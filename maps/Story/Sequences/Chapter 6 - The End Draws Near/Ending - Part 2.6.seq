@@ -1,0 +1,61 @@
+import file=main.var
+
+info time="day" name="Parasne" music="continue" fadeValue="0" musicVolume="0" status="2" delay="3000"
+
+var marc=0
+var dexter=1
+var woldou=2
+var orgaan=3
+var putters=4
+var pretto=5
+var temeth=6
+
+actor name="Marc"
+actor name="Dexter"
+actor name="Woldou"
+actor name="Orgaan"
+actor name="Putters"
+actor name="Pretto"
+actor name="Berca/villagers/Temeth/TemethExtras1" pos=705;660;2
+
+ins timea=0 index=temeth kind=screen_center center=true
+
+ins timea=0 index=marc kind=controll controll=true
+ins timea=0 index=dexter kind=controll controll=true
+ins timea=0 index=woldou kind=controll controll=true
+ins timea=0 index=orgaan kind=controll controll=true
+ins timea=0 index=putters kind=controll controll=true
+ins timea=0 index=pretto kind=controll controll=true
+
+ins timea=0 index=marc kind=hide
+ins timea=0 index=dexter kind=hide
+ins timea=0 index=woldou kind=hide
+ins timea=0 index=orgaan kind=hide
+ins timea=0 index=putters kind=hide
+ins timea=0 index=pretto kind=hide
+
+ins timea=0 index=marc kind=show movepos=690;745;0
+ins timea=0 index=dexter kind=show movepos=720;745;0
+ins timea=0 index=woldou kind=show movepos=630;700;1
+ins timea=0 index=orgaan kind=show movepos=790;700;3
+ins timea=0 index=putters kind=show movepos=790;730;3
+ins timea=0 index=pretto kind=show movepos=630;730;1
+
+text lines="Marc and Dexter got married.";"(By Temeth of Berca)" pos=450;384 color=0 size=50 pos=450;384
+ins type=fadein timea=500 index=0 fadetime=2000 kind=text
+ins timea=500 kind=screen_go acceleration=50000 distance=240 direction=2 duration=5000
+ins timea=4000 kind=screen_stop
+
+ins timea=500 index=dexter kind=dist distance=50 direction=0 duration=2000 
+ins timea=0 index=marc kind=dist distance=50 direction=0 duration=2000
+ 
+ins type=fadeout timea=1500 index=0 fadetime=1500 kind=text
+
+ins timea=2500 index=dexter kind=stop direction=3 
+ins timea=500 index=marc kind=stop direction=1
+ins timea=1500 index=dexter kind=dist distance=5 direction=3 duration=100 
+ins timea=0 index=marc kind=dist distance=5 direction=1 duration=100
+
+ins type=fadeout timea=1500 kind=village fadetime=2000
+ins timea=0 index=temeth kind=screen_center center=false
+ins timea=2500 kind=endseq

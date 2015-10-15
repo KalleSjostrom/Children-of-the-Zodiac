@@ -1,0 +1,85 @@
+mapSize -0.5 0.5 1
+
+size 249
+
+mission BombMission SewerMission trigger="the_sewers--north.maphinderdoor108";"1" trigger="the_sewers--north.maphinderdoor124";"1" dialog="Kin";"Let's get out of here!"
+
+fog red=.2 green=1 blue=.6 alpha=.0008 density=0.003 start=0 end=10
+
+light0 position=0;0;0;1 ambient=.8;.8;.8;1 specular=0;0;0;1 diffuse=.8;.8;.8;1 attenuation=1;0.01;0.015
+material ambient=.4;.4;.4;1 specular=0;0;0;1 diffuse=.7;.7;.7;1
+invMaterial ambient=.4;.4;.4;1 specular=0;0;0;1 diffuse=.4;.4;.4;1
+
+floorTex sewerfloor.jpg
+wallTex sewerwall.png
+wallTex sewerdoor0.png
+wallTex sewerdoor1.png
+roofTex sewerroof.jpg
+
+normal floor 0 1
+normal wall 1 4
+normal roof 4 5
+
+mapPos 0 1
+
+dir 10 1 26
+dir 26 1 42
+dir 38 1 54
+dir 42 1 58
+dir 52 2 53
+dir 53 2 54
+dir 54 1 70
+dir 56 2 57
+dir 57 2 58
+dir 58 1 74
+dir 58 2 59
+dir 70 1 86
+dir 74 1 90
+dir 86 1 102
+dir 90 1 106
+dir 99 2 100
+dir 100 2 101
+dir 101 2 102
+dir 102 1 118
+dir 102 2 103
+dir 106 1 122
+dir 118 1 134
+dir 120 2 121
+dir 121 2 122
+dir 122 2 123
+dir 123 1 139
+dir 123 2 124
+dir 134 1 150
+dir 139 1 155
+dir 149 2 150
+dir 150 1 166
+dir 150 2 151
+dir 151 2 152
+dir 152 2 153
+dir 153 2 154
+dir 154 2 155
+dir 155 1 171
+dir 155 2 156
+dir 156 2 157
+dir 157 2 158
+dir 158 2 159
+dir 166 1 182
+dir 182 1 198
+
+mapEnd
+
+inv hinderDoor 198 1 2 Walls/sewerdoor the_sewers--south-mark2
+
+inv hinderDoor 99 0 2 Walls/sewerdoor the_sewers--north_west-mark0
+inv button 159 2 7 Images/lever The_Sewers--South_West.maphinderDoor99
+
+inv hinderDoor 153 2 2 Walls/sewerdoor the_sewers--south_west-mark3
+inv hinderDoor 154 0 2 Walls/sewerdoor the_sewers--south_west-mark2
+inv button 52 0 7 Images/lever The_Sewers--South_West.maphinderDoor153 The_Sewers--South_West.maphinderDoor154
+
+inv bomb 56 0 sewermission Images/bomb.png Zalzi="We're almost under the school now.";"Just think what this bomb could have done..." 0-Kin()="What are those rebels thinking?";"How can they justify this??" 1-Kin()="They must have been really desperate to do something";"like this, and Vincent is the one who..." 1-Kin()="My own flesh and blood...";"" 2-Kin()="I must make my father see...";"I must stop his oppression to end this!"
+  
+inv chest 10 3 2 Images/chest 0 800
+inv chest 120 0 2 Images/chest 0 1100
+
+end

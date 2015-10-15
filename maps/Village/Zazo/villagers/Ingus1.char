@@ -1,0 +1,28 @@
+image Ingus
+
+start 130 255
+
+in 2 1000 true
+
+dialog 1
+
+n Ingus
+fl Shhhh...
+sl Don't talk! I'm trying to hide!
+f true
+
+n Ingus
+fl If you don't tell anyone, I'll give you this card!
+sl end
+gift cards.offense.BattleCard 2 1 true
+trigger Ingus1 2
+f true
+
+dialog 2
+
+n Ingus
+fl Shhhh...
+sl Don't talk! I'm trying to hide!
+f true
+
+end

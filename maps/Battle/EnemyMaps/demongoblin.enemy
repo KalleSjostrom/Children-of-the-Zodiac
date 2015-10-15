@@ -1,0 +1,28 @@
+name Demon_Goblin
+
+defense 250
+magicDefense 261
+agility 21
+evade 0
+hit 90
+attack 1403
+magic 0
+support 0
+hp 3024
+element 0
+gold 1534
+experience 1028
+criticalChance 0
+
+diesound Goblin/dies
+image demongoblin 3
+armor 45 45
+preferences 100 0
+
+scale 5.5
+height -2.2
+depth -6
+middle -0.6
+
+attackSpec anim=(a=180,se=Monster/Goblin/attack)--(f=1,a=330)--(f=2,h=true,a=800)
+# attackSpec type=mag name=Earth element=earth anim=(a=200,c=m+Earth,se=earth)--(f=3,a=200)--(a=200)--(f=3,a=200)--(a=200)--(f=3,a=200)--(a=200)

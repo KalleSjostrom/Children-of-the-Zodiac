@@ -1,0 +1,121 @@
+import file=main.var
+
+var elmer=0
+var kin=1
+var celis=2
+
+actor name="Elmer"
+actor name="Kin" pos=345;800;0
+actor name="Celis" pos=345;770;0
+
+info time="day" name="Alares" music="Alares" fadeValue="1"
+
+ins timea=0 index=elmer kind=controll controll=true
+
+dialogpacket name=0 starttimea=0 duration=1000
+dialog packetname=0 name="Elmer" text="Armageddon will soon be over us.";"" first=true
+
+ins timea=600 index=elmer kind=dist distance=10 duration=400 direction=1
+
+dialogpacket name=0.1 starttimea=1000 duration=1000
+dialog packetname=0.1 name="Elmer" text="Humanity will perish.";"" first=true
+
+ins timea=500 index=elmer kind=stop direction=0
+ins timea=400 index=elmer kind=dist distance=10 duration=600 direction=3
+
+ins timea=500 index=kin kind=stop direction=3
+
+dialogpacket name=1 starttimea=500 duration=1000
+dialog packetname=1 name="Kin" text="Wow, this man sure is crazy.";"Come on, Celis... Let's go." first=true
+
+ins timea=1100 index=kin kind=dist distance=40 duration=1500 direction=2
+ins timea=1500 index=kin kind=stop direction=2
+ins timea=500 index=kin kind=stop direction=3
+ins timea=1000 index=kin kind=stop direction=0
+
+dialogpacket name=2 starttimea=1000
+dialog packetname=2 name="Kin" text="Celis, shouldn't we be looking for your real family";"instead of listening to a crazy man?" first=true
+
+ins timea=250 index=celis kind=dist distance=5 duration=200 direction=2
+
+# Music fades down
+ins type=fadeout timea=150 index=0 fadetime=1000 kind=music mode=pause
+dialogpacket name=3 starttimea=0 duration=200
+dialog packetname=3 name="Celis" text="No, wait!";"There is something about this man." first=true
+
+# ins timea=0 index=kin kind=dist distance=5 duration=100 direction=2 facedirection=0
+ins timea=950 index=celis kind=dist distance=5 duration=900 direction=0
+
+dialogpacket name=4 starttimea=200
+dialog packetname=4 name="Celis" text="I don't know why...";"but I feel something about him." first=true
+
+ins timea=1000 index=kin kind=dist distance=25 duration=1400 direction=0
+dialogpacket name=5 starttimea=500
+dialog packetname=5 name="Kin" text="Hmm... Alright. If you want to,";"we'll stay and listen..." first=true
+
+ins timea=300 index=elmer kind=dist distance=10 duration=800 direction=0
+ins timea=900 index=elmer kind=dist distance=12 duration=800 direction=3
+ins timea=900 index=elmer kind=stop direction=0
+
+dialogpacket name=6 starttimea=1
+dialog packetname=6 name="Elmer" text="If only someone could";"wake the stones..." first=true
+
+ins timea=300 index=elmer kind=dist distance=12 duration=800 direction=3
+ins timea=900 index=elmer kind=stop direction=1
+
+dialogpacket name=7 starttimea=1
+dialog packetname=7 name="Elmer" text="... a pure Child...";"That's what they say..." first=true
+
+ins timea=300 index=elmer kind=dist distance=105 duration=8000 direction=3
+
+ins timea=2500 index=kin kind=dist distance=40 duration=1200 direction=0
+ins timea=1200 index=kin kind=stop direction=3
+
+dialogpacket name=8 starttimea=1000
+dialog packetname=8 name="Kin" text="Boy... What a nut.";"" first=true
+
+# ins timea=200 index=kin kind=stop direction=3
+ins timea=500 index=celis kind=stop direction=3
+ins timea=2000 index=kin kind=stop direction=2
+
+ins timea=600 index=elmer kind=dist distance=25 duration=2000 direction=2
+
+dialogpacket name=8.1 starttimea=1 duration=1000
+dialog packetname=8.1 name="Kin" text="Come on, Celis. I'm hungry and tired.";"Let's go see if the Inn has any vacant rooms." first=true
+
+ins timea=2000 index=celis kind=dist distance=15 duration=2000 direction=3
+
+dialogpacket name=9 starttimea=500 duration=1000
+dialog packetname=9 name="Celis" text="...";"" first=true
+
+ins timea=1500 index=kin kind=dist distance=5 duration=300 direction=3
+dialogpacket name=10 starttimea=250
+dialog packetname=10 name="Kin" text="Celis! Are you listening to me?!";"" first=true
+
+ins timea=1000 index=celis kind=stop direction=1 
+
+dialogpacket name=11 starttimea=50
+dialog packetname=11 name="Celis" text="Oh.. Yes..";"" first=true
+
+ins timea=1000 index=celis kind=dist distance=20 duration=2000 direction=1
+
+dialogpacket name=11.1 starttimea=300 duration=2000
+dialog packetname=11.1 name="Celis" text="I am kind of hungry myself.";"" first=true
+
+ins timea=200 index=kin kind=dist distance=25 duration=2500 direction=1
+ins timea=1500 index=celis kind=stop direction=3
+
+dialogpacket name=11.2 starttimea=500 duration=1500
+dialog packetname=11.2 name="Celis" text="I wonder..." whisper=true
+
+ins timea=200 index=kin kind=stop direction=3
+
+load trigger="AlaresInn"
+load trigger="Elmer"
+
+ins index=0 timea=0 kind=trigger value=0
+ins index=1 timea=0 kind=trigger value=1
+
+ins type=fadein timea=1000 index=0 fadetime=2000 kind=music mode=play
+
+ins timea=1000 kind=end

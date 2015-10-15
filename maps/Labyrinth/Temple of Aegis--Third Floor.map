@@ -1,0 +1,77 @@
+mapSize -0.5 0.5 1
+
+size 309
+
+fog red=.4 green=.3 blue=0 alpha=.01 density=0.01
+
+light0 position=0;0;0;1 ambient=1;1;1;1 specular=0;0;0;1 diffuse=1;1;1;1 attenuation=1;0.02;0.03
+light1 position=0;0;0;0 ambient=.2;.2;.2;.2 specular=0;0;0;1 diffuse=.2;.2;.2;.2
+material ambient=.7;.7;.7;1 specular=0;0;0;1 diffuse=.7;.7;.7;1
+
+floorTex aegisfloor.jpg
+wallTex aegisstairsdown0.png
+wallTex aegisstairsup0.png
+SwallTex aegiswall.png 3
+roofTex aegisroof.jpg
+
+normal floor 0 1
+normal wall 1 7
+normal roof 7 8
+
+mapPos 0 1
+
+dir 37 1 53
+dir 37 2 38
+dir 38 2 39
+dir 39 2 40
+dir 40 2 41
+dir 41 2 42
+dir 42 1 58
+dir 42 2 43
+dir 43 2 44
+dir 44 2 45
+dir 45 2 46
+dir 46 1 62
+dir 53 1 69
+dir 58 1 74
+dir 62 1 78
+dir 69 1 85
+dir 76 2 77
+dir 77 2 78
+dir 85 2 86
+dir 86 1 102
+dir 102 2 103
+dir 103 2 104
+dir 106 2 107
+dir 107 2 108
+dir 108 1 124
+dir 124 2 125
+dir 125 1 141
+dir 134 2 135
+dir 135 2 136
+dir 136 1 152
+dir 138 1 154
+dir 141 1 157
+dir 152 1 168
+dir 154 1 170
+dir 157 1 173
+dir 168 2 169
+dir 169 2 170
+dir 170 2 171
+dir 171 2 172
+dir 172 2 173
+mapEnd
+
+wall 1 106 0
+inv door--down 106 0 dontopen temple_of_aegis--second_floor-mark1
+wall 2 134 0
+inv door--up 134 0 dontopen temple_of_aegis--fourth_floor-mark0
+wall 2 104 2
+inv door--up 104 2 dontopen temple_of_aegis--fourth_floor-mark1
+wall 2 74 1
+inv door--up 74 1 dontopen temple_of_aegis--fourth_floor-mark2
+
+inv chest 76 0 2 Images/stonebox 2 cards.offense.Drain 2 false
+inv chest 138 3 2 Images/stonebox 2 cards.magic.Fire 3 false
+
+end

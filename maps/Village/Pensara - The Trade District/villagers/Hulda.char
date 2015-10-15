@@ -1,0 +1,22 @@
+image Hulda
+start 915 320
+
+in 3     500 true
+in 2     180 false
+in 2     500 true
+in 1 45 false
+in 2     500 true
+in 0     250 false
+in 0     500 true
+in 3 45 false
+in 2 70 false
+
+dialog 1
+
+# Walking around the market place
+n Hulda
+fl I'm shopping because it's fun!
+sl end
+f true
+
+end

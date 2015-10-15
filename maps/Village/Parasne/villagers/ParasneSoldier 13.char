@@ -1,0 +1,85 @@
+image char/Pensarasoldier
+start 1690 1565
+
+in 2 100 true
+
+dialog 1
+
+n Soldier
+fl All clear to the south.
+sl end
+f true 
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

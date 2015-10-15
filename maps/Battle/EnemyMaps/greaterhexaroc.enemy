@@ -1,0 +1,31 @@
+name G._Hexaroc
+
+defense 40
+magicDefense 38
+agility 14
+evade 0
+hit 93
+attack 239
+magic 190
+support 73
+hp 820
+element 4
+gold 369
+experience 246
+criticalChance 0
+
+diesound Hexaroc/dies
+image greaterHexaroc 9
+armor 25 12
+preferences 65 35
+
+scale 5.5
+height -2
+depth -6
+middle 0
+
+# type name power onAll element
+attackSpec anim=(f=1,a=100,se=Monster/Hexaroc/attack)--(f=2,a=100)--(f=3,a=100)--(f=4,a=100)--(f=5,a=200)--(f=6,a=210)--(f=7,a=210)--(f=8,a=200,h=true)
+attackSpec type=mag name=Magic_Boulder power=1.5 element=earth anim=(f=1,a=100,se=Monster/Hexaroc/attack)--(f=2,a=100)--(f=3,a=100)--(f=4,a=100)--(f=5,a=200)--(f=6,a=210)--(f=7,a=210)--(f=8,a=200,h=true,cs=true)--(cs=true,a=300)
+
+# cardPreference [CardName preference]

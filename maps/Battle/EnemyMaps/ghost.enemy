@@ -1,0 +1,27 @@
+name Ghost
+
+defense 999
+magicDefense 27
+agility 10
+evade 0
+hit 95
+attack 0
+magic 94
+support 56
+hp 58
+element 0
+gold 48
+experience 32
+criticalChance 0
+
+diesound Ghost/dies
+image ghost 4 3 1
+armor 0 0
+preferences 0 100
+
+scale 5
+height -1.3
+depth -6
+middle 0
+
+attackSpec type=mag name=Putrid_Breath anim=(a=100,se=Monster/Ghost/attack)--(f=1,a=200)--(f=2,a=1100)--(f=3,h=true)

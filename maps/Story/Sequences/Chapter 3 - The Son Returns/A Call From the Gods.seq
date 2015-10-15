@@ -1,0 +1,23 @@
+import file=main.var
+
+load music="Someone's Calling2"
+
+info time="night" name="No Place" music="No Music" fadeValue="0" musicVolume="1"
+
+text lines="Find us...";"" pos=380;384
+text lines="Seek the stones";"" pos=380;384
+ins type=fadeout timea=0 index=0 fadetime=0 kind=village
+ins type=fadeout timea=1500 index=1 fadetime=0 kind=music mode=play
+
+ins type=fadein timea=0 index=0 fadetime=2000 kind=text
+ins type=fadeout timea=8000 index=0 fadetime=2000 kind=text
+dialogsingle starttimea=2000 <= name="Celis" text="Who is this?";"What's happening!?"
+
+ins type=fadein timea=1000 index=1 fadetime=1000 kind=text
+ins type=fadeout timea=8000 index=1 fadetime=1000 kind=text
+
+dialogsingle starttimea=2000 <= name="Celis" text="Why?!";"What's going to happen?!"
+
+ins type=fadeout timea=500 index=1 fadetime=2500 kind=music mode=kill
+
+ins timea=2500 kind=endseq

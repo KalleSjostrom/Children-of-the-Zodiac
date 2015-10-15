@@ -1,0 +1,143 @@
+mapSize -0.5 0.5 1
+
+size 511
+
+light0 position=0;0;0;1 ambient=.7;.7;.7;1 specular=0;0;0;1 diffuse=.7;.7;.7;1 attenuation=1;0.02;0.03
+material ambient=.3;.3;.3;1 specular=0;0;0;1 diffuse=.3;.3;.4;1
+
+enemyColor 1 1 1 1
+
+floorTex icecavefloor.jpg
+wallTex icecavewall.png
+wallTex icecavedoor0.png
+roofTex icecaveroof.jpg
+
+normal floor 0 1
+normal wall 1 3
+normal roof 3 4
+
+mapPos 1 1
+
+# directions in labyrinth
+dir 4 1 20
+dir 6 2 7
+dir 7 2 8
+dir 8 1 24
+dir 11 1 27
+dir 11 2 12
+dir 12 2 13
+dir 13 2 14
+dir 20 1 36
+dir 24 1 40
+dir 27 1 43
+dir 36 2 37
+dir 37 2 38
+dir 38 1 54
+dir 40 1 56
+dir 40 2 41
+dir 41 2 42
+dir 42 1 58
+dir 42 2 43
+dir 45 2 46
+dir 46 1 62
+dir 54 1 70
+dir 56 1 72
+dir 58 1 74
+dir 60 1 76
+dir 62 1 78
+dir 68 1 84
+dir 68 2 69
+dir 69 2 70
+dir 70 1 86
+dir 70 2 71
+dir 71 2 72
+dir 72 1 88
+dir 72 2 73
+dir 73 2 74
+dir 74 1 90
+dir 74 2 75
+dir 75 2 76
+dir 76 1 92
+dir 76 2 77
+dir 77 2 78
+dir 78 1 94
+dir 84 1 100
+dir 86 1 102
+dir 88 1 104
+dir 90 1 106
+dir 92 1 108
+dir 94 1 110
+dir 102 1 118
+dir 102 2 103
+dir 103 2 104
+dir 104 1 120
+dir 104 2 105
+dir 105 2 106
+dir 106 1 122
+dir 106 2 107
+dir 107 2 108
+dir 108 1 124
+dir 108 2 109
+dir 109 2 110
+dir 110 1 126
+dir 110 2 111
+dir 118 1 134
+dir 120 1 136
+dir 122 1 138
+dir 124 1 140
+dir 126 1 142
+dir 132 1 148
+dir 134 1 150
+dir 134 2 135
+dir 135 2 136
+dir 136 1 152
+dir 136 2 137
+dir 137 2 138
+dir 138 1 154
+dir 138 2 139
+dir 139 2 140
+dir 140 1 156
+dir 140 2 141
+dir 141 2 142
+dir 148 1 164
+dir 150 1 166
+dir 154 1 170
+dir 156 1 172
+dir 164 1 180
+dir 164 2 165
+dir 165 2 166
+dir 166 2 167
+dir 167 1 183
+dir 169 1 185
+dir 169 2 170
+dir 170 2 171
+dir 171 2 172
+dir 172 2 173
+dir 173 2 174
+dir 174 2 175
+dir 175 1 191
+dir 180 1 196
+dir 183 1 199
+dir 185 1 201
+dir 191 1 207
+dir 203 2 204
+dir 204 2 205
+dir 205 2 206
+dir 206 2 207
+
+mapEnd
+
+wall 2 111 2
+
+inv door 111 2 dontopen landIce_Cavern--Pillar_Room-mark0
+inv hinderDoor 199 1 2 Walls/icecavedoor Ice_Cavern--Mysterious_Forest-mark0
+inv hinderDoor 4 3 2 Walls/icecavedoor Ice_Cavern--Frozen_Field-mark1
+
+inv button 6 0 7 Images/lever Ice_Cavern--Pillar_Room.maphinderdoor199
+inv button 201 1 7 Images/lever Ice_Cavern--Pillar_Room.maphinderdoor4
+
+inv chest 14 2 2 Images/icepot 2 cards.offense.ChameleonStrike 2
+inv chest 196 1 2 Images/icepot 2 cards.support.Cure 3 true
+inv chest 203 0 2 Images/icepot 2 cards.magic.Fire 3 true
+
+# inv riddle 100 1 0 riddle

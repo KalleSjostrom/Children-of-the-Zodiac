@@ -1,0 +1,29 @@
+##### LANDSCAPE #####
+# NAME: World two
+
+##### BACKGRUND #####
+
+background North
+
+##### PLACES #####
+
+# Node Xpos Ypos type name
+
+	node 526 319 village Dellna
+	node 674 321 labyrinth Frozen_Forest--Forest_Passage-mark0
+	
+	road 0 Dellna 1 Frozen_Forest--Forest_Passage-mark0 3
+		co 526 319
+		co 541 327
+		co 559 328
+		co 576 323
+		co 593 320
+		co 610 322
+		co 625 327
+		co 644 329
+		co 659 326
+		co 674 321
+		oc
+        
+##### END #####
+end

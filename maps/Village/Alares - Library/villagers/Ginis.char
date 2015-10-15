@@ -1,0 +1,29 @@
+image Ginis	   
+	   
+start 555 500	   
+
+in 2 180 true	   
+	   
+dialog 1	   
+	   
+n Ginis	   
+fl Hello, Celis!	   
+sl How's your father?	   
+f true	   
+	   
+dialog 2	   
+	   
+n Ginis	   
+fl Has something happened in Zazo?	   
+sl end	   
+f true	   
+	   
+dialog 3	   
+	   
+n Ginis	   
+fl Where have you been Celis!
+sl Your father is worried sick.
+f true	   
+	   
+##### END #####	   
+end	 

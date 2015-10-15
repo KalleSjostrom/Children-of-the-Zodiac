@@ -1,0 +1,39 @@
+# background, prefix name of both images day
+background Pensara_-_The_North_District_-_Farmer_House true
+
+inside
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1024 768
+start 500 540 0
+
+holeDoor switch Pensara_-_The_North_District 500 560 30 2 1 1840 575 2
+
+o 583 279 671 349
+o 341 332 350 374
+o 317 278 341 401
+o 319 437 339 448
+o 342 280 574 301
+o 696 278 717 655
+o 662 436 697 483
+o 339 437 405 483
+o 290 201 751 278
+o 436 439 487 451
+o 319 602 488 693
+o 534 602 703 693
+o 544 436 579 483
+o 319 398 492 438
+o 298 278 319 655
+o 405 438 425 449
+o 532 398 696 436
+
+
+o 533 398 543 492
+o 533 542 543 606
+o 426 438 436 531
+o 426 580 436 602
+
+villager Dido
+villager Ella
+
+end

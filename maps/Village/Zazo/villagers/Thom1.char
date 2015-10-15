@@ -1,0 +1,14 @@
+image Thom
+
+start 690 720
+
+in 0 180 true
+
+dialog 1
+
+n Thom
+fl I've been swamped for a while now cleaning
+sl up Teo's mess.
+f true
+
+end

@@ -1,0 +1,137 @@
+image GTgirlpink	   
+	   
+start 1310 585	   
+
+in 2 140 false	   
+in 3 290 false	   
+in 2 480 false	   
+in 3 100 true	   
+in 1 100 true	   
+in 2 100 true	   
+in 0 480 false	   
+in 1 290 false	   
+in 0 140 false	   
+in 2 400 true	   
+	   
+dialog 1	   
+	   
+n Bella	   
+fl Some day I would like to see the land 	   
+sl on the other side of the ocean. 	   
+f true	   
+	   
+n Bella	   
+fl I would really like to meet the royal family, 	   
+sl and maybe meet my prince there... 	   
+f true	   
+	   
+n Bella	   
+fl Maybe just a souvenir from the royal family 	   
+sl would be enough...	   
+f true	   
+	   
+n Bella	   
+fl That doesn't seem like an impossible scenario...	   
+sl Or what do you say?	   
+trigger Bella 2	   
+f true	   
+	   
+dialog 2	   
+	   
+n Bella	   
+fl Oh... If only I had a souvenir from the royal family.	   
+sl end	   
+f true	   
+	   
+dialog 3	   
+	   
+check Bella 4 Royal_Crown	   
+	   
+n Bella	   
+fl What's going to happen with those miners?	   
+sl Oh, those poor souls...	   
+f true	   
+	   
+n Bella	   
+whisper
+fl If only I had a souvenir from the royal family.	   
+sl end	   
+f true	   
+	   
+dialog 4	   
+	   
+n Bella	   
+fl Oh, what a beautiful crown!	   
+sl It looks really royal!	   
+f true	   
+	   
+n Bella	   
+fl Please, let me have it!	   
+sl end	   
+f true	   
+	   
+q 10	   
+alt Hand_over_the_crown	   
+alt Keep_it	   
+alt _	   
+alt _	   
+f true	   
+	   
+*11	   
+n Bella	   
+fl Oh, thank you so much!	   
+sl Please, let me give you this card in return.	   
+f true
+
+n _
+fl You got a card! 
+sl You gave away the key item "Royal Crown".   
+gift cards.magic.Earth 2 3 true	   
+take Royal_Crown 1	   
+trigger Bella 5	   
+f true
+	   
+*12	   
+n Bella	   
+fl Hmph, I have a card burning a hole in my pocket.	   
+sl Come back, if you want it.
+f true	   
+	   
+dialog 5	   
+	   
+n Bella	   
+fl Thanks again!	   
+sl end	   
+f true	   
+	   
+dialog 6	   
+	   
+check Bella 4 Royal_Crown	   
+	   
+n Bella	   
+fl I'm glad those miners could be saved	   
+sl in the end.	   
+f true	   
+	   
+n Bella	   
+fl (If only I had a souvenir from the royal family.)	   
+sl end	   
+f true	   
+
+dialog 7
+
+check Bella 4 Royal_Crown	   
+	   
+n Bella	   
+fl All the bad things happens to Zazo.	   
+sl end	   
+f true	   
+	   
+n Bella	   
+fl (If only I had a souvenir from the royal family.)	   
+sl end	   
+f true	   
+	   
+##### END #####	   
+end	   
+	 

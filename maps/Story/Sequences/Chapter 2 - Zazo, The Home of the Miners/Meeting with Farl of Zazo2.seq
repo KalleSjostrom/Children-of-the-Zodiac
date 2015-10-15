@@ -1,0 +1,107 @@
+import file=main.var
+
+var farl=0
+var kin=1
+var celis=2
+var borealis=3
+
+set passvillage
+
+info time="day" name="Zazo" music="Zazo" fadeValue="0" musicVolume="0"
+
+ins timea=0 index=farl kind=controll controll=true
+actor name="Farl"
+actor name="Kin"
+actor name="Celis"
+actor name="Borealis"
+
+load music="The Theme of the Elders" 
+
+show index=kin value=false
+show index=celis value=false
+show index=borealis value=false
+
+ins type=fadein timea=0 index=1 fadetime=0 kind=music mode=play
+
+ins timea=0 index=kin kind=show movepos=1820;273
+ins timea=0 index=celis kind=show movepos=1785;258
+ins timea=0 index=borealis kind=show movepos=1755;248;1
+
+ins index=farl timea=1000 kind=dist distance=15 duration=1000 direction=0
+dialogpacket name=3 starttimea=750 duration=250
+dialog packetname=3 name="Farl" text="We believe that The Great War is linked";"to the situation today, somehow."
+dialog packetname=3 name="Farl" text="However, we do not know the details surrounding this.";""
+
+ins index=kin timea=1000 kind=dist distance=15 duration=800 direction=0
+dialogsingle starttimea=600 duration=200 <= name="Kin" text="Why are you suspecting that?";""
+
+ins index=farl timea=500 kind=dist distance=10 duration=1000 direction=2
+dialogsingle starttimea=500 duration=500 <= name="Farl" text="The growing force that Elmer talked about has";"roots leading back to the war."
+
+ins index=farl timea=600 kind=stop direction=3
+ins index=farl timea=1500 kind=stop direction=2
+dialogsingle starttimea=100 <= name="Farl" text="We believe this because we lived then as well.";""
+
+ins index=celis timea=250 kind=emotion emotion=? show=true
+ins index=borealis timea=20 kind=emotion emotion=? show=true
+ins index=kin timea=50 kind=emotion emotion=?! show=true
+
+ins index=kin timea=50 kind=dist distance=5 duration=100 direction=0
+dialogsingle starttimea=0 <= name="Kin" text="What?! But...";"The Great War was like a thousand years ago?!"
+
+ins index=celis timea=1000 kind=emotion emotion=... show=true
+ins index=kin timea=50 kind=emotion show=false
+ins index=borealis timea=500 kind=emotion show=false
+ins index=celis timea=1500 kind=stop direction=3
+ins index=celis timea=1500 kind=stop direction=0
+ins index=celis timea=50 kind=dist distance=10 duration=1000 direction=0
+dialogsingle starttimea=1000 duration=1000 <= name="Celis" text="That must mean that you are tenjins as well...";""
+ins index=celis timea=500 kind=emotion show=false
+
+ins index=farl timea=550 kind=dist distance=5 duration=500 direction=2
+dialogsingle starttimea=250 <= name="Farl" text="Ah, Indeed. But we are not descendants of the";"Twelve Children, so we can not use the stones."
+
+ins index=farl timea=500 kind=dist distance=20 duration=1500 direction=0
+dialogpacket name=4 starttimea=500 duration=500
+dialog packetname=4 name="Farl" text="The elder in the town of Pensara is called Lecca";"and he had an apprentice before the war."
+dialog packetname=4 name="Farl" text="After the war this apprentice was filled with hate";"and soon left the surviving group of tenjins."
+
+ins index=farl timea=1000 kind=stop direction=0
+ins index=farl timea=1500 kind=dist distance=15 duration=1500 direction=2
+dialogsingle starttimea=750 duration=1250 <= name="Farl" text="We hold suspicions against this apprentice because of";"his situation after the war."
+
+ins index=farl timea=1700 kind=stop direction=3
+dialogsingle starttimea=500 <= name="Farl" text="Lecca can surly tell you more about this."
+
+ins index=borealis timea=1000 kind=stop direction=2
+dialogsingle starttimea=400 <= name="Borealis" text="Ok... Well, a boat to Pensara...";"In times of war, traveling freely by boat is difficult."
+
+ins index=farl timea=400 kind=dist distance=12 duration=400 direction=3
+dialogsingle starttimea=400 duration=300 <= name="Farl" text="It's true that not anyone can travel by boat in these days."
+ins index=borealis timea=200 kind=stop direction=0
+ins index=farl timea=800 kind=stop direction=1
+dialogsingle starttimea=1000 duration=700 <= name="Farl" text="But I'm not just anyone..."
+ins index=celis timea=600 kind=emotion emotion=? show=true
+ins index=farl timea=800 kind=stop direction=2
+dialogsingle starttimea=1000 duration=700 <= name="Farl" text="I've arranged for a boat to take you to Pensara.";"It should be ready when you arrive at the port of Alares."
+ins index=celis timea=600 kind=emotion emotion=! show=true
+
+ins index=celis timea=800 kind=dist distance=10 duration=400 direction=0
+dialogpacket name=last starttimea=400
+dialog packetname=last name="Celis" text="You are amazing!";"Thank you!"
+dialog packetname=last name="Farl" text="We are counting on you, Celis." first=false
+ins index=celis timea=200 kind=emotion show=false
+
+load trigger="Farl"
+ins timea=0 index=0 kind=trigger value=2
+load trigger="Elmer"
+ins timea=0 index=1 kind=trigger value=6
+load trigger="Port of Alares"
+ins timea=0 index=2 kind=trigger value=1
+#ins type=fadeout timea=0 index=1 fadetime=1500 kind=music mode=kill
+
+ins timea=1500 index=farl kind=controll controll=false
+ins type=fadeout timea=0 index=1 fadetime=1000 kind=music mode=kill
+ins type=fadein timea=1000 index=0 fadetime=1000 kind=music mode=play
+
+ins timea=0 kind=end

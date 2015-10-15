@@ -1,0 +1,108 @@
+image Pert
+start 1340 370
+
+in 2 100 true
+
+dialog 1
+
+# standing near a tent
+n Merchant Pert
+fl Please buy bananas from me. How about 100 gold?
+sl end
+f true
+
+q 10
+alt Mmm..._Bananas
+alt No_fruit_today
+alt _
+alt _
+price 100 0 0 0
+f true
+
+*11
+n Merchant Pert
+fl Nice doin' business with you!
+sl I'll tell you when I get hold on some more fruits.
+f true
+
+n _
+fl You got the key item "Bananas"!
+sl end
+gift Bananas 1 1
+trigger Pert 2
+f true
+
+*12
+n Merchant Pert
+fl Then... Go away!
+sl end
+f true
+
+*15
+n Merchant Pert
+fl If you don't have the money, then...
+sl Go away!
+f true
+
+dialog 2
+
+n Merchant Pert
+fl I tell you when I get hold on some more fruits.
+sl end
+f true
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,81 @@
+ 
+image Freddy	   
+start 1120 900	   
+	   
+in 2 100 true	   
+	   
+dialog 1	   
+	   
+n Freddy	   
+fl People in this village are talking about a man sneaking	   
+sl around in grey clothes and green hair during the night.	   
+f true	   
+	   
+n Freddy	   
+fl To be sure, I don't want to leave my house.	   
+sl I suspect he might be a thief.	   
+f true	   
+	   
+n Freddy	   
+fl That thief won't take anything from me... 	   
+sl That's for sure!	   
+trigger Freddy 2	   
+trigger Galanda 2	   
+f true	   
+	   
+dialog 2	   
+	   
+n Freddy	   
+fl People in this village are talking about a man sneaking	   
+sl around in grey clothes and green hair during the night.	   
+f true	   
+	   
+n Freddy	   
+fl To be sure, I don't want to leave my house.	   
+sl I suspect he might be a thief.	   
+f true	   
+	   
+n Freddy	   
+fl That thief won't take anything from me... 	   
+sl If you hear something about him please tell me.	   
+f true	   
+	   
+dialog 3	   
+	   
+n Freddy	   
+fl Mats Meadowgrove is his name you say. It has to be him.	   
+sl You must capture him and let him pay for his crimes.	   
+trigger Thieving_looking_guy 2
+trigger Freddy 4	   
+trigger Galanda 4	   
+f true	   
+	   
+dialog 4	   
+	   
+n Freddy	   
+fl So this is what we have: His name is Mats Meadowgrove, he wear grey clothes	   
+sl and has green hair and he steals from people all over the world.	   
+f true	   
+	   
+dialog 5	   
+	   
+n Freddy	   
+fl Finally Mats Meadowgrove is behind bars.	   
+sl Take this as a token of my gratitude.	   
+f true	   
+
+n _
+fl You got the weapon "Bloodstained Dagger"!
+sl end	   
+gift Bloodstained_Dagger 1	   
+trigger Freddy 6	   
+f true	   
+	   
+dialog 6	   
+	   
+n Freddy	   
+fl Finally Mats Meadowgrove is behind bars.	   
+sl end	   
+f true	   
+	   
+end	 

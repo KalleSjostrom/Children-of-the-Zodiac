@@ -1,0 +1,25 @@
+image Alaressolider
+
+forstatus 1
+start 459 372
+in 2 180 true
+
+forstatus -1
+start 509 372
+in 2 180 true
+
+dialog 1
+
+n Marcus
+fl No entrance without permission from commander Seth.
+sl end
+f true
+
+dialog 2
+
+n Marcus
+fl Hi, Borealis! 
+sl Please step in!
+f false
+
+end

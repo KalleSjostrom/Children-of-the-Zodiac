@@ -1,0 +1,159 @@
+mapSize -0.5 0.5 1
+
+size 511
+
+battleMusic Battle Menthu's_Theme
+
+light0 position=0;0;0;1 ambient=.7;.7;.7;1 specular=0;0;0;1 diffuse=.7;.7;.7;1 attenuation=1;0.02;0.03
+material ambient=.3;.3;.3;1 specular=0;0;0;1 diffuse=.3;.3;.4;1
+
+enemyColor 1 1 1 1
+
+floorTex icecavefloor.jpg
+wallTex icecavewall.png
+wallTex icecavedoor0.png
+roofTex icecaveroof.jpg
+
+normal floor 0 1
+normal wall 1 3
+normal roof 3 4
+
+mapPos 1 0
+
+# directions in labyrinth
+dir 5 1 21
+dir 11 1 27
+dir 15 1 31
+dir 21 1 37
+dir 27 1 43
+dir 31 1 47
+dir 35 1 51
+dir 37 2 38
+dir 38 2 39
+dir 39 2 40
+dir 40 2 41
+dir 47 1 63
+dir 51 1 67
+dir 63 1 79
+dir 67 2 68
+dir 68 2 69
+#dir 69 1 85
+dir 69 2 70
+
+dir 70 1 86
+dir 86 2 87
+dir 86 1 102
+dir 102 1 118
+dir 118 2 119
+dir 118 1 134 
+
+dir 70 2 71
+dir 71 1 87
+dir 71 2 72
+dir 72 1 88
+dir 72 2 73
+
+dir 73 2 74
+dir 74 3 58
+dir 89 2 90
+dir 121 2 122
+dir 137 2 138
+dir 138 1 154
+
+dir 74 1 90
+dir 90 1 106
+dir 106 1 122
+dir 122 1 138
+
+dir 73 1 89
+dir 79 1 95
+#dir 85 1 101
+dir 87 1 103
+dir 87 2 88
+dir 88 1 104
+dir 88 2 89
+dir 89 1 105
+dir 95 1 111
+dir 99 2 100
+dir 100 2 101
+#dir 101 1 117
+dir 101 2 102
+dir 102 2 103
+dir 103 1 119
+dir 103 2 104
+dir 104 1 120
+dir 104 2 105
+dir 105 1 121
+dir 105 2 106
+dir 106 2 107
+dir 107 2 108
+dir 108 2 109
+dir 109 2 110
+dir 110 2 111
+dir 111 1 127
+#dir 117 1 133
+dir 119 1 135
+dir 119 2 120
+dir 120 1 136
+dir 120 2 121
+dir 121 1 137
+dir 127 1 143
+dir 131 1 147
+dir 131 2 132
+dir 132 2 133
+dir 133 2 134
+dir 134 2 135
+dir 135 2 136
+dir 136 2 137
+dir 143 1 159
+dir 147 1 163
+dir 159 1 175
+dir 165 1 181
+dir 165 2 166
+dir 166 2 167
+dir 167 2 168
+dir 168 2 169
+dir 171 1 187
+dir 175 1 191
+dir 181 1 197
+dir 187 1 203
+dir 191 1 207
+
+dir 125 1 141
+dir 109 1 125
+dir 93 1 109
+dir 77 1 93
+
+mapEnd
+
+wall 2 15 3
+wall 2 207 1
+wall 2 203 1
+wall 2 197 1
+wall 2 5 3
+wall 2 11 3
+
+inv door 15 3 dontopen Ice_Cavern--Hall_of_Confusion-mark0
+inv door 207 1 dontopen Ice_Cavern--Hall_of_Anguish-mark0
+inv door 203 1 dontopen Ice_Cavern--Hall_of_Anguish-mark2
+inv door 197 1 dontopen Ice_Cavern--Hall_of_Anguish-mark3
+inv door 5 3 dontopen Ice_Cavern--Hall_of_Confusion-mark3
+inv door 11 3 dontopen Ice_Cavern--Hall_of_Confusion-mark2
+
+inv riddleDoor 102 0 2 Walls/icecavedoor Ice_Cavern--Throne_Room-mark7
+inv door 101 2 dontopen Ice_Cavern--Throne_Room-mark6
+
+inv iceComboButton 35 3 2 Images/note1 0 Labyrinth/Note_1.wav 0
+inv iceComboButton 58 3 2 Images/note2 0 Labyrinth/Note_2.wav 1 ice_cavern--throne_room.mapiceComboButton35
+inv iceComboButton 163 1 2 Images/note3 0 Labyrinth/Note_3.wav 2 ice_cavern--throne_room.mapiceComboButton35 ice_cavern--throne_room.mapiceComboButton58
+inv iceComboButton 154 1 2 Images/note4 0 Labyrinth/Note_4.wav 3 ice_cavern--throne_room.mapiceComboButton35 ice_cavern--throne_room.mapiceComboButton58 ice_cavern--throne_room.mapiceComboButton163
+inv iceComboButton 77 3 2 Images/note5 0 Labyrinth/Note_5.wav 4 ice_cavern--throne_room.mapiceComboButton35 ice_cavern--throne_room.mapiceComboButton58 ice_cavern--throne_room.mapiceComboButton163 ice_cavern--throne_room.mapiceComboButton154 ice_cavern--throne_room.mapriddleDoor102
+
+inv chest 41 2 2 Images/icepot 2 cards.offense.Destroyer 1
+inv chest 43 1 2 Images/icepot 2 cards.offense.CriticalBlow 3
+inv chest 171 3 2 Images/icepot 2 cards.offense.ChameleonStrike 3
+inv chest 169 2 2 Images/icepot 2 cards.magic.SacredBeam 1
+
+inv boss 100 -1 -1 Menthu1
+
+inv save 141 3 -1 -1

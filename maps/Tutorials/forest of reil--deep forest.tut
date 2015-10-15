@@ -1,0 +1,98 @@
+title string="Tutorial - Cards and Slots";""
+
+var type=vector name=gray value=.7,.7,.7
+var type=vector name=blue value=0,0,.7
+var type=vector name=green value=0,.7,0
+var type=vector name=darkgreen value=0,.6,0
+var type=vector name=purple value=.5,0,.5
+var type=vector name=red value=1,0,0
+
+newtext
+
+newMap
+putMap index=1 vector=blue
+putMap index=4 vector=blue
+putMap index=5 vector=blue
+addRow newpage=true text="Your weapon's set of slots, indicates how many and";"" usemap=true
+
+newMap
+putMap index=1 vector=blue
+putMap index=2 vector=blue
+putMap index=3 vector=blue
+addRow newpage=false text="which types of cards your character may use in battle.";"" usemap=true
+
+addRow newpage=true text="For example, if your character's weapon contains";""
+newMap
+putMap index=1 vector=gray
+putMap index=5 vector=purple
+
+addRow newpage=false text="2 Battle slots and 1 Magic slot, you may use";"" usemap=true
+addRow newpage=false text="2 Battle cards and 1 Magic card each turn.";"" usemap=true
+addRow newpage=false text="";""
+addRow newpage=false text="";""
+addRow newpage=false text="Example weapon:";"" icon=Menu/0slot.png yoffset=-30 iconxoffset=155 iconyoffset=-52
+addRow newpage=false text="";"" icon=Menu/0slot.png yoffset=-70 iconxoffset=230 iconyoffset=-52
+addRow newpage=false text="";"" icon=Menu/1slot.png yoffset=-110 iconxoffset=305 iconyoffset=-52
+
+put turn=0
+
+newtext
+newMap
+putMap index=3 vector=blue
+putMap index=4 vector=blue
+putMap index=6 vector=blue
+addRow newpage=true text="You could either use, discard or store a card.";"" usemap=true
+addRow newpage=false text="";""
+
+newMap
+putMap index=0 vector=blue
+putMap index=3 vector=blue
+addRow newpage=false text="Choose card to use in this turn:";"" iconxoffset=350 iconyoffset=-23 usemap=true button=cross
+
+newMap
+putMap index=0 vector=blue
+putMap index=3 vector=blue
+putMap index=4 vector=blue
+addRow newpage=false text="Store card for later use:";"" iconxoffset=350 iconyoffset=-23 usemap=true button=square
+
+newMap
+putMap index=0 vector=blue
+putMap index=2 vector=red
+addRow newpage=false text="Discard card, unusable until shuffle:";"" iconxoffset=350 iconyoffset=-23 usemap=true button=circle
+ 
+newMap
+putMap index=3 vector=red
+putMap index=4 vector=red
+putMap index=5 vector=red
+putMap index=6 vector=red
+addRow newpage=true text="When your deck runs out of cards, the used and";"" usemap=true
+
+newMap
+putMap index=3 vector=blue
+putMap index=4 vector=blue
+putMap index=5 vector=blue
+addRow newpage=false text="discarded cards will automatically be shuffled and";"" usemap=true
+addRow newpage=false text="your deck will be full again.";""
+
+newMap
+putMap index=2 vector=blue
+putMap index=5 vector=red
+addRow newpage=true text="However, the stored card will not be shuffled. It";"" usemap=true
+addRow newpage=false text="will stay in the store slot until it is used or discarded.";""
+addRow newpage=false text="";""
+addRow newpage=false text="";""
+newMap
+putMap index=0 vector=blue
+addRow newpage=false text="Store slot:";"" icon=Battle/save.png iconxoffset=105 iconyoffset=-52 usemap=true
+
+newMap
+putMap index=1 vector=red
+putMap index=2 vector=red
+putMap index=7 vector=red
+addRow newpage=true text="But take heed, shuffling makes your character forfeit";"" usemap=true
+newMap
+putMap index=0 vector=red
+putMap index=1 vector=red
+addRow newpage=false text="one turn, so do not discard too much!";"" usemap=true
+
+put turn=1

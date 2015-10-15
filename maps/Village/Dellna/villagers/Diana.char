@@ -1,0 +1,45 @@
+image Diana
+start 1000 280
+
+in 2 60 false
+in 1    190 false
+in 0    500 true
+in 3    280 false
+in 0 20 false
+in 3    500 true
+in 1 90 false
+in 0 40 false
+in 2    100 true
+
+dialog 1
+
+# (walking around left of the snow man)
+n Diana
+fl I've heard that the Senate of Pensara is trying
+sl to start a war against the other nations.
+f true
+
+n Diana
+fl But I don't think that Dellna will fall
+sl for their negative propaganda.
+f true 
+
+n Diana
+fl We usually don't bother about things that
+sl happen on the warmer islands.
+f true
+
+dialog 2
+
+# after demon cave 4
+n Diana
+fl After what happened now maybe we don't have a 
+sl choice but to deal with the problems in the world.
+f true 
+
+n Diana
+fl I was hoping we didn't have to come to this point.
+sl end
+f true
+
+end

@@ -1,0 +1,93 @@
+image char/Samborg
+start 995 1275
+
+in 2 200 false
+in 1 80 false
+in 0 85 false
+in 3 65 false
+in 0 80 false
+in 1 35 false
+in 0 35 false
+in 3 50 false
+
+dialog 1
+
+# walking on the left pier
+n Samborg
+fl I like to spend my days here at the harbor.
+sl end
+f true 
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

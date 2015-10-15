@@ -1,0 +1,52 @@
+image char/Alaressoldier	   
+start 550 300
+
+in 0 400 true   
+	   
+dialog 1	   
+	   
+n Soldier	   
+fl No boats are leaving at the moment.	   
+sl end	   
+f true	   
+	   
+n Soldier	   
+fl Even if there were, you couldn't get on anyway.	   
+sl You know, with the trade stop and all.
+f true	   
+	   
+n Soldier	   
+fl You do know about the trade stop,
+sl don't you?
+f true	   
+	   
+q 10	   
+alt Yes	   
+alt No
+alt _
+alt _
+f true	   
+	   
+*11	   
+n Soldier	   
+fl Ok then, of you go!	   
+sl end	   
+f true	   
+	   
+*12	   
+n Soldier	   
+fl Zazo and Alares has seized all export to and 	   
+sl all import from Pensara.	   
+f true	   
+	   
+n Soldier	   
+fl This, because Pensara has shown signs of hostility,
+sl which also led this port to only handle passenger ships.	   
+f true	   
+	   
+n Soldier	   
+fl And even if you want to travel with them,
+sl you'll need a legit passport with travel approval.	   
+f true	   
+	   
+end	 

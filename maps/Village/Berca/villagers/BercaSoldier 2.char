@@ -1,0 +1,49 @@
+image char/Pensarasoldier
+start 1250 1110
+
+in 2 100 true
+
+dialog 1
+
+n Soldier
+fl This is Berca. We run things here!
+sl So, be careful!
+f true
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

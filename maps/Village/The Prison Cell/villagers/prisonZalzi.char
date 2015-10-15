@@ -1,0 +1,58 @@
+image Zalzi
+
+start 368 389
+
+in 3 180 true
+
+dialog 1
+
+n Zalzi
+fl A bit more...
+sl end
+trigger prisonZalzi 2
+f true
+
+dialog 2
+
+n Zalzi
+fl This lock won't stand a chance.
+sl end
+trigger prisonZalzi 3
+f true
+
+dialog 3
+
+n Zalzi
+fl I'm a master thief.
+sl This ain't no problem!
+trigger prisonZalzi 4
+f true
+
+dialog 4
+
+n Zalzi
+fl I haven't yet met a lock worthy of my skill!
+sl end
+f true
+
+n Kin
+fl Enough, already!
+sl Just open the door!
+f false
+
+n Zalzi
+fl I would have, if someone wasn't breathing
+sl down my neck, all the live long day!
+trigger prisonZalzi 5
+f true
+
+dialog 5
+
+n Zalzi
+fl ...
+sl end
+f true
+
+run exitMenthu_is_Pleased continue
+
+end

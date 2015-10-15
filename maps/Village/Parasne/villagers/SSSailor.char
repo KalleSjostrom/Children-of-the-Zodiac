@@ -1,0 +1,16 @@
+image char/Sailor2
+start 1150 1325
+	   
+in 1 100 true
+in 2 100 false
+in 2 100 true
+in 0 100 false
+	   
+dialog 1	   
+	   
+n Sailor	   
+fl Arrgh there no ladies h'r who want me,
+sl me self, as me am argh.
+f true	   
+	   
+end	 

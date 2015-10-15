@@ -1,0 +1,28 @@
+image Benzer
+start 1285 110
+
+in 2 100 true
+in 3 90 false
+in 2 100 true
+in 1 90 false
+
+dialog 1
+
+n Benzer
+fl You can always look around and see if you find
+sl anything interesting.
+f true
+
+dialog 2
+
+n Benzer
+fl If you don't find anything, 
+sl go inside the shop over there.
+f true
+
+n Benzer
+fl They're always open for business.
+sl end
+f true
+
+end

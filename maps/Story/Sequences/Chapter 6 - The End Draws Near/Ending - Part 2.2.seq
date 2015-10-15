@@ -1,0 +1,47 @@
+import file=main.var
+
+info time="day" name="Alares" music="continue" fadeValue="0" musicVolume="1" status="1" delay="1000"
+
+var flog=0
+var eve=1
+var john=2
+var jane=3
+var bob=4
+var ella=5
+
+actor name="Flog"
+actor name="Eve"
+actor name="Farmer John"
+actor name="Farmer Jane"
+actor name="Pensara - The North District/villagers/Farmer Bob/Farmer BobExtras" pos=1375;1200;2
+actor name="Pensara - The North District - Farmer House/villagers/Ella/EllaExtras" pos=1405;1200;2
+
+ins kind=screen_center center=false
+
+ins timea=0 index=flog kind=controll controll=true
+ins timea=0 index=eve kind=controll controll=true
+ins timea=0 index=john kind=controll controll=true
+ins timea=0 index=jane kind=controll controll=true
+
+ins timea=0 index=flog kind=hide
+ins timea=0 index=eve kind=hide
+ins timea=0 index=john kind=hide
+ins timea=0 index=jane kind=hide
+
+ins timea=0 index=flog kind=show movepos=1255;1200;2
+ins timea=0 index=eve kind=show movepos=1285;1200;2
+ins timea=0 index=jane kind=show movepos=1315;1200;2
+ins timea=0 index=john kind=show movepos=1345;1200;2
+
+text lines="Eve got her Flog &";"the Farmers got reunited." color=0 size=50 pos=450;384
+ins timea=1500 kind=screen_go acceleration=50000 distance=300 direction=0 duration=6000
+
+ins type=fadein timea=1500 index=0 fadetime=2000 kind=text
+ins timea=3500 kind=screen_stop
+ins type=fadeout timea=1000 index=0 fadetime=1000 kind=text
+
+load trigger="Marc"
+ins index=0 timea=0 kind=trigger value=1
+
+ins type=fadeout timea=1500 kind=village fadetime=1200
+ins timea=1200 kind=endseq

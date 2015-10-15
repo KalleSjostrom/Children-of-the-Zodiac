@@ -1,0 +1,69 @@
+mapSize -0.5 0.5 1
+
+size 187
+
+mission VillagerMission GreatMineMission trigger="Zazo";"2" trigger="Zazonode";"2" dialog="Celis";"Seems that no more workers are here.&&Let's head back to Zazo!" extranext="2";"After a Hard Days Work"
+
+light0 position=0;0;0;1 ambient=.8;.8;.8;1 specular=0;0;0;1 diffuse=.8;.8;.8;1 attenuation=1;0.01;0.015
+material ambient=.4;.4;.4;1 specular=0;0;0;1 diffuse=.7;.7;.7;1
+invMaterial ambient=.7;.7;.7;1 specular=.2;.2;.2;1 diffuse=.8;.8;.8;1 shininess=5 emission=.1;.1;.1;1
+
+floorTex minecavefloor.jpg
+wallTex minecavewall.png
+wallTex minecavedoorbig0.png
+wallTex minecavedoor0.png
+roofTex minecaveroof.jpg
+
+normal floor 0 1
+normal wall 1 4
+normal roof 4 5
+
+mapPos 0 0
+
+# directions in labyrinth
+dir 105 1 121
+dir 107 1 123
+dir 121 1 137
+dir 123 1 139
+dir 125 1 141
+dir 125 2 126
+dir 126 2 127
+dir 137 1 153
+dir 139 1 155
+dir 141 1 157
+dir 153 1 169
+dir 153 2 154
+dir 154 2 155
+dir 155 1 171
+dir 155 2 156
+dir 156 2 157
+dir 157 2 158
+dir 158 2 159
+dir 159 1 175
+dir 169 1 185
+dir 171 1 187
+dir 175 1 191
+dir 185 1 201
+dir 187 1 203
+dir 189 2 190
+dir 190 2 191
+dir 191 1 207
+
+mapEnd
+
+inv hinderDoor 127 2 2 Walls/minecavedoorbig the_great_mine--west_wing-mark1
+inv hinderDoor 201 1 2 Walls/minecavedoorbig the_great_mine--the_mine_core-mark1
+
+inv hinderDoor 139 3 2 Walls/minecavedoor the_great_mine--great_deep-mark3
+wall 3 123 1
+inv door 123 1 dontopen the_great_mine--great_deep-mark2
+
+inv button 189 0 7 Images/lever The_Great_Mine--Great_Deep.maphinderDoor201 The_Great_Mine--Mine_Core.maphinderDoor9 The_Great_Mine--Mine_Core.mapbutton155
+inv button 207 1 7 Images/lever The_Great_Mine--Great_Deep.maphinderDoor127 The_Great_Mine--West_Wing.maphinderDoor115 The_Great_Mine--West_Wing.mapbutton148
+
+inv chest 105 3 2 Images/chest 0 125
+inv chest 203 1 2 Images/chest 2 cards.magic.Earth 2 false
+
+inv villager 107 3 GreatMineMission Images/minermarcus.png Villager="Aggh!";"You scared me!" Villager="I've hidden in this tool shed.";"We should be safe in here..." Kin="Come on! Just follow us out!" Villager="Alright, alright...";"You don't have to yell!"
+
+inv save 155 0 -1 -1

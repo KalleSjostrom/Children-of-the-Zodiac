@@ -1,0 +1,66 @@
+image char/Guy
+start 850 1030
+
+in 2 100 true
+#in 0 80 false
+#in 3 85 false
+#in 0 90 false
+#in 3 180 false
+#in 2 140 false
+#in 1 80 false
+#in 2 80 false
+#in 3 100 false
+#in 2 55 false
+#in 1 435 false
+#in 0 105 false
+#in 3 150 false
+
+dialog 1
+
+n Guy
+fl The climate here is not nice to us. We have to spend
+sl a lot of time inside our houses because of the heat. 
+trigger Guy 2
+f true
+
+dialog 2
+
+run Guy_Walks_Inside continue
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

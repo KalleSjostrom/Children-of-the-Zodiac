@@ -1,0 +1,25 @@
+image Ylwaa
+start 2500 400
+
+in 3 770 false
+in 2 55 false
+in 1 900 false
+in 0 155 false
+in 3 60 false
+in 3 70 false
+in 2 100 false
+
+dialog 1
+
+n Ylwaa
+fl All these street people creep me out. 
+sl That's why I don't shop at the regular stores.
+f true
+
+end
+
+
+
+
+
+

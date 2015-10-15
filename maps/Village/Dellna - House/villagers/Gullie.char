@@ -1,0 +1,25 @@
+image Gullie	   
+start 280 290	   
+	   
+in 0    100 true	   
+in 1 45 false	   
+in 0    100 true	   
+in 3    170 false	   
+in 0    200 true	   
+in 1    125 false	   
+	   
+dialog 1	   
+	   
+n Gullie	   
+fl I try to get Smallie to play outdoors sometimes,
+sl but she stubbornly refuses.
+f true
+	   
+dialog 2	   
+	   
+n Gullie	   
+fl After the death of Merri I won't let Smallie play
+sl outside. It's far too dangerous!
+f true	   
+	   
+end	 

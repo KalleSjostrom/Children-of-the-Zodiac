@@ -1,0 +1,86 @@
+image Gebb
+
+start 960 500
+
+in 2 100 false
+in 2 20 true
+in 1 20 true
+in 2 100 false
+in 2 20 true
+in 1 20 true
+in 2 100 false
+in 2 20 true
+in 1 20 true
+in 2 100 false
+in 2 20 true
+in 1 20 true
+in 0 400 false
+
+dialog 1
+
+check Gebb1 2 Camera
+
+n Gebb
+fl I think Marcus has a camera. I'd give anything
+sl for it but he won't give it to me.
+f true
+
+n Gebb
+fl What would you do if you had one?
+sl end
+trigger Marcus 3
+f true
+
+dialog 2
+
+n Gebb
+fl Ahhhh...
+sl You have the camera...
+f true
+
+n Gebb
+fl I'll give you everything I have for it!
+sl end
+f true
+
+n Gebb
+fl Let's see... I have 10 gold.
+sl end
+f true
+
+q 10
+alt Sell_camera_for_10_gold
+alt Keep_the_camera
+alt _
+alt _
+f true
+
+*11
+
+n Gebb
+fl Thank you very much.
+sl I can't describe how grateful I am.
+f true
+
+n _
+fl You gave away the key item "Camera".
+sl end
+trigger Gebb1 3
+take Camera
+f true
+
+*12
+
+n Gebb
+fl I see... hmpf...
+sl You're just like Marcus.
+f true
+
+dialog 3
+
+n Gebb
+fl Thank you again!
+sl end
+f true
+
+end

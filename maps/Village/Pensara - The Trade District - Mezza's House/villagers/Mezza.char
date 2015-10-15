@@ -1,0 +1,53 @@
+image Mezza
+start 334 460
+
+in 0 100 true
+
+dialog 1
+
+n Mezza
+fl The world is about to collapse, but everyone
+sl keep closing their eyes for the truth.
+f true
+
+n Mezza
+fl Maybe we should listen more to our elders, 
+sl they know what's going on. 
+f true
+
+n Mezza
+fl Lately I've sensed something evil coming from the 
+sl pyramids... I don't know what it is.
+f true
+
+dialog 2
+
+n Mezza
+fl I believe you fought one of the demons, 
+sl a beast from the core of this planet.
+f true
+
+n Mezza
+fl The demons swore to protect the planet at any cost.
+sl For some reason the demons have turned against us humans...
+f true
+
+n Mezza
+fl Why? That's something for us humans to answer.
+sl Right now we seems to be a threat to our own survival.
+f true
+
+n Mezza
+fl The demons protect the stones because they don't want any 
+sl threat to the planet to come near them and their power...
+trigger Mezza 3
+f true
+
+dialog 3
+
+n Mezza 
+fl 've spooked to Lecca and I agree with him...
+sl We have no choice but to collect the stones...
+f true 
+
+end

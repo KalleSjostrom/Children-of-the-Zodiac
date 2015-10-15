@@ -1,0 +1,109 @@
+image Candy
+start 1165 215
+
+in 2 100 true
+in 3 50 false
+in 0 70 false
+in 0 100 true
+in 3 65 false
+in 0 100 true
+in 2 70 false
+in 2 30 true
+in 1 115 false
+
+dialog 1
+
+check Candy 2 Jewel
+
+n Candy
+fl Would you like to have a piece of Candy?
+sl Well, first you have to give me something shiny.
+f true
+
+dialog 2
+
+n Candy
+fl Would you like to have a piece of Candy?
+sl Well, first you have to give me something shiny.
+f true
+
+n Candy
+fl Ooohh! That's jewel is really shiny! I want it!
+sl I'll give you all the Candy you can take!
+f true
+
+q 10
+alt Sure!
+alt ..._I_don't_know...
+alt _
+alt _
+f true
+
+*11
+n Candy
+fl Thank you for buying me that jewel.
+sl end
+f true
+
+n Candy
+fl Now, please leave or I'll call the guards.
+sl end
+f true
+
+n _
+fl You gave away the key item "Jewel".
+sl end
+trigger Candy 3
+take Jewel
+f true
+
+*12
+n Candy
+fl But...
+sl I have never been turned down before.
+f true
+
+dialog 3
+
+check Candy 4 s.Sewers=2
+
+n Candy
+fl Leave or I'll call the guards!
+sl end
+f true
+
+dialog 4
+
+check Candy 5 Fur
+
+n Candy
+fl Would you like to have something nice?
+sl Then get me something warm.
+f true
+
+dialog 5
+
+n Candy
+fl Thank you so much my handsome warrior.
+sl Take this!
+trigger Candy 6
+f true
+
+n _
+fl You got a card!
+sl end
+gift cards.offense.LaceratingCut 2 3 false
+f true
+
+dialog 6
+
+n Candy
+fl Now I'll be warm.
+sl ...
+f true
+
+end
+
+
+
+

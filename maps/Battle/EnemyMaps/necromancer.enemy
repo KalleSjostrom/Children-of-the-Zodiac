@@ -1,0 +1,29 @@
+name Necromancer
+
+defense 188
+magicDefense 202
+agility 20
+evade 4
+hit 90
+attack 783
+magic 1203
+support 628
+hp 2463
+element 0
+gold 1108
+experience 1538
+criticalChance 0
+
+diesound Necromancer/dies
+image necromancer 3
+armor 67 90
+preferences 0 65
+
+scale 4.2
+height -2
+depth -5
+middle 0
+
+attackSpec type=mag name=Soul_Blazer power=.7 onAll=true p=.5 anim=(a=900,se=Monster/Necromancer/attack)--(f=1,h=true)--(f=2)
+attackSpec type=mag name=Wrath_of_the_Ancients power=1 onAll=false p=.5 anim=(a=900,se=Monster/Necromancer/attack)--(f=1,h=true)--(f=2)
+attackSpec type=sup name=Heal power=1 onAll=true anim=(f=3,c=s+Cure,a=1000)

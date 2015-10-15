@@ -1,0 +1,41 @@
+# background, prefix name of both images day
+background Alares_-_Belmet's_House true
+
+inside
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1024 768
+start 462 537 0
+
+holeDoor switch Alares 462 567 30 2 1 1569 1530 2
+
+o 507 364 518 441
+#o 506 490 517 527
+o 446 488 456 512
+o 445 560 456 620	
+
+o 507 491 516 520
+o 444 481 455 513
+o 445 560 454 596
+
+o 314 208 695 280
+o 329 279 346 291
+o 668 296 698 357
+o 352 362 400 373
+o 507 350 694 393
+o 315 275 325 600
+o 599 392 662 422
+o 575 280 699 297
+o 507 520 692 560
+o 326 484 359 506
+o 320 596 454 689
+o 691 212 711 603
+o 516 394 573 402
+o 327 446 455 485
+o 507 365 518 444
+o 505 597 696 690
+o 332 316 420 361
+
+villager Belmet
+
+end

@@ -1,0 +1,32 @@
+##### VILLAGER #####
+image Lecca
+
+##### STARTING LOCATION #####
+
+# start x y
+start 805 1663
+
+##### INSTRUCTIONS #####
+
+# in angle distance stopped
+in 2 180 true
+
+##### DIALOGS #####
+
+# first line
+# second line
+# first dialog background (the one at the far left top of the screen)
+
+dialog 1
+
+	run The_Mentor_of_Menthu continue 3
+
+dialog 2
+
+	n Lecca
+	fl His name is Mizoram and he lives in the town of Berca
+	sl north of here. Good luck to you all!
+	f true
+
+##### END #####
+end

@@ -1,0 +1,62 @@
+mapSize -0.5 0.5 1
+
+size 338
+
+light0 position=0;0;0;1 ambient=1;1;1;1 specular=0;0;0;1 diffuse=1;1;1;1 attenuation=1;0.01;0.015
+material ambient=.8;.8;.8;1 specular=0;0;0;1 diffuse=.7;.7;.7;1
+
+wallTex demonfloorwall.png
+wallTex demonfloordoor0.png
+
+normal floor 0 0
+normal wall 0 2
+normal roof 2 2
+
+mapPos 2 1
+
+# directions in labyrinth
+dir 55 1 71
+dir 57 1 73
+dir 57 2 58
+dir 58 2 59
+dir 59 1 75
+dir 71 1 87
+dir 73 1 89
+dir 75 1 91
+dir 75 2 76
+dir 76 2 77
+dir 87 2 88
+dir 88 2 89
+dir 89 2 90
+dir 90 2 91
+dir 115 2 116
+dir 116 2 117
+dir 117 2 118
+dir 118 2 119
+dir 119 2 120
+dir 121 1 137
+dir 105 1 121
+dir 137 1 153
+dir 153 1 169
+dir 155 1 171
+dir 169 1 185
+dir 171 1 187
+dir 185 1 201
+dir 187 1 203
+dir 201 2 202
+dir 202 2 203
+
+mapEnd
+
+wall 1 155 3
+inv door--down 155 3 dontopen mt._cesadur--fourth_floor-mark4
+
+inv hinderDoor 119 0 2 Walls/demonfloordoor mt._cesadur--mountain_top-mark3
+inv hinderDoor 118 2 2 Walls/demonfloordoor mt._cesadur--mountain_top-mark2
+
+inv boss 117 -1 -1 Taur
+inv save 121 0 -1 -1
+
+inv chest 77 2 2 Images/chest 2 cards.offense.BattleCard 2 false
+
+end

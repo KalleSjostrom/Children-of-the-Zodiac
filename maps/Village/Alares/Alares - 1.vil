@@ -1,0 +1,16 @@
+name Alares The_Green_Village
+background Alares true
+
+back 1953 1877 1
+start 1333 1809 0
+animObj fountain 1303 1279
+
+villager Bella 
+villager Eve 
+villager Farmer_Jane 
+villager Farmer_John 
+villager Flog 
+villager Marge
+villager Uri 
+
+end

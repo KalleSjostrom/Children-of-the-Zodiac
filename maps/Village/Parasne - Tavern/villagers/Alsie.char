@@ -1,0 +1,30 @@
+image Alsie
+start 540 420
+
+in 2 100 true
+
+dialog 1
+
+n Alsie 
+fl This is the best place if you want to
+sl take away your pain.
+trigger Alsie 2
+f true
+
+dialog 2
+
+n Alsie
+fl I have a lot of things in my past that
+sl I want to forget.
+trigger Alsie 3
+f true
+
+dialog 3
+
+n Alsie
+fl ...
+sl end
+trigger Alsie 1
+f true
+
+end

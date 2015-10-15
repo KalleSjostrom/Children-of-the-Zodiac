@@ -1,0 +1,76 @@
+import file=main.var
+
+var menthu=0
+var throne=1
+var kin=2
+var celis=3
+var borealis=4
+var zalzi=5
+
+var circle=6
+var sign=7
+var signflip=8
+var ophi=9
+
+info time="day" name="No Place" music="Menthu's Theme" fadeValue="0" musicVolume="1"
+
+actor name="Characters/Menthu/MenthuExtras" pos=494;250;2
+actor name="Stuff/thronePropExtras1" pos=467;230;0
+actor name="Characters/Kin/KinExtras" pos=422;440;0
+actor name="Characters/Celis/CelisExtras" pos=470;440;0
+actor name="Characters/Borealis/BorealisExtras" pos=518;440;0
+actor name="Characters/Zalzi/ZalziExtras" pos=566;440;0
+
+actor name="MenthuThroneSystem" pos=465;235
+#actor name="MenthuThroneSystem" pos=512;270
+actor name="MenthuSignSystem" pos=265;280
+actor name="MenthuSignFlipSystem" pos=660;280
+
+
+dialogpacket name=1 starttimea=300 duration=100
+dialog packetname=1 name="Menthu" text="It seems I have visitors...";""
+dialog packetname=1 name="Menthu" text="You've traveled a long way";"but your journey ends here."
+
+ins timea=50 index=0 kind=screenzoom zoomin=true zoomtime=8000 usestaticpos=true pos=512;300
+/*
+dialogpacket name=2 starttimea=300 duration=100
+dialog packetname=2 name="Celis" text="Menthu! Don't do this!";""
+dialog packetname=2 name="Celis" text="Humans have the the same right to life";"as Tenjins do!"
+
+dialogpacket name=3 starttimea=300 duration=100
+dialog packetname=3 name="Menthu" text="Man is nothing but greed and hate.";"Man is nothing but a plague for this planet."
+dialog packetname=3 name="Menthu" text="The world and all life would benefit";"for the humans to die."
+
+dialogpacket name=4 starttimea=300 duration=100
+dialog packetname=4 name="Celis" text="Humans are part of life!";"A part of the planet!"
+dialog packetname=4 name="Celis" text="They are not some 'error' that you can erase!";""
+
+dialogpacket name=5 starttimea=300 duration=100
+dialog packetname=5 name="Menthu" text="You are wrong.";""
+dialog packetname=5 name="Menthu" text="They were supposed to live in harmony";"with all life."
+dialog packetname=5 name="Menthu" text="They failed, and must therefore be erased.";""
+
+dialogsingle starttimea=500 <= name="Celis" text="The once who failed were the Tenjins";"for not educating them!"
+
+dialogpacket name=6 starttimea=300 duration=100
+dialog packetname=6 name="Menthu" text="Man cannot be educated, they are far to ignorant!";"" 
+dialog packetname=6 name="Menthu" text="The world would be a better place without them!";""
+
+dialogpacket name=7 starttimea=300 duration=100
+dialog packetname=7 name="Menthu" text="After I watched my fellow Tenjins get";"slaughtered, Ophiuchus approached me."
+dialog packetname=7 name="Menthu" text="He spoke to me about the gods mistake";"and how it was supposed to be."
+dialog packetname=7 name="Menthu" text="I cannot forgive what man has done to me and my race.";""
+dialog packetname=7 name="Menthu" text="How can you?";""
+
+dialogpacket name=8 starttimea=300 duration=100
+dialog packetname=8 name="Celis" text="The great war was a great calamity";"and must not repeated."
+dialog packetname=8 name="Celis" text="But you are doing the same against the humans!";""
+dialog packetname=8 name="Celis" text="Two wrongs doesn't make a right!";""
+
+dialogsingle starttimea=500 <= name="Menthu" text="I'm going to fulfill my destiny";"and uphold the will of Ophiuchus!"
+dialogsingle starttimea=500 <= name="Celis" text="We have the blessing of the twelve Zodiacs";"and!"
+dialogsingle starttimea=500 <= name="Menthu" text="Enough talk!";"It's time for you to visit your mother."
+*/
+#ins timea=0 index=sys2 kind=dist distance=30 duration=2000 direction=1
+
+ins timea=1000 kind=endseq

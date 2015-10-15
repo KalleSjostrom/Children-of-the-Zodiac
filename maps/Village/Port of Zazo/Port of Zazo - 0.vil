@@ -1,0 +1,50 @@
+##### VILLAGE #####
+# NAME
+name Port_of_Zazo _
+
+##### BACKGRUND #####
+
+# background, prefix name of both images day
+background Port_of_Zazo true
+
+##### STARTING LOCATION #####
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1024 768
+start0 4 235 1
+
+##### OBSTICLES #####
+
+o 48 537 69 767
+o 149 571 170 767
+o 0 510 47 767
+o 0 0 194 178
+o 267 353 267 353
+o 235 579 242 767
+o 203 602 235 767
+o 243 297 1023 767
+o 397 268 1023 297
+o 231 492 243 526
+o 232 409 244 460
+o 236 767 236 767
+o 46 227 75 267
+o 195 0 245 158
+o 171 586 202 768
+o 119 544 147 552
+o 70 553 148 767
+o 246 0 1022 268
+
+##### DOORS #####
+
+door house House 87 121 30 0 2
+doorSignFl Closed by order from Teo of Zazo.
+
+loot bottle 211 150 0;1;2;3 trigger=node:1 Bottle 1 1
+lootLine You found a letter in a bottle.
+lootLine It says to search outside of the Ice continent.
+
+sign 46 226 30
+signL Welcome to the port of Zazo
+
+##### END #####
+end

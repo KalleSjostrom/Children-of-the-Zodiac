@@ -1,0 +1,172 @@
+image Dexter	   
+start 1640 1125	   
+	   
+in 0 50 false	   
+in 3 45 false	   
+in 3 100 true	   
+in 1 145 false	   
+in 1 100 true	   
+in 0 70 false	   
+in 1 60 false	   
+in 2 100 true	   
+in 0 100 true	   
+in 3 85 false	   
+in 0 80 false	   
+in 1 25 false	   
+in 1 100 true	   
+in 0 55 false	   
+in 1 100 true	   
+in 0 165 false	   
+in 1 60 false	   
+in 0 100 true	   
+in 2 115 false	   
+in 2 100 true	   
+in 3 160 false	   
+in 2 305 false	   
+in 0 100 true
+
+dialog 1	   
+	   
+# walking on the right pier	   
+n Dexter	   
+fl I don't like Marc!	   
+sl He has giving me strange looks all week long.	   
+f true	   
+	   
+n Dexter	   
+fl Man I hate him!!!	   
+sl end	   
+trigger Dexter 2	   
+f true	   
+	   
+dialog 2	   
+	   
+n Dexter	   
+fl When it's dark I'm gonna catch him 	   
+sl when he is on his way home!	   
+f true	   
+	   
+n Dexter	   
+fl I'm gonna beat him and he won't know it's me.	   
+sl end	   
+trigger Dexter 3
+f true	   
+	   
+dialog 3	   
+	   
+n Dexter	   
+fl Will you help me catch him when it's dark?	   
+sl end	   
+f true	   
+	   
+q 10	   
+alt Sure_thing.
+alt Hell_no!	   
+alt _	   
+alt _	   
+f true	   
+	   
+*11	   
+	   
+n Dexter	   
+fl Excellent!!!
+sl Take this... It may help us during the attack!
+gift cards.offense.CriticalBlow 2 2 false
+trigger Forah 2
+trigger Dexter 4
+f true
+
+*12	   
+	   
+n Dexter	   
+fl Then... 	   
+sl Forget all I've told you.	   
+trigger Dexter 5	   
+f true	   
+	   
+dialog 4	   
+
+n Dexter
+fl Shhh... Not here...
+sl See you when the sun goes down.
+f true
+
+dialog 5	   
+	   
+n Dexter	   
+fl Go away!	   
+sl end	   
+trigger Dexter 6	   
+f true	   
+	   
+dialog 6	   
+	   
+n Dexter 	   
+fl ...	   
+sl end	   
+trigger Dexter 1	   
+f true	   
+	   
+dialog 7	   
+	   
+n Dexter	   
+fl What's up?
+sl end	   
+f true	   
+	   
+q 10	   
+alt Want_to_buy_some_fish?	   
+alt Party_at_the_pub_tonight!	   
+alt Stop_beating_up_others!	   
+alt Nothing...	   
+f true	   
+	   
+*11	   
+n Dexter	   
+fl No! What's wrong with you!	   
+sl Get lost!	   
+f true	   
+	   
+*12	   
+n Dexter	   
+fl A party?!! Tonight!! All night long!!	   
+sl I wont miss that for anything in the world!!	   
+trigger Dexter 8	   
+f true	   
+
+n Dexter	   
+fl I guess I'll kick Marc's butt some other night..	   
+sl end
+trigger Dexter 8
+f true	   
+	   
+*13	   
+n Dexter	   
+fl But others are mean to me...	   
+sl end	   
+f true	   
+	   
+*14	   
+n Dexter	   
+fl Then, get lost!	   
+sl end
+f true
+	   
+dialog 8	   
+	   
+n Dexter	   
+fl Thanks for the info! Here's a little something	   
+sl for you as token of my gratitude.   
+gift cards.offense.CriticalBlow 2 2 false	   
+trigger Forah 4
+trigger Dexter 9
+f true	   
+	   
+dialog 9	   
+	   
+n Dexter
+fl Thanks again!
+sl end
+f true	   
+	   
+end	 

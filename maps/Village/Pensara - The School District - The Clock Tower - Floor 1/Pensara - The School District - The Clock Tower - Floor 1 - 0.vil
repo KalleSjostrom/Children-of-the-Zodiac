@@ -1,0 +1,24 @@
+# background, prefix name of both images day
+background Pensara_-_The_School_District_-_The_Clock_Tower_-_Floor_1 true
+
+inside
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1024 768
+start0 490 568 0
+start1 508 390 3
+
+# start0.x, start0.y + 20, width, dir, ?, village.x, village.y + 15, dir of player
+holeDoor switch Pensara_-_The_School_District 490 588 50 2 2 336 1705 2
+holeDoor house Pensara_-_The_School_District_-_The_Clock_Tower_-_Floor_2 485 370 30 1 0
+
+o 511 415 737 450
+o 495 441 513 450
+o 283 290 329 679
+o 475 380 729 413
+o 721 289 765 658
+o 560 618 729 689
+o 329 618 471 688
+o 270 188 751 290
+
+end

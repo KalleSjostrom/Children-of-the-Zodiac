@@ -1,0 +1,200 @@
+# ins type time index fadeInTime kind posX posY
+# type = 	showActor 0
+#		hideActor 1
+#		fadeIn    2
+#		fadeOut   3
+#		noFade	  4
+#
+# time		Start Time
+# 
+# index		which dialog / image to use
+#
+# fadeInTime	Time to fade in or out.
+#
+# kind		image   0
+#		text    1
+#		actor   2
+#		village 3
+#		music	4
+# 
+# posX 		For text - The x position for the dialog / image.
+# 
+# posY		For text - The y position for the dialog / image.
+#
+# imageMode	For images:
+#		Zoom		0
+#		Scroll right 	1
+#		Normal		2
+#		Scroll down	3
+#
+# size
+#
+
+# ins type time index fadeInTime kind posX posY
+
+load black 1024 768
+
+####### FIRST SCENE #######
+######## Questions ########
+
+ins 2 1000 0 1000 1 20 380
+fr Can hatred arise from nothingness?
+sr empty
+ins 3 6000 0 1000 1 20 380
+
+ins 2 7000 1 1000 1 20 380
+fr Or does it always emerge within a context?
+sr empty
+ins 3 13000 1 1000 1 20 380
+
+ins 2 14000 2 1000 1 20 380
+fr If that's the case...
+sr empty
+ins 3 18000 2 1000 1 20 380
+
+ins 2 19000 3 1000 1 20 380
+fr ...could an evil deed be justified, 
+sr when you have the circumstances to blame?
+ins 3 26000 3 1000 1 20 380
+
+####### SECOND SCENE #######
+####### First Image ######
+####### Zoom, creation of the world ######
+
+ins 2 27000 1 1000 0 0 1
+load 1 1024 576
+
+ins 2 28000 4 1000 1 20 650
+fr From fire and lightning the world was forged. It took
+sr the shape of two lands separated by a great sea.
+ins 3 36000 4 1000 1 20 650
+
+ins 2 38000 5 1000 1 20 650
+fr The twelve great gods, called the Zodiacs,
+sr saw the world they had created with proud eyes.
+ins 3 46000 5 1000 1 20 650
+
+ins 2 48000 6 1000 1 20 650
+fr They smiled when they saw the green tall 
+sr trees and the birds singing in harmony.
+ins 3 55000 6 1000 1 20 650
+
+ins 3 56001 1 1000 0 2 1
+
+####### THIRD SCENE #######
+####### Second Image - Scroll to right ######
+####### Lecture turn to man chopping wood #######
+
+ins 2 57000 0 1000 0 1 2
+
+ins 2 57001 7 1000 1 20 380
+fr One of the beings who wandered the lands 
+sr learned to coexist with nature to a great extent.
+ins 3 63000 7 1000 1 20 380
+
+ins 2 64500 2 1000 0 1 2
+
+load 2 2058 576
+
+ins 2 66000 8 1000 1 20 650
+fr They developed a close bond to nature, and learned
+sr with haste the secrets that nature had to teach.
+ins 3 73000 8 1000 1 20 650
+
+ins 2 75000 9 1000 1 20 650
+fr The name they took was Tenjins, but they were not  
+sr the only intelligent creature who was set on earth.
+ins 3 82000 9 1000 1 20 650
+
+ins 2 84000 10 1000 1 20 650
+fr Another creature had emerged from the unborn.
+sr empty
+ins 3 91000 10 1000 1 20 650
+
+ins 2 93000 11 1000 1 20 650
+fr They where unable to hear the voice of nature, so
+sr they chopped down trees and hunted animals for food.
+ins 3 100000 11 1000 1 20 650
+
+ins 2 100001 12 1000 1 20 650
+fr That creature was man.
+sr empty
+ins 3 107000 12 1000 1 20 650
+
+ins 3 107001 2 1000 0 4 2
+
+####### FOURTH SCENE #######
+####### Black Image #######
+
+ins 4 109000 0 1000 0 2 1
+
+ins 2 110000 13 1000 1 20 380
+fr The gods where displeased with this
+sr development and planned to aid the humans.
+ins 3 117000 13 1000 1 20 380
+
+####### FIFTH SCENE #######
+####### Third Image #######
+####### Twelve Children Calling ######
+
+ins 2 118500 3 1000 0 2 1
+
+load 3 1024 576
+
+ins 2 120500 14 1000 1 20 650
+fr Therefore, they called upon the twelve most prosperous
+sr Tenjins to carry out a mission of great importance.
+ins 3 128500 14 1000 1 20 650
+
+ins 2 130500 15 1000 1 20 650
+fr One stone where given to each of the twelve,
+sr to be used as a way to contact the Zodiacs.
+ins 3 138500 15 1000 1 20 650
+
+ins 3 140500 3 1000 0 2 1
+
+####### SIXTH SCENE #######
+####### Forth Image - Scroll right ######
+####### Man reading, plowing and the Castle #######
+
+ins 2 144500 4 1000 0 1 2
+
+load 4 3800 576
+
+ins 2 148500 16 1000 1 20 650
+fr The teachings of the Tenjins soon 
+sr spread across the land of men.
+ins 3 157500 16 1000 1 20 650
+
+ins 2 159500 17 1000 1 20 650
+fr Literacy grew and books became popular which
+sr greatly helped the process of learning.
+ins 3 168500 17 1000 1 20 650
+
+ins 2 170500 18 1000 1 20 650
+fr Man began to see that animals could be tamed to do hard
+sr work and that some animals even made excellent companions.
+ins 3 179500 18 1000 1 20 650
+
+ins 2 181500 19 1000 1 20 650
+fr Agriculture became more advanced and they
+sr even learned the secrets of forging metal.
+ins 3 190500 19 1000 1 20 650
+
+ins 2 192500 20 1000 1 20 650
+fr Villages grew larger and trade became a natural part of life.
+sr empty
+ins 3 201500 20 1000 1 20 650
+
+ins 2 203500 21 1000 1 20 650
+fr The seed of knowledge was planted by the Tenjins
+sr but it was still mans choice how to use it.
+ins 3 211500 21 1000 1 20 650
+
+ins 3 226500 4 5000 0 4 2
+
+ins 2 233500 5 8000 0 2 1
+
+load 5 1024 576
+
+ins 3 243500 5 7000 0 2 1

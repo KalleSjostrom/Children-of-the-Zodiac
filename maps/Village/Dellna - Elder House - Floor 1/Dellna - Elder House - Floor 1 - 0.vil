@@ -1,0 +1,24 @@
+background Dellna_-_Elder_House_-_Floor_1 true
+back 1024 768
+start0 495 480 0
+start1 588 411 2
+
+inside
+
+holeDoor switch Dellna 495 500 30 2 1 473 367 2 2
+holeDoor house Dellna_-_Elder_House_-_Floor_2 588 386 30 0 0 582 296 0
+
+o 538 536 624 659
+o 392 536 478 659
+o 393 406 462 462
+o 617 373 623 457
+o 373 235 631 330
+o 577 361 622 373
+o 622 331 641 684
+o 394 351 460 390
+o 577 373 583 457
+o 374 333 393 686
+
+villager Gabriel 1 2
+
+end

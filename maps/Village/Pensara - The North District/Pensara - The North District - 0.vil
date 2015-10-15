@@ -1,0 +1,275 @@
+##### VILLAGE #####
+# NAME
+name Pensara The_North_District
+
+##### BACKGRUND #####
+
+# background, prefix name of both images day
+background Pensara_-_The_North_District true
+
+##### STARTING LOCATION #####
+
+# start Player xpos ypos angle, Background xpos ypos
+back 2820 1336 1
+start0 1081 1265 0
+# Vincent's Resident
+start1 1074 698 2
+# Sewers
+start2 326 435 2
+
+wind -10;0;0 1
+particlesystem smokesystemHut smokesystemArmory
+
+##### OBSTICLES #####
+# obsticles x y x2 y2
+# Berg
+o 819 824 826 858
+o 767 552 776 575
+o 809 358 837 389
+o 1518 696 1528 771
+o 842 861 907 931
+o 1484 809 1510 879
+o 1528 581 1538 597
+o 778 678 806 683
+o 1069 401 1089 422
+o 1311 539 1405 585
+o 640 613 640 613
+o 1180 868 1185 939
+o 1478 815 1483 819
+o 801 893 817 924
+o 905 865 965 938
+o 976 838 1003 909
+o 1529 598 1540 764
+o 850 403 873 437
+o 1323 446 1402 465
+o 795 683 808 757
+o 1511 774 1517 877
+o 667 448 715 663
+o 715 443 715 443
+o 1157 844 1167 914
+o 1002 825 1067 897
+o 1169 864 1179 933
+o 985 325 1009 355
+o 1133 826 1156 909
+o 1471 820 1484 888
+o 618 709 645 725
+o 965 858 974 930
+o 1185 870 1309 942
+o 873 322 899 357
+o 740 447 1018 470
+o 645 719 732 811
+o 717 551 767 669
+o 834 472 927 487
+o 768 576 777 678
+o 1327 422 1402 445
+o 809 792 819 893
+o 1406 833 1459 907
+o 1486 805 1510 809
+o 732 752 799 793
+o 1324 584 1394 596
+o 610 640 646 710
+o 1445 551 1532 580
+o 1320 844 1347 915
+o 799 757 808 894
+o 1165 391 1189 421
+o 766 479 802 486
+o 1347 830 1404 904
+o 1406 527 1442 564
+o 820 857 842 925
+o 972 393 993 430
+o 750 470 833 479
+o 1019 421 1326 446
+o 1309 862 1320 931
+o 727 415 746 441
+o 1263 447 1323 462
+o 1385 466 1404 536
+o 715 442 739 455
+o 902 394 925 432
+o 1460 832 1471 903
+o 644 613 664 640
+o 849 487 913 501
+
+# Fluffy trees
+o 570 829 597 853
+o 884 743 911 767
+o 1333 328 1360 352
+o 1592 551 1619 575
+o 1505 334 1532 358
+o 729 981 756 1005
+o 1592 717 1619 741
+o 805 359 832 383
+o 1499 917 1526 941
+o 872 324 899 348
+o 1255 990 1282 1014
+o 1162 373 1189 397
+o 595 494 622 518
+o 141 953 168 977
+o 141 1111 168 1135
+o 1494 619 1521 643
+o 980 326 1007 350
+
+# Houses
+# East house
+o 1783 504 1925 616
+# South east house
+o 1587 853 1784 995
+# Shut down house
+o 275 381 409 469
+# Vincents house front
+o 1026 631 1183 736
+# Vincents house up
+o 934 499 1276 631
+# South west house
+o 241 840 485 997
+
+## Wall ##
+
+# Water north of wall
+o 0 0 130 289
+# North wall
+o 130 191 600 289
+o 600 191 1135 289
+o 1135 191 2140 289
+o 2140 191 2666 289
+# East wall
+o 2666 191 2761 739
+o 2666 739 2761 1337
+
+# Pine trees
+o 517 319 537 355
+o 566 652 586 688
+o 758 1130 778 1166
+o 653 851 673 887
+o 325 314 345 350
+o 210 370 230 406
+o 198 538 218 574
+o 716 811 736 847
+o 240 635 260 671
+o 192 703 212 739
+o 831 955 851 991
+o 851 549 871 585
+o 1328 760 1348 796
+
+# MISC
+o 2070 587 2246 804
+o 269 1114 294 1154
+o 2017 510 2581 543
+o 2289 836 2528 1071
+o 1018 729 1044 752
+o 1146 1111 1171 1151
+o 1047 1272 1056 1335
+o 230 995 254 1015
+o 462 985 512 1025
+o 2018 543 2027 802
+o 1682 538 1710 565
+o 1770 993 1796 1007
+o 1152 979 1196 1020
+o 1023 1114 1048 1154
+o 1711 1112 1736 1152
+o 2019 1086 2583 1119
+o 1160 731 1186 754
+o 1770 1007 1785 1016 
+o 332 998 359 1012
+o 1168 1252 1225 1289
+o 2331 1260 2665 1299
+o 1775 609 1801 623
+o 2019 836 2025 1086
+o 1654 574 1687 601
+o 968 1251 1025 1288
+o 2288 587 2527 804
+o 1575 334 1601 373
+o 2062 833 2242 1073
+o 2572 513 2581 1086
+o 430 409 491 437
+o 998 978 1042 1019
+o 1138 1274 1147 1337
+o 1569 975 1618 1015
+
+# Water
+o 1 903 15 1337
+o 17 1298 1045 1353
+o 1148 1299 2329 1340
+o 4 290 128 902
+
+# Trees and stuff north east in pensara
+o 2321 359 2391 405
+o 2604 384 2629 408
+o 2476 430 2501 454
+o 2532 307 2557 331
+
+# Large tree
+o 158 342 158 342
+o 2321 367 2328 394
+o 2312 376 2321 383
+o 2383 365 2396 393
+o 2601 382 2632 410
+o 2397 381 2406 389
+o 2329 358 2382 409
+o 2530 309 2560 335
+o 2474 429 2505 457
+
+
+##### DOORS #####
+
+holeDoor village Pensara_-_The_Trade_District 1094 1363 96 2 0 0 0 3
+
+# Vincents entrance
+door house Vincent 1074 678 60 0
+doorSignFL The resident of Vincent af Kinstone.
+
+# Farmer's House
+door house Pensara_-_The_North_District_-_Farmer_House 1840 559 30 0 2
+doorSignFL Locked.
+
+# Library
+holeDoor house Pensara_-_The_North_District_-_Library 1666 930 40 0 2
+doorSignFL Locked.
+
+# left door left house
+door house Pensara_-_The_North_District_-_Civil_House 300 944 30 0 2
+doorSignFL Locked.
+
+# right door left house
+door house Pensara_-_The_North_District_-_Civil_House 397 944 30 0 2 0 0 1
+doorSignFL Locked.
+
+# Shut door
+door labyrinth The_Sewers--North-mark6 326 415 30 0
+doorSignFL Shut tight.
+
+##### SIGNS #####
+
+# right statue
+sign 1152 983 40
+signL A weird statue.
+
+# left statue
+sign 999 983 40
+signL A weird statue.
+
+# axe
+sign 1654 569 30
+signL Seems someone has chopped wood here.
+
+# grave
+sign 1574 332 30
+signL R.I.P.
+signL Here lies Inu the dog.
+
+##### VILLAGERS #####
+
+# villager name
+villager Billy 3
+villager Farmer_Bob
+villager Nodd
+villager PensaraSoldier_15
+villager PensaraSoldier_16
+villager PensaraSoldier_17
+villager PensaraSoldier_18
+villager PensaraSoldier_19
+villager Podd 1 2 3
+villager Thieving_looking_guy 6 8
+villager Uli
+
+##### END #####
+end

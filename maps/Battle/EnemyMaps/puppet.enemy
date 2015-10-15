@@ -1,0 +1,29 @@
+name Puppet
+
+defense 340
+magicDefense 340
+agility 21
+evade 5
+hit 90
+attack 1487
+magic 1350
+support 1103
+hp 3600
+element 0
+gold 3420
+experience 2280
+criticalChance 0
+
+diesound Puppet/dies
+image puppet 8
+armor 50 50
+preferences 40 40
+
+scale 5
+height -2
+depth -5
+middle 0
+
+attackSpec anim=(a=400)--(f=1,a=400)--(f=2,a=400)--(f=3,a=400)--(f=4,a=400)--(f=4,a=50,se=Monster/Puppet/attack)--(f=5,a=400)--(f=5,a=50,se=Monster/Puppet/attack)--(f=6,a=400,h=true)--(f=7,a=400)
+attackSpec type=mag name=Entangling_Wind anim=(a=400)--(f=1,a=400)--(f=2,a=400)--(f=3,a=400)--(f=4,a=1500,h=true,c=m+3+Wind:-.15;.15;-7)
+attackSpec type=sup name=Repair anim=(a=400)--(f=1,a=400)--(f=2,a=400)--(f=3,a=400)--(f=4,a=1500,h=true)

@@ -1,0 +1,145 @@
+import file=main.var
+
+var kin=0
+var celis=1
+var borealis=2
+
+info time="day" name="Zazo" music="Zazo" fadeValue="0" musicVolume="0"
+
+actor name="Kin"
+actor name="Celis"
+actor name="Borealis"
+
+load music="Zazo intro"
+load music="Theme of Borealis"
+
+show index=kin value=false
+show index=celis value=false
+show index=borealis value=false
+
+load translucent="res/Texts/Zazo.png"
+
+ins type=fadeout timea=0 index=0 fadetime=0 kind=music mode=pause
+ins type=fadein timea=0 index=1 fadetime=0 kind=music mode=play
+
+ins type=fadein timea=2000 kind=image fadetime=4000 scrollmode=normal imagetype=translucent
+ins type=fadeout timea=6000 kind=image fadetime=2000 scrollmode=normal imagetype=translucent
+
+ins type=fadeout timea=1000 index=1 fadetime=1000 kind=music mode=kill
+
+ins timea=1000 index=kin kind=show movepos=1205;1065
+ins timea=0 index=celis kind=show movepos=1175;1075
+ins timea=0 index=borealis kind=show movepos=1190;1025
+
+ins timea=1500 index=kin kind=dist distance=150 duration=4200 direction=0
+ins timea=0 index=celis kind=dist distance=150 duration=4000 direction=0
+ins timea=0 index=borealis kind=dist distance=160 duration=4500 direction=0
+
+ins timea=6000 index=borealis kind=stop direction=1
+ins timea=1500 index=borealis kind=stop direction=3
+ins timea=1500 index=borealis kind=stop direction=0
+
+ins timea=1500 index=borealis kind=dist distance=10 duration=1000 direction=0
+dialogsingle starttimea=300 <= name="Borealis" text="Zazo...";"I never imagined I return here so soon."
+
+ins timea=400 index=kin kind=dist distance=15 duration=1000 direction=0
+
+dialogsingle starttimea=500 duration=500 <= name="Kin" text="What do you mean?";"Isn't Zazo your home?"
+
+ins type=fadein timea=600 index=2 fadetime=0 kind=music mode=play
+ins timea=0 index=0 kind=screenzoom zoomin=true zoomtime=4000 usestaticpos=true pos=512;768
+ins timea=900 index=borealis kind=stop direction=2
+dialogsingle starttimea=500 <= name="Borealis" text="After recent events, I'm not very";"liked in this town anymore."
+
+ins timea=200 index=kin kind=emotion emotion=? show=true
+dialogsingle starttimea=200 <= name="Kin" text="Why not?";""
+
+ins timea=1500 index=borealis kind=stop direction=0
+ins timea=250 index=kin kind=emotion show=false
+ins timea=500 index=borealis kind=dist distance=10 duration=1000 direction=0
+dialogsingle starttimea=500 duration=500 <= name="Borealis" text="To tell the truth... I've been exiled from Zazo";"because of that corrupt mayor Teo."
+
+ins timea=1500 index=celis kind=emotion emotion=? show=true
+ins timea=250 index=celis kind=dist distance=10 duration=1000 direction=0
+dialogsingle starttimea=0 duration=500 <= name="Celis" text="I don't understand, what have you done?";""
+
+ins timea=1500 index=borealis kind=stop direction=3
+ins timea=250 index=celis kind=emotion emotion=? show=true
+ins timea=1250 index=borealis kind=stop direction=0
+ins timea=500 index=celis kind=emotion show=false
+ins timea=1000 index=borealis kind=dist distance=10 duration=1000 direction=2
+
+dialogpacket name=1 starttimea=500 duration=50
+dialog packetname=1 name="Borealis" text="Well... Do you know about the treaty between Zazo";"and Alares to exclude Pensara from our export of iron?"
+dialog packetname=1 name="Kin" text="Vaguely.";"" first=false
+
+ins timea=200 index=borealis kind=dist distance=15 duration=2000 direction=0
+dialogsingle starttimea=1000 duration=1000 <= name="Borealis" text="Well, to make it short. Since Pensara started";"preparing for war, Alares ceased all export to Pensara."
+ins timea=600 index=kin kind=emotion show=false
+
+ins timea=600 index=borealis kind=stop direction=2
+dialogsingle starttimea=200 duration=500 <= name="Borealis" text="Alares insisted the we, Zazo, should halt";"our export overseas as well."
+
+ins timea=1000 index=borealis kind=dist distance=10 duration=1500 direction=2
+dialogpacket name=2 starttimea=2500 duration=500
+dialog packetname=2 name="Borealis" text="But Zazo is poor, we can not afford to";"lose our largest source of income."
+dialog packetname=2 name="Borealis" text="So, Zazo and Alares joined in a treaty saying";"that Pensara should get no iron and..."
+dialog packetname=2 name="Borealis" text="...that Zazo should get a higher price";"for the amount exported to Alares."
+
+ins timea=500 index=celis kind=dist distance=5 duration=750 direction=0
+dialogsingle starttimea=250 duration=500 <= name="Celis" text="Oh, I understand...";""
+ins timea=250 index=kin kind=emotion emotion=... show=true
+ins timea=550 index=celis kind=stop direction=3
+dialogsingle starttimea=500 duration=500 <= name="Celis" text="I think...";"" whisper=true
+
+ins timea=1000 index=borealis kind=dist distance=10 duration=1500 direction=1
+ins timea=400 index=celis kind=stop direction=0
+ins timea=250 index=kin kind=emotion emotion=... show=false
+dialogsingle starttimea=500 duration=500 <= name="Borealis" text="The thing is, I found out that Teo secretly smuggled";"a portion of our iron to Pensara behind our back."
+
+ins timea=400 index=kin kind=stop direction=3
+dialogsingle starttimea=500 <= name="Kin" text="That's some mayor he got, huh?";""
+ins timea=600 index=celis kind=dist distance=5 duration=750 direction=0
+dialogsingle starttimea=400 duration=700 <= name="Celis" text="What did you do?";""
+ins timea=300 index=kin kind=stop direction=0
+
+ins timea=300 index=borealis kind=stop direction=2
+dialogpacket name=3 starttimea=200
+dialog packetname=3 name="Borealis" text="I confronted him with it.";""
+dialog packetname=3 name="Borealis" text="I gave him a week to come forward to the villagers";"but instead he forged evidences against me."
+
+ins timea=900 index=borealis kind=dist distance=20 duration=2500 direction=0
+dialogsingle starttimea=2000 duration=500 <= name="Borealis" text="And so, I was cast out of Zazo with nowhere to go.";""
+
+ins timea=250 index=kin kind=emotion emotion=! show=true
+ins timea=50 index=celis kind=emotion emotion=! show=true
+ins timea=200 index=celis kind=dist distance=5 duration=300 direction=0
+dialogsingle starttimea=250 <= name="Celis" text="That's terrible!";""
+
+ins timea=200 index=kin kind=dist distance=3 duration=600 direction=0
+dialogsingle starttimea=250 duration=500 <= name="Kin" text="What a rotten man, that Teo!";""
+ins timea=400 index=celis kind=emotion show=false
+ins timea=200 index=kin kind=emotion show=false
+
+ins timea=2000 index=borealis kind=stop direction=1
+dialogsingle starttimea=2000 duration=500 <= name="Borealis" text="I've been meandering about the vicinity of Zazo";"for days trying to sort things out.."
+
+ins timea=2000 index=borealis kind=stop direction=0
+dialogsingle starttimea=250 <= name="Borealis" text="Before I met you guys I'd decided to join the army in";"Alares. But now we got more important things to do."
+
+ins timea=250 index=kin kind=dist distance=5 duration=300 direction=0
+dialogsingle starttimea=250 duration=500 <= name="Kin" text="Yeah! Let's hurry west, to the Great Mine."
+ins timea=400 index=borealis kind=stop direction=2
+
+ins timea=200 index=celis kind=emotion emotion=! show=true
+dialogsingle starttimea=250 <= name="Celis" text="Yes! Let us go and save those miners!"
+ins timea=200 index=celis kind=emotion show=false
+ins timea=0 index=0 kind=screenzoom zoomin=false zoomtime=2000 usestaticpos=true pos=512;768
+ins type=fadeout timea=0 index=2 fadetime=2000 kind=music mode=kill
+	
+load trigger="road0-15"
+ins index=0 timea=0 kind=trigger value=1
+load trigger="Zazonode"
+ins index=1 timea=0 kind=trigger value=0
+
+ins timea=2000 kind=end

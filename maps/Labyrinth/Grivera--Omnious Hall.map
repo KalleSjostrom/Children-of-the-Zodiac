@@ -1,0 +1,167 @@
+mapSize -0.5 0.5 1
+
+size 206
+
+#fog red=.4 green=.3 blue=0 alpha=.01 density=0.01
+
+light0 position=0;0;0;1 ambient=.8;.8;.8;1 specular=.2;.2;.2;1 diffuse=.8;.8;.8;1 attenuation=1;0.01;0.015
+material ambient=.7;.7;.7;1 specular=.2;.2;.2;1 diffuse=.8;.8;.8;1
+invMaterial ambient=.7;.7;.7;1 specular=.2;.2;.2;1 diffuse=.8;.8;.8;1 shininess=5 emission=.1;.1;.1;1
+
+enemyColor .7 .7 .7 1
+
+floorTex demoncave1floor.jpg
+floorTex demoncave1flooropen.jpg
+floorTex demoncave1floorpuddle.jpg
+wallTex demoncave1wall.png
+wallTex demoncave1door0.png
+wallTex demoncave1walllight.png
+wallTex demoncave1wallcrack.png
+wallTex demoncave1wallgoo.png
+roofTex demoncave1roof.jpg
+roofTex demoncave1roofopen.jpg
+
+normal floor 0 3
+normal wall 3 8
+normal roof 8 10
+
+mapPos 0 1
+
+# directions in labyrinth
+dir 21 1 37
+dir 21 2 22
+dir 22 1 38
+dir 22 2 23
+dir 23 1 39
+dir 23 2 24
+dir 24 1 40
+dir 24 2 25
+dir 25 1 41
+dir 25 2 26
+dir 26 1 42
+dir 26 2 27
+dir 27 2 28
+dir 37 1 53
+dir 37 2 38
+dir 38 1 54
+dir 38 2 39
+dir 39 1 55
+dir 39 2 40
+dir 40 1 56
+dir 40 2 41
+dir 41 1 57
+dir 41 2 42
+dir 42 1 58
+dir 53 1 69
+dir 53 2 54
+dir 54 1 70
+dir 54 2 55
+dir 55 1 71
+dir 55 2 56
+dir 56 1 72
+dir 56 2 57
+dir 57 1 73
+dir 57 2 58
+dir 58 1 74
+dir 58 2 59
+dir 59 2 60
+dir 69 1 85
+dir 69 2 70
+dir 70 1 86
+dir 70 2 71
+dir 71 1 87
+dir 71 2 72
+dir 72 1 88
+dir 72 2 73
+dir 73 1 89
+dir 73 2 74
+dir 74 1 90
+dir 84 2 85
+dir 83 2 84
+dir 85 1 101
+dir 85 2 86
+dir 86 1 102
+dir 86 2 87
+dir 87 1 103
+dir 87 2 88
+dir 88 1 104
+dir 88 2 89
+dir 89 1 105
+dir 89 2 90
+dir 90 1 106
+dir 90 2 91
+dir 91 2 92
+dir 101 1 117
+dir 101 2 102
+dir 102 1 118
+dir 102 2 103
+dir 103 1 119
+dir 103 2 104
+dir 104 1 120
+dir 104 2 105
+dir 105 1 121
+dir 105 2 106
+dir 106 1 122
+dir 117 1 133
+dir 117 2 118
+dir 118 1 134
+dir 118 2 119
+dir 119 1 135
+dir 119 2 120
+dir 120 1 136
+dir 120 2 121
+dir 121 1 137
+dir 121 2 122
+dir 122 1 138
+dir 122 2 123
+dir 123 2 124
+dir 133 1 149
+dir 133 2 134
+dir 134 1 150
+dir 134 2 135
+dir 135 1 151
+dir 135 2 136
+dir 136 1 152
+dir 136 2 137
+dir 137 1 153
+dir 137 2 138
+dir 138 1 154
+dir 149 2 150
+dir 150 2 151
+dir 151 2 152
+dir 152 2 153
+dir 153 2 154
+dir 154 2 155
+dir 155 2 156
+
+mapEnd
+
+# Entrance
+wall 3 85 0
+# Chest1
+wall 3 154 2
+# Chest2
+wall 3 26 2
+# Save
+wall 3 90 2
+# Hidden Goo
+wall 3 58 2
+# Goo
+wall 7 60 2
+# Light
+wall 5 101 0
+# Puddle
+floor 2 103 0
+# Crack
+wall 6 21 3
+
+floor 1 83 0
+inv ladderDoor 83 0 dontopen Images/ladderdown.png false grivera--third_floor-mark1
+inv hiddenHinderDoor 151 1 2 Walls/demoncave1doorhidden grivera--corridor_of_agony-mark0
+
+inv chest 28 2 2 Images/chest 2 cards.magic.Death 1 false
+inv chest 156 2 2 Images/chest 0 50
+
+inv riddle 124 2 1 Images/riddle.png grivera GriveraRiddle
+
+inv save 92 0 -1 -1

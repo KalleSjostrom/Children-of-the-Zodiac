@@ -1,0 +1,28 @@
+Village:
+	Think about the entrances to other rooms in a house...
+	
+Stores:
+	Check all the scroll bars.
+	
+Labyrinth:
+	Riddle: Grivera - land in puddle, shorter
+	Death sound.
+
+Battle:
+	Think that the color change on the enemies don't work.
+	Tornado is a bit slow...
+	Demolish makes the snowflakes not blend.
+	Missed crushing still makes the "sword hit" sound after one second.
+	Burning ophiuchus.
+
+	Inget ljud på Ultima!?	
+	Inget ljud på Slow..	
+	
+General:
+	Move save file location to lib.
+	
+Questions for others:
+	Belmet's mind game?
+	Silence later when meeting Borealis?
+	Some boss in the end should change element often? Enough with the change of shape.
+	Which animation frame should show during menthu's last status stuff. 

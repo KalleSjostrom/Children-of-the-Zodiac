@@ -1,0 +1,25 @@
+import file=main.var
+
+info time="day" name="Dellna" music="continue" fadeValue="0" musicVolume="0" delay="2000" status="2"
+
+var farl=0
+var lecca=1
+var mizoram=2
+var elmer=3
+
+actor name="Characters/Farl/FarlExtras" pos=420;400;1
+actor name="Pensara - The School District/villagers/Lecca/LeccaExtras" pos=520;400;3
+actor name="Characters/Mizoram/MizoramExtras" pos=420;450;1
+actor name="Alares/villagers/GTElmer/GTElmerExtras" pos=520;450;3
+
+ins kind=screen_center center=false
+
+text lines="The members of the Brethren";"are gathering in Merris honor." pos=450;384 color=0 size=50 pos=450;384
+
+ins timea=0 kind=screen_go acceleration=100000 distance=300 direction=0 duration=10000
+ins type=fadein timea=2000 index=0 fadetime=1000 kind=text
+ins type=fadeout timea=7000 index=0 fadetime=1000 kind=text
+ins timea=1000 kind=screen_stop
+
+ins type=fadeout timea=700 kind=village fadetime=2000
+ins timea=2000 kind=endseq

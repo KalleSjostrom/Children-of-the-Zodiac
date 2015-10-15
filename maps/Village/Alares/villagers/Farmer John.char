@@ -1,0 +1,156 @@
+image GTboyfarmer
+
+start 1550 1200
+
+in 2 100 true
+
+dialog 1
+
+n Farmer John
+fl ...
+sl end
+f true
+	
+dialog 2
+
+run Talking_to_Farmer_John continue 1
+	
+dialog 3
+
+n Farmer John
+fl Everyone says that Elmer is just an old fool,
+sl but I think he knows something we don't.
+f true
+
+dialog 4
+
+n Farmer John
+fl A cave-in... That's terrible! 
+sl But that man needn't come yelling in front of my Jane.
+f true
+
+n Farmer John
+fl He scared her stiff.
+sl Now she won't talk...
+f true
+
+dialog 5
+
+check Farmer_John 6 Letter_to_John
+
+n Farmer John
+fl How's life treating you?
+sl end
+f true
+
+dialog 6
+
+n Farmer John
+fl Oh... A letter from Bob..
+sl Hmm, there are some things I'd like to say to him...
+f true
+
+n _
+fl You gave away the key item "Letter to John".
+sl end
+take Letter_to_John
+f true
+
+n Farmer John
+fl Wait a while, would you.
+sl You could take a reply with you now, right?
+f true
+
+q 10
+alt Uhh,_I_guess.
+alt No_time,_I'm_afraid.
+alt _
+alt _
+f true
+
+*11
+n Farmer John
+fl Great!
+sl Hang on...
+f true
+
+n Farmer John
+fl ...
+sl ... (reading...) ...
+f true
+
+n Farmer John
+sl ... (reading...) ...
+fl ... (yawn...) ..  ... 
+f true
+
+n Farmer John
+fl ... Oh.. .. !! ..
+sl ... Jesus Ameliya! ...
+f true
+
+n Farmer John
+fl ...
+sl ... writing ...
+f true
+
+n Farmer John
+fl Done!
+sl end
+f true
+
+n _
+fl You got the key item "Letter to Bob"!
+sl end
+gift Letter_to_Bob 1
+trigger Farmer_John 7
+f true
+
+*12
+n Farmer John
+fl I bet you never have time to care about
+sl the little people...
+trigger Farmer_John 8
+f true
+
+dialog 7
+
+n Farmer John
+fl It's nice to hear from ones brother, once in a while.
+sl end
+f true
+
+dialog 8
+
+n Farmer John
+fl Could you take that reply with you now?
+sl end
+f true
+
+q 10
+alt Sure.
+alt Still no time...
+alt _
+alt _
+f true
+
+*11
+n Farmer John
+fl Great!
+sl Hang on...
+f true
+
+n _
+fl You got the key item "Letter to Bob"!
+sl end
+gift Letter_to_Bob 1
+trigger Farmer_John 7
+f true
+
+*12
+n Farmer John
+fl I bet you never have time to care about
+sl the little people...
+f true
+
+end

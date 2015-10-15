@@ -1,0 +1,76 @@
+image Woldou
+start 700 700
+
+in 1 95 false
+in 2 35 false
+in 1 90 false
+in 0 105 false
+in 3 285 false
+in 2 105 false
+in 1 100 false
+in 0 35 false
+
+dialog 1
+
+n Woldou
+fl Me and Orgaan use to hunt wherever we can find pray.
+sl end
+f true
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

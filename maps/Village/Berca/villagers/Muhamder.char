@@ -1,0 +1,34 @@
+ 
+image Muhamer	   
+start 1500 200	   
+	   
+in 2 100 true	   
+in 2 390 false	   
+in 1 335 false	   
+in 0 165 false	   
+in 1 235 false	   
+in 0 390 false	   
+in 3 410 false	   
+in 2 165 false	   
+in 3 160 false	   
+	   
+dialog 1	   
+	   
+n Muhamder
+fl In the ancient pyramids around here
+sl there are writings that no one can read.
+f true
+
+n Muhamder
+fl I've tried but not only is it hard to decipher
+sl but there are dangerous monsters too.
+f true	   
+	   
+dialog 2	   
+	   
+n Muhamder
+fl Ah... You've deciphered the writings!	   
+sl I wish I was just like you.
+f true	   
+	   
+end

@@ -1,0 +1,31 @@
+##### VILLAGER #####
+# NAME: Fredricsitting
+image Fredricsitting 1 40 26
+
+##### STARTING LOCATION #####
+
+# start x y
+start 1223 740
+
+range 40
+
+##### INSTRUCTIONS #####
+
+# in angle distance stopped
+in 1 180 true
+
+##### DIALOGS #####
+
+# first line
+# second line
+# first dialog background (the one at the far left top of the screen)
+
+dialog 1
+
+n Fredric
+fl Shhh...
+sl Can't you hear old Thom's tellin' a story.
+f true
+
+##### END #####
+end

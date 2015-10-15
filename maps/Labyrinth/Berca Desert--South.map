@@ -1,0 +1,96 @@
+mapSize -0.5 0.5 1
+
+size 206
+
+light0 position=0;0;0;1 ambient=.8;.8;.8;1 specular=0;0;0;1 diffuse=.8;.8;.8;1 attenuation=1;0.01;0.015
+light1 position=0;0;0;0 ambient=1;1;1;1 specular=0;0;0;1 diffuse=1;1;1;1
+material ambient=.7;.7;.7;1 specular=0;0;0;1 diffuse=.7;.7;.7;1 shininess=0 emission=.1;.1;.1;1
+
+sky top=.12;.21;.31;1 bottom=.79;.77;.71;1
+
+enemyColor 1 1 1 1
+
+floorTex desertfloor.jpg
+wallTex desertwall.png
+wallTex desertdoor.png
+
+normal floor 0 1
+normal wall 1 3
+
+mapPos 1 1
+
+# directions in labyrinth
+dir 7 1 23
+dir 12 1 28
+dir 20 1 36
+dir 20 2 21
+dir 21 2 22
+dir 22 2 23
+dir 28 1 44
+dir 36 1 52
+dir 44 1 60
+dir 52 1 68
+dir 54 1 70
+dir 58 1 74
+dir 58 2 59
+dir 59 2 60
+dir 60 2 61
+dir 61 2 62
+dir 62 1 78
+dir 68 1 84
+dir 70 1 86
+dir 74 1 90
+dir 78 1 94
+dir 84 1 100
+dir 86 1 102
+dir 90 1 106
+dir 94 1 110
+dir 100 1 116
+dir 102 2 103
+dir 103 2 104
+dir 104 1 120
+dir 104 2 105
+dir 105 2 106
+dir 110 1 126
+dir 115 2 116
+dir 120 1 136
+dir 126 1 142
+dir 136 1 152
+dir 142 1 158
+dir 152 1 168
+dir 158 1 174
+dir 164 1 180
+dir 164 2 165
+dir 165 2 166
+dir 166 2 167
+dir 167 2 168
+dir 168 1 184
+dir 174 1 190
+dir 180 1 196
+dir 184 2 185
+dir 185 2 186
+dir 186 2 187
+dir 187 2 188
+dir 188 1 204
+dir 188 2 189
+dir 189 2 190
+
+mapEnd
+
+wall 2 115 0
+wall 2 12 3
+wall 2 7 3
+wall 2 204 1
+wall 2 196 1
+
+inv door 115 0 dontopen berca_desert--north-mark0
+inv door 12 3 dontopen berca_desert--south_west-mark1
+inv door 7 3 dontopen berca_desert--south_west-mark2
+inv door 204 1 dontopen berca_desert--south_east-mark3
+inv door 196 1 dontopen berca_desert--south_east-mark2
+
+inv chest 54 3 2 Images/crate 2 cards.magic.Fire 2 true
+
+inv save 184 2 -1 -1
+
+end

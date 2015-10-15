@@ -1,0 +1,236 @@
+##### VILLAGE #####
+# name
+name Berca The_Village_of_the_Sun
+
+##### BACKGRUND #####
+
+# background, prefix name of both images day
+background Berca true
+
+##### STARTING LOCATION #####
+
+# start Player xpos ypos angle, Background xpos ypos
+back 2336 1197 1
+start0 1192 1140 0
+
+##### OBSTICLES #####
+
+### Trees ###
+
+o 131 429 146 472
+o 432 136 447 179
+o 107 305 122 348
+o 237 510 252 553
+o 120 174 147 213
+o 7 308 22 351
+o 58 225 85 264
+o 1806 113 1821 156
+o 152 95 179 134
+o 187 405 214 444
+o 375 474 390 517
+o 1370 556 1385 599
+o 1379 778 1394 821
+o 1661 554 1688 593
+o 2011 122 2026 165
+o 745 708 760 751
+o 1740 552 1767 591
+o 302 101 317 144
+o 426 382 453 421
+o 51 360 78 399
+o 364 127 391 166
+o 207 106 234 145
+o 164 533 191 572
+o 886 499 913 538
+o 59 134 86 173
+o 280 437 295 480
+
+### Lake ###
+
+o 187 217 193 223
+o 324 316 330 324
+o 250 373 371 388
+o 179 233 183 242
+o 237 377 250 382
+o 310 251 319 259
+o 181 324 186 335
+o 199 207 206 213
+o 215 367 223 374
+o 351 331 356 337
+o 175 242 310 324
+o 205 199 216 212
+o 368 346 374 368
+o 311 259 314 267
+o 310 392 356 398
+o 198 354 206 360
+o 350 338 367 368
+o 309 311 323 324
+o 275 387 363 393
+o 226 187 362 194
+o 387 211 391 236
+o 304 243 330 250
+o 265 175 324 180
+o 331 320 338 323
+o 193 213 216 241
+o 217 194 367 242
+o 380 203 387 242
+o 186 324 206 354
+o 206 324 350 368
+o 311 303 317 310
+o 223 367 373 377
+o 184 223 194 243
+o 367 199 379 242
+o 169 254 175 309
+o 246 181 340 186
+
+### Stuff ###
+
+o 1720 878 1746 898
+o 1549 572 1577 613
+o 750 441 767 487
+o 1746 873 1756 888
+o 1684 379 1713 422
+o 813 440 822 487
+o 1379 1058 1402 1078
+o 1685 321 1709 340
+o 683 746 713 772
+o 566 260 611 303
+o 1759 420 1815 435
+o 1871 418 1899 453
+o 1242 778 1273 816
+o 1173 202 1201 233
+o 149 1108 293 1149
+o 157 633 301 674
+o 1900 417 1923 435
+o 663 440 672 487
+o 617 342 647 381
+
+### Houses ###
+
+o 1239 482 1464 556
+o 1143 899 1151 956
+o 1319 1102 1327 1111
+o 1326 1022 1333 1047
+o 1269 974 1412 1034
+o 943 467 1127 557
+o 1493 334 1493 334
+o 1151 152 1158 406
+o 928 973 1025 1063
+o 756 130 916 259
+o 1319 1030 1326 1055
+o 1334 1013 1341 1038
+o 1033 899 1149 907
+o 1269 1034 1314 1063
+o 1158 152 1458 160
+o 1243 328 1376 416
+o 1105 964 1142 1046
+o 1401 1034 1406 1079
+o 1335 1086 1342 1111
+o 1457 152 1464 490
+o 1327 1095 1334 1111
+o 1592 750 1850 878
+o 1343 1079 1406 1111
+o 1314 1033 1319 1063
+o 1714 279 1970 426
+o 457 694 674 778
+o 1031 965 1062 1047
+o 1127 481 1191 556
+o 1143 952 1151 1046
+o 1128 406 1158 413
+o 1024 899 1032 1047
+o 1406 1034 1412 1065
+o 1120 406 1127 479
+
+##### DOORS #####
+
+# Large house north east
+holeDoor house House1 1822 378 43 0 2
+
+# House right
+holeDoor house House2 1655 832 25 0 2
+holeDoorSignFl Locked.
+
+# Rebel Hideout
+holeDoor house House3 553 723 23 0 2
+holeDoorSignFl Locked.
+
+# Red drape entry house
+holeDoor house House4 1111 996 25 0 2
+holeDoorSignFl Locked.
+
+# Left of entry house
+holeDoor house House5 942 1015 25 0 2
+holeDoorSignFl Locked.
+
+# Purple drape entry house
+holeDoor house House6 1038 870 25 0 2
+holeDoorSignFl Locked.
+
+# Right of entry house
+holeDoor house House7 1371 983 25 0 2
+holeDoorSignFl Locked.
+
+# Stairs
+holeDoor house House8 1819 138 25 0 2
+holeDoorSignFl Locked.
+
+# top of inn
+holeDoor house House6 1297 367 25 0 2
+holeDoorSignFl Locked.
+
+# inn
+holeDoor inn Inn 1026 506 25 0
+building Inn bercaInn.jpg bercaInnKeeperSamuler.png Samuler Welcome?! _ house
+
+# Weapon shop
+holeDoor weapon bercaWeapons 825 211 25 0
+building bercaWeapons bercaWeaponShop.jpg bercaWeaponShopHelgar.png Helgar I_have_weapons_from_all_around_the_world! Interested? itemshop
+
+##### SIGNS ######
+
+# sign middle of inn and large
+sign 1550 572 27
+signL West: Inn and an item shop on the roof.
+signL East: Holy square.
+
+# SfinxRight
+sign 1905 120 41
+signL What a butt ugly statue!
+
+# Sfinx left
+sign 1744 119 41
+signL This statue is kind of nice!
+
+# Welcome
+sign 1242 781 31
+signL Welcome to the Village of the Sun!
+
+# oasis
+sign 310 248 30
+signL The water looks fresh.
+
+# Itemshop
+sign 1362 186 45
+signL Item shop.
+
+# Well sign
+sigin 617 342 30
+signL Drink the water on your own risk!
+
+##### LOOT #####
+
+# GOLD = 0;
+# ITEM = 1;
+# CARD = 2;
+# WEAPON = 3;
+# ARMOR = 4;
+
+# name x y contentName type [nr level all]
+loot name 575 270 cards.offense.BattleCard 2 3 2 false
+lootLine A card was wedged in between the bricks in the well!
+
+##### VILLAGERS #####
+
+villager Herman
+
+##### END #####
+end

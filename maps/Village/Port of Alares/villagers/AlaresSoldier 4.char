@@ -1,0 +1,13 @@
+image char/Alaressoldier
+start 565 495	   
+	   
+in 3 100 true
+
+dialog 1
+
+n Soldier
+fl Go right ahead.
+sl end
+f true
+
+end

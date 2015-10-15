@@ -1,0 +1,38 @@
+image Valie
+start 220 1050
+
+in 0 100 true
+
+dialog 1
+
+# Standing next to a grave
+
+n Valie
+fl Why does it have to be this way?
+sl end
+f true
+
+n Valie
+fl One day you're living your life...
+sl You're happy...
+
+n Valie
+fl The next day, all you've shared with someone,
+sl just disappears... 
+f true
+
+n Valie
+fl Just because he spoke to people from his heart...
+sl What was on his mind.
+trigger Valie 2
+f true
+
+dialog 2
+
+n Valie
+fl ... 
+sl end
+trigger Valie 1
+f true
+
+end

@@ -1,0 +1,23 @@
+import file=main.var
+
+var cap=0
+var kin=1
+var celis=2
+var borealis=3
+
+info time="day" name="Port of Alares" music="Port of Alares" fadeValue="1"
+
+actor name="ShipCaptain"
+actor name="Kin" pos=590;715;2
+actor name="Celis" pos=590;745;2
+actor name="Borealis" pos=590;685;2
+
+dialogsingle starttimea=300 <= name="Ship Captain" text="Bounded for Pensara we arrgh in a minute!";""
+dialogsingle starttimea=300 <= name="Ship Captain" text="Take yer seats in the cabin downstairs,";"orr arrgh be goin' without ye!"
+	   
+ins timea=200 index=cap kind=dist distance=80 direction=3 duration=1000
+
+load trigger="ShipCaptain"
+ins index=0 timea=0 kind=trigger value=2
+
+ins timea=800 kind=end

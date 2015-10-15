@@ -1,0 +1,166 @@
+import file=main.var
+
+var mizoram=0
+var kin=1
+var celis=2
+var zalzi=3
+
+info time="day" name="Berca - Library - Floor 1" music="Berca" fadeValue="1" musicVolume="1"
+
+actor name="Mizoram"
+actor name="Kin" pos=300;463;0
+actor name="Celis" pos=300;493;0
+actor name="Zalzi" pos=300;523;0
+
+ins timea=0 index=mizoram kind=controll controll=true
+
+Zalzi: Hey, old man!
+Mizoram: Hello there, Zalzi. What can I do for you?
+Zalzi: Kin and Celis would like to talk to you.
+Mizoram: Great! I was expecting you a little earlier... but it is good that you have come.
+
+ins timea=500 index=celis kind=dist distance=15 direction=0 duration=450
+dialogpacket name=1 starttimea=200 duration=250
+dialog packetname=1 name="Celis" text="Mizoram, about the stones.";"Why do we need to contact the gods?"
+dialog packetname=1 name="Celis" text="Why doesn’t the gods contact us?";""
+
+ins timea=800 index=mizoram kind=dist distance=20 direction=0 duration=1200
+dialogsingle starttimea=600 duration=600 <= name="Mizoram" text="Those questions I sadly can not answer and I don’t think";"you will get an answer ’till you’ve collected all the stones."
+ins timea=400 index=zalzi kind=dist distance=80 duration=1600 direction=1
+ins timea=0 index=zalzi kind=queue distance=30 duration=800 direction=0
+ins timea=100 index=kin kind=stop direction=0
+
+ins timea=2000 index=celis kind=stop direction=2
+ins timea=0 index=celis kind=emotion emotion=... show=true
+ins timea=3000 index=celis kind=emotion show=false
+ins timea=0 index=celis kind=stop direction=0
+dialogsingle starttimea=0 <= name="Celis" text="... Do you know the whereabouts of any stones?";""
+ins timea=300 index=mizoram kind=stop direction=2
+dialogsingle starttimea=150 <= name="Mizoram" text="It is said that one stone is located in the Temple of Aegis."
+Kin: Where?
+Mizoram: The Temple of Aegis is located just outside of Berca.
+Mizoram: The people who lived ther 
+
+;"There is, however, a continent made of ice in the north."
+ins timea=300 index=mizoram kind=dist distance=20 direction=1 duration=800
+dialogsingle starttimea=400 duration=400 <= name="Mizoram" text="It's an isolated cold place which is almost impossible";"to get to by ship, due to cold weather and ice."
+ins timea=1000 index=mizoram kind=dist distance=20 direction=3 duration=800
+dialogsingle starttimea=200 duration=600 <= name="Mizoram" text="One of the brethren lives there but I have not heard";"from him since the worlds last airship was destroyed."
+ins timea=1000 index=mizoram kind=stop direction=2
+dialogsingle starttimea=150 <= name="Mizoram" text="I would assume that he knows more.";""
+
+ins timea=1000 index=kin kind=emotion emotion=... show=true
+ins timea=1000 index=kin kind=stop direction=1
+ins timea=1300 index=kin kind=emotion show=false
+ins timea=0 index=kin kind=stop direction=0
+dialogpacket name=2 starttimea=500
+dialog packetname=2 name="Kin" text="So... How will we get there?"
+dialog packetname=2 name="Mizoram" text="I can not help you with that, I’m afraid." first=false
+
+ins timea=0 index=celis kind=dist distance=10 duration=300 direction=0
+dialogsingle starttimea=150 duration=300 <= name="Celis" text="Good day, sir.";"We come with a message from Lecca of Pensara."
+ins timea=200 index=mizoram kind=stop direction=2
+ins timea=400 index=mizoram kind=emotion emotion=! show=true
+dialogsingle starttimea=150 <= name="Mizoram" text="Oh, great. I have been meaning to visit the old man.";"I thank you young girl."
+ins timea=40 index=mizoram kind=emotion show=false
+ins timea=250 index=zalzi kind=dist distance=13 duration=200 direction=0
+dialogsingle starttimea=100 duration=100 <= name="Zalzi" text="Enough with the pleasantries.";"Where’s that weird stone?"
+
+ins timea=200 index=celis kind=emotion emotion=! show=true
+ins timea=0 index=celis kind=stop direction=1
+dialogsingle starttimea=150 duration=500 <= name="Celis" text="Zalzi! You can’t talk to strangers like that!";""
+ins timea=350 index=zalzi kind=stop direction=3
+ins timea=100 index=kin kind=stop direction=1
+
+ins timea=350 index=mizoram kind=dist distance=15 direction=1 duration=450
+ins timea=0 index=mizoram kind=queue direction=2
+dialogsingle starttimea=350 duration=400 <= name="Mizoram" text="Hehe, she is no stranger.";"I have known her since she was a newborn."
+ins timea=200 index=celis kind=emotion show=false
+ins timea=0 index=celis kind=stop direction=0
+ins timea=100 index=kin kind=stop direction=0
+ins timea=70 index=zalzi kind=stop direction=0
+ins timea=850 index=mizoram kind=stop direction=3
+dialogsingle starttimea=150 <= name="Mizoram" text="She has energy, no?"
+ins timea=300 index=kin kind=stop direction=3
+dialogsingle starttimea=150 <= name="Kin" text="You can say that again..." whisper=true
+
+ins timea=850 index=mizoram kind=stop direction=2
+dialogsingle starttimea=150 duration=300 <= name="Mizoram" text="To answer your question Zalzi, one of the stones";"you seek is located in the Temple of Aegis."
+ins timea=250 index=kin kind=stop direction=0
+ins timea=650 index=kin kind=dist distance=40 direction=0 duration=700
+ins timea=0 index=kin kind=queue direction=1
+dialogsingle starttimea=350 duration=450 <= name="Kin" text="Where's that?";""
+ins timea=350 index=mizoram kind=stop direction=3
+dialogsingle starttimea=350 <= name="Mizoram" text="The Temple of Aegis lies north east of here";"and I have studied its origin for ages."
+ins timea=350 index=zalzi kind=stop direction=3
+dialogsingle starttimea=150 duration=300 <= name="Zalzi" text="He’s been obsessed with that good-for-nothing";"place for as long as I can remember."
+ins timea=250 index=celis kind=stop direction=1
+ins timea=350 index=mizoram kind=stop direction=2
+dialogsingle starttimea=150 duration=400 <= name="Mizoram" text="The origin of Aegis is not well known";"and it contains many secrets."
+ins timea=250 index=zalzi kind=stop direction=0
+ins timea=150 index=celis kind=stop direction=0
+ins timea=1000 index=mizoram kind=dist distance=20 direction=1 duration=600
+dialogsingle starttimea=450 duration=150 <= name="Mizoram" text="I suspect that the pyramids has been used as some sort";"of stronghold, which is why it's called Aegis."
+ins timea=250 index=kin kind=emotion emotion=? show=true
+ins timea=750 index=kin kind=dist distance=20 direction=2 duration=600
+ins timea=0 index=kin kind=queue direction=1
+dialogsingle starttimea=450 duration=150 <= name="Kin" text="Why is that a reason, Celis?";"" whisper=true
+ins timea=250 index=celis kind=stop direction=3
+dialogsingle starttimea=350 duration=350 <= name="Celis" text="Shh, the man’s taking.";"" whisper=true first=false
+ins timea=300 index=kin kind=emotion show=false
+ins timea=200 index=kin kind=tor movepos=-5;-20 duration=1200
+ins timea=0 index=kin kind=queue direction=1	
+ins timea=100 index=celis kind=stop direction=0
+
+ins timea=1450 index=mizoram kind=stop direction=3
+dialogpacket name=1 starttimea=150
+dialog packetname=1 name="Mizoram" text="On some walls, riddles are scribbled down";"which seems to describe how to get to..."
+dialog packetname=1 name="Mizoram" text="...the innermost sanctum of the temple."
+
+ins timea=650 index=mizoram kind=dist distance=35 direction=3 duration=900
+dialogpacket name=2 starttimea=600 duration=350
+dialog packetname=2 name="Mizoram" text="An interesting part is that the language which has";"been used in and around the temple,"
+dialog packetname=2 name="Mizoram" text="cannot be related to any of todays languages."
+ins timea=800 index=mizoram kind=stop direction=2
+dialogsingle starttimea=250 <= name="Mizoram" text="This could mean that the people who build it";"where not man nor tenjin but some other race."
+ins timea=800 index=celis kind=emotion emotion=... show=true
+ins timea=800 index=celis kind=dist distance=10 direction=0 duration=400
+ins timea=300 index=celis kind=emotion show=false
+dialogsingle starttimea=0 duration=100 <= name="Celis" text="Ah... A third race, that’s amazing.";""
+ins timea=200 index=celis kind=emotion show=false
+ins timea=400 index=zalzi kind=stop direction=2
+dialogsingle starttimea=200 <= name="Zalzi" text="*Pheuu*" whisper=true
+ins timea=200 index=zalzi kind=stop direction=0
+dialogsingle starttimea=200 <= name="Zalzi" text="Get to the point already..."
+
+ins timea=300 index=mizoram kind=stop direction=2
+dialogsingle starttimea=150 <= name="Mizoram" text="Oh, sorry. Got a bit carried away.";""
+ins timea=400 index=mizoram kind=dist distance=70 direction=1 duration=1400
+ins timea=0 index=mizoram kind=queue direction=0
+dialogsingle starttimea=200 duration=1200 <= name="Mizoram" text="I have studied this language and written";"the results of my studies in this book."
+ins timea=1800 index=mizoram kind=dist distance=70 direction=3 duration=1400
+ins timea=0 index=mizoram kind=queue direction=2
+dialogpacket name=3 starttimea=200 duration=1200
+dialog packetname=3 name="Mizoram" text="I'm going to give it to you so you can solve";"the riddles and get that stone."
+dialog packetname=3 name="Mizoram" text="But remember, it is not complete.";"You might have to improvise."
+ins timea=1500 index=zalzi kind=tor movepos=5;-20 duration=500
+ins timea=0 index=zalzi kind=queue direction=3
+dialogsingle starttimea=450 <= name="Zalzi" text="Improvise? How are we...";""
+ins timea=300 index=kin kind=dist distance=20 direction=2 duration=200
+ins timea=0 index=kin kind=emotion emotion=! show=true
+dialogsingle starttimea=150 duration=50 <= name="Kin" text="We’ll figure it out, won’t we?";""
+ins timea=100 index=kin kind=emotion show=false
+ins timea=300 index=celis kind=emotion emotion=! show=true
+ins timea=0 index=celis kind=stop direction=3
+dialogsingle starttimea=150 duration=300 <= name="Celis" text="Of course we will!";""
+ins timea=250 index=celis kind=stop direction=3
+ins timea=100 index=celis kind=emotion show=false
+ins timea=600 index=mizoram kind=dist distance=12 direction=2 duration=600
+ins timea=300 index=celis kind=stop direction=0
+dialogsingle starttimea=300 duration=350 <= name="Mizoram" text="Here’s the book, good luck to you all!";""
+ins timea=300 index=kin kind=stop direction=1
+ins timea=800 index=mizoram kind=dist distance=12 direction=0 duration=600
+ins timea=0 index=mizoram kind=queue direction=2
+dialogsingle starttimea=250 <= name="Celis" text="Thank you so much!";""
+
+ins timea=500 kind=end

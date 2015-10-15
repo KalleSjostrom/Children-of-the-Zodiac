@@ -1,0 +1,82 @@
+mapSize -0.5 0.5 1
+
+battleMusic Battle Shadowbattle
+
+size 239
+
+light0 position=0;0;0;1 ambient=1;1;1;1 specular=0;0;0;1 diffuse=1;1;1;1 attenuation=1;0.01;0.015
+material ambient=.8;.8;.8;1 specular=0;0;0;1 diffuse=.7;.7;.7;1
+
+wallTex demonfloorwall.png
+wallTex demonfloordoor0.png
+
+normal floor 0 0
+normal wall 0 2
+normal roof 2 2
+
+mapPos 1 0
+
+dir 9 1 25
+dir 25 1 41
+dir 41 1 57
+dir 57 1 73
+dir 71 1 87
+dir 71 2 72
+dir 72 1 88
+dir 72 2 73
+dir 73 1 89
+dir 73 2 74
+dir 74 1 90
+dir 74 2 75
+dir 75 1 91
+dir 87 1 103
+dir 87 2 88
+dir 88 1 104
+dir 88 2 89
+dir 89 2 90
+dir 90 1 106
+dir 90 2 91
+dir 91 1 107
+dir 99 2 100
+dir 100 2 101
+dir 101 2 102
+dir 102 2 103
+dir 103 1 119
+dir 103 2 104
+dir 104 1 120
+dir 106 1 122
+dir 106 2 107
+dir 107 1 123
+dir 107 2 108
+dir 108 2 109
+dir 109 2 110
+dir 110 2 111
+dir 119 1 135
+dir 119 2 120
+dir 120 1 136
+dir 120 2 121
+dir 121 1 137
+dir 121 2 122
+dir 122 1 138
+dir 122 2 123
+dir 123 1 139
+dir 135 2 136
+dir 136 2 137
+dir 137 1 153
+dir 137 2 138
+dir 138 2 139
+dir 153 1 169
+dir 169 1 185
+dir 185 1 201
+
+mapEnd
+
+wall 1 106 0
+
+inv door 106 0 dontopen empyrian_temple--hall_of_wind-mark3
+ 
+inv chest 9 3 2 Images/chest 2 cards.magic.Colliding 1
+inv chest 201 1 2 Images/chest 2 cards.support.Haste 3 true
+# inv chest 106 0 2 Images/chest 2 ???
+
+inv boss 101 -1 -1 MemoryTaur

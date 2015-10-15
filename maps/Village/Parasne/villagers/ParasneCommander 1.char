@@ -1,0 +1,96 @@
+image char/Pensaracommander
+start 120 125
+
+in 3 100 true
+in 2 80 false
+in 3 100 true
+in 2 90 false
+in 3 100 true
+in 2 40 false
+in 3 100 true
+in 0 40 false
+in 3 100 true
+in 0 90 false
+in 3 100 true
+in 0 80 false
+
+dialog 1
+
+n Commander
+fl This isn't the best place to be stationed but 
+sl someone need to be in command here to you know.
+f true
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

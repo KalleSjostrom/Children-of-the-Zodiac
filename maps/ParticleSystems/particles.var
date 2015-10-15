@@ -1,0 +1,33 @@
+var false=0
+var true=1
+
+# Type
+var emitterShape=0
+var emitter=1
+var particle=2
+var system=3
+
+# Shape
+var line=0
+var box=1
+var circle=2
+var image=3
+
+# Emitterkind
+var normal=0
+var masterSlave=1
+
+# Point
+var width=0
+var height=1
+
+# Particle
+var fireparticle=0
+var smokeparticle=1
+var fountainparticle=2
+var rainbowparticle=3
+var bulletparticle=4
+var snowparticle=5
+var rainparticle=6
+var sandparticle=7
+var starparticle=8

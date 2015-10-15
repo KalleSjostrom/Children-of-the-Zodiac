@@ -1,0 +1,28 @@
+name Tunnelworm
+
+defense 85
+magicDefense 83
+agility 20
+evade 0
+hit 90
+attack 405
+magic 379
+support 182
+hp 2053
+element 0
+gold 1591
+experience 1061
+criticalChance 0
+
+image tunnelworm 4
+armor 15 22
+preferences 40 60
+
+scale 4.2
+height -2
+depth -4.5
+middle -0.5
+
+attackSpec anim=(a=500)--(f=1,a=500)--(f=2,a=700,h=true)
+attackSpec type=mag name=Earthquake p=.35 onAll=true element=earth anim=(a=900,s=true)--(a=1300,s=true,cs=true)
+attackSpec type=mag name=Wind p=.65 element=wind anim=(a=500)--(f=3,a=250)--(f=1,a=1500,c=m+3+Wind:.25;-.5;-7,h=true)

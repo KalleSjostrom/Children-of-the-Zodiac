@@ -1,0 +1,17 @@
+# background, prefix name of both images day
+background Crystal_Room true
+
+##### STARTING LOCATION #####
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1024 768
+start 495 710 0
+
+holeDoor village Serphia_Hall 480 800 100 2 0 0 0 1
+
+o 409 252 474 791
+o 448 227 576 301
+o 549 249 614 788
+
+##### DOORS #####
+end

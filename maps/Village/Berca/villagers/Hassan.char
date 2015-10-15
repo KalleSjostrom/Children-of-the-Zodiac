@@ -1,0 +1,39 @@
+image Hassan
+start 1000 700
+
+in 2 100 true
+in 3 85 false
+in 0 165 false
+in 1 100 false
+in 2 55 false
+in 1 115 false
+in 0 50 false
+in 1 160 false
+in 2 55 false
+in 3 80 false
+in 2 60 false
+in 1 85 false
+in 2 70 false
+in 3 125 false
+in 0 100 false
+in 3 170 false
+in 2 75 false
+
+dialog 1
+
+n Hassan
+fl I wonder if the soldiers would stop harassing us 
+sl if the rebels surrendered.
+f true
+
+end
+
+
+
+
+
+
+
+
+
+

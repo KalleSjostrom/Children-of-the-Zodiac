@@ -1,0 +1,5 @@
+import file=main.var
+
+info time="day" name="No Place" music="No Music" fadeValue="0" musicVolume="0"
+
+ins timea=500 kind=end

@@ -1,0 +1,65 @@
+image Hendrick	   
+start 950 100	   
+	   
+in 3 100 true	   
+in 2 80 false	   
+in 3 100 true	   
+in 2 100 true	   
+in 1 75 false	   
+in 2 90 false	   
+in 3 100 true	   
+in 2 125 false	   
+in 1 90 false	   
+in 2 75 false	   
+in 3 100 true	   
+in 2 40 false	   
+in 3 70 false	   
+in 0 100 true	   
+in 3 65 false	   
+in 0 100 true	   
+in 2 55 false	   
+in 1 150 false	   
+in 0 465 false	   
+in 3 100 true	   
+in 3 180 false	   
+	   
+dialog 1	   
+	   
+n Hendrick	   
+fl With each passing day war grows closer. 
+sl But I feel safe as long as we have Althier in charge.	   
+f true	   
+	   
+n Hendrick	   
+fl Do you know what he does for the region of Pensara?	   
+sl end	   
+f true	   
+	   
+q 10	   
+alt Yes	   
+alt No	   
+alt _
+alt _
+f true	   
+	   
+*11	   
+n Hendrick	   
+fl May he protect our people for ever.	   
+sl end	   
+f true	   
+	   
+*12	   
+n Hendrick	   
+fl Althier is a member of our senate and general of the	   
+sl great imperial army.	 
+trigger Hendrick 2  
+f true	   
+
+dialog 2
+
+n Hendrick
+fl Althier is the greatest man alive!
+sl Plus, he's really handsome...
+f true 
+	   
+end	 

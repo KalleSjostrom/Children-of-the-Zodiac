@@ -1,0 +1,58 @@
+mapSize -0.5 0.5 1
+
+size 187
+
+mission VillagerMission GreatMineMission trigger="Zazo";"2" trigger="Zazonode";"2" dialog="Celis";"Seems that no more workers are here.&&Let's head back to Zazo!" extranext="2";"After a Hard Days Work"
+
+light0 position=0;0;0;1 ambient=.8;.8;.8;1 specular=0;0;0;1 diffuse=.8;.8;.8;1 attenuation=1;0.01;0.015
+material ambient=.4;.4;.4;1 specular=0;0;0;1 diffuse=.7;.7;.7;1
+invMaterial ambient=.7;.7;.7;1 specular=.2;.2;.2;1 diffuse=.8;.8;.8;1 shininess=5 emission=.1;.1;.1;1
+
+floorTex minecavefloor.jpg
+wallTex minecavewall.png
+wallTex minecavedoorbig0.png
+roofTex minecaveroof.jpg
+
+normal floor 0 1
+normal wall 1 3
+normal roof 3 4
+
+mapPos 2 0
+
+# directions in labyrinth
+dir 7 1 23
+dir 23 1 39
+dir 25 1 41
+dir 29 1 45
+dir 39 1 55
+dir 41 1 57
+dir 45 1 61
+dir 55 2 56
+dir 56 2 57
+dir 57 1 73
+dir 57 2 58
+dir 58 2 59
+dir 59 1 75
+dir 59 2 60
+dir 60 2 61
+dir 61 1 77
+dir 61 2 62
+dir 62 2 63
+dir 73 1 89
+dir 75 1 91
+dir 77 1 93
+
+mapEnd
+
+inv hinderDoor 63 2 2 Walls/minecavedoorbig the_great_mine--tunnel-mark1
+inv hinderDoor 7 3 2 Walls/minecavedoorbig the_great_mine--the_mine_core-mark2
+
+inv button 93 1 7 Images/lever The_Great_Mine--Mine_Shaft.maphinderDoor63 The_Great_Mine--Tunnel.maphinderDoor51 The_Great_Mine--Tunnel.mapbutton25
+inv button 29 3 7 Images/lever The_Great_Mine--Mine_Shaft.maphinderDoor7 The_Great_Mine--The_Mine_Core.maphinderDoor199 The_Great_Mine--Tunnel.mapbutton189
+
+inv chest 89 1 2 Images/chest 2 cards.offense.BattleCard 2 false
+inv chest 91 1 2 Images/chest 0 150
+
+inv save 55 2 -1 -1
+
+end

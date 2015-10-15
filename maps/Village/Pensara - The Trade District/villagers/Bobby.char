@@ -1,0 +1,54 @@
+image Merchant_Boby	   
+start 915 225	   
+	   
+in 2 100 true	   
+	   
+dialog 1	   
+	   
+n Merchant Bobby	   
+fl I can sell you this jewel for 1000 gold.	   
+sl How 'bout it?	   
+f true	   
+	   
+q 10	   
+alt Let's_do_it!	   
+alt No_way,_Jose!	   
+alt _	   
+alt _	   
+price 1000 0 0 0	   
+f true	   
+	   
+*11	   
+n Merchant Bobby	   
+fl Thanks a lot!	   
+sl end	   
+f true
+
+n Merchant Bobby	   
+fl You got the key item "Jewel"!	   
+sl end
+trigger Bobby 2	   
+gift Jewel 1
+take gold 1000
+f true	   
+	   
+*12	   
+n Merchant Bobby	   
+fl Your loss...	   
+sl end	   
+f true	   
+	   
+*15	   
+n Merchant Bobby	   
+fl Make sure you have the credit before	   
+sl agreeing to purchase.
+f true	   
+	   
+dialog 2	   
+	   
+n Merchant Bobby	   
+fl I don't have anything for you right now.	   
+sl end	   
+f true	   
+	   
+end	 

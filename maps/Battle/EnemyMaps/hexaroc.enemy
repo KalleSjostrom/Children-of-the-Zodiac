@@ -1,0 +1,27 @@
+name Hexaroc
+
+defense 28
+magicDefense 25
+agility 9
+evade 0
+hit 95
+attack 153
+magic 15
+support 23
+hp 571
+element 4
+gold 257
+experience 171
+criticalChance 0
+
+diesound Hexaroc/dies
+image hexaroc 9
+armor 20 8
+preferences 100 0
+
+scale 5.5
+height -2
+depth -6
+middle 0
+
+attackSpec anim=(f=1,a=100,se=Monster/Hexaroc/attack)--(f=2,a=100)--(f=3,a=100)--(f=4,a=100)--(f=5,a=200)--(f=6,a=210)--(f=7,a=210)--(f=8,a=200,h=true)

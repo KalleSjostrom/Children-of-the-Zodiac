@@ -1,0 +1,105 @@
+image char/Pensarasoldier
+start 120 775
+
+in 0 60 false
+in 3 100 true
+in 0 60 false
+in 3 100 true
+in 0 60 false
+in 3 100 true
+in 2 60 false
+in 3 100 true
+in 2 60 false
+in 3 100 true
+in 2 60 false
+in 3 100 true
+
+dialog 1
+
+n Soldier
+fl Can't talk, patrolling.
+sl end
+trigger ParasneSoldier_2 2
+f true
+
+dialog 2
+
+n Soldier
+fl Shhh... I'm on patrol.
+sl end
+trigger ParasneSoldier_2 1
+f true
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

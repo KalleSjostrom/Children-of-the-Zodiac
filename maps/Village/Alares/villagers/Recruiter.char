@@ -1,0 +1,88 @@
+image Recruitingsoldier
+
+start 1270 1598
+
+in 2 180 true
+
+dialog 1
+
+n Recruiter
+fl Join the army now!
+sl Glory awaits those who do!
+trigger Recruiter 2
+f true
+
+dialog 2
+
+n Recruiter
+fl Full pension for all soldiers of the western army.
+sl Your stomach will never be empty again!
+trigger Recruiter 3
+f true
+
+dialog 3
+
+n Recruiter
+fl The western army wants you!
+sl Get your professional training for free.
+f true
+
+n Recruiter
+fl Learn to defend yourself against wretched fiends.
+sl Learn to protect those dear to you.
+trigger Recruiter 1
+f true
+
+dialog 4
+
+n Recruiter
+fl I would have gone too, if...
+sl if...
+f true
+
+n Recruiter
+fl Hmm...
+sl end
+f true
+
+n Recruiter
+fl If it wasn't for my bad knee.
+sl Yes! That's it. I've got a bad knee!
+trigger Recruiter 5
+f true
+
+n Recruiter
+fl I've got a bad knee so I can't go.
+sl (hehe, that was close...)
+f true
+
+dialog 5
+
+n Recruiter
+fl I've got a bad knee so I can't go.
+sl (hehe, that was close...)
+f true
+
+dialog 6
+
+n Recruiter
+fl Heard you saved those miners!
+sl Please take this as a token of my appreciation!
+f true
+
+n _
+fl You got 102 gold!
+sl end
+gift 102 0
+trigger Recruiter 1
+f true
+
+dialog 7
+
+n Recruiter
+fl Heard Zazo got over run by Pensara!
+sl Makes me think about my job.
+trigger Recruiter 1
+f true
+
+end

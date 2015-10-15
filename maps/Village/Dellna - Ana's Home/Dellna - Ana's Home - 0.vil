@@ -1,0 +1,75 @@
+# background, prefix name of both images day
+background Dellna_-_Ana's_Home true
+
+inside
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1024 768
+start 501 546 0
+
+holeDoor switch Dellna 501 566 30 2 1 1234 576 2
+
+# null
+o 278 603 489 673
+
+# null
+o 620 277 679 355
+
+# null
+o 337 278 577 301
+
+# null
+o 300 278 318 674
+
+# null
+o 318 278 341 344
+
+# null
+o 579 436 601 449
+
+# null
+o 427 404 436 462
+
+# null
+o 533 402 702 436
+
+# null
+o 427 500 437 608
+
+# null
+o 319 426 353 482
+
+# null
+o 630 436 698 451
+
+# null
+o 534 516 543 606
+
+# null
+o 544 521 564 612
+
+# null
+o 544 434 577 483
+
+# null
+o 533 405 544 478
+
+# null
+o 316 405 492 438
+
+# null
+o 364 436 427 452
+
+# null
+o 696 278 714 674
+
+# null
+o 296 201 720 278
+
+# null
+o 437 434 461 457
+
+# null
+o 536 604 699 669
+
+end

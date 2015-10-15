@@ -1,0 +1,33 @@
+name Screamer
+
+defense 177
+magicDefense 213
+agility 22
+evade 10
+hit 95
+attack 628
+magic 654
+support 810
+hp 1939
+element 0
+gold 872
+experience 581
+criticalChance 0
+
+diesound Screamer/dies
+image screamer 6
+armor 0 0
+preferences 0 70
+
+scale 5.5
+height -2
+depth -6
+middle -0.5
+
+attackSpec type=mag name=Shriek p=.5 power=.7 onAll=true anim=(f=4)--(f=5,se=Monster/Screamer/attack,a=1250,cs=true)--(f=4,h=true)
+attackSpec type=mag name=Scream p=.5 anim=(f=1)--(f=2,se=Monster/Screamer/attack,a=1250)--(f=1,h=true)
+attackSpec type=sup name=Heal power=1 p=.5 anim=()--(f=3,c=s+Cure,a=1250)--(h=true)
+attackSpec type=sup name=All_Heal p=.5 anim=()--(f=3,c=s+Cure,a=1250)--(h=true)
+
+# cardPreference [CardName preference]
+

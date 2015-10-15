@@ -1,0 +1,25 @@
+import file=main.var
+
+info time="day" name="The Prison Cell" music="continue" fadeValue="0" musicVolume="0" delay="1000"
+
+var mats=0
+
+load music="Intro"
+
+actor name="Alares/villagers/GTthief/GTthiefExtras" pos=568;360;2
+
+ins timea=0 index=mats kind=dist distance=150 duration=2000 direction=3
+ins timea=0 index=mats kind=queue distance=150 duration=2000 direction=1
+ins timea=0 index=mats kind=queue distance=150 duration=2000 direction=3
+ins timea=0 index=mats kind=queue distance=150 duration=2000 direction=1
+ins timea=0 index=mats kind=queue distance=150 duration=2000 direction=3
+ins timea=0 index=mats kind=queue distance=150 duration=2000 direction=1
+
+ins timea=0 index=0 kind=screenzoom zoomin=true zoomtime=2500 usestaticpos=true pos=512;378
+text lines="Mats Meadowgrove";"got what he deserved." color=0 size=50 pos=450;384
+
+ins type=fadein timea=2500 index=0 fadetime=1000 kind=text
+ins type=fadeout timea=2500 index=0 fadetime=1000 kind=text
+
+ins type=fadeout timea=3500 kind=village fadetime=2000
+ins timea=2000 kind=endseq

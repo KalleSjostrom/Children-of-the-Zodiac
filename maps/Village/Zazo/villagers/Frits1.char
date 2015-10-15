@@ -1,0 +1,29 @@
+##### VILLAGER #####
+# NAME: Frits
+image Frits
+
+##### STARTING LOCATION #####
+
+# start x y
+start 1848 482
+
+##### INSTRUCTIONS #####
+
+# in angle distance stopped
+in 0 180 true
+
+##### DIALOGS #####
+
+# first line
+# second line
+# first dialog background (the one at the far left top of the screen)
+
+dialog 1
+
+n Frits
+fl Uh...
+sl I'm not sad anymore.
+f true
+
+##### END #####
+end

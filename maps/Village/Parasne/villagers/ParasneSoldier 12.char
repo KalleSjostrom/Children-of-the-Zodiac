@@ -1,0 +1,85 @@
+image char/Pensarasoldier
+start 980 1535
+
+in 2 100 true
+
+dialog 1
+
+n Soldier
+fl Shhh... I'm on patrol.
+sl end
+f true 
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

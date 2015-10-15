@@ -1,0 +1,65 @@
+image GTElmer	   
+	   
+start 800 315	   
+	   
+in 2 180 true	   
+	   
+dialog 1	   
+	   
+n Elmer	   
+fl The world will decompose...	   
+sl But people don't seem to care.	   
+f true	   
+	   
+n Elmer	   
+fl They just go on with their lives, as if there was	   
+sl nothing going on at all. Only John seems sane...	   
+f true	   
+	   
+n Kin	   
+fl What are you talking about?	   
+sl end	   
+f false	   
+	   
+n Elmer	   
+fl Hmpf... I have better things to do than talk to you.	   
+sl You're just like everyone else.	   
+trigger Farmer_John 2	   
+f true	   
+	   
+dialog 2	   
+	   
+run Meeting_a_Crazy_Man continue 1	   
+	   
+dialog 3	   
+	   
+n Elmer	   
+fl ...	   
+sl end	   
+f true	   
+	   
+dialog 4	   
+	   
+run The_Revelation_of_Elmer continue 1	   
+	   
+dialog 5	   
+	   
+n Elmer	   
+fl Talk to Farl of Zazo up north.	   
+sl He will tell you more.	   
+f true	   
+	   
+n Elmer	   
+fl Now go.
+sl end	   
+f true	   
+	   
+dialog 6	   
+	   
+n Elmer	   
+fl Our faith is in your hands!	   
+sl end	   
+f true	   
+	   
+##### END #####	   
+end	 

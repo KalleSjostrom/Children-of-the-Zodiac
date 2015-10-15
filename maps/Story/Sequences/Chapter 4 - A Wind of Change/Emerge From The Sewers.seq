@@ -1,0 +1,83 @@
+import file=main.var
+
+var kin=0
+var celis=1
+var borealis=2
+var zalzi=3
+
+info time="day" name="Pensara - The North District" music="No Music" fadeValue="0" musicVolume="0"
+
+actor name="Kin"
+actor name="Celis"
+actor name="Borealis"
+actor name="Zalzi"
+
+show index=kin value=false
+show index=celis value=false
+show index=borealis value=false
+show index=zalzi value=false
+
+pos name="Background" pos=0;100
+ins kind=screen_center center=false
+
+load music="Kin's Childhood"
+
+ins type=fadein timea=0 index=1 fadetime=0 kind=music mode=play
+
+ins timea=0 index=kin kind=show movepos=324;429;2
+ins timea=0 index=celis kind=show movepos=298;474;3
+ins timea=0 index=borealis kind=show movepos=406;523;2
+ins timea=0 index=zalzi kind=show movepos=401;450;0
+
+/*
+After the party has disarmed the bombs they exit the sewers by the path that 
+leads directly inside the city walls. Kin walks towards Vincent’s resident in 
+determent steps. Borealis catches up to him and says:
+*/ 
+
+ins timea=300 index=kin kind=tor movepos=50;100 duration=1200
+ins timea=600 index=borealis kind=stop direction=3
+ins timea=200 index=borealis kind=emotion emotion=?! show=true
+ins timea=0 index=borealis kind=tor movepos=-30;30 duration=300
+ins timea=0 index=borealis kind=queue direction=0
+
+dialogsingle starttimea=200 duration=500 <= name="Borealis" text="Wait! What are you doing?!";""
+ins timea=300 index=celis kind=emotion emotion=? show=true
+ins timea=0 index=celis kind=dist distance=20 direction=1 duration=300
+ins timea=0 index=celis kind=queue direction=2
+ins timea=100 index=zalzi kind=emotion emotion=? show=true
+ins timea=0 index=zalzi kind=stop direction=2
+
+ins timea=300 index=kin kind=emotion emotion=! show=true
+dialogsingle starttimea=150 duration=300 <= name="Kin" text="Back off!";"I’m in a mood for a little yelling!"
+ins timea=200 index=borealis kind=emotion emotion=! show=false
+ins timea=250 index=kin kind=tor movepos=40;80 duration=1200
+ins timea=0 index=kin kind=queue direction=0
+ins timea=200 index=borealis kind=dist distance=40 direction=3 facedirection=0 duration=300
+ins timea=0 index=borealis kind=queue direction=1
+ins timea=350 index=borealis kind=emotion emotion=? show=true
+ins timea=350 index=borealis kind=tor movepos=40;20 duration=400
+ins timea=0 index=borealis kind=queue direction=2
+dialogsingle starttimea=200 duration=200 <= name="Borealis" text="Who are you going to yell at?";""
+
+ins timea=400 index=kin kind=tor movepos=-9;-10 distance=10 duration=100
+dialogpacket name=1 starttimea=50
+dialog packetname=1 name="Kin" text="Vincent, of course! Who else?!";""
+dialog packetname=1 name="Kin" text="My father almost destroyed an entire city";"because of his oppression!"
+
+ins timea=250 index=kin kind=tor movepos=40;80 duration=1200
+ins timea=0 index=kin kind=queue direction=0
+ins timea=100 index=zalzi kind=emotion emotion=... show=true
+ins timea=0 index=zalzi kind=stop direction=0
+ins timea=200 index=celis kind=emotion show=false
+ins timea=400 index=borealis kind=tor movepos=15;25 duration=400
+ins timea=50 index=borealis kind=emotion emotion=! show=true
+dialogpacket name=2 starttimea=150 duration=200
+dialog packetname=2 name="Borealis" text="Vincent’s just going to put you in prison again!";""
+dialog packetname=2 name="Kin" text="You guys can stay here, but I’m going in!";"" first=false
+
+ins timea=400 index=kin kind=tor movepos=40;80 duration=1200
+
+ins type=fadeout timea=0 index=1 fadetime=2000 kind=music mode=kill
+
+ins timea=2000 kind=endseq

@@ -1,0 +1,100 @@
+image Putters
+start 200 800
+
+in 3 100 true
+in 1 1435 false
+in 3 330 false
+in 0 25 false
+in 0 100 true
+in 1 70 false
+in 0 75 false
+in 0 100 true
+in 2 75 false
+in 3 170 false
+in 0 80 false
+in 0 100 true
+in 1 100 true
+in 3 40 false
+in 2 45 false
+in 3 115 false
+in 0 100 false
+in 3 110 false
+in 2 160 false
+in 3 740 false
+
+dialog 1
+
+n Putters
+fl If I get enough money I will move to Pensara. Did you
+sl know that the prices there are the highest in the world?
+f true
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

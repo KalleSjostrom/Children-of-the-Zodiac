@@ -1,0 +1,26 @@
+background The_Prison_Cell true
+
+back 1024 768
+start0 604 414 2
+
+loot card 615 310 1;0 cards.offense.BattleCard 2 3 false
+lootLine You found a card in the toilet!
+lootLine (Kinda gross...)
+
+o 616 347 645 355
+o 486 346 518 395
+o 543 346 575 395
+o 327 347 369 647
+o 331 261 684 346
+o 429 345 461 394
+o 645 348 687 648
+o 633 355 644 360
+o 372 346 404 395
+o 290 502 782 675
+
+villager prisonCelis
+villager prisonBorealis
+villager prisonZalzi
+
+##### END #####
+end

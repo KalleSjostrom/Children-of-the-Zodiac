@@ -1,0 +1,26 @@
+# background, prefix name of both images day
+background Pensara_-_The_North_District_-_Library true
+
+inside
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1024 768
+start 490 560 0
+
+holeDoor switch Pensara_-_The_North_District 490 580 30 2 1 1666 962 2 
+
+o 292 274 303 731
+o 559 518 721 554
+o 302 477 364 576
+o 404 477 465 576
+o 256 185 761 273
+o 304 401 465 433
+o 303 274 320 329
+o 287 644 747 719
+o 429 274 463 329
+o 557 274 591 329
+o 558 465 719 496
+o 718 496 738 742
+o 702 272 730 496
+
+end

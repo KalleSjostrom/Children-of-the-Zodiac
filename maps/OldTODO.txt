@@ -1,0 +1,79 @@
+DONE -- Connect all the places in the game with the point in the air landscape.
+
+Destroyer card missing.
+	
+Enemy name:
+	* DONE -- Space should be allowed.
+	* DONE -- Bestiary related ??? names should be removed in result screen.
+	* DONE -- Multiple bosses on the same floor.
+
+Flare card has a graphics flaw.
+Queue for fade images.
+	
+DONE -- Dialog that tells the player that a door in the labyrinth is closed.
+Create stories for the characters to go in the Status menu.
+Add sound effects. The navigation sound effect should not play if one presses left or right when the possible options are up and down.
+Make it possible to fade to half in story sequences
+
+Show the number of cards left in the deck, on the deck. Almost done (The numbers aren't really centered)
+Show card info in lower right corner (?), when battling. Almost done.
+
+DONE -- Music: Great temple in Menthus place.
+DONE -- Darkworld musik på sista våningen i Wind Temple (ligga kvar under striderna).
+Jonas -- No obstacles in Teo's House.
+
+Wall obstacles in houses are too narrow.
+The obstacles for the trees to the left of the church in Dellna.
+Math in Dellna, his image is too small.
+
+DONE -- Villagers in Home of the Gods.
+
+Make Uri sequence longer (Althea)
+
+From Jonas first hour:
+	DONE -- r1 och l1 byta gubbe i menyn.
+	DONE -- Level på firsta meny bilden.
+	DONE -- Scroll around i deck meny, när man går upp och hamnar längst ner
+	DONE -- Vägarna i landskapet sparas inte.
+	DONE -- Pass to Zazo - Placera en av vakterna för ingången istället för "Door is Locked" =)
+	DONE ?? -- Looparna kan utebli.
+	Mera loot.
+	DONE -- Då man trycker på eldar (Pass to Zazo) ska det stå aj! =)
+	DONE -- Elmer triggar inte sig själv. Meeting a crazy man. UpdateVillageTrigger
+	DONE -- Kolla så att då man inte har råd med innet så varnar han.
+	DONE -- Göra det gratis med inn då det är triggers.
+	Jonas -- Offense / defense text i strid syns knappt.
+	Pengarna i kistorna är inte bestämt.
+	DONE -- Namn på våningarna ovanför småkartorna.
+	DONE -- Ta bort where is pensara från borealis storyn
+	Lägg till på några bybor om vart pensara ligger och vad det är.
+	Storyn väntar inte på sista (?) dialog rutan.
+	Sega magier.
+	DONE -- Hålet i Grivera är i taket men ska vara i golvet.
+	Spoils screen saknade level up mätarna...
+	DONE -- Bara mött blobbar i Grivera.
+	DONE -- Ta bort Farmer John sekvensen.
+	Lägg in ett extra minus steg då man byter vånging.
+	DONE -- Göra det omöjligt att röra handen då man sparar.
+	
+From Hampus first hour:
+	DONE -- Inn keeper image wrong.
+	Spoils screen saknade level up mätarna...
+	DONE -- Ta bort Farmer John sekvensen.
+	DONE -- Flytta kistorna på topp-våningen till fjärde våningen.
+
+Då man dör:
+	Menthu tema då man slåss
+	Fada ut innan sista slaget
+	Bymode - Tyst
+	Stabbar oss - Stabbing teo
+	Resten av hans musik
+
+Questions:
+    Make so that it should be able to cancel story sequences?
+    The game starts to get slow after a while... Flooding OpenGL pipeline? Make the battle animations static so that each battle does not create new ones?
+    How much is recreated? (images, textures, draw lists and so on?)
+
+Regular bugs:
+	If one presses too fast when the result screen appears, the music fucks.
+	Stuck in the stone outside of Uri...

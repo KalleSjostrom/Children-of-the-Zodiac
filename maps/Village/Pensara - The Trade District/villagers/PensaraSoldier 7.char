@@ -1,0 +1,13 @@
+image char/Pensarasoldier
+start 1446 330
+
+in 2 100 true
+
+dialog 1
+
+n Soldier
+fl This is the soldiers quarters.
+sl end
+f true
+
+end

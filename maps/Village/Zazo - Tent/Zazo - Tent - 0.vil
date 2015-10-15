@@ -1,0 +1,26 @@
+# background, prefix name of both images day
+background Zazo_-_Tent true
+
+inside
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1024 768
+start 494 420 0
+
+holeDoor switch Zazo 494 440 30 2 1 308 706 2
+
+o 450 387 476 400
+o 452 399 485 432
+o 451 363 482 381
+o 573 408 585 505
+o 535 338 580 408
+o 534 470 579 494
+o 436 337 449 492
+o 459 337 489 364
+o 510 337 525 352
+o 450 470 489 495
+o 436 288 586 337
+
+villager Shaun 2
+
+end

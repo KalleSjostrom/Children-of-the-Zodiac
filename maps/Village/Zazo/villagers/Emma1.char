@@ -1,0 +1,46 @@
+image Emma
+
+start 1570 110
+
+in 2 100 false
+in 0 20 true
+in 1 20 true
+in 3 20 true
+in 1 100 false
+in 0 20 true
+in 1 20 true
+in 3 20 true
+in 0 100 false
+in 0 20 true
+in 1 20 true
+in 3 20 true
+in 0 100 false
+in 0 20 true
+in 1 20 true
+in 3 20 true
+in 3 100 false
+in 0 20 true
+in 1 20 true
+in 3 20 true
+in 2 100 false
+in 0 20 true
+in 1 20 true
+in 3 20 true
+
+dialog 1
+
+n Emma
+fl I'm looking for Ingus, have you 
+sl seen him?
+trigger Emma1 2
+f true
+
+dialog 2
+
+n Emma
+fl We are playing hide and seek!
+sl end
+trigger Emma1 1
+f true
+
+end

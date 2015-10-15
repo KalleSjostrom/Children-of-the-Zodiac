@@ -1,0 +1,90 @@
+image Joharu
+start 1300 750
+
+in 2 100 true
+
+dialog 1
+
+n Joahru
+fl To be able to live in Pensara...
+sl That would surely be a dream.
+f true
+
+n Joahru
+fl I wouldn't have to work here, on this salary...
+sl end
+f true 
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

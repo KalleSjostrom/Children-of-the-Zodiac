@@ -1,0 +1,40 @@
+import file=main.var
+
+var kin=0
+var celis=1
+var zalzi=2
+
+actor name="Kin"
+actor name="Celis"
+actor name="Zalzi"
+
+show index=kin value=false
+show index=celis value=false
+show index=zalzi value=false
+
+info time="night" name="Zazo - Teo" music="No Music" fadeValue="0" musicVolume="0"
+
+ins timea=0 index=kin kind=show movepos=1024;300
+ins timea=0 index=celis kind=show movepos=1024;280
+ins timea=0 index=zalzi kind=show movepos=1024;320
+
+ins timea=1500 index=kin kind=dist distance=100 duration=2000 direction=3
+ins timea=0 index=kin kind=queue direction=0
+ins timea=3500 index=kin kind=stop direction=2
+ins timea=2000 index=kin kind=stop direction=1
+dialogsingle starttimea=250 <= name="Kin" text="Psst!";"Coast is clear!" whisper=true
+
+ins timea=500 index=kin kind=dist distance=60 duration=600 direction=0
+ins timea=0 index=kin kind=queue distance=40 duration=400 direction=0
+ins timea=0 index=kin kind=queue direction=2
+
+ins timea=200 index=zalzi kind=dist distance=120 duration=1000 direction=3
+ins timea=0 index=zalzi kind=queue distance=90 duration=900 direction=0
+
+ins timea=200 index=celis kind=dist distance=100 duration=1500 direction=3
+ins timea=0 index=celis kind=queue distance=50 duration=750 direction=0
+
+load trigger="Zazonode"
+ins index=0 timea=0 kind=trigger value=-2
+
+ins timea=2000 kind=endseq

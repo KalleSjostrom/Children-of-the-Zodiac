@@ -1,0 +1,52 @@
+##### VILLAGER #####
+# NAME: Passguard Seth
+image Passguard
+
+##### STARTING LOCATION #####
+
+# start x y
+start 404 381
+
+##### INSTRUCTIONS #####
+
+# in angle distance stopped
+in 2 180 true
+
+##### DIALOGS #####
+
+# first line
+# second line
+# first dialog background (the one at the far left top of the screen)
+
+dialog 1
+
+n Seth
+fl Only supplies and the military get past here. 
+sl If you want to get by, join the army!
+f true
+
+dialog 2
+
+n Seth
+fl To enter the pass you will need a permission.
+sl To get a permission you will have to either
+f true
+
+n Seth
+fl join the army or speak to Uri of Alares, but he
+sl doesn't give them out to anybody.
+f true
+
+dialog 3
+
+run Encounter_With_an_Ally borealis
+
+dialog 4
+
+n Seth
+fl Please go on ahead.
+sl end
+f true
+
+##### END #####
+end

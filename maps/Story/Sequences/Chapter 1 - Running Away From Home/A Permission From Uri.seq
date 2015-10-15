@@ -1,0 +1,199 @@
+import file=main.var
+
+var uri=0
+var eve=1
+var john=2
+var jane=3
+var elthea=4
+var bella=5
+var man=6
+var kin=7
+var celis=8
+
+actor name="Uri"
+actor name="Eve"
+actor name="Farmer John"
+actor name="Farmer Jane"
+actor name="Elthea"
+actor name="Bella"
+actor name="Kin" pos=1120;1330;0
+actor name="Celis" pos=1120;1360;0
+actor name="Characters/Alaressoldier/AlaressoldierExtras" pos=1930;1250
+
+info time="day" name="Alares" music="Alares" fadeValue="1" musicVolume="1" status="0"
+
+load music="We've Got To Hurry"
+load music="Kin's Theme"
+
+ins timea=0 index=uri kind=controll controll=true
+
+dialogsingle starttimea=0 duration=100 <= name="Uri" text="What can I do you for?"
+ins timea=500 index=kin kind=dist distance=10 direction=0 duration=500
+dialogsingle starttimea=1000 duration=500 <= name="Kin" text="We need to get to Zazo and that means";"that you are going to give us a permission."
+
+ins timea=500 index=uri kind=emotion emotion=! show=true
+ins timea=2000 index=uri kind=emotion show=false
+
+dialogpacket name=0 starttimea=0 duration=500
+dialog packetname=0 name="Uri" text="Hehe, such fiery youths, I like your style, boy.";"But I'm sorry.."
+dialog packetname=0 name="Uri" text="I do not hand out permissions just like that.";""
+
+ins type=fadeout timea=1000 index=0 fadetime=1000 kind=music mode=kill
+ins timea=750 index=man kind=dist distance=250 direction=3 duration=1500
+ins timea=250 index=1 kind=music mode=play
+
+dialogsingle starttimea=600 duration=1400 <= name="Man" text="Help! It's a disaster!"
+
+ins timea=0 index=eve kind=controll controll=true
+ins timea=50 index=eve kind=emotion emotion=? show=true
+
+ins timea=5 index=john kind=controll controll=true
+ins timea=0 index=john kind=emotion emotion=?! show=true shake=true
+ins timea=30 index=jane kind=controll controll=true
+ins timea=0 index=jane kind=emotion emotion=? show=true
+ins timea=20 index=elthea kind=controll controll=true
+ins timea=0 index=elthea kind=emotion emotion=? show=true
+ins timea=0 index=elthea kind=look_at actor=man
+ins timea=20 index=kin kind=emotion emotion=? show=true
+ins timea=20 index=uri kind=emotion emotion=? show=true
+ins timea=0 index=celis kind=emotion emotion=? show=true
+ins timea=10 index=bella kind=controll controll=true
+ins timea=0 index=bella kind=emotion emotion=? show=true
+ins timea=0 index=bella kind=look_at actor=man
+
+ins timea=0 index=jane kind=dist distance=10 duration=300 direction=0 facedirection=2
+ins timea=200 index=kin kind=dist distance=10 duration=600 direction=2
+ins timea=20 index=kin kind=emotion emotion=?! show=true shake=true
+ins timea=0 index=celis kind=stop direction=2
+
+ins timea=35 index=eve kind=look_at actor=man
+ins timea=300 index=john kind=stop direction=0
+ins timea=200 index=eve kind=emotion emotion=?! show=true
+ins timea=100 index=eve kind=to movepos=1080;1170 speed=30000
+ins timea=0 index=eve kind=queue distance=50 duration=400 direction=0
+#ins timea=100 index=eve kind=reset
+#ins timea=2000 index=eve kind=controll controll=false
+
+ins timea=300 index=john kind=stop direction=2
+ins timea=300 index=man kind=stop direction=0
+ins timea=300 index=man kind=stop direction=3
+ins timea=300 index=man kind=stop direction=2
+
+dialogsingle starttimea=700 duration=500 <= name="Man" text="Some workers are trapped in the mine up north!";""
+ins timea=250 index=man kind=dist distance=15 duration=100 direction=2
+ins timea=750 index=man kind=dist distance=200 duration=1333 direction=3
+ins timea=1400 index=man kind=stop direction=0
+dialogsingle starttimea=250 duration=1500 <= name="Man" text="They need help!";""
+
+ins timea=0 index=kin kind=emotion emotion=! show=true shake=false
+
+ins timea=250 index=man kind=dist distance=30 duration=200 direction=0
+ins timea=0 index=man kind=queue distance=300 duration=2000 direction=3
+
+ins timea=350 index=bella kind=look_at actor=man
+ins timea=0 index=bella kind=emotion show=false
+ins timea=0 index=elthea kind=emotion show=false
+ins timea=350 index=bella kind=to movepos=1310;585 duration=6000
+ins timea=0 index=eve kind=emotion show=false
+ins timea=0 index=john kind=emotion show=false
+
+ins timea=1650 index=man kind=stop direction=0
+ins timea=0 index=jane kind=emotion show=false
+ins timea=0 index=jane kind=dist distance=10 duration=1000 direction=2
+ins timea=0 index=john kind=reset
+ins timea=0 index=john kind=controll controll=false
+
+ins timea=1000 index=man kind=dist distance=30 duration=200 direction=2
+ins timea=200 index=man kind=dist distance=3000 duration=20000 direction=3
+ins timea=0 index=jane kind=reset
+ins timea=0 index=jane kind=controll controll=false
+ins timea=100 index=kin kind=dist distance=50 duration=1000 direction=2
+ins timea=0 index=kin kind=emotion emotion=? show=true
+ins timea=1000 index=kin kind=stop direction=3
+ins timea=0 index=kin kind=emotion show=false
+
+ins timea=800 index=uri kind=dist distance=10 duration=1500 direction=2
+ins timea=400 index=uri kind=emotion show=false
+dialogsingle starttimea=600 duration=500 <= name="Uri" text="Oh, dear... How terrible..."
+ins timea=280 index=celis kind=stop direction=0
+ins timea=0 index=celis kind=emotion show=false
+ins timea=250 index=kin kind=stop direction=0
+ins timea=250 index=kin kind=dist distance=10 duration=500 direction=0
+
+dialogsingle starttimea=1500 <= name="Uri" text="I have already sent all the available troops to Zazo. The";"rest of our men with arms are out preparing for the war..."
+ins type=fadeout timea=30 index=1 fadetime=800 kind=music mode=pause
+
+ins timea=500 index=kin kind=stop direction=2
+ins timea=750 index=kin kind=dist distance=20 duration=1500 direction=2
+
+ins timea=2500 index=kin kind=dist distance=20 duration=500 direction=0
+ins timea=0 index=2 kind=music mode=play
+
+dialogsingle starttimea=100 <= name="Kin" text="We can go!"
+ins timea=10 index=celis kind=emotion emotion=! show=true
+ins timea=250 index=celis kind=dist distance=10 duration=500 direction=0
+dialogsingle starttimea=100 <= name="Celis" text="Yes!";"Let us go to Zazo!"
+ins timea=700 index=celis kind=emotion show=false
+
+ins timea=300 index=uri kind=stop direction=0
+ins timea=100 index=eve kind=emotion emotion=... show=true
+ins timea=0 index=eve kind=dist distance=50 duration=2000 direction=2
+ins timea=1000 index=uri kind=stop direction=1
+dialogsingle starttimea=0 <= name="Uri" text="Oh.. Well.."
+ins timea=1000 index=uri kind=dist distance=5 duration=1000 direction=0
+ins timea=100 index=eve kind=stop direction=3
+ins timea=750 index=eve kind=emotion emotion=? show=true
+ins timea=750 index=eve kind=stop direction=1
+ins timea=500 index=uri kind=stop direction=2
+ins timea=0 index=eve kind=emotion show=false
+dialogsingle starttimea=0 duration=500 <= name="Uri" text="I don't see any other way..";"Are you sure you're up to the task?"
+ins timea=400 index=eve kind=to movepos=1370;1220 duration=4000
+dialogsingle starttimea=600 duration=1000 <= name="Kin" text="Of course! We'll manage, for sure!"
+ins timea=1100 index=uri kind=dist distance=5 duration=1000 direction=2
+ins timea=1000 index=uri kind=stop direction=1
+ins timea=1600 index=uri kind=stop direction=0
+ins timea=0 index=eve kind=reset
+ins timea=0 index=eve kind=controll controll=false
+ins timea=0 index=bella kind=reset
+ins timea=0 index=bella kind=controll controll=false
+dialogsingle starttimea=0 duration=50 <= name="Uri" text="Ok, I'll let you go. Show this to the";"guards at the entrance of the cave."
+dialogsingle starttimea=500 duration=500 <= name="Kin" text="We'll do!";"C'mon Celis! Let's hurry!"
+ins timea=400 index=kin kind=stop direction=1
+#ins timea=4 index=uri kind=dist distance=5 duration=300 direction=2
+dialogsingle starttimea=250 duration=500 <= name="Uri" text="Good luck!";""
+
+load trigger="Eve"
+ins index=0 timea=0 kind=trigger value=3
+
+load trigger="Farmer John"
+ins index=1 timea=0 kind=trigger value=4
+
+load trigger="Farmer Jane"
+ins index=2 timea=0 kind=trigger value=2
+
+load trigger="Bella"
+ins index=3 timea=0 kind=trigger value=3
+
+load trigger="Elthea"
+ins index=4 timea=0 kind=trigger value=2
+
+load trigger="Belmet"
+ins index=5 timea=0 kind=trigger value=4
+
+load trigger="Flog"
+ins index=6 timea=0 kind=trigger value=3
+
+load trigger="Ghertrudd"
+ins index=7 timea=0 kind=trigger value=2
+
+load trigger="Recruiter"
+ins index=8 timea=0 kind=trigger value=4
+
+load trigger="Passguard Seth"
+ins index=9 timea=0 kind=trigger value=3
+
+load trigger="Uri"
+ins index=10 timea=0 kind=trigger value=4
+
+ins timea=0 index=2 kind=music_overwrite
+ins timea=500 kind=end

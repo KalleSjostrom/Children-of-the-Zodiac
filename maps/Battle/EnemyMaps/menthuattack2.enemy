@@ -1,0 +1,163 @@
+name Menthu
+
+defense 436
+magicDefense 431
+agility 27
+evade 0
+hit 90
+attack 2352
+magic 2352
+support 2352
+hp 80324
+element 0
+startFrame 10
+
+image serpent 13
+armor 50 50
+preferences 100 0
+
+scale 5.3
+height -1.8
+# height -2.2
+depth -6
+middle 0
+
+attackSpec type=no name=change0 anim=(f=10,a=1000)--(f=11,a=1500,d=true) target=-1
+attackSpec type=no name=Cool_Down power=0 target=-1 anim=(a=1000)--(a=1000,cps=true)
+
+attackSpec {
+	type=sup
+	name=Omega
+	power=0
+	anim=(f=11,s=true,se=Monster/Menthu/delta,a=1500,d=true)
+	effect=(BoostAll=2;1)
+}
+
+attackSpec {
+	type=no
+	name=Wrath_of_Ophiuchus
+	power=0 
+	onAll=true
+	anim=(f=11,a=1000,cm=2)--(f=11,a=4000,r=.0001,se=Monster/Menthu/transformfire)--(f=11,a=2000,c=m+Flame,pl=true)--(f=12,c=m+Flame,a=1500)--(f=12,c=m+Fire:-1.2;1.1;-6,a=500,cm=1)--(f=12,c=m+Fire:1.35;1.1;-6,a=500)--(f=12,c=m+Fire:-1.2;1.1;-6,a=500)--(f=12,c=m+Fire:1.35;1.1;-6,a=500)--(f=12,a=1000)--(h=true,f=12,a=1000)--(cm=2,f=12,a=1500,sm=Menthu's_Final_Breath)--(f=12,a=1000)--(f=11,a=2500,cps=true)--(f=11,a=6500,r=-.0001)--(f=10,a=2000)--(f=9,a=1000)--(f=10,a=900)--(f=9,a=800)--(f=10,a=700)--(f=9,a=600)--(f=10,a=500)--(f=9,a=400)--(f=10,a=300)--(f=9,a=200)--(f=10,a=100)--(f=9,a=100)--(f=10,a=100)--(f=9,a=100)--(f=10,a=100)--(f=9,a=100)--(f=10,a=100)--(f=9,a=100)--(f=10,a=100)--(f=9,a=100)--(f=10,a=100)--(f=9,a=100)--(f=10,a=100)--(f=9,a=100)--(f=9,a=3100,se=Monster/Menthu/transform)
+	effect=(DownTo=1)
+}
+
+
+attackSpec {
+	type=mag
+	name=Ophiuchus_Fury
+	power=0
+	onAll=true
+	anim=()--(c=m+Flame,a=1500,se=Monster/Menthu/burningdemon)--(c=m+Fire:-1.2;1.1;-6,a=500)--(c=m+Fire:1.35;1.1;-6,a=500)--(c=m+Fire:-1.2;1.1;-6,a=500)--(c=m+Fire:1.35;1.1;-6,a=500)--(a=2000,h=true)--(a=2000)
+	effect=(DownTo=1)
+}
+
+attackSpec type=mag name=Fire element=fire anim=(f=4,a=1000)--(f=5,a=1000,c=m+3+Fire:-.1;.05;-6)
+attackSpec type=mag name=Ice element=ice anim=(f=4,a=1000)--(f=5,a=1000,c=m+3+Ice:0;-.05;-6)
+attackSpec type=mag name=Earth element=earth anim=(f=4,a=500)--(f=4,a=1000,c=m+3+Earth:0;-.05;-6)
+attackSpec type=mag name=Wind element=wind anim=(f=4,a=500)--(f=4,a=1000,c=m+3+Wind:0;-.05;-6)
+attackSpec type=mag name=Omega_Fire onAll=true power=.8 element=fire anim=(f=4,a=500)--(f=4,a=10,c=m+Fire:-2;1;-6)--(f=4,a=10,c=m+Fire:2;1;-6)--(f=4,a=10,c=m+Fire:-2;-1.2;-6)--(f=4,a=10,c=m+Fire:2;-1.2;-6)--(f=4,a=2000)
+attackSpec type=mag name=Omega_Ice onAll=true power=.8 element=ice anim=(f=4,a=500)--(f=4,a=10,c=m+Ice:-2;1;-6)--(f=4,a=10,c=m+Ice:2;1;-6)--(f=4,a=10,c=m+Ice:-2;-1.2;-6)--(f=4,a=10,c=m+Ice:2;-1.2;-6)--(f=4,a=2000)
+attackSpec type=mag name=Omega_Earth onAll=true power=.8 element=earth anim=(f=4,a=500)--(f=4,a=10,c=m+Earth:-2;1;-6)--(f=4,a=10,c=m+Earth:2;1;-6)--(f=4,a=10,c=m+Earth:-2;-1.2;-6)--(f=4,a=10,c=m+Earth:2;-1.2;-6)--(f=4,a=2000)
+attackSpec type=mag name=Omega_Wind onAll=true power=.8 element=wind anim=(f=4,a=500)--(f=4,a=10,c=m+Wind:-2;1;-6)--(f=4,a=10,c=m+Wind:2;1;-6)--(f=4,a=10,c=m+Wind:-2;-1.2;-6)--(f=4,a=10,c=m+Wind:2;-1.2;-6)--(f=4,a=2000)
+
+attackSpec {
+	type=mag
+	name=Death
+	anim=(f=2,a=30,se=Monster/Virgo/reaper)--(a=20,c=m+SerphiaDeath:-1.3;.05;-6)--(a=900,c=m+SerphiaDeath:1.2;0;-6)--(f=4,a=800)--(f=5)
+	power=0
+	effect=(Death=1)
+}
+
+attackSpec {
+	type=off
+	name=Fury_Slash
+	anim=(f=1,a=300,se=Monster/Menthu/slash)--(f=2,a=400)--(f=3,a=300)
+	power=.8
+}
+
+attackSpec {
+	type=off
+	name=Demon_Jaws
+	anim=(f=6,a=1100,se=Monster/Menthu/demonjaws)--(f=7,a=500)--(f=8,a=400)
+	power=1
+}
+
+attackSpec {
+	type=off
+	name=Hell_Claws
+	onAll=true
+	anim=(f=4,a=450,se=Monster/Menthu/hellclaws)--(f=2,a=300)--(f=3,a=300)--(f=4,a=500)--(f=2,a=300)--(f=3,a=300)--(f=4,a=500)--(f=2,a=300)--(f=3,a=300)
+	power=.6
+}
+
+attackSpec {
+	type=off
+	name=Gore
+	onAll=true
+	anim=(f=6,a=1000,se=Monster/Menthu/gore)--(f=8,a=600,s=true)
+	power=.7
+}
+
+attackSpec {
+	type=mag
+	name=Roar
+	onAll=true
+	power=0
+	anim=(f=7,s=true,a=1500,se=Monster/Menthu/roar)
+	effect=(BoostOff=2;-.5)--(BoostDef=2;-.5)
+}
+
+attackSpec {
+	type=mag
+	name=Demoralize
+	onAll=true
+	power=0
+	anim=(f=7,s=true,a=1500,se=Monster/Menthu/demoralize)
+	effect=(BoostMag=2;-.5)--(BoostMagDef=2;-.5)
+}
+
+attackSpec {
+	type=sup
+	name=Taur's_Endurance
+	power=0
+	anim=(f=4,s=true,a=2000,c=s+BlackCure,se=Monster/Menthu/endurance)
+	effect=(BoostDef=2;5)
+}
+
+attackSpec type=sup name=Neutralize power=0 anim=(f=4,s=true,a=2000,c=s+BlackCure,se=Monster/Menthu/endurance) effect=(ChangeElement=0)
+attackSpec type=sup name=Fire_Element power=0 anim=(f=4,s=true,a=2000,c=s+BlackCure,se=Monster/Menthu/endurance) effect=(ChangeElement=1)
+attackSpec type=sup name=Ice_Element power=0 anim=(f=4,s=true,a=2000,c=s+BlackCure,se=Monster/Menthu/endurance) effect=(ChangeElement=2)
+attackSpec type=sup name=Wind_Element power=0 anim=(f=4,s=true,a=2000,c=s+BlackCure,se=Monster/Menthu/endurance) effect=(ChangeElement=3)
+attackSpec type=sup name=Earth_Element power=0 anim=(f=4,s=true,a=2000,c=s+BlackCure,se=Monster/Menthu/endurance) effect=(ChangeElement=4)
+
+attackSpec {
+	type=sup
+	name=Serphia's_Bless
+	power=0
+	anim=(f=4,s=true,a=2000,c=s+BlackCure,se=Monster/Menthu/endurance)
+	effect=(BoostAll=2;.5)
+}
+
+attackSpec {
+	type=mag
+	name=Salmonman's_Distortion
+	onAll=true
+	power=0
+	anim=(se=Monster/Salmonman/chrono)--(c=m+1+Slow:-1.2;.2;-6,a=10)--(c=m+1+Slow:1.15;.15;-6,a=1500)
+	effect=(BoostSpeed=2;-.25)--(BoostSpeed=2;.25)
+}
+
+run script=menthuattack2
+
+cardPreference Death 0
+#cardPreference Demolish 0
+cardPreference openwound 0
+
+dialog name="Menthu" text="Impossible!";""
+end=begin
+dialog name="Menthu" text="Argh!"
+end=endEnemyDead
+dialog name="Menthu" text="Ha ha ha!"
+end=endPartyDead
+nextPlace="Ending - Part 1";""

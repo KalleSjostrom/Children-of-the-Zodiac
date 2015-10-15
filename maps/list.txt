@@ -1,0 +1,127 @@
+Forest of Reil
+    Monsters:   Boar, Blob
+    Texture:    Gräs och stenväg (stonewood) (forest)
+    Musik:      Forest labyrinth (forest)
+    
+Forest of Reil - på natten
+    Monsters:   Werewolf, Boar, Giant Bat
+    Texture:    Gräs och stenväg (stonewood) (forest)
+    Musik:      Inte färdig
+    
+Grivera - Demon Cave 1
+    Monsters:   Troll, Porcupine blob, Goblin
+    Boss:       ???
+    Texture:    Brun texture (deamon)
+    Musik:      Inte färdig
+    
+Pass to Zazo
+    Monsters:   Beastman, Werewolf, Brute
+    Texture:    Grå (färdig)
+    Musik:      South Pass
+    
+Zazo Great Mine
+    Monsters:   Hexaroc, Hangman, Giant Bat
+    Texture:    Golv inte klar
+    Musik:      The old mine
+    
+Mt. Garr - Demon Cave 2
+    Monsters:   Zombie, Necromancer, Hangman, Skeleton
+    Boss:       ???
+    Texture:    Inte färdig - Typ grå gammal tempel... Lite odöd=)
+    Musik:      Crystal cave 1
+    
+"Cardcave"
+    Monsters:   Gorillar, Goblin (Fast en variation), Ogre (Variant på trollet)      
+    Texture:    Färdig
+    Musik:      Big Cave
+    
+Zalzi cave
+    Monsters:   Black Boar, Zombie (en variant)
+    Texture:    Färdig
+    Musik:      Inte färdig - Typisk Grottmusik. Gau theme typ
+    
+Prison
+    Monsters:   Guard
+    Texture:    Färdig
+    Musik:      We've got to hurry
+    
+Desert
+    Monsters:   Tunnelworm, Stitchman
+    Texture:    Stenvägg, typ grekisk mytologisk labyrint.
+    Musik:      Berca musiken
+
+Sewers
+    Monsters:   Filth Ghoul, Screamer
+    Texture:    Inte färdig
+    Musik:      Inte färdig
+    
+Undead Cave
+    Monsters:   Undead Children
+    Texture:    Inte färdig   
+    Musik:      Silent cave
+    
+Deamon Cave 3
+    Monsters:   Gorillar, Horned one (beastman variant), Greater Tunnelworm
+    Boss:       "Serphia"
+    Texture:    Inte färdig
+    Musik:      Ancient temple
+    
+Zazo Mountain
+    Monsters:   Gåtor
+    Texture:    Variation south pass
+    Musik:      Inte Färdig
+
+Deamon Cave 4
+    Monsters:   Stitchman (variation), Shadow Boar, Necromancer 
+    Texture:    Demon Cave 1
+    Musik:      Inte Färdig
+
+Snow pass
+    Monsters:   Winter wolf, Skeleton (variant)
+    Texture:    Färdig
+    Musik:      Inte Färdig
+    
+Zodiac Weapon Cave
+    Monsters:   None
+    Texture:    Inte färdig (Crystal floor)
+    Musik:      Tyst
+
+    Fire Cave
+        Monsters:   Fire Elemental
+        Texture:    Färdig
+        Musik:      Inte färdig
+       
+    Ice Cave
+        Monsters:   Walrus, Ice Elemental
+        Texture:    Lite arbete men typ färdig
+        Musik:      Ice cave
+        
+    Earth Cave
+        Monsters:   Greater Tunnelworm, Greater Hexaroc, Earth Elemental
+        Texture:    Färdig
+        Musik:      Inte färdig
+        
+    Wind Cave
+        Monsters:   Wind Elemental
+        Texture:    Inte färdig
+        Musik:      Inte färdig
+
+Mountain of the Gods
+    Monsters:   ???
+    Texture:    Inte färdig
+    Musik:      Mörkerlandskap
+
+Serpents Lair
+    Monsters:   Salmonman, Dragon, Serpentarius
+    Texture:    Inte färdig    
+    Musik:      Great temple
+    
+Sandcave - Sidequest
+    Monsters:   
+    Texture:    
+    Musik:      
+    
+Hedge Passage - Sidequest
+    Monsters:   Gorillar
+    Texture:    
+    Musik:      

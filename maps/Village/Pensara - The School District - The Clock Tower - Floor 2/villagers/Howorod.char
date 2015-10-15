@@ -1,0 +1,20 @@
+image Howorod	   
+start 380 400	   
+	   
+in 1 100 true	   
+in 1 220 false	   
+in 3 220 false	   
+ 	   
+dialog 1	   
+	   
+n Howorod	   
+fl Before these tense times, our economy was stable,
+sl but now taxes are higher and we have more expenses.
+f true	   
+	   
+n Howorod	   
+fl I can't even make a living just working here anymore.	   
+sl end	   
+f true	   
+	   
+end	 

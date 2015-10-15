@@ -1,0 +1,52 @@
+image char/Pensarasoldier
+start 1245 620
+
+in 1 570 false
+in 3 570 false
+
+dialog 1
+
+n Soldier
+fl On patrol, can't talk.
+sl end
+f true
+
+
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

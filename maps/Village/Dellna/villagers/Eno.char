@@ -1,0 +1,45 @@
+image Eno
+start 1650 750
+
+in 0    150 false
+in 2    150 false
+
+dialog 1
+
+# behind the dead tree five times  
+# standing by the lake
+n Eno
+fl 2   5   8   9   14   4
+sl 20   8   5
+f true
+
+n Eno
+fl 4   5   1   4
+sl 20   18   5   5
+f true
+
+n Eno
+fl five
+sl 20   9   13   5   19
+f true
+
+dialog 2
+
+n Eno
+fl 2   5   8   9   14   4
+sl 20   8   5
+f true
+
+n Eno
+fl 4   5   1   4
+sl 20   18   5   5
+f true
+
+n Eno
+fl five
+sl 20   9   13   5   19
+trigger Wilko 2
+trigger Eno 1
+f true
+
+end

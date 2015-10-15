@@ -1,0 +1,74 @@
+image Laila
+start 1940 530
+
+in 2 200 false
+in 1 300 false
+in 0 200 false
+in 3 100 false
+in 2 200 false
+in 3 200 false
+in 0 200 false
+
+dialog 1
+
+n Laila
+fl When I was younger I used to get fascinated by ancient
+sl history... The kings... The queens, the temples... 
+f true
+
+n Laila
+fl Everything about it was a thrill to me.
+sl end
+trigger Laila 2
+f true
+
+dialog 2
+
+n Laila
+fl One day when I was out searching for treasures, in one
+sl of the pyramids, I got attacked by evil monsters... 
+f true
+
+n Laila
+fl I ran as fast as I could, trying to get away!
+sl end
+f true
+
+n Laila
+fl I managed to escape, but I didn't find the treasure 
+sl I was after: The Ancients pearls! 
+trigger Laila 3
+f true
+
+dialog 3
+
+check Laila 4 Ancients_Pearls
+
+n Laila
+fl Can you please find them for me... 
+sl Find the pearls..?
+f true
+
+dialog 4
+
+n Laila
+fl I've searched for these for so long, you have no idea
+sl what this means to me!! Take this!
+f true
+
+n _
+fl You got a card!
+sl You gave away "Ancients Pearls".
+gift cards.support.Fungi 2 3 false
+trigger Laila 5
+take Ancients_Pearls
+f true
+
+dialog 5
+
+n Laila
+fl Thank you!
+sl end
+f true
+
+end

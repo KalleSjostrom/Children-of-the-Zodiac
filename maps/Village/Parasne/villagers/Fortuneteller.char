@@ -1,0 +1,29 @@
+image Fortuneteller	   
+start 403 172	   
+	   
+in 2 100 true	   
+
+range 80
+	   
+dialog 1	   
+	   
+n Rakul the fortune-teller	   
+fl I see a great threat approaching in the mist of time.	   
+sl end	   
+f true	   
+	   
+dialog 2	   
+	   
+n Rakul the fortune-teller	   
+fl I see a beautiful lady hiding in the sands.	   
+sl end	   
+f true	   
+	   
+dialog 3	   
+	   
+n Rakul the fortune-teller	   
+fl I see you will have great faith in the gods.
+sl end	   
+f true	   
+	   
+end	 

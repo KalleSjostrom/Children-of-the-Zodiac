@@ -1,0 +1,55 @@
+image _ 0
+
+start 736 337
+
+in 2 100 true
+
+dialog 1
+
+n _
+fl A poor lone tree.
+sl Looks like it wants some water.
+f true
+
+n _
+fl The water in the river seems so gross.
+sl I wonder if they have some fresh water somewhere.
+f true
+
+dialog 2
+
+n _
+fl A poor lone tree.
+sl Looks like it wants some water.
+f true
+
+n _
+fl You pour the fresh water on the tree. 
+sl end
+f true
+
+n _
+fl Oh, look how happy it made it!
+sl end
+f true
+
+n _
+fl When you look closer you see a card
+sl lying in the wet dirt.
+f true
+
+n _
+fl You got a card!
+sl You gave away the key item "Fresh Water".
+gift cards.offense.BattleCard 2 2 false
+take Fresh_Water
+trigger LoneTree 3
+f true
+dialog 3
+n _
+fl It looks very happy now!
+sl end
+f true
+
+##### END #####
+end

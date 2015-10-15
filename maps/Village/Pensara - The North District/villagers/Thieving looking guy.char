@@ -1,0 +1,27 @@
+image GTthief	   
+start 415 280	   
+	   
+in 2 100 true	   
+	   
+dialog 6	   
+	   
+n Mats Meadowgrove	   
+fl Ok, I give up!	   
+sl Here's 20000 gold.	   
+f true
+	   
+n _ 
+fl You got 20000 gold!
+sl end	   
+gift 20000 0
+trigger Tieving_looking_guy 8	   
+f true
+	   
+dialog 8	   
+	   
+n Mats Meadowgrove	   
+fl Don't tell anyone about my crimes! 
+sl end	   
+f true	   
+	   
+end	 

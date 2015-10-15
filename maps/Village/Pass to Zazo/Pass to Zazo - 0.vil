@@ -1,0 +1,94 @@
+##### VILLAGE #####
+# NAME
+name Pass_to_Zazo _
+
+##### BACKGRUND #####
+
+# background, prefix name of both images day
+background Pass_to_Zazo true
+
+##### STARTING LOCATION #####
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1024 768
+start0 512 710 0
+start1 458 374 2
+
+wind 10;0;0 .1
+particlesystem firesystem:0
+#Pass smokesystemPass
+
+sign 640 450 40 0;1;2;3
+signL Ouch!
+signL2 Fire is hot... Who knew...
+
+##### OBSTICLES #####
+# obsticles x y x2 y2
+# Fireplace
+o 649 487 676 513
+o 697 461 720 550
+
+# Mountain
+o 857 312 865 319
+o 587 381 603 392
+o 808 279 856 327
+o 856 312 856 312
+o 85 279 122 301
+o 808 328 832 349
+o 241 321 262 339
+o 233 321 241 328
+o 207 278 261 320
+o 393 396 447 406
+o 123 279 143 291
+o 969 297 983 311
+o 961 297 968 303
+o 878 296 902 303
+o 857 296 877 311
+o 808 349 817 354
+o 694 356 728 375
+o 0 279 84 309
+o 184 278 191 286
+o 144 279 158 286
+o 857 278 1005 296
+o 833 328 843 338
+o 984 296 1005 320
+o 197 298 206 307
+o 306 356 693 380
+o 320 380 586 395
+o 282 357 306 368
+o 190 279 206 297
+o 252 340 261 349
+o 604 381 652 387
+o 996 321 1005 331
+o 764 356 787 363
+o 262 279 807 356
+o 0 0 1005 278
+o 728 356 763 370
+o 507 395 552 403
+
+
+# Trees...
+o 893 304 960 360
+o 795 253 795 253
+o 31 379 66 411
+o 55 575 122 631
+o 613 438 648 470
+o 667 670 734 726
+o 243 454 310 510
+o 356 583 391 615
+o 985 578 1023 633
+
+##### DOORS #####
+# villagename is declared under name above. In this case Southpass
+# data base name: villagename + name
+# holeDoor type name coordinates 
+holeDoor labyrinth Central_Pass--West_Part-mark0 463 314 50 0
+
+##### VILLAGERS #####
+
+# villager name
+villager Passguard_Marcus
+villager Passguard_Seth
+
+##### END #####
+end

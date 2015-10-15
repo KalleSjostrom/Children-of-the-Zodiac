@@ -1,0 +1,50 @@
+var type=vector name=underline value=0,0,.7
+var type=vector name=blue value=0,0,.7
+var type=vector name=lightblue value=.3,.3,.7
+var type=vector name=green value=0,.7,0
+var type=vector name=red value=.7,0,0
+
+newtext
+newMap
+putMap index=3 vector=red
+putMap index=4 vector=red
+addRow newpage=true text="Each character may exchange gold for the possibility of starting a";"" usemap=true
+newMap
+putMap index=0 vector=underline
+putMap index=1 vector=underline
+putMap index=3 vector=underline
+putMap index=4 vector=underline
+addRow newpage=false text="new class with more experience (Exp). Moving the markers to the right,";"" usemap=true
+
+newMap
+putMap index=3 vector=lightblue
+putMap index=5 vector=lightblue
+putMap index=6 vector=lightblue
+addRow newpage=false text="costs money. The left marker (blue hand) cost twice as much to move as";"" usemap=true
+newMap
+putMap index=1 vector=green
+putMap index=3 vector=green
+putMap index=4 vector=green
+addRow newpage=false text="the right one (green hand).";"" usemap=true
+
+newMap
+putMap index=2 vector=underline
+addRow newpage=false text="When choosing Done, the character will receive a random amount of";"" usemap=true
+
+newMap
+putMap index=3 vector=lightblue
+putMap index=6 vector=green
+putMap index=12 vector=green
+addRow newpage=false text="Exp between the left and the right marker. This zone is colored green.";"" usemap=true
+
+newMap
+putMap index=4 vector=underline
+putMap index=6 vector=red
+putMap index=7 vector=red
+putMap index=8 vector=red
+addRow newpage=false text="Also, once you choose Done, you cannot go back!";"" usemap=true
+
+newMap
+addRow newpage=false text="";"" usemap=true
+
+put turn=0

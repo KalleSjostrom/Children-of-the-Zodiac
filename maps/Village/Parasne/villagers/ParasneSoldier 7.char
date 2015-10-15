@@ -1,0 +1,92 @@
+image char/Pensarasoldier
+start 1810 445
+
+in 1 100 true
+in 2 100 false
+in 1 100 true
+in 2 100 false
+in 1 100 true
+in 0 100 false
+in 1 100 true
+in 0 100 false
+
+dialog 1
+
+n Soldier
+fl When is my shift ending?
+sl Feel as if I've been here all day.
+f true
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

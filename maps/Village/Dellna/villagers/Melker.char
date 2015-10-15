@@ -1,0 +1,72 @@
+image Melker
+start 60 430
+
+in 2 100 true
+
+dialog 1
+# walking at the outskirt of the town
+n Melker
+fl It used to live a woman here named Ana.
+sl She was like the most beautiful woman I've ever seen.
+f true
+
+n Melker
+fl That was a really long time ago.
+sl She was taken from us by the dark hooded man...
+f true
+
+n Melker
+fl He took her from us, but he couldn't take 
+sl our memories away. I will never forget her smile.
+trigger Melker 2
+f true
+
+dialog 2
+
+n Melker
+fl ...never ever forget...
+sl end
+f true
+
+dialog 3
+
+# moved to the center of the town
+
+n Melker
+fl I've heard what happened!
+sl Nohting short of a cataclysm...
+trigger Melker 4
+f true
+
+dialog 4
+
+n Melker
+fl Hmm...since you left the village I couldn't
+sl stop thinking about you. 
+f true
+
+n Melker
+fl It's strange how you look just like Ana! I won't say 
+sl out loud what I'm thinking but take this card as a gift from me.
+f true
+
+n Melker 
+fl I don't know why, but suddenly
+sl I got a glimpse of hope inside of me.
+f true
+
+n _
+fl You got a card!
+sl end
+trigger Melker 5
+gift cards.offense.SpiritAssault 2 1
+f true
+
+dialog 5
+
+n Melker
+fl Good luck, on your journey!
+sl end
+f true
+
+end

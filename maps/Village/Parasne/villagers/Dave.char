@@ -1,0 +1,67 @@
+image Dave
+start 870 300
+
+in 2 100 true
+
+dialog 1
+
+n Merchant Dave
+fl Come see the best wares in the whole world.
+sl Never buy anything from Willy. He'll fool you.
+f true
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

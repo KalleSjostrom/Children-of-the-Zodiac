@@ -1,0 +1,26 @@
+ 
+image Alishia	   
+start 400 600	   
+	   
+in 2 100 true	   
+in 3 90 false	   
+in 2 100 true	   
+in 1 90 false	   
+	   
+dialog 1	   
+	   
+n Alishia	   
+fl The soccer field here was always filled with children  
+sl end	   
+trigger Alishia 2	   
+f true	   
+	   
+dialog 2	   
+	   
+n Alishia	   
+fl I don't like that the Pensarian soldiers take	   
+sl up our children's playgrounds.	   
+trigger Alishia 1
+f true	   
+	   
+end	 

@@ -1,0 +1,504 @@
+image BTScientist
+start 439 288
+
+in 2 180 true
+
+dialog 1
+
+n Belmet
+fl My name is Belmet. I guess that you've heard
+sl of me before? I'm a famous scientist. 
+f true
+
+n Belmet
+fl Drop by later, and I will prepare some questions for you.
+sl end
+f true
+
+dialog 2
+
+n Belmet
+fl Aaah!
+sl You're back.
+f true
+
+n Belmet
+fl Are you ready for the questions?
+sl You only have three tries to get them right.
+f true
+
+q 10
+alt Bring_'em_on!
+alt Hmm,_no...
+alt _
+alt _
+f true
+
+*12
+n Belmet
+fl Come back when you are ready.
+sl end
+f true
+
+*11
+n Belmet
+fl Alright.
+sl Here comes the first question:
+f true
+
+n Belmet
+fl What is the name of my son?
+sl end
+f true
+
+q 20
+alt Flog
+alt Frog
+alt Fred
+alt Fido
+f true
+
+*22
+n Belmet
+fl Better luck next time.
+sl end
+trigger Belmet 5
+f true
+
+*23
+n Belmet
+fl Better luck next time.
+sl end
+trigger Belmet 5
+f true
+
+*24
+n Belmet
+fl Better luck next time.
+sl end
+trigger Belmet 5
+f true
+
+*21
+n Belmet
+fl Correct you are!
+sl Here's the next one:
+f true
+
+n Belmet
+fl How many windows are there in this town?
+sl end
+f true
+
+q 30
+alt 25
+alt 31
+alt 35
+alt 42
+f true
+
+*31
+n Belmet
+fl Better luck next time.
+sl end
+trigger Belmet 5
+f true
+
+*33
+n Belmet
+fl Better luck next time.
+sl end
+trigger Belmet 5
+f true
+
+*34
+n Belmet
+fl Better luck next time.
+sl end
+trigger Belmet 5
+f true
+
+*32
+n Belmet
+fl Correct you are!
+sl Here's the next one:
+f true
+
+n Belmet
+fl How many persons in this town has red hair?
+sl end
+f true
+
+q 40
+alt 3
+alt 2
+alt 0
+alt 1
+f true
+
+*41
+n Belmet
+fl Better luck next time.
+sl end
+trigger Belmet 5
+f true
+
+*42
+n Belmet
+fl Better luck next time.
+sl end
+trigger Belmet 5
+f true
+
+*43
+n Belmet
+fl Better luck next time.
+sl end
+trigger Belmet 5
+f true
+
+*44
+n Belmet
+fl Congratulations!
+sl Here's a little something for the trouble.
+f true
+
+n _
+fl You got a card!
+sl end
+trigger Belmet 3
+gift cards.offense.BattleCard 2 2 true
+f true
+
+dialog 3
+
+n Belmet
+fl What did you think of my questions?
+sl end
+f true
+
+dialog 4
+
+n Belmet
+fl What's the ruckus?
+sl end
+f true
+
+dialog 5
+
+n Belmet
+fl Aaah!
+sl You're back.
+f true
+
+n Belmet
+fl Are you ready for the questions?
+sl You only have two more tries to get them right.
+f true
+
+q 10
+alt Bring_'em_on!
+alt Hmm,_no...
+alt _
+alt _
+f true
+
+*12
+n Belmet
+fl Come back when you are ready.
+sl end
+f true
+
+*11
+n Belmet
+fl Alright.
+sl Here comes the first question:
+f true
+
+n Belmet
+fl What is the name of my son?
+sl end
+f true
+
+q 20
+alt Flog
+alt Frog
+alt Fred
+alt Fido
+f true
+
+*22
+n Belmet
+fl Better luck next time.
+sl end
+trigger Belmet 6
+f true
+
+*23
+n Belmet
+fl Better luck next time.
+sl end
+trigger Belmet 6
+f true
+
+*24
+n Belmet
+fl Better luck next time.
+sl end
+trigger Belmet 6
+f true
+
+*21
+n Belmet
+fl Correct you are!
+sl Here's the next one:
+f true
+
+n Belmet
+fl How many windows are there in this town?
+sl end
+f true
+
+q 30
+alt 25
+alt 31
+alt 35
+alt 42
+f true
+
+*31
+n Belmet
+fl Better luck next time.
+sl end
+trigger Belmet 6
+f true
+
+*33
+n Belmet
+fl Better luck next time.
+sl end
+trigger Belmet 6
+f true
+
+*34
+n Belmet
+fl Better luck next time.
+sl end
+trigger Belmet 6
+f true
+
+*32
+n Belmet
+fl Correct you are!
+sl Here's the next one:
+f true
+
+n Belmet
+fl How many persons in this town has red hair?
+sl end
+f true
+
+q 40
+alt 3
+alt 2
+alt 0
+alt 1
+f true
+
+*41
+n Belmet
+fl Better luck next time.
+sl end
+trigger Belmet 6
+f true
+
+*42
+n Belmet
+fl Better luck next time.
+sl end
+trigger Belmet 6
+f true
+
+*43
+n Belmet
+fl Better luck next time.
+sl end
+trigger Belmet 6
+f true
+
+*44
+n Belmet
+fl Congratulations!
+sl Here's a little something for the trouble.
+f true
+
+n _
+fl You got a card!
+sl end
+trigger Belmet 3
+gift cards.offense.BattleCard 2 2 true
+f true
+
+dialog 6
+
+n Belmet
+fl Aaah!
+sl You're back.
+f true
+
+n Belmet
+fl Are you ready for the questions?
+sl This is your last shot.
+f true
+
+q 10
+alt Bring_'em_on!
+alt Hmm,_no...
+alt _
+alt _
+f true
+
+*12
+n Belmet
+fl Come back when you are ready.
+sl end
+f true
+
+*11
+n Belmet
+fl Alright.
+sl Here comes the first question:
+f true
+
+n Belmet
+fl What is the name of my son?
+sl end
+f true
+
+q 20
+alt Flog
+alt Frog
+alt Fred
+alt Fido
+f true
+
+*22
+n Belmet
+fl Better luck next time.
+sl end
+trigger Belmet 7
+f true
+
+*23
+n Belmet
+fl Better luck next time.
+sl end
+trigger Belmet 7
+f true
+
+*24
+n Belmet
+fl Better luck next time.
+sl end
+trigger Belmet 7
+f true
+
+*21
+n Belmet
+fl Correct you are!
+sl Here's the next one:
+f true
+
+n Belmet
+fl How many windows are there in this town?
+sl end
+f true
+
+q 30
+alt 25
+alt 31
+alt 35
+alt 42
+f true
+
+*31
+n Belmet
+fl Better luck next time.
+sl end
+trigger Belmet 7
+f true
+
+*33
+n Belmet
+fl Better luck next time.
+sl end
+trigger Belmet 7
+f true
+
+*34
+n Belmet
+fl Better luck next time.
+sl end
+trigger Belmet 7
+f true
+
+*32
+n Belmet
+fl Correct you are!
+sl Here's the next one:
+f true
+
+n Belmet
+fl How many persons in this town has red hair?
+sl end
+f true
+
+q 40
+alt 3
+alt 2
+alt 0
+alt 1
+f true
+
+*41
+n Belmet
+fl Better luck next time.
+sl end
+trigger Belmet 7
+f true
+
+*42
+n Belmet
+fl Better luck next time.
+sl end
+trigger Belmet 7
+f true
+
+*43
+n Belmet
+fl Better luck next time.
+sl end
+trigger Belmet 7
+f true
+
+*44
+n Belmet
+fl Congratulations!
+sl Here's a little something for the trouble.
+f true
+
+n _
+fl You got a card!
+sl end
+trigger Belmet 3
+gift cards.offense.BattleCard 2 2 true
+f true
+
+dialog 7
+
+n Belmet
+fl Sorry.
+sl Seems that you are not worthy of my fine price..
+f true
+	
+end

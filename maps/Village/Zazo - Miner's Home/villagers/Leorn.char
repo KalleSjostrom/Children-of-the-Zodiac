@@ -1,0 +1,28 @@
+image Leorn
+
+start 380 500
+
+in 3 200 false
+in 0 20 false
+in 1 250 false
+in 0 190 false
+in 1 135 false
+in 2 150 false
+in 1 165 false
+in 0 70 false
+in 3 65 false
+in 0 90 false
+in 1 140 false
+in 2 90 false
+in 3 75 false
+in 2 130 false
+in 3 350 false
+
+dialog 1
+
+n Leorn
+fl It's nice to work along with my brother,
+sl it never get lonely that way.
+f true
+
+end

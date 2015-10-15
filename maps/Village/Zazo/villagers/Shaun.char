@@ -1,0 +1,34 @@
+##### VILLAGER #####
+# NAME: Shaun
+image Shaun
+
+##### STARTING LOCATION #####
+
+# start x y
+start 225 775
+
+##### INSTRUCTIONS #####
+
+# in angle distance stopped
+in 2 1000 true
+
+##### DIALOGS #####
+
+# first line
+# second line
+# first dialog background (the one at the far left top of the screen)
+
+dialog 1
+
+n Shaun
+fl I'm just a mining trainee. 
+sl Now I wonder if I'm fit for this kind of work.
+f true
+
+n Shaun
+fl Perhaps I should quit as soon as my mentor
+sl gets back... If he ever does.
+f true
+
+##### END #####
+end

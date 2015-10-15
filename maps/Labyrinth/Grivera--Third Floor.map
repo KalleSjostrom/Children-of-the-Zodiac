@@ -1,0 +1,60 @@
+mapSize -0.5 0.5 1
+
+size 206
+
+#fog red=.4 green=.3 blue=0 alpha=.01 density=0.01
+
+light0 position=0;0;0;1 ambient=.8;.8;.8;1 specular=.2;.2;.2;1 diffuse=.8;.8;.8;1 attenuation=1;0.01;0.015
+material ambient=.7;.7;.7;1 specular=.2;.2;.2;1 diffuse=.8;.8;.8;1
+invMaterial ambient=.7;.7;.7;1 specular=.2;.2;.2;1 diffuse=.8;.8;.8;1 shininess=5 emission=.1;.1;.1;1
+
+enemyColor .7 .7 .7 1
+
+floorTex demoncave1floor.jpg
+floorTex demoncave1flooropen.jpg
+wallTex demoncave1wall.png
+wallTex demoncave1door0.png
+roofTex demoncave1roof.jpg
+roofTex demoncave1roofopen.jpg
+
+normal floor 0 2
+normal wall 2 4
+normal roof 4 6
+
+mapPos 2 0
+
+# directions in labyrinth
+# directions in labyrinth
+dir 27 1 43
+dir 43 1 59
+dir 59 1 75
+dir 75 1 91
+dir 83 2 84
+dir 84 2 85
+dir 85 2 86
+dir 86 2 87
+dir 87 2 88
+dir 88 1 104
+dir 91 1 107
+dir 91 2 92
+dir 92 2 93
+dir 93 2 94
+dir 104 1 120
+dir 107 1 123
+dir 120 2 121
+dir 121 2 122
+dir 122 1 138
+dir 122 2 123
+dir 138 1 154
+dir 152 2 153
+dir 153 2 154
+dir 154 1 170
+
+mapEnd
+
+floor 1 94
+inv ladderDoor 94 2 dontopen Images/ladderdown.png false grivera--second_floor-mark2
+roof 5 83
+inv ladderDoor 83 0 dontopen Images/ladderup.png true grivera--omnious_hall-mark0
+
+inv chest 27 3 2 Images/chest 2 cards.magic.Death 1 false

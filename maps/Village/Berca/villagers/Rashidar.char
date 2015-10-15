@@ -1,0 +1,36 @@
+image Rashidar
+start 1170 400
+
+in 1 230 false
+in 0 190 false
+in 3 230 false
+in 2 190 false
+
+dialog 1
+
+n Rashidar
+fl We hardly ever get visitors from other towns anymore.
+sl end
+f true
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

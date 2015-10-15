@@ -1,0 +1,28 @@
+name Goblin
+
+defense 30
+magicDefense 28
+agility 10
+evade 0
+hit 95
+attack 121
+magic 112
+support 23
+hp 419
+element 4
+gold 188
+experience 125
+criticalChance 0
+
+diesound Goblin/dies
+image goblin 4
+armor 6 6
+preferences 50 50
+
+scale 5.5
+height -2.2
+depth -6
+middle -0.6
+
+attackSpec anim=(a=180,se=Monster/Goblin/attack)--(f=1,a=330)--(f=2,h=true,a=800)
+attackSpec type=mag name=Earth element=earth anim=(a=200,c=m+Earth,se=earth)--(f=3,a=200)--(a=200)--(f=3,a=200)--(a=200)--(f=3,a=200)--(a=200)

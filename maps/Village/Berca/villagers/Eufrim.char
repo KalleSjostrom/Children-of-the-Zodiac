@@ -1,0 +1,30 @@
+image Eufrim
+start 710 210
+
+in 2 1000 true
+
+dialog 1
+
+n Eufrim
+fl In Berca we do have some powerful weapons. We have a
+sl long tradition from ancient times in developing weapons.
+f true
+
+n Eufrim
+fl Thousand years ago, during the great war, 
+sl we provided the humans with weapons.
+f true
+
+dialog 2
+
+n Eufrim
+fl You visited the pyramids?
+sl That must have been awesome.
+f true
+
+n Eufrim
+fl The ones that built them, the Ancients,
+sl were phenomenal architects.
+f true
+
+end

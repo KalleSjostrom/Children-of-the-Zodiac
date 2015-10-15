@@ -1,0 +1,71 @@
+image GTladyhat
+
+start 1600 600
+
+in 1 50 false
+in 0 50 false
+in 1 50 false
+in 2 50 false
+in 3 50 false
+in 0 100 false
+in 3 50 false
+in 0 50 false
+in 1 100 false
+in 2 50 false
+in 3 50 false
+in 2 50 false
+in 3 50 false
+in 2 50 false
+# startplats
+in 1 100 false
+in 0 150 false
+in 3 50 false
+in 2 150 false
+in 1 50 false
+in 0 100 false
+in 3 50 false
+in 0 50 false
+in 3 50 false
+in 2 150 false
+
+
+dialog 1
+
+n Ghertrudd
+fl I'm so alone now that my son has joined the army.
+sl I wonder if he will be alright.
+f true
+
+n Ghertrudd
+fl Before I could always rely on Elmer
+sl to keep me company. 
+f true
+
+n Ghertrudd
+fl Of course, this was many years 
+sl ago before he went nuts.
+f true
+
+dialog 2
+
+n Ghertrudd
+fl Serves them right.
+sl I've heard that Zazo wants world dominion.
+trigger Ghertrudd 3
+f true
+
+dialog 3
+
+n Ghertrudd
+fl Lousy Zazoians...
+sl end
+f true
+
+dialog 4
+
+n Ghertrudd
+fl Guess I was wrong...
+sl end
+f true
+
+end

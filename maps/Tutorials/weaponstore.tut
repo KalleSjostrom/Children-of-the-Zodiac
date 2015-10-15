@@ -1,0 +1,108 @@
+title string="Tutorial - Equipments and Slots";""
+
+var type=vector name=gray value=.7,.7,.7
+var type=vector name=green value=0,.7,0
+var type=vector name=blue value=0,0,.7
+var type=vector name=darkgreen value=0,.7,0
+var type=vector name=purple value=.5,0,.5
+
+newtext
+
+newMap
+putMap index=2 vector=blue
+addRow newpage=true text="There are 3 types of equipments.";"" usemap=true
+newMap
+putMap index=1 vector=blue
+putMap index=2 vector=blue
+putMap index=4 vector=blue
+addRow newpage=false text="- Weapons, armors and accessories.";"" usemap=true
+
+newMap
+putMap index=0 vector=blue
+putMap index=5 vector=blue
+addRow newpage=true text="Weapons raises physical and magical offense.";"" usemap=true
+newMap
+putMap index=0 vector=blue
+putMap index=2 vector=blue
+addRow newpage=true text="Armors and accessories raises physical and magical";"" usemap=true
+addRow newpage=false text="defense.";"" usemap=true
+
+newMap
+putMap index=3 vector=blue
+putMap index=4 vector=blue
+putMap index=5 vector=blue
+putMap index=6 vector=blue
+addRow newpage=true text="Equipments also contain a set of slots which decides";""
+addRow newpage=false text="how many and which types of cards your character";""
+
+newMap
+putMap index=6 vector=blue
+putMap index=8 vector=blue
+putMap index=9 vector=blue
+putMap index=10 vector=blue
+addRow newpage=false text="may use in battle. There are 3 different types of slots.";"" usemap=true
+
+newMap
+putMap index=0 vector=gray
+putMap index=2 vector=purple
+putMap index=5 vector=green
+addRow newpage=false text="Battle slots, Magic slots and Support slots.";"" usemap=true
+
+newMap
+putMap index=1 vector=gray
+putMap index=2 vector=gray
+addRow newpage=true text="1. Battle slots. In these slots you can use";"" usemap=true
+newMap
+putMap index=0 vector=gray
+putMap index=1 vector=gray
+putMap index=5 vector=gray
+addRow newpage=false text="Battle cards, which have a gray frame.";"" usemap=true
+addRow newpage=false text="";""
+addRow newpage=false text="";""
+newMap
+putMap index=0 vector=gray
+addRow newpage=false text="Battle slot:";"" icon=Menu/0slot.png yoffset=-20 iconxoffset=105 iconyoffset=-52 usemap=true
+addRow newpage=false text="Gray frame:";"" icon=Cards/Battle_Card.png xoffset=250 yoffset=-60 iconxoffset=115 iconyoffset=-72 iconscale=.7 usemap=true
+
+newMap
+putMap index=1 vector=purple
+putMap index=2 vector=purple
+addRow newpage=true text="2. Magic slots. In these slots you can use";"" usemap=true
+newMap
+putMap index=0 vector=purple
+putMap index=1 vector=purple
+putMap index=5 vector=purple
+addRow newpage=false text="   Magic cards, which have a purple frame.";"" usemap=true
+addRow newpage=false text="";""
+addRow newpage=false text="";""
+newMap
+putMap index=0 vector=purple
+addRow newpage=false text="Magic slot:";"" icon=Menu/1slot.png yoffset=-20 iconxoffset=105 iconyoffset=-52 usemap=true
+addRow newpage=false text="Purple frame:";"" icon=Cards/Fire.png xoffset=250 yoffset=-60 iconxoffset=115 iconyoffset=-72 iconscale=.7 usemap=true
+
+newMap
+putMap index=1 vector=darkgreen
+putMap index=2 vector=darkgreen
+addRow newpage=true text="3. Support slots. In these slots you can use";"" usemap=true
+newMap
+putMap index=0 vector=darkgreen
+putMap index=1 vector=darkgreen
+putMap index=5 vector=darkgreen
+addRow newpage=false text="    Support cards, which have a green frame.";"" usemap=true
+addRow newpage=false text="";""
+addRow newpage=false text="";""
+newMap
+putMap index=0 vector=darkgreen
+addRow newpage=false text="Support slot:";"" icon=Menu/2slot.png yoffset=-20 iconxoffset=125 iconyoffset=-52 usemap=true
+addRow newpage=false text="Green frame:";"" icon=Cards/Cure.png xoffset=250 yoffset=-60 iconxoffset=115 iconyoffset=-72 iconscale=.7 usemap=true
+
+addRow newpage=true text="Summary:";""
+newMap
+putMap index=5 vector=gray
+putMap index=7 vector=purple
+addRow newpage=false text="Weapons contain a mix of Battle and Magic slots.";"" usemap=true
+newMap
+putMap index=4 vector=darkgreen
+addRow newpage=false text="Armors and accessories contain Support slots.";"" usemap=true
+
+put turn=0

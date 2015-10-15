@@ -1,0 +1,61 @@
+import file=main.var
+
+var kin=0
+var celis=1
+var borealis=2
+var zalzi=3
+
+info time="day" name="Pensara - The Trade District - House 1 - Floor 1" music="continue" fadeValue="1" musicVolume="1"
+
+actor name="Kin" pos=475;340;0
+actor name="Celis" pos=460;370;0
+actor name="Borealis" pos=475;400;0
+actor name="Zalzi" pos=480;370;0
+
+load music="Celis piano"
+
+dialogsingle starttimea=500 <= name="Celis" text="Let me try!";""
+
+ins timea=200 index=celis kind=dist distance=10 direction=0 duration=200
+
+ins type=fadeout timea=100 index=0 fadetime=1000 kind=music mode=pause
+ins type=fadein timea=1000 index=1 fadetime=0 kind=music mode=play
+
+var d=250
+
+ins timea=180 index=celis kind=dist distance=4 direction=1 facedirection=0 duration=100
+ins timea=d index=celis kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=d index=celis kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=d index=celis kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=d index=celis kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=d index=celis kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=d index=celis kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=d index=celis kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=d index=celis kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=d index=celis kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=d index=celis kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=d index=celis kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=d index=celis kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=d index=celis kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=d index=celis kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=d index=celis kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=d index=celis kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=d index=celis kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=d index=celis kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=d index=celis kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=d index=celis kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=d index=celis kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=d index=celis kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=d index=celis kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=d index=celis kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=d index=celis kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=d index=celis kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=d index=celis kind=dist distance=8 direction=1 facedirection=0 duration=100
+
+ins type=fadeout timea=400 index=1 fadetime=1000 kind=music mode=kill
+ins type=fadein timea=1000 index=0 fadetime=1000 kind=music mode=play
+
+load trigger="Piano"
+ins index=0 timea=0 kind=trigger value=3
+
+ins timea=1000 kind=end

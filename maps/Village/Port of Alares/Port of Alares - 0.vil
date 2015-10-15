@@ -1,0 +1,79 @@
+background Port_of_Alares true
+
+back 1024 768
+start 550 0 2
+
+# Hus och vatten
+o 380 181 474 258
+o 475 118 538 258
+o 597 118 660 258
+o 763 75 922 216
+o 41 181 222 258
+
+# vatten
+o 0 308 538 376
+o 599 308 1024 316
+
+# träd stubbar lådor
+o 731 184 753 247
+o 301 123 322 159
+o 688 200 698 242
+o 248 96 301 164
+o 909 217 934 249
+o 977 199 987 257
+o 699 177 731 242
+o 948 183 976 195
+o 988 225 1003 257
+o 852 214 899 255
+o 722 243 731 247
+o 233 128 248 153
+o 923 195 976 244
+
+# bridge
+o 598 308 610 620
+o 531 308 538 640
+o 540 588 598 652
+
+door house Port_of_Alares_-_Tavern 810 174 30 0 2
+doorSignFL Locked.
+
+#holeDoor house The_Ship_Cabin 720 664 40 2 2
+
+# Barrel to the right of the tavern
+loot card 941 200 0 cards.magic.Slow 2 2 false
+lootLine You found a card in a barrel!
+
+sign 862 224 40
+signL Welcome to Spouter Tavern.
+
+sign 54 230 20
+signL Some bottles of weird smelling liquid.
+
+sign 106 230 20
+signL Regular beer glasses.
+
+sign 188 230 20
+signL Looks like wine.
+
+sign 430 230 20
+signL Bread.
+
+sign 500 230 20
+signL Lots of bread...
+
+sign 526 158 20
+signL So much bread!
+
+sign 628 234 20
+signL Books and paper.
+
+villager AlaresSoldier_1
+villager AlaresSoldier_2
+villager AlaresSoldier_3
+villager AlaresSoldier_4
+villager AlaresSoldier_5
+villager AlaresSoldier_6
+villager Polly
+villager Sigge 1
+
+end

@@ -1,0 +1,109 @@
+image Amy
+start 980 480
+
+in 2 100 true
+
+dialog 1
+
+# standing near a tent
+n Merchant Amy
+fl I've been traveling the world since I was a little child.
+sl end
+f true
+
+n Merchant Amy
+fl I've been almost everywhere except for the white village...
+sl A village covered in snow.
+f true 
+
+n Merchant Amy
+fl If you ever have a chance to visit that place,
+sl please come back to tell me how it was.
+f true
+
+dialog 2
+
+n Merchant Amy
+fl Snow everywhere... people in warm clothes... 
+sl surrounded by mountains... It sounds awesome!
+f true
+
+n Merchant Amy
+fl I want to go there!
+sl Thank you for returning to me.
+f true
+
+n Merchant Amy
+fl I want to give you this... 
+sl It's not a expensive thing, but it's important to me.
+f true
+
+n _
+fl You got the key item "Old Doll"! 
+sl end
+gift Old_Doll 1 1
+trigger Amy 3
+f true
+
+dialog 3
+
+n Merchant Amy
+fl Snow everywhere... people in warm clothes... 
+sl surrounded by mountains... It sounds magical!
+f true
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

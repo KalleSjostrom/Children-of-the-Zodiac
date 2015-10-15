@@ -1,0 +1,25 @@
+image Helen
+start 220 785
+
+in 2 100 true
+
+dialog 1
+
+n Helen
+fl Too cold, you say? 
+sl Well, you get used to it.
+f true
+
+n Helen
+fl Actually it's kind a cozy gathering around
+sl an open fire together. 
+f true
+
+dialog 2
+
+n Helen
+fl I feel sorry for Merri...
+sl He was such a kind man... 
+f true
+
+end

@@ -1,0 +1,25 @@
+##### BACKGRUND #####
+
+# background, prefix name of both images day
+background Crossroad true
+
+##### STARTING LOCATION #####
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1024 768
+start0 0 368 1
+
+##### OBSTICLES #####
+
+o 834 261 863 303
+o 431 226 460 268
+o 787 524 816 566
+o 149 133 178 175
+o 561 360 580 390
+
+##### DOORS #####
+
+##### VILLAGERS #####
+
+##### END #####
+end

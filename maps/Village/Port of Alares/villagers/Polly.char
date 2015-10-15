@@ -1,0 +1,38 @@
+image Polly
+start 430 223
+
+in 0 200 true
+in 1 60 false
+in 0 600 true
+in 1 120 false
+in 0 200 true
+in 3 120 false
+in 0 500 true
+in 3 60 false
+
+dialog 1
+
+# Right of Sigge
+n Polly  
+fl Sigge is dreaming about fortune and fame.
+sl I'm moving cause of ideological reasons.
+f true
+
+n Polly
+fl I like Pensaras politics... They do what's 
+sl best for their own town, for their own survival.
+f true
+
+n Polly
+fl I guess it's about time to join the winners for once!
+sl end
+f true
+
+dialog 2
+
+n Polly
+fl I like Pensaras politics... I guess it's about
+sl time to join the winners for once!
+f true
+
+end

@@ -1,0 +1,31 @@
+import file=main.var
+
+info time="day" name="No Place" music="No Music" fadeValue="0" musicVolume="0" status="0"
+
+#load music="Pensara"
+
+text lines="Menthu is no more...";"" pos=20;380
+text lines="The product and the very symbol of mans greed";"has vanished from existance." pos=20;380
+text lines="Ophiuchus' last hope has perished";"and with it, his strength." pos=20;380
+text lines="As time passed, man's hunger for war faded";"and soon the land was once again calm." pos=20;380
+text lines="The stones were returned to their origin and since this day,";"not man nor tenjin has heard from the Zodiac's again." pos=20;380
+
+#ins type=fadeout timea=0 index=1 fadetime=0 kind=music mode=pause
+#ins type=fadein timea=500 index=1 fadetime=0 kind=music mode=play
+
+ins type=fadein timea=textfadetime index=0 fadetime=textfadetime kind=text
+ins type=fadeout timea=5000 index=0 fadetime=textfadetime kind=text
+
+ins type=fadein timea=textfadetime index=1 fadetime=textfadetime kind=text
+ins type=fadeout timea=7000 index=1 fadetime=textfadetime kind=text
+
+ins type=fadein timea=textfadetime index=2 fadetime=textfadetime kind=text
+ins type=fadeout timea=7000 index=2 fadetime=textfadetime kind=text
+
+ins type=fadein timea=textfadetime index=3 fadetime=textfadetime kind=text
+ins type=fadeout timea=7000 index=3 fadetime=textfadetime kind=text
+
+ins type=fadein timea=textfadetime index=4 fadetime=textfadetime kind=text
+ins type=fadeout timea=8000 index=4 fadetime=textfadetime kind=text
+
+ins timea=2000 kind=endseq

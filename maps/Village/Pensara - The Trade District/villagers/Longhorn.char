@@ -1,0 +1,32 @@
+image Longhorn
+start 1230 540
+
+in 1 50 true
+in 3 50 true
+in 2 45 false
+in 3 50 true
+in 1 50 true
+in 2 75 false
+in 1 50 true
+in 2 65 false
+in 1 75 false
+in 0 50 true
+in 3 185 false
+in 0 140 false
+in 1 50 true
+in 0 50 false
+in 1 50 true
+in 0 50 false
+in 1 110 false
+in 2 55 false
+
+dialog 1
+
+n Longhorn
+fl If it wasn't for senator Logner 
+sl we wouldn't have such a beautiful city.
+f true
+
+end
+
+

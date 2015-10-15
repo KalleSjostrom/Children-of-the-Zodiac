@@ -1,0 +1,31 @@
+image GTredhair
+
+start 1795 190
+
+in 2 180 true
+
+dialog 1
+
+# 1 - Villager
+n Pavier
+fl Pavier is my name. I'm the only person with 
+sl red hair in this town, and I'm proud of it!
+trigger Pavier 2
+f true
+
+dialog 2
+
+n Pavier
+fl I wonder, could that be the reason
+sl why the army didn't accept me?
+trigger Pavier 1
+f true
+
+dialog 3
+
+n Pavier
+fl The Alares army doesn't want me because im a
+sl red head, wonder if Pensaras army might.
+f true
+
+end

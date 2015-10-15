@@ -1,0 +1,76 @@
+import file=main.var
+
+var kin=0
+var celis=1
+var borealis=2
+var zalzi=3
+
+info time="day" name="Berca" music="Berca" fadeValue="0" musicVolume="0"
+
+load translucent="res/Texts/Berca.png"
+
+actor name="Kin"
+actor name="Celis"
+actor name="Borealis"
+actor name="Zalzi"
+
+show index=kin value=false
+show index=celis value=false
+show index=borealis value=false
+show index=zalzi value=false
+
+load music="Berca intro"
+
+load translucent="res/Texts/Berca.png"
+
+ins type=fadeout timea=0 index=0 fadetime=0 kind=music mode=pause
+ins type=fadein timea=0 index=1 fadetime=0 kind=music mode=play
+
+ins type=fadein timea=1500 kind=image fadetime=4000 scrollmode=normal imagetype=translucent
+ins type=fadeout timea=6000 kind=image fadetime=2000 scrollmode=normal imagetype=translucent
+
+ins timea=0 index=kin kind=show movepos=1192;1280
+ins timea=0 index=borealis kind=show movepos=1213;1230
+ins timea=0 index=celis kind=show movepos=1172;1240
+ins timea=0 index=zalzi kind=show movepos=1192;1200
+
+ins timea=1000 index=0 kind=screenzoom zoomin=true zoomtime=4000 usestaticpos=true pos=512;768
+
+ins timea=2000 index=kin kind=dist distance=200 direction=0 duration=4000
+ins timea=0 index=celis kind=dist distance=190 direction=0 duration=3800
+ins timea=0 index=borealis kind=dist distance=190 direction=0 duration=3800
+ins timea=0 index=zalzi kind=dist distance=190 direction=0 duration=3800
+
+ins type=fadeout timea=3500 index=1 fadetime=500 kind=music mode=kill
+ins type=fadein timea=1000 index=0 fadetime=0 kind=music mode=play
+dialogsingle starttimea=0 <= name="Zalzi" text="Ah! Home at last!";"Breathe in the sweet air of freedom!"
+ins timea=500 index=kin kind=stop direction=3
+ins timea=1000 index=kin kind=stop direction=1
+dialogsingle starttimea=500 <= name="Kin" text="It just smells like dirt here..." whisper=true
+
+ins timea=1000 index=zalzi kind=stop direction=2
+dialogsingle starttimea=150 <= name="Zalzi" text="Well, I'll be of then.";"It has been a pleasure to meet you all!"
+ins timea=30 index=zalzi kind=dist distance=40 direction=0 duration=500
+ins timea=0 index=zalzi kind=queue direction=2
+ins timea=350 index=celis kind=dist distance=20 direction=0 duration=200
+dialogsingle starttimea=100 duration=100 <= name="Celis" text="Wait! We are here to see Mizoram.";"Do you happen to know where he is?"
+ins timea=100 index=kin kind=stop direction=0
+
+ins timea=30 index=zalzi kind=dist distance=10 direction=2 duration=300
+dialogpacket name=1 starttimea=150 duration=150
+dialog packetname=1 name="Zalzi" text="Oh, yes. I can show you where he lives.";""
+dialog packetname=1 name="Zalzi" text="But first I need to head over to the headquarters";"and give them the loot. It's by the soccer field."
+dialog packetname=1 name="Celis" text="Sound fine by me." first=false
+
+load trigger="Bercanode"
+ins index=0 timea=0 kind=trigger value=0
+load trigger="Olda"
+ins index=1 timea=0 kind=trigger value=1
+load trigger="BercaSoldier 1"
+ins index=2 timea=0 kind=trigger value=1
+load trigger="BercaSoldier 2"
+ins index=3 timea=0 kind=trigger value=1
+
+ins timea=300 index=0 kind=screenzoom zoomin=false zoomtime=2000 usestaticpos=true pos=512;768
+
+ins timea=2000 kind=end

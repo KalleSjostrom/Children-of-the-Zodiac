@@ -1,0 +1,13 @@
+image char/Pensarasoldier
+start 1160 1290
+
+in 2 100 true
+
+dialog 1
+
+n Soldier
+fl Welcome to Pensara!
+sl The capital of the world.
+f true
+
+end

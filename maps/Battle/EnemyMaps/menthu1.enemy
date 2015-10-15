@@ -1,0 +1,106 @@
+name Menthu
+
+defense 416
+magicDefense 416
+agility 26
+evade 4
+hit 100
+attack 1783
+magic 1772
+support 1769
+hp 64610
+element 0
+
+diesound Menthu/dies
+image menthu 7
+armor 50 50
+preferences 100 0
+
+scale 5.3
+height -1.8
+depth -6
+middle 0
+
+attackSpec type=no name=change anim=()--(f=5,d=true) target=-1
+
+attackSpec {
+	type=off
+	name=Attack
+	power=1
+	anim=(f=3,se=Monster/Menthu/attack)--(f=4)
+}
+
+attackSpec {
+	type=off
+	name=Slice
+	power=.8
+	onAll=true
+	anim=(f=3,a=300,se=Monster/Menthu/slice)--(f=4,a=300)--(f=3,a=300)--(f=4,a=300)--(f=3,a=300)--(f=4,a=300)
+}
+
+attackSpec {
+	type=mag
+	name=Secret_Force
+	power=1
+	anim=(f=2,a=2000,c=m+BlackWind:-.36f;.4;-6)
+}
+
+attackSpec {
+	type=mag
+	name=Ultimate_Force
+	power=.8
+	onAll=true
+	anim=(f=2,a=1000,c=m+BlackUltima:-.36f;.4;-6)--(f=2,a=2000,c=m+BlackUltima:-.36f;.4;-6)
+}
+
+attackSpec {
+	type=sup
+	name=Sigma
+	power=0
+	anim=(s=true,se=Monster/Menthu/sigma)--(f=1,s=true)--(s=true)--(f=1,s=true)
+	effect=(Dispel=1)
+}
+
+attackSpec {
+	type=mag
+	name=Death
+	power=0
+	anim=(f=1,se=Monster/Menthu/death)--(f=6,a=100)--(f=1,a=100)--(f=6,a=100)--(f=1,a=100)--(f=6,a=100)--(f=1,a=100)--(f=6,a=100)--(f=1,a=100)--(f=6,a=100)--(f=1,a=100)--(f=6,a=100)--(f=1,a=100)--(f=6,a=100)--(f=1,a=100)
+	effect=(Death=1)
+}
+
+attackSpec {
+	type=sup
+	name=Delta
+	power=0
+	anim=(s=true,se=Monster/Menthu/delta)--(f=1,s=true)--(s=true)--(f=1,s=true)
+	effect=(BoostMagDef=2;1)--(BoostDef=2;1)
+}
+
+attackSpec {
+	type=sup
+	name=Omega
+	power=0
+	anim=(s=true,se=Monster/Menthu/delta)--(f=1,s=true)--(s=true)--(f=1,s=true)
+	effect=(BoostMag=2;1)--(BoostOff=2;1)
+}
+
+run script=menthu1
+
+cardPreference Death 0
+cardPreference openwound 0
+
+dialog name="Menthu" text="I am impressed that you made it this far.";""
+dialog name="Kin" text="Who are you?";""
+dialog name="Celis" text="Menthu...";""
+dialog name="Menthu" text="Indeed.";"You are a greater nuisance to me than expected."
+dialog name="Kin" text="Nuisance!?";"We are the once who are going to put an end to you!"
+dialog name="Menthu" text="Haha!";"Amusing..."
+dialog name="Menthu" text="Mere humans...";""
+dialog name="Menthu" text="Prepare to die!";""
+end=begin
+dialog name="Menthu" text="Not bad...";""
+end=endEnemyDead
+dialog name="Menthu" text="Nothing is left in my path.";"All humans will perish..."
+end=endPartyDead
+nextPlace="Menthuattack";""

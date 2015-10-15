@@ -1,0 +1,44 @@
+title string="Tutorial - Levels";""
+
+var type=vector name=blue value=0,0,.7
+var type=vector name=green value=0,.7,0
+var type=vector name=red value=.7,0,0
+
+newtext
+putMap index=2 vector=blue
+putMap index=3 vector=blue
+putMap index=4 vector=blue
+putMap index=5 vector=blue
+addRow newpage=true text="There are two types of levels.";"" usemap=true
+newMap
+putMap index=1 vector=blue
+putMap index=7 vector=blue
+addRow newpage=false text="- Levels which increases when you gain experience, and";"" usemap=true
+newMap
+putMap index=1 vector=blue
+putMap index=8 vector=blue
+putMap index=9 vector=blue
+addRow newpage=false text="- Classes which you can increase when you visit a";"" usemap=true
+newMap
+putMap index=0 vector=blue
+putMap index=1 vector=blue
+addRow newpage=false text="new church.";"" usemap=true
+
+newMap
+putMap index=4 vector=red
+putMap index=5 vector=red
+addRow newpage=true text="Each class contains a limited amount of levels. When";"" usemap=true
+
+newMap
+putMap index=2 vector=red
+putMap index=3 vector=red
+addRow newpage=false text="reaching the maximum level of certain class, your";"" usemap=true
+
+newMap
+putMap index=2 vector=red
+putMap index=3 vector=red
+addRow newpage=false text="character will not obtain more experience until";"" usemap=true
+addRow newpage=false text="this character's class increases.";"" usemap=true
+put turn=0
+
+

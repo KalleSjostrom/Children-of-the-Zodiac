@@ -1,0 +1,102 @@
+name Shalomil
+
+trigger Elmer=4
+item The_Zodiac_Stone=1
+
+defense 17
+magicDefense 20
+agility 13
+evade 0
+hit 100
+attack 100
+magic 120
+support 92
+hp 1081
+element 2
+gold 0
+experience 0
+criticalChance 0
+
+diesound Salmonman/dies
+image salmonman 6
+armor 10 10
+preferences 100 0
+
+scale 6.5
+height -2.5
+depth -6
+xoffset .5
+middle 0
+
+attackSpec {
+	type=mag
+	name=Chrono
+	element=neutral
+	anim=(f=1,se=Monster/Salmonman/chrono)--(f=5,c=m+1+Slow:.8f;.6;-6,a=2000)
+	onAll=true
+	power=0
+	effect=(BoostSpeed=2;-.25f)
+}
+
+attackSpec {
+	type=off
+	name=Tail_Whip
+	anim=(f=1,se=Monster/Salmonman/tailwhip)--(f=2)--(f=1,h=true)
+	power=1
+}
+
+attackSpec {
+	type=mag
+	name=Ice
+	element=ice
+	anim=(f=1)--(f=3,a=50,c=m+Ice:-1.3;1.45;-7)--(f=3,a=1200,c=m+Ice:0.9;1.6;-7)
+	power=1
+}
+
+attackSpec {
+	type=mag
+	name=Ice_Rain
+	element=ice
+	anim=(f=1)--(f=3)--(f=4,a=50,c=m+Ice:-0.8;0.8;-7)--(f=4,a=1200,c=m+Ice:1;1.25;-7)--(f=3)--(f=4,a=50,c=m+Ice:-0.8;0.8;-7)--(f=4,a=1200,c=m+Ice:1;1.25;-7)--(f=3)--(f=4,a=50,c=m+Ice:-0.8;0.8;-7)--(f=4,a=1200,c=m+Ice:1;1.25;-7)
+	onAll=true
+	power=.8
+}
+
+attackSpec {
+	type=sup
+	name=Heal
+	anim=(c=s+Cure,a=1000)
+	power=2
+}
+
+attackSpec {
+	type=sup
+	name=Last_Resort
+	anim=(c=s+Cure,a=1000)
+	power=1
+}
+
+attackSpec {
+	type=sup
+	name=Scales
+	anim=(a=1000,c=o+CrushingSaber)
+	power=0
+	effect=(BoostDef=2;1)--(BoostMagDef=2;1)
+}
+
+run script=salmonman
+
+cardPreference Death 0
+cardPreference openwound 0
+
+dialog name="Shalomil" text="Prepare to die, puny humans!"
+end=begin
+dialog name="" text="The great demon has fallen!";"Leaving but ashes."
+dialog name="" text="A stone lies glimmering in the remains of what once were."
+dialog name="" text="Celis reaches down and puts her fingers around it,";"clinging to it with a firm grip."
+dialog name="Celis" text="This looks like..." first=0 whisper=1
+dialog name="" text="They turn their back on the remains and";"walk out of the dark cavern."
+end=endEnemyDead
+dialog name="Shalomil" text="No one can defeat me!"
+end=endPartyDead
+nextPlace="landGrivera--First Floor-mark0";""

@@ -1,0 +1,106 @@
+image Merchant_Tori
+start 597 623
+
+in 2 100 true
+
+dialog 1
+
+n Merchant Tori
+fl Hello stranger.
+sl Want to buy this white wolf's tail for 1000 gp?
+f true
+
+q 10
+alt Sure!
+alt Why_would_I_want_a_tail?
+alt _
+alt _
+price 1000 0 0 0
+f true
+
+*11
+n Merchant Tori
+fl Thanks a bunch!
+sl Come back, any time.
+trigger Tori 2
+take gold 100
+f true
+
+*12
+n Merchant Tori
+fl I don't know...
+sl end
+f true
+
+n Merchant Tori
+fl Come back when you change your mind!
+sl end
+f true
+
+*15
+n Merchant Tori
+fl Missing some gold, my friend!
+sl end
+f true
+
+dialog 2
+
+check Tori 3 Old_Doll
+
+n Merchant Tori
+fl When I was a small child I used to collect dolls.
+sl For some reason I really miss that thing.
+f true
+
+n Merchant Tori
+fl I wonder where I can find one of those things. 
+sl end
+f true
+
+dialog 3
+
+n Merchant Tori
+fl A doll!!
+sl Gimme, gimme, gimme!
+f true
+
+q 10
+alt Give_him_the_doll
+alt Keep_it_for_yourself
+alt _
+alt _
+f true
+
+*11
+n Merchant Tori
+fl Thanks a million!
+sl That's like the first doll I've seen in years.
+f true
+
+n Merchant Tori
+fl Please, accept this gift from me.
+sl end
+f true
+
+n _
+fl You got a card!
+sl end
+trigger Tori 4
+gift cards.magic.Earth 2 3 true
+f true
+
+*12
+n Merchant Tori
+fl I would really like one of those old dolls.
+sl You know, for nostalgic reason, of course...
+trigger Tori 2
+f true
+
+dialog 4
+
+n Merchant Tori
+fl I really want some more dolls, that would be nice.
+sl end
+f true
+
+end

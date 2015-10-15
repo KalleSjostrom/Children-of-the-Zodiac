@@ -1,0 +1,39 @@
+import file=main.var
+
+var gerbias=0
+var kin=1
+var celis=2
+var borealis=3
+
+info time="day" name="Zazo" music="Zazo" fadeValue="1" status="1"
+
+ins timea=0 index=gerbias kind=controll controll=true
+
+actor name="Gerbias1"
+actor name="Kin" pos=270;925;0
+actor name="Celis" pos=270;865;0
+actor name="Borealis" pos=270;896;0
+
+ins timea=600 index=borealis kind=dist distance=10 duration=400 direction=0
+
+dialogpacket name=1 starttimea=200 duration=600
+dialog packetname=1 name="Borealis" text="Hey, Gerbias. Do you know where Farl is?";"These two would like to talk to him."
+dialog packetname=1 name="Gerbias" text="He said he was going south to Mt. Cesadur.";"Said something about unlocking..."
+dialog packetname=1 name="Gerbias" text="Don't really know...";"You know how cryptic he can be."
+dialog packetname=1 name="Borealis" text="Hehe. Yeah I do.";"Thank you Gerbias"
+
+ins timea=1000 index=borealis kind=dist distance=20 duration=1000 direction=2
+ins timea=400 index=borealis kind=emotion emotion=... show=true
+ins timea=500 index=kin kind=stop direction=2
+ins timea=200 index=celis kind=stop direction=2
+dialogsingle starttimea=700 <= name="Borealis" text="I wonder..." whisper=true
+ins timea=1000 index=borealis kind=emotion emotion=... show=false
+
+load trigger="road0-18"
+ins index=0 timea=0 kind=trigger value=1
+load trigger="Gerbias1"
+ins index=1 timea=0 kind=trigger value=2
+
+ins timea=0 index=gerbias kind=controll controll=false
+
+ins timea=500 kind=end

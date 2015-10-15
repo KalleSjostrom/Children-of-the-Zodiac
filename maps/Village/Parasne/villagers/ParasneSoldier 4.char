@@ -1,0 +1,88 @@
+image char/Pensarasoldier
+start 705 265
+
+in 2 40 false
+in 1 300 true
+in 0 40 false
+in 1 500 true
+
+dialog 1
+
+n Soldier
+fl I just love looking around here on my spare time.
+sl You'll never know what you'll find.
+f true
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

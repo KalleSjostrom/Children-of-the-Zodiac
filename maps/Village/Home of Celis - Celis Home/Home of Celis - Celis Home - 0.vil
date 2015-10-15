@@ -1,0 +1,33 @@
+# background, prefix name of both images day
+background Home_of_Celis_-_Celis_Home true
+
+inside
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1024 768
+start 495 528 0
+
+holeDoor switch Home_of_Celis 495 566 30 2 1 650 472 2
+
+o 320 404 493 439
+o 324 279 342 297
+o 371 439 428 451
+o 260 278 320 708
+o 533 405 700 438
+o 427 571 437 605
+o 454 439 473 451
+o 675 279 698 342
+o 619 437 697 450
+o 319 438 352 475
+o 534 539 543 603
+o 347 336 461 374
+o 544 436 578 475
+o 296 198 764 278
+o 537 602 702 646
+o 427 440 437 533
+o 450 278 675 302
+o 533 438 543 497
+o 321 602 486 646
+o 696 278 756 708
+
+end

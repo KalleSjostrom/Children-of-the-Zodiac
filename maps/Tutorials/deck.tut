@@ -1,0 +1,78 @@
+title string="Tutorial - Decks";""
+
+var type=vector name=blue value=0,0,.7
+var type=vector name=green value=0,.7,0
+var type=vector name=brightgreen value=0,1,0
+var type=vector name=brightred value=1,0,0
+var type=vector name=red value=.7,0,0
+
+newtext
+
+newMap
+putMap index=8 vector=blue
+addRow newpage=true text="You manage your cards from the menu, under Deck.";"" usemap=true
+
+
+newMap
+putMap index=9 vector=blue
+putMap index=10 vector=blue
+addRow newpage=true text="You collect all the cards you gather in the Party deck.";"" usemap=true
+newMap
+putMap index=6 vector=red
+addRow newpage=false text="The Party deck contains the cards not used in battle.";"" usemap=true
+
+newMap
+putMap index=6 vector=blue
+putMap index=7 vector=blue
+addRow newpage=true text="Your characters each have a personal Character deck";"" usemap=true
+newMap
+putMap index=8 vector=red
+putMap index=9 vector=red
+putMap index=10 vector=red
+addRow newpage=false text="containing the cards they may use in battle.";"" usemap=true
+newMap
+putMap index=1 vector=red
+putMap index=2 vector=red
+putMap index=3 vector=red
+addRow newpage=false text="The number of cards each character's deck can contain";"" usemap=true
+newMap
+putMap index=1 vector=red
+putMap index=4 vector=blue
+putMap index=5 vector=blue
+addRow newpage=false text="is limited. This limit is increased when the character";"" usemap=true
+newMap
+putMap index=2 vector=blue
+putMap index=3 vector=blue
+addRow newpage=false text="gains a class.";"" usemap=true
+
+newMap
+putMap index=2 vector=blue
+putMap index=3 vector=blue
+putMap index=4 vector=blue
+addRow newpage=true text="When you acquire a card, (finding or buying it) it will";"" usemap=true
+newMap
+putMap index=2 vector=blue
+putMap index=3 vector=blue
+putMap index=4 vector=blue
+putMap index=5 vector=blue
+putMap index=6 vector=blue
+addRow newpage=false text="automatically be placed in the Party deck. If you want";"" usemap=true
+newMap
+putMap index=1 vector=blue
+addRow newpage=false text="to use the card in battle, it has to be placed in one";"" usemap=true
+newMap
+putMap index=3 vector=blue
+putMap index=4 vector=blue
+addRow newpage=false text="of your character's Character deck.";"" usemap=true
+
+newMap
+putMap index=4 vector=red
+putMap index=5 vector=red
+putMap index=9 vector=red
+addRow newpage=true text="If the character's deck is full, you have to remove one";"" usemap=true
+addRow newpage=false text="of the cards in the full deck. When you do this the";""
+newMap
+putMap index=0 vector=green
+addRow newpage=false text="card moves back to the Party deck.";""
+
+put turn=0

@@ -1,0 +1,104 @@
+image Merchant_Ollie	   
+start 1250 260	   
+	   
+in 3 100 true	   
+	   
+dialog 1	   
+	   
+n Merchant Ollie	   
+fl Want to buy a card?	   
+sl Special price, only for you, 1000 gold?	   
+f true	   
+	   
+q 10	   
+alt Alrighty!	   
+alt I_don't_think_so...	   
+alt _	   
+alt _	   
+price 1000 0 0 0	   
+f true	   
+	   
+*11	   
+n Merchant Ollie	   
+fl Great!	   
+sl end	   
+trigger Ollie 2	   
+# Take X!!	   
+take gold 1000	   
+f true	   
+	   
+n _	   
+fl You got a card!	   
+sl end	   
+gift cards.magic.Wind 2 3 false	   
+trigger Ollie 2
+f true	   
+	   
+*12	   
+n Merchant Ollie	   
+fl It's a great card.	   
+sl No refund, though.	   
+f true	   
+	   
+*15	   
+n Merchant Ollie	   
+fl You can't buy if you don't have the money!	   
+sl end	   
+f true	   
+	   
+dialog 2	   
+	   
+n Merchant Ollie	   
+fl Nice doin' business with you.	   
+sl end	   
+trigger Ollie 3	   
+f true	   
+	   
+dialog 3	   
+	   
+n Merchant Ollie	   
+fl I can sell you this fur for 5000.	   
+sl What do you say?	   
+	   
+q 10	   
+alt Alrighty!	   
+alt I_don't_think_so...	   
+alt _	   
+alt _	   
+price 5000 0 0 0	   
+f true	   
+	   
+*11	   
+n Merchant Ollie	   
+fl Great!	   
+sl end
+f true
+
+n _
+fl You got the key item "Fur"!
+sl end
+trigger Ollie 4	   
+take gold 5000	   
+gift Fur 1 1
+f true	   
+	   
+*12	   
+n Merchant Ollie	   
+fl It's a nice fur.	   
+sl No refund, though.	   
+f true	   
+	   
+*15	   
+n Merchant Ollie	   
+fl You can't buy if you don't have the money!	   
+sl end	   
+f true	   
+	   
+dialog 4	   
+	   
+n Merchant Ollie	   
+fl Nice doin' business with you.	   
+sl end	   
+f true	   
+	   
+end	 

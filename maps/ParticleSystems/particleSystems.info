@@ -1,0 +1,262 @@
+import file=particles.var
+
+# Home of Celis
+new type=emitterShape name=line1 kind=line pos=650;-280 point=20;0 angle=20
+new type=emitter kind=normal name=smokeEmitter force=0;10;0 timeStep=.025 useshape=line1
+new type=particle kind=smokeparticle name=smoke2 mass=0.01 size=3.5 color=.3;.3;.3 settings=[max=.7-.4]
+new type=system particle=smoke2 name=smokesystem warmUp=300 nrParticles=100 emitter=smokeEmitter texture=particle.png additive=true
+
+# Fire with black smoke
+new type=emitterShape name=line2 kind=line pos=660;-500 point=10;0 angle=10
+new type=emitter kind=masterSlave name=fireEmitter force=0;15;0 timeStep=.06 useshape=line2 slave=firesmokesystem
+
+new type=particle kind=fireparticle name=fireParticle mass=0.01 size=1.3 color=1;.1;.03
+new type=system particle=fireParticle name=firesystem warmUp=300 nrParticles=50 emitter=fireEmitter texture=particle.png additive=true
+new type=particle kind=smokeparticle name=smokeParticle mass=0.01 size=1.5 color=.3;.3;.3 settings=[max=.3]
+new type=system particle=smokeParticle name=firesmokesystem nrParticles=100 emitter=fireEmitter texture=particle.png additive=false
+
+# Fire with black smoke
+new type=emitterShape name=passLine kind=line pos=650;-500 point=25;0 angle=20
+new type=emitter kind=normal name=smokeEmitterPass force=0;10;0 timeStep=.025 useshape=passLine
+new type=particle kind=smokeparticle name=smokePass mass=0.01 size=1.5 color=.3;.3;.3 settings=[max=.15]
+new type=system particle=smokePass name=smokesystemPass warmUp=300 nrParticles=100 emitter=smokeEmitterPass texture=particle.png additive=false
+
+new type=emitterShape name=firePassLine kind=line pos=650;-500 point=10;0 angle=10
+new type=emitter kind=normal name=fireEmitterPass force=0;15;0 timeStep=.03 useshape=firePassLine
+new type=particle kind=fireparticle name=fireParticlePass mass=0.01 size=1.3 color=1;.1;.03
+new type=system particle=fireParticlePass name=firesystemPass warmUp=300 nrParticles=500 emitter=fireEmitterPass texture=particle.png additive=true
+
+# Snow in dellna
+new type=emitterShape name=line3 kind=line pos=-100;0 point=1827;0 angle=0
+new type=emitterShape name=box1 kind=box pos=-100;0 point:0=1827;0 point:1=0;-1262;0
+new type=emitter kind=normal name=snowEmitter force=1;-10;0 timeStep=.018-.018 useshape=line3
+new type=particle kind=snowparticle name=snow mass=0.01-0.05 size=1.2-0.8 color=.6;.6;.6 settings=[height=1262]
+new type=system particle=snow name=snowsystem warmUpShape=box1 nrParticles=6000 emitter=snowEmitter emitterShape=line1 texture=particle4.png additive=true
+
+# Rain in Alares
+new type=emitterShape name=rainAlaresLine kind=line pos=-100;0 point=2053;0 angle=0
+new type=emitterShape name=rainBoxAlares kind=box pos=-100;0 point:0=2053;0 point:1=0;-1877;0
+new type=emitter kind=normal name=rainEmitter force=1;-150;0 timeStep=.001-.001 useshape=rainAlaresLine
+new type=particle kind=rainparticle name=rain mass=0.01-0.02 size=0.6-0.2 color=.2;.2;.8 settings=[height=1877]
+new type=system particle=rain name=rainsystem warmUpShape=rainBoxAlares nrParticles=6000 emitter=rainEmitter emitterShape=rainAlaresLine texture=particle7.png additive=true
+
+# Rain in Celis house
+new type=emitterShape name=rainCelisLine kind=line pos=-100;20 point=1124;0 angle=0
+new type=emitter kind=normal name=rainCelisEmitter force=30;-300;0 timeStep=.003-.003 useshape=rainCelisLine
+new type=particle kind=rainparticle name=rainCelis mass=0.01-0.02 size=0.6-0.2 color=.4;.4;.6 settings=[height=768]
+new type=system particle=rainCelis name=rainCelissystem warmUp=300 nrParticles=2000 emitter=rainCelisEmitter emitterShape=rainCelisLine texture=particle7.png additive=true
+
+# Sand in Berca
+new type=emitterShape name=sandBox kind=box pos=0;0 point:0=2336;0 point:1=0;-1197;0
+new type=emitter kind=normal name=sandEmitter force=1;-10;0 timeStep=.018-.018 useshape=sandBox
+new type=particle kind=sandparticle name=sand mass=0.01-0.05 size=1.2-0.8 color=.7;.7;0 settings=[size=2336;1197]
+new type=system particle=sand name=sandsystem warmUpShape=box1 nrParticles=1000 emitter=snowEmitter emitterShape=line1 texture=particle4.png additive=true
+
+# Weaponshop in Dellna
+new type=emitterShape name=dellnaWeaponLine kind=line pos=656;-988 point=20;0 angle=20
+new type=emitter kind=normal name=smokeEmitterWeaponDellna force=0;10;0 timeStep=.025 useshape=dellnaWeaponLine
+new type=particle kind=smokeparticle name=smokeDellna mass=0.01 size=1.5 color=.3;.3;.3 settings=[max=.15]
+new type=system particle=smokeDellna name=smokesystemWeaponDellna warmUp=300 nrParticles=100 emitter=smokeEmitterWeaponDellna texture=particle.png additive=false
+
+new type=emitterShape name=dellnaInnLine kind=line pos=184;-958 point=20;0 angle=20
+new type=emitter kind=normal name=smokeEmitterInnDellna force=0;10;0 timeStep=.025 useshape=dellnaInnLine
+new type=system particle=smokeDellna name=smokesystemInnDellna warmUp=300 nrParticles=100 emitter=smokeEmitterInnDellna texture=particle.png additive=false
+
+new type=emitterShape name=dellnaBigLine kind=line pos=66;-604 point=20;0 angle=20
+new type=emitter kind=normal name=smokeEmitterBigDellna force=0;10;0 timeStep=.025 useshape=dellnaBigLine
+new type=system particle=smokeDellna name=smokesystemBigDellna warmUp=300 nrParticles=100 emitter=smokeEmitterBigDellna texture=particle.png additive=false
+
+new type=emitterShape name=dellnaAnaLine kind=line pos=1240;-376 point=20;0 angle=20
+new type=emitter kind=normal name=smokeEmitterAnaDellna force=0;10;0 timeStep=.025 useshape=dellnaAnaLine
+new type=system particle=smokeDellna name=smokesystemAnaDellna warmUp=300 nrParticles=100 emitter=smokeEmitterAnaDellna texture=particle.png additive=false
+
+# Weaponshop in Alares
+new type=emitterShape name=alaresLine kind=line pos=1158;-1359 point=20;0 angle=20
+new type=emitter kind=normal name=smokeEmitterAlares force=0;10;0 timeStep=.025 useshape=alaresLine
+new type=system particle=smokeDellna name=smokesystemAlares warmUp=300 nrParticles=100 emitter=smokeEmitterAlares texture=particle.png additive=false
+
+# Baracks in Zazo
+new type=emitterShape name=barackZazoLine kind=line pos=245;-209 point=20;0 angle=20
+new type=emitter kind=normal name=smokeEmitterBarackZazo force=0;10;0 timeStep=.025 useshape=barackZazoLine
+new type=system particle=smokeDellna name=smokesystemBarackZazo warmUp=300 nrParticles=100 emitter=smokeEmitterBarackZazo texture=particle.png additive=false
+
+# Inn in Zazo
+new type=emitterShape name=innZazoLine kind=line pos=1224;-80 point=20;0 angle=20
+new type=emitter kind=normal name=smokeEmitterInnZazo force=0;10;0 timeStep=.025 useshape=innZazoLine
+new type=system particle=smoke2 name=smokesystemInnZazo warmUp=300 nrParticles=100 emitter=smokeEmitterInnZazo texture=particle.png additive=true
+
+# Mayor in Zazo
+new type=emitterShape name=mayorZazoLine kind=line pos=1624;-227 point=20;0 angle=20
+new type=emitter kind=normal name=smokeEmittermayorZazo force=0;10;0 timeStep=.025 useshape=mayorZazoLine
+new type=system particle=smokeDellna name=smokesystemmayorZazo warmUp=300 nrParticles=100 emitter=smokeEmittermayorZazo texture=particle.png additive=false
+
+# School
+new type=emitterShape name=schoolLine kind=line pos=736;-1908 point=20;0 angle=20
+new type=emitter kind=normal name=smokeEmitterSchool force=0;10;0 timeStep=.025 useshape=schoolLine
+new type=system particle=smoke2 name=smokesystemSchool warmUp=300 nrParticles=100 emitter=smokeEmitterSchool texture=particle.png additive=true
+
+# North district - hut
+new type=emitterShape name=hutLine kind=line pos=1845;-393 point=20;0 angle=20
+new type=emitter kind=normal name=smokeEmitterHut force=0;10;0 timeStep=.025 useshape=hutLine
+new type=system particle=smoke2 name=smokesystemHut warmUp=300 nrParticles=100 emitter=smokeEmitterHut texture=particle.png additive=true
+
+# North district - armory
+new type=emitterShape name=armoryLine kind=line pos=1651;-741 point=2;0 angle=15
+new type=emitter kind=normal name=smokeEmitterArmory force=0;10;0 timeStep=.025 useshape=armoryLine
+new type=particle kind=smokeparticle name=smokeNorth mass=0.01 size=1.5 color=.3;.3;.3 settings=[max=.3]
+new type=system particle=smokeNorth name=smokesystemArmory warmUp=300 nrParticles=100 emitter=smokeEmitterArmory texture=particle.png additive=false
+
+
+# Crystal
+new type=emitterShape name=greenFireLine kind=line pos=430;-230 point=10;0 angle=10
+new type=emitter kind=normal name=greenFireEmitter force=0;15;0 timeStep=.013 useshape=greenFireLine
+new type=particle kind=fireparticle name=greenFireParticle mass=0.01 size=1.5 color=.2;1;.2
+new type=system particle=greenFireParticle name=greenFire warmUp=300 nrParticles=300 emitter=greenFireEmitter texture=particle.png additive=true
+
+new type=emitterShape name=redFireLine kind=line pos=585;-345 point=10;0 angle=10
+new type=emitter kind=normal name=redFireEmitter force=0;15;0 timeStep=.013 useshape=redFireLine
+new type=particle kind=fireparticle name=redFireParticle mass=0.01 size=1.5 color=1;.2;.1
+new type=system particle=redFireParticle name=redFire warmUp=300 nrParticles=300 emitter=redFireEmitter texture=particle.png additive=true
+
+new type=emitterShape name=brownFireLine kind=line pos=430;-345 point=10;0 angle=10
+new type=emitter kind=normal name=brownFireEmitter force=0;15;0 timeStep=.013 useshape=brownFireLine
+new type=particle kind=fireparticle name=brownFireParticle mass=0.01 size=1.5 color=.5;.25;.1
+new type=system particle=brownFireParticle name=brownFire warmUp=300 nrParticles=300 emitter=brownFireEmitter texture=particle.png additive=true
+
+new type=emitterShape name=blueFireLine kind=line pos=585;-230 point=10;0 angle=10
+new type=emitter kind=normal name=blueFireEmitter force=0;15;0 timeStep=.013 useshape=blueFireLine
+new type=particle kind=fireparticle name=blueFireParticle mass=0.01 size=1.5 color=.2;.2;1
+new type=system particle=blueFireParticle name=blueFire warmUp=300 nrParticles=300 emitter=blueFireEmitter texture=particle.png additive=true
+
+# Home of the Gods
+new type=emitterShape name=box2 kind=box pos=0;0 point:0=1024;0 point:1=0;-768;0
+new type=emitter kind=normal name=starEmitter force=0;0;0 timeStep=0 useshape=box2
+new type=particle kind=starparticle name=star mass=0.01-0.05 size=1-0.4 settings=[height=768]
+new type=system particle=star name=starsystem warmUpShape=box2 nrParticles=50 emitter=starEmitter emitterShape=line4 texture=stars2.png additive=true
+new type=system particle=star name=starsystem2 warmUpShape=box2 nrParticles=50 emitter=starEmitter emitterShape=line4 texture=stars3.png additive=true
+new type=system particle=star name=starsystem3 warmUpShape=box2 nrParticles=50 emitter=starEmitter emitterShape=line4 texture=stars4.png additive=true
+new type=system particle=star name=starsystem4 warmUpShape=box2 nrParticles=50 emitter=starEmitter emitterShape=line4 texture=stars5.png additive=true
+
+new type=emitterShape name=godgreenFireLine kind=line pos=1132;-480 point=15;0 angle=15
+new type=emitter kind=normal name=godgreenFireEmitter force=0;15;0 timeStep=.013 useshape=godgreenFireLine
+new type=particle kind=fireparticle name=godgreenFireParticle mass=0.01 size=1.5 color=.2;1;.2
+new type=system particle=godgreenFireParticle name=godgreenFire warmUp=300 nrParticles=300 emitter=godgreenFireEmitter texture=particle.png additive=true
+
+new type=emitterShape name=godredFireLine kind=line pos=940;-385 point=15;0 angle=15
+new type=emitter kind=normal name=godredFireEmitter force=0;15;0 timeStep=.013 useshape=godredFireLine
+new type=particle kind=fireparticle name=godredFireParticle mass=0.01 size=1.5 color=1;.2;.1
+new type=system particle=godredFireParticle name=godredFire warmUp=300 nrParticles=300 emitter=godredFireEmitter texture=particle.png additive=true
+
+new type=emitterShape name=godbrownFireLine kind=line pos=617;-480 point=15;0 angle=15
+new type=emitter kind=normal name=godbrownFireEmitter force=0;15;0 timeStep=.013 useshape=godbrownFireLine
+new type=particle kind=fireparticle name=godbrownFireParticle mass=0.01 size=1.5 color=.5;.25;.15
+new type=system particle=godbrownFireParticle name=godbrownFire warmUp=300 nrParticles=300 emitter=godbrownFireEmitter texture=particle.png additive=true
+
+new type=emitterShape name=godblueFireLine kind=line pos=811;-385 point=15;0 angle=15
+new type=emitter kind=normal name=godblueFireEmitter force=0;15;0 timeStep=.013 useshape=godblueFireLine
+new type=particle kind=fireparticle name=godblueFireParticle mass=0.01 size=1.5 color=.2;.2;1
+new type=system particle=godblueFireParticle name=godblueFire warmUp=300 nrParticles=300 emitter=godblueFireEmitter texture=particle.png additive=true
+
+1760 1468
+new type=emitterShape name=blueCircle kind=circle pos=880;-840 point=400;400
+new type=emitter kind=normal name=circleblueFireEmitter force=0;15;0 timeStep=.0005 useshape=blueCircle
+new type=system particle=godblueFireParticle name=circleblueFire warmUp=300 nrParticles=10000 emitter=circleblueFireEmitter texture=particle.png additive=true
+
+
+
+new type=emitterShape name=menthuCircle kind=circle pos=494;-380 point=60;60
+new type=emitter kind=normal name=menthuCircleFireEmitter force=0;10;0 timeStep=.001 useshape=menthuCircle
+new type=particle kind=fireparticle name=menthuBlueFireParticle mass=0.01 size=2 color=.2;.2;1 fade=100;0.01;1
+new type=system particle=menthuBlueFireParticle name=menthucirclesystem nrParticles=2000 emitter=menthuCircleFireEmitter texture=particle.png additive=true
+
+new type=emitterShape name=menthuSign kind=image pos=194;-380 image=staff
+new type=emitter kind=normal name=menthuSignFireEmitter force=0;3;0 timeStep=.0028 useshape=menthuSign
+new type=particle kind=fireparticle name=menthuFireParticle mass=0.01 size=2 color=.5;.25;.15 fade=100;0.01;1
+new type=system particle=menthuFireParticle name=menthusignsystem nrParticles=3000 emitter=menthuSignFireEmitter texture=particle.png additive=true
+
+new type=emitterShape name=menthuThrone kind=image pos=494;-380 image=throne
+new type=emitter kind=normal name=menthuThroneFireEmitter force=0;3;0 timeStep=.0028 useshape=menthuThrone
+new type=particle kind=fireparticle name=menthuFireParticle2 mass=0.01 size=1 color=.5;.25;.15 fade=100;0.01;1
+new type=system particle=menthuFireParticle2 name=menthuthronesystem nrParticles=1000 emitter=menthuThroneFireEmitter texture=particle.png additive=true
+
+new type=emitterShape name=menthuSignFlip kind=image pos=194;-380 image=staff flipX=true
+new type=emitter kind=normal name=menthuSignFireEmitterFlip force=0;2;0 timeStep=.0028 useshape=menthuSignFlip
+new type=system particle=menthuFireParticle name=menthusignflipsystem nrParticles=3000 emitter=menthuSignFireEmitterFlip texture=particle.png additive=true
+
+new type=emitterShape name=ophiuchus kind=image pos=194;-380 image=ophiuchus
+new type=emitter kind=normal name=ophiuchusFireEmitter force=0;5;0 timeStep=.001 useshape=ophiuchus
+new type=system particle=godbrownFireParticle name=ophiuchussystem nrParticles=3000 emitter=ophiuchusFireEmitter texture=particle.png additive=true
+
+new type=emitterShape name=menthuLine kind=line pos=811;-385 point=10;0 angle=15
+new type=emitter kind=normal name=menthuEmitter force=0;15;0 timeStep=.013 useshape=menthuLine
+new type=system particle=godblueFireParticle name=menthufiresystem nrParticles=500 emitter=menthuEmitter texture=particle.png additive=true
+
+new type=emitterShape name=menthuFlame kind=image pos=194;-380 image=stroke1
+new type=emitter kind=normal name=menthuFlameEmitter force=0;3;0 timeStep=.0028 useshape=menthuFlame
+new type=particle kind=fireparticle name=menthuFlameParticle mass=0.01 size=.5 color=.5;.25;.15 fade=100;0.01;1
+new type=system particle=menthuFlameParticle name=menthuflamesystem nrParticles=1000 emitter=menthuFlameEmitter texture=particle.png additive=true
+
+
+
+# Gods
+new type=particle kind=fireparticle name=godWaterParticle mass=0.01 size=2 color=.2;.2;1 fade=100;0.01;1
+new type=particle kind=fireparticle name=godFireParticle mass=0.01 size=2 color=1;.2;.1 fade=100;0.01;1
+new type=particle kind=fireparticle name=godEarthParticle mass=0.01 size=2 color=.5;.25;.15 fade=100;0.01;1
+new type=particle kind=fireparticle name=godWindParticle mass=0.01 size=2 color=.25;.6;.15 fade=100;0.01;1
+
+new type=emitterShape name=godCapricornImage kind=image pos=672;-1160 image=capricorn scaleX=4.04 scaleY=4.27
+new type=emitter kind=normal name=godCapricornImageEmitter force=0;3;0 timeStep=.0028 useshape=godCapricornImage
+new type=system particle=godEarthParticle name=godCapricornSystem nrParticles=3000 emitter=godCapricornImageEmitter texture=particle.png additive=true
+
+new type=emitterShape name=godAquariusImage kind=image pos=444;-1046 image=aquarius scaleX=4.04 scaleY=4.27
+new type=emitter kind=normal name=godAquariusImageEmitter force=0;3;0 timeStep=.0028 useshape=godAquariusImage
+new type=system particle=godWindParticle name=godAquariusSystem nrParticles=3000 emitter=godAquariusImageEmitter texture=particle.png additive=true
+
+new type=emitterShape name=godPiscesImage kind=image pos=338;-802 image=pisces scaleX=4.04 scaleY=4.27
+new type=emitter kind=normal name=godPiscesImageEmitter force=0;3;0 timeStep=.0028 useshape=godPiscesImage
+new type=system particle=godWaterParticle name=godPiscesSystem nrParticles=3000 emitter=godPiscesImageEmitter texture=particle.png additive=true
+
+new type=emitterShape name=godAriesImage kind=image pos=332;-552 image=aries scaleX=4.04 scaleY=4.27
+new type=emitter kind=normal name=godAriesImageEmitter force=0;3;0 timeStep=.0028 useshape=godAriesImage
+new type=system particle=godFireParticle name=godAriesSystem nrParticles=3000 emitter=godAriesImageEmitter texture=particle.png additive=true
+
+new type=emitterShape name=godTaurusImage kind=image pos=438;-328 image=taurus scaleX=4.04 scaleY=4.27
+new type=emitter kind=normal name=godTaurusImageEmitter force=0;3;0 timeStep=.0028 useshape=godTaurusImage
+new type=system particle=godEarthParticle name=godTaurusSystem nrParticles=3000 emitter=godTaurusImageEmitter texture=particle.png additive=true
+
+new type=emitterShape name=godGeminiImage kind=image pos=664;-252 image=gemini scaleX=4.04 scaleY=4.27
+new type=emitter kind=normal name=godGeminiImageEmitter force=0;3;0 timeStep=.0028 useshape=godGeminiImage
+new type=system particle=godWindParticle name=godGeminiSystem nrParticles=3000 emitter=godGeminiImageEmitter texture=particle.png additive=true
+
+new type=emitterShape name=godCancerImage kind=image pos=896;-252 image=cancer scaleX=4.04 scaleY=4.27
+new type=emitter kind=normal name=godCancerImageEmitter force=0;3;0 timeStep=.0028 useshape=godCancerImage
+new type=system particle=godWaterParticle name=godCancerSystem nrParticles=3000 emitter=godCancerImageEmitter texture=particle.png additive=true
+
+new type=emitterShape name=godLeoImage kind=image pos=1116;-328 image=leo scaleX=4.04 scaleY=4.27
+new type=emitter kind=normal name=godLeoImageEmitter force=0;3;0 timeStep=.0028 useshape=godLeoImage
+new type=system particle=godFireParticle name=godLeoSystem nrParticles=3000 emitter=godLeoImageEmitter texture=particle.png additive=true
+
+new type=emitterShape name=godVirgoImage kind=image pos=1224;-552 image=virgo scaleX=4.04 scaleY=4.27
+new type=emitter kind=normal name=godVirgoImageEmitter force=0;3;0 timeStep=.0028 useshape=godVirgoImage
+new type=system particle=godEarthParticle name=godVirgoSystem nrParticles=3000 emitter=godVirgoImageEmitter texture=particle.png additive=true
+
+new type=emitterShape name=godLibraImage kind=image pos=1230;-802 image=libra scaleX=4.04 scaleY=4.27
+new type=emitter kind=normal name=godLibraImageEmitter force=0;3;0 timeStep=.0028 useshape=godLibraImage
+new type=system particle=godWindParticle name=godLibraSystem nrParticles=3000 emitter=godLibraImageEmitter texture=particle.png additive=true
+
+new type=emitterShape name=godScorpiusImage kind=image pos=1120;-1042 image=scorpius scaleX=4.04 scaleY=4.27
+new type=emitter kind=normal name=godScorpiusImageEmitter force=0;3;0 timeStep=.0028 useshape=godScorpiusImage
+new type=system particle=godWaterParticle name=godScorpiusSystem nrParticles=3000 emitter=godScorpiusImageEmitter texture=particle.png additive=true
+
+new type=emitterShape name=godSagittariusImage kind=image pos=898;-1162 image=sagittarius scaleX=4.04 scaleY=4.7
+new type=emitter kind=normal name=godSagittariusImageEmitter force=0;3;0 timeStep=.0028 useshape=godSagittariusImage
+new type=system particle=godFireParticle name=godSagittariusSystem nrParticles=3000 emitter=godSagittariusImageEmitter texture=particle.png additive=true
+
+new type=emitterShape name=godDoorLine kind=line pos=860;-497 point=40;0 angle=0
+new type=emitter kind=normal name=godDoorEmitter force=0;5;0 timeStep=.03 useshape=godDoorLine
+new type=particle kind=rainbowparticle name=godRainbowParticle mass=0.01 size=1 fade=1000;0.001;2000
+new type=system particle=godRainbowParticle name=godDoorEntrySystem nrParticles=400 warmUp=300 emitter=godDoorEmitter texture=particle.png additive=true background=blackness.png;858;444
+
+new type=emitterShape name=godDoorExitLine kind=line pos=860;-689 point=40;0 angle=0
+new type=emitter kind=normal name=godDoorExitEmitter force=0;5;0 timeStep=.03 useshape=godDoorExitLine
+new type=system particle=godRainbowParticle name=godDoorExitSystem nrParticles=400 warmUp=300 emitter=godDoorExitEmitter texture=particle.png additive=true background=blackness.png;858;636

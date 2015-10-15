@@ -1,0 +1,59 @@
+image Hilda
+
+start 1870 1170
+
+in 3 250 true
+
+dialog 4
+
+check Hilda1 5 Sea_Stone
+
+n Hilda
+fl I'm one of the refugees from Zazo and I collect 
+sl sea stones to ease my mind. 
+f true
+
+dialog 5
+
+n Hilda
+fl Ohh... you have a sea stone. If you give 
+sl it to me I'll give you something good.
+f true
+
+q 10
+alt Give_away_the_sea_stone
+alt Refuse
+alt _
+alt _
+f true
+
+*11
+
+n Hilda
+fl Ah... Thank you...
+sl Here you go as promised.
+f true
+
+n _
+fl You got a card!
+sl You gave away the key item "Sea Stone".
+trigger Hilda1 6
+take Sea_Stone
+gift cards.support.Resurrect 2 2 true
+f true
+
+*12
+
+n Hilda
+fl Meh... are you sure...
+sl Pretty please.
+f true
+
+dialog 6
+
+n Hilda
+fl It's you again!
+sl Do you have any more sea stones?
+f true
+
+end

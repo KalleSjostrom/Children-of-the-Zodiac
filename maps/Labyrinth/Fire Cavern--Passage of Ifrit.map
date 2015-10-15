@@ -1,0 +1,66 @@
+mapSize -0.5 0.5 1
+
+size 322
+
+mission FireMission treasureMission trigger="Crossroadnode";"2" dialog="Zalzi";"That's both of them!&&Let's head out!"
+
+light0 position=0;0;0;1 ambient=.8;.8;.8;1 specular=0;0;0;1 diffuse=.8;.8;.8;1 attenuation=1;0.02;0.03
+material ambient=.4;.4;.4;1 specular=0;0;0;1 diffuse=.7;.7;.7;1 shininess=10 emission=.20;.10;.03;1
+
+floorTex firecavefloor.jpg
+wallTex firecavewall.png
+wallTex firecavedoor.png
+roofTex firecaveroof.jpg
+
+normal floor 0 1
+normal wall 1 3
+normal roof 3 4
+
+mapPos 1 0
+
+# directions in labyrinth
+dir 3 1 19
+dir 19 1 35
+dir 35 1 51
+dir 51 1 67
+dir 67 1 83
+dir 73 1 89
+dir 83 2 84
+dir 84 1 100
+dir 84 2 85
+dir 85 2 86
+dir 86 1 102
+dir 89 1 105
+dir 100 1 116
+dir 102 1 118
+dir 105 1 121
+dir 116 1 132
+dir 118 2 119
+dir 119 2 120
+dir 120 2 121
+dir 121 1 137
+dir 132 1 148
+dir 137 2 138
+dir 138 2 139
+dir 139 2 140
+dir 140 1 156
+dir 148 2 149
+dir 149 2 150
+dir 150 1 166
+dir 156 1 172
+dir 166 1 182
+dir 172 1 188
+dir 188 2 189
+dir 189 2 190
+dir 190 2 191
+dir 191 1 207
+
+mapEnd
+
+wall 2 3 3
+wall 2 207 1
+inv ifDoor 3 3 dontopen treasureMission==2 Meanwhile_-_Teo_is_Plotting_With_Vincent fire_cavern--blazing_maze-mark1
+inv ifDoor 207 1 dontopen treasureMission==2 Meanwhile_-_Teo_is_Plotting_With_Vincent fire_cavern--hall_of_the_damned-mark0
+
+inv chest 73 3 1 Images/volcano.png 2 cards.magic.Ice 2 false
+inv missionChest 182 1 2 Images/chest Zalzi="Ahh! Finally Here!";"" Kin="What are you waiting for?";"Just open it, already!" Zalzi="Ok, ok!";"" gift="a Neclace";"" Celis="Oh, it's beautiful!";"" Kin="Yes yes! Beautiful...";"We better head on.";""

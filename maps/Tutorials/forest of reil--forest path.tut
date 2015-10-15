@@ -1,0 +1,35 @@
+title string="Tutorial - Battle";""
+
+var type=vector name=gray value=.7,.7,.7
+var type=vector name=green value=0,.7,0
+var type=vector name=blue value=0,0,.7
+var type=vector name=darkgreen value=0,.6,0
+var type=vector name=purple value=.5,0,.5
+
+newtext
+addRow newpage=true text="The battles are turn-based.";""
+
+newMap
+putMap index=1 vector=blue
+putMap index=5 vector=blue
+putMap index=6 vector=blue
+addRow newpage=true text="You attack your enemy by choosing cards from your";"" usemap=true
+
+newMap
+putMap index=5 vector=blue
+addRow newpage=false text="character's deck. Each time you choose a card, it will";"" usemap=true
+
+newMap
+putMap index=6 vector=blue
+putMap index=7 vector=blue
+addRow newpage=false text="be placed on one of your weapon's slots.";"" usemap=true
+
+newMap
+putMap vector=blue
+addRow newpage=false text="Choose card:";"" usemap=true button=cross iconxoffset=245 iconyoffset=-23
+addRow newpage=false text="Attack with chosen cards:";"" usemap=true button=triangle iconxoffset=245 iconyoffset=-23
+put turn=0
+
+newtext
+addRow newpage=true text="Different equipment contains different sets of slots.";""
+put turn=1

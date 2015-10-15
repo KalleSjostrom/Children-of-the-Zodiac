@@ -1,0 +1,28 @@
+name Blob
+
+defense 20
+magicDefense 17
+agility 8
+evade 0
+hit 90
+attack 70
+magic 70
+support 40
+hp 160
+element 0
+gold 48
+experience 32
+criticalChance 0
+
+diesound Blob/dies
+image blob 3
+armor 1 1
+preferences 50 50
+
+scale 4.5
+height -2
+depth -6
+middle -1
+
+attackSpec anim=(a=200)--(f=1,a=290)--(f=2,h=true,se=Monster/Blob/attack)
+attackSpec type=mag name=Buring_Goo element=fire anim=(a=200)--(f=1,a=290)--(a=1000,f=2,h=true,c=m+Fire:-.22f;.02;-6)

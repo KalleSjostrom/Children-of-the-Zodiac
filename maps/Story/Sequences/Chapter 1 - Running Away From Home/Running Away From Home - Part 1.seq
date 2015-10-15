@@ -1,0 +1,21 @@
+import file=main.var
+
+var celis=0
+
+info time="night" name="Home of Celis" music="Home of Celis" fadeValue="0" musicVolume="0"
+
+actor name="Characters/Celis/CelisExtras"
+load music="Celis' Theme"
+
+show index=celis value=false
+
+dialogpacket name=0 starttimea=4000 duration=500
+dialog packetname=0 name="Celis' Father" text="It's just a dream, Celis.";"It doesn't mean anything."
+dialog packetname=0 name="Celis" text="I hate you!";"" first=false
+
+ins timea=1000 index=celis fadetime=0 kind=show movepos=648;466
+
+ins timea=0 index=celis kind=dist distance=20 duration=140 direction=2
+ins timea=0 index=celis kind=queue distance=400 duration=2800 direction=3
+
+ins type=fadeout timea=3300 index=0 fadetime=0 kind=endseq

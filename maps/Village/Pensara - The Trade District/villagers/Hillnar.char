@@ -1,0 +1,27 @@
+image Hillnar
+start 1800 800
+
+in 0 30 false
+in 2 100 true
+in 1 60 false
+in 2 120 false
+in 3 205 false
+in 0 100 true
+in 1 255 false
+in 0 110 false
+in 2 100 true
+in 2 20 false
+in 3 110 false
+
+dialog 1
+
+n Hillnar
+fl Have I met you before?
+sl You do look familiar.
+f true
+
+end
+
+
+
+

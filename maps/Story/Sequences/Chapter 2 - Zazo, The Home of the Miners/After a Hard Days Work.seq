@@ -1,0 +1,63 @@
+import file=main.var
+
+var zalzi=0
+var man1=1
+var man2=2
+
+actor name="Characters/Zalzi/ZalziExtras" pos=1000;1290
+actor name="Characters/Man1/Man1Extras" pos=978;1508
+actor name="Characters/Man2/Man2Extras" pos=1026;1515
+
+info time="night" name="Parasne" music="No Music" fadeValue="0" musicVolume="0"
+
+pos name="Background" pos=1030;500
+ins kind=screen_center center=false
+
+text lines="Meanwhile on distant shores.";"" pos=330;384
+ins type=fadeout timea=0 index=0 fadetime=0 kind=village
+ins type=fadein timea=0 index=0 fadetime=2000 kind=text
+ins type=fadeout timea=meantime index=0 fadetime=2000 kind=text
+ins type=fadein timea=2000 index=0 fadetime=2000 kind=village
+
+ins timea=0 index=zalzi kind=dist distance=165 duration=5000 direction=2
+
+ins timea=0 index=man2 kind=stop direction=3
+ins timea=0 index=man1 kind=stop direction=1
+
+ins timea=4200 index=man1 kind=stop direction=0 
+ins timea=450 index=man1 kind=tor movepos=15;-20 duration=1500 
+
+ins timea=500 index=man2 kind=stop direction=0 
+dialogsingle starttimea=900 duration=100 <= name="Man" text="Hey, Zalzi. How did your day go?"
+dialogsingle starttimea=1500 duration=500 <= name="Zalzi" text="Not good, not good at all...";"You?"
+dialogsingle starttimea=1500 <= name="Man" text="Same here,";"seems that people are carrying less money than usual."
+
+ins timea=250 index=zalzi kind=dist distance=75 direction=1 duration=3000 
+dialogsingle starttimea=1500 duration=1350 <= name="Zalzi" text="Yeah, tell me about it."
+ins timea=1000 index=man1 kind=dist distance=10 direction=0 duration=500 
+ins timea=0 index=man1 kind=queue direction=1
+
+ins timea=4000 index=man2 kind=dist distance=10 direction=0 duration=2000 
+dialogsingle starttimea=1000 duration=1000 <= name="Man 2" text="I went to the Fire Cavern again.";"All the easy money there is taken."
+
+ins timea=2000 index=man2 kind=stop direction=1
+dialogsingle starttimea=3000 <= name="Man 2" text="We must aim for the deeper areas soon,";"but none of us are strong enough."
+
+ins timea=1000 index=zalzi kind=stop direction=3
+dialogsingle starttimea=250 <= name="Zalzi" text="Maybe we could spend some money and hire some help."
+
+ins timea=500 index=zalzi kind=dist distance=30 direction=3 duration=1500 
+dialogsingle starttimea=500 duration=500 <= name="Zalzi" text="The reward should be more";"than the salary for the mercenaries."
+ins timea=200 index=man2 kind=stop direction=0
+
+ins timea=600 index=man1 kind=tor movepos=10;-9 duration=1000 
+dialogsingle starttimea=250 duration=750 <= name="Man" text="No, that's too risky.";"We have to pay them even if we find nothing."
+
+ins timea=800 index=man2 kind=dist distance=10 direction=0 duration=1000
+dialogsingle starttimea=1500 duration=500 <= name="Man 2" text="We can't even be sure that there";"is a lot of money deeper inside."
+ins timea=300 index=zalzi kind=stop direction=2
+
+ins timea=2000 index=zalzi kind=dist distance=30 direction=1 duration=3000
+dialogsingle starttimea=1500 duration=1500 <= name="Zalzi" text="Maybe you're right..."
+
+ins timea=4000 kind=end

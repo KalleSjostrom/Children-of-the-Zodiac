@@ -1,0 +1,30 @@
+image Mollie
+start 60 190
+
+in 2 150 false
+in 1 10 true
+in 0 10 true
+in 3 10 true
+in 2 10 true
+in 0 150 false
+in 1 10 true
+in 0 10 true
+in 3 10 true
+in 2 10 true
+
+dialog 1
+
+# Playing top left corner
+n Mollie
+fl Have you met my mother Sarah.
+sl end
+f true
+
+dialog 2
+
+n Mollie
+fl When I grow up I wanna be like her,
+sl she's such a wonderful person.
+f true
+
+end

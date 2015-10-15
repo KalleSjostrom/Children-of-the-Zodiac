@@ -1,0 +1,56 @@
+image Forah	   
+start 325 365	   
+	   
+in 2 100 true	   
+	   
+dialog 1	   
+	   
+n Forah	   
+fl I love drinkin' and all there is to it.	   
+sl end	   
+f true	   
+	   
+dialog 2	   
+	   
+n Forah	   
+fl I have a friend that's working here.	   
+sl His name is Dexter.	   
+f true	   
+	   
+n Forah	   
+fl If you see him, could you tell him to 	   
+sl meet me here at the pub after work?	   
+f true	   
+	   
+n Forah	   
+fl There is a party tonight!	   
+sl end	   
+f true	   
+	   
+n Forah	   
+fl It starts just before it gets dark...	   
+sl You better prepare him for a hard evening though.	   
+f true	   
+	   
+n Forah	   
+fl We won't be home until tomorrow morning.	   
+sl end	   
+trigger Dexter 7	   
+trigger Forah 3	   
+f true	   
+	   
+dialog 3	   
+	   
+n Forah	   
+fl It's gonna be the party of a lifetime!
+sl end
+f true
+
+dialog 4
+
+n Forah
+fl He's coming?!
+sl Party!!
+f true	   
+	   
+end	 

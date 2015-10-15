@@ -1,0 +1,29 @@
+name Karcul
+
+defense 406
+magicDefense 331
+agility 19
+evade 0
+hit 90
+attack 1900
+magic 0
+support 0
+hp 5324
+element 4
+gold 4534
+experience 2528
+criticalChance 0
+
+diesound Ghoul/dies
+image karcul 3
+armor 67 52
+preferences 100
+
+scale 5.7
+height -2
+depth -6
+middle 0
+
+attackSpec p=.5 anim=(f=1)--(f=1,a=80,se=Monster/Ghoul/attack)--(f=2,h=true)
+attackSpec name=All_Attack power=.7 onAll=true  p=.5 anim=(f=1)--(f=1,a=80,se=Monster/Ghoul/attack)--(f=2,h=true)
+

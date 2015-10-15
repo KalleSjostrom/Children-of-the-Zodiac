@@ -1,0 +1,37 @@
+import file=main.var
+
+var kin=0
+var celis=1
+
+info time="night" name="Home of Celis" music="continue" fadeValue="0" musicVolume="0" delay="1000"
+
+actor name="Characters/Kin/KinExtras" pos=400;800;0
+actor name="Characters/Celis/CelisExtras" pos=248;486;3
+
+load animation="celishugging"
+
+text lines="As for Celis & Kin...";"" pos=380;384
+ins type=fadeout timea=0 index=0 fadetime=0 kind=village
+ins type=fadein timea=1500 index=0 fadetime=2000 kind=text
+ins type=fadeout timea=meantime index=0 fadetime=2000 kind=text
+ins type=fadein timea=2000 index=0 fadetime=4000 kind=village
+
+ins timea=2000 index=kin kind=dist distance=150 duration=3000 direction=0
+ins timea=3000 index=kin kind=stop direction=3
+ins timea=1000 index=kin kind=dist distance=50 duration=1000 direction=3
+ins timea=0 index=kin kind=queue distance=163 duration=3360 direction=0
+ins timea=0 index=kin kind=queue direction=3
+ins timea=5000 index=kin kind=dist distance=50 duration=1500 direction=3
+
+ins timea=3000 index=celis kind=stop direction=1
+ins timea=2000 index=kin kind=dist distance=21 duration=1500 direction=3
+ins timea=1000 index=celis kind=dist distance=21 duration=1000 direction=1
+
+ins timea=1500 index=0 kind=animation actor=celis animation=17
+ins timea=0 index=kin kind=hide
+
+ins timea=500 index=0 kind=screenzoom zoomin=true zoomtime=8000 usestaticpos=true pos=100;650
+
+#ins type=fadeout timea=8000 index=0 fadetime=2000 kind=music mode=kill
+
+ins timea=2000 kind=endseq

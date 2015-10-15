@@ -1,0 +1,128 @@
+mapSize -0.5 0.5 1
+
+size 309
+
+fog red=.4 green=.3 blue=0 alpha=.01 density=0.01
+
+light0 position=0;0;0;1 ambient=1;1;1;1 specular=0;0;0;1 diffuse=1;1;1;1 attenuation=1;0.02;0.03
+light1 position=0;0;0;0 ambient=.2;.2;.2;.2 specular=0;0;0;1 diffuse=.2;.2;.2;.2
+material ambient=.7;.7;.7;1 specular=0;0;0;1 diffuse=.7;.7;.7;1
+invMaterial ambient=.7;.7;.7;1 specular=0;0;0;1 diffuse=.7;.7;.7;1
+
+floorTex aegisfloor.jpg
+wallTex aegisdoor20.png
+SwallTex aegiswall.png 2
+roofTex aegisroof.jpg
+
+normal floor 0 1
+normal wall 1 6
+normal roof 6 7
+
+mapPos 1 0
+
+# directions in labyrinth
+dir 3 2 4
+dir 4 2 5
+dir 5 2 6
+dir 6 1 22
+dir 12 1 28
+dir 12 2 13
+dir 15 1 31
+dir 22 2 23
+dir 23 1 39
+dir 27 1 43
+dir 27 2 28
+dir 31 1 47
+dir 35 1 51
+dir 39 1 55
+dir 43 1 59
+dir 47 1 63
+dir 51 2 52
+dir 52 1 68
+dir 55 1 71
+dir 59 1 75
+dir 62 1 78
+dir 62 2 63
+dir 68 2 69
+dir 69 2 70
+dir 70 2 71
+dir 71 1 87
+dir 71 2 72
+dir 72 2 73
+dir 73 2 74
+dir 74 2 75
+dir 75 1 91
+dir 75 2 76
+dir 76 2 77
+dir 77 2 78
+dir 87 1 103
+dir 91 1 107
+dir 102 2 103
+dir 103 1 119
+dir 103 2 104
+dir 106 2 107
+dir 107 2 108
+dir 107 1 123
+dir 119 1 135
+dir 123 1 139
+dir 132 1 148
+dir 132 2 133
+dir 133 2 134
+dir 134 2 135
+dir 135 1 151
+dir 135 2 136
+dir 136 2 137
+dir 137 2 138
+dir 138 2 139
+dir 139 1 155
+dir 139 2 140
+dir 140 2 141
+dir 141 2 142
+dir 142 1 158
+dir 147 1 163
+dir 147 2 148
+dir 151 1 167
+dir 155 1 171
+dir 158 2 159
+dir 159 1 175
+dir 163 1 179
+dir 167 1 183
+dir 171 1 187
+dir 179 1 195
+dir 182 1 198
+dir 182 2 183
+dir 187 2 188
+dir 188 1 204
+dir 197 2 198
+dir 204 2 205
+dir 205 2 206
+dir 206 2 207
+
+mapEnd
+
+wall 1 106 0
+
+inv door 106 0 dontopen landtemple_of_aegis--first_floor-mark0
+inv hinderDoor--up 104 2 2 Walls/aegisstairsup temple_of_aegis--second_floor-mark0
+
+# Top left
+inv hinderDoor--down 3 0 2 Walls/aegisstairsdown temple_of_aegis--base_level-mark0
+# Top right
+inv hinderDoor--down 195 1 2 Walls/aegisstairsdown temple_of_aegis--base_level-mark1
+# Bottom left
+inv hinderDoor--down 15 3 2 Walls/aegisstairsdown temple_of_aegis--base_level-mark2
+# Bottom right
+inv hinderDoor--down 207 2 2 Walls/aegisstairsdown temple_of_aegis--base_level-mark3
+
+# Earth
+inv aegisComboButton 13 2 2 Images/aegis0 0 0
+# Water
+inv aegisComboButton 197 0 2 Images/aegis1 1 1 temple_of_aegis--first_floor.mapaegisComboButton13
+# Fire
+inv aegisComboButton 175 1 2 Images/aegis2 2 2 temple_of_aegis--first_floor.mapaegisComboButton13 temple_of_aegis--first_floor.mapaegisComboButton197
+# Wind
+inv aegisComboButton 35 3 2 Images/aegis3 3 3 temple_of_aegis--first_floor.mapaegisComboButton13 temple_of_aegis--first_floor.mapaegisComboButton197 temple_of_aegis--first_floor.mapaegisComboButton175 temple_of_aegis--first_floor.maphinderDoor3
+
+inv riddle 108 2 1 Images/stonetablet.png aegis AegisRiddle
+
+inv save 102 2 -1 -1

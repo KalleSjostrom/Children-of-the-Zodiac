@@ -1,0 +1,26 @@
+image Benth
+start 275 395
+
+in 3 90 false
+in 0     320 false
+in 0 2000 true
+in 2 320 false
+in 1 90 false
+in 2 2000 true
+
+dialog 1
+
+# Outside Sarahs house
+n Benth
+fl I feel sorry for farmer Bob. He works his fingers
+sl to the bone and still he don't have any money.
+f true
+
+dialog 2
+
+n Benth
+fl I've never seen farmer Bob this happy before.
+sl I wonder what's happened. 
+f true
+
+end

@@ -1,0 +1,113 @@
+import file=main.var
+
+var teo=0
+var menthu=1
+
+info time="night" name="Port of Alares" music="No Music" fadeValue="0" musicVolume="0" status="0"
+
+actor name="Characters/Teo/TeoExtras" pos=150;230
+actor name="Characters/Menthu/MenthuExtras" pos=330;230
+
+text lines="Meanwhile at the Port of Alares";"" pos=290;384
+ins type=fadeout timea=0 index=0 fadetime=0 kind=village
+ins type=fadein timea=1500 index=0 fadetime=2000 kind=text
+ins type=fadeout timea=meantime index=0 fadetime=2000 kind=text
+ins type=fadein timea=2000 index=0 fadetime=4000 kind=village
+
+ins index=menthu timea=1000 kind=stop direction=1
+
+ins index=teo timea=0 kind=emotion emotion=! show=true
+ins index=teo timea=0 kind=dist distance=120 duration=1000 direction=1
+dialogpacket name=1 starttimea=800
+dialog packetname=1 name="Teo" text="I'm sorry, sir! I didn't... I mean he wasn't...";"Those guards of mine screwed up! It wasn't my fault!!!" 
+dialog packetname=1 name="Teo" text="You have to believe me, please!"
+ 
+ins index=teo timea=2000 kind=emotion emotion=... show=true
+ins index=teo timea=2000 kind=emotion show=false
+ins index=teo timea=500 kind=stop direction=2
+
+ins index=menthu timea=2000 kind=emotion emotion=... show=true
+ins index=menthu timea=2000 kind=emotion show=false
+
+dialogsingle starttimea=0 duration=350 <= name="???" text="Hmph... You have disappointed me.";"" 
+
+ins index=teo timea=200 kind=emotion emotion=! show=true
+ins index=teo timea=100 kind=dist distance=12 duration=100 direction=3 facedirection=1
+
+ins index=teo timea=200 kind=dist distance=12 duration=300 direction=1
+dialogsingle starttimea=100 duration=150 <= name="Teo" text="But, no! It was Borealis fault.";"He came out of nowhere! He cast me out!" 
+ins index=teo timea=500 kind=emotion show=false
+dialogsingle starttimea=1000 <= name="???" text="I know.";"" 
+
+ins index=teo timea=1500 kind=stop direction=2
+ins index=teo timea=1500 kind=stop direction=3
+ins index=teo timea=1500 kind=dist distance=50 duration=2500 direction=3
+ins index=teo timea=4000 kind=dist distance=50 duration=1500 direction=1
+dialogsingle starttimea=750 duration=750 <= name="Teo" text="What can I do to...";"" 
+
+ins index=teo timea=2000 kind=dist distance=15 duration=1500 direction=1
+dialogsingle starttimea=1500 duration=500 <= name="Teo" text="...";""
+
+ins index=menthu timea=5000 kind=dist distance=22 duration=2000 direction=1
+dialogpacket name=2 starttimea=1000 duration=1000
+dialog packetname=2 name="???" text="You have failed me, Teo."
+dialog packetname=2 name="???" text="You have lost a great deal of iron for Pensara."
+dialog packetname=2 name="???" text="Getting weapons now will be even more difficult."
+dialog packetname=2 name="???" text="And even worse, you have strengthen";"the bond between Alares and Zazo."
+
+ins index=teo timea=1250 kind=dist distance=10 duration=300 direction=1
+dialogsingle starttimea=400 duration=100 <= name="Teo" text="But...";""
+
+ins index=menthu timea=150 kind=emotion emotion=! show=true
+ins index=menthu timea=0 kind=dist distance=15 duration=150 direction=3
+dialogsingle starttimea=100 duration=500 <= name="???" text="Save me your pitiful excuses!";"Your time will come..."
+ins index=menthu timea=50 kind=emotion show=false
+ins index=teo timea=100 kind=emotion emotion=! show=true shake=true
+ins index=teo timea=20 kind=dist distance=20 duration=200 direction=3 facedirection=1
+
+ins index=teo timea=1500 kind=emotion emotion=... show=true
+dialogsingle starttimea=2000 <= name="???" text="Pathetic worm..."
+ins index=menthu timea=250 kind=dist distance=210 duration=4200 direction=1
+ins index=menthu timea=0 kind=queue distance=600 duration=12000 direction=0
+
+#### Teo is Plotting ####
+
+ins index=teo timea=5000 kind=stop direction=2
+ins index=teo timea=2000 kind=dist distance=80 duration=2400 direction=3
+ins index=teo timea=1700 kind=emotion show=false
+ins type=fadeout timea=0 index=0 fadetime=1500 kind=music mode=kill
+dialogsingle starttimea=0 <= name="Teo" text="Borealis..."
+
+ins index=teo timea=500 kind=emotion emotion=! show=true
+ins index=teo timea=50 kind=dist distance=20 duration=200 direction=1
+dialogsingle starttimea=50 <= name="Teo" text="How dare they cast me out!";""
+
+ins index=teo timea=1000 kind=emotion emotion=... show=true
+ins index=teo timea=2500 kind=emotion show=false
+dialogsingle starttimea=0 <= name="Teo" text="I must take revenge, but how? On this side";"of the ocean I have no friends no more..."
+
+ins index=teo timea=500 kind=stop direction=0
+ins index=teo timea=2000 kind=dist distance=100 duration=3000 direction=1
+dialogsingle starttimea=500 <= name="Teo" text="Maybe if I..."
+
+/*
+ins index=teo timea=3500 kind=stop direction=2
+ins index=teo timea=1500 kind=stop direction=3
+ins index=teo timea=500 kind=emotion emotion=! show=true
+ins index=teo timea=50 kind=dist distance=10 duration=150 direction=3
+dialogsingle starttimea=50 duration=50 <= name="Teo" text="Oh, that's it!"
+ins index=teo timea=500 kind=stop direction=2
+dialogsingle starttimea=200 <= name="Teo" text="I must get them to Pensara!";"There I can get enough help to take revenge."
+
+ins index=teo timea=1000 kind=emotion show=false
+ins index=teo timea=500 kind=dist distance=20 duration=1000 direction=1
+dialogsingle starttimea=500 duration=500 <= name="Teo" text="Maybe even he can help me.";"Hehe, I am so smart..."
+
+ins index=teo timea=1000 kind=stop direction=2
+dialogsingle starttimea=500 <= name="Teo" text="Now, I will get them, for sure.";""
+
+ins index=teo timea=2000 kind=emotion emotion=? show=true
+ins index=teo timea=3000 kind=dist distance=60 duration=3000 direction=3
+dialogsingle starttimea=2500 duration=500 <= name="Teo" text="But then again, how can I trick them into going?";""
+*/
+ins timea=1000 kind=endseq

@@ -1,0 +1,225 @@
+###### STORES ######
+
+store alaresCardShop
+
+status 0
+
+card o BattleCard 2 40
+card o BattleCard 2 40
+card m Fire 1 15
+card m Fire 1 15
+card m Earth 1 15
+card m Earth 1 15
+card m Wind 1 15
+card m Slow 1 true 20
+card s Cure 1 25
+
+status 1
+
+# Affär 6
+card s HerbOfVitality 3 5300
+card s Cure 3 5300
+card s Cure 2 true 6000
+card m Earth 3 5200
+
+status 2
+
+# Affär 8
+card s Cure 3 13000
+card s Cure 3 13000
+card s Resurrect 3 14300
+card s Resurrect 2 true 14300
+card s Focus 3 12740
+
+store zazoCardShop
+
+status 0
+
+card o BattleCard 2 120
+card o MagicalBlow 1 110
+card o CrushingSaber 1 125
+card s Shield 1 110
+card m Wind 2 140
+card m Wind 2 140
+
+status 1
+
+card o BattleCard 2 300
+card o BattleCard 2 300
+card o Drain 2 300
+card o Drain 2 300
+card o LaceratingCut 1 270
+card m Fire 2 320
+card m Ice 2 320
+card s Cure 2 470
+card s Resurrect 1 510
+
+store parasneCardShop
+
+status 0
+
+card o BattleCard 2 300
+card o BattleCard 2 300
+card o BattleCard 2 300
+card o BattleCard 2 300
+card o CrushingSaber 2 320
+card n TheElementOfWind 1 280
+card n TheElementOfIce 1 280
+card n TheElementOfFire 1 true 410
+card s HerbOfVitality 2 350
+card s Fungi 2 350
+
+status 1
+
+card m Slow 3 5200
+card m Earth 3 5200
+card s HerbOfVitality 1 true 5000
+
+status 2
+
+# Affär 6
+card n TheElementOfEarth 1 true 5200
+card m Earth 2 true 5200
+card m Earth 2 true 5200
+card m Earth 3 5200
+card m Earth 3 5200
+card m Wind 2 true 5200
+card s Cure 2 true 5200
+card s Cure 3 5400
+card s ProtectingBarrier 3 5300
+card s HerbOfVitality 3 5300
+
+store pensaraCardShop
+
+status 0
+
+card o BattleCard 2 300
+card o BattleCard 2 300
+card o BattleCard 2 300
+card o BattleCard 2 300
+card o CrushingSaber 2 320
+card o Drain 2 340
+card m Demolish 3 340
+card m Ice 2 340
+card m Ice 1 true 340
+card s Haste 1 true 340
+
+status 1
+
+card o BattleCard 3 4800
+card o BattleCard 3 4800
+card o BattleCard 3 4800
+card o ChameleonStrike 1 5300
+card m Ice 3 5200
+card m Fire 3 5200
+card s Cure 3 5400
+card s Cure 3 5400
+card s Resurrect 2 6000
+
+status 2
+# Affär 6
+card m Wind 2 true 5200
+card m Wind 2 true 5200
+card s Cure 2 true 6000
+card s Haste 3 true 5300
+card s Focus 3 5300
+card s HerbOfVitality 3 5300
+
+status 3
+
+# Affär 8
+card n TheElementOfWind 1 2600
+card n TheElementOfFire 1 2600
+card n TheElementOfIce 1 2600
+card n TheElementOfEarth 1 2600
+card o Destroyer 1 15600
+card o Destroyer 1 15600
+card o Destroyer 1 15600
+card o Destroyer 1 15600
+card o SpiritAssault 1 16300
+card m Blizzard 1 15600
+card m Colliding 1 15600
+card m Flare 1 15600
+card m Tornado 1 15600
+
+store bercaCardShop
+
+status 0
+
+card o BattleCard 3 2400
+card o BattleCard 3 2400
+card o BattleCard 3 2400
+card o BattleCard 2 true 2400
+card o BattleCard 2 true 2400
+card o ChameleonStrike 1 3000
+card o MagicalBlow 2 true 2600
+card s Haste 3 2600
+card s Haste 3 2600
+card s Shield 2 2400
+card s Shield 1 true 2600
+card s Shield 1 true 2600
+card s Cure 1 true 2800
+
+status 1
+
+# Affär 6
+card m Fire 3 5200
+card m Fire 3 5200
+card m Ice 3 5200
+card m Ice 3 5200
+card m Earth 3 5200
+card m Earth 3 5200
+card m Wind 3 5200
+card m Wind 3 5200
+card s Cure 3 5400
+card s Resurrect 2 5900
+
+status 2
+# Affär 8
+card m SacredBeam 1 16900
+card m Flare 1 20200
+card o BattleCard 3 11700
+card o BattleCard 3 11700
+card o BattleCard 3 11700
+card o BattleCard 3 11700
+card o BattleCard 3 11700
+
+store dellnaCardShop
+
+status 0
+
+card o BattleCard 3 5000
+card o BattleCard 3 5000
+card o CriticalBlow 2 4700
+card o CriticalBlow 2 4700
+card o ChameleonStrike 2 6700
+card m Fire 3 5400
+card m Fire 2 true 5400
+card m Flare 1 10200
+card m Ice 3 5400
+card m Ice 3 5400
+card m Ice 2 true 5400
+card m SacredBeam 1 8400
+card s HerbOfVitality 3 5600
+card s HerbOfVitality 3 5600
+card s Resurrect 3 6500
+card s Haste 3 true 6400
+card s HerbOfVitality 2 true 6400
+
+status 1
+
+# Affär 8
+card o Destroyer 1 15600
+card o Destroyer 1 15600
+card o Destroyer 1 15600
+card o MagicalBlow 2 true 11700
+card o CrushingSaber 2 2600
+card m Ice 3 true 15600
+card m Ice 3 true 15600
+card m Earth 3 true 15600
+card m Earth 3 true 15600
+card m Wind 3 true 15600
+card m Wind 3 true 15600
+card m Ultima 1 false 20200
+card s Shield 3 12740
+card s Resurrect 3 14300

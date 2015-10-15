@@ -1,0 +1,25 @@
+image Dido
+start 635 440
+
+in 0 40 false
+in 3 30 false
+in 2 110 false
+in 1 60 false
+in 0 40 false
+in 3 120 false
+in 2 40 false
+in 1 35 false
+in 0 70 false
+in 1 60 false
+
+dialog 1
+
+# Inside farmers house.
+n Dido
+fl Both my father and uncle are farmers.
+sl I wonder if that's my destiny too.
+f true
+
+end
+
+

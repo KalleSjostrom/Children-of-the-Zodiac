@@ -1,0 +1,17 @@
+##### VILLAGE #####
+# NAME
+name Dorma's_Tranquility The_Home_of_the_Flower_Girl
+
+##### BACKGRUND #####
+
+# background, prefix name of both images day
+background Dorma's_Tranquility true
+
+##### STARTING LOCATION #####
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1024 768
+start0 6 379 1
+
+##### END #####
+end

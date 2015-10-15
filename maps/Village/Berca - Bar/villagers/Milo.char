@@ -1,0 +1,18 @@
+image Milo
+start 690 450
+
+in 3 100 true
+
+dialog 1
+
+n Milo
+fl I used to work as a soldier for Pensara's
+sl liberation army.
+f true
+
+n Milo
+fl But I stepped back because of their policy 
+sl against other villages.
+f true
+
+end

@@ -1,0 +1,99 @@
+image Stienie
+start 320 930
+
+in 0 40 false
+in 3 45 false
+in 2 20 false
+in 3 155 false
+in 3 100 true
+in 1 355 false
+in 2 70 false
+in 0 100 true
+in 0 70 false
+in 3 75 false
+in 2 70 false
+in 0 100 true
+in 3 55 false
+in 0 50 false
+in 3 25 false
+
+dialog 1
+
+n Stienie
+fl My son has been out to sea for a long time now.
+sl I hope he'll come back safe.
+f true
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

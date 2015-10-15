@@ -1,0 +1,42 @@
+import file=main.var
+
+var chairs=0
+var celis=1
+var ana=2
+
+info time="day" name="Dellna - Ana's Home Memory" music="No Music" fadeValue="0" musicVolume="0"
+
+actor name="Anim"
+actor name="Characters/barncelis/barncelisExtras" pos=616;249;2
+actor name="Characters/ana/anaExtras" pos=616;300;0
+
+load image="Celis' Hands"
+load image="The Killing"
+load image="Menthu's Face"
+
+ins timea=0 index=celis kind=emotion emotion=hihi show=true
+ins timea=2000 index=ana kind=emotion emotion=hihi show=true
+
+ins timea=4500 index=ana kind=emotion emotion=! show=true
+ins timea=0 index=ana kind=stop direction=3
+ins timea=500 index=celis kind=emotion emotion=? show=true
+ins timea=0 index=ana kind=dist distance=120 direction=3 duration=1000
+ins timea=0 index=ana kind=queue direction=2
+ins timea=800 index=celis kind=stop direction=3
+ins timea=800 index=ana kind=emotion emotion=! show=true shake=true
+ins timea=600 index=ana kind=tor movepos=100;-40 duration=700
+ 
+dialogsingle starttimea=400 duration=500 <= name="Ana" text="Take this and hide!" whisper=true
+ins timea=400 index=celis kind=emotion emotion=! show=true
+
+ins type=fadeout timea=800 kind=village fadetime=500
+ins type=fadein timea=3000 kind=village fadetime=500
+
+ins timea=800 index=ana kind=tor movepos=-100;40 duration=700
+ins timea=0 index=ana kind=emotion emotion=! show=true
+ins timea=0 index=ana kind=queue distance=220 direction=2 duration=1600
+ins timea=0 index=ana kind=queue direction=0
+ins timea=300 index=celis kind=tor movepos=-125;40 duration=1000
+ins timea=0 index=celis kind=queue distance=150 direction=2 duration=1500
+ins timea=0 index=celis kind=queue distance=130 direction=3 duration=1300
+ins timea=2000 kind=endseq

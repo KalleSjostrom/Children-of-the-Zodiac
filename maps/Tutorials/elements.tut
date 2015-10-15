@@ -1,0 +1,128 @@
+title string="Tutorial - Elements";""
+
+var type=vector name=blue value=0,0,.7
+var type=vector name=underline value=0,0,.7
+var type=vector name=green value=0,.7,0
+var type=vector name=purple value=.5,0,.5
+var type=vector name=brightgreen value=0,1,0
+var type=vector name=brightred value=1,0,0
+var type=vector name=red value=.7,0,0
+var type=vector name=fire value=.7,0,0
+var type=vector name=ice value=.4,.4,.8
+var type=vector name=earth value=.6,.3,.05
+var type=vector name=wind value=.9,.9,.9
+
+newtext
+
+newMap
+putMap index=8 vector=blue
+addRow newpage=true text="Different elements are effective against its opposite,";"" usemap=true
+addRow newpage=false text="resulting in twice the damage.";"" yoffset=-10
+
+newMap
+putMap index=1 vector=fire
+putMap index=3 vector=blue
+putMap index=5 vector=ice
+addRow newpage=false text="- Fire is strong against Ice.";"" icon=Menu/Elements/1.png yoffset=-10 iconxoffset=10 iconyoffset=0 iconscale=1 usemap=true
+addRow newpage=false text="";"" icon=Menu/Elements/2.png yoffset=-40 iconxoffset=220 iconyoffset=0 iconscale=1
+
+newMap
+putMap index=1 vector=ice
+putMap index=3 vector=blue
+putMap index=5 vector=fire
+addRow newpage=false text="- Ice is strong against Fire.";"" icon=Menu/Elements/2.png yoffset=-10 iconxoffset=10 iconyoffset=0 iconscale=1 usemap=true
+addRow newpage=false text="";"" icon=Menu/Elements/1.png yoffset=-40 iconxoffset=220 iconyoffset=0 iconscale=1
+
+newMap
+putMap index=1 vector=earth
+putMap index=3 vector=blue
+putMap index=5 vector=wind
+addRow newpage=true text="- Earth is strong against Wind.";"" icon=Menu/Elements/4.png yoffset=0 iconxoffset=20 iconyoffset=0 iconscale=1 usemap=true
+addRow newpage=false text="";"" icon=Menu/Elements/3.png yoffset=-40 iconxoffset=250 iconyoffset=0 iconscale=1
+
+newMap
+putMap index=1 vector=wind
+putMap index=3 vector=blue
+putMap index=5 vector=earth
+addRow newpage=false text="- Wind is strong against Earth.";"" icon=Menu/Elements/3.png yoffset=0 iconxoffset=20 iconyoffset=0 iconscale=1 usemap=true
+addRow newpage=false text="";"" icon=Menu/Elements/4.png yoffset=-40 iconxoffset=250 iconyoffset=0 iconscale=1
+
+newMap
+putMap index=3 vector=red
+addRow newpage=true text="Furthermore, same is weak against same, as in";"" usemap=true
+
+newMap
+putMap index=1 vector=ice
+putMap index=3 vector=red
+putMap index=5 vector=ice
+addRow newpage=false text="- Ice is weak against Ice,";"" icon=Menu/Elements/2.png yoffset=0 iconxoffset=10 iconyoffset=0 iconscale=1 usemap=true
+addRow newpage=false text="";"" icon=Menu/Elements/2.png yoffset=-40 iconxoffset=193 iconyoffset=0 iconscale=1
+newMap
+putMap index=2 vector=red
+putMap index=3 vector=red
+putMap index=4 vector=red
+addRow newpage=false text="resulting in half the damage";"" usemap=true
+
+newMap
+putMap index=4 vector=underline
+putMap index=5 vector=underline
+addRow newpage=true text="Some enemies have a natural element.";"" usemap=true
+newMap
+putMap index=4 vector=underline
+putMap index=5 vector=underline
+putMap index=6 vector=underline
+addRow newpage=false text="Such an enemy often attacks and protects itself with";"" usemap=true
+addRow newpage=false text="that element. An icon close to the enemy's name will";""
+addRow newpage=false text="show its natural element, if any.";""
+
+newMap
+putMap index=2 vector=underline
+putMap index=5 vector=underline
+addRow newpage=true text="You can change both monsters and your character's";"" usemap=true
+newMap
+putMap index=4 vector=underline
+putMap index=5 vector=underline
+putMap index=6 vector=underline
+addRow newpage=false text="element, by using a change element card.";"" usemap=true
+
+newMap
+putMap index=4 vector=green
+putMap index=6 vector=purple
+addRow newpage=false text="Such cards have both green and purple frame.";"" usemap=true
+addRow newpage=false text="";""
+
+addRow newpage=false text="Change element card:";"" icon=Cards/Fire_Element.png yoffset=-10 iconxoffset=200 iconyoffset=-72 iconscale=.7
+ 
+addRow newpage=true text="If you change your characters' element to the enemy";""
+newMap
+putMap index=0 vector=red
+addRow newpage=false text="weakness, both the enemy's and your characters";"" usemap=true
+newMap
+putMap index=1 vector=underline
+putMap index=2 vector=underline
+putMap index=3 vector=underline
+addRow newpage=false text="will deal more damage (and vice versa).";"" usemap=true
+
+newMap
+putMap index=6 vector=red
+addRow newpage=true text="However, the element of the card overrides the";"" usemap=true
+addRow newpage=false text="character's element.";""
+
+newMap
+putMap index=0 vector=underline
+putMap index=1 vector=underline
+putMap index=7 vector=fire
+addRow newpage=false text="For example: if the character has element fire and";"" usemap=true
+
+newMap
+putMap index=4 vector=ice
+putMap index=9 vector=underline
+putMap index=10 vector=underline
+addRow newpage=false text="chooses to use an ice card. The card will still deal";"" usemap=true
+newMap
+putMap index=0 vector=underline
+putMap index=1 vector=underline
+putMap index=2 vector=underline
+addRow newpage=false text="twice the damage to a fire enemy.";"" usemap=true
+
+put turn=0

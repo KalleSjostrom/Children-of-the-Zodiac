@@ -1,0 +1,19 @@
+image Shaun
+
+start 540 345
+
+in 3 200 true
+
+dialog 2
+
+n Shaun
+fl I'm just a mining trainee. A while ago
+sl I wondered if I was fit for this job.
+f true
+
+n Shaun
+fl I still don't know but the least
+sl I can do is to try.
+f true
+
+end

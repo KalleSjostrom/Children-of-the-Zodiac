@@ -1,0 +1,58 @@
+image Ingo
+start 330 1050
+
+in 2 80 false
+in 3 210 false
+in 0 60 false
+in 3 65 false
+in 0 70 false
+in 1 105 false
+in 0 70 false
+in 1 80 false
+in 2 120 false
+in 1 90 false
+
+dialog 1
+
+n Ingo
+fl We don't have a ball to train with... 
+sl How are we going to be soccer stars without a ball?
+f true
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

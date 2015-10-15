@@ -1,0 +1,54 @@
+image Borealis
+
+start 460 316
+
+in 2 180 true
+
+dialog 1
+
+n Borealis
+fl Hope Zalzi knows what she's doing...  
+sl end
+trigger prisonBorealis 2
+f true
+
+dialog 2
+
+n Borealis
+fl Zalzi can get us out of here...  
+sl end
+trigger prisonBorealis 3
+f true
+
+dialog 3
+
+n Borealis
+fl Or..  
+sl Can she?
+trigger prisonBorealis 4
+f true
+
+dialog 4
+
+n Borealis
+fl I've heard that picking a lock ain't easy..
+sl end
+trigger prisonBorealis 5
+f true
+
+dialog 5
+
+n Borealis
+fl I'm hungry..
+sl Could she hurry up!
+trigger prisonBorealis 6
+f true
+
+dialog 6
+
+n Borealis
+fl I'm hungry..
+sl Could she hurry up!
+f true
+
+end

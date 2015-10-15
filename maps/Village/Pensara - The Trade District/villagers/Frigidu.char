@@ -1,0 +1,38 @@
+image Frigidu
+start 90 100
+
+in 2 100 true
+in 0 100 true
+in 2 100 true
+in 2 40 false
+in 3 75 false
+in 1 100 true
+in 3 100 true
+in 3 100 true
+in 1 75 false
+in 0 40 false
+
+dialog 1
+
+n Frigidu
+fl Rumor has it that there was a time when man could fly 
+sl and it is said that an old civilization holds the key.
+f true
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

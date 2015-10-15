@@ -1,0 +1,75 @@
+mapSize -0.5 0.5 1
+
+size 153
+
+light0 position=0;0;0;1 ambient=.8;.8;.8;1 specular=0;0;0;1 diffuse=.8;.8;.8;1 attenuation=1;0.01;0.015
+light1 position=0;0;0;0 ambient=.2;.2;.2;1 specular=0;0;0;1 diffuse=.2;.2;.2;1
+material ambient=.4;.4;.4;1 specular=0;0;0;1 diffuse=.7;.7;.7;1
+invMaterial ambient=.8;.8;.8;1 specular=.8;.8;.8;1 diffuse=.8;.8;.8;1
+
+floorTex southpassfloor.jpg
+wallTex southpasswall.png
+wallTex southpassdoor0.png
+roofTex southpassroof.jpg
+
+normal floor 0 1
+normal wall 1 3
+normal roof 3 4
+
+mapPos 1 1
+
+dir 4 1 20
+dir 9 1 25
+dir 20 1 36
+dir 25 1 41
+dir 36 2 37
+dir 37 2 38
+dir 38 2 39
+dir 39 1 55
+dir 39 2 40
+dir 40 2 41
+dir 55 1 71
+dir 71 1 87
+dir 87 2 88
+dir 88 2 89
+dir 89 1 105
+dir 89 2 90
+dir 90 2 91
+dir 105 1 121
+dir 109 1 125
+dir 109 2 110
+dir 121 1 137
+dir 125 1 141
+dir 131 2 132
+dir 132 2 133
+dir 133 1 149
+dir 137 1 153
+dir 137 2 138
+dir 138 2 139
+dir 139 2 140
+dir 140 2 141
+dir 141 1 157
+dir 149 1 165
+dir 153 1 169
+dir 157 1 173
+dir 165 1 181
+dir 165 2 166
+dir 166 2 167
+dir 167 2 168
+dir 168 2 169
+dir 173 2 174
+dir 174 2 175
+dir 181 1 197
+dir 197 2 198
+dir 198 2 199
+
+mapEnd
+
+#inv door 131 0 0-10 central_pass--west_part-mark0
+inv hinderDoor 4 3 2 Walls/southpassdoor central_pass--west_part-mark1
+inv hinderDoor 131 0 2 Walls/southpassdoor central_pass--north_part-mark0
+
+inv button 175 2 7 Images/lever Central_Pass--Central_Part.maphinderDoor131 Central_Pass--North_Part.maphinderDoor143
+
+inv chest 9 3 2 Images/chest 0 50
+inv chest 199 2 2 Images/chest 2 cards.neutral.TheElementOfFire 1 false

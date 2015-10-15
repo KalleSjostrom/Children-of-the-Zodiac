@@ -1,0 +1,13 @@
+image char/Alaressoldier
+start 505 10
+
+in 2 100 true
+
+dialog 1
+
+n Soldier
+fl Welcome to the Port of Alares.
+sl end
+f true
+
+end

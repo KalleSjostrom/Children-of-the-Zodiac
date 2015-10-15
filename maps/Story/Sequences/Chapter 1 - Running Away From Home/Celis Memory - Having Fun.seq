@@ -1,0 +1,20 @@
+import file=main.var
+
+var chairs=0
+var celis=1
+var ana=2
+
+info time="day" name="Dellna - Ana's Home Memory" music="No Music" fadeValue="0" musicVolume="0"
+
+actor name="Anim"
+actor name="Characters/barncelis/barncelisExtras" pos=616;249;2
+actor name="Characters/ana/anaExtras" pos=490;267;0
+
+ins timea=0 index=ana kind=dist distance=100 direction=1 duration=2000
+ins timea=2500 index=ana kind=dist distance=33 direction=2 duration=660
+ins timea=0 index=ana kind=queue distance=26 direction=1 duration=520
+ins timea=0 index=ana kind=queue direction=0
+ins timea=4000 index=celis kind=emotion emotion=hihi show=true
+ins timea=800 index=ana kind=emotion emotion=? show=true
+dialogsingle starttimea=200 duration=500 <= name="Ana" text="What's so funny?"
+ins timea=1000 kind=endseq

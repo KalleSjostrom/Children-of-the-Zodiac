@@ -1,0 +1,233 @@
+background Pensara_-_The_School_District true
+
+back 1100 2778 2
+start 1046 1770 3
+
+wind -10;0;0 .1
+particlesystem smokesystemSchool
+
+##### OBSTICLES #####
+# obsticles x y x2 y2
+# Churchandtrees
+o 553 636 830 1040
+o 552 1269 579 1291
+o 832 986 861 1027
+o 307 697 344 704
+o 834 817 863 858
+o 973 698 997 709
+o 525 895 553 936
+o 807 1035 823 1040
+o 409 298 439 313
+o 1063 309 1087 331
+o 524 698 551 707
+o 524 983 552 1025
+o 1042 703 1063 709
+o 1040 698 1079 703
+o 400 287 439 297
+o 806 1614 834 1636
+o 791 298 815 320
+o 514 320 538 342
+o 388 697 411 706
+o 479 2352 506 2374
+o 810 1269 837 1291
+o 835 741 863 782
+o 900 1945 926 1968
+o 560 1035 577 1041
+o 835 698 858 708
+o 457 697 482 707
+o 558 1437 583 1458
+o 976 343 1000 365
+o 225 2351 253 2374
+o 522 739 549 778
+o 902 698 927 707
+o 808 1432 833 1453
+o 560 697 823 1035
+o 307 526 1079 697
+o 832 898 860 938
+o 349 2352 376 2375
+o 522 815 549 854
+o 556 1611 584 1633
+o 614 286 644 312
+# Wall
+o 166 2549 1099 2645
+# Lantern3
+o 907 1733 934 1770
+# Wall
+o 70 717 165 1417
+# null
+o 281 2119 332 2146
+# Grave7
+o 224 1034 254 1073
+# Fence
+o 602 1890 949 1923
+# School
+o 694 2043 852 2237
+# Grave6
+o 435 903 464 943
+# Bench
+o 533 1702 596 1742
+# Schoolblommor1
+o 689 2215 752 2241
+# Grave1
+o 224 783 253 821
+# lantern1
+o 458 1851 485 1888
+# Fence
+o 943 1923 948 2320
+# Fence
+o 603 2290 609 2320
+# Clocktower
+o 252 1622 463 1738
+# Wall
+o 70 1417 165 2124
+# Wall
+o 70 288 165 717
+# Schoolblommor4
+o 852 2211 887 2251
+# mailbox
+o 584 2209 596 2248
+# mote
+o 963 1376 1100 1766
+# Bluehousestuff
+o 432 2119 437 2127
+# Bluehousestuff
+o 414 2128 437 2144
+# Grave3
+o 366 781 394 825
+# Grave9
+o 366 1035 393 1081
+# brige
+o 955 1722 962 1766
+# Shoolblommor3
+o 825 2251 847 2257
+# Mote
+o 960 1861 1099 2548
+# Bridge
+o 955 1839 1099 1861
+# Grave8
+o 295 1034 326 1077
+# Lantern2
+o 908 1843 935 1880
+# Grave2
+o 295 783 326 824
+# Fence
+o 602 1923 609 2246
+# Fence
+o 603 2321 948 2355
+# Wall
+o 70 191 1099 288
+# Grave4
+o 436 782 467 821
+# mote
+o 1081 288 1100 752
+# Grave10
+o 436 1032 466 1071
+# mote
+o 967 746 1100 1377
+# Wall
+o 70 2124 165 2644
+# Schoolblommor2
+o 805 2238 851 2251
+# Sign
+o 603 1120 649 1157
+# Grave5
+o 224 903 254 947
+# Bluehouse
+o 286 2009 431 2129
+# Clocktowerblomma
+o 223 1716 265 1756
+
+o 324 889 366 939
+o 583 2198 597 2248
+o 602 1118 650 1156
+
+##### DOORS #####
+
+holeDoor village Pensara_-_The_Trade_District 1097 1746 50 1 0 0 0 4
+
+# chapel
+door house Pensara_-_The_School_District_-_The_Clock_Tower_-_Floor_1 329 1679 62 0 2
+doorSignFl Locked.
+
+# school
+door house Pensara_-_The_School_District_-_The_School 755 2186 30 0 2
+doorSignFl Locked.
+
+# church
+door church Church 661 978 60 0
+building Church pensaraChurch.jpg pensaraPastorKai.png Pastor_Kai How_can_I_be_of_assistance? _ Pensara_Church
+
+# armor place
+door house Pensara_-_The_School_District_-_The_Armory 344 2078 30 0 2
+doorSignFl Locked.
+
+##### SIGNS ######
+
+sign 223 903 28
+# "Skägget gör inte filosofen" Plutarkos
+signL Barba non facit philosophum
+
+# "Harmoniska medborgare är städernas murar"
+sign 296 782 28
+signL Concordia civium murus urbium
+
+# "Till vilken nytta?"
+sign 435 1031 28
+signL Cui bono?
+
+# "Kunskap är makt." Francis Bacon, 1597.
+sign 436 782 28
+signL Et ipsa scientia potestas est.
+
+# "Lycklig den som inser sakers orsaker" (Vergilius, Georgica 2,490)
+sign 296 1034 28
+signL Felix qui potuit rerum cognoscere causas
+
+# "Människor tror det de vill"
+sign 225 780 28
+signL Homines quod volunt credunt
+
+# "Vid tvekan, favorisera den anklagade"
+sign 224 1031 28
+signL In dubio pro reo -- 
+
+# "Enade i mångfalden"
+sign 365 785 28
+signL In varietate concordia
+
+# "Kunskapens rot är bitter, med dess frukter är söta"
+sign 435 904 28
+signL Litterarum radices amarae, fructus dulces.
+
+# "Kom ihåg din dödlighet"
+sign 364 1038 28
+signL Memento mori 
+
+# fountain middle grave
+# "Källa och ursprung
+sign 324 889 28
+signL The words "fons et origo"
+signL is inscribed on the fountain
+
+# school mailbox
+sign 568 2200 28
+signL The mailbox is full of letters to the school.
+
+# church sign
+sign 602 1118 28
+signL Welcome to Pensara Cathedral.
+
+##### VILLAGERS #####
+
+# villager name
+
+villager Aldrin
+villager Buttenar
+villager Emma
+villager Gravekeeper
+villager Lecca
+villager PensaraSoldier_13
+villager Valie
+
+##### END #####
+end

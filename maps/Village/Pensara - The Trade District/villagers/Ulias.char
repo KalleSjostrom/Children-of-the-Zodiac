@@ -1,0 +1,21 @@
+image Ulias
+start 2000 250
+
+in 2 110 false
+in 2 30 true
+in 0 30 true
+in 0 165 false
+in 0 30 true
+in 2 30 true
+in 2 55 false
+
+dialog 1
+
+n Ulias
+fl Senator Althier is the greatest hero Pensara ever had. 
+sl I try my best to get everyone to see that.
+f true
+
+end
+
+

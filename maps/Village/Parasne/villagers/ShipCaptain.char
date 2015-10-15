@@ -1,0 +1,13 @@
+image char/ShipCaptain
+start 1150 1600	   
+
+in 0 100 true
+
+dialog 1	   
+
+n Ship Captain	   
+fl Bounded for Port of Alares arrgh ye?
+sl No ships arrgh goin' therr for a while.
+f true	   
+ 	   
+end

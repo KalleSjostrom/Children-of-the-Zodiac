@@ -1,0 +1,56 @@
+import file=main.var
+
+var marlo=0
+var kin=1
+var celis=2
+var borealis=3
+var zalzi=4
+
+info time="day" name="Dellna" music="Dellna" fadeValue="0" musicVolume="0"
+
+load translucent="res/Texts/Dellna.png"
+
+actor name="Marlo"
+actor name="Kin"
+actor name="Celis"
+actor name="Borealis"
+actor name="Zalzi"
+
+load music="Dellna intro"
+
+show index=kin value=false
+show index=celis value=false
+show index=borealis value=false
+show index=zalzi value=false
+
+ins timea=0 index=marlo kind=controll controll=true
+
+ins type=fadeout timea=0 index=0 fadetime=0 kind=music mode=pause
+ins type=fadein timea=0 index=1 fadetime=0 kind=music mode=play
+
+ins type=fadein timea=2000 kind=image fadetime=4000 scrollmode=normal imagetype=translucent
+ins type=fadeout timea=6000 kind=image fadetime=2000 scrollmode=normal imagetype=translucent
+
+ins timea=2000 index=kin kind=show movepos=400;1300
+ins timea=0 index=celis kind=show movepos=360;1310
+ins timea=0 index=borealis kind=show movepos=300;1320
+ins timea=0 index=zalzi kind=show movepos=440;1330
+
+ins timea=1000 index=kin kind=dist distance=156 duration=3000 direction=0
+ins timea=300 index=celis kind=dist distance=160 duration=3100 direction=0
+ins timea=300 index=borealis kind=dist distance=160 duration=3100 direction=0
+ins timea=300 index=zalzi kind=dist distance=160 duration=3100 direction=0
+
+dialogsingle starttimea=1300 duration=100 <= name="Kin" text="So cold!"
+ins timea=300 index=celis kind=dist distance=20 duration=600 direction=0
+dialogsingle starttimea=500 duration=100 <= name="Celis" text="Let's find this Merri!"
+
+ins timea=0 index=marlo kind=controll controll=false
+
+ins type=fadeout timea=0 index=1 fadetime=800 kind=music mode=kill
+ins type=fadein timea=800 index=0 fadetime=1000 kind=music mode=play
+
+load trigger="Dellnanode"
+ins timea=0 index=0 kind=trigger value=0
+
+ins timea=500 kind=end

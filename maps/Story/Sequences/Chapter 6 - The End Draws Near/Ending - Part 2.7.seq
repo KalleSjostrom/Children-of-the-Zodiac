@@ -1,0 +1,19 @@
+import file=main.var
+
+info time="day" name="Kin's Place" music="continue" fadeValue="0" musicVolume="0" delay="1000"
+
+actor name="Characters/Zalzi/ZalziExtras"
+
+ins timea=0 kind=controll controll=true
+ins timea=0 kind=hide
+ins timea=0 kind=show movepos=-100;305;0
+
+text lines="Zalzi continues to explore new areas of the world.";"" pos=450;384 color=0 size=50 pos=450;384
+
+ins timea=2500 kind=dist distance=500 duration=7000 direction=1
+
+ins type=fadein timea=500 index=0 fadetime=1000 kind=text
+ins type=fadeout timea=3000 index=0 fadetime=1000 kind=text
+
+ins type=fadeout timea=700 kind=village fadetime=2000
+ins timea=2000 kind=endseq

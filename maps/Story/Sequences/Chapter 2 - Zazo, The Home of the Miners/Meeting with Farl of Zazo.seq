@@ -1,0 +1,94 @@
+import file=main.var
+
+var farl=0
+var kin=1
+var celis=2
+var borealis=3
+
+info time="day" name="Zazo" music="Zazo" fadeValue="1" status="1"
+
+ins timea=0 index=farl kind=controll controll=true
+
+actor name="Farl"
+actor name="Kin" pos=283;1815;0
+actor name="Celis" pos=278;1785;0
+actor name="Borealis" pos=248;1800;0
+
+load music="The Theme of the Elders"
+ins timea=0 index=0 kind=screenzoom zoomin=true zoomtime=4000 usestaticpos=true pos=1024;0
+
+dialogsingle starttimea=2000 <= name="Borealis" text="Farl, long time no see. These two have some";"questions that needs to be addressed."
+ins index=borealis timea=250 kind=dist distance=45 duration=2000 direction=3
+ins index=borealis timea=0 kind=queue direction=1
+
+dialogsingle starttimea=1000 duration=600 <= name="Farl" text="I know.";"Celis and Kin. It's an honor."
+ins index=farl timea=500 kind=dist distance=15 duration=800 direction=2
+
+ins index=celis timea=250 kind=emotion emotion=? show=true
+ins index=kin timea=50 kind=emotion emotion=?! show=true
+
+ins type=fadeout timea=200 index=0 fadetime=700 kind=music mode=pause
+
+ins index=kin timea=0 kind=dist distance=10 duration=200 direction=0
+dialogsingle starttimea=200 <= name="Kin" text="How do you know our names?!";""
+
+ins index=celis timea=200 kind=stop direction=1
+ins index=celis timea=0 kind=emotion show=false
+dialogsingle starttimea=200 duration=210 <= name="Celis" text="Shh, Kin! The man is talking!";""
+
+ins index=kin timea=200 kind=dist distance=5 duration=200 direction=1 facedirection=3
+ins index=kin timea=0 kind=emotion emotion=! show=true
+
+ins index=kin timea=800 kind=emotion show=false
+ins index=celis timea=200 kind=stop direction=0
+ins index=kin timea=200 kind=stop direction=0
+
+ins index=farl timea=500 kind=dist distance=5 duration=1000 direction=2
+
+dialogpacket name=1 starttimea=200
+dialog packetname=1 name="Farl" text="That's alright. I know of you because";"I've paid Elmer of Alares a recent visit."
+dialog packetname=1 name="Farl" text="He has made me aware of the";"situation surrounding you."
+
+ins index=farl timea=500 kind=dist distance=5 duration=1000 direction=2
+ins type=fadein timea=500 index=1 fadetime=0 kind=music mode=play
+dialogsingle starttimea=0 <= name="Farl" text="I see that you have found the stone in Mt. Cesadur.";"Well done, I must say."
+
+ins index=farl timea=1000 kind=stop direction=3
+dialogsingle starttimea=250 <= name="Farl" text="Unfortunately, the whereabouts of";"any more stones are unknown to me."
+ins index=farl timea=400 kind=stop direction=2
+
+ins index=celis timea=500 kind=dist distance=10 duration=1000 direction=0
+dialogsingle starttimea=500 duration=400 <= name="Celis" text="Why is this happening now?";"I mean, why is war stirring in the world?"
+
+ins index=farl timea=500 kind=stop direction=0
+ins index=farl timea=1000 kind=dist distance=15 duration=1500 direction=0
+dialogsingle starttimea=1500 <= name="Farl" text="Well, that's a long story with no easy answer.";"But I can tell you what the brethren believes."
+
+ins index=celis timea=500 kind=dist distance=10 duration=800 direction=0
+dialogsingle starttimea=400 duration=400 <= name="Celis" text="Please do.";""
+
+ins index=farl timea=1000 kind=stop direction=2
+dialogsingle starttimea=250 <= name="Farl" text="It all started long before The Great War.";""
+
+ins index=farl timea=1000 kind=dist distance=10 duration=800 direction=2
+dialogpacket name=1.1 starttimea=500 duration=500
+dialog packetname=1.1 name="Farl" text="As Elmer probably told you, twelve tenjins were given";"six stones, as means to communicate with the Zodiacs."
+dialog packetname=1.1 name="Kin" text="Yeah, he did." first=false
+
+ins index=farl timea=1500 kind=dist distance=10 duration=1000 direction=0
+dialogsingle starttimea=500 duration=500 <= name="Farl" text="But what he did not tell you was the reason for this.";""
+
+ins index=farl timea=2000 kind=stop direction=2
+dialogpacket name=2 starttimea=250
+dialog packetname=2 name="Farl" text="The twelve tenjins were given a mission to educate";"and care for man, seeing how primitive man were."
+dialog packetname=2 name="Farl" text="They carried out that mission.";""
+dialog packetname=2 name="Farl" text="The seed of knowledge were planted by the tenjins,";"but it was still mans choice how to use it."
+
+ins index=borealis timea=0 kind=stop direction=1
+
+ins type=fadeout timea=200 fadetime=2500 kind=village
+ins type=fadeout timea=0 index=1 fadetime=2500 kind=music mode=kill
+
+ins timea=0 index=farl kind=controll controll=false
+ins type=fadeout timea=0 index=0 fadetime=2000 kind=music mode=pause
+ins timea=3000 kind=endseq

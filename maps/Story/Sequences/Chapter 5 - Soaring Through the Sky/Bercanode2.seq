@@ -1,0 +1,183 @@
+import file=main.var
+
+var man=0
+var borealis=1
+var kin=2
+var celis=3
+var zalzi=4
+
+unload character="Borealis"
+
+actor name="Characters/Man1/Man1Extras" pos=1100;1020;2
+actor name="Characters/Borealis/BorealisExtras"
+actor name="Kin"
+actor name="Celis"
+actor name="Zalzi"
+
+load music="Theme of Borealis"
+load music="Someone's Calling2"
+
+info time="day" name="Berca" music="Berca" fadeValue="0" musicVolume="1"
+
+show index=kin value=false
+show index=celis value=false
+show index=borealis value=false
+show index=zalzi value=false
+
+#ins kind=screen_center center=false
+
+ins timea=0 index=0 kind=screenzoom zoomin=true zoomtime=4000 usestaticpos=true pos=512;768
+
+ins timea=0 index=kin kind=show movepos=1192;1280
+ins timea=0 index=borealis kind=show movepos=1213;1230
+ins timea=0 index=celis kind=show movepos=1172;1240
+ins timea=0 index=zalzi kind=show movepos=1192;1200
+
+ins timea=2000 index=kin kind=dist distance=140 direction=0 duration=2800
+ins timea=0 index=celis kind=dist distance=130 direction=0 duration=2600
+ins timea=0 index=borealis kind=dist distance=130 direction=0 duration=2600
+ins timea=0 index=zalzi kind=dist distance=130 direction=0 duration=2600
+
+ins timea=1000 index=man kind=dist distance=92 direction=1 duration=1600
+ins timea=0 index=man kind=queue direction=2
+dialogpacket name=1 starttimea=1700
+dialog packetname=1 name="Man" text="Hi, Zalzi.";"I'm surprised to see you here!"
+dialog packetname=1 name="Man" text="After what you did,";"I would assume you wouldn't be back for a while..."
+
+ins timea=200 index=zalzi kind=dist distance=15 direction=0 duration=100
+ins timea=0 index=zalzi kind=emotion emotion=! show=true
+dialogsingle starttimea=50 duration=100 <= name="Zalzi" text="I had to do it!";"It doesn't mean I've sided with Pensara!"
+ins timea=90 index=man kind=dist distance=10 direction=0 facedirection=2 duration=100
+ins timea=0 index=man kind=emotion emotion=! show=true
+
+ins timea=500 index=man kind=emotion show=false
+ins timea=200 index=man kind=dist distance=5 direction=2 duration=300
+dialogpacket name=2 starttimea=150 duration=550
+dialog packetname=2 name="Man" text="Hey, calm down.";""
+dialog packetname=2 name="Man" text="I'm with you!";"The rebels have gone too far."
+ins timea=500 index=zalzi kind=emotion show=false
+
+ins timea=1500 index=man kind=emotion emotion=... show=true
+ins timea=1000 index=man kind=stop direction=1
+dialogsingle starttimea=1500 <= name="Man" text="But now I'm not so sure anymore..";""
+
+ins timea=500 index=zalzi kind=emotion emotion=? show=true
+ins timea=1200 index=zalzi kind=dist distance=10 direction=0 duration=1000
+dialogsingle starttimea=500 duration=500 <= name="Zalzi" text="Why's that?";""
+ins timea=450 index=zalzi kind=emotion show=false
+
+ins timea=250 index=man kind=emotion emotion=? show=true
+ins timea=0 index=man kind=stop direction=2
+dialogsingle starttimea=150 <= name="Man" text="Haven't you heard?";""
+ins timea=250 index=man kind=emotion show=false
+
+dialogsingle starttimea=150 duration=150 <= name="Man" text="Pensara is about to occupy Zazo!";""
+ins type=fadeout timea=100 index=0 fadetime=800 kind=music mode=pause
+ins timea=200 index=zalzi kind=emotion emotion=! show=true
+ins timea=50 index=borealis kind=dist distance=20 direction=0 duration=100
+ins timea=0 index=borealis kind=emotion emotion=!? show=true
+dialogsingle starttimea=100 duration=250 <= name="Borealis" text="What?!";""
+ins timea=100 index=kin kind=emotion emotion=! show=true
+ins timea=60 index=zalzi kind=stop direction=2
+ins timea=30 index=celis kind=emotion emotion=! show=true
+dialogsingle starttimea=1500 duration=500 <= name="Man" text="Pensara's gathering troops to secure the iron.";""
+ins timea=460 index=zalzi kind=stop direction=0
+ins timea=0 index=zalzi kind=emotion show=false
+ins timea=500 index=kin kind=emotion show=false
+ins timea=300 index=celis kind=emotion show=false
+
+ins timea=700 index=borealis kind=emotion emotion=... show=true
+ins timea=200 index=borealis kind=dist distance=50 direction=1 duration=3000
+ins timea=750 index=celis kind=dist distance=30 direction=0 duration=2000
+ins timea=0 index=celis kind=queue direction=1
+ins timea=400 index=zalzi kind=stop direction=1
+dialogsingle starttimea=2500 duration=350 <= name="Man" text="I hate to be the bearer of bad news...";"I'll leave now."
+ins timea=300 index=zalzi kind=stop direction=0
+ins timea=200 index=man kind=dist distance=400 direction=0 duration=8000
+ins timea=0 index=man kind=queue distance=4000 direction=3 duration=80000
+ins timea=1000 index=zalzi kind=stop direction=1
+
+ins type=fadein timea=2000 index=1 fadetime=0 kind=music mode=play
+ins timea=2500 index=borealis kind=dist distance=40 direction=3 duration=1500
+dialogsingle starttimea=500 duration=500 <= name="Borealis" text="I canÕt stay here any longer.";"I must get to Zazo as fast as I can!"
+
+ins timea=750 index=celis kind=dist distance=10 direction=1 duration=100
+ins timea=0 index=celis kind=emotion emotion=?! show=true
+dialogsingle starttimea=150 <= name="Celis" text="What!? But...";""
+ins timea=100 index=celis kind=emotion show=false
+ins timea=200 index=borealis kind=stop direction=1
+ins timea=1000 index=kin kind=emotion emotion=... show=true
+ins timea=2000 index=kin kind=tor movepos=20;-20 duration=1500
+ins timea=0 index=kin kind=emotion emotion=? show=true
+dialogsingle starttimea=1200 duration=300 <= name="Kin" text="How?"
+ins timea=200 index=borealis kind=look_at actor=kin
+dialogsingle starttimea=250 duration=500 <= name="Borealis" text="I donÕt have it figured out quite yet, but I have to go."
+ins timea=400 index=kin kind=emotion show=false
+
+ins timea=1000 index=borealis kind=stop direction=1
+ins timea=0 index=borealis kind=emotion show=false
+dialogsingle starttimea=150 <= name="Borealis" text="IÕve already made up my mind.";"My people needs me."
+ins timea=250 index=celis kind=dist distance=10 direction=1 duration=200
+ins timea=0 index=celis kind=emotion emotion=! show=true
+dialogsingle starttimea=150 duration=300 <= name="Celis" text="We'll help you!"
+ins timea=250 index=borealis kind=look_at actor=celis
+ins timea=250 index=borealis kind=dist distance=20 direction=1 duration=1000
+dialogsingle starttimea=500 duration=500 <= name="Borealis" text="ThatÕs very kind of you, but I think it will";"be faster and easier to go alone."
+ins timea=400 index=celis kind=emotion show=false
+ins timea=1000 index=borealis kind=stop direction=1
+dialogsingle starttimea=1000 <= name="Borealis" text="Besides, youÕve got your own thing."
+ins timea=1000 index=celis kind=emotion emotion=... show=true
+dialogsingle starttimea=1500 duration=500 <= name="Celis" text="..."
+ins timea=1000 index=kin kind=dist distance=25 direction=1 duration=1500
+ins timea=0 index=kin kind=queue direction=0
+dialogsingle starttimea=250 duration=250 <= name="Kin" text="ItÕs been a pleasure traveling with you!";""
+ins timea=500 index=borealis kind=stop direction=2
+dialogsingle starttimea=150 <= name="Borealis" text="With you too!";"Come visit, ok?"
+ins timea=300 index=zalzi kind=dist distance=40 direction=1 duration=1500
+ins timea=0 index=zalzi kind=queue direction=2
+dialogsingle starttimea=1500 duration=300 <= name="Zalzi" text="Take care, Borealis."
+ins timea=250 index=borealis kind=stop direction=0
+ins timea=1500 index=borealis kind=stop direction=3
+dialogsingle starttimea=250 <= name="Borealis" text="Good bye, all of you."
+ins timea=1000 index=celis kind=stop direction=3
+dialogsingle starttimea=1000 <= name="Celis" text="..."
+ins timea=300 index=borealis kind=dist distance=30 direction=1 duration=600
+ins timea=0 index=borealis kind=queue distance=300 direction=2 duration=6000
+
+ins timea=120 index=celis kind=dist distance=20 duration=800 direction=3
+ins timea=1600 index=kin kind=dist distance=20 duration=1000 direction=0
+ins timea=1600 index=zalzi kind=stop direction=1
+
+ins type=fadeout timea=400 index=1 fadetime=2500 kind=music mode=kill
+ins timea=5000 index=celis kind=emotion emotion=!? show=true
+ins timea=400 index=kin kind=stop direction=3
+ins timea=0 index=kin kind=emotion emotion=? show=true
+ins type=fadein timea=200 index=2 fadetime=1 kind=music mode=play
+text lines="You are close";"" pos=450;384
+ins type=fadeout timea=0 index=0 fadetime=1 kind=village
+ins type=fadein timea=1500 index=0 fadetime=2000 kind=text
+ins type=fadeout timea=8000 index=0 fadetime=2000 kind=text
+ins type=fadein timea=2000 index=0 fadetime=2000 kind=village
+ins timea=0 index=zalzi kind=stop direction=3
+ins timea=0 index=celis kind=emotion emotion=!? show=false
+ins timea=2000 index=kin kind=dist distance=20 duration=800 direction=3
+dialogsingle starttimea=400 <= name="Kin" text="Celis?";"Are you alright?"
+ins timea=1000 index=celis kind=stop direction=1
+ins timea=1000 index=celis kind=dist distance=10 duration=800 direction=1
+ins timea=200 index=kin kind=emotion show=false
+dialogsingle starttimea=400 <= name="Celis" text="Yes.";"Let's go.."
+
+load trigger="Bercanode"
+ins index=0 timea=0 kind=trigger value=0
+load trigger="Olda"
+ins index=1 timea=0 kind=trigger value=1
+load trigger="BercaSoldier 1"
+ins index=2 timea=0 kind=trigger value=1
+load trigger="BercaSoldier 2"
+ins index=3 timea=0 kind=trigger value=1
+
+ins timea=200 index=0 kind=screenzoom zoomin=false zoomtime=4000 usestaticpos=true pos=512;768
+
+ins type=fadeout timea=1000 index=2 fadetime=1000 kind=music mode=kill
+ins type=fadein timea=2000 index=0 fadetime=1000 kind=music mode=play
+ins timea=1000 kind=end

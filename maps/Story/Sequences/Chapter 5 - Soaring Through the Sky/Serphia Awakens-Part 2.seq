@@ -1,0 +1,15 @@
+import file=main.var
+
+var kin=0
+var celis=1
+var zalzi=2
+
+actor name="Kin"
+actor name="Celis"
+actor name="Zalzi"
+
+info time="day" name="Serphia Hall" music="No Music" fadeValue="0" musicVolume="0"
+
+dialogsingle starttimea=600 duration=400 <= name="Girl" text="...";""
+
+ins timea=1000 kind=endseq

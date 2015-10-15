@@ -1,0 +1,94 @@
+mapSize -0.5 0.5 1
+
+size 249
+
+mission BombMission SewerMission trigger="the_sewers--north.maphinderdoor108";"1" trigger="the_sewers--north.maphinderdoor124";"1" dialog="Kin";"Let's get out of here!"
+
+fog red=.2 green=1 blue=.6 alpha=.0008 density=0.003 start=0 end=10
+
+light0 position=0;0;0;1 ambient=.8;.8;.8;1 specular=0;0;0;1 diffuse=.8;.8;.8;1 attenuation=1;0.01;0.015
+material ambient=.4;.4;.4;1 specular=0;0;0;1 diffuse=.7;.7;.7;1
+invMaterial ambient=.4;.4;.4;1 specular=0;0;0;1 diffuse=.4;.4;.4;1
+
+floorTex sewerfloor.jpg
+wallTex sewerwall.png
+wallTex sewerdoor0.png
+wallTex sewerdoor1.png
+roofTex sewerroof.jpg
+
+normal floor 0 1
+normal wall 1 4
+normal roof 4 5
+
+mapPos 1 0
+
+dir 12 1 28
+dir 21 1 37
+dir 26 2 27
+dir 27 2 28
+dir 28 1 44
+dir 28 2 29
+dir 29 2 30
+dir 37 1 53
+dir 44 1 60
+dir 53 2 54
+dir 54 2 55
+dir 55 1 71
+dir 60 1 76
+dir 71 2 72
+dir 72 2 73
+dir 73 2 74
+dir 74 2 75
+dir 75 2 76
+dir 76 1 92
+dir 76 2 77
+dir 92 1 108
+dir 102 1 118
+dir 108 1 124
+dir 118 1 134
+dir 122 1 138
+dir 124 1 140
+dir 133 2 134
+dir 134 1 150
+dir 134 2 135
+dir 135 2 136
+dir 136 2 137
+dir 137 2 138
+dir 138 1 154
+dir 138 2 139
+dir 139 2 140
+dir 140 1 156
+dir 140 2 141
+dir 141 2 142
+dir 142 2 143
+dir 150 1 166
+dir 154 1 170
+dir 170 1 186
+dir 186 1 202
+
+mapEnd
+
+inv hinderDoor 143 2 2 Walls/sewerdoor the_sewers--south-mark1
+inv hinderDoor 202 1 2 Walls/sewerdoor the_sewers--north_east-mark0
+inv hinderDoor 136 2 2 Walls/sewerdoor the_sewers--north-mark3
+inv hinderDoor 137 0 2 Walls/sewerdoor the_sewers--north-mark2
+inv hinderDoor 108 1 2 Walls/sewerdoor the_sewers--north-mark5
+inv hinderDoor 124 3 2 Walls/sewerdoor the_sewers--north-mark4
+
+
+# this door = 6 - Very special, leads to the north part of Pensara
+wall 2 21 3
+inv door 21 3 dontopen Emerge_From_The_Sewers pensara_-_the_north_district-pos2
+
+inv chest 26 0 2 Images/chest 0 900
+inv chest 30 2 2 Images/chest 0 1300
+
+inv bomb 166 1 sewermission Images/bomb.png Zalzi="Vincent...";"" 0-Kin()="What are those rebels thinking?";"How can they justify this??" 1-Kin()="They must have been really desperate to do something";"like this, and Vincent is the one who..." 1-Kin()="My own flesh and blood...";"" 2-Kin()="I must make my father see...";"I must stop his oppression to end this!"
+
+#wall 3 12 3
+#wall 3 77 2
+#wall 3 122 3
+#wall 3 156 1
+#wall 3 133 0
+
+end

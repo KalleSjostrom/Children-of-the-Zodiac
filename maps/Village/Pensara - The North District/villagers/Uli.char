@@ -1,0 +1,14 @@
+image Uli
+start 1670 1050
+
+in 2 100 true
+
+dialog 1
+
+# Outside the library
+n Uli
+fl I don't feel like talking.
+sl end
+f true
+
+end

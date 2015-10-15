@@ -1,0 +1,32 @@
+name Giant
+
+defense 457
+magicDefense 351
+agility 21
+evade 0
+hit 93
+attack 2300
+magic 0
+support 2310
+hp 6501
+element 0
+gold 5534
+experience 3128
+criticalChance 0
+
+diesound Ogre/dies
+image troll 3
+armor 38 43
+preferences 90 0 10
+
+scale 8.5
+height -2
+depth -5
+middle 0
+
+# type name power onAll element
+attackSpec probability=.5 anim=(f=1,a=400)--(f=1,a=180,se=Monster/Ogre/attack)--(f=2,h=true)
+attackSpec name=Blade_of_Furry power=.6 onAll=true probability=.5 anim=(f=1,a=300)--(f=1,a=180,se=Monster/Ogre/attack)--(f=2,a=300)--(f=1,a=300)--(f=1,a=180,se=Monster/Ogre/attack)--(f=2,a=300)--(f=1,a=300)--(f=1,a=180,se=Monster/Ogre/attack)--(f=2,a=300,h=true)
+attackSpec type=sup name=Heal power=1 anim=(f=1,a=800,c=s+Cure)--(f=1,a=200,h=true)
+
+# cardPreference [CardName preference]

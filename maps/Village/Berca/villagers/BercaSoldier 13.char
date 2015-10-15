@@ -1,0 +1,49 @@
+image char/Pensarasoldier
+start 2160 120
+
+in 2 100 true
+
+dialog 1
+
+n Soldier
+fl I hate it here.
+sl I want to go back home to my wife.
+f true
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

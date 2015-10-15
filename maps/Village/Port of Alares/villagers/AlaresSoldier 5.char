@@ -1,0 +1,20 @@
+image char/Alaressoldier	   
+start 10 240	   
+	   
+in 1 100 true	   
+	   
+dialog 1	   
+	   
+n Soldier 1	   
+fl God I'm bored, but I know Pensara	   
+sl will strike any moment now.	   
+f true	   
+	   
+dialog 2	   
+	   
+n Soldier	   
+fl If Pensara is behind the Zazo incident,
+sl I know they will attack Alares any moment.	   
+f true	   
+	   
+end	 

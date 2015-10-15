@@ -1,0 +1,56 @@
+image char/Billy_the_rascal	   
+start 2100 770	   
+	   
+in 0 190 false 3	   
+in 3 350 false 3	   
+in 2 230 false 3	   
+in 3 150 false 3	   
+in 2 190 false 3	   
+in 3 350 false 3	   
+in 0 150 false 3	   
+in 1 250 false 3	   
+in 2 200 false 3	   
+in 1 450 false 3	   
+in 0 220 false 3	   
+in 1 150 false 3	   
+in 0 60 false 3	   
+	   
+dialog 1	   
+	   
+n Billy the Rascal	   
+fl My family is so boring. 	   
+sl end	   
+f true	   
+	   
+n Billy the Rascal	   
+fl They leave me no choice but to	   
+sl run away from home again.	   
+f true	   
+	   
+dialog 2	   
+	   
+n Billy the Rascal	   
+fl Have you talked to my father?	   
+sl end	   
+f true	   
+	   
+n Billy the Rascal	   
+fl Please don't tell on me!
+sl Please...
+trigger Farmer_Bob 2	   
+trigger Billy 4
+f true	   
+
+dialog 4	   
+	   
+n Billy the Rascal	   
+fl Have you talked to my father?	   
+sl end	   
+f true	   
+	   
+n Billy the Rascal	   
+fl Please don't tell on me!
+sl Please...  
+f true	 
+	   
+end	 

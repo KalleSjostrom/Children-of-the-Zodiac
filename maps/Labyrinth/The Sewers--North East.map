@@ -1,0 +1,75 @@
+mapSize -0.5 0.5 1
+
+size 249
+
+mission BombMission SewerMission trigger="the_sewers--north.maphinderdoor108";"1" trigger="the_sewers--north.maphinderdoor124";"1" dialog="Kin";"Let's get out of here!"
+
+fog red=.2 green=1 blue=.6 alpha=.0008 density=0.003 start=0 end=10
+
+light0 position=0;0;0;1 ambient=.8;.8;.8;1 specular=0;0;0;1 diffuse=.8;.8;.8;1 attenuation=1;0.01;0.015
+material ambient=.4;.4;.4;1 specular=0;0;0;1 diffuse=.7;.7;.7;1
+invMaterial ambient=.4;.4;.4;1 specular=0;0;0;1 diffuse=.4;.4;.4;1
+
+floorTex sewerfloor.jpg
+wallTex sewerwall.png
+wallTex sewerdoor0.png
+wallTex sewerdoor1.png
+roofTex sewerroof.jpg
+
+normal floor 0 1
+normal wall 1 4
+normal roof 4 5
+
+mapPos 2 0
+
+dir 10 1 26
+dir 22 2 23
+dir 23 1 39
+dir 23 2 24
+dir 24 2 25
+dir 25 1 41
+dir 25 2 26
+dir 26 2 27
+dir 27 2 28
+dir 28 2 29
+dir 29 2 30
+dir 39 1 55
+dir 41 1 57
+dir 55 1 71
+dir 57 1 73
+dir 73 1 89
+dir 89 1 105
+dir 92 1 108
+dir 104 2 105
+dir 105 1 121
+dir 105 2 106
+dir 106 2 107
+dir 107 2 108
+dir 108 1 124
+dir 108 2 109
+dir 109 2 110
+dir 121 1 137
+dir 137 1 153
+
+mapEnd
+
+# this door = 0
+inv hinderDoor 10 3 2 Walls/sewerdoor the_sewers--north-mark1
+
+inv hinderDoor 25 1 2 Walls/sewerdoor the_sewers--north_east-mark2
+inv hinderDoor 41 3 2 Walls/sewerdoor the_sewers--north_east-mark1
+
+inv button 30 2 7 Images/lever The_Sewers--North_East.maphinderDoor25 The_Sewers--North_East.maphinderDoor41
+inv button 153 1 7 Images/lever The_Sewers--North.maphinderDoor136 The_Sewers--North.maphinderDoor137
+
+inv chest 71 1 2 Images/chest 0 950
+inv chest 110 2 2 Images/chest 0 1050
+
+inv save 104 2 -1 -1
+
+#wall 3 22 0
+#wall 3 104 0
+#wall 3 92 3
+#wall 3 124 1
+
+end

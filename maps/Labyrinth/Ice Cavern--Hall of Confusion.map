@@ -1,0 +1,118 @@
+mapSize -0.5 0.5 1
+
+size 511
+
+light0 position=0;0;0;1 ambient=.7;.7;.7;1 specular=0;0;0;1 diffuse=.7;.7;.7;1 attenuation=1;0.02;0.03
+material ambient=.3;.3;.3;1 specular=0;0;0;1 diffuse=.3;.3;.4;1
+
+enemyColor 1 1 1 1
+
+floorTex icecavefloor.jpg
+wallTex icecavewall.png
+wallTex icecavedoor0.png
+roofTex icecaveroof.jpg
+
+normal floor 0 1
+normal wall 1 3
+normal roof 3 4
+
+mapPos 0 0
+
+# directions in labyrinth
+dir 3 1 19
+dir 6 1 22
+dir 9 1 25
+dir 12 1 28
+dir 19 1 35
+dir 22 1 38
+dir 25 1 41
+dir 28 1 44
+dir 35 2 36
+dir 36 2 37
+dir 37 2 38
+dir 38 2 39
+dir 39 1 55
+dir 39 2 40
+dir 40 2 41
+dir 41 2 42
+dir 42 2 43
+dir 43 2 44
+dir 44 2 45
+dir 45 2 46
+dir 46 2 47
+dir 55 1 71
+dir 71 1 87
+dir 76 1 92
+dir 79 1 95
+dir 85 1 101
+dir 87 1 103
+dir 92 1 108
+dir 95 1 111
+dir 101 1 117
+dir 103 2 104
+dir 104 1 120
+dir 104 2 105
+dir 105 2 106
+dir 106 1 122
+dir 106 2 107
+dir 107 2 108
+dir 108 2 109
+dir 109 1 125
+dir 111 1 127
+dir 117 1 133
+dir 120 1 136
+dir 122 1 138
+dir 125 1 141
+dir 125 2 126
+dir 126 2 127
+dir 133 2 134
+dir 134 2 135
+dir 135 2 136
+dir 136 1 152
+dir 141 1 157
+dir 152 1 168
+dir 157 1 173
+dir 165 1 181
+dir 165 2 166
+dir 166 2 167
+dir 167 2 168
+dir 168 2 169
+dir 169 2 170
+dir 170 2 171
+dir 171 1 187
+dir 171 2 172
+dir 172 2 173
+dir 173 2 174
+dir 174 2 175
+dir 175 1 191
+dir 181 1 197
+dir 187 1 203
+dir 191 1 207
+
+mapEnd
+
+wall 2 47 2
+
+inv hinderDoor 207 1 2 Walls/icecavedoor Ice_Cavern--Throne_Room-mark0
+inv door 47 2 dontopen Ice_Cavern--Frozen_Field-mark0
+
+inv hinderDoor 203 1 2 Walls/icecavedoor Ice_Cavern--Throne_Room-mark5
+inv hinderDoor 197 1 2 Walls/icecavedoor Ice_Cavern--Throne_Room-mark4
+inv hinderDoor 126 2 2 Walls/icecavedoor Ice_Cavern--Hall_of_Confusion-mark5
+inv hinderDoor 127 0 2 Walls/icecavedoor Ice_Cavern--Hall_of_Confusion-mark4
+
+# Bottom left - To bottom right
+inv iceButton 79 3 2 Images/note2 Labyrinth/Note_2.wav Ice_Cavern--Hall_of_Confusion.maphinderdoor207 Ice_Cavern--Hall_of_Anguish.maphinderdoor15 Ice_Cavern--Hall_of_Anguish.mapicebutton143
+# Middle left - To top right
+inv iceButton 76 3 2 Images/note4 Labyrinth/Note_4.wav Ice_Cavern--Hall_of_Confusion.maphinderdoor197 Ice_Cavern--Hall_of_Anguish.maphinderdoor5 Ice_Cavern--Hall_of_Anguish.mapicebutton140
+# Top left - Internal door
+inv iceButton 85 3 2 Images/note3 Labyrinth/Note_3.wav Ice_Cavern--Hall_of_Confusion.maphinderdoor126 Ice_Cavern--Hall_of_Confusion.maphinderdoor127 Ice_Cavern--Hall_of_Anguish.maphinderdoor94 Ice_Cavern--Hall_of_Anguish.maphinderdoor95  Ice_Cavern--Hall_of_Anguish.mapicebutton117 
+# Middle right - middle right
+inv iceButton 138 1 2 Images/note5 Labyrinth/Note_5.wav Ice_Cavern--Hall_of_Confusion.maphinderdoor203 Ice_Cavern--Hall_of_Anguish.maphinderdoor11 Ice_Cavern--Hall_of_Anguish.mapicebutton74
+
+inv chest 6 3 2 Images/icepot 2 cards.magic.Colliding 1
+inv chest 9 3 2 Images/icepot 2 cards.magic.Blizzard 1
+inv chest 3 3 2 Images/icepot 2 cards.magic.Flare 1
+inv chest 12 3 2 Images/icepot 2 cards.magic.Tornado 1
+
+inv save 45 0 -1 -1

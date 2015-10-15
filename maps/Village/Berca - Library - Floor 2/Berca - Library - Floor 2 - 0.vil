@@ -1,0 +1,41 @@
+background Berca_-_Library_-_Floor_2 true
+
+inside
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1024 768
+start 496 290 0
+
+holeDoor switch Berca_-_Library_-_Floor_1 496 328 30 2 2 496 464 2
+# holeDoor village Berca 494 430 30 0 2 1826 104 0
+
+villager Garli
+
+o 611 281 643 315
+o 610 435 642 469
+o 493 286 527 299
+
+o 540 333 552 396
+o 480 386 552 396
+#o 539 454 546 489
+#o 478 456 485 489
+#o 483 383 541 396
+#o 478 394 545 457
+
+o 274 609 754 702
+o 244 190 774 286
+o 719 436 751 470
+o 271 435 303 469
+o 381 582 410 637
+o 610 582 643 641
+o 379 281 411 315
+o 720 281 752 315
+o 274 583 301 651
+o 379 435 411 469
+o 237 285 274 640
+o 271 281 303 315
+o 470 333 485 394
+o 721 581 757 640
+o 750 286 797 656
+
+end

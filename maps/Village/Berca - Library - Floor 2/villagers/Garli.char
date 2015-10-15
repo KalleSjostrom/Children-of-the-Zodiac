@@ -1,0 +1,67 @@
+image Garli
+start 550 250
+
+in 2 180 true
+
+dialog 1
+
+n Garli
+fl I read a lot.
+sl That's my way to relax.
+f true
+
+dialog 2
+
+n Garli
+fl I think stopping the rebels was a good thing to do. 
+sl You seem like someone who can get things done. 
+f true
+
+n Garli
+fl I was wondering if you can help me finding a book
+sl about trees and flowers?
+f true
+
+n Garli
+fl You see, because of where I live I don't know much about 
+sl the green nature. I give you something shiny in return!
+trigger Alares_-_Libraryloot1 0
+trigger Garli 3
+f true
+
+dialog 3
+
+check Garli 4 Book_of_Nature
+
+n Garli
+fl A book about trees and flowers would be really great...
+sl end
+f true
+
+dialog 4
+
+n Garli
+fl A book about trees and flowers!
+sl I'm gonna start reading at once!
+f true
+
+n Garli
+fl Oh... your reward... here you go!
+sl end
+f true
+
+n _
+fl You got the key item "Royal Crown"!
+sl end
+gift Royal_Crown 1
+trigger Garli 5
+f true
+
+dialog 5
+
+n Garli
+fl Schh! I'm reading...
+sl end
+f end
+
+end

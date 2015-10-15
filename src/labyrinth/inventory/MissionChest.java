@@ -1,0 +1,125 @@
+package labyrinth.inventory;
+
+import graphics.Object2D;
+import info.BattleValues;
+import info.Database;
+import info.LabyrinthMap;
+
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+
+import labyrinth.Labyrinth;
+import labyrinth.Node;
+import labyrinth.inventory.Inventory;
+import labyrinth.mission.Mission;
+import sound.SoundPlayer;
+import villages.villageStory.Parser;
+
+public class MissionChest extends Inventory {
+	
+	private ArrayList<String[]> dialogs = new ArrayList<String[]>();
+	private int current = 0;
+	private String currentSpeaker;
+	private boolean first = true;
+	private boolean missionDone = false;
+
+	public MissionChest(Node n, int dir, int nrOfTexs, String image, int status, StringTokenizer t) {
+		super(n, dir, nrOfTexs, image, status);
+		if (status == 1) {
+			currentTex = Object2D.INVISIBLE;
+			current = Integer.MAX_VALUE;
+		} else {
+			current = 0;
+			currentTex = 0;
+			while (t.hasMoreTokens()) {
+				String[] dial = new String[3];
+				String[] s = Parser.getArgument(t.nextToken());
+				dial[0] = s[0];
+				s = Parser.getText(t, s[1]);
+				dial[1] = s[0];
+				dial[2] = (s.length > 1) ? s[1] : "";
+				dialogs.add(dial);
+			}
+			if (dialogs.size() > 0) {
+				currentSpeaker = dialogs.get(0)[0];
+			}
+		}
+	}
+	
+	@Override
+	protected void setSettings() {
+		scale = BattleValues.CARD_SCALE;
+		info = getSettings();
+		heightOffset = info.getHeightOffset();
+		zOff = info.getZOffset();
+		scale2 = info.getScale();
+	}
+	
+	@Override
+	public void activate(Labyrinth labyrinth) {
+		if (current < dialogs.size()) {
+			String[] d = dialogs.get(current);
+			String cs = d[0];
+			if (currentSpeaker.compareTo(cs) != 0) {
+				currentSpeaker = cs;
+				first = !first;
+			}
+			
+			if (d[0].equals("gift")) {
+				currentTex = 1;
+				String name = d[1].replace("_", " ");
+				// Load.getPartyItems().addItem(name, 1);
+				SoundPlayer.playSound(info.getSoundEffect());
+				labyrinth.drawDialog("Zalzi took " + name + " from the chest.", "");
+			} else {
+				labyrinth.drawDialog(first, d[0], d[1], d[2], d[0].contains("()"));
+			}
+			current++;
+		} else if (!missionDone) {
+			Mission mission = labyrinth.getMission();
+			mission.incrementStatus();
+			missionDone  = true;
+			if (mission.checkIfFinished()) {
+				ArrayList<String[]> missionDialogs = mission.getFinishedDialogs();
+				if (missionDialogs != null) {
+					dialogs = missionDialogs;
+					current = 0;
+				}
+			}
+			activate(labyrinth);
+		} else {
+			doneForGood();
+//			labyrinth.exitDialog(true);
+		}
+	}
+
+	private void doneForGood() {
+		status = 1;
+		Database.addStatus(dataBaseName, status);
+	}
+
+	@Override
+	public String getMapImage() {
+		int status = Database.getStatusFor(dataBaseName);
+		if (status == -1) {
+			status = 0;
+			Database.addStatus(dataBaseName, 0);
+		}
+		return LabyrinthMap.chest[status];
+	}
+
+	public boolean isPassable(int dir) {
+		return false;
+	}
+	
+	public boolean isPassableOnThis(int dir) {return isPassable(dir);}
+
+	public boolean isDirectedTowards(int dir) {
+		return true;
+	}
+
+	@Override
+	public boolean shouldDrawWhenOnlySeen() {
+		return true;
+	}
+}

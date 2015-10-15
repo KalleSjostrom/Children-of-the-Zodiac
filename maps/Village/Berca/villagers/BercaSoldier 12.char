@@ -1,0 +1,49 @@
+image char/Pensarasoldier
+start 2160 50
+
+in 2 100 true
+
+dialog 1
+
+n Soldier
+fl It's so hot here...
+sl I wish I didn't have to wear this outfit.
+f true
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

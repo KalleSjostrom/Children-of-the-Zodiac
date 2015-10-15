@@ -1,0 +1,242 @@
+##### LANDSCAPE #####
+# NAME: World one
+
+##### BACKGRUND #####
+
+background West
+
+##### PLACES #####
+
+# Node Xpos Ypos type name
+
+## SOUTH DENVIR ##
+	node 204 440 village Home_of_Celis
+	node 244 426 crossroad Celis_Cross
+	
+    node 290 454 labyrinth Forest_of_Reil--Deep_Forest-mark0
+    node 380 485 labyrinth Forest_of_Reil--Deep_Forest-mark1
+	
+	node 471 534 crossroad Main_Cross
+	
+	node 583 516 village Alares
+	node 573 564 crossroad East_Cross
+	node 616 535 labyrinth Grivera--First_Floor-mark0
+	
+	node 580 600 village Port_of_Alares
+	node 476 422 village Pass_to_Zazo
+
+## NORTH DENVIR ##
+    node 576 390 labyrinth Central_Pass--North_East_Part-mark0
+    node 621 370 crossroad Zazo_South_Cross
+    node 663 296 crossroad Zazo_Cross
+    node 783 264 village Port_of_Zazo
+	node 645 250 village Zazo
+	
+	node 522 260 crossroad West_Cross
+	node 421 253 labyrinth The_Great_Mine--The_Hall-mark0
+	node 631 406 labyrinth East_Passage--West_Mountain-mark0
+	
+## EAST DENVIR ##
+	node 714 448 labyrinth Forest_of_Bri--East_Forest-mark0
+	node 771 449 labyrinth Mt._Cesadur--Entrance-mark0
+
+##### ROADS #####
+
+# 0 = up, 1 = right, 2 = down, 3 = left
+# road name from dirTo to dirBack isClosed
+# co x y (coordinates)
+# oc (add the way back)
+
+## SOUTH DENVIR ##
+
+	# From Home_of_Celis (celis house) right to the crossroad
+	road 0 Home_of_Celis 1 Celis_Cross 3
+		co 204 440
+		co 219 438
+		co 234 432
+		co 244 426
+		oc
+	
+	# From the cross road right to the forest of Reil
+	road 2 Celis_Cross 1 Forest_of_Reil--Deep_Forest-mark0 3
+	   co 244 426
+	   co 258 430
+	   co 273 440
+	   co 290 454
+	   oc
+	   
+	# Past the forest of reil
+    road 3 Forest_of_Reil--Deep_Forest-mark0 1 Forest_of_Reil--Deep_Forest-mark1 3
+       co 290 454
+       co 305 456
+       co 320 458
+       co 335 462
+       co 350 468
+       co 365 475
+       co 380 485
+       oc
+       
+    # From the forest of reil right to the main cross road
+    road 4 Forest_of_Reil--Deep_Forest-mark1 1 Main_Cross 3
+        co 380 485   
+        co 393 497
+        co 407 510
+        co 422 519
+        co 436 526
+        co 452 530
+        co 471 534
+        oc
+        
+    # From the main cross road right to the east cross road
+    road 5 Main_Cross 1 East_Cross 3
+        co 471 534
+        co 488 545
+        co 505 555
+        co 522 563
+        co 539 565
+        co 556 566
+        co 573 564
+        oc
+        
+    # From the main cross road up to the north cave leading to Zazo.
+    road 6 Main_Cross 0 Pass_to_Zazo 2
+        co 471 534
+        co 474 517
+        co 475 500
+        co 475 483
+        co 474 466
+        co 474 449
+        co 475 435
+        co 476 422
+        oc
+
+    # From the east cross road to alares
+    road 7 East_Cross 0 Alares 2
+        co 573 564
+        co 578 550
+        co 583 533
+        co 583 516
+        oc
+        
+    # From the east cross road to grivera
+    road 8 East_Cross 1 Grivera--First_Floor-mark0 2 
+        co 573 564
+        co 590 558
+        co 606 545
+        co 616 535
+        oc
+        
+    # From the east cross road to grivera
+    road 9 East_Cross 2 Port_of_Alares 0
+        co 573 564
+        co 571 578
+        co 572 590
+        co 580 600
+        oc
+        
+## NORTH DENVIR ##
+
+    # From the south pass up to the north pass
+    road 10 Pass_to_Zazo 1 Central_Pass--North_East_Part-mark0 3
+        co 476 422
+        co 496 416
+        co 516 410
+        co 536 404
+        co 556 397
+        co 576 390
+        oc
+        
+    # From the "pass to alares" up to the zazo cross
+    road 11 Central_Pass--North_East_Part-mark0 1 Zazo_South_Cross 3
+        co 576 390
+        co 601 380
+        co 621 370
+        oc
+    
+    road 12 Zazo_South_Cross 1 Zazo_Cross 2
+        co 621 370
+        co 637 361
+        co 649 349
+        co 655 332
+        co 660 313
+        co 663 298
+        oc
+        
+     # From the Zazo cross right to the port of zazo
+     road 13 Zazo_Cross 1 Port_of_Zazo 3
+        co 663 298
+        co 683 293
+        co 703 293
+        co 723 290
+        co 743 284
+        co 763 274
+        co 783 264
+        oc
+
+     # From the Zazo cross up to Zazo
+     road 14 Zazo_Cross 0 Zazo 2
+        co 663 298
+        co 662 277
+        co 658 259
+        co 650 250
+        oc
+
+     # From the Zazo cross left to the west cross
+     road 15 Zazo_Cross 3 West_Cross 1
+        co 663 298
+        co 643 302
+        co 623 304
+        co 603 305
+        co 583 302
+        co 564 298
+        co 548 289
+        co 533 277
+        co 522 260
+        oc
+        
+     # From the West Cross left to the Great Mine
+     road 16 West_Cross 3 The_Great_Mine--The_Hall-mark0 1
+        co 522 260
+        co 502 252
+        co 482 248
+        co 462 253
+        co 442 258
+        co 421 253
+        oc
+        
+     # From the West Cross down to the Earth Cave
+     #road 17 West_Cross 2 Earth_Cavern--First_Floor-mark1 0
+     #   co 522 260
+     #   co 510 278
+     #   co 491 288
+     #   oc
+        
+     road 18 Zazo_South_Cross 2 East_Passage--West_Mountain-mark0 0
+        co 621 370
+        co 626 388
+        co 631 406
+        oc
+     
+     road 19 East_Passage--West_Mountain-mark0 1 Forest_of_Bri--East_Forest-mark0 3
+        co 631 406
+        co 643 414
+        co 656 420
+        co 668 429
+        co 679 436
+        co 692 441
+        co 703 443
+        co 714 448
+        oc
+        
+## EAST DENVIR ##
+    # From East Pass right to mount garr
+    road 20 Forest_of_Bri--East_Forest-mark0 1 Mt._Cesadur--Entrance-mark0 3
+        co 714 448
+        co 728 451
+        co 742 455
+        co 757 455
+        co 771 449
+        oc
+        
+##### END #####
+end

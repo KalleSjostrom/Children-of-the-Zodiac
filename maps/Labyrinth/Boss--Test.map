@@ -1,0 +1,29 @@
+mapSize -0.5 0.5 1
+
+# fog red=.4 green=.3 blue=0 alpha=.01 density=0.01
+
+light0 position=0;0;0;1 ambient=1;1;1;1 specular=0;0;0;1 diffuse=1;1;1;1 attenuation=1;0.01;0.015
+material ambient=.8;.8;.8;1 specular=0;0;0;1 diffuse=.7;.7;.7;1
+invMaterial ambient=.7;.7;.7;1 specular=.2;.2;.2;1 diffuse=.8;.8;.8;1 shininess=5 emission=.1;.1;.1;1
+
+enemyColor .7 .7 .7 1
+
+#wallTex demonfloorwall.png
+#wallTex demonfloordoor0.png
+
+normal floor 0 0
+normal wall 0 0
+normal roof 0 0
+
+mapPos 2 1
+
+# directions in labyrinth
+dir 13 1 29
+
+mapEnd
+
+inv door 13 2 dontopen _
+
+inv boss 29 -1 -1 Menthu
+
+end

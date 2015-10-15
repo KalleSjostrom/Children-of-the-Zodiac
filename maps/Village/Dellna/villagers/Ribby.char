@@ -1,0 +1,34 @@
+image Ribby
+start 35 850
+
+in 2    100 false
+in 0    100 false
+
+dialog 1
+
+n Ribby
+fl An outsider! 
+sl Long time since I saw someone from the outer world.
+f true
+
+n Ribby
+fl I really like it here in Dellna, we are not disturbed by all
+sl the nonsense that is happening on the other continents.
+trigger Ribby 2
+f true
+
+dialog 2
+
+n Ribby
+fl Yeah... 
+sl I really like it here!
+f true
+
+dialog 3
+
+n Ribby
+fl I heard that our beloved elder passed away... 
+sl Sacrificed himself for the world...
+f true
+
+end

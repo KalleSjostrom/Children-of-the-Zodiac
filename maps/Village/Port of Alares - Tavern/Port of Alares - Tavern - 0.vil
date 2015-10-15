@@ -1,0 +1,41 @@
+# background, prefix name of both images day
+background Port_of_Alares_-_Tavern true
+
+inside
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1024 768
+start 413 543 0
+
+holeDoor switch Port_of_Alares 413 563 30 2 1 810 189 2
+
+o 432 345 699 380
+o 432 320 453 355
+o 495 378 512 391
+o 615 509 688 538
+o 331 505 404 534
+o 359 535 376 552
+o 479 509 552 538
+o 321 598 406 637
+o 696 191 741 682
+o 551 377 567 388
+o 275 205 320 696
+o 646 448 662 465
+o 364 439 381 454
+o 414 336 431 365
+o 668 377 683 390
+o 671 278 696 293
+o 292 202 748 279
+o 451 375 468 388
+o 617 420 690 449
+o 335 409 408 438
+o 611 377 628 390
+o 643 538 660 555
+o 456 598 715 643
+o 508 538 525 553
+
+villager Earl
+villager Felix
+villager Herb
+
+end

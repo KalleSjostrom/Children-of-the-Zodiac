@@ -1,0 +1,22 @@
+image /Pensara_-_The_North_District/villagers/Podd
+start 0 0
+
+in 2 100 true
+
+dialog 4
+
+n Podd
+fl I want to give you this to show my appreciation 
+sl that you saved our town earlier. Take this!
+trigger Podd 5
+gift cards.offense.MagicalBlow 2 3 false
+f true
+
+dialog 5
+
+n Podd
+fl Thank you, again!
+sl end
+f true
+
+end

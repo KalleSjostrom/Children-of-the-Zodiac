@@ -1,0 +1,95 @@
+name Taur
+
+defense 456
+magicDefense 381
+agility 22
+evade 0
+hit 90
+attack 2102
+magic 0
+support 0
+hp 20324
+element 4
+gold 0
+experience 0
+criticalChance 0
+
+diesound Spikey/dies
+image shadowtaur 8
+armor 65 45
+preferences 100 0
+
+scale 6.1
+height -2.6
+depth -6
+middle 0
+
+attackSpec type=off name=Preparing power=0 target=-1 anim=(a=1000)
+
+attackSpec {
+	type=off
+	name=Crush
+	onAll=true
+	power=1.5
+	anim=(f=1,h=true,se=Monster/Spikey/earthcrush,a=430)--(f=2)--(f=3,s=true,a=560)--(f=4)
+}
+	#power=0
+	#effect=(Death=1)
+
+attackSpec {
+	type=off
+	name=Bite
+	power=1
+	anim=(f=1)--(f=1,a=40,se=Monster/Spikey/bite)--(f=5,cs=true,a=860)--(f=6)--(f=7)
+}
+
+attackSpec {
+	type=off
+	name=Earth_Claw
+	element=earth
+	power=1.5
+	anim=(f=1,h=true,se=Monster/Spikey/earthclaw,a=430)--(f=2)--(f=3,s=true,a=560)--(f=4)
+}
+
+attackSpec {
+	type=off
+	name=Earth_Shake
+	element=earth
+	power=0
+	onAll=true
+	anim=(s=true,cs=true,a=550,se=Monster/Spikey/earthquake)--(f=1,s=true,cs=true,a=800)--(s=true,cs=true)
+	effect=(BoostDef=2;-.5)
+}
+
+attackSpec {
+	type=off
+	name=Wall
+	power=0
+	onAll=true
+	anim=(s=true,se=Monster/Spikey/wall,a=550)--(f=1,s=true,a=200)--(s=true,a=750)--(f=1,s=true,a=200)
+	effect=(BoostDef=2;1)
+}
+
+attackSpec {
+	type=off
+	name=Strengthen
+	power=0
+	onAll=true
+	anim=(a=50,se=Monster/Spikey/strengthen)--(f=5,s=true,a=1800)
+	effect=(BoostOff=2;1)
+}
+
+attackSpec {
+	type=off
+	name=Paralyzed
+	power=0
+	onAll=true
+	anim=(s=true,a=1200,se=Monster/Spikey/paralyzed)
+}
+
+run script=taur
+
+cardPreference Death 0
+cardPreference openwound 0
+
+nextPlace="MemorySalmonman";""

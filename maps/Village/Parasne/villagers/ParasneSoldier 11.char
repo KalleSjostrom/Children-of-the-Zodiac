@@ -1,0 +1,85 @@
+image char/Pensarasoldier
+start 335 1255
+
+in 2 100 true
+
+dialog 1
+
+n Soldier
+fl This is a good spot to relax
+sl and just listen to the ocean waves.
+f true 
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

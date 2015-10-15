@@ -1,0 +1,142 @@
+import file=main.var
+
+var elmer=0
+var kin=1
+var celis=2
+
+load image="black"
+load music="Someone's Calling2"
+
+info time="night" name="Alares - Celis" music="Alares at Night" fadeValue="0" musicVolume="1"
+
+actor name="Kin"
+actor name="Celis"
+actor name="Alares/villagers/GTElmer/GTElmerExtras"
+
+show index=kin value=false
+show index=celis value=false
+show index=elmer value=false
+
+ins timea=0 index=elmer kind=controll controll=true
+
+ins type=fadein timea=0 fadetime=2000 kind=village
+
+ins timea=0 index=celis kind=show movepos=886;193
+
+ins timea=0 index=celis kind=dist distance=250 duration=5000 direction=2
+ins timea=5000 index=celis kind=dist distance=100 duration=3000 direction=3
+
+dialogsingle starttimea=1500 duration=3000 <= name="Celis" text="...";""
+ins timea=3000 index=celis kind=stop direction=2
+ins timea=4000 index=celis kind=dist distance=20 duration=500 direction=0
+ins timea=1000 index=celis kind=emotion emotion=... show=true
+ins timea=2000 index=celis kind=emotion show=false
+ins timea=1000 index=celis kind=dist distance=125 duration=3000 direction=3
+dialogsingle starttimea=3100 duration=1730 <= name="Celis" text="Oh, my head hurts..";""
+ins timea=100 index=celis kind=stop direction=2
+ins timea=400 index=celis kind=stop direction=3
+ins timea=200 index=celis kind=emotion emotion=? show=true
+ins timea=200 index=celis kind=stop direction=0
+ins timea=400 index=celis kind=stop direction=3
+ins timea=400 index=celis kind=stop direction=2
+
+ins timea=400 index=celis kind=dist distance=180 duration=4400 direction=3
+ins timea=200 index=celis kind=emotion show=false
+dialogsingle starttimea=3000 duration=2000 <= name="Celis" text="I can't sleep.";"I feel so dizzy."
+
+ins timea=2000 index=celis kind=stop direction=3
+ins timea=120 index=celis kind=stop direction=0
+ins timea=60 index=celis kind=emotion emotion=?! show=true
+ins timea=60 index=celis kind=stop direction=1
+ins timea=120 index=celis kind=stop direction=2
+dialogsingle starttimea=50 duration=800 <= name="Celis" text="What's happening!";""
+ins timea=400 index=celis kind=emotion show=false
+
+ins type=fadeout timea=0 index=0 fadetime=2500 kind=music mode=pause
+ins timea=70 index=celis kind=stop direction=3
+ins timea=120 index=celis kind=stop direction=0
+ins timea=120 index=celis kind=stop direction=1
+
+ins type=fadein timea=1200 index=1 fadetime=1 kind=music mode=play
+text lines="Find us...";"" pos=450;384
+ins type=fadeout timea=0 index=0 fadetime=1 kind=village
+ins type=fadein timea=1500 index=0 fadetime=2000 kind=text
+ins type=fadeout timea=8000 index=0 fadetime=2000 kind=text
+ins type=fadein timea=2000 index=0 fadetime=2000 kind=village
+
+ins timea=0 index=kin kind=show movepos=667;420
+ins timea=0 index=celis kind=stop direction=3
+ins timea=200 index=kin kind=dist distance=100 duration=1000 direction=3
+ins timea=200 index=kin kind=emotion emotion=! show=true
+
+dialogsingle starttimea=600 duration=2000 <= name="Kin" text="Celis!!";"Are you alright? I heard you screaming!"
+ins timea=1900 index=kin kind=emotion show=false
+dialogsingle starttimea=1100 duration=50 <= name="Celis" text="We have got to go!";""
+ins timea=0 index=celis kind=stop direction=1
+dialogsingle starttimea=1000 duration=500 <= name="Kin" text="What are you talking about?";"Are you sleepwalking, or something?"
+ins timea=250 index=kin kind=dist distance=10 duration=600 direction=3
+
+ins timea=650 index=celis kind=dist distance=10 duration=1000 direction=2
+dialogsingle starttimea=500 <= name="Celis" text="East, I sense there is something in the east.";""
+
+ins timea=1000 index=celis kind=stop direction=1
+dialogsingle starttimea=0 duration=1500 <= name="Celis" text="We have to go. Now!";""
+ins timea=1500 index=celis kind=dist distance=50 duration=700 direction=2
+ins timea=400 index=kin kind=tor movepos=-22;25 duration=400
+
+dialogsingle starttimea=300 <= name="Kin" text="Hey, wait!";""
+dialogsingle starttimea=300 <= name="Celis" text="If you don't want to follow, then don't!";"I have to go!"
+
+ins timea=350 index=celis kind=tor movepos=-30;40 duration=700
+ins timea=350 index=kin kind=tor movepos=-30;20 duration=300
+dialogsingle starttimea=250 duration=1600 <= name="Kin" text="Don't be like that, Celis!";""
+ins timea=300 index=kin kind=dist distance=50 duration=1200 direction=3
+ins timea=1200 index=kin kind=stop direction=2
+
+dialogsingle starttimea=300 duration=300 <= name="Kin" text="Of course I'm coming with you.";"It's just that..."
+
+ins timea=350 index=celis kind=stop direction=0
+dialogsingle starttimea=0 duration=300 <= name="Celis" text="What?!";""
+
+ins timea=2500 index=kin kind=dist distance=15 duration=1500 direction=2
+dialogsingle starttimea=1000 <= name="Kin" text="It's in the middle of the night..";""
+
+ins timea=250 index=celis kind=dist distance=10 duration=100 direction=0
+dialogsingle starttimea=300 <= name="Celis" text="So? Are you afraid of the dark, or what?!";""
+
+ins timea=250 index=kin kind=dist distance=5 duration=50 direction=0 facedirection=2
+
+dialogsingle starttimea=100 duration=2000 <= name="Kin" text="What?! Don't be silly! I'm not afraid!";""
+
+ins timea=700 index=kin kind=stop direction=1
+ins timea=700 index=kin kind=stop direction=3
+ins timea=600 index=kin kind=stop direction=2
+#ins timea=600 index=kin kind=dist distance=10 duration=1000 direction=2
+
+dialogsingle starttimea=1300 <= name="Kin" text="I just thought maybe you were, that's all..."
+
+ins timea=600 index=celis kind=dist distance=300 duration=4500 direction=2
+
+ins timea=900 index=kin kind=tor movepos=-50;45 duration=670 direction=3
+ins timea=0 index=kin kind=queue distance=300 duration=3000 direction=2
+
+# kill music
+ins type=fadeout timea=5000 index=1 fadetime=3500 kind=music mode=kill
+
+# ins timea=5000 index=elmer kind=show movepos=-55;379
+ins timea=1000 index=elmer kind=show movepos=410;50
+
+ins timea=250 index=elmer kind=dist distance=130 duration=4000 direction=1
+ins timea=0 index=elmer kind=queue direction=2
+#ins timea=2000 index=elmer kind=stop direction=1
+#ins timea=2000 index=elmer kind=dist distance=130 duration=10000 direction=2
+
+#dialogsingle starttimea=9000 <= name="Elmer" text="Could it be..."
+
+load trigger="road0-8"
+
+ins kind=trigger value=1
+
+ins timea=8000 kind=endseq
+
+ins timea=1000 kind=endseq

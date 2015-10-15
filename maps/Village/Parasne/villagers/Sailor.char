@@ -1,0 +1,13 @@
+image char/Samborg
+start 1515 2240
+
+in 1 200 true
+
+dialog 1
+
+n Samborg
+fl Pensara lies north of here.
+sl Just through the forest.
+f true 
+
+end

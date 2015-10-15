@@ -1,0 +1,77 @@
+mapSize -0.5 0.5 1
+
+size 206
+
+light0 position=0;0;0;1 ambient=.8;.8;.8;1 specular=.2;.2;.2;1 diffuse=.8;.8;.8;1 attenuation=1;0.01;0.015
+light1 position=0;0;0;0 ambient=.3;.3;.3;1 specular=0;0;0;1 diffuse=.3;.3;.3;1 attenuation=1;0.01;0.015
+material ambient=.7;.7;.7;1 specular=.2;.2;.2;1 diffuse=.8;.8;.8;1
+invMaterial ambient=.7;.7;.7;1 specular=.2;.2;.2;1 diffuse=.8;.8;.8;1 shininess=5 emission=.1;.1;.1;1
+
+enemyColor .7 .7 .7 1
+
+floorTex demoncave1floor.jpg
+floorTex demoncave1flooropen.jpg
+wallTex demoncave1wall.png
+wallTex demoncave1door0.png
+roofTex demoncave1roof.jpg
+roofTex demoncave1roofopen.jpg
+
+normal floor 0 2
+normal wall 2 4
+normal roof 4 6
+
+mapPos 0 0
+
+dir 9 1 25
+dir 12 1 28
+dir 25 1 41
+dir 28 1 44
+dir 41 1 57
+dir 44 1 60
+dir 47 1 63
+dir 56 1 72
+dir 56 2 57
+dir 57 2 58
+dir 58 2 59
+dir 59 2 60
+dir 60 1 76
+dir 63 1 79
+dir 72 1 88
+dir 76 1 92
+dir 79 1 95
+dir 88 1 104
+dir 92 2 93
+dir 93 1 109
+dir 93 2 94
+dir 94 2 95
+dir 104 1 120
+dir 109 1 125
+dir 116 2 117
+dir 117 2 118
+dir 118 2 119
+dir 119 2 120
+dir 120 1 136
+dir 125 1 141
+dir 136 2 137
+dir 137 2 138
+dir 138 2 139
+dir 139 1 155
+dir 139 2 140
+dir 140 2 141
+dir 155 1 171
+dir 171 1 187
+dir 187 1 203
+
+mapEnd
+
+wall 3 12 3
+inv triggerDoor 12 3 dontopen Grivera_-_New_Tutorial landgrivera--first_floor-mark0
+roof 5 116
+inv ladderDoor 116 0 dontopen Images/ladderup.png true grivera--second_floor-mark0
+roof 5 203
+inv ladderDoor 203 1 dontopen Images/ladderup.png true grivera--second_floor-mark1
+
+inv chest 9 3 2 Images/chest 0 80
+inv chest 47 3 2 Images/chest 2 cards.offense.BattleCard 2 false
+
+end

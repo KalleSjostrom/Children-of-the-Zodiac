@@ -1,0 +1,256 @@
+import file=main.var
+
+var elmer=0
+var celischild=1
+var kin=2
+var celis=3
+
+actor name="Elmer"
+actor name="Kin" pos=345;770;0
+actor name="Celis" pos=345;800;0
+actor name="Characters/barncelis/barncelisExtras" pos=800;300
+
+info time="day" name="Alares" music="Alares" fadeValue="1"
+
+load image="black"
+load image="Outside of Ana's House"
+load image="Menthu's Face"
+
+load music="The Theme of the Elders"
+load music="Celis Memories"
+load music="Menthu Picture.wav"
+
+show index=celischild value=false
+ins kind=screen_center center=false
+ins timea=0 index=elmer kind=controll controll=true
+# ins type=fadeout timea=250 index=0 fadetime=1400 kind=music mode=pause
+
+### TEST ###
+
+# ins timea=0 index=0 kind=screenzoom zoomin=true zoomtime=2000 usestaticpos=true pos=512;378
+# ins timea=1000 index=kin kind=dist distance=50 direction=3 duration=500
+# ins timea=3000 index=kin kind=screen_center center=true
+# ins timea=50 index=0 kind=screenzoom zoomin=false zoomtime=2000 usestaticpos=true pos=512;378
+
+
+dialogsingle starttimea=500 duration=500 <= name="Elmer" text="Oh, you're back.";"I knew you would make it."
+ins timea=600 index=kin kind=emotion emotion=?! show=true
+dialogsingle starttimea=0 duration=500 <= name="Kin" text="What?!";"How did he.."
+ins timea=250 index=kin kind=stop direction=1
+ins timea=300 index=kin kind=emotion show=false
+ins timea=1000 index=kin kind=stop direction=0
+
+dialogpacket name=0 starttimea=500 duration=500
+dialog packetname=0 name="Elmer" text="Did you find it?";"" first=true
+dialog packetname=0 name="Celis" text="Yes, I did.";"It is just like my mothers stone." first=false
+
+ins timea=1000 index=kin kind=stop direction=1
+dialogsingle starttimea=0 duration=500 <= name="Kin" text="What do you mean, I did?";""
+ins timea=900 index=kin kind=dist distance=15 direction=3 duration=100 facedirection=1
+ins timea=50 index=kin kind=emotion emotion=?! shake=true show=true
+ins type=fadeout timea=0 index=0 fadetime=500 kind=music mode=pause
+ins timea=0 index=0 kind=screenzoom zoomin=true zoomtime=2000 usestaticpos=true pos=512;378
+dialogsingle starttimea=0 duration=500 <= name="Kin" text="What?!";"You already have a stone?!"
+
+ins timea=1250 index=kin kind=emotion show=false
+
+dialogsingle starttimea=0 duration=1000 <= name="Elmer" text="Just as a thought..";""
+ins timea=500 index=kin kind=stop direction=0
+ins type=fadein timea=500 index=1 fadetime=700 kind=music mode=play
+
+ins timea=3000 index=elmer kind=tor movepos=-5;-23 duration=4000
+#ins timea=3000 index=elmer kind=dist direction=0 distance=25 duration=4000
+dialogsingle starttimea=3000 duration=200 <= name="Elmer" text="As you might have figured, the stones";"you carry are not of this world."
+
+ins timea=300 index=kin kind=dist direction=0 distance=15 duration=100
+ins timea=0 index=kin kind=emotion emotion=?! show=true
+dialogsingle starttimea=0 duration=500 <= name="Kin" text="Not of this world?!";""
+ins timea=800 index=kin kind=emotion show=false
+ins timea=1400 index=kin kind=tor movepos=8;7 duration=1000
+dialogsingle starttimea=200 duration=500 <= name="Kin" text="Now, that's just crazy... right Celis?";""
+
+ins timea=1000 index=elmer kind=stop direction=0
+ins timea=200 index=kin kind=stop direction=0
+dialogpacket name=1 starttimea=500 duration=500
+dialog packetname=1 name="Elmer" text="Six stones were made in ancient times by the";"Zodiacs and where given to twelve chosen tenjins."
+dialog packetname=1 name="Elmer" text="This, with the purpose to communicate with the gods.";""
+dialog packetname=1 name="Elmer" text="The twelve tenjins has passed the stones down";"from parent to child throughout the ages."
+dialog packetname=1 name="Elmer" text="However, some of the stones' masters where killed in";"the Great War and some of the stones were lost."
+
+ins timea=400 index=elmer kind=dist distance=5 duration=1000 direction=2
+
+ins timea=200 index=celis kind=dist distance=5 duration=300 direction=0
+dialogsingle starttimea=250 <= name="Celis" text="Oh, no!";""
+
+ins timea=200 index=kin kind=stop direction=2
+dialogsingle starttimea=400 <= name="Kin" whisper=true text="Jeez.. What a load of crap...";""
+ins timea=1000 index=kin kind=stop direction=0
+
+ins timea=1000 index=elmer kind=dist distance=10 duration=2000 direction=0
+dialogsingle starttimea=1000 <= name="Elmer" text="You are the last descendent of these twelve";"and you carry the power to use the stones."
+
+ins timea=200 index=kin kind=emotion emotion=? show=true
+ins timea=500 index=kin kind=dist distance=5 duration=1000 direction=0
+ins timea=1100 index=kin kind=stop direction=1
+ins timea=250 index=celis kind=emotion emotion=... show=true
+ins timea=1500 index=kin kind=dist distance=5 duration=1000 direction=0
+ins timea=1000 index=celis kind=emotion show=false
+ins timea=250 index=kin kind=emotion show=false
+dialogsingle starttimea=500 <= name="Kin" text="So.. What you're telling me is...";"that Celis is not human..?"
+
+ins timea=1000 index=celis kind=emotion emotion=... show=true
+ins timea=500 index=celis kind=stop direction=2
+ins timea=1000 index=celis kind=dist distance=5 duration=2000 direction=2
+ins timea=2000 index=kin kind=dist distance=10 duration=1000 direction=2
+ins timea=1500 index=celis kind=emotion show=false
+dialogsingle starttimea=0 duration=500 <= name="Celis" whisper=true text="This explains so much...";""
+
+ins timea=1500 index=elmer kind=stop direction=2
+ins timea=1000 index=kin kind=stop direction=0
+ins timea=150 index=celis kind=stop direction=0
+ins timea=250 index=elmer kind=dist distance=15 duration=3000 direction=2
+
+# some other music
+dialogpacket name=1.1 starttimea=1000 duration=1000
+dialog packetname=1.1 name="Elmer" text="I am but one of a group concerned with this matter and";"we refer ourselves as the Brethren."
+dialog packetname=1.1 name="Elmer" text="The members of the group are stationed around each";"town and we have created a network amongst ourselves."
+dialog packetname=1.1 name="Elmer" text="We have been looking for you for some time now";"and I am very honored to have met you."
+
+ins timea=1500 index=elmer kind=stop direction=1
+ins timea=2500 index=elmer kind=stop direction=2
+
+dialogpacket name=2 starttimea=500 duration=500
+dialog packetname=2 name="Elmer" text="People around our world have become more agitated";"lately and the lust for power and war has increased."
+dialog packetname=2 name="Elmer" text="We believe that the answers to this lies in the stones.";""
+
+ins timea=1000 index=elmer kind=dist distance=10 duration=3000 direction=0
+
+dialogsingle starttimea=0 duration=1500 <= name="Elmer" text="You have to go now and find the other stones.";"Talk to the others of the brethren to find out more."
+ins timea=2500 index=elmer kind=stop direction=2
+dialogsingle starttimea=500 duration=500 <= name="Elmer" text="One of them is Farl of Zazo up north.";"He will tell you more."
+ins type=fadeout timea=1000 index=1 fadetime=2500 kind=music mode=pause
+
+ins timea=1000 index=kin kind=stop direction=1
+dialogsingle starttimea=500 duration=500 <= name="Kin" text="Well.. I'll guess we'll head north then..?";""
+
+ins timea=1000 index=celis kind=dist distance=10 duration=2000 direction=0
+dialogsingle starttimea=1000 duration=1000 <= name="Celis" text="Thank you for everything, Elmer.";""
+
+ins timea=1250 index=elmer kind=stop direction=0
+dialogsingle starttimea=0 duration=500 <= name="Elmer" text="Now go.";""
+
+### NEXT PART ###
+
+ins timea=0 index=0 kind=screenzoom zoomin=false zoomtime=2000 usestaticpos=true pos=512;378
+
+ins timea=600 index=kin kind=screen_center center=true
+
+ins timea=50 index=kin kind=dist distance=15 duration=750 direction=2
+ins timea=1250 index=kin kind=dist distance=100 duration=5000 direction=1
+ins timea=1500 index=celis kind=dist distance=85 duration=4250 direction=1
+
+dialogsingle starttimea=1775 duration=2500 <= name="Kin" text="So, north..? I've heard that the pass is so dangerous";"that they don't let people without permission through."
+ins timea=1775 index=kin kind=dist distance=70 duration=3500 direction=2
+ins timea=700 index=celis kind=dist distance=20 duration=1000 direction=2
+
+dialogpacket name=3 starttimea=500 duration=500
+dialog packetname=3 name="Celis" text="My mother was a tenjin..?";"I don't remember much of her.."
+dialog packetname=3 name="Celis" text="I just remember playing in the cold snow.";""
+
+ins timea=600 index=kin kind=stop direction=0
+
+dialogsingle starttimea=200 duration=500 <= name="Kin" text="Celis..";"Celis!"
+ins timea=600 index=kin kind=dist distance=10 duration=300 direction=0
+dialogsingle starttimea=250 duration=500 <= name="Kin" text="Are you listening to me?";"How do we get permission through the cave!?"
+dialogsingle starttimea=1000 duration=400 <= name="Celis" text="I can almost see her...";""
+
+#### FLASHBACK ####
+
+ins type=fadeout timea=500 kind=village fadetime=2000
+ins type=fadein timea=2500 index=1 fadetime=3000 kind=image scrollmode=normal imagetype=backflash
+
+ins timea=0 index=celischild kind=show movepos=-1;-1
+
+ins timea=0 index=elmer kind=hide
+ins timea=0 index=kin kind=hide
+ins timea=0 index=celis kind=hide
+
+ins type=fadein timea=500 index=2 fadetime=2500 kind=music mode=play
+
+ins timea=0 index=celischild kind=dist distance=50 duration=2000 direction=1
+ins timea=2000 index=celischild kind=dist distance=30 duration=1200 direction=0
+ins timea=1200 index=celischild kind=stop direction=0
+ins timea=800 index=celischild kind=dist distance=50 duration=2000 direction=3
+ins timea=2000 index=celischild kind=dist distance=10 duration=400 direction=0
+ins timea=800 index=celischild kind=dist distance=20 duration=800 direction=1
+ins timea=800 index=celischild kind=stop direction=3
+ins timea=1600 index=celischild kind=dist distance=30 duration=1200 direction=0
+ins timea=1200 index=celischild kind=dist distance=20 duration=800 direction=3
+ins timea=800 index=celischild kind=dist distance=10 duration=400 direction=2
+ins timea=400 index=celischild kind=stop direction=3
+
+dialogpacket name=4 starttimea=1000 duration=1000
+dialog packetname=4 name="Ana" text="Celis! Supper is ready!";"Come in now and eat!"
+ins timea=600 index=celischild kind=stop direction=0
+dialog packetname=4 name="Celis" text="But mother! Just a little bit longer!" first=false
+dialog packetname=4 name="Ana" text="Hehe. It's great that you are having fun,";"but the food is getting cold!"		
+dialog packetname=4 name="Ana" text="You can play more after you eat."
+dialog packetname=4 name="Celis" text="Ok mother! I'm coming!" first=false
+
+ins timea=600 index=celischild kind=dist distance=200 duration=4000 direction=0
+
+ins type=fadeout timea=500 index=2 fadetime=500 kind=music mode=pause
+ins timea=500 index=3 kind=music mode=play
+
+ins timea=90 index=2 kind=image scrollmode=normal imagetype=coverall
+ins timea=1 index=celischild kind=hide
+
+ins timea=40 index=elmer kind=show movepos=-1;-1
+ins timea=0 index=elmer kind=stop direction=2
+ins timea=40 index=kin kind=show movepos=-1;-1
+ins timea=40 index=celis kind=show movepos=-1;-1
+
+ins type=fadein timea=1100 kind=village fadetime=250
+
+ins timea=700 index=kin kind=emotion emotion=?! show=true
+ins timea=0 index=kin kind=dist distance=10 duration=200 direction=0
+
+dialogsingle starttimea=100 duration=50 <= name="Kin" text="Celis! What happend?";""
+
+ins timea=500 index=kin kind=emotion show=false
+ins timea=200 index=celis kind=emotion emotion=? show=true
+ins timea=1000 index=celis kind=stop direction=1
+ins timea=700 index=celis kind=stop direction=3
+dialogsingle starttimea=500 duration=250 <= name="Celis" text="..what do you mean?";""
+ins timea=200 index=celis kind=stop direction=2
+ins timea=0 index=celis kind=emotion show=false
+
+ins timea=250 index=kin kind=dist distance=10 duration=500 direction=0
+dialogsingle starttimea=250 duration=500 <= name="Kin" text="You just froze up.. Like if you saw a ghost or";"remembered something terrible."
+
+ins timea=500 index=celis kind=stop direction=1
+ins timea=500 index=celis kind=stop direction=3
+ins timea=500 index=celis kind=stop direction=2
+dialogsingle starttimea=500 duration=2600 <= name="Celis" text="Oh, it's nothing.";"So, a permission to get through the cave, huh?"
+ins timea=500 index=celis kind=dist distance=80 duration=5700 direction=2
+
+ins timea=1700 index=kin kind=dist distance=10 duration=700 direction=3 facedirection=1
+dialogsingle starttimea=500 duration=1300 <= name="Kin" text="Hmm.. Yeah, how do you reckon we get it?";"(She's hiding something..)"
+ins timea=1200 index=kin kind=stop direction=2
+
+ins timea=2000 index=celis kind=stop direction=0
+dialogsingle starttimea=250 duration=100 <= name="Celis" text="I don't know. I'll guess we'll just";"have to figure it out."
+
+ins type=fadein timea=200 index=0 fadetime=2500 kind=music mode=play
+
+ins kind=levelup timea=0
+
+load trigger="Elmer"
+load trigger="Passguard Seth"
+load trigger="Uri"
+
+ins index=0 timea=0 kind=trigger value=5
+ins index=1 timea=0 kind=trigger value=2
+ins index=2 timea=0 kind=trigger value=3
+
+ins timea=500 kind=end

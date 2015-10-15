@@ -1,0 +1,21 @@
+##### VILLAGE #####
+# NAME
+name Dellna_-_Ana's_Home_Memory _
+
+inside
+
+##### BACKGRUND #####
+
+# background, prefix name of both images day
+background Dellna_-_Ana's_Home_Memory true
+
+animObj chairs 622 319 1
+
+##### STARTING LOCATION #####
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1024 768
+start 886 193 2
+
+##### DOORS #####
+end

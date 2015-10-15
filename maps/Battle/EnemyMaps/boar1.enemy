@@ -1,0 +1,30 @@
+name Boar
+
+defense 10
+magicDefense 10
+agility 10
+evade 0
+hit 95
+attack 20
+magic 20
+support 20
+hp 70
+element 0
+gold 21
+experience 4
+criticalChance 0
+
+diesound Boar/dies
+image boar 4 3 1
+armor 4 4
+preferences 100 0
+
+scale 4
+height -1.7
+depth -6
+middle -1
+
+# DEFAULT #
+# attackSpec type=0 name=Attack power=1 onAll=false element=1 probability=1
+
+attackSpec anim=(f=1)--(f=2)--(a=400,f=3,se=Monster/Boar/attack)

@@ -1,0 +1,8 @@
+trigger name=elements.tut value=2
+
+dialogpacket name=0
+dialog packetname=0 name="" text="A new tutorial on Elements has been added in the";"Menu. Read the tutorial now?"
+dialog packetname=0 alts=Sure,_why_not.;Not_now!_I_wanna_explore!;_;_ name="" text="";""
+
+playSound name=Menu/Questlog_Entry.wav
+tutorialName name=elements

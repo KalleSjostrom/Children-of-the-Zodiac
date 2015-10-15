@@ -1,0 +1,44 @@
+image Ella
+start 400 275
+
+in 2 100 true
+in 0 15 false
+in 3 60 false
+in 2 45 false
+in 1 220 false
+in 0 30 false
+in 3 60 false
+in 3 100 false
+
+dialog 1
+
+n Ella
+fl My husband Bob has a brother that lives on
+sl the other side of the ocean.
+f true
+
+n Ella
+fl It was a very long time since they talked
+sl to each other.
+f true
+
+n Ella
+fl Why? Well... I don't know, but I guess he's kind of 
+sl disappointed that Bob moved to the big city for a career.
+f true
+
+dialog 2
+
+n Ella
+fl You found John! They have written some letters?!
+sl That's great!
+f true
+
+n Ella
+fl I can't believe you did that for Bob,
+sl that's so sweet of you.
+f true
+
+end
+
+

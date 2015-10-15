@@ -1,0 +1,13 @@
+image char/Pensarasoldier
+start 1035 723
+
+in 2 100 true
+
+dialog 1
+
+n Soldier
+fl This is the Vincent af Kinstone residence.
+sl end
+f true
+
+end

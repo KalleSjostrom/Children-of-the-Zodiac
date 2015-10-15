@@ -1,0 +1,41 @@
+image Red
+start 1210 910
+
+in 2 100 true
+in 1 70 false
+in 2 100 true
+in 3 70 false
+
+dialog 1
+
+check Red 2 s.Dexter>7:s.Marc>7
+
+# Left of Marc
+n Red
+fl I think there's gonna be a fight tonight...
+sl I wish there was a way to prevent it.
+f true
+
+n Red
+fl Both Dexter and Marc look so angry.
+sl end
+f true
+
+dialog 2 
+
+# after trigging Dexter, Marc
+n Red
+fl You did it. You prevented the fight!
+sl Please take this...
+trigger Red 3
+gift cards.support.Resurrect 2 1 true
+f true
+
+dialog 3
+
+n Red
+fl Nice work!
+sl end
+f true
+
+end

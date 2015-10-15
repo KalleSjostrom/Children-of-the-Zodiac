@@ -1,0 +1,28 @@
+name Walrus
+
+defense 321
+magicDefense 323
+agility 19
+evade 0
+hit 85
+attack 1353
+magic 1243
+support 1302
+hp 8461
+element 0
+gold 5076
+experience 3384
+criticalChance 0
+
+diesound Walrus/dies
+image walrus 3
+armor 152 83
+preferences 100 0
+
+scale 4.3
+height -2
+depth -4.7
+middle -1
+
+attackSpec anim=(a=100,se=Monster/Walrus/attack)--(f=1,a=1040)--(f=2,h=true,a=1000,cs=true)
+

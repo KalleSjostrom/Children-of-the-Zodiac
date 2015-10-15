@@ -1,0 +1,56 @@
+image Omer
+start 1500 1000
+
+in 1 100 true
+in 1 155 false
+in 0 80 false
+in 1 420 false
+in 2 100 false
+in 3 190 false
+in 2 120 false
+in 3 90 false
+in 0 135 false
+in 3 100 false
+in 2 95 false
+in 3 145 false
+in 2 40 false
+in 3 240 false
+in 0 45 false
+in 1 195 false
+in 0 90 false
+
+dialog 1
+
+n Omer
+fl Please stop harassing me!
+sl end
+f true
+
+n Omer
+fl Oh, you're not a soldier, then have a good day.
+sl end
+f true
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

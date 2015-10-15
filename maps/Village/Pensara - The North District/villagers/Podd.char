@@ -1,0 +1,34 @@
+image Podd
+start 430 965
+
+in 2 100 true
+
+dialog 1
+
+# outside Podd/Nodds house
+n Podd
+fl People are jealous at us because we have
+sl so much money and power. 
+f true
+
+n Podd
+fl Poor common people got nothing better to do 
+sl than complain.
+f true
+
+dialog 2
+
+n Podd
+fl Hello again! I knew you wasn't a commoner.
+sl You're invited to our house any time you want.
+trigger Podd 3
+f true
+
+dialog 3
+
+n Podd
+fl Please come back later.
+sl end
+f true
+
+end

@@ -1,0 +1,68 @@
+mapSize -0.5 0.5 1
+
+size 206
+
+light0 position=0;0;0;1 ambient=.8;.8;.8;1 specular=0;0;0;1 diffuse=.8;.8;.8;1 attenuation=1;0.01;0.015
+light1 position=0;0;0;0 ambient=1;1;1;1 specular=0;0;0;1 diffuse=1;1;1;1
+material ambient=.7;.7;.7;1 specular=0;0;0;1 diffuse=.7;.7;.7;1 shininess=0 emission=.1;.1;.1;1
+
+sky top=.12;.21;.31;1 bottom=.79;.77;.71;1
+
+enemyColor 1 1 1 1
+
+floorTex desertfloor.jpg
+wallTex desertwall.png
+wallTex desertdoor.png
+
+normal floor 0 1
+normal wall 1 3
+
+mapPos 0 1
+
+# directions in labyrinth
+dir 24 1 40
+dir 40 1 56
+dir 56 1 72
+dir 72 1 88
+dir 76 1 92
+dir 76 2 77
+dir 77 2 78
+dir 78 2 79
+dir 88 1 104
+dir 92 1 108
+dir 104 2 105
+dir 105 2 106
+dir 106 2 107
+dir 107 2 108
+dir 108 1 124
+dir 124 1 140
+dir 140 1 156
+dir 147 2 148
+dir 148 2 149
+dir 149 2 150
+dir 150 2 151
+dir 151 1 167
+dir 151 2 152
+dir 152 2 153
+dir 153 2 154
+dir 154 2 155
+dir 155 2 156
+dir 156 1 172
+dir 167 1 183
+dir 172 1 188
+dir 183 1 199
+dir 188 1 204
+
+mapEnd
+
+wall 2 79 2
+inv door 79 2 dontopen landberca_desert--south_west-mark0
+wall 2 204 1
+inv door 204 1 dontopen berca_desert--south-mark1
+wall 2 199 1
+inv door 199 1 dontopen berca_desert--south-mark2
+wall 2 147 0
+inv door 147 0 dontopen berca_desert--north_west-mark0
+
+inv chest 24 3 2 Images/pot 2 cards.offense.CrushingSaber 2 false
+

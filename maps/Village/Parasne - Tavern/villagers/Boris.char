@@ -1,0 +1,76 @@
+image Boris
+start 400 300
+
+in 2 100 true
+
+dialog 1
+
+n Boris
+fl I really wanna taste the famous wine from
+sl the port of Alares!
+f true
+
+n Boris
+fl Don't tell anyone, but I'm gonna steal the recipe...
+sl end
+trigger Herb 2
+trigger Boris 2
+f true
+
+dialog 2
+
+check Boris 3 Wine
+
+n Boris
+fl I really wanna taste the famous wine from
+sl the port of Alares!
+f true
+
+n Boris
+fl Don't tell anyone, but I'm gonna steal the recipe...
+sl end
+f true
+
+dialog 3
+
+n Boris
+fl You have a bottle with you.
+sl Let me trade it for this great card!
+f true
+
+q 10
+alt Yeah,_let's_trade!
+alt Keep_the_wine.
+alt _
+alt _
+f true
+
+*11
+
+n Boris
+fl Thank you, my friend!
+sl end
+trigger Boris 4
+f true
+
+n _
+fl You got a card!
+sl end
+gift cards.offense.BattleCard 2 3 false
+f true
+
+*12
+
+n Boris
+fl But I need it!
+sl It's a really good card...
+f true
+ 
+dialog 4
+
+n Boris
+fl Now I can make great wine in no time!
+sl end
+f true
+
+end

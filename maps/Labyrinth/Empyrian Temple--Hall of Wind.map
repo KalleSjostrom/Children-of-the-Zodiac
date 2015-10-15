@@ -1,0 +1,91 @@
+mapSize -0.5 0.5 1
+
+size 239
+
+fog red=.4 green=.3 blue=0 alpha=.01 density=0.01
+
+light0 position=0;0;0;1 ambient=1;1;1;1 specular=0;0;0;1 diffuse=1;1;1;1 attenuation=1;0.02;0.03
+light1 position=0;0;0;0 ambient=.2;.2;.2;.2 specular=0;0;0;1 diffuse=.2;.2;.2;.2
+material ambient=.7;.7;.7;1 specular=0;0;0;1 diffuse=.7;.7;.7;1
+
+floorTex airtemplefloor.jpg
+wallTex airtemplewall.png
+wallTex airtempledoor0.png
+wallTex airtemplewall.png
+roofTex airtempleroof.jpg
+
+normal floor 0 1
+normal wall 1 4
+normal roof 4 5
+
+mapPos 1 1
+
+# directions in labyrinth
+dir 9 1 25
+dir 25 1 41
+dir 41 1 57
+dir 57 1 73
+dir 71 1 87
+dir 71 2 72
+dir 72 1 88
+dir 72 2 73
+dir 73 1 89
+dir 73 2 74
+dir 74 1 90
+dir 74 2 75
+dir 75 1 91
+dir 87 1 103
+dir 87 2 88
+dir 88 1 104
+dir 88 2 89
+dir 89 2 90
+dir 90 1 106
+dir 90 2 91
+dir 91 1 107
+dir 99 2 100
+dir 100 2 101
+dir 101 2 102
+dir 102 2 103
+dir 103 1 119
+dir 103 2 104
+dir 104 1 120
+dir 106 1 122
+dir 106 2 107
+dir 107 1 123
+dir 107 2 108
+dir 108 2 109
+dir 109 2 110
+dir 110 2 111
+dir 119 1 135
+dir 119 2 120
+dir 120 1 136
+dir 120 2 121
+dir 121 1 137
+dir 121 2 122
+dir 122 1 138
+dir 122 2 123
+dir 123 1 139
+dir 135 2 136
+dir 136 2 137
+dir 137 1 153
+dir 137 2 138
+dir 138 2 139
+dir 153 1 169
+dir 169 1 185
+dir 185 1 201
+
+mapEnd
+
+wall 2 111 2
+wall 2 121 3
+wall 2 89 1
+
+inv door 111 2 dontopen airempyrian_temple--hall_of_wind-mark0
+inv door 121 3 dontopen empyrian_temple--tower_of_magic-mark0 
+inv door 89 1 dontopen empyrian_temple--tower_of_strength-mark0
+inv addDoor 104 2 2 Walls/airtempledoor empyrian_temple--hall_of_memories-mark0 12
+inv hinderDoor 106 0 2 Walls/airtempledoor home_of_the_gods
+ 
+inv chest 9 3 2 Images/chest 2 cards.magic.Ultima 1
+inv save 99 2 -1 -1
+inv chest 201 1 2 Images/chest 2 cards.offense.SpiritAssault 1

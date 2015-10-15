@@ -1,0 +1,28 @@
+name Horned_One
+
+defense 30
+magicDefense 27
+agility 18
+evade 0
+hit 92
+attack 290
+magic 273
+support 130
+hp 1126
+element 1
+gold 675
+experience 450
+criticalChance 0
+
+diesound Beastman/dies
+image hornedOne 4
+armor 28 22
+preferences 70 30
+
+scale 6.1
+height -2
+depth -6
+middle -.5
+
+attackSpec anim=(a=350,se=Monster/Beastmen/attack)--(f=1,a=500)--(f=2,h=true)
+attackSpec type=mag name=Hells_Fire anim=(a=350)--(f=3,a=1500,c=m+Fire:.06;1.3;-6)

@@ -1,0 +1,17 @@
+image Ross
+
+start 1170 700
+
+in 2 1000 true
+in 1 50 false
+in 2 1000 true
+in 3 50 false
+
+dialog 1
+
+n Ross
+fl I'm sure that when the mine is up and running again,
+sl the world's problem is over.
+f true
+
+end

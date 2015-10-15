@@ -1,0 +1,39 @@
+import file=main.var
+
+var kin=0
+var celis=1
+
+info time="day" name="Alares" music="Alares" fadeValue="0" musicVolume="0"
+
+load translucent="res/Texts/Alares.png"
+
+actor name="Kin"
+actor name="Celis"
+
+load music="Alaresintro"
+
+show index=kin value=false
+show index=celis value=false
+
+ins type=fadeout timea=0 index=0 fadetime=0 kind=music mode=pause
+ins type=fadein timea=0 index=1 fadetime=0 kind=music mode=play
+
+ins type=fadein timea=2000 kind=image fadetime=4000 scrollmode=normal imagetype=translucent
+ins type=fadeout timea=6000 kind=image fadetime=2000 scrollmode=normal imagetype=translucent
+
+ins timea=2000 index=kin kind=show movepos=1333;1889
+ins timea=0 index=celis kind=show movepos=1290;1899
+
+ins timea=1000 index=kin kind=dist distance=96 duration=1500 direction=0
+ins timea=300 index=celis kind=dist distance=100 duration=1600 direction=0
+
+dialogsingle starttimea=1300 duration=100 <= name="Kin" text="Finally here!"
+ins timea=300 index=celis kind=dist distance=20 duration=600 direction=0
+dialogsingle starttimea=500 duration=100 <= name="Celis" text="Let's find some supplies."
+
+load trigger="Alaresnode"
+ins index=0 timea=0 kind=trigger value=0
+
+ins type=fadeout timea=110 index=1 fadetime=1500 kind=music mode=kill
+
+ins timea=500 kind=end

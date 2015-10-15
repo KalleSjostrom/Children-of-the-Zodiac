@@ -1,0 +1,32 @@
+name Ghoul
+
+defense 122
+magicDefense 105
+agility 18
+evade 0
+hit 90
+attack 700
+magic 659
+support 323
+hp 3399
+element 0
+gold 2039
+experience 1359
+criticalChance 0
+
+diesound Ghoul/dies
+image ghoul 3
+armor 67 52
+preferences 50 50
+
+scale 5.5
+height -2
+depth -6
+middle 0
+
+attackSpec p=.5 anim=(f=1)--(f=1,a=80,se=Monster/Ghoul/attack)--(f=2,h=true)
+attackSpec name=All_Attack power=.7 onAll=true  p=.5 anim=(f=1)--(f=1,a=80,se=Monster/Ghoul/attack)--(f=2,h=true)
+attackSpec type=mag name=Grip_of_Death anim=(f=1)--(f=1,a=80,se=Monster/Ghoul/attack)--(f=2,h=true)
+
+# cardPreference [CardName preference]
+

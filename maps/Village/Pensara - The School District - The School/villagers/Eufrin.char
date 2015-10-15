@@ -1,0 +1,78 @@
+image Teacher_Eufrin
+start 500 240
+
+in 2 100 true
+
+dialog 1
+
+n Teacher Eufrin
+fl People are talking about demons, stones and
+sl other crazy stories.
+f true
+
+n Teacher Eufrin
+fl Don't listen to all rubbish that people are saying.
+sl Let me tell you a story that actually took place.
+f true
+
+n Teacher Eufrin
+fl You know, I'm a history teacher, witch means that
+sl I only tell stories that are historically correct.
+f true
+
+n Teacher Eufrin
+fl You wanna hear it?
+sl end
+f true
+
+q 10
+alt Let's_hear_it!
+alt I_rather_not...
+alt _
+alt _
+f true
+
+*11
+n Teacher Eufrin
+fl There once was a warrior who sailed the seas with
+sl a boat full of treasures.
+f true
+
+n Teacher Eufrin
+fl He was the master of battle cards and was
+sl therefore feared by all and everyone... 
+f true
+
+n Teacher Eufrin
+fl It seemed as if he was immortal.
+sl end
+f true
+
+n Teacher Eufrin
+fl But then, one day a storm surprised him and
+sl the ship sank to the bottom of the ocean.
+f true
+
+n Teacher Eufrin
+fl What happened to the warrior? He drowned...
+sl Maybe he couldn't swim as well as he could fight.
+f true
+
+n Teacher Eufrin
+fl The only thing that has been found from the accident
+sl was a message in a bottle with his log saying:
+f true
+
+n Teacher Eufrin
+fl I started out my journey at the harbor
+sl only stones and dust use.
+trigger Port_of_Zazobottle 0
+f true
+
+*12
+n Teacher Eufrin
+fl Oh... Alright.
+sl end
+f true
+
+end

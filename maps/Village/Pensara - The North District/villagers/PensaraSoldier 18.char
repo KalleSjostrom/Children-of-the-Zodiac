@@ -1,0 +1,13 @@
+image char/Pensarasoldier
+start 1620 970
+
+in 2 100 true
+
+dialog 1
+
+n Soldier
+fl I like to take up a nice book at the end of my shifts.
+sl end
+f true
+
+end

@@ -1,0 +1,49 @@
+title string="Tutorial - Battle modes";""
+
+var type=vector name=gray value=.7,.7,.7
+var type=vector name=green value=0,.7,0
+var type=vector name=blue value=0,0,.7
+var type=vector name=darkgreen value=0,.7,0
+var type=vector name=purple value=.5,0,.5
+
+newtext
+addRow newpage=true text="Every turn you perform your actions in either";""
+putMap index=0 vector=blue
+putMap index=2 vector=blue
+putMap index=3 vector=blue
+addRow newpage=false text="Offense or Support mode.";"" usemap=true
+
+newMap
+putMap index=1 vector=blue
+putMap index=9 vector=blue
+putMap index=10 vector=blue
+addRow newpage=true text="To attack an enemy, you have to be in Offense mode.";"" usemap=true
+
+newMap
+putMap index=9 vector=blue
+putMap index=10 vector=blue
+putMap index=11 vector=blue
+addRow newpage=false text="When in this mode, you are able to perform a mix of";"" usemap=true
+
+newMap
+putMap index=0 vector=gray
+putMap index=2 vector=purple
+addRow newpage=false text="physical and magical attacks, depending on equipped";"" usemap=true
+addRow newpage=false text="weapon.";""
+
+newMap
+putMap index=1 vector=blue
+putMap index=6 vector=blue
+addRow newpage=true text="To heal your party members or boost their attributes";"" usemap=true
+
+newMap
+putMap index=6 vector=darkgreen
+putMap index=7 vector=darkgreen
+addRow newpage=false text="you have to switch mode to Support mode.";"" usemap=true
+addRow newpage=false text="";""
+addRow newpage=false text="";""
+
+newMap
+putMap index=0 vector=blue
+addRow newpage=false text="Switch mode:";"" iconxoffset=135 iconyoffset=-23 usemap=true button=l2r2 usemap=true
+put turn=0

@@ -1,0 +1,41 @@
+##### VILLAGER #####
+# NAME: Ingussitting
+image Ingussitting 1 40 26
+
+##### STARTING LOCATION #####
+
+# start x y
+start 1198 745
+
+range 40
+
+##### INSTRUCTIONS #####
+
+# in angle distance stopped
+in 0 180 true
+
+##### DIALOGS #####
+
+# first line
+# second line
+# first dialog background (the one at the far left top of the screen)
+
+dialog 1
+
+n Ingus
+fl To tell the truth, I don't think Thom's
+sl stories are all that great.
+f true
+
+n Ingus
+fl I'm only sitting here so that my sister
+sl won't be afraid.
+f true
+
+n Ingus
+fl I know that Thom's just distracting us so that
+sl we won't have to worry about what's happening.
+f true
+
+##### END #####
+end

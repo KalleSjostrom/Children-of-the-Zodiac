@@ -1,0 +1,77 @@
+image Elviri
+start 585 373
+
+in 0 100 true
+
+dialog 1
+
+n Elviri
+fl My mother is devastated.
+sl end
+f true
+
+n Elviri
+fl Since my father Carl got killed, even people in
+sl Pensara have opened their eyes to what's going on. 
+f true
+
+dialog 2
+
+n Elviri
+fl My grandpa lives in Berca, the desert town.
+sl end
+f true
+
+n Elviri
+fl Can you please give him this photograph of my father,
+sl I know he would appreciate it.
+f true
+
+q 10
+alt Sure
+alt No_can_do...
+alt _
+alt _
+f true
+
+*11
+n Elviri
+fl Great!
+sl Thanks!
+f true
+
+n _
+fl You got the key item "Photograph"!
+sl Thanks!
+trigger Elviri 3
+gift Photograph 1 1
+f true
+
+*12
+n Elviri
+fl Oh... I understand.
+sl I'd really appreciate it, though.
+f true
+
+dialog 3
+
+n Elviri
+fl Thank you, again!
+sl end
+f true
+
+dialog 4
+
+n Elviri
+fl You gave grandpa the photograph?
+sl Thank you. 
+f true
+
+n Elviri
+fl I want you to have this for doing me the favor.
+sl end
+gift cards.offense.Drain 2 3 false
+trigger Elviri 3
+f true
+
+end

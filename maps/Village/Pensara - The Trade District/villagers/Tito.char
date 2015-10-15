@@ -1,0 +1,92 @@
+image Tito
+start 2600 865
+
+in 2 100 true
+
+dialog 1
+
+# ruins
+n Tito
+fl Hello brave warrior!
+sl end
+f true
+
+n Tito
+fl I also used to be a great warrior but after my
+sl leg got hurt I didn't want to live that way anymore.
+f true
+
+n Tito
+fl I always kept track of how many I killed
+sl when I was active.
+f true
+
+n Tito
+fl I've killed 200 monsters in my life!
+sl If you beat my record, come visit me.
+f true
+
+n Tito
+fl Right now your kill rate is at --getBattles--.
+sl end
+trigger Tito 2
+f true
+
+dialog 2
+
+n Tito
+fl Don't you dare double it!
+sl end
+trigger Tito 3
+f true
+
+dialog 3
+
+check Tito 4 a.getBattles=201-399
+check Tito 6 a.getBattles=400-up
+n Tito
+fl So far your kill rate is at --getBattles--.
+sl end
+f true
+
+dialog 4
+
+# Between 201 and 399 killed
+n Tito
+fl I'm impressed! 
+sl Take this!
+gift cards.magic.Ice 2 3 false
+trigger Tito 5
+f true
+
+dialog 5
+
+check Tito 6 a.getBattles=400-9999999
+n Tito
+fl So far your kill rate is at --getBattles--.
+sl end
+f true
+
+dialog 6
+
+# after 400 kills
+n Tito
+fl You've double my record!!!!
+sl I can't believe it!
+f true
+
+n Tito
+fl Take this reward.
+sl From now on, you're my god.
+trigger Tito 7
+gift cards.offense.CrushingBlow 2 3 false
+f true
+
+dialog 7
+
+n Tito
+fl So far your kill rate is at --getBattles--.
+sl end
+f true
+
+end

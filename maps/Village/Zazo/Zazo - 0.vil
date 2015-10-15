@@ -1,0 +1,279 @@
+##### BACKGRUND #####
+
+# background, prefix name of both images day
+background Zazo true
+
+##### STARTING LOCATION #####
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1993 1024
+start0 1205 955 0
+start1 1203 286 2
+
+wind 10;0;0 .1
+particlesystem smokesystemBarackZazo smokesystemInnZazo smokesystemmayorZazo
+
+##### OBSTICLES #####
+
+# Graveyard
+o 1758 433 1767 441
+o 1890 576 1904 705
+o 1753 438 1757 441
+o 1767 424 1783 442
+o 1887 504 1973 575
+o 1939 421 1957 442
+o 1681 442 1832 549
+o 1715 550 1832 663
+o 1783 663 1832 675
+o 1965 436 1968 443
+o 1958 429 1964 443
+o 1763 428 1767 433
+o 1958 429 1958 429
+o 1784 409 1938 442
+o 1775 416 1783 424
+o 1939 412 1947 421
+o 1780 412 1783 416
+o 1821 676 1832 702
+o 1832 443 1973 503
+o 1905 576 1973 662
+
+# Houses
+o 1892 234 1940 246
+o 746 182 796 201
+o 735 181 746 194
+o 1169 326 1196 338
+o 726 -1 1023 181
+o 1116 240 1318 326
+o 252 639 393 738
+o 1780 234 1806 239
+o 1643 396 1673 409
+o 1616 828 1645 838
+o 1485 797 1515 828
+o 398 389 426 399
+o 1930 221 1940 233
+o 1521 738 1656 827
+o 760 744 894 828
+o 1778 218 1783 234
+o 341 739 352 758
+o 142 282 428 388
+o 1486 271 1673 395
+o 1238 327 1267 338
+o 1024 102 1031 235
+o 292 738 304 757
+o 922 182 1023 246
+o 1784 155 1930 234
+o 239 389 300 401
+o 796 182 921 254
+
+# River
+o 675 410 680 420
+o 581 254 674 474
+o 543 894 549 917
+o 562 940 670 1024
+o 569 358 581 379
+o 554 43 565 221
+o 569 510 683 771
+o 560 674 568 691
+o 675 255 684 286
+o 673 771 679 783
+o 692 117 705 235
+o 693 117 694 117
+o 551 653 568 674
+o 555 379 580 474
+o 534 540 545 629
+o 545 510 569 653
+o 575 346 581 357
+o 561 734 568 743
+o 566 0 676 226
+o 564 373 569 379
+o 554 939 562 974
+o 551 761 556 771
+o 674 420 685 474
+o 550 771 666 939
+o 539 522 544 540
+o 537 799 550 893
+o 670 971 678 1027
+o 676 72 692 254
+o 667 772 673 807
+o 556 743 569 771
+o 575 242 676 254
+o 569 227 677 241
+o 544 783 550 799
+o 538 630 544 641
+
+# Signs
+o 1143 931 1175 973
+o 1276 421 1324 461
+
+# StonesAndTrees
+o 58 420 67 428
+o 1566 812 1566 812
+o 1674 337 1706 399
+o 27 428 42 438
+o 353 749 386 775
+o 1356 414 1415 459
+o 1351 228 1378 359
+o 67 421 105 443
+o 1582 937 1624 974
+o 729 791 756 832
+o 1327 180 1378 227
+o 32 662 62 717
+o 1825 349 1891 385
+o 1651 959 1710 1004
+o 93 681 155 720
+o 724 954 757 981
+o 1168 636 1256 726
+o 1472 894 1505 923
+o 87 372 121 419
+o 79 602 118 664
+o 419 576 478 621
+o 1271 961 1330 1006
+o 1153 445 1185 473
+o 50 345 86 419
+o 700 861 762 902
+o 1016 414 1075 459
+o 730 342 758 388
+o 849 578 908 623
+o 0 397 16 439
+o 1059 187 1109 229
+o 26 345 49 427
+o 1057 230 1084 356
+o 1968 390 1995 425
+o 1236 445 1269 475
+o 105 420 111 428
+o 16 369 26 442
+
+
+# Children listening
+o 1170 747 1258 756
+
+# Extra in top left corner
+o 18 110 303 195
+o 335 112 360 155
+o 272 196 301 208
+o 139 208 165 222
+o 114 195 180 209
+o 438 139 463 182
+
+##### DOORS #####
+# The name field connects the door to the building so it must be the 
+# same for the door to lead to the building
+## Example: 
+## door type NAME int int int bool
+## building NAME image image string string string
+## Where the NAME is equal to NAME.
+
+# door type name xpos ypos width locked
+# building name image clerkImage clerkName clerkFirstLine clerkSecondeLine
+
+# The left and right door on the double entrance house.
+door house Zazo_-_Miner's_Home 197 332 30 0 2 0 0 1
+door house Zazo_-_Miner's_Home 340 332 30 0 2
+
+door house Zazo_-_Miner's_Home2 72 142 30 0 2 0 0 1
+door house Zazo_-_Miner's_Home2 215 142 30 0 2
+
+holeDoor house Zazo_-_Tent 307 691 30 0 2
+
+door house Zazo_-_Teo's_House 1562 341 30 0 2
+doorSignFl Teo's office. No entry!
+
+door house Zazo_-_Farl's_House 1844 181 30 0 2
+doorSignFl I'm not in, come back later.
+doorSignSl - Farl.
+
+holeDoor church Church 840 190 40 0
+building Church zazoChurch.jpg zazoPastorHent.png Pastor_Hent May_the_gods_watch_over_you! _ Zazo_Church
+
+door inn Inn 1201 272 30 0
+building Inn zazoInn.jpg zazoInnKeeperCivler.png Civler Anything_you_need? _ House
+doorSignFl Closed due to the accident.
+
+door weapon zazoWeapons 812 775 30 0
+building zazoWeapons zazoWeaponShop.jpg zazoWeaponShopEgger.png Egger Buy_or_get_out! _ Zazo_Shop
+doorSignFl Closed due to the accident.
+
+door card zazoCardShop 1573 775 30 0
+building zazoCardShop zazoCardShop.jpg zazoCardShopDaniel.png Daniel Don't_have_much_at_the_moment... but_do_you_want_any_cards? Zazo_Shop
+doorSignFl Closed due to the accident.
+
+loot name 90 310 2 cards.magic.Earth 2 2 false
+lootLine You found a card lying among the stones!
+
+loot name2 1698 511 1 cards.offense.MagicalBlow 2 1 false
+lootLine You found a card in the crate!
+
+# At the entrance
+sign 1141 930 30
+signL Left: Weapon shop.
+signL Right: Item shop, graveyard.
+
+# Outside the Inn
+sign 1275 418 15
+signL Inn: Stay at our fine establishment!
+signL Weapon shop: Low low prices on weapons.
+
+# Outside the Inn
+sign 1300 418 30
+signL Mats Meadowgrove, wanted for thievery.
+
+# Grave
+sign 1853 474 40
+signL R.I.P
+signL Here lies our great leader and friend.
+
+# Outside of Itemshop
+sign 1620 819 25
+signL Just a small pile of wood...
+signL What did you expect?
+# Outside of Itemshop
+sign 721 879 30
+signL Some rocks... This is a mining town after all...
+# By the graveyard
+sign 1720 580 40 1
+signL Rows of barrels.
+signL I wonder what they keep in them...
+
+# By the inn
+sign 1243 313 30
+signL Ornamental flowers. Looks kinda nice.
+
+# By the inn
+sign 1173 313 30
+signL Ornamental flowers. Looks kinda shabby.
+
+# By the baracks
+sign 273 366 30
+signL Another crate of ore...
+# By the baracks
+sign 243 366 30
+signL Another pile of wood...
+
+# The dead tree
+sign 80 608 40 1;2;3;4
+signL A tree.
+signL It looks dead...
+
+loot itembarrel 1492 805 0;1;2;3 75 0
+lootLine You found 75 gold in the barrel!
+lootLine Nice, huh!
+
+##### VILLAGERS #####
+
+# villager name
+villager Ander0
+villager Frits0
+villager Gerbias0
+villager Hilda0
+villager Shaun
+villager Thom0
+villager Dedricsitting0
+villager Fredricsitting0
+villager Emmasitting0
+villager Ingerdsitting0
+villager Ingussitting0
+villager WaterBarrel
+villager LoneTree
+
+##### END #####
+end

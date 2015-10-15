@@ -1,0 +1,51 @@
+import file=main.var
+
+var kin=0
+var celis=1
+
+info time="day" name="Dellna - Ana's Home" music="No Music" fadeValue="0" musicVolume="0"
+
+actor name="Characters/Kin/KinExtras" pos=495;585;0
+actor name="Characters/Celis/CelisExtras" pos=495;585;0
+
+ins timea=2000 index=celis kind=dist distance=100 duration=2000 direction=0
+ins timea=1000 index=kin kind=dist distance=70 duration=1400 direction=0
+
+ins timea=4000 index=celis kind=emotion emotion=... show=true
+ins timea=2000 index=celis kind=stop direction=2
+ins timea=1500 index=kin kind=dist distance=10 duration=600 direction=0
+
+ins timea=1500 index=celis kind=dist distance=30 duration=600 direction=0
+ins timea=0 index=celis kind=queue direction=1
+ins timea=1000 index=celis kind=emotion show=false
+ins timea=1500 index=celis kind=dist distance=80 duration=1600 direction=1
+
+ins timea=1500 index=celis kind=stop direction=2
+ins timea=2500 index=celis kind=dist distance=80 duration=1600 direction=3
+ins timea=2500 index=celis kind=stop direction=2
+ins timea=2000 index=celis kind=emotion emotion=... show=true
+ins timea=2500 index=celis kind=dist distance=35 duration=700 direction=0
+ins timea=0 index=celis kind=queue distance=135 duration=2700 direction=3
+# Looking at the bed
+ins timea=5500 index=celis kind=stop direction=2
+ins timea=2000 index=celis kind=emotion show=false
+ins timea=2500 index=celis kind=dist distance=135 duration=2700 direction=1
+ins timea=0 index=celis kind=queue distance=30 duration=600 direction=2
+
+dialogsingle starttimea=5000 <= name="Celis" text="This was my home...";""
+ins timea=300 index=kin kind=dist distance=20 duration=300 direction=0
+ins timea=0 index=kin kind=emotion emotion=? show=true
+dialogsingle starttimea=150 duration=150 <= name="Kin" text="What? Are you sure?"
+ins timea=300 index=kin kind=emotion show=false
+dialogsingle starttimea=3500 <= name="Celis" text="Walk with me, won't you?"
+
+ins timea=200 index=celis kind=dist distance=170 duration=3400 direction=0
+ins timea=400 index=kin kind=dist distance=170 duration=3400 direction=0
+
+ins timea=5000 index=celis kind=stop direction=3
+ins timea=2000 index=celis kind=stop direction=1
+ins timea=1000 index=celis kind=emotion emotion=... show=true
+ins timea=2000 index=celis kind=dist distance=70 duration=2800 direction=1
+ins timea=1000 index=kin kind=stop direction=1
+
+ins timea=1000 kind=endseq

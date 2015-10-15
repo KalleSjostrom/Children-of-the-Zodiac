@@ -1,0 +1,13 @@
+image Buttenar
+start 900 790
+
+in 3 38 true
+
+dialog 1
+
+n Buttenar
+fl The graveyard is probably the most scary 
+sl place in the whole world.
+f true
+
+end

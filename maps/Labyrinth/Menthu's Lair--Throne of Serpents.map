@@ -1,0 +1,50 @@
+mapSize -0.5 0.5 1
+
+size 136
+
+battleMusic Battle Menthu's_Theme
+
+light0 position=0;0;0;1 ambient=1;1;1;1 specular=0;0;0;1 diffuse=1;1;1;1 attenuation=1;0.01;0.015
+material ambient=.8;.8;.8;1 specular=0;0;0;1 diffuse=.7;.7;.7;1
+invMaterial ambient=.7;.7;.7;1 specular=.2;.2;.2;1 diffuse=.8;.8;.8;1 shininess=5 emission=.1;.1;.1;1
+
+enemyColor .7 .7 .7 1
+
+wallTex demonfloorwall.png
+wallTex demonfloordoor0.png
+
+normal floor 0 0
+normal wall 0 2
+normal roof 2 2
+
+mapPos 2 0
+
+dir 43 1 59
+dir 59 1 75
+dir 75 1 91
+dir 91 1 107
+dir 103 2 104
+dir 104 2 105
+dir 105 2 106
+dir 106 2 107
+dir 107 1 123
+dir 107 2 108
+dir 108 2 109
+dir 109 2 110
+dir 110 2 111
+dir 123 1 139
+dir 139 1 155
+dir 155 1 171
+
+mapEnd
+
+wall 1 111 2
+
+inv door 111 2 dontopen Menthu's_Lair--Hall_of_Memories-mark1
+
+inv boss 104 -1 -1 Menthu2
+
+inv chest 43 3 2 Images/chest 2 cards.magic.Ultima 1 true
+inv chest 171 1 2 Images/chest 2 cards.magic.Flare 1 true
+
+end

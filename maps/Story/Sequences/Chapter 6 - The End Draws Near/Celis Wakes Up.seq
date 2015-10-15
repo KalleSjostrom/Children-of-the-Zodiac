@@ -1,0 +1,177 @@
+import file=main.var
+
+var kin=0
+var celis=1
+
+info time="day" name="Dellna - Elder House - Floor 3" music="No Music" fadeValue="0" musicVolume="0"
+
+actor name="Celis"
+actor name="Kin"
+
+set drawpause="true"
+
+unload character="Borealis"
+unload character="Zalzi"
+
+show index=celis value=false
+show index=kin value=false
+
+
+ins timea=0 index=celis kind=show movepos=590;290;1
+ins timea=0 index=kin kind=show movepos=530;460;0
+
+ins timea=20 index=celis kind=emotion emotion=! show=true
+ins timea=0 index=celis kind=dist distance=40 direction=3 duration=400
+ins timea=0 index=celis kind=queue direction=2
+
+ins timea=100 index=kin kind=dist distance=70 direction=0 duration=700
+
+ins timea=0 index=kin kind=emotion emotion=!? show=true
+dialogsingle starttimea=700 <= name="Kin" text="Celis! Are you alright!?";""
+ins timea=300 index=celis kind=emotion emotion=... show=true
+ins timea=900 index=celis kind=stop direction=3
+ins timea=1300 index=celis kind=stop direction=2
+ins timea=0 index=celis kind=emotion show=false
+dialogsingle starttimea=150 duration=800 <= name="Celis" text="Yeah...";"I think so..."
+ins timea=700 index=kin kind=emotion show=false
+ins timea=0 index=0 kind=screenzoom zoomin=true zoomtime=8000 usestaticpos=true pos=512;378
+
+ins timea=900 index=celis kind=stop direction=3
+ins timea=400 index=celis kind=stop direction=2
+ins timea=500 index=celis kind=dist distance=40 duration=400 direction=3
+ins timea=0 index=celis kind=emotion emotion=!? show=true
+dialogsingle starttimea=150 duration=250 <= name="Celis" text="Where's Borealis and Zalzi!?";""
+ins timea=500 index=kin kind=dist distance=10 duration=400 direction=0
+dialogsingle starttimea=150 duration=250 <= name="Kin" text="They're fine."
+ins timea=200 index=celis kind=stop direction=2
+ins timea=40 index=celis kind=emotion show=false
+ins timea=1000 index=celis kind=stop direction=1
+ins timea=0 index=celis kind=emotion emotion=... show=true
+ins timea=1500 index=celis kind=dist distance=20 duration=800 direction=1
+ins timea=300 index=celis kind=emotion show=false
+dialogsingle starttimea=400 <= name="Celis" text="Oh... I see..."
+ins timea=1000 index=celis kind=stop direction=2
+ins timea=1800 index=celis kind=stop direction=3
+ins timea=0 index=celis kind=emotion emotion=? show=true
+ins timea=1200 index=celis kind=stop direction=0
+ins timea=500 index=celis kind=stop direction=2
+dialogsingle starttimea=400 <= name="Celis" text="Where am I?"
+
+ins timea=700 index=kin kind=dist distance=20 duration=400 direction=0
+dialogsingle starttimea=200 duration=200 <= name="Kin" text="You're in Merri's house.";"He's the member of the Brethren who lives in Dellna."
+ins timea=150 index=celis kind=emotion show=false
+ins timea=500 index=kin kind=emotion emotion=... show=true
+ins timea=1500 index=kin kind=stop direction=2
+ins timea=1000 index=kin kind=emotion show=false
+dialogsingle starttimea=100 <= name="Kin" text="Or... lived...";""
+ins timea=300 index=celis kind=dist distance=20 duration=200 direction=2
+ins timea=0 index=celis kind=emotion emotion=?! show=true
+dialogsingle starttimea=150 duration=300 <= name="Celis" text="What!?";"What's happened to Merri??"
+ins timea=250 index=kin kind=stop direction=0
+ins timea=500 index=kin kind=stop direction=2
+dialogsingle starttimea=150 duration=500 <= name="Kin" text="Do you remember the battle with Menthu?";""
+ins timea=400 index=celis kind=emotion show=false
+ins timea=400 index=celis kind=stop direction=3
+ins timea=0 index=celis kind=emotion emotion=? show=true
+ins timea=1200 index=celis kind=stop direction=2
+dialogsingle starttimea=150 <= name="Celis" text="Yeah..."
+ins timea=500 index=kin kind=stop direction=0
+dialogsingle starttimea=250 duration=350 <= name="Kin" text="Menthu was about to finish us off for good,";"when Merri came and saved us."
+ins timea=300 index=celis kind=emotion show=false
+ins timea=1000 index=celis kind=stop direction=0
+dialogsingle starttimea=500 <= name="Celis" text="The only thing I remember is a bright light..."
+
+ins timea=2500 index=celis kind=stop direction=2
+ins timea=0 kind=setfadeimage fadeimage=black
+dialogsingle starttimea=150 <= name="Celis" text="What happened to Menthu?";""
+
+ins timea=500 index=kin kind=stop direction=1
+dialogsingle starttimea=250 <= name="Kin" text="We don't know..."
+
+ins timea=1500 index=kin kind=dist distance=20 direction=0 duration=800
+dialogsingle starttimea=1100 <= name="Kin" text="Gabriel believe he fled."
+ins timea=300 index=celis kind=dist distance=10 direction=2 duration=300
+dialogsingle starttimea=150 duration=150 <= name="Celis" text="Who's Gabriel?"
+ins timea=400 index=kin kind=stop direction=3
+dialogsingle starttimea=200 <= name="Kin" text="He's Merri's apprentice.";"He was with Merri when we were saved."
+ins timea=500 index=kin kind=dist distance=30 direction=2 duration=1200
+dialogsingle starttimea=1000 duration=200 <= name="Kin" text="Gabriel, together with a few more,";"took us out of the cave..."
+ins timea=300 index=celis kind=dist distance=10 direction=2 duration=200
+dialogpacket name=2 starttimea=50 duration=400
+dialog packetname=2 name="Celis" text="Where is this Gabriel?";"I want to thank him."
+dialog packetname=2 name="Kin" text="He's out with Borealis and Zalzi.";"They're just checking the surrounding areas." first=false
+ins timea=300 index=kin kind=stop direction=0
+
+ins timea=1000 index=celis kind=dist distance=20 direction=0 duration=2000
+dialogsingle starttimea=2500 <= name="Celis" text="Why aren't you with them?";""
+ins timea=500 index=kin kind=stop direction=2
+dialogsingle starttimea=150 <= name="Kin" text="Well..."
+
+ins timea=500 index=kin kind=emotion emotion=... show=true
+ins timea=2000 index=kin kind=stop direction=0
+ins timea=0 index=kin kind=emotion show=false
+dialogsingle starttimea=150 <= name="Kin" text="I wanted to stay here with you."
+ins timea=400 index=celis kind=emotion emotion=... show=true
+ins timea=0 index=celis kind=dist distance=20 direction=2 duration=800
+dialogsingle starttimea=700 duration=100 <= name="Celis" text="You really are a true friend..."
+
+ins timea=400 index=celis kind=emotion show=false
+ins timea=500 index=kin kind=emotion emotion=... show=true
+ins timea=500 index=kin kind=stop direction=2
+ins timea=5000 index=kin kind=stop direction=0
+ins timea=0 index=kin kind=emotion show=false
+dialogsingle starttimea=150 duration=500 <= name="Kin" text="By the way, Gabriel said that you should";"go visit a house here in Dellna."
+ins timea=400 index=celis kind=emotion show=false
+ins timea=0 index=celis kind=stop direction=2
+ins timea=200 index=celis kind=emotion emotion=? show=true
+dialogsingle starttimea=1000 <= name="Celis" text="Why?";""
+ins timea=500 index=kin kind=dist distance=10 direction=0 duration=400
+dialogsingle starttimea=200 duration=350 <= name="Kin" text="I don't know...";"He just said it might be of interest to you..."
+ins timea=300 index=celis kind=emotion show=false
+ins timea=500 index=celis kind=stop direction=3
+dialogsingle starttimea=150 <= name="Celis" text="Well then.";"Let's go!"
+ins timea=0 index=0 kind=screenzoom zoomin=false zoomtime=2500 usestaticpos=true pos=512;378
+
+load trigger="Dellna"
+ins index=0 timea=0 kind=trigger value=1
+load trigger="Helen"
+ins index=1 timea=0 kind=trigger value=2
+load trigger="Diana"
+ins index=2 timea=0 kind=trigger value=2
+load trigger="Marlo"
+ins index=3 timea=0 kind=trigger value=2
+load trigger="Math"
+ins index=4 timea=0 kind=trigger value=4
+load trigger="Melker"
+ins index=5 timea=0 kind=trigger value=3
+load trigger="Ribby"
+ins index=6 timea=0 kind=trigger value=3
+load trigger="Wilko"
+ins index=7 timea=0 kind=trigger value=3
+load trigger="Gullie"
+ins index=8 timea=0 kind=trigger value=2
+load trigger="Kilty"
+ins index=9 timea=0 kind=trigger value=4
+load trigger="dellnaCardShop"
+ins index=10 timea=0 kind=trigger value=1
+load trigger="alaresCardShop"
+ins index=11 timea=0 kind=trigger value=2
+load trigger="pensaraCardShop"
+ins index=12 timea=0 kind=trigger value=3
+load trigger="bercaCardShop"
+ins index=13 timea=0 kind=trigger value=2
+load trigger="Gabriel"
+ins index=14 timea=0 kind=trigger value=0
+load trigger="dellnadellna - ana's home"
+ins index=15 timea=0 kind=trigger value=0
+
+load trigger="dellna - elder house - floor 1"
+ins index=16 timea=0 kind=trigger value=1
+load trigger="dellna - elder house - floor 2"
+ins index=17 timea=0 kind=trigger value=1
+load trigger="dellna - elder house - floor 3"
+ins index=18 timea=0 kind=trigger value=1
+load trigger="dellna - house"
+ins index=19 timea=0 kind=trigger value=1
+
+ins timea=2500 kind=end

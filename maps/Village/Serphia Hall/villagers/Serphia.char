@@ -1,0 +1,10 @@
+image Serphia
+start 494 240
+
+in 2 100 true
+
+dialog 1
+
+run Serphia_Awakens-Part_2 continue 1
+
+end

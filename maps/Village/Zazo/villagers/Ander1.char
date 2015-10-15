@@ -1,0 +1,42 @@
+##### VILLAGER #####
+# NAME: Ander
+image Ander
+
+##### STARTING LOCATION #####
+
+# start x y
+start 1440 530
+
+##### INSTRUCTIONS #####
+
+# in angle distance stopped
+in 2 200 true
+in 3 10 true
+in 2 200 true
+in 1 10 true
+
+##### DIALOGS #####
+
+# first line
+# second line
+# first dialog background (the one at the far left top of the screen)
+
+dialog 1
+
+n Ander
+fl Praise be to you all!
+sl end
+f true
+
+n Ander
+fl If you hadn't shown up all of the workers 
+sl would still be trapped and surely dead.
+f true
+
+n Ander
+fl It truly is a blessing that you arrived.
+sl end
+f true
+
+##### END #####
+end

@@ -1,0 +1,38 @@
+##### VILLAGER #####
+image Thom
+
+##### STARTING LOCATION #####
+
+# start x y
+start 1194 685
+
+##### INSTRUCTIONS #####
+
+# in angle distance stopped
+in 2 180 true
+
+##### DIALOGS #####
+
+# first line
+# second line
+# first dialog background (the one at the far left top of the screen)
+
+dialog 1
+	
+	n Thom
+	fl ...it was then the dragon appeared from out of 
+	sl nowhere and roared a grim roar even Casius...
+	trigger Thom0 2
+	f true
+	
+
+dialog 2
+
+	n Thom
+	fl (I hope my stories keeps the children occupied until 
+	sl this terrible accident is resolved.)
+	whisper
+	f true
+
+##### END #####
+end

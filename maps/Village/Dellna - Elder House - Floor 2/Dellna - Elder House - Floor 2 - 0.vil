@@ -1,0 +1,22 @@
+background Dellna_-_Elder_House_-_Floor_2 true
+back 1024 768
+start0 582 296 0
+start1 399 390 2
+
+inside
+
+holeDoor switch Dellna_-_Elder_House_-_Floor_1 582 316 30 2 0 580 411 2 1
+holeDoor house Dellna_-_Elder_House_-_Floor_3 402 380 30 0 0 402 300 0
+
+o 390 262 454 376
+o 574 340 583 388
+o 582 388 621 491
+o 374 314 393 634
+o 394 376 400 457
+o 370 236 659 313
+o 432 377 455 418
+o 621 313 640 633
+o 432 419 440 458
+o 392 534 623 587
+
+end

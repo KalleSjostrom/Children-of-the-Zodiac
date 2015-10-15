@@ -1,0 +1,143 @@
+background East
+
+node 364 617 village Parasne
+node 391 598 labyrinth Pensara_Forest--Forest-mark0
+node 415 530 labyrinth Pensara_Forest--Forest-mark1
+node 418 502 village Pensara_-_The_Trade_District
+node 497 530 labyrinth Fire_Cavern--Hall_of_Fire-mark0
+node 430 372 labyrinth Pensara_Prison--Floor_1-mark0
+node 462 373 labyrinth Berca_Desert--South_West-mark0
+node 522 379 village Crossroad
+node 596 264 labyrinth Berca_Desert--North_East-mark0
+node 615 230 village Berca
+node 704 277 crossroad Berca_Cross
+node 737 148 labyrinth Temple_of_Aegis--First_Floor-mark0
+node 498 656 labyrinth Dorma's_Forest--Forest_of_Hate-mark0
+node 570 515 labyrinth Fire_Cavern--Inferno-mark2
+node 630 540 labyrinth Silent_Ruin--The_Great_Ruins-mark0
+
+road 0 Parasne 1 Pensara_Forest--Forest-mark0 3
+    co 364 617
+	co 378 609
+	co 391 598
+	oc
+
+road 1 Pensara_Forest--Forest-mark0 0 Pensara_Forest--Forest-mark1 2
+	co 391 598
+	co 397 583
+	co 396 567
+	co 396 551
+	co 408 538
+	co 415 530
+	oc
+
+road 2 Pensara_Forest--Forest-mark1 0 Pensara_-_The_Trade_District 2
+	co 415 530
+	co 420 516
+	co 418 502
+	oc
+	
+road 3 Pensara_Forest--Forest-mark1 1 Fire_Cavern--Hall_of_Fire-mark0 3
+	co 419 528
+	co 434 528
+	co 449 531
+	co 465 533
+	co 481 532
+	co 497 530
+	oc
+  
+road 4 Pensara_-_The_Trade_District 1 Crossroad 2
+	co 418 502
+	co 437 500
+	co 453 494
+	co 457 480
+	co 461 466
+	co 467 453
+	co 475 437
+	co 481 422
+	co 493 409
+	co 503 398
+	co 513 388
+	co 522 379
+	oc
+
+road 5 Crossroad 3 Berca_Desert--South_West-mark0 1
+	co 522 379
+	co 507 377
+	co 492 375
+	co 477 374
+	co 462 373
+	oc
+
+road 6 Berca_Desert--South_West-mark0 3 Pensara_Prison--Floor_1-mark0 1
+	co 462 373
+	co 446 373
+	co 430 372
+	oc
+
+road 7 Crossroad 0 Berca_Desert--North_East-mark0 2
+	co 522 379
+	co 537 363
+	co 550 349
+	co 560 337
+	co 571 322
+	co 580 309
+	co 588 295
+	co 594 280
+	co 596 264
+	oc
+
+road 8 Berca_Desert--North_East-mark0 0 Berca 2
+	co 596 264
+	co 595 251
+	co 602 239
+	co 615 230
+	oc
+	
+road 9 Berca 1 Berca_Cross 3
+	co 615 230
+	co 630 230
+	co 644 233
+	co 654 244
+	co 663 256
+	co 674 268
+	co 688 275
+	co 704 277
+	oc
+
+road 10 Berca_Cross 0 Temple_of_Aegis--First_Floor-mark0 3
+	co 704 277
+	co 704 263
+	co 704 248
+	co 701 234
+	co 700 219
+	co 698 204
+	co 698 189
+	co 700 175
+	co 709 162
+	co 723 153
+	co 737 148
+	oc
+
+
+road 11 Pensara_Forest--Forest-mark0 1 Dorma's_Forest--Forest_of_Hate-mark0 3
+    co 391 598
+    co 406 603
+    co 422 607
+    co 436 618
+    co 447 629
+    co 455 643
+    co 469 651
+    co 483 654
+    co 498 656
+    oc
+    
+road 12 Fire_Cavern--Inferno-mark2 1 Silent_Ruin--The_Great_Ruins-mark0 3
+    co 570 515
+    co 585 521
+    co 600 527
+    co 615 533
+    co 630 540
+    oc
+
+end

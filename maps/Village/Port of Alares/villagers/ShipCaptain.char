@@ -1,0 +1,22 @@
+image char/ShipCaptain
+start 715 620
+	   
+in 0 100 true  
+	   
+dialog 1
+
+run ShipCaptain continue 1	
+
+dialog 2	   
+	   
+n Ship Captain	   
+fl Bounded for Pensara we arrgh in a minute!
+sl end
+f true	   
+
+n Ship Captain	   
+fl Take yer seats in the cabin downstairs,
+sl orr arrgh be goin' without ye!   
+f true
+	   	   
+end

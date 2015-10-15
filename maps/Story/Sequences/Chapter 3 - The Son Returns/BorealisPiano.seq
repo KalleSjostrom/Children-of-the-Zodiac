@@ -1,0 +1,99 @@
+import file=main.var
+
+var kin=0
+var celis=1
+var borealis=2
+var zalzi=3
+
+info time="day" name="Pensara - The Trade District - House 1 - Floor 1" music="continue" fadeValue="1" musicVolume="1"
+
+actor name="Borealis" pos=460;370;0
+actor name="Celis" pos=475;340;0
+actor name="Kin" pos=475;400;0
+actor name="Zalzi" pos=480;370;0
+
+load music="Borealis piano"
+
+dialogsingle starttimea=500 <= name="Borealis" text="This is how it's done!";""
+
+ins timea=200 index=borealis kind=dist distance=10 direction=0 duration=200
+
+ins type=fadeout timea=100 index=0 fadetime=1000 kind=music mode=pause
+ins type=fadein timea=1000 index=1 fadetime=0 kind=music mode=play
+
+
+#var d1=445
+#var d2=334
+#var d3=111
+#var d4=222
+#var d5=667
+
+var d3=127
+var d4=254
+var d2=381
+var d1=508
+var d5=765
+var pause=1911
+
+var first=1911
+var d2a=396
+var d1a=528
+
+ins timea=180 index=borealis kind=dist distance=4 direction=1 facedirection=0 duration=100
+ins timea=d2 index=borealis kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=d3 index=borealis kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=d4 index=borealis kind=dist distance=8 direction=3 facedirection=0 duration=100
+
+ins timea=d5 index=borealis kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=d3 index=borealis kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=d4 index=borealis kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=d5 index=borealis kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=d3 index=borealis kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=d4 index=borealis kind=dist distance=8 direction=3 facedirection=0 duration=100
+
+ins timea=d5 index=borealis kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=d3 index=borealis kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=d4 index=borealis kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=d5 index=borealis kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=d3 index=borealis kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=d4 index=borealis kind=dist distance=8 direction=3 facedirection=0 duration=100
+
+ins timea=d5 index=borealis kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=d3 index=borealis kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=d4 index=borealis kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=d5 index=borealis kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=d3 index=borealis kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=d4 index=borealis kind=dist distance=8 direction=3 facedirection=0 duration=100
+
+ins timea=first index=borealis kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=d2a index=borealis kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=d2a index=borealis kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=d2a index=borealis kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=d2a index=borealis kind=dist distance=8 direction=1 facedirection=0 duration=100
+
+ins timea=d1a index=borealis kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=d2a index=borealis kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=d2a index=borealis kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=d2a index=borealis kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=d2a index=borealis kind=dist distance=8 direction=3 facedirection=0 duration=100
+
+ins timea=d1a index=borealis kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=d2a index=borealis kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=d2a index=borealis kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=d2a index=borealis kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=d2a index=borealis kind=dist distance=8 direction=1 facedirection=0 duration=100
+
+ins timea=d1a index=borealis kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=d2a index=borealis kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=d2a index=borealis kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=d2a index=borealis kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=d2a index=borealis kind=dist distance=8 direction=3 facedirection=0 duration=100
+
+
+ins type=fadeout timea=400 index=1 fadetime=1000 kind=music mode=kill
+ins type=fadein timea=1000 index=0 fadetime=1000 kind=music mode=play
+
+load trigger="Piano"
+ins index=0 timea=0 kind=trigger value=6
+
+ins timea=1000 kind=end

@@ -1,0 +1,27 @@
+image Quintis	   
+start 370 510	   
+	   
+in 0 100 true	   
+	   
+dialog 1	   
+	   
+n Quintis	   
+fl Travelers who comes to Berca use to tell us stories	   
+sl of a white village in the north. 	   
+f true	   
+	   
+n Quintis	   
+fl Rumor has it that it's so cold inside their houses	   
+sl that people sleeps in furs.	   
+trigger Quintis 2	   
+f true	   
+	   
+dialog 2	   
+	   
+n Quintis	   
+fl The white village is nothing for me, though.	   
+sl I like it warm.	   
+trigger Quintis 1	   
+f true	   
+	   
+end	 

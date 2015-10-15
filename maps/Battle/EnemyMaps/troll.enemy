@@ -1,0 +1,30 @@
+name Troll
+
+defense 30
+magicDefense 25
+agility 10
+evade 0
+hit 93
+attack 188
+magic 102
+support 73
+hp 701
+element 4
+gold 315
+experience 210
+criticalChance 5
+
+diesound Ogre/dies
+image ogre 3
+armor 20 15
+preferences 100 0
+
+scale 6
+height -2
+depth -6
+middle 0
+
+attackSpec probability=.5 anim=(f=1,a=400)--(f=1,a=180,se=Monster/Ogre/attack)--(f=2,h=true)
+attackSpec name=Sword_of_Furry power=.5 onAll=true p=.5 anim=(f=1,a=300)--(f=1,a=180,se=Monster/Ogre/attack)--(f=2,a=300)--(f=1,a=300)--(f=1,a=180,se=Monster/Ogre/attack)--(f=2,a=300)--(f=1,a=300)--(f=1,a=180,se=Monster/Ogre/attack)--(f=2,a=300,h=true)
+
+# cardPreference [CardName preference]

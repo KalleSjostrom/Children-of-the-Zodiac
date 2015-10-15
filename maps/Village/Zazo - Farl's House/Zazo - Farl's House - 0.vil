@@ -1,0 +1,14 @@
+# background, prefix name of both images day
+background Zazo_-_Farl's_House true
+
+inside
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1024 768
+start 486 535 0
+
+
+
+holeDoor switch Zazo 486 560 30 2 1 1840 196 2
+
+end

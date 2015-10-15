@@ -1,0 +1,23 @@
+image char/Gabriel
+
+start 540 379
+
+in 2 200 true
+
+dialog 1
+
+n Gabriel
+fl If you seek Merri the elder, he is out.
+sl He went east towards the Ice Cavern.
+trigger road2-0 1
+f true
+
+dialog 2
+# 20
+
+n Gabriel
+fl You must hurry to the Empyrian Temple!
+sl end
+f true
+
+end

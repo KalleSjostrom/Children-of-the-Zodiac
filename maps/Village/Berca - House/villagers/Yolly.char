@@ -1,0 +1,31 @@
+image Yolly
+start 355 480
+
+in 2 100 true
+
+dialog 1
+
+n Yolly
+fl My two sons want to be soccer players 
+sl when they grow up. 
+f true
+
+n Yolly
+fl It's sad, though, that the senate have forbid
+sl soccer all over the country. 
+f true
+
+n Yolly
+fl But I tell my sons to keep practicing... 
+sl You never know what's going to happen in the future.
+trigger Yolly 2
+f true
+
+dialog 2
+
+n Yolly
+fl You never know what's going to happen in the future.
+sl end
+f true
+
+end

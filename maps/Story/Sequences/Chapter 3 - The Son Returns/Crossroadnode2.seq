@@ -1,0 +1,189 @@
+import file=main.var
+
+var guard1=0
+var guard2=1
+var guard3=2
+var guard4=3
+var guard5=4
+var kin=5
+var celis=6
+var borealis=7
+var zalzi=8
+
+info time="day" name="Crossroad" music="Wasteland" fadeValue="0" musicVolume="0"
+
+actor name="Characters/Pensarasoldier/PensarasoldierExtras" pos=-50;335;1
+actor name="Characters/Pensarasoldier/PensarasoldierExtras" 
+actor name="Characters/Pensarasoldier/PensarasoldierExtras" 
+actor name="Characters/Pensarasoldier/PensarasoldierExtras"
+actor name="Characters/Pensarasoldier/PensarasoldierExtras"
+
+actor name="Kin"
+actor name="Celis"
+actor name="Borealis"
+actor name="Zalzi"
+
+load music="Wasteland2"
+load music="We've Got To Hurry"
+
+ins timea=0 index=0 kind=screenzoom zoomin=true zoomtime=4000 usestaticpos=true pos=430;378
+
+ins type=fadeout timea=0 index=0 fadetime=0 kind=music mode=pause
+ins type=fadein timea=0 index=1 fadetime=0 kind=music mode=play
+
+#show index=guard1 value=false
+show index=guard2 value=false
+show index=guard3 value=false
+show index=guard4 value=false
+show index=guard5 value=false
+show index=kin value=false
+show index=celis value=false
+show index=borealis value=false
+show index=zalzi value=false
+
+ins timea=0 index=guard2 kind=show movepos=830;207;3
+ins timea=0 index=guard3 kind=show movepos=428;172;1
+ins timea=0 index=guard4 kind=show movepos=808;770;0
+ins timea=0 index=guard5 kind=show movepos=340;770;0
+
+ins timea=0 index=kin kind=show movepos=497;380;3
+ins timea=0 index=celis kind=show movepos=457;400;0
+ins timea=0 index=borealis kind=show movepos=457;360;2
+ins timea=0 index=zalzi kind=show movepos=417;380;1
+
+ins timea=1000 index=kin kind=emotion emotion=! show=true 
+ins timea=0 index=kin kind=dist distance=10 direction=3 duration=100
+dialogsingle starttimea=50 duration=50 <= name="Kin" text="So, give us our money now and get out of here!"
+
+ins timea=250 index=celis kind=emotion emotion=! show=true 
+ins timea=0 index=celis kind=tor movepos=11;-10 duration=100
+dialogsingle starttimea=100 duration=500 <= name="Celis" text="Quit being so harsh!"
+ins timea=400 index=kin kind=emotion show=false
+ins timea=200 index=kin kind=dist distance=10 direction=1 duration=150
+ 
+ins timea=700 index=celis kind=emotion show=false 
+ins timea=0 index=zalzi kind=tor movepos=30;10 duration=600
+ins timea=300 index=celis kind=stop direction=3
+dialogsingle starttimea=600 <= name="Zalzi" text="A promise is a promise.";"Here you go."
+
+ins timea=600 index=zalzi kind=tor movepos=-30;-10 duration=600
+ins timea=0 index=zalzi kind=queue direction=1
+dialogsingle starttimea=800 <= name="Celis" text="Thank you!"
+ins timea=200 index=0 kind=screenzoom zoomin=false zoomtime=1000 usestaticpos=true pos=430;378
+
+ins type=fadeout timea=500 index=1 fadetime=500 kind=music mode=kill
+ins timea=0 index=guard1 kind=dist distance=300 direction=1 duration=3000
+ins type=fadein timea=500 index=2 fadetime=0 kind=music mode=play
+dialogsingle starttimea=500 duration=7000 <= name="Guard" text="By orders of Vincent af Kinstone of Pensara,";"you are herby under arrest!"
+
+
+# ------- Zalzi ------- #
+ins timea=250 index=zalzi kind=stop direction=3
+ins timea=150 index=zalzi kind=emotion emotion=! show=true
+ins timea=0 index=zalzi kind=to movepos=362;172 duration=1000
+ins timea=0 index=borealis kind=stop direction=3
+ins timea=0 index=borealis kind=emotion emotion=! show=true
+ins timea=250 index=borealis kind=to movepos=765;205 duration=1000
+ins timea=650 index=guard3 kind=to movepos=377;160 duration=200
+ins timea=0 index=kin kind=stop direction=3
+ins timea=0 index=kin kind=emotion emotion=! show=true
+ins timea=250 index=guard2 kind=to movepos=772;190 duration=200
+ins timea=50 index=kin kind=to movepos=744;681 duration=1000
+ins timea=50 index=zalzi kind=dist distance=10 direction=3 facedirection=1 duration=100
+ins timea=0 index=celis kind=emotion emotion=? show=true
+ins timea=250 index=guard5 kind=to movepos=396;624 duration=400
+ins timea=250 index=zalzi kind=stop direction=2
+ins timea=150 index=guard5 kind=stop direction=2
+ins timea=50 index=guard3 kind=to movepos=352;145 duration=200
+ins timea=100 index=borealis kind=dist distance=8 direction=3 facedirection=1 duration=100
+ins timea=0 index=guard4 kind=to movepos=750;681 duration=200
+ins timea=100 index=kin kind=dist distance=8 direction=0 facedirection=2 duration=100
+ins timea=400 index=borealis kind=stop direction=3
+ins timea=100 index=guard3 kind=dist distance=50 direction=2 duration=1000
+ins timea=0 index=kin kind=stop direction=0
+
+ins timea=0 index=guard5 kind=stop direction=0
+
+ins timea=0 index=zalzi kind=dist distance=50 direction=2 duration=1000
+ins timea=0 index=zalzi kind=emotion show=false
+ins timea=0 index=zalzi kind=stop direction=2
+ins timea=500 index=celis kind=emotion show=false
+ins timea=500 index=guard2 kind=to movepos=498;330 duration=4000
+ins timea=0 index=guard3 kind=to movepos=498;300 duration=4000
+ins timea=0 index=guard3 kind=queue direction=3
+ins timea=0 index=borealis kind=emotion show=false
+ins timea=0 index=zalzi kind=to movepos=468;300 duration=4000
+ins timea=0 index=zalzi kind=stop direction=2
+ins timea=0 index=zalzi kind=queue direction=3
+ins timea=0 index=borealis kind=to movepos=468;330 duration=4000
+ins timea=0 index=borealis kind=stop direction=3
+
+ins timea=100 index=guard5 kind=stop direction=3
+ins timea=400 index=guard5 kind=stop direction=1
+ins timea=100 index=kin kind=emotion show=false
+
+ins timea=400 index=guard4 kind=to movepos=498;360 duration=4000
+ins timea=0 index=guard4 kind=queue direction=3
+ins timea=0 index=kin kind=to movepos=468;360 duration=4000
+ins timea=0 index=kin kind=stop direction=3
+
+ins timea=500 index=guard5 kind=to movepos=498;490 duration=2500
+ins timea=0 index=guard5 kind=queue distance=100 direction=0 duration=1200
+ins timea=0 index=guard5 kind=queue direction=3
+
+# ------- Celis ------- #
+
+ins timea=2500 index=guard1 kind=dist distance=100 direction=1 duration=2000
+dialogsingle starttimea=1500 duration=500 <= name="Guard" text="Trying to run away, aye?"
+
+ins timea=750 index=kin kind=dist distance=60 direction=3 duration=500
+ins timea=0 index=kin kind=emotion emotion=! show=true
+ins timea=200 index=guard4 kind=dist distance=60 direction=3 duration=300
+ins timea=0 index=guard4 kind=emotion emotion=! show=true
+dialogsingle starttimea=100 duration=500 <= name="Kin" text="What's going on?!"
+ins timea=450 index=kin kind=emotion show=false
+
+ins timea=150 index=guard1 kind=dist distance=20 direction=1 duration=200
+ins timea=0 index=guard1 kind=emotion emotion=! show=true
+dialogsingle starttimea=100 duration=500 <= name="Guard" text="Silence!!"
+ins timea=300 index=guard4 kind=dist distance=60 direction=1 facedirection=3 duration=1800
+ins timea=0 index=guard4 kind=emotion show=false
+ins timea=0 index=kin kind=dist distance=60 direction=1 facedirection=3 duration=1800
+ins timea=0 index=kin kind=stop direction=3
+
+ins timea=1000 index=guard1 kind=emotion show=false
+ins timea=2000 index=guard1 kind=dist distance=40 direction=3 duration=3000
+dialogsingle starttimea=2500 duration=500 <= name="Guard" text="You can take up the details with lord Vincent.";"We are to bring you to him, at once."
+
+ins timea=400 index=kin kind=emotion emotion=... show=true
+dialogsingle starttimea=1000 duration=500 <= name="Kin" text="Vincent...";"My own father..." whisper=true
+
+ins timea=1000 index=guard1 kind=dist direction=1 distance=20 duration=200
+ins timea=0 index=guard1 kind=emotion emotion=! show=true
+dialogsingle starttimea=100 duration=100 <= name="Guard" text="Come on, soldiers of Pensara!";"Our lord is waiting!"
+ins timea=50 index=kin kind=emotion show=false
+
+ins timea=600 index=guard1 kind=emotion show=false
+ins timea=200 index=guard1 kind=dist direction=3 distance=1000 duration=8000
+ins timea=0 index=guard2 kind=dist direction=3 distance=1000 duration=10000
+ins timea=0 index=guard3 kind=dist direction=3 distance=1000 duration=12000
+ins timea=0 index=guard4 kind=dist direction=3 distance=1000 duration=8000
+ins timea=0 index=guard5 kind=dist direction=3 distance=1000 duration=8000
+ins timea=0 index=celis kind=dist direction=3 distance=1000 duration=8000
+ins timea=0 index=kin kind=dist direction=3 distance=1000 duration=8000
+
+ins timea=0 index=borealis kind=dist direction=3 distance=1000 duration=10000
+ins timea=0 index=borealis kind=stop direction=3
+ins timea=0 index=zalzi kind=dist direction=3 distance=1000 duration=12000
+ins timea=0 index=zalzi kind=stop direction=1
+
+ins type=fadeout timea=2000 index=2 fadetime=1500 kind=music mode=kill
+ins type=fadein timea=1500 index=1 fadetime=1500 kind=music mode=play
+ins timea=0 index=1 kind=music_overwrite
+
+load trigger="Fortuneteller"
+ins index=0 timea=0 kind=trigger value=2
+load trigger="Crossroadnode"
+ins index=1 timea=0 kind=trigger value=0
+
+ins timea=1500 kind=endseq

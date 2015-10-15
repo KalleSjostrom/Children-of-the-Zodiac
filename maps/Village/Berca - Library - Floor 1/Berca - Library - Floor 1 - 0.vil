@@ -1,0 +1,37 @@
+background Berca_-_Library_-_Floor_1 true
+
+inside
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1024 768
+start 495 560 0
+
+holeDoor switch Berca 495 560 30 2 1 1822 390 2
+holeDoor house Berca_-_Library_-_Floor_2 498 420 30 0 0 496 290 2
+
+villager Mizoram 1 2 3 4
+
+o 718 437 753 490
+o 361 287 442 337
+o 539 454 563 490
+o 310 176 310 176
+o 379 436 412 470
+o 269 436 304 489
+o 610 579 642 643
+o 270 280 305 333
+o 594 287 660 338
+o 252 286 274 594
+o 750 287 772 595
+o 461 454 485 490
+o 610 437 643 471
+o 718 281 753 334
+o 263 240 778 287
+o 477 394 546 452
+o 379 585 411 642
+o 256 614 769 730
+o 721 579 753 636
+o 418 331 418 331
+o 611 587 643 644
+o 266 583 298 640
+
+end

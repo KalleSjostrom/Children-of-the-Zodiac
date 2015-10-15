@@ -1,0 +1,209 @@
+Kin=1:1 hp=98 attack=11 magic=9 support=8 defense=11 magicDefense=9 expToNext=80
+Kin=1:2 hp=110 attack=12 magic=10 support=9 defense=12 magicDefense=10 expToNext=110
+Kin=1:3 hp=123 attack=14 magic=11 support=10 defense=14 magicDefense=11 expToNext=200
+Kin=1:4 hp=135 attack=15 magic=12 support=11 defense=15 magicDefense=12
+
+Kin=2:1 hp=147 attack=16 magic=13 support=12 defense=16 magicDefense=13 expToNext=100 deckSize=20
+Kin=2:2 hp=159 attack=17 magic=14 support=13 defense=17 magicDefense=14 expToNext=120
+Kin=2:3 hp=172 attack=19 magic=15 support=14 defense=19 magicDefense=15 expToNext=160
+Kin=2:4 hp=186 attack=20 magic=16 support=15 defense=20 magicDefense=16 expToNext=200
+Kin=2:5 hp=201 attack=22 magic=18 support=16 defense=22 magicDefense=18 expToNext=240
+Kin=2:6 hp=212 attack=23 magic=18 support=17 defense=23 magicDefense=18
+
+Kin=3:1 hp=223 attack=24 magic=19 support=18 defense=24 magicDefense=19 expToNext=180 deckSize=23
+Kin=3:2 hp=242 attack=26 magic=20 support=19 defense=26 magicDefense=20 expToNext=220
+Kin=3:3 hp=261 attack=28 magic=22 support=21 defense=28 magicDefense=22 expToNext=530
+Kin=3:4 hp=283 attack=30 magic=24 support=23 defense=30 magicDefense=24 expToNext=770
+Kin=3:5 hp=305 attack=33 magic=26 support=25 defense=33 magicDefense=26 expToNext=1080
+Kin=3:6 hp=330 attack=36 magic=28 support=27 defense=36 magicDefense=28 expToNext=1420
+Kin=3:7 hp=357 attack=39 magic=30 support=29 defense=39 magicDefense=30 expToNext=2000
+Kin=3:8 hp=387 attack=42 magic=32 support=31 defense=42 magicDefense=32
+
+Kin=4:1 hp=418 attack=46 magic=35 support=34 defense=46 magicDefense=35 expToNext=675 deckSize=25
+Kin=4:2 hp=452 attack=50 magic=38 support=37 defense=50 magicDefense=38 expToNext=825
+Kin=4:3 hp=488 attack=54 magic=41 support=40 defense=54 magicDefense=41 expToNext=1400
+Kin=4:4 hp=527 attack=58 magic=44 support=43 defense=58 magicDefense=44 expToNext=2200
+Kin=4:5 hp=567 attack=62 magic=47 support=46 defense=62 magicDefense=47 expToNext=2925
+Kin=4:6 hp=612 attack=66 magic=50 support=49 defense=66 magicDefense=50 expToNext=3575
+Kin=4:7 hp=658 attack=71 magic=54 support=53 defense=71 magicDefense=54 expToNext=4050
+Kin=4:8 hp=712 attack=76 magic=57 support=56 defense=76 magicDefense=58 expToNext=4950
+Kin=4:9 hp=769 attack=81 magic=60 support=59 defense=81 magicDefense=62 expToNext=6000
+Kin=4:10 hp=823 attack=86 magic=65 support=64 defense=86 magicDefense=66
+
+Kin=5:1 hp=880 attack=92 magic=71 support=70 defense=92 magicDefense=71 expToNext=1350 deckSize=27
+Kin=5:2 hp=946 attack=98 magic=76 support=74 defense=98 magicDefense=76 expToNext=1650
+Kin=5:3 hp=1014 attack=104 magic=81 support=79 defense=104 magicDefense=81 expToNext=2000
+Kin=5:4 hp=1088 attack=111 magic=86 support=84 defense=111 magicDefense=86 expToNext=2500
+Kin=5:5 hp=1166 attack=118 magic=92 support=89 defense=118 magicDefense=92 expToNext=3050
+Kin=5:6 hp=1250 attack=125 magic=98 support=94 defense=125 magicDefense=98 expToNext=3950
+Kin=5:7 hp=1338 attack=133 magic=104 support=100 defense=133 magicDefense=104 expToNext=5400
+Kin=5:8 hp=1433 attack=141 magic=110 support=106 defense=141 magicDefense=110 expToNext=6400
+Kin=5:9 hp=1532 attack=149 magic=116 support=112 defense=149 magicDefense=116 expToNext=7050
+Kin=5:10 hp=1639 attack=157 magic=122 support=118 defense=157 magicDefense=122 expToNext=9050
+Kin=5:11 hp=1750 attack=166 magic=129 support=125 defense=166 magicDefense=129 expToNext=11000
+Kin=5:12 hp=1870 attack=175 magic=136 support=132 defense=175 magicDefense=136
+
+Kin=6:1 hp=1995 attack=184 magic=143 support=139 defense=184 magicDefense=143 expToNext=6750 deckSize=28
+Kin=6:2 hp=2129 attack=193 magic=150 support=146 defense=193 magicDefense=150 expToNext=8250
+Kin=6:3 hp=2269 attack=203 magic=158 support=154 defense=203 magicDefense=158 expToNext=11750
+Kin=6:4 hp=2422 attack=213 magic=166 support=162 defense=213 magicDefense=166 expToNext=15250
+Kin=6:5 hp=2581 attack=224 magic=175 support=170 defense=224 magicDefense=175 expToNext=19750
+Kin=6:6 hp=2755 attack=236 magic=184 support=179 defense=236 magicDefense=184 expToNext=34250
+Kin=6:7 hp=2936 attack=248 magic=193 support=188 defense=248 magicDefense=193 expToNext=38750
+Kin=6:8 hp=3134 attack=261 magic=203 support=198 defense=261 magicDefense=203 expToNext=42250
+Kin=6:9 hp=3340 attack=274 magic=213 support=208 defense=274 magicDefense=213 expToNext=47750
+Kin=6:10 hp=3565 attack=288 magic=224 support=219 defense=288 magicDefense=224 expToNext=52250
+Kin=6:11 hp=3799 attack=303 magic=235 support=230 defense=303 magicDefense=235 expToNext=59000
+Kin=6:12 hp=4055 attack=319 magic=247 support=242 defense=319 magicDefense=247 expToNext=64000
+Kin=6:13 hp=4321 attack=335 magic=260 support=254 defense=335 magicDefense=260 expToNext=68000
+Kin=6:14 hp=4641 attack=354 magic=275 support=274 defense=355 magicDefense=272
+
+Celis=1:1 hp=83 attack=9 magic=12 support=11 defense=9 magicDefense=11 expToNext=80
+Celis=1:2 hp=99 attack=10 magic=13 support=12 defense=10 magicDefense=12 expToNext=110
+Celis=1:3 hp=116 attack=11 magic=15 support=14 defense=11 magicDefense=14 expToNext=200
+Celis=1:4 hp=120 attack=12 magic=16 support=15 defense=12 magicDefense=15
+
+Celis=2:1 hp=125 attack=13 magic=18 support=17 defense=13 magicDefense=17 expToNext=100 deckSize=20
+Celis=2:2 hp=135 attack=14 magic=19 support=18 defense=14 magicDefense=18 expToNext=120
+Celis=2:3 hp=146 attack=15 magic=21 support=20 defense=15 magicDefense=20 expToNext=160
+Celis=2:4 hp=158 attack=16 magic=23 support=21 defense=16 magicDefense=21 expToNext=200
+Celis=2:5 hp=171 attack=18 magic=25 support=23 defense=18 magicDefense=23 expToNext=240
+Celis=2:6 hp=186 attack=19 magic=27 support=24 defense=19 magicDefense=24
+
+Celis=3:1 hp=201 attack=21 magic=29 support=26 defense=21 magicDefense=26 expToNext=180 deckSize=23
+Celis=3:2 hp=218 attack=23 magic=31 support=28 defense=23 magicDefense=28 expToNext=220
+Celis=3:3 hp=235 attack=25 magic=34 support=30 defense=25 magicDefense=30 expToNext=530
+Celis=3:4 hp=255 attack=27 magic=37 support=32 defense=27 magicDefense=32 expToNext=770
+Celis=3:5 hp=275 attack=29 magic=40 support=35 defense=29 magicDefense=35 expToNext=1080
+Celis=3:6 hp=298 attack=31 magic=43 support=38 defense=31 magicDefense=38 expToNext=1420
+Celis=3:7 hp=322 attack=34 magic=47 support=41 defense=34 magicDefense=41 expToNext=2000
+Celis=3:8 hp=349 attack=37 magic=51 support=44 defense=37 magicDefense=44
+
+Celis=4:1 hp=377 attack=40 magic=55 support=48 defense=40 magicDefense=48 expToNext=675 deckSize=25
+Celis=4:2 hp=408 attack=43 magic=59 support=52 defense=43 magicDefense=52 expToNext=825
+Celis=4:3 hp=440 attack=47 magic=64 support=56 defense=47 magicDefense=56 expToNext=1400
+Celis=4:4 hp=475 attack=50 magic=69 support=60 defense=50 magicDefense=60 expToNext=2200
+Celis=4:5 hp=512 attack=54 magic=74 support=65 defense=54 magicDefense=65 expToNext=2925
+Celis=4:6 hp=552 attack=58 magic=79 support=70 defense=58 magicDefense=70 expToNext=3575
+Celis=4:7 hp=594 attack=62 magic=85 support=75 defense=62 magicDefense=75 expToNext=4050
+Celis=4:8 hp=637 attack=65 magic=88 support=68 defense=65 magicDefense=80 expToNext=4950
+Celis=4:9 hp=681 attack=69 magic=92 support=60 defense=69 magicDefense=86 expToNext=6000
+Celis=4:10 hp=737 attack=75 magic=101 support=79 defense=75 magicDefense=92
+
+Celis=5:1 hp=795 attack=81 magic=111 support=98 defense=81 magicDefense=98 expToNext=1350 deckSize=27
+Celis=5:2 hp=854 attack=86 magic=118 support=104 defense=86 magicDefense=104 expToNext=1650
+Celis=5:3 hp=916 attack=92 magic=126 support=111 defense=92 magicDefense=111 expToNext=2000
+Celis=5:4 hp=983 attack=98 magic=134 support=118 defense=98 magicDefense=118 expToNext=2500
+Celis=5:5 hp=1053 attack=104 magic=142 support=125 defense=104 magicDefense=125 expToNext=3050
+Celis=5:6 hp=1129 attack=110 magic=151 support=133 defense=110 magicDefense=133 expToNext=3950
+Celis=5:7 hp=1208 attack=117 magic=160 support=141 defense=117 magicDefense=141 expToNext=5400
+Celis=5:8 hp=1294 attack=124 magic=169 support=149 defense=124 magicDefense=149 expToNext=6400
+Celis=5:9 hp=1383 attack=131 magic=179 support=158 defense=131 magicDefense=158 expToNext=7050
+Celis=5:10 hp=1480 attack=138 magic=189 support=167 defense=138 magicDefense=167 expToNext=9050
+Celis=5:11 hp=1580 attack=146 magic=200 support=176 defense=146 magicDefense=176 expToNext=11000
+Celis=5:12 hp=1688 attack=154 magic=211 support=185 defense=154 magicDefense=185
+
+Celis=6:1 hp=1801 attack=162 magic=222 support=195 defense=162 magicDefense=195 expToNext=6750 deckSize=28
+Celis=6:2 hp=1923 attack=170 magic=233 support=205 defense=170 magicDefense=205 expToNext=8250
+Celis=6:3 hp=2049 attack=179 magic=245 support=215 defense=179 magicDefense=215 expToNext=11750
+Celis=6:4 hp=2187 attack=188 magic=258 support=226 defense=188 magicDefense=226 expToNext=15250
+Celis=6:5 hp=2331 attack=198 magic=271 support=238 defense=198 magicDefense=238 expToNext=19750
+Celis=6:6 hp=2490 attack=208 magic=285 support=250 defense=208 magicDefense=250 expToNext=34250
+Celis=6:7 hp=2656 attack=219 magic=299 support=263 defense=219 magicDefense=263 expToNext=38750
+Celis=6:8 hp=2833 attack=230 magic=314 support=277 defense=230 magicDefense=277 expToNext=42250
+Celis=6:9 hp=3017 attack=242 magic=330 support=291 defense=242 magicDefense=291 expToNext=47750
+Celis=6:10 hp=3220 attack=254 magic=347 support=306 defense=254 magicDefense=306 expToNext=52250
+Celis=6:11 hp=3432 attack=267 magic=365 support=322 defense=267 magicDefense=322 expToNext=59000
+Celis=6:12 hp=3663 attack=281 magic=384 support=339 defense=281 magicDefense=339 expToNext=64000
+Celis=6:13 hp=3904 attack=295 magic=403 support=356 defense=295 magicDefense=356 expToNext=68000
+Celis=6:14 hp=4262 attack=321 magic=423 support=374 defense=321 magicDefense=380
+
+Borealis=2:5 hp=231 attack=26 magic=10 support=8 defense=25 magicDefense=12 expToNext=240
+Borealis=2:6 hp=244 attack=26 magic=11 support=9 defense=27 magicDefense=13
+
+Borealis=3:1 hp=257 attack=27 magic=12 support=10 defense=29 magicDefense=15 expToNext=180 deckSize=23
+Borealis=3:2 hp=279 attack=29 magic=13 support=11 defense=31 magicDefense=16 expToNext=220
+Borealis=3:3 hp=301 attack=32 magic=14 support=12 defense=34 magicDefense=18 expToNext=530
+Borealis=3:4 hp=326 attack=34 magic=15 support=13 defense=37 magicDefense=19 expToNext=770
+Borealis=3:5 hp=352 attack=37 magic=16 support=14 defense=40 magicDefense=21 expToNext=1080
+Borealis=3:6 hp=381 attack=40 magic=17 support=15 defense=43 magicDefense=23 expToNext=1420
+Borealis=3:7 hp=412 attack=43 magic=19 support=16 defense=47 magicDefense=25 expToNext=2000
+Borealis=3:8 hp=446 attack=46 magic=20 support=17 defense=51 magicDefense=27
+
+Borealis=4:1 hp=482 attack=50 magic=22 support=19 defense=55 magicDefense=29 expToNext=675 deckSize=25
+Borealis=4:2 hp=522 attack=54 magic=24 support=20 defense=59 magicDefense=31 expToNext=825
+Borealis=4:3 hp=563 attack=58 magic=26 support=22 defense=64 magicDefense=34 expToNext=1800
+Borealis=4:4 hp=608 attack=62 magic=28 support=23 defense=69 magicDefense=36 expToNext=2200
+Borealis=4:5 hp=654 attack=67 magic=30 support=25 defense=74 magicDefense=39 expToNext=2925
+Borealis=4:6 hp=705 attack=72 magic=32 support=27 defense=79 magicDefense=42 expToNext=3575
+Borealis=4:7 hp=759 attack=77 magic=35 support=29 defense=85 magicDefense=45 expToNext=4050
+Borealis=4:8 hp=818 attack=82 magic=37 support=31 defense=91 magicDefense=48 expToNext=4950
+Borealis=4:9 hp=879 attack=88 magic=40 support=33 defense=97 magicDefense=52 expToNext=6000
+Borealis=4:10 hp=946 attack=94 magic=43 support=35 defense=104 magicDefense=55
+
+Borealis=5:1 hp=1015 attack=100 magic=46 support=38 defense=111 magicDefense=59 expToNext=1350 deckSize=27
+Borealis=5:2 hp=1091 attack=107 magic=49 support=40 defense=118 magicDefense=63 expToNext=1650
+Borealis=5:3 hp=1170 attack=114 magic=52 support=43 defense=126 magicDefense=67 expToNext=2000
+Borealis=5:4 hp=1256 attack=121 magic=55 support=46 defense=134 magicDefense=71 expToNext=2500
+Borealis=5:5 hp=1346 attack=129 magic=59 support=49 defense=143 magicDefense=76 expToNext=3050
+Borealis=5:6 hp=1444 attack=137 magic=63 support=52 defense=152 magicDefense=81 expToNext=3950
+Borealis=5:7 hp=1545 attack=146 magic=67 support=56 defense=162 magicDefense=86 expToNext=5400
+Borealis=5:8 hp=1655 attack=156 magic=71 support=60 defense=173 magicDefense=92 expToNext=6400
+Borealis=5:9 hp=1769 attack=166 magic=76 support=64 defense=184 magicDefense=98 expToNext=7050
+Borealis=5:10 hp=1892 attack=177 magic=81 support=68 defense=196 magicDefense=104 expToNext=9050
+Borealis=5:11 hp=2021 attack=188 magic=86 support=73 defense=209 magicDefense=111 expToNext=11000
+Borealis=5:12 hp=2160 attack=198 magic=90 support=77 defense=220 magicDefense=117
+
+Borealis=6:1 hp=2304 attack=209 magic=95 support=81 defense=232 magicDefense=123 expToNext=6750 deckSize=28
+Borealis=6:2 hp=2459 attack=220 magic=100 support=85 defense=244 magicDefense=129 expToNext=8250
+Borealis=6:3 hp=2621 attack=231 magic=105 support=90 defense=256 magicDefense=136 expToNext=11750
+Borealis=6:4 hp=2797 attack=243 magic=110 support=94 defense=269 magicDefense=143 expToNext=15250
+Borealis=6:5 hp=2981 attack=255 magic=116 support=99 defense=283 magicDefense=150 expToNext=19750
+Borealis=6:6 hp=3182 attack=268 magic=122 support=104 defense=298 magicDefense=158 expToNext=34250
+Borealis=6:7 hp=3391 attack=282 magic=128 support=109 defense=313 magicDefense=166 expToNext=38750
+Borealis=6:8 hp=3619 attack=297 magic=134 support=114 defense=329 magicDefense=174 expToNext=42250
+Borealis=6:9 hp=3857 attack=312 magic=141 support=120 defense=346 magicDefense=183 expToNext=47750
+Borealis=6:10 hp=4117 attack=328 magic=148 support=126 defense=364 magicDefense=192 expToNext=52250
+Borealis=6:11 hp=4387 attack=345 magic=156 support=133 defense=382 magicDefense=202 expToNext=59000
+Borealis=6:12 hp=4682 attack=363 magic=164 support=140 defense=402 magicDefense=212 expToNext=64000
+Borealis=6:13 hp=4990 attack=381 magic=172 support=147 defense=422 magicDefense=223 expToNext=68000
+Borealis=6:14 hp=5401 attack=399 magic=192 support=164 defense=441 magicDefense=231
+
+Zalzi=4:1 hp=403 attack=43 magic=45 support=41 defense=43 magicDefense=42 expToNext=675 deckSize=25
+Zalzi=4:2 hp=436 attack=46 magic=48 support=44 defense=46 magicDefense=45 expToNext=825
+Zalzi=4:3 hp=471 attack=50 magic=52 support=48 defense=50 magicDefense=49 expToNext=1800
+Zalzi=4:4 hp=509 attack=54 magic=56 support=51 defense=54 magicDefense=53 expToNext=2200
+Zalzi=4:5 hp=548 attack=58 magic=60 support=55 defense=58 magicDefense=57 expToNext=2925
+Zalzi=4:6 hp=591 attack=62 magic=64 support=59 defense=62 magicDefense=61 expToNext=3575
+Zalzi=4:7 hp=636 attack=67 magic=69 support=63 defense=67 magicDefense=66 expToNext=4050
+Zalzi=4:8 hp=685 attack=72 magic=74 support=67 defense=72 magicDefense=71 expToNext=4950
+Zalzi=4:9 hp=736 attack=77 magic=79 support=72 defense=77 magicDefense=76 expToNext=6000
+Zalzi=4:10 hp=792 attack=82 magic=84 support=77 defense=82 magicDefense=81
+
+Zalzi=5:1 hp=850 attack=88 magic=90 support=82 defense=88 magicDefense=87 expToNext=1350 deckSize=27
+Zalzi=5:2 hp=914 attack=94 magic=96 support=87 defense=94 magicDefense=93 expToNext=1650
+Zalzi=5:3 hp=980 attack=100 magic=102 support=93 defense=100 magicDefense=99 expToNext=2000
+Zalzi=5:4 hp=1052 attack=106 magic=108 support=99 defense=106 magicDefense=105 expToNext=2500
+Zalzi=5:5 hp=1127 attack=113 magic=115 support=105 defense=113 magicDefense=112 expToNext=3050
+Zalzi=5:6 hp=1208 attack=120 magic=122 support=111 defense=120 magicDefense=119 expToNext=3950
+Zalzi=5:7 hp=1293 attack=127 magic=129 support=118 defense=127 magicDefense=126 expToNext=5400
+Zalzi=5:8 hp=1385 attack=134 magic=136 support=125 defense=134 magicDefense=134 expToNext=6400
+Zalzi=5:9 hp=1480 attack=142 magic=144 support=132 defense=142 magicDefense=142 expToNext=7050
+Zalzi=5:10 hp=1583 attack=150 magic=152 support=139 defense=150 magicDefense=149 expToNext=9050
+Zalzi=5:11 hp=1691 attack=158 magic=161 support=147 defense=158 magicDefense=157 expToNext=11000
+Zalzi=5:12 hp=1807 attack=166 magic=170 support=155 defense=166 magicDefense=165
+
+Zalzi=6:1 hp=1928 attack=175 magic=179 support=163 defense=175 magicDefense=174 expToNext=6750 deckSize=28
+Zalzi=6:2 hp=2058 attack=184 magic=188 support=171 defense=184 magicDefense=183 expToNext=8250
+Zalzi=6:3 hp=2193 attack=193 magic=198 support=180 defense=193 magicDefense=192 expToNext=11750
+Zalzi=6:4 hp=2341 attack=203 magic=208 support=189 defense=203 magicDefense=202 expToNext=15250
+Zalzi=6:5 hp=2495 attack=213 magic=219 support=199 defense=213 magicDefense=212 expToNext=19750
+Zalzi=6:6 hp=2663 attack=224 magic=230 support=209 defense=224 magicDefense=223 expToNext=34250
+Zalzi=6:7 hp=2838 attack=235 magic=242 support=220 defense=235 magicDefense=234 expToNext=38750
+Zalzi=6:8 hp=3029 attack=247 magic=254 support=231 defense=247 magicDefense=246 expToNext=42250
+Zalzi=6:9 hp=3228 attack=260 magic=267 support=243 defense=260 magicDefense=259 expToNext=47750
+Zalzi=6:10 hp=3446 attack=273 magic=281 support=256 defense=273 magicDefense=272 expToNext=52250
+Zalzi=6:11 hp=3672 attack=287 magic=295 support=269 defense=287 magicDefense=286 expToNext=59000
+Zalzi=6:12 hp=3919 attack=302 magic=310 support=283 defense=302 magicDefense=301 expToNext=64000
+Zalzi=6:13 hp=4177 attack=317 magic=326 support=297 defense=317 magicDefense=316 expToNext=68000
+Zalzi=6:14 hp=4302 attack=332 magic=341 support=312 defense=332 magicDefense=331

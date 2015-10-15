@@ -1,0 +1,13 @@
+image char/Pensarasoldier
+start 1516 330
+
+in 2 100 true
+
+dialog 1
+
+n Soldier
+fl Only soldiers allowed here.
+sl end
+f true
+
+end

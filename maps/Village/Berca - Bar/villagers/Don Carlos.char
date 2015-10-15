@@ -1,0 +1,72 @@
+image Don_Carlos
+start 620 280
+
+in 2 100 true
+
+range 80
+
+dialog 1
+
+n Don Carlos
+fl This is my joint.
+sl Would you like to order something?
+f true
+
+q 10
+alt Toasted_desert_rat_(150_gold)
+alt A_cold_drink_(150_gold)
+alt Hot_soup_(150_gold)
+alt Nothing
+price 150 150 150 0
+f true
+
+*11
+n Don Carlos
+fl Thanks! Hope you like it.
+sl end
+f true
+
+n Kin
+fl That wasn't the best meal I've had in my life.
+sl end
+take gold 150
+f false
+
+*12
+n Don Carlos
+fl Thanks! Hope you like it.
+sl end
+f true
+
+n _
+fl You got the key item "Cold Drink"!
+sl end
+gift Cold_Drink 1 1
+take gold 150
+f true
+
+*13
+n Don Carlos
+fl Thanks! Hope you like it.
+sl end
+f true
+
+n Kin
+fl Mapleicious!
+sl end
+take gold 150
+f false
+
+*14
+n Don Carlos
+fl Hmpf... Well, come back later.
+sl end
+f true
+
+*15
+n Don Carlos
+fl Can't buy if you don't have the cash.
+sl end
+f true
+
+end

@@ -1,0 +1,23 @@
+##### VILLAGE #####
+# name
+name Name Title
+
+##### BACKGRUND #####
+
+# background, prefix name of both images day
+background Crossroad false
+
+##### STARTING LOCATION #####
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1024 768
+start0 0 368 0
+
+##### OBSTICLES #####
+
+##### DOORS #####
+
+##### VILLAGERS #####
+
+##### END #####
+end

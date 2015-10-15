@@ -1,0 +1,31 @@
+name Bat
+
+defense 30
+magicDefense 29
+agility 12
+evade 5
+hit 100
+attack 92
+magic 80
+support 60
+hp 207
+element 3
+gold 93
+experience 62
+criticalChance 0
+
+diesound Bat/dies
+image bat 4
+armor 0 0
+preferences 40 40
+
+scale 6
+height -2
+depth -6
+middle 0
+
+attackSpec anim=(f=3,a=200,se=Monster/Bat/attack)--(a=150)--(f=1,a=150)--(f=2,a=150)--(f=1,a=150)--(f=2,a=150)--(f=1,a=150)--(f=2,a=150)--(f=1,a=150)--(f=2,a=150,h=true)--(f=3,a=150)--(a=150)
+attackSpec type=mag name=Sonic_Wind element=wind anim=(f=3,a=200,se=Monster/Bat/attack)--(a=150)--(f=1,a=150)--(f=2,a=150,c=m+Wind)--(f=1,a=150)--(f=2,a=150)--(f=1,a=150)--(f=2,a=150)--(f=1,a=150)--(f=2,a=150,h=true)--(f=3,a=150)--(a=150)
+attackSpec type=sup name=Heal anim=(f=3,c=s+Cure,a=1000)
+
+

@@ -1,0 +1,42 @@
+##### VILLAGER #####
+# NAME: Gerbias
+image Gerbias
+
+##### STARTING LOCATION #####
+
+# start x y
+start 810 230
+
+##### INSTRUCTIONS #####
+
+# in angle distance stopped
+in 2 180 true
+
+##### DIALOGS #####
+
+# first line
+# second line
+# first dialog background (the one at the far left top of the screen)
+
+dialog 1
+
+n Gerbias
+fl A man with a black hood went by
+sl the village the other day.
+f true
+
+n Gerbias
+fl I wonder what he wanted?
+sl He just had a talk with Teo and then left.
+trigger Gerbias0 2
+f true
+
+dialog 2
+
+n Gerbias
+fl In times like this all we can do is pray.
+sl You should pray too.
+f true
+
+##### END #####
+end

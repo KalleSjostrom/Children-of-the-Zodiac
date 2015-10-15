@@ -1,0 +1,96 @@
+image char/Pensarasoldier
+start 1810 100
+
+in 1 100 true
+in 2 100 false
+in 1 100 true
+in 2 100 false
+in 1 120 true
+in 2 30 false
+in 1 100 true
+in 0 30 false
+in 1 100 true
+in 0 100 false
+in 1 100 true
+in 0 100 false
+
+dialog 1
+
+n Soldier
+fl You never know when Alares might strike.
+sl end
+f true
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

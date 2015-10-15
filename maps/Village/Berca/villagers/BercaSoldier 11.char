@@ -1,0 +1,50 @@
+image char/Pensarasoldier
+start 1250 880
+
+in 1 820 false
+in 3 820 false
+
+dialog 1
+
+n Soldier
+fl Patrolling.
+sl end
+f true
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

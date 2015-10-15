@@ -1,0 +1,118 @@
+mapSize -0.5 0.5 1
+
+size 309
+
+light0 position=0;0;0;1 ambient=.8;.8;.8;1 specular=0;0;0;1 diffuse=.8;.8;.8;1 attenuation=1;0.01;0.015
+material ambient=.4;.4;.4;1 specular=0;0;0;1 diffuse=.5;.5;.5;1
+
+SfloorTex templefloor.jpg 0
+wallTex templewall.png
+wallTex templestairsup.png
+roofTex templeroof.jpg
+
+normal floor 0 5
+normal wall 5 7
+normal roof 7 8
+
+mapPos 0 0
+
+# directions in labyrinth
+dir 3 2 4
+dir 4 2 5
+dir 5 2 6
+dir 6 2 7
+dir 7 2 8
+dir 8 2 9
+dir 9 1 25
+dir 15 1 31
+dir 25 1 41
+dir 27 1 43
+dir 27 2 28
+dir 28 2 29
+dir 29 1 45
+dir 31 1 47
+dir 36 1 52
+dir 36 2 37
+dir 37 2 38
+dir 38 2 39
+dir 39 2 40
+dir 40 2 41
+dir 43 1 59
+dir 45 1 61
+dir 47 1 63
+dir 52 1 68
+dir 59 1 75
+dir 61 1 77
+dir 63 1 79
+dir 68 2 69
+dir 69 2 70
+dir 70 2 71
+dir 71 2 72
+dir 72 2 73
+dir 75 1 91
+dir 77 1 93
+dir 79 1 95
+dir 91 1 107
+dir 93 1 109
+dir 95 1 111
+dir 99 1 115
+dir 99 2 100
+dir 100 2 101
+dir 101 1 117
+dir 103 1 119
+dir 109 2 110
+dir 110 2 111
+dir 115 1 131
+dir 117 1 133
+dir 119 1 135
+dir 131 1 147
+dir 133 1 149
+dir 135 1 151
+dir 137 2 138
+dir 138 2 139
+dir 139 2 140
+dir 140 2 141
+dir 141 2 142
+dir 142 1 158
+dir 147 1 163
+dir 149 1 165
+dir 151 1 167
+dir 158 1 174
+dir 163 1 179
+dir 165 1 181
+dir 167 1 183
+dir 169 1 185
+dir 169 2 170
+dir 170 2 171
+dir 171 2 172
+dir 172 2 173
+dir 173 2 174
+dir 179 1 195
+dir 181 2 182
+dir 182 2 183
+dir 185 1 201
+dir 201 2 202
+dir 202 2 203
+dir 203 2 204
+dir 204 2 205
+dir 205 2 206
+dir 206 2 207
+
+mapEnd
+
+wall 6 3 0
+wall 6 195 1
+wall 6 15 3
+wall 6 207 2
+
+inv door--up 3 0 dontopen temple_of_aegis--first_floor-mark2
+inv door--up 195 1 dontopen temple_of_aegis--first_floor-mark3
+inv door--up 15 3 dontopen temple_of_aegis--first_floor-mark4
+inv door--up 207 2 dontopen temple_of_aegis--first_floor-mark5
+
+inv button 73 2 7 Images/lever temple_of_aegis--first_floor.maphinderDoor207
+inv button 103 3 7 Images/lever temple_of_aegis--first_floor.maphinderDoor104
+inv button 137 0 7 Images/lever temple_of_aegis--first_floor.maphinderDoor15
+inv button 107 1 7 Images/lever temple_of_aegis--first_floor.maphinderDoor195
+
+end

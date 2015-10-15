@@ -1,0 +1,48 @@
+image char/rebelblue
+start 500 750
+
+in 2 100 true
+
+dialog 1
+
+n Rebel 1
+fl No soup for you!
+sl end
+f true
+
+dialog 2
+
+check Rebel_1 3 Photograph
+
+n Rebel 1
+fl Go away! I don't want to talk to you!
+sl end
+f true
+
+dialog 3
+
+n Rebel 1
+fl My son! Carl... How did you get this beautiful picture?
+sl He was walking in my footsteps, trying to change the world.
+f true
+
+n Rebel 1
+fl But instead of using violence like me, 
+sl he chose to use words... and for that he died...
+f true
+
+n Rebel 1
+fl It should have been me!
+sl end
+trigger Rebel_1 4
+trigger Elviri 4
+f true
+
+dialog 4
+
+n Rebel 1
+fl Carl...
+sl end
+f true
+
+end

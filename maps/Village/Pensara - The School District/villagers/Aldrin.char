@@ -1,0 +1,20 @@
+image Aldrin
+start 685 1060
+
+in 2 720 false
+in 3 165 false
+in 2 410 false
+in 3 180 false
+in 1 180 false
+in 0 410 false
+in 1 165 false
+in 0 720 false
+ 
+dialog 1
+
+n Aldrin
+fl Our school system is amazing.
+sl end
+f true
+
+end

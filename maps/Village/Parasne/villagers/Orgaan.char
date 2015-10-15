@@ -1,0 +1,77 @@
+image Orgaan
+start 450 500
+
+in 2 200 false
+in 3 50 false
+in 2 100 true
+in 2 35 false
+in 1 165 false
+in 0 100 false
+in 0 115 false
+in 1 110 false
+in 0 100 true
+in 3 110 false
+in 0 100 true
+in 0 40 false
+in 1 100 true
+in 0 85 false
+in 1 95 false
+in 2 100 true
+in 3 145 false
+in 2 105 false
+in 3 65 false
+
+dialog 1
+
+n Orgaan
+fl How's the wildlife where you live? 
+sl I can only imagine.
+f true
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

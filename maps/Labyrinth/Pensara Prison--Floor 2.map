@@ -1,0 +1,38 @@
+mapSize -0.5 0.5 1
+
+size 84
+
+mission TimeMission prisonMission
+
+light0 position=0;0;0;1 ambient=.8;.8;.8;1 specular=0;0;0;1 diffuse=.8;.8;.8;1 attenuation=1;0.01;0.015
+material ambient=.4;.4;.4;1 specular=0;0;0;1 diffuse=.7;.7;.7;1
+
+floorTex prisonfloor.jpg
+wallTex prisonwall.png
+roofTex prisonroof.jpg
+
+normal floor 0 1
+normal wall 1 2
+normal roof 2 3
+
+mapPos 1 1
+
+dir 57 1 73
+dir 73 1 89
+dir 89 1 105
+dir 102 2 103
+dir 103 2 104
+dir 104 2 105
+dir 105 1 121
+dir 105 2 106
+dir 106 2 107
+dir 107 2 108
+dir 121 1 137
+dir 137 1 153
+
+mapEnd
+
+inv hinderDoor--down 102 0 2 Walls/prisondoord pensara_prison--floor_1-mark1
+inv hinderDoor--up 108 2 2 Walls/prisondooru pensara_prison--floor_3-mark1
+inv hinderDoor 57 3 2 Walls/prisondoor _
+inv hinderDoor 153 1 2 Walls/prisondoor _

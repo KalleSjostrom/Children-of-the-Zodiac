@@ -1,0 +1,54 @@
+image Marlo
+start 660 1160
+
+in 2 1000 true
+in 3 450 false
+in 2 1000 true
+in 1 450 false
+
+dialog 1
+
+n Marlo
+fl Have you ever heard of the temple in the sky?
+sl end
+f true
+
+n Marlo
+fl Some people say that you can almost
+sl look the gods in their eyes.
+f true
+
+n Marlo
+fl I don't believe in such stories if you ask me. 
+sl end
+f true
+
+dialog 2
+
+n Marlo
+fl Why...
+sl end
+trigger Marlo 3
+f true
+
+dialog 3
+
+n Marlo
+fl Merri... 
+sl end
+trigger Marlo 4
+f true
+
+dialog 4
+
+n Marlo
+fl He was like a father to me, you know... 
+sl He was like a father to everyone. 
+f true
+
+n Marlo
+fl I've heard that the man in a black cloak killed him.
+sl He better not show his face around here, that's for sure... 
+f true
+
+end

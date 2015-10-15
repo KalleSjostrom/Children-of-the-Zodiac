@@ -1,0 +1,161 @@
+import file=main.var
+
+var marcus=0
+var seth=1
+var kin=2
+var celis=3
+var borealis=4
+
+load character="Borealis"
+
+actor name="Passguard Marcus"
+actor name="Passguard Seth"
+actor name="Kin" pos=411;404;0
+actor name="Celis" pos=411;374;0
+actor name="Borealis"
+
+info time="day" name="Pass to Zazo" music="Wasteland" fadeValue="1" musicVolume="1"
+
+show index=borealis value=false
+
+# load music="We've Got To Hurry"
+
+ins timea=0 index=marcus kind=controll controll=true
+ins timea=0 index=seth kind=controll controll=true
+
+dialogpacket name=0 starttimea=0 duration=500
+dialog packetname=0 name="Seth" text="Oh, I see you got a permission slip.";"Then I'll just need your names and you'll be off." first=true
+dialog packetname=0 name="Kin" text="Ok, well..";"My name is Kin and this one here is Celis." first=false
+dialog packetname=0 name="Seth" text="Kin and Celis.. Noted..";"Well, good luck on your travels through the pass." first=true
+
+ins timea=600 index=marcus kind=dist distance=50 duration=1000 direction=1
+ins timea=0 index=marcus kind=queue direction=2
+
+ins timea=600 index=celis kind=to movepos=390;420 duration=1700
+ins timea=100 index=kin kind=stop direction=2
+ins timea=600 index=kin kind=dist distance=15 duration=1000 direction=1
+
+ins timea=800 index=borealis kind=show movepos=460;360
+ins timea=0 index=borealis kind=dist distance=100 duration=3700 direction=2
+ins timea=200 index=kin kind=emotion emotion=? show=true
+ins timea=200 index=celis kind=dist distance=5 direction=3 facedirection=1 duration=200
+ins timea=100 index=celis kind=emotion emotion=? show=true
+#ins timea=300 index=kin kind=stop direction=3
+ins timea=400 index=celis kind=emotion show=false
+ins timea=250 index=kin kind=emotion show=false
+ins timea=1300 index=kin kind=stop direction=1
+
+ins timea=500 index=marcus kind=dist distance=10 direction=2 duration=200
+ins timea=100 index=marcus kind=emotion emotion=! show=true
+dialogsingle starttimea=0 <= name="Marcus" text="Hey!";"Borealis!"
+
+ins timea=400 index=borealis kind=stop direction=0
+dialogsingle starttimea=800 <= name="Borealis" text="Oh.. Hey Marcus..";""
+
+ins timea=500 index=marcus kind=dist distance=5 direction=2 duration=500
+ins timea=100 index=marcus kind=emotion show=false
+dialogsingle starttimea=400 <= name="Marcus" text="Haven't seen you here for quite some time.";"Where 'ave you been!"
+ins timea=800 index=borealis kind=stop direction=1
+ins timea=800 index=kin kind=stop direction=3
+ins timea=400 index=borealis kind=stop direction=3
+ins timea=1200 index=borealis kind=dist distance=50 direction=1 duration=2500
+ins timea=0 index=borealis kind=queue distance=20 direction=0 duration=1000
+dialogsingle starttimea=750 <= name="Borealis" text="Oh... Yeah... I've been busy.";""
+ins timea=200 index=marcus kind=emotion emotion=... show=true
+ins timea=1000 index=marcus kind=stop direction=2
+ins timea=500 index=marcus kind=emotion show=false
+dialogsingle starttimea=500 <= name="Marcus" text="Are you here to get some help for";"that incident at the Great Mine?"
+ins type=fadeout timea=200 index=0 fadetime=500 kind=music mode=pause
+ins timea=0 index=0 kind=screenzoom zoomin=true zoomtime=2000 usestaticpos=true pos=512;478
+
+# ins type=fadein timea=0 index=1 fadetime=0 kind=music mode=play
+ins timea=200 index=borealis kind=emotion emotion=?! show=true shake=true
+ins timea=50 index=celis kind=emotion emotion=? show=true
+ins timea=50 index=borealis kind=dist distance=10 direction=0 duration=300
+ins timea=50 index=kin kind=emotion emotion=? show=true
+ins timea=0 index=kin kind=stop direction=1
+ins timea=25 index=seth kind=stop direction=1
+dialogsingle starttimea=100 <= name="Borealis" text="Incident?!";"What incident??"
+ins timea=400 index=marcus kind=dist distance=5 direction=2 duration=300
+dialogsingle starttimea=100 duration=1000 <= name="Marcus" text="Haven't you heard?!";""
+ins timea=50 index=kin kind=emotion show=false
+ins timea=50 index=celis kind=emotion show=false
+ins timea=900 index=borealis kind=emotion emotion=? show=true
+dialogsingle starttimea=500 duration=500 <= name="Marcus" text="They accidently mined too deep in the Great Mine";"and monsters just came pouring out!"
+ins timea=400 index=borealis kind=emotion show=false
+
+ins timea=800 index=borealis kind=emotion emotion=... show=true
+ins timea=1000 index=borealis kind=dist distance=10 duration=1000 direction=2 facedirection=0
+dialogsingle starttimea=1000 duration=500 <= name="Marcus" text="Most of the miners managed to escape";"but some are still trapped!"
+
+ins timea=300 index=borealis kind=emotion show=false
+ins timea=1000 index=borealis kind=stop direction=2
+ins timea=1000 index=borealis kind=dist distance=10 direction=2 duration=1500
+ins type=fadein timea=0 index=0 fadetime=500 kind=music mode=play
+ins timea=0 index=borealis kind=queue distance=10 direction=1 duration=1500
+dialogsingle starttimea=1600 duration=1400 <= name="Borealis" text="I told them to stay away from those dark areas";"but now that Teo has..."
+
+ins timea=1450 index=marcus kind=emotion emotion=? show=true
+dialogsingle starttimea=200 <= name="Marcus" text="What you mean?";"What has Teo done?"
+
+ins timea=500 index=borealis kind=emotion emotion=... show=true
+ins timea=500 index=borealis kind=stop direction=1
+ins timea=500 index=borealis kind=stop direction=3
+ins timea=500 index=borealis kind=stop direction=0
+
+dialogsingle starttimea=0 <= name="Borealis" text="Oh... Nothing.";"Forget it..."
+ins timea=100 index=marcus kind=emotion show=false
+
+ins timea=1250 index=borealis kind=emotion show=false
+ins timea=1000 index=borealis kind=dist distance=10 direction=0 duration=1500
+dialogsingle starttimea=1300 <= name="Borealis" text="...";"Is anyone there searching for survivals??"
+dialogsingle starttimea=500 duration=500 <= name="Marcus" text="A messenger went through here a while ago";"heading for Alares to get help but none has come."
+
+ins timea=1000 index=seth kind=stop direction=1
+dialogsingle starttimea=400 duration=1350 <= name="Seth" text="These guys just came from Alares!";"Uri sent them to help the miners."
+ins timea=400 index=borealis kind=stop direction=3
+ins timea=300 index=marcus kind=stop direction=3
+ins timea=300 index=celis kind=emotion emotion=... show=true
+ins timea=300 index=celis kind=dist distance=5 direction=3 facedirection=1 duration=1000
+
+ins timea=300 index=marcus kind=emotion emotion=! show=true
+dialogsingle starttimea=200 duration=500 <= name="Marcus" text="What! These kids! They can't help even";"themselves yet alone any miners!"
+ins timea=300 index=celis kind=emotion show=false
+
+ins timea=300 index=kin kind=emotion emotion=! show=true
+ins timea=100 index=kin kind=dist distance=8 direction=1 duration=300
+dialogsingle starttimea=150 <= name="Kin" text="Kids!? We're no kids!";"We are a lot tougher than we look!"
+
+ins timea=300 index=marcus kind=emotion emotion=... show=true
+ins timea=600 index=kin kind=emotion show=false
+ins timea=900 index=borealis kind=stop direction=1
+ins timea=300 index=marcus kind=stop direction=2
+ins timea=200 index=marcus kind=emotion show=false
+ins timea=1000 index=borealis kind=dist distance=10 duration=1500 direction=1
+ins timea=1500 index=borealis kind=stop direction=3
+dialogpacket name=2 starttimea=0
+dialog packetname=2 name="Borealis" text="I've got to help my fellow Zazoians! I'm going too!";""
+dialog packetname=2 name="Borealis" text="Back to Zazo...";"" whisper=true
+
+ins timea=500 index=kin kind=stop direction=3
+ins timea=2000 index=kin kind=dist distance=10 duration=800 direction=1
+dialogsingle starttimea=200 <= name="Kin" text="Then we might as well join up.";""
+
+ins timea=300 index=celis kind=dist distance=10 duration=300 direction=1
+dialogsingle starttimea=150 <= name="Celis" text="Yes! Together we are stronger!";""
+ins timea=500 index=kin kind=stop direction=0
+dialogsingle starttimea=500 <= name="Kin" text="It's not like we'd need any help..." whisper=true
+ins timea=1000 index=borealis kind=dist distance=15 duration=1500 direction=3
+dialogsingle starttimea=500 <= name="Borealis" text="Let us go together!";""
+
+ins timea=100 index=0 kind=screenzoom zoomin=false zoomtime=2000 usestaticpos=true pos=512;478
+
+load trigger="Passguard Seth"
+load trigger="Passguard Marcus"
+load trigger="Belmet"
+
+ins index=0 timea=0 kind=trigger value=4
+ins index=1 timea=0 kind=trigger value=2
+ins index=2 timea=0 kind=trigger value=2
+
+ins timea=2000 kind=end

@@ -1,0 +1,67 @@
+mapSize -0.5 0.5 1
+
+size 34
+
+useRain
+
+fog red=.3 green=.3 blue=.3 alpha=.08 density=0.03 start=0 end=10
+
+light0 position=0;0;0;1 ambient=.8;.8;.8;1 specular=0;0;0;1 diffuse=.8;.8;.8;1 attenuation=1;0.01;0.015
+material ambient=.4;.4;.4;1 specular=0;0;0;1 diffuse=.7;.7;.7;1 shininess=5 emission=.1;.1;.1;1
+invMaterial ambient=.8;.8;.8;1 specular=.8;.8;.8;1 diffuse=.8;.8;.8;1
+
+sky top=.3;.3;.3;1 bottom=.45;.45;.45;1
+
+floorTex hedgefloor.jpg
+wallTex hedgewall.png
+wallTex hedgedoor.png
+
+normal floor 0 1
+normal wall 1 3
+
+mapPos 1 0
+
+dir 87 2 88
+dir 88 2 89
+dir 89 2 90
+dir 90 1 106
+dir 106 1 122
+dir 109 1 125
+dir 109 2 110
+dir 110 2 111
+dir 122 1 138
+dir 125 1 141
+dir 138 1 154
+dir 138 2 139
+dir 139 2 140
+dir 140 2 141
+dir 150 1 166
+dir 150 2 151
+dir 151 2 152
+dir 152 2 153
+dir 153 1 169
+dir 153 2 154
+dir 159 1 175
+dir 166 1 182
+dir 169 1 185
+dir 175 1 191
+dir 179 2 180
+dir 180 2 181
+dir 181 2 182
+dir 185 2 186
+dir 186 2 187
+dir 187 2 188
+dir 188 2 189
+dir 189 2 190
+dir 190 2 191
+
+mapEnd
+
+wall 2 111 2
+wall 2 179 0
+
+inv door 111 2 dontopen landpensara_forest--forest-mark0
+inv door 179 0 1-1 landpensara_forest--forest-mark1
+
+inv chest 87 0 2 Images/crate 2 cards.offense.BattleCard 2 false
+inv chest 159 3 1 Images/stub.png 2 cards.offense.LaceratingCut 2 false

@@ -1,0 +1,85 @@
+image char/Pensarasoldier
+start 1620 1015
+
+in 2 100 true
+
+dialog 1
+
+n Soldier
+fl I don't think Alares would make this their starting
+sl point if they were to invade, way too crowded.
+f true 
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

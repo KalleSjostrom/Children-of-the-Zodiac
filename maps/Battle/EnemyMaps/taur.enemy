@@ -1,0 +1,105 @@
+name Taur
+
+trigger farl=1
+trigger zazozazo_-_farl's_house=0
+item The_Zodiac_Stone=1
+
+defense 50
+magicDefense 33
+agility 15
+evade 0
+hit 93
+attack 259
+magic 190
+support 83
+hp 4690
+element 4
+gold 0
+experience 0
+criticalChance 0
+
+diesound Spikey/dies
+image taur 8
+armor 20 12
+preferences 100 0
+
+scale 6.1
+height -2.6
+depth -6
+middle 0
+
+attackSpec type=off name=Preparing power=0 target=-1 anim=(a=1000)
+
+attackSpec {
+	type=off
+	name=Crush
+	power=0
+	anim=(f=1,h=true,se=Monster/Spikey/earthcrush,a=430)--(f=2)--(f=3,s=true,a=560)--(f=4)
+	effect=(Death=1)
+}
+
+attackSpec {
+	type=off
+	name=Bite
+	power=1
+	anim=(f=1)--(f=1,a=40,se=Monster/Spikey/bite)--(f=5,cs=true,a=860)--(f=6)--(f=7)
+}
+
+attackSpec {
+	type=off
+	name=Earth_Claw
+	element=earth
+	power=1.5
+	anim=(f=1,h=true,se=Monster/Spikey/earthclaw,a=430)--(f=2)--(f=3,s=true,a=560)--(f=4)
+}
+
+attackSpec {
+	type=off
+	name=Earth_Shake
+	element=earth
+	power=0
+	onAll=true
+	anim=(s=true,cs=true,a=550,se=Monster/Spikey/earthquake)--(f=1,s=true,cs=true,a=800)--(s=true,cs=true)
+	effect=(BoostDef=2;-.5)
+}
+
+attackSpec {
+	type=off
+	name=Wall
+	power=0
+	onAll=true
+	anim=(s=true,se=Monster/Spikey/wall,a=550)--(f=1,s=true,a=200)--(s=true,a=750)--(f=1,s=true,a=200)
+	effect=(BoostDef=2;1)
+}
+
+attackSpec {
+	type=off
+	name=Strengthen
+	power=0
+	onAll=true
+	anim=(a=50,se=Monster/Spikey/strengthen)--(f=5,s=true,a=1800)
+	effect=(BoostOff=2;1)
+}
+
+attackSpec {
+	type=off
+	name=Paralyzed
+	power=0
+	onAll=true
+	anim=(s=true,a=1200,se=Monster/Spikey/paralyzed)
+}
+
+run script=taur
+
+cardPreference Death 0
+cardPreference openwound 0
+
+dialog name="Taur" text="You will never get it!"
+end=begin
+dialog name="" text="Another beast has fallen!";""
+dialog name="" text="Celis feels a rush running through her body";"as she once again touches one of the holy stones."
+dialog name="" text="They turn their back on the remains and";"walk out of the dark cavern."
+end=endEnemyDead
+dialog name="Taur" text="No one can defeat me!"
+end=endPartyDead
+nextPlace="landMt._Cesadur--Entrance-mark0";""

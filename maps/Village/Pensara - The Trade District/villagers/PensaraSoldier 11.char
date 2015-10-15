@@ -1,0 +1,13 @@
+image char/Pensarasoldier
+start 1045 110
+
+in 2 100 true
+
+dialog 1
+
+n Soldier
+fl This way to the north district.
+sl end
+f true
+
+end

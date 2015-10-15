@@ -1,0 +1,148 @@
+import file=main.var
+
+load image="1"
+load image="2"
+load image="3"
+load image="4"
+load translucent="res/Title/loggasten.png"
+load translucent="res/Title/loggatext.png"
+
+info time="day" name="No Place" music="No Music" fadeValue="0" musicVolume="0" status="0"
+
+load music="Intro"
+####### FIRST SCENE #######
+######## Questions ########
+text lines="Can hatred arise from nothingness?";"" pos=20;380
+text lines="Or does it always emerge within a context?";"" pos=20;380
+text lines="If that's the case...";"" pos=20;380
+text lines="...could an evil deed be justified,";"when you have the circumstances to blame?" pos=20;380
+ins type=fadeout timea=0 index=1 fadetime=0 kind=music mode=pause
+ins type=fadein timea=500 index=1 fadetime=0 kind=music mode=play
+ins type=fadein timea=8000 index=0 fadetime=textfadetime kind=text
+ins type=fadeout timea=5000 index=0 fadetime=textfadetime kind=text
+
+ins type=fadein timea=2000 index=1 fadetime=textfadetime kind=text
+ins type=fadeout timea=6000 index=1 fadetime=textfadetime kind=text
+
+ins type=fadein timea=2000 index=2 fadetime=textfadetime kind=text
+ins type=fadeout timea=4000 index=2 fadetime=textfadetime kind=text
+
+ins type=fadein timea=2000 index=3 fadetime=textfadetime kind=text
+ins type=fadeout timea=6000 index=3 fadetime=textfadetime kind=text
+# 35 sec
+####### SECOND SCENE #######
+####### First Image ######
+####### Zoom, creation of the world ######
+
+text lines="From fire and lightning the world was forged.";"It took the shape of two lands separated by a vast sea." pos=20;650
+text lines="The twelve great gods, called the Zodiacs,";"gazed upon the new world with proud eyes." pos=20;650
+text lines="They smiled when they saw the majestic trees";"and the birds singing in harmony." pos=20;650
+
+ins type=fadein timea=1000 index=0 fadetime=1000 kind=image scrollmode=zoom size=100 imagetype=storyimage
+
+ins type=fadein timea=1000 index=4 fadetime=textfadetime kind=text
+ins type=fadeout timea=8000 index=4 fadetime=textfadetime kind=text
+ins type=fadein timea=2000 index=5 fadetime=textfadetime kind=text
+ins type=fadeout timea=8000 index=5 fadetime=textfadetime kind=text
+ins type=fadein timea=2000 index=6 fadetime=textfadetime kind=text
+ins type=fadeout timea=7000 index=6 fadetime=textfadetime kind=text
+
+ins type=fadeout timea=1000 index=0 fadetime=1000 kind=image scrollmode=imagepause size=100 imagetype=storyimage
+# 1 min 5 sec
+####### THIRD SCENE #######
+####### Second Image - Scroll to right ######
+####### Lecture turn to man chopping wood #######
+text lines="One of the beings who wandered the lands";"learned to coexist with nature to a great extent." pos=20;380
+text lines="They developed a close bond with nature and learned,";"with haste, the secrets that nature had to teach." pos=20;650
+text lines="These beings came to be called tenjins.";"" pos=20;650
+text lines="Alongside these prosperous tenjins,";"another species emerged from the unborn." pos=20;650
+text lines="They, on the other hand, were unable to hear the voice of nature.";"" pos=20;650
+text lines="They chopped down the forests and hunted the animals within,";"instead of listening to nature as the tenjins did." pos=20;650
+text lines="That creature was man.";"" pos=20;650
+
+ins type=fadein timea=2000 index=7 fadetime=textfadetime kind=text
+ins type=fadeout timea=7000 index=7 fadetime=textfadetime kind=text
+
+ins type=fadein timea=2000 index=1 fadetime=1000 kind=image scrollmode=right size=200 imagetype=storyimage scrollSpeed=7000
+
+ins type=fadein timea=1000 index=8 fadetime=textfadetime kind=text
+ins type=fadeout timea=8000 index=8 fadetime=textfadetime kind=text
+ins type=fadein timea=2000 index=9 fadetime=textfadetime kind=text
+ins type=fadeout timea=4000 index=9 fadetime=textfadetime kind=text
+ins type=fadein timea=2000 index=10 fadetime=textfadetime kind=text
+ins type=fadeout timea=6000 index=10 fadetime=textfadetime kind=text
+ins type=fadein timea=2000 index=11 fadetime=textfadetime kind=text
+ins type=fadeout timea=6000 index=11 fadetime=textfadetime kind=text
+ins type=fadein timea=2000 index=12 fadetime=textfadetime kind=text
+ins type=fadeout timea=8000 index=12 fadetime=textfadetime kind=text
+ins type=fadein timea=2000 index=13 fadetime=textfadetime kind=text
+ins type=fadeout timea=5000 index=13 fadetime=textfadetime kind=text
+
+ins type=fadeout timea=0 index=1 fadetime=1000 kind=image scrollmode=imagepause size=200 imagetype=storyimage scrollSpeed=7000
+# 2 min 4 sec
+####### FOURTH SCENE #######
+####### Black Image #######
+text lines="The gods were displeased with this development";"and planned to aid the humans in finding their path." pos=20;380
+
+ins type=fadein timea=2000 index=14 fadetime=textfadetime kind=text
+ins type=fadeout timea=8000 index=14 fadetime=textfadetime kind=text
+# 2 min 14 sec
+####### FIFTH SCENE #######
+####### Third Image #######
+####### Twelve Children Calling ######
+text lines="Therefore, they called upon the six most prosperous";"tenjin families who would educate and care for man." pos=20;650
+text lines="Six stones were given to these tenjins as a link to the gods,";" to be used in times of need." pos=20;650
+
+ins type=fadein timea=2000 index=2 fadetime=1000 kind=image scrollmode=normal size=100 imagetype=storyimage
+
+ins type=fadein timea=2000 index=15 fadetime=textfadetime kind=text
+ins type=fadeout timea=9000 index=15 fadetime=textfadetime kind=text
+ins type=fadein timea=2000 index=16 fadetime=textfadetime kind=text
+ins type=fadeout timea=9000 index=16 fadetime=textfadetime kind=text
+
+ins type=fadeout timea=2000 index=2 fadetime=1000 kind=image scrollmode=normal size=100 imagetype=storyimage
+# 2 min 40 sec
+####### SIXTH SCENE #######
+####### Forth Image - Scroll right ######
+####### Man reading, plowing and the Castle #######
+
+text lines="The teachings of the tenjins soon";"spread across the land of men." pos=20;650
+text lines="Literacy grew and books became popular.";"" pos=20;650
+text lines="Man began to see that animals could be tamed to do hard work";"and that some animals even made excellent companions." pos=20;650
+text lines="Agriculture became more and more advanced,";"and the secrets of forging metal took place in human knowledge." pos=20;650
+text lines="Villages grew larger and trade became a natural part of life.";"" pos=20;650
+text lines="The seed of knowledge was planted by the tenjins";"but it was still mans choice how to use it." pos=20;650
+
+ins type=fadein timea=2000 index=3 fadetime=1000 kind=image scrollmode=right size=200 imagetype=storyimage scrollSpeed=8000
+
+ins type=fadein timea=2000 index=17 fadetime=textfadetime kind=text
+ins type=fadeout timea=7000 index=17 fadetime=textfadetime kind=text
+ins type=fadein timea=2000 index=18 fadetime=textfadetime kind=text
+ins type=fadeout timea=6000 index=18 fadetime=textfadetime kind=text
+ins type=fadein timea=2000 index=19 fadetime=textfadetime kind=text
+ins type=fadeout timea=10000 index=19 fadetime=textfadetime kind=text
+ins type=fadein timea=2000 index=20 fadetime=textfadetime kind=text
+ins type=fadeout timea=9000 index=20 fadetime=textfadetime kind=text
+ins type=fadein timea=2000 index=21 fadetime=textfadetime kind=text
+ins type=fadeout timea=7000 index=21 fadetime=textfadetime kind=text
+ins type=fadein timea=2000 index=22 fadetime=textfadetime kind=text
+ins type=fadeout timea=9000 index=22 fadetime=textfadetime kind=text
+# After this 3 min 42 sec
+
+ins type=fadeout timea=10000 index=3 fadetime=8000 kind=image scrollmode=imagepause size=200 imagetype=storyimage scrollSpeed=8000
+# Slottet 3 min 52 sec
+
+ins type=fadein timea=10000 index=4 fadetime=5000 kind=image scrollmode=normal size=100 imagetype=storyimage
+# 4 min 2 sec (clip 4 min 1.5 sec)
+
+ins timea=6900 index=4 kind=setvillageback
+ins type=fadein timea=0 index=5 fadetime=5000 kind=image scrollmode=normal imagetype=translucentunder
+# 4 min 8.9 sec
+
+ins type=fadeout timea=13900 index=4 fadetime=0 kind=image scrollmode=normal size=100 imagetype=storyimage
+ins type=fadeout timea=0 index=1 fadetime=2000 kind=music type=kill
+# 4 min 22.8 sec
+
+ins timea=2000 kind=endseq
+
+# Note: Loggan to black 4 min 22.8 sec

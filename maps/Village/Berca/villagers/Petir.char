@@ -1,0 +1,45 @@
+image Petir
+start 660 170
+
+in 2 100 true
+in 3 40 false
+in 2 100 true
+in 3 40 false
+in 2 100 true
+in 3 40 false
+in 2 100 true
+in 3 40 false
+in 2 100 true
+in 1 40 false
+in 2 100 true
+in 1 40 false
+in 2 100 true
+in 1 40 false
+in 2 100 true
+in 1 40 false
+
+dialog 1
+
+n Petir
+fl The powerful people of Pensara don't
+sl care for our little village.
+f true
+
+n Petir
+fl All they want is to take our money and
+sl use them for their own purpose.
+f true
+
+dialog 2
+
+n Petir
+fl I heard you stopped the rebels. 
+sl I don't know if that was a good idea... 
+f true
+
+n Petir
+fl That was maybe our only chance to get some
+sl attention in this bureaucratic world...
+f true
+
+end

@@ -1,0 +1,122 @@
+mapSize -0.5 0.5 1
+
+size 338
+
+fog red=.4 green=.3 blue=0 alpha=.01 density=0.01
+
+light0 position=0;0;0;1 ambient=1;1;1;1 specular=0;0;0;1 diffuse=1;1;1;1 attenuation=1;0.02;0.03
+light1 position=0;0;0;0 ambient=.2;.2;.2;.2 specular=0;0;0;1 diffuse=.2;.2;.2;.2
+material ambient=.7;.7;.7;1 specular=1;1;1;1 diffuse=.7;.7;.7;1
+
+floorTex earthcavefloor.jpg
+floorTex earthcaveflooropen.jpg
+wallTex earthcavewall.png
+wallTex earthcavedoor.png
+roofTex earthcaveroof.jpg
+roofTex earthcaveroofopen.jpg
+
+normal floor 0 2
+normal wall 2 4
+normal roof 4 6
+
+mapPos 1 0
+
+dir 26 1 42
+dir 29 1 45
+dir 42 1 58
+dir 45 1 61
+dir 58 2 59
+dir 59 2 60
+dir 60 2 61
+dir 61 1 77
+dir 77 1 93
+dir 91 1 107
+dir 91 2 92
+dir 92 2 93
+dir 93 2 94
+dir 94 1 110
+dir 101 2 102
+dir 102 2 103
+dir 103 2 104
+dir 104 2 105
+dir 110 1 126
+dir 116 1 132
+dir 126 1 142
+dir 132 1 148
+dir 132 2 133
+dir 133 2 134
+dir 134 2 135
+dir 135 2 136
+dir 136 2 137
+dir 139 1 155
+dir 142 1 158
+dir 148 1 164
+dir 155 1 171
+dir 157 1 173
+dir 157 2 158
+dir 158 2 159
+dir 159 1 175
+dir 164 1 180
+dir 164 2 165
+dir 165 2 166
+dir 166 2 167
+dir 167 1 183
+dir 171 1 187
+dir 173 1 189
+dir 175 1 191
+dir 180 1 196
+dir 183 2 184
+dir 184 2 185
+dir 185 2 186
+dir 186 2 187
+dir 187 2 188
+dir 188 2 189
+dir 191 1 207
+dir 4 1 20
+dir 6 1 22
+dir 6 2 7
+dir 7 2 8
+dir 8 1 24
+dir 20 1 36
+dir 22 1 38
+dir 24 1 40
+dir 36 2 37
+dir 37 2 38
+dir 40 1 56
+dir 56 1 72
+dir 67 2 68
+dir 68 2 69
+dir 69 2 70
+dir 70 2 71
+dir 71 2 72
+dir 61 2 62
+dir 62 2 63
+
+mapEnd
+
+wall 3 105 2
+inv door 105 2 dontopen landmt._cesadur--entrance-mark0
+roof 5 101
+inv ladderDoor 101 0 dontopen Images/ladderup.png true mt._cesadur--second_floor-mark0
+roof 5 137
+inv ladderDoor 137 2 dontopen Images/ladderup.png true mt._cesadur--second_floor-mark1
+roof 5 67
+inv ladderDoor 67 0 dontopen Images/ladderup.png true mt._cesadur--second_floor-mark2
+roof 5 207
+inv ladderDoor 207 1 dontopen Images/ladderup.png true Mt._Cesadur--Second_Floor-mark3
+roof 5 29
+inv ladderDoor 29 3 dontopen Images/ladderup.png true Mt._Cesadur--Second_Floor-mark4
+floor 1 63
+inv ladderDoor 63 2 dontopen Images/ladderdown.png false mt._cesadur--basement-mark0
+wall 2 61 2
+wall 2 62 0
+
+inv chest 196 1 1 Images/stub.png 2 cards.offense.MagicalBlow 1 true
+inv chest 139 3 1 Images/stub.png 2 cards.offense.BattleCard 1 true
+inv chest 26 3 1 Images/stub.png 0 600
+
+inv chest 4 3 1 Images/stub.png 2 cards.offense.BattleCard 1 true
+
+inv save 107 3 -1 -1
+
+end

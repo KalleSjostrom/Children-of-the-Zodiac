@@ -1,0 +1,79 @@
+image Willy
+start 297 699
+
+in 2 100 true
+
+dialog 1
+
+n Merchant Willy
+fl That Dave steels all my customers.
+sl I wonder how he does that...
+f true
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

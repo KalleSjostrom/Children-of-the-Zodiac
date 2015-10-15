@@ -1,0 +1,36 @@
+image char/Mizoram	   
+start 493 260	   
+	   
+in 0 180 true	   
+	   
+dialog 1	   
+	   
+run Seeing_the_Elder_of_Berca continue   
+	   
+dialog 2	   
+	   
+n Mizoram	   
+fl You must hurry to the Temple of Aegis and use	   
+sl my book to retrieve the stone residing inside.	   
+f true	   
+	   
+dialog 3	   
+	   
+n Mizoram	   
+fl I knew it...	   
+sl There really was a way to fly in the air.	   
+f true	   
+	   
+n Mizoram	   
+fl Now go to the continent of ice and snow and talk	   
+sl to my brother Merri, he will show you the path.	   
+f true	   
+	   
+dialog 4	   
+	   
+n Mizoram	   
+fl It is a tragedy what happened to Merri. He will be 	   
+sl remembered as a kind and powerful man forever.	   
+f true	   
+	   
+end	 

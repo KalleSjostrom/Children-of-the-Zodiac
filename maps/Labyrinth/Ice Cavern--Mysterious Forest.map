@@ -1,0 +1,173 @@
+mapSize -0.5 0.5 1
+
+size 511
+
+useSnow
+
+fog red=.8 green=.8 blue=1 alpha=.8 density=0.02
+
+light0 position=0;0;0;1 ambient=.8;.8;.8;1 specular=0;0;0;1 diffuse=.8;.8;.8;1 attenuation=1;0.01;0.015
+light1 position=0;0;0;0 ambient=.8;.8;.8;1 specular=0;0;0;1 diffuse=.8;.8;.8;1 attenuation=1;0.01;0.015
+material ambient=.4;.4;.4;1 specular=0;0;0;1 diffuse=.7;.7;.7;1 shininess=5 emission=.1;.1;.1;1
+
+sky top=.3;.3;.5;.8 bottom=.8;.8;1;.8
+
+floorTex snowhedgefloor.jpg
+wallTex snowhedgewall.png
+wallTex snowhedgedoor.png
+wallTex IceRiddle/d1603.png
+wallTex IceRiddle/d2.png
+wallTex IceRiddle/d3.png
+wallTex IceRiddle/d4.png
+wallTex IceRiddle/d5476.png
+wallTex IceRiddle/d6768.png
+wallTex IceRiddle/d7.png
+wallTex IceRiddle/d8345.png
+wallTex IceRiddle/d9.png
+wallTex IceRiddle/d10.png
+wallTex IceRiddle/d11.png
+wallTex IceRiddle/d12.png
+wallTex IceRiddle/d13.png
+
+normal floor 0 1
+normal wall 1 16
+
+mapPos 2 1
+# directions in labyrinth
+
+dir 7 1 23
+dir 21 1 37
+dir 21 2 22
+dir 22 2 23
+dir 23 1 39
+dir 23 2 24
+dir 24 2 25
+dir 25 1 41
+dir 27 1 43
+dir 27 2 28
+dir 28 2 29
+dir 29 1 45
+dir 29 2 30
+dir 30 2 31
+dir 31 1 47
+dir 37 1 53
+dir 41 1 57
+dir 43 1 59
+dir 47 1 63
+dir 53 1 69
+dir 53 2 54
+dir 56 2 57
+dir 57 1 73
+dir 59 1 75
+dir 59 2 60
+dir 62 2 63
+dir 63 1 79
+dir 69 1 85
+dir 71 1 87
+dir 73 1 89
+dir 75 1 91
+dir 77 1 93
+dir 79 1 95
+dir 85 2 86
+dir 86 2 87
+dir 87 2 88
+dir 88 2 89
+dir 91 2 92
+dir 92 2 93
+dir 93 2 94
+dir 94 2 95
+dir 117 1 133
+dir 117 2 118
+dir 118 2 119
+dir 119 1 135
+dir 119 2 120
+dir 120 2 121
+dir 121 1 137
+dir 123 1 139
+dir 123 2 124
+dir 124 2 125
+dir 125 1 141
+dir 125 2 126
+dir 126 2 127
+dir 127 1 143
+dir 133 1 149
+dir 137 1 153
+dir 139 1 155
+dir 143 1 159
+dir 149 1 165
+dir 149 2 150
+dir 152 2 153
+dir 153 1 169
+dir 155 1 171
+dir 155 2 156
+dir 158 2 159
+dir 159 1 175
+dir 165 1 181
+dir 167 1 183
+dir 169 1 185
+dir 171 1 187
+dir 173 1 189
+dir 175 1 191
+dir 181 2 182
+dir 182 2 183
+dir 183 2 184
+dir 184 2 185
+dir 187 2 188
+dir 188 2 189
+dir 189 2 190
+dir 190 2 191
+
+mapEnd
+
+wall 4 54 2
+# Correct
+wall 3 71 3
+wall 5 56 0
+
+wall 6 150 2
+wall 9 152 0
+# Correct
+wall 7 135 1
+
+wall 13 77 3
+# Correct
+wall 8 62 0
+wall 11 45 1
+
+wall 12 156 2
+# Correct
+wall 10 173 3
+wall 14 158 0
+wall 15 141 1
+
+wall 2 7 3
+inv door 7 3 dontopen Ice_Cavern--Pillar_Room-mark1
+
+# Top left
+inv door 54 2 dontopen Ice_Cavern--Mysterious_Forest-mark0
+inv door 71 3 dontopen Ice_Cavern--Mysterious_Forest-mark4
+inv door 56 0 dontopen Ice_Cavern--Mysterious_Forest-mark0
+inv riddle 39 1 1 Images/iceriddle.png iceriddle RiddleGame
+# RIGHT (exit up)
+#inv riddle 39 1 1 Images/1-9small.png puzzle55numbers RubicsPuzzle19 _
+
+# Top right
+inv door 150 2 dontopen Ice_Cavern--Mysterious_Forest-mark0
+inv chest 167 3 2 Images/icepot 2 cards.offense.SpiritAssault 1
+inv door 152 0 dontopen Ice_Cavern--Mysterious_Forest-mark0
+inv door 135 1 dontopen Ice_Cavern--Mysterious_Forest-mark9
+# LEFT (exit left)
+
+# Bottom left
+inv chest 60 2 2 Images/icepot 2 cards.support.Shield 2 true
+inv door 77 3 dontopen Ice_Cavern--Mysterious_Forest-mark0
+inv door 62 0 dontopen Ice_Cavern--Mysterious_Forest-mark11
+inv door 45 1 dontopen Ice_Cavern--Mysterious_Forest-mark0
+# DOWN (exit right)
+
+# Bottom right
+inv door 156 2 dontopen Ice_Cavern--Mysterious_Forest-mark0
+inv door 173 3 dontopen Ice_Cavern--Hall_of_Anguish-mark1
+inv door 158 0 dontopen Ice_Cavern--Mysterious_Forest-mark0
+inv door 141 1 dontopen Ice_Cavern--Mysterious_Forest-mark0
+# RIGHT (exit)

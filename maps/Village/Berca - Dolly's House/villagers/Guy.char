@@ -1,0 +1,56 @@
+image char/Guy
+start 387 437
+
+in 2 100 true
+
+dialog 3
+
+check Guy 4 Cold_Drink
+
+n Guy
+fl That's much better...
+sl a cold one would hit the spot.
+f true
+
+dialog 4
+
+n Guy
+fl That's much better...
+sl A cold one would really do it for me, though.
+f true
+
+q 10
+alt Give_him_a_cold_drink
+alt Ignore_him
+alt _
+alt _
+f true
+
+*11
+n Guy
+fl A cold drink just for me!
+sl Thank you! Please accept this card.
+f true
+
+n _
+fl You got a card!
+sl You gave away the key item "Cold Drink"!
+trigger Guy 5
+gift cards.offense.LaceratingCut 2 3 false
+take Cold_Drink 1
+f true
+
+*12
+n Guy
+fl I'm so thirsty...
+sl end
+f true
+
+dialog 5
+
+n Guy
+fl Thanks to you I will survive another hot day!
+sl end
+f true
+
+end

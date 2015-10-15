@@ -1,0 +1,95 @@
+image Ludmillha
+start 670 270
+
+in 3 70 false
+in 0 185 false
+in 1 190 false
+in 2 100 false
+in 3 120 false
+in 2 85 false
+
+dialog 1
+
+n Ludmillha
+fl If I had all the money in the world, I could buy
+sl all the nice things they're selling here.
+f true
+
+n Ludmillha
+fl I probably don't even need all the money in the world.
+sl Just a lot!
+f true
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

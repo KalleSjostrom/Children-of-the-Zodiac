@@ -1,0 +1,30 @@
+name Werewolf
+
+defense 35
+magicDefense 25
+agility 12
+evade 2
+hit 95
+attack 182
+magic 110
+support 93
+hp 390
+element 0
+gold 175
+experience 117
+criticalChance 0
+
+diesound Werewolf/dies
+image werewolf 3
+armor 13 10
+preferences 50 50
+
+scale 6
+height -2
+depth -6
+middle -.5
+
+attackSpec anim=(f=1)--(f=1,a=150,se=Monster/Werewolf/attack)--(f=2,h=true)
+attackSpec type=mag name=Ground_Shake onAll=true element=earth anim=(f=1,a=2000,cs=true,h=true,se=Magics/Earthrumble)
+
+# cardPreference [CardName preference]

@@ -1,0 +1,28 @@
+name Corpse
+
+defense 163
+magicDefense 123
+agility 17
+evade 0
+hit 95
+attack 694
+magic 573
+support 427
+hp 3066
+element 1
+gold 1380
+experience 1020
+criticalChance 0
+
+diesound Zombie/dies
+image corpse 3
+armor 59 90
+preferences 100 0
+
+scale 5.5
+height -2
+depth -6
+middle 0
+
+attackSpec p=.5 anim=(f=1)--(f=1,a=140,se=Monster/Zombie/attack)--(f=2,h=true)
+attackSpec name=Triple_Bash power=.7 onAll=true p=.5 anim=(f=1,a=200)--(f=1,a=140,se=Monster/Zombie/attack)--(f=2,a=300)--(f=1,a=200)--(f=1,a=140,se=Monster/Zombie/attack)--(f=2,a=300)--(f=1,a=200)--(f=1,a=140,se=Monster/Zombie/attack)--(f=2,h=true,a=300)

@@ -1,0 +1,31 @@
+##### VILLAGER #####
+# NAME: Emmasitting
+image Emmasitting 1 40 26
+
+##### STARTING LOCATION #####
+
+# start x y
+start 1243 720
+
+range 40
+
+##### INSTRUCTIONS #####
+
+# in angle distance stopped
+in 3 180 true
+
+##### DIALOGS #####
+
+# first line
+# second line
+# first dialog background (the one at the far left top of the screen)
+
+dialog 1
+
+n Emma
+fl I just love uncle Thoms stories. 
+sl This one is about a man and a woman.
+f true
+
+##### END #####
+end

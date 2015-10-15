@@ -1,0 +1,31 @@
+##### VILLAGER #####
+# NAME: Dedricsitting
+image Dedricsitting 1 40 26
+
+##### STARTING LOCATION #####
+
+# start x y
+start 1151 720
+
+range 33
+
+##### INSTRUCTIONS #####
+
+# in angle distance stopped
+in 0 180 true
+
+##### DIALOGS #####
+
+# first line
+# second line
+# first dialog background (the one at the far left top of the screen)
+
+dialog 1
+
+n Dedric
+fl Shhh...
+sl Can't you hear old Thom's tellin' a story.
+f true
+
+##### END #####
+end

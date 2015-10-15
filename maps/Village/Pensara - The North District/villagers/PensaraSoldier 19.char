@@ -1,0 +1,13 @@
+image char/Pensarasoldier
+start 1980 540
+
+in 2 100 true
+
+dialog 1
+
+n Soldier
+fl Don't tell my superiors I'm here.
+sl Then they'd just make me patrol.
+f true
+
+end

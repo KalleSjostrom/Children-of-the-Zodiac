@@ -1,0 +1,23 @@
+image Gilo
+start 535 340
+
+in 2 100 true
+
+dialog 1
+
+n Gilo
+fl My brother Milo used to be a soldier...
+sl end
+f true
+
+n Gilo
+fl I guess he got brainwashed by the generals who promised
+sl fortune and fame for the people who joined them.
+f true
+
+n Gilo
+fl Of course, that was just a trick to get people to join.
+sl end
+f true
+
+end

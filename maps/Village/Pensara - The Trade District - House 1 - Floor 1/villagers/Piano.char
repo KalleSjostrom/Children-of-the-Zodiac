@@ -1,0 +1,61 @@
+image _ 0
+
+start 375 427
+
+in 2 100 true
+
+dialog 1
+
+run KinPiano continue 1
+
+dialog 2
+
+run CelisPiano continue 1
+
+dialog 3
+
+check Piano 4 c.Borealis
+
+n Kin
+fl A nice piano.
+sl Someone else should try it.
+f true
+
+dialog 4
+
+n Borealis
+whisper
+fl Hmm, maybe I should try too...
+sl Next time, maybe...
+trigger Piano 5
+f true
+
+dialog 5
+
+run BorealisPiano continue 1
+
+dialog 6
+
+check Piano 7 c.Zalzi
+
+n Kin
+fl A nice piano.
+sl Someone else should try it.
+f true
+
+dialog 7
+
+n Zalzi
+whisper
+fl If Borealis can, maybe I could too...
+sl end
+trigger Piano 8
+f true
+
+dialog 8
+
+run ZalziPiano continue 1
+
+dialog 9
+
+end

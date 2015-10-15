@@ -1,0 +1,94 @@
+import file=main.var
+
+var kin=0
+var celis=1
+var borealis=2
+var zalzi=3
+
+info time="day" name="Berca" music="Berca" fadeValue="0" musicVolume="0"
+
+pos name="Background" pos=424;80
+ins kind=screen_center center=false
+
+actor name="Kin"
+actor name="Celis"
+actor name="Borealis"
+actor name="Zalzi"
+
+show index=kin value=false
+show index=celis value=false
+show index=borealis value=false
+show index=zalzi value=false
+
+ins type=fadeout timea=0 index=0 fadetime=0 kind=village
+
+ins timea=0 index=0 kind=screenzoom zoomin=true zoomtime=500 usestaticpos=true pos=660;378
+ins type=fadein timea=500 index=0 fadetime=0 kind=village
+
+ins timea=0 index=kin kind=show movepos=552;848;0
+ins timea=0 index=celis kind=show movepos=598;764;3
+ins timea=0 index=borealis kind=show movepos=522;760;2
+ins timea=0 index=zalzi kind=show movepos=554;737;2
+ins timea=0 index=zalzi kind=dist distance=55 duration=1000 direction=2
+
+#592;808
+
+ins timea=800 index=kin kind=dist distance=15 duration=400 direction=0
+dialogpacket name=1 starttimea=200 duration=0
+dialog packetname=1 name="Kin" text="Oh, there you are.";"Now, show the way to Mizoram."
+dialog packetname=1 name="Zalzi" text="Can’t do that now." first=false
+dialog packetname=1 name="Zalzi" text="The rebels are planning to blow up Pensara!" first=false 
+
+ins timea=300 index=zalzi kind=dist distance=50 duration=500 direction=1
+ins timea=0 index=zalzi kind=queue direction=3
+ins timea=100 index=borealis kind=emotion emotion=! show=true
+ins timea=50 index=kin kind=emotion emotion=? show=true
+ins timea=0 index=kin kind=dist distance=5 duration=100 direction=2 facedirection=0
+ins timea=20 index=celis kind=emotion emotion=!? show=true
+ins timea=0 index=celis kind=dist distance=5 duration=100 direction=1 facedirection=3
+ins timea=0 index=celis kind=queue direction=2
+
+dialogsingle starttimea=100 duration=100 <= name="Borealis" text="What!?"
+ins timea=0 index=borealis kind=tor movepos=10;5
+
+dialogsingle starttimea=400 <= name="Zalzi" text="I must hurry and stop them!";""
+ins timea=20 index=zalzi kind=dist distance=80 duration=800 direction=1
+
+ins timea=250 index=celis kind=dist distance=15 duration=200 direction=1
+dialogsingle starttimea=100 duration=300 <= name="Celis" text="That's awful!";"We will help you!"
+ins timea=200 index=borealis kind=look_at actor=zalzi
+
+ins timea=200 index=zalzi kind=stop direction=3
+dialogsingle starttimea=100 duration=1500 <= name="Zalzi" text="Thanks, you guys.";""
+ins timea=1000 index=kin kind=emotion show=false
+ins timea=100 index=borealis kind=emotion show=false
+ins timea=300 index=celis kind=emotion show=false
+
+ins timea=500 index=kin kind=tor movepos=20;-10 duration=400
+dialogsingle starttimea=250 duration=200 <= name="Kin" text="Stop bombs?";"And how do you s’pose we do that?"
+
+ins timea=200 index=zalzi kind=stop direction=2
+dialogsingle starttimea=150 <= name="Zalzi" text="Supposedly, there are three bombs";"located in the sewers under Pensara."
+
+ins timea=200 index=zalzi kind=stop direction=3
+dialogsingle starttimea=150 <= name="Zalzi" text="We will just have to disarm the bombs there.";""
+
+ins timea=500 index=kin kind=tor movepos=20;-10 duration=600
+dialogsingle starttimea=300 duration=300 <= name="Kin" text="And I assume you know how?";""
+
+ins timea=600 index=zalzi kind=emotion emotion=! show=true
+ins timea=100 index=zalzi kind=dist distance=10 direction=3 duration=200
+dialogsingle starttimea=100 <= name="Zalzi" text="Of course! When you're working with the rebels,";"you learn a thing or two."
+
+ins timea=200 index=celis kind=emotion emotion=! show=true
+ins timea=0 index=celis kind=dist distance=10 direction=1 duration=200
+dialogsingle starttimea=100 duration=800 <= name="Celis" text="Then it's settled!";"Let us make haste!"
+ins timea=300 index=0 kind=screenzoom zoomin=false zoomtime=2000 usestaticpos=true pos=660;378
+
+ins timea=500 index=zalzi kind=emotion show=false
+ins timea=500 index=celis kind=emotion show=false
+
+load trigger="Pensara - The Trade Districtnode"
+ins index=0 timea=0 kind=trigger value=2
+
+ins timea=1000 kind=end

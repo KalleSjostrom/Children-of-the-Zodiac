@@ -1,0 +1,131 @@
+image GTthief	   
+	   
+start 200 125	   
+	   
+in 2 180 true	   
+	   
+dialog 1	   
+	   
+n Thieving looking guy	   
+fl I don't need to talk to you if I don't want to!	   
+sl Now, get lost!	   
+f true	   
+	   
+dialog 2	   
+	   
+n Thieving looking guy	   
+fl Mats Meadowgrove... Hmm...	   
+sl Never heard of him.	   
+trigger Thieving_looking_guy 3	   
+f true	   
+	   
+dialog 3	   
+	   
+n Thieving looking guy	   
+fl I'm not this Mats you are talking about.	   
+sl Now get out of my sight!  
+trigger Thieving_looking_guy 4	   
+f true	   
+	   
+dialog 4	   
+	   
+n Thieving looking guy
+fl You were one persistent fella, I have to give you that.	   
+sl end
+f true
+
+n Thieving looking guy
+fl I confess... 
+sl I am Mats Meadowgrove.
+trigger Thieving_looking_guy 5	   
+f true	   
+	   
+dialog 5	   
+	   
+n Mats Meadowgrove
+fl You wan't to turn me in?	   
+sl I can't let you do that.	   
+f true	   
+	   
+n Mats Meadowgrove	   
+fl How about I give you 10000 gold if you let me be.	   
+sl end	   
+f true	   
+	   
+q 10	   
+alt Ok_I'll_take_10000_gold_and_let_you_be.	   
+alt 10000_gold..._20000_gold_and_we_have_a_deal.
+alt 30000_gold_and_not_a_penny_less.
+alt Never!_You're_going_to_jail!
+f true  
+	   
+*11	   
+n Mats Meadowgrove	   
+fl Here you go, 10000 gold as promised.	   
+sl end	   
+f true
+
+n _   
+fl You got 10000 gold!  
+sl end	   
+gift 10000 0
+trigger Thieving_looking_guy 7
+f true	   
+	   
+*12	   
+n Mats Meadowgrove	   
+fl 20000 gold, isn't that a bit much?
+sl I have to think about it.
+trigger Thieving_looking_guy 6
+f true	   
+	   
+*13	   
+n Mats Meadowgrove	   
+fl Are you serious?	   
+sl That's just preposterous! I'm out of here.
+trigger Thieving_looking_guy 7
+f true	   
+	   
+*14	   
+n Mats Meadowgrove	   
+fl Nooo... Please... I'm to beautiful to go to jail	   
+sl Please let me go... I'll be nice... I promise.   
+f true	   
+	   
+q 20	   
+alt Ah..._What_the_hell,_I'll_let_you_go.	   
+alt You're_going_to_jail_right_now.	
+alt _	   
+alt _
+	   
+*21	   
+n Mats Meadowgrove	   
+fl Thank you so much.	   
+sl end	   
+trigger Thieving_looking_guy 7
+f true	   
+	   
+*22	   
+n Mats Meadowgrove
+fl Noooooooooo!!
+sl end
+trigger Thieving_looking_guy 7	   
+trigger Freddy 5	   
+trigger Galanda 5	   
+f true	   
+
+dialog 6
+
+n Mats Meadowgrove
+fl ... 
+sl end
+f true
+
+dialog 7
+
+n Mats Meadowgrove
+fl ... 
+sl end
+f true	 
+
+end	 

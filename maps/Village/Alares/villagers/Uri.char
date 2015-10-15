@@ -1,0 +1,105 @@
+##### VILLAGER #####
+# NAME: Uri GTleader
+image GTleader
+
+##### STARTING LOCATION #####
+
+# start x y
+start 1330 1080
+
+##### INSTRUCTIONS #####
+
+# in angle distance stopped
+in 2 100 true
+
+##### DIALOGS #####
+
+# first line
+# second line
+# first dialog background (the one at the far left top of the screen)
+
+dialog 1
+
+	# 1 - Villager
+	n ???
+	fl Who are you strangers?
+	sl end
+	f true
+	
+	# 2 - Player
+	n Kin
+	fl I'm Kin and this is Celis.
+	sl Who are you?
+	f false
+	
+	# 3 - Villager
+	n Uri
+	fl I'm Uri, the leader of this village.
+	sl end
+	f true
+	
+	# 4 - Villager
+	n Uri
+	fl But, even though I'm the leader, I don't live
+	sl a more luxurious life than my fellow villagers.
+	f true
+	
+	# 5 - Villager
+	n Uri
+	fl I want to be a part of this community 
+	sl and help out the way I can.
+	f true
+	
+	# 6 - Villager
+	n Uri
+	fl I think it's every ones duty to help out, 
+	sl to help us survive in this tough world.
+	f true
+	
+	# 7 - Villager
+	n Uri
+	fl The only one who doesn't work is Elmer... Hmpf...
+	sl I'm getting angry just to think about his lazy attitude.
+	f true
+	
+	# 8 - Villager
+	n Uri
+	fl By the way, don't listen to Elmers stories.
+	sl He's just a crazy old man...
+	trigger Uri 2
+	f true
+
+dialog 2
+
+	n Uri
+	fl Don't listen to Elmers stories.
+	sl He's just a crazy old man...
+	f true
+	
+dialog 3
+
+	run A_Permission_From_Uri continue 1
+	
+dialog 4
+
+	n Uri
+	fl You must hurry if you want to save those miners.
+	sl Go north to the pass and show that permission slip.
+	f true
+	
+dialog 5
+
+	n Uri
+	fl Nice weather today.
+	sl Don't you think?
+	f true
+
+dialog 6
+	
+	n Uri
+	fl I haven't got enough soldiers to send to Zazo
+	sl so I've decided to withdraw Alares army.
+	f true
+
+##### END #####
+end

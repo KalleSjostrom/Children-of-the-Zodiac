@@ -1,0 +1,103 @@
+image Earl
+start 655 440
+
+in 3 300 true
+
+dialog 1
+
+n Earl
+fl I don't drink for my own pleasure... 
+sl I drink to support this joint.
+f true
+
+# After Airship
+dialog 2
+
+n Earl
+fl You're back...
+sl Do you want to buy this card from me?
+f true
+
+n Earl
+fl I need money for... hmm...
+sl Gifts for my lovely wife.
+f true
+
+n Earl
+fl 1000 gold would suffice.
+sl end
+f true
+
+q 10
+alt Sure!
+alt No,_I_don't_think_so...
+alt _
+alt _
+price 1000 0 0 0
+f true
+
+*11
+n Earl
+fl Thank you!
+sl Here you go.
+trigger Earl 3
+f true
+
+n _
+fl You got a card!
+sl end
+gift cards.offense.BattleCard 2 3 false
+f true
+
+*12
+n Earl
+fl Well... 
+sl Take it anyway...
+trigger Earl 3
+f true
+
+n _
+fl You got a card!
+sl end
+gift cards.offense.BattleCard 2 3 false
+f true
+
+*15
+n Earl
+fl Those are not gold coins!
+sl end
+f true
+
+n Earl
+fl Don't just grab some random metal object from
+sl your pocket and pretend it's money!
+f true
+
+n Earl
+fl I'm not THAT drunk!
+sl end
+f true
+
+n Earl
+fl But even if I were, would you really
+sl feel OK taking advantage of that!
+f true
+
+n Earl
+fl Just to save a few measly gold coins?!
+sl end
+f true
+
+n Earl
+fl Go out and get me some money so I can drink!
+sl Oh... I mean...
+f true
+
+dialog 3
+
+n Earl
+fl Get lost...
+sl end
+f true
+
+end

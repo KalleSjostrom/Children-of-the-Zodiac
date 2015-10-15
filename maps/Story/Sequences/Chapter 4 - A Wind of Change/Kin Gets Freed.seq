@@ -1,0 +1,134 @@
+import file=main.var
+
+var guard1=0
+var guard2=1
+var kin=2
+var celis=3
+var borealis=4
+var zalzi=5
+
+info time="day" name="Pensara - The North District" music="Pensara" fadeValue="0"
+
+actor name="Characters/Pensarasoldier/PensarasoldierExtras"
+actor name="Characters/Pensarasoldier/PensarasoldierExtras"
+actor name="Kin"
+actor name="Celis"
+actor name="Borealis"
+actor name="Zalzi"
+
+load animation="Pensarasoldier Down 3"
+load animation="Pensarasoldier Down 4"
+
+pos name="Background" pos=566;581
+ins kind=screen_center center=false
+
+show index=guard1 value=false
+show index=guard2 value=false
+show index=kin value=false
+show index=celis value=false
+show index=borealis value=false
+show index=zalzi value=false
+
+ins timea=0 index=guard1 kind=show movepos=1062;704;2
+ins timea=0 index=guard2 kind=show movepos=1102;704;2
+ins timea=0 index=kin kind=show movepos=1082;720;2
+ins timea=0 index=celis kind=show movepos=668;941;1
+ins timea=0 index=borealis kind=show movepos=1000;981;1
+ins timea=0 index=zalzi kind=show movepos=1162;981;3
+
+dialogsingle starttimea=250 duration=500 <= name="Borealis" text="Shh! They are coming, get ready." whisper=true
+ins timea=700 index=guard1 kind=dist distance=240 duration=4000 direction=2
+ins timea=0 index=guard2 kind=dist distance=240 duration=4000 direction=2
+ins timea=0 index=kin kind=dist distance=240 duration=4000 direction=2
+ins timea=0 index=celis kind=dist distance=100 duration=1000 direction=2
+ins timea=0 index=celis kind=queue distance=415 duration=2500 direction=1
+ins timea=0 index=celis kind=queue direction=0
+ins timea=0 index=0 kind=screenzoom zoomin=true zoomtime=3500 usestaticpos=true pos=512;378
+
+dialogsingle starttimea=4000 duration=500 <= name="Celis" text="Hey, guys!"
+
+ins timea=700 index=guard1 kind=emotion emotion=! show=true
+ins timea=0 index=guard2 kind=emotion emotion=! show=true
+
+ins timea=0 index=guard1 kind=dist distance=10 duration=200 direction=3
+ins timea=0 index=guard1 kind=queue distance=40 duration=800 direction=2
+ins timea=0 index=guard2 kind=dist distance=10 duration=200 direction=1
+ins timea=0 index=guard2 kind=queue distance=40 duration=800 direction=2
+ins timea=0 index=borealis kind=dist distance=20 duration=200 direction=3
+ins timea=0 index=borealis kind=queue distance=60 duration=600 direction=0
+ins timea=0 index=borealis kind=queue distance=20 duration=200 direction=1
+ins timea=0 index=zalzi kind=dist distance=20 duration=200 direction=1
+ins timea=0 index=zalzi kind=queue distance=60 duration=600 direction=0
+ins timea=0 index=zalzi kind=queue distance=20 duration=200 direction=3
+
+
+dialogpacket name=1 starttimea=350 duration=350
+dialog packetname=1 name="Guards" text="Wow! Look at her!"
+dialog packetname=1 name="Kin" text="Celis... What's she doing?" whisper=true first=false
+
+ins timea=500 index=celis kind=stop direction=1
+ins timea=400 index=celis kind=stop direction=2
+ins timea=300 index=celis kind=stop direction=1
+ins timea=900 index=celis kind=stop direction=0
+ins timea=300 index=borealis kind=emotion emotion=! show=true
+#dialogsingle starttimea=0 duration=1200 <= name="Borealis" text="NOW!"
+/*
+ins timea=400 index=guard1 kind=stop direction=0
+ins timea=0 index=guard2 kind=stop direction=0
+ins timea=0 index=guard1 kind=emotion emotion=? show=true
+ins timea=0 index=guard2 kind=emotion emotion=? show=true
+*/
+ins timea=100 index=borealis kind=dist distance=55 direction=1 duration=275
+ins timea=0 index=borealis kind=queue distance=70 direction=2 duration=300
+ins timea=0 index=zalzi kind=dist distance=55 direction=3 duration=275
+ins timea=0 index=zalzi kind=queue distance=70 direction=2 duration=300
+ins timea=500 index=guard1 kind=tor movepos=-30;30 duration=150
+ins timea=0 index=guard1 kind=emotion show=false
+ins timea=0 index=guard2 kind=tor movepos=30;30 duration=150
+ins timea=0 index=guard2 kind=emotion show=false
+ins timea=50 index=0 kind=animation actor=guard1 animation=17
+ins timea=0 index=1 kind=animation actor=guard2 animation=17
+
+ins timea=50 index=kin kind=dist distance=500 direction=2 duration=2500
+ins timea=150 index=borealis kind=dist distance=20 direction=1 duration=100
+ins timea=0 index=borealis kind=queue distance=500 direction=2 duration=2500
+ins timea=10 index=celis kind=dist distance=500 direction=2 duration=2500
+ins timea=60 index=zalzi kind=dist distance=20 direction=3 duration=100
+ins timea=0 index=zalzi kind=dist distance=500 direction=2 duration=2500
+
+load trigger="Pensara - The Trade Districtnode"
+ins index=0 timea=0 kind=trigger value=0
+
+load trigger="Bercanode"
+ins index=1 timea=0 kind=trigger value=2
+
+load trigger="Petir"
+ins index=2 timea=0 kind=trigger value=2
+load trigger="Tilly"
+ins index=3 timea=0 kind=trigger value=3
+load trigger="Garli"
+ins index=4 timea=0 kind=trigger value=2
+load trigger="Nodd"
+ins index=5 timea=0 kind=trigger value=2
+load trigger="Podd"
+ins index=6 timea=0 kind=trigger value=2
+load trigger="Juha"
+ins index=7 timea=0 kind=trigger value=2
+load trigger="Sarah"
+ins index=8 timea=0 kind=trigger value=2
+load trigger="Elviri"
+ins index=9 timea=0 kind=trigger value=2
+load trigger="Rebel 1"
+ins index=10 timea=0 kind=trigger value=2
+load trigger="Rebel 2"
+ins index=11 timea=0 kind=trigger value=2
+load trigger="Sewers"
+ins index=12 timea=0 kind=trigger value=2
+load trigger="parasneCardShop"
+ins index=13 timea=0 kind=trigger value=1
+load trigger="pensaraCardShop"
+ins index=14 timea=0 kind=trigger value=1
+load trigger="Ylwa"
+ins index=15 timea=0 kind=trigger value=2
+
+ins timea=1500 kind=endseq

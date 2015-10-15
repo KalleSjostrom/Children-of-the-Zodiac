@@ -1,0 +1,57 @@
+image Merchant_Tord
+start 535 330
+
+in 2 100 true
+
+range 40
+
+dialog 1
+
+check Tord 2 Bananas
+
+n Merchant Tord
+fl I want some bananas!
+sl end
+f true
+
+dialog 2
+
+n Merchant Tord
+fl Mmm, you have bananas!
+sl Would you mind giving the bananas to me?
+f true
+
+q 10
+alt I_don't_need_'em.
+alt No,_they're_mine!
+alt _
+alt _
+f true
+
+*11
+n Merchant Tord
+fl Thanks a bunch!
+sl Here, take this shiny sea stone.
+f true
+
+n _
+fl You got the key item "Sea Stone"!
+sl end
+gift Sea_Stone 1 1
+trigger Tord 3
+f true
+
+*12
+n Merchant Tord
+fl But, I'm hungry!
+sl end
+f true
+
+dialog 3
+
+n Merchant Tord
+fl Those bananas were heavenly.
+sl end
+f true
+
+end

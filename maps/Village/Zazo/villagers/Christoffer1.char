@@ -1,0 +1,22 @@
+image Christoffer
+
+start 880 840
+
+in 2 500 true
+in 3 20 true
+in 1 500 true
+in 2 30 false
+in 2 500 true
+in 3 20 true
+in 1 500 true
+in 0 30 false
+in 3 200 true
+
+dialog 1
+
+n Christoffer
+fl Peace and harmony has returned but to be safe I have
+sl stocked up on weapons in case of another misshap'.
+f true
+
+end

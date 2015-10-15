@@ -1,0 +1,55 @@
+image Wilko
+start 1265 620
+
+in 2    100 false
+in 1 50 true
+in 0 50 true
+in 3 50 true
+in 2    100 false
+in 3    100 false
+in 2 50 true
+in 1 50 true
+in 2 50 true
+in 3 50 true
+in 0    100 false
+in 1    100 false
+in 0    100 false
+
+dialog 1
+
+n Wilko
+fl Eno is a strange fellow. He mixes up numbers with
+sl letters and makes the opposite of it...
+f true
+
+n Wilko
+fl Talk about crazy.
+sl end
+trigger Eno 2
+f true
+
+dialog 2
+
+n Wilko
+fl See... I told you!
+sl Eno is craaaazy!
+f true
+
+n Wilko
+fl It's very confusing when he always do 
+sl the opposites with the numbers and letters.
+f true
+
+dialog 3
+
+n Wilko
+fl I thinking of leaving this village now.
+sl Since Merri died, there's no hope.
+f true
+
+n Wilko
+fl He was our communication to the rest of the world.
+sl end
+f true
+
+end

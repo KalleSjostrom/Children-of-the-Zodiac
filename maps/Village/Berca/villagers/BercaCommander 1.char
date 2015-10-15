@@ -1,0 +1,49 @@
+image char/Pensaracommander
+start 360 700
+
+in 2 100 true
+
+dialog 1
+
+n Soldier
+fl 1, 2, 3, 4.
+sl 1, 2, 3, 4.
+f true
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

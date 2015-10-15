@@ -1,0 +1,85 @@
+image Dolly
+start 565 416
+
+in 2 1000 true
+
+dialog 1
+
+check Dolly 4 s.Temple_of_Aegis=2
+
+n Dolly
+fl Our whole culture and society is a legacy from
+sl ancient times. Have you heard about the Ancients?
+f true
+
+q 10
+alt Yes,_I_have.
+alt No,_please_tell_me.
+alt _
+alt _
+f true
+
+*11
+# If yes (Does not wanna hear)
+n Dolly
+fl Well then you also must know about
+sl the pyramids I guess.
+f true
+
+*12
+# If no 
+n Dolly
+fl The Ancients lived back in ancient times. 
+sl end
+f true
+
+n Dolly
+fl They created a society based on science
+sl rather than theology. 
+f true
+
+n Dolly
+fl In this society, architecture and philosophy
+sl were the main disciplines.
+f true
+
+n Dolly
+fl They created a way for us mortal humans to
+sl live in the dry desert.
+f true
+
+n Dolly
+fl If it wasn't for them, Berca wouldn't exist.
+sl end
+f true
+
+n Dolly
+fl By the way... you have to visit the pyramids... 
+sl Remarkable buildings. 
+trigger Dolly 2
+f true
+
+dialog 2
+
+check Dolly 3 s.Temple_of_Aegis=2
+
+n Dolly
+fl Those pyramids...
+sl Really remarkable buildings...
+f true
+
+dialog 3
+
+n Dolly
+fl I told you they were remarkable buildings!
+sl end
+f true
+
+dialog 4
+
+n Dolly
+fl You been've to the pyramids?!
+sl Those are remarkable buildings!
+f true
+
+end

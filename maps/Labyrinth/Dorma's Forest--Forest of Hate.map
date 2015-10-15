@@ -1,0 +1,97 @@
+mapSize -0.5 0.5 1
+
+size 53
+
+steps 6 9
+
+useRain
+
+fog red=.2 green=.2 blue=.25 alpha=.08 density=0.03 start=0 end=10
+
+light0 position=0;0;0;1 ambient=.5;.5;.55;1 specular=0;0;0;1 diffuse=.5;.5;.55;1 attenuation=1;0.02;0.03
+material ambient=.4;.4;.4;1 specular=0;0;0;1 diffuse=.7;.7;.7;1 shininess=5 emission=.1;.1;.1;1
+
+sky top=0;0;0;1 bottom=.2;.2;.25;1
+
+floorTex forestfloor.jpg
+wallTex forestwall.png
+wallTex forestdoor0.png
+
+normal floor 0 1
+normal wall 1 3
+
+mapPos 0 0
+
+# directions in labyrinth
+dir 46 2 47
+dir 47 1 63
+dir 56 1 72
+dir 63 1 79
+dir 68 2 69
+dir 69 2 70
+dir 70 1 86
+dir 72 1 88
+dir 74 1 90
+dir 74 2 75
+dir 75 2 76
+dir 79 1 95
+dir 86 1 102
+dir 88 1 104
+dir 90 1 106
+dir 95 1 111
+dir 102 1 118
+dir 104 1 120
+dir 106 1 122
+dir 111 1 127
+dir 115 2 116
+dir 116 2 117
+dir 117 2 118
+dir 118 1 134
+dir 118 2 119
+dir 119 2 120
+dir 120 1 136
+dir 120 2 121
+dir 121 2 122
+dir 122 1 138
+dir 122 2 123
+dir 123 2 124
+dir 124 2 125
+dir 125 2 126
+dir 126 2 127
+dir 127 1 143
+dir 134 1 150
+dir 136 1 152
+dir 138 1 154
+dir 143 1 159
+dir 150 1 166
+dir 152 1 168
+dir 154 1 170
+dir 159 1 175
+dir 164 2 165
+dir 165 2 166
+dir 168 1 184
+dir 170 2 171
+dir 171 2 172
+dir 175 1 191
+dir 191 1 207
+dir 206 2 207
+
+mapEnd
+
+wall 2 115 0
+wall 2 125 0
+
+inv door 115 0 dontopen landDorma's_Forest--Forest_of_Hate-mark0
+
+inv hinderDoor 124 2 2 Walls/forestdoor Dorma's_Forest--Forest_of_Hate-mark2
+inv door 125 0 dontopen Dorma's_Forest--Forest_of_Hate-mark1
+
+inv riddle 172 2 1 Images/hatetest.png hateriddle HateRiddle Dorma's_Forest--Forest_of_Hate.maphinderDoor124
+inv riddle 68 0 1 Images/hate1.png hate1 RiddleGame
+inv riddle 164 0 1 Images/hate2.png hate2 RiddleGame
+inv riddle 56 3 1 Images/hate3.png hate3 RiddleGame
+inv riddle 184 1 1 Images/hate4.png hate4 RiddleGame
+inv riddle 76 2 1 Images/hate5.png hate5 RiddleGame
+
+inv chest 46 0 2 Images/chest 2 cards.magic.Tornado 1 false
+inv chest 206 0 2 Images/chest 2 cards.magic.Blizzard 1 false

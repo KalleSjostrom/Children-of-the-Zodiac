@@ -1,0 +1,65 @@
+import file=main.var
+
+var teo=0
+var noette=1
+var noah=2
+
+actor name="Characters/Teo/TeoExtras" pos=0;285
+actor name="Characters/Noette/NoetteExtras" pos=-50;280
+actor name="Characters/Noah/NoahExtras"" pos=-45;305
+
+info time="night" name="Zazo - Teo" music="Teo's Theme" fadeValue="0" musicVolume="1"
+
+text lines="Meanwhile in Zazo";"" pos=380;384
+ins type=fadeout timea=0 index=0 fadetime=0 kind=village
+ins type=fadein timea=1500 index=0 fadetime=2000 kind=text
+ins type=fadeout timea=meantime index=0 fadetime=2000 kind=text
+ins type=fadein timea=2000 index=0 fadetime=4000 kind=village
+
+ins timea=1000 index=teo kind=dist distance=500 direction=1 duration=7000
+ins timea=0 index=noette kind=dist distance=500 direction=1 duration=7200
+ins timea=0 index=noah kind=dist distance=500 direction=1 duration=7300
+
+ins timea=7000 index=teo kind=stop direction=3
+ins timea=150 index=noah kind=emotion emotion=! show=true
+dialogsingle starttimea=500 duration=500 <= name="Teo" text="How's the help from Alares commin' along?";""
+
+ins timea=400 index=noah kind=emotion show=false
+ins timea=300 index=noette kind=dist distance=15 direction=1 duration=200
+dialogsingle starttimea=250 <= name="Noette" text="It is going along just fine.";"Alares has sent a group to aid us."
+
+ins timea=250 index=noah kind=dist distance=15 direction=1 duration=200
+dialogsingle starttimea=250 <= name="Noah" text="They are half way trough the pass";"and should be here by tomorrow."
+ins timea=1500 index=teo kind=stop direction=2
+ins timea=1000 index=teo kind=dist distance=45 direction=1 duration=3000
+dialogsingle starttimea=4000 <= name="Teo" text="Splendid.";""
+ins timea=1000 index=teo kind=dist distance=10 direction=3 duration=200
+dialogsingle starttimea=200 duration=500 <= name="Teo" text="What are you waiting for!";"Get out there and keep me posted!"
+
+ins timea=250 index=noette kind=emotion emotion=! show=true
+ins timea=0 index=noette kind=dist distance=5 direction=3 facedirection=1 duration=100
+
+ins timea=150 index=noah kind=emotion emotion=! show=true
+ins timea=0 index=noah kind=dist distance=7 direction=3 facedirection=1 duration=100
+
+ins timea=1000 index=noette kind=emotion show=false
+ins timea=0 index=noette kind=dist distance=10 direction=1 duration=200
+dialogsingle starttimea=100 <= name="Noette" text="Yes sir!";""
+
+ins timea=500 index=noah kind=emotion show=false
+ins timea=0 index=noah kind=dist distance=10 direction=1 duration=200
+dialogsingle starttimea=100 <= name="Noah" text="We'll do!";""
+
+ins timea=100 index=noah kind=dist distance=1000 direction=2 duration=8000
+ins timea=200 index=noette kind=dist distance=1000 direction=2 duration=8000
+
+ins timea=500 index=teo kind=stop direction=2
+dialogsingle starttimea=5000 duration=500 <= name="Teo" text="Hehe...";"Everything is going according to the plan."
+ins timea=500 index=teo kind=dist distance=50 direction=1 duration=3000
+dialogsingle starttimea=4000 duration=500 <= name="Teo" text="Borealis is gone and now we've reached the";"deepest most profitable parts of the mine."
+
+ins timea=3000 index=teo kind=stop direction=2
+dialogsingle starttimea=1000 duration=500 <= name="Teo" text="Just as he had foreseen.";""
+
+ins type=fadeout timea=2000 index=0 fadetime=4000 kind=village
+ins timea=4000 kind=end

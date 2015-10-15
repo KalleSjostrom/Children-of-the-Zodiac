@@ -1,0 +1,17 @@
+##### VILLAGE #####
+# NAME
+name Alares In_The_Cover_of_Darkness
+
+##### BACKGRUND #####
+
+# background, prefix name of both images day
+background Alares_-_Celis false
+
+##### STARTING LOCATION #####
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1024 768
+start 886 193 2
+
+##### DOORS #####
+end

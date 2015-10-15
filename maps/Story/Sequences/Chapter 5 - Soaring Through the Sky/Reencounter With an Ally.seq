@@ -1,0 +1,82 @@
+import file=main.var
+
+var kin=0
+var celis=1
+var borealis=2
+var zalzi=3
+
+info time="day" name="Zazo - Teo's House" music="No Music" fadeValue="0" musicVolume="0"
+
+set fromvillage
+
+load character="Borealis"
+
+actor name="Kin"
+actor name="Celis"
+actor name="Borealis" pos=459;560
+actor name="Zalzi"
+
+show index=kin value=false
+show index=celis value=false
+show index=zalzi value=false
+
+ins timea=500 index=borealis kind=dist distance=130 direction=1 duration=5000
+
+ins timea=0 index=kin kind=show movepos=488;572;0
+ins timea=0 index=zalzi kind=show movepos=488;572;0
+ins timea=0 index=celis kind=show movepos=488;572;0
+ins timea=500 index=kin kind=dist distance=110 direction=0 duration=1800
+ins timea=0 index=kin kind=queue direction=3
+ins timea=2400 index=kin kind=emotion emotion=? show=true
+ins timea=1000 index=kin kind=stop direction=1
+ins timea=1000 index=kin kind=emotion emotion=! show=true
+ins timea=100 index=celis kind=dist distance=130 direction=0 duration=2600
+ins timea=100 index=kin kind=dist distance=80 direction=1 duration=800
+ins timea=0 index=celis kind=queue distance=70 direction=1 duration=1200
+ins timea=500 index=zalzi kind=dist distance=80 direction=0 duration=1600
+ins timea=0 index=zalzi kind=queue distance=60 direction=1 duration=1200
+
+dialogsingle starttimea=350 duration=400 <= name="Kin" text="Hi, Borealis!";""
+ins timea=300 index=borealis kind=emotion emotion=!? show=true
+ins timea=150 index=kin kind=emotion emotion=! show=false
+ins timea=0 index=borealis kind=dist distance=10 direction=1 duration=100 facedirection=3
+ins timea=200 index=borealis kind=emotion show=false
+ins timea=200 index=borealis kind=dist distance=40 direction=3 duration=800
+dialogsingle starttimea=600 duration=80 <= name="Borealis" text="Oh, Hi there!";"Long time no see!"
+dialogsingle starttimea=350 duration=300 <= name="Borealis" text="What a coincidence!";"I was just thinking about you."
+ins timea=700 index=borealis kind=stop direction=2
+dialogsingle starttimea=800 duration=400 <= name="Borealis" text="I've decided to join up with you again!"
+ins timea=250 index=celis kind=emotion emotion=! show=true
+ins timea=120 index=kin kind=emotion emotion=! show=true
+ins timea=400 index=celis kind=dist distance=20 direction=1 duration=200
+dialogsingle starttimea=100 duration=200 <= name="Celis" text="Really!";"That's great!"
+ins timea=100 index=borealis kind=stop direction=3
+ins timea=120 index=kin kind=emotion emotion=! show=false
+ins timea=120 index=celis kind=emotion emotion=! show=false
+ins timea=400 index=borealis kind=dist distance=20 direction=3 duration=400
+dialogsingle starttimea=350 duration=80 <= name="Borealis" text="I've done all I can here.";"I've managed to stabilize the situation."
+dialogsingle starttimea=350 duration=500 <= name="Borealis" text="Farl believe, and so do I, that the only way to end";"the occupation, and the war, is for you to find the stones."
+
+ins timea=550 index=celis kind=emotion emotion=... show=true
+ins timea=1200 index=borealis kind=dist distance=10 direction=3 duration=300
+ins timea=40 index=celis kind=emotion emotion=... show=false
+dialogsingle starttimea=200 duration=80 <= name="Borealis" text="By following you three, I'm doing the most for Zazo.";"I see that now."
+ins timea=800 index=kin kind=dist distance=10 direction=1 duration=300
+dialogsingle starttimea=250 duration=80 <= name="Kin" text="So, are you ready to go? We have an airship";"waiting to take us to the north continent."
+ins timea=200 index=borealis kind=dist distance=20 direction=1 duration=150 facedirection=3
+ins timea=100 index=borealis kind=emotion emotion=!? show=true
+dialogsingle starttimea=350 duration=80 <= name="Borealis" text="What!?";""
+ins timea=400 index=zalzi kind=dist distance=20 direction=1 duration=300
+dialogsingle starttimea=350 duration=500 <= name="Zalzi" text="We'll fill you in on the way there.";"Let's go!"
+ins timea=400 index=borealis kind=emotion emotion=!? show=false
+
+load trigger="DellnaChurch"
+ins index=0 timea=0 kind=trigger value=0
+load trigger="Menthu1"
+ins index=1 timea=0 kind=trigger value=1
+load trigger="Gabriel"
+ins index=2 timea=0 kind=trigger value=1
+load trigger="frozen forest--forest passage.mapdoor99"
+ins index=3 timea=0 kind=trigger value=0
+
+ins timea=1000 kind=endseq

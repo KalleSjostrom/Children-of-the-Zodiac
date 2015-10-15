@@ -1,0 +1,30 @@
+name Dragon
+
+defense 588
+magicDefense 701
+agility 22
+evade 0
+hit 90
+attack 2502
+magic 2335
+support 2402
+hp 14195
+element 3
+gold 40
+experience 20
+criticalChance 0
+
+image dragon 3
+armor 210 452
+preferences 70 30
+
+scale 5
+height -2
+depth -6
+
+attackSpec name=Dragons_Claw p=.4 anim=()--(f=1,h=true)--(f=2)
+attackSpec name=Sweep power=0.7 onAll=true p=.2 anim=()--(f=1,h=true)--(f=2)
+attackSpec name=Tail_Lash power=1.2 p=.2 anim=()--(f=1,h=true)--(f=2)
+attackSpec name=Fang power=0.8 p=.2 anim=()--(f=1,h=true)--(f=2)
+attackSpec type=mag name=Breath_of_Fire power=.7 onAll=true element=fire anim=()--(f=1,h=true)--(f=2)
+attackSpec type=mag name=Wing_of_Wind power=.7 onAll=true element=wind anim=()--(f=1,h=true)--(f=2)

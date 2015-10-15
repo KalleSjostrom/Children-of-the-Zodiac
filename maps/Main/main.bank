@@ -1,0 +1,795 @@
+place mode="0" name="Title Screen" music="Kin's Theme"
+place mode="19" name="Game Over Screen" music="Game Over"
+place mode="3" name="world0.map" map="world0.map" music="Landscape"
+place mode="3" name="world1.map" map="world1.map" music="Landscape"
+place mode="3" name="world2.map" map="world2.map" music="Landscape"
+place mode="15" name="airworld" map="land" music="Airship"
+
+#### Stories ####
+
+## Prolog ##
+
+var 1="Chapter 1 - Running Away From Home/"
+var 2="Chapter 2 - Zazo, The Home of the Miners/"
+var 3="Chapter 3 - The Son Returns/"
+var 4="Chapter 4 - A Wind of Change/"
+var 5="Chapter 5 - Soaring Through the Sky/"
+var 6="Chapter 6 - The End Draws Near/"
+ 
+## Chapter one - Running Away From Home ##
+place mode="14" name="Prolog" music="No Music" nextPlace="Celis Memory - Having Fun" map=1
+place mode="14" name="Celis Memory - Having Fun" music="No Music" nextPlace="Running Away From Home - Part 1" map=1
+place mode="14" name="Running Away From Home - Part 1" music="Celis at Night" nextPlace="Forest of Reil--Forest Path-mark0" map=1
+place mode="14" name="Home of Celisnode1" music="No Music" nextPlace="landHome of Celis" map=1
+# 07:51
+
+# Forest of Reil
+
+place mode="14" name="Alaresnode1" music="No Music" map=1
+place mode="14" name="Talking to Farmer John" music="continue" map=1
+place mode="14" name="Meeting a Crazy Man" music="continue" map=1
+place mode="14" name="Someone's Calling" music="Alares at Night" nextPlace="landAlares" map=1
+# 03:18
+
+# Demon Cave 1 - Part 1
+place mode="14" name="The Senate of Pensara" music="Prepare For War" nextPlace="Grivera--Third Floor-mark0" map=1
+# 01:17
+# Demon Cave 1 - Part 2
+
+place mode="14" name="The Revelation of Elmer" music="continue" map=1
+place mode="14" name="A Permission From Uri" music="continue" map=1
+place mode="14" name="Encounter With an Ally" music="continue" map=1
+
+## Chapter two - Zazo, the Home of the Miners ##
+place mode="14" name="Zazonode1" music="No Music" map=2
+place mode="14" name="Meanwhile in Zazo" music="Teo's Theme" nextPlace="Central Pass--North East Part-mark1" map=2
+place mode="14" name="Borealis Reveals His Background" music="continue" map=2
+# 11:37 - ej aktuell
+
+place mode="14" name="After a Hard Days Work" music="Theme of the Rebels" nextPlace="" map=2
+# The Great Mine
+
+place mode="14" name="Zazonode2" music="No Music" nextPlace="Zazo" map=2
+place mode="14" name="Meeting with Gerbias" music="continue" map=2
+# 04:10 - ej aktuell
+
+# Demon Cave 2 - Part 1
+place mode="14" name="Senate is Disappointed" music="Prepare For War" nextPlace="mt. cesadur--entrance-mark2" map=2
+place mode="14" name="Menthu is Disappointed" music="Menthu's Theme" nextPlace="mt. cesadur--mountain top-mark1" map=2
+# 03:43 - ej aktuell
+# Demon Cave 2 - Part 2
+
+place mode="14" name="Meeting with Farl of Zazo" music="continue" nextPlace="The Farl Story" map=2
+place mode="14" name="The Farl Story" music="continue" nextPlace="Meeting with Farl of Zazo2" map=2
+place mode="14" name="Meeting with Farl of Zazo2" music="continue" map=2
+
+## Chapter three - The Son Returs ##
+place mode="14" name="ShipCaptain" music="continue" map=3
+place mode="14" name="On the Boat to Pensara" music="Parasne Ocean" nextPlace="A Call From the Gods" map=3
+place mode="14" name="A Call From the Gods" music="No Music" nextPlace="Arrival at the Port Town of Parasne" map=3
+place mode="14" name="Arrival at the Port Town of Parasne" music="Parasne Ocean" map=3
+place mode="14" name="Pensara - The Trade Districtnode1" music="Pensaraintro" map=3
+place mode="14" name="Pensara - The Trade Districtnode2" music="No Music" nextPlace="The Sewers--South East-mark0" map=3
+place mode="14" name="The Mentor of Menthu" music="continue" map=3
+place mode="14" name="Crossroadnode1" music="No Music" map=3
+place mode="14" name="Farmer Bob Follows Billy" music="continue" map=3
+place mode="14" name="KinPiano" music="continue" map=3
+place mode="14" name="BorealisPiano" music="continue" map=3
+place mode="14" name="CelisPiano" music="continue" map=3
+place mode="14" name="ZalziPiano" music="continue" map=3
+# 16:47 - ej aktuell
+
+# Fire Cave - Part 1
+place mode="14" name="Meanwhile - Teo is Plotting With Vincent" music="Prepare For War" nextPlace="fire cavern--hall of the damned-mark0" map=3
+# 04:34 - ej aktuell
+# Fire Cave - Part 2
+
+place mode="14" name="Crossroadnode2" music="No Music" nextPlace="Meeting Vincent af Kinstone" map=3
+place mode="14" name="Meeting Vincent af Kinstone" music="continue" nextPlace="The Prison Cell - Celis Speaks Up" map=3
+# Canceled -- place mode="14" name="Menthu is Pleased" music="Parasne Ocean" nextPlace="The Prison Cell - Celis Speaks Up" map=3
+place mode="14" name="The Prison Cell - Celis Speaks Up" music="Kin's Childhood" nextPlace="Pensara Prison--Floor 5-mark0" map=3
+place mode="14" name="Berca Desert--South West-mark0node1" music="No Music" nextPlace="Berca Desert--South West-mark0" map=3
+# 07:54 - ej aktuell
+
+# The Prison / Desert
+
+## Chapter four - A Wind of Change ##
+place mode="14" name="Bercanode1" music="No Music" map=4
+place mode="14" name="Meeting With the Rebels" music="Theme of the Rebels" nextPlace="Zalzi Speaks of Her Concerns" map=4
+place mode="14" name="Zalzi Speaks of Her Concerns" music="Berca Wind Sound" map=4
+place mode="14" name="Guy Walks Inside" music="continue" map=4
+# 06:00 - ej aktuell
+
+# The Sewers
+place mode="14" name="Emerge From The Sewers" music="No Music" nextPlace="Kin is Meeting With Vincent" map=4
+place mode="14" name="Kin is Meeting With Vincent" music="Prepare For War" nextPlace="Kin Gets Freed" map=4
+place mode="14" name="Kin Gets Freed" music="continue" nextPlace="landPensara - The Trade District" map=4
+place mode="14" name="Farewell Borealis" music="No Music" map=4
+
+## Chapter five - Soaring Through the Sky ##
+place mode="14" name="Bercanode2" music="Berca" map=5
+place mode="14" name="Seeing the Elder of Berca" music="continue" map=5
+# 06:57 - ej aktuell
+
+# Demon Cave 3 - Part 1
+place mode="14" name="Meanwhile - Menthu Kills Teo" music="Alares at Night" nextPlace="temple of aegis--top floor-mark0" map=5
+# 01:23 - ej aktuell
+# Demon Cave 3 - Part 2
+
+place mode="14" name="Dellnanode1" music="No Music" map=5
+place mode="14" name="Dellnanode2" music="No Music" map=5
+place mode="14" name="Zazonode3" music="Night in desert" nextPlace="Reencounter With an Ally" map=5
+place mode="14" name="Zazonode4" music="Night in desert" nextPlace="Reencounter With an Ally" map=5
+place mode="14" name="Serphia Awakens-Part 1" music="continue" nextPlace="Serphia Hall" map=5
+place mode="14" name="Serphia Awakens-Part 2" music="No Music" nextPlace="Serphia" map=5
+place mode="14" name="Getting the Crystal of Levitation" music="Crystal Room" nextPlace="airtemple_of_aegis--first_floor-mark0" map=5
+place mode="14" name="Battle With Serphia" music="No Music" nextPlace="airtemple_of_aegis--first_floor-mark0" map=5
+place mode="14" name="I Miss Borealis" music="No Music" map=5
+place mode="14" name="Reencounter With an Ally" music="No Music" nextPlace="landZazo" map=5
+
+## Chapter six - The End Draws Near ##
+# Demon Cave 4 - Part 1
+place mode="14" name="Vincent Tries to Cool Down the War" music="Prepare For War" nextPlace="ice cavern--pillar room-mark0" map=5 
+# Demon Cave 4 - Part 2
+
+place mode="14" name="Elder of Dellna Saves the Day" music="continue" nextPlace="Celis Memory - Arrival at the New Home" map=6
+place mode="14" name="Celis Memory - Arrival at the New Home" music="Celis Memories" nextPlace="Celis Wakes Up" map=6
+place mode="14" name="Celis Wakes Up" music="Celis' Theme" map=6
+place mode="14" name="A Visit to the Childhood Home - Part 1" nextPlace="Celis Memory - The Killing" music="Celis Memories" map=6
+place mode="14" name="Celis Memory - The Killing" music="Menthu's Theme" nextPlace="Showing the Path to the Gods" map=6
+place mode="14" name="Showing the Path to the Gods" music="No Music" map=6
+place mode="14" name="Talking to Menthu" music="No Music" nextPlace="Menthu2" map=6
+# 10:43 - ej aktuell
+
+place mode="14" name="Ending - Part 1" music="No Music" nextPlace="Ending - Part 2.1" map=6
+place mode="14" name="Ending - Part 2.1" music="No Music" nextPlace="Ending - Part 2.2" map=6
+place mode="14" name="Ending - Part 2.2" music="continue" nextPlace="Ending - Part 2.3" map=6
+place mode="14" name="Ending - Part 2.3" music="continue" nextPlace="Ending - Part 2.4" map=6
+place mode="14" name="Ending - Part 2.4" music="continue" nextPlace="Ending - Part 2.5" map=6
+place mode="14" name="Ending - Part 2.5" music="continue" nextPlace="Ending - Part 2.6" map=6
+place mode="14" name="Ending - Part 2.6" music="continue" nextPlace="Ending - Part 2.7" map=6
+place mode="14" name="Ending - Part 2.7" music="continue" nextPlace="Ending - Part 2.8" map=6
+place mode="14" name="Ending - Part 2.8" music="continue" nextPlace="Ending - Part 2.9" map=6
+place mode="14" name="Ending - Part 2.9" music="continue" nextPlace="Ending - Part 3" map=6
+place mode="14" name="Ending - Part 3" music="No Music" nextPlace="Title Screen" map=6
+
+place mode="14" name="Celis Memory - Someone's Comming" music="No Music" nextPlace="Running Away From Home" map=1
+place mode="14" name="Celis Memory - Ana's Reaction" music="No Music" nextPlace="Running Away From Home" map=1
+
+#### Villages #####
+
+place mode="2" name="Home of Celis" music="Home of Celis"
+place mode="2" name="Home of Celis - Celis Home" music="Home of Celis"
+
+place mode="2" name="Kin's Place" music="Kin's Theme"
+
+place mode="2" name="Alares" music="Alares"
+place mode="2" name="Alares - Belmet's House" music="Alares"
+place mode="2" name="Alares - Uri's Resident" music="Alares"
+place mode="2" name="Alares - Library" music="Alares"
+# Wind sound
+place mode="2" name="Pass to Zazo" music="Wasteland"
+
+# Port of Alares
+place mode="2" name="Port of Alares" music="Port of Alares"
+place mode="2" name="Port of Alares - Tavern" music="Port of Alares"
+
+# Zazo
+place mode="2" name="Zazo" music="Zazo"
+place mode="2" name="Zazo - Miner's Home" music="Zazo"
+place mode="2" name="Zazo - Miner's Home2" music="Zazo"
+place mode="2" name="Zazo - Tent" music="Zazo"
+place mode="2" name="Zazo - Teo's House" music="Zazo"
+place mode="2" name="Zazo - Farl's House" music="Zazo"
+
+place mode="2" name="Port of Zazo" music="Port of Zazo"
+
+place mode="2" name="The Ship Cabin" music="Parasne"
+place mode="2" name="The Ship Cabin2" music="Parasne"
+
+# Parasne
+place mode="2" name="Parasne" music="Parasne"
+place mode="2" name="Parasne - Tavern" music="Parasne"
+
+# Pensara Trade District
+place mode="2" name="Pensara - The Trade District" music="Pensara"
+place mode="2" name="Pensara - The Trade District - House 1 - Floor 1" music="Pensara"
+place mode="2" name="Pensara - The Trade District - House 1 - Floor 2" music="Pensara"
+place mode="2" name="Pensara - The Trade District - House 2 - Floor 1" music="Pensara"
+place mode="2" name="Pensara - The Trade District - House 2 - Floor 2" music="Pensara"
+place mode="2" name="Pensara - The Trade District - Mezza's House" music="Pensara"
+place mode="2" name="Pensara - The Trade District - Tent" music="Pensara"
+place mode="2" name="Pensara - The Trade District - Tower Prison" music="Pensara"
+
+# Pensara School District
+place mode="2" name="Pensara - The School District" music="Pensara"
+place mode="2" name="Pensara - The School District - The School" music="Pensara"
+place mode="2" name="Pensara - The School District - The Clock Tower - Floor 1" music="Pensara"
+place mode="2" name="Pensara - The School District - The Clock Tower - Floor 2" music="Pensara"
+
+# Pensara North District
+place mode="2" name="Pensara - The North District" music="Pensara"
+place mode="2" name="Vincent's Office" music="No Music"
+place mode="2" name="Pensara - The North District - Farmer House" music="Pensara"
+place mode="2" name="Pensara - The North District - Library" music="Pensara"
+place mode="2" name="Pensara - The North District - Civil House" music="Pensara"
+
+place mode="2" name="The Prison Cell" music="No Music"
+place mode="2" name="Crystal Room" music="Crystal Room"
+place mode="2" name="Serphia Hall" music="The Theme of Demons"
+
+# Berca
+place mode="2" name="Berca" music="Berca"
+place mode="2" name="Berca - Library - Floor 1" music="Berca"
+place mode="2" name="Berca - Library - Floor 2" music="Berca"
+place mode="2" name="Berca - Bar" music="Berca"
+place mode="2" name="Berca - House" music="Berca"
+place mode="2" name="Berca - Dolly's House" music="Berca"
+place mode="2" name="Rebel Hideout" music="Berca"
+
+place mode="2" name="Crossroad" music="Wasteland"
+
+# Dellna
+place mode="2" name="Dellna" music="Dellna"
+place mode="2" name="Dellna - Elder House - Floor 1" music="Dellna"
+place mode="2" name="Dellna - Elder House - Floor 2" music="Dellna"
+place mode="2" name="Dellna - Elder House - Floor 3" music="Dellna"
+place mode="2" name="Dellna - House" music="Dellna"
+place mode="2" name="Dellna - Ana's Home" music="Dellnasad"
+
+place mode="2" name="Home of the Gods" music="Someone's Calling"
+
+############## LABYRINTHS - 4 ##############
+	
+## Forest of Reil ##
+place mode="4" name="Forest of Reil--Deep Forest-mark0" start="0" music="Forest of Reil" map="Forest of Reil--Deep Forest.map"
+place mode="4" name="Forest of Reil--Deep Forest-mark1" start="1" music="Forest of Reil" map="Forest of Reil--Deep Forest.map" 
+place mode="4" name="Forest of Reil--Deep Forest-save" start="-1" music="Forest of Reil" map="Forest of Reil--Deep Forest.map"
+ 
+place mode="4" name="Forest of Reil--Forest Path-mark0" start="0" music="Forest Intro" map="Forest of Reil--Forest Path.map" 
+place mode="4" name="Forest of Reil--Forest Path-save" start="-1" music="Forest Intro" map="Forest of Reil--Forest Path.map" 
+
+## Grivera ##
+place mode="4" name="Grivera--First Floor-mark0" start="0" music="Grivera" map="Grivera--First Floor.map" 
+place mode="4" name="Grivera--First Floor-mark1" start="1" music="Grivera" map="Grivera--First Floor.map" 
+place mode="4" name="Grivera--First Floor-mark2" start="2" music="Grivera" map="Grivera--First Floor.map" 
+place mode="4" name="Grivera--First Floor-save" start="-1" music="Grivera" map="Grivera--First Floor.map" 
+
+place mode="4" name="Grivera--Second Floor-mark0" start="0" music="Grivera" map="Grivera--Second Floor.map" 
+place mode="4" name="Grivera--Second Floor-mark1" start="1" music="Grivera" map="Grivera--Second Floor.map" 
+place mode="4" name="Grivera--Second Floor-mark2" start="2" music="Grivera" map="Grivera--Second Floor.map" 
+place mode="4" name="Grivera--Second Floor-save" start="-1" music="Grivera" map="Grivera--Second Floor.map" 
+
+place mode="4" name="Grivera--Third Floor-mark0" start="0" music="Grivera" map="Grivera--Third Floor.map" 
+place mode="4" name="Grivera--Third Floor-mark1" start="1" music="Grivera" map="Grivera--Third Floor.map" 
+place mode="4" name="Grivera--Third Floor-save" start="-1" music="Grivera" map="Grivera--Third Floor.map" 
+
+place mode="4" name="Grivera--Omnious Hall-mark0" start="0" music="Grivera" map="Grivera--Omnious Hall.map" 
+place mode="4" name="Grivera--Omnious Hall-mark1" start="1" music="Grivera" map="Grivera--Omnious Hall.map" 
+place mode="4" name="Grivera--Omnious Hall-mark2" start="2" music="Grivera" map="Grivera--Omnious Hall.map" 
+place mode="4" name="Grivera--Omnious Hall-mark3" start="3" music="Grivera" map="Grivera--Omnious Hall.map" 
+place mode="4" name="Grivera--Omnious Hall-save" start="-1" music="Grivera" map="Grivera--Omnious Hall.map" 
+
+place mode="4" name="Grivera--Corridor of Agony-mark0" start="0" music="The Theme of Demons" map="Grivera--Corridor of Agony.map"
+place mode="4" name="Grivera--Corridor of Agony-mark1" start="1" music="The Theme of Demons" map="Grivera--Corridor of Agony.map"
+place mode="4" name="Grivera--Corridor of Agony-mark2" start="2" music="The Theme of Demons" map="Grivera--Corridor of Agony.map"
+place mode="4" name="Grivera--Corridor of Agony-mark3" start="3" music="The Theme of Demons" map="Grivera--Corridor of Agony.map"
+place mode="4" name="Grivera--Corridor of Agony-mark4" start="4" music="The Theme of Demons" map="Grivera--Corridor of Agony.map"
+place mode="4" name="Grivera--Corridor of Agony-save" start="-1" music="The Theme of Demons" map="Grivera--Corridor of Agony.map"
+
+## Central Pass ##
+place mode="4" name="Central Pass--West Part-mark0" start="0" music="Central Pass" map="Central Pass--West Part.map"
+place mode="4" name="Central Pass--West Part-mark1" start="1" music="Central Pass" map="Central Pass--West Part.map"
+place mode="4" name="Central Pass--West Part-save" start="-1" music="Central Pass" map="Central Pass--West Part.map"
+
+place mode="4" name="Central Pass--Central Part-mark0" start="0" music="Central Pass" map="Central Pass--Central Part.map"
+place mode="4" name="Central Pass--Central Part-mark1" start="1" music="Central Pass" map="Central Pass--Central Part.map"
+place mode="4" name="Central Pass--Central Part-save" start="-1" music="Central Pass" map="Central Pass--Central Part.map"
+
+place mode="4" name="Central Pass--North Part-mark0" start="0" music="Central Pass" map="Central Pass--North Part.map"
+place mode="4" name="Central Pass--North Part-mark1" start="1" music="Central Pass" map="Central Pass--North Part.map"
+place mode="4" name="Central Pass--North Part-mark2" start="2" music="Central Pass" map="Central Pass--North Part.map"
+place mode="4" name="Central Pass--North Part-mark3" start="3" music="Central Pass" map="Central Pass--North Part.map"
+place mode="4" name="Central Pass--North Part-save" start="-1" music="Central Pass" map="Central Pass--North Part.map"
+
+place mode="4" name="Central Pass--North East Part-mark0" start="0" music="Central Pass" map="Central Pass--North East Part.map"
+place mode="4" name="Central Pass--North East Part-mark1" start="1" music="Central Pass" map="Central Pass--North East Part.map"	
+place mode="4" name="Central Pass--North East Part-mark2" start="2" music="Central Pass" map="Central Pass--North East Part.map"	
+place mode="4" name="Central Pass--North East Part-mark3" start="3" music="Central Pass" map="Central Pass--North East Part.map"	
+place mode="4" name="Central Pass--North East Part-save" start="-1" music="Central Pass" map="Central Pass--North East Part.map"	
+
+## Greath Mine ##
+place mode="4" name="The Great Mine--The Hall-mark0" start="0" music="The Great Mine" map="The Great Mine--The Hall.map" 
+place mode="4" name="The Great Mine--The Hall-mark1" start="1" music="The Great Mine" map="The Great Mine--The Hall.map" 
+place mode="4" name="The Great Mine--The Hall-mark2" start="2" music="The Great Mine" map="The Great Mine--The Hall.map" 
+place mode="4" name="The Great Mine--The Hall-mark3" start="3" music="The Great Mine" map="The Great Mine--The Hall.map" 
+place mode="4" name="The Great Mine--The Hall-mark4" start="4" music="The Great Mine" map="The Great Mine--The Hall.map" 
+place mode="4" name="The Great Mine--The Hall-mark5" start="5" music="The Great Mine" map="The Great Mine--The Hall.map" 
+place mode="4" name="The Great Mine--The Hall-save" start="-1" music="The Great Mine" map="The Great Mine--The Hall.map" 
+
+place mode="4" name="The Great Mine--West Wing-mark0" start="0" music="The Great Mine" map="The Great Mine--West Wing.map" 
+place mode="4" name="The Great Mine--West Wing-mark1" start="1" music="The Great Mine" map="The Great Mine--West Wing.map" 
+place mode="4" name="The Great Mine--West Wing-mark2" start="2" music="The Great Mine" map="The Great Mine--West Wing.map" 
+place mode="4" name="The Great Mine--West Wing-mark3" start="3" music="The Great Mine" map="The Great Mine--West Wing.map" 
+place mode="4" name="The Great Mine--West Wing-mark4" start="4" music="The Great Mine" map="The Great Mine--West Wing.map" 
+place mode="4" name="The Great Mine--West Wing-mark5" start="5" music="The Great Mine" map="The Great Mine--West Wing.map" 
+place mode="4" name="The Great Mine--West Wing-save" start="-1" music="The Great Mine" map="The Great Mine--West Wing.map" 
+
+place mode="4" name="The Great Mine--Great Deep-mark0" start="0" music="The Great Mine" map="The Great Mine--Great Deep.map" 
+place mode="4" name="The Great Mine--Great Deep-mark1" start="1" music="The Great Mine" map="The Great Mine--Great Deep.map" 
+place mode="4" name="The Great Mine--Great Deep-mark2" start="2" music="The Great Mine" map="The Great Mine--Great Deep.map" 
+place mode="4" name="The Great Mine--Great Deep-mark3" start="3" music="The Great Mine" map="The Great Mine--Great Deep.map" 
+place mode="4" name="The Great Mine--Great Deep-mark4" start="4" music="The Great Mine" map="The Great Mine--Great Deep.map" 
+place mode="4" name="The Great Mine--Great Deep-mark5" start="5" music="The Great Mine" map="The Great Mine--Great Deep.map" 
+place mode="4" name="The Great Mine--Great Deep-mark6" start="6" music="The Great Mine" map="The Great Mine--Great Deep.map" 
+place mode="4" name="The Great Mine--Great Deep-mark7" start="7" music="The Great Mine" map="The Great Mine--Great Deep.map" 
+place mode="4" name="The Great Mine--Great Deep-save" start="-1" music="The Great Mine" map="The Great Mine--Great Deep.map" 
+
+place mode="4" name="The Great Mine--The Mine Core-mark0" start="0" music="The Great Mine" map="The Great Mine--The Mine Core.map" 
+place mode="4" name="The Great Mine--The Mine Core-mark1" start="1" music="The Great Mine" map="The Great Mine--The Mine Core.map" 
+place mode="4" name="The Great Mine--The Mine Core-mark2" start="2" music="The Great Mine" map="The Great Mine--The Mine Core.map" 
+place mode="4" name="The Great Mine--The Mine Core-mark3" start="3" music="The Great Mine" map="The Great Mine--The Mine Core.map" 
+place mode="4" name="The Great Mine--The Mine Core-mark4" start="4" music="The Great Mine" map="The Great Mine--The Mine Core.map" 
+place mode="4" name="The Great Mine--The Mine Core-mark5" start="5" music="The Great Mine" map="The Great Mine--The Mine Core.map" 
+place mode="4" name="The Great Mine--The Mine Core-mark6" start="6" music="The Great Mine" map="The Great Mine--The Mine Core.map" 
+place mode="4" name="The Great Mine--The Mine Core-mark7" start="7" music="The Great Mine" map="The Great Mine--The Mine Core.map" 
+place mode="4" name="The Great Mine--The Mine Core-mark8" start="8" music="The Great Mine" map="The Great Mine--The Mine Core.map" 
+place mode="4" name="The Great Mine--The Mine Core-save" start="-1" music="The Great Mine" map="The Great Mine--The Mine Core.map" 
+ 
+place mode="4" name="The Great Mine--Mine Shaft-mark0" start="0" music="The Great Mine" map="The Great Mine--Mine Shaft.map" 
+place mode="4" name="The Great Mine--Mine Shaft-mark1" start="1" music="The Great Mine" map="The Great Mine--Mine Shaft.map" 
+place mode="4" name="The Great Mine--Mine Shaft-mark2" start="2" music="The Great Mine" map="The Great Mine--Mine Shaft.map" 
+place mode="4" name="The Great Mine--Mine Shaft-mark3" start="3" music="The Great Mine" map="The Great Mine--Mine Shaft.map" 
+place mode="4" name="The Great Mine--Mine Shaft-mark4" start="4" music="The Great Mine" map="The Great Mine--Mine Shaft.map" 
+place mode="4" name="The Great Mine--Mine Shaft-mark5" start="5" music="The Great Mine" map="The Great Mine--Mine Shaft.map" 
+place mode="4" name="The Great Mine--Mine Shaft-save" start="-1" music="The Great Mine" map="The Great Mine--Mine Shaft.map" 
+
+place mode="4" name="The Great Mine--Tunnel-mark0" start="0" music="The Great Mine" map="The Great Mine--Tunnel.map" 
+place mode="4" name="The Great Mine--Tunnel-mark1" start="1" music="The Great Mine" map="The Great Mine--Tunnel.map" 
+place mode="4" name="The Great Mine--Tunnel-mark2" start="2" music="The Great Mine" map="The Great Mine--Tunnel.map" 
+place mode="4" name="The Great Mine--Tunnel-mark3" start="3" music="The Great Mine" map="The Great Mine--Tunnel.map" 
+place mode="4" name="The Great Mine--Tunnel-mark4" start="4" music="The Great Mine" map="The Great Mine--Tunnel.map" 
+place mode="4" name="The Great Mine--Tunnel-mark5" start="5" music="The Great Mine" map="The Great Mine--Tunnel.map" 
+place mode="4" name="The Great Mine--Tunnel-mark6" start="6" music="The Great Mine" map="The Great Mine--Tunnel.map" 
+place mode="4" name="The Great Mine--Tunnel-mark7" start="7" music="The Great Mine" map="The Great Mine--Tunnel.map" 
+place mode="4" name="The Great Mine--Tunnel-save" start="-1" music="The Great Mine" map="The Great Mine--Tunnel.map" 
+
+## East passage ##
+place mode="4" name="East Passage--West_Mountain-mark0" start="0" music="Central Pass" map="East Passage--West Mountain.map" 
+place mode="4" name="East Passage--West_Mountain-mark1" start="1" music="Central Pass" map="East Passage--West Mountain.map" 
+place mode="4" name="East Passage--West_Mountain-save" start="-1" music="Central Pass" map="East Passage--West Mountain.map" 
+
+place mode="4" name="East Passage--East_Mountain-mark0" start="0" music="Central Pass" map="East Passage--East Mountain.map" 
+place mode="4" name="East Passage--East_Mountain-mark1" start="1" music="Central Pass" map="East Passage--East Mountain.map"
+place mode="4" name="East Passage--East_Mountain-save" start="-1" music="Central Pass" map="East Passage--East Mountain.map"
+
+## Forest of Bri ##
+place mode="4" name="Forest of Bri--West_Forest-mark0" start="0" music="Forest of Reil" map="Forest of Bri--West Forest.map" 
+place mode="4" name="Forest of Bri--West_Forest-mark1" start="1" music="Forest of Reil" map="Forest of Bri--West Forest.map" 
+place mode="4" name="Forest of Bri--West_Forest-mark2" start="2" music="Forest of Reil" map="Forest of Bri--West Forest.map" 
+place mode="4" name="Forest of Bri--West_Forest-save" start="-1" music="Forest of Reil" map="Forest of Bri--West Forest.map" 
+
+place mode="4" name="Forest of Bri--East_Forest-mark0" start="0" music="Forest of Reil" map="Forest of Bri--East Forest.map" 
+place mode="4" name="Forest of Bri--East_Forest-mark1" start="1" music="Forest of Reil" map="Forest of Bri--East Forest.map" 
+place mode="4" name="Forest of Bri--East_Forest-mark2" start="2" music="Forest of Reil" map="Forest of Bri--East Forest.map" 
+place mode="4" name="Forest of Bri--East_Forest-save" start="-1" music="Forest of Reil" map="Forest of Bri--East Forest.map" 
+
+## Mt. Cesadur ##
+place mode="4" name="Mt. Cesadur--Basement-mark0" start="0" music="Earth Cavern" map="Mt. Cesadur--Basement.map" 
+place mode="4" name="Mt. Cesadur--Basement-mark1" start="1" music="Earth Cavern" map="Mt. Cesadur--Basement.map" 
+place mode="4" name="Mt. Cesadur--Basement-mark2" start="2" music="Earth Cavern" map="Mt. Cesadur--Basement.map" 
+place mode="4" name="Mt. Cesadur--Basement-save" start="-1" music="Earth Cavern" map="Mt. Cesadur--Basement.map" 
+
+place mode="4" name="Mt. Cesadur--Entrance-mark0" start="0" music="Earth Cavern" map="Mt. Cesadur--Entrance.map" 
+place mode="4" name="Mt. Cesadur--Entrance-mark1" start="1" music="Earth Cavern" map="Mt. Cesadur--Entrance.map" 
+place mode="4" name="Mt. Cesadur--Entrance-mark2" start="2" music="Earth Cavern" map="Mt. Cesadur--Entrance.map" 
+place mode="4" name="Mt. Cesadur--Entrance-mark3" start="3" music="Earth Cavern" map="Mt. Cesadur--Entrance.map" 
+place mode="4" name="Mt. Cesadur--Entrance-mark4" start="4" music="Earth Cavern" map="Mt. Cesadur--Entrance.map" 
+place mode="4" name="Mt. Cesadur--Entrance-mark5" start="5" music="Earth Cavern" map="Mt. Cesadur--Entrance.map" 
+place mode="4" name="Mt. Cesadur--Entrance-mark6" start="6" music="Earth Cavern" map="Mt. Cesadur--Entrance.map" 
+place mode="4" name="Mt. Cesadur--Entrance-save" start="-1" music="Earth Cavern" map="Mt. Cesadur--Entrance.map" 
+
+place mode="4" name="Mt. Cesadur--Second Floor-mark0" start="0" music="Earth Cavern" map="Mt. Cesadur--Second Floor.map" 
+place mode="4" name="Mt. Cesadur--Second Floor-mark1" start="1" music="Earth Cavern" map="Mt. Cesadur--Second Floor.map" 
+place mode="4" name="Mt. Cesadur--Second Floor-mark2" start="2" music="Earth Cavern" map="Mt. Cesadur--Second Floor.map" 
+place mode="4" name="Mt. Cesadur--Second Floor-mark3" start="3" music="Earth Cavern" map="Mt. Cesadur--Second Floor.map" 
+place mode="4" name="Mt. Cesadur--Second Floor-mark4" start="4" music="Earth Cavern" map="Mt. Cesadur--Second Floor.map" 
+place mode="4" name="Mt. Cesadur--Second Floor-mark5" start="5" music="Earth Cavern" map="Mt. Cesadur--Second Floor.map" 
+place mode="4" name="Mt. Cesadur--Second Floor-mark6" start="6" music="Earth Cavern" map="Mt. Cesadur--Second Floor.map" 
+place mode="4" name="Mt. Cesadur--Second Floor-mark7" start="7" music="Earth Cavern" map="Mt. Cesadur--Second Floor.map" 
+place mode="4" name="Mt. Cesadur--Second Floor-save" start="-1" music="Earth Cavern" map="Mt. Cesadur--Second Floor.map" 
+
+place mode="4" name="Mt. Cesadur--Third Floor-mark0" start="0" music="Earth Cavern" map="Mt. Cesadur--Third Floor.map" 
+place mode="4" name="Mt. Cesadur--Third Floor-mark1" start="1" music="Earth Cavern" map="Mt. Cesadur--Third Floor.map" 
+place mode="4" name="Mt. Cesadur--Third Floor-mark2" start="2" music="Earth Cavern" map="Mt. Cesadur--Third Floor.map" 
+place mode="4" name="Mt. Cesadur--Third Floor-mark3" start="3" music="Earth Cavern" map="Mt. Cesadur--Third Floor.map" 
+place mode="4" name="Mt. Cesadur--Third Floor-mark4" start="4" music="Earth Cavern" map="Mt. Cesadur--Third Floor.map" 
+place mode="4" name="Mt. Cesadur--Third Floor-mark5" start="5" music="Earth Cavern" map="Mt. Cesadur--Third Floor.map" 
+place mode="4" name="Mt. Cesadur--Third Floor-mark6" start="6" music="Earth Cavern" map="Mt. Cesadur--Third Floor.map" 
+place mode="4" name="Mt. Cesadur--Third Floor-save" start="-1" music="Earth Cavern" map="Mt. Cesadur--Third Floor.map" 
+
+place mode="4" name="Mt. Cesadur--Fourth Floor-mark0" start="0" music="Earth Cavern" map="Mt. Cesadur--Fourth Floor.map" 
+place mode="4" name="Mt. Cesadur--Fourth Floor-mark1" start="1" music="Earth Cavern" map="Mt. Cesadur--Fourth Floor.map" 
+place mode="4" name="Mt. Cesadur--Fourth Floor-mark2" start="2" music="Earth Cavern" map="Mt. Cesadur--Fourth Floor.map" 
+place mode="4" name="Mt. Cesadur--Fourth Floor-mark3" start="3" music="Earth Cavern" map="Mt. Cesadur--Fourth Floor.map" 
+place mode="4" name="Mt. Cesadur--Fourth Floor-mark4" start="4" music="Earth Cavern" map="Mt. Cesadur--Fourth Floor.map" 
+place mode="4" name="Mt. Cesadur--Fourth Floor-save" start="-1" music="Earth Cavern" map="Mt. Cesadur--Fourth Floor.map" 
+
+place mode="4" name="Mt. Cesadur--Mountain Top-mark0" start="0" music="THe Theme of Demons" map="Mt. Cesadur--Mountain Top.map" 
+place mode="4" name="Mt. Cesadur--Mountain Top-mark1" start="1" music="The Theme of Demons" map="Mt. Cesadur--Mountain Top.map" 
+place mode="4" name="Mt. Cesadur--Mountain Top-mark2" start="2" music="The Theme of Demons" map="Mt. Cesadur--Mountain Top.map" 
+place mode="4" name="Mt. Cesadur--Mountain Top-save" start="-1" music="The Theme of Demons" map="Mt. Cesadur--Mountain Top.map"
+
+## Earth Cavern ##
+place mode="4" name="Earth Cavern--First Floor-mark1" start="0" music="Earth Cavern" map="Earth Cavern--First Floor.map" 
+place mode="4" name="Earth Cavern--First Floor-mark2" start="1" music="Earth Cavern" map="Earth Cavern--First Floor.map" 
+place mode="4" name="Earth Cavern--First Floor-save" start="-1" music="Earth Cavern" map="Earth Cavern--First Floor.map" 
+
+place mode="4" name="Earth Cavern--Second Floor-mark1" start="0" music="Earth Cavern" map="Earth Cavern--Second Floor.map" 
+place mode="4" name="Earth Cavern--Second Floor-mark2" start="1" music="Earth Cavern" map="Earth Cavern--Second Floor.map" 
+place mode="4" name="Earth Cavern--Second Floor-save" start="-1" music="Earth Cavern" map="Earth Cavern--Second Floor.map" 
+
+## Dorma's Forest ##
+place mode="4" name="Dorma's Forest--Forest of Hate-mark0" start="0" music="Forest of Hate" map="Dorma's Forest--Forest of Hate.map" 
+place mode="4" name="Dorma's Forest--Forest of Hate-mark1" start="1" music="Forest of Hate" map="Dorma's Forest--Forest of Hate.map" 
+place mode="4" name="Dorma's Forest--Forest of Hate-mark2" start="2" music="Forest of Hate" map="Dorma's Forest--Forest of Hate.map" 
+
+## Pensara Forest ##        
+place mode="4" name="Pensara Forest--Forest-mark0" start="0" music="Forest of Reil" map="Pensara Forest--Forest.map" 
+place mode="4" name="Pensara Forest--Forest-mark1" start="1" music="Forest of Reil" map="Pensara Forest--Forest.map" 
+place mode="4" name="Pensara Forest--Forest-save" start="-1" music="Forest of Reil" map="Pensara Forest--Forest.map" 
+
+## Fire Cavern ##       
+place mode="4" name="Fire Cavern--First Floor-mark0" start="0" music="Fire Cavern" map="Fire Cavern--First Floor.map" 
+place mode="4" name="Fire Cavern--First Floor-mark1" start="1" music="Fire Cavern" map="Fire Cavern--First Floor.map" 
+place mode="4" name="Fire Cavern--First Floor-save" start="-1" music="Fire Cavern" map="Fire Cavern--First Floor.map" 
+
+place mode="4" name="Fire Cavern--Hall of Fire-mark0" start="0" music="Fire Cavern" map="Fire Cavern--Hall of Fire.map" 
+place mode="4" name="Fire Cavern--Hall of Fire-mark1" start="1" music="Fire Cavern" map="Fire Cavern--Hall of Fire.map" 
+place mode="4" name="Fire Cavern--Hall of Fire-mark2" start="2" music="Fire Cavern" map="Fire Cavern--Hall of Fire.map"
+place mode="4" name="Fire Cavern--Hall of Fire-save" start="-1" music="Fire Cavern" map="Fire Cavern--Hall of Fire.map"
+ 
+place mode="4" name="Fire Cavern--Blazing Maze-mark0" start="0" music="Fire Cavern" map="Fire Cavern--Blazing Maze.map" 
+place mode="4" name="Fire Cavern--Blazing Maze-mark1" start="1" music="Fire Cavern" map="Fire Cavern--Blazing Maze.map" 
+place mode="4" name="Fire Cavern--Blazing Maze-save" start="-1" music="Fire Cavern" map="Fire Cavern--Blazing Maze.map" 
+
+place mode="4" name="Fire Cavern--Passage of Ifrit-mark0" start="0" music="Fire Cavern" map="Fire Cavern--Passage of Ifrit.map" 
+place mode="4" name="Fire Cavern--Passage of Ifrit-mark1" start="1" music="Fire Cavern" map="Fire Cavern--Passage of Ifrit.map" 
+place mode="4" name="Fire Cavern--Passage of Ifrit-save" start="-1" music="Fire Cavern" map="Fire Cavern--Passage of Ifrit.map"
+ 
+place mode="4" name="Fire Cavern--Hall of the Damned-mark0" start="0" music="Fire Cavern" map="Fire Cavern--Hall of the Damned.map" 
+place mode="4" name="Fire Cavern--Hall of the Damned-mark1" start="1" music="Fire Cavern" map="Fire Cavern--Hall of the Damned.map" 
+place mode="4" name="Fire Cavern--Hall of the Damned-save" start="-1" music="Fire Cavern" map="Fire Cavern--Hall of the Damned.map"
+ 
+place mode="4" name="Fire Cavern--Furnace-mark0" start="0" music="Fire Cavern" map="Fire Cavern--Furnace.map" 
+place mode="4" name="Fire Cavern--Furnace-mark1" start="1" music="Fire Cavern" map="Fire Cavern--Furnace.map" 
+place mode="4" name="Fire Cavern--Furnace-save" start="-1" music="Fire Cavern" map="Fire Cavern--Furnace.map" 
+
+place mode="4" name="Fire Cavern--Inferno-mark0" start="0" music="Fire Cavern" map="Fire Cavern--Inferno.map" 
+place mode="4" name="Fire Cavern--Inferno-mark1" start="1" music="Fire Cavern" map="Fire Cavern--Inferno.map" 
+place mode="4" name="Fire Cavern--Inferno-mark2" start="2" music="Fire Cavern" map="Fire Cavern--Inferno.map" 
+place mode="4" name="Fire Cavern--Inferno-save" start="-1" music="Fire Cavern" map="Fire Cavern--Inferno.map" 
+
+place mode="4" name="Silent Ruin--The Great Ruins-mark0" start="0" music="Silent Cave" map="Silent Ruin--The Great Ruins.map" 
+place mode="4" name="Silent Ruin--The Great Ruins-mark1" start="1" music="Silent Cave" map="Silent Ruin--The Great Ruins.map" 
+place mode="4" name="Silent Ruin--The Great Ruins-mark2" start="2" music="Silent Cave" map="Silent Ruin--The Great Ruins.map" 
+place mode="4" name="Silent Ruin--The Great Ruins-mark3" start="3" music="Silent Cave" map="Silent Ruin--The Great Ruins.map" 
+place mode="4" name="Silent Ruin--The Great Ruins-mark4" start="4" music="Silent Cave" map="Silent Ruin--The Great Ruins.map" 
+place mode="4" name="Silent Ruin--The Great Ruins-mark5" start="5" music="Silent Cave" map="Silent Ruin--The Great Ruins.map" 
+place mode="4" name="Silent Ruin--The Great Ruins-mark6" start="6" music="Silent Cave" map="Silent Ruin--The Great Ruins.map" 
+place mode="4" name="Silent Ruin--The Great Ruins-mark7" start="7" music="Silent Cave" map="Silent Ruin--The Great Ruins.map" 
+place mode="4" name="Silent Ruin--The Great Ruins-mark8" start="8" music="Silent Cave" map="Silent Ruin--The Great Ruins.map" 
+place mode="4" name="Silent Ruin--The Great Ruins-mark9" start="9" music="Silent Cave" map="Silent Ruin--The Great Ruins.map" 
+place mode="4" name="Silent Ruin--The Great Ruins-mark10" start="10" music="Silent Cave" map="Silent Ruin--The Great Ruins.map" 
+place mode="4" name="Silent Ruin--The Great Ruins-mark11" start="11" music="Silent Cave" map="Silent Ruin--The Great Ruins.map" 
+        
+## Pensara Prison ##       
+place mode="4" name="Pensara Prison--Floor 1-mark0" start="0" music="We've Got To Hurry" map="Pensara Prison--Floor 1.map" 
+place mode="4" name="Pensara Prison--Floor 1-mark1" start="1" music="We've Got To Hurry" map="Pensara Prison--Floor 1.map" 
+place mode="4" name="Pensara Prison--Floor 1-mark2" start="2" music="We've Got To Hurry" map="Pensara Prison--Floor 1.map" 
+place mode="4" name="Pensara Prison--Floor 1-mark3" start="3" music="We've Got To Hurry" map="Pensara Prison--Floor 1.map" 
+place mode="4" name="Pensara Prison--Floor 2-mark0" start="0" music="We've Got To Hurry" map="Pensara Prison--Floor 2.map" 
+place mode="4" name="Pensara Prison--Floor 2-mark1" start="1" music="We've Got To Hurry" map="Pensara Prison--Floor 2.map" 
+place mode="4" name="Pensara Prison--Floor 3-mark0" start="0" music="We've Got To Hurry" map="Pensara Prison--Floor 3.map" 
+place mode="4" name="Pensara Prison--Floor 3-mark1" start="1" music="We've Got To Hurry" map="Pensara Prison--Floor 3.map" 
+place mode="4" name="Pensara Prison--Floor 3-mark2" start="2" music="We've Got To Hurry" map="Pensara Prison--Floor 3.map" 
+place mode="4" name="Pensara Prison--Floor 3-mark3" start="3" music="We've Got To Hurry" map="Pensara Prison--Floor 3.map" 
+place mode="4" name="Pensara Prison--Floor 4-mark0" start="0" music="We've Got To Hurry" map="Pensara Prison--Floor 4.map" 
+place mode="4" name="Pensara Prison--Floor 4-mark1" start="1" music="We've Got To Hurry" map="Pensara Prison--Floor 4.map" 
+place mode="4" name="Pensara Prison--Floor 5-mark0" start="0" music="We've Got To Hurry" map="Pensara Prison--Floor 5.map" 
+place mode="4" name="Pensara Prison--Floor 5-mark1" start="1" music="We've Got To Hurry" map="Pensara Prison--Floor 5.map" 
+place mode="4" name="Pensara Prison--Floor 5-mark2" start="2" music="We've Got To Hurry" map="Pensara Prison--Floor 5.map" 
+place mode="4" name="Pensara Prison--Floor 6-mark0" start="0" music="We've Got To Hurry" map="Pensara Prison--Floor 6.map" 
+place mode="4" name="Pensara Prison--Floor 6-mark1" start="1" music="We've Got To Hurry" map="Pensara Prison--Floor 6.map" 
+place mode="4" name="Pensara Prison--Floor 6-mark2" start="2" music="We've Got To Hurry" map="Pensara Prison--Floor 6.map" 
+
+## Berca Desert ##
+place mode="4" name="Berca Desert--South West-mark0" start="0" music="The Berca Desert" map="Berca Desert--South West.map" 
+place mode="4" name="Berca Desert--South West-mark1" start="1" music="The Berca Desert" map="Berca Desert--South West.map" 
+place mode="4" name="Berca Desert--South West-mark2" start="2" music="The Berca Desert" map="Berca Desert--South West.map" 
+place mode="4" name="Berca Desert--South West-mark3" start="3" music="The Berca Desert" map="Berca Desert--South West.map" 
+place mode="4" name="Berca Desert--South West-save" start="-1" music="The Berca Desert" map="Berca Desert--South West.map" 
+
+place mode="4" name="Berca Desert--South-mark0" start="0" music="The Berca Desert" map="Berca Desert--South.map" 
+place mode="4" name="Berca Desert--South-mark1" start="1" music="The Berca Desert" map="Berca Desert--South.map" 
+place mode="4" name="Berca Desert--South-mark2" start="2" music="The Berca Desert" map="Berca Desert--South.map" 
+place mode="4" name="Berca Desert--South-mark3" start="3" music="The Berca Desert" map="Berca Desert--South.map" 
+place mode="4" name="Berca Desert--South-mark4" start="4" music="The Berca Desert" map="Berca Desert--South.map" 
+place mode="4" name="Berca Desert--South-save" start="-1" music="The Berca Desert" map="Berca Desert--South.map" 
+
+place mode="4" name="Berca Desert--South East-mark0" start="0" music="The Berca Desert" map="Berca Desert--South East.map" 
+place mode="4" name="Berca Desert--South East-mark1" start="1" music="The Berca Desert" map="Berca Desert--South East.map" 
+place mode="4" name="Berca Desert--South East-mark2" start="2" music="The Berca Desert" map="Berca Desert--South East.map" 
+place mode="4" name="Berca Desert--South East-mark3" start="3" music="The Berca Desert" map="Berca Desert--South East.map" 
+place mode="4" name="Berca Desert--South East-save" start="-1" music="The Berca Desert" map="Berca Desert--South East.map" 
+
+place mode="4" name="Berca Desert--North West-mark0" start="0" music="The Berca Desert" map="Berca Desert--North West.map" 
+place mode="4" name="Berca Desert--North West-mark1" start="1" music="The Berca Desert" map="Berca Desert--North West.map" 
+place mode="4" name="Berca Desert--North West-save" start="-1" music="The Berca Desert" map="Berca Desert--North West.map" 
+
+place mode="4" name="Berca Desert--North-mark0" start="0" music="The Berca Desert" map="Berca Desert--North.map" 
+place mode="4" name="Berca Desert--North-mark1" start="1" music="The Berca Desert" map="Berca Desert--North.map" 
+place mode="4" name="Berca Desert--North-mark2" start="2" music="The Berca Desert" map="Berca Desert--North.map" 
+place mode="4" name="Berca Desert--North-save" start="-1" music="The Berca Desert" map="Berca Desert--North.map" 
+
+place mode="4" name="Berca Desert--North East-mark0" start="0" music="The Berca Desert" map="Berca Desert--North East.map" 
+place mode="4" name="Berca Desert--North East-mark1" start="1" music="The Berca Desert" map="Berca Desert--North East.map" 
+place mode="4" name="Berca Desert--North East-mark2" start="2" music="The Berca Desert" map="Berca Desert--North East.map" 
+place mode="4" name="Berca Desert--North East-mark3" start="3" music="The Berca Desert" map="Berca Desert--North East.map" 
+place mode="4" name="Berca Desert--North East-save" start="-1" music="The Berca Desert" map="Berca Desert--North East.map" 
+
+## The Sewers ##      
+place mode="4" name="The Sewers--South East-mark0" start="0" music="Sewers" map="The Sewers--South East.map" 
+place mode="4" name="The Sewers--South East-mark1" start="1" music="Sewers" map="The Sewers--South East.map" 
+place mode="4" name="The Sewers--South East-mark2" start="2" music="Sewers" map="The Sewers--South East.map" 
+place mode="4" name="The Sewers--South East-mark3" start="3" music="Sewers" map="The Sewers--South East.map" 
+place mode="4" name="The Sewers--South East-mark4" start="4" music="Sewers" map="The Sewers--South East.map" 
+place mode="4" name="The Sewers--South East-mark5" start="5" music="Sewers" map="The Sewers--South East.map" 
+place mode="4" name="The Sewers--South East-mark6" start="6" music="Sewers" map="The Sewers--South East.map" 
+place mode="4" name="The Sewers--South East-mark7" start="7" music="Sewers" map="The Sewers--South East.map" 
+place mode="4" name="The Sewers--South East-save" start="-1" music="Sewers" map="The Sewers--South East.map"
+
+place mode="4" name="The Sewers--South-mark0" start="0" music="Sewers" map="The Sewers--South.map"
+place mode="4" name="The Sewers--South-mark1" start="1" music="Sewers" map="The Sewers--South.map"
+place mode="4" name="The Sewers--South-mark2" start="2" music="Sewers" map="The Sewers--South.map"
+place mode="4" name="The Sewers--South-mark3" start="3" music="Sewers" map="The Sewers--South.map"
+place mode="4" name="The Sewers--South-mark4" start="4" music="Sewers" map="The Sewers--South.map"
+place mode="4" name="The Sewers--South-save" start="-1" music="Sewers" map="The Sewers--South.map"
+
+place mode="4" name="The Sewers--South West-mark0" start="0" music="Sewers" map="The Sewers--South West.map"
+place mode="4" name="The Sewers--South West-mark1" start="1" music="Sewers" map="The Sewers--South West.map"
+place mode="4" name="The Sewers--South West-mark2" start="2" music="Sewers" map="The Sewers--South West.map"
+place mode="4" name="The Sewers--South West-mark3" start="3" music="Sewers" map="The Sewers--South West.map"
+place mode="4" name="The Sewers--South West-save" start="-1" music="Sewers" map="The Sewers--South West.map"
+
+place mode="4" name="The Sewers--North West-mark0" start="0" music="Sewers" map="The Sewers--North West.map"
+place mode="4" name="The Sewers--North West-mark1" start="1" music="Sewers" map="The Sewers--North West.map"
+place mode="4" name="The Sewers--North West-mark2" start="2" music="Sewers" map="The Sewers--North West.map"
+place mode="4" name="The Sewers--North West-save" start="-1" music="Sewers" map="The Sewers--North West.map"
+
+place mode="4" name="The Sewers--North-mark0" start="0" music="Sewers" map="The Sewers--North.map"
+place mode="4" name="The Sewers--North-mark1" start="1" music="Sewers" map="The Sewers--North.map"
+place mode="4" name="The Sewers--North-mark2" start="2" music="Sewers" map="The Sewers--North.map"
+place mode="4" name="The Sewers--North-mark3" start="3" music="Sewers" map="The Sewers--North.map"
+place mode="4" name="The Sewers--North-mark4" start="4" music="Sewers" map="The Sewers--North.map"
+place mode="4" name="The Sewers--North-mark5" start="5" music="Sewers" map="The Sewers--North.map"
+place mode="4" name="The Sewers--North-mark6" start="6" music="Sewers" map="The Sewers--North.map"
+place mode="4" name="The Sewers--North-save" start="-1" music="Sewers" map="The Sewers--North.map"
+
+place mode="4" name="The Sewers--North East-mark0" start="0" music="Sewers" map="The Sewers--North East.map"
+place mode="4" name="The Sewers--North East-mark1" start="1" music="Sewers" map="The Sewers--North East.map"
+place mode="4" name="The Sewers--North East-mark2" start="2" music="Sewers" map="The Sewers--North East.map"
+place mode="4" name="The Sewers--North East-save" start="-1" music="Sewers" map="The Sewers--North East.map"
+
+## Temple of Aegis        
+place mode="4" name="Temple of Aegis--First Floor-mark0" start="0" music="The Temple of Aegis" map="Temple of Aegis--First Floor.map" 
+place mode="4" name="Temple of Aegis--First Floor-mark1" start="1" music="The Temple of Aegis" map="Temple of Aegis--First Floor.map" 
+place mode="4" name="Temple of Aegis--First Floor-mark2" start="2" music="The Temple of Aegis" map="Temple of Aegis--First Floor.map" 
+place mode="4" name="Temple of Aegis--First Floor-mark3" start="3" music="The Temple of Aegis" map="Temple of Aegis--First Floor.map" 
+place mode="4" name="Temple of Aegis--First Floor-mark4" start="4" music="The Temple of Aegis" map="Temple of Aegis--First Floor.map" 
+place mode="4" name="Temple of Aegis--First Floor-mark5" start="5" music="The Temple of Aegis" map="Temple of Aegis--First Floor.map" 
+place mode="4" name="Temple of Aegis--First Floor-save" start="-1" music="The Temple of Aegis" map="Temple of Aegis--First Floor.map" 
+
+place mode="4" name="Temple of Aegis--Base Level-mark0" start="0" music="The Temple of Aegis" map="Temple of Aegis--Base Level.map" 
+place mode="4" name="Temple of Aegis--Base Level-mark1" start="1" music="The Temple of Aegis" map="Temple of Aegis--Base Level.map" 
+place mode="4" name="Temple of Aegis--Base Level-mark2" start="2" music="The Temple of Aegis" map="Temple of Aegis--Base Level.map" 
+place mode="4" name="Temple of Aegis--Base Level-mark3" start="3" music="The Temple of Aegis" map="Temple of Aegis--Base Level.map" 
+place mode="4" name="Temple of Aegis--Base Level-save" start="-1" music="The Temple of Aegis" map="Temple of Aegis--Base Level.map" 
+
+place mode="4" name="Temple of Aegis--Second Floor-mark0" start="0" music="The Temple of Aegis" map="Temple of Aegis--Second Floor.map" 
+place mode="4" name="Temple of Aegis--Second Floor-mark1" start="1" music="The Temple of Aegis" map="Temple of Aegis--Second Floor.map"
+place mode="4" name="Temple of Aegis--Second Floor-save" start="-1" music="The Temple of Aegis" map="Temple of Aegis--Second Floor.map"
+ 
+place mode="4" name="Temple of Aegis--Third Floor-mark0" start="0" music="The Temple of Aegis" map="Temple of Aegis--Third Floor.map" 
+place mode="4" name="Temple of Aegis--Third Floor-mark1" start="1" music="The Temple of Aegis" map="Temple of Aegis--Third Floor.map" 
+place mode="4" name="Temple of Aegis--Third Floor-mark2" start="2" music="The Temple of Aegis" map="Temple of Aegis--Third Floor.map" 
+place mode="4" name="Temple of Aegis--Third Floor-mark3" start="3" music="The Temple of Aegis" map="Temple of Aegis--Third Floor.map" 
+place mode="4" name="Temple of Aegis--Third Floor-save" start="-1" music="The Temple of Aegis" map="Temple of Aegis--Third Floor.map" 
+ 
+place mode="4" name="Temple of Aegis--Fourth Floor-mark0" start="0" music="The Temple of Aegis" map="Temple of Aegis--Fourth Floor.map" 
+place mode="4" name="Temple of Aegis--Fourth Floor-mark1" start="1" music="The Temple of Aegis" map="Temple of Aegis--Fourth Floor.map" 
+place mode="4" name="Temple of Aegis--Fourth Floor-mark2" start="2" music="The Temple of Aegis" map="Temple of Aegis--Fourth Floor.map" 
+place mode="4" name="Temple of Aegis--Fourth Floor-mark3" start="3" music="The Temple of Aegis" map="Temple of Aegis--Fourth Floor.map"
+place mode="4" name="Temple of Aegis--Fourth Floor-save" start="-1" music="The Temple of Aegis" map="Temple of Aegis--Fourth Floor.map"
+ 
+place mode="4" name="Temple of Aegis--Top Floor-mark0" start="0" music="The Theme of Demons" map="Temple of Aegis--Top Floor.map" 
+place mode="4" name="Temple of Aegis--Top Floor-mark1" start="1" music="The Theme of Demons" map="Temple of Aegis--Top Floor.map" 
+place mode="4" name="Temple of Aegis--Top Floor-save" start="-1" music="The Theme of Demons" map="Temple of Aegis--Top Floor.map" 
+
+## Frozen Forest & Ice Cavern ##
+place mode="4" name="Frozen Forest--Forest Passage-mark0" start="0" music="Snowpass" map="Frozen Forest--Forest Passage.map" 
+place mode="4" name="Frozen Forest--Forest Passage-mark1" start="1" music="Snowpass" map="Frozen Forest--Forest Passage.map" 
+place mode="4" name="Frozen Forest--Forest Passage-save" start="-1" music="Snowpass" map="Frozen Forest--Forest Passage.map" 
+       
+place mode="4" name="Ice Cavern--Pillar Room-mark0" start="0" music="Ice Cavern" map="Ice Cavern--Pillar Room.map" 
+place mode="4" name="Ice Cavern--Pillar Room-mark1" start="1" music="Ice Cavern" map="Ice Cavern--Pillar Room.map" 
+place mode="4" name="Ice Cavern--Pillar Room-mark2" start="2" music="Ice Cavern" map="Ice Cavern--Pillar Room.map" 
+place mode="4" name="Ice Cavern--Pillar Room-save" start="-1" music="Ice Cavern" map="Ice Cavern--Pillar Room.map" 
+
+place mode="4" name="Ice Cavern--Frozen Field-mark0" start="0" music="Snowpass" map="Ice Cavern--Frozen Field.map" 
+place mode="4" name="Ice Cavern--Frozen Field-mark1" start="1" music="Snowpass" map="Ice Cavern--Frozen Field.map" 
+place mode="4" name="Ice Cavern--Frozen Field-save" start="-1" music="Snowpass" map="Ice Cavern--Frozen Field.map" 
+
+place mode="4" name="Ice Cavern--Mysterious Forest-mark0" start="0" music="Snowpass" map="Ice Cavern--Mysterious Forest.map" 
+place mode="4" name="Ice Cavern--Mysterious Forest-mark1" start="1" music="Snowpass" map="Ice Cavern--Mysterious Forest.map" 
+place mode="4" name="Ice Cavern--Mysterious Forest-mark2" start="2" music="Snowpass" map="Ice Cavern--Mysterious Forest.map" 
+place mode="4" name="Ice Cavern--Mysterious Forest-mark3" start="3" music="Snowpass" map="Ice Cavern--Mysterious Forest.map" 
+place mode="4" name="Ice Cavern--Mysterious Forest-mark4" start="4" music="Snowpass" map="Ice Cavern--Mysterious Forest.map" 
+place mode="4" name="Ice Cavern--Mysterious Forest-mark5" start="5" music="Snowpass" map="Ice Cavern--Mysterious Forest.map" 
+place mode="4" name="Ice Cavern--Mysterious Forest-mark6" start="6" music="Snowpass" map="Ice Cavern--Mysterious Forest.map" 
+place mode="4" name="Ice Cavern--Mysterious Forest-mark7" start="7" music="Snowpass" map="Ice Cavern--Mysterious Forest.map" 
+place mode="4" name="Ice Cavern--Mysterious Forest-mark8" start="8" music="Snowpass" map="Ice Cavern--Mysterious Forest.map" 
+place mode="4" name="Ice Cavern--Mysterious Forest-mark9" start="9" music="Snowpass" map="Ice Cavern--Mysterious Forest.map" 
+place mode="4" name="Ice Cavern--Mysterious Forest-mark10" start="10" music="Snowpass" map="Ice Cavern--Mysterious Forest.map" 
+place mode="4" name="Ice Cavern--Mysterious Forest-mark11" start="11" music="Snowpass" map="Ice Cavern--Mysterious Forest.map" 
+place mode="4" name="Ice Cavern--Mysterious Forest-mark12" start="12" music="Snowpass" map="Ice Cavern--Mysterious Forest.map" 
+place mode="4" name="Ice Cavern--Mysterious Forest-mark13" start="13" music="Snowpass" map="Ice Cavern--Mysterious Forest.map" 
+place mode="4" name="Ice Cavern--Mysterious Forest-save" start="-1" music="Snowpass" map="Ice Cavern--Mysterious Forest.map" 
+
+place mode="4" name="Ice Cavern--Hall of Anguish-mark0" start="0" music="Ice Cavern" map="Ice Cavern--Hall of Anguish.map" 
+place mode="4" name="Ice Cavern--Hall of Anguish-mark1" start="1" music="Ice Cavern" map="Ice Cavern--Hall of Anguish.map" 
+place mode="4" name="Ice Cavern--Hall of Anguish-mark2" start="2" music="Ice Cavern" map="Ice Cavern--Hall of Anguish.map" 
+place mode="4" name="Ice Cavern--Hall of Anguish-mark3" start="3" music="Ice Cavern" map="Ice Cavern--Hall of Anguish.map" 
+place mode="4" name="Ice Cavern--Hall of Anguish-mark4" start="4" music="Ice Cavern" map="Ice Cavern--Hall of Anguish.map" 
+place mode="4" name="Ice Cavern--Hall of Anguish-mark5" start="5" music="Ice Cavern" map="Ice Cavern--Hall of Anguish.map" 
+place mode="4" name="Ice Cavern--Hall of Anguish-save" start="-1" music="Ice Cavern" map="Ice Cavern--Hall of Anguish.map" 
+
+place mode="4" name="Ice Cavern--Hall of Confusion-mark0" start="0" music="Ice Cavern" map="Ice Cavern--Hall of Confusion.map" 
+place mode="4" name="Ice Cavern--Hall of Confusion-mark1" start="1" music="Ice Cavern" map="Ice Cavern--Hall of Confusion.map" 
+place mode="4" name="Ice Cavern--Hall of Confusion-mark2" start="2" music="Ice Cavern" map="Ice Cavern--Hall of Confusion.map" 
+place mode="4" name="Ice Cavern--Hall of Confusion-mark3" start="3" music="Ice Cavern" map="Ice Cavern--Hall of Confusion.map" 
+place mode="4" name="Ice Cavern--Hall of Confusion-mark4" start="4" music="Ice Cavern" map="Ice Cavern--Hall of Confusion.map" 
+place mode="4" name="Ice Cavern--Hall of Confusion-mark5" start="5" music="Ice Cavern" map="Ice Cavern--Hall of Confusion.map" 
+place mode="4" name="Ice Cavern--Hall of Confusion-save" start="-1" music="Ice Cavern" map="Ice Cavern--Hall of Confusion.map" 
+
+place mode="4" name="Ice Cavern--Throne Room-mark0" start="0" music="No Music" map="Ice Cavern--Throne Room.map" 
+place mode="4" name="Ice Cavern--Throne Room-mark1" start="1" music="No Music" map="Ice Cavern--Throne Room.map" 
+place mode="4" name="Ice Cavern--Throne Room-mark2" start="2" music="No Music" map="Ice Cavern--Throne Room.map" 
+place mode="4" name="Ice Cavern--Throne Room-mark3" start="3" music="No Music" map="Ice Cavern--Throne Room.map" 
+place mode="4" name="Ice Cavern--Throne Room-mark4" start="4" music="No Music" map="Ice Cavern--Throne Room.map" 
+place mode="4" name="Ice Cavern--Throne Room-mark5" start="5" music="No Music" map="Ice Cavern--Throne Room.map" 
+place mode="4" name="Ice Cavern--Throne Room-mark6" start="6" music="No Music" map="Ice Cavern--Throne Room.map" 
+place mode="4" name="Ice Cavern--Throne Room-mark7" start="7" music="No Music" map="Ice Cavern--Throne Room.map" 
+place mode="4" name="Ice Cavern--Throne Room-save" start="-1" music="No Music" map="Ice Cavern--Throne Room.map" 
+
+## Empyrian Temple ##
+place mode="4" name="Empyrian Temple--Hall of Wind-mark0" start="0" music="Air Temple" map="Empyrian Temple--Hall of Wind.map"
+place mode="4" name="Empyrian Temple--Hall of Wind-mark1" start="1" music="Air Temple" map="Empyrian Temple--Hall of Wind.map"
+place mode="4" name="Empyrian Temple--Hall of Wind-mark2" start="2" music="Air Temple" map="Empyrian Temple--Hall of Wind.map"
+place mode="4" name="Empyrian Temple--Hall of Wind-mark3" start="3" music="Air Temple" map="Empyrian Temple--Hall of Wind.map"
+place mode="4" name="Empyrian Temple--Hall of Wind-mark4" start="4" music="Air Temple" map="Empyrian Temple--Hall of Wind.map"
+place mode="4" name="Empyrian Temple--Hall of Wind-save" start="-1" music="Air Temple" map="Empyrian Temple--Hall of Wind.map"
+
+place mode="4" name="Empyrian Temple--Tower of Magic-mark0" start="0" music="Air Temple" map="Empyrian Temple--Tower of Magic.map"
+place mode="4" name="Empyrian Temple--Tower of Magic-mark1" start="1" music="Air Temple" map="Empyrian Temple--Tower of Magic.map"
+place mode="4" name="Empyrian Temple--Tower of Magic-mark2" start="2" music="Air Temple" map="Empyrian Temple--Tower of Magic.map"
+place mode="4" name="Empyrian Temple--Tower of Magic-mark3" start="3" music="Air Temple" map="Empyrian Temple--Tower of Magic.map"
+place mode="4" name="Empyrian Temple--Tower of Magic-mark4" start="4" music="Air Temple" map="Empyrian Temple--Tower of Magic.map"
+place mode="4" name="Empyrian Temple--Tower of Magic-mark5" start="5" music="Air Temple" map="Empyrian Temple--Tower of Magic.map"
+place mode="4" name="Empyrian Temple--Tower of Magic-mark6" start="6" music="Air Temple" map="Empyrian Temple--Tower of Magic.map"
+place mode="4" name="Empyrian Temple--Tower of Magic-mark7" start="7" music="Air Temple" map="Empyrian Temple--Tower of Magic.map"
+place mode="4" name="Empyrian Temple--Tower of Magic-save" start="-1" music="Air Temple" map="Empyrian Temple--Tower of Magic.map"
+
+place mode="4" name="Empyrian Temple--Tower of Strength-mark0" start="0" music="Air Temple" map="Empyrian Temple--Tower of Strength.map"
+place mode="4" name="Empyrian Temple--Tower of Strength-mark1" start="1" music="Air Temple" map="Empyrian Temple--Tower of Strength.map"
+place mode="4" name="Empyrian Temple--Tower of Strength-mark2" start="2" music="Air Temple" map="Empyrian Temple--Tower of Strength.map"
+place mode="4" name="Empyrian Temple--Tower of Strength-mark3" start="3" music="Air Temple" map="Empyrian Temple--Tower of Strength.map"
+place mode="4" name="Empyrian Temple--Tower of Strength-mark4" start="4" music="Air Temple" map="Empyrian Temple--Tower of Strength.map"
+place mode="4" name="Empyrian Temple--Tower of Strength-mark5" start="5" music="Air Temple" map="Empyrian Temple--Tower of Strength.map"
+place mode="4" name="Empyrian Temple--Tower of Strength-mark6" start="6" music="Air Temple" map="Empyrian Temple--Tower of Strength.map"
+place mode="4" name="Empyrian Temple--Tower of Strength-mark7" start="7" music="Air Temple" map="Empyrian Temple--Tower of Strength.map"
+place mode="4" name="Empyrian Temple--Tower of Strength-save" start="-1" music="Air Temple" map="Empyrian Temple--Tower of Strength.map"
+
+place mode="4" name="Empyrian Temple--Light-mark0" start="0" music="Crystal Room" map="Empyrian Temple--Light.map"
+place mode="4" name="Empyrian Temple--Dark-mark0" start="0" music="Crystal Room" map="Empyrian Temple--Dark.map"
+place mode="4" name="Empyrian Temple--Hall of Memories-mark0" start="0" music="The Theme of Demons" map="Empyrian Temple--Hall of Memories.map"
+
+## Menthu's Lair ##
+place mode="4" name="Menthu's Lair--Room of Confusion-mark0" start="0" music="Silent Cave" map="Menthu's Lair--Room of Confusion.map"
+place mode="4" name="Menthu's Lair--Room of Confusion-mark1" start="1" music="Silent Cave" map="Menthu's Lair--Room of Confusion.map"
+place mode="4" name="Menthu's Lair--Room of Confusion-mark2" start="2" music="Silent Cave" map="Menthu's Lair--Room of Confusion.map"
+place mode="4" name="Menthu's Lair--Room of Confusion-mark3" start="3" music="Silent Cave" map="Menthu's Lair--Room of Confusion.map"
+place mode="4" name="Menthu's Lair--Room of Confusion-mark4" start="4" music="Silent Cave" map="Menthu's Lair--Room of Confusion.map"
+place mode="4" name="Menthu's Lair--Room of Confusion-mark5" start="5" music="Silent Cave" map="Menthu's Lair--Room of Confusion.map"
+place mode="4" name="Menthu's Lair--Room of Confusion-mark6" start="6" music="Silent Cave" map="Menthu's Lair--Room of Confusion.map"
+place mode="4" name="Menthu's Lair--Room of Confusion-mark7" start="7" music="Silent Cave" map="Menthu's Lair--Room of Confusion.map"
+place mode="4" name="Menthu's Lair--Room of Confusion-mark8" start="8" music="Silent Cave" map="Menthu's Lair--Room of Confusion.map"
+place mode="4" name="Menthu's Lair--Room of Confusion-mark9" start="9" music="Silent Cave" map="Menthu's Lair--Room of Confusion.map"
+place mode="4" name="Menthu's Lair--Room of Confusion-mark10" start="10" music="Silent Cave" map="Menthu's Lair--Room of Confusion.map"
+place mode="4" name="Menthu's Lair--Room of Confusion-mark11" start="11" music="Silent Cave" map="Menthu's Lair--Room of Confusion.map"
+place mode="4" name="Menthu's Lair--Room of Confusion-mark12" start="12" music="Silent Cave" map="Menthu's Lair--Room of Confusion.map"
+place mode="4" name="Menthu's Lair--Room of Confusion-mark13" start="13" music="Silent Cave" map="Menthu's Lair--Room of Confusion.map"
+place mode="4" name="Menthu's Lair--Room of Confusion-mark14" start="14" music="Silent Cave" map="Menthu's Lair--Room of Confusion.map"
+place mode="4" name="Menthu's Lair--Room of Confusion-save" start="-1" music="Silent Cave" map="Menthu's Lair--Room of Confusion.map"
+
+place mode="4" name="Menthu's Lair--Room of Doubt-mark0" start="0" music="Silent Cave" map="Menthu's Lair--Room of Doubt.map"
+place mode="4" name="Menthu's Lair--Room of Doubt-mark1" start="1" music="Silent Cave" map="Menthu's Lair--Room of Doubt.map"
+place mode="4" name="Menthu's Lair--Room of Doubt-mark2" start="2" music="Silent Cave" map="Menthu's Lair--Room of Doubt.map"
+place mode="4" name="Menthu's Lair--Room of Doubt-mark3" start="3" music="Silent Cave" map="Menthu's Lair--Room of Doubt.map"
+place mode="4" name="Menthu's Lair--Room of Doubt-mark4" start="4" music="Silent Cave" map="Menthu's Lair--Room of Doubt.map"
+place mode="4" name="Menthu's Lair--Room of Doubt-mark5" start="5" music="Silent Cave" map="Menthu's Lair--Room of Doubt.map"
+place mode="4" name="Menthu's Lair--Room of Doubt-mark6" start="6" music="Silent Cave" map="Menthu's Lair--Room of Doubt.map"
+place mode="4" name="Menthu's Lair--Room of Doubt-mark7" start="7" music="Silent Cave" map="Menthu's Lair--Room of Doubt.map"
+place mode="4" name="Menthu's Lair--Room of Doubt-mark8" start="8" music="Silent Cave" map="Menthu's Lair--Room of Doubt.map"
+place mode="4" name="Menthu's Lair--Room of Doubt-mark9" start="9" music="Silent Cave" map="Menthu's Lair--Room of Doubt.map"
+place mode="4" name="Menthu's Lair--Room of Doubt-mark10" start="10" music="Silent Cave" map="Menthu's Lair--Room of Doubt.map"
+place mode="4" name="Menthu's Lair--Room of Doubt-mark11" start="11" music="Silent Cave" map="Menthu's Lair--Room of Doubt.map"
+place mode="4" name="Menthu's Lair--Room of Doubt-mark12" start="12" music="Silent Cave" map="Menthu's Lair--Room of Doubt.map"
+place mode="4" name="Menthu's Lair--Room of Doubt-mark13" start="13" music="Silent Cave" map="Menthu's Lair--Room of Doubt.map"
+place mode="4" name="Menthu's Lair--Room of Doubt-mark14" start="14" music="Silent Cave" map="Menthu's Lair--Room of Doubt.map"
+place mode="4" name="Menthu's Lair--Room of Doubt-mark15" start="15" music="Silent Cave" map="Menthu's Lair--Room of Doubt.map"
+place mode="4" name="Menthu's Lair--Room of Doubt-save" start="-1" music="Silent Cave" map="Menthu's Lair--Room of Doubt.map"
+
+place mode="4" name="Menthu's Lair--Room of Turmoil-mark0" start="0" music="Silent Cave" map="Menthu's Lair--Room of Turmoil.map"
+place mode="4" name="Menthu's Lair--Room of Turmoil-mark1" start="1" music="Silent Cave" map="Menthu's Lair--Room of Turmoil.map"
+place mode="4" name="Menthu's Lair--Room of Turmoil-mark2" start="2" music="Silent Cave" map="Menthu's Lair--Room of Turmoil.map"
+place mode="4" name="Menthu's Lair--Room of Turmoil-mark3" start="3" music="Silent Cave" map="Menthu's Lair--Room of Turmoil.map"
+place mode="4" name="Menthu's Lair--Room of Turmoil-mark4" start="4" music="Silent Cave" map="Menthu's Lair--Room of Turmoil.map"
+place mode="4" name="Menthu's Lair--Room of Turmoil-mark5" start="5" music="Silent Cave" map="Menthu's Lair--Room of Turmoil.map"
+place mode="4" name="Menthu's Lair--Room of Turmoil-mark6" start="6" music="Silent Cave" map="Menthu's Lair--Room of Turmoil.map"
+place mode="4" name="Menthu's Lair--Room of Turmoil-mark7" start="7" music="Silent Cave" map="Menthu's Lair--Room of Turmoil.map"
+place mode="4" name="Menthu's Lair--Room of Turmoil-mark8" start="8" music="Silent Cave" map="Menthu's Lair--Room of Turmoil.map"
+place mode="4" name="Menthu's Lair--Room of Turmoil-mark9" start="9" music="Silent Cave" map="Menthu's Lair--Room of Turmoil.map"
+place mode="4" name="Menthu's Lair--Room of Turmoil-mark10" start="10" music="Silent Cave" map="Menthu's Lair--Room of Turmoil.map"
+place mode="4" name="Menthu's Lair--Room of Turmoil-mark11" start="11" music="Silent Cave" map="Menthu's Lair--Room of Turmoil.map"
+place mode="4" name="Menthu's Lair--Room of Turmoil-mark12" start="12" music="Silent Cave" map="Menthu's Lair--Room of Turmoil.map"
+place mode="4" name="Menthu's Lair--Room of Turmoil-mark13" start="13" music="Silent Cave" map="Menthu's Lair--Room of Turmoil.map"
+place mode="4" name="Menthu's Lair--Room of Turmoil-mark14" start="14" music="Silent Cave" map="Menthu's Lair--Room of Turmoil.map"
+place mode="4" name="Menthu's Lair--Room of Turmoil-mark15" start="15" music="Silent Cave" map="Menthu's Lair--Room of Turmoil.map"
+place mode="4" name="Menthu's Lair--Room of Turmoil-save" start="-1" music="Silent Cave" map="Menthu's Lair--Room of Turmoil.map"
+
+place mode="4" name="Menthu's Lair--Room of Chaos-mark0" start="0" music="Silent Cave" map="Menthu's Lair--Room of Chaos.map"
+place mode="4" name="Menthu's Lair--Room of Chaos-mark1" start="1" music="Silent Cave" map="Menthu's Lair--Room of Chaos.map"
+place mode="4" name="Menthu's Lair--Room of Chaos-mark2" start="2" music="Silent Cave" map="Menthu's Lair--Room of Chaos.map"
+place mode="4" name="Menthu's Lair--Room of Chaos-mark3" start="3" music="Silent Cave" map="Menthu's Lair--Room of Chaos.map"
+place mode="4" name="Menthu's Lair--Room of Chaos-mark4" start="4" music="Silent Cave" map="Menthu's Lair--Room of Chaos.map"
+place mode="4" name="Menthu's Lair--Room of Chaos-mark5" start="5" music="Silent Cave" map="Menthu's Lair--Room of Chaos.map"
+place mode="4" name="Menthu's Lair--Room of Chaos-mark6" start="6" music="Silent Cave" map="Menthu's Lair--Room of Chaos.map"
+place mode="4" name="Menthu's Lair--Room of Chaos-mark7" start="7" music="Silent Cave" map="Menthu's Lair--Room of Chaos.map"
+place mode="4" name="Menthu's Lair--Room of Chaos-mark8" start="8" music="Silent Cave" map="Menthu's Lair--Room of Chaos.map"
+place mode="4" name="Menthu's Lair--Room of Chaos-mark9" start="9" music="Silent Cave" map="Menthu's Lair--Room of Chaos.map"
+place mode="4" name="Menthu's Lair--Room of Chaos-mark10" start="10" music="Silent Cave" map="Menthu's Lair--Room of Chaos.map"
+place mode="4" name="Menthu's Lair--Room of Chaos-mark11" start="11" music="Silent Cave" map="Menthu's Lair--Room of Chaos.map"
+place mode="4" name="Menthu's Lair--Room of Chaos-mark12" start="12" music="Silent Cave" map="Menthu's Lair--Room of Chaos.map"
+place mode="4" name="Menthu's Lair--Room of Chaos-mark13" start="13" music="Silent Cave" map="Menthu's Lair--Room of Chaos.map"
+place mode="4" name="Menthu's Lair--Room of Chaos-mark14" start="14" music="Silent Cave" map="Menthu's Lair--Room of Chaos.map"
+place mode="4" name="Menthu's Lair--Room of Chaos-save" start="-1" music="Silent Cave" map="Menthu's Lair--Room of Chaos.map"
+
+place mode="4" name="Menthu's Lair--Hall of Memories-mark0" start="0" music="Menthus Floor" map="Menthu's Lair--Hall of Memories.map"
+place mode="4" name="Menthu's Lair--Hall of Memories-mark1" start="1" music="Menthus Floor" map="Menthu's Lair--Hall of Memories.map"
+place mode="4" name="Menthu's Lair--Hall of Memories-mark2" start="2" music="Menthus Floor" map="Menthu's Lair--Hall of Memories.map"
+place mode="4" name="Menthu's Lair--Hall of Memories-mark3" start="3" music="Menthus Floor" map="Menthu's Lair--Hall of Memories.map"
+place mode="4" name="Menthu's Lair--Hall of Memories-mark4" start="4" music="Menthus Floor" map="Menthu's Lair--Hall of Memories.map"
+place mode="4" name="Menthu's Lair--Hall of Memories-mark5" start="5" music="Menthus Floor" map="Menthu's Lair--Hall of Memories.map"
+place mode="4" name="Menthu's Lair--Hall of Memories-save" start="-1" music="Menthus Floor" map="Menthu's Lair--Hall of Memories.map"
+
+place mode="4" name="Menthu's Lair--Throne of Serpents-mark0" start="0" music="greattemple" map="Menthu's Lair--Throne of Serpents.map"
+place mode="4" name="Menthu's Lair--Throne of Serpents-save" start="-1" music="greattemple" map="Menthu's Lair--Throne of Serpents.map"
+
+place mode="23" name="Serphia" bossName="Serphia" music="Fight the Demons" boss="true"
+place mode="23" name="MemorySerphia" bossName="MemorySerphia" music="Shadowbattle" boss="true"
+place mode="23" name="MemorySalmonman" bossName="MemorySalmonman" music="Shadowbattle" boss="true"
+# particles="SnowSystem"
+place mode="23" name="Menthuattack" bossName="Menthuattack" music="No Music" boss="true"
+place mode="23" name="Menthu2" bossName="Menthu2" music="Menthu's Theme" boss="true"
+place mode="23" name="Menthuattack2" bossName="Menthuattack2" music="No Music" boss="true"

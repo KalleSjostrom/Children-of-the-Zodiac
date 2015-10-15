@@ -1,0 +1,266 @@
+import file=main.var
+
+var header=44
+var name=30
+var subheader=38
+var headerx=100
+var namex=160
+var subheaderx=130
+var subnamex=160
+var subsubnamex=180
+var subname=24
+var subsubname=24
+var longdistance=120
+var short=80
+
+load image="Ending/end1"
+load image="Ending/end2"
+load image="Ending/end3"
+load image="Ending/end4"
+load image="Ending/end5"
+load image="Ending/end6"
+load image="Ending/end7"
+load image="Ending/end8"
+load image="Ending/end9"
+load image="Ending/end10"
+load image="Ending/end11"
+load image="Ending/end12"
+load image="Ending/end13"
+load image="Ending/end14"
+load image="Ending/end15"
+load image="Ending/end16"
+load image="Ending/end17"
+load image="Ending/end18"
+load image="Ending/end19"
+
+info time="day" name="No Place" music="No Music" fadeValue="0" musicVolume="0" status="0"
+
+load music="end credit"
+
+ins type=fadeout timea=0 index=1 fadetime=0 kind=music mode=pause
+ins type=fadein timea=500 index=1 fadetime=0 kind=music mode=play
+
+newscrolltext speed=1.15
+ins kind=scrolltext
+
+var imagefadetime=2000
+var fadestart=2000
+var fadeend=6000
+var imagesize=65
+
+ins type=fadein timea=fadestart index=0 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+ins type=fadeout timea=fadeend index=0 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+
+ins type=fadein timea=fadestart index=1 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+ins type=fadeout timea=fadeend index=1 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+
+ins type=fadein timea=fadestart index=2 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+ins type=fadeout timea=fadeend index=2 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+
+ins type=fadein timea=fadestart index=3 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+ins type=fadeout timea=fadeend index=3 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+
+ins type=fadein timea=fadestart index=4 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+ins type=fadeout timea=fadeend index=4 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+
+ins type=fadein timea=fadestart index=5 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+ins type=fadeout timea=fadeend index=5 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+
+ins type=fadein timea=fadestart index=6 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+ins type=fadeout timea=fadeend index=6 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+
+ins type=fadein timea=fadestart index=7 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+ins type=fadeout timea=fadeend index=7 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+
+ins type=fadein timea=fadestart index=8 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+ins type=fadeout timea=fadeend index=8 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+
+ins type=fadein timea=fadestart index=9 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+ins type=fadeout timea=fadeend index=9 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+
+ins type=fadein timea=fadestart index=10 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+ins type=fadeout timea=fadeend index=10 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+
+ins type=fadein timea=fadestart index=11 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+ins type=fadeout timea=fadeend index=11 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+
+ins type=fadein timea=fadestart index=12 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+ins type=fadeout timea=fadeend index=12 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+
+ins type=fadein timea=fadestart index=13 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+ins type=fadeout timea=fadeend index=13 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+
+ins type=fadein timea=fadestart index=14 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+ins type=fadeout timea=fadeend index=14 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+
+ins type=fadein timea=fadestart index=15 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+ins type=fadeout timea=fadeend index=15 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+
+ins type=fadein timea=fadestart index=16 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+ins type=fadeout timea=fadeend index=16 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+
+ins type=fadein timea=fadestart index=17 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+ins type=fadeout timea=fadeend index=17 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+
+ins type=fadein timea=fadestart index=18 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+ins type=fadeout timea=fadeend index=18 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
+
+scrolltext text="Executive Producer:";"" x=headerx size=header
+	scrolltext text="Kalle Sjöström";"" x=namex size=name distance=longdistance
+
+scrolltext text="Game concept:";"" x=headerx size=header
+	scrolltext text="Jonas Ahlmark Aspros";"" x=namex size=name
+	scrolltext text="Johannes Bergenheim";"" x=namex size=name
+	scrolltext text="Erik Lindgren";"" x=namex size=name
+	scrolltext text="Kalle Sjöström";"" x=namex size=name distance=longdistance
+
+scrolltext text="All programming:";"" x=headerx size=header
+	scrolltext text="Kalle Sjöström";"" x=namex size=name distance=longdistance
+
+scrolltext text="Scripting:";"" x=headerx size=header
+	scrolltext text="Kalle Sjöström";"" x=namex size=name distance=short
+
+	scrolltext text="Assisted by:";"" x=subheaderx size=subheader
+		scrolltext text="Jonas Ahlmark Aspros";"" x=subnamex size=subname distance=longdistance
+
+scrolltext text="Story:";"" x=headerx size=header
+	scrolltext text="Jonas Ahlmark Aspros";"" x=namex size=name
+	scrolltext text="Johannes Bergenheim";"" x=namex size=name
+	scrolltext text="Erik Lindgren";"" x=namex size=name
+	scrolltext text="Kalle Sjöström";"" x=namex size=name distance=longdistance
+	
+scrolltext text="Script:";"" x=headerx size=header
+	scrolltext text="Kalle Sjöström";"" x=namex size=name
+	scrolltext text="Jonas Ahlmark Aspros";"" x=namex size=name distance=longdistance
+
+scrolltext text="All music by:";"" x=headerx size=header
+	scrolltext text="Johannes Bergenheim";"" x=namex size=name distance=short
+
+	scrolltext text="Except:";"" x=subheaderx size=subheader
+		scrolltext text="Theme of Alares";"" x=subnamex size=subname
+		scrolltext text="Theme of Zazo";"" x=subnamex size=subname
+			scrolltext text="Composed by Johan Tjällman";"" x=subsubnamex size=subsubname distance=short
+			
+		scrolltext text="The Great Mine";"" x=subnamex size=subname
+			scrolltext text="Composed by Johannes Bergenheim and Rickard N. Jokela";"" x=subsubnamex size=subsubname distance=short
+			
+		scrolltext text="Berca Church";"" x=subnamex size=subname
+			scrolltext text="Composed by Rickard N. Jokela and Johannes Bergenheim";"" x=subsubnamex size=subsubname distance=longdistance
+
+scrolltext text="All instruments played by:";"" x=headerx size=header
+	scrolltext text="Johannes Bergenheim";"" x=namex size=name distance=short
+
+	scrolltext text="Except:";"" x=subheaderx size=subheader
+		scrolltext text="Elin Söderberg, Cello:";"" x=subnamex size=subname
+			scrolltext text="Prologue pt 1, 2";"" x=subsubnamex size=subsubname
+			scrolltext text="Berca Shop";"" x=subsubnamex size=subsubname
+			scrolltext text="Menthu's Theme";"" x=subsubnamex size=subsubname distance=short
+
+		scrolltext text="Elin Söderberg, Vocal:";"" x=subnamex size=subname
+			scrolltext text="Pensara Church";"" x=subsubnamex size=subsubname distance=short
+
+		scrolltext text="Rickard N. Jokela, Bass:";"" x=subnamex size=subname
+			scrolltext text="The Great Mine";"" x=subsubnamex size=subsubname
+			scrolltext text="Berca Church";"" x=subsubnamex size=subsubname distance=short
+	
+		scrolltext text="Johan Tjällman, Guitar:";"" x=subnamex size=subname
+			scrolltext text="Theme of Alares";"" x=subsubnamex size=subsubname
+			scrolltext text="Theme of Zazo";"" x=subsubnamex size=subsubname
+			scrolltext text="Inn";"" x=subsubnamex size=subsubname distance=short
+
+		scrolltext text="Thomas Ivarsson, Snare drum:";"" x=subnamex size=subname
+			scrolltext text="Victory Fanfare";"" x=subsubnamex size=subsubname distance=longdistance
+
+scrolltext text="Enemy design:";"" x=headerx size=header
+	scrolltext text="Erik Lindgren";"" x=namex size=name distance=short
+
+	scrolltext text="Except:";"" x=subheaderx size=subheader
+		scrolltext text="Erik Lindgren and Denis Camacho:";"" x=subnamex size=subname
+			scrolltext text="Troll";"" x=subsubnamex size=subsubname
+			scrolltext text="Boar";"" x=subsubnamex size=subsubname distance=longdistance
+
+scrolltext text="Character design:";"" x=headerx size=header
+	scrolltext text="Erik Lindgren";"" x=namex size=name distance=short
+
+	scrolltext text="Except:";"" x=subheaderx size=subheader
+		scrolltext text="Erik Lindgren and John Söderberg";"" x=subnamex size=subname
+			scrolltext text="Blacksmith";"" x=subsubnamex size=subsubname distance=longdistance
+
+scrolltext text="Prologue graphic design:";"" x=headerx size=header
+	scrolltext text="Erik Lindgren";"" x=namex size=name distance=short
+	
+	scrolltext text="Assisted by:";"" x=subheaderx size=subheader
+		scrolltext text="Felix Tolke";"" x=subnamex size=subname distance=longdistance
+
+scrolltext text="Story images:";"" x=headerx size=header
+	scrolltext text="Erik Lindgren";"" x=namex size=name distance=short
+
+	scrolltext text="Assisted by:";"" x=subheaderx size=subheader
+		scrolltext text="Denis Camacho";"" x=subnamex size=subname distance=longdistance
+
+scrolltext text="Village design:";"" x=headerx size=header
+	scrolltext text="Jonas Ahlmark Aspros";"" x=namex size=name
+	scrolltext text="Johannes Bergenheim";"" x=namex size=name distance=short
+
+	scrolltext text="Based on:";"" x=subheaderx size=subheader
+		scrolltext text="RPGMaker";"" x=subnamex size=subname distance=longdistance
+
+scrolltext text="Dungeons:";"" x=headerx size=header
+	scrolltext text="Jonas Ahlmark Aspros";"" x=namex size=name
+	scrolltext text="Kalle Sjöström";"" x=namex size=name distance=short
+
+scrolltext text="Battle design:";"" x=headerx size=header
+	scrolltext text="Jonas Ahlmark Aspros";"" x=namex size=name
+	scrolltext text="Johannes Bergenheim";"" x=namex size=name
+	scrolltext text="Kalle Sjöström";"" x=namex size=name distance=longdistance
+
+scrolltext text="Menu design:";"" x=headerx size=header
+	scrolltext text="Jonas Ahlmark Aspros";"" x=namex size=name
+	scrolltext text="Johannes Bergenheim";"" x=namex size=name
+	scrolltext text="Kalle Sjöström";"" x=namex size=name distance=longdistance
+
+scrolltext text="Animations:";"" x=headerx size=header
+	scrolltext text="Kalle Sjöström";"" x=namex size=name distance=short
+
+	scrolltext text="Assisted by:";"" x=subheaderx size=subheader
+		scrolltext text="Jonas Ahlmark Aspros";"" x=subnamex size=subname distance=longdistance
+
+scrolltext text="Testing:";"" x=headerx size=header
+	scrolltext text="Selle";"" x=namex size=name
+	scrolltext text="Selle";"" x=namex size=name
+	scrolltext text="Selle";"" x=namex size=name
+	scrolltext text="Selle";"" x=namex size=name distance=longdistance
+
+scrolltext text="Music, story and concept inspiration:";"" x=headerx size=header
+	scrolltext text="Phantasy Star (Sega...)";"" x=namex size=name
+	scrolltext text="Baten Kaitos (Namco Bandai...)";"" x=namex size=name
+	scrolltext text="Final Fantasy (Square....)";"" x=namex size=name
+	scrolltext text="Zelda (Nintendo...)";"" x=namex size=name
+	scrolltext text="Baldur's Gate ()";"" x=namex size=name
+	scrolltext text="And all the other great games out there";"" x=namex size=name distance=longdistance
+
+scrolltext text="Special thanks to:";"" x=headerx size=header
+	scrolltext text="Johanna Samuelsson";"" x=namex size=name
+	scrolltext text="Frida Marklund";"" x=namex size=name
+	scrolltext text="Martin Söderberg";"" x=namex size=name
+	scrolltext text="Victor Jonsson";"" x=namex size=name
+	scrolltext text="Albin Marklund Bergenheim";"" x=namex size=name
+	scrolltext text="Linnea Burstedt";"" x=namex size=name distance=longdistance
+
+	scrolltext text="Ica's Pizza - Mozzarella";"" x=namex size=name
+	
+scrolltext text="";"" x=headerx size=header distance=longdistance
+scrolltext text="";"" x=headerx size=header distance=longdistance
+scrolltext text="";"" x=headerx size=header distance=longdistance
+scrolltext text="Thanks for playing!";"" x=headerx size=header
+scrolltext text="";"" x=headerx size=header distance=longdistance
+scrolltext text="";"" x=headerx size=header distance=longdistance
+scrolltext text="";"" x=headerx size=header distance=longdistance
+scrolltext text="";"" x=headerx size=header distance=longdistance
+scrolltext text="";"" x=headerx size=header distance=longdistance
+scrolltext text="";"" x=headerx size=header distance=longdistance
+scrolltext text="The end.";"" x=headerx size=header
+	
+ins type=fadeout timea=1200000 index=1 fadetime=2000 kind=music mode=kill
+
+ins timea=2000 kind=endseq

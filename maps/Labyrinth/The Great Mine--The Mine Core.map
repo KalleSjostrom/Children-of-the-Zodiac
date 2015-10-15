@@ -1,0 +1,84 @@
+mapSize -0.5 0.5 1
+
+size 187
+
+mission VillagerMission GreatMineMission trigger="Zazo";"2" trigger="Zazonode";"2" dialog="Celis";"Seems that no more workers are here.&&Let's head back to Zazo!" extranext="2";"After a Hard Days Work"
+
+light0 position=0;0;0;1 ambient=.8;.8;.8;1 specular=0;0;0;1 diffuse=.8;.8;.8;1 attenuation=1;0.01;0.015
+material ambient=.4;.4;.4;1 specular=0;0;0;1 diffuse=.7;.7;.7;1
+invMaterial ambient=.7;.7;.7;1 specular=.2;.2;.2;1 diffuse=.8;.8;.8;1 shininess=5 emission=.1;.1;.1;1
+
+floorTex minecavefloor.jpg
+wallTex minecavewall.png
+wallTex minecavedoorbig0.png
+wallTex minecavedoor0.png
+roofTex minecaveroof.jpg
+
+normal floor 0 1
+normal wall 1 4
+normal roof 4 5
+
+mapPos 1 0
+
+# directions in labyrinth
+# directions in labyrinth
+dir 9 1 25
+dir 25 1 41
+dir 41 1 57
+dir 57 1 73
+dir 73 1 89
+dir 76 1 92
+dir 85 1 101
+dir 87 1 103
+dir 89 1 105
+dir 92 1 108
+dir 101 1 117
+dir 103 1 119
+dir 105 1 121
+dir 105 2 106
+dir 106 2 107
+dir 107 2 108
+dir 108 2 109
+dir 109 1 125
+dir 109 2 110
+dir 110 2 111
+dir 117 2 118
+dir 118 2 119
+dir 119 2 120
+dir 120 2 121
+dir 121 1 137
+dir 125 1 141
+dir 137 1 153
+dir 141 1 157
+dir 151 1 167
+dir 151 2 152
+dir 152 2 153
+dir 155 2 156
+dir 156 2 157
+dir 157 1 173
+dir 157 2 158
+dir 158 2 159
+dir 167 1 183
+dir 173 1 189
+dir 183 1 199
+
+mapEnd
+
+inv hinderDoor 111 2 2 Walls/minecavedoorbig the_great_mine--the_hall-mark2
+inv hinderDoor 9 3 2 Walls/minecavedoorbig the_great_mine--great_deep-mark1
+inv hinderDoor 199 1 2 Walls/minecavedoorbig the_great_mine--mine_shaft-mark1
+
+inv hinderDoor 119 3 2 Walls/minecavedoor the_great_mine--the_mine_core-mark4
+wall 3 103 1
+inv door 103 1 dontopen the_great_mine--the_mine_core-mark3
+
+inv button 155 0 7 Images/lever The_Great_Mine--Great_Deep.maphinderDoor201 The_Great_Mine--The_Mine_Core.maphinderDoor9 The_Great_Mine--Great_Deep.mapbutton189
+inv button 159 2 7 Images/lever The_Great_Mine--The_Mine_Core.maphinderDoor111 The_Great_Mine--The_Hall.maphinderDoor99 The_Great_Mine--The_Hall.mapbutton68
+inv button 189 1 7 Images/lever The_Great_Mine--The_Mine_Core.maphinderDoor199 The_Great_Mine--Mine_Shaft.maphinderDoor7 The_Great_Mine--Mine_Shaft.mapbutton28
+
+inv chest 76 3 2 Images/chest 0 130
+inv chest 85 3 2 Images/chest 0 100
+
+inv villager 87 3 GreatMineMission Images/minergebb.png Villager="I thought you were a monster!" Villager="I almost hit you in the head with my shovel." Villager="Mind if I tag along out of here?"
+
+end

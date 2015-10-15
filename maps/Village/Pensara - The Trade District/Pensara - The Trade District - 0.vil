@@ -1,0 +1,328 @@
+background Pensara_-_The_Trade_District true
+
+##### STARTING LOCATION #####
+
+# start Player xpos ypos angle, Background xpos ypos
+back 2820 1442 1
+start0 1081 1380 0
+start3 1081 20 2
+start4 15 435 1
+# start north
+# start2 458 374 2
+
+##### OBSTICLES #####
+# obsticles x y x2 y2
+## Trees ##
+o 981 1004 1040 1047 
+o 557 531 616 574
+o 1554 554 1613 597
+o 1151 834 1210 877
+o 855 1010 884 1034
+o 969 121 1028 164
+o 2593 731 2622 759
+o 154 981 213 1024
+o 1152 1003 1211 1046
+o 372 533 431 576
+o 2465 210 2494 238
+o 133 718 192 761
+o 2438 788 2467 816
+o 2519 149 2548 177
+o 2495 711 2524 739
+o 1945 825 2004 868
+o 2563 230 2592 258
+o 2378 190 2407 218
+o 982 828 1041 871
+o 2493 69 2522 97
+o 2560 590 2589 618
+o 2406 284 2435 312
+o 1168 123 1227 166
+o 2578 87 2607 115
+o 2447 605 2476 633
+o 35 129 94 172
+o 1784 547 1843 590
+o 2406 694 2435 722
+
+
+
+## Houses ##
+o 1446 676 1592 798
+o 1425 196 1569 367
+o 247 686 389 809
+o 2164 996 2170 1011
+o 2029 912 2037 917
+o 2029 996 2037 1011
+o 252 254 394 377
+o 2037 912 2163 1006
+o 1998 113 2170 224
+o 1806 703 1946 798
+o 600 693 760 811
+o 2163 912 2171 917
+o 499 158 757 375
+o 1569 174 1813 305
+o 1811 196 1953 368
+
+## Plotter and tents ##
+o 1369 492 1395 528
+o 2126 395 2154 435
+o 970 234 977 278
+o 906 640 948 672
+o 2331 656 2665 701
+o 2426 835 2452 878
+o 1161 609 1170 653
+o 2586 284 2620 330
+o 2492 800 2623 839
+o 1570 306 1669 335
+o 788 508 816 548
+o 1034 235 1041 279
+o 2150 812 2182 843
+o 741 781 783 821
+o 951 245 979 277
+o 737 339 764 381
+o 2422 383 2454 420
+o 1294 311 1353 326
+o 885 293 892 305
+o 221 368 272 408
+o 2390 1016 2634 1057
+o 1608 335 1635 350
+o 1808 905 1809 907
+o 1277 561 1303 601
+# Mail box
+o 551 865 561 898
+o 600 373 661 403
+o 864 543 898 610
+o 1345 223 1352 235
+o 1804 361 1835 386
+o 1206 237 1321 281
+o 1715 316 1764 345
+o 999 565 1006 577
+o 490 338 517 380
+o 987 253 1042 268
+o 341 385 355 426
+o 1195 365 1204 410
+o 283 371 306 390
+o 2380 826 2393 898
+o 1270 820 1324 860
+o 1320 354 1354 408
+o 1347 569 1354 581
+o 1205 378 1241 397
+o 2529 254 2561 290
+o 1204 397 1218 412
+o 862 236 915 267
+o 2377 994 2390 1055
+o 242 804 268 822
+o 932 571 967 603
+o 2575 839 2603 872
+o 1680 299 1729 328
+o 1020 179 1048 219
+o 850 340 899 379
+o 701 375 729 390
+o 2372 394 2400 434
+o 1070 456 1122 498
+o 2350 750 2385 778
+o 2371 495 2399 535
+o 1247 380 1274 401
+o 1162 563 1169 575
+o 51 496 79 536
+o 830 293 837 305
+o 1290 706 1299 750
+o 999 233 1023 260
+o 1934 360 1965 385
+o 1200 611 1224 668
+o 1028 856 1060 893
+o 1282 364 1291 408
+o 2466 272 2497 325
+o 2443 291 2466 317
+o 1285 701 1341 732
+o 2424 970 2451 1008
+o 1197 236 1204 280
+o 53 395 81 435
+o 830 337 837 381
+o 1182 633 1200 663
+o 2578 970 2605 1008
+o 1332 723 1355 761
+o 881 696 1008 750
+o 1146 179 1174 219
+o 971 628 996 666
+o 128 122 192 155
+o 2125 495 2153 535
+o 1217 564 1224 576
+o 2559 273 2586 334
+o 1393 338 1460 381
+o 1759 868 1808 907
+o 586 807 643 845
+o 821 358 850 390
+o 2380 307 2434 339
+o 1378 383 1406 423
+o 337 863 368 901
+
+## Wall ##
+
+o 0 1215 400 1312
+o 400 1215 800 1312
+o 800 1215 1025 1312
+o 2666 974 2761 1214
+o 2666 325 2761 650
+o 2623 1214 2760 1312
+o 2136 1214 2622 1312
+o 2666 650 2761 975
+o 1164 1214 1650 1312
+o 2666 0 2761 325
+o 1650 1214 2136 1312
+
+## Water ##
+
+o 0 387 35 427
+o 0 708 9 1129
+o 0 110 13 389
+o 0 527 9 708
+o 0 1129 8 1446
+o 2194 873 2337 1224
+o 2194 1224 2338 1448
+o 0 503 35 537
+o 1604 0 2070 112
+o 1138 0 1604 112
+o 0 0 620 110
+o 2173 501 2352 526
+o 620 0 1057 111
+o 2070 3 2331 112
+o 2188 112 2332 423
+o 2189 526 2335 847
+
+# Entrance trees
+o 967 1350 984 1442
+o 1227 1266 1258 1393
+o 1236 1394 1256 1441
+o 926 1253 966 1450
+
+
+##### DOORS #####
+# x y w d f 
+holeDoor village Pensara_-_The_North_District 1095 -80 92 0 0 0 0 0
+holeDoor village Pensara_-_The_School_District -70 442 92 3 0 0 0 0
+
+# Tower Prison
+door house Pensara_-_The_Trade_District_-_Tower_Prison 2060 170 40 0 2
+doorSignFl Locked.
+
+# Left door on mayors house.
+door house Pensara_-_The_Trade_District_-_Senate 563 320 30 0
+doorSignFl The House of The Senate.
+doorSignSl Authorized personnel only!
+
+# right door on mayors house.
+door house Pensara_-_The_Trade_District_-_Senate 665 321 30 0
+doorSignFl The House of The Senate.
+doorSignSl Authorized personnel only!
+
+# Hole door - Tent
+holeDoor house Pensara_-_The_Trade_District_-_Tent 2086 950 30 0 2
+holeDoorSignFl Can't talk, eating!
+
+# right door soldiers quarter
+o 1868 313 1898 367
+door house Pensara_-_The_Trade_District_-_Soldier 1868 313 30 0
+doorSignFl Authorized personnel only. 
+
+# left door soliders quarter
+door house Pensara_-_The_Trade_District_-_Soldier 1484 313 30 0
+doorSignFl Authorized personnel only. 
+
+# House right of the inn.
+door house Pensara_-_The_Trade_District_-_House_1_-_Floor_1 1503 741 30 0 2
+doorSignFl Not home
+
+# north west house
+door house Pensara_-_The_Trade_District_-_House_2_-_Floor_1 308 322 30 0 2
+doorSignFl Locked.
+
+# left of weapon
+door house Pensara_-_The_Trade_District_-_Mezza's_House 666 756 30 0 2
+doorSignFl Locked.
+
+### Business Houses ### 
+
+# Weapon shop hole door
+holeDoor weapon pensaraWeapons 1865 740 30 0
+building pensaraWeapons pensaraWeaponShop.jpg pensaraWeaponShopDenril.png Denril I_may_look_ruff_but_I_have_the_finest_quality_weapons, _there_is. Pensara_Shop
+
+door inn Inn 304 754 30 0 
+building Inn pensaraInn.jpg pensaraInnKeeperGustel.png Gustel Greetings,_fellow_citizen! _ House
+
+door card pensaraCardShop 2511 281 30 0;1;3
+building pensaraCardShop pensaraCardShop.jpg pensaraCardShopDeel.png Deel Great_cards_at_low,_low_prices! _ Pensara_Shop
+
+##### SIGNS #####
+
+# weapon shop sign
+sign 1760 870 47
+signL Welcome to Pensara weapon shop!
+signL Lowest prices in all of Pensara!
+
+# inn sign
+sign 338 863 30
+signL Rest here at the finest Inn you'll ever visit!
+signL Four beds for the price of three!
+
+# east of square sign
+sign 1367 492 30
+signL North: Vincent's resident. 
+signL West: School district.
+
+# east sign
+sign 2424 385 30
+signL Step by the greatest card shop, you'll ever see!
+signL Speak with the bald man in the stand up above.
+
+# entrance sign
+sign 1028 856 30
+signL West: The inn of Pensara.
+signL East: The weapon shop.
+
+# clock
+sign 1072 456 30
+signL Out of order.
+
+# north west mail box
+sign 341 385 15
+signL The mailbox seems empty...
+
+##### LOOTS #####
+
+# left of inn mail box
+loot card 555 868 0 cards.support.Fungi 2 1 false
+lootLine You found a card shoved inside the mail box!
+
+##### VILLAGERS #####
+
+# villager name
+villager Benth
+villager Billy 1 2 4
+villager Bobby
+villager Candy
+villager Deel
+villager Denese
+villager Frigidu
+villager Hillnar
+villager Hippo
+villager Hulda
+villager Juha
+villager Longhorn
+villager Mollie
+villager Ollie
+villager PensaraSoldier_1
+villager PensaraSoldier_2
+villager PensaraSoldier_3
+villager PensaraSoldier_4
+villager PensaraSoldier_7
+villager PensaraSoldier_8
+villager PensaraSoldier_9
+villager PensaraSoldier_10
+villager PensaraSoldier_11
+villager PensaraSoldier_12
+villager Polandera
+villager Tito
+villager Ulias
+villager Ylwaa
+
+##### END #####
+end

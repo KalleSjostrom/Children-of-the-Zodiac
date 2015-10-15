@@ -1,0 +1,40 @@
+
+start west
+	node 110 575 village landHome_of_Celis
+	node 313 611 village landAlares
+	node 349 672 village landPort_of_Alares
+	node 273 568 village landPass_to_Zazo
+    node 461 469 village landPort_of_Zazo
+	node 346 470 village landZazo
+    	
+    node 163 577 labyrinth landForest_of_Reil--Deep_Forest-mark0
+    node 219 602 labyrinth landForest_of_Reil--Deep_Forest-mark1
+    node 325 546 labyrinth landCentral_Pass--North_East_Part-mark0
+	node 354 622 labyrinth landGrivera--First_Floor-mark0
+	node 240 472 labyrinth landThe_Great_Mine--The_Hall-mark0
+	node 365 554 labyrinth landEast_Passage--West_Mountain-mark0
+	node 407 588 labyrinth landForest_of_Bri--East_Forest-mark0
+	node 440 579 labyrinth landMt._Cesadur--Entrance-mark0
+    	
+start east
+    node 636 654 village landParasne
+    node 678 585 village landPensara_-_The_Trade_District
+    node 791 419 village landBerca
+    node 768 456 village landCrossroad
+    
+    node 663 640 labyrinth landPensara_Forest--Forest-mark0
+    node 670 609 labyrinth landPensara_Forest--Forest-mark1
+    node 726 598 labyrinth landFire_Cavern--Hall_of_Fire-mark0
+    node 678 508 labyrinth landPensara_Prison--Floor_1-mark0
+    node 699 514 labyrinth landBerca_Desert--South_West-mark0
+    node 732 520 labyrinth landBerca_Desert--North_East-mark0
+    node 863 381 labyrinth landTemple_of_Aegis--First_Floor-mark0
+    node 726 664 labyrinth landDorma's_Forest--Forest_of_Hate-mark0
+        
+start north
+    node 481 180 village landDellna
+    
+    node 574 186 labyrinth landFrozen_Forest--Forest_Passage-mark0
+    node 532 394 labyrinth Empyrian_Temple--Hall_of_Wind-mark0
+
+end

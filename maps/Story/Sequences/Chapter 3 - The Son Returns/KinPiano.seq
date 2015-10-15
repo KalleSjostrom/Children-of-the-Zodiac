@@ -1,0 +1,60 @@
+import file=main.var
+
+var kin=0
+var celis=1
+var borealis=2
+var zalzi=2
+
+info time="day" name="Pensara - The Trade District - House 1 - Floor 1" music="continue" fadeValue="1" musicVolume="1"
+
+actor name="Kin" pos=460;370;0
+actor name="Celis" pos=475;340;0
+actor name="Borealis" pos=475;400;0
+actor name="Zalzi" pos=480;370;0
+
+load music="Kin piano"
+
+dialogsingle starttimea=500 <= name="Kin" text="Oh! A piano!";"Watch and learn!"
+
+ins timea=200 index=kin kind=dist distance=10 direction=0 duration=200
+
+ins type=fadeout timea=100 index=0 fadetime=1000 kind=music mode=pause
+ins type=fadein timea=1000 index=1 fadetime=0 kind=music mode=play
+
+
+var d=470
+
+ins timea=140 index=kin kind=dist distance=4 direction=1 facedirection=0 duration=100
+ins timea=d index=kin kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=d index=kin kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=200 index=celis kind=emotion emotion=? show=true
+ins timea=270 index=kin kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=d index=kin kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=d index=kin kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=100 index=celis kind=emotion emotion=hihi show=true
+ins timea=370 index=kin kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=d index=kin kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=0 index=celis kind=stop direction=1
+ins timea=d index=kin kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=0 index=celis kind=stop direction=2
+ins timea=d index=kin kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=0 index=celis kind=stop direction=3
+ins timea=d index=kin kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=0 index=celis kind=stop direction=0
+ins timea=d index=kin kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=0 index=celis kind=stop direction=1
+ins timea=d index=kin kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=0 index=celis kind=stop direction=2
+ins timea=d index=kin kind=dist distance=8 direction=3 facedirection=0 duration=100
+ins timea=0 index=celis kind=stop direction=3
+ins timea=d index=kin kind=dist distance=8 direction=1 facedirection=0 duration=100
+ins timea=0 index=celis kind=stop direction=0
+ins timea=100 index=celis kind=emotion emotion=hihi show=false
+
+ins type=fadeout timea=1400 index=1 fadetime=1000 kind=music mode=kill
+ins type=fadein timea=1000 index=0 fadetime=1000 kind=music mode=play
+
+load trigger="Piano"
+ins index=0 timea=0 kind=trigger value=2
+
+ins timea=1000 kind=end

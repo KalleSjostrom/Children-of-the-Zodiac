@@ -1,0 +1,93 @@
+image char/Pensarasoldier
+start 830 520
+
+in 3 50 false
+in 0 500 true
+in 3 50 false
+in 0 300 true
+in 1 20 false
+in 0 400 true
+in 1 80 false
+in 0 600 true
+
+
+dialog 1
+
+n Soldier
+fl The soldiers payment is a little low but it
+sl doesn't hurt to look around for nice stuff.
+f true
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

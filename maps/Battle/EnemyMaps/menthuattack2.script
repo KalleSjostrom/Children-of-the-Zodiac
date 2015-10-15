@@ -1,0 +1,39 @@
+newList 100-50
+attackSingle change0
+attackSingle Omega
+attackSingle Wrath_of_Ophiuchus
+attack Death
+attack Salmonman's_Distortion Serphia's_Bless Taur's_Endurance
+attack Demon_Jaws Fury_Slash
+attack Fire_Element Ice_Element Earth_Element Wind_Element
+attack Demon_Jaws Fury_Slash
+attack Fire Ice Earth Wind
+attack Fire_Element Ice_Element Earth_Element Wind_Element
+attack Gore Hell_Claws
+attack Demoralize Roar
+attack Demon_Jaws Fury_Slash
+newList 50-25
+attack Ophiuchus_Fury
+attack Cool_Down
+attack Demon_Jaws Fury_Slash
+attack Fire_Element Ice_Element Earth_Element Wind_Element
+attack Omega_Fire Omega_Ice Omega_Earth Omega_Wind
+attack Salmonman's_Distortion Serphia's_Bless Taur's_Endurance
+attack Demon_Jaws Fury_Slash
+attack Fire_Element Ice_Element Earth_Element Wind_Element
+attack Gore Hell_Claws
+attack Demoralize Roar
+attack Death
+newList 25-0
+attack Ophiuchus_Fury
+attack Cool_Down
+attack Demon_Jaws Fury_Slash
+attack Fire_Element Ice_Element Earth_Element Wind_Element
+attack Omega_Fire Omega_Ice Omega_Earth Omega_Wind
+attack Salmonman's_Distortion Serphia's_Bless Taur's_Endurance
+attack Demon_Jaws Fury_Slash
+attack Fire_Element Ice_Element Earth_Element Wind_Element
+attack Gore Hell_Claws
+attack Demoralize Roar
+attack Death
+attack Death

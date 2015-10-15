@@ -1,0 +1,270 @@
+background Berca true
+
+back 2336 1197 1
+start 1192 1140 0
+#wind -80;0;0 1
+#particlesystem sandsystem
+
+### Trees ###
+o 131 429 146 472
+o 432 136 447 179
+o 107 305 122 348
+o 237 510 252 553
+o 120 174 147 213
+o 7 308 22 351
+o 58 225 85 264
+o 1806 113 1821 156
+o 152 95 179 134
+o 187 405 214 444
+o 375 474 390 517
+o 1370 556 1385 599
+o 1379 778 1394 821
+o 1661 554 1688 593
+o 2011 122 2026 165
+o 745 708 760 751
+o 1740 552 1767 591
+o 302 101 317 144
+o 426 382 453 421
+o 51 360 78 399
+o 364 127 391 166
+o 207 106 234 145
+o 164 533 191 572
+o 886 499 913 538
+o 59 134 86 173
+o 280 437 295 480
+
+### Lake ###
+o 187 217 193 223
+o 324 316 330 324
+o 250 373 371 388
+o 179 233 183 242
+o 237 377 250 382
+o 310 251 319 259
+o 181 324 186 335
+o 199 207 206 213
+o 215 367 223 374
+o 351 331 356 337
+o 175 242 310 324
+o 205 199 216 212
+o 368 346 374 368
+o 311 259 314 267
+o 310 392 356 398
+o 198 354 206 360
+o 350 338 367 368
+o 309 311 323 324
+o 275 387 363 393
+o 226 187 362 194
+o 387 211 391 236
+o 304 243 330 250
+o 265 175 324 180
+o 331 320 338 323
+o 193 213 216 241
+o 217 194 367 242
+o 380 203 387 242
+o 186 324 206 354
+o 206 324 350 368
+o 311 303 317 310
+o 223 367 373 377
+o 184 223 194 243
+o 367 199 379 242
+o 169 254 175 309
+o 246 181 340 186
+
+### Stuff ###
+o 1720 878 1746 898
+o 1549 572 1577 613
+o 750 441 767 487
+o 1746 873 1756 888
+o 1684 379 1713 422
+o 813 440 822 487
+o 1379 1058 1402 1078
+o 1685 321 1709 340
+o 683 746 713 772
+o 566 260 611 303
+o 1759 420 1815 435
+o 1871 418 1899 453
+o 1242 778 1273 816
+o 1173 202 1201 233
+o 149 1108 293 1149
+o 157 633 301 674
+o 1900 417 1923 435
+o 663 440 672 487
+o 617 342 647 381
+
+### Houses ###
+o 1239 482 1464 556
+o 1143 899 1151 956
+o 1269 974 1412 1034
+o 943 467 1127 557
+o 1493 334 1493 334
+o 1151 152 1158 406
+o 928 973 1025 1063
+o 756 130 916 259
+o 1033 899 1149 907
+o 1158 152 1458 160
+o 1243 328 1376 416
+o 1105 964 1142 1046
+o 1457 152 1464 490
+o 1592 750 1850 878
+o 1714 279 1970 426
+o 457 694 674 778
+o 1031 965 1062 1047
+o 1127 481 1191 556
+o 1143 952 1151 1046
+o 1128 406 1158 413
+o 1024 899 1032 1047
+o 1120 406 1127 479
+o 1326 1096 1344 1112
+o 1343 1078 1406 1112
+o 1312 1031 1326 1056
+o 1311 1106 1329 1112
+o 1401 1032 1413 1064
+o 1327 1031 1342 1040
+o 1400 1064 1406 1087
+o 1268 1031 1311 1064
+o 1363 157 1389 179
+o 1154 113 1159 404
+o 1172 201 1201 233
+o 1203 112 1231 154
+o 1461 113 1465 482
+o 1383 128 1442 172
+o 1154 96 1465 112
+o 1221 128 1256 208
+o 1360 179 1409 219
+o 1255 114 1460 127
+
+o 1025 855 1150 919
+
+##### DOORS #####
+
+# Large house north east
+holeDoor house Berca_-_Library_-_Floor_1 1822 355 43 0 2
+
+# House right
+holeDoor house Berca_-_Bar 1655 825 25 0 2
+holeDoorSignFl Locked.
+
+# Rebel Hideout
+holeDoor story;house Meeting_With_the_Rebels;Rebel_Hideout 553 723 30 0 2
+holeDoorSignFl Not now!
+holeDoorSignSl We must hurry!
+
+# Red drape entry house
+door house RedDrape 1105 1012 25 0 2
+doorSignFl No entry!
+
+# Left of entry house
+holeDoor house Berca_-_Dolly's_House 937 1010 25 0 2
+holeDoorSignFl Locked.
+
+# Purple drape entry house
+door house House6 1038 870 25 0 2
+doorSignFl Don't come in!
+
+# Right of entry house
+holeDoor house Berca_-_House 1365 983 25 0 2
+holeDoorSignFl Locked.
+
+# Stairs
+holeDoor house House8 1819 138 25 0 2
+holeDoorSignFl Locked.
+
+# top of inn
+holeDoor card bercaCardShop 1297 367 25 0
+building bercaCardShop bercaCardShop.jpg bercaCardShopRomero.png Romero Get_your_cards_here! _ Berca_Shop
+holeDoorSignFl Locked.
+door church Church 2088 590 40 0;1;2;3
+building Church bercaChurch.jpg bercaPastorTemeth.png Temeth Welcome. How_can_I_be_of_assistance? Berca_Church
+holeDoorSignFl Locked.
+
+# inn
+holeDoor inn Inn 1026 506 25 0
+building Inn bercaInn.jpg bercaInnKeeperSamuler.png Samuler Welcome. _ House
+
+# Weapon shop
+holeDoor weapon bercaWeapons 825 211 25 0
+building bercaWeapons bercaWeaponShop.jpg bercaWeaponShopHelgar.png Helgar I_have_weapons_from_all_around_the_world! Interested? Berca_Shop
+
+##### SIGNS ######
+
+# sign middle of inn and large
+sign 1550 572 27
+signL West: Inn and an item shop on the roof.
+signL East: Holy square.
+
+# SfinxRight
+sign 1905 120 41
+signL What a butt ugly statue!
+
+# Sfinx left
+sign 1744 119 41
+signL This statue is kind of nice!
+
+# Welcome
+sign 1242 781 31
+signL Welcome to the Village of the Sun!
+
+# oasis
+sign 310 248 30
+signL The water looks fresh.
+
+# Itemshop
+sign 1362 186 45
+signL Item shop.
+
+# Well sign
+sign 617 342 30
+signL Drink the water on your own risk!
+
+##### LOOT #####
+
+# GOLD = 0;
+# ITEM = 1;
+# CARD = 2;
+# WEAPON = 3;
+# ARMOR = 4;
+
+# name x y contentName type [nr level all]
+loot name 575 270 0 cards.support.Shield 2 2 false
+lootLine A card was wedged in between the bricks in the well!
+
+# loot name x y cards.magic.Wind 2 2 false
+# lootLine 
+# loot name x y cards.offense.BattleCard 2 1 true
+# loot name x y cards.offense.CriticalBlow 2 2 false
+# loot name x y cards.offense.MagicalBlow 2 2 false
+
+##### VILLAGERS #####
+
+villager Alishia
+villager BercaCommander_1
+villager BercaSoldier_10
+villager BercaSoldier_11
+villager BercaSoldier_12
+villager BercaSoldier_13
+villager BercaSoldier_1 1
+villager BercaSoldier_2 1
+villager BercaSoldier_3
+villager BercaSoldier_4
+villager BercaSoldier_5
+villager BercaSoldier_6
+villager BercaSoldier_7
+villager BercaSoldier_8
+villager BercaSoldier_9
+villager Eufrim
+villager Freddy
+villager Guy 1 2
+villager Hassan
+villager Ingo
+villager Laila
+villager Muhamder
+villager Olda 1
+villager Omer
+villager Petir
+villager Rashidar
+villager Rebel_2
+villager Temeth
+villager Tilly
+
+##### END #####
+end

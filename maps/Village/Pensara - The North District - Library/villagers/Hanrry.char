@@ -1,0 +1,25 @@
+image Hanrry
+start 390 265
+
+in 1 100 true
+in 3 75 false
+in 3 100 true
+in 2 50 false
+in 2 100 true
+in 1 75 false
+in 2 100 true
+in 0 50 false
+
+dialog 1
+
+n Hanrry
+fl If you haven't you must visit the
+sl library in Berca.
+f true
+
+n Hanrry
+fl The scrolls they keep there are
+sl older than man himself.
+f true
+
+end

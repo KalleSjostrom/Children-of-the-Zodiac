@@ -1,0 +1,115 @@
+image Sellie
+start 1790 1130
+
+in 3 55 false
+in 2 185 false
+in 1 65 false
+in 1 100 true
+in 3 210 false
+in 3 100 true
+in 0 85 false
+in 3 100 true
+in 1 50 false
+in 2 180 false
+in 3 45 false
+in 3 100 true
+in 1 85 false
+in 0 280 false
+in 1 110 false
+
+dialog 1
+
+# walking on the right pier
+n Sellie
+fl The big ships still impresses me.
+sl It's a proof of what we humans can accomplish!
+f true
+
+dialog 2
+
+n Sellie
+fl I've heard that someone awoke the legendary airship.
+sl That's amazing!
+trigger Sellie 3
+f true
+
+dialog 3 
+
+n Sellie
+fl We humans have really earned our throne as ruler
+sl of the earth, the nature and other creatures!
+f true 
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,28 @@
+##### VILLAGER #####
+image char/Farl
+
+##### STARTING LOCATION #####
+
+# start x y
+start 652 544
+
+##### INSTRUCTIONS #####
+
+# in angle distance stopped
+in 2 180 true
+
+##### DIALOGS #####
+
+# first line
+# second line
+# first dialog background (the one at the far left top of the screen)
+
+dialog 1
+
+n Farl
+fl ...
+sl end
+f true
+
+##### END #####
+end

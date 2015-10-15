@@ -1,0 +1,98 @@
+image Friedrich
+start 1480 200
+
+in 1 75 false
+in 1 100 true
+in 0 50 false
+in 1 50 false
+in 2 100 true
+in 1 55 false
+in 2 50 false
+in 3 100 true
+in 2 40 false
+in 3 55 false
+in 0 100 true
+in 3 265 false
+in 0 40 false
+in 1 140 false
+
+dialog 1
+
+n Friedrich
+fl Soon something will happen. I just know it.
+sl end
+f true
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

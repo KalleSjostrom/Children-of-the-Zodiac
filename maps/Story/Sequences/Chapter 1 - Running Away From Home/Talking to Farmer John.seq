@@ -1,0 +1,52 @@
+import file=main.var
+
+var kin=0
+var celis=1
+
+actor name="Kin" pos=1240;1565
+actor name="Celis" pos=1240;1535
+
+info time="day" name="Alares" music="Alares" fadeValue="1" musicVolume="1"
+
+dialogpacket name=0 starttimea=0
+dialog packetname=0 name="Farmer John" text="Everyone says that Elmer is just an old fool,";"but I think he knows something we don't."
+dialog packetname=0 name="Farmer John" text="Maybe we have all just closed our eyes to the truth..?";""
+dialog packetname=0 name="Farmer John" text="Maybe we're afraid to admit that";"we are facing a serious problem."
+dialog packetname=0 name="Farmer John" text="Anyway... who am I to lecture you?";"I'm just a simple farm boy."
+
+ins type=4 timea=1200 index=celis kind=stop direction=1
+
+dialogsingle starttimea=250 duration=500 <= name="Celis" text="Maybe there is something...";"Maybe we should open our eyes."
+
+ins type=4 timea=800 index=celis kind=dist distance=30 duration=2500 direction=2
+ins type=4 timea=300 index=kin kind=emotion emotion=? show=true
+ins type=4 timea=400 index=kin kind=stop direction=1
+dialogsingle starttimea=800 duration=1000 <= name="Celis" text="There could be something we";"are closing our eyes to!"
+
+ins type=4 timea=1200 index=kin kind=dist distance=15 duration=300 direction=3
+ins type=4 timea=700 index=kin kind=stop direction=2
+dialogsingle starttimea=250 <= name="Kin" text="What?";"What are you saying?"
+
+ins type=4 timea=250 index=celis kind=stop direction=0
+dialogsingle starttimea=250 <= name="Celis" text="Maybe we are afraid to see";"the truth sometimes."
+ins type=4 timea=250 index=kin kind=tor movepos=-5;8 duration=200
+ins type=4 timea=0 index=kin kind=emotion emotion=! show=true
+dialogsingle starttimea=250 duration=500 <= name="Kin" text="Afraid!?";"I'm not afraid of anything!"
+
+ins type=4 timea=1000 index=celis kind=stop direction=2
+ins type=4 timea=0 index=celis kind=emotion emotion=... show=true
+ins type=4 timea=500 index=celis kind=dist distance=20 duration=1000 direction=2
+ins type=4 timea=500 index=kin kind=emotion show=false
+ins type=4 timea=1000 index=kin kind=stop direction=1
+ins type=4 timea=1000 index=kin kind=stop direction=3
+ins type=4 timea=1000 index=kin kind=stop direction=2
+ins type=4 timea=1000 index=kin kind=dist distance=10 duration=200 direction=2
+dialogsingle starttimea=1 duration=100 <= name="Kin" text="Come on Celis...";"Let's go."
+ins type=4 timea=800 index=celis kind=emotion show=false
+
+load trigger="Farmer John"
+load trigger="Elmer"
+ins index=0 timea=0 kind=trigger value=3
+ins index=1 timea=0 kind=trigger value=2
+
+ins timea=500 kind=end

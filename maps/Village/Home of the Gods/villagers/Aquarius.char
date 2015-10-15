@@ -1,0 +1,384 @@
+image _ 0
+start 608 962
+
+in 2 200 true
+
+range 50
+
+dialog 1
+
+n Aquarius
+fl In the beginning we, the thirteen Zodics, 
+sl created the world and in this world, life began to grow.
+beforeTrigger godAquariusSystem 1
+f true
+
+n Aquarius
+fl First came the tenjins whom we loved as children, 
+sl especially Ophichus.
+trigger Aquarius 20
+triggeradd Aries 1
+triggeradd Cancer 1
+triggeradd Capricorn 1
+triggeradd Gemini 1
+triggeradd Leo 1
+triggeradd Libra 1
+triggeradd Pisces 1
+triggeradd Sagittarius 1
+triggeradd Scorpius 1
+triggeradd Taurus 1
+triggeradd Virgo 1
+triggeradd godDoorExitSystem 1
+triggeradd home_of_the_godsmenthu's_lair--room_of_confusion-mark0activation 1
+f true
+
+dialog 2
+
+n Aquarius
+fl Ophiuchus watched them adjust to nature 
+sl and learn their true path. 
+beforeTrigger godAquariusSystem 1
+f true
+
+n Aquarius
+fl When man emerged, Ophiuchus wept. 
+sl end
+f true
+
+n Aquarius
+fl Man was rough, uncivilized and with no 
+sl concern other than of themselves. 
+trigger Aquarius 20
+triggeradd Aries 1
+triggeradd Cancer 1
+triggeradd Capricorn 1
+triggeradd Gemini 1
+triggeradd Leo 1
+triggeradd Libra 1
+triggeradd Pisces 1
+triggeradd Sagittarius 1
+triggeradd Scorpius 1
+triggeradd Taurus 1
+triggeradd Virgo 1
+triggeradd godDoorExitSystem 1
+triggeradd home_of_the_godsmenthu's_lair--room_of_confusion-mark0activation 1
+f true
+
+dialog 3
+
+n Aquarius
+fl The rest of us, saw man and tenjins as our children 
+sl and we love them both equally.
+beforeTrigger godAquariusSystem 1
+f true
+
+n Aquarius
+fl When we saw the humans struggling, 
+sl we wanted to help them find their path.
+trigger Aquarius 20
+triggeradd Aries 1
+triggeradd Cancer 1
+triggeradd Capricorn 1
+triggeradd Gemini 1
+triggeradd Leo 1
+triggeradd Libra 1
+triggeradd Pisces 1
+triggeradd Sagittarius 1
+triggeradd Scorpius 1
+triggeradd Taurus 1
+triggeradd Virgo 1
+triggeradd godDoorExitSystem 1
+triggeradd home_of_the_godsmenthu's_lair--room_of_confusion-mark0activation 1
+f true
+
+dialog 4
+
+n Aquarius
+fl Ophiuchus could never accept man as his child, 
+sl but only saw them as a threat to the tenjins.
+beforeTrigger godAquariusSystem 1
+f true
+
+n Aquarius
+fl He assembled us here to "solve our mistake" as he put it. 
+sl end
+trigger Aquarius 20
+triggeradd Aries 1
+triggeradd Cancer 1
+triggeradd Capricorn 1
+triggeradd Gemini 1
+triggeradd Leo 1
+triggeradd Libra 1
+triggeradd Pisces 1
+triggeradd Sagittarius 1
+triggeradd Scorpius 1
+triggeradd Taurus 1
+triggeradd Virgo 1
+triggeradd godDoorExitSystem 1
+triggeradd home_of_the_godsmenthu's_lair--room_of_confusion-mark0activation 1
+f true
+
+dialog 5
+
+n Aquarius
+fl Ophiuchus strongly believed that man must be 
+sl eradicated quickly, before they destroyed too much.
+beforeTrigger godAquariusSystem 1
+f true
+
+n Aquarius
+fl We agreed that the behaviour of man was not healthy 
+sl for the planet, but we differed in our view of the solution. 
+trigger Aquarius 20
+triggeradd Aries 1
+triggeradd Cancer 1
+triggeradd Capricorn 1
+triggeradd Gemini 1
+triggeradd Leo 1
+triggeradd Libra 1
+triggeradd Pisces 1
+triggeradd Sagittarius 1
+triggeradd Scorpius 1
+triggeradd Taurus 1
+triggeradd Virgo 1
+triggeradd godDoorExitSystem 1
+triggeradd home_of_the_godsmenthu's_lair--room_of_confusion-mark0activation 1
+f true
+
+dialog 6
+
+n Aquarius
+fl We wanted to help man, 
+sl while he wanted to remove them.
+beforeTrigger godAquariusSystem 1
+f true
+
+n Aquarius
+fl When no one would join him in his request, 
+sl he left and has not been seen since. 
+f true
+
+n Aquarius
+fl Now, however, his plan is clear. 
+sl He went his own way in order to achieve his will.
+trigger Aquarius 20
+triggeradd Aries 1
+triggeradd Cancer 1
+triggeradd Capricorn 1
+triggeradd Gemini 1
+triggeradd Leo 1
+triggeradd Libra 1
+triggeradd Pisces 1
+triggeradd Sagittarius 1
+triggeradd Scorpius 1
+triggeradd Taurus 1
+triggeradd Virgo 1
+triggeradd godDoorExitSystem 1
+triggeradd home_of_the_godsmenthu's_lair--room_of_confusion-mark0activation 1
+f true
+
+dialog 7
+
+n Aquarius
+fl As we are not of physical nature, 
+sl we can not control man nor tenjins to do our will.
+beforeTrigger godAquariusSystem 1
+f true
+
+n Aquarius
+fl Because of this, we created the stones in order to guide 
+sl the tenjin in helping man become as gifted as themselves.
+trigger Aquarius 20
+triggeradd Aries 1
+triggeradd Cancer 1
+triggeradd Capricorn 1
+triggeradd Gemini 1
+triggeradd Leo 1
+triggeradd Libra 1
+triggeradd Pisces 1
+triggeradd Sagittarius 1
+triggeradd Scorpius 1
+triggeradd Taurus 1
+triggeradd Virgo 1
+triggeradd godDoorExitSystem 1
+triggeradd home_of_the_godsmenthu's_lair--room_of_confusion-mark0activation 1
+f true
+
+dialog 8
+
+n Aquarius
+fl But ever since the great war the stones has been silent.
+sl end
+beforeTrigger godAquariusSystem 1
+f true
+
+n Aquarius
+fl Now we can see that man once again has strayed from his path.
+sl end
+trigger Aquarius 20
+triggeradd Aries 1
+triggeradd Cancer 1
+triggeradd Capricorn 1
+triggeradd Gemini 1
+triggeradd Leo 1
+triggeradd Libra 1
+triggeradd Pisces 1
+triggeradd Sagittarius 1
+triggeradd Scorpius 1
+triggeradd Taurus 1
+triggeradd Virgo 1
+triggeradd godDoorExitSystem 1
+triggeradd home_of_the_godsmenthu's_lair--room_of_confusion-mark0activation 1
+f true
+
+dialog 9
+
+n Aquarius
+fl There is a greater force involved and all humans on the 
+sl planet will come to destroy each other if this goes on.
+beforeTrigger godAquariusSystem 1
+trigger Aquarius 20
+triggeradd Aries 1
+triggeradd Cancer 1
+triggeradd Capricorn 1
+triggeradd Gemini 1
+triggeradd Leo 1
+triggeradd Libra 1
+triggeradd Pisces 1
+triggeradd Sagittarius 1
+triggeradd Scorpius 1
+triggeradd Taurus 1
+triggeradd Virgo 1
+triggeradd godDoorExitSystem 1
+triggeradd home_of_the_godsmenthu's_lair--room_of_confusion-mark0activation 1
+f true
+
+dialog 10
+
+n Aquarius
+fl Ophiuchus is using Menthu to do his bidding. 
+sl end
+beforeTrigger godAquariusSystem 1
+f true
+
+n Aquarius
+fl Destroy Menthu and Ophiuchus will have lost 
+sl his last hope of achieving his will.
+trigger Aquarius 20
+triggeradd Aries 1
+triggeradd Cancer 1
+triggeradd Capricorn 1
+triggeradd Gemini 1
+triggeradd Leo 1
+triggeradd Libra 1
+triggeradd Pisces 1
+triggeradd Sagittarius 1
+triggeradd Scorpius 1
+triggeradd Taurus 1
+triggeradd Virgo 1
+triggeradd godDoorExitSystem 1
+triggeradd home_of_the_godsmenthu's_lair--room_of_confusion-mark0activation 1
+f true
+
+dialog 11
+
+n Aquarius
+fl To help you in this task we beg of you, take this blessing
+sl so that you will have the might to overpower Menthu.
+beforeTrigger godAquariusSystem 1
+trigger Aquarius 20
+triggeradd Aries 1
+triggeradd Cancer 1
+triggeradd Capricorn 1
+triggeradd Gemini 1
+triggeradd Leo 1
+triggeradd Libra 1
+triggeradd Pisces 1
+triggeradd Sagittarius 1
+triggeradd Scorpius 1
+triggeradd Taurus 1
+triggeradd Virgo 1
+triggeradd godDoorExitSystem 1
+triggeradd home_of_the_godsmenthu's_lair--room_of_confusion-mark0activation 1
+f true
+
+dialog 12
+
+n Aquarius
+fl The path ahead will lead you to Menthu's lair. 
+sl end
+beforeTrigger godAquariusSystem 1
+trigger Aquarius 20
+triggeradd Aries 1
+triggeradd Cancer 1
+triggeradd Capricorn 1
+triggeradd Gemini 1
+triggeradd Leo 1
+triggeradd Libra 1
+triggeradd Pisces 1
+triggeradd Sagittarius 1
+triggeradd Scorpius 1
+triggeradd Taurus 1
+triggeradd Virgo 1
+triggeradd godDoorExitSystem 1
+triggeradd home_of_the_godsmenthu's_lair--room_of_confusion-mark0activation 1
+f true
+
+dialog 20
+n Aquarius
+fl ...
+f true
+dialog 21
+n Aquarius
+fl ...
+f true
+dialog 22
+n Aquarius
+fl ...
+f true
+dialog 23
+n Aquarius
+fl ...
+f true
+dialog 24
+n Aquarius
+fl ...
+f true
+dialog 25
+n Aquarius
+fl ...
+f true
+dialog 26
+n Aquarius
+fl ...
+f true
+dialog 27
+n Aquarius
+fl ...
+f true
+dialog 28
+n Aquarius
+fl ...
+f true
+dialog 29
+n Aquarius
+fl ...
+f true
+dialog 30
+n Aquarius
+fl ...
+f true
+dialog 31
+n Aquarius
+fl ...
+f true
+dialog 32
+n Aquarius
+fl ...
+f true
+dialog 33
+n Aquarius
+fl ...
+f true
+
+end

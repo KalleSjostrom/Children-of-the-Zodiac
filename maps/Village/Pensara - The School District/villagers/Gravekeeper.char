@@ -1,0 +1,30 @@
+image Grave_keeper
+start 400 790
+
+in 3 38 false
+in 0 200 true
+in 3 71 false
+in 0 200 true
+in 3 71 false
+in 0 200 true
+in 3 40 false
+in 2 130 false
+in 1 41 false
+in 0 200 true
+in 1 210 false
+in 0 200 true
+in 1 54 false
+in 0 130 false
+in 3 52 false
+in 0 200 true
+in 3 33 false 
+
+dialog 1
+
+# Standing at the graveyard
+n Gravekeeper
+fl Digging... Digging...
+sl That's all I do...
+f true
+
+end

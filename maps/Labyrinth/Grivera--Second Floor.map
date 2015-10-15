@@ -1,0 +1,78 @@
+mapSize -0.5 0.5 1
+
+size 206
+
+#fog red=.4 green=.3 blue=0 alpha=.01 density=0.01
+
+light0 position=0;0;0;1 ambient=.8;.8;.8;1 specular=.2;.2;.2;1 diffuse=.8;.8;.8;1 attenuation=1;0.01;0.015
+material ambient=.7;.7;.7;1 specular=.2;.2;.2;1 diffuse=.8;.8;.8;1
+invMaterial ambient=.7;.7;.7;1 specular=.2;.2;.2;1 diffuse=.8;.8;.8;1 shininess=5 emission=.1;.1;.1;1
+
+enemyColor .7 .7 .7 1
+
+floorTex demoncave1floor.jpg
+floorTex demoncave1flooropen.jpg
+wallTex demoncave1wall.png
+wallTex demoncave1door0.png
+roofTex demoncave1roof.jpg
+roofTex demoncave1roofopen.jpg
+
+normal floor 0 2
+normal wall 2 4
+normal roof 4 6
+
+mapPos 1 0
+
+# directions in labyrinth
+dir 43 1 59
+dir 43 2 44
+dir 44 2 45
+dir 45 2 46
+dir 46 1 62
+dir 52 2 53
+dir 53 2 54
+dir 54 2 55
+dir 55 1 71
+dir 59 1 75
+dir 62 1 78
+dir 71 1 87
+dir 75 1 91
+dir 78 1 94
+dir 87 1 103
+dir 87 2 88
+dir 88 2 89
+dir 89 2 90
+dir 90 2 91
+dir 103 1 119
+dir 116 2 117
+dir 117 2 118
+dir 118 2 119
+dir 139 1 155
+dir 139 2 140
+dir 140 2 141
+dir 141 2 142
+dir 142 2 143
+dir 143 1 159
+dir 155 1 171
+dir 159 1 175
+dir 171 1 187
+dir 175 1 191
+dir 187 1 203
+dir 189 2 190
+dir 190 2 191
+
+mapEnd
+
+floor 1 116 0
+inv ladderDoor 116 0 dontopen Images/ladderdown.png false grivera--first_floor-mark1
+floor 1 203 1
+inv ladderDoor 203 1 dontopen Images/ladderdown.png false grivera--first_floor-mark2
+roof 5 94 1
+inv ladderDoor 94 1 dontopen Images/ladderup.png true The_Senate_of_Pensara grivera--third_floor-mark0
+
+inv chest 52 0 2 Images/chest 0 20
+inv chest 189 0 2 Images/chest 2 cards.magic.Slow 2 false
+
+inv save 87 2 -1 -1
+
+end

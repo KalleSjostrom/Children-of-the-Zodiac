@@ -1,0 +1,21 @@
+background Dellna_-_Elder_House_-_Floor_3 true
+music Dellnasad
+
+back 1024 768
+start 402 300 0
+
+inside
+
+holeDoor switch Dellna_-_Elder_House_-_Floor_2 402 315 30 2 0 399 390 2 1
+
+o 590 315 627 355
+o 430 372 437 380
+o 367 315 394 592
+o 367 213 674 314
+o 395 380 432 491
+o 394 528 623 590
+o 621 314 648 591
+o 432 340 441 371
+o 497 314 590 328
+
+end

@@ -1,0 +1,92 @@
+image Falk	   
+	   
+start 565 515	   
+	   
+in 1 35 false	   
+in 0 130 false	   
+in 1 60 false	   
+in 0 50 true	   
+in 1 55 false	   
+in 0 60 true	   
+in 1 55 false	   
+in 0 100 true	   
+in 1 55 false	   
+in 0 60 true	   
+in 1 45 false	   
+in 0 80 false	   
+in 3 45 false	   
+in 2 60 true	   
+in 3 55 false	   
+in 2 60 true	   
+in 3 55 false	   
+in 2 60 true	   
+in 3 55 false	   
+in 2 60 true	   
+in 3 105 false	   
+in 2 60 true	   
+in 3 55 false	   
+in 2 60 true	   
+in 3 55 false	   
+in 2 60 true	   
+in 1 155 false	   
+in 2 210 false	   
+in 3 35 false	   
+in 3 100 true	   
+	   
+dialog 1	   
+	   
+n Falk	   
+fl Do you know of Pensara?	   
+sl end	   
+f true	   
+	   
+q 10	   
+alt Yes
+alt No
+alt _
+alt _
+f true
+	   
+*11	   
+n Falk
+fl Then I don't have to tell you what a	   
+sl frightening nation it is.	   
+f true	   
+	   
+*12	   
+n Falk	   
+fl Pensara is the largest nation with the largest	   
+sl army in the world.
+f true	   
+	   
+n Falk	   
+fl Lately they've shown ambitions of taking	   
+sl over the world with their huge army.
+f true
+	   
+n Falk	   
+fl As a protest against that, Alares and Zazo has agreed
+sl to stop all trade with them.
+f true	   
+	   
+dialog 2	   
+	   
+n Falk	   
+fl I bet pensara is behind the incident in Zazo.	   
+sl end	   
+trigger Falk 1
+f true	
+
+dialog 3
+
+n Falk
+fl I bet I was right about that the mine incident in
+sl Zazo was Pensaras doing.
+f true
+
+n Falk
+fl And now the war hunger nation desides to invade.
+sl What a soul less nation it is.
+f true
+	   
+end	 

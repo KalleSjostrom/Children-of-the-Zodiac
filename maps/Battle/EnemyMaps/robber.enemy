@@ -1,0 +1,27 @@
+name Robber
+
+defense 26
+magicDefense 25
+agility 12
+evade 2
+hit 100
+attack 182
+magic 161
+support 93
+hp 491
+element 0
+gold 40
+experience 40
+criticalChance 0
+
+image boar 4 3 1
+armor 18 10
+preferences 100 0
+
+scale 5
+height -2
+depth -6
+
+attackSpec anim=()--(f=1,h=true)--(f=2)--(f=3)
+
+# cardPreference [CardName preference]

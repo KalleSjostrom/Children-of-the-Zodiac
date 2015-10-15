@@ -1,0 +1,8 @@
+trigger name=deck.tut value=2
+
+dialogpacket name=0
+dialog packetname=0 name="" text="A new tutorial on Decks has been added in the Menu.";"Read the tutorial now?"
+dialog packetname=0 alts=Sure,_bring_it_on!;Nah,_I_just_got_here...;_;_ name="" text="";""
+
+playSound name=Menu/Questlog_Entry.wav
+tutorialName name=deck

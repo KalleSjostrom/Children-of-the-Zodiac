@@ -1,0 +1,44 @@
+# background, prefix name of both images day
+background Pensara_-_The_School_District_-_The_School true
+
+inside
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1024 768
+start 496 688 0
+
+# start0.x, start0.y + 20, width, dir, ?, village.x, village.y + 15, dir of player
+holeDoor switch Pensara_-_The_School_District 503 708 30 2 1 755 2201 2
+
+door house _ 357 217 30 0
+doorSignFl Locked.
+
+door house _ 646 217 30 0
+doorSignFl Occupied.
+
+o 303 206 757 258
+o 392 428 421 461
+o 602 518 631 551
+o 467 294 556 327
+o 546 669 701 677
+o 662 428 691 461
+o 332 518 361 551
+o 662 518 691 551
+o 332 428 361 461
+o 539 737 706 771
+o 324 670 479 678
+o 392 518 421 551
+o 323 630 494 669
+o 535 630 706 669
+o 452 518 481 551
+o 325 737 492 771
+o 602 428 631 461
+o 293 258 324 759
+o 699 258 730 759
+o 542 518 571 551
+o 542 428 571 461
+o 452 428 481 461
+
+villager Eufrin
+
+end

@@ -1,0 +1,27 @@
+newList intro
+attack Crackle
+attack change1
+attack Scream
+attack Renew
+newList 100-40
+attack Cut Scythe Demonic_Beam Reaper Black_Fire
+attack Cut Black_Fire
+attack Demonic_Beam Scythe
+attack Cut Black_Fire
+attack Reaper Scythe
+attack Cut Demonic_Beam
+attack Demonic_Beam
+newList 40-0
+attackSingle change0
+attackSingle nop
+attackSingle Crackle
+attackSingle change1
+attackSingle Scream
+attackSingle Renew
+attack Cut Scythe Demonic_Beam Reaper Black_Fire Drain
+attack Cut Black_Fire Drain
+attack Demonic_Beam Scythe Drain
+attack Cut Black_Fire Drain
+attack Reaper Scythe Drain
+attack Cut Demonic_Beam Drain
+attack Demonic_Beam Drain

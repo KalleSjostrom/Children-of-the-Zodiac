@@ -1,0 +1,33 @@
+image Nodd
+start 265 960
+
+in 2 100 true
+
+dialog 1
+
+# (Outside his house)
+n Nodd
+fl People think that Vincent is running this town...
+sl But actually it's me and my brother.
+f true
+
+dialog 2
+
+n Nodd
+fl Oh my god! Are you the one who saved Pensara?
+sl Can we please be friends?
+f true
+
+dialog 3 
+
+n Nodd
+fl My brother? He's inside doing something.
+sl I don't pay much attention to him at all anymore.
+f true
+
+n Nodd
+fl To tell you the truth...
+sl I'm kinda fed up with him.
+f true  
+
+end

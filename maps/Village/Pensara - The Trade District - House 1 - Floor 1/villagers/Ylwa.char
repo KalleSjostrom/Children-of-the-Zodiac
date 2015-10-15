@@ -1,0 +1,20 @@
+image Ylwa
+start 430 300
+
+in 2 100 true
+
+dialog 1
+
+n Ylwa
+fl I like to play alone,
+sl but sometimes my sister won't let me.
+f true
+
+dialog 2
+
+n Ylwa
+fl I like to play alone,
+sl but sometimes my sister won't let me.
+f true
+
+end

@@ -1,0 +1,384 @@
+image _ 0
+start 800 1058
+
+in 2 200 true
+
+range 50
+
+dialog 1
+
+n Capricorn
+fl In the beginning we, the thirteen Zodics, 
+sl created the world and in this world, life began to grow.
+beforeTrigger godCapricornSystem 1
+f true
+
+n Capricorn
+fl First came the tenjins whom we loved as children, 
+sl especially Ophichus.
+trigger Capricorn 20
+triggeradd Aries 1
+triggeradd Cancer 1
+triggeradd Aquarius 1
+triggeradd Gemini 1
+triggeradd Leo 1
+triggeradd Libra 1
+triggeradd Pisces 1
+triggeradd Sagittarius 1
+triggeradd Scorpius 1
+triggeradd Taurus 1
+triggeradd Virgo 1
+triggeradd godDoorExitSystem 1
+triggeradd home_of_the_godsmenthu's_lair--room_of_confusion-mark0activation 1
+f true
+
+dialog 2
+
+n Capricorn
+fl Ophiuchus watched them adjust to nature 
+sl and learn their true path. 
+beforeTrigger godCapricornSystem 1
+f true
+
+n Capricorn
+fl When man emerged, Ophiuchus wept. 
+sl end
+f true
+
+n Capricorn
+fl Man was rough, uncivilized and with no 
+sl concern other than of themselves. 
+trigger Capricorn 20
+triggeradd Aries 1
+triggeradd Cancer 1
+triggeradd Aquarius 1
+triggeradd Gemini 1
+triggeradd Leo 1
+triggeradd Libra 1
+triggeradd Pisces 1
+triggeradd Sagittarius 1
+triggeradd Scorpius 1
+triggeradd Taurus 1
+triggeradd Virgo 1
+triggeradd godDoorExitSystem 1
+triggeradd home_of_the_godsmenthu's_lair--room_of_confusion-mark0activation 1
+f true
+
+dialog 3
+
+n Capricorn
+fl The rest of us, saw man and tenjins as our children 
+sl and we love them both equally.
+beforeTrigger godCapricornSystem 1
+f true
+
+n Capricorn
+fl When we saw the humans struggling, 
+sl we wanted to help them find their path.
+trigger Capricorn 20
+triggeradd Aries 1
+triggeradd Cancer 1
+triggeradd Aquarius 1
+triggeradd Gemini 1
+triggeradd Leo 1
+triggeradd Libra 1
+triggeradd Pisces 1
+triggeradd Sagittarius 1
+triggeradd Scorpius 1
+triggeradd Taurus 1
+triggeradd Virgo 1
+triggeradd godDoorExitSystem 1
+triggeradd home_of_the_godsmenthu's_lair--room_of_confusion-mark0activation 1
+f true
+
+dialog 4
+
+n Capricorn
+fl Ophiuchus could never accept man as his child, 
+sl but only saw them as a threat to the tenjins.
+beforeTrigger godCapricornSystem 1
+f true
+
+n Capricorn
+fl He assembled us here to "solve our mistake" as he put it. 
+sl end
+trigger Capricorn 20
+triggeradd Aries 1
+triggeradd Cancer 1
+triggeradd Aquarius 1
+triggeradd Gemini 1
+triggeradd Leo 1
+triggeradd Libra 1
+triggeradd Pisces 1
+triggeradd Sagittarius 1
+triggeradd Scorpius 1
+triggeradd Taurus 1
+triggeradd Virgo 1
+triggeradd godDoorExitSystem 1
+triggeradd home_of_the_godsmenthu's_lair--room_of_confusion-mark0activation 1
+f true
+
+dialog 5
+
+n Capricorn
+fl Ophiuchus strongly believed that man must be 
+sl eradicated quickly, before they destroyed too much.
+beforeTrigger godCapricornSystem 1
+f true
+
+n Capricorn
+fl We agreed that the behaviour of man was not healthy 
+sl for the planet, but we differed in our view of the solution. 
+trigger Capricorn 20
+triggeradd Aries 1
+triggeradd Cancer 1
+triggeradd Aquarius 1
+triggeradd Gemini 1
+triggeradd Leo 1
+triggeradd Libra 1
+triggeradd Pisces 1
+triggeradd Sagittarius 1
+triggeradd Scorpius 1
+triggeradd Taurus 1
+triggeradd Virgo 1
+triggeradd godDoorExitSystem 1
+triggeradd home_of_the_godsmenthu's_lair--room_of_confusion-mark0activation 1
+f true
+
+dialog 6
+
+n Capricorn
+fl We wanted to help man, 
+sl while he wanted to remove them.
+beforeTrigger godCapricornSystem 1
+f true
+
+n Capricorn
+fl When no one would join him in his request, 
+sl he left and has not been seen since. 
+f true
+
+n Capricorn
+fl Now, however, his plan is clear. 
+sl He went his own way in order to achieve his will.
+trigger Capricorn 20
+triggeradd Aries 1
+triggeradd Cancer 1
+triggeradd Aquarius 1
+triggeradd Gemini 1
+triggeradd Leo 1
+triggeradd Libra 1
+triggeradd Pisces 1
+triggeradd Sagittarius 1
+triggeradd Scorpius 1
+triggeradd Taurus 1
+triggeradd Virgo 1
+triggeradd godDoorExitSystem 1
+triggeradd home_of_the_godsmenthu's_lair--room_of_confusion-mark0activation 1
+f true
+
+dialog 7
+
+n Capricorn
+fl As we are not of physical nature, 
+sl we can not control man nor tenjins to do our will.
+beforeTrigger godCapricornSystem 1
+f true
+
+n Capricorn
+fl Because of this, we created the stones in order to guide 
+sl the tenjin in helping man become as gifted as themselves.
+trigger Capricorn 20
+triggeradd Aries 1
+triggeradd Cancer 1
+triggeradd Aquarius 1
+triggeradd Gemini 1
+triggeradd Leo 1
+triggeradd Libra 1
+triggeradd Pisces 1
+triggeradd Sagittarius 1
+triggeradd Scorpius 1
+triggeradd Taurus 1
+triggeradd Virgo 1
+triggeradd godDoorExitSystem 1
+triggeradd home_of_the_godsmenthu's_lair--room_of_confusion-mark0activation 1
+f true
+
+dialog 8
+
+n Capricorn
+fl But ever since the great war the stones has been silent.
+sl end
+beforeTrigger godCapricornSystem 1
+f true
+
+n Capricorn
+fl Now we can see that man once again has strayed from his path.
+sl end
+trigger Capricorn 20
+triggeradd Aries 1
+triggeradd Cancer 1
+triggeradd Aquarius 1
+triggeradd Gemini 1
+triggeradd Leo 1
+triggeradd Libra 1
+triggeradd Pisces 1
+triggeradd Sagittarius 1
+triggeradd Scorpius 1
+triggeradd Taurus 1
+triggeradd Virgo 1
+triggeradd godDoorExitSystem 1
+triggeradd home_of_the_godsmenthu's_lair--room_of_confusion-mark0activation 1
+f true
+
+dialog 9
+
+n Capricorn
+fl There is a greater force involved and all humans on the 
+sl planet will come to destroy each other if this goes on.
+beforeTrigger godCapricornSystem 1
+trigger Capricorn 20
+triggeradd Aries 1
+triggeradd Cancer 1
+triggeradd Aquarius 1
+triggeradd Gemini 1
+triggeradd Leo 1
+triggeradd Libra 1
+triggeradd Pisces 1
+triggeradd Sagittarius 1
+triggeradd Scorpius 1
+triggeradd Taurus 1
+triggeradd Virgo 1
+triggeradd godDoorExitSystem 1
+triggeradd home_of_the_godsmenthu's_lair--room_of_confusion-mark0activation 1
+f true
+
+dialog 10
+
+n Capricorn
+fl Ophiuchus is using Menthu to do his bidding. 
+sl end
+beforeTrigger godCapricornSystem 1
+f true
+
+n Capricorn
+fl Destroy Menthu and Ophiuchus will have lost 
+sl his last hope of achieving his will.
+trigger Capricorn 20
+triggeradd Aries 1
+triggeradd Cancer 1
+triggeradd Aquarius 1
+triggeradd Gemini 1
+triggeradd Leo 1
+triggeradd Libra 1
+triggeradd Pisces 1
+triggeradd Sagittarius 1
+triggeradd Scorpius 1
+triggeradd Taurus 1
+triggeradd Virgo 1
+triggeradd godDoorExitSystem 1
+triggeradd home_of_the_godsmenthu's_lair--room_of_confusion-mark0activation 1
+f true
+
+dialog 11
+
+n Capricorn
+fl To help you in this task we beg of you, take this blessing
+sl so that you will have the might to overpower Menthu.
+beforeTrigger godCapricornSystem 1
+trigger Capricorn 20
+triggeradd Aries 1
+triggeradd Cancer 1
+triggeradd Aquarius 1
+triggeradd Gemini 1
+triggeradd Leo 1
+triggeradd Libra 1
+triggeradd Pisces 1
+triggeradd Sagittarius 1
+triggeradd Scorpius 1
+triggeradd Taurus 1
+triggeradd Virgo 1
+triggeradd godDoorExitSystem 1
+triggeradd home_of_the_godsmenthu's_lair--room_of_confusion-mark0activation 1
+f true
+
+dialog 12
+
+n Capricorn
+fl The path ahead will lead you to Menthu's lair. 
+sl end
+beforeTrigger godCapricornSystem 1
+trigger Capricorn 20
+triggeradd Aries 1
+triggeradd Cancer 1
+triggeradd Aquarius 1
+triggeradd Gemini 1
+triggeradd Leo 1
+triggeradd Libra 1
+triggeradd Pisces 1
+triggeradd Sagittarius 1
+triggeradd Scorpius 1
+triggeradd Taurus 1
+triggeradd Virgo 1
+triggeradd godDoorExitSystem 1
+triggeradd home_of_the_godsmenthu's_lair--room_of_confusion-mark0activation 1
+f true
+
+dialog 20
+n Capricorn
+fl ...
+f true
+dialog 21
+n Capricorn
+fl ...
+f true
+dialog 22
+n Capricorn
+fl ...
+f true
+dialog 23
+n Capricorn
+fl ...
+f true
+dialog 24
+n Capricorn
+fl ...
+f true
+dialog 25
+n Capricorn
+fl ...
+f true
+dialog 26
+n Capricorn
+fl ...
+f true
+dialog 27
+n Capricorn
+fl ...
+f true
+dialog 28
+n Capricorn
+fl ...
+f true
+dialog 29
+n Capricorn
+fl ...
+f true
+dialog 30
+n Capricorn
+fl ...
+f true
+dialog 31
+n Capricorn
+fl ...
+f true
+dialog 32
+n Capricorn
+fl ...
+f true
+dialog 33
+n Capricorn
+fl ...
+f true
+
+end

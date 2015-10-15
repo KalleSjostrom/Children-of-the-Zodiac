@@ -1,0 +1,84 @@
+image Ulph
+start 1075 975
+
+in 1    100 false
+in 1    500 true
+in 3    100 false
+in 3    500 true
+
+dialog 1
+
+n Ulph
+fl Did you come here by air?
+sl That's so cool!
+trigger Ulph 2
+f true
+
+dialog 2
+
+n Ulph
+fl I too want to see the world from above...
+sl Look at all the small houses...
+f true
+
+dialog 3
+
+check Ulph 3 Photo
+
+n Ulph
+fl If I only had an airship, I'll go revenge Merri...
+sl end
+f true
+
+dialog 4
+
+n Ulph
+fl Oh...a photo from taken from the sky!
+sl Would you mind give it to me?
+f true
+
+q 10
+alt Of_course!
+alt No_no_no...
+alt _
+alt _
+f true
+
+*11
+
+n Ulph
+fl Thank you soooo much!
+sl Now I don't need an airship.
+f true
+
+n Ulph
+fl With this picture, I only have to close my eyes to
+sl imagine how it would feel like to travel by air.
+f true
+
+n Ulph
+fl Take this... as a thank you!
+sl end
+f true
+
+n _
+fl You got a card!
+sl end
+trigger Ulph 5
+gift cards.magic.Ice 2 3 true
+f true
+
+*12
+n Ulph
+fl ...
+sl end
+f true
+
+dialog 5
+
+n Ulph
+fl With this picture, I only have to close my eyes to
+sl imagine how it would feel like to travel by air.
+f true
+
+end

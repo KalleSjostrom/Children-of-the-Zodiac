@@ -1,0 +1,46 @@
+# background, prefix name of both images day
+background Serphia_Hall true
+
+##### STARTING LOCATION #####
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1024 768
+start0 495 710 0
+start1 495 10 2
+
+holeDoor labyrinth Temple_of_Aegis--Top_Floor-mark1 480 800 100 2
+holeDoor village Crystal_Room 480 -90 100 0
+
+o 699 355 709 540
+o 468 600 480 768
+o 314 325 336 354
+o 688 342 698 353
+o 678 540 699 555
+o 344 302 364 327
+o 368 281 389 301
+o 555 600 636 611
+o 651 568 666 583
+o 315 355 325 540
+o 325 540 340 555
+o 373 588 388 599
+o 540 0 569 307
+o 460 0 480 306
+o 645 302 659 316
+o 389 600 468 612
+o 636 583 651 599
+o 570 279 633 291
+o 674 329 688 342
+o 634 279 653 301
+o 328 313 351 340
+o 543 600 555 768
+o 340 554 356 571
+o 355 291 378 314
+o 666 555 678 568
+o 660 316 674 329
+o 390 279 453 291
+o 356 571 372 588
+
+villager Serphia 1
+
+##### DOORS #####
+end

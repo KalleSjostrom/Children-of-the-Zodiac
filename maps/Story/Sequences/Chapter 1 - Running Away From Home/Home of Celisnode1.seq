@@ -1,0 +1,140 @@
+import file=main.var
+
+var kin=0
+var celis=1
+
+load character="Celis"
+
+info time="night" name="Home of Celis" music="Home of Celis" fadeValue="0" musicVolume="0"
+
+set fromvillage
+
+actor name="Kin" pos=800;400;0
+actor name="Celis" pos=486;248;3
+load music="Celis' Theme"
+load particleSystem="rainCelissystem"
+
+ins timea=2000 index=kin kind=dist distance=150 duration=3000 direction=0
+ins timea=3000 index=kin kind=stop direction=3
+ins timea=1000 index=kin kind=dist distance=50 duration=1000 direction=3
+ins timea=0 index=kin kind=queue distance=168 duration=3360 direction=0
+ins timea=0 index=kin kind=queue direction=3
+ins timea=5000 index=kin kind=dist distance=50 duration=1500 direction=3
+
+ins type=fadeout timea=1000 index=0 fadetime=2000 kind=music mode=pause
+dialogpacket name=1 starttimea=0 duration=2500
+dialog packetname=1 name="Celis" text="..."
+dialog packetname=1 name="Kin" text="What's wrong?";"" first=false
+dialog packetname=1 name="Celis" text="Who is he to tell me what to do?";"He's not even my real father!"
+dialog packetname=1 name="Kin" text="I know, but...";"...he is the one that raised you." first=false
+
+ins type=fadein timea=2000 index=1 fadetime=1500 kind=music mode=play
+#ins type=fadeout timea=1000 index=0 kind=fadeparticlesystem sysfadespeed=10 sysswiftness=9000 syscutoff=700
+
+ins timea=1420 index=celis kind=dist distance=30 duration=200 direction=1
+ins timea=100 index=kin kind=emotion emotion=! show=true
+ins timea=0 index=kin kind=dist distance=20 duration=150 direction=1 facedirection=3
+
+dialogpacket name=2 starttimea=0 duration=150
+dialog packetname=2 name="Celis" text="Are you taking his side now!?";"" first=true
+dialog packetname=2 name="Kin" text="Hum, no...";"I suppose not..." first=false
+dialog packetname=2 name="Celis" text="...";"" first=true
+ins timea=500 index=kin kind=emotion show=false
+
+ins timea=2100 index=celis kind=stop direction=3
+ins timea=1000 index=celis kind=dist distance=45 duration=1600 direction=3
+
+dialogpacket name=3 starttimea=2000
+dialog packetname=3 name="Celis" text="I had that dream again...";"" first=true
+dialog packetname=3 name="Kin" text="...";"" first=false
+
+ins timea=2300 index=celis kind=stop direction=0
+
+dialogsingle starttimea=1000 duration=3000 <= name="Celis" text="It's getting clearer.";""
+
+ins timea=4500 index=kin kind=dist distance=15 duration=1200 direction=3
+ins timea=2000 index=celis kind=stop direction=2
+ins timea=1000 index=celis kind=stop direction=3
+
+dialogsingle starttimea=500 duration=2000 <= name="Celis" text="I can't live like this anymore.";"I must find out my ..."
+dialogsingle starttimea=3000 duration=1000 <= name="Kin" text="...";""
+
+ins timea=1500 index=kin kind=stop direction=2
+ins timea=2000 index=celis kind=stop direction=1
+ins timea=1000 index=celis kind=dist distance=45 duration=1600 direction=1
+
+dialogsingle starttimea=500 duration=1000 <= name="Celis" text="Is life always this hard?";""
+
+ins timea=500 index=kin kind=dist distance=15 duration=600 direction=1 facedirection=3
+ins timea=1750 index=celis kind=stop direction=2
+
+dialogsingle starttimea=1000 duration=1000 <= name="Celis" text="I just wish things could be the way they were.";""
+
+ins timea=4000 index=celis kind=stop direction=1
+dialogsingle starttimea=1000 duration=1000 <= name="Celis" text="Kin...?";"Do you remember when we used to play here?"
+dialogsingle starttimea=1500 duration=1000 <= name="Kin" text="Yeah... You know I do.";""
+
+ins timea=0 index=kin kind=dist distance=7 duration=800 direction=3
+
+ins timea=2000 index=celis kind=stop direction=0
+ins timea=2000 index=celis kind=stop direction=1
+
+# music dies
+#ins type=fadeout timea=0 index=0 fadetime=1000 kind=music 
+dialogsingle starttimea=0 <= name="Celis" text="...";"Would you run away with me?"
+
+ins timea=350 index=kin kind=dist distance=10 duration=100 direction=1 facedirection=3
+ins timea=50 index=kin kind=emotion emotion=?! show=true
+dialogsingle starttimea=50 duration=200 <= name="Kin" text="Wha! What.. I don't know..";"Where?? When?"
+
+ins timea=300 index=celis kind=dist distance=10 duration=200 direction=1
+
+dialogsingle starttimea=50 duration=150 <= name="Celis" text="Come on... I must find my past.";"I can not do it without you."
+ins timea=100 index=kin kind=emotion show=false
+
+ins timea=500 index=kin kind=stop direction=2
+ins timea=1800 index=kin kind=stop direction=3
+
+dialogsingle starttimea=0 <= name="Kin" text="But.. Where would we go?";""
+
+ins timea=1000 index=celis kind=dist distance=35 duration=800 direction=0
+dialogsingle starttimea=2000 <= name="Celis" text="Anywhere...";""
+
+ins timea=1000 index=celis kind=stop direction=3
+dialogsingle starttimea=500 duration=500 <= name="Celis" text="Nowhere...";""
+
+ins timea=1500 index=kin kind=dist distance=35 duration=1500 direction=0
+ins timea=1500 index=kin kind=stop direction=3
+ins timea=200 index=celis kind=stop direction=1
+ins timea=1700 index=kin kind=dist distance=15 duration=750 direction=1
+ins timea=0 index=kin kind=queue distance=150 duration=6000 direction=0
+ins timea=1500 index=celis kind=dist distance=150 duration=6000 direction=0
+
+dialogsingle starttimea=5000 <= name="Kin" text="Well.. I can't let you go on your own...";"Besides, it's true that you can't do it without me!"
+
+ins timea=300 index=celis kind=dist distance=15 duration=200 direction=1
+ins timea=300 index=kin kind=stop direction=3
+
+dialogsingle starttimea=0 <= name="Celis" text="Tihi.. My own little bodyguard.";"Thank you, Kin..."
+ins timea=0 index=kin kind=stop direction=3
+
+ins timea=400 index=kin kind=stop direction=2
+dialogpacket name=4 starttimea=300
+dialog packetname=4 name="Kin" text="Now. The closest village is Alares to the east.";"We better go there to stock up on traveling supplies."
+dialog packetname=4 name="Kin" text="We can leave in the break of dawn!";""
+dialog packetname=4 name="Celis" text="Ok, sound like a plan.";"" first=false
+
+# ins timea=400 index=celis kind=stop direction=2
+
+
+# ins timea=500 index=celis kind=dist distance=20 duration=300 direction=1
+# ins timea=0 index=celis kind=queue distance=700 duration=10500 direction=0
+# ins timea=100 index=kin kind=dist distance=700 duration=10500 direction=0
+
+# ins type=fadeout timea=3000 index=0 fadetime=2000 kind=village day=true
+ins type=fadeout timea=100 index=1 fadetime=2000 kind=music mode=kill
+
+load trigger="Home of Celisnode"
+ins timea=0 index=0 kind=trigger value=0
+
+ins timea=1500 kind=endseq

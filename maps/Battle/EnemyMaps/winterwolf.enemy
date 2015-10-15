@@ -1,0 +1,31 @@
+name Winterwolf
+
+defense 299
+magicDefense 301
+agility 22
+evade 2
+hit 95
+attack 1167
+magic 1075
+support 1050
+hp 4866
+element 2
+gold 2919
+experience 1946
+criticalChance 0
+
+diesound Werewolf/dies
+image winterwolf 3
+armor 91 32
+preferences 50 50
+
+scale 6.2
+height -2
+depth -6
+middle 0
+
+attackSpec element=ice anim=(f=1)--(f=1,a=150,se=Monster/Werewolf/attack)--(f=2,h=true)
+attackSpec element=ice type=mag name=Icicle_Rain onAll=true power=.7 p=.5 anim=(f=1,a=2000,c=m+Blizzard)--(f=0,h=true)
+attackSpec element=ice type=mag name=Ice p=.5 anim=(f=1,a=100)--(f=1,a=50,c=m+Ice:-.7;2.1;-7)--(f=1,a=1000,c=m+Ice:.9;1.9;-7)--(f=0,h=true)
+
+# cardPreference [CardName preference]

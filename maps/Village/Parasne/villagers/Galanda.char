@@ -1,0 +1,81 @@
+image Galanda	   
+start 400 1240	   
+	   
+in 2 100 true	   
+in 1 535 false	   
+in 0 210 false	   
+in 2 210 false	   
+in 3 535 false	   
+	   
+dialog 1	   
+	   
+n Galanda	   
+fl My watch got stolen the other day.
+sl That makes me so mad!
+f true
+
+n Galanda
+fl There are rumors that a man named
+sl Mats Meadowgrove does that kind of things.	   
+f true  
+	   
+dialog 2	   
+
+n Galanda	   
+fl My watch got stolen the other day.
+sl That makes me so mad!
+f true
+
+n Galanda
+fl There are rumors that a man named
+sl Mats Meadowgrove does that kind of things.	   
+f true
+	   
+n Galanda	   
+fl Did he appear in Berca to? Well I be darned.	   
+sl please help us find and capture him.	   
+trigger Freddy 3
+trigger Galanda 3  
+f true	   
+	   
+dialog 3	   
+	   
+n Galanda	   
+fl If you search for clues you might find him.	   
+sl end	   
+f true	   
+	   
+dialog 4	   
+	   
+n Galanda	   
+fl So this is what we have: 
+sl His name is Mats Meadowgrove.
+f true
+
+n Galanda
+fl He wear grey clothes, has green hair
+sl and he steals from people all over the world.	   
+f true	   
+	   
+dialog 5	   
+	   
+n Galanda	   
+fl You caught Mats Meadowgrove!	   
+sl Take this reward.	   
+f true
+	   
+n _
+fl You got the weapon "Grieving Axe"!
+sl end
+gift Grieving_Axe 1	   
+trigger Galanda 6	   
+f true
+	   
+dialog 6	   
+	   
+n Galanda	   
+fl Mats Meadowgrove won't bother anyone anymore.	   
+sl end	   
+f true	   
+	   
+end	 

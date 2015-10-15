@@ -1,0 +1,64 @@
+mapSize -0.5 0.5 1
+
+size 70
+
+light0 position=0;0;0;1 ambient=.8;.8;.8;1 specular=0;0;0;1 diffuse=.8;.8;.8;1 attenuation=1;0.01;0.015
+light1 position=0;0;0;0 ambient=.8;.8;.8;1 specular=0;0;0;1 diffuse=.8;.8;.8;1 attenuation=1;0.01;0.015
+material ambient=.4;.4;.4;1 specular=0;0;0;1 diffuse=.7;.7;.7;1 shininess=5 emission=.1;.1;.1;1
+
+sky top=.3;.3;.8;1 bottom=1;.8;.1;1
+
+enemyColor .8 .8 .8 1
+
+floorTex forestfloor.jpg
+wallTex forestwall.png
+wallTex forestdoor0.png
+
+normal floor 0 1
+normal wall 1 3
+
+mapPos 2 1
+
+# directions in labyrinth
+dir 7 1 23
+dir 12 1 28
+dir 23 1 39
+dir 28 1 44
+dir 36 2 37
+dir 37 2 38
+dir 38 2 39
+dir 44 1 60
+dir 58 1 74
+dir 58 2 59
+dir 59 2 60
+dir 71 1 87
+dir 71 2 72
+dir 72 2 73
+dir 73 2 74
+dir 74 1 90
+dir 87 1 103
+dir 90 1 106
+dir 101 2 102
+dir 102 2 103
+dir 106 1 122
+dir 122 1 138
+dir 138 2 139
+dir 139 2 140
+dir 140 1 156
+dir 156 1 172
+dir 172 2 173
+dir 173 2 174
+dir 174 2 175
+
+mapEnd
+
+wall 2 175 2
+wall 2 7 3
+wall 2 12 3
+
+inv door 175 2 0-19 landforest_of_bri--east_forest-mark0
+inv door 7 3 dontopen forest_of_bri--west_forest-mark1
+inv door 12 3 dontopen forest_of_bri--west_forest-mark2
+
+inv chest 36 2 2 Images/woodenbox 2 cards.magic.Earth 1 true
+inv chest 39 3 2 Images/woodenbox 2 cards.magic.Earth 1 true

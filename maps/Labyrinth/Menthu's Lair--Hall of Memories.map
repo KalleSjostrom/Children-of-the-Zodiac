@@ -1,0 +1,111 @@
+mapSize -0.5 0.5 1
+
+size 136
+
+# fog red=.4 green=.3 blue=0 alpha=.01 density=0.01
+
+light0 position=0;0;0;1 ambient=1;1;1;1 specular=0;0;0;1 diffuse=1;1;1;1 attenuation=1;0.01;0.015
+material ambient=.8;.8;.8;1 specular=0;0;0;1 diffuse=.7;.7;.7;1
+invMaterial ambient=.7;.7;.7;1 specular=.2;.2;.2;1 diffuse=.8;.8;.8;1 shininess=5 emission=.1;.1;.1;1
+
+enemyColor .7 .7 .7 1
+
+wallTex demonfloorwall.png
+wallTex demonfloordoor0.png
+
+normal floor 0 0
+normal wall 0 2
+normal roof 2 2
+
+mapPos 2 1
+
+# directions in labyrinth
+dir 13 1 29
+dir 29 1 45
+dir 25 1 41
+dir 41 1 57
+
+dir 73 2 74
+dir 73 0 72
+dir 57 2 58
+dir 57 0 56
+dir 41 2 42
+dir 41 0 40
+
+dir 42 1 58
+dir 58 1 74
+dir 40 1 56
+dir 56 1 72
+
+dir 45 1 61
+dir 37 1 53
+dir 53 1 69
+dir 57 1 73
+dir 61 1 77
+dir 69 1 85
+dir 73 1 89
+dir 77 1 93
+dir 85 1 101
+dir 89 1 105
+dir 93 1 109
+dir 99 2 100
+dir 100 2 101
+dir 101 1 117
+dir 101 2 102
+dir 102 2 103
+dir 103 2 104
+dir 104 2 105
+dir 105 1 121
+dir 105 2 106
+dir 106 2 107
+dir 107 2 108
+dir 108 2 109
+dir 109 1 125
+dir 109 2 110
+dir 110 2 111
+dir 117 1 133
+dir 121 1 137
+dir 125 1 141
+dir 133 1 149
+dir 149 1 165
+dir 137 1 153
+dir 141 1 157
+dir 153 1 169
+dir 169 1 185
+dir 157 1 173
+dir 173 1 189
+dir 189 1 205
+dir 157 2 158
+dir 158 2 159
+dir 61 2 62
+dir 62 2 63
+
+mapEnd
+
+wall 1 111 2
+wall 1 106 2
+wall 1 102 2
+wall 1 99 0
+
+inv door 111 2 dontopen Menthu's_Lair--Room_of_Confusion-mark0
+inv door 99 0 dontopen MemorySerphia Menthu's_Lair--Throne_of_Serpents-mark0
+inv door 106 2 dontopen Menthu's_Lair--Hall_of_Memories-mark3
+inv hinderDoor 107 0 2 Walls/demonfloordoor Menthu's_Lair--Hall_of_Memories-mark2
+inv door 102 2 dontopen Menthu's_Lair--Hall_of_Memories-mark5
+inv hinderDoor 103 0 2 Walls/demonfloordoor Menthu's_Lair--Hall_of_Memories-mark4
+
+inv save 109 0 -1 -1 
+
+inv boss 45 -1 -1 MemoryTaur
+inv boss 57 -1 -1 MemorySalmonman
+
+inv button 13 3 7 Images/lever Menthu's_Lair--Hall_of_Memories.maphinderDoor107
+inv button 25 3 7 Images/lever Menthu's_Lair--Hall_of_Memories.maphinderDoor103
+
+inv chest 165 1 2 Images/chest 2 cards.magic.Quake 1 true
+inv chest 185 1 2 Images/chest 2 cards.support.Resurrect 3 true
+inv chest 205 1 2 Images/chest 2 cards.support.Cure 3 true
+inv chest 159 2 2 Images/chest 2 cards.magic.Blizzard 3 true
+inv chest 63 2 2 Images/chest 0 10000
+
+end

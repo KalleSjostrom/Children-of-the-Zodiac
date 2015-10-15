@@ -1,0 +1,30 @@
+name Zombie
+
+defense 18
+magicDefense 17
+agility 10
+evade 0
+hit 95
+attack 84
+magic 60
+support 40
+hp 189
+element 0
+gold 57
+experience 57
+criticalChance 0
+
+diesound Zombie/dies
+image zombie 3
+armor 9 3
+preferences 100 0
+
+scale 6
+height -2
+depth -6
+middle 0
+
+attackSpec anim=(f=1)--(f=1,a=140,se=Monster/Zombie/attack)--(f=2,h=true)
+attackSpec name=Triple_Hit power=.5 onAll=true p=.5 anim=(f=1,a=200)--(f=1,a=140,se=Monster/Zombie/attack)--(f=2,a=300)--(f=1,a=200)--(f=1,a=140,se=Monster/Zombie/attack)--(f=2,a=300)--(f=1,a=200)--(f=1,a=140,se=Monster/Zombie/attack)--(f=2,h=true,a=300)
+
+# cardPreference [CardName preference]

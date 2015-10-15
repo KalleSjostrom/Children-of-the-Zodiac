@@ -1,0 +1,30 @@
+image Hippo
+start 1020 560
+
+in 2 50 false
+in 3     200 true
+in 2 30 false
+in 3     200 true
+in 2 20 false
+in 3     200 true
+in 2 30 false
+in 3     200 true
+in 0 50 false
+in 3     200 true
+in 0 80 false
+in 3     200 true
+
+dialog 1
+
+# Walking around the market place
+n Hippo
+fl I've heard that the people of Berca don't like us...
+sl end
+f true
+
+n Hippo
+fl I think they're jealous of our cheap prices
+sl here at the market place! 
+f true
+
+end

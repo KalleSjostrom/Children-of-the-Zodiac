@@ -1,0 +1,93 @@
+mapSize -0.5 0.5 1
+
+size 338
+
+fog red=.4 green=.3 blue=0 alpha=.01 density=0.01
+
+light0 position=0;0;0;1 ambient=1;1;1;1 specular=0;0;0;1 diffuse=1;1;1;1 attenuation=1;0.02;0.03
+light1 position=0;0;0;0 ambient=.2;.2;.2;.2 specular=0;0;0;1 diffuse=.2;.2;.2;.2
+material ambient=.7;.7;.7;1 specular=0;0;0;1 diffuse=.7;.7;.7;1
+
+floorTex earthcavefloor.jpg
+floorTex earthcaveflooropen.jpg
+wallTex earthcavewall.png
+wallTex earthcavedoor.png
+roofTex earthcaveroof.jpg
+roofTex earthcaveroofopen.jpg
+
+normal floor 0 2
+normal wall 2 4
+normal roof 4 6
+
+mapPos 0 1
+
+dir 39 2 40
+dir 40 2 41
+dir 41 2 42
+dir 42 1 58
+dir 58 1 74
+dir 60 1 76
+dir 60 2 61
+dir 61 2 62
+dir 70 2 71
+dir 71 2 72
+dir 72 2 73
+dir 73 2 74
+dir 76 1 92
+dir 92 2 93
+dir 93 2 94
+dir 118 1 134
+dir 118 2 119
+dir 119 2 120
+dir 120 2 121
+dir 123 1 139
+dir 123 2 124
+dir 124 2 125
+dir 125 2 126
+dir 132 1 148
+dir 132 2 133
+dir 133 2 134
+dir 134 1 150
+dir 139 1 155
+dir 148 1 164
+dir 150 2 151
+dir 151 2 152
+dir 152 1 168
+dir 152 2 153
+dir 153 2 154
+dir 154 2 155
+dir 164 1 180
+dir 168 1 184
+dir 184 1 200
+dir 3 1 19
+dir 3 2 4
+dir 4 2 5
+dir 19 1 35
+dir 35 2 36
+dir 36 2 37
+
+mapEnd
+
+floor 1 39
+inv ladderDoor 39 0 dontopen Images/ladderdown.png false mt._cesadur--second_floor-mark5
+floor 1 37
+inv ladderDoor 37 2 dontopen Images/ladderdown.png false mt._cesadur--second_floor-mark6
+floor 1 62
+inv ladderDoor 62 2 dontopen Images/ladderdown.png false mt._cesadur--second_floor-mark7
+
+roof 5 94
+inv ladderDoor 94 2 dontopen Images/ladderup.png true mt._cesadur--fourth_floor-mark0
+roof 5 126
+inv ladderDoor 126 2 dontopen Images/ladderup.png true mt._cesadur--fourth_floor-mark1
+roof 5 180
+inv ladderDoor 180 1 dontopen Images/ladderup.png true mt._cesadur--fourth_floor-mark2
+roof 5 5
+inv ladderDoor 5 2 dontopen Images/ladderup.png true mt._cesadur--fourth_floor-mark3
+
+inv chest 70 0 1 Images/stub.png 0 400
+inv chest 200 1 1 Images/stub.png 2 cards.support.Haste 2 true
+inv chest 121 2 1 Images/stub.png 2 cards.support.ProtectingBarrier 1 true
+
+inv save 134 0 -1 -1
+
+end

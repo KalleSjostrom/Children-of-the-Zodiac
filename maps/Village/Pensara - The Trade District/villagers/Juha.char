@@ -1,0 +1,32 @@
+image Juha
+start 265 870
+
+in 0 70 false
+in 2 70 false
+
+dialog 1
+
+# Outside the inn
+n Juha 
+fl I've been thinking of joining the army.
+sl But I havn't decided yet...
+f true
+
+dialog 2
+
+n Juha
+fl I heard about the attempt to blow our city into pieces.
+sl ...
+f true
+
+n Juha
+fl After this I really have second thoughts about 
+sl joining the army...
+f true
+
+n Juha
+fl I don't know if the military just upsets
+sl other cities in the world.
+f true
+
+end

@@ -1,0 +1,248 @@
+image Math
+start 215 1115
+
+in 2 100 true
+
+dialog 1
+
+n Math
+fl I work as a grounds keeper here at the inn and I love it.
+sl But the thing is that I live TOO close to work.
+f true
+
+n Math
+fl I need to lose some weight and could really need a 
+sl longer walk when I travel between my home and work.
+f true
+
+n Math
+fl My doctor tells me I need to walk at least 180 steps 
+sl a day, but I don't know if I actually do that.
+f true
+
+n Math
+fl To be honest there isn't much work for a grounds 
+sl keeper in a place like this, I usually don't move at all.
+f true
+
+n Math
+fl Can you help figure this thing out? 
+sl end
+f true
+
+q 10
+alt Leave_it_to_me,_good_man!
+alt Math_is'n_really_my_cup_of_tea...
+alt _
+alt _
+f true
+
+*11
+# Visa bilden. 
+n Math
+fl This picture shows the numbers I've
+sl come up with this far.
+trigger Math 2
+f true
+
+n Math
+showImage math.jpg
+f true
+
+n Math
+fl I live in the house with two doors, 
+sl in the second door from the left.
+f true
+
+n Math
+fl I walk to work in the morning and 
+sl I stay there until lunch break.
+f true
+
+n Math
+fl I usually walk the shortest way over to my friend at the 
+sl weapon shop to share a tasty ice burger for lunch.
+f true
+
+n Math
+fl We use to meet at the south west corner of the house
+sl because we both love to eat our lunch outside.
+f true
+
+n Math
+fl When we're done I walk back the same way I came for
+sl another 4 hours, holding my position, doing my thing.
+f true
+
+n Math
+fl After this I'm going home, straight to bed. The question
+sl I ask myself is, do I follow the doctor's recommendation?
+f true
+
+n Math
+fl How many steps do I take on an ordinary day?
+sl end
+f true
+
+n Math
+fl Can you answer this for me?
+sl end
+f true
+
+q 20
+alt Of_course
+alt Lemme_think_about_it
+alt _
+alt _
+f true
+
+*21
+n How many steps?
+inputQ 160
+f true
+
+*160
+n Math
+fl Oh... I see, that's too bad.
+sl I have to walk a bit longer from here on...
+f true
+
+n Math
+fl Thanks anyway!
+sl I hope you'll find this useful!
+f true
+
+n _
+fl You got a card!
+sl end
+trigger Math 3
+gift cards.offense.BattleCard 2 3 false
+f true
+
+*0
+n Math
+fl Are you sure?
+sl That doesn't seem right...
+f true
+
+*22
+n Math
+fl Ok, come back any time!
+sl end
+f true
+
+*12
+n Math
+fl Ok, I understand. Heroes like you don't
+sl have time for ordinary people like me.
+f true
+
+dialog 2
+
+# Visa bilden. 
+n Math
+fl This picture shows the numbers I've
+sl come up with this far.
+f true
+
+n Math
+showImage math.jpg
+f true
+
+n Math
+fl I live in the house with two doors, 
+sl in the second door from the left.
+f true
+
+n Math
+fl I walk to work in the morning and 
+sl I stay there until lunch break.
+f true
+
+n Math
+fl I usually walk the shortest way over to my friend at the 
+sl weapon shop to share a tasty ice burger for lunch.
+f true
+
+n Math
+fl We use to meet at the south west corner of the house
+sl because we both love to eat our lunch outside.
+f true
+
+n Math
+fl When we're done I walk back the same way I came for
+sl another 4 hours, holding my position, doing my thing.
+f true
+
+n Math
+fl After this I'm going home, straight to bed. The question
+sl I ask myself is, do I follow the doctor's recommendation?
+f true
+
+n Math
+fl How many steps do I take on an ordinary day?
+sl end
+f true
+
+n Math
+fl Can you answer this for me?
+sl end
+f true
+
+q 10
+alt Of_course
+alt Lemme_think_about_it
+alt _
+alt _
+f true
+
+*11
+n How many steps?
+inputQ 160
+f true
+
+*160
+n Math
+fl Oh... I see, that's too bad.
+sl I have to walk a bit longer from here on...
+f true
+
+n Math
+fl Thanks anyway!
+sl I hope you'll find this useful!
+f true
+
+n _
+fl You got a card!
+sl end
+trigger Math 3
+gift cards.support.Shield 2 2 true
+f true
+
+*0
+n Math
+fl Are you sure?
+sl That doesn't seem right...
+f true
+
+*12
+n Math
+fl Ok, come back any time!
+sl end
+f true
+
+dialog 3
+
+n Math
+fl Hmm... I'll have to walk 20 steps longer then...
+sl end
+f true
+
+dialog 4
+
+n Math
+fl Now all we can do is to ask the gods for help...
+sl end
+f true
+
+end

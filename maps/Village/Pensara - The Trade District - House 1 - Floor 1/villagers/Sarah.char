@@ -1,0 +1,167 @@
+image Sarah
+start 450 280
+
+in 2 100 true
+
+dialog 1
+
+n Sarah
+fl I've known Senator Vincent for a long time and
+sl he is really a good person. 
+f true
+
+n Sarah
+fl He's just been twisted by fortune and power.
+sl By the way... You look familiar.
+f true
+
+dialog 2
+
+n Sarah
+fl Have you ever heard of the Temple of Aegis?
+sl end
+f true
+
+q 10
+alt Yes
+alt No
+alt _
+alt _
+f true
+
+*11
+n Sarah
+fl I've heard that once you've gone there,
+sl you'll never come out alive. 
+trigger Sarah 3
+trigger Ylwa 3
+f true
+
+*12
+n Sarah
+fl I've heard that once you've gone there,
+sl you'll never come out alive. 
+trigger Sarah 3
+trigger Ylwa 3
+f true
+
+dialog 3
+
+n Sarah
+fl I've heard that once you've gone to the
+sl Temple of Aegis, you'll never come out alive. 
+f true
+
+dialog 4
+
+n Sarah
+fl Are you the ones playing that wonderful music
+sl on my piano?
+f true
+
+n Sarah
+fl You are all so incredibly talented!
+sl All of you!
+f true
+
+n Sarah
+fl You deserve a very nice gift for me!
+sl You may choose your gift yourself.
+f true
+
+q 10	   
+alt Money,_money,_money!
+alt Cards,_of_course!
+alt A_nice_weapon,_please!
+alt Nah,_keep_it...
+f true
+
+*11	   
+n Sarah
+fl Then money it is!	   
+sl end	   
+f true
+
+n _
+fl You got 10000 gold
+sl end
+take 10000 0
+trigger Sarah 5
+f true
+
+*12
+n Sarah
+fl Oh, a card!  
+sl Hope you like it!
+f true
+
+n _
+fl You got a card! 
+sl end   
+gift cards.offense.ChameleonStrike 2 2 false	   
+trigger Sarah 5
+f true
+
+*13
+n Sarah
+fl Weapons, you say.  
+sl Well you are your fathers son...
+f true
+
+n Kin
+fl What did you say!?  
+sl end
+f false
+
+n Sarah
+fl Nothing!  
+sl Here you go!
+f true
+
+n _
+fl You got the weapon Ebony Lance! 
+sl end   
+gift Ebony_Lance 3  
+trigger Sarah 5
+f true
+
+*14
+n Sarah
+fl Oh, how noble of you!
+sl Greed and materialism is the root of all evil!  
+f true
+
+n Sarah
+fl As a token of my gratitude I like you to
+sl have all my gifts!
+f true
+
+n _
+fl You got 10000 gold
+sl end
+take 10000 0
+f true
+
+n _
+fl You got a card! 
+sl end   
+gift cards.offense.ChameleonStrike 2 2 false	   
+f true
+
+n _
+fl You got the weapon Ebony Lance! 
+sl end   
+gift Ebony_Lance 1
+trigger Sarah 5
+f true
+
+dialog 5
+
+check Sarah Ylwa s.Sarah=5
+
+n Test
+fl Should not happen... 
+sl end   
+f true
+
+end

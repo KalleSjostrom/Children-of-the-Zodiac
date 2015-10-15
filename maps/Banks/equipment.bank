@@ -1,0 +1,86 @@
+########## WEAPON BANK ##########
+
+w attack=60 magicAttack=40 price=20 name=Worn-out_Sword slots=0:0
+w attack=70 magicAttack=50 price=50 name=Broadsword slots=0:0:1
+w attack=80 magicAttack=60 price=260 name=Iron_Sword slots=0:0:0:1
+w attack=75 magicAttack=90 price=950 name=Silver_Sword slots=0:0:1:1
+w attack=90 magicAttack=75 price=4400 name=Ivory_Sword slots=0:0:0:0:1
+w attack=95 magicAttack=90 price=11000 name=Diamond_Blade slots=0:0:0:1:1
+w attack=95 magicAttack=90 price=11000 name=Test slots=0:0:1:1
+
+w attack=100 magicAttack=30 price=0 name=Sword_of_Terra slots=0:0:0:0
+
+s defense=20 magicDefense=10 supportAttack=10 price=30 name=Wooden_Shield slots=_
+s defense=30 magicDefense=20 supportAttack=10 price=230 name=Iron_Buckler slots=2
+s defense=30 magicDefense=25 supportAttack=20 price=880 name=Silver_Shield slots=2:2
+s defense=40 magicDefense=35 supportAttack=30 price=3700 name=Platinum_Shield slots=2
+s defense=45 magicDefense=40 supportAttack=40 price=9500 name=Diamond_Shield slots=2:2
+
+a defense=60 magicDefense=50 supportAttack=50 price=15 name=Leather_Cloth slots=2
+a defense=70 magicDefense=60 supportAttack=50 price=50 name=Heavy_Vest slots=2
+a defense=75 magicDefense=65 supportAttack=55 price=250 name=Iron_Armor slots=2
+a defense=80 magicDefense=70 supportAttack=60 price=4100 name=Plate_Armor slots=2
+a defense=85 magicDefense=70 supportAttack=60 price=9800 name=Diamond_Mail slots=2:2
+
+######## CELIS ########
+
+w for=1 attack=50 magicAttack=60 price=20 name=Walking_Stick slots=0:1
+w for=1 attack=60 magicAttack=80 price=40 name=Wooden_Staff slots=0:1:1
+w for=1 attack=30 magicAttack=80 price=230 name=Arcane_Rod slots=1:1:1
+w for=1 attack=80 magicAttack=75 price=920 name=Silver_Rod slots=0:1:1:1
+w for=1 attack=100 magicAttack=70 price=4200 name=Battle_Staff slots=0:0:1:1
+w for=1 attack=100 magicAttack=90 price=10500 name=Diamond_Staff slots=0:1:1:1:1
+w for=1 attack=80 magicAttack=100 price=0 name=Ana's_Staff slots=1:1:1:1:1
+w for=1 attack=80 magicAttack=100 price=0 name=Test_Staff slots=0:0:0:1:1
+
+s for=1 defense=10 magicDefense=20 supportAttack=30 price=30 name=Iron_Bracelet slots=2
+#s for=1 defense=10 magicDefense=20 supportAttack=20 price=0 name=Bracelet_of_Magi slots=2:2
+s for=1 defense=10 magicDefense=30 supportAttack=40 price=220 name=Sorceress_Ring slots=2:2
+s for=1 defense=15 magicDefense=35 supportAttack=45 price=850 name=Silver_Ring slots=2:2
+s for=1 defense=15 magicDefense=30 supportAttack=45 price=3900 name=Heavens_Guard slots=2:2:2
+s for=1 defense=25 magicDefense=40 supportAttack=45 price=10000 name=Diamond_Ring slots=2:2:2
+
+a for=1 defense=50 magicDefense=60 supportAttack=60 price=10 name=Rags slots=2
+a for=1 defense=60 magicDefense=70 supportAttack=70 price=40 name=Iron_Cuirass slots=2
+a for=1 defense=60 magicDefense=65 supportAttack=75 price=210 name=Tippet slots=2:2
+a for=1 defense=55 magicDefense=70 supportAttack=75 price=900 name=Silver_Cape slots=2:2
+a for=1 defense=65 magicDefense=75 supportAttack=75 price=4000 name=Silk_Mantle slots=2:2
+a for=1 defense=70 magicDefense=80 supportAttack=80 price=10500 name=Diamond_Cloak slots=2:2:2
+
+######## BOREALIS ########
+
+w for=2 attack=70 magicAttack=10 price=300 name=Iron_Axe slots=0:0:0
+w for=2 attack=70 magicAttack=120 price=970 name=Silver_Lance slots=0:0:0:1
+w for=2 attack=70 magicAttack=120 price=1100 name=Ebony_Lance slots=0:0:0:0
+w for=2 attack=70 magicAttack=70 price=4300 name=Morning_Star slots=0:0:0:0:0
+w for=2 attack=80 magicAttack=120 price=5400 name=Ebony_Lance slots=0:0:0:0:1
+w for=2 attack=85 magicAttack=70 price=12000 name=Diamond_Star slots=0:0:0:0:0
+w for=2 attack=85 magicAttack=380 price=0 name=Grieving_Axe slots=0:0:0:1:1
+
+s for=2 defense=25 magicDefense=5 supportAttack=0 price=60 name=Leather_Band slots=_
+s for=2 defense=30 magicDefense=15 supportAttack=0 price=260 name=Iron_Armlet slots=_
+s for=2 defense=25 magicDefense=30 supportAttack=0 price=830 name=Silver_Armlet slots=_
+s for=2 defense=35 magicDefense=30 supportAttack=15 price=9000 name=Diamond_Armlet slots=_
+
+a for=2 defense=60 magicDefense=50 supportAttack=20 price=50 name=Armored_Shell slots=_
+a for=2 defense=65 magicDefense=55 supportAttack=20 price=230 name=Iron_Breastplate slots=_
+a for=2 defense=65 magicDefense=70 supportAttack=70 price=890 name=Silver_Chainmail slots=2
+a for=2 defense=75 magicDefense=65 supportAttack=75 price=10000 name=Diamond_Armor slots=2
+
+######## ZALZI ########
+	
+w for=3 attack=80 magicAttack=80 price=980 name=Silver_Knife slots=0:0:1:1
+w for=3 attack=80 magicAttack=80 price=4300 name=Orichalcum_Dagger slots=0:0:0:1:1
+w for=3 attack=100 magicAttack=100 price=10500 name=Diamond_Knife slots=0:0:1:1
+w for=3 attack=90 magicAttack=95 price=0 name=Bloodstained_Dagger slots=0:0:0:1:1
+
+s for=3 defense=30 magicDefense=30 supportAttack=30 price=820 name=Desert_Glove slots=2
+s for=3 defense=35 magicDefense=35 supportAttack=35 price=4200 name=Thief's_Ring slots=2:2
+s for=3 defense=45 magicDefense=45 supportAttack=35 price=9000 name=Diamond_Glove slots=2:2
+
+a for=3 defense=65 magicDefense=65 supportAttack=70 price=900 name=Silver_Vest slots=2
+a for=3 defense=65 magicDefense=70 supportAttack=70 price=4350 name=Mythril_Vest slots=2:2
+a for=3 defense=70 magicDefense=70 supportAttack=75 price=9500 name=Diamond_Mantle slots=2:2
+
+############## END ##############
+end

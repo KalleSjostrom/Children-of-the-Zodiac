@@ -1,0 +1,23 @@
+# background, prefix name of both images day
+background Pensara_-_The_Trade_District_-_Tower_Prison true
+
+inside
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1024 768
+start 490 465 0
+
+# start0.x, start0.y + 20, width, dir, ?, village.x, village.y + 15, dir of player
+holeDoor switch Pensara_-_The_Trade_District 490 485 30 2 1 2060 190 2
+
+door house _ 581 424 30 0
+doorSignFl Locked.
+
+o 369 363 399 539
+o 618 465 676 582
+o 363 251 659 363
+o 544 522 623 569
+o 399 521 478 568
+o 560 361 675 464
+
+end

@@ -1,0 +1,59 @@
+mapSize -0.5 0.5 1
+
+size 54
+
+light0 position=0;0;0;1 ambient=.8;.8;.8;1 specular=0;0;0;1 diffuse=.8;.8;.8;1 attenuation=1;0.01;0.015
+material ambient=.4;.4;.4;1 specular=0;0;0;1 diffuse=.7;.7;.7;1
+
+enemyColor .7 .7 .7 1
+
+floorTex southpassfloor.jpg
+wallTex southpasswall.png
+wallTex southpassdoor0.png
+roofTex southpassroof.jpg
+
+normal floor 0 1
+normal wall 1 3
+normal roof 3 4
+
+mapPos 1 0
+
+dir 5 1 21
+dir 21 1 37
+dir 37 1 53
+dir 53 2 54
+dir 54 2 55
+dir 55 2 56
+dir 56 1 72
+dir 59 1 75
+dir 59 2 60
+dir 60 2 61
+dir 61 2 62
+dir 72 1 88
+dir 75 1 91
+dir 88 1 104
+dir 88 2 89
+dir 89 2 90
+dir 90 2 91
+dir 91 1 107
+dir 104 1 120
+dir 107 1 123
+dir 118 1 134
+dir 118 2 119
+dir 119 2 120
+dir 123 2 124
+dir 124 2 125
+dir 125 2 126
+dir 126 2 127
+dir 134 1 150
+dir 150 1 166
+
+mapEnd
+
+wall 2 5 3
+wall 2 127 2
+
+inv door 127 2 dontopen forest_of_bri--west_forest-mark0
+inv door 5 3 dontopen east_passage--west_mountain-mark1
+
+inv chest 166 1 2 Images/chest 2 cards.magic.Earth 1 true

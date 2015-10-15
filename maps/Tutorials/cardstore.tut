@@ -1,0 +1,87 @@
+title string="Tutorial - Cards";""
+
+var type=vector name=underline value=0,0,.7
+var type=vector name=blue value=0,0,.7
+var type=vector name=green value=0,.7,0
+var type=vector name=brightred value=1,0,0
+var type=vector name=red value=.7,0,0
+
+newtext
+
+newMap
+putMap index=3 vector=underline
+putMap index=5 vector=underline
+addRow newpage=true text="Cards can be purchased or found.";"" usemap=true
+newMap
+putMap index=1 vector=underline
+putMap index=2 vector=underline
+putMap index=7 vector=underline
+putMap index=8 vector=underline
+addRow newpage=false text="After certain events, a card store can update its";"" usemap=true
+newMap
+putMap index=0 vector=underline
+putMap index=5 vector=underline
+addRow newpage=false text="wares, so make sure to revisit!";"" usemap=true
+
+addRow newpage=true text="The strength of the effect dealt by a card is";""
+newMap
+putMap index=2 vector=underline
+putMap index=3 vector=underline
+putMap index=4 vector=underline
+putMap index=5 vector=underline
+putMap index=6 vector=underline
+addRow newpage=false text="dependent on the level of that card. A card's level is";"" usemap=true
+addRow newpage=false text="fixed and cannot be changed during the game.";""
+
+newMap
+putMap index=0 vector=underline
+putMap index=1 vector=underline
+putMap index=2 vector=underline
+putMap index=3 vector=underline
+putMap index=4 vector=underline
+putMap index=8 vector=underline
+putMap index=9 vector=underline
+addRow newpage=true text="The level of a card is indicated by the number";"" usemap=true
+newMap
+putMap index=0 vector=underline
+putMap index=1 vector=underline
+putMap index=5 vector=brightred
+putMap index=6 vector=brightred
+putMap index=11 vector=brightred
+addRow newpage=false text="of crystals on it. The maximum level of a card is 3.";"" usemap=true
+addRow newpage=false text="";""
+addRow newpage=false text="";""
+
+addRow newpage=false text="A crystal:";"" icon=Cards/ball.png iconxoffset=120 iconyoffset=-20 iconscale=1.5
+
+newMap
+putMap index=2 vector=red
+putMap index=5 vector=red
+putMap index=6 vector=underline
+putMap index=7 vector=underline
+addRow newpage=true text="Cards with red crystals affects single targets only,";"" usemap=true
+
+newMap
+putMap index=3 vector=blue
+putMap index=6 vector=blue
+putMap index=7 vector=underline
+putMap index=8 vector=underline
+addRow newpage=false text="while those with blue crystals affect all possible targets.";"" usemap=true
+addRow newpage=false text="";""
+addRow newpage=false text="";""
+
+newMap
+putMap index=2 vector=red
+addRow newpage=false text="Lv. 2 single:";"" icon=Cards/Battle_Card.png yoffset=-20 iconxoffset=105 iconyoffset=-72 iconscale=.7 usemap=true
+addRow newpage=false text="";"" icon=Cards/ball.png iconxoffset=138 iconyoffset=-117 iconscale=.9
+addRow newpage=false text="";"" icon=Cards/ball.png iconxoffset=162 iconyoffset=-157 iconscale=.9
+
+newMap
+putMap index=2 vector=blue
+addRow newpage=false text="Lv. 3 all:";"" icon=Cards/Battle_Card.png xoffset=250 yoffset=-140 iconxoffset=70 iconyoffset=-72 iconscale=.7 usemap=true
+addRow newpage=false text="";"" icon=Cards/blueball.png iconxoffset=344 iconyoffset=-237 iconscale=.9
+addRow newpage=false text="";"" icon=Cards/blueball.png iconxoffset=364 iconyoffset=-277 iconscale=.9
+addRow newpage=false text="";"" icon=Cards/blueball.png iconxoffset=384 iconyoffset=-317 iconscale=.9
+
+
+put turn=0

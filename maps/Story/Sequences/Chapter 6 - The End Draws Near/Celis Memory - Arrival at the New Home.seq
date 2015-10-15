@@ -1,0 +1,41 @@
+import file=main.var
+
+var celis=0
+var father=1
+var merri=2
+var boat=3
+
+info time="day" name="Home of Celis - Memory" music="No Music" fadeValue="0" musicVolume="0"
+
+actor name="Characters/barncelis/barncelisExtras" pos=439;250;3
+actor name="Characters/RyoldMemory/RyoldMemoryExtras" pos=439;219;3
+actor name="Characters/MerriMemory/MerriMemoryExtras" pos=370;246;1
+actor name="Stuff/BoatPropExtras1" pos=245;215
+
+ins type=fadeout timea=0 kind=village fadetime=0
+ins type=fadein timea=0 kind=village fadetime=10000
+
+ins timea=3000 index=0 kind=screenzoom zoomin=true zoomtime=8000 usestaticpos=true pos=312;178
+
+
+ins timea=8000 index=merri kind=dist distance=70 direction=3 duration=2800
+
+
+
+ins timea=8000 index=merri kind=tor movepos=-400;-100 duration=20000
+ins timea=0 index=merri kind=stop direction=3
+ins timea=0 index=boat kind=tor movepos=-400;-100 duration=20000
+ins timea=2000 index=celis kind=dist distance=100 direction=3 duration=1000
+ins timea=900 index=celis kind=emotion emotion=! show=true
+ins timea=500 index=merri kind=emotion emotion=! show=true
+ins timea=200 index=merri kind=stop direction=1
+ins timea=0 index=0 kind=screenzoom zoomin=false zoomtime=8000 usestaticpos=true pos=312;178
+ins timea=500 index=celis kind=emotion emotion=! show=false
+ins timea=1000 index=merri kind=emotion emotion=! show=false
+ins timea=2000 index=merri kind=emotion emotion=... show=true
+ins timea=1000 index=merri kind=stop direction=3
+ins timea=2000 index=celis kind=emotion emotion=... show=true
+ins type=fadeout timea=0 kind=village fadetime=10000
+ins timea=3000 index=celis kind=emotion emotion=... show=false
+
+ins timea=7000 kind=endseq

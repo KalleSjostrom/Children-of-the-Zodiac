@@ -1,0 +1,258 @@
+import file=main.var
+
+var farl=0
+var kin=1
+var celis=2
+var borealis=3
+var zalzi=4
+
+info time="day" name="Zazo - Farl's House" music="Zazo" fadeValue="0" musicVolume="1"
+
+actor name="Farl"
+actor name="Kin"
+actor name="Celis"
+actor name="Borealis"
+actor name="Zalzi"
+
+show index=kin value=false
+show index=celis value=false
+show index=borealis value=false
+show index=zalzi value=false
+
+ins timea=0 index=farl kind=controll controll=true
+
+ins timea=0 index=farl kind=show movepos=453;500;0
+ins timea=0 index=kin kind=show movepos=493;611;0
+ins timea=0 index=celis kind=show movepos=478;649;0
+ins timea=0 index=zalzi kind=show movepos=508;630;0
+
+ins timea=0 index=farl kind=dist distance=140 direction=0 duration=2800
+ins timea=1200 index=kin kind=dist distance=120 direction=0 duration=1400
+ins timea=0 index=celis kind=dist distance=120 direction=0 duration=1400
+ins timea=0 index=zalzi kind=dist distance=120 direction=0 duration=1400
+
+ins timea=1000 index=kin kind=emotion emotion=! show=true
+dialogsingle starttimea=400 duration=400 <= name="Kin" text="Hey Farl!";"Nice to see you again!"
+ins timea=300 index=farl kind=emotion emotion=! show=true
+ins timea=80 index=farl kind=stop direction=2
+ins timea=100 index=kin kind=emotion show=false
+ins timea=200 index=farl kind=dist distance=70 direction=2 duration=1400
+ins timea=0 index=farl kind=queue distance=40 direction=1 duration=800
+ins timea=0 index=farl kind=queue direction=2
+dialogpacket name=1 starttimea=300 duration=1100
+dialog packetname=1 name="Farl" text="Oh, hello!";"It's great to see you!"
+dialog packetname=1 name="Farl" text="I've been kind of worried for you!";"Have you found any stones?"
+ins timea=1000 index=farl kind=emotion show=false
+
+ins timea=400 index=kin kind=dist distance=15 direction=0 duration=300
+dialogsingle starttimea=100 duration=200 <= name="Kin" text="Yes, we have.";"We have also found an airship"
+dialogsingle starttimea=100 duration=200 <= name="Farl" text="That's really great!";"Now you can easily travel north and continue searching for stones!"
+dialogsingle starttimea=100 duration=200 <= name="Farl" text="I was actually a bit worried how you were to travel there as I assumed you must"
+dialogsingle starttimea=100 duration=200 <= name="Celis" text="We are here to talk to Borealis.";"We would very much like him to come along with us."
+dialogsingle starttimea=100 duration=200 <= name="Celis" text="However, we can't just walk around in Zazo anymore...";"Could you go get him?"
+dialogsingle starttimea=100 duration=200 <= name="Farl" text="Of course!";"Just wait here... It could be a while."
+	
+ins type=fadeout timea=1000 index=0 fadetime=2000 kind=village
+load animation="Teodown"
+text lines="A while later";"" pos=370;384
+ins type=fadein timea=2000 index=0 fadetime=2000 kind=text
+ins timea=0 index=farl kind=to movepos=-342;-258;0 duration=1
+ins timea=0 index=kin kind=emotion show=false
+ins timea=0 index=celis kind=emotion show=false
+ins timea=0 index=zalzi kind=emotion show=false
+ins timea=0 index=farl kind=emotion emotion=... show=true
+ins timea=0 index=kin kind=to movepos=420;487 duration=1
+ins timea=0 index=celis kind=to movepos=420;437 duration=1
+ins timea=0 index=zalzi kind=to movepos=641;499 duration=1
+ins timea=0 index=kin kind=stop direction=0
+ins timea=0 index=celis kind=stop direction=2
+ins timea=0 index=zalzi kind=emotion emotion=zzz show=true
+ins timea=100 index=0 kind=animation actor=zalzi animation=17
+ins type=fadeout timea=7000 index=0 fadetime=2000 kind=text
+ins type=fadein timea=2000 index=0 fadetime=4000 kind=village
+
+ins timea=500 index=farl kind=dist distance=50 direction=1 duration=1000
+ins timea=0 index=farl kind=queue direction=0
+
+dialogsingle starttimea=1500 <= name="Farl" text="Hmm, interesting..."
+
+ins timea=1000 index=borealis kind=show movepos=493;611;0
+ins timea=1000 index=kin kind=stop direction=0
+ins timea=0 index=borealis kind=dist distance=120 direction=0 duration=2600
+ins timea=0 index=borealis kind=queue direction=3
+
+ins timea=1300 index=celis kind=emotion emotion=! show=true
+ins timea=200 index=kin kind=emotion emotion=! show=true
+ins timea=0 index=kin kind=stop direction=1
+ins timea=50 index=celis kind=stop direction=1
+ins timea=200 index=zalzi kind=emotion emotion=... show=true
+ins timea=0 index=zalzi kind=stop direction=0
+ins timea=100 index=celis kind=dist distance=20 direction=1 duration=300
+dialogsingle starttimea=150 duration=150 <= name="Celis" text="Borealis!"
+ins timea=100 index=zalzi kind=stop direction=1
+ins timea=500 index=zalzi kind=stop direction=0
+
+ins timea=800 index=borealis kind=dist distance=20 direction=3 duration=500
+dialogsingle starttimea=350 duration=380 <= name="Borealis" text="Oh, Hi there!";"Long time no see!"
+ins timea=400 index=borealis kind=stop direction=0
+dialogsingle starttimea=350 duration=380 <= name="Borealis" text="Are you waiting for Farl?"
+ins timea=200 index=zalzi kind=stop direction=2
+ins timea=100 index=kin kind=emotion show=false
+ins timea=50 index=celis kind=emotion show=false
+
+ins timea=200 index=kin kind=dist distance=10 direction=1 duration=300
+dialogsingle starttimea=150 duration=1050 <= name="Kin" text="Yeah. He's taking his sweet time, that's for sure."
+ins timea=1000 index=celis kind=dist distance=10 direction=1 duration=300
+ins timea=0 index=celis kind=queue direction=2
+ins timea=200 index=zalzi kind=emotion emotion=! show=true
+ins timea=0 index=zalzi kind=dist distance=15 direction=1 facedirection=3 duration=100
+
+ins timea=200 index=borealis kind=stop direction=0
+dialogpacket name=4.1 starttimea=350 duration=350
+dialog packetname=4.1 name="Borealis" text="Yeah, that's Farl alright.";"And when he's focused, he gets a bit absent-minded."
+dialog packetname=4.1 name="Borealis" text="I bet he haven't even noticed my entrance."
+
+ins timea=500 index=zalzi kind=emotion show=false 
+ins timea=50 index=zalzi kind=tor movepos=-110;-10 duration=1300
+dialogsingle starttimea=300 duration=1000 <= name="Zalzi" text="Well, I be damned!";"Look what the cat dragged in!"
+ins timea=400 index=borealis kind=stop direction=1
+ins timea=1200 index=borealis kind=dist distance=20 direction=1 duration=400
+dialogpacket name=5 starttimea=200 duration=200
+dialog packetname=5 name="Borealis" text="Oh, hi there, Zalzi! Didn't see you there..."
+dialog packetname=5 name="Zalzi" text="Of course not! I'm only seen if I want to be seen.";"" first=false
+ins timea=400 index=zalzi kind=stop direction=2
+ins timea=0 index=zalzi kind=emotion emotion=... show=true
+ins timea=1400 index=zalzi kind=stop direction=3
+ins timea=0 index=zalzi kind=emotion show=false
+dialogpacket name=5.1 starttimea=300
+dialog packetname=5.1 name="Zalzi" text="So, what are you doing here anyway?"
+dialog packetname=5.1 name="Borealis" text="I'm here to talk to Farl about...";"leaving Zazo again, actually." first=false
+
+ins timea=500 index=celis kind=dist distance=25 direction=1 duration=250
+ins timea=0 index=celis kind=queue direction=2
+ins timea=0 index=celis kind=emotion emotion=! show=true
+dialogsingle starttimea=50 duration=400 <= name="Celis" text="Have you decided to join us again?!"
+ins timea=300 index=borealis kind=emotion show=false
+ins timea=50 index=borealis kind=stop direction=0
+ins timea=500 index=borealis kind=dist distance=10 direction=0 duration=400
+dialogsingle starttimea=400 duration=400 <= name="Borealis" text="Yes, I have."
+ins timea=300 index=celis kind=emotion show=false
+ins timea=500 index=borealis kind=dist distance=30 direction=2 duration=1200
+dialogsingle starttimea=900 duration=300 <= name="Borealis" text="I've been thinking that it's the best";"way to help Zazo after all."
+ins timea=400 index=celis kind=emotion emotion=! show=true
+dialogsingle starttimea=50 <= name="Celis" text="That's so great!";"We have all missed you!"
+ins timea=200 index=celis kind=emotion show=false
+ins timea=800 index=zalzi kind=emotion emotion=... show=true
+ins timea=0 index=kin kind=emotion emotion=... show=true
+ins timea=300 index=zalzi kind=stop direction=1
+ins timea=0 index=kin kind=stop direction=3
+dialogsingle starttimea=350 <= name="Zalzi and Kin" text="Yeah, right..." whisper=true
+
+ins timea=500 index=kin kind=emotion show=false
+ins timea=0 index=zalzi kind=emotion show=false
+
+ins timea=1000 index=celis kind=dist distance=10 direction=2 duration=300
+dialogsingle starttimea=150 <= name="Celis" text="We are going to use Farl's air ship and fly towards";"the north continent to get the last stones."
+ins timea=300 index=borealis kind=dist distance=30 direction=0 duration=400
+ins timea=0 index=borealis kind=emotion emotion=?! show=true
+
+dialogsingle starttimea=150 duration=250 <= name="Borealis" text="What?!"
+ins timea=400 index=borealis kind=emotion show=false
+ins timea=800 index=borealis kind=dist distance=30 direction=2 duration=900
+ins timea=2000 index=borealis kind=stop direction=0
+ins timea=100 index=borealis kind=emotion emotion=? show=true
+dialogsingle starttimea=150 <= name="Borealis" text="But the Cardinal cannot fly...";"How are..."
+
+ins timea=250 index=farl kind=emotion emotion=! show=true
+ins timea=250 index=farl kind=tor movepos=35;180 duration=1800
+dialogsingle starttimea=300 duration=1500 <= name="Farl" text="I found the last piece in making the Cardinal fly!";""
+ins timea=100 index=borealis kind=emotion show=false
+ins timea=300 index=kin kind=stop direction=0
+ins timea=0 index=zalzi kind=stop direction=3
+ins timea=0 index=celis kind=stop direction=3
+ins timea=400 index=borealis kind=tor movepos=-30;-40 duration=800
+ins timea=0 index=borealis kind=queue direction=0
+ins timea=350 index=kin kind=dist distance=20 direction=3 duration=400
+ins timea=0 index=kin kind=queue direction=0
+ins timea=200 index=zalzi kind=tor movepos=-110;0 duration=1000
+ins timea=0 index=zalzi kind=queue direction=0
+
+ins timea=300 index=farl kind=emotion show=false
+ins timea=700 index=farl kind=stop direction=1
+
+dialogpacket name=6 starttimea=150
+dialog packetname=6 name="Farl" text="With the book you gave me, I was able to";"translate some old documents I had lying around."
+dialog packetname=6 name="Farl" text="It says here that we will need the";"''Crystal of Levitation'' to make the bird fly."
+
+ins timea=600 index=celis kind=emotion emotion=? show=false
+ins timea=800 index=celis kind=dist distance=10 direction=3 duration=300
+dialogsingle starttimea=150 duration=150 <= name="Celis" text="So where is this crystal, then?";""
+ins timea=1300 index=farl kind=stop direction=3
+dialogsingle starttimea=500 <= name="Farl" text="Well... It doesn't say..."
+ins timea=800 index=farl kind=stop direction=2
+dialogsingle starttimea=150 <= name="Farl" text="But now I know whatÕs missing!";"This is so exciting!"
+ins timea=800 index=zalzi kind=dist distance=10 direction=2 duration=400
+dialogsingle starttimea=200 duration=300 <= name="Zalzi" text="So we're back at square one then...";""
+ins timea=800 index=borealis kind=stop direction=1
+ins timea=0 index=borealis kind=emotion emotion=... show=true
+ins timea=2000 index=borealis kind=dist distance=20 duration=600 direction=1
+ins timea=1500 index=borealis kind=dist distance=30 duration=400 direction=3
+ins timea=0 index=borealis kind=queue direction=0
+ins timea=0 index=borealis kind=emotion show=false
+dialogsingle starttimea=150 duration=150 <= name="Boreails" text="Hmm... This crystal. What about itÕs origin?";""
+ins timea=400 index=farl kind=dist distance=10 direction=0 facedirection=2 duration=100
+ins timea=0 index=farl kind=emotion emotion=!? show=true
+dialogpacket name=7 starttimea=350 duration=350
+dialog packetname=7 name="Farl" text="Oh! Borealis! When did you arrive?"
+dialog packetname=7 name="Borealis" text="Just a minute ago.";"Nothing gets past you, eyh?" first=false
+ins timea=300 index=zalzi kind=stop direction=0
+ins timea=300 index=farl kind=stop direction=3
+ins timea=0 index=farl kind=emotion show=false
+dialogsingle starttimea=500 <= name="Farl" text="Hmm... Yeah, well..."
+ins timea=300 index=farl kind=stop direction=2
+dialogsingle starttimea=150 <= name="Farl" text="Anyway, the people who built the air ships";"are long gone but this text was written by them."
+ins timea=900 index=celis kind=stop direction=2
+dialogsingle starttimea=1500 <= name="Celis" text="So... If the language in that text were only used,";"by the people who lived near the Temple of Aegis..."
+ins timea=300 index=celis kind=dist distance=10 direction=3 duration=100
+ins timea=0 index=celis kind=emotion emotion=! show=true
+dialogsingle starttimea=150 <= name="Celis" text="The crystal of levitation is probably around there!";""
+ins timea=300 index=farl kind=dist distance=20 direction=0 duration=200
+ins timea=0 index=farl kind=emotion emotion=! show=true
+dialogsingle starttimea=150 duration=300 <= name="Farl" text="Yes, of course!";"The crystal must be around Berca!"
+ins timea=200 index=celis kind=emotion show=false
+ins timea=200 index=farl kind=emotion show=false
+
+ins timea=1000 index=kin kind=dist distance=10 direction=0 duration=300
+dialogsingle starttimea=200 duration=300 <= name="Kin" text="We actually found a glassy stone in the Temple...";""
+ins timea=250 index=borealis kind=stop direction=3
+
+ins timea=250 index=farl kind=emotion emotion=! show=true
+ins timea=0 index=farl kind=dist distance=20 direction=2 duration=150
+dialogsingle starttimea=150 duration=150 <= name="Farl" text="What!";"Can I see it!?"
+ins timea=300 index=kin kind=dist distance=10 direction=0 duration=300
+ins timea=200 index=farl kind=tor movepos=-20;27 direction=2 duration=500
+ins timea=200 index=borealis kind=stop direction=3
+ins timea=1500 index=farl kind=dist distance=30 direction=0 duration=900
+ins timea=200 index=farl kind=emotion emotion=... show=true
+ins timea=1500 index=farl kind=emotion emotion=! show=true
+ins timea=0 index=farl kind=stop direction=2
+dialogpacket name=7.9 starttimea=0
+dialog packetname=7.9 name="Farl" text="This must be it!";"I looks exactly as the one described in the text."
+dialog packetname=7.9 name="Farl" text="The gods must truly be on our side!"
+ins timea=350 index=zalzi kind=emotion emotion=! show=true
+dialogsingle starttimea=150 duration=400 <= name="Zalzi" text="Finally some good news!";"LetÕs fix that ship and fly of."
+ins timea=500 index=zalzi kind=emotion show=false
+ins timea=100 index=farl kind=emotion show=false
+ins timea=800 index=farl kind=dist distance=10 direction=2 duration=300
+dialogpacket name=8 starttimea=150
+dialog packetname=8 name="Farl" text="I have hidden away The Red Cardinal";"inside the Zazo Mountain."
+dialog packetname=8 name="Farl" text="I have a secret tunnel in my cellar, you can use."
+ins timea=400 index=farl kind=to movepos=414;344 duration=1500
+ins timea=600 index=borealis kind=stop direction=0
+ins timea=100 index=celis kind=stop direction=0
+ins timea=0 index=farl kind=queue direction=2
+dialogsingle starttimea=300 duration=500 <= name="Farl" text="Just take these stairs and you'll soon find it.";""
+ins timea=700 index=celis kind=dist distance=20 direction=0 duration=400
+dialogsingle starttimea=200 duration=200 <= name="Celis" text="Thank you again, Farl!";""
+
+ins timea=500 kind=end

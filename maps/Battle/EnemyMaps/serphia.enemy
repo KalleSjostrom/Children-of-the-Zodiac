@@ -1,0 +1,125 @@
+name Serphia
+
+defense 163
+magicDefense 203
+agility 21
+evade 0
+hit 95
+attack 1104
+magic 1104
+support 1004
+hp 30000
+element 0
+gold 0
+experience 0
+criticalChance 0
+
+diesound Virgo/dies
+image serphia 6
+armor 10 10
+preferences 100 0
+
+scale 5.5
+height -2
+depth -6
+middle 0
+
+#attackSpec type=no name=change0 anim=(f=2,a=600,se=Monster/Virgo/transform)--(f=0,a=600,se=Monster/Virgo/transformshort)--(f=2,a=400,se=Monster/Virgo/transformshort)--(f=0,a=400,se=Monster/Virgo/transformshort)--(f=2,a=200,se=Monster/Virgo/transformshort)--(f=0,a=200,se=Monster/Virgo/transformshort)--(f=2,a=100,se=Monster/Virgo/transformshort)--(f=0,a=100,se=Monster/Virgo/transformshort)--(f=2,a=100,se=Monster/Virgo/transformshort)--(f=0,a=100,se=Monster/Virgo/transformshort)--(f=2,a=100,se=Monster/Virgo/transformshort)--(f=0,a=100,se=Monster/Virgo/transformshort)--(f=2,a=100,se=Monster/Virgo/transformshort)--(f=0,a=100,se=Monster/Virgo/transformshort)--(f=2,a=100,se=Monster/Virgo/transformshort)--(f=0,a=100,d=true,se=Monster/Virgo/transformshort) target=-1
+#attackSpec type=no name=change1 anim=(f=0,a=600,se=Monster/Virgo/transform)--(f=1,a=600,se=Monster/Virgo/transformshort)--(f=0,a=400,se=Monster/Virgo/transformshort)--(f=1,a=400,se=Monster/Virgo/transformshort)--(f=0,a=200,se=Monster/Virgo/transformshort)--(f=1,a=200,se=Monster/Virgo/transformshort)--(f=0,a=100,se=Monster/Virgo/transformshort)--(f=1,a=100,se=Monster/Virgo/transformshort)--(f=0,a=100,se=Monster/Virgo/transformshort)--(f=1,a=100,se=Monster/Virgo/transformshort)--(f=0,a=100,se=Monster/Virgo/transformshort)--(f=1,a=100,se=Monster/Virgo/transformshort)--(f=0,a=100,se=Monster/Virgo/transformshort)--(f=1,a=100,se=Monster/Virgo/transformshort)--(f=0,a=100,se=Monster/Virgo/transformshort)--(f=1,a=100,d=true,se=Monster/Virgo/transformshort) target=-1
+
+attackSpec type=no name=change0 anim=(f=2,a=600,se=Monster/Virgo/transform)--(f=0,a=600)--(f=2,a=400)--(f=0,a=400)--(f=2,a=200)--(f=0,a=200)--(f=2,a=100)--(f=0,a=100)--(f=2,a=100)--(f=0,a=100)--(f=2,a=100)--(f=0,a=100)--(f=2,a=100)--(f=0,a=100)--(f=2,a=100)--(f=0,a=100,d=true) target=-1
+attackSpec type=no name=change1 anim=(f=0,a=600,se=Monster/Virgo/transform)--(f=1,a=600)--(f=0,a=400)--(f=1,a=400)--(f=0,a=200)--(f=1,a=200)--(f=0,a=100)--(f=1,a=100)--(f=0,a=100)--(f=1,a=100)--(f=0,a=100)--(f=1,a=100)--(f=0,a=100)--(f=1,a=100)--(f=0,a=100)--(f=1,a=100,d=true) target=-1
+
+attackSpec {
+	type=no
+	name=Renew
+	anim=(f=1,a=600,se=Monster/Virgo/transform)--(f=2,a=500)--(f=1,a=400)--(f=2,a=300)--(f=1,a=200)--(f=2,a=100)--(f=1,a=100)--(f=2,a=100)--(f=1,a=100)--(f=2,a=100,d=true)--(f=2,a=1000,h=true)
+	power=0
+	effect=(Renew=.5)
+}
+
+attackSpec {
+	type=Off
+	name=Scream
+	anim=(f=1,s=true,se=Monster/Virgo/scream)--(f=1,s=true)--(f=1,s=true,h=true,d=true)
+	onAll=true
+	power=.5
+}
+
+attackSpec {
+	type=Mag
+	name=Crackle
+	anim=(a=1500,hit=true,s=true,se=Monster/Virgo/crackle)
+	onAll=true
+	power=0
+	effect=(BoostAll=1000;-.5)
+}
+
+attackSpec {
+	type=Off
+	name=Cut
+	anim=(f=2)--(f=3,hit=true,se=Monster/Virgo/attack)--(f=2,d=true)
+	power=1
+}
+
+attackSpec {
+	type=Off
+	name=Scythe
+	anim=(f=2,a=285,se=Monster/Virgo/scythe)--(f=4,a=300)--(f=2,a=300)--(f=5,a=300)--(f=2,a=300)--(f=4,a=300)--(f=2,a=300)--(f=5,a=300)--(f=2,a=300,d=true)
+	onAll=true
+	power=.6
+}
+
+attackSpec {
+	type=Mag
+	name=Demonic_Beam
+	anim=(f=2,d=true,a=20,c=m+SmallSacredBeam:0.09;0.86;-6)--(f=2,d=true,a=20,c=m+SmallSacredBeam:0.32;0.92;-6)--(f=2,d=true,a=2000,c=m+SmallSacredBeam:-0.12;0.98;-6)
+	onAll=true
+	power=.7
+}
+
+attackSpec {
+	type=Mag
+	name=Black_Fire
+	anim=(f=2)--(f=3,a=300,se=Monster/Virgo/attack)--(f=3,a=1000,c=m+BlackFire:-0.025;0.14;-6)--(f=2,d=true)
+	power=1
+}
+
+attackSpec {
+	type=Off
+	name=Drain
+	anim=(f=2)--(f=4,hit=true,c=o+EnemyDrain,se=Monster/Virgo/attack)--(f=2,d=true)
+	power=.8
+	effect=(Drain=.5)
+}
+
+attackSpec {
+	type=Mag
+	name=Reaper
+	anim=(f=2,a=30,se=Monster/Virgo/reaper)--(f=2,a=20,c=m+SerphiaDeath:-1.62;.55;-6)--(f=2,a=1700,c=m+SerphiaDeath:1.625;0.875;-6)--(f=3)--(f=2,d=true)
+	power=0
+	effect=(Death=1)
+}
+
+cardPreference neutral 0
+cardPreference Death 0
+cardPreference openwound 0
+
+run script=serphia
+
+dialog name="Girl" text="You will never get it!";"He told me to hold on to it!"
+dialog name="Kin" text="We're not going to hurt you.";"We are here to help." first=0 
+dialog name="Girl" text="The stone is mine!";"Get away from me!"
+dialog name="Celis" text="The stone?";"" first=0 
+dialog name="Girl" text="Menthu told me to hold on to it!";"I will not let him down!"
+dialog name="Kin" text="Menthu!?";"" first=0 
+dialog name="Celis" text="We must have that stone.";"" first=0 whisper=1
+dialog name="Girl" text="I warned you...";""
+end=begin
+dialog name="" text="Another stone falls in the";"possession of Celis and her party."
+dialog name="Kin" text="Now let's find that levitation crystal!";"" first=0
+dialog name="" text="They pressed on and soon arrived at a sparkling room...";""
+end=endEnemyDead
+dialog name="Girl" text="You should have listened to me...";""
+end=endPartyDead
+nextPlace="Getting_the_Crystal_of_Levitation";""

@@ -1,0 +1,106 @@
+image Killian
+start 1220 360
+
+in 1 100 true
+in 2 45 false
+in 1 100 true
+in 2 60 false
+in 1 45 false
+in 0 100 true
+in 1 40 false
+in 0 100 true
+in 1 45 false
+in 0 50 false
+in 0 100 true
+in 3 100 true
+in 0 100 true
+in 1 30 false
+in 0 100 true
+in 1 100 false
+in 2 115 false
+in 3 305 false
+in 0 100 true
+in 2 100 true
+in 3 100 true
+in 0 170 false
+in 1 45 false
+
+dialog 1
+
+n Killian
+fl I have always wanted to see the
+sl vast regions of this world.
+f true
+
+n Killian
+fl But I've heard that people on 
+sl the other side are dangerous.
+f true
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

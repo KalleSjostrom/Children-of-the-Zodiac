@@ -1,0 +1,363 @@
+##### VILLAGE #####
+# NAME
+name Alares The_Green_Village
+
+##### BACKGRUND #####
+
+# background, prefix name of both images day
+background Alares true
+
+##### STARTING LOCATION #####
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1953 1877 1
+start0 1333 1809 0
+start1 1805 1070 2
+wind 10;0;0 .1
+particlesystem smokesystemAlares
+# rainsystem 
+
+animObj fountain 1303 1279
+
+##### DOORS #####
+# The name field connects the door to the building so it must be the 
+# same for the door to lead to the building
+## Example: 
+## door type NAME int int int bool
+## building NAME image image string string string
+## Where NAME is equal to NAME.
+
+# door type name xpos ypos width locked
+# building name image clerkImage clerkName clerkFirstLine clerkSecondeLine music
+door church Church 708 725 50 0
+building Church alaresChurch.jpg alaresPastorMikel.png Pastor_Mikel How_can_I_be_of_assistance? _ Alares_Church
+
+door weapon grasstownWeapons 1006 1518 30 0
+building grasstownWeapons alaresWeaponShop.jpg alaresWeaponShopClerk.png Clerk What_can_I_do_for_you? _ Item_Shop
+
+door inn Inn 1810 1048 30 0
+building Inn alaresInn.jpg alaresInnKeeperBurt.png Burt Whaddaya_want?! _ House
+doorSignFl I'm out, come back later.
+doorSignSl  - Innkeeper Burt.
+
+door card alaresCardShop 328 471 30 0
+building alaresCardShop alaresCardShop.jpg alaresCardShopDenther.png Denter Want_any_cards? _ Item_Shop
+
+door house Alares_-_Belmet's_House 1569 1515 30 0 2
+doorSignFl No one is home.
+
+door house Alares_-_Library 1319 518 30 0 2
+doorSignFl The library is closed.
+
+door house cardHouse 213 504 30 0 2
+doorSignFl The shop is to the right.
+
+# GOLD = 0;
+# ITEM = 1;
+# CARD = 2;
+# WEAPON = 3;
+# ARMOR = 4;
+
+# name x y contentName type [level all]
+loot barrelLoot 1080 1527 0 cards.magic.Ice 2 1 true
+lootLine A card was wedged in between the barrels!
+
+#loot card 40 1812 0;1;2;3 cards.magic.Flare 2 2 true
+#lootLine You found a card lying on the ground!
+
+loot stoneLoot 868 481 0;1;2;3 25 0
+lootLine You found 25 gold coins under the stone!
+
+loot treeLoot 1532 528 0;1;2;3 cards.offense.BattleCard 2 2 false
+lootLine You found a card hidden among the 
+lootLine leaves of the small tree!
+
+##### SIGNS #####
+# sign xpos ypos
+# signL text
+sign 1390 1813 35
+signL North west: Weapon Shop.
+signL North east: Scientist Belmets residence.
+
+sign 1205 1555 50
+signL Weapon Shop.
+
+# item sign
+sign 262 547 30
+signL Item shop.
+
+# uri sign
+sign 1289 1167 30
+signL The uri mansion.
+
+# hot
+sign 1148 1504 52
+signL Hot hot hot!!!
+
+sign 986 1527 30
+signL Maybe we shouldn't read someone elses mail...
+
+# sign left of the well 
+sign 806 1248 30
+signL Left: Church and item store.
+signL Right: Town square.
+
+##### VILLAGERS #####
+
+# villager name
+villager Bella 
+villager Elmer 
+villager Elthea 
+villager Eve 
+villager Farmer_Jane 
+villager Farmer_John 
+villager Flog 
+villager Ghertrudd 
+villager Marge
+villager Pavier 
+villager Recruiter
+villager Thieving_looking_guy 1 2 3 4 5
+villager Uri 
+villager Marcus 6
+villager Hilda1 4
+
+# East woods
+o 1903 845 1930 878
+o 1621 779 1955 813
+o 1882 814 1953 844
+
+# North woods
+o 1568 253 1597 289
+o 428 93 606 171
+o 912 240 968 270
+o 1185 194 1238 220
+o 1101 248 1127 279
+o 1239 194 1313 283
+o 1540 194 1623 253
+o 1314 252 1348 281
+o 608 194 662 251
+o 524 250 569 300
+o 1262 283 1290 316
+o 1223 220 1239 233
+o 598 251 663 298
+o 442 172 607 250
+o 792 273 820 309
+o 1399 281 1428 311
+o 1381 250 1447 280
+o 1854 81 1901 201
+o 768 193 843 273
+o 607 0 1792 193
+o 1876 232 1906 259
+o 1083 194 1145 247
+o 1655 193 1683 219
+o 663 193 706 244
+o 1792 0 1854 165
+o 844 194 878 271
+o 926 271 956 302
+o 574 69 607 92
+o 1624 194 1654 249
+o 1314 193 1457 251
+o 1683 193 1757 246
+o 1457 193 1483 226
+o 484 305 511 337
+o 879 194 987 240
+o 618 298 649 331
+o 1146 194 1184 244
+o 1705 247 1734 281
+o 466 250 524 304
+o 988 194 1012 215
+
+# Plotter träd
+o 1435 1812 1462 1841
+o 813 1178 840 1201
+o 1112 1180 1139 1203
+o 814 1028 841 1051
+o 1429 1610 1456 1633
+o 1229 1817 1256 1840
+o 1041 504 1068 533
+o 625 1178 652 1201
+o 625 868 652 891
+o 626 1023 653 1046
+o 159 275 186 298
+o 74 587 101 610
+o 1228 1767 1255 1790
+o 814 867 841 890
+o 943 1174 970 1203
+o 422 689 449 718
+o 914 1757 941 1786
+o 1542 1159 1569 1188
+o 100 216 127 239
+o 1428 1533 1455 1556
+
+## Sign Stone Well ##
+
+# Eastroadsign
+o 808 1246 840 1287
+# Twinstone2
+o 386 971 418 1000
+# Twinstone1
+o 396 957 428 986
+# Majorstone
+o 1398 1175 1429 1205
+# Southstone
+o 1039 1801 1070 1828
+# Well
+o 1302 1293 1392 1363
+# Eastroadstone
+o 754 1258 785 1288
+# Majorsign
+o 1289 1164 1319 1205
+# Northroadstone
+o 979 708 1009 739
+# Enterensesign
+o 1389 1812 1418 1854
+
+# South east woods
+o 1925 1469 1960 1554
+o 1948 1327 1964 1469
+o 1876 1554 1954 1786
+o 1686 1786 1962 1889
+o 1837 1751 1876 1786
+
+# South west woods
+o 735 1545 767 1571
+o 583 1630 682 1788
+o 753 1471 771 1545
+o 1876 1554 1954 1786
+o 1686 1786 1962 1889
+o 686 1360 721 1403
+o 144 1789 806 1906
+o 84 1181 400 1323
+o 1837 1751 1876 1786
+o 401 1224 450 1325
+o 0 1526 40 1768
+o 144 1630 582 1789
+o 1925 1469 1960 1554
+o 686 1403 753 1544
+o 1948 1327 1964 1469
+o 50 1288 85 1323
+o 450 1284 480 1325
+o 682 1683 741 1789
+o 0 1324 685 1525
+o 742 1722 783 1790
+
+# Belmets house
+
+o 1498 1540 1504 1567
+o 1506 1565 1528 1567
+o 1655 1566 1663 1571
+o 1664 1508 1683 1573
+o 1504 1476 1664 1565
+
+# Church
+
+o 629 635 839 767
+
+# Inn
+
+o 1785 1102 1808 1111
+o 1845 1103 1866 1111
+o 1645 879 1867 1102
+o 1726 1103 1754 1113
+o 1637 1089 1686 1110
+
+# Item shop
+
+o 181 550 320 558
+o 270 577 280 582
+o 261 559 320 576
+o 149 449 307 549
+o 374 507 419 576
+o 307 459 419 506
+o 308 507 323 549
+
+# Library
+
+o 1134 391 1534 537
+o 1518 537 1535 543
+o 1254 538 1411 570
+o 1126 511 1133 533
+o 1535 491 1556 543
+o 1535 481 1547 490
+
+# Majors House
+
+o 1236 982 1459 1102
+o 1367 1102 1396 1112
+o 1301 1103 1331 1112
+
+# River
+o 403 295 411 305
+o 417 415 426 427
+o 427 356 494 440
+o 266 108 345 215
+o 277 216 287 236
+o 398 379 427 414
+o 455 441 463 448
+o 537 392 546 400
+o 303 215 382 306
+o 527 822 559 848
+o 527 848 545 870
+o 335 341 344 354
+o 495 369 512 375
+o 444 814 454 821
+o 482 883 500 897
+o 557 421 575 440
+o 294 258 304 275
+o 383 253 392 274
+o 462 441 476 454
+o 486 467 495 475
+o 383 274 402 305
+o 476 440 494 466
+o 589 750 596 770
+o 489 763 496 770
+o 315 307 326 318
+o 419 911 444 924
+o 399 835 418 841
+o 495 401 557 485
+o 427 337 452 355
+o 500 739 507 750
+o 419 822 525 882
+o 371 379 381 390
+o 381 378 398 400
+o 346 165 353 178
+o 259 153 266 175
+o 249 841 417 934
+o 366 203 372 214
+o 419 883 482 911
+o 557 441 596 485
+o 452 348 463 356
+o 346 178 366 215
+o 557 411 565 422
+o 453 808 478 822
+o 495 750 588 796
+o 286 217 304 257
+o 326 308 342 341
+o 499 486 507 507
+o 0 839 189 934
+o 478 795 574 821
+o 252 107 266 153
+o 246 0 340 107
+o 576 431 583 441
+o 507 485 608 749
+o 484 771 494 795
+o 427 325 440 336
+o 494 376 536 400
+o 343 306 426 378
+
+# Weapon shop
+o 1085 1566 1126 1580
+o 1203 1549 1251 1591
+o 1186 1544 1217 1554
+o 976 1566 1005 1580
+o 1145 1514 1193 1544
+o 1103 1581 1124 1587
+o 1039 1566 1070 1569
+o 1135 1543 1143 1566
+o 977 1477 1135 1566
+o 1126 1566 1142 1573
+o 1193 1529 1211 1543
+o 1203 1477 1229 1502
+
+##### END #####
+end

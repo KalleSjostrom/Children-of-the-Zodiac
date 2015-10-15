@@ -1,0 +1,30 @@
+image Farl
+
+##### STARTING LOCATION #####
+
+# start x y
+start 1800 218
+
+##### INSTRUCTIONS #####
+
+# in angle distance stopped
+in 2 180 true
+
+##### dialogS #####
+
+# first line
+# second line
+# first dialog background (the one at the far left top of the screen)
+
+dialog 1
+
+run Meeting_with_Farl_of_Zazo continue
+
+dialog 2
+
+n Farl
+fl The gods await you.
+sl May your journey be prosperous.
+f true
+
+end

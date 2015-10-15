@@ -1,0 +1,32 @@
+import file=main.var
+
+info time="day" name="Zazo" music="continue" fadeValue="0" musicVolume="0" delay="0"
+
+var gerbias=0
+var borealis=1
+
+actor name="Gerbias1"
+actor name="Characters/Borealis/BorealisExtras" pos=1203;400;0
+
+ins timea=0 index=gerbias kind=controll controll=true
+ins timea=0 index=gerbias kind=hide
+ins timea=0 index=gerbias kind=show movepos=1200;370;2
+
+load music="ending"
+
+ins type=fadein timea=0 index=1 fadetime=0 kind=music mode=play
+ins type=fadeout timea=0 kind=village fadetime=0
+ins type=fadein timea=3000 kind=village fadetime=1500
+
+text lines="Zazo is no longer occupied &";"Borealis became mayor." pos=450;384 color=0 size=50 pos=450;384
+ins timea=500 kind=screen_go acceleration=50000 distance=240 direction=0 duration=5000
+ins timea=4000 kind=screen_stop
+ins type=fadein timea=500 index=0 fadetime=1000 kind=text
+
+ins timea=1500 index=borealis kind=screenzoom zoomin=true zoomtime=4000 usestaticpos=true pos=512;378
+ins type=fadeout timea=4000 index=0 fadetime=1000 kind=text
+ins timea=500 index=borealis kind=stop direction=2
+
+ins type=fadeout timea=1500 kind=village fadetime=1200
+ins timea=0 index=1 kind=music_story_overwrite
+ins timea=1200 kind=endseq

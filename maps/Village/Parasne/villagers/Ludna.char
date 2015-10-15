@@ -1,0 +1,90 @@
+image Ludna
+start 325 275
+
+in 0 35 false
+in 1 155 false
+in 2 150 false
+in 3 270 false
+in 0 115 false
+in 1 115 false
+
+dialog 1
+
+n Ludna
+fl I had my fortune told and I'm gonna get
+sl married to a wealthy man.
+f true
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

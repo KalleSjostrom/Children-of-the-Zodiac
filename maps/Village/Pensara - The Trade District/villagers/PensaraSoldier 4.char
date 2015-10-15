@@ -1,0 +1,13 @@
+image char/Pensarasoldier
+start 80 480
+
+in 1 1000 true
+
+dialog 1
+
+n Soldier
+fl This way to the School district.
+sl end
+f true
+
+end

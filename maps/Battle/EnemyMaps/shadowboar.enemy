@@ -1,0 +1,28 @@
+name Shadow_Boar
+
+defense 74
+magicDefense 68
+agility 20
+evade 0
+hit 92
+attack 339
+magic 319
+support 280
+hp 1601
+element 1
+gold 1080
+experience 720
+criticalChance 0
+
+diesound Boar/dies
+image shadowBoar 4 3 1
+armor 13 11
+preferences 0 100
+
+scale 6
+height -1.5
+depth -6
+middle 0
+
+attackSpec type=mag name=Shadow_Flame element=fire probability=.6 anim=()--(f=1,a=300)--(a=200,f=2)--(a=700,f=2,c=m+BlackFire:-.6f;1.9;-6)--(a=300,f=3,h=true)
+attackSpec type=mag name=Dark_Inferno power=.6 onAll=true element=fire probability=.4 anim=()--(f=1,a=300)--(a=200,f=2)--(a=700,f=2,c=m+3+Fire:-.6f;1.9;-6)--(a=300,f=3,h=true)

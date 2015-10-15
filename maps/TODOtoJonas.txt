@@ -1,0 +1,12 @@
+-- DONE -- Math in Dellna, his image is too small.
+-- DONE -- More loot.
+-- DONE -- Fortune-teller igen=)
+-- DONE -- Paper on sign to Pensara weapon shop.
+-- DONE -- Two dudes in card shop in Pensara.
+-- DONE -- Trees outside of Pensara? Obstacles?
+-- DONE -- Top layer on pensara north corner? Obstacles?
+-- DONE -- Top layer in serphia hall? Obstacles?
+
+Scrollbar in deck menu?
+Press-on-bomb sound?
+Map icons for zodiac signs.

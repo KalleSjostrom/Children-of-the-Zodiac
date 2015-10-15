@@ -1,0 +1,18 @@
+image Beorn
+
+start 295 440
+
+in 2 180 true
+
+dialog 1
+
+n Beorn
+fl All our family have been working the mines ever since
+sl they first discovered it was rich in ore.
+f true
+
+end
+
+
+
+

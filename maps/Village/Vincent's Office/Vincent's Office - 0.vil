@@ -1,0 +1,50 @@
+background Vincents_Office true
+
+##### STARTING LOCATION #####
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1024 768
+start0 4 235 1
+
+animObj desk 780 269 1
+
+##### OBSTICLES #####
+
+# shelf4
+o 419 295 473 311
+# shelf2
+o 318 362 378 399
+# shelf8
+o 642 448 702 485
+# shelf6
+o 643 293 702 312
+# leftwall
+o 308 294 318 530
+o 328 309 328 309
+# shelf5
+o 546 294 601 311
+# shelf3
+o 319 295 377 312
+o 394 304 394 304
+# shelf1
+o 319 448 379 485
+# shelf7
+o 642 362 702 399
+# toppwall1
+o 376 285 420 295
+# desk
+o 479 308 539 338
+o 461 430 461 430
+o 354 453 354 453
+# rightwall
+o 703 294 713 530
+o 533 389 533 389
+# toppwall2
+o 602 287 643 294
+# bottonwall
+o 319 530 706 544
+
+##### DOORS #####
+
+##### END #####
+end

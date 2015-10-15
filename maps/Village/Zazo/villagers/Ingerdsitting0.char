@@ -1,0 +1,31 @@
+##### VILLAGER #####
+# NAME: Ingerdsitting
+image Ingerdsitting 1 40 26
+
+##### STARTING LOCATION #####
+
+# start x y
+start 1175 740
+
+range 40
+
+##### INSTRUCTIONS #####
+
+# in angle distance stopped
+in 0 180 true
+
+##### DIALOGS #####
+
+# first line
+# second line
+# first dialog background (the one at the far left top of the screen)
+
+dialog 1
+
+n Ingerd
+fl Me and my brother is Thom's biggest fans.
+sl If Thom wasn't here I would run away.
+f true
+
+##### END #####
+end

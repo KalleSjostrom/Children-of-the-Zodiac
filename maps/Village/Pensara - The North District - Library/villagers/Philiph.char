@@ -1,0 +1,43 @@
+image Philiph
+start 310 395
+
+in 0 100 true
+in 1 55 false
+in 0 100 true
+in 1 55 false
+in 0 100 true
+in 1 50 false
+in 0 135 false
+in 3 100 true
+in 1 50 false
+in 1 100 true
+in 2 40 false
+in 1 75 false
+in 0 40 false
+in 3 100 true
+in 2 110 false
+in 3 75 false
+in 2 25 false
+in 3 210 false
+
+dialog 1
+
+n Philiph
+fl I just love to read.
+sl Learn about the continents and it's history.
+f true
+
+n Philiph
+fl When I was a boy I wanted to be a scholar,
+sl but my father said that nobles doesn't teach.
+f true
+
+end
+
+
+
+
+
+
+
+

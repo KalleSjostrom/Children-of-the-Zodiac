@@ -1,0 +1,44 @@
+# background, prefix name of both images day
+background Pensara_-_The_Trade_District_-_Mezza's_House true
+
+inside
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1024 768
+start 465 550 0
+
+holeDoor switch Pensara_-_The_Trade_District 465 570 30 2 1 666 777 2
+# x y w d f 
+# 0 = Dont fade
+# 1 = Fade up
+# 2 = Fade half
+
+o 295 278 324 631
+o 546 403 613 431
+o 578 279 671 301
+o 292 201 722 279
+o 639 403 691 413
+o 507 362 702 402
+o 325 447 452 489
+o 668 279 702 373
+o 351 328 438 386
+o 320 585 451 620
+
+# o 522 551 567 564
+# o 624 551 698 565
+# Pins & Byrå and wall
+o 507 526 699 565
+
+# Wall down right
+o 505 610 699 637
+# Right wall
+o 691 279 720 632
+
+o 507 402 518 439
+o 507 488 517 529
+o 445 448 455 511
+o 445 560 455 602
+
+villager Mezza
+
+end

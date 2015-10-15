@@ -1,0 +1,73 @@
+mapSize -0.5 0.5 1
+
+size 70
+
+light0 position=0;0;0;1 ambient=.8;.8;.8;1 specular=0;0;0;1 diffuse=.8;.8;.8;1 attenuation=1;0.01;0.015
+light1 position=0;0;0;0 ambient=.8;.8;.8;1 specular=0;0;0;1 diffuse=.8;.8;.8;1 attenuation=1;0.01;0.015
+material ambient=.4;.4;.4;1 specular=0;0;0;1 diffuse=.7;.7;.7;1 shininess=5 emission=.1;.1;.1;1
+
+sky top=.3;.3;.8;1 bottom=1;.8;.1;1
+
+enemyColor .8 .8 .8 1
+
+floorTex forestfloor.jpg
+wallTex forestwall.png
+wallTex forestdoor0.png
+
+normal floor 0 1
+normal wall 1 3
+
+mapPos 1 1
+
+# directions in labyrinth
+dir 39 2 40
+dir 40 2 41
+dir 41 2 42
+dir 42 1 58
+dir 58 1 74
+dir 69 2 70
+dir 70 2 71
+dir 71 1 87
+dir 74 1 90
+dir 87 1 103
+dir 90 1 106
+dir 103 1 119
+dir 106 1 122
+dir 106 2 107
+dir 107 2 108
+dir 108 1 124
+dir 115 2 116
+dir 116 2 117
+dir 117 2 118
+dir 118 2 119
+dir 119 1 135
+dir 122 1 138
+dir 124 1 140
+dir 135 1 151
+dir 138 1 154
+dir 140 1 156
+dir 151 2 152
+dir 152 2 153
+dir 153 2 154
+dir 156 1 172
+dir 172 1 188
+dir 183 1 199
+dir 183 2 184
+dir 184 2 185
+dir 185 2 186
+dir 186 2 187
+dir 187 2 188
+dir 188 1 204
+
+mapEnd
+
+wall 2 115 0
+wall 2 199 1
+wall 2 204 1
+
+inv door 115 0 dontopen east_passage--east_mountain-mark0
+inv door 199 1 dontopen forest_of_bri--east_forest-mark1
+inv door 204 1 dontopen forest_of_bri--east_forest-mark2
+
+inv chest 39 2 2 Images/woodenbox 0 100
+

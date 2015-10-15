@@ -1,0 +1,19 @@
+# Soldier 6	   
+image char/Alaressoldier	   
+start 990 240	   
+	   
+in 3 100 true	   
+	   
+dialog 1	   
+	   
+n Soldier 1	   
+fl After my shift, I'm going to Spouter Tavern.	   
+sl They serve an amazing wine!	   
+f true	   
+	   
+n Soldier 1	   
+fl It's really sad that ships doesn't come here	   
+sl 'cus Spouter never get new drinks anymore.	   
+f true	   
+	   
+end	 

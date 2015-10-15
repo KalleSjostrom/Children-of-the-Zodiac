@@ -1,0 +1,63 @@
+mapSize -0.5 0.5 1
+
+size 309
+
+fog red=.4 green=.3 blue=0 alpha=.01 density=0.01
+
+light0 position=0;0;0;1 ambient=1;1;1;1 specular=0;0;0;1 diffuse=1;1;1;1 attenuation=1;0.02;0.03
+light1 position=0;0;0;0 ambient=.2;.2;.2;.2 specular=0;0;0;1 diffuse=.2;.2;.2;.2
+material ambient=.7;.7;.7;1 specular=0;0;0;1 diffuse=.7;.7;.7;1
+
+floorTex aegisfloor.jpg
+wallTex aegisstairsdown0.png
+wallTex aegisstairsup0.png
+SwallTex aegiswall.png 3
+roofTex aegisroof.jpg
+
+normal floor 0 1
+normal wall 1 7
+normal roof 7 8
+
+mapPos 1 1
+
+dir 56 1 72
+dir 56 2 57
+dir 57 2 58
+dir 58 1 74
+dir 58 2 59
+dir 59 2 60
+dir 60 1 76
+dir 70 1 86
+dir 70 2 71
+dir 71 2 72
+dir 76 1 92
+dir 86 1 102
+dir 92 1 108
+dir 104 2 105
+dir 105 2 106
+dir 108 1 124
+dir 124 1 140
+dir 134 1 150
+dir 140 1 156
+dir 150 2 151
+dir 151 2 152
+dir 152 2 153
+dir 153 2 154
+dir 154 2 155
+dir 155 2 156
+mapEnd
+
+wall 1 134 3
+inv door--down 134 3 dontopen temple_of_aegis--third_floor-mark1
+wall 1 104 0
+inv door--down 104 0 dontopen temple_of_aegis--third_floor-mark2
+wall 1 74 1
+inv door--down 74 1 dontopen temple_of_aegis--third_floor-mark3
+wall 2 106 2
+inv door--up 106 2 dontopen Meanwhile_-_Menthu_Kills_Teo temple_of_aegis--top_floor-mark0
+
+inv chest 102 1 2 Images/stonebox 2 cards.magic.Death 2 false
+
+inv save 156 3 -1 -1
+
+end

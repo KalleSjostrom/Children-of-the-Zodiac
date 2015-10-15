@@ -1,0 +1,46 @@
+image Gregory
+start 560 300
+
+in 2 100 true
+
+dialog 1
+
+n Gregory
+fl I'm too old to play soccer now, but I love
+sl to see my grandsons play.
+f true
+
+n Gregory
+fl It reminds me of when I was young, 
+sl chasing women around the oasis during night... hehe.. 
+f true
+
+n Gregory
+fl I especially remember this gorgeous woman who lived 
+sl here for only a couple of weeks... 
+f true
+
+n Gregory
+fl She was so beautiful that time stopped 
+sl when you looked at her.
+trigger Gregory 2
+f true
+
+dialog 2
+
+n Gregory
+fl ...that woman, suddenly left one night leaving 
+sl just a note:
+f true
+
+n Gregory
+fl "If a black hooded man asks for me,
+sl don't tell him I was here".
+f true
+
+n Gregory
+fl If you ask me, I think she was followed by someone.
+sl end
+f true
+
+end

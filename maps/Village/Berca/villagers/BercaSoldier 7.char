@@ -1,0 +1,52 @@
+image char/Pensarasoldier
+start 340 860
+
+in 1 20 false
+in 0 20 true
+in 3 20 false
+in 0 20 true
+
+dialog 1
+
+n Soldier
+fl Would you please be so inclined to move an inch
+sl or two, I'm currently exercising.
+f true
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

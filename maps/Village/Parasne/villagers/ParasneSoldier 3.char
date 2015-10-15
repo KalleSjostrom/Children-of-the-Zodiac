@@ -1,0 +1,85 @@
+image char/Pensarasoldier
+start 1035 25
+
+in 2 100 true
+
+dialog 1
+
+n Soldier
+fl Welcome to Parasne, the merchant harbor.
+sl end
+f true
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

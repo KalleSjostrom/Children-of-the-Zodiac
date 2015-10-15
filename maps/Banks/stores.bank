@@ -1,0 +1,93 @@
+###### STORES ######
+
+###### CHARACTERS ######
+
+# store		name
+
+# weapon 	name
+
+# armor 	name
+
+# shield 	name
+
+store grasstownWeapons
+
+## STUFF ##
+
+rightHand Broadsword
+rightHand Wooden_Staff
+
+leftHand Iron_Bracelet
+leftHand Wooden_Shield
+
+body Heavy_Vest
+body Iron_Cuirass
+
+store zazoWeapons
+
+## STUFF ##
+
+rightHand Iron_Sword
+rightHand Arcane_Rod 
+
+leftHand Iron_Buckler
+leftHand Sorceress_Ring
+leftHand Iron_Armlet
+
+body Iron_Armor
+body Tippet
+body Iron_Breastplate
+
+store pensaraWeapons
+
+## STUFF ##
+
+rightHand Silver_Sword
+rightHand Silver_Rod
+rightHand Silver_Lance
+
+leftHand Silver_Shield
+leftHand Silver_Ring
+leftHand Silver_Armlet
+
+body Silver_Cape
+body Silver_Chainmail
+
+store bercaWeapons
+
+## STUFF ##
+
+rightHand Ivory_Sword
+rightHand Battle_Staff
+rightHand Morning_Star
+rightHand Orichalcum_Dagger
+
+leftHand Platinum_Shield
+leftHand Heavens_Guard
+leftHand Thief's_Ring
+
+body Plate_Armor
+body Silk_Mantle
+body Mythril_Vest
+
+store dellnaWeapons
+
+## STUFF ##
+
+rightHand Diamond_Blade
+rightHand Diamond_Staff
+rightHand Diamond_Star
+rightHand Diamond_Knife
+
+leftHand Diamond_Shield
+leftHand Diamond_Ring
+leftHand Diamond_Armlet
+leftHand Diamond_Glove
+
+body Diamond_Mail
+body Diamond_Cloak
+body Diamond_Armor
+body Diamond_Mantle
+
+end
+

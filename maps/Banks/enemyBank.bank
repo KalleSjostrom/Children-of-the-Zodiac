@@ -1,0 +1,374 @@
+newEnemy Boar
+newEnemy Boar1
+newEnemy Robber
+newEnemy Blob
+newEnemy Ghost
+newEnemy Zombie
+newEnemy Zombie2
+newEnemy Hexaroc
+newEnemy Bat
+newEnemy Goblin
+newEnemy Werewolf
+newEnemy greaterhexaroc
+newEnemy Troll
+newEnemy ShadowBoar
+newEnemy Stonecrusher
+newEnemy HornedOne
+newEnemy Stitchman
+newEnemy Ogre
+newEnemy Tunnelworm
+newEnemy PorcupineBlob
+newEnemy Ghoul
+newEnemy Screamer
+newEnemy Necromancer
+newEnemy Corpse
+newEnemy Wraith
+newEnemy Winterwolf
+newEnemy Beastman
+newEnemy Walrus
+newEnemy Puppet
+newEnemy Warlock
+newEnemy Karcul
+newEnemy LargeOgre
+newEnemy DemonGoblin
+
+newEnemy Taur
+newEnemy Salmonman
+newEnemy Serphia
+newEnemy MemoryTaur
+newEnemy MemorySalmonman
+newEnemy MemorySerphia
+newEnemy Menthu1
+newEnemy Menthu2
+newEnemy Menthuattack
+newEnemy Menthuattack2
+
+# dec    		name hp ag at ma su de md ev hit el go ex im crit bc
+stats Boar         1  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats Boar1        1  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats Robber       1  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats Blob         1  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats Ghost    	   1  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats Zombie       1  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats Zombie2      1  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats Hexaroc      1  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats Bat    	   1  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats Goblin       1  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats Werewolf     1  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats greaterhexaroc 1  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats Troll    	   1  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats ShadowBoar   1  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats HornedOne    1  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats Stonecrusher 1  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats Stitchman    1  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats Tunnelworm   1  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats Ogre 		   1  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats PorcupineBlob  1  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats Ghoul    	   1  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats Corpse       1  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats Wraith       1  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats Winterwolf   1  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats Beastman     1  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats Screamer     1  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats Necromancer  1  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats Walrus       1  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats Puppet       1  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats Warlock      1  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats Karcul       1  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats LargeOgre    1  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats DemonGoblin  1  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+
+stats Taur    	   		2  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats Salmonman    		2  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats Serphia    	   	2  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats MemoryTaur   		2  2  2  2  2  2  2  2  2   2  2  2  2  2    2  2
+stats MemorySalmonman   2  2  2  2  2  2  2  2  2   2  2  2  2  2    2  2
+stats MemorySerphia   	2  2  2  2  2  2  2  2  2   2  2  2  2  2    2  2
+stats Menthu1       	2  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats Menthu2       	2  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats Menthuattack  	2  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+stats Menthuattack2  	2  1  1  1  1  1  1  1  1   1  1  1  1  1    1  1
+
+newGroup Forest_of_Reil--Forest_Path
+	enemy Boar1 1 0 0
+	
+newGroup Forest_of_Reil--Deep_Forest
+	enemy Boar 1 0 0
+
+newGroup Grivera--First_Floor
+ 	enemy Blob .7 0 0
+ 	enemy Zombie .3 0 0
+ 	
+newGroup Grivera--Second_Floor
+ 	enemy Blob .4 0 0
+ 	enemy Ghost .2 0 0
+ 	enemy Zombie .4 0 0
+ 	
+newGroup Grivera--Third_Floor
+ 	enemy Blob .2 0 0
+ 	enemy Ghost .4 0 0
+ 	enemy Zombie .4 0 0
+ 	
+newGroup Grivera--Fifth_Floor
+ 	enemy Blob .2 0 0
+ 	enemy Ghost .4 0 0
+ 	enemy Zombie .4 0 0
+ 	
+newGroup Central_Pass--West_Part
+	enemy Bat 1 .1 0
+ 	
+newGroup Central_Pass--Central_Part
+	enemy Bat .5 .1 0
+ 	enemy Zombie2 .5 0 0
+ 	
+newGroup Central_Pass--North_Part
+	enemy Bat .8 .4 0
+ 	enemy Zombie2 .2 0 0
+ 	
+newGroup Central_Pass--North_East_Part
+	enemy Bat .8 .5 .1
+ 	enemy Zombie2 .2 0 0
+
+# Bottom middle 	
+newGroup The_Great_Mine--The_Hall
+	enemy Goblin .5 .2 0
+	enemy Bat .5 .5 0
+
+# Top right
+newGroup The_Great_Mine--Mine_Shaft
+	enemy Hexaroc .4 0 0
+	enemy Goblin .4 .4 0
+	enemy Bat .2 .3 .5
+
+# Bottom right	
+newGroup The_Great_Mine--Tunnel
+	enemy Hexaroc .2 0 0
+	enemy Goblin .4 .2 0
+	enemy Bat .4 .5 .3
+
+# Top left		
+newGroup The_Great_Mine--Great_Deep
+	enemy Hexaroc .4 0 0
+	enemy Goblin .4 .4 0
+	enemy Bat .2 .3 .5
+	
+# Bottom left
+newGroup The_Great_Mine--West_Wing
+	enemy Hexaroc .2 0 0
+	enemy Goblin .4 .2 0
+	enemy Bat .4 .5 .3
+
+# Top middle		
+newGroup The_Great_Mine--The_Mine_Core
+	enemy Hexaroc .2 0 0
+	enemy Goblin .4 .2 0
+	enemy Bat .4 .5 .3
+
+newGroup East_Passage--West_Mountain
+	enemy Goblin .6 .4 0
+	enemy Bat .4 .2 .4
+	
+newGroup East_Passage--East_Mountain
+	enemy Goblin .6 .4 0
+	enemy Bat .4 .2 .4
+
+newGroup Forest_of_Bri--West_Forest	
+	enemy Goblin .2 .4 0
+	enemy Bat .2 .2 .4
+	enemy Werewolf .6 .3 0
+
+newGroup Forest_of_Bri--East_Forest	
+	enemy Goblin .2 .4 0
+	enemy Bat .2 .2 .4
+	enemy Werewolf .6 .3 0
+
+newGroup Mt._Cesadur--Entrance
+	enemy Werewolf .8 .6 0
+	enemy Troll .2 0 0
+
+newGroup Mt._Cesadur--Second_Floor 
+	enemy Troll .5 .1 0
+	enemy Werewolf .5 .6 .15
+	
+newGroup Mt._Cesadur--Third_Floor
+	enemy Troll .5 .3 0
+	enemy greaterhexaroc .4 0 0
+	enemy Werewolf .1 .6 .3
+	
+newGroup Mt._Cesadur--Fourth_Floor
+	enemy Troll .4 .3 0
+	enemy greaterhexaroc .5 0 0
+	enemy Werewolf .1 .6 .3
+	
+newGroup Mt._Cesadur--Mountain_Top
+	enemy greaterhexaroc 1 0 0
+	
+newGroup Pensara_Forest--Forest
+	enemy Werewolf 1 .5 .5
+
+newGroup Fire_Cavern--Hall_of_Fire
+	enemy HornedOne 1 .2 0
+	
+newGroup Fire_Cavern--Furnace
+	enemy HornedOne .6 .2 0
+	enemy ShadowBoar .4 0 0
+	
+newGroup Fire_Cavern--Inferno
+	enemy HornedOne .4 .2 0
+	enemy ShadowBoar .6 0 0
+	
+newGroup Fire_Cavern--Hall_of_the_Damned
+	enemy HornedOne .3 .2 0
+	enemy ShadowBoar .4 0 0
+	enemy Stonecrusher .3 0 0
+	
+newGroup Fire_Cavern--Passage_of_Ifrit
+	enemy HornedOne .3 .2 0
+	enemy ShadowBoar .4 0 0
+	enemy Stonecrusher .3 0 0
+	
+newGroup Fire_Cavern--Blazing_Maze
+	enemy ShadowBoar .6 0 0
+	enemy Stonecrusher .4 0 0
+	
+newGroup Berca_Desert--South_West
+	enemy Stitchman .5 0 0
+	enemy Ogre .5 .7 0
+	
+newGroup Berca_Desert--South
+	enemy Stitchman .5 0 0
+	enemy Ogre .5 .7 0
+	
+newGroup Berca_Desert--North_West
+	enemy Stitchman .5 0 0
+	enemy Ogre .5 .7 0
+	
+newGroup Berca_Desert--North
+	enemy Tunnelworm .2 0 0
+	enemy Stitchman .4 0 0
+	enemy Ogre .4 .7 0
+	
+newGroup Berca_Desert--South_East
+	enemy Tunnelworm .4 0 0
+	enemy Stitchman .3 0 0
+	enemy Ogre .3 .6 .3
+	
+newGroup Berca_Desert--North_East
+	enemy Tunnelworm .6 0 0
+	enemy Stitchman .4 .2 0
+
+newGroup The_Sewers--South_East
+	enemy PorcupineBlob .6 .3 0
+	enemy Ghoul .3 0 0
+	enemy Screamer .1 0 0
+	
+newGroup The_Sewers--South
+	enemy PorcupineBlob .4 .5 .1
+	enemy Ghoul .5 0 0
+	enemy Screamer .1 0 0
+	
+newGroup The_Sewers--North
+	enemy PorcupineBlob .2 .6 .1
+	enemy Ghoul .5 0 0
+	enemy Screamer .3 .5 0
+
+newGroup The_Sewers--South_West
+	enemy PorcupineBlob .2 .6 .1
+	enemy Ghoul .5 0 0
+	enemy Screamer .3 .5 0
+	
+newGroup The_Sewers--North_West
+	enemy PorcupineBlob .1 .6 .1
+	enemy Ghoul .45 0 0
+	enemy Screamer .45 .7 .1
+		
+newGroup The_Sewers--North_East
+	enemy PorcupineBlob .1 .6 .1
+	enemy Ghoul .45 0 0
+	enemy Screamer .45 .7 .1
+	
+newGroup Temple_of_Aegis--Base_Level
+	enemy Corpse .7 0 0
+	enemy Wraith .3 0 0
+	
+newGroup Temple_of_Aegis--Second_Floor
+	enemy Corpse .6 0 0
+	enemy Wraith .2 0 0
+	enemy Necromancer .2 0 0
+	
+newGroup Temple_of_Aegis--Third_Floor
+	enemy Necromancer .4 0 0
+	enemy Corpse .3 0 0
+	enemy Wraith .3 0 0
+	
+newGroup Temple_of_Aegis--Fourth_Floor
+	enemy Necromancer .5 0 0
+	enemy Corpse .5 .1 0
+	
+newGroup Temple_of_Aegis--Fifth_Floor
+	enemy Necromancer .5 .5 0
+	enemy Corpse .5 .5 0
+	
+newGroup Temple_of_Aegis--Top_Floor
+	enemy Necromancer .7 .5 0
+	enemy Corpse .3 .5 0
+
+newGroup Frozen_Forest--Forest_Passage
+	enemy Winterwolf 1 0 0
+
+newGroup Ice_Cavern--Pillar_Room
+	enemy Winterwolf .5 .2 0
+	enemy Beastman .5 0 0
+
+newGroup Ice_Cavern--Frozen_Field
+	enemy Winterwolf .3 .2 0
+	enemy Beastman .4 0 0
+	enemy Walrus .3 0 0
+	
+newGroup Ice_Cavern--Hall_of_Ruin
+	enemy Winterwolf .5 .2 0
+	enemy Beastman .5 0 0
+	
+newGroup Ice_Cavern--Hall_of_Anxiety
+	enemy Winterwolf .5 .2 0
+	enemy Beastman .5 0 0
+	
+newGroup Ice_Cavern--Hall_of_Anguish
+	enemy Walrus .5 0 0
+	enemy Beastman .5 .3 0
+	
+newGroup Ice_Cavern--Hall_of_Confusion
+	enemy Walrus .5 0 0
+	enemy Beastman .5 .3 0
+	
+newGroup Empyrian_Temple--Hall_of_Wind
+#	enemy Puppet .25 .5 0
+#	enemy Warlock .25 0 0
+#	enemy Karcul .25 .5 0
+#	enemy DemonGoblin .25 0 1
+	enemy DemonGoblin 1 0 1
+	
+newGroup Empyrian_Temple--Tower_of_Strength
+	enemy Karcul .5 .5 0
+	enemy DemonGoblin .5 0 1
+	
+newGroup Empyrian_Temple--Light
+	enemy Karcul .1 .5 0
+	enemy DemonGoblin .1 0 1
+	enemy LargeOgre .8 0 0
+	
+newGroup Empyrian_Temple--Tower_of_Magic
+	enemy Puppet .5 .5 0
+	enemy Warlock .5 0 0
+	
+newGroup Empyrian_Temple--Dark
+	enemy Puppet .5 .5 0
+	enemy Warlock .5 0 0
+	
+newGroup Empyrian_Temple--Hall_of_Memories
+	enemy Puppet .25 .5 0
+	enemy Warlock .25 0 0
+	enemy Karcul .25 .5 0
+	enemy DemonGoblin .25 0 1
+
+end

@@ -1,0 +1,23 @@
+import file=main.var
+
+info time="day" name="The Senate" music="continue" fadeValue="0" musicVolume="0" delay="1000"
+
+var vincent=0
+
+actor name="Characters/Vincent/VincentExtras" pos=483;312;2
+
+text lines="Vincent leaves the senate for the last time.";"" pos=450;384 color=0 size=50 pos=450;384
+
+ins type=fadein timea=0 kind=village fadetime=2000
+
+ins timea=0 index=0 kind=screenzoom zoomin=true zoomtime=30 usestaticpos=true pos=512;378
+ins timea=0 index=1000 kind=screenzoom zoomin=false zoomtime=8000 usestaticpos=true pos=512;378
+
+ins type=fadein timea=500 index=0 fadetime=1000 kind=text
+ins timea=3000 kind=dist distance=40 direction=1 duration=1000
+ins timea=0 kind=queue distance=80 direction=0 duration=2000
+ins timea=0 kind=queue distance=200 direction=3 duration=5000
+ins type=fadeout timea=500 index=0 fadetime=1000 kind=text
+
+ins type=fadeout timea=4000 kind=village fadetime=2000
+ins timea=2000 kind=endseq

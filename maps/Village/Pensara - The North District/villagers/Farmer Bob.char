@@ -1,0 +1,129 @@
+image Farmer_Bob
+start 1970 750
+
+in 2 100 true
+
+# Standing besides the field
+
+dialog 1
+
+n Farmer Bob
+fl I do everything for Vincent so that maybe
+sl one day my family can live a better life.
+f true
+
+n Farmer Bob
+fl From one thing to another... 
+sl Have you seen my son?
+trigger Billy 2
+f true
+
+dialog 2
+
+run Farmer_Bob_Follows_Billy continue
+
+dialog 4
+
+n Farmer Bob
+fl Thank you for your kindness.
+sl I want to give you this.
+f true
+
+n Farmer Bob
+fl I know it's not much, 
+sl but that's all I have to give you.
+gift cards.offense.CriticalBlow 2 2 false
+trigger Farmer_Bob 5
+f true
+
+dialog 5
+
+n Farmer Bob
+fl Thank you.
+sl Could you possibly do me another favor?
+f true
+
+q 10
+alt Always!
+alt Don't_have_the_time...
+alt _
+alt _
+f true
+
+*11
+n Farmer Bob
+fl Oh, you are truly a great person!
+sl end
+f true
+
+n Farmer Bob
+fl Could you give my brother this letter?
+sl end
+f true
+
+q 20
+alt Just_hand_it_over
+alt No_can_do,_amigo
+alt _
+alt _
+f true
+
+*21
+n Farmer Bob
+fl Here you go!
+sl Thank you!
+f true
+
+n _
+fl You got the key item "Letter to John"!
+sl end
+gift Letter_to_John 1 1
+trigger Farmer_Bob 6
+f true
+
+*22
+n Farmer Bob
+fl Oh...
+sl I see...
+f true
+
+*12
+n Farmer Bob
+fl Oh...
+sl I see...
+f true
+
+dialog 6
+
+check Farmer_Bob 7 Letter_to_Bob
+
+n Farmer Bob
+fl I look forward to hear from my brother!
+sl end
+f true
+
+dialog 7
+
+n Farmer Bob
+fl A letter...
+sl From my brother! Thank you so much.
+f true
+
+n _
+fl You got a card!
+sl You gave away the key item "Letter to Bob".
+trigger Farmer_Bob 8
+trigger Benth 2
+trigger Ella 2
+take Letter_to_Bob
+gift cards.offense.BattleCard 2 3 true
+f true
+
+dialog 8
+
+n Farmer Bob
+fl You've done so much for me...
+sl Thank you!
+f true
+
+end

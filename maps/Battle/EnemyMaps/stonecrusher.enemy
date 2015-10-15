@@ -1,0 +1,28 @@
+name Stonecrusher
+
+defense 50
+magicDefense 43
+agility 18
+evade 0
+hit 91
+attack 360
+magic 390
+support 280
+hp 1702
+element 4
+gold 1381
+experience 920
+criticalChance 0
+
+diesound Stonecrusher/dies
+image stonecrusher 4
+armor 48 46
+preferences 70 30
+
+scale 5.5
+height -2
+depth -6
+middle -0.5
+
+attackSpec name=Ground_Crush element=earth anim=(f=1,a=300)--(f=1,a=320,se=Monster/Stonecrusher/attack)--(f=2,h=true,cs=true,a=500)--(f=2,a=320,se=Monster/Stonecrusher/attack)--(f=0,h=true,cs=true,a=600)
+attackSpec type=mag name=Stalactite_Rain onAll=true element=earth power=.55 anim=(f=1,a=300)--(f=1,a=320,se=Monster/Stonecrusher/attack)--(f=2,h=true,a=500,cs=true,c=m+Earth)--(f=2,a=320,se=Monster/Stonecrusher/attack)--(f=0,h=true,cs=true,a=300,c=m+2+Earth)--(f=3,a=200)--(f=3,a=320,se=Monster/Stonecrusher/attack)--(f=0,h=true,cs=true,a=600,c=m+3+Earth)

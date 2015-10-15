@@ -1,0 +1,13 @@
+image char/Billy_the_rascal
+start 1940 750
+
+in 2 100 true
+
+dialog 3
+
+n Billy the Rascal
+fl I hate you right now. 
+sl How could you rat me out?
+f true
+
+end

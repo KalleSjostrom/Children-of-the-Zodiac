@@ -1,0 +1,196 @@
+import file=main.var
+
+var lecca=0
+var kin=1
+var celis=2
+var borealis=3
+
+actor name="Lecca"
+actor name="Kin" pos=1723;805;0
+actor name="Celis" pos=1723;775;0
+actor name="Borealis" pos=1723;835;0
+
+info time="day" name="Pensara - The School District" music="Pensara" fadeValue="1"
+
+load music="The Theme of the Elders"
+
+ins timea=0 index=lecca kind=controll controll=true
+ins kind=screen_center center=false
+
+ins timea=1000 index=kin kind=dist distance=20 direction=0 duration=400
+dialogpacket name=1 starttimea=300 duration=100
+dialog packetname=1 name="Kin" text="Are you, by any chance, Lecca?"
+dialog packetname=1 name="Lecca" text="Well, yes." first=false
+dialog packetname=1 name="Lecca" text="Kin, I presume." first=false
+
+ins type=fadeout timea=150 index=0 fadetime=500 kind=music mode=pause
+
+ins timea=350 index=kin kind=dist distance=10 direction=2 facedirection=0 duration=200
+ins timea=0 index=kin kind=emotion emotion=!? show=true
+
+ins timea=30 index=celis kind=dist distance=5 direction=2 facedirection=0 duration=100
+ins timea=0 index=celis kind=emotion emotion=? show=true
+
+ins timea=45 index=borealis kind=dist distance=6 direction=2 facedirection=0 duration=110
+ins timea=0 index=borealis kind=emotion emotion=!? show=true
+
+ins timea=1000 index=kin kind=dist distance=10 direction=0 duration=200
+ins timea=0 index=kin kind=emotion emotion=? show=true
+dialogpacket name=1.5 starttimea=100 duration=100
+dialog packetname=1.5 name="Kin" text="What!? How did you know my name!"
+dialog packetname=1.5 name="Lecca" text="Well, I could ask you that same question." first=false
+
+ins timea=700 index=kin kind=emotion show=false
+ins timea=70 index=celis kind=emotion show=false
+ins timea=100 index=borealis kind=emotion show=false
+
+ins timea=900 index=kin kind=stop direction=3
+ins timea=0 index=kin kind=emotion emotion=... show=true
+ins timea=2000 index=kin kind=stop direction=0
+ins timea=100 index=kin kind=emotion show=false
+dialogsingle starttimea=100 <= name="Kin" text="I guess, but..."
+ins timea=800 index=kin kind=dist distance=10 direction=2 facedirection=0 duration=800
+
+ins timea=1400 index=celis kind=tor movepos=4;-20 duration=800 
+dialogpacket name=2 starttimea=400 duration=400
+dialog packetname=2 name="Celis" text="My name is Celis and we've heard about you from";"Farl of Zazo. He told us that you would reside here."
+dialog packetname=2 name="Lecca" text="Yes, I know. I've been informed." first=false
+
+ins timea=1200 index=lecca kind=emotion emotion=... show=true
+ins timea=0 index=lecca kind=dist distance=15 direction=0 duration=1500
+ins timea=2000 index=lecca kind=emotion show=false
+ins type=fadein timea=0 index=1 fadetime=0 kind=music mode=play
+
+dialogpacket name=2.5 starttimea=0
+dialog packetname=2.5 name="Lecca" text="You are here in the matter of the stones and..."
+dialog packetname=2.5 name="Lecca" text="...my apprentice."
+
+ins timea=250 index=celis kind=emotion emotion=! show=true
+ins timea=0 index=celis kind=dist distance=5 direction=0 duration=100
+dialogsingle starttimea=50 duration=50 <= name="Celis" text="Exactly! What do you know about him?"
+
+ins timea=800 index=lecca kind=stop direction=2
+dialogsingle starttimea=200 duration=500 <= name="Lecca" text="As Farl said, I was his teacher so I know him quite well...";"or maybe knew would be a better word."
+ins timea=400 index=celis kind=emotion show=false
+
+ins timea=1000 index=lecca kind=dist distance=25 direction=3 duration=2500
+dialogpacket name=3 starttimea=1000 duration=1500
+dialog packetname=3 name="Lecca" text="His name is Menthu and I taught him back in the days";"of peace in lots of subjects including the Art of War."
+dialog packetname=3 name="Lecca" text="Menthu surpassed his fellow students";"in almost every subject."
+
+ins timea=2500 index=lecca kind=stop direction=2
+dialogsingle starttimea=200 <= name="Lecca" text="But then came war..."
+
+ins timea=400 index=celis kind=tor movepos=-2;-6 duration=200
+dialogsingle starttimea=200 <= name="Celis" text="What happened to Menthu?"
+
+ins timea=500 index=lecca kind=dist distance=20 direction=1 duration=2000
+dialogpacket name=4 starttimea=300 duration=500
+dialog packetname=4 name="Lecca" text="As you know, the tenjins suffered great loss but";"Menthu together with a few more managed to survive."
+dialog packetname=4 name="Lecca" text="Menthu lost his wife and only child.";""
+ins timea=400 index=celis kind=emotion show=false
+
+ins timea=350 index=kin kind=dist distance=10 direction=0 duration=200
+ins timea=0 index=kin kind=emotion emotion=! show=true
+dialogsingle starttimea=100 duration=100 <= name="Kin" text="That's terrible!"
+
+ins timea=800 index=lecca kind=stop direction=2
+dialogsingle starttimea=200 duration=500 <= name="Lecca" text="Indeed.";"And he took it with great heartache."
+ins timea=0 index=kin kind=emotion show=false
+
+ins timea=1000 index=borealis kind=dist distance=20 direction=0 duration=1200
+dialogsingle starttimea=150 duration=600 <= name="Borealis" text="That's understandable...";""
+
+ins timea=700 index=lecca kind=dist distance=10 direction=0 duration=1000
+dialogpacket name=5 starttimea=300 duration=700
+dialog packetname=5 name="Lecca" text="He was convinced that they were still alive.";""
+dialog packetname=5 name="Lecca" text="He traveled the lands in disguise";"searching for his lost family without luck."
+dialog packetname=5 name="Lecca" text="And after many years he returned to us."
+
+ins timea=1300 index=lecca kind=stop direction=2
+dialogsingle starttimea=350 <= name="Lecca" text="He was obsessed with revenge and wanted us to join";"him with the goal to rid the earth of man."
+
+ins timea=400 index=kin kind=stop direction=1
+ins timea=0 index=kin kind=emotion emotion=! show=true
+dialogsingle starttimea=100 duration=300 <= name="Kin" text="Wow! He sure cooked up a drastic solution!";""
+ins timea=250 index=borealis kind=stop direction=3
+
+ins timea=500 index=celis kind=dist distance=10 direction=0 duration=300
+dialogsingle starttimea=150 duration=350 <= name="Celis" text="How did you all respond to that?"
+ins timea=200 index=kin kind=stop direction=0
+ins timea=0 index=kin kind=emotion show=false
+ins timea=100 index=borealis kind=stop direction=0
+ins timea=0 index=borealis kind=emotion show=false
+
+# Dont know
+dialogsingle starttimea=300 <= name="Lecca" text="We refused, of course.";""
+
+ins timea=500 index=lecca kind=dist distance=20 direction=2 duration=1800
+dialogpacket name=6 starttimea=300 duration=1500
+dialog packetname=6 name="Lecca" text="We did not blame man but ourself for";"not teaching them as our gods had wished."
+dialog packetname=6 name="Lecca" text="We were ashamed because we felt that we had";"failed our gods in our holy mission."
+
+ins timea=2500 index=lecca kind=stop direction=0
+dialogpacket name=6.5 starttimea=200
+dialog packetname=6.5 name="Lecca" text="Menthu was furious with our decision";"and soon disappeared."
+dialog packetname=6.5 name="Lecca" text="Neither of us ever saw him again."
+
+ins timea=1000 index=lecca kind=stop direction=2
+dialogpacket name=6.6 starttimea=200
+dialog packetname=6.6 name="Lecca" text="We believe that Menthu started the war ahead";"of us to make man battle himself."
+dialog packetname=6.6 name="Lecca" text="I've always said to him that: 'If you can not defeat";"your enemies, make them battle each other'."
+
+ins timea=300 index=kin kind=stop direction=1
+dialogsingle starttimea=100 duration=100 <= name="Kin" text="That's clever..."
+
+ins timea=500 index=lecca kind=tor movepos=-10;10 duration=1000
+dialogpacket name=7 starttimea=100 duration=500
+dialog packetname=7 name="Lecca" text="You must find the rest of the stones and take this";"matter to the great Zodiacs and ask them for aid."
+dialog packetname=7 name="Lecca" text="They can help us disarm the threat upon us,";"and to hinder Menthus plans."
+ins timea=300 index=kin kind=stop direction=0
+
+ins timea=1200 index=celis kind=emotion emotion=... show=true
+ins timea=600 index=celis kind=dist distance=35 direction=2 duration=3500
+dialogsingle starttimea=100 duration=430 <= name="Celis" text="..."
+ins timea=250 index=borealis kind=look_at actor=celis
+ins timea=150 index=kin kind=look_at actor=celis
+
+ins timea=125 index=kin kind=dist distance=15 direction=2 duration=1500
+ins timea=125 index=kin kind=queue direction=3
+ins timea=2750 index=borealis kind=dist distance=40 direction=0 duration=3000
+ins timea=0 index=borealis kind=queue direction=3
+ins timea=300 index=celis kind=emotion show=false
+dialogsingle starttimea=3000 duration=500 <= name="Borealis" text="So... Do you know were any other stones might be?"
+
+ins timea=750 index=lecca kind=stop direction=1
+dialogsingle starttimea=150 <= name="Lecca" text="Well, good question.";"Unfortunately I do not know."
+
+ins timea=400 index=kin kind=stop direction=0
+ins timea=1000 index=lecca kind=dist distance=10 direction=1 duration=1000
+dialogsingle starttimea=500 duration=500 <= name="Lecca" text="However, you should go and talk to Mizoram."
+
+ins timea=1000 index=lecca kind=stop direction=2
+dialogsingle starttimea=250 duration=500 <= name="Lecca" text="He's the elder in the desert town of Berca north of here.";"Mizoram might know about some other stones."
+ins timea=400 index=celis kind=stop direction=0
+
+ins timea=1000 index=borealis kind=dist distance=10 direction=2 duration=1000
+dialogsingle starttimea=500 duration=500 <= name="Borealis" text="Well then...";"I guess we'll just head towards this Berca, right?"
+
+ins timea=750 index=kin kind=dist distance=5 direction=0 duration=100
+dialogpacket name=8 starttimea=50 duration=50
+dialog packetname=8 name="Kin" text="Of course, let's go!"
+dialog packetname=8 name="Lecca" text="Good luck to you all!"
+
+ins timea=1000 index=celis kind=dist distance=25 direction=0 duration=2000
+ins timea=300 index=borealis kind=stop direction=3
+dialogsingle starttimea=1200 duration=500 <= name="Celis" text="Thank you!"
+
+ins type=fadeout timea=1000 index=1 fadetime=1000 kind=music mode=kill
+ins timea=0 index=lecca kind=controll controll=false
+load trigger="Lecca"
+ins timea=0 kind=trigger value=2
+
+load trigger="road1-4"
+ins timea=0 index=1 kind=trigger value=1
+
+ins timea=0 kind=end

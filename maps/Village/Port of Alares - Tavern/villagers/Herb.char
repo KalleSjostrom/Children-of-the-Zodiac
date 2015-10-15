@@ -1,0 +1,46 @@
+image Herb
+start 575 290
+
+in 2 300 true
+
+range 80
+
+dialog 1
+
+n Herb 
+fl It's hard to get customers when there's
+sl no trading ships around.
+f true 
+
+n Herb
+fl Nowadays there's no tourists here either.
+sl end
+f true
+
+dialog 2
+
+n Herb
+fl Does Boris want to taste my wine?
+sl end
+f true
+
+n Herb
+fl Well, give him this bottle of wine and tell him to give
+sl a good word for me on the other side of the ocean.
+f true
+
+n _
+fl You got the key item "Wine"!
+sl end
+gift Wine 1
+trigger Herb 3
+f true
+
+dialog 3
+
+n Herb
+fl My wine is the best in the world... 
+sl That's what people are saying.
+f true
+
+end

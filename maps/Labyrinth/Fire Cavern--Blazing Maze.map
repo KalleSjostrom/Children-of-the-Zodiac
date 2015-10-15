@@ -1,0 +1,95 @@
+mapSize -0.5 0.5 1
+
+size 322
+
+mission FireMission treasureMission trigger="Crossroadnode";"2" dialog="Zalzi";"That's both of them!&&Let's head out!"
+
+light0 position=0;0;0;1 ambient=.8;.8;.8;1 specular=1;1;1;1 diffuse=.8;.8;.8;1 attenuation=1;0.025;0.035
+light1 position=0;0;0;0 ambient=.1;.1;.1;1 specular=0;0;0;1 diffuse=.2;.2;.2;1
+material ambient=.4;.4;.4;1 specular=.2;.2;.2;1 diffuse=.7;.7;.7;1 shininess=10 emission=.20;.10;.03;1
+
+floorTex firecavefloor.jpg
+wallTex firecavewall.png
+wallTex firecavedoor.png
+roofTex firecaveroof.jpg
+
+normal floor 0 1
+normal wall 1 3
+normal roof 3 4
+
+mapPos 0 0
+
+enemyColor 1 1 1 1
+
+# directions in labyrinth
+dir 20 2 21
+dir 21 2 22
+dir 22 1 38
+dir 22 2 23
+dir 23 2 24
+dir 38 1 54
+dir 54 1 70
+dir 58 1 74
+dir 68 1 84
+dir 68 2 69
+dir 69 2 70
+dir 70 2 71
+dir 71 1 87
+dir 74 1 90
+dir 84 1 100
+dir 87 1 103
+dir 90 1 106
+dir 90 2 91
+dir 91 2 92
+dir 92 2 93
+dir 93 1 109
+dir 100 1 116
+dir 103 1 119
+dir 106 1 122
+dir 109 1 125
+dir 116 1 132
+dir 119 1 135
+dir 119 2 120
+dir 120 2 121
+dir 121 2 122
+dir 122 1 138
+dir 125 2 126
+dir 126 2 127
+dir 132 1 148
+dir 135 1 151
+dir 138 1 154
+dir 148 2 149
+dir 149 1 165
+dir 149 2 150
+dir 150 2 151
+dir 154 2 155
+dir 155 2 156
+dir 156 2 157
+dir 157 1 173
+dir 165 1 181
+dir 173 1 189
+dir 179 2 180
+dir 179 1 195
+dir 195 1 211
+dir 180 2 181
+dir 185 1 201
+dir 185 2 186
+dir 186 2 187
+dir 187 2 188
+dir 188 2 189
+
+mapEnd
+
+wall 2 127 2
+wall 2 211 1
+
+inv hinderDoor 127 2 2 Walls/firecavedoor fire_cavern--hall_of_fire-mark1 
+inv door 211 1 dontopen fire_cavern--passage_of_ifrit-mark0
+
+inv chest 58 3 1 Images/volcano.png 2 cards.support.Cure 2 false
+inv chest 24 2 1 Images/volcano.png 2 cards.magic.Ice 2 false
+inv chest 20 0 1 Images/volcano.png 0 1500
+
+inv button 201 1 7 Images/lever Fire_Cavern--Blazing_Maze.maphinderDoor127 Fire_Cavern--Hall_of_Fire.maphinderDoor115
+
+inv save 149 2 -1 -1

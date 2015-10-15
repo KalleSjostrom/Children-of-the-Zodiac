@@ -1,0 +1,21 @@
+image Smallie	   
+start 670 300	   
+	   
+in 1 10 false	   
+in 3 10 false	   
+	   
+dialog 1	   
+	   
+n Smallie	   
+fl It's too cold to play outside, 	   
+sl that's why I always spend my days here...	   
+f true	   
+	   
+dialog 2	   
+	   
+n Smallie	   
+fl I want to play outside,
+sl but my mother won't let me.	   
+f true	   
+	   
+end	 

@@ -1,0 +1,731 @@
+###### NEW GAME ######
+
+time day
+
+###### CHARACTERS ######
+
+start Prolog
+
+#### ARGATH ####
+
+# 	  name		hp  de  md  ag  ev hit  at   ma  su  mhp  nlv  ds  cs  ex  lv
+character Kin   98  12   8  10   6  95  11   9   8    98   20  16   1  75  1
+
+## EQUIPMENT ##
+
+rightHand Worn-out_Sword
+armor Leather_Cloth
+
+characterdeck
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 2 false
+card cards.offense.BattleCard 2 false
+card cards.offense.CriticalBlow 1 false
+card cards.offense.CriticalBlow 1 false
+card cards.offense.Drain 1 false
+card cards.support.Resurrect 1 false
+card cards.support.Cure 1 false
+
+#### CELIS ####
+
+# 	  name		     hp   de  md  ag  ev  hit  at  ma  su  mhp  nlv  ds  cs  ex  lv
+exCharacter Celis     83   8  12  11   4   95  9  12  11   83   23  16  1   55   1
+
+## EQUIPMENT ##
+
+rightHand Walking_Stick
+armor Rags
+
+characterdeck
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 2 false
+card cards.offense.CriticalBlow 1 false
+card cards.magic.Wind 1 false
+card cards.magic.Wind 1 false
+card cards.magic.Ice 1 false
+card cards.magic.Ice 1 false
+card cards.neutral.TheElementOfEarth 1 false
+card cards.magic.Slow 1 false
+card cards.magic.Demolish 1 false
+card cards.support.Resurrect 1 false
+card cards.support.Cure 1 false
+card cards.support.Cure 1 false
+card cards.support.Haste 1 false
+
+#### BOREALIS ####
+
+# 	  		name		hp  de  md  ag  ev hit  at  ma  su  mhp  nlv  ds  cs  ex  lv
+exCharacter Borealis   231  25  12  9   0  92   26  10   8  231  120  20   2 481   5
+
+rightHand Iron_Axe
+leftHand Leather_Band
+armor Armored_Shell
+
+characterdeck
+card cards.offense.BattleCard 2 false
+card cards.offense.BattleCard 2 false
+card cards.offense.BattleCard 2 false
+card cards.offense.BattleCard 2 false
+card cards.offense.BattleCard 2 false
+
+card cards.offense.BattleCard 2 false
+card cards.offense.BattleCard 1 true
+card cards.offense.BattleCard 1 false
+card cards.offense.CriticalBlow 1 false
+card cards.offense.LaceratingCut 2 false
+
+card cards.offense.Drain 1 false
+card cards.support.Cure 1 true
+card cards.support.Fungi 1 false
+card cards.support.Focus 1 false
+card cards.support.HerbOfVitality 1 false
+
+
+#### ZALZI ####
+
+#           name        hp  de  md  ag  ev hit  at  ma  su  mhp  nlv  ds  hs  ex  lv
+exCharacter Zalzi      403  43  42 12   7 100  43  45  41   403  325  25  4  350   1
+
+rightHand Silver_Knife
+leftHand Desert_Glove
+armor Silver_Vest
+
+characterdeck
+card cards.offense.BattleCard 3 false
+card cards.offense.BattleCard 3 false
+card cards.offense.BattleCard 2 false
+card cards.offense.BattleCard 2 false
+card cards.offense.BattleCard 2 false
+
+card cards.offense.BattleCard 2 false
+card cards.offense.BattleCard 2 false
+card cards.offense.BattleCard 2 false
+card cards.offense.Drain 2 false
+card cards.offense.BattleCard 2 true
+
+card cards.magic.Ice 2 false
+card cards.magic.Fire 2 false
+card cards.magic.Ice 1 true
+card cards.magic.Wind 2 false
+card cards.magic.Earth 2 false
+
+card cards.magic.Earth 2 false
+card cards.magic.Slow 2 true
+card cards.magic.Demolish 3 false
+card cards.neutral.TheElementOfIce 1 true
+card cards.support.HerbOfVitality 2 false
+
+card cards.offense.CriticalBlow 2 false
+card cards.offense.Drain 2 false
+card cards.offense.CriticalBlow 1 false
+card cards.magic.Slow 1 false
+card cards.magic.Wind 1 false
+
+#### PARTY ITEMS ####
+
+# Info gold timeH timeMin steps battles
+info 250 00 00 0 0
+item Ana's_Stone 1
+
+maindeck
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+
+card cards.magic.Wind 1 false
+card cards.magic.Fire 1 false
+card cards.magic.Demolish 1 false
+card cards.support.Haste 1 false
+card cards.offense.BattleCard 1 false
+
+# Loots
+status Home_of_Celisflower 1
+status Port_of_Zazobottle 1
+status Alares_-_Libraryloot1 1
+
+####### HOME OF CELIS ########
+
+# Home of Celis - Houses
+status Home_of_Celis -> Home_of_Celis_-_Celis_Home 0
+status Home_of_Celis_-_Celis_Home -> Home_of_Celis 0
+
+# Home of Celis - Inside Houses
+status Home_of_Celis_-_Celis_Home 0
+
+####### ALARES ########
+
+# Alares - Villagers
+status Bella 1
+status Belmet 1
+status Belmetnight 1
+status Elmer 2
+status Elthea 1
+status Eve 1
+status Farmer_Jane 1
+status Farmer_Janenight 1
+status Farmer_John 3
+status Flog 1
+status Flognight 1
+status Ghertrudd 1
+status Pavier 1
+status Thieving_looking_guy 1
+status Thieving_looking_guynight 1
+status Uri 1
+status Marge 1
+status Recruiter 1
+status CelChild 1
+
+# Alares - Houses
+status Alares -> Alares_-_Belmet's_House 0
+status Alares_-_Belmet's_House -> Alares 0
+status Alares -> Alares_-_Library 0
+status Alares_-_Library -> Alares 0
+status AlarescardHouse -1
+status Alares -> grasstownWeapons 0
+status Alares -> Church 0
+status Alares -> Inn -1
+status Alares -> alaresCardShop 0
+
+storedTrigger alaresinn someone's_calling
+
+status alaresCardShop 0
+
+# Alares - Loot
+# status Alaresname 1
+# status Alarescard 1
+
+# Alares - Inside Houses
+status Alares_-_Belmet's_House 0
+status Alares_-_Library 0
+
+####### PORT OF ALARES ########
+
+# Port of Alares - Villagers
+status Sigge 1
+status Polly 1
+
+# Port of Alares - Houses
+status Port_of_Alares -> Port_of_Alares_-_Tavern 0
+status Port_of_Alares_-_Tavern -> Port_of_Alares 0
+status Port_of_Alares -> The_Ship_Cabin 0
+status The_Ship_Cabin -> Port_of_Alares 0
+status Port_of_Alares -> On_the_Boat_to_Pensara 0
+
+# Port of Alares - Inside Houses
+status Port_of_Alares_-_Tavern 0
+
+####### PASS TO ZAZO ########
+
+# Pass to Zazo - Villagers
+status Passguard_Seth 1
+status Passguard_Marcus 1
+
+# Pass to Zazo - Houses (Cave)
+status Pass_to_Zazo -> Central_Pass--West_Part-mark0 0
+
+####### ZAZO ########
+
+# Zazo - Villagers
+status Farl 0
+status DellnaenoCard 5
+
+# Town
+status Zazo 0
+
+# Zazo - Houses
+status Zazo -> Zazo_-_Miner's_Home 0
+status Zazo_-_Miner's_Home -> Zazo 0
+status Zazo -> Zazo_-_Miner's_Home2 0
+status Zazo_-_Miner's_Home2 -> Zazo 0
+status Zazo -> Zazo_-_Tent 0
+status Zazo_-_Tent -> Zazo 0
+status Zazo_-_Teo's_House -> Zazo 0
+status Zazo -> Zazo_-_Teo's_House -1
+status Zazo_-_Farl's_House -> Zazo 0
+status Zazo -> Zazo_-_Farl's_House -1
+
+status Zazo -> Church 0
+status Zazo -> Inn 0
+status Zazo -> zazoWeapons -1
+status Zazo -> zazoCardShop 1
+
+# Zazo - Inside Houses
+status Zazo_-_Farl's_House 0
+status Zazo_-_Miner's_Home 0
+status Zazo_-_Miner's_Home2 0
+status Zazo_-_Miner's_Tent 0
+status Zazo_-_Teo's_House 0
+
+# Zazo - Loot
+# status Zazoname 1
+
+####### PARASNE ########
+
+# Parasne - Villagers
+status Sellie 0
+
+# Parasne - Houses
+status Parasne -> Parasne_-_Tavern 0
+status Parasne_-_Tavern -> Parasne 0
+status Parasne -> The_Ship_Cabin 0
+status The_Ship_Cabin -> Parasne 0
+status Parasne -> parasneCardShop 0
+
+# Parasne - Inside Houses
+status Parasne_-_Tavern 0
+
+############### PENSARA ###############
+
+####### PENSARA - THE SCHOOL DISTRICT ########
+
+# Pensara - The School District - Villagers
+status Lecca 1
+
+# Pensara - The School District - Houses
+status Pensara_-_The_School_District -> Pensara_-_The_Trade_District 0
+status Pensara_-_The_School_District -> Pensara_-_The_School_District_-_The_School 0
+status Pensara_-_The_School_District_-_The_School -> Pensara_-_The_School_District 0
+status Pensara_-_The_School_District -> Pensara_-_The_School_District_-_The_Clock_Tower_-_Floor_1 0
+status Pensara_-_The_School_District_-_The_Clock_Tower_-_Floor_1 -> Pensara_-_The_School_District 0
+status Pensara_-_The_School_District_-_The_Clock_Tower_-_Floor_1 -> Pensara_-_The_School_District_-_The_Clock_Tower_-_Floor_2 0
+status Pensara_-_The_School_District_-_The_Clock_Tower_-_Floor_2 -> Pensara_-_The_School_District_-_The_Clock_Tower_-_Floor_1 0
+status Pensara_-_The_School_District -> Pensara_-_The_School_District_-_The_Armory -1
+status Pensara_-_The_School_District -> Church 0
+
+# Pensara - The School District - Inside Houses
+
+####### PENSARA - THE TRADE DISTRICT ########
+
+# Pensara - The Trade District - Villagers
+status Billy 1
+
+# Pensara - The Trade District - Doors
+status Pensara_-_The_Trade_District -> Pensara_-_The_North_District 0
+status Pensara_-_The_Trade_District -> Pensara_-_The_School_District 0
+
+status Pensara_-_The_Trade_District -> Pensara_-_The_Trade_District_-_Tower_Prison 0
+status Pensara_-_The_Trade_District_-_Tower_Prison -> Pensara_-_The_Trade_District 0
+
+status Pensara_-_The_Trade_District -> Pensara_-_The_Trade_District_-_Senate -1
+status Pensara_-_The_Trade_District -> Pensara_-_The_Trade_District_-_Soldier -1
+
+status Pensara_-_The_Trade_District -> Pensara_-_The_Trade_District_-_Tent 0
+status Pensara_-_The_Trade_District_-_Tent -> Pensara_-_The_Trade_District 0
+
+status Pensara_-_The_Trade_District -> Pensara_-_The_Trade_District_-_House_1_-_Floor_1 0
+status Pensara_-_The_Trade_District_-_House_1_-_Floor_1 -> Pensara_-_The_Trade_District 0
+status Pensara_-_The_Trade_District_-_House_1_-_Floor_1 -> Pensara_-_The_Trade_District_-_House_1_-_Floor_2 0
+status Pensara_-_The_Trade_District_-_House_1_-_Floor_2 -> Pensara_-_The_Trade_District_-_House_1_-_Floor_1 0
+
+status Pensara_-_The_Trade_District -> Pensara_-_The_Trade_District_-_House_2_-_Floor_1 0
+status Pensara_-_The_Trade_District_-_House_2_-_Floor_1 -> Pensara_-_The_Trade_District 0
+status Pensara_-_The_Trade_District_-_House_2_-_Floor_1 -> Pensara_-_The_Trade_District_-_House_2_-_Floor_2 0
+status Pensara_-_The_Trade_District_-_House_2_-_Floor_2 -> Pensara_-_The_Trade_District_-_House_2_-_Floor_1 0
+
+status Pensara_-_The_Trade_District -> Pensara_-_The_Trade_District_-_Mezza's_House 0
+status Pensara_-_The_Trade_District_-_Mezza's_House -> Pensara_-_The_Trade_District 0
+
+status Pensara_-_The_Trade_District -> pensaraWeapons 0
+status Pensara_-_The_Trade_District -> Inn 0
+status Pensara_-_The_Trade_District -> pensaraCardShop 0
+
+# Pensara - The Trade District - Inside Houses
+status Pensara_-_The_Trade_District_-_House_1_-_Floor_1 0
+status Pensara_-_The_Trade_District_-_House_1_-_Floor_2 0
+status Pensara_-_The_Trade_District_-_House_2_-_Floor_1 0
+status Pensara_-_The_Trade_District_-_House_2_-_Floor_2 0
+status Pensara_-_The_Trade_District_-_House_3 0
+status Pensara_-_The_Trade_District_-_Tent 0
+
+
+
+####### PENSARA - THE NORTH DISTRICT ########
+
+# Pensara - The North District - Villagers
+status Podd 1
+
+# Pensara - The North District - Houses
+status Pensara_-_The_North_District -> Pensara_-_The_North_District_-_Farmer_House 0
+status Pensara_-_The_North_District_-_Farmer_House -> Pensara_-_The_North_District 0
+status Pensara_-_The_North_District -> Pensara_-_The_North_District_-_Library 0
+status Pensara_-_The_North_District_-_Library -> Pensara_-_The_North_District 0
+status Pensara_-_The_North_District -> Pensara_-_The_North_District_-_Civil_House 0
+status Pensara_-_The_North_District_-_Civil_House -> Pensara_-_The_North_District 0
+status Pensara_-_The_North_District -> Pensara_-_The_Trade_District 0
+status Pensara_-_The_North_District -> The_Sewers--North-mark6 -1
+
+# Pensara - The North District - Inside Houses
+status Pensara_-_The_North_District_-_Farmer's_House 0
+status Pensara_-_The_North_District_-_Library 0
+status Pensara_-_The_North_District_-_Civil_House 0
+
+####### BERCA ########
+
+# Berca - Villagers
+status Guy 1
+status Petir 1
+status Eufrim 1
+status Freddy 1
+status Ingo 1
+status Laila 1
+status Tilly 1
+
+# Bar
+status Don_Carlos 1
+status Gilo 1
+status Milo 1
+status Quintis 1
+
+# House
+status Yolly 1
+status Gregory 1
+
+# Floor House
+status Dolly 1
+
+# Library
+status Mizoram 0
+status Garli 1
+
+# Rebels
+status Rebel_1 1
+status Rebel_2 1
+
+# Hide for story
+status Olda 0
+status BercaSoldier_1 0
+status BercaSoldier_2 0
+
+# Berca - Houses
+status Berca -> Meeting_With_the_Rebels 0
+status Berca -> Berca_-_Bar 0
+status Berca_-_Bar -> Berca 0
+status Berca -> Berca_-_House 0
+status Berca_-_House -> Berca 0
+status Berca -> Berca_-_Dolly's_House 0
+status Berca_-_Dolly's_House -> Berca 0
+status Berca -> Berca_-_Library_-_Floor_1 0
+status Berca_-_Library_-_Floor_1 -> Berca 0
+status Berca_-_Library_-_Floor_1 -> Berca_-_Library_-_Floor_2 0
+status Berca_-_Library_-_Floor_2 -> Berca_-_Library_-_Floor_1 0
+status Berca_-_Library_-_Floor_2 -> Berca 0
+status Berca -> Rebel_Hideout 0
+status Rebel_Hideout -> Berca 0
+status Berca -> Inn 0
+status Berca -> Church 0
+status Berca -> bercaWeapons 0
+status Berca -> bercaCardShop 0
+
+# Berca - Inside Houses
+status Berca_-_Bar 0
+status Berca_-_House 0
+status Berca_-_Dolly's_House 0
+status Berca_-_Library_-_Floor_1 0
+status Berca_-_Library_-_Floor_2 0
+status Rebel_Hideout 0
+
+status Serphia_Hall -> Temple_of_Aegis--Top_Floor-mark1 0
+status Serphia_Hall -> Crystal_Room 0
+status Crystal_Room -> Serphia_Hall 0
+
+####### DELLNA ########
+
+# Dellna - Villagers
+status Gabriel 0
+status Math 1
+
+# Dellna - Houses
+status Dellna -> Dellna_-_House 0
+status Dellna_-_House -> Dellna 0
+
+status Dellna -> Dellna_-_Elder_House_-_Floor_1 0
+status Dellna_-_Elder_House_-_Floor_1 -> Dellna 0
+
+status Dellna_-_Elder_House_-_Floor_1 -> Dellna_-_Elder_House_-_Floor_2 0
+status Dellna_-_Elder_House_-_Floor_2 -> Dellna_-_Elder_House_-_Floor_1 0
+status Dellna_-_Elder_House_-_Floor_2 -> Dellna_-_Elder_House_-_Floor_3 0
+status Dellna_-_Elder_House_-_Floor_3 -> Dellna_-_Elder_House_-_Floor_2 0
+
+status Dellna -> Dellna_-_Ana's_Home -1
+status Dellna_-_Ana's_Home -> Dellna 0
+
+status Dellna -> Church 0
+status Dellna -> dellnaWeapons 0
+status Dellna -> dellnaCardShop 0
+status Dellna -> Inn 0
+
+# Dellna - Inside Houses
+status Dellna_-_Ana's_Home 0
+status Dellna_-_Elder_House_-_Floor_1 0
+status Dellna_-_Elder_House_-_Floor_2 0
+status Dellna_-_Elder_House_-_Floor_3 0
+status Dellna_-_House 0
+
+####### The Prison Cell #######
+
+# The Prison Cell - Villagers
+status Celis 0
+status Borealis 0
+status Zalzi 0
+status The_Prison_Cell 1
+
+# The Prison Cell - Houses (Cave)
+
+status road0-3 0
+status road0-8 0
+status road0-10 0
+status road0-15 0
+status road0-17 0
+status road0-18 0
+status road0-19 0
+
+status road1-1 0
+status road1-3 0
+status road1-4 0
+status road1-5 0
+status road1-7 0
+status road1-9 0
+
+status Airship 0
+
+# Tutorials
+status cardstore.tut 1
+status deck.tut 1
+status churchbless.tut 1
+status elements.tut 1
+status churchlevels.tut 1
+status forest_of_reil--deep_forest.tut 1
+status forest_of_reil--forest_path.tut 1
+status grivera--first_floor.tut 1
+status weaponstore.tut 1
+
+# Nodes
+status Zazonode 1
+status Berca_Desert--South_West-mark0node 1
+status Alaresnode 1
+status Home_of_Celisnode 1
+status Pensara_-_The_Trade_Districtnode 1
+status Crossroadnode 1
+status Bercanode 1
+status Dellnanode 1
+
+status Alares 0
+status Alares_-_Celis 0
+status Port_of_Alares 0
+status Berca 0
+status Home_of_Celis 0
+status Dellna 0
+status Crossroad 0
+status Dorma's_Tranquility 0
+status Kin's_Place 0
+status Pensara_-_The_North_District 0
+status Pensara_-_The_School_District 0
+status Pensara_-_The_Trade_District 0
+status Parasne 0
+status Port_of_Zazo 0
+status The_Prison 0
+status The_Ship_Cabin 0
+status Vincent's_Office 0
+status Port_of_Zazo 0
+status Zazo_-_Teo 0
+
+status Pensara_Prison--Floor_1-mark0node -2
+
+status Home_of_the_Gods -> Empyrian_Temple--The_Zodiac-mark1 0
+status home_of_the_godsmenthu's_lair--room_of_confusion-mark0 0
+
+status Grivera--Third_Floor.maphinderDoor203 0
+status Grivera--Third_Floor.maphinderDoor219 0
+
+status The_Great_Mine--The_Hall.maphinderDoor9 0
+status The_Great_Mine--The_Hall.maphinderDoor99 0
+status The_Great_Mine--The_Hall.maphinderDoor199 0
+
+status The_Great_Mine--West_Wing.maphinderDoor201 0
+status The_Great_Mine--West_Wing.maphinderDoor115 0
+status The_Great_Mine--West_Wing.maphinderDoor108 1
+status The_Great_Mine--West_Wing.maphinderDoor124 2
+
+status The_Great_Mine--Great_Deep.maphinderDoor127 0
+status The_Great_Mine--Great_Deep.maphinderDoor201 0
+status The_Great_Mine--Great_Deep.maphinderDoor139 1
+
+status The_Great_Mine--The_Mine_Core.maphinderDoor111 0
+status The_Great_Mine--The_Mine_Core.maphinderDoor9 0
+status The_Great_Mine--The_Mine_Core.maphinderDoor199 0
+status The_Great_Mine--The_Mine_Core.maphinderDoor119 1
+
+status The_Great_Mine--Tunnel.maphinderDoor53 1
+
+status Mt._Cesadur--Basement.maphinderDoor199 0
+status Mt._Cesadur--Basement.maphinderDoor198 1
+
+status mt._cesadur--mountain_top.maphinderdoor119 1
+status mt._cesadur--mountain_top.maphinderdoor118 1
+
+status The_Sewers--South_East.maphinderDoor6 0
+status The_Sewers--South_East.maphinderDoor53 0
+status The_Sewers--South_East.maphinderDoor54 0
+status The_Sewers--South_East.maphinderDoor104 0
+status The_Sewers--South_East.maphinderDoor105 0
+status The_Sewers--South_East.maphinderDoor90 0
+status The_Sewers--South_East.maphinderDoor106 0
+status The_Sewers--South_East.maphinderDoor156 0
+status The_Sewers--South_East.maphinderDoor157 0
+
+status The_Sewers--South.maphinderDoor198 1
+status The_Sewers--South.maphinderDoor131 0
+status The_Sewers--South.maphinderDoor6 0
+status The_Sewers--South.maphinderDoor120 0
+status The_Sewers--South.maphinderDoor121 0
+status The_Sewers--South.maphinderDoor184 0
+status The_Sewers--South.maphinderDoor185 0
+status The_Sewers--South.maphinderDoor42 1
+status The_Sewers--South.maphinderDoor43 1
+
+status The_Sewers--South_West.maphinderDoor198 1
+status The_Sewers--South_West.maphinderDoor99 0
+status The_Sewers--South_West.maphinderDoor153 0
+status The_Sewers--South_West.maphinderDoor154 0
+status The_Sewers--South_West.maphinderDoor57 0
+status The_Sewers--South_West.maphinderDoor58 0
+
+status The_Sewers--North_West.maphinderDoor111 1
+status The_Sewers--North_West.maphinderDoor76 0
+status The_Sewers--North_West.maphinderDoor92 0
+status The_Sewers--North_West.maphinderDoor105 0
+status The_Sewers--North_West.maphinderDoor106 0
+
+status The_Sewers--North.maphinderDoor143 1
+status The_Sewers--North.maphinderDoor202 0
+status The_Sewers--North.maphinderDoor136 0
+status The_Sewers--North.maphinderDoor137 0
+status The_Sewers--North.maphinderDoor108 0
+status The_Sewers--North.maphinderDoor124 0
+
+# To pensara, open. Start 6
+status The_Sewers--North.maphinderDoor21 0
+
+status The_Sewers--North_East.maphinderDoor10 1
+status The_Sewers--North_East.maphinderDoor25 0
+status The_Sewers--North_East.maphinderDoor41 0
+
+status Fire_Cavern--Hall_of_Fire115 0
+status Fire_Cavern--Blazing_Maze127 0
+
+status Pensara_Prison--Floor_6.maphinderDoor102 2
+status Pensara_Prison--Floor_6.maphinderDoor108 1
+status Pensara_Prison--Floor_6.maphinderDoor109 2
+status Pensara_Prison--Floor_6.maphinderDoor57 0
+status Pensara_Prison--Floor_6.maphinderDoor153 0
+
+status Pensara_Prison--Floor_5.maphinderDoor154 0
+status Pensara_Prison--Floor_5.maphinderDoor102 1
+status Pensara_Prison--Floor_5.maphinderDoor108 1
+status Pensara_Prison--Floor_5.maphinderDoor57 0
+
+status Pensara_Prison--Floor_4.maphinderDoor153 0
+status Pensara_Prison--Floor_4.maphinderDoor102 1
+status Pensara_Prison--Floor_4.maphinderDoor108 2
+status Pensara_Prison--Floor_4.maphinderDoor57 0
+
+status Pensara_Prison--Floor_3.maphinderDoor102 2
+status Pensara_Prison--Floor_3.maphinderDoor108 1
+status Pensara_Prison--Floor_3.maphinderDoor169 2
+status Pensara_Prison--Floor_3.maphinderDoor153 1
+status Pensara_Prison--Floor_3.maphinderDoor57 0
+
+status Pensara_Prison--Floor_2.maphinderDoor153 0
+status Pensara_Prison--Floor_2.maphinderDoor102 1
+status Pensara_Prison--Floor_2.maphinderDoor108 2
+status Pensara_Prison--Floor_2.maphinderDoor57 0
+
+status Pensara_Prison--Floor_1.maphinderDoor153 0
+status Pensara_Prison--Floor_1.maphinderDoor102 2
+status Pensara_Prison--Floor_1.maphinderDoor108 1
+status Pensara_Prison--Floor_1.maphinderDoor57 1
+status Pensara_Prison--Floor_1.maphinderDoor41 2
+
+status Pensara_Prison--Floor_1.mapchest25 0
+status Pensara_Prison--Floor_3.mapchest185 0
+status Pensara_Prison--Floor_6.mapchest110 0
+
+status frozen_forest--forest_passage.mapdoor99 1
+
+status Ice_Cavern--Pillar_Room.maphinderdoor199 0
+status Ice_Cavern--Pillar_Room.maphinderdoor4 0
+
+status Ice_Cavern--Hall_of_Confusion.maphinderdoor207 0
+status Ice_Cavern--Hall_of_Confusion.maphinderdoor203 0 
+status Ice_Cavern--Hall_of_Confusion.maphinderdoor197 0 
+status Ice_Cavern--Hall_of_Confusion.maphinderdoor126 0 
+status Ice_Cavern--Hall_of_Confusion.maphinderdoor127 0 
+
+status Ice_Cavern--Hall_of_Anguish.mapaddDoor15 0
+status Ice_Cavern--Hall_of_Anguish.mapaddDoor11 0
+status Ice_Cavern--Hall_of_Anguish.mapaddDoor5 0
+status Ice_Cavern--Hall_of_Anguish.mapaddDoor94 0
+status Ice_Cavern--Hall_of_Anguish.mapaddDoor95 0
+
+status Ice_Cavern--Throne_Room.mapriddleDoor102 0
+
+status Empyrian_Temple--Hall_of_Wind.maphinderDoor201 0
+status Empyrian_Temple--Hall_of_Wind.maphinderDoor9 0
+status Empyrian_Temple--Hall_of_Wind.maphinderDoor99 0
+status Empyrian_Temple--Hall_of_Wind.maphinderDoor72 0
+status Empyrian_Temple--Hall_of_Wind.maphinderDoor73 0
+status Empyrian_Temple--Hall_of_Wind.maphinderDoor135 0
+status Empyrian_Temple--Hall_of_Wind.maphinderDoor119 0
+
+status Empyrian_Temple--Sign_of_Cancer.maphinderDoor201 0
+status Empyrian_Temple--Sign_of_Cancer.maphinderDoor99 0
+status Empyrian_Temple--Sign_of_Cancer.maphinderDoor91 0
+status Empyrian_Temple--Sign_of_Cancer.maphinderDoor92 0
+
+status Empyrian_Temple--Sign_of_Aries.maphinderDoor10 0
+status Empyrian_Temple--Sign_of_Aries.maphinderDoor99 0
+status Empyrian_Temple--Sign_of_Aries.maphinderDoor156 0
+status Empyrian_Temple--Sign_of_Aries.maphinderDoor140 0
+
+status Empyrian_Temple--Sign_of_Capricorn.maphinderDoor111 0
+
+status Empyrian_Temple--Sign_of_Libra.maphinderDoor111 0
+
+status Empyrian_Temple--The_Zodiac.maphinderDoor111 0
+status Empyrian_Temple--The_Zodiac.maphinderDoor108 0
+status Empyrian_Temple--The_Zodiac.maphinderDoor109 0
+status Empyrian_Temple--The_Zodiac.maphinderDoor103 0
+status Empyrian_Temple--The_Zodiac.maphinderDoor104 0
+status Empyrian_Temple--The_Zodiac.maphinderDoor101 0
+status Empyrian_Temple--The_Zodiac.maphinderDoor102 0
+
+status Menthu's_Lair--Room_of_Doubt.maphinderDoor148 0
+status Menthu's_Lair--Hall_of_Memories.maphinderDoor107 0
+status Menthu's_Lair--Hall_of_Memories.maphinderDoor103 0
+status Menthu's_Lair--Room_of_Turmoil.maphinderDoor62 0
+status airship 0
+
+status Serphia 1
+status Taur 1
+status Salmonman 1
+status Menthu 1
+status Menthu1 0
+status Menthu2 1
+status MemoryTaur 1
+status MemorySalmonman 1
+status MemorySerphia 1
+
+end

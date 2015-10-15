@@ -1,0 +1,35 @@
+# background, prefix name of both images day
+background Berca_-_House true
+
+inside
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1024 768
+start 496 540 0
+
+# start0.x, start0.y + 20, width, dir, ?, village.x, village.y + 15, dir of player
+holeDoor switch Berca 496 560 30 2 1 1365 1000 2
+
+o 594 353 687 397
+o 563 292 599 300
+o 540 597 710 665
+o 325 285 359 339
+o 465 285 473 389
+o 399 414 450 423
+o 423 538 455 564
+o 667 464 696 511
+o 609 397 669 409
+o 696 286 753 674
+o 391 554 416 576
+o 179 337 179 337
+o 283 197 774 285
+o 524 285 598 292
+o 269 284 326 672
+o 462 525 470 602
+o 378 383 473 414
+o 326 598 480 662
+
+villager Gregory
+villager Yolly
+
+end

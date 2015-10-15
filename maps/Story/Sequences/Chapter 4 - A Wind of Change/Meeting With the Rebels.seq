@@ -1,0 +1,222 @@
+import file=main.var
+
+var head=0
+var tabler=1
+var tablel=2
+var farleft=3
+var zalzi=4
+var armory=5
+var vincent=6
+var soldiers=7
+
+info time="day" name="Rebel Hideout" music="No Music" fadeValue="0" musicVolume="0"
+
+actor name="Characters/rebelblue/rebelblueExtras" pos=587;318;2
+actor name="Characters/rebelgreenbald/rebelgreenbaldExtras" pos=640;346;3
+actor name="Characters/rebelpurple/rebelpurpleExtras" pos=532;346;1
+actor name="Characters/rebelbluebald/rebelbluebaldExtras" pos=439;396;1 
+actor name="Characters/Zalzi/ZalziExtras"
+actor name="Stuff/ringPropExtras1"
+actor name="Stuff/ringPropExtras1"
+actor name="Stuff/ringPropExtras1"
+
+show index=zalzi value=false
+show index=armory value=false
+show index=vincent value=false
+show index=soldiers value=false
+
+load image="Pensara Map"
+
+ins timea=1000 index=zalzi kind=show movepos=571;697;0
+ins timea=0 index=zalzi kind=dist distance=200 direction=0 duration=3000
+
+ins timea=2400 index=head kind=emotion emotion=! show=true
+dialogsingle starttimea=250 duration=310 <= name="Rebel Leader" text="Oh, there you are!";"We were just talking about you."
+ins timea=240 index=farleft kind=emotion emotion=! show=true
+ins timea=40 index=tabler kind=stop direction=2
+ins timea=20 index=tablel kind=stop direction=2
+
+ins timea=100 index=farleft kind=emotion show=false
+ins timea=70 index=head kind=emotion show=false
+ins timea=250 index=tablel kind=dist distance=20 direction=2 duration=500
+dialogsingle starttimea=250 duration=250 <= name="Rebel" text="YouÕre late!";"Where Õave you been?"
+ins timea=450 index=zalzi kind=dist distance=15 direction=0 duration=600
+dialogsingle starttimea=300 duration=500 <= name="Zalzi" text="In jail, actually...";""
+
+ins timea=240 index=farleft kind=emotion emotion=! show=true
+ins timea=0 index=farleft kind=dist distance=10 direction=3 facedirection=1 duration=100
+ins timea=20 index=tablel kind=dist distance=10 direction=0 facedirection=2 duration=100
+ins timea=70 index=head kind=dist distance=20 direction=0 facedirection=2 duration=200
+
+ins timea=200 index=tabler kind=dist distance=20 direction=2 duration=300
+dialogsingle starttimea=150 duration=150 <= name="Rebel" text="What! Why!?";""
+ins timea=400 index=zalzi kind=dist distance=40 direction=2 duration=2000
+dialogpacket name=1 starttimea=200 duration=1800
+dialog packetname=1 name="Zalzi" text="ItÕs a long story, but I got some people";"to help loot the Fire Cavern."
+dialog packetname=1 name="Zalzi" text="And apparently... Vincent had a quarrel with";"those guys so he had us all thrown in jail."
+dialog packetname=1 name="Zalzi" text="But I simply picked the lock and escaped."
+ins timea=440 index=farleft kind=emotion show=false
+
+ins timea=2200 index=zalzi kind=dist distance=15 direction=0 duration=100
+dialogsingle starttimea=100 <= name="Zalzi" text="No one can lock me up!"
+ins timea=500 index=farleft kind=dist distance=45 direction=1 duration=1500
+ins timea=0 index=farleft kind=queue direction=2
+dialogsingle starttimea=500 duration=500 <= name="Rebel" text="Hehe, confident as always.";"So, how much did you get your hands on?"
+ins timea=1000 index=zalzi kind=stop direction=2
+dialogsingle starttimea=250 <= name="Zalzi" text="Quite a bit, more than a month income."
+ins timea=400 index=head kind=dist distance=10 direction=2 duration=500
+
+dialogsingle starttimea=300 duration=200 <= name="Rebel Leader" text="That's really great Zalzi!"
+ins timea=600 index=head kind=stop direction=3
+ins timea=200 index=tablel kind=stop direction=1
+ins timea=1000 index=head kind=stop direction=1
+ins timea=200 index=tabler kind=stop direction=3
+ins timea=800 index=head kind=stop direction=2
+dialogsingle starttimea=500 duration=1400 <= name="Rebel Leader" text="Well then, letÕs get down to business.";"WeÕre just about to go through our latest plan."
+ins timea=300 index=zalzi kind=stop direction=0
+ins timea=100 index=farleft kind=stop direction=1
+ins timea=900 index=zalzi kind=dist distance=80 direction=0 duration=2000
+
+ins timea=800 index=tabler kind=dist distance=10 direction=0 duration=500
+ins timea=0 index=tabler kind=queue direction=3
+
+ins type=fadeout timea=500 kind=village fadetime=1000
+ins timea=1000 index=head kind=hide
+ins timea=0 index=tabler kind=hide
+ins timea=0 index=tablel kind=hide
+ins timea=0 index=farleft kind=hide
+ins timea=0 index=zalzi kind=hide
+ins type=fadein timea=0 index=0 fadetime=1000 kind=image scrollmode=normal imagetype=backflash
+
+dialogpacket name=3 starttimea=2000
+dialog packetname=3 name="Rebel Green Bald" text="WeÕve put three large bombs";"in the sewers under Pensara."
+dialog packetname=3 name="Rebel Green Bald" text="These bombs are connected to a remote detonator";"which the bomb maker kept as collateral Õtill he gets paid."
+
+ins timea=300 index=tablel kind=dist distance=10 direction=2 duration=500
+dialogsingle starttimea=250 duration=500 <= name="Rebel" text="With the money you just brought, Zalzi, we can get that";"detonation device by nightfall and execute the plan."
+
+ins timea=1000 index=head kind=dist distance=10 direction=3 duration=500
+dialogsingle starttimea=200 duration=1000 <= name="Rebel Leader" text="The first bomb should take out that weapon";"supplier VincentÕs resident."
+
+ins timea=900 index=vincent kind=show movepos=498;122
+
+ins timea=350 index=tablel kind=stop direction=1
+ins timea=750 index=tabler kind=stop direction=2
+dialogsingle starttimea=250 duration=1000 <= name="Rebel" text="The second is bound for the soldier quarters...";""
+ins timea=900 index=soldiers kind=show movepos=636;360
+
+dialogsingle starttimea=1000 duration=1000 <= name="Rebel" text="...and the third is to destroy the armory in the south west.";""
+ins timea=900 index=armory kind=show movepos=28;507
+
+ins type=fadeout timea=1500 index=0 fadetime=1000 kind=image scrollmode=normal imagetype=backflash
+ins timea=1000 index=head kind=show direction=2 movepos=-1;-1
+ins timea=0 index=tabler kind=show direction=3 movepos=-1;-1
+ins timea=0 index=tablel kind=show direction=1 movepos=-1;-1
+ins timea=0 index=farleft kind=show direction=1 movepos=-1;-1
+ins timea=0 index=zalzi kind=show movepos=-1;-1
+ins timea=0 index=armory kind=hide
+ins timea=0 index=soldiers kind=hide
+ins timea=0 index=vincent kind=hide
+ins type=fadein timea=0 kind=village fadetime=1000
+
+ins timea=0 index=head kind=stop direction=2
+ins timea=0 index=tablel kind=stop direction=1
+ins timea=0 index=tabler kind=stop direction=3
+ins timea=0 index=farleft kind=stop direction=1
+ins timea=1000 index=zalzi kind=dist distance=10 direction=0 duration=800
+ins timea=800 index=zalzi kind=emotion show=false
+
+
+dialogsingle starttimea=0 <= name="Zalzi" text="... IsnÕt the armory right next to the school?";""
+
+ins timea=500 index=head kind=emotion emotion=... show=true
+ins timea=0 index=head kind=stop direction=1
+ins timea=1000 index=head kind=stop direction=2
+ins timea=0 index=head kind=emotion show=false
+dialogsingle starttimea=250 <= name="Rebel" text="Well, yeah... We'd discussed this and";"decided to detonate during the night."
+ins timea=600 index=tablel kind=stop direction=2
+dialogsingle starttimea=200 <= name="Rebel" text="There shouldnÕt be any children at the school then.";""
+
+ins timea=250 index=zalzi kind=emotion emotion=!? show=true shake=true
+ins timea=0 index=zalzi kind=dist distance=20 direction=0 duration=150
+ins type=fadeout timea=0 index=0 fadetime=1000 kind=music mode=pause
+dialogsingle starttimea=0 duration=150 <= name="Zalzi" text="ShouldnÕt!? What if there are?";""
+ins timea=0 index=0 kind=screenzoom zoomin=true zoomtime=1500 usestaticpos=true pos=700;300
+
+ins timea=1000 index=head kind=dist distance=10 direction=0 duration=500
+dialogsingle starttimea=1050 duration=250 <= name="Rebel" text="We have to do this.";"We have no other choice."
+ins timea=200 index=zalzi kind=emotion show=false
+ins timea=500 index=tabler kind=dist distance=10 direction=2 duration=200
+ins timea=0 index=tabler kind=emotion emotion=! show=true
+dialogpacket name=3.1 starttimea=100 duration=100
+dialog packetname=3.1 name="Rebel" text="The previous attempts weÕve made";"have been shown futile!"
+dialog packetname=3.1 name="Rebel" text="We can not live like this anymore!"
+
+ins timea=250 index=tabler kind=emotion show=false
+ins timea=100 index=zalzi kind=stop direction=1
+ins timea=0 index=zalzi kind=emotion emotion=! show=true
+dialogpacket name=4 starttimea=150
+dialog packetname=4 name="Zalzi" text="But there could still be civilians around!"
+dialog packetname=4 name="Zalzi" text="The soldierÕs quarter is almost at the center of town!";"It is guaranteed to be people walking around there!"
+
+ins timea=700 index=zalzi kind=emotion show=false
+ins timea=200 index=head kind=emotion emotion=... show=true
+ins timea=2000 index=head kind=stop direction=2
+ins timea=500 index=head kind=emotion show=false
+dialogsingle starttimea=0 <= name="Rebel" text="... I donÕt like this either but we have to do something...";""
+ins type=fadein timea=0 index=0 fadetime=500 kind=music mode=play
+ins timea=800 index=zalzi kind=stop direction=0
+ins timea=2000 index=zalzi kind=dist distance=20 direction=2 duration=1000
+dialogsingle starttimea=500 duration=500 <= name="Zalzi" text="I thought the money where for supplies and to hit targets";"not located inside the town perimeters, as usual."
+ins timea=950 index=zalzi kind=emotion emotion=! show=true
+ins timea=0 index=zalzi kind=stop direction=0
+dialogsingle starttimea=150 duration=100 <= name="Zalzi" text="We cannot blow up the city,";"too many innocent lives are at stake!"
+
+ins timea=850 index=head kind=emotion emotion=... show=true
+ins timea=850 index=head kind=stop direction=0
+ins timea=1500 index=head kind=emotion show=false
+dialogsingle starttimea=100 <= name="Rebel Leader" text="If anyone wants to leave, now is the time.";""
+
+ins timea=1200 index=zalzi kind=tor movepos=60;0 duration=500
+ins timea=0 index=zalzi kind=queue direction=0
+
+ins timea=1000 index=tabler kind=emotion emotion=... show=true
+ins timea=700 index=tabler kind=dist distance=30 direction=0 duration=3000
+ins timea=1000 index=zalzi kind=emotion emotion=... show=true
+ins timea=0 index=zalzi kind=dist direction=2
+
+ins timea=2000 index=zalzi kind=emotion show=false
+ins timea=100 index=zalzi kind=dist distance=90 direction=3 duration=500
+ins timea=0 index=zalzi kind=queue direction=0
+
+ins timea=1100 index=tablel kind=emotion emotion=... show=true
+ins timea=700 index=tablel kind=dist distance=30 direction=0 duration=3000
+ins timea=1000 index=zalzi kind=emotion emotion=... show=true
+ins timea=0 index=zalzi kind=dist direction=2
+
+ins timea=2000 index=zalzi kind=emotion show=false
+ins timea=700 index=zalzi kind=tor movepos=-30;-15 duration=400
+ins timea=0 index=zalzi kind=queue direction=3
+
+ins timea=1000 index=farleft kind=emotion emotion=... show=true
+ins timea=700 index=farleft kind=dist distance=30 direction=3 duration=3000
+ins timea=1000 index=zalzi kind=emotion emotion=... show=true
+ins timea=0 index=zalzi kind=dist direction=2
+
+ins timea=2000 index=zalzi kind=emotion show=false
+ins timea=1000 index=zalzi kind=tor movepos=60;40 duration=1000
+ins timea=0 index=zalzi kind=queue direction=0
+ins timea=0 index=zalzi kind=emotion emotion=! show=true
+
+dialogpacket name=last starttimea=500 duration=500
+dialog packetname=last name="Zalzi" text="I canÕt believe this!";"How can you go through with this?"
+dialog packetname=last name="Zalzi" text="I'm leaving!"
+
+ins timea=600 index=zalzi kind=to movepos=571;607 duration=2000
+ins timea=0 index=zalzi kind=queue distance=1600 direction=2 duration=1600
+ins timea=400 index=zalzi kind=emotion show=false
+
+load trigger="BercaMeeting With the Rebels"
+ins index=0 timea=0 kind=trigger value=-1
+
+ins timea=1500 kind=endseq

@@ -1,0 +1,22 @@
+import file=main.var
+
+var kin=0
+var celis=1
+var borealis=1
+
+info time="day" name="Pensara - The Trade District" music="Pensara" fadeValue="0" musicVolume="0"
+
+load translucent="res/Texts/Pensara.png"
+
+set fromvillage
+actor name="Kin" pos=1380;1081;0
+actor name="Borealis" pos=1381;1081;0
+actor name="Celis" pos=1383;1081;0
+
+ins type=fadein timea=2000 kind=image fadetime=4000 scrollmode=normal imagetype=translucent
+ins type=fadeout timea=6000 kind=image fadetime=2000 scrollmode=normal imagetype=translucent
+
+load trigger="Pensara - The Trade Districtnode"
+ins index=0 timea=0 kind=trigger value=0
+
+ins timea=3000 kind=end

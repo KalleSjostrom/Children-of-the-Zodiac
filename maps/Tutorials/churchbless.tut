@@ -1,0 +1,75 @@
+title string="Tutorial - Bless";""
+
+var type=vector name=underline value=0,0,.7
+var type=vector name=blue value=0,0,.7
+var type=vector name=lightblue value=.3,.3,.7
+var type=vector name=green value=0,.7,0
+var type=vector name=red value=.7,0,0
+
+newtext
+newMap
+putMap index=3 vector=red
+putMap index=4 vector=red
+addRow newpage=true text="Each character may exchange gold for the possibility";"" usemap=true
+newMap
+putMap index=3 vector=underline
+putMap index=4 vector=underline
+putMap index=5 vector=underline
+putMap index=8 vector=underline
+addRow newpage=false text="of starting a new class with more experience (Exp).";"" usemap=true
+
+newMap
+putMap index=1 vector=underline
+putMap index=2 vector=underline
+addRow newpage=true text="An Exp bar will be shown for each character. The";"" usemap=true
+newMap
+putMap index=4 vector=underline
+putMap index=5 vector=underline
+addRow newpage=false text="selected character also has two markers on this bar.";"" usemap=true
+
+addRow newpage=false text="";""
+newMap
+putMap index=1 vector=underline
+putMap index=2 vector=underline
+addRow newpage=false text="An Exp bar:";"" usemap=true icon=Battle/bar/test.png iconxoffset=190 iconyoffset=-43 
+newMap
+putMap vector=underline
+addRow newpage=false text="Select character:";"" usemap=true button=updown iconxoffset=190 iconyoffset=-23
+
+addRow newpage=true text="Moving the markers to the right, costs money.";""
+newMap
+putMap index=1 vector=lightblue
+putMap index=3 vector=lightblue
+putMap index=4 vector=lightblue
+addRow newpage=false text="The left marker (blue hand) cost twice as much to";"" usemap=true
+newMap
+putMap index=3 vector=green
+putMap index=5 vector=green
+putMap index=6 vector=green
+addRow newpage=false text="move as the right one (green hand).";"" usemap=true
+
+newMap
+putMap vector=underline
+addRow newpage=false text="Switch marker to move:";"" usemap=true button=cross iconxoffset=230 iconyoffset=-23
+addRow newpage=false text="Move marker:";"" usemap=true button=leftright iconxoffset=230 iconyoffset=-23
+
+newMap
+putMap index=2 vector=underline
+addRow newpage=true text="When choosing Done, the character will receive a";"" usemap=true
+
+newMap
+putMap index=6 vector=lightblue
+putMap index=9 vector=green
+addRow newpage=false text="random amount of Exp between the left and the right";"" usemap=true
+
+newMap
+putMap index=5 vector=green
+addRow newpage=false text="marker. This zone is colored green. Also, once you";"" usemap=true
+
+newMap
+putMap index=3 vector=red
+putMap index=4 vector=red
+putMap index=5 vector=red
+addRow newpage=false text="choose Done, you cannot go back!";"" usemap=true
+
+put turn=0

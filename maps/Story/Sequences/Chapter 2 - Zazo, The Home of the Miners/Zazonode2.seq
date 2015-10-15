@@ -1,0 +1,381 @@
+import file=main.var
+
+var teo=0
+var noah=1
+var noette=2
+var gerbias=3
+var hilda=4
+var shaun=5
+var thom=6
+var ander=7
+var christoffer=8
+var gebb=9
+var marcus=10
+var kin=11
+var celis=12
+var borealis=13
+
+info time="day" name="Zazo - Teo" music="Zazo" fadeValue="0" musicVolume="0"
+
+load music="Teo's Theme"
+load music="Theme of Borealis"
+
+actor name="Characters/Teo/TeoExtras" pos=460;500
+actor name="Characters/Noah/NoahExtras" pos=480;450
+actor name="Characters/Noette/NoetteExtras" pos=420;450
+actor name="Zazo/villagers/Gerbias/GerbiasExtras" pos=460;570
+actor name="Zazo/villagers/Hilda/HildaExtras" pos=400;550
+actor name="Zazo/villagers/Shaun/ShaunExtras" pos=490;550
+actor name="Zazo/villagers/Thom/ThomExtras" pos=430;555
+
+actor name="Zazo/villagers/Argus/ArgusExtras"
+actor name="Zazo/villagers/Christoffer/ChristofferExtras"
+actor name="Zazo/villagers/Gebb/GebbExtras"
+actor name="Characters/Marcus/MarcusExtras"
+actor name="Kin"
+actor name="Celis"
+actor name="Borealis"
+
+show index=ander value=false
+show index=christoffer value=false
+show index=gebb value=false
+show index=marcus value=false
+show index=kin value=false
+show index=celis value=false
+show index=borealis value=false
+
+ins index=teo timea=0 kind=stop direction=2
+ins index=noah timea=0 kind=stop direction=2
+ins index=noette timea=0 kind=stop direction=2
+
+ins type=fadeout timea=0 index=0 fadetime=0 kind=music mode=pause
+ins type=fadein timea=0 index=1 fadetime=0 kind=music mode=play
+/*
+ins index=teo timea=500 kind=dist distance=20 duration=800 direction=2
+dialogpacket name=1 starttimea=500 duration=300
+dialog packetname=1 name="Teo" text="Fellow citizens of Zazo.";""
+dialog packetname=1 name="Teo" text="I have once again stepped up to";"save this village from disaster."
+ins index=gerbias timea=500 kind=emotion emotion=... show=true
+
+ins index=teo timea=500 kind=dist distance=60 duration=2000 direction=3
+dialogpacket name=2 starttimea=1400 duration=600
+dialog packetname=2 name="Teo" text="I've arranged for more soldiers from Alares";"to rid the mine of the terrible monsters."
+dialog packetname=2 name="Teo" text="I have also instructed them to rescue all";"the miners that are trapped."
+ins index=gerbias timea=400 kind=emotion show=false
+
+ins index=teo timea=1000 kind=stop direction=2
+dialogsingle starttimea=500 <= name="Teo" text="They should be done by now and soon we can";"resume our mining in the new part of the mine."
+
+ins index=shaun timea=1000 kind=dist distance=20 duration=600 direction=0
+ins index=shaun timea=0 kind=queue direction=3
+dialogsingle starttimea=500 duration=400 <= name="Shaun" text="Can you guarantee us that all the monsters will be gone?";""
+ins index=teo timea=300 kind=stop direction=1
+
+ins index=teo timea=600 kind=dist distance=50 duration=2000 direction=1
+ins index=teo timea=0 kind=emotion emotion=! show=true
+dialogpacket name=2.1 starttimea=400 duration=400
+dialog packetname=2.1 name="Teo" text="Of course!"
+dialog packetname=2.1 name="Teo" text="I will increase security until";"all the workers feel secure again."
+ins index=teo timea=600 kind=emotion show=false
+
+ins index=teo timea=400 kind=stop direction=2
+dialogsingle starttimea=150 <= name="Teo" text="After all, your safety is my main concern!";"With me as your leader, you have nothing to worry about!"
+
+ins index=teo timea=700 kind=dist distance=40 duration=2000 direction=0
+ins index=hilda timea=1000 kind=stop direction=1
+dialogsingle starttimea=250 <= name="Hilda" text="I've got a bad feeling about this..";"" whisper=true
+ins index=thom timea=250 kind=stop direction=3
+dialogsingle starttimea=150 <= name="Thom" text="Me too..";"" whisper=true
+
+ins index=thom timea=250 kind=stop direction=0
+ins index=hilda timea=150 kind=stop direction=0
+
+ins index=teo timea=500 kind=stop direction=2
+
+ins index=ander timea=0 kind=show movepos=500;850
+ins index=christoffer timea=0 kind=show movepos=425;820
+ins index=gebb timea=0 kind=show movepos=410;830
+ins index=marcus timea=0 kind=show movepos=455;850
+ins index=kin timea=0 kind=show movepos=425;850
+ins index=celis timea=0 kind=show movepos=470;800
+ins index=borealis timea=0 kind=show movepos=440;790
+
+ins type=fadeout timea=500 index=1 fadetime=1500 kind=music mode=pause
+
+ins index=ander timea=0 kind=dist distance=150 duration=3000 direction=0
+ins index=christoffer timea=0 kind=dist distance=150 duration=3000 direction=0
+ins index=gebb timea=0 kind=dist distance=150 duration=3000 direction=0
+ins index=marcus timea=0 kind=dist distance=150 duration=3000 direction=0
+ins index=kin timea=0 kind=dist distance=150 duration=3000 direction=0
+ins index=celis timea=0 kind=dist distance=150 duration=3000 direction=0
+ins index=borealis timea=0 kind=dist distance=150 duration=3000 direction=0
+
+ins index=teo timea=800 kind=emotion emotion=! show=true
+ins index=teo timea=0 kind=dist distance=5 duration=100 direction=0 facedirection=2
+ins index=teo timea=600 kind=dist distance=15 duration=550 direction=2
+ins index=teo timea=200 kind=emotion show=false
+
+dialogsingle starttimea=300 duration=500 <= name="Teo" text="Ah, the traitor returns!";"How dare he step foot in the great town of Zazo!?"
+
+ins index=gerbias timea=250 kind=stop direction=2
+ins index=hilda timea=50 kind=stop direction=2
+ins index=shaun timea=5 kind=emotion emotion=! show=true 
+ins index=gerbias timea=25 kind=emotion emotion=! show=true
+ins index=shaun timea=5 kind=stop direction=2
+ins index=hilda timea=50 kind=emotion emotion=?! show=true
+ins index=thom timea=25 kind=emotion emotion=? show=true
+ins index=thom timea=25 kind=stop direction=2
+
+ins index=shaun timea=200 kind=dist distance=10 duration=100 direction=2
+dialogsingle starttimea=50 <= name="Shaun" text="Oh, look! Borealis has rescued the miners!";""
+ins index=hilda timea=50 kind=emotion emotion=! show=true
+ins index=thom timea=25 kind=emotion emotion=! show=true
+
+ins index=teo timea=150 kind=emotion emotion=! show=true
+ins index=teo timea=50 kind=dist distance=10 duration=150 direction=0 facedirection=2
+dialogsingle starttimea=50 duration=350 <= name="Teo" text="What! No... He can't...";""
+ins index=shaun timea=250 kind=emotion show=false 
+ins index=gerbias timea=25 kind=emotion show=false
+ins index=gerbias timea=25 kind=stop direction=0
+
+ins index=teo timea=300 kind=dist distance=15 duration=100 direction=0
+dialogsingle starttimea=50 duration=400 <= name="Teo" text="Oh, you buffoons!";"You didn't see that Borealis was with them!" whisper=true
+ins index=noah timea=150 kind=emotion emotion=! show=true
+ins index=noah timea=0 kind=dist distance=15 duration=150 direction=0 facedirection=2
+ins index=noette timea=50 kind=emotion emotion=! show=true
+ins index=noette timea=0 kind=dist distance=15 duration=150 direction=0 facedirection=2
+
+ins index=hilda timea=50 kind=emotion show=false
+ins index=hilda timea=0 kind=stop direction=0
+ins index=thom timea=25 kind=emotion show=false
+ins index=thom timea=0 kind=stop direction=0
+
+ins index=teo timea=500 kind=emotion emotion=... show=true
+ins index=noah timea=800 kind=emotion show=false
+ins index=noette timea=1000 kind=emotion show=false
+ins index=teo timea=250 kind=dist distance=20 duration=1000 direction=2
+dialogsingle starttimea=700 duration=300 <= name="Teo" text="Obviously these other guys did all the work!";"Borealis was surely out to take the mine for his own..."
+ins index=teo timea=0 kind=emotion show=false
+ins index=shaun timea=200 kind=stop direction=0
+
+ins index=ander timea=450 kind=dist distance=25 duration=200 direction=0
+ins index=ander timea=0 kind=emotion emotion=! show=true
+ins type=fadein timea=150 index=2 fadetime=0 kind=music mode=play
+dialogsingle starttimea=0 duration=400 <= name="Ander" text="That's a lie!";"Borealis came and saved us from the monsters!"
+ins index=shaun timea=250 kind=stop direction=2
+ins index=hilda timea=50 kind=stop direction=2
+ins index=thom timea=50 kind=stop direction=2
+ins index=ander timea=100 kind=emotion show=false
+
+ins index=christoffer timea=700 kind=dist distance=10 duration=100 direction=0
+ins index=christoffer timea=0 kind=emotion emotion=! show=true
+dialogsingle starttimea=50 duration=300 <= name="Christoffer" text="Borealis told us the whole story and we believe him!";""
+ins index=gerbias timea=250 kind=stop direction=2
+ins index=christoffer timea=100 kind=emotion show=false
+
+ins index=teo timea=250 kind=emotion emotion=! show=true
+ins index=teo timea=0 kind=dist distance=15 duration=150 direction=2
+dialogsingle starttimea=50 duration=150 <= name="Teo" text="That's preposterous!";"He's a traitor who sold iron to make weapons!"
+
+ins index=hilda timea=500 kind=stop direction=0
+ins index=hilda timea=1000 kind=dist distance=10 duration=500 direction=0
+dialogsingle starttimea=250 duration=700 <= name="Hilda" text="What is this Teo?";""
+ins index=teo timea=250 kind=dist distance=10 duration=800 direction=0 facedirection=2
+ins index=teo timea=50 kind=emotion show=false
+
+ins index=thom timea=250 kind=stop direction=0
+ins index=gerbias timea=50 kind=stop direction=0
+ins index=shaun timea=50 kind=stop direction=0
+
+ins index=thom timea=500 kind=dist distance=10 duration=500 direction=0
+dialogsingle starttimea=250 duration=250 <= name="Thom" text="Wasn't it you who wanted us to dig deeper";"when Borealis always told us not to."
+
+ins index=teo timea=400 kind=stop direction=1
+ins index=teo timea=250 kind=emotion emotion=... show=true
+ins index=teo timea=1000 kind=stop direction=3
+ins index=teo timea=700 kind=stop direction=2
+ins index=teo timea=250 kind=emotion show=false
+dialogsingle starttimea=50 <= name="Teo" text="Uhh...";"But I made that decision with the villages best in mind..."
+
+ins index=borealis timea=300 kind=dist distance=15 duration=200 direction=0
+ins index=borealis timea=0 kind=emotion emotion=! show=false
+dialogsingle starttimea=100 duration=100 <= name="Borealis" text="That's not true! You knew exactly what";"dwelled deep in those mines."
+
+ins index=gerbias timea=600 kind=stop direction=2
+dialogsingle starttimea=350 <= name="Gerbias" text="Borealis has always told the truth! I'll put";"my vote on Borealis as mayor over this liar!"
+
+ins index=gebb timea=250 kind=emotion emotion=! show=true
+ins index=gebb timea=0 kind=dist distance=10 duration=150 direction=3
+ins index=gebb timea=0 kind=queue distance=15 duration=250 direction=0
+dialogsingle starttimea=50 duration=400 <= name="Gebb" text="Yeah! Let's cast Teo out! Exile the bastard!!!";""
+ins index=gebb timea=300 kind=emotion show=false
+
+ins index=borealis timea=700 kind=dist distance=25 duration=1000 direction=0
+dialogsingle starttimea=500 duration=300 <= name="Borealis" text="Consider yourself relieved of your post as";"mayor of Zazo. Teo, you are now exiled."
+ins index=gerbias timea=250 kind=stop direction=0
+
+ins index=teo timea=300 kind=dist distance=15 duration=100 direction=2
+ins index=teo timea=0 kind=emotion emotion=! show=true
+dialogsingle starttimea=50 duration=50 <= name="Teo" text="Fine!";"I don't need any of you guys."
+
+ins index=teo timea=500 kind=stop direction=3
+ins index=teo timea=700 kind=stop direction=1
+dialogsingle starttimea=150 <= name="Teo" text="I'll manage fine on my own.";""
+ins index=teo timea=0 kind=emotion show=false
+
+ins index=teo timea=500 kind=dist distance=190 duration=2500 direction=0
+
+ins type=fadeout timea=2000 index=2 fadetime=1500 kind=music mode=kill
+ins index=teo timea=1000 kind=stop direction=2
+ins index=teo timea=1000 kind=dist distance=20 duration=200 direction=2
+ins index=teo timea=0 kind=emotion emotion=! show=true
+dialogsingle starttimea=150 duration=350 <= name="Teo" text="What are you waiting for, you idiots!";"Let's get out of here."
+ins index=noah timea=250 kind=emotion emotion=! show=true
+ins index=noah timea=0 kind=dist distance=5 duration=100 direction=2 facedirection=0
+ins index=noette timea=50 kind=emotion emotion=! show=true
+ins index=noette timea=0 kind=dist distance=5 duration=100 direction=2 facedirection=0
+
+ins index=noette timea=200 kind=dist distance=160 duration=1600 direction=0
+ins index=noette timea=0 kind=queue distance=550 duration=5500 direction=3
+ins index=noah timea=200 kind=dist distance=160 duration=1500 direction=0
+ins index=noah timea=0 kind=queue distance=550 duration=5156 direction=3
+
+ins index=teo timea=500 kind=emotion emotion=... show=true
+ins index=noah timea=500 kind=emotion show=false
+ins index=noette timea=500 kind=emotion show=false
+
+ins index=teo timea=1000 kind=dist distance=20 duration=1000 direction=2
+ins index=teo timea=500 kind=emotion show=false
+dialogsingle starttimea=0 duration=500 <= name="Teo" text="You haven't seen the last of me, Borealis!";"Be sure of that!"
+
+ins index=teo timea=800 kind=dist distance=60 duration=1000 direction=0
+ins index=teo timea=0 kind=queue distance=550 duration=5500 direction=3
+
+
+ins index=gerbias timea=1000 kind=dist distance=10 duration=1000 direction=0
+ins index=gerbias timea=0 kind=queue direction=2
+ins index=hilda timea=100 kind=stop direction=2
+
+ins index=gebb timea=500 kind=dist distance=20 duration=500 direction=3
+ins index=gebb timea=0 kind=queue distance=90 duration=2000 direction=0
+
+ins index=hilda timea=200 kind=dist distance=20 duration=500 direction=3
+ins index=hilda timea=0 kind=queue direction=2
+
+ins index=shaun timea=150 kind=stop direction=2
+
+ins index=christoffer timea=150 kind=dist distance=20 duration=500 direction=3
+ins index=christoffer timea=0 kind=queue distance=90 duration=2000 direction=0
+
+ins index=ander timea=200 kind=dist distance=100 duration=2400 direction=0
+ins index=ander timea=0 kind=queue distance=10 duration=300 direction=3
+ins index=ander timea=0 kind=queue direction=0
+
+ins index=thom timea=100 kind=stop direction=2
+
+ins index=celis timea=250 kind=dist distance=30 duration=500 direction=3
+ins index=celis timea=0 kind=queue distance=15 duration=250 direction=2
+ins index=celis timea=0 kind=queue direction=0
+
+ins index=thom timea=100 kind=dist distance=20 duration=500 direction=3
+ins index=thom timea=0 kind=queue direction=2
+
+ins index=marcus timea=200 kind=dist distance=15 duration=400 direction=1
+ins index=marcus timea=0 kind=queue distance=100 duration=2000 direction=0
+ins index=marcus timea=0 kind=queue distance=10 duration=300 direction=3
+ins index=marcus timea=0 kind=queue direction=0
+
+ins index=kin timea=100 kind=dist distance=20 duration=700 direction=3
+ins index=kin timea=0 kind=queue distance=33 duration=1000 direction=0
+
+dialogpacket name=3 starttimea=500 duration=400
+dialog packetname=3 name="Hilda" text="We're so glad to see you!" first=true
+dialog packetname=3 name="Ander" text="You are really a sight for sore eyes!" first=false
+
+ins index=borealis timea=300 kind=dist distance=15 duration=700 direction=3
+ins index=borealis timea=0 kind=queue distance=40 duration=1000 direction=2
+
+ins index=gerbias timea=500 kind=dist distance=15 duration=1000 direction=2
+ins index=gerbias timea=0 kind=queue direction=1
+
+ins index=ander timea=250 kind=dist distance=5 duration=500 direction=2
+ins index=ander timea=0 kind=queue direction=3
+
+ins index=thom timea=50 kind=dist distance=10 duration=1000 direction=0
+ins index=thom timea=0 kind=queue direction=2
+
+ins index=christoffer timea=100 kind=dist distance=20 duration=500 direction=1
+ins index=christoffer timea=0 kind=queue distance=20 duration=500 direction=0
+ins index=christoffer timea=0 kind=queue distance=15 duration=500 direction=1
+
+ins index=shaun timea=300 kind=dist distance=25 duration=800 direction=3
+
+ins index=gebb timea=50 kind=dist distance=30 duration=1000 direction=1
+ins index=gebb timea=0 kind=queue distance=25 duration=800 direction=0
+
+ins index=marcus timea=20 kind=dist distance=80 duration=1500 direction=3
+ins index=marcus timea=0 kind=queue distance=30 duration=700 direction=0
+
+dialogpacket name=4 starttimea=500
+dialog packetname=4 name="Thom" text="You have surely been missed!" first=true
+dialog packetname=4 name="Shaun" text="Let's set up a feast!" first=false
+
+ins index=gerbias timea=1000 kind=dist distance=30 duration=1000 direction=3
+ins index=gerbias timea=0 kind=queue distance=15 duration=1000 direction=2
+dialogsingle starttimea=150 duration=950 <= name="Gerbias" text="We thank you, Borealis."
+
+ins index=marcus timea=100 kind=dist distance=60 duration=2000 direction=3
+ins index=marcus timea=0 kind=queue direction=2
+
+ins index=ander timea=50 kind=stop direction=2
+
+ins index=hilda timea=250 kind=dist distance=30 duration=1000 direction=3
+ins index=hilda timea=0 kind=queue direction=2
+
+ins index=christoffer timea=200 kind=stop direction=2
+
+ins index=gebb timea=140 kind=dist distance=30 duration=1000 direction=3
+ins index=gebb timea=0 kind=queue direction=2
+
+ins index=shaun timea=100 kind=stop direction=2
+
+ins index=borealis timea=300 kind=dist distance=10 duration=400 direction=0
+dialogsingle starttimea=200 duration=200 <= name="Borealis" text="No need to thank me...";"You are my fellow Zazoians after all!"
+*/
+load trigger="Zazo"
+ins index=0 timea=0 kind=trigger value=1
+load trigger="zazozazoWeapons"
+ins index=1 timea=0 kind=trigger value=0
+load trigger="zazoCardShop"
+ins index=2 timea=0 kind=trigger value=1
+load trigger="Shaun"
+ins index=3 timea=0 kind=trigger value=2
+load trigger="Marcus"
+ins index=4 timea=0 kind=trigger value=5
+load trigger="Zazonode"
+ins index=5 timea=0 kind=trigger value=0
+
+load trigger="Elthea"
+ins index=6 timea=0 kind=trigger value=7
+load trigger="Farmer Jane"
+ins index=7 timea=0 kind=trigger value=1
+load trigger="Farmer John"
+ins index=8 timea=0 kind=trigger value=5
+load trigger="Recruiter"
+ins index=9 timea=0 kind=trigger value=6
+load trigger="Eve"
+ins index=10 timea=0 kind=trigger value=4
+load trigger="Marge"
+ins index=11 timea=0 kind=trigger value=1
+load trigger="Flog"
+ins index=12 timea=0 kind=trigger value=1
+load trigger="Ghertrudd"
+ins index=13 timea=0 kind=trigger value=3
+load trigger="Bella"
+ins index=14 timea=0 kind=trigger value=6
+load trigger="Ginis"
+ins index=15 timea=0 kind=trigger value=3
+
+ins type=fadein timea=1500 index=0 fadetime=0 kind=music mode=play
+
+ins timea=600 kind=endseq

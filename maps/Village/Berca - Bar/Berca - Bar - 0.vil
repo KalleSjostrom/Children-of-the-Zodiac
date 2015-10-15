@@ -1,0 +1,42 @@
+# background, prefix name of both images day
+background Berca_-_Bar true
+
+inside
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1024 768
+start 453 533 0
+
+# start0.x, start0.y + 20, width, dir, ?, village.x, village.y + 15, dir of player
+holeDoor switch Berca 453 553 30 2 1 1655 847 2
+
+o 706 505 735 554
+o 500 596 745 669
+o 735 286 797 640
+o 286 283 410 302
+o 222 200 795 285
+o 513 458 576 512
+o 677 268 694 329
+o 318 514 350 526
+o 298 492 365 513
+o 674 494 703 557
+o 224 285 286 639
+o 599 366 615 381
+o 286 596 444 667
+o 479 365 527 376
+o 306 419 367 439
+o 562 366 578 376
+o 442 310 462 339
+o 528 512 560 524
+o 458 261 678 366
+o 652 365 668 377
+o 320 440 352 451
+o 508 496 513 512
+o 460 360 678 369
+
+villager Don_Carlos
+villager Gilo
+villager Milo
+villager Quintis
+
+end

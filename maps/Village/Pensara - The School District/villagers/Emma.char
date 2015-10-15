@@ -1,0 +1,19 @@
+image Emma
+start 480 1710
+
+in 2 1000 true
+ 
+dialog 1
+
+# Sitting outside the clock tower.
+n Emma
+fl Our father Carl died because of his political believes.
+sl ...
+f true
+
+n Emma
+fl He criticized the senate for
+sl taking advantage of the people. 
+f true
+
+end

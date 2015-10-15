@@ -1,0 +1,48 @@
+# background, prefix name of both images day
+background Pensara_-_The_North_District_-_Civil_House true
+
+inside
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1024 768
+start0 344 640 0
+start1 655 640 0
+
+holeDoor switch Pensara_-_The_North_District 344 660 30 2 1 300 959 2
+holeDoor switch Pensara_-_The_North_District 655 660 30 2 1 397 959 2
+
+o 632 381 643 416
+o 699 700 749 758
+o 402 279 430 297
+o 451 471 600 505
+o 271 325 336 370
+o 232 279 272 760
+o 462 327 602 376
+o 412 428 443 462
+o 273 701 330 760
+o 686 383 750 417
+o 421 573 561 622
+o 749 279 789 760
+o 328 458 360 473
+o 592 503 602 726
+o 697 595 750 646
+o 418 463 437 476
+o 442 282 453 505
+o 273 428 328 476
+o 380 700 651 759
+o 511 512 511 512
+o 447 623 535 633
+o 709 523 738 535
+o 696 487 751 523
+o 709 418 739 432
+o 695 280 750 316
+o 499 386 566 397
+o 488 376 576 386
+o 244 194 793 279
+o 329 428 369 461
+o 622 279 631 416
+o 458 632 525 643
+
+villager Podd 4 5
+
+end

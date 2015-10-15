@@ -1,0 +1,32 @@
+import file=main.var
+
+var kin=0
+var celis=1
+var zalzi=2
+
+actor name="Kin"
+actor name="Celis"
+actor name="Zalzi"
+
+show index=kin value=false
+show index=celis value=false
+show index=zalzi value=false
+
+info time="day" name="Serphia Hall" music="The Theme of Demons" fadeValue="0" musicVolume="1"
+
+ins timea=0 index=kin kind=show movepos=475;770
+ins timea=0 index=celis kind=show movepos=510;770
+ins timea=0 index=zalzi kind=show movepos=489;820
+
+ins index=kin timea=2000 kind=dist distance=120 duration=2400 direction=0
+ins index=celis timea=0 kind=dist distance=120 duration=2400 direction=0
+ins index=zalzi timea=0 kind=dist distance=120 duration=2400 direction=0
+
+ins index=kin timea=3000 kind=dist distance=15 duration=150 direction=0
+ins index=kin timea=0 kind=emotion emotion=! show=true
+dialogsingle starttimea=600 duration=400 <= name="Kin" text="Look, a little girl!";"What's she doing here?!"
+ins index=kin timea=500 kind=emotion emotion=! show=false
+ins index=celis timea=600 kind=dist distance=15 duration=150 direction=0
+dialogsingle starttimea=600 duration=400 <= name="Celis" text="Don't know...";"Why don't we ask her!"
+
+ins timea=500 kind=end

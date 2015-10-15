@@ -1,0 +1,62 @@
+background Home_of_Celis true
+
+back 1024 768
+start 600 710 0
+
+wind 10;0;0 .1
+particlesystem smokesystem:1
+
+door house Home_of_Celis_-_Celis_Home 650 457 30 0 2
+doorSignFl The door is locked.
+
+loot flower 334 529 0;1;2;3 Lovely_Flower 1 1
+lootLine You picked a lovely flower.
+
+loot flower 309 250 0;1;2;3 Lovely_Flower 1 1
+lootLine You picked a lovely flower.
+
+loot flower 300 96 0;1;2;3 Lovely_Flower 1 1
+lootLine You picked a lovely flower.
+
+loot flower 243 678 0;1;2;3 Lovely_Flower 1 1
+lootLine You picked a lovely flower.
+
+loot flower 184 665 0;1;2;3 Lovely_Flower 1 1
+lootLine You picked a lovely flower.
+
+sign 750 679 30
+signL Welcome to the home of 
+signL Ryold and Celis
+
+o 106 58 125 87
+o 81 440 114 473
+o 136 108 150 147
+o 81 474 97 491
+o 80 564 99 701
+o 80 9 105 271
+o 151 325 182 419
+o 115 440 133 457
+o 81 534 93 564
+o 81 311 150 439
+o 1 9 80 701
+o 106 88 135 169
+o 183 347 207 387
+o 100 580 112 636
+o 106 170 124 187
+o 695 519 712 559
+o 691 123 722 162
+o 572 481 582 506
+o 929 265 967 299
+o 482 162 744 198
+o 583 501 594 506
+o 947 300 985 355
+o 641 68 678 93
+o 985 301 1022 332
+o 583 409 770 501
+o 515 93 691 161
+o 480 200 788 322
+o 739 673 771 714
+o 525 322 787 409
+o 834 165 865 193
+
+end

@@ -1,0 +1,88 @@
+#inside house 2
+image char/Marcus
+
+start 430 700
+
+in 2 180 true
+
+dialog 6
+
+n Marcus
+fl If I had the right amount of money I would
+sl quit this job and just travel the world.
+trigger Marcus 7
+f true
+
+dialog 7
+
+n Marcus
+fl If I had the right amount of money I would
+sl quit this job and just travel the world.
+f true
+
+n Marcus
+fl I have a rare camera I could sell to you.
+sl Only 10 000 gold.
+f true
+
+n Marcus
+fl My prize won't budge.
+sl Do you want it?
+f true
+
+q 10
+alt Buy_the_camera?
+alt Keep_the_10_000_gp.
+alt _
+alt _
+price 10000 0 0 0
+f true
+
+*11
+
+n Marcus
+fl You just made my life!
+sl Thanks a bunch!
+f true
+
+n _
+fl You got the key item "Camera"!
+sl end
+gift Camera 1 1
+trigger Marcus 8
+f true
+
+*12
+
+n Marcus
+fl If you collect the money don't forget about me.
+sl Ok?
+f false
+
+*15
+
+n Marcus
+fl It was a serious price!
+sl Don't say yes if you don't have the money!
+f true
+
+dialog 8
+
+n Marcus
+fl Have you taken any good photographs yet?
+sl end
+f true
+
+dialog 9
+
+n Marcus
+fl Thank you for saving me from the monsters in the mine,
+sl but now I'm to scared to go back there and help rebuild.
+f true
+
+n Marcus
+fl I wonder if I'll ever be able to go back 
+sl after this terrible event.
+f true
+
+end

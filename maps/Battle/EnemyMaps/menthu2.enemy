@@ -1,0 +1,107 @@
+name Menthu
+
+defense 406
+magicDefense 401
+agility 24
+evade 0
+hit 90
+attack 2102
+magic 2102
+support 2102
+hp 18324
+element 0
+
+diesound Menthu/dies
+image menthu 7
+armor 80 80
+preferences 100 0
+
+scale 5.3
+height -1.8
+depth -6
+middle 0
+
+# All attack phys & mag
+# Single attack phys & mag
+# Boost phys & mag
+# Dispel
+# Death
+
+# Mega attack (down to one)
+
+attackSpec type=no name=change anim=()--(f=5,d=true) target=-1
+
+attackSpec {
+	type=off
+	name=Attack
+	power=1
+	anim=(f=3,se=Monster/Menthu/attack)--(f=4)
+}
+
+attackSpec {
+	type=off
+	name=Slice
+	power=.7
+	onAll=true
+	anim=(f=3,a=300,se=Monster/Menthu/slice)--(f=4,a=300)--(f=3,a=300)--(f=4,a=300)--(f=3,a=300)--(f=4,a=300)
+}
+
+attackSpec {
+	type=mag
+	name=Secret_Force
+	power=1
+	anim=(f=2,a=2000,c=m+BlackWind:-.36f;.4;-6)
+}
+
+attackSpec {
+	type=mag
+	name=Ultimate_Force
+	power=.7
+	onAll=true
+	anim=(f=2,a=1000,c=m+BlackUltima:-.36f;.4;-6)--(f=2,a=2000,c=m+BlackUltima:-.36f;.4;-6)
+}
+
+attackSpec {
+	type=sup
+	name=Sigma
+	power=0
+	anim=(s=true,se=Monster/Menthu/sigma)--(f=1,s=true)--(s=true)--(f=1,s=true)
+	effect=(Dispel=1)
+}
+
+attackSpec {
+	type=mag
+	name=Death
+	power=0
+	anim=(f=1,se=Monster/Menthu/death)--(f=6,a=100)--(f=1,a=100)--(f=6,a=100)--(f=1,a=100)--(f=6,a=100)--(f=1,a=100)--(f=6,a=100)--(f=1,a=100)--(f=6,a=100)--(f=1,a=100)--(f=6,a=100)--(f=1,a=100)--(f=6,a=100)--(f=1,a=100)
+	effect=(Death=1)
+}
+
+attackSpec {
+	type=sup
+	name=Delta
+	power=0
+	anim=(s=true,se=Monster/Menthu/delta)--(f=1,s=true)--(s=true)--(f=1,s=true)
+	effect=(BoostMagDef=2;1)--(BoostDef=2;1)
+}
+
+attackSpec {
+	type=sup
+	name=Omega
+	power=0
+	anim=(s=true,se=Monster/Menthu/delta)--(f=1,s=true)--(s=true)--(f=1,s=true)
+	effect=(BoostMag=2;1)--(BoostOff=2;1)
+}
+
+run script=menthu1
+
+cardPreference Death 0
+cardPreference openwound 0
+
+dialog name="Menthu" text="Wretched humans!";""
+end=begin
+dialog name="Menthu" text="Impossible!";""
+end=endEnemyDead
+dialog name="Menthu" text="No one can stand up against me!";""
+end=endPartyDead
+nextPlace="MenthuAttack2";""

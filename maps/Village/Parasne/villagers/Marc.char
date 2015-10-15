@@ -1,0 +1,100 @@
+image Marc	   
+start 1430 895	   
+	   
+in 0 500 true	   
+in 3 120 false	   
+in 0 500 true	   
+in 1 120 false	   
+	   
+dialog 1	   
+	   
+#  (by the fish net)	   
+n Marc	   
+fl Dexter has been giving me strange looks all week long.	   
+sl I don't like him... at all...	   
+trigger Marc 2	   
+f true	   
+	   
+dialog 2	   
+	   
+n Marc	   
+fl I am going to hurt him, but I have 	   
+sl to wait 'til the sun goes down...	   
+trigger Marc 3
+f true	   
+	   
+dialog 3	   
+	   
+n Marc	   
+fl Maybe you can help me?
+sl You look like a real warrior!	   
+f true	   
+	   
+q 10	   
+alt Sure_thing!	   
+alt No...	   
+alt _	   
+alt _	   
+f true	   
+	   
+*11	   
+n Marc
+fl Great! 	   
+sl Then, this may come in handy.	   
+trigger Marc 5	   
+gift cards.offense.MagicalBlow 2 2 false	   
+f true	   
+	   
+*12	   
+n Marc	   
+fl Hmpf... 
+sl You coward!
+trigger Marc 6
+f true	   
+	   
+dialog 5	   
+	   
+n Marc	   
+fl This is our secret...	   
+sl end	   
+trigger Marc 7
+f true	   
+	   
+dialog 6	   
+	   
+n Marc	   
+fl ...	   
+sl end	   
+trigger Marc 7
+f true	   
+	   
+dialog 7	   
+	   
+n Marc	   
+fl ...	   
+sl end	   
+trigger Pretto 2
+f true	   
+	   
+dialog 8	   
+# after talking to Pretto	   
+n Marc	   
+fl The boat to the pyramids are leaving this afternoon?	   
+sl I have to go...
+f true 	   
+	   
+n Marc	   
+fl Dexter will have to wait to get his ass kicked.
+sl Please tell my brother to cover for me at work.	   
+trigger Marc 9	   
+trigger Pretto 3
+f true	   
+	   
+dialog 9	   
+	   
+n Marc	   
+fl The pyramids... 	   
+sl That's gonna be nice.	   
+f true	   
+	   
+end	 

@@ -1,0 +1,16 @@
+image char/Sailor2
+start 635 370
+	   
+in 1 100 true
+in 2 100 false
+in 2 100 true
+in 0 100 false
+	   
+dialog 1	   
+	   
+n Sailor	   
+fl P'rhapps I, me self can get me self
+sl a lady f'r the night in Parasne.
+f true	   
+	   
+end	 

@@ -1,0 +1,93 @@
+image char/Pensarasoldier
+start 850 970
+
+in 0 200 true
+in 1 170 true
+in 0 220 true
+in 3 150 true
+
+dialog 1
+
+n Soldier
+fl I know there was some thing I were to pick
+sl up for my old lady when I quit for the day.
+f true 
+
+n Soldier
+fl I just can't remember what it was.
+sl end
+f true
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

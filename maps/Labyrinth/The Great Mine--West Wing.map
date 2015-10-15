@@ -1,0 +1,70 @@
+mapSize -0.5 0.5 1
+
+size 187
+
+mission VillagerMission GreatMineMission trigger="Zazo";"2" trigger="Zazonode";"2" dialog="Celis";"Seems that no more workers are here.&&Let's head back to Zazo!" extranext="2";"After a Hard Days Work"
+
+light0 position=0;0;0;1 ambient=.8;.8;.8;1 specular=0;0;0;1 diffuse=.8;.8;.8;1 attenuation=1;0.01;0.015
+material ambient=.4;.4;.4;1 specular=0;0;0;1 diffuse=.7;.7;.7;1
+invMaterial ambient=.7;.7;.7;1 specular=.2;.2;.2;1 diffuse=.8;.8;.8;1 shininess=5 emission=.1;.1;.1;1
+
+floorTex minecavefloor.jpg
+wallTex minecavewall.png
+wallTex minecavedoorbig0.png
+wallTex minecavedoor0.png
+roofTex minecaveroof.jpg
+
+normal floor 0 1
+normal wall 1 4
+normal roof 4 5
+
+mapPos 0 1
+
+# directions in labyrinth
+dir 71 1 87
+dir 76 1 92
+dir 87 1 103
+dir 92 1 108
+dir 103 1 119
+dir 103 2 104
+dir 104 2 105
+dir 105 1 121
+dir 105 2 106
+dir 106 2 107
+dir 107 2 108
+dir 108 1 124
+dir 115 2 116
+dir 116 2 117
+dir 117 2 118
+dir 118 2 119
+dir 121 1 137
+dir 124 1 140
+dir 137 1 153
+dir 148 2 149
+dir 149 2 150
+dir 150 1 166
+dir 150 2 151
+dir 151 2 152
+dir 152 2 153
+dir 153 1 169
+dir 166 1 182
+dir 169 1 185
+dir 185 1 201
+
+mapEnd
+
+inv hinderDoor 201 1 2 Walls/minecavedoorbig the_great_mine--the_hall-mark1
+inv hinderDoor 115 0 2 Walls/minecavedoorbig the_great_mine--great_deep-mark0
+
+inv hinderDoor 108 1 2 Walls/minecavedoor the_great_mine--west_wing-mark3
+inv hinderDoor 124 3 2 Walls/minecavedoor the_great_mine--west_wing-mark2
+
+inv button 182 1 7 Images/lever The_Great_Mine--The_Hall.maphinderDoor9 The_Great_Mine--West_Wing.maphinderDoor201  The_Great_Mine--The_Hall.mapbutton38
+inv button 148 0 7 Images/lever The_Great_Mine--West_Wing.maphinderDoor115 The_Great_Mine--Great_Deep.maphinderDoor127 The_Great_Mine--Great_Deep.mapbutton207
+
+inv chest 71 3 2 Images/chest 2 cards.magic.Demolish 2 false
+inv chest 76 3 2 Images/chest 0 125
+
+inv villager 140 1 GreatMineMission Images/minerander.png Villager="Oh, thank god!";"I thought I was a gonner!" Villager="Please let me follow you out."
+
+end

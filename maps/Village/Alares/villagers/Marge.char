@@ -1,0 +1,33 @@
+image Marge
+
+start 1350 1700
+
+in 2 180 true
+
+dialog 1
+
+n Marge
+fl Welcome to Alares!
+sl The greenest town in the whole world.
+f true
+
+dialog 2
+
+n Marge
+fl Are you the ones that Uri sent?!
+sl ...
+f true
+
+dialog 3
+
+n Marge
+fl Not so long ago the mine in Zazo had an incident,
+sl back the 3 heroes came to their rescue.
+f true
+
+n Marge
+fl I wonder where they are now...
+sl end
+f true
+
+end

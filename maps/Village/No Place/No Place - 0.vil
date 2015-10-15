@@ -1,0 +1,17 @@
+##### VILLAGE #####
+# NAME
+name Zazo _
+
+##### BACKGRUND #####
+
+# background, prefix name of both images day
+background No_Place true
+
+##### STARTING LOCATION #####
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1024 768 as=1:1
+start 886 193 2
+
+##### DOORS #####
+end

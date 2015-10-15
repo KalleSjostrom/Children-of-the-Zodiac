@@ -1,0 +1,14 @@
+newList 100-50
+attack Chrono
+attack Tail_Whip
+attack Ice Tail_Whip
+attack Ice Tail_Whip
+attack Heal Ice
+newList 30-10
+attackSingle Scales
+attack Tail_Whip
+attack Ice_Rain Tail_Whip
+attack Ice_Rain Tail_Whip
+attack Heal Ice
+newList 10-0
+attack Ice_Rain Ice_Rain Ice_Rain Last_Resort

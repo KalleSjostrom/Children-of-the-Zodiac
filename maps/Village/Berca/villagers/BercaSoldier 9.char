@@ -1,0 +1,58 @@
+image char/Pensarasoldier
+start 790 230
+
+in 3 170 false
+in 2 40 false
+in 3 52 false
+in 2 255 false
+in 1 300 false
+in 3 300 false
+in 0 255 false
+in 1 52 false
+in 0 40 false
+in 1 170 false
+
+dialog 1
+
+n Soldier
+fl Seen any suspicious looking people lately?
+sl end
+f true
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

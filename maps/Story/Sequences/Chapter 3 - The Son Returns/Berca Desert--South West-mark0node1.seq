@@ -1,0 +1,128 @@
+import file=main.var
+
+var menthu=0
+var sys=1
+var sys2=2
+var sys3=3
+var sys4=4
+var sys5=5
+var sys6=6
+var sys7=7
+var sys8=8
+var circle=9
+var sign=10
+var signflip=11
+var ophi=12
+
+info time="day" name="No Place" music="No Music" fadeValue="0" musicVolume="0"
+
+actor name="Characters/Menthu/MenthuExtras" pos=493;700;0
+actor name="MenthuFireSystem"
+actor name="MenthuFireSystem"
+actor name="MenthuFireSystem"
+actor name="MenthuFireSystem"
+actor name="MenthuFireSystem"
+actor name="MenthuFireSystem"
+actor name="MenthuFireSystem"
+actor name="MenthuFireSystem"
+actor name="MenthuCircleSystem"
+actor name="MenthuSignSystem"
+actor name="MenthuSignFlipSystem"
+actor name="OphiuchusSystem"
+
+show index=sys value=false
+show index=sys2 value=false
+show index=sys3 value=false
+show index=sys4 value=false
+show index=sys5 value=false
+show index=sys6 value=false
+show index=sys7 value=false
+show index=sys8 value=false
+show index=circle value=false
+show index=sign value=false
+show index=signflip value=false
+show index=ophi value=false
+
+var firetime=1000
+var fireheight1=700
+var fireheight2=650
+var fireheight3=600
+var fireheight4=550
+var fireleft=492
+var fireright=522
+# middle 19:50
+load music="Menthu's Theme"
+
+ins type=fadeout timea=0 index=1 fadetime=0 kind=music mode=pause
+ins type=fadein timea=500 index=1 fadetime=0 kind=music mode=play
+
+ins timea=2000 index=sys kind=show movepos=fireleft;fireheight1
+ins timea=0 index=sys2 kind=show movepos=fireright;fireheight1
+ins timea=2000 index=sys kind=dist distance=30 duration=2000 direction=3
+ins timea=0 index=sys2 kind=dist distance=30 duration=2000 direction=1
+ins timea=0 index=sys kind=deaccs
+ins timea=0 index=sys2 kind=deaccs
+ins timea=500 index=menthu kind=dist distance=300 duration=12000 direction=0
+
+ins timea=500 index=sys3 kind=show movepos=fireleft;fireheight2
+ins timea=0 index=sys4 kind=show movepos=fireright;fireheight2
+ins timea=firetime index=sys3 kind=dist distance=30 duration=2000 direction=3
+ins timea=0 index=sys4 kind=dist distance=30 duration=2000 direction=1
+ins timea=0 index=sys3 kind=deaccs
+ins timea=0 index=sys4 kind=deaccs
+
+ins timea=1000 index=sys5 kind=show movepos=fireleft;fireheight3
+ins timea=0 index=sys6 kind=show movepos=fireright;fireheight3
+ins timea=firetime index=sys5 kind=dist distance=30 duration=2000 direction=3
+ins timea=0 index=sys6 kind=dist distance=30 duration=2000 direction=1
+ins timea=0 index=sys5 kind=deaccs
+ins timea=0 index=sys6 kind=deaccs
+
+ins timea=1000 index=sys7 kind=show movepos=fireleft;fireheight4
+ins timea=0 index=sys8 kind=show movepos=fireright;fireheight4
+ins timea=firetime index=sys7 kind=dist distance=30 duration=2000 direction=3
+ins timea=0 index=sys8 kind=dist distance=30 duration=2000 direction=1
+ins timea=0 index=sys7 kind=deaccs
+ins timea=0 index=sys8 kind=deaccs
+
+# 5500
+# 12000 - 5500 = 6500
+ins timea=8500 index=circle kind=show movepos=512;450
+dialogsingle starttimea=2000 duration=500 <= name="Menthu" text="Sage of the celestial heavens!";"Come forth and heed my words!"
+
+ins timea=1000 index=sign kind=show movepos=100;300
+ins timea=0 index=signflip kind=show movepos=824;300
+ins timea=0 index=ophi kind=show movepos=392;50
+
+text lines="What burdens your heart, my child?";"" pos=450;344
+ins type=fadein timea=3500 index=0 fadetime=2000 kind=text fadebackto=50
+ins type=fadeout timea=6000 index=0 fadetime=2000 kind=text fadebackto=100
+
+dialogsingle starttimea=2000 duration=0 <= name="Menthu" text="On my shoulders lies great woe.";"The wanderers of Alares has grown."
+dialogsingle starttimea=2000 duration=0 <= name="Menthu" text="The last child may have a greater";"significance than we expected."
+dialogsingle starttimea=500 duration=0 <= name="Menthu" text="Teo got her locked up and I asked him to kill them.";""
+dialogsingle starttimea=500 duration=0 <= name="Menthu" text="However, the alarm went of at the prison.";"I am certain she got away."
+
+text lines="The last child could indeed pose a threat to our goal.";"" pos=450;344
+text lines="But she is young and naive.";"Serphia could handle her and her followers." pos=450;344
+text lines="As for your servant.";"This is not the first time he has let you down." pos=450;344
+text lines="Worthless human deserves nothing other than death.";"" pos=450;344
+
+ins type=fadein timea=2500 index=1 fadetime=2000 kind=text fadebackto=50
+ins type=fadeout timea=6000 index=1 fadetime=2000 kind=text fadebackto=50
+
+ins type=fadein timea=2500 index=2 fadetime=2000 kind=text fadebackto=50
+ins type=fadeout timea=6000 index=2 fadetime=2000 kind=text fadebackto=50
+
+ins type=fadein timea=2500 index=3 fadetime=2000 kind=text fadebackto=50
+ins type=fadeout timea=6000 index=3 fadetime=2000 kind=text fadebackto=50
+
+ins type=fadein timea=2500 index=4 fadetime=2000 kind=text fadebackto=50
+ins type=fadeout timea=6000 index=4 fadetime=2000 kind=text fadebackto=100
+
+ins type=fadeout timea=4000 index=1 fadetime=2000 kind=music mode=kill
+
+load trigger="Berca Desert--South West-mark0node"
+ins timea=0 index=0 kind=trigger value=0
+
+ins timea=2000 kind=endseq

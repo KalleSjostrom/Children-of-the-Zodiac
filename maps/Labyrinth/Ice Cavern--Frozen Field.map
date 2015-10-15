@@ -1,0 +1,227 @@
+mapSize -0.5 0.5 1
+
+size 511
+
+useSnow
+
+fog red=.8 green=.8 blue=1 alpha=.8 density=0.02
+
+light0 position=0;0;0;1 ambient=.8;.8;.8;1 specular=0;0;0;1 diffuse=.8;.8;.8;1 attenuation=1;0.01;0.015
+light1 position=0;0;0;0 ambient=.8;.8;.8;1 specular=0;0;0;1 diffuse=.8;.8;.8;1 attenuation=1;0.01;0.015
+material ambient=.4;.4;.4;1 specular=0;0;0;1 diffuse=.7;.7;.7;1 shininess=5 emission=.1;.1;.1;1
+
+sky top=.3;.3;.5;.8 bottom=.8;.8;1;.8
+
+floorTex snowhedgefloor.jpg
+wallTex snowhedgewall.png
+wallTex snowhedgedoor.png
+
+normal floor 0 1
+normal wall 1 3
+
+mapPos 0 1
+
+# directions in labyrinth
+dir 14 1 30
+dir 21 1 37
+dir 21 2 22
+dir 22 1 38
+dir 22 2 23
+dir 23 1 39
+dir 23 2 24
+dir 24 1 40
+dir 24 2 25
+dir 25 1 41
+dir 25 2 26
+dir 26 1 42
+dir 26 2 27
+dir 27 1 43
+dir 27 2 28
+dir 28 1 44
+dir 28 2 29
+dir 29 1 45
+dir 29 2 30
+dir 30 1 46
+dir 35 2 36
+dir 36 2 37
+dir 37 1 53
+dir 37 2 38
+dir 38 1 54
+dir 38 2 39
+dir 39 1 55
+dir 39 2 40
+dir 40 1 56
+dir 40 2 41
+dir 41 2 42
+dir 42 2 43
+dir 43 1 59
+dir 43 2 44
+dir 44 1 60
+dir 44 2 45
+dir 45 1 61
+dir 45 2 46
+dir 46 1 62
+dir 53 1 69
+dir 53 2 54
+dir 54 1 70
+dir 54 2 55
+dir 55 1 71
+dir 55 2 56
+dir 56 1 72
+dir 59 1 75
+dir 59 2 60
+dir 60 1 76
+dir 60 2 61
+dir 61 1 77
+dir 61 2 62
+dir 62 1 78
+dir 68 2 69
+dir 69 1 85
+dir 69 2 70
+dir 70 1 86
+dir 70 2 71
+dir 71 1 87
+dir 71 2 72
+dir 72 1 88
+dir 74 2 75
+dir 75 1 91
+dir 75 2 76
+dir 76 1 92
+dir 76 2 77
+dir 77 1 93
+dir 77 2 78
+dir 78 1 94
+dir 85 1 101
+dir 85 2 86
+dir 86 1 102
+dir 86 2 87
+dir 87 1 103
+dir 87 2 88
+dir 88 1 104
+dir 91 1 107
+dir 91 2 92
+dir 92 1 108
+dir 92 2 93
+dir 93 1 109
+dir 93 2 94
+dir 94 1 110
+dir 101 1 117
+dir 101 2 102
+dir 102 1 118
+dir 102 2 103
+dir 103 1 119
+dir 103 2 104
+dir 104 1 120
+dir 104 2 105
+dir 105 1 121
+dir 107 2 108
+dir 108 1 124
+dir 108 2 109
+dir 109 1 125
+dir 109 2 110
+dir 110 1 126
+dir 110 2 111
+dir 117 1 133
+dir 117 2 118
+dir 118 1 134
+dir 118 2 119
+dir 119 1 135
+dir 119 2 120
+dir 120 1 136
+dir 120 2 121
+dir 121 1 137
+dir 124 1 140
+dir 124 2 125
+dir 125 1 141
+dir 125 2 126
+dir 126 1 142
+dir 133 1 149
+dir 133 2 134
+dir 134 1 150
+dir 134 2 135
+dir 135 1 151
+dir 135 2 136
+dir 136 1 152
+dir 136 2 137
+dir 137 1 153
+dir 137 2 138
+dir 138 1 154
+dir 138 2 139
+dir 139 1 155
+dir 139 2 140
+dir 140 1 156
+dir 140 2 141
+dir 141 1 157
+dir 141 2 142
+dir 142 1 158
+dir 148 1 164
+dir 148 2 149
+dir 149 2 150
+dir 150 1 166
+dir 150 2 151
+dir 151 1 167
+dir 151 2 152
+dir 152 1 168
+dir 152 2 153
+dir 153 1 169
+dir 153 2 154
+dir 154 1 170
+dir 154 2 155
+dir 155 1 171
+dir 155 2 156
+dir 156 1 172
+dir 156 2 157
+dir 157 1 173
+dir 157 2 158
+dir 158 1 174
+dir 163 1 179
+dir 163 2 164
+dir 166 2 167
+dir 167 1 183
+dir 167 2 168
+dir 168 1 184
+dir 168 2 169
+dir 169 1 185
+dir 169 2 170
+dir 170 1 186
+dir 170 2 171
+dir 171 1 187
+dir 171 2 172
+dir 172 1 188
+dir 172 2 173
+dir 173 1 189
+dir 173 2 174
+dir 174 1 190
+dir 179 1 195
+dir 183 2 184
+dir 184 2 185
+dir 185 1 201
+dir 185 2 186
+dir 186 1 202
+dir 186 2 187
+dir 187 1 203
+dir 187 2 188
+dir 188 1 204
+dir 188 2 189
+dir 189 1 205
+dir 189 2 190
+dir 190 1 206
+dir 201 2 202
+dir 202 2 203
+dir 203 2 204
+dir 204 2 205
+dir 205 2 206
+end
+
+mapEnd
+
+wall 2 35 0
+inv door 35 0 dontopen Ice_Cavern--Hall_of_Confusion-mark1
+wall 2 195 1
+inv door 195 1 dontopen Ice_Cavern--Pillar_Room-mark2 
+
+inv chest 14 3 2 Images/icepot 2 cards.magic.Death 3
+inv chest 74 0 2 Images/icepot 2 cards.offense.Destroyer 1 
+inv chest 111 2 2 Images/icepot 2 cards.magic.Fire 3 true 
+inv chest 68 0 2 Images/icepot 2 cards.magic.Ultima 1 
+

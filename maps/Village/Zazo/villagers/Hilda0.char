@@ -1,0 +1,37 @@
+##### VILLAGER #####
+# NAME: Hilda
+image Hilda
+
+##### STARTING LOCATION #####
+
+# start x y
+start 1440 825
+
+##### INSTRUCTIONS #####
+
+# in angle distance stopped
+in 3 50 false
+in 2 50 false
+in 1 50 false
+in 0 50 false
+
+##### DIALOGS #####
+
+# first line
+# second line
+# first dialog background (the one at the far left top of the screen)
+
+dialog 1
+
+n Hilda
+fl If that mine get infected with monsters permanently,
+sl I have to move back to Alares.
+f true
+
+n Hilda
+fl I wonder what the monsters want...
+sl Anyway, I like to see them gone sooner than later.
+f true
+
+##### END #####
+end

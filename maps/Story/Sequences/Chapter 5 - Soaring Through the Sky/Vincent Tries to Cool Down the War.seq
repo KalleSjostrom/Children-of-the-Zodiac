@@ -1,0 +1,110 @@
+import file=main.var
+
+var althair=0
+var dure=1
+var vincent=2
+var logner=3
+var brejar=4
+
+actor name="Characters/Althair/AlthairExtras" pos=383;312;1
+actor name="Characters/Dure/DureExtras" pos=431;312;1
+actor name="Characters/Vincent/VincentExtras" pos=573;352;3
+actor name="Characters/Logner/LognerExtras" pos=382;387;1
+actor name="Characters/Brejar/BrejarExtras" pos=481;387;0
+
+info time="day" name="The Senate" music="No Music" fadeValue="0" musicVolume="0"
+
+text lines="Meanwhile at the Senate";"" pos=360;384
+ins type=fadeout timea=0 index=0 fadetime=0 kind=village
+ins type=fadein timea=1500 index=0 fadetime=2000 kind=text
+ins type=fadeout timea=meantime index=0 fadetime=2000 kind=text
+ins type=fadein timea=2000 index=0 fadetime=4000 kind=village
+
+ins timea=0 index=0 kind=screenzoom zoomin=true zoomtime=4000 usestaticpos=true pos=412;378
+
+ins timea=0 index=vincent kind=dist distance=30 direction=3 duration=600
+dialogsingle starttimea=300 duration=300 <= name="Vincent" text="The war we are fighting is pointless.";"There is no real enemy."
+ins timea=500 index=vincent kind=dist distance=30 direction=0 duration=600
+dialogsingle starttimea=300 duration=300 <= name="Vincent" text="Berca has promised to stop their rebel attacks as";"soon as we withdraw our forces from their land."
+ins timea=500 index=vincent kind=dist distance=60 direction=2 duration=1200
+dialogsingle starttimea=300 duration=300 <= name="Vincent" text="Zazo has never done anything besides mining."
+ins timea=1500 index=vincent kind=dist distance=30 direction=0 duration=600
+dialogsingle starttimea=300 duration=300 <= name="Vincent" text="Alares is yet to show any real sign of aggression."
+ins timea=500 index=vincent kind=stop direction=3
+dialogsingle starttimea=300 <= name="Vincent" text="All aggressive actions has been a response";"to the attacks we've made."
+ins timea=500 index=vincent kind=dist distance=30 direction=1 duration=600
+dialogsingle starttimea=300 duration=300 <= name="Vincent" text="Alares alone does not have the means to damage us.";""
+ins timea=500 index=vincent kind=stop direction=3
+dialogsingle starttimea=1000 <= name="Vincent" text="If we laid down our weapons, peace would follow.";""
+ins timea=500 index=althair kind=stop direction=2
+dialogsingle starttimea=250 duration=400 <= name="General Althair" text="What you speak of is not true.";""
+ins timea=300 index=dure kind=stop direction=3
+ins timea=50 index=logner kind=stop direction=0
+ins timea=30 index=brejar kind=stop direction=0
+ins timea=500 index=althair kind=dist distance=40 direction=3 duration=800
+ins timea=0 index=althair kind=queue distance=40 direction=2 duration=800
+ins timea=0 index=althair kind=queue direction=1
+ins timea=900 index=brejar kind=stop direction=3
+ins timea=100 index=logner kind=stop direction=3
+dialogpacket name=1 starttimea=0 duration=600
+dialog packetname=1 name="General Althair" text="IÕve got it from reliable sources that both";"Berca and Alares has been plotting to overrun us."
+dialog packetname=1 name="General Althair" text="This to gain control over our port and";"the areas surrounding Pensara."
+ins timea=800 index=althair kind=stop direction=3
+dialogsingle starttimea=150 <= name="General Althair" text="The unjust treaty between";"Alares and Zazo is sign of this."
+ins timea=250 index=vincent kind=emotion emotion=! show=true
+ins timea=0 index=vincent kind=dist distance=20 duration=200 direction=3
+dialogsingle starttimea=150 duration=500 <= name="Vincent" text="That treaty came into use as a result of our";"increasing weapon production!"
+ins timea=250 index=althair kind=stop direction=1
+ins timea=100 index=dure kind=stop direction=1
+ins timea=50 index=logner kind=stop direction=1
+ins timea=30 index=brejar kind=stop direction=1
+ins timea=550 index=vincent kind=emotion show=false
+ins timea=800 index=vincent kind=dist distance=30 direction=1 duration=600
+dialogsingle starttimea=300 duration=300 <= name="Vincent" text="It is not strange nor unjust to cease the export";"of iron in a situation like that."
+ins timea=500 index=vincent kind=stop direction=3
+dialogsingle starttimea=150 <= name="Vincent" text="It is the action of frightened nations.";""
+ins timea=500 index=dure kind=emotion emotion=... show=true
+ins timea=0 index=dure kind=stop direction=2
+ins timea=1000 index=dure kind=stop direction=1
+ins timea=150 index=dure kind=emotion show=false
+dialogpacket name=2 starttimea=0
+dialog packetname=2 name="Dure" text="Is it not you, Vincent,";"that has produced the weapons for this war?"
+dialog packetname=2 name="Dure" text="Is it not you,";"that pushed for an increased weapon production?"
+dialog packetname=2 name="Vincent" text="Yes, but I now wish to stop.";"" first=false
+ins timea=1000 index=vincent kind=dist distance=30 direction=3 duration=600
+dialogsingle starttimea=300 duration=300 <= name="Vincent" text="As you just said,";"I am the one who produces weapons."
+ins timea=600 index=vincent kind=stop direction=1
+dialogsingle starttimea=300 duration=300 <= name="Vincent" text="If we were to stop,";"I would be the one left with the greatest loss."
+ins timea=600 index=vincent kind=stop direction=3
+dialogsingle starttimea=300 duration=300 <= name="Vincent" text="I therefore have no motif for lying";"or trying to manipulate you."
+
+ins timea=400 index=logner kind=emotion emotion=... show=true
+ins timea=2000 index=logner kind=emotion show=false
+dialogsingle starttimea=0 duration=500 <= name="Logner" text="IÕve heard you have been meeting with your son."
+ins timea=400 index=brejar kind=stop direction=3
+ins timea=40 index=dure kind=stop direction=2
+ins timea=500 index=logner kind=stop direction=0
+dialogsingle starttimea=200 <= name="Logner" text="It has apparently made you weak."
+ins timea=300 index=vincent kind=dist distance=15 duration=150 direction=3
+ins timea=0 index=vincent kind=emotion emotion=! show=true
+dialogsingle starttimea=100 duration=300 <= name="Vincent" text="Throwing my son in jail hardly constitutes as ''meeting''."
+ins timea=200 index=dure kind=stop direction=1
+ins timea=40 index=brejar kind=stop direction=1
+ins timea=500 index=vincent kind=emotion show=false
+ins timea=700 index=vincent kind=stop direction=1
+dialogsingle starttimea=100 <= name="Vincent" text="Besides, my private life is not of your concern";"nor it is relevant in this case."
+ins timea=800 index=logner kind=stop direction=0
+dialogsingle starttimea=150 duration=500 <= name="Logner" text="Just like when your wife was alive..."
+ins timea=400 index=brejar kind=stop direction=3
+ins timea=40 index=dure kind=stop direction=2
+ins timea=800 index=logner kind=stop direction=1
+dialogsingle starttimea=150 <= name="Logner" text="Mushy, sensitive politicians";"do not have room in PensaraÕs great Senate."
+ins timea=400 index=althair kind=emotion emotion=! show=true
+ins timea=40 index=brejar kind=stop direction=0
+dialogsingle starttimea=0 duration=400 <= name="General Althair" text="Haha!"
+ins timea=300 index=brejar kind=stop direction=0
+ins timea=400 index=vincent kind=emotion emotion=... show=true
+
+ins type=fadeout timea=1000 index=0 fadetime=800 kind=music mode=kill
+
+ins timea=500 kind=endseq

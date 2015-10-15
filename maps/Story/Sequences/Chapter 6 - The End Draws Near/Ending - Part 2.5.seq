@@ -1,0 +1,65 @@
+import file=main.var
+
+info time="day" name="Berca" music="continue" fadeValue="0" musicVolume="0" status="2" delay="2000"
+
+var ingo=0
+var tilly=1
+var muhamder=2
+var rebel=3
+var omer=4
+var rebel2=5
+var ball=6
+
+actor name="Ingo"
+actor name="Tilly"
+actor name="Muhamder"
+actor name="Rebel 2"
+actor name="Omer"
+actor name="Characters/rebelgreen/rebelgreenExtras"
+actor name="Characters/ball/ballExtras3"
+actor name="Stuff/boulderPropExtras1" pos=548;714
+
+ins timea=0 kind=screen_center center=false
+
+ins timea=0 index=ingo kind=controll controll=true
+ins timea=0 index=tilly kind=controll controll=true
+ins timea=0 index=muhamder kind=controll controll=true
+ins timea=0 index=rebel kind=controll controll=true
+ins timea=0 index=omer kind=controll controll=true
+ins timea=0 index=rebel2 kind=controll controll=true
+ins timea=0 index=ball kind=controll controll=true
+
+ins timea=0 index=ingo kind=hide
+ins timea=0 index=tilly kind=hide
+ins timea=0 index=muhamder kind=hide
+ins timea=0 index=rebel kind=hide
+ins timea=0 index=omer kind=hide
+ins timea=0 index=rebel2 kind=hide
+ins timea=0 index=ball kind=hide
+
+ins timea=0 index=ingo kind=show movepos=200;745;0
+ins timea=0 index=tilly kind=show movepos=300;805;0
+ins timea=0 index=muhamder kind=show movepos=200;645;2
+ins timea=0 index=rebel kind=show movepos=200;1035;0
+ins timea=0 index=omer kind=show movepos=240;765;0
+ins timea=0 index=rebel2 kind=show movepos=135;805;0
+ins timea=0 index=ball kind=show movepos=215;744;0
+
+text lines="Berca is no longer under pensara's control.";"" pos=450;384 color=0 size=50 pos=450;384
+text lines="The children can once again playing soccer.";"" pos=450;384 color=0 size=50 pos=450;384
+
+ins type=fadein timea=500 index=0 fadetime=1000 kind=text
+ins timea=500 kind=screen_go acceleration=100000 distance=650 direction=3 duration=10000
+ins type=fadeout timea=5000 index=0 fadetime=1000 kind=text
+ins type=fadein timea=1500 index=1 fadetime=1000 kind=text
+ins timea=2500 kind=screen_stop
+
+ins type=fadeout timea=1500 index=1 fadetime=1000 kind=text
+
+ins timea=500 index=ingo kind=dist distance=50 duration=1000 direction=2 facedirection=0
+ins timea=2000 index=ingo kind=dist distance=50 duration=200 direction=0
+ins timea=200 index=ball kind=to movepos=275;644 duration=250
+ins timea=150 index=muhamder kind=dist distance=50 duration=250 direction=1 facedirection=2
+
+ins type=fadeout timea=700 kind=village fadetime=2000
+ins timea=2000 kind=endseq

@@ -1,0 +1,104 @@
+import file=main.var
+
+var kin=0
+var celis=1
+var zalzi=2
+
+actor name="Kin"
+actor name="Celis"
+actor name="Zalzi"
+
+show index=kin value=false
+show index=celis value=false
+show index=zalzi value=false
+
+info time="day" name="Crystal Room" music="No Music" fadeValue="0" musicVolume="0"
+
+load translucent="res/Story/Crystal Flare.png"
+load music="Crystal"
+
+ins timea=0 index=kin kind=show movepos=494;770
+ins timea=0 index=celis kind=show movepos=514;820
+ins timea=0 index=zalzi kind=show movepos=474;820
+
+ins index=kin timea=2000 kind=dist distance=150 duration=3000 direction=0
+ins index=celis timea=0 kind=dist distance=150 duration=3000 direction=0
+ins index=zalzi timea=0 kind=dist distance=150 duration=3000 direction=0
+
+ins index=celis timea=4000 kind=emotion emotion=... show=true
+ins index=kin timea=2000 kind=stop direction=2
+dialogsingle starttimea=150 duration=500 <= name="Kin" text="This must be the Crystal of Levitation."
+ins index=celis timea=400 kind=emotion show=false
+ins index=celis timea=1000 kind=dist distance=20 duration=800 direction=0
+dialogsingle starttimea=800 duration=200 <= name="Celis" text="Yes...";"It should be."
+
+ins index=kin timea=1000 kind=stop direction=0
+dialogsingle starttimea=1000 <= name="Kin" text="What now?";"We can't just take it with us, it's huge!"
+ins index=kin timea=1000 kind=stop direction=2
+ins index=celis timea=200 kind=emotion emotion=... show=true
+ins index=kin timea=2000 kind=stop direction=0
+dialogsingle starttimea=1000 duration=500 <= name="Kin" text="I'll go check!"
+ins index=celis timea=400 kind=emotion show=false
+
+ins index=kin timea=600 kind=dist distance=330 duration=7000 direction=0
+
+ins type=fadeout timea=0 index=0 fadetime=5000 kind=music mode=kill
+ins type=fadein timea=1500 index=1 fadetime=0 kind=music mode=play
+
+ins type=fadein timea=7200 index=0 kind=image scrollmode=normal imagetype=translucent fadetime=4000
+ins index=kin timea=400 kind=dist distance=10 duration=100 facedirection=0 direction=2
+ins index=kin timea=0 kind=emotion emotion=! show=true
+ins index=celis timea=200 kind=dist distance=25 duration=400 direction=0
+ins index=celis timea=0 kind=emotion emotion=! show=true
+
+ins timea=6000 kind=setfadeimage fadeimage=white
+ins type=fadeout timea=0 kind=village fadetime=5000 show=true
+
+load trigger="Sellie"
+ins index=0 timea=0 kind=trigger value=2
+load trigger="Earl"
+ins index=1 timea=0 kind=trigger value=2
+load trigger="Airship"
+ins index=2 timea=0 kind=trigger value=1
+load trigger="Zazonode"
+ins index=3 timea=0 kind=trigger value=3
+load trigger="DellnaChurch"
+ins index=4 timea=0 kind=trigger value=-1
+load trigger="Bella"
+ins index=5 timea=0 kind=trigger value=7
+load trigger="Elthea"
+ins index=6 timea=0 kind=trigger value=8
+load trigger="Farmer Jane"
+ins index=7 timea=0 kind=trigger value=3
+load trigger="Ghertrudd"
+ins index=8 timea=0 kind=trigger value=4
+load trigger="Marge"
+ins index=9 timea=0 kind=trigger value=3
+load trigger="Pavier"
+ins index=10 timea=0 kind=trigger value=3
+load trigger="Recruiter"
+ins index=11 timea=0 kind=trigger value=7
+load trigger="Uri"
+ins index=12 timea=0 kind=trigger value=6
+load trigger="Falk"
+ins index=13 timea=0 kind=trigger value=3
+load trigger="Onrod"
+ins index=14 timea=0 kind=trigger value=2
+load trigger="Hilda1"
+ins index=15 timea=0 kind=trigger value=4
+load trigger="Marcus"
+ins index=16 timea=0 kind=trigger value=6
+
+## UPDATE TO CARDSTORE 6 ##
+load trigger="alaresCardShop"
+ins index=17 timea=0 kind=trigger value=1
+load trigger="parasneCardShop"
+ins index=18 timea=0 kind=trigger value=2
+load trigger="pensaraCardShop"
+ins index=19 timea=0 kind=trigger value=2
+load trigger="bercaCardShop"
+ins index=20 timea=0 kind=trigger value=1
+
+ins type=fadeout timea=10000 index=1 fadetime=500 kind=music mode=kill
+ins index=celis timea=500 kind=emotion show=false
+ins timea=0 kind=endseq

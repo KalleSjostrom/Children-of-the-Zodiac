@@ -1,0 +1,62 @@
+name Menthu
+
+defense 416
+magicDefense 416
+agility 23
+evade 4
+hit 100
+attack 1483
+magic 1372
+support 1369
+hp 846100
+element 0
+
+image menthuattack 3
+armor 50 50
+preferences 100 0
+
+scale 5.3
+height -1.8
+depth -6
+middle 0
+
+attackSpec type=no name=change0 anim=(f=0,a=2000)--(f=1,a=3000,d=true) target=-1
+
+attackSpec {
+	type=mag
+	name=Wrath_of_Ophiuchus
+	power=0
+	onAll=true
+	anim=(f=1,a=1000,cm=2)--(f=1,a=4000,r=.0001,se=Monster/Menthu/transformfire)--(f=1,a=2000,c=m+Flame,pl=true)--(f=2,c=m+Flame,a=1500)--(f=2,c=m+Fire:-1.2;1.1;-6,a=500,cm=1)--(f=2,c=m+Fire:1.35;1.1;-6,a=500)--(f=2,c=m+Fire:-1.2;1.1;-6,a=500)--(f=2,c=m+Fire:1.35;1.1;-6,a=500)--(f=2,a=2000,h=true)--(f=2,a=30,exit=true,d=true)
+	effect=(DownTo=1)
+}
+
+attackSpec {
+	type=sup
+	name=Delta
+	power=0
+	anim=(f=1,s=true)--(f=1,s=true)--(f=1,s=true)--(f=1,s=true,h=true,d=true)
+	effect=(BoostMagDef=2;1)--(BoostDef=2;1)
+}
+
+attackSpec {
+	type=sup
+	name=Omega
+	power=0
+	anim=(f=1,s=true)--(f=1,s=true)--(f=1,s=true)--(f=1,s=true,h=true,d=true)
+	effect=(BoostMag=2;1)--(BoostOff=2;1)
+}
+
+run script=menthuattack
+
+cardPreference Death 0
+cardPreference Demolish 0
+cardPreference openwound 0
+
+dialog name="Menthu" text="I've had enough of this.";"Feel my wrath."
+end=begin
+dialog name="Menthu" text="Argh!"
+end=endEnemyDead
+dialog name="Menthu" text="Ha ha ha!"
+end=endPartyDead
+nextPlace="Elder of Dellna Saves the Day";""

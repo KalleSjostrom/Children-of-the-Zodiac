@@ -1,0 +1,32 @@
+# background, prefix name of both images day
+background Zazo_-_Teo's_House true
+
+inside
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1024 768
+start 489 517 0
+
+holeDoor switch Zazo 489 542 30 2 1 1560 356 2
+
+o 290 462 350 476
+o 156 135 273 730
+o 604 312 649 329
+o 640 397 723 446
+o 551 293 744 311
+o 82 63 914 292
+o 744 292 888 708
+o 400 293 463 333
+o 274 429 425 461
+o 539 293 550 459
+o 470 429 540 459
+o 652 379 667 393
+o 692 379 707 393
+o 652 447 667 462
+o 274 293 371 310
+o 357 462 415 478
+o 273 583 740 656
+o 489 293 538 311
+o 692 447 707 462
+
+end

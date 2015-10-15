@@ -1,0 +1,28 @@
+name Beastman
+
+defense 350
+magicDefense 301
+agility 25
+evade 5
+hit 92
+attack 1315
+magic 1214
+support 1037
+hp 6090
+element 2
+gold 3654
+experience 2436
+criticalChance 0
+
+diesound Beastman/dies
+image beastman 3
+armor 83 67
+preferences 60 40
+
+scale 6.1
+height -2
+depth -6
+middle 0
+
+attackSpec anim=(a=350,se=Monster/Beastmen/attack)--(f=1,a=500)--(f=2,h=true)
+attackSpec type=mag name=Hammer_of_Thor anim=(a=350,se=Monster/Beastmen/attack)--(f=1,a=500)--(f=2,h=true,cs=true,a=700,se=earthquake)

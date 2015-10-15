@@ -1,0 +1,55 @@
+# background, prefix name of both images day
+background Alares_-_Library true
+
+inside
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1024 768
+start 494 589 0
+
+o 330 645 490 710
+o 469 531 556 574
+o 430 366 596 411
+o 664 528 679 541
+o 727 264 788 280
+o 325 483 384 531
+o 740 281 774 300
+o 238 265 299 281
+o 904 265 927 548
+o 251 282 285 301
+o 696 488 903 691
+o 111 193 927 264
+o 122 487 329 690
+o 346 528 361 541
+o 159 364 382 410
+o 98 264 121 547
+o 549 263 570 277
+o 166 265 198 283
+o 481 264 542 280
+o 537 645 697 710
+o 496 280 530 299
+o 426 481 599 530
+o 602 264 634 282
+o 793 264 814 278
+o 641 479 865 493
+o 212 264 233 278
+o 701 263 722 277
+o 827 264 859 282
+o 305 263 326 277
+o 389 265 421 283
+o 641 483 700 531
+o 456 263 477 277
+o 644 364 867 410
+o 159 473 383 487
+
+villager Falk
+villager Ginis
+villager Onrod
+
+loot loot1 243 678 0 Book_of_Nature 1 1
+lootLine You found Book of Nature.
+lootLine (It is added to your Key Items.)
+
+holeDoor switch Alares 494 609 30 2 1 1317 533 2
+
+end

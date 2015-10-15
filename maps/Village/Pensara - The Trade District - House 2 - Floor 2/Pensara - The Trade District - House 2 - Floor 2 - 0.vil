@@ -1,0 +1,32 @@
+# background, prefix name of both images day
+background Pensara_-_The_Trade_District_-_House_2_-_Floor_2 true
+
+inside
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1024 768
+start 592 396 0
+
+holeDoor switch Pensara_-_The_Trade_District_-_House_2_-_Floor_1 592 450 30 2 0 592 530 2
+
+o 583 483 638 493
+o 363 473 398 499
+o 365 278 408 318
+o 627 436 642 493
+o 418 279 506 294
+o 531 281 558 296
+o 578 436 593 493
+o 414 473 428 479
+o 328 171 689 280
+o 363 429 514 473
+o 612 281 638 297
+o 317 279 364 668
+o 651 280 698 669
+
+o 362 613 668 660
+
+o 507 281 517 324
+o 507 370 518 504
+o 508 550 518 645
+
+end

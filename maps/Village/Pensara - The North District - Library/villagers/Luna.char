@@ -1,0 +1,26 @@
+image Luna
+start 520 465
+
+in 2 100 true
+
+dialog 1
+
+n Luna
+fl Hi and welcome to the Pensara library.
+sl Please make yourself comftable.
+f true
+
+n Luna
+fl Here you can learn everything 
+sl there is to know about the world.
+f true
+
+end
+
+
+
+
+
+
+
+

@@ -1,0 +1,85 @@
+image char/Pensarasoldier
+start 1060 995
+
+in 2 100 true
+
+dialog 1
+
+n Soldier
+fl My brother is stationed in Berca,
+sl wonder how he's doing.
+f true 
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

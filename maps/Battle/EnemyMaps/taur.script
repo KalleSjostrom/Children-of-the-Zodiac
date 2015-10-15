@@ -1,0 +1,20 @@
+newList 100-30
+attack Preparing
+attack Crush
+attack Bite
+attack Bite Earth_Claw
+attack Earth_Shake Bite
+attack Earth_Claw
+attack Preparing
+attack Crush
+attack Earth_Claw Wall
+attack Strengthen Bite
+attack Earth_Claw
+attack Bite Earth_Claw
+newList 30-0
+attackSingle Paralyzed
+attack Bite
+attack Earth_Claw
+attack Earth_Shake Strengthen
+attack Earth_Claw Bite
+attack Earth_Claw

@@ -1,0 +1,59 @@
+image GTboygreen	   
+	   
+start 1090 1700	   
+	   
+in 3 100 false	   
+in 2 100 false	   
+in 1 100 false	   
+in 0 100 false	   
+in 1 50 true	   
+in 2 100 false	   
+in 3 100 false	   
+in 0 100 false	   
+in 1 100 false	   
+in 0 50 true	   
+	   
+dialog 1	   
+	   
+n Flog	   
+fl Hi!	   
+sl My name is Flog.	   
+f true	   
+	   
+n Flog	   
+fl When I grow up I want to be a 	   
+sl scientist just like my father.	   
+f true	   
+	   
+n Flog	   
+fl I don't wanna play a bunch of silly games like	   
+sl all the other children. I wanna learn something.	   
+trigger Flog 2	   
+f true	   
+	   
+dialog 2	   
+	   
+n Flog	   
+fl The other kids, my age, are so immature,	   
+sl especially Eve.	   
+f true	   
+	   
+n Flog	   
+fl She's so annoying...	   
+sl all she wants to do is play hide 'n seek.	   
+f true	   
+	   
+n Flog	   
+fl That's such a silly game.	   
+sl I hate her!!!	   
+trigger Flog 1	   
+f true	   
+
+dialog 3	   
+	   
+n Flog	   
+fl What is everybody fuzzed up for?	   
+sl end	   
+f true	 
+	   
+end	 

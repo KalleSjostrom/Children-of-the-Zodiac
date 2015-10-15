@@ -1,0 +1,13 @@
+image Polandera
+start 600 600 
+
+in 2 100 true
+
+dialog 1
+
+n Polandera
+fl Hard times calls for drastic measures.
+sl Many have turned to a life of crime.
+f true
+
+end

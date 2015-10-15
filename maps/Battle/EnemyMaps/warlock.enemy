@@ -1,0 +1,29 @@
+name Lich
+
+defense 331
+magicDefense 406
+agility 23
+evade 4
+hit 90
+attack 1978
+magic 2129
+support 2402
+hp 4824
+element 3
+gold 5494
+experience 3329
+criticalChance 0
+
+diesound Necromancer/dies
+image lich 3
+armor 67 90
+preferences 0 75
+
+scale 4.2
+height -2
+depth -6
+middle 0
+
+attackSpec type=mag name=Warlock's_Curse p=.5 anim=(a=900,se=Monster/Necromancer/attack)--(f=1,h=true)--(f=2)
+attackSpec type=mag element=wind name=Wind_Flame power=.7 onAll=true p=.5 anim=(a=900,se=Monster/Necromancer/attack)--(f=1,h=true)--(f=2)
+attackSpec type=sup name=Heal power=1 onAll=true anim=(f=3,c=s+Cure,a=1000)

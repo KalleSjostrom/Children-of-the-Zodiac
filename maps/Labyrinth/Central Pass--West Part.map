@@ -1,0 +1,60 @@
+mapSize -0.5 0.5 1
+
+size 153
+
+light0 position=0;0;0;1 ambient=.8;.8;.8;1 specular=0;0;0;1 diffuse=.8;.8;.8;1 attenuation=1;0.01;0.015
+light1 position=0;0;0;0 ambient=.2;.2;.2;1 specular=0;0;0;1 diffuse=.2;.2;.2;1
+material ambient=.4;.4;.4;1 specular=0;0;0;1 diffuse=.7;.7;.7;1
+
+floorTex southpassfloor.jpg
+wallTex southpasswall.png
+wallTex southpassdoor0.png
+roofTex southpassroof.jpg
+
+normal floor 0 1
+normal wall 1 3
+normal roof 3 4
+
+mapPos 0 1
+
+dir 37 2 38
+dir 38 2 39
+dir 39 1 55
+dir 55 1 71
+dir 71 1 87
+dir 71 2 72
+dir 72 2 73
+dir 73 2 74
+dir 74 2 75
+dir 75 1 91
+dir 87 1 103
+dir 91 1 107
+dir 100 1 116
+dir 100 2 101
+dir 101 2 102
+dir 102 2 103
+dir 107 1 123
+dir 107 2 108
+dir 108 2 109
+dir 109 2 110
+dir 110 2 111
+dir 116 1 132
+dir 123 1 139
+dir 132 1 148
+dir 137 2 138
+dir 138 2 139
+dir 148 1 164
+dir 164 1 180
+dir 164 2 165
+dir 165 2 166
+dir 166 2 167
+dir 180 1 196
+
+mapEnd
+
+wall 2 111 2
+inv triggerDoor 111 2 dontopen Central_Pass_-_New_Tutorial pass_to_zazo-pos1
+inv hinderDoor 196 1 2 Walls/southpassdoor central_pass--central_part-mark0
+inv button 37 0 7 Images/lever Central_Pass--West_Part.maphinderDoor196 Central_Pass--Central_Part.maphinderDoor4
+
+inv chest 137 0 2 Images/chest 0 70

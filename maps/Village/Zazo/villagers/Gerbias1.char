@@ -1,0 +1,18 @@
+image Gerbias
+
+start 895 230
+
+in 2 180 true
+
+dialog 1
+
+run Meeting_with_Gerbias continue 1
+
+dialog 2
+
+n Gerbias
+fl I wonder if the man in black had something
+sl to do with the sudden swarm of monsters.
+f true
+
+end

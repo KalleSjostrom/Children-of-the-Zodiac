@@ -1,0 +1,13 @@
+image char/Pensarasoldier
+start 300 1090
+
+in 2 100 true
+
+dialog 1
+
+n Soldier
+fl I'm sick and tiered of listening to these people.
+sl end
+f true
+
+end

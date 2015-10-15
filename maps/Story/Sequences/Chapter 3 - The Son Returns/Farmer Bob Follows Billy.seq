@@ -1,0 +1,34 @@
+import file=main.var
+
+var bob=0
+var kin=1
+var celis=2
+var borealis=3
+
+info time="day" name="Pensara - The North District" music="continue" fadeValue="1" musicVolume="1"
+
+actor name="Farmer Bob"
+actor name="Kin" pos=780;1970;0
+actor name="Celis" pos=780;2000;0
+actor name="Borealis" pos=780;1940;0
+
+ins timea=0 index=bob kind=controll controll=true
+
+dialogsingle starttimea=500 <= name="Farmer Bob" text="You saw my son in the trade district?";"I have to run after him."
+ins timea=500 index=bob kind=dist distance=80 direction=3 duration=600
+ins timea=0 index=bob kind=queue distance=1000 direction=2 duration=3000
+
+ins timea=700 index=kin kind=stop direction=3
+#ins timea=300 index=borealis kind=dist distance=30 direction=1 duration=500
+ins timea=300 index=celis kind=stop direction=3
+ins timea=0 index=borealis kind=queue direction=3
+
+ins timea=3450 index=bob kind=hide
+ins timea=0 index=bob kind=remove
+
+load trigger="Farmer Bob"
+load trigger="Billy"
+ins index=0 timea=0 kind=trigger value=4
+ins index=1 timea=0 kind=trigger value=3
+
+ins timea=200 kind=end

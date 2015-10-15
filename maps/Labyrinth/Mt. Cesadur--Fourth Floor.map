@@ -1,0 +1,111 @@
+mapSize -0.5 0.5 1
+
+size 338
+
+fog red=.4 green=.3 blue=0 alpha=.01 density=0.01
+
+light0 position=0;0;0;1 ambient=1;1;1;1 specular=0;0;0;1 diffuse=1;1;1;1 attenuation=1;0.02;0.03
+light1 position=0;0;0;0 ambient=.2;.2;.2;.2 specular=0;0;0;1 diffuse=.2;.2;.2;.2
+material ambient=.7;.7;.7;1 specular=0;0;0;1 diffuse=.7;.7;.7;1
+
+floorTex earthcavefloor.jpg
+floorTex earthcaveflooropen.jpg
+wallTex earthcavewall.png
+wallTex earthcavedoor.png
+roofTex earthcaveroof.jpg
+roofTex earthcaveroofopen.jpg
+
+normal floor 0 2
+normal wall 2 4
+normal roof 4 6
+
+mapPos 1 1
+
+dir 10 1 26
+dir 10 2 11
+dir 11 2 12
+dir 12 2 13
+dir 13 2 14
+dir 14 1 30
+dir 23 2 24
+dir 24 2 25
+dir 25 2 26
+dir 26 1 42
+dir 30 1 46
+dir 42 1 58
+dir 46 1 62
+dir 55 1 71
+dir 57 1 73
+dir 57 2 58
+dir 60 1 76
+dir 60 2 61
+dir 61 2 62
+dir 71 1 87
+dir 73 1 89
+dir 76 1 92
+dir 87 1 103
+dir 89 1 105
+dir 92 2 93
+dir 93 2 94
+dir 103 2 104
+dir 104 2 105
+dir 105 1 121
+dir 121 2 122
+dir 122 2 123
+dir 123 2 124
+dir 124 2 125
+dir 125 2 126
+dir 3 1 19
+dir 3 2 4
+dir 4 2 5
+dir 19 1 35
+dir 35 1 51
+dir 51 1 67
+dir 67 1 83
+dir 67 2 68
+dir 68 2 69
+dir 69 1 85
+dir 83 1 99
+dir 85 1 101
+dir 99 1 115
+dir 115 1 131
+dir 131 2 132
+dir 132 2 133
+dir 133 2 134
+dir 134 1 150
+dir 150 1 166
+dir 150 2 151
+dir 151 2 152
+dir 152 2 153
+dir 153 1 169
+dir 155 1 171
+dir 157 1 173
+dir 166 1 182
+dir 169 1 185
+dir 171 1 187
+dir 173 1 189
+dir 180 2 181
+dir 181 2 182
+dir 185 2 186
+dir 186 2 187
+dir 187 2 188
+dir 188 2 189
+
+mapEnd
+
+floor 1 94
+inv ladderDoor 94 2 dontopen Images/ladderdown.png false mt._cesadur--third_floor-mark3
+floor 1 126
+inv ladderDoor 126 2 dontopen Images/ladderdown.png false mt._cesadur--third_floor-mark4
+floor 1 180
+inv ladderDoor 180 0 dontopen Images/ladderdown.png false mt._cesadur--third_floor-mark5
+floor 1 5
+inv ladderDoor 5 2 dontopen Images/ladderdown.png false mt._cesadur--third_floor-mark6
+
+roof 5 155
+inv ladderDoor 155 3 dontopen Images/ladderup.png true Menthu_is_Disappointed mt._cesadur--mountain_top-mark0
+
+inv chest 157 3 1 Images/stub.png 0 100
+inv chest 23 0 1 Images/stub.png 0 100
+
+end

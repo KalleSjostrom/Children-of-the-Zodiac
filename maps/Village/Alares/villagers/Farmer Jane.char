@@ -1,0 +1,61 @@
+image GTgirlfarm
+
+start 1575 1200
+
+in 2 100 true
+
+dialog 1
+
+n Farmer Jane
+fl Do you want to buy some bread?
+sl Only 10 gold.
+f true
+
+q 10
+alt Sure!
+alt No,_thank_you.
+alt _
+alt _
+price 10 0 0 0
+f true
+
+*11
+n Farmer Jane
+fl Oh, thank you!
+sl end
+f true
+
+n _
+fl 25 % of your hp has been restored.
+sl end
+take gold 10
+gift .25 4
+f false
+
+*12
+n Farmer Jane
+fl That's too bad...
+sl end
+f true
+
+*15
+n Farmer Jane
+fl You don't even have 10 gold!
+sl How poor are you!
+f true
+
+dialog 2
+
+n Farmer Jane
+fl ...
+sl end
+f true
+
+dialog 3
+
+n Farmer Jane
+fl Those poor Zazonians, first the mine incident
+sl now Pensara occupies
+f true
+
+end

@@ -1,0 +1,43 @@
+# background, prefix name of both images day
+background Pensara_-_The_Trade_District_-_House_2_-_Floor_1 true
+
+inside
+
+# start Player xpos ypos angle, Background xpos ypos
+back 1024 768
+start0 465 550 0
+start1 592 530 2
+
+holeDoor switch Pensara_-_The_Trade_District 465 570 30 2 1 306 342 2
+holeDoor house Pensara_-_The_Trade_District_-_House_2_-_Floor_2 592 520 25 0 0
+
+o 631 527 705 652
+
+o 298 202 741 279
+o 375 488 391 495
+o 667 301 694 376
+o 578 279 697 301
+o 325 448 456 487
+o 506 527 698 550
+o 355 487 412 526
+o 517 511 565 527
+o 313 279 324 651
+o 504 600 697 644
+o 525 551 580 563
+o 519 364 692 401
+o 660 552 678 561
+o 351 327 439 385
+o 643 509 695 527
+o 580 550 593 562
+o 691 279 702 651
+o 632 551 643 575
+o 325 599 458 639
+
+o 507 364 518 441
+o 506 490 517 527
+o 446 488 456 512
+o 445 560 456 620
+
+villager Elviri
+
+end

@@ -1,0 +1,27 @@
+name Stitchman
+
+defense 72
+magicDefense 69
+agility 22
+evade 0
+hit 95
+attack 344
+magic 321
+support 182
+hp 1882
+element 0
+gold 1129
+experience 752
+criticalChance 5
+
+diesound Stitchman/dies
+image stitchman 3
+armor 8 7
+preferences 100
+
+scale 7
+height -2
+depth -5.5
+middle 0
+
+attackSpec anim=(f=1)--(f=1,a=150,se=Monster/Stitchman/attack)--(f=2,h=true)

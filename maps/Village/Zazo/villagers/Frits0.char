@@ -1,0 +1,103 @@
+image Frits
+
+start 1848 482
+
+in 0 180 true
+
+dialog 1
+
+n Frits
+fl ...
+sl This disaster remind me of my fathers death.
+f true
+
+n Frits
+fl He died one year ago when a wall in the mine collapsed.
+sl end
+f true
+
+n Frits
+fl I really hope none of the miners are dead.
+sl ...
+trigger Frits0 2
+f true
+
+dialog 2
+
+n Frits
+fl If you can count some things in town and translate these
+sl numbers into letters they will spell my fathers name.
+f true
+
+n Frits
+fl Wanna try?
+sl It might be difficult.
+f true
+
+q 10
+alt Yes
+alt No
+alt _
+alt _
+f true
+
+*11
+
+n Frits
+fl The things are windows, children and chimneys.
+sl What's the name of my father?
+f true
+
+q 20
+alt Ted
+alt Red
+alt Seb
+alt Geb
+f true
+
+*21
+n Frits
+fl No no no!
+sl Sorry.
+f true
+
+*22
+n Frits
+fl No no no!
+sl Sorry.
+f true
+
+*23
+#Right anser is Seb. You win a Cure 2
+n Frits
+fl Right you are!
+sl I'm impressed, please accept this!
+trigger Frits0 3
+f true
+
+n _
+fl You got a card!
+sl end
+gift cards.support.Cure 2 2 false
+f true
+
+*24
+n Frits
+fl No no no!
+sl Sorry.
+f true
+
+*12
+n Frits
+fl Alright then...
+sl See you later.
+f true
+
+dialog 3
+
+n Frits
+fl I miss Seb...
+sl end
+f true
+
+end

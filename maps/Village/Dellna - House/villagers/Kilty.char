@@ -1,0 +1,112 @@
+image Kilty	   
+start 915 330	   
+	   
+in 0 40 false	   
+in 0    300 true	   
+in 3 20 false	   
+in 3    300 true	   
+in 2 10 false	   
+in 1 65 false	   
+in 1    300 true	   
+in 3 45 false	   
+in 2 30 false	   
+	   
+dialog 1	   
+	   
+n Kilty	   
+fl I would really like to have some more friends around here.	   
+sl Maybe I'm move away from this village when I grow up.	   
+f true	   
+	   
+n Kilty	   
+fl I've heard of a beautiful village called Alares, 	   
+sl where the flowers are blooming.	   
+f true	   
+	   
+n Kilty	   
+fl There you can eat apples directly from the trees. 	   
+sl Yeah, that's where I want to live... 	   
+f true	   
+	   
+n Kilty	   
+fl Or at least I want to see one of those flowers	   
+sl from that continent...	   
+f true	   
+	   
+n Kilty	   
+fl I've heard that they're blooming around the sea shore.	   
+sl end	   
+trigger Home_of_Celisflower 0	   
+trigger Kilty 2	   
+f true	   
+	   
+dialog 2	   
+	   
+check Kilty 3 Lovely_Flower	   
+	   
+n Kilty	   
+fl If only I had a flower from the green continent...	   
+sl I've heard that they're blooming around the sea shore.	   
+f true	   
+	   
+dialog 3	   
+	   
+n Kilty	   
+fl If only I had a flower from the green continent...	   
+sl I've heard that they're blooming around the sea shore.	   
+f true	   
+	   
+q 10	   
+alt Give_her_the_flower	   
+alt Keep_it	   
+alt _	   
+alt _	   
+f true	   
+	   
+*11	   
+n Kilty	   
+fl A flower? For me?	   
+sl Thank you!	   
+f true	   
+	   
+n Kilty	   
+fl I'm gonna put this next to my snow digging 	   
+sl trophies on my bookshelf.	   
+f true	   
+	   
+n Kilty	   
+fl I want to give you this.	   
+sl Maybe it will come in handy.	   
+f true	   
+	   
+n _
+fl You got a card!	   
+fl You gave away the key item "Lovely Flower".   
+trigger Kilty 5
+gift cards.offense.CrushingSaber 2 3	   
+take Lovely_Flower
+f true	   
+	   
+*12	   
+n Kilty	   
+fl ...	   
+sl end	   
+f true	   
+	   
+dialog 4	   
+	   
+n Kilty	   
+fl There are no words...	   
+sl The whole village grieves. 	     
+f true	   
+	   
+dialog 5	   
+	   
+check Kilty 4 s.Gullie=2	   
+	   
+n Kilty	   
+fl Thanks again for the flower!	   
+sl end	   
+f true	   
+	   
+end	 

@@ -1,0 +1,68 @@
+image Pretto	   
+start 975 360	   
+	   
+in 3 220 false	   
+in 0 30 false	   
+in 0 100 true	   
+in 1 25 false	   
+in 0 100 true	   
+in 1 45 false	   
+in 0 100 true	   
+in 1 75 false	   
+in 0 100 true	   
+in 1 75 false	   
+in 2 30 false	   
+in 3 25 true	   
+in 0 25 true	   
+in 2 25 true	   
+in 3 100 true	   
+	   
+dialog 1	   
+	   
+# Walking around in the center	   
+	   
+n Pretto	   
+fl My brother Marc loves to travel. 
+sl end
+f true
+	   
+dialog 2	   
+	   
+n Pretto	   
+fl My brother Marc loves to travel. Please tell him 	   
+sl that there is a boat leaving this afternoon. 	   
+f true	   
+	   
+n Pretto	   
+fl I think the destination was the pyramids.	   
+sl end
+trigger Marc 8	   
+f true
+
+dialog 3
+
+n Pretto
+fl Oh, Marc is going then... 
+sl And I must cover for him again.
+f true
+
+n Pretto
+fl I'm still gonna miss him...
+sl end
+f true
+
+n Pretto
+fl Well, anyway...
+sl You did me a favor, so here you go.
+trigger Pretto 4
+gift cards.offense.MagicalBlow 2 3 false
+f true
+
+dialog 4
+
+n Pretto
+fl I'm gonna miss him.
+sl end
+f true
+	   
+end	 

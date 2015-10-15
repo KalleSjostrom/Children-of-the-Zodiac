@@ -1,0 +1,221 @@
+import file=main.var
+
+var sailor=0
+var sailorr=1
+var sailorrr=2
+var cap=3
+var dexter=4
+var zalzi=5
+var ship=6
+var bridge=7
+var mast=8
+var plutt=9
+var kin=10
+var celis=11
+var borealis=12
+
+pos name="Background" pos=900;930
+
+info time="day" name="Parasne" music="Parasne" fadeValue="0" musicVolume="0"
+
+load translucent="res/Texts/Parasne.png"
+load music="Parasne"
+
+actor name="Sailor"
+actor name="SSailor"
+actor name="SSSailor"
+actor name="ShipCaptain"
+actor name="Dexter"
+actor name="Characters/Zalzi/ZalziExtras" pos=1774;1525
+actor name="Stuff/ShipPropExtras1" pos=1340;1715
+actor name="Stuff/bridgePropExtras1" pos=1520;2235
+actor name="Stuff/mastPropExtras1" pos=1340;1715
+actor name="Stuff/pluttPropExtras1" pos=1573;2237
+actor name="Kin"
+actor name="Celis"
+actor name="Borealis"
+
+ins timea=0 index=dexter kind=controll controll=true
+ins timea=0 index=sailor kind=controll controll=true
+ins timea=0 index=sailorr kind=controll controll=true
+ins timea=0 index=sailorrr kind=controll controll=true
+ins timea=0 index=cap kind=controll controll=true
+ins timea=0 index=dexter kind=stop direction=0
+
+ins timea=0 index=sailorr kind=to movepos=1515;2050 duration=2
+ins timea=0 index=sailorrr kind=to movepos=1370;2050 duration=2
+ins timea=0 index=cap kind=to movepos=1445;2385 duration=0
+
+show index=kin value=false
+show index=celis value=false
+show index=borealis value=false
+
+ins kind=screen_center center=false
+
+ins timea=0 index=ship kind=addspritetobottomlayer
+ins timea=0 index=bridge kind=addspritetobottomlayer
+ins timea=0 index=mast kind=addspritetobottomlayer
+ins timea=0 index=plutt kind=addspritetotoplayer
+/*
+ins type=fadein timea=2000 kind=image fadetime=4000 scrollmode=normal imagetype=translucent
+ins type=fadeout timea=6000 kind=image fadetime=2000 scrollmode=normal imagetype=translucent
+*/
+ins timea=0 index=kin kind=show movepos=1525;2320
+ins timea=0 index=borealis kind=show movepos=1515;2160
+ins timea=0 index=celis kind=show movepos=1360;2265
+
+ins timea=1000 index=celis kind=emotion emotion=... show=true
+
+ins timea=0 index=kin kind=dist distance=900 duration=15000 direction=0
+ins timea=0 index=celis kind=dist distance=900 duration=15000 direction=0
+ins timea=0 index=borealis kind=dist distance=900 duration=15000 direction=0
+ins timea=0 index=bridge kind=dist distance=900 duration=15000 direction=0
+ins timea=0 index=ship kind=dist distance=900 duration=15000 direction=0
+ins timea=0 index=mast kind=dist distance=900 duration=15000 direction=0
+ins timea=0 index=plutt kind=dist distance=900 duration=15000 direction=0
+ins timea=0 index=sailor kind=dist distance=900 duration=15000 direction=0
+ins timea=0 index=sailorr kind=dist distance=900 duration=15000 direction=0
+ins timea=0 index=sailorrr kind=dist distance=900 duration=15000 direction=0
+ins timea=0 index=cap kind=dist distance=900 duration=15000 direction=0
+
+ins timea=0 index=kin kind=stop direction=2
+ins timea=0 index=celis kind=stop direction=3
+ins timea=0 index=borealis kind=stop direction=1
+ins timea=0 index=sailor kind=stop direction=1
+ins timea=0 index=sailorr kind=stop direction=2
+ins timea=0 index=sailorrr kind=stop direction=2
+ins timea=0 index=cap kind=stop direction=0
+
+ins timea=11000 index=kin kind=deaccs
+ins timea=0 index=celis kind=deaccs
+ins timea=0 index=borealis kind=deaccs
+ins timea=0 index=bridge kind=deaccs
+ins timea=0 index=ship kind=deaccs
+ins timea=0 index=plutt kind=deaccs
+ins timea=0 index=mast kind=deaccs
+ins timea=0 index=sailor kind=deaccs
+ins timea=0 index=sailorr kind=deaccs
+ins timea=0 index=sailorrr kind=deaccs
+ins timea=0 index=cap kind=deaccs
+
+ins timea=10000 index=sailor kind=dist distance=5 duration=200 direction=0
+ins timea=0 index=kin kind=screen_center center=true
+
+ins type=fadeout timea=250 index=0 fadetime=500 kind=music mode=pause
+ins type=fadein timea=500 index=1 fadetime=100 kind=music mode=play
+
+dialogsingle starttimea=0 duration=250 <= name="Sailor" text="Mind givin' me a hand with 'is?"
+
+ins timea=150 index=borealis kind=stop direction=2
+ins timea=500 index=borealis kind=dist distance=20 duration=300 direction=2
+dialogsingle starttimea=100 duration=100 <= name="Borealis" text="Sure!"
+#ins timea=350 index=celis kind=stop direction=3
+
+ins timea=500 index=borealis kind=dist distance=25 duration=2500 direction=1
+ins timea=0 index=bridge kind=dist distance=25 duration=2500 direction=1
+ins timea=0 index=sailor kind=dist distance=25 duration=2500 direction=1
+
+ins timea=3000 index=sailor kind=stop direction=0
+dialogsingle starttimea=200 duration=200 <= name="Sailor" text="Thanks!"
+ins timea=300 index=borealis kind=stop direction=2
+ins timea=100 index=celis kind=stop direction=1
+ins timea=1000 index=celis kind=emotion emotion=... show=false
+ins timea=100 index=celis kind=dist distance=85 duration=1500 direction=1
+dialogsingle starttimea=1200 duration=500 <= name="Celis" text="Thank you!"
+ins timea=200 index=sailor kind=stop direction=3
+ins timea=400 index=sailor kind=dist distance=15 duration=200 direction=3
+dialogsingle starttimea=200 duration=200 <= name="Sailor" text="You're welcome!"
+ins timea=1000 index=borealis kind=dist distance=25 duration=800 direction=2
+ins timea=0 index=borealis kind=queue distance=150 duration=2000 direction=1
+ins timea=0 index=borealis kind=queue distance=75 duration=3000 direction=0
+
+ins timea=1000 index=sailor kind=dist distance=60 duration=1000 direction=0
+ins timea=0 index=sailor kind=queue distance=0 duration=0 direction=2
+
+ins timea=500 index=celis kind=dist distance=80 duration=1000 direction=1
+ins timea=0 index=celis kind=queue direction=2
+ins timea=2500 index=celis kind=dist distance=15 duration=500 direction=2
+
+ins timea=1000 index=kin kind=emotion emotion=... show=true
+ins timea=2500 index=celis kind=dist distance=70 duration=800 direction=0
+ins timea=0 index=celis kind=queue distance=160 duration=2000 direction=1
+ins timea=0 index=celis kind=queue distance=50 duration=1200 direction=0
+ins timea=500 index=kin kind=emotion show=false
+
+ins timea=2000 index=kin kind=dist distance=110 duration=2000 direction=0
+ins timea=0 index=kin kind=queue distance=140 duration=2000 direction=1
+ins timea=0 index=kin kind=queue distance=10 duration=1000 direction=0
+
+ins timea=0 index=mast kind=addspritetotoplayer
+
+dialogsingle starttimea=2500 <= name="Borealis" text="So, this is Paranse."
+ins timea=2000 index=borealis kind=stop direction=2
+dialogpacket name=1 starttimea=250
+dialog packetname=1 name="Borealis" text="The famous city of Pensara lies just through the forest."
+dialog packetname=1 name="Borealis" text="Should we just head through the forest";"into the city area?"
+
+ins timea=100 index=sailor kind=dist distance=30 duration=800 direction=2
+ins timea=0 index=sailor kind=queue distance=50 duration=1400 direction=1
+
+#ins timea=200 index=kin kind=emotion emotion=... show=true
+ins timea=400 index=celis kind=dist distance=5 duration=400 direction=0
+dialogsingle starttimea=50 duration=200 <= name="Celis" text="Yes, we must go see if we can find this Lecca."
+
+ins timea=200 index=kin kind=emotion show=false
+dialogsingle starttimea=400 <= name="Borealis" text="Then, let us go."
+
+ins type=fadeout timea=100 index=1 fadetime=500 kind=music mode=pause
+ins timea=0 index=zalzi kind=dist distance=90 duration=360 direction=3
+ins timea=0 index=zalzi kind=queue distance=280 duration=1100 direction=0
+ins timea=0 index=zalzi kind=queue distance=45 duration=180 direction=1
+ins timea=0 index=zalzi kind=queue distance=210 duration=800 direction=0
+ins timea=0 index=zalzi kind=queue distance=50 duration=200 direction=3
+ins timea=0 index=zalzi kind=queue distance=500 duration=2000 direction=0
+
+ins timea=200 index=borealis kind=dist distance=35 duration=2000 direction=0
+ins timea=120 index=celis kind=dist distance=25 duration=2000 direction=0
+ins timea=100 index=kin kind=dist distance=25 duration=2000 direction=0
+
+ins timea=1100 index=celis kind=tor movepos=-18;-18 duration=200
+ins timea=50 index=celis kind=emotion emotion=! show=true
+ins timea=20 index=borealis kind=emotion emotion=! show=true
+ins timea=0 index=borealis kind=dist distance=25 duration=300 direction=0
+dialogsingle starttimea=0 duration=200 <= name="Borealis" text="Hey! Whacha doin'!"
+ins timea=100 index=kin kind=emotion emotion=! show=true
+
+dialogsingle starttimea=200 duration=350 <= name="Celis" text="Oh, she took our money!!"
+ins timea=300 index=borealis kind=stop direction=2
+
+ins timea=400 index=kin kind=dist distance=10 duration=200 direction=0
+dialogsingle starttimea=150 duration=300 <= name="Kin" text="What!?"
+ins timea=250 index=celis kind=stop direction=2
+ins timea=400 index=kin kind=dist distance=40 duration=800 direction=1
+ins timea=0 index=kin kind=queue direction=0
+dialogsingle starttimea=400 duration=600 <= name="Kin" text="That's just like this place, only thieves and liars!"
+
+ins timea=200 index=borealis kind=emotion emotion=? show=true
+ins timea=400 index=borealis kind=dist distance=5 duration=1000 direction=2
+dialogsingle starttimea=500 duration=500 <= name="Borealis" text="What do you know?";"It's not that you have been here before. Right, Kin?"
+ins timea=400 index=celis kind=emotion emotion=? show=true
+ins timea=200 index=kin kind=dist distance=150 duration=2500 direction=0
+dialogsingle starttimea=250 duration=1250 <= name="Kin" text="Not now, Borealis!";"We've just been robbed! We have to follow her!"
+ins timea=800 index=borealis kind=tor movepos=-20;-20 duration=200 facedirection=1
+ins timea=0 index=borealis kind=queue direction=0
+ins timea=400 index=celis kind=dist distance=50 duration=1000 direction=1
+ins timea=0 index=celis kind=queue direction=0
+ins timea=40 index=celis kind=emotion show=false
+ins timea=500 index=borealis kind=emotion show=false
+ins timea=50 index=kin kind=emotion show=false
+
+load trigger="Sellie"
+ins index=0 timea=0 kind=trigger value=1
+load trigger="Parasne"
+ins index=1 timea=0 kind=trigger value=1
+load trigger="The Ship Cabin"
+ins index=2 timea=0 kind=trigger value=1
+load trigger="The Port of Alares"
+ins index=3 timea=0 kind=trigger value=0
+
+ins timea=0 index=dexter kind=controll controll=false
+
+ins timea=200 kind=end

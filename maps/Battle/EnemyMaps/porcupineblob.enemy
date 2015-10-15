@@ -1,0 +1,28 @@
+name Porcupine_Blob
+
+defense 108
+magicDefense 136
+agility 18
+evade 0
+hit 90
+attack 462
+magic 426
+support 300
+hp 2286
+element 0
+gold 1371
+experience 914
+criticalChance 0
+
+diesound Blob/dies
+image porcupineBlob 3
+armor 0 0
+preferences 50 50
+
+scale 4.5
+height -2
+depth -6
+middle -0.25
+
+attackSpec anim=(a=200)--(f=1,a=290)--(f=2,h=true,se=Monster/Blob/attack)
+attackSpec type=mag name=Piercing_Stare anim=(a=200)--(f=1,a=290)--(a=1500,f=2,h=true,c=m+SacredBeam:-.22f;.02;-6)
