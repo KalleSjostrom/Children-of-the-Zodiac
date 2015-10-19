@@ -37,7 +37,7 @@ import sound.SoundPlayer;
  * The graphics is all ready double buffered on a higher level 
  * so subclasses does not need to consider this. 
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 17 Feb 2008
  */
 public abstract class AbstractPage extends SubGameMode {

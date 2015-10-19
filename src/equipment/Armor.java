@@ -15,7 +15,7 @@ import info.Values;
  * The special slot is the way to execute any special skills that may 
  * be equipped on the current armor.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 24 Jan 2008
  */
 public class Armor extends AbstractEquipment {

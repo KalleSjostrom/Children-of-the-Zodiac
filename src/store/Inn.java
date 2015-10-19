@@ -55,7 +55,7 @@ import cards.support.Resurrect;
  * sleep until morning or just take a nap which will cause the player
  * to wake up in the middle of the night.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 13 May 2008
  */
 public class Inn extends AbstractStore {

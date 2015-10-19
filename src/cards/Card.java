@@ -30,7 +30,7 @@ import character.Enemy;
  * This class extends the abstract card with the additional functions of
  * sorting and damage calculating when attacking.
  * 
- * @author 		Kalle Sj�str�m 
+ * @author 		Kalle Sjöström 
  * @version 	0.7.0 - 11 Nov 2008
  */
 public abstract class Card extends AbstractCard {

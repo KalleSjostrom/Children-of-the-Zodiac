@@ -24,7 +24,7 @@ import villages.VillageLoader;
  * where this inventory resides, the Database class is called to find out 
  * whether the chest has been opened or not.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 13 Sep 2008
  */
 public class HinderDoor extends AbstractDoor {

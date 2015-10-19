@@ -15,7 +15,7 @@ import sprite.Sprite;
  * This class animates the objects in the game. These objects are, 
  * for example, the fountain in the grass village. 
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 13 May 2008
  */
 public class AnimatedObjects extends Sprite {

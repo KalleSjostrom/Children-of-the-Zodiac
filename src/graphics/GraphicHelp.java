@@ -20,7 +20,7 @@ import java.awt.image.WritableRaster;
  * This class contains some static methods for drawing and handling
  * images and graphics.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 27 Jan 2008
  */
 public class GraphicHelp {

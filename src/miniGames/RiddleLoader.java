@@ -21,7 +21,7 @@ import villages.utils.DialogSequence;
 /**
  * This class loads the information and images used in the riddle.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 25 Sep 2008
  */
 public class RiddleLoader extends AbstractMapLoader {

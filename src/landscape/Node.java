@@ -15,7 +15,7 @@ import info.Values;
  * This class represents a node in the landscape. This could be a village, 
  * crossroad or a labyrinth.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 14 May 2008
  */
 public class Node {

@@ -16,7 +16,7 @@ import cards.Card;
  * a character can do, including black magic, support magic and
  * regular attacks.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 25 May 2008
  */
 public class HitElement {

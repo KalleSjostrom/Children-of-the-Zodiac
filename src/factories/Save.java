@@ -40,7 +40,7 @@ import equipment.Items.Item;
  * up again. It is designed as a singelton which means there will only 
  * be one object of this class.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 22 Jan 2008
  */
 public class Save {

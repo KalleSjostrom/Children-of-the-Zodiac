@@ -10,7 +10,7 @@ package info;
 /**
  * This class is a static library for values concerning the sound effects.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 24 Sep 2008
  */
 public class SoundMap {

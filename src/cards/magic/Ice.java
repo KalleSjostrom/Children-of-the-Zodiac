@@ -21,7 +21,7 @@ import cards.Card;
  * This class represents the Ice magic in the game. The Ice magic 
  * is a basic magic with ice attribute.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 11 Nov 2008
  */
 public class Ice extends Magic {

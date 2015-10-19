@@ -32,7 +32,7 @@ import organizer.ResourceLoader;
  * permanent list. Methods for adding textures and data to theses maps are
  * found in this class.  
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 30 Dec 2008
  */
 public class ImageHandler {
@@ -479,7 +479,7 @@ public class ImageHandler {
 	 * This class stores textures, images and draw lists in different hash 
 	 * maps.
 	 * 
-	 * @author 		Kalle Sj�str�m
+	 * @author 		Kalle Sjöström
 	 * @version 	0.7.0 - 30 Dec 2008
 	 */
 	private static class TextureList {

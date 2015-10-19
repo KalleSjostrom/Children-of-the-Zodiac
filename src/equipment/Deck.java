@@ -28,7 +28,7 @@ import character.Character;
  * This class represents a deck. A deck consists of an array of cards
  * and a pointer hand. It also has methods to move around in the deck.
  * 
- * @author 		Kalle Sj�str�m 
+ * @author 		Kalle Sjöström 
  * @version 	0.7.0 - 15 Feb 2008
  */
 public class Deck {

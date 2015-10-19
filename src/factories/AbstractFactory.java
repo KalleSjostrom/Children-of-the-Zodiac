@@ -15,7 +15,7 @@ import organizer.AbstractMapLoader;
  * The subclasses of this abstract class is intended to be designed as
  * singleton classes. This means that there should be a private constructor
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 21 Jan 2008
  */
 public abstract class AbstractFactory extends AbstractMapLoader {

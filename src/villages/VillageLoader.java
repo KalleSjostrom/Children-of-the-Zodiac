@@ -37,7 +37,7 @@ import bodies.system.SystemLoader;
  * This class loads all images and creates the animations and input mapping.
  * It has three subclasses: Dialog, Background and MapLoader.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 19 Jan 2008
  */
 public abstract class VillageLoader extends MenuStarter {
@@ -165,7 +165,7 @@ public abstract class VillageLoader extends MenuStarter {
 	/**
 	 * This class loads the information about the village from a *.vil file
 	 * 
-	 * @author     Kalle Sj�str�m
+	 * @author     Kalle Sjöström
 	 * @version    0.7.0  - 13 May 2008
 	 */
 	private class MapLoader extends AbstractMapLoader {

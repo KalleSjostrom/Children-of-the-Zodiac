@@ -20,7 +20,7 @@ import cards.AnimationSettingsFactory;
  * This class represents the Colliding magic in the game. The Colliding magic 
  * is a strong version of the earth magic.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 11 Nov 2008
  */
 public class Colliding extends PowerMagic {

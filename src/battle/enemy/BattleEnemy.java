@@ -39,7 +39,7 @@ import com.jogamp.opengl.util.texture.Texture;
  * BattleEnemy. This makes it possible to draw the enemy in 3D space,
  * to animate it and to battle against it.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 09 June 2008
  */
 public class BattleEnemy extends Object2D {

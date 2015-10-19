@@ -18,7 +18,7 @@ import cards.Card;
  * A particle system is used to illustrate fire or smoke or
  * something like that.
  * 
- * @author		Kalle Sjöström
+ * @author		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 01 Oct 2008
  */
 public class EnemySystem extends ParticleSystem {

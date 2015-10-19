@@ -24,7 +24,7 @@ import character.Creature;
  * The slow card will cause the target to act less often. The progress bar will
  * fill up more slowly.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 11 Nov 2008
  */
 public class Slow extends Card {

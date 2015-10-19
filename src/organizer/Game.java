@@ -28,7 +28,7 @@ import info.Values;
  * -Dsun.java2d.noddraw=true 
  * -Xmx512m -Dsun.java2d.opengl=true -Dsun.java2d.d3d=false -Dsun.java2d.ddoffscreen=false -Dsun.java2d.noddraw=true 
  * 
- * @author 		Kalle Sj�str�m 
+ * @author 		Kalle Sjöström 
  * @version 	0.7.0 - 27 Jan 2008
  */
 public class Game {

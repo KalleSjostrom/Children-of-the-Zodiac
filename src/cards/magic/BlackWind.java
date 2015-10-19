@@ -24,7 +24,7 @@ import cards.Card;
  * This class represents the Wind magic in the game. The Wind magic 
  * is a basic magic with wind attribute.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 11 Nov 2008
  */
 public class BlackWind extends Magic {

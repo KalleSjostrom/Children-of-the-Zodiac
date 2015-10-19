@@ -15,7 +15,7 @@ import equipment.Weapon;
  * the player is in when battling. These mode is GLWeapon.OFFENSE_MODE 
  * or .DEFENSE_MODE. It shows a different image for these two cases.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 15 Sep 2008
  */
 public class WeaponModeIcon extends GLSlot {

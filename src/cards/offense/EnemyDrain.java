@@ -32,7 +32,7 @@ import factories.Load;
  * to the caster of this card.
  * 
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 27 Dec 2008
  */
 public class EnemyDrain extends Card {

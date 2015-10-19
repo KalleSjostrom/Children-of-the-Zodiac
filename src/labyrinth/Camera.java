@@ -14,7 +14,7 @@ import info.Values;
  * This class manages the view in the labyrinth. It is the players "eyes"
  * or the camera.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 24 May 2088
  */
 public class Camera {

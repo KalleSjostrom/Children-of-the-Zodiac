@@ -26,7 +26,7 @@ import villages.utils.Dialog;
  * in 1024 * 768 resolution. The canvas created when drawing is rescaled anyway 
  * when drawn.
  * 
- * @author 		Kalle Sj�str�m 
+ * @author 		Kalle Sjöström 
  * @version 	0.7.0 - 01 Mar 2008
  */
 public abstract class Building extends GameMode {

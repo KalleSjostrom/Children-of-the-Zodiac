@@ -19,7 +19,7 @@ import cards.Card;
 /**
  * This class manages the slots in the weapon.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 25 Jan 2008
  */
 public class Slot {

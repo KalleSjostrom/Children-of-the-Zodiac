@@ -25,7 +25,7 @@ import menu.MapPage;
  * This class represents a position in the labyrinth.
  * The player can walk between these nodes via edges and the graph.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 24 May 2008
  */
 public class Node {

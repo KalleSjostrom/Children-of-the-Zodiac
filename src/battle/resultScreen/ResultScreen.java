@@ -23,7 +23,7 @@ import character.Enemy;
  * Manages the result screen in battle. The basic result screen
  * is the one displaying the result of a normal attack
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 26 Dec 2008
  */
 public class ResultScreen extends Screen {

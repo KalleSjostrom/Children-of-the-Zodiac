@@ -15,7 +15,7 @@ import info.Values;
  * This class represents the scroll bar that is used in the deck menu.
  * It should indicate where the player is in his/her deck. 
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 22 July 2008
  */
 public class ScrollBar extends ProgressBar {

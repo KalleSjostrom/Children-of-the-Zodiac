@@ -25,7 +25,7 @@ import character.Creature;
  * This class represents the character in the 3D battle. It shows information
  * about HP and progress.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 19 June 2008
  */
 public class Character3D extends Creature3D {

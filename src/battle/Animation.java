@@ -40,7 +40,7 @@ import character.Enemy;
  * the damage is calculated by the BattleCalculator and stored in the
  * given list of HitElements.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 15 June 2008.
  */
 public class Animation {

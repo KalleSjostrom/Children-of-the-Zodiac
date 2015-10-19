@@ -20,7 +20,7 @@ import equipment.Slot;
  * by check if the card is an instance of SupportCard or not. All the cards
  * that should be put in the support slot in battle must extend this class.
  * 
- * @author 		Kalle Sj�str�m 
+ * @author 		Kalle Sjöström 
  * @version 	0.7.0 - 11 Nov 2008
  */
 public abstract class SupportCard extends Card {

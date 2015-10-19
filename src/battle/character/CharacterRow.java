@@ -23,7 +23,7 @@ import graphics.Graphics;
  * manageable. The extend class CreatureRow is a hideable which makes
  * the character row possible to hide.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 19 June 2008
  */
 public class CharacterRow extends CreatureRow {

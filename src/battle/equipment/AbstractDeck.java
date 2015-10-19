@@ -21,7 +21,7 @@ import battle.Hideable;
  * This class is an abstraction of a deck drawn in 3D. It extends hideable
  * which makes the decks possible to hide.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 14 June 2008
  */
 public abstract class AbstractDeck extends Hideable {

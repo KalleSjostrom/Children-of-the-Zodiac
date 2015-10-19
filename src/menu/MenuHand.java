@@ -18,7 +18,7 @@ import info.Values;
  * the direction of which the hand is pointing can be set. 
  * It is also possible to hide the hand.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 13 May 2008
  */
 public class MenuHand {

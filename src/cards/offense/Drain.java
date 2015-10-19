@@ -24,7 +24,7 @@ import factories.Load;
  * The Drain card will damage the enemy just like a normal battle card
  * but it will also heal the attacker some percentage of the damage amount.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 27 Dec 2008
  */
 public class Drain extends Card {

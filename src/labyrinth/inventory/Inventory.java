@@ -37,7 +37,7 @@ import com.jogamp.opengl.util.texture.Texture;
  * labyrinth, that the player can find. Examples of these is chest,
  * buttons, doors and so on.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 13 Sep 2008
  */
 public abstract class Inventory implements Comparable<Inventory> {

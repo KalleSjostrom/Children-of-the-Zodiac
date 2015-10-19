@@ -38,7 +38,7 @@ import character.Character;
  * a screenshot over the screen before the menu was entered, 
  * is shown in thumbnail size. 
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 15 May 2008
  */
 public class StartPage extends AbstractPage {

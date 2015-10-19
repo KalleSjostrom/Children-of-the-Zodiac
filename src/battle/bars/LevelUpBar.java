@@ -16,7 +16,7 @@ import info.Values;
  * the limit to the next level. It is used after battle to show the player 
  * how much experiance is missing for a new level up.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 27 Dec 2008
  */
 public class LevelUpBar {

@@ -16,7 +16,7 @@ import info.Values;
  * This class represents a basic screen which results or spoils 
  * can be drawn upon. 
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 27 Dec 2008
  */
 public class Screen {

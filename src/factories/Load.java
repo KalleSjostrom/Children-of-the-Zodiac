@@ -53,7 +53,7 @@ import graphics.ImageHandler;
  * has methods for getting the party's equipment like weapons, armors, shields,
  * items and so on. 
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 22 Jan 2008
  */
 public class Load extends AbstractMapLoader {

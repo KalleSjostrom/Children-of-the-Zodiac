@@ -16,7 +16,7 @@ import organizer.ResourceLoader;
 /**
  * This class stores information about the textures in the labyrinth.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 25 May 2008.
  */
 public class LabyrinthTexture {

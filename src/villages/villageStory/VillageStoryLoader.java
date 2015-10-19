@@ -28,7 +28,7 @@ import story.TimeLineEvent;
  * It parses the sequence file and creates the sequence according to 
  * the file.
  * 
- * @author     Kalle Sjöström 
+ * @author     Kalle Sj√∂str√∂m 
  * @version    0.7.0 - 13 May 2008
  */
 public class VillageStoryLoader extends AbstractMapLoader {

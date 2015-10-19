@@ -17,7 +17,7 @@ import java.util.Stack;
  * A hideable object2D is a two dimensional object that can be drawn in 3D
  * space in OpenGL. It can also be moved out of vision so that it is hidden.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 14 June 2008
  */
 public abstract class Hideable extends Object2D {

@@ -25,7 +25,7 @@ import villages.utils.Dialog;
 /**
  * The landscape class. This class is in charge of the landscape game mode.
  * 
- * @author 		Kalle Sj�str�m 
+ * @author 		Kalle Sjöström 
  * @version 	0.7.0 - 14 May 2088
  */
 public class Landscape extends LandscapeLoader {

@@ -30,7 +30,7 @@ import character.Character;
 /**
  * Manages the story sequences that takes place in the villages.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 12 Oct 2008
  */
 public class VillageStory extends GameMode {

@@ -19,7 +19,7 @@ import cards.Card;
  * It therefore has some methods for flipping and moving around the card
  * in a 3D space.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 12 June 2008
  */
 public class GLCard extends FlatObj {

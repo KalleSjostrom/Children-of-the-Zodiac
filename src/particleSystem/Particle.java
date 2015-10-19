@@ -15,7 +15,7 @@ import bodies.Vector3f;
 /**
  * This class contains some common methods for a particle.
  * 
- * @author		Kalle Sjöström
+ * @author		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 01 Oct 2008
  */
 public class Particle extends PointBody {

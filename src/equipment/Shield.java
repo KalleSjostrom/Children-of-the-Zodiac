@@ -15,7 +15,7 @@ import info.Values;
  * a speed value indicating the decrease in agility that will take place
  * if a character equips a shield.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 25 Jan 2008
  */
 public class Shield extends AbstractEquipment {

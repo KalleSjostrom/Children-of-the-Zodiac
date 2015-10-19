@@ -39,7 +39,7 @@ import equipment.Weapon;
  * These equipments can be changes via the menu in the game. Or via the 
  * text file where this information is gotten.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 25 Jan 2008
  */
 public class Character extends Creature {

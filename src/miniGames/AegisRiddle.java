@@ -12,7 +12,7 @@ import graphics.Graphics;
 /**
  * This class manages the riddles in the labyrinth.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 25 Sep 2008
  */
 public class AegisRiddle extends RiddleGame {

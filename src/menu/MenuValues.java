@@ -11,7 +11,7 @@ package menu;
  * This class contains some static values used in the menu. These values
  * are mostly positions of stats and such.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 25 Sep 2008
  */
 public class MenuValues {

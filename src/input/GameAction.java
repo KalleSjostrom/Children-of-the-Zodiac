@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * action, like jumping or moving. GameActions can be mapped
  * to keys or the mouse with the InputManager.
  *
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 15 May 2008
  */
 public class GameAction {

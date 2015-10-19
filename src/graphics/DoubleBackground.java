@@ -24,7 +24,7 @@ import bodies.system.ParticleSystem;
 /**
  * This class manages the backgrounds a village or the landscape.
  * 
- * @author     Kalle Sj�str�m
+ * @author     Kalle Sjöström
  * @version    0.7.0 - 13 May 2008
  */
 public class DoubleBackground {

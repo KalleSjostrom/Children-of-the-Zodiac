@@ -15,7 +15,7 @@ import sprite.Sprite;
  * This class represents the player when it is walking around the landscape.
  * It has location and angle, but also all the images and animation.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 12 May 2008
  */
 public class LandPlayer extends Sprite {

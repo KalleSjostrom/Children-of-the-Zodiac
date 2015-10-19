@@ -13,7 +13,7 @@ package graphics;
  * slots, time bars and so on. It is also used to draw chests and other 
  * 2D images in the labyrinth. 
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 23 Sep 2088
  */
 public abstract class Object2D extends TimeHideable {

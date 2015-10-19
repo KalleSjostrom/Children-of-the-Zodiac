@@ -31,7 +31,7 @@ import com.jogamp.opengl.util.texture.awt.AWTTextureIO;
  * information about the creature, such as life, progress, and maybe
  * an image of the creature.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 19 June 2008
  */
 public abstract class Creature3D extends Object2D {

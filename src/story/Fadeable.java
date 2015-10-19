@@ -13,7 +13,7 @@ import info.Values;
  * This class contains some method that handles fading of graphics.
  * It is possible to set fade in / out speeds. 
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 04 Oct 2008
  */
 public abstract class Fadeable {

@@ -38,7 +38,7 @@ import character.Enemy;
  * on both sides of the screen. It uses an instance of Battle to do
  * most of the logic behind the battle.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 24 May 2008.
  */
 public class BattleManager extends GameMode implements LabyrinthDrawable {

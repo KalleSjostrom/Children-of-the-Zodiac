@@ -42,7 +42,7 @@ import character.Creature;
  * some static methods like getFont() or other methods which are 
  * frequently used.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 21 Jan 2008
  */
 public class Values {

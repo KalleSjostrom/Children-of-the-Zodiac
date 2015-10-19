@@ -13,7 +13,7 @@ package weather;
  * It will send out a ball of magic that will explode upon hitting the
  * target.
  * 
- * @author		Kalle Sjöström
+ * @author		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 01 Oct 2008
  */
 public class RainSystem extends WeatherSystem {

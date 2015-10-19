@@ -19,7 +19,7 @@ import labyrinth.inventory.Inventory;
  * where this inventory resides, a riddle game mode is started
  * letting the player read and solve the riddle.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 13 Sep 2008
  */
 public class Riddle extends Inventory {

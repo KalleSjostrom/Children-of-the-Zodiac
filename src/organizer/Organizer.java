@@ -26,7 +26,7 @@ import java.util.logging.*;
  * sure that only one object of this class can be constructed. This is done
  * by inserting a private constructor.
  * 
- * @author 		Kalle Sj�str�m 
+ * @author 		Kalle Sjöström 
  * @version 	0.7.0 - 11 May 2008
  */
 public class Organizer extends GameCore {

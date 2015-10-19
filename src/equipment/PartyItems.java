@@ -19,7 +19,7 @@ import equipment.Items.Item;
  * This class stores the shared assets for the party. So far
  * these assets are the gold and the main party deck.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 25 Jan 2008
  */
 public class PartyItems {

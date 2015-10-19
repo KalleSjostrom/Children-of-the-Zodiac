@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
  * This class stores information about a card,
  * such as name, position, level and so on.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 24 Jan 2008
  */
 public abstract class AbstractCard implements Comparable<Card> {

@@ -23,7 +23,7 @@ import organizer.MenuStarter;
 
 /**
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 14 May 2008
  */
 public abstract class AirLandscapeLoader extends MenuStarter {
@@ -83,7 +83,7 @@ public abstract class AirLandscapeLoader extends MenuStarter {
 	 * 
 	 * This class loads the information about the landscape from a *.map file.
 	 * 
-	 * @author      Kalle Sjöström
+	 * @author      Kalle Sj√∂str√∂m
 	 * @version     0.7.0 - 14 May 2008
 	 */
 	private class MapLoader extends AbstractMapLoader {

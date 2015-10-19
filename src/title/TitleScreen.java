@@ -21,7 +21,7 @@ import sound.SoundPlayer;
  * This class represents the title screen. The player can load games 
  * from here, but not create new save slots.
  * 
- * @author 		Kalle Sj�str�m.
+ * @author 		Kalle Sjöström.
  * @version 	0.7.0 - 27 Jan 2008
  */
 public class TitleScreen extends GameMode {

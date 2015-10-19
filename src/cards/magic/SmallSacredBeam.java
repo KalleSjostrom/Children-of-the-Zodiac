@@ -24,7 +24,7 @@ import character.Creature;
 /**
  * The sacred beam card will both damage the target and cause open wound.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 11 Nov 2008
  */
 public class SmallSacredBeam extends Card {

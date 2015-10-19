@@ -15,7 +15,7 @@ import java.util.HashMap;
  * class the landscape can store information about where the 
  * player has been between the times the player is in the landscape.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 14 May 2008
  */
 public class Visited {

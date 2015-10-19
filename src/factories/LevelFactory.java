@@ -24,7 +24,7 @@ import villages.villageStory.Parser;
  * concerning all the levels in the game. There are unique levels for
  * each character.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 21 Jan 2008
  */
 public class LevelFactory extends AbstractFactory {

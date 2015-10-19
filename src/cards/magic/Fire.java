@@ -22,7 +22,7 @@ import cards.Card;
  * This class represents the Fire magic in the game. The Fire magic 
  * is a basic magic with fire attribute.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 11 Nov 2008
  */
 public class Fire extends Magic {

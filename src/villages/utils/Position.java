@@ -11,7 +11,7 @@ package villages.utils;
  * This class represents a position that a party member can have.
  * It consist of an x and y value as well as a direction.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version     0.7.0 - 13 May 2008
  */
 public class Position {

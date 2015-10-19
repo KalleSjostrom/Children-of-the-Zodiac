@@ -15,7 +15,7 @@ import java.util.StringTokenizer;
  * is a point on a time line where an event takes place. An event could be
  * an image fading in, an image scrolling, zooming or something like that.
  * 
- * @author 		Kalle Sjöström.
+ * @author 		Kalle Sj√∂str√∂m.
  * @version 	0.7.0 - 05 Oct 2008
  */
 public class TimeLineEvent implements Comparable<TimeLineEvent> {

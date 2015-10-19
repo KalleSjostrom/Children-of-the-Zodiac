@@ -28,7 +28,7 @@ import labyrinth.inventory.Save;
  * move to and the edges is vectors that the player walks via. A "stop place"
  * is where the player can stop and make a decision on where to go next
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 24 May 2008
  */
 public class Graph {

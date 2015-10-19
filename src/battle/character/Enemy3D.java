@@ -23,7 +23,7 @@ import character.Bestiary.Stats;
  * This class represents a enemy in the 3D battle. It shows information
  * about life and progress.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 19 June 2008
  */
 public class Enemy3D extends Creature3D {

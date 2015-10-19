@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * This class manages the links between places in the landscape.
  * It connects nodes (places), with walkable roads.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 14 May 2008
  */
 public class Road {
@@ -190,7 +190,7 @@ public class Road {
 	 * Its x, and y position and the angle of the player, 
 	 * if the player should stand on this coordinate.
 	 * 
-	 * @author      Kalle Sjöström
+	 * @author      Kalle Sj√∂str√∂m
 	 * @version     0.7.0 - 14 May 2008
 	 */
 	private class Coordinate {
@@ -216,7 +216,7 @@ public class Road {
 	/**
 	 * This class represents a small dot in between of each nodes.
 	 * 
-	 * @author      Kalle Sjöström
+	 * @author      Kalle Sj√∂str√∂m
 	 * @version     0.7.0 - 14 May 2008
 	 */
 	private class MoveDot {

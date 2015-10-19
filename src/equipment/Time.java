@@ -13,7 +13,7 @@ import organizer.GameCore;
  * This class represents a clock which counts the minutes and hours 
  * that the player has played. 
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version		0.7.0 - 25 Jan 2008
  */
 public class Time {

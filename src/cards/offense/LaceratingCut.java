@@ -23,7 +23,7 @@ import character.Creature;
  * The lacerating cut card is a battle card with one addition, the chance of an
  * open wound hit exists.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 27 Dec 2008
  */
 public class LaceratingCut extends Card {

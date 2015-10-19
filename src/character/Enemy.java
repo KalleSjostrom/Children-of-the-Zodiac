@@ -24,7 +24,7 @@ import equipment.Items.Item;
  * This class represents an enemy in the game. A enemy is a creature 
  * which the player battles.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 25 Jan 2008
  */
 public class Enemy extends Creature {
@@ -487,7 +487,7 @@ public class Enemy extends Creature {
 	 * This class represents an enemy armor. It only has two
 	 * values which is normal defense and magical defense.
 	 * 
-	 * @author 		Kalle Sj�str�m
+	 * @author 		Kalle Sjöström
 	 * @version 	0.7.0 - 25 Jan 2008
 	 */
 	private class EnemyArmor {

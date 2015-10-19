@@ -21,7 +21,7 @@ import cards.AnimationSettingsFactory;
  * This class represents the Blizzard magic in the game. A Blizzard is a strong
  * version of the ice magic.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 11 Nov 2008
  */
 public class Blizzard extends PowerMagic {

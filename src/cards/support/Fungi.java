@@ -19,7 +19,7 @@ import equipment.Slot;
 /**
  * The fungi card is played to boost attack.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 27 Dec 2008
  */
 public class Fungi extends SupportCard {

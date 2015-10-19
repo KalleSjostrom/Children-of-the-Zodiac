@@ -18,7 +18,7 @@ import cards.Card;
  * double texture (front and back), able to rotate and to choose which side to
  * draw if not drawing both.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 28 June 2008
  */
 public abstract class FlatObj extends Object2D {

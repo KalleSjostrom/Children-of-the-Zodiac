@@ -27,7 +27,7 @@ import villages.Village;
  * Not all places can be visited from here but a lot of new places
  * will soon be available.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 27 Jan 2008
  */
 public class Cheater extends GameMode {

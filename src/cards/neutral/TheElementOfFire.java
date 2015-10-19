@@ -12,7 +12,7 @@ package cards.neutral;
  * The element of fire card will change the targets offensive and defensive 
  * element to fire.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 11 Nov 2008
  */
 public class TheElementOfFire extends Elements {

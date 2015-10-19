@@ -28,7 +28,7 @@ import story.Fadeable;
  * the game. It is in charge of loading, fading in, playing and fading 
  * out music. It can also fade graphics, and initializes the input managers.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 11 May 2008
  */
 public abstract class GameMode extends Fadeable {

@@ -26,7 +26,7 @@ import landscape.Landscape;
  * This information could be level information, character status, road status
  * and so on.
  * 
- * @author		Kalle Sj�str�m
+ * @author		Kalle Sjöström
  * @version 	0.7.0  - 19 May 2008
  */
 public class Database {

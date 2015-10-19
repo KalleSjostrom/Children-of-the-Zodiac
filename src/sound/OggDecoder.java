@@ -22,7 +22,7 @@ import de.jarnbjo.vorbis.VorbisStream;
 /**
  * This class decodes an ogg stream and reads it.
  * 
- * @author		Kalle Sjöström
+ * @author		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 01 Oct 2008
  */
 public class OggDecoder {

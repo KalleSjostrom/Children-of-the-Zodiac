@@ -20,7 +20,7 @@ import organizer.GameMode;
  * It uses the Timer class to poll with delay DELAY, which currently is
  * 40 micro seconds. 
  *
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 17 May 2008
  */
 public class InputGamePadManager extends InputManager {

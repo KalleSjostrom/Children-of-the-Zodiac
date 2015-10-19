@@ -14,7 +14,7 @@ import info.Values;
  * in the game. These values can be used to manages the music player.
  * This can be done by the method setMusicMode() in GameMode class.
  * 
- * @author		Kalle Sjöström
+ * @author		Kalle Sj√∂str√∂m
  * @version 	0.7.0  - 24 Sep 2008
  */
 public class SoundValues {

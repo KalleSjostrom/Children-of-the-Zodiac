@@ -28,7 +28,7 @@ import graphics.Graphics;
  * gold and experience one found. The level up result screen is the one 
  * displaying the result of a level up.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 26 Dec 2008
  */
 public class SpoilsScreen extends Screen {

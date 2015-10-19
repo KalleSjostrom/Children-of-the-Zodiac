@@ -32,7 +32,7 @@ import character.Creature;
  * the current characters status. It is possible to switch to another characters
  * status by pressing the R2 or L2 buttons.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 18 Feb 2008
  */
 public class StatusPage extends AbstractPage {

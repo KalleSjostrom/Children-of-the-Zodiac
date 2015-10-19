@@ -22,7 +22,7 @@ import villages.utils.Sign;
  * button in front of a door, the doors attributes are gotten and the player
  * enters the building.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 13 May 2008
  */
 public class Door {

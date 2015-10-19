@@ -18,7 +18,7 @@ import com.jogamp.opengl.util.texture.Texture;
 /**
  * This class loads and creates texture from files or images.
  * 
- * @author 		Kalle Sj�str�m 
+ * @author 		Kalle Sjöström 
  * @version 	0.7.0 - 23 Sep 2088
  */
 public class ImageLoader {

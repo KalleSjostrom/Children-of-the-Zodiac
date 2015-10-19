@@ -24,7 +24,7 @@ import com.jogamp.opengl.util.awt.TextRenderer;
  * "31" for example. The text is then moved upwards while fading like smoke.
  * It uses the TextRenderer from the JOGL distribution.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 18 June 2008.
  */
 public class AttackText {
@@ -180,7 +180,7 @@ public class AttackText {
 	 * "31" for example. The text is then moved upwards while fading like smoke.
 	 * It uses the TextRenderer from the JOGL distribution.
 	 * 
-	 * @author 	    Kalle Sj�str�m
+	 * @author 	    Kalle Sjöström
 	 * @version     0.7.0 - 18 June 2008.
 	 */
 	private static class Text {

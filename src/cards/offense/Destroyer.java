@@ -22,7 +22,7 @@ import character.Creature;
  * The battle card is the most basic of physical attacking cards. It has
  * nothing special about it. 
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 27 Dec 2008
  */
 public class Destroyer extends Card {

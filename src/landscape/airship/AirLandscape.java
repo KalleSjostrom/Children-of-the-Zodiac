@@ -15,7 +15,7 @@ import java.util.HashMap;
 
 /**
  * 
- * @author 		Kalle Sj�str�m 
+ * @author 		Kalle Sjöström 
  * @version 	0.7.0 - 14 May 2088
  */
 public class AirLandscape extends AirLandscapeLoader {

@@ -30,7 +30,7 @@ import character.Creature;
 /**
  * The cure card is the most basic of support cards. It just cures the target.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 27 Dec 2008
  */
 public class Cure extends SupportCard {

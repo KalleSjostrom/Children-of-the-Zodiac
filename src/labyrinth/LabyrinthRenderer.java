@@ -25,7 +25,7 @@ import weather.WeatherSystem;
  * ceilings with textures. It does not draw any inventory, like chests, doors
  * and so on.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 25 May 2008.
  */
 public class LabyrinthRenderer {

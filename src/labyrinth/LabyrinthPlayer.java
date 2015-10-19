@@ -15,7 +15,7 @@ import graphics.Graphics;
  * so that the screen shows where the player is looking. This results in
  * a first person view.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 24 May 2008.
  */
 public class LabyrinthPlayer {

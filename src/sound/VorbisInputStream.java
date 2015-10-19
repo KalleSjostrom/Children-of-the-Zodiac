@@ -16,7 +16,7 @@ import de.jarnbjo.vorbis.VorbisStream;
 /**
  * This class wraps a VorbisStream in an InputStream.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 22 June 2008
  */
 public class VorbisInputStream extends InputStream {

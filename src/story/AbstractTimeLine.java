@@ -16,7 +16,7 @@ import java.util.concurrent.Semaphore;
  * at different times. The time is counted in micro seconds and images
  * and text can be faded.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 04 Oct 2008
  */
 public abstract class AbstractTimeLine extends Fadeable {

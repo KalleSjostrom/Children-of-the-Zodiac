@@ -17,7 +17,7 @@ import graphics.Graphics;
  * done to be able to draw them in 3D space with openGL. It has two slots
  * one for each mode of the weapon.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 28 June 2008
  */
 public class GLSlot extends FlatObj {

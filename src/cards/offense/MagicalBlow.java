@@ -24,7 +24,7 @@ import equipment.Slot;
  * The magical blow card is like a battle card but will damage with the magic
  * attack on the targets magic defense, just like any other magic.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 27 Dec 2008
  */
 public class MagicalBlow extends Card {

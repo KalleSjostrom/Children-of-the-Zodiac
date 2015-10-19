@@ -17,7 +17,7 @@ import java.util.Random;
  * This player plays sound effects in the game. These effects are small
  * *.ogg files containing attack sounds, magic sounds and so on.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 03 Oct 2008
  */
 public class SoundPlayer {

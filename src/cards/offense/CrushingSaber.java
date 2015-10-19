@@ -27,7 +27,7 @@ import character.Creature;
  * The crushing saber card is a battle card with one addition, the chance of an
  * armor break exists.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 27 Dec 2008
  */
 public class CrushingSaber extends Card {

@@ -23,7 +23,7 @@ import equipment.Weapon;
  * players turn is over for some other reason, this deck is sent to a 
  * battle calculator to calculate the damage made on the enemy.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 12 June 2008
  */
 public class GLWeapon extends Hideable {

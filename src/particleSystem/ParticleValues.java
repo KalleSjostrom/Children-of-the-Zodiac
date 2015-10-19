@@ -11,7 +11,7 @@ package particleSystem;
 /**
  * This class contains some values used by particles and the systems.
  * 
- * @author		Kalle Sjöström
+ * @author		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 01 Oct 2008
  */
 public class ParticleValues {

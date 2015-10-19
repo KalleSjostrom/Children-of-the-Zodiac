@@ -11,7 +11,7 @@ import com.jogamp.opengl.GL2;
  * A magic particle system is used in the game when a character uses
  * a magic, like fire, ice and so on.
  * 
- * @author		Kalle Sj�str�m
+ * @author		Kalle Sjöström
  * @version 	0.7.0 - 01 Oct 2008
  */
 public class SaveParticle {

@@ -25,7 +25,7 @@ import character.Enemy;
  * manageable. The extend class CreatureRow is a hideable which makes
  * the row of enemies possible to hide.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 19 June 2008
  */
 public class EnemyRow extends CreatureRow {

@@ -22,7 +22,7 @@ import equipment.Weapon;
  * be one object of this class. It reads a file containing information 
  * concerning all the hand equipments in the game. 
  *
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 21 Jan 2008
  */
 public class EquipmentFactory extends AbstractFactory {

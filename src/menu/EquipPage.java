@@ -23,7 +23,7 @@ import graphics.Graphics;
  * weapons, armors and left handed items. These can be equipped in either the 
  * right hand, body or the left hand, respectively.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 13 May 2008
  */
 public class EquipPage extends AbstractPage {

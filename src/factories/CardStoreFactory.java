@@ -23,7 +23,7 @@ import equipment.Deck;
  * with weapons, armors and shields which can be gotten from the methods 
  * in this class.
  *
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 23 Jan 2008
  */
 public class CardStoreFactory extends AbstractFactory {

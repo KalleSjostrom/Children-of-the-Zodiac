@@ -34,7 +34,7 @@ import villages.villageStory.Parser;
  * where this inventory resides, the player can enter the door and
  * be transported to the place named nextPlace in this class..
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 13 Sep 2008
  */
 public class TriggerDoor extends Door {

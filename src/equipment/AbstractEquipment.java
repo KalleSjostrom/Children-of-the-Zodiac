@@ -20,7 +20,7 @@ import graphics.ImageHandler;
  * This abstract class is the superclass to the equipments in the game.
  * The equipments is armors, shields, weapons and skills.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 25 Jan 2008
  */
 public class AbstractEquipment {

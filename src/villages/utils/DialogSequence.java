@@ -13,7 +13,7 @@ import java.util.HashMap;
  * This class represents a sequence in a dialog.
  * The text to be displayed.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 2 Feb 2008
  */
 public class DialogSequence {

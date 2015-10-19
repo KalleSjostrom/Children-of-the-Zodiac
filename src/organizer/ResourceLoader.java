@@ -34,7 +34,7 @@ import villages.villageStory.Parser;
  * It tries to load everything from inside the game jar, 
  * if that is unsuccessful try to load it from outside the jar.
  * 
- * @author		Kalle Sj�str�m
+ * @author		Kalle Sjöström
  * @version 	0.7.0 - 19 Jan 2008
  */
 public class ResourceLoader extends AbstractMapLoader {

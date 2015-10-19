@@ -26,7 +26,7 @@ import factories.Load;
 /**
  * The resurrect card is played to resurrect a dead target. 
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 27 Dec 2008
  */
 public class Resurrect extends SupportCard {

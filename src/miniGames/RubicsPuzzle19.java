@@ -16,7 +16,7 @@ import sound.SoundPlayer;
 /**
  * This class manages the riddles in the labyrinth.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 25 Sep 2008
  */
 public class RubicsPuzzle19 extends RubicsPuzzle {

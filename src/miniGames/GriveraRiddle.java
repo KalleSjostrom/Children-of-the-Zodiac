@@ -17,7 +17,7 @@ import labyrinth.inventory.Inventory;
 /**
  * This class manages the riddles in the labyrinth.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 25 Sep 2008
  */
 public class GriveraRiddle extends RiddleGame {

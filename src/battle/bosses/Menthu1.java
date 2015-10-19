@@ -16,7 +16,7 @@ import character.Enemy;
  * This class is not done, because it is not decided what should happen when
  * battling bosses.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 21 July 2008
  */
 public class Menthu1 extends Boss {

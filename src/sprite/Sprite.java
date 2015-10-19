@@ -20,7 +20,7 @@ import villages.utils.Animation;
  * This abstract class represents an animated object. This includes 
  * players, party members, villagers and so on.
  * 
- * @author 		Kalle Sj�str�m 
+ * @author 		Kalle Sjöström 
  * @version 	0.7.0 - 13 May 2008
  */
 public abstract class Sprite {

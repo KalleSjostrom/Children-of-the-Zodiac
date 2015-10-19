@@ -34,7 +34,7 @@ import graphics.Graphics;
 /**
  * This class represents an item store in a village.
  * 
- * @author 		Kalle Sj�str�m 
+ * @author 		Kalle Sjöström 
  * @version 	0.7.0 - 13 May 2008
  */
 public class CardStore extends AbstractStore {

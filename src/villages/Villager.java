@@ -40,7 +40,7 @@ import villages.utils.Player;
  * 
  * It has one subclasses which is VillagerLoader.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0  - 13 May 2008
  */
 public class Villager extends InstructionFollower {
@@ -377,7 +377,7 @@ public class Villager extends InstructionFollower {
 	/**
 	 * This class loads the information about the villager from a file.
 	 * 
-	 * @author      Kalle Sj�str�m
+	 * @author      Kalle Sjöström
 	 * @version     0.7.0 - 13 May 2008
 	 */
 	private class VillagerLoader extends AbstractMapLoader {

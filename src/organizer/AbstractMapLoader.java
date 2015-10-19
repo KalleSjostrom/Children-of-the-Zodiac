@@ -18,7 +18,7 @@ import villages.villageStory.Parser;
  * This class is an abstraction of a map loader. It consists of methods
  * for handling the loading of a map.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 19 Jan 2008
  */
 public abstract class AbstractMapLoader {

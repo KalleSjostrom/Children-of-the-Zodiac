@@ -14,7 +14,7 @@ import villages.utils.DialogSequence;
 /**
  * This class contains a list of dialog sequence with a start and stop time.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 08 Oct 2008
  */
 public class DialogPackage {

@@ -5,7 +5,7 @@ package weather;
  * A magic particle system is used in the game when a character uses
  * a magic, like fire, ice and so on.
  * 
- * @author		Kalle Sjöström
+ * @author		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 01 Oct 2008
  */
 public class SnowParticle extends WeatherParticle {

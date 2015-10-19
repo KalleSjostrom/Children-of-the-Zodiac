@@ -16,7 +16,7 @@ import info.Values;
  * whether the weapon is two handed or not. It also has a list of slots
  * that the player can put cards in when battling.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 25 Jan 2008
  */
 public class Weapon extends AbstractEquipment {

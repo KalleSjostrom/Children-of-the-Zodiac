@@ -35,7 +35,7 @@ import equipment.Slot;
  * if one would like to implement some AI. This version, however, does not
  * implement any artificial intelligence.
  * 
- * @author 		Kalle Sj�str�m 
+ * @author 		Kalle Sjöström 
  * @version 	0.7.0 - 26 Dec 2008
  */
 public class EnemyLogic {

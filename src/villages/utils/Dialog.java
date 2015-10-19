@@ -25,7 +25,7 @@ import cards.Card;
  * as a singleton class which means that there will be only one object of
  * this class.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 02 Feb 2008
  */
 public class Dialog {

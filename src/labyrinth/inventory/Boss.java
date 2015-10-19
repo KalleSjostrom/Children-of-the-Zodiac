@@ -23,7 +23,7 @@ import labyrinth.inventory.Inventory;
  * alive or not. This inventory does not have any textures but is only a 
  * launcher for the boss battle.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 13 Sep 2008
  */
 public class Boss extends Inventory {

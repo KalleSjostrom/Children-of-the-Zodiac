@@ -25,7 +25,7 @@ import com.jogamp.opengl.util.texture.Texture;
  * It will send out a ball of magic that will explode upon hitting the
  * target.
  * 
- * @author		Kalle Sj�str�m
+ * @author		Kalle Sjöström
  * @version 	0.7.0 - 01 Oct 2008
  */
 public class SaveSystem {

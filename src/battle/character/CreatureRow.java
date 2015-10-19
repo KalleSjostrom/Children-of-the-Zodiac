@@ -21,7 +21,7 @@ import character.Enemy;
  * It draws some number of creature3D. It also extends hideable
  * which makes the rows able to hide.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 19 June 2008
  */
 public abstract class CreatureRow extends Hideable {

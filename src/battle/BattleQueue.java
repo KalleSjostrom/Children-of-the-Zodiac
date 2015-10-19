@@ -16,7 +16,7 @@ import character.Creature;
  * when a creatures is ready to fight. If more than one creature is ready
  * this queue is used to store these creatures.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 21 July 2008
  */
 public class BattleQueue {

@@ -13,7 +13,7 @@ import net.java.games.input.Controller;
 /**
  * This class represents a game pad controller.
  *
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 15 May 2008
  */
 public class GamePadController {

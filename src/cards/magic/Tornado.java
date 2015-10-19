@@ -23,7 +23,7 @@ import cards.AnimationSettingsFactory;
  * This class represents the Tornado magic in the game. A Tornado is a strong
  * version of the wind magic.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 11 Nov 2008
  */
 public class Tornado extends PowerMagic {

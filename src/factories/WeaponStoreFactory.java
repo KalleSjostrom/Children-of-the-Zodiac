@@ -23,7 +23,7 @@ import equipment.AbstractEquipment;
  * with weapons, armors and shields which can be gotten from the methods 
  * in this class.
  *
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 23 Jan 2008
  */
 public class WeaponStoreFactory extends AbstractFactory {
@@ -139,7 +139,7 @@ public class WeaponStoreFactory extends AbstractFactory {
 	 * class without getters and setters. This is because the only class
 	 * who needs the information is the store factory.
 	 *
-	 * @author     Kalle Sjöström
+	 * @author     Kalle Sj√∂str√∂m
 	 * @version    0.7.0 - 21 Jan 2008
 	 */
 	private class Store {

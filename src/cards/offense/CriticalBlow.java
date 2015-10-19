@@ -18,7 +18,7 @@ import character.Creature;
  * The critical blow card is a battle card with one addition, the chance of a
  * critical hit is greatly increased.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 27 Dec 2008
  */
 public class CriticalBlow extends Card {

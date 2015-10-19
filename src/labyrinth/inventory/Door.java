@@ -30,7 +30,7 @@ import villages.VillageLoader;
  * where this inventory resides, the player can enter the door and
  * be transported to the place named nextPlace in this class..
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 13 Sep 2008
  */
 public class Door extends AbstractDoor {

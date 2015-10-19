@@ -19,7 +19,7 @@ import equipment.Slot;
 /**
  * The focus card is played to boost magic attack.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 27 Dec 2008
  */
 public class Focus extends SupportCard {

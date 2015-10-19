@@ -35,7 +35,7 @@ import javax.swing.border.Border;
  * build some labyrinths for the Zodiac Children. In the editor, the user can
  * also try the labyrinth directly. 
  * 
- * @author 	Kalle Sj�str�m
+ * @author 	Kalle Sjöström
  * @version 	0.5.0 - 03 Aug 2008.
  */
 public class GraphicUI {

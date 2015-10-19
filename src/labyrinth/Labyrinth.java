@@ -58,7 +58,7 @@ import character.Character;
  * have no collision detection so, if the path goes through a wall then 
  * so does the player. The labyrinth uses open GL to render the textures.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 24 May 2008.
  */
 public class Labyrinth extends MenuStarter implements BattleStarter {

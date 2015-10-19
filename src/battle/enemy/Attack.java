@@ -19,7 +19,7 @@ import java.awt.geom.Rectangle2D;
  * managed by the clock and the turn is finished when the time has run out.
  * The clock is Hideable and will show when a players turn is initiated.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 21 July 2008
  */
 public class Attack {

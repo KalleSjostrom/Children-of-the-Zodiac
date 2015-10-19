@@ -20,7 +20,7 @@ import cards.AnimationSettingsFactory;
  * This class represents the Flare magic in the game. A Flare is a strong
  * version of the fire magic.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 11 Nov 2008
  */
 public class Flare extends PowerMagic {

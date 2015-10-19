@@ -30,7 +30,7 @@ import bodies.Vector3f;
  * to textures to be drawn in openGL and they are stored in a map with the
  * images as keys. 
  * 
- * @author 		Kalle Sj�str�m 
+ * @author 		Kalle Sjöström 
  * @version 	0.7.0 - 01 Sep 2088
  */
 public class Graphics {

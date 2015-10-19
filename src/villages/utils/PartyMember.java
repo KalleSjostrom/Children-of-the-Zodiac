@@ -15,7 +15,7 @@ import sprite.Sprite;
  * This class represents a party member. The party members is the players
  * walking in a straight line behind each other in the village. 
  * 
- * @author		Kalle Sjöström
+ * @author		Kalle Sj√∂str√∂m
  * @version     0.7.0 - 13 May 2008
  */
 public class PartyMember extends Sprite {

@@ -22,7 +22,7 @@ import cards.Card;
  * This class represents the Earth magic in the game. The Earth magic 
  * is a basic magic with earth attribute.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 11 Nov 2008
  */
 public class Earth extends Magic {

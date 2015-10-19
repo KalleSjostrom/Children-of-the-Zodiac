@@ -36,7 +36,7 @@ import graphics.Graphics;
  * player can buy or sell weapons, shield or armors. It uses the static method
  * from the equip page, in the menu, to draw parts of the store.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 13 May 2008
  */
 public class WeaponStore extends AbstractStore {

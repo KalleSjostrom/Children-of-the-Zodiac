@@ -26,7 +26,7 @@ import character.Creature;
 /**
  * The Ultima magic is extremely powerful magic with no element. 
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 11 Nov 2008
  */
 public class Ultima extends Card {

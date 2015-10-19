@@ -30,7 +30,7 @@ import character.Creature;
  * dies immediately. This is the major difference. The card can only hit
  * or miss, not hit hard or weak.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 11 Nov 2008
  */
 public class BlackDeath extends Card {

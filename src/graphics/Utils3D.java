@@ -17,7 +17,7 @@ import com.jogamp.opengl.util.texture.TextureCoords;
  * textures in 3D. It also has some methods for setting color and
  * calculating distance in 3D space. 
  * 
- * @author 		Kalle Sj�str�m 
+ * @author 		Kalle Sjöström 
  * @version 	0.7.0 - 23 Sep 2088
  */
 public class Utils3D {

@@ -18,7 +18,7 @@ import character.Creature;
 /**
  * The haste card is played to boost agility (speed).
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 27 Dec 2008
  */
 public class Haste extends SupportCard {

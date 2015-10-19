@@ -28,7 +28,7 @@ import organizer.ResourceLoader;
  * This class streams ogg-files. It is the main sound player in the game
  * and plays all the background music.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 22 June 2008
  */
 public class Sound {

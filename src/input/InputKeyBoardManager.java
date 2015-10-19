@@ -25,7 +25,7 @@ import organizer.Organizer;
  * This class manages the input from the regular key board. It implements
  * the key listener and uses game actions to mark a button as pressed.
  *
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 17 May 2008
  */
 public class InputKeyBoardManager extends InputManager implements KeyListener {

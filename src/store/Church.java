@@ -40,7 +40,7 @@ import character.Character;
  * the game or be resurrected if any of the party members has died.
  * The priest is animated when resurrecting.
  * 
- * @author 		Kalle Sj�str�m 
+ * @author 		Kalle Sjöström 
  * @version 	0.7.0 - 13 May 2008
  */
 public class Church extends Building {

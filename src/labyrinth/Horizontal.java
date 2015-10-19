@@ -17,7 +17,7 @@ import com.jogamp.opengl.GL2;
  * A node is one step, and the location is used to draw either the
  * floor or the ceiling in the labyrinth.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 24 May 2008
  */
 public class Horizontal {

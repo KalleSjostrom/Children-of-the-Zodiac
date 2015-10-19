@@ -14,7 +14,7 @@ import java.util.StringTokenizer;
  * Objects of this class is a instruction for a animated object like
  * a villager. Where it should go, if it should stand still and so on.
  * 
- * @author     Kalle Sjöström
+ * @author     Kalle Sj√∂str√∂m
  * @version    0.7.0 - 13 May 2008
  */
 public class Instructions {

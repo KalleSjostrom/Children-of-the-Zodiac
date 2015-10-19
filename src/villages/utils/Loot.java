@@ -22,7 +22,7 @@ import factories.EquipmentFactory;
  * This class represents a sequence in a dialog.
  * The text to be displayed.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 1 Jan 2009
  */
 public class Loot {

@@ -31,7 +31,7 @@ import graphics.Graphics;
  * equipment such as armor, weapon and deck. It consist of a number of pages
  * which all are subclasses of the abstract class AbstractPage. 
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 13 May 2008
  */
 public class MainMenu extends GameMode {

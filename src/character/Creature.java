@@ -23,7 +23,7 @@ import cards.AbstractCard;
  * This abstract class represents a creature in the game. A creature can 
  * either be a character or an enemy. 
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 25 Jan 2008
  */
 public abstract class Creature {
@@ -702,7 +702,7 @@ public abstract class Creature {
 	 * This class represents a boost for one of the characters
 	 * attributes, such as attack, defense and so on.
 	 * 
-	 * @author 		Kalle Sj�str�m
+	 * @author 		Kalle Sjöström
 	 * @version 	0.7.0 - 15 Sep 2008
 	 */
 	public class Boost {

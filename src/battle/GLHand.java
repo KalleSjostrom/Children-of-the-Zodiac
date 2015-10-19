@@ -22,7 +22,7 @@ import character.Creature;
  * This class represents the hand in the battle. The hand is the cursor
  * pointer that tells which creature to attack.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 21 July 2008
  */
 public class GLHand extends Object2D {

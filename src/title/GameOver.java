@@ -24,7 +24,7 @@ import organizer.GameMode;
  * screen and switch to the title screen when the player presses the 
  * cross button.
  * 
- * @author 		Kalle Sjöström.
+ * @author 		Kalle Sj√∂str√∂m.
  * @version 	0.7.0 - 27 Jan 2008
  */
 public class GameOver extends GameMode {

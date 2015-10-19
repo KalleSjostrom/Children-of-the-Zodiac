@@ -17,7 +17,7 @@ import java.awt.image.BufferedImage;
  * getThumbnailScreenShot() which enables the menu to get the
  * thumb nail screen shot to be used in the menu. 
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 19 May 2008
  */
 public abstract class MenuStarter extends GameMode {

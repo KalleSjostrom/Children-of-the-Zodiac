@@ -27,7 +27,7 @@ import organizer.Organizer;
  * The Landscape Loader class.
  * This class loads the landscape from the world1.map file.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 14 May 2008
  */
 public abstract class LandscapeLoader extends MenuStarter {
@@ -139,7 +139,7 @@ public abstract class LandscapeLoader extends MenuStarter {
 	 * 
 	 * This class loads the information about the landscape from a *.map file.
 	 * 
-	 * @author      Kalle Sj�str�m
+	 * @author      Kalle Sjöström
 	 * @version     0.7.0 - 14 May 2008
 	 */
 	private class MapLoader extends AbstractMapLoader {

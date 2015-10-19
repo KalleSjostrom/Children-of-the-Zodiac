@@ -19,7 +19,7 @@ import java.util.Arrays;
  * and presses the cross button, this text will be received if the isInRange
  * method returns true.
  * 
- * @author 		Kalle Sjöström.
+ * @author 		Kalle Sj√∂str√∂m.
  * @version 	0.7.0 - 09 Feb 2008 
  *
  */

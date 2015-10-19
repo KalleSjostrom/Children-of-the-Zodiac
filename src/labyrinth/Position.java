@@ -12,7 +12,7 @@ package labyrinth;
  * This class stores a player position. It has both a location and also
  * an angle or direction.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 25 May 2008
  */
 public class Position {

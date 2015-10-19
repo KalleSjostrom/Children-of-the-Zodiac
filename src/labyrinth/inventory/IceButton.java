@@ -16,7 +16,7 @@ import labyrinth.Node;
  * where this inventory resides, the Database class is called to find out 
  * whether the button is pressed or not.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 13 Sep 2008
  */
 public class IceButton extends Button {

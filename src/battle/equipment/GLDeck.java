@@ -31,7 +31,7 @@ import graphics.Graphics;
  * choose which cards to play. It also has a save slot which the player
  * can use to save one card.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 28 June 2008
  */
 public class GLDeck extends AbstractDeck {

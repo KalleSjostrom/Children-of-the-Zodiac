@@ -13,7 +13,7 @@ import info.Values;
  * This class represents a obstacle in a village, it has positions and methods for 
  * checking collisions with the obstacle.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 09 Feb 2008
  */
 public class Obstacle {

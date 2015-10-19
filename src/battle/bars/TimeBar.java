@@ -13,7 +13,7 @@ import graphics.Graphics;
  * This class represents the bar displaying the time the the player has
  * to make a move in battle.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 22 July 2008
  */
 public class TimeBar extends ProgressBar {

@@ -12,7 +12,7 @@ import info.Values;
 /**
  * This class is a sprite which follows instructions.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 09 Oct 2008
  */
 public abstract class InstructionFollower extends Sprite {

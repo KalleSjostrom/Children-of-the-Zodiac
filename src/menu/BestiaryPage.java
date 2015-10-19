@@ -18,7 +18,7 @@ import character.Bestiary.Stats;
  * can look at the images of the enemies and see their stats, if the
  * player has encountered an enemy enough times. 
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 17 Feb 2008
  */
 public class BestiaryPage extends AbstractPage {

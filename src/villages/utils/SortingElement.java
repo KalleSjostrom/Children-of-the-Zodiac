@@ -16,7 +16,7 @@ package villages.utils;
  * by their yPos values, the index is gotten and used to access the 
  * right party member.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version     0.7.0 - 09 Feb 2008
  */
 public class SortingElement implements Comparable<SortingElement> {

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * This class represents a list of items. Used by the main menu.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 25 Jan 2008
  */
 public class Items {
@@ -129,7 +129,7 @@ public class Items {
 	/**
 	 * This nested class stores information about a item.
 	 * 
-	 * @author 	   Kalle Sjöström 
+	 * @author 	   Kalle Sj√∂str√∂m 
 	 * @version    0.7.0 - 25 Jan 2008
 	 */
 	public static class Item {

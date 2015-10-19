@@ -20,7 +20,7 @@ import organizer.GameMode;
  * a list of game actions and a method for mapping them to certain key
  * codes.
  *
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 17 May 2008
  */
 public abstract class InputManager {

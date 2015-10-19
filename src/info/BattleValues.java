@@ -13,7 +13,7 @@ import graphics.ImageHandler;
  * This class is a static library for values concerning the battle.
  * It has values for scales, positions, speeds to name a few.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 21 July 2008
  */
 public class BattleValues {

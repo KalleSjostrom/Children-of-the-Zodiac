@@ -24,7 +24,7 @@ import character.Character;
  * All the party members is managed from this class. The animation update 
  * and movement of all the party members is carried out here. 
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 13 May 2008
  */
 public class Player {

@@ -14,7 +14,7 @@ package organizer;
  * can call a subGameModes buttonPressed() when a button is pressed and it is
  * up to the implementation of the SubGameMode what will happen.
  * 
- * @author 		Kalle Sjöström.
+ * @author 		Kalle Sj√∂str√∂m.
  * @version 	0.7.0 - 30 Sep 2008
  */
 public abstract class SubGameMode {

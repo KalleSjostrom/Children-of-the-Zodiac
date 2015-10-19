@@ -16,7 +16,7 @@ import character.Creature;
  * This class combines the shared price grouping for the magic cards.
  * All these cards should have the same price regardless of element.
  * 
- * @author 		Kalle Sjöström 
+ * @author 		Kalle Sj√∂str√∂m 
  * @version 	0.7.0 - 11 Nov 2008
  */
 public abstract class Magic extends Card {

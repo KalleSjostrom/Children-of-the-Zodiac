@@ -55,7 +55,7 @@ import graphics.Graphics;
  * game mode runs it. The battle consists of different modes, which are
  * Idling, Battling, Enemy turn, Game over, Animate, Result, Spoils and Exit.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 18 June 2008.
  */
 public class Battle extends SubGameMode {

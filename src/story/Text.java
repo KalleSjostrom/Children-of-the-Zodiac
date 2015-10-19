@@ -15,7 +15,7 @@ import java.util.Arrays;
  * This class has information about the text and 
  * the amount of time to display the text.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 31 Jan 2008
  */
 public class Text extends Fadeable {

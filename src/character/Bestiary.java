@@ -18,7 +18,7 @@ import java.util.Iterator;
  * times, some stats and images are shown from the bestiary page in the menu.
  * The information about which stats to show are stored in this class.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 22 Sept 2008
  */
 public class Bestiary {
@@ -135,7 +135,7 @@ public class Bestiary {
 	 * If the counter is not higher than the set value, (this value is set
 	 * by the enemy bank file) ??? is returned as the attribute. 
 	 * 
-	 * @author 		Kalle Sjöström
+	 * @author 		Kalle Sj√∂str√∂m
 	 * @version 	0.7.0 - 22 Sept 2008
 	 */
 	public class Stats {

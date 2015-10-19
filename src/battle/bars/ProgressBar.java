@@ -18,7 +18,7 @@ import info.Values;
  * It is used in battle to show which creature is about to hit.
  * The idling bar, is another name for it.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 22 July 2008
  */
 public class ProgressBar extends Object2D {

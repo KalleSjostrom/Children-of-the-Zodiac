@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * This class handles the obstacles in a village, it has positions and
  * methods for checking collisions with between obstacles.
  * 
- * @author 		Kalle Sjöström
+ * @author 		Kalle Sj√∂str√∂m
  * @version 	0.7.0 - 09 Feb 2008
  */
 public class ObstacleHandler {

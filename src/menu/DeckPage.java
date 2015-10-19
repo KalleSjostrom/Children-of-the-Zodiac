@@ -29,7 +29,7 @@ import graphics.Graphics;
  * On this deck page, the user can exchange cards between their own deck and
  * the main party deck, but also arrange the decks.
  * 
- * @author 		Kalle Sj�str�m
+ * @author 		Kalle Sjöström
  * @version 	0.7.0 - 11 Feb 2008
  */
 public class DeckPage extends AbstractPage {

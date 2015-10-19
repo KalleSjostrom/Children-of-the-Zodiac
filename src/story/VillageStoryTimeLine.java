@@ -124,7 +124,7 @@ import character.Character;
  * game are talking to villagers. All the sprites is turned into actors
  * and their instructions is executed and updated by the time line.  
  * 
- * @author 		Kalle Sj�str�m.
+ * @author 		Kalle Sjöström.
  * @version 	0.7.0 - 04 Oct 2008
  */
 public class VillageStoryTimeLine extends AbstractTimeLine {
