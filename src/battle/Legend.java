@@ -68,23 +68,21 @@ public class Legend extends Hideable {
 		
 		int x = (int) (TEXT_X + super.getXtrans() * 600);
 		
-		g.startText(-1, 0, 24);
-		g.drawMultiString(INFO[0], x, TEXT_HEIGHT);
-		g.drawMultiString(INFO[1], x, TEXT_HEIGHT + STEP);
-		g.drawMultiString(INFO[2], x, TEXT_HEIGHT + 2 * STEP);
-		g.drawMultiString(INFO[3], x, TEXT_HEIGHT + 3 * STEP);
-		g.drawMultiString(INFO[support ? 5 : 4], x, TEXT_HEIGHT + 4 * STEP);
-		g.drawMultiString(INFO[6], x, TEXT_HEIGHT + 5 * STEP);
-		g.setTextColorAndApply(1, 1);
+		g.drawString(INFO[0], x, TEXT_HEIGHT);
+		g.drawString(INFO[1], x, TEXT_HEIGHT + STEP);
+		g.drawString(INFO[2], x, TEXT_HEIGHT + 2 * STEP);
+		g.drawString(INFO[3], x, TEXT_HEIGHT + 3 * STEP);
+		g.drawString(INFO[support ? 5 : 4], x, TEXT_HEIGHT + 4 * STEP);
+		g.drawString(INFO[6], x, TEXT_HEIGHT + 5 * STEP);
+		g.setColor(1.0f);
 		x -= 2;
 		int y = TEXT_HEIGHT - 2;
-		g.drawMultiString(INFO[0], x, y);
-		g.drawMultiString(INFO[1], x, y + STEP);
-		g.drawMultiString(INFO[2], x, y + 2 * STEP);
-		g.drawMultiString(INFO[3], x, y + 3 * STEP);
-		g.drawMultiString(INFO[support ? 5 : 4], x, y + 4 * STEP);
-		g.drawMultiString(INFO[6], x, y + 5 * STEP);
-		g.finishText();
+		g.drawString(INFO[0], x, y);
+		g.drawString(INFO[1], x, y + STEP);
+		g.drawString(INFO[2], x, y + 2 * STEP);
+		g.drawString(INFO[3], x, y + 3 * STEP);
+		g.drawString(INFO[support ? 5 : 4], x, y + 4 * STEP);
+		g.drawString(INFO[6], x, y + 5 * STEP);
 	}
 
 	public void drawTopLayer(Graphics g) {

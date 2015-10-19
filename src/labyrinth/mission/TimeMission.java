@@ -29,10 +29,9 @@ public class TimeMission extends Mission {
 	}
 
 	public void draw(Graphics g) {
-		g.startText();
 		super.update();
 		g.setFontSize(40);
-		Graphics.setTextColor(1);
+		g.setColor(1);
 		int status = getStatus();
 		time += Values.INTERVAL;
 		if (time > 1000) {
@@ -41,7 +40,7 @@ public class TimeMission extends Mission {
 			setStatus(status);
 		}
 		if (isFinished(status)) {
-			g.drawMultiString("Time's up!", (int) (800 + getXtrans() * 300), 50);
+			g.drawString("Time's up!", (int) (800 + getXtrans() * 300), 50);
 			if (!gameOver) {
 				GameMode m = Organizer.getOrganizer().getCurrentMode();
 				Labyrinth l = (Labyrinth) m;
@@ -56,9 +55,8 @@ public class TimeMission extends Mission {
 		} else {
 			sec = status % 60;
 			min = status / 60;
-			g.drawMultiString(string + min + ":" + (sec < 10 ? "0" : "") + sec, (int) (800 + getXtrans() * 300), 50);
+			g.drawString(string + min + ":" + (sec < 10 ? "0" : "") + sec, (int) (800 + getXtrans() * 300), 50);
 		}
-		g.finishText();
 	}
 
 	public void initDraw(Graphics g) {}

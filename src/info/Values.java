@@ -142,6 +142,13 @@ public class Values {
 	/* The resolution */
 	public static int[] RESOLUTIONS;
 	public static int[] ORIGINAL_RESOLUTION = {768, 1024};
+	private static float FAR = 10;
+	private static float NEAR = 0;
+	public static float[] ORTHOGRAPHIC_PROJECTION = new float[]{
+			2.0f/ORIGINAL_RESOLUTION[X], 0, 0, -1,
+			0, -2.0f/ORIGINAL_RESOLUTION[Y], 0, 1,
+			0, 0, -2/(FAR-NEAR), -(FAR+NEAR)/(FAR-NEAR),
+			0, 0, 0, 1};
 	public static float WIDE_SCREEN_HEIGHT = 576;
 	public static float RESOLUTION_X_PRECENT;
 	public static float RESOLUTION_Y_PRECENT;
@@ -515,7 +522,7 @@ public class Values {
 	 */
 	public static BufferedImage getMenuScreenShot() {
 		try {
-			BufferedImage im = GameEventListener.getG().copyFrame(Graphics.gl);
+			BufferedImage im = GameEventListener.getG().copyFrame(Graphics.gl2);
 			return GraphicHelp.scaleImage(im, 183, 137);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -605,32 +612,6 @@ public class Values {
 		return copy;
 	}
 
-	/**
-	 * This method swaps the integer at position first with 
-	 * the integer at position second.
-	 * 
-	 * @param array the array which contains the integers to swap.
-	 * @param first the index of one of the integers to swap.
-	 * @param second the index of one of the integers to swap.
-	 */
-	public static void swapInt(int[] array, int first, int second) {
-		int temp = array[first];
-		array[first] = array[second];
-		array[second] = temp;
-	}
-
-	/**
-	 * This method loads the identity matrix for the given gl object.
-	 * (calls glLoadIdentity()). It also scales the identity matrix so
-	 * that it will fit the current resolution.
-	 * 
-	 * @param gl the GL to load the matrix on.
-	 */
-//	public static void loadIdentity(GL2 gl) {
-//		gl.glLoadIdentity();
-//		gl.glScalef(ASPECT_RATIO, 1, 1);
-//	}
-
 	public static boolean check(int setting) {
 		return SETTINGS_MAP[setting];
 	}
@@ -643,13 +624,7 @@ public class Values {
 		return (int) (((angle + 90) / 90 + 4) % 4);
 	}
 
-	public static void printStackTrace(int size) {
-		StackTraceElement[] st = new IndexOutOfBoundsException().getStackTrace();
-		for (int i = 0; i < Math.min(size, st.length); i++) {
-			System.out.println(st[i]);
-		}
-	}
-
+	// TODO(kalle): WTH?!
 	public static void zoom(boolean small) {
 		if (small) {
 			float percent = 1; //.6f;

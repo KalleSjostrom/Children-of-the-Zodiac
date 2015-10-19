@@ -12,22 +12,15 @@ import graphics.DoubleBackground;
 import graphics.Graphics;
 import info.Database;
 import info.Values;
-
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
-
 import java.util.logging.*;
-
 import bodies.system.ParticleSystem;
-
 import menu.DeckPage;
-
 import organizer.GameMode;
 import organizer.Organizer;
-
 import sound.SoundValues;
 import sprite.Sprite;
 import store.Door;
@@ -82,7 +75,6 @@ public class Village extends VillageLoader {
 		setDrawPos(0);
 		setDrawPos(1);
 		createSpritesList();
-		Graphics.setTextColor(Color.black);
 		exitName = infoMap.get("landname");
 		logger.log(Level.FINE, "Init " + inStore + " " + inHouse + " " + Arrays.toString(fromHouse));
 		int delay = 0;
@@ -724,7 +716,7 @@ public class Village extends VillageLoader {
 	 * @param g the graphics to draw on.
 	 */
 	public void draw(Graphics g) {
-//		g.getGL().glTranslatef(-.25f * Values.RESOLUTIONS[Values.X], -.25f * Values.RESOLUTIONS[Values.Y], 1);
+//		Graphics.gl.glTranslatef(-.25f * Values.RESOLUTIONS[Values.X], -.25f * Values.RESOLUTIONS[Values.Y], 1);
 		//super.drawNew(g);
 		g.setColor(1);
 		synchronized (this) {

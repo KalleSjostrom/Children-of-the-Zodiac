@@ -27,7 +27,7 @@ import bodies.system.ParticleSystem;
  * @author     Kalle Sj�str�m
  * @version    0.7.0 - 13 May 2008
  */
-public class DoubleBackground extends Sprite2D {
+public class DoubleBackground {
 
 	public static final int BOTTOM_LAYER = -1;
 	public static final int VILLAGER_LAYER = 0;
@@ -81,7 +81,6 @@ public class DoubleBackground extends Sprite2D {
 	
 	public DoubleBackground(int backgroundWidth, int backgroundHeight,
 			int actualWidth, int actualHeight) {
-		super(null, null);
 		width = backgroundWidth;
 		height = backgroundHeight;
 		this.actualHeight = actualHeight;

@@ -18,8 +18,7 @@ public class HelpText {
 	}
 
 	public void drawTopLayer(Graphics g) {
-		g.setFontSize(34);
-		Graphics.setTextColor(0);
+		g.setColor(0);
 		g.setFontSize(26);
 		Row.drawRows(g, rows);
 	}

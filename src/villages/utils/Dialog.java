@@ -11,19 +11,13 @@ import factories.Load;
 import graphics.Graphics;
 import graphics.ImageHandler;
 import info.Values;
-
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import com.jogamp.opengl.GL2;
-
 import menu.DeckPage;
 import menu.MenuHand;
 import menu.MenuValues;
-
 import organizer.GameMode;
-
 import cards.Card;
 
 /**
@@ -241,7 +235,7 @@ public class Dialog {
 			drawGift(g, DS);
 		} else if (DS.image) {
 			g.setColor(1, 1, 1, alpha);
-			g.drawImage(Graphics.fadeImage, 0, -384, 2);
+			g.drawImage(Graphics.fadeImage, 0, -384, 2, 1);
 			if (speed > 0 && alpha <= 2) {
 				alpha += speed;
 			} else if (speed < 0 && alpha >= 0) {
@@ -267,13 +261,11 @@ public class Dialog {
 		}
 		g.drawImage(DIALOG_1, xs[DIALOG][FIRST], ys[DIALOG][FIRST]);
 
-		g.startText();
-		g.drawMultiString(ds.name, xs[NAME][FIRST], ys[NAME][FIRST]);
-		g.drawMultiString(String.valueOf(inputNr[0]), 70, 130);
-		g.drawMultiString(String.valueOf(inputNr[1]), 100, 130);
-		g.drawMultiString(String.valueOf(inputNr[2]), 130, 130);
-		g.drawMultiString(String.valueOf(inputNr[3]), 160, 130);
-		g.finishText();
+		g.drawString(ds.name, xs[NAME][FIRST], ys[NAME][FIRST]);
+		g.drawString(String.valueOf(inputNr[0]), 70, 130);
+		g.drawString(String.valueOf(inputNr[1]), 100, 130);
+		g.drawString(String.valueOf(inputNr[2]), 130, 130);
+		g.drawString(String.valueOf(inputNr[3]), 160, 130);
 		int x = 0;
 		switch (current) {
 		case 0:
@@ -324,7 +316,7 @@ public class Dialog {
 		if (fontSize != 30) {
 			g.setFontSize(30);
 		}
-		Graphics.setTextColor(Color.black);
+		g.setColor(Graphics.BLACK);
 		if (first) {
 			if (secondHasBeenShown) {
 				g.drawImage(DIALOG_2, xs[DIALOG][SECOND], ys[DIALOG][SECOND]);
@@ -363,10 +355,8 @@ public class Dialog {
 			g.drawString(fl, xs[FIRST_LINE][pos], y1);
 		} else {
 			g.setFontSize(small ? size : size + 6);
-			g.startText();
-			g.drawMultiString(fl, xs[FIRST_LINE][pos], y1);
-			g.drawMultiString(sl, xs[SECOND_LINE][pos], y2);
-			g.finishText();
+			g.drawString(fl, xs[FIRST_LINE][pos], y1);
+			g.drawString(sl, xs[SECOND_LINE][pos], y2);
 		}
 	}
 
@@ -386,15 +376,12 @@ public class Dialog {
 			g.setBlendFunc(GL2.GL_ONE_MINUS_SRC_ALPHA);
 			g.setAlphaFunc(.1f);
 		}
-		Graphics.setTextColor(Color.black);
+		g.setColor(Graphics.BLACK);
 		g.drawImage(DIALOG_1, xs[DIALOG][FIRST], ys[DIALOG][FIRST]);
 		g.setFontSize(MenuValues.MENU_FONT_SIZE_LARGE);
 		int yValue = sl.equals("") ? 110 : 85;
-		g.startText();
-		g.drawMultiString(fl, 65, yValue);
-		g.drawMultiString(sl, 65, 135);
-		g.finishText();
-//		g.setFontSize(MenuValues.MENU_FONT_SIZE);
+		g.drawString(fl, 65, yValue);
+		g.drawString(sl, 65, 135);
 	}
 	
 	private void drawGift(Graphics g, DialogSequence ds) {
@@ -437,12 +424,10 @@ public class Dialog {
 		}
 		g.drawImage(DIALOG_1, xs[DIALOG][FIRST], ys[DIALOG][FIRST]);
 
-		g.startText();
-		g.drawMultiString(alt[0], 65, 75);
-		g.drawMultiString(alt[1], 370, 75);
-		g.drawMultiString(alt[2], 65, 135);
-		g.drawMultiString(alt[3], 370, 135);
-		g.finishText();
+		g.drawString(alt[0], 65, 75);
+		g.drawString(alt[1], 370, 75);
+		g.drawString(alt[2], 65, 135);
+		g.drawString(alt[3], 370, 135);
 		g.drawImage(hand, handX[xChoice], handY[yChoice]);
 	}
 	
@@ -454,13 +439,11 @@ public class Dialog {
 		}
 		g.drawImage(DIALOG_1, xs[DIALOG][FIRST], ys[DIALOG][FIRST]);
 
-		g.startText();
-		g.drawMultiString(title, xs[NAME][FIRST], ys[NAME][FIRST]);
-		g.drawMultiString(alt[0], xs[FIRST_LINE][FIRST], ys[FIRST_LINE][FIRST]);
-		g.drawMultiString(alt[1], 370, ys[SECOND_LINE][FIRST]);
-		g.drawMultiString(alt[2], xs[SECOND_LINE][FIRST], ys[SECOND_LINE][FIRST]);
-		g.drawMultiString(alt[3], 370, ys[SECOND_LINE][FIRST]);
-		g.finishText();
+		g.drawString(title, xs[NAME][FIRST], ys[NAME][FIRST]);
+		g.drawString(alt[0], xs[FIRST_LINE][FIRST], ys[FIRST_LINE][FIRST]);
+		g.drawString(alt[1], 370, ys[SECOND_LINE][FIRST]);
+		g.drawString(alt[2], xs[SECOND_LINE][FIRST], ys[SECOND_LINE][FIRST]);
+		g.drawString(alt[3], 370, ys[SECOND_LINE][FIRST]);
 		g.drawImage(hand, handX[xChoice], handY[yChoice]);
 	}
 

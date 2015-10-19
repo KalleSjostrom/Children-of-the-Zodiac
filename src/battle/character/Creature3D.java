@@ -22,7 +22,6 @@ import battle.bars.ProgressBar;
 import cards.AbstractCard;
 import character.Creature;
 
-import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.util.texture.Texture;
 import com.jogamp.opengl.util.texture.TextureData;
 import com.jogamp.opengl.util.texture.awt.AWTTextureIO;
@@ -180,7 +179,7 @@ public abstract class Creature3D extends Object2D {
 			Texture t = ImageHandler.getTexture(
 					Values.MenuImages + "Elements/" + element + ".png")
 					.getTexture();
-			t.bind(g.getGL());
+			t.bind(Graphics.gl);
 			g.push();
 			g.scale(.65f);
 			g.beginQuads();
@@ -204,7 +203,6 @@ public abstract class Creature3D extends Object2D {
 			g.translate(-.22f, -.05f, 0);
 		}
 		int[] boosts = creature.getBoosts();
-		int counter = 0;
 		for (int i = 0; i < boosts.length; i++) {
 			if (boosts[i] != 0) {
 				int nr = (i + 1) * (boosts[i] == 1 ? 1 : 11);
@@ -214,7 +212,6 @@ public abstract class Creature3D extends Object2D {
 				g.translate(DISTANCE_BETWEEN_ICONS, 0, 0);
 				Utils3D.draw3D(g, t, coordList[2]);
 			}
-			counter++;
 		}
 		g.pop();
 	}
@@ -241,8 +238,8 @@ public abstract class Creature3D extends Object2D {
 		textHeight = textImage.getHeight() / 300f;
 
 		data = GameTexture.newTextureData(textImage);
-		tex = AWTTextureIO.newTexture(g.getGL(), data);
-		tex.updateImage(g.getGL(), data);
+		tex = AWTTextureIO.newTexture(Graphics.gl, data);
+		tex.updateImage(Graphics.gl, data);
 	}
 
 	/**
@@ -259,7 +256,7 @@ public abstract class Creature3D extends Object2D {
 		
 		drawInfo(g2d);
 		g2d.dispose();
-		tex.updateImage(g.getGL(), data);
+		tex.updateImage(Graphics.gl, data);
 	}
 
 	/**

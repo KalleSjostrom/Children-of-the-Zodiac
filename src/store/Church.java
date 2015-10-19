@@ -33,7 +33,6 @@ import organizer.GameMode;
 
 import sound.SoundPlayer;
 import battle.bars.LevelUpBar;
-import bodies.Vector3f;
 import character.Character;
 
 /**
@@ -41,13 +40,13 @@ import character.Character;
  * the game or be resurrected if any of the party members has died.
  * The priest is animated when resurrecting.
  * 
- * @author 		Kalle Sjšstršm 
+ * @author 		Kalle Sjï¿½strï¿½m 
  * @version 	0.7.0 - 13 May 2008
  */
 public class Church extends Building {
 
-	private static final Vector3f GREEN = new Vector3f(0, .7f, 0);
-	private static final Vector3f BLUE = new Vector3f(0, 0, .7f);
+	private static final float[] GREEN = new float[]{0, 0.7f, 0};
+	private static final float[] BLUE = new float[]{0, 0, 0.7f};
 	
 	private static final int BLESS_NAME_DISTANCE = 50;
 	private static final int BLESS_NAME_X = 50;
@@ -461,13 +460,15 @@ public class Church extends Building {
 			int costX = 560;
 			int active = activeNode.getMenuCursor();
 			ArrayList<Character> cs = Load.getCharacters();
-			g.drawStringSetSize("Cost", costX, BLESS_NAME_Y - 40, 30);
+			g.setFontSize(30);
+			g.drawString("Cost", costX, BLESS_NAME_Y - 40);
 			totalCost = 0;
 			for (int i = 0; i < cs.size(); i++) {
 				Character c = cs.get(i);
 				PercentPair pair = percents.get(c.getName());
 				int y = BLESS_NAME_Y + i * BLESS_NAME_DISTANCE;
-				g.drawStringSetSize(pair.getCost(), costX, y, 26);
+				g.setFontSize(26);
+				g.drawString(pair.getCost(), costX, y);
 				totalCost += pair.cost;
 				LevelUpBar.draw(g, barX, y + barDist, pair.getLow(), pair.getHigh(), i == active ? 1.7f : 1.7f);
 				if (i == active) {
@@ -519,7 +520,7 @@ public class Church extends Building {
 		}
 	}
 
-	private void drawHand(Graphics g, MenuHand hand, Vector3f v) {
+	private void drawHand(Graphics g, MenuHand hand, float[] v) {
 		if (hand.isDimmed()) {
 			hand.drawHand(g);
 		} else {

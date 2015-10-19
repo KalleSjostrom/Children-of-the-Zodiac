@@ -367,7 +367,6 @@ public class Battle extends SubGameMode {
 			hand.draw(g);
 			legend.setSupport(isSupportMode());
 			legend.draw(g);
-			g.loadIdentity();
 			if (mode == BattleManager.ANIMATE) {
 				animate.draw(g);
 			}

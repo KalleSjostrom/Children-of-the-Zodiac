@@ -126,7 +126,7 @@ public class LabyrinthRenderer {
 	 * @param gl the GL to add the fog to.
 	 */
 	public void addFog(Graphics g) {
-		GL2 gl = g.getGL();
+		GL2 gl = Graphics.gl2;
 		if (settings[MapLoader.FOG]) {
 			gl.glEnable(GL2.GL_FOG);
 			gl.glFogf(GL2.GL_FOG_MODE, GL2.GL_EXP);
@@ -155,7 +155,7 @@ public class LabyrinthRenderer {
 	 * @param g the GL to add the light to.
 	 */
 	public void addLight(Graphics g) {
-		GL2 gl = g.getGL();
+		GL2 gl = Graphics.gl2;
 		if (settings[MapLoader.LIGHT_0]) {
 			addLight(gl, MapLoader.LIGHT_0, GL2.GL_LIGHT0);
 		} else {
@@ -183,7 +183,7 @@ public class LabyrinthRenderer {
 	}
 
     public void setLight(Graphics g) {
-    	GL2 gl = g.getGL();
+    	GL2 gl = Graphics.gl2;
     	gl.glLightfv(GL2.GL_LIGHT3, GL2.GL_POSITION, new float[]{0, 0, 0, 1}, 0);
     	gl.glLightfv(GL2.GL_LIGHT3, GL2.GL_AMBIENT, new float[]{1, 1, 1, 1}, 0);
     	gl.glLightfv(GL2.GL_LIGHT3, GL2.GL_DIFFUSE, new float[]{1, 1, 1, 1}, 0);
@@ -205,13 +205,13 @@ public class LabyrinthRenderer {
 	}
 
 	public void renderSky(Graphics g) {
-		if (settings[MapLoader.SKY]) {
+		/*if (settings[MapLoader.SKY]) {
 			g.push();
 			g.loadIdentity();
 			g.setLightEnabled(false);
 			g.setDepthTestEnabled(false);
 			g.setTextureEnabled(false);
-			GL2 gl = g.getGL();
+			GL2 gl = Graphics.gl2;
 			// TODO: change to g.setCullFaceEnabled(false);
 			gl.glDisable(GL2.GL_CULL_FACE);
 			float[] colors = settingValues[MapLoader.SKY];
@@ -229,12 +229,12 @@ public class LabyrinthRenderer {
 			g.setDepthTestEnabled(true);
 			g.setTextureEnabled(true);
 			g.pop();
-		}
+		}*/
 	}
 
 	public void setMaterial(Graphics g) {
 		float[] material = settingValues[MapLoader.MATERIAL];
-		GL2 gl = g.getGL();
+		GL2 gl = Graphics.gl2;
 		gl.glMaterialfv(GL2.GL_FRONT, GL2.GL_AMBIENT, material, MapLoader.MATERIAL_AMBIENT);
 		gl.glMaterialfv(GL2.GL_FRONT, GL2.GL_DIFFUSE, material, MapLoader.MATERIAL_DIFFUSE);
 		gl.glMaterialfv(GL2.GL_FRONT, GL2.GL_SPECULAR, material, MapLoader.MATERIAL_SPECULAR);

@@ -12,7 +12,6 @@ import graphics.ImageHandler;
 import info.SoundMap;
 import info.Values;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -134,25 +133,6 @@ public abstract class AbstractPage extends SubGameMode {
 	protected void setPage(int[] page) {
 		this.page = page;
 	}
-	
-	private static HashMap<Integer, String> createWiiMap() {
-		HashMap<Integer, String> map = new HashMap<Integer, String>();
-		map.put(GameMode.TRIANGLE, "wii+");
-		map.put(GameMode.CROSS, "wii2");
-		map.put(GameMode.CIRCLE, "wii1");
-		map.put(GameMode.SQUARE, "wii-");
-		map.put(GameMode.L1, "wiiB");
-		map.put(GameMode.L2, "wiiA");
-		map.put(GameMode.R1, "wiiB");
-		map.put(GameMode.R2, "wiiA");
-		map.put(GameMode.L1R1, "wiiB");
-		map.put(GameMode.L2R2, "wiiA");
-		map.put(GameMode.SELECT, "wiiShake");
-		map.put(GameMode.START, "wiiHome");
-		map.put(GameMode.UP_DOWN, "wiiUpDown");
-		map.put(GameMode.LEFT_RIGHT, "wiiLeftRight");
-		return map;
-	}
 
 	private static HashMap<Integer, String> createKeyBoardMap() {
 		HashMap<Integer, String> map = new HashMap<Integer, String>();
@@ -251,11 +231,11 @@ public abstract class AbstractPage extends SubGameMode {
 	 * 
 	 * @param g3D the graphics to draw on.
 	 */
-	protected void drawStandard(Graphics g3D) {
-		g3D.setFontSize(MenuValues.MENU_FONT_SIZE);
-		Graphics.setTextColor(Color.BLACK);
-		g3D.drawImage(background, 0, 0);
-		drawMenuBackground(g3D);
+	protected void drawStandard(Graphics g) {
+		g.setFontSize(MenuValues.MENU_FONT_SIZE);
+		g.setColor(Graphics.BLACK);
+		g.drawImage(background, 0, 0);
+		drawMenuBackground(g);
 	}
 	
 	public void trianglePressed() {

@@ -113,7 +113,7 @@ public class ParticleSystem extends BodySystem {
 	}
 	
 	private void drawIt(Graphics g, int x, int y) {
-		if (active) {
+		/*if (active) {
 			if (!inited) {
 				init(g);
 				inited = true;
@@ -137,7 +137,7 @@ public class ParticleSystem extends BodySystem {
 			g.setBlendFunc(GL2.GL_ONE_MINUS_SRC_ALPHA);
 			g.setAlphaFunc(.1f);
 			g.setColor(1);
-		}
+		}*/
 	}
 
 	private void init(Graphics g) {

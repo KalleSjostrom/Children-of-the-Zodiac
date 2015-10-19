@@ -39,7 +39,7 @@ public class Utils3D {
 	 */
 	private static void draw3D(
 			Graphics g, TextureCoords tc, float[] x, float[] y, float[] z) {
-		GL2 gl = g.getGL();
+		GL2 gl = Graphics.gl2;
 		gl.glTexCoord2f(tc.left(), tc.bottom()); gl.glVertex3f(x[0], y[0], z[0]);
 		gl.glTexCoord2f(tc.right(), tc.bottom()); gl.glVertex3f(x[1], y[0], z[0]);
 		gl.glTexCoord2f(tc.right(), tc.top()); gl.glVertex3f(x[1], y[1], z[1]);
@@ -70,7 +70,7 @@ public class Utils3D {
 	 */
 	private static void draw3D(Graphics g, TextureCoords tc, float percent, 
 			float[] x, float[] y, float[] z, float length) {
-		GL2 gl = g.getGL();
+		GL2 gl = Graphics.gl2;
 		gl.glTexCoord2f(tc.left(), tc.bottom());
 		gl.glVertex3f(x[0], y[0], z[0]);
 		gl.glTexCoord2f(tc.right() * percent, tc.bottom());
@@ -106,7 +106,7 @@ public class Utils3D {
 	 */
 	private static void draw3DY(Graphics g, TextureCoords tc, float percent, 
 			float[] x, float[] y, float[] z, float length) {
-		GL2 gl = g.getGL();
+		GL2 gl = Graphics.gl2;
 		float ys = y[1] - length * percent;
 		gl.glTexCoord2f(tc.left(), tc.bottom() * percent); 
 		gl.glVertex3f(x[0], ys, z[0]);
@@ -135,7 +135,7 @@ public class Utils3D {
 	 */
 	private static void draw3DBackside(
 			Graphics g, TextureCoords tc, float[] x, float[] y, float[] z) {
-		GL2 gl = g.getGL();
+		GL2 gl = Graphics.gl2;
 		gl.glTexCoord2f(tc.right(), tc.top()); gl.glVertex3f(x[0], y[1], z[1]);
 		gl.glTexCoord2f(tc.left(), tc.top()); gl.glVertex3f(x[1], y[1], z[1]);
 		gl.glTexCoord2f(tc.left(), tc.bottom()); gl.glVertex3f(x[1], y[0], z[0]);
@@ -169,7 +169,7 @@ public class Utils3D {
 	 * @param coordList the list containing all the coordinates.
 	 */
 	public static void draw3D(Graphics g, Texture texture, float[][] coordList) {
-		texture.bind(g.getGL());
+		texture.bind(Graphics.gl);
 		g.beginQuads();
 		draw3D(g, texture.getImageTexCoords(), coordList);
 		g.end();
@@ -179,7 +179,7 @@ public class Utils3D {
 		TextureCoords tc = tex.getImageTexCoords();
 		float hs = size / 2f;
 //		g.draw3f(tc, false, x - hs, y - hs, z, x + hs, y + hs, z);
-		GL2 gl = g.getGL();
+		GL2 gl = Graphics.gl2;
 		tex.bind(gl);
 		gl.glBegin(GL2.GL_QUADS);
 		gl.glTexCoord2f(tc.left(), tc.bottom()); gl.glVertex3f(x - hs, y - hs, z);
@@ -206,7 +206,7 @@ public class Utils3D {
 		TextureCoords tc = tex.getImageTexCoords();
 		float h = tex.getHeight() * size * tc.bottom();
 		float w = tex.getWidth() * size;
-		GL2 gl = g.getGL();
+		GL2 gl = Graphics.gl2;
 		tex.bind(gl);
 		gl.glBegin(GL2.GL_QUADS);
 		gl.glTexCoord2f(tc.left(), tc.bottom()); gl.glVertex3f(x - w, y - h, z);
@@ -230,7 +230,7 @@ public class Utils3D {
 	 * @param coordList the list containing all the coordinates.
 	 */
 	public static void draw3DBackside(Graphics g, Texture tex, float[][] coordList) {
-		tex.bind(g.getGL());
+		tex.bind(Graphics.gl);
 		g.beginQuads();
 		draw3DBackside(g, tex.getImageTexCoords(), 
 				coordList[0], coordList[1], coordList[2]);
@@ -253,7 +253,7 @@ public class Utils3D {
 	 */
 	public static void draw3DPart(
 			Graphics g, Texture tex, float[][] coordList, float percent, float width) {
-		tex.bind(g.getGL());
+		tex.bind(Graphics.gl);
 		g.beginQuads();
 		draw3D(g, tex.getImageTexCoords(), percent,
 				coordList[0], coordList[1], coordList[2], width);
@@ -300,7 +300,7 @@ public class Utils3D {
 	 */
 	public static void draw3DPartY(
 			Graphics g, Texture tex, float[][] coordList, float percent, float height) {
-		tex.bind(g.getGL());
+		tex.bind(Graphics.gl);
 		g.beginQuads();
 		draw3DY(g, tex.getImageTexCoords(), percent,
 				coordList[0], coordList[1], coordList[2], height);

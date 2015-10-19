@@ -15,7 +15,7 @@ import java.util.HashMap;
 
 /**
  * 
- * @author 		Kalle Sjšstršm 
+ * @author 		Kalle Sjï¿½strï¿½m 
  * @version 	0.7.0 - 14 May 2088
  */
 public class AirLandscape extends AirLandscapeLoader {
@@ -134,7 +134,7 @@ public class AirLandscape extends AirLandscapeLoader {
 			if (name.startsWith("land")) {
 				name = name.replace("land", "");
 			}
-			g.drawSingleCenteredText(name, 60, 1, 0);
+			g.drawStringCentered(name, 60);
 		}
 		super.checkMenu();
 		super.draw(g);

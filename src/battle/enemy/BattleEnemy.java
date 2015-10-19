@@ -173,7 +173,7 @@ public class BattleEnemy extends Object2D {
 	
 	public void drawTopLayer(Graphics g) {
 		if (useCritImage && !isVisible()) {
-			g.fadeOldSchoolColorWhite(.8f, 0, 0, .5f);
+			g.drawImage(Graphics.whiteFadeImage, 0, 0, 8, 0.5f);
 		}
 	}
 
@@ -188,7 +188,7 @@ public class BattleEnemy extends Object2D {
 			g.loadIdentity();
 			g.translate(shakeoffx, shakeoffy + risey, info.get(EnemyInfo.DEPTH));
 			// -0.14884003
-			g.setColor3(usedColor);
+			g.setColor(usedColor[0], usedColor[1], usedColor[2]);
 			if (isVisible()) {
 				if (slice) {
 					life -= sliceFade;
@@ -223,7 +223,7 @@ public class BattleEnemy extends Object2D {
 	
 	private void drawSlice(
 			Graphics g, Texture texture, float[] x, float[] y, float[] z) {
-		GL2 gl = g.getGL();
+		GL2 gl = Graphics.gl2;
 		xsSpeed += XS_ACC * Values.INTERVAL;
 		xs -= xsSpeed;
 		float ys = xs*.3f;
@@ -241,7 +241,7 @@ public class BattleEnemy extends Object2D {
 		
 		float testy1 = y[0] + (y[1] - y[0]) * test1c;
 		float testy2 = y[0] + (y[1] - y[0]) * test2c;
-		g.setColor4(usedColor, life);
+		g.setColor(usedColor, life);
 		g.push();
 		texture.bind(gl);
 		g.beginQuads();

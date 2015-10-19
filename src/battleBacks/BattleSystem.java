@@ -76,7 +76,7 @@ public abstract class BattleSystem {
 		g.beginBlend(false);
 		g.setBlendFunc(GL2.GL_ONE);
 		
-		tex.bind(g.getGL());
+		tex.bind(Graphics.gl);
 		g.beginQuads();
 		for (BattleParticle p : particles) {
 			p.drawParticle(

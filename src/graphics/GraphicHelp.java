@@ -20,7 +20,7 @@ import java.awt.image.WritableRaster;
  * This class contains some static methods for drawing and handling
  * images and graphics.
  * 
- * @author 		Kalle Sjšstršm
+ * @author 		Kalle Sjï¿½strï¿½m
  * @version 	0.7.0 - 27 Jan 2008
  */
 public class GraphicHelp {
@@ -100,6 +100,7 @@ public class GraphicHelp {
 	 * @param size the size of the text.
 	 * @param c the color to draw the text with.
 	 */
+	// TODO(kalle): Move this to a shader!
 	public static void drawStringWithBlackFrame(
 			Graphics2D g, String text, int x, int y, int size, Color c, int offset, int font) {
 		g.setFont(Values.getFont(font, size));
@@ -112,6 +113,7 @@ public class GraphicHelp {
 		g.drawString(text, x, y);
 	}
 	
+	/*
 	public static void drawStringWithBlackFrame(
 			Graphics g, String text, int x, int y, int size, Color c, int offset, int font) {
 //		g.setFont(Values.BOLD);
@@ -125,7 +127,7 @@ public class GraphicHelp {
 		g.drawString(text, x, y, .8f);
 		
 //		g.setFont(Values.PLAIN);
-	}
+	}*/
 
 	/**
 	 * This method scales the given image to fit the given width and height.

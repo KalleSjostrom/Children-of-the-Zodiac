@@ -129,7 +129,7 @@ public abstract class AbstractStore extends Building {
 			g.drawImage(AbstractPage.images[14], 400, 300);
 			g.drawString(name, 430, 360);
 			String s = price + " gp";
-			int x = Graphics.calcAlignRight(s, 630);
+			int x = g.calcAlignRight(s, 630);
 			g.drawString(s, x, 390);
 			break;
 		case NOT_AFFORD:

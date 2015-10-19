@@ -29,7 +29,7 @@ import graphics.Graphics;
  * On this deck page, the user can exchange cards between their own deck and
  * the main party deck, but also arrange the decks.
  * 
- * @author 		Kalle Sjšstršm
+ * @author 		Kalle Sjï¿½strï¿½m
  * @version 	0.7.0 - 11 Feb 2008
  */
 public class DeckPage extends AbstractPage {
@@ -375,14 +375,12 @@ public class DeckPage extends AbstractPage {
 	 */
 	protected void draw3D(Graphics g) {
 		drawStandard(g);
-		g.startText();
-		g.drawMultiString(charName + "'s Deck - " + charDeck.getSizeInfo(),
+		g.drawString(charName + "'s Deck - " + charDeck.getSizeInfo(),
 				MenuValues.CHAR_DECK_X - 10, 
 				MenuValues.DECK_Y - 20);
-		g.drawMultiString("Party Deck - " + mainDeck.getSizeInfo(),
+		g.drawString("Party Deck - " + mainDeck.getSizeInfo(),
 				MenuValues.MAIN_DECK_X - 10,
 				MenuValues.DECK_Y - 20);
-		g.finishText();
 		switch (activeDeck) {
 		case NO_DECK :
 			g.setImageColor(1, 1, 1, 1);
@@ -489,21 +487,21 @@ public class DeckPage extends AbstractPage {
 			String[] info = c.getInfo();
 			String name = info[0];
 			y += 75;
-			g.drawStringSetSize("Name: " + name, x, (y), 26);
+			g.setFontSize(26);
+			g.drawString("Name: " + name, x, (y));
 			
 			g.setFontSize(MenuValues.MENU_FONT_SIZE);
-			g.startText();
 			y += 32;
-			g.drawMultiString(info[1], x + 20, y);
+			g.drawString(info[1], x + 20, y);
 			y += 27;
-			g.drawMultiString(info[2], x + 20, y);
+			g.drawString(info[2], x + 20, y);
 			y += 27;
-			g.drawMultiString(info[3], x + 20, y);
+			g.drawString(info[3], x + 20, y);
 			y += 32;
-			g.finishText();
 			
 			info = c.getVeryShortInfo();
-			g.drawStringSetSize("Effect: " + info[0] + info[1], x, y, 20);
+			g.setFontSize(20);
+			g.drawString("Effect: " + info[0] + info[1], x, y);
 		}
 	}
 	

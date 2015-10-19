@@ -10,15 +10,10 @@ package store;
 import graphics.Graphics;
 import graphics.ImageHandler;
 import info.Values;
-
 import java.util.HashMap;
-
 import menu.AbstractPage;
-import menu.MenuValues;
 import menu.Node;
-
 import organizer.GameMode;
-
 import villages.utils.Dialog;
 
 /**
@@ -31,7 +26,7 @@ import villages.utils.Dialog;
  * in 1024 * 768 resolution. The canvas created when drawing is rescaled anyway 
  * when drawn.
  * 
- * @author 		Kalle Sjšstršm 
+ * @author 		Kalle Sjï¿½strï¿½m 
  * @version 	0.7.0 - 01 Mar 2008
  */
 public abstract class Building extends GameMode {
@@ -208,24 +203,7 @@ public abstract class Building extends GameMode {
 	 */
 	protected void drawMenuBackground(Graphics g) {
 		AbstractPage.drawMenuBackground(g, store, menusUsed);
-	}
-
-	/**
-	 * This method sets up and draws some standard things in a building.
-	 * These include, a background, a keeper, a dialog and so on. It also
-	 * sets the correct font and color.
-	 * 
-	 * @param g the graphics to draw on.
-	 */
-	private void drawStandard(Graphics g) {
-		g.drawImage(background, 0, 0);
-		if (dialogIsShowing) {
-			Dialog.getDialog().draw(
-					g, true, name, dialog[0], dialog[1], false);
-		}
-		g.drawCenteredImage(keeper, keeperHeight());
-		drawMenuBackground(g);
-	}
+	}	
 	
 	protected int keeperHeight() {
 		return 205;
@@ -237,11 +215,16 @@ public abstract class Building extends GameMode {
 	 * @param g the graphics to draw on.
 	 */
 	public void draw(Graphics g) {
-		g.setColor(1);
-		g.setFontSize(MenuValues.MENU_FONT_SIZE);
-		g.setAlphaFunc(.02f);
-		Graphics.setTextColor(0, 0, 0);
-		drawStandard(g);
+		g.setColor(0, 0, 0, 1);
+
+		g.drawImage(background, 0, 0);
+		if (dialogIsShowing) {
+			Dialog.getDialog().draw(
+					g, true, name, dialog[0], dialog[1], false);
+		}
+		g.drawCenteredImage(keeper, keeperHeight());
+		drawMenuBackground(g);
+
 		draw3D(g);
 		super.draw(g);
 	}

@@ -20,7 +20,7 @@ import villages.utils.Animation;
  * This abstract class represents an animated object. This includes 
  * players, party members, villagers and so on.
  * 
- * @author 		Kalle Sjšstršm 
+ * @author 		Kalle Sjï¿½strï¿½m 
  * @version 	0.7.0 - 13 May 2008
  */
 public abstract class Sprite {
@@ -312,13 +312,13 @@ public abstract class Sprite {
 	}
 	
 	protected void drawSprite(Graphics g, int x, int y) {
-//		g.getGL().glPushMatrix();
-//		g.getGL().glScalef(1.25f, 1.25f, 1);
+//		Graphics.gl.glPushMatrix();
+//		Graphics.gl.glScalef(1.25f, 1.25f, 1);
 //		int yoffset = STANDARD_HEIGHT - this.getHeight();
 //		int xoffset = STANDARD_WIDTH - this.getWidth();
 //		g.drawImage(anim.getImage(), x + xoffset, y + yoffset);
 		g.drawImage(anim.getImage(), x, y);
-//		g.getGL().glPopMatrix();
+//		Graphics.gl.glPopMatrix();
 		if (currentEmotion != -1) {
 			emotionX = x;
 			emotionY = y;

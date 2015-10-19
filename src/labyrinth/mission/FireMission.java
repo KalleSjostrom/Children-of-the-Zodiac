@@ -19,17 +19,15 @@ public class FireMission extends Mission {
 	}
 
 	public void draw(Graphics g) {
-		g.startText();
 		super.update();
 		g.setFontSize(40);
-		Graphics.setTextColor(1);
+		g.setColor(1);
 		int status = getStatus();
 		if (isFinished(status)) {
-			g.drawMultiString("Mission done!", (int) (800 + getXtrans() * 300), 50);
+			g.drawString("Mission done!", (int) (800 + getXtrans() * 300), 50);
 		} else {
-			g.drawMultiString(string + status + "/" + DONE_CRITERION, (int) (800 + getXtrans() * 300), 50);
+			g.drawString(string + status + "/" + DONE_CRITERION, (int) (800 + getXtrans() * 300), 50);
 		}
-		g.finishText();
 	}
 
 	public void initDraw(Graphics g) {}

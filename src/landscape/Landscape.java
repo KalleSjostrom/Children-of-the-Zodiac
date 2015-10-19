@@ -327,7 +327,7 @@ public class Landscape extends LandscapeLoader {
 				if (name.contains("-")) {
 					name = name.split("-")[0];
 				}
-				g.drawSingleCenteredText(name, 60, 1, 0);
+				g.drawStringCentered(name, 60, 0);
 			}
 		}
 		if (message) {

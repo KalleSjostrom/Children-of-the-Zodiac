@@ -502,7 +502,7 @@ public class ParticleSystem extends PointBody {
 			g.setBlendFunc(additiveColoring ? GL2.GL_ONE : GL2.GL_ONE_MINUS_SRC_ALPHA);
 		}
 		
-		GL2 gl = g.getGL();
+		GL2 gl = Graphics.gl2;
 		tex[textures[0]].bind(gl);
 		if (drawable != null) {
 			drawable.drawGround(
@@ -539,7 +539,7 @@ public class ParticleSystem extends PointBody {
 	}
 
 	public void bindTexture(Graphics g, int i) {
-		tex[textures[i]].bind(g.getGL());
+		tex[textures[i]].bind(Graphics.gl);
 	}
 
 	public static Vector3f getRandomVector(float scalar) {

@@ -41,9 +41,9 @@ public abstract class Body extends PointBody {
 		
 	public void draw(Graphics g, GameTexture t, Vector3f pPos) {
 		if (isAlive()) {
-			g.setColor4(rgb, life);
+			g.setColor(rgb, life);
 			Vector3f pos = getPosition();
-			t.drawMany(g, pos.x + pPos.x, -(pos.y + pPos.y), modifySize(size));
+			// t.drawMany(g, pos.x + pPos.x, -(pos.y + pPos.y), modifySize(size));
 		}
 	}	
 	

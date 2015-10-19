@@ -30,7 +30,7 @@ import villages.VillageLoader;
  * where this inventory resides, the player can enter the door and
  * be transported to the place named nextPlace in this class..
  * 
- * @author 		Kalle Sjšstršm
+ * @author 		Kalle Sjï¿½strï¿½m
  * @version 	0.7.0 - 13 Sep 2008
  */
 public class Door extends AbstractDoor {
@@ -130,7 +130,7 @@ public class Door extends AbstractDoor {
 	public void drawInMap(Graphics g, float x, float y, int angle) {
 		if (haveBeenIn) {
 			GameTexture t = ImageHandler.getTexture(LabyrinthMap.entrance[0]);
-			Utils3D.draw3D(g.getGL(), t.getTexture(), x, y, 0, .1f);
+			Utils3D.draw3D(g, t.getTexture(), x, y, 0, .1f);
 		}
 		super.drawInMap(g, x, y, angle);
 	}

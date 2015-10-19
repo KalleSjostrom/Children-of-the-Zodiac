@@ -88,7 +88,6 @@ public class AttackText {
 				t.draw(g);
 			}
 		}
-		g.loadIdentity();
 	}
 	
 	/**
@@ -108,7 +107,7 @@ public class AttackText {
 		centerx += HALF_DISTANCE;
 		centerx /= 2 * HALF_DISTANCE;
 		int cx = Math.round(centerx * Values.ORIGINAL_RESOLUTION[Values.X]);
-		float x = Graphics.calcAlignCenterTest(info, cx, getRenderer(size), 1.8f);
+		float x = 0; // g.calcAlignCenterTest(info, cx, getRenderer(size), 1.8f);
 		centerx = x / Values.ORIGINAL_RESOLUTION[Values.X];
 		centerx *= (2 * HALF_DISTANCE);
 		centerx -= HALF_DISTANCE;

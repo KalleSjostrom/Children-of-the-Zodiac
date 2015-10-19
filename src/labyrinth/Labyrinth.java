@@ -197,7 +197,6 @@ public class Labyrinth extends MenuStarter implements BattleStarter {
 		g.compileDrawList(drawList);
 		g.setTextureEnabled(false);
 		g.setLightEnabled(false);
-		g.clearColor(0);
 		
 		renderer.renderSky(g);
 		g.setTextureEnabled(true);
@@ -570,8 +569,8 @@ public class Labyrinth extends MenuStarter implements BattleStarter {
 			weatherSystem.draw(g, player, true);
 		}
 		g.loadIdentity();
-		g.getGL().glDepthMask(false);
-		g.getGL().glDisable(GL2.GL_DEPTH_TEST);
+		Graphics.gl.glDepthMask(false);
+		Graphics.gl.glDisable(GL2.GL_DEPTH_TEST);
 		mapRenderer.draw(
 				g, player.get(), player.getDirection(), 
 				currentNode.getAddress(), lastAddress);

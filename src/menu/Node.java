@@ -24,10 +24,13 @@ import equipment.AbstractEquipment;
  * This class represents a node in the menu tree. 
  * A node is a choice in the menu, like equip.
  * 
- * @author 		Kalle Sjšstršm
+ * @author 		Kalle Sjï¿½strï¿½m
  * @version 	0.7.0 - 13 May 2008
  */
 public class Node {
+
+	private static final float[] enableColor = Graphics.BLACK;
+	private static final float[] disableColor = Graphics.DARK_GRAY;
 
 	private Node parent;
 	private ArrayList<Node> children = new ArrayList<Node>();
@@ -43,8 +46,6 @@ public class Node {
 	private int number;
 	private int menuCursor = 0;
 	private final int Y_DISTANCE_OFFSET = 20;
-	private Color enableColor = Color.BLACK;
-	private Color disableColor = Color.DARK_GRAY;
 	private ScrollBar scrollBar;
 	
 	private int bboffset;
@@ -73,19 +74,6 @@ public class Node {
 		Node child = new Node(this, name);
 		children.add(child);
 		return child;
-	}
-
-	/**
-	 * Sets the color of the text in the menu.
-	 * 
-	 * @param c the color to set.
-	 */
-	public void setEnableColor(Color c) {
-		enableColor = c;
-	}
-
-	public void setDisableColor(Color c) {
-		disableColor = c;
 	}
 
 	/**
@@ -156,8 +144,7 @@ public class Node {
 	 * drawn a bit further down. (25 pixels).
 	 * @param withEquipment true if the equipment or 
 	 */
-	private void draw(Graphics g, boolean withPrice, boolean allChildren, 
-			boolean withNumber, boolean down, boolean withEquipment) {
+	private void draw(Graphics g, boolean withPrice, boolean allChildren, boolean withNumber, boolean down, boolean withEquipment) {
 		if (menuCursor >= children.size()) {
 			previousChild();
 		}
@@ -167,7 +154,7 @@ public class Node {
 			if (allChildren && child.isActive()) {
 				child.drawAllChildren(g);
 			}
-			Graphics.setTextColor(child.enabled ? enableColor : disableColor);
+			g.setColor(child.enabled ? enableColor : disableColor);
 			if (!child.getName().contains("character")) {
 				int y = (Ypos + i * distance) + bboffset;
 				if (bbMinY == -1 || 
@@ -185,9 +172,6 @@ public class Node {
 						drawWithEquipment(child, g, y, down);
 					}
 				}
-			}
-			if (!child.enabled) {
-				Graphics.setTextColor(enableColor);
 			}
 		}
 		if (child != null) {
@@ -218,7 +202,7 @@ public class Node {
 		if (child.getPrice() > 0) {
 			g.setFontSize(20);
 			String price = child.getPrice() + " gp";
-			g.drawStringRightWithReg(price, y + (down ? 25 : 0));
+			g.drawStringRightAligned(price, y + (down ? 25 : 0), 985);
 			g.setFontSize(MenuValues.MENU_FONT_SIZE);
 		}
 	}
@@ -243,7 +227,7 @@ public class Node {
 		if (ae != null) {
 			String name = ae.getName();
 			g.setFontSize(20);
-			g.drawStringRightWithReg(name, y + (down ? 25 : 0));
+			g.drawStringRightAligned(name, y + (down ? 25 : 0), 985);
 			g.setFontSize(MenuValues.MENU_FONT_SIZE);
 		}
 	}
@@ -268,7 +252,7 @@ public class Node {
 				number = "(" + String.valueOf(child.number) + ")";
 			}
 			g.setFontSize(20);
-			int x = Graphics.calcAlignRight(number, 980);
+			int x = g.calcAlignRight(number, 980);
 			g.drawString(number, x, y);
 			g.setFontSize(MenuValues.MENU_FONT_SIZE);
 		}

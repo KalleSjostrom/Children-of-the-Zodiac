@@ -38,7 +38,7 @@ import character.Character;
  * a screenshot over the screen before the menu was entered, 
  * is shown in thumbnail size. 
  * 
- * @author 		Kalle Sjšstršm
+ * @author 		Kalle Sjï¿½strï¿½m
  * @version 	0.7.0 - 15 May 2008
  */
 public class StartPage extends AbstractPage {
@@ -250,7 +250,7 @@ public class StartPage extends AbstractPage {
 		} else {
 			isOnSave = true;
 		}
-		if (true) { // isOnSave) {
+		if (isOnSave) {
 			activeNode.insertChild("Save");
 		} else {
 			activeNode.insertChild("Load");
@@ -277,7 +277,6 @@ public class StartPage extends AbstractPage {
 			child.addNumber(item.getNr());
 			child.setEnabled(false);
 		}
-		n.setDisableColor(Color.black);
 		n.setStandardWithBB();
 	}
 

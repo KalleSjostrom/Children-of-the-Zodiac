@@ -73,12 +73,12 @@ public class SaveParticle {
 	}
 	
 	protected void drawParticle(Graphics g, int dir) {
-		g.setColor4(rgb, life);
+		g.setColor(rgb, life);
 		float x1 = pos[0] - size/2;
 		float y1 = pos[1] - size/2;
 		float y2 = y1 + size/2;
 		float z1 = pos[2] - size/2;
-		GL2 gl = g.getGL();
+		GL2 gl = Graphics.gl2;
 		gl.glTexCoord2i(0, 0);
 		gl.glVertex3f(x1, y1, z1);
 		switch (dir) {

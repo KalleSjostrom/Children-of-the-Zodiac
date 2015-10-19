@@ -17,7 +17,7 @@ import labyrinth.inventory.Inventory;
 /**
  * This class manages the riddles in the labyrinth.
  * 
- * @author 		Kalle Sjšstršm
+ * @author 		Kalle Sjï¿½strï¿½m
  * @version 	0.7.0 - 25 Sep 2008
  */
 public class GriveraRiddle extends RiddleGame {
@@ -67,12 +67,12 @@ public class GriveraRiddle extends RiddleGame {
 	public void drawTopLayer(Graphics g) {
 		super.drawTopLayer(g);
 		if (pageNr < pages.size()) {
-			g.startText(fade, 0, 28);
+			g.setAlpha(fade);
+			g.setFontSize(28);
 			Page p = pages.get(pageNr);
 			for (int i = 0; i < p.text.size(); i++) {
-				g.drawMultiCenteredText(p.text.get(i), 250 + i * p.distance);
+				g.drawStringCentered(p.text.get(i), 250 + i * p.distance);
 			}
-			g.finishText();
 		}
 	}
 

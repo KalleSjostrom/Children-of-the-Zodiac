@@ -233,7 +233,6 @@ public class BattleManager extends GameMode implements LabyrinthDrawable {
 		for (int i = 0; i < objects.size(); i++) {
 			objects.get(i).draw(g);
 		}
-		
 		battle.drawBattle(g);
 	}
 

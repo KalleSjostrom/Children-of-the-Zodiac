@@ -107,7 +107,7 @@ public abstract class WeatherParticle {
 				} else {
 				
 				*/
-				GL2 gl = g.getGL();
+				GL2 gl = Graphics.gl2;
 					gl.glColor4f(1, 1, 1, color[3]);
 				//}
 				float height = /*(1.3f - color[3]) */ size[HEIGHT];

@@ -380,6 +380,7 @@ public class ImageHandler {
 		return t;
 	}
 		
+	// TODO(kalle): Make sure unused textures are destroyed!
 	public static GameTexture getGameTexture(BufferedImage image) {
 		GameTexture t = getIt(getList(currentGameMode).list, image);
 		if (t == null) {

@@ -34,7 +34,7 @@ import graphics.Graphics;
 /**
  * This class represents an item store in a village.
  * 
- * @author 		Kalle Sjšstršm 
+ * @author 		Kalle Sjï¿½strï¿½m 
  * @version 	0.7.0 - 13 May 2008
  */
 public class CardStore extends AbstractStore {
@@ -461,11 +461,6 @@ public class CardStore extends AbstractStore {
 		}
 		
 		drawInfo(g);
-	}
-	
-	private void drawMergedCard(Graphics g) {
-		Card c = currentDeck.getCurrent();
-		DeckPage.drawCardInfo(g, c, 530);
 	}
 
 	private void drawBuy(Graphics g, Card c) {

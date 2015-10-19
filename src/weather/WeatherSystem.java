@@ -83,7 +83,7 @@ public abstract class WeatherSystem {
 		}
 		g.setBlendFunc(GL2.GL_ONE);
 		setup(g);
-		tex.bind(g.getGL());
+		tex.bind(Graphics.gl);
 		g.beginQuads();
 		if (!front) {
 			int dir = Values.angleToDirection2(player.getDirection());

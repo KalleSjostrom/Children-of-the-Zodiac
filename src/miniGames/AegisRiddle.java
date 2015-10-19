@@ -12,7 +12,7 @@ import graphics.Graphics;
 /**
  * This class manages the riddles in the labyrinth.
  * 
- * @author 		Kalle Sjšstršm
+ * @author 		Kalle Sjï¿½strï¿½m
  * @version 	0.7.0 - 25 Sep 2008
  */
 public class AegisRiddle extends RiddleGame {
@@ -45,14 +45,13 @@ public class AegisRiddle extends RiddleGame {
 	public void drawTopLayer(Graphics g) {
 		super.drawTopLayer(g);
 		if (pageNr < SPLIT) {
-			g.startText(1, 0, 28);
+			g.setFontSize(28);
 			int half = texts.size() / 2;
 			int start = pageNr * half;
 			int end = start + half;
 			for (int i = start; i < end; i++) {
-				g.drawMultiCenteredText(texts.get(i), 250 + (i - start) * 50);
+				g.drawStringCentered(texts.get(i), 250 + (i - start) * 50);
 			}
-			g.finishText();
 		}
 	}
 }

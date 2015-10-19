@@ -52,7 +52,7 @@ public class Villager extends Inventory {
 	}
 	
 //	public void draw(Graphics g) {
-//		GL2 gl = g.getGL();
+//		GL2 gl = Graphics.gl2;
 //		gl.glEnd();
 //		texture[0].bind(g);
 //		gl.glBegin(GL2.GL_QUADS);

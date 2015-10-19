@@ -125,7 +125,7 @@ public abstract class Inventory implements Comparable<Inventory> {
 	
 	public void draw(Graphics g) {
 		if (currentTex != Object2D.INVISIBLE) {
-			GL2 gl = g.getGL();
+			GL2 gl = Graphics.gl2;
 			if (currentTex < texture.length) {
 				texture[currentTex].bind(g);
 			}
@@ -535,11 +535,11 @@ public abstract class Inventory implements Comparable<Inventory> {
 		if (s != null) {
 			Texture tex = ImageHandler.getTexture(s).getTexture();
 			if (tex != null) {
-				GL2 gl = g.getGL();
+				GL2 gl = Graphics.gl2;
 				gl.glPushMatrix();
 				gl.glTranslatef(x, y, 0);
 				gl.glRotatef(-angle, 0, 0, 1);
-				Utils3D.draw3D(g.getGL(), tex, 0, 0, 0, .1f);
+				Utils3D.draw3D(g, tex, 0, 0, 0, .1f);
 				gl.glPopMatrix();
 			}
 		}

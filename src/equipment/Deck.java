@@ -28,7 +28,7 @@ import character.Character;
  * This class represents a deck. A deck consists of an array of cards
  * and a pointer hand. It also has methods to move around in the deck.
  * 
- * @author 		Kalle Sjšstršm 
+ * @author 		Kalle Sjï¿½strï¿½m 
  * @version 	0.7.0 - 15 Feb 2008
  */
 public class Deck {
@@ -344,10 +344,9 @@ public class Deck {
 							enabled = info.isEnabled();
 							drawCard(g, large, x, y, c, enabled);
 							
-							Graphics.setTextColor(0);
-							g.drawStringRightAligned("" + info.getIndex(), y + 171, x + 118);
-							Graphics.setTextColor(1);
-							g.drawStringRightAligned("" + info.getIndex(), y + 169, x + 116);
+							String string = "" + info.getIndex();
+							int xright = g.calcAlignRight(string, x + 116);
+							g.drawWithShadow(string, y + 169, xright);
 						} else {
 							enabled = c.getPrice() <= gold;
 							drawCard(g, large, x, y, c, enabled);
@@ -372,10 +371,9 @@ public class Deck {
 					currentCard.drawGrayCard(g, x - 15, y - 20, large ? 1.2f : .9f);
 				}
 				
-				Graphics.setTextColor(0);
-				g.drawStringRightAligned("" + info.getIndex(), y + 186, x + 128);
-				Graphics.setTextColor(1);
-				g.drawStringRightAligned("" + info.getIndex(), y + 184, x + 126);
+				String string = "" + info.getIndex();
+				int xright = g.calcAlignRight(string, x + 126);
+				g.drawWithShadow(string, y + 184, xright);
 			} else {
 				if (currentCard.getPrice() <= gold) {
 					currentCard.drawCard(g, x - 15, y - 20, large ? 1.2f : .9f);
@@ -387,8 +385,6 @@ public class Deck {
 		if (active) {
 			hand.drawHand(g);
 		}
-		Graphics.setTextColor(0);
-		//g.setFontSize(22, false);
 		g.setFontSize(fs, false);
 	}
 

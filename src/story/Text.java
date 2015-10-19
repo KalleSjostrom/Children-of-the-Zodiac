@@ -15,7 +15,7 @@ import java.util.Arrays;
  * This class has information about the text and 
  * the amount of time to display the text.
  * 
- * @author 		Kalle Sjšstršm
+ * @author 		Kalle Sjï¿½strï¿½m
  * @version 	0.7.0 - 31 Jan 2008
  */
 public class Text extends Fadeable {
@@ -78,12 +78,13 @@ public class Text extends Fadeable {
 	 * @param alpha the alpha value of the text.
 	 */
 	public void draw(Graphics g, float alpha) {
-		g.startText(alpha, color, whisper ? size - 6 : size);
-		g.drawMultiCenteredText(firstLine, pos[1]);
+		g.setColor(color);
+		g.setAlpha(alpha);
+		g.setFontSize(whisper ? size - 6 : size);
+		g.drawStringCentered(firstLine, pos[1]);
 		if (!secondLine.equals("")) {
-			g.drawMultiCenteredText(secondLine, pos[1] + 70);
+			g.drawStringCentered(secondLine, pos[1] + 70);
 		}
-		g.finishText();
 	}
 	
 	public String toString() {

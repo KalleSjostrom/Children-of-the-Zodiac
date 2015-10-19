@@ -11,12 +11,8 @@ import factories.Load;
 import graphics.Graphics;
 import info.Database;
 import info.Values;
-
-import java.awt.Color;
 import java.util.HashMap;
-
 import java.util.logging.*;
-
 import landscape.Landscape;
 import menu.Node;
 import store.CardStore;
@@ -126,7 +122,6 @@ public class Cheater extends GameMode {
 	private void setNormalMenuValues(Node n) {
 		n.setPositions(40, 40);
 		n.setDistance(30);
-		n.setEnableColor(Color.RED);		
 	}
 	
 	private void fillRoot() {
@@ -733,7 +728,7 @@ public class Cheater extends GameMode {
 	public void draw(Graphics g) {
 		g.setColor(1);
 		g.loadIdentity();
-		Graphics.setTextColor(Color.RED);
+		g.setColor(Graphics.RED);
 		g.setFontSize(26);
 		activeNode.drawChildren(g);
 	}

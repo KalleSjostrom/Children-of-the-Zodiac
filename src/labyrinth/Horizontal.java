@@ -64,7 +64,7 @@ public class Horizontal {
 	public void draw(Graphics g, float height, float width, int direction) {
 		float x = coord[0] - 2;
 		float z = coord[1] + 2;
-		GL2 gl = g.getGL();
+		GL2 gl = Graphics.gl2;
 		if (this.direction == direction) { 
 			if (rotation == Values.UP) {
 				gl.glTexCoord2f(0, 1); gl.glVertex3f(x, height, z);

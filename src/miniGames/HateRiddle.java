@@ -10,13 +10,8 @@ package miniGames;
 import graphics.Graphics;
 import info.SoundMap;
 import info.Values;
-
-import java.awt.Color;
-
 import com.jogamp.opengl.GL2;
-
 import sound.SoundPlayer;
-
 import labyrinth.Labyrinth;
 import labyrinth.inventory.Button;
 import labyrinth.inventory.Inventory;
@@ -122,11 +117,11 @@ public class HateRiddle extends RiddleGame {
 	public void drawTopLayer(Graphics g) {
 		super.drawTopLayer(g);
 		g.setFontSize(36);
-		Graphics.setTextColor(Color.BLACK);
-		g.startText(fade, -1);
+		g.setColor(Graphics.BLACK);
+		g.setAlpha(fade);
 		for (int j = 0; j < ys.length; j++) {
 			for (int i = 0; i < xs.length; i++) {
-				g.drawMultiString((j * 3 + i + 1) + "", xs[i], ys[j]);
+				g.drawString((j * 3 + i + 1) + "", xs[i], ys[j]);
 			}
 		}
 		char[] ca = choosenCode.toCharArray();
@@ -134,8 +129,7 @@ public class HateRiddle extends RiddleGame {
 		for (char c : ca) {
 			sb.append(c + " ");
 		}
-		g.drawMultiCenteredText(sb.toString(), ys[2] + 80);
-		g.finishText();
+		g.drawStringCentered(sb.toString(), ys[2] + 80);
 		hand.drawHand(g);
 	}
 }

@@ -1,8 +1,5 @@
 package organizer;
 
-import java.util.concurrent.Semaphore;
-import java.util.concurrent.TimeUnit;
-
 import com.jogamp.opengl.GLAutoDrawable;
 
 public class FPSAnimator implements Runnable {
@@ -11,13 +8,11 @@ public class FPSAnimator implements Runnable {
 	private Thread thread;
 	private int targetduration;	
 	private boolean keeprunning;
-	private long zeroTime;
 	
 	public FPSAnimator(GLAutoDrawable drawable, int fps) {
 		this.drawable = drawable;
 		setTargetfps(fps);		
 	}
-	
 	
 	public void start() {
 		if (thread == null || thread.isAlive()) {
@@ -32,13 +27,6 @@ public class FPSAnimator implements Runnable {
 	}
 
 	public void run() {
-		Semaphore sem = new Semaphore(1);
-		try {
-			sem.acquire();
-		} catch (InterruptedException e1) {
-			e1.printStackTrace();
-		}
-		zeroTime = System.currentTimeMillis();
 		while (keeprunning) {
 			try {
 				long t1 = System.currentTimeMillis();
@@ -46,12 +34,8 @@ public class FPSAnimator implements Runnable {
 				long t2 = System.currentTimeMillis();
 				int duration = (int) (t2 - t1);
 				int timetosleep = (int) (targetduration - duration);
-//				if (duration > 10) {
-//					System.out.println("Duration " + duration + " " + timetosleep);
-//				}
 				if (timetosleep > 0) {
-					sem.tryAcquire((long) (23/*timetosleep*/), TimeUnit.MILLISECONDS);
-					
+					Thread.sleep(timetosleep);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

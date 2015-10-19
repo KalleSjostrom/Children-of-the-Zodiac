@@ -974,7 +974,7 @@ public class VillageStoryTimeLine extends AbstractTimeLine {
 				}
 			}
 			
-			g.setFadeColor(color[0], color[1], color[2], color[3]);
+			// g.setFadeColor(color[0], color[1], color[2], color[3]);
 			village.drawBottom(g);
 			if (imageMode == BACKFLASH_MODE) {
 				if (currentImage != null && currentImage.equals("black")) {
@@ -1259,7 +1259,7 @@ public class VillageStoryTimeLine extends AbstractTimeLine {
 			
 		public void drawTextBack(Graphics g) {
 			g.loadIdentity();
-			g.drawImage(Graphics.textBack, 0, 576, 1);
+			g.drawImage(Graphics.textBack, 0, 576, 1, 1);
 		}
 
 		public void update() {

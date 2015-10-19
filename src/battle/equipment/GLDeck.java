@@ -146,39 +146,36 @@ public class GLDeck extends AbstractDeck {
 			
 			if (c != null) {
 				int x = 760;
-				g.startText(-1, 0, 34);
+				g.setFontSize(34);
 				int y = Math.round(660 + 200 *  (-getYtrans() - .65f));
 				int y2 = y + 40;
-				g.drawMultiString(c.getName(), x + 2, y + 2);
-				g.setTextColorAndApply(1, 1);
-				g.drawMultiString(c.getName(), x, y);
-				g.finishText();
+				g.drawString(c.getName(), x + 2, y + 2);
+				g.setColor(1);
+				g.drawString(c.getName(), x, y);
 				
-				g.startText(-1, 0, 50);
+				g.setFontSize(50);
 				int size = deckCards.size();
 				int textx = 70;
 				if (size > 0) {
 					if (size >= 10 && size <= 19) {
 						textx -= 5;
 					}
-					g.drawMultiCenteredText(String.valueOf(deckCards.size()), y + 62, textx + 2);
-					g.setTextColorAndApply(1, 1);
-					g.drawMultiCenteredText(String.valueOf(deckCards.size()), y + 60, textx);
+					g.drawStringCentered(String.valueOf(deckCards.size()), y + 62, textx + 2);
+					g.setColor(1);
+					g.drawStringCentered(String.valueOf(deckCards.size()), y + 60, textx);
 				}
-				g.finishText();
 				textx = 47;
 				int texty = y + 10;
 				
-				g.startText(-1, 0, 24);
+				g.setFontSize(24);
 				String[] info = c.getVeryShortInfo();
-				g.drawMultiString(info[0], x + 2, y2 + 2);
-				g.drawMultiString(info[1], x + 2, y2 + 27);
-				g.drawMultiString("Deck", textx + 2, texty + 2);
-				g.setTextColorAndApply(1, 1);
-				g.drawMultiString(info[0], x, y2);
-				g.drawMultiString(info[1], x, y2 + 25);
-				g.drawMultiString("Deck", textx, texty);
-				g.finishText();
+				g.drawString(info[0], x + 2, y2 + 2);
+				g.drawString(info[1], x + 2, y2 + 27);
+				g.drawString("Deck", textx + 2, texty + 2);
+				g.setColor(1);
+				g.drawString(info[0], x, y2);
+				g.drawString(info[1], x, y2 + 25);
+				g.drawString("Deck", textx, texty);
 			}
 		}
 	}

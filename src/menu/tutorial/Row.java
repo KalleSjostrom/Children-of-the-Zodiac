@@ -36,17 +36,17 @@ public class Row {
 			if (colorMap != null) {
 				Vector3f c = colorMap.get(i);
 				if (c != null) {
-					g.setTextColorAndApply(0, 1);
-					g.drawMultiString(s, x + offset + 1, y + 1);		
-					g.setTextColorAndApply(c);
+					g.setColor(0, 0, 0, 1);
+					g.drawString(s, x + offset + 1, y + 1);		
+					g.setColor(c.x, c.y, c.z, 1);
 				} else {
-					g.setTextColorAndApply(0, 1);
+					g.setColor(0, 0, 0, 1);
 				}
 			} else {
-				g.setTextColorAndApply(0, 1);
+				g.setColor(0, 0, 0, 1);
 			}
-			g.drawMultiString(s, x + offset, y);
-			offset += Graphics.getStringWidth(s) + 7;
+			g.drawString(s, x + offset, y);
+			offset += g.getStringWidth(s) + 7;
 		}
 	}
 
@@ -57,11 +57,9 @@ public class Row {
 	}
 
 	public static void drawRows(Graphics g, ArrayList<Row> rows) {
-		g.startText();
 		for (Row r : rows) {
 			r.draw(g);
 		}
-		g.finishText();
 		for (Row r : rows) {
 			r.drawIcon(g);
 		}

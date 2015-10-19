@@ -30,7 +30,7 @@ public class SwordBackground implements SystemDrawable {
 			float y = Math.abs(pos.y - target.y) > ySize ? pos.y : target.y;
 			float z = target.z;
 			float alpha = particles.size() == 0 ? 0 : particlesLeft / (float) particles.size();
-			GL2 gl = g.getGL();
+			GL2 gl = Graphics.gl2;
 			g.setColor(1, 1, 1, alpha);
 			g.beginQuads();
 

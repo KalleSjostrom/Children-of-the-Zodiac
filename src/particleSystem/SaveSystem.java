@@ -98,7 +98,7 @@ public class SaveSystem {
 		g.setBlendFunc(GL2.GL_ONE);
 		g.setAlphaTestEnabled(true);
 		g.setAlphaFunc(0);
-		tex.bind(g.getGL());
+		tex.bind(Graphics.gl);
 		g.beginQuads();
 		if (dir > -135 && dir < -45) { // 0
 			loop(g, particlesz, 0);

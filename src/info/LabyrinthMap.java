@@ -90,6 +90,7 @@ public class LabyrinthMap {
 	private static int OFFSET_Y = -70;
 
 	private static float SIZE2 = .12f;
+	private static float[] ON_FLOOR_COLOR = new float[]{.2f, .8f, .2f, 1.0f};
 	
 	public int draw(
 			Graphics g, Node currentNode, int currentDir,
@@ -111,16 +112,14 @@ public class LabyrinthMap {
 		}
 		if (pos != null) {
 			if (isOnFloor) {
-				Graphics.setTextColor(0, 0, 0);
-				g.drawSingleCenteredText(this.getName(), pos[1] * 330 + 86, 1, 0, 24, pos[0] * 215 + 171);
-				Graphics.setTextColor(.2f, .8f, .2f);
-				g.drawSingleCenteredText(this.getName(), pos[1] * 330 + 85, 1, -1, 24, pos[0] * 215 + 170);
-				Graphics.setTextColor(0, 0, 0);
+				String string = getName();
+				int center = g.calcAlignCenter(string, pos[0] * 215 + 170);
+				g.drawWithShadow(string, pos[1] * 330 + 85, center, ON_FLOOR_COLOR);
 			} else {
-				g.drawSingleCenteredText(this.getName(), pos[1] * 330 + 85, 1, -1, 24, pos[0] * 215 + 170);
+				g.drawStringCentered(this.getName(), pos[1] * 330 + 85, pos[0] * 215 + 170);
 			}
 		} else {
-			g.drawSingleCenteredText(this.getName(), 60, 1, 0, 34, 380);
+			g.drawStringCentered(this.getName(), 60, 380);
 		}
 		g.setFontSize(MenuValues.MENU_FONT_SIZE);
 		it = nodes.keySet().iterator();

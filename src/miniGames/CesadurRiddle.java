@@ -10,16 +10,10 @@ package miniGames;
 import graphics.Graphics;
 import info.SoundMap;
 import info.Values;
-
-import java.awt.Color;
 import java.util.Stack;
-
 import com.jogamp.opengl.GL2;
-
 import organizer.GameMode;
-
 import sound.SoundPlayer;
-
 import labyrinth.Labyrinth;
 import labyrinth.inventory.Button;
 import labyrinth.inventory.Inventory;
@@ -279,11 +273,8 @@ public class CesadurRiddle extends RiddleGame {
 	}
 
 	public void drawTopLayer(Graphics g) {
-//		dialog.drawAsMessage(g);
 		super.drawTopLayer(g);
-		Graphics.setTextColor(Color.BLACK);
 		g.setColor(0, 0, 0, 1);
-		g.startText();
 		for (int i = 0; i < xs.length; i++) {
 			for (int j = 0; j < ys.length - 1; j++) {
 				if (texts[i][j] != null) {
@@ -291,13 +282,10 @@ public class CesadurRiddle extends RiddleGame {
 				}
 			}
 		}
-		g.finishText();
-		g.startText();
 		if (mode == SELECT_WORD) {
 			g.setColor(0, 0, 0, .3f);
 		}
 		texts[0][ys.length - 1].draw(g);
-		g.finishText();
 		hand.drawHand(g);
 		wordHand.drawHand(g);
 		drawHelp(g);
@@ -464,8 +452,8 @@ public class CesadurRiddle extends RiddleGame {
 			}
 
 			public void draw(Graphics g) {
-				g.drawMultiString(letter, x, y);
-				g.drawMultiString("__", x, y + 2);
+				g.drawString(letter, x, y);
+				g.drawString("__", x, y + 2);
 			}
 		}
 	}

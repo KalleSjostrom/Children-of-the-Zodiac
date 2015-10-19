@@ -83,7 +83,7 @@ public class Tutorial {
 
 	public void drawTopLayer(Graphics g) {
 		if (active && chapter != null) {
-			g.fadeOldSchoolColor(1, 1, 1, .5f);
+			g.drawImage(Graphics.fadeImage, 0, 0, 8, 0.5f);
 			int x = (int) (IMAGE_X) + AbstractPage.xoffset;
 			int y = IMAGE_HEIGHT;
 
@@ -91,9 +91,9 @@ public class Tutorial {
 			g.drawImage(AbstractPage.images[15], x-35, IMAGE_HEIGHT);
 			g.pop();
 			g.setFontSize(34);
-			Graphics.setTextColor(0);
+			g.setColor(0, 0, 0, 1);
 			ArrayList<Row> l = chapter.getCurrentPage();
-			g.drawSingleCenteredText(title, y + 50, 1, 0);
+			g.drawStringCentered(title, y + 50);
 			
 			g.setFontSize(26);
 			Row.drawRows(g, l);

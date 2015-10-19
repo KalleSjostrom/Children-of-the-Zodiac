@@ -107,7 +107,7 @@ public class Animation {
 		float txw = tx + 36.0f / tex.getWidth();
 		float tyh = ty + 55.0f / tex.getHeight();
 		
-		GL2 gl = g.getGL();
+		GL2 gl = Graphics.gl2;
 		g.beginQuads();
 		gl.glTexCoord2f(tx, tyh);
 		gl.glVertex2i((int) x, nyh);

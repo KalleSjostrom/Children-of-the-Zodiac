@@ -102,12 +102,15 @@ public class ResultScreen extends Screen {
 			}
 		}
 	}
+	
+	private Color selectColor(int value, Color high, Color low) {
+		if (value > 0)
+			return high;
+		if (value < 0)
+			return low;
+		return Color.white;
+	}
 
-	/**
-	 * Draws the result screen on the given graphics.
-	 * 
-	 * @param g the graphics to draw on.
-	 */
 	public void drawResult(Graphics g) {
 		drawBackground(g);
 
@@ -124,15 +127,12 @@ public class ResultScreen extends Screen {
 		for (int i = 0; i < team.size(); i++) {
 			Creature c = team.get(i);
 			g.drawWithShadow(c.getName(), x[i + 1], y[0]);
-			Color color;
 			for (int j = 0; j < 3; j++) {
-				color = j < 2 ? Color.red : Color.green;
-				g.drawValueWithShadow(
-						attack[i][j], x[1 + i], y[j + 1], color);
+				int value = attack[i][j];
+				g.drawWithShadow(String.valueOf(value), x[1 + i], y[j + 1], selectColor(value, j < 2 ? Color.red : Color.green, j < 2 ? Color.green : Color.red));
 			}
 			int total = attack[i][0] + attack[i][1] - attack[i][2];
-			color = total > 0 ? Color.red : Color.green;
-			g.drawValueWithShadow(Math.abs(total), x[i + 1], y[4], color);
+			g.drawWithShadow(String.valueOf(Math.abs(total)), x[i + 1], y[4], selectColor(total, Color.red, Color.green));
 		}
 //		g.loadIdentity();
 		for (int i = 0; i < cards.size(); i++) {

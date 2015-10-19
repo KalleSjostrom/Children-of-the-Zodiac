@@ -58,7 +58,7 @@ public class SphereParticleSystem extends ParticleSystem {
 
 	@Override
 	public void start(Graphics g) {
-		GL2 gl = g.getGL();
+		GL2 gl = Graphics.gl2;
 		gl.glPushMatrix();
 //		g.checkError();
 		gl.glPushAttrib(GL2.GL_LIGHTING_BIT);
@@ -95,7 +95,7 @@ public class SphereParticleSystem extends ParticleSystem {
 
 	@Override
 	public void end(Graphics g) {
-		GL2 gl = g.getGL();
+		GL2 gl = Graphics.gl2;
 		gl.glPopAttrib();
 		gl.glPopMatrix();
 	}

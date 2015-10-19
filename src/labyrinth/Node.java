@@ -140,7 +140,7 @@ public class Node {
 	private void draw(Graphics g, int height) {
 		float x = position.getX() - 2;
 		float z = position.getZ() + 2;
-		GL2 gl = g.getGL();
+		GL2 gl = Graphics.gl2;
 		
 		if (height == FLOOR_HEIGHT) {
 			gl.glNormal3f(0, 1, 0);
@@ -169,7 +169,7 @@ public class Node {
 		float x = position.getX() - 2;
 		float z = position.getZ() + 2;
 		flip = true;
-		GL2 gl = g.getGL();
+		GL2 gl = Graphics.gl2;
 		switch (dir) {
 		case 0 : 
 		// Back wall // SOUTH

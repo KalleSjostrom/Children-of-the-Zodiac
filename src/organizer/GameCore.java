@@ -17,20 +17,15 @@ import input.InputKeyBoardManager;
 import input.InputManager;
 import input.GameAction.GameActions;
 import input.InputManager.InputManagers;
-
-import java.awt.Color;
-
 import com.jogamp.opengl.GLAutoDrawable;
-
 import java.util.logging.*;
-
 import menu.Node;
 
 /**
  * This class is the game core. It initializes the screen and the 
  * input managers and start the game loop.
  * 
- * @author 		Kalle Sj�str�m.
+ * @author 		Kalle Sjöström.
  * @version 	0.7.0 - 11 May 2008
  */
 public abstract class GameCore {
@@ -54,7 +49,6 @@ public abstract class GameCore {
 	protected void init() {
 		screen = Screen.getScreen();
 		activeNode = new Node(null, "");
-		activeNode.setEnableColor(Color.WHITE);
 		fillRoot();
 	}
 	
@@ -104,13 +98,16 @@ public abstract class GameCore {
 	boolean firstTimeIn = true;
 	
 	public void update() {
+		if (isPausable() && inputManager.hasStartBeenPressed()) {
+			paused = !paused;
+		}
+
 		long elapsedTime = System.currentTimeMillis() - zeroTime;
 		zeroTime = System.currentTimeMillis();
 		update(elapsedTime);
 	}
 	
-	public void testDraw(Graphics g, GLAutoDrawable drawable) {
-		preDraw(g);
+	protected void render(Graphics g, GLAutoDrawable drawable) {
 		draw(g);
 		g.checkError();
 
@@ -122,9 +119,11 @@ public abstract class GameCore {
 			}
 			firstTimeIn = false;
 			g.fadeOldSchool(.5f);
-			g.drawSingleCenteredText("Connection to game pad lost", 250, 1, 1, 50, Values.ORIGINAL_RESOLUTION[Values.X] / 2);
-			g.drawSingleCenteredText("Please reconnect the game pad in a USB port", 320, 1, 1, 30, Values.ORIGINAL_RESOLUTION[Values.X] / 2);
-			g.drawSingleCenteredText("(You can connect to the gamepad from the menu (Settings) later)", 350, 1, 1, 20, Values.ORIGINAL_RESOLUTION[Values.X] / 2);
+			g.setFontSize(50);
+			g.drawStringCentered("Connection to game pad lost", 250);
+			g.setFontSize(30);
+			g.drawStringCentered("Please reconnect the game pad in a USB port", 320);
+			g.drawStringCentered("(You can connect to the gamepad from the menu (Settings) later)", 350);
 			
 			if (gameActions[GameMode.UP].isPressed()) {
 				activeNode.previousChild();
@@ -145,25 +144,12 @@ public abstract class GameCore {
 			activeNode.drawAllChildren(g);
 		} else if (paused) {
 			g.fadeOldSchool(.5f);
-			int fs = g.getFontSize();
-			g.drawSingleCenteredText("Paused", 250, 1, 1, 50, Values.ORIGINAL_RESOLUTION[Values.X] / 2);
-			g.setFontSize(fs);
+			g.drawStringCentered("Paused", 250);
 		}
 	}
-	
-	int counter = 0;
-	int counter2 = 0;
-	int counter3 = 0;
+	int x = 78;
+	int y = 59;
 
-	private void preDraw(Graphics g) {
-		if (isPausable() && inputManager.hasStartBeenPressed()) {
-			paused = !paused;
-		}
-		if (paused) {
-//			g.drawImage(pauseScreen, 0, 0, 2);
-//			g.drawCenteredText("Paused", 500, 50, 1, 1);
-		}
-	}
 	
 	/**
 	 * Checks if the game is paused.
@@ -177,19 +163,13 @@ public abstract class GameCore {
 	public static void exitGame() {
 		screen.exitScreen();
 		inputManager.exit();
-		logger .info("Exiting game");
+		logger.info("Exiting game");
 		System.exit(0);
 	}
 	
 	public static void setFullScreen() {
 		screen.swapFullScreen();
 	}
-	/*
-	public static void setsFPS(int fps) {
-		if (fps != Values.FPS) {
-			screen.setFPS(fps);
-		}
-	}*/
 
 	/**
 	 * Updates the state of the game/animation based on the

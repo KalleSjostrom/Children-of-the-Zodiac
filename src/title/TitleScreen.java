@@ -12,12 +12,8 @@ import graphics.Graphics;
 import graphics.ImageHandler;
 import info.SoundMap;
 import info.Values;
-
-import java.awt.Color;
 import java.util.HashMap;
-
 import menu.Node;
-
 import organizer.GameMode;
 import sound.SoundPlayer;
 
@@ -25,13 +21,17 @@ import sound.SoundPlayer;
  * This class represents the title screen. The player can load games 
  * from here, but not create new save slots.
  * 
- * @author 		Kalle Sjšstršm.
+ * @author 		Kalle Sjï¿½strï¿½m.
  * @version 	0.7.0 - 27 Jan 2008
  */
 public class TitleScreen extends GameMode {
 
 	private String background;
 	private String titleBackground;
+
+	private int x = 78;
+	private int y = 59;
+
 	private Node activeNode;
 	private float index = 0;
 	
@@ -46,15 +46,8 @@ public class TitleScreen extends GameMode {
 		pausable = false;
 		loadImages();
 		activeNode = new Node(null, "");
-		activeNode.setEnableColor(Color.WHITE);
 		fillRoot();
 		fadeInSpeed = 1;
-//		new Thread() {
-//			public void run() {
-//				Values.sleep(2000);
-//				loading = false;
-//			}
-//		}.start();
 		logicLoading = false;
 	}
 
@@ -74,13 +67,12 @@ public class TitleScreen extends GameMode {
 	 */
 	private void fillContinue() {
 		Node n = activeNode;
-		activeNode.setEnableColor(Color.WHITE);
 		if (!n.hasChildren()) {
-		n.insertChild("Slot 1");
-		n.insertChild("Slot 2");
-		n.insertChild("Slot 3");
-		n.setDistance(50);
-		n.setPositions(Values.createNormalPoint(450, 600));
+			n.insertChild("Slot 1");
+			n.insertChild("Slot 2");
+			n.insertChild("Slot 3");
+			n.setDistance(50);
+			n.setPositions(Values.createNormalPoint(450, 600));
 		}
 	}
 
@@ -158,19 +150,19 @@ public class TitleScreen extends GameMode {
 	/**
 	 * The draw method of title screen. It draws the background and the menu.
 	 * 
-	 * @param g3D the graphics on which to draw.
+	 * @param g the graphics on which to draw.
 	 */
-	public void draw(Graphics g3D) {
-		g3D.setColor(1);
-		g3D.setFontSize(24);
-		g3D.drawImage(background, x, y);
+	public void draw(Graphics g) {
+		/*g.setColor(1);
+		g.setFontSize(24);*/
+		g.drawImage(background, x, y);
 		if (!fadein) {
-			drawTitle(g3D);
+			g.drawImage(titleBackground, x, y, 1, index);
 			if (doneFading()) {
-				activeNode.drawAllChildren(g3D);
+				activeNode.drawAllChildren(g);
 			}
 		}
-		super.draw(g3D);
+		super.draw(g);
 	}
 
 	/**
@@ -182,20 +174,5 @@ public class TitleScreen extends GameMode {
 	 */
 	private boolean doneFading() {
 		return index > .9f;
-	}
-	
-	int x = 78;
-	int y = 59;
-
-	/**
-	 * Draws the title text.
-	 * 
-	 * @param g the graphics on which to draw.
-	 */
-	private void drawTitle(Graphics g) {
-		if (index < .9) {
-			g.setColor(1, 1, 1, index);
-		}
-		g.drawImage(titleBackground, x, y, 1);
-	}
+	}	
 }

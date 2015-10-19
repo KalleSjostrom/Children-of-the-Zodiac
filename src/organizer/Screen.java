@@ -14,7 +14,6 @@ import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
 
-import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import java.util.logging.*;
 
@@ -80,10 +79,9 @@ public class Screen extends Frame {
 				
 				screen.setSize(frameWidth, frameHeight);
 				Values.setResolution(frameWidth, frameHeight);
-				GLCapabilities capabilities = new GLCapabilities(GLProfile.get(GLProfile.GL2));
+				GLCapabilities capabilities = new GLCapabilities(GLProfile.get(GLProfile.GL4));
 				capabilities.setDoubleBuffered(true);
 				checkCapabilities(capabilities);
-				
 				
 				canvas = new GLCanvas(capabilities);
 				canvas.addGLEventListener(new GameEventListener(core));
@@ -91,26 +89,10 @@ public class Screen extends Frame {
 				add(canvas);
 				canvas.setCursor(getCursor());
 				
-				int refreshRate = device.getDisplayMode().getRefreshRate();
-				if (refreshRate != DisplayMode.REFRESH_RATE_UNKNOWN) {
-					logger.log(Level.FINE, "System refresh rate: " + refreshRate + " Hz");
-				} else {
-					refreshRate = 60;
-					logger.log(Level.FINE, "System refresh rate could not be read, assuming 60 Hz.");
-				}
-				// System.out.println("refresh " + refreshRate);
-				// setFPS();
-//				anim = new FPSAnimator(refreshRate / 2);
 				anim = new FPSAnimator(canvas, (int) (Values.FPS));
-				//anim.setRunAsFastAsPossible(true);
-//				anim.add(canvas);
-				// logger.log(Level.FINE, "Setting FPS: " + (refreshRate / 2));
 				screen.setVisible(true);
 				canvas.setFocusable(false);
-				
 			}
-
-
 		};
 		return r;
 	}
@@ -119,24 +101,11 @@ public class Screen extends Frame {
 		Values.INTERVAL = 1000f / Values.FPS;
 		Values.LOGIC_INTERVAL = 1000f / Values.FPS;
 	}
-	/*
-	public void setFPS(int fps) {
-		anim.stop();
-		Values.FPS = fps;
-		Values.INTERVAL = 1000f / Values.FPS;
-		anim = new FPSAnimator(Values.FPS);
-		logger.log(Level.FINE, "FPS: " + Values.FPS);
-		anim.add(canvas);
-		this.setVisible(true);
-		canvas.setFocusable(false);
-		SwingUtilities.invokeLater(startAnimation());
-	}
-*/
 	
 	private Runnable startAnimation() {
 		Runnable r = new Runnable() {
 			public void run() {
-				while (anim == null) {Values.sleep(100);}
+				while (anim == null) { Values.sleep(100); }
 				anim.start();
 			}
 		};

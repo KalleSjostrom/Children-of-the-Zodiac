@@ -9,12 +9,8 @@ package menu;
 
 import info.SoundMap;
 import info.Values;
-
-import java.awt.Color;
 import java.util.ArrayList;
-
 import organizer.GameMode;
-
 import sound.SoundPlayer;
 import store.WeaponStore;
 import character.Character;
@@ -27,7 +23,7 @@ import graphics.Graphics;
  * weapons, armors and left handed items. These can be equipped in either the 
  * right hand, body or the left hand, respectively.
  * 
- * @author 		Kalle Sjšstršm
+ * @author 		Kalle Sjï¿½strï¿½m
  * @version 	0.7.0 - 13 May 2008
  */
 public class EquipPage extends AbstractPage {
@@ -245,8 +241,7 @@ public class EquipPage extends AbstractPage {
 	 * @param mode indicates if the characters RIGHT_HAND, LEFT_HAND 
 	 * or ARMORS should be compared with the values in the given equipment.
 	 */
-	public static void drawStatus(Graphics g,
-			Character c, AbstractEquipment ae, int mode) {
+	public static void drawStatus(Graphics g, Character c, AbstractEquipment ae, int mode) {
 		if (c != null) {
 			AbstractEquipment equipped = null; 
 			if (mode == RIGHT_HAND) {
@@ -258,7 +253,7 @@ public class EquipPage extends AbstractPage {
 			}
 			int[] change = AbstractEquipment.getChange(c, ae, equipped);
 
-			Graphics.setTextColor(Color.BLACK);
+			g.setColor(Graphics.BLACK);
 			if (ae == equipped) {
 				ae = null;
 			}
@@ -300,14 +295,14 @@ public class EquipPage extends AbstractPage {
 		} else if (change < 0) {
 			int c = change * -1;
 			g.drawString(line+ " -" + c, x, y);
-			Graphics.setTextColor(Color.RED);
+			g.setColor(Graphics.RED);
 			g.drawString(line+ " -" + c, x-1, y-1);
 		} else if (change > 0){
 			g.drawString(line+ " +" + change, x, y);
-			Graphics.setTextColor(Color.GREEN);
+			g.setColor(Graphics.GREEN);
 			g.drawString(line+ " +" + change, x-1, y-1);
 		}
-		Graphics.setTextColor(Color.BLACK);
+		g.setColor(Graphics.BLACK);
 	}
 	
 	/**
