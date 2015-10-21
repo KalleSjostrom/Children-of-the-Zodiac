@@ -7,19 +7,19 @@ import landscape.LandPlayer;
 public class AirShip extends LandPlayer {
 	
 	private float velocity = 0;
-	private static final float MAX_VELOCITY = .2f;
-	private static final float VELOCITY_INCREASE_STEP = .02f;
-	private static final float VELOCITY_DECREASE_STEP = -.03f;
+	private static final float MAX_VELOCITY = 200.0f;
+	private static final float ACCELERATION = 200.0f;
+	private static final float DECCELERATION = -300.0f;
 	private float distance;
-	private float increase = 0;
+	private float delta_velocity = 0;
 	private boolean[] dirs = new boolean[4];
 	
 	public void init() {
-		loadImages(Values.LandscapeImages, "Airship");
+		loadImage(Values.LandscapeImages, "Airship");
 	}
 
 	public void go(int dir) {
-		increase = VELOCITY_INCREASE_STEP;
+		delta_velocity = ACCELERATION;
 		dirs[dir] = true;
 		if (!moving || direction != dir) {
 			direction = dir;
@@ -27,8 +27,8 @@ public class AirShip extends LandPlayer {
 		}
 	}
 	
-	private void goforward(int dir) {
-		float dist = Values.DIRECTIONS[dir] * Values.LOGIC_INTERVAL* velocity;
+	private void goforward(float dt, int dir) {
+		float dist = Values.DIRECTIONS[dir] * dt * velocity;
 		pos[dir % 2] += dist;
 		distance += Math.abs(dist);
 		if (distance >= 30) {
@@ -37,24 +37,24 @@ public class AirShip extends LandPlayer {
 		}
 	}
 	
-	public void update(float elapsedTime) {
-		if ((increase > 0 && velocity < MAX_VELOCITY) || (increase < 0 && velocity > 0)) {
-			velocity += increase;
+	public void update(float dt) {
+		if ((delta_velocity > 0 && velocity < MAX_VELOCITY) || (delta_velocity < 0 && velocity > 0)) {
+			velocity += delta_velocity * dt;
 		}
 		if (velocity >= MAX_VELOCITY) {
 			velocity = MAX_VELOCITY;
-			increase = 0;
+			delta_velocity = 0;
 		} else if (velocity <= 0) {
 			velocity = 0;
-			increase = 0;
+			delta_velocity = 0;
 		}
 		for (int i = 0; i < 4; i++) {
 			if (dirs[i]) {
-				goforward(i);
+				goforward(dt, i);
 			}
 			dirs[i] = false;
 		}
-		super.update(elapsedTime);
+		super.update(dt);
 		checkLeftUp();
 		checkRightDown();
 	}
@@ -80,7 +80,7 @@ public class AirShip extends LandPlayer {
 	}
 	
 	public void standStill() {
-		increase = VELOCITY_DECREASE_STEP;
+		delta_velocity = DECCELERATION;
 		dirs[direction] = true;
 //		standStill(direction);
 	}

@@ -37,7 +37,6 @@ public abstract class GameCore {
 	private static boolean paused;
 	private static String[] strings;
 	private static String[] values;
-	private static long zeroTime;
 	private static Logger logger = Logger.getLogger("GameCore");
 	
 	private Node activeNode;
@@ -92,23 +91,23 @@ public abstract class GameCore {
 			int v = Database.getStatusFor(s);
 			values[i] = String.valueOf(v);
 		}
-		zeroTime = System.currentTimeMillis();
 	}
 
 	boolean firstTimeIn = true;
 	
-	public void update() {
+	public void coreUpdate(float dt) {
 		if (isPausable() && inputManager.hasStartBeenPressed()) {
 			paused = !paused;
 		}
+		
+		if (paused)
+			dt = 0;
 
-		long elapsedTime = System.currentTimeMillis() - zeroTime;
-		zeroTime = System.currentTimeMillis();
-		update(elapsedTime);
+		update(dt);
 	}
 	
-	protected void render(Graphics g, GLAutoDrawable drawable) {
-		draw(g);
+	protected void render(float dt, Graphics g, GLAutoDrawable drawable) {
+		draw(dt, g);
 		g.checkError();
 
 		if (inputManager.connectionLost()) {
@@ -178,15 +177,8 @@ public abstract class GameCore {
 	 * @param elapsedTime the amount of time that has elapsed since the
 	 * last update.
 	 */
-	protected abstract void update(float elapsedTime);
-
-	/**
-	 * Draws to the screen.
-	 * 
-	 * @param g the Graphics3D object on which to draw.
-	 */
-	protected abstract void draw(Graphics g);
-	
+	protected abstract void update(float dt);
+	protected abstract void draw(float dt, Graphics g);
 	protected abstract boolean isPausable();
 
 }

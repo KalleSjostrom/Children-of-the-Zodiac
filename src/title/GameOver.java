@@ -97,10 +97,10 @@ public class GameOver extends GameMode {
 	 * 
 	 * @param g3D the graphics on which to draw.
 	 */
-	public void draw(Graphics g3D) {
+	public void draw(float dt, Graphics g3D) {
 		g3D.setColor(1);
 		g3D.setFontSize(24);
 		g3D.drawImage(background, 0, 0);
-		super.draw(g3D);
+		super.draw(dt, g3D);
 	}
 }

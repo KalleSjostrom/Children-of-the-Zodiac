@@ -93,7 +93,7 @@ public class Flare extends PowerMagic {
 		settings.setValue(AnimSettings.CHECK_DESTROY_MODE, ParticleSystem.PARTICLES_DESTROYED);
 		settings.setValue(AnimSettings.EMITTER_TYPE, ParticleSystem.FLARE_EMITTER_TYPE);
 		settings.setValue(AnimSettings.IS_DEAD_LIMIT, 30);
-		settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, 0);
+		settings.setValue(AnimSettings.EMITTANCE_PERIOD, 0);
 		psp.add(new ParticleSystem(settings), 0);
 		return psp;
 	}

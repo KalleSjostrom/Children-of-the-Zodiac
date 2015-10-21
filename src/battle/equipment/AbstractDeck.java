@@ -141,7 +141,7 @@ public abstract class AbstractDeck extends Hideable {
 	 * 
 	 * @param g the Graphics to draw on.
 	 */
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		translate(g);
 
 		float[][] cl = new float[3][2];

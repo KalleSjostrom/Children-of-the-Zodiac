@@ -79,9 +79,9 @@ public class GLDeck extends AbstractDeck {
 		initCards(g);
 	}
 	
-	public void update() {
-		super.update();
-		weaponDeck.update();
+	public void update(float dt) {
+		super.update(dt);
+		weaponDeck.update(dt);
 	}
 
 	/**
@@ -121,9 +121,9 @@ public class GLDeck extends AbstractDeck {
 	 * 
 	 * @param g the Graphics to draw on.
 	 */
-	public void draw(Graphics g) {
-		weaponDeck.draw(g);
-		super.draw(g);
+	public void draw(float dt, Graphics g) {
+		weaponDeck.draw(dt, g);
+		super.draw(dt, g);
 		drawDeck(g, shownCards, BattleValues.CARD_SELECTED_OFFSET);
 		drawSavedCard(g);
 		drawTopCard(g, deckCards);
@@ -812,13 +812,13 @@ public class GLDeck extends AbstractDeck {
 	 * The hand deck are the cards that is currently showing in battle and the
 	 * weapon deck is the cards that the player has chosen to attack with.
 	 */
-	public void updatePos() {
+	public void updatePos(float dt) {
 		for (int i = 0; i < shownCards.size(); i++) {
-			shownCards.get(i).update();
+			shownCards.get(i).update(dt);
 		}
-		weaponDeck.updatePos();
+		weaponDeck.updatePos(dt);
 		if (savedCard != null) {
-			savedCard.update();
+			savedCard.update(dt);
 		}
 	}
 

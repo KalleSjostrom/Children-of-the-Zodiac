@@ -10,7 +10,7 @@ public abstract class BodySystem extends Sprite {
 	private Bodies bodies = new Bodies();
 	
 	public BodySystem() {
-		animImages = new String[0];
+		animImage = "";
 	}
 
 	protected Bodies getBodies() {
@@ -22,5 +22,5 @@ public abstract class BodySystem extends Sprite {
 	}
 	
 	@Override
-	public void draw(Graphics g, int x, int y) {}
+	public void draw(float dt, Graphics g, int x, int y) {}
 }

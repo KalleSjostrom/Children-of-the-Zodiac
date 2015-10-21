@@ -55,7 +55,7 @@ public class ParticleSystem extends BodySystem {
 	}
 	
 	public void setPos(float[] p) {
-		super.setPos(p);
+		pos = p;
 		Vector3f emitterPos = emitter.getPosition();
 		emitterPos.x = p[Values.X];
 		emitterPos.y = -p[Values.Y];
@@ -75,27 +75,22 @@ public class ParticleSystem extends BodySystem {
 	
 	long zeroTime;
 
-	public void update(float elapsedTime) {
+	public void update(float dt) {
 		if (active) {
-			if (elapsedTime < 5 * Values.LOGIC_INTERVAL) {
-				elapsedTime /= 1000f;
-				enqueue(cq, elapsedTime);
-				cq.run(getBodies(), elapsedTime);
+			enqueue(cq, dt);
+			cq.run(getBodies(), dt);
 
-				Bodies b = getBodies();
-				Body tempBody;
-				Iterator<Body> it = b.iterator();
-				int index = 0;
-				while (it.hasNext()) {
-					tempBody = it.next();
-					if (tempBody.isDead()) {
-						emitter.postEmit(tempBody);
-					}
-					index += 1;
+			Bodies b = getBodies();
+			Body tempBody;
+			Iterator<Body> it = b.iterator();
+			while (it.hasNext()) {
+				tempBody = it.next();
+				if (tempBody.isDead()) {
+					emitter.postEmit(tempBody);
 				}
 			}
 		} else if (activateStatus != -1) {
-			if (Database.getStatusFor(getName()) == activateStatus) {
+			if (Database.getStatusFor(name) == activateStatus) {
 				active = true;
 			}
 		}
@@ -220,19 +215,6 @@ public class ParticleSystem extends BodySystem {
 			}
 		}
 		EMITTER_COMMAND.setEmitter(emitter);
-	}
-	
-	public void warmUp() {
-//		if (activateStatus != -1) {
-//			if (Database.getStatusFor(getName()) == activateStatus) {
-//				active = true;
-//			}
-//		}
-//		if (active) {
-			for (int i = 0; i < warmUp; i++) {
-				this.update(Values.LOGIC_INTERVAL);
-			}
-//		}
 	}
 
 	public int getWarmUp() {

@@ -103,7 +103,7 @@ public class Flame extends Card {
 //		settings.setVector(AnimSettings.COLLISION_VECTOR, new Vector3f(-1.9f, 1.9f, -1.9f));
 
 		settings.setValue(AnimSettings.NR_PARTICLES, 3000);
-//		settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, (Values.LOGIC_INTERVAL / 1000f) * .01f);
+//		settings.setValue(AnimSettings.EMITTANCE_SPEED, .01f);
 		settings.setValue(AnimSettings.EMITTER_TYPE, ParticleSystem.FLAME_EMITTER_TYPE);
 		settings.setValue(AnimSettings.IS_DEAD_LIMIT, 100);
 

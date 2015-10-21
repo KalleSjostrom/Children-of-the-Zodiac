@@ -60,7 +60,7 @@ public class SlowParticleSystem extends ParticleSystem {
 	public void end(Graphics g) {}
 
 	@Override
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		if (!hasInited) {
 			loadGLTextures();
 			hasInited = true;

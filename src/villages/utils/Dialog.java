@@ -223,7 +223,7 @@ public class Dialog {
 	 * 
 	 * @param g the graphics2D to draw on.
 	 */
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		DialogSequence DS = dialogSec.get(index);
 		if (DS.inputQ) {
 			drawInputQuestion(g, DS);
@@ -376,12 +376,11 @@ public class Dialog {
 			g.setBlendFunc(GL2.GL_ONE_MINUS_SRC_ALPHA);
 			g.setAlphaFunc(.1f);
 		}
-		g.setColor(Graphics.BLACK);
 		g.drawImage(DIALOG_1, xs[DIALOG][FIRST], ys[DIALOG][FIRST]);
 		g.setFontSize(MenuValues.MENU_FONT_SIZE_LARGE);
 		int yValue = sl.equals("") ? 110 : 85;
-		g.drawString(fl, 65, yValue);
-		g.drawString(sl, 65, 135);
+		g.drawStringWithShadow(fl, 65, yValue);
+		g.drawStringWithShadow(sl, 65, 135);
 	}
 	
 	private void drawGift(Graphics g, DialogSequence ds) {

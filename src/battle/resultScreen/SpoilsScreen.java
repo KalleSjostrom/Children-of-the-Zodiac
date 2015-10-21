@@ -10,7 +10,6 @@ package battle.resultScreen;
 import info.Database;
 import info.Values;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -101,8 +100,7 @@ public class SpoilsScreen extends Screen {
 		for (int i = 0; i < characters.size(); i++) {
 			totalNrOfRounds += characters.get(i).getRoundCounter();
 		}
-		float amountOfDecreases = DECREASE_MILLISECONDS / (float) Values.LOGIC_INTERVAL;
-		
+
 		Bestiary.getBestiary().updateStats(enemy, enemySize);
 		Load.getPartyItems().incrementBattle();
 		Load.getPartyItems().addGold(gold);
@@ -115,7 +113,7 @@ public class SpoilsScreen extends Screen {
 			if (c.isAlive()) {
 				float varryingFraction = c.getRoundCounter() / totalNrOfRounds;
 				int gottenExp = Math.round(varryingFraction * varryExp + staticFraction * staticExp);
-				info[i].expDecrease = gottenExp / amountOfDecreases;
+				info[i].expDecrease = gottenExp;
 				info[i].expCounter = info[i].recievedExp = gottenExp;
 				info[i].canLevelUp = c.canLevelUp();
 				info[i].expToNext = c.getExpToNextLevel();
@@ -196,13 +194,13 @@ public class SpoilsScreen extends Screen {
 	 */
 	private void drawSpoil(Graphics g) {
 		g.setFontSize(26);
-		g.drawWithShadow("Result", 200, y[0]);
+		g.drawStringWithShadow("Result", 200, y[0]);
 
 		int totalgold = Load.getPartyItems().getGold();
 		if (step > 0) {
-			g.drawWithShadow("The enemy dropped " + gold + " gp, " + 
+			g.drawStringWithShadow("The enemy dropped " + gold + " gp, " + 
 					"total: " + totalgold + " gp", x[0], y[1]);
-			g.drawWithShadow("The party got " + exp + " exp.", x[0], y[2]);
+			g.drawStringWithShadow("The party got " + exp + " exp.", x[0], y[2]);
 		}
 
 		ArrayList<Character> characters = Load.getCharacters();
@@ -210,29 +208,29 @@ public class SpoilsScreen extends Screen {
 			if (step > 1 + i) {
 				Character c = characters.get(i);
 				if (c.isAlive()) {
-					Color color = Color.WHITE;
+					float[] color = Graphics.WHITE;
 					boolean canLevelUp = info[i].canLevelUp;
 
 					if (info[i].hasLeveledUp) {
-						color = Color.GREEN;
-						g.drawWithShadow("Level up!", x[3], y[3 + i], color);
-						g.drawWithShadow(Math.round(info[i].recievedExp) + " exp", x[2], y[3 + i], color);
+						color = Graphics.GREEN;
+						g.drawStringWithShadow("Level up!", x[3], y[3 + i], color);
+						g.drawStringWithShadow(Math.round(info[i].recievedExp) + " exp", x[2], y[3 + i], color);
 					} else if (!canLevelUp) {
-						g.drawWithShadow("Max level", x[3], y[3 + i], Color.RED);
-						g.drawWithShadow("0 exp", x[2], y[3 + i], Color.RED);
+						g.drawStringWithShadow("Max level", x[3], y[3 + i], Graphics.RED);
+						g.drawStringWithShadow("0 exp", x[2], y[3 + i], Graphics.RED);
 					} else {
-						g.drawWithShadow(Math.round(info[i].recievedExp) + " exp", x[2], y[3 + i], Color.WHITE);
+						g.drawStringWithShadow(Math.round(info[i].recievedExp) + " exp", x[2], y[3 + i], Graphics.WHITE);
 					}
 					drawBars(g, i, info[i].etn, canLevelUp);
 
-					g.drawWithShadow(c.getName(), x[0], y[3 + i], color);
+					g.drawStringWithShadow(c.getName(), x[0], y[3 + i], color);
 				} else {
-					g.drawWithShadow(c.getName(), x[0], y[3 + i], Color.RED);
+					g.drawStringWithShadow(c.getName(), x[0], y[3 + i], Graphics.RED);
 				}
 			}
 		}
 		if (step >= 2 + characters.size() && droppedItem != null) {
-			g.drawWithShadow("You found " + droppedItem.getName() + " laying on the ground!", x[0], y[3 + 4]);
+			g.drawStringWithShadow("You found " + droppedItem.getName() + " laying on the ground!", x[0], y[3 + 4]);
 		}
 	}
 
@@ -297,10 +295,10 @@ public class SpoilsScreen extends Screen {
 		private boolean hasLeveledUp;
 		private boolean canLevelUp;
 		
-		public int update(float elapsedTime, int step, boolean updateStep) {
+		public int update(float dt, int step, boolean updateStep) {
 			if (canLevelUp) {
 				if (expCounter > 0) {
-					expCounter -= expDecrease;
+					expCounter -= expDecrease * dt;
 					updateETN();
 					
 					if (etn >= 1) {

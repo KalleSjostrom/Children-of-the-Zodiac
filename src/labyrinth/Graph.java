@@ -273,7 +273,7 @@ public class Graph {
 	 * 
 	 * @param g the Graphics to draw on.
 	 */
-	public void drawInventory(Graphics g) {
+	public void drawInventory(float dt, Graphics g) {
 		int i;
 		boolean found = false;
 		for (i = 0; i < inventories.length && !found; i++) {
@@ -281,7 +281,7 @@ public class Graph {
 			if (inv instanceof Save) {
 				((Save) inv).draw(g, labyrinth.getPlayerAngle());
 			} else {
-				inv.draw(g);
+				inv.draw(dt, g);
 			}
 		}
 	}

@@ -28,14 +28,14 @@ public class ParticleSystemPacket {
 		delays.put(system, delay);
 	}
 	
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		// TODO: called when systems.size() == 0...
 		if (systems.size() > 0) { // Shouldn't be needed.
 			if (useStartStop) systems.get(0).start(g);
 			for (ParticleSystem ps : systems) {
 				int delay = delays.get(ps);
 				if (delay <= 0) {
-					ps.draw(g);
+					ps.draw(dt, g);
 				}
 			}
 			if (useStartStop) systems.get(systems.size()-1).end(g);

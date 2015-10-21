@@ -167,10 +167,10 @@ public class VillageStory extends GameMode {
 	 * 
 	 * @param g the graphics to draw on.
 	 */
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		g.setColor(1);
-		timeLine.draw(g);
-		super.draw(g);
+		timeLine.draw(dt, g);
+		super.draw(dt, g);
 	}
 
 	/**

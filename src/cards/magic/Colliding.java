@@ -8,7 +8,6 @@
 package cards.magic;
 
 import info.SoundMap;
-import info.Values;
 import particleSystem.ParticleSystem;
 import particleSystem.ParticleSystemPacket;
 import settings.AnimSettings;
@@ -75,7 +74,7 @@ public class Colliding extends PowerMagic {
 	public static ParticleSystemPacket getStaticAnimation(AnimationInfo info) {
 		ParticleSystemPacket psp = new ParticleSystemPacket();
 		AnimSettings settings = AnimationSettingsFactory.getDefault();
-		settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, (Values.LOGIC_INTERVAL / 1000f) * .05f);
+		settings.setValue(AnimSettings.EMITTANCE_PERIOD, .05f);
 		float size = 1.2f;
 		settings.setValue(AnimSettings.SPEED, 7);
 		settings.setValue(AnimSettings.SIZE, .4f * size);

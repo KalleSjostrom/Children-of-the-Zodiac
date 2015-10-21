@@ -18,8 +18,8 @@ public class FireMission extends Mission {
 		addTriggers(info);
 	}
 
-	public void draw(Graphics g) {
-		super.update();
+	public void draw(float dt, Graphics g) {
+		super.update(dt);
 		g.setFontSize(40);
 		g.setColor(1);
 		int status = getStatus();

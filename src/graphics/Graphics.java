@@ -49,18 +49,24 @@ public class Graphics {
 
 	public static final float[] BLACK = new float[]{ 0, 0, 0, 1 };
 	public static final float[] WHITE = new float[]{ 1, 1, 1, 1 };
-
-	public static final float[] RED = new float[]{ Color.red.getRed(), Color.red.getGreen(), Color.red.getBlue(), 1.0f };
-	public static final float[] GREEN = new float[]{ Color.green.getRed(), Color.green.getGreen(), Color.green.getBlue(), 1.0f };
-	public static final float[] DARK_GRAY = new float[]{ Color.darkGray.getRed(), Color.darkGray.getGreen(), Color.darkGray.getBlue(), 1.0f };
+	
+	private static float[] COLOR_TO_FLOAT_ARRAY(Color c) {
+		float[] color = new float[]{ 1, 1, 1, 1 };
+		c.getColorComponents(color);
+		return color;
+	}
+	public static final float[] RED = COLOR_TO_FLOAT_ARRAY(Color.red);
+	public static final float[] GREEN = COLOR_TO_FLOAT_ARRAY(Color.green);
+	public static final float[] DARK_GRAY = COLOR_TO_FLOAT_ARRAY(Color.darkGray);
 
 	public static GL2 gl2;
 	public static GL4 gl;
 	private static String fadeImageName;
-	private float[] global_color = new float[4];
+	private float[] text_color = new float[]{ 1, 1, 1, 1 };
 		
 	private Material spriteMaterial;
-	private StringRenderer stringRenderer;
+	public StringRenderer stringRenderer;
+	public SpriteRenderer spriteRenderer;
 	
 	private static Logger logger = Logger.getLogger("Graphics");
 	
@@ -74,6 +80,9 @@ public class Graphics {
 
 		stringRenderer = new StringRenderer();
 		stringRenderer.init(gl);
+
+		spriteRenderer = new SpriteRenderer();
+		spriteRenderer.init(gl);
 	}
 	
 	////////// IMAGE DRAWING METHODS //////////
@@ -153,38 +162,67 @@ public class Graphics {
 	
 	////////// TEXT DRAWING METHODS //////////
 	public void drawString(String string, int x, int y) {
-		stringRenderer.drawString(gl, string, x, y, 1.0f);
+		stringRenderer.drawString(gl, string, x, y, 1.0f, 1.0f);
 	}
 	public void drawString(String string, int x, int y, float alpha) {
-		stringRenderer.drawString(gl, string, x, y, alpha);
+		stringRenderer.drawString(gl, string, x, y, 1.0f, alpha);
+	}
+	public void drawString(String string, int x, int y, float scale, float alpha) {
+		stringRenderer.drawString(gl, string, x, y, scale, alpha);
 	}
 	public void drawStringCentered(String string, int y) {
-		int anchor = Values.ORIGINAL_RESOLUTION[Values.X] / 2;
-		drawStringCentered(string, y, anchor);
+		int x = calcAlignCenter(string, Values.ORIGINAL_RESOLUTION[Values.X] / 2);
+		stringRenderer.drawString(gl, string, x, y, 1.0f, 1.0f);
 	}
 	public void drawStringCentered(String string, int y, int anchor) {
 		int x = calcAlignCenter(string, anchor);
-		drawString(string, x, y);
+		stringRenderer.drawString(gl, string, x, y, 1.0f, 1.0f);
 	}
-	public void drawStringRightAligned(String text, int y, int rightLimit) {
-		int x = calcAlignRight(text, rightLimit);
-		drawString(text, x, y);
+	public void drawStringRightAligned(String string, int y, int rightLimit) {
+		int x = calcAlignRight(string, rightLimit);
+		stringRenderer.drawString(gl, string, x, y, 1.0f, 1.0f);
 	}
 	
-	public void drawWithShadow(String string, int x, int y) {
-		drawWithShadow(string, x, y, WHITE);
+	public void drawStringWithShadow(String string, int x, int y) {
+		drawStringWithShadow(string, x, y, WHITE);
 	}	
-	public void drawWithShadow(String string, int x, int y, Color color) {
-		setColor(0, 0, 0, 1);
-		drawString(string, x + 1, y + 1);
-		setColor(color.getColorComponents(null), 1);
-		drawString(string, x, y);
-	}	
-	public void drawWithShadow(String string, int x, int y, float[] color) {
+	public void drawStringWithShadow(String string, int x, int y, float[] color) {
 		setColor(0, 0, 0, 1);
 		drawString(string, x + 1, y + 1);
 		setColor(color);
 		drawString(string, x, y);
+	}
+	
+	public void setColor(float i) {
+		text_color[0] = text_color[1] = text_color[2] = text_color[3] = i;
+		stringRenderer.setTextColor(gl, text_color);
+	}
+	public void setColor(float r, float g, float b) {
+		text_color[0] = r;
+		text_color[1] = g;
+		text_color[2] = b;
+		stringRenderer.setTextColor(gl, text_color);
+	}
+	public void setColor(float r, float g, float b, float a) {
+		text_color[0] = r;
+		text_color[1] = g;
+		text_color[2] = b;
+		text_color[3] = a;
+		stringRenderer.setTextColor(gl, text_color);
+	}
+	public void setColor(float[] rgb, float a) {
+		text_color[0] = rgb[0];
+		text_color[1] = rgb[1];
+		text_color[2] = rgb[2];
+		text_color[3] = a;
+		stringRenderer.setTextColor(gl, text_color);
+	}
+	public void setColor(float[] rgba) {
+		text_color[0] = rgba[0];
+		text_color[1] = rgba[1];
+		text_color[2] = rgba[2];
+		text_color[3] = rgba[3];
+		stringRenderer.setTextColor(gl, text_color);
 	}
 
 	// Bounds and alignments
@@ -241,42 +279,8 @@ public class Graphics {
 	}
 
 	public void setImageColor(float r, float g, float b, float a) {
-		setColor(r, g, b, a);
-	}
-
-	/**
-	 * Sets the color by giving one value to be used as all the 
-	 * three values of the RGB color. So calling this method with
-	 * argument 0 will result in black color.
-	 * 
-	 * @param i the value to use as red, green and blue.
-	 */
-	public void setColor(float i) {
-		global_color[0] = global_color[1] = global_color[2] = global_color[3] = i;
-	}
-	public void setColor(float r, float g, float b) {
-		global_color[0] = r;
-		global_color[1] = g;
-		global_color[2] = b;
-	}
-	public void setColor(float r, float g, float b, float a) {
-		global_color[0] = r;
-		global_color[1] = g;
-		global_color[2] = b;
-		global_color[3] = a;
-	}
-	public void setColor(float[] rgb, float a) {
-		global_color[0] = rgb[0];
-		global_color[1] = rgb[1];
-		global_color[2] = rgb[2];
-		global_color[3] = a;
-	}
-	public void setColor(float[] rgba) {
-		global_color[0] = rgba[0];
-		global_color[1] = rgba[1];
-		global_color[2] = rgba[2];
-		global_color[3] = rgba[3];
-	}
+		// setColor(r, g, b, a);
+	}	
 
 	/**
 	 * Sets the size as the size used when drawing texts.
@@ -353,7 +357,10 @@ public class Graphics {
 		// gl2.glLoadIdentity();
 	}
 	public void setBlendFunc(int glMode) {
-		gl2.glBlendFunc(GL2.GL_SRC_ALPHA, glMode);
+		// gl2.glBlendFunc(GL2.GL_SRC_ALPHA, glMode);
+	}
+	public void setAlphaFunc(float f) {
+		 // gl2.glAlphaFunc(GL2.GL_GREATER, f);
 	}
 
 	private int frameWidth;
@@ -491,11 +498,7 @@ public class Graphics {
 		} else {
 			gl2.glDisable(GL2.GL_DEPTH_TEST);	
 		}
-	}
-	
-	public void setAlphaFunc(float f) {
-		 // gl2.glAlphaFunc(GL2.GL_GREATER, f);
-	}
+	}	
 	
 	public void drawGradient(Vector3f color, float topAlpha, float bottomAlpha, float xRight, 
 			float xLeft, float yBottom, float yTop, boolean popPush, boolean beginQuads) {

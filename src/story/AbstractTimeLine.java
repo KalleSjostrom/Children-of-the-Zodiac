@@ -39,10 +39,12 @@ public abstract class AbstractTimeLine extends Fadeable {
 	
 	protected ArrayList<TimeLineEvent> info;
 	protected int doneMode = NOT_DONE;
-	protected int nextInitTime;
-	protected int nextStopTime;
-	protected int currentTime;
-	
+
+	protected float nextInitTime;
+	protected float nextStopTime;
+	protected float currentTime;
+
+	// TODO(kalle): Is this even used in a multi-threading context? Is there any real reason if so?
 	private Semaphore modeAccess = new Semaphore(1);
 	protected int mode = NORMAL;
 	private boolean searchingForDialog;
@@ -54,7 +56,7 @@ public abstract class AbstractTimeLine extends Fadeable {
 	 * @param elapsedTime the amount of time that has elapsed since this
 	 * method was last called.
 	 */
-	public void update(int elapsedTime) {
+	public void update(float dt) {
 		if (mode % 2 == RUNNING) {
 			if (searchingForDialog) { // SHOULD INIT
 				if (currentTime >= nextInitTime) {
@@ -74,7 +76,7 @@ public abstract class AbstractTimeLine extends Fadeable {
 //				currentTime = nextStopTime;
 //				setNextStopTime();
 //			}
-			currentTime += elapsedTime;
+			currentTime += dt;
 			if (info.size() > 0) {
 				TimeLineEvent tli = info.get(0); 
 				while (currentTime >= tli.getTime()) {

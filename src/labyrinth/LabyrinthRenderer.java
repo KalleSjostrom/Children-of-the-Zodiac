@@ -77,7 +77,7 @@ public class LabyrinthRenderer {
 		}
 	}
 
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		HashMap<Integer, Node> nodes = map.getNodes();
 		Iterator<Integer> it = nodes.keySet().iterator();
 		

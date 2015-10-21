@@ -167,7 +167,7 @@ public class Cure extends SupportCard {
 		settings.setValue(AnimSettings.EMITTER_TYPE, ParticleSystem.LINE_EMITTER_TYPE);
 		
 		settings.setValue(AnimSettings.NR_PARTICLES, 250);
-		settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, (Values.LOGIC_INTERVAL / 1000f) * .12f);
+		settings.setValue(AnimSettings.EMITTANCE_PERIOD, .12f);
 		
 		settings.setValue(AnimSettings.NR_TEXTURES, 3);
 		settings.setValue(AnimSettings.NR_TEXTURES + 1, ParticleSystem.JITTER_4);

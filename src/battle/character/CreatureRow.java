@@ -89,11 +89,11 @@ public abstract class CreatureRow extends Hideable {
 	 * 
 	 * @param g the Graphics to draw on.
 	 */
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		translate(g);
 		drawBack(g);
 		for (int i = 0; i < creatures3D.size(); i++) {
-			creatures3D.get(i).draw(g);
+			creatures3D.get(i).draw(dt, g);
 			translateCreature(g);
 			g.setColor(1);
 		}

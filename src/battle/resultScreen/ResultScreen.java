@@ -8,12 +8,8 @@
 package battle.resultScreen;
 
 import graphics.Graphics;
-
-import java.awt.Color;
 import java.util.ArrayList;
-
 import java.util.logging.*;
-
 import battle.HitElement;
 import cards.Card;
 import character.Creature;
@@ -103,12 +99,12 @@ public class ResultScreen extends Screen {
 		}
 	}
 	
-	private Color selectColor(int value, Color high, Color low) {
+	private float[] selectColor(int value, float[] high, float[] low) {
 		if (value > 0)
 			return high;
 		if (value < 0)
 			return low;
-		return Color.white;
+		return Graphics.WHITE;
 	}
 
 	public void drawResult(Graphics g) {
@@ -118,21 +114,21 @@ public class ResultScreen extends Screen {
 		int[] y = Y_POS;
 
 		g.setFontSize(26);
-		g.drawWithShadow("Result", x[0], y[0]);
-		g.drawWithShadow("Attack", x[0], y[1]);
-		g.drawWithShadow("Magic", x[0], y[2]);
-		g.drawWithShadow("Support", x[0], y[3]);
-		g.drawWithShadow("Total", x[0], y[4]);
+		g.drawStringWithShadow("Result", x[0], y[0]);
+		g.drawStringWithShadow("Attack", x[0], y[1]);
+		g.drawStringWithShadow("Magic", x[0], y[2]);
+		g.drawStringWithShadow("Support", x[0], y[3]);
+		g.drawStringWithShadow("Total", x[0], y[4]);
 		
 		for (int i = 0; i < team.size(); i++) {
 			Creature c = team.get(i);
-			g.drawWithShadow(c.getName(), x[i + 1], y[0]);
+			g.drawStringWithShadow(c.getName(), x[i + 1], y[0]);
 			for (int j = 0; j < 3; j++) {
 				int value = attack[i][j];
-				g.drawWithShadow(String.valueOf(value), x[1 + i], y[j + 1], selectColor(value, j < 2 ? Color.red : Color.green, j < 2 ? Color.green : Color.red));
+				g.drawStringWithShadow(String.valueOf(value), x[1 + i], y[j + 1], selectColor(value, j < 2 ? Graphics.RED : Graphics.GREEN, j < 2 ? Graphics.GREEN : Graphics.RED));
 			}
 			int total = attack[i][0] + attack[i][1] - attack[i][2];
-			g.drawWithShadow(String.valueOf(Math.abs(total)), x[i + 1], y[4], selectColor(total, Color.red, Color.green));
+			g.drawStringWithShadow(String.valueOf(Math.abs(total)), x[i + 1], y[4], selectColor(total, Graphics.RED, Graphics.GREEN));
 		}
 //		g.loadIdentity();
 		for (int i = 0; i < cards.size(); i++) {

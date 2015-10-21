@@ -725,7 +725,7 @@ public class Cheater extends GameMode {
 	 * 
 	 * @param g3D the graphics to draw on.
 	 */
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		g.setColor(1);
 		g.loadIdentity();
 		g.setColor(Graphics.RED);

@@ -8,7 +8,6 @@
 package cards.magic;
 
 import info.SoundMap;
-import info.Values;
 import particleSystem.ParticleSystem;
 import particleSystem.ParticleSystemPacket;
 import particleSystem.ParticleValues;
@@ -139,7 +138,7 @@ public class Ultima extends Card {
 		settings.setVector(AnimSettings.SOURCE, source);
 		
 		settings.setValue(AnimSettings.NR_PARTICLES, 250);
-		settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, (Values.LOGIC_INTERVAL / 1000f) * .1f);
+		settings.setValue(AnimSettings.EMITTANCE_PERIOD, 0.1f);
 
 		InterpolationInfo info1 = ParticleSystem.calcInterpolationInfo(settings);
 		

@@ -15,8 +15,8 @@ public class DemolishEmitter extends Emitter {
 	private boolean initiated;
 
 	public DemolishEmitter(Stack<Particle> particlePool,
-			ArrayList<Particle> particles, InterpolationInfo info, float emitTimeStep, int limit) {
-		super(particlePool, particles, info, emitTimeStep, limit);
+			ArrayList<Particle> particles, InterpolationInfo info, float emitPeriod, int limit) {
+		super(particlePool, particles, info, emitPeriod, limit);
 	}
 
 	public void update(ParticleSystem system, float elapsedTime) {

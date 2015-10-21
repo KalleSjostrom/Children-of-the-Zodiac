@@ -105,7 +105,7 @@ public class CharacterRow extends CreatureRow {
 	 * 
 	 * @param g the Graphics to draw on. 
 	 */
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		g.loadIdentity();
 		g.translate(0, getYtrans(), -2);
 		if (!boss) {
@@ -121,7 +121,7 @@ public class CharacterRow extends CreatureRow {
 				g.translate(0, -trans[Y], 0);
 			}
 			creatures3D.get(i).setSupport(supportMode && i == target);
-			creatures3D.get(i).draw(g);
+			creatures3D.get(i).draw(dt, g);
 			if (i == target) {
 				g.translate(0, trans[Y], 0);
 			}

@@ -121,7 +121,7 @@ public class ProgressBar extends Object2D {
 	}
 	
 	@Override
-	public void draw(Graphics g) {}
+	public void draw(float dt, Graphics g) {}
 
 	/**
 	 * Updates the progress bar with the given progress. The given number

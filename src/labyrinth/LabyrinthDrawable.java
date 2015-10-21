@@ -6,7 +6,7 @@ public interface LabyrinthDrawable {
 
 	public void initDraw(Graphics g);
 
-	public void draw(Graphics g);
+	public void draw(float dt, Graphics g);
 
 	public void update(float elapsedTime);
 

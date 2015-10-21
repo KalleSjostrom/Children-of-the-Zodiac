@@ -48,7 +48,7 @@ public class EnemyCard extends Hideable {
 		createCoordFor(0, 0, 0, Z);
 	}
 	
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		super.translate(g);
 		draw(g, currentList, 0, true);
 	}

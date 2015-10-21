@@ -80,7 +80,7 @@ public abstract class Hideable extends Object2D {
 		g.translate(pos[X] + trans[X], pos[Y] + trans[Y], zDepth);
 	}
 	
-	public void update() {
+	public void update(float dt) {
 		if (shouldTranslate) {
 			System.out.println("Updating " + shouldTranslate);
 			trans[axis] += currentTransAmount;
@@ -96,11 +96,6 @@ public abstract class Hideable extends Object2D {
 //				trans[axis] = limits[visible ? LIMITS_LOW : LIMITS_HIGH];
 //			}
 //		}
-	}
-	
-	private void onTranslateDone() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	protected void setZdepth(float z) {

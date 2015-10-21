@@ -214,7 +214,7 @@ public abstract class Building extends GameMode {
 	 * 
 	 * @param g the graphics to draw on.
 	 */
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		g.setColor(0, 0, 0, 1);
 
 		g.drawImage(background, 0, 0);
@@ -226,7 +226,7 @@ public abstract class Building extends GameMode {
 		drawMenuBackground(g);
 
 		draw3D(g);
-		super.draw(g);
+		super.draw(dt, g);
 	}
 	
 	/**

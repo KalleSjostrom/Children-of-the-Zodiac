@@ -97,11 +97,11 @@ public class GLWeapon extends Hideable {
 	 * 
 	 * @param g the Graphics to draw on.
 	 */
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		super.translate(g);
-		icon.draw(g, getYtrans());
+		icon.draw(dt, g, getYtrans());
 		for (int i = 0; i < slots.size(); i++) {
-			slots.get(i).draw(g, getYtrans());
+			slots.get(i).draw(dt, g, getYtrans());
 		}
 		g.setAlphaFunc(.5f);
 		drawDeck(g, cards);
@@ -251,9 +251,9 @@ public class GLWeapon extends Hideable {
 	/**
 	 * Updates the cards in this weapon, if there are any.
 	 */
-	public void updatePos() {
+	public void updatePos(float dt) {
 		for (int i = 0; i < cards.size(); i++) {
-			cards.get(i).update();
+			cards.get(i).update(dt);
 		}		
 	}
 }

@@ -8,7 +8,6 @@
 package cards.magic;
 
 import info.SoundMap;
-import info.Values;
 import particleSystem.ParticleSystem;
 import particleSystem.ParticleSystemPacket;
 import particleSystem.equations.CircularWave;
@@ -137,7 +136,7 @@ public class Wind extends Magic {
 		
 		radius = .5f;
 		settings.setValue(AnimSettings.NR_PARTICLES, 1000);
-		settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, (Values.LOGIC_INTERVAL / 1000f) * .07f);
+		settings.setValue(AnimSettings.EMITTANCE_PERIOD, .07f);
 		
 		wave = new CircularWave(period, radius, 0, true);
 		settings.setVectorEquation(AnimSettings.POSITION_VECTOR_EQUATION, wave);
@@ -172,7 +171,7 @@ public class Wind extends Magic {
 		
 		radius = .75f;
 		settings.setValue(AnimSettings.NR_PARTICLES, 1500);
-		settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, (Values.LOGIC_INTERVAL / 1000f) * .03f);
+		settings.setValue(AnimSettings.EMITTANCE_PERIOD, .03f);
 		
 		wave = new CircularWave(period, radius, 0, false);
 		settings.setVectorEquation(AnimSettings.POSITION_VECTOR_EQUATION, wave);

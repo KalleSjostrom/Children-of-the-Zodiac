@@ -72,7 +72,7 @@ public class EnemySystem extends ParticleSystem {
 	public void end(Graphics g) {}
 	
 	@Override
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		if (!destroyed) {
 			if (getEnemy() != null) {
 				BattleEnemy e = getEnemy();

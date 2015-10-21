@@ -54,7 +54,7 @@ public class BattleTest extends GameMode {
 		super.update(elapsedTime);
 	}
 
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		g.loadIdentity();
 		g.setColor(1);
 		g.setLightEnabled(false);
@@ -63,6 +63,6 @@ public class BattleTest extends GameMode {
 			manager.initDraw(g);
 			inited = true;
 		}
-		manager.draw(g);
+		manager.draw(dt, g);
 	}
 }

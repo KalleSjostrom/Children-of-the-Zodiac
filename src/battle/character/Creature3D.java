@@ -126,7 +126,7 @@ public abstract class Creature3D extends Object2D {
 	 * @param g the Graphics object to draw to.
 	 * @param supportMode 
 	 */
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		
 		if (creature.isActive() && creature.isAlive()) {
 			alpha = .7f;

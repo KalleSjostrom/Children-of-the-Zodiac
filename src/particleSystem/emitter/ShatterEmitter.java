@@ -25,8 +25,8 @@ public class ShatterEmitter extends Emitter {
 	private static int[][] alpha;
 
 	public ShatterEmitter(Stack<Particle> particlePool,
-			ArrayList<Particle> particles, InterpolationInfo info, float emitTimeStep, int limit) {
-		super(particlePool, particles, info, emitTimeStep, limit);
+			ArrayList<Particle> particles, InterpolationInfo info, float emitPeriod, int limit) {
+		super(particlePool, particles, info, emitPeriod, limit);
 	}
 
 	public void update(ParticleSystem system, float elapsedTime) {
@@ -39,7 +39,7 @@ public class ShatterEmitter extends Emitter {
 			}
 			addTime(elapsedTime);
 			boolean empty = false;
-			while (!empty && getTime() >= getEmitTimeStep()) {
+			while (!empty && getTime() >= getemitPeriod()) {
 				if (okToEmit()) {
 					Particle p = getParticle(system);
 					Vector3f pos = p.getPosition();
@@ -72,7 +72,7 @@ public class ShatterEmitter extends Emitter {
 					getParticles().add(p);
 				}
 				empty = !okToEmit();
-				addTime(-getEmitTimeStep());
+				addTime(-getemitPeriod());
 			}
 		}
 	}

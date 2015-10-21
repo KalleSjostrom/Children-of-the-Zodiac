@@ -136,24 +136,24 @@ public class BossBattleArea extends GameMode implements BattleStarter {
 	 * 
 	 * @param g the graphics to draw on.
 	 */
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		if (weatherSystem != null) {
 			weatherSystem.draw(g, false);
 		}
-		drawExtra(g, false);
+		drawExtra(dt, g, false);
 		
 		GameEventListener.set2DNow(g);
 		if (dialog != null) {
 			g.setColor(1);
-			Dialog.getDialog().draw(g);
+			Dialog.getDialog().draw(dt, g);
 			if (card != null) {
 				DeckPage.drawCardInfo(g, card, 530);
 			}
 		}
 		g.push();
-		drawExtra(g, true);
+		drawExtra(dt, g, true);
 		g.pop();
-		super.draw(g);
+		super.draw(dt, g);
 	}
 	
 	/**
@@ -161,7 +161,7 @@ public class BossBattleArea extends GameMode implements BattleStarter {
 	 * 
 	 * @param g the graphics to draw on.
 	 */
-	private void drawExtra(Graphics g, boolean topLayer) {
+	private void drawExtra(float dt, Graphics g, boolean topLayer) {
 		if (!subGameModeInitiated) {
 			bm.initDraw(g);
 			subGameModeInitiated = true;
@@ -169,7 +169,7 @@ public class BossBattleArea extends GameMode implements BattleStarter {
 		if (topLayer) {
 			bm.drawTopLayer(g);
 		} else {
-			bm.draw(g);
+			bm.draw(dt, g);
 		}
 	}
 	

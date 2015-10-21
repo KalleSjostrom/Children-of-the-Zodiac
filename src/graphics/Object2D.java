@@ -183,6 +183,6 @@ public abstract class Object2D extends TimeHideable {
 	 * @param gl the GL object to use when initializing.
 	 */
 	public abstract void initDraw(Graphics g);
-	public abstract void draw(Graphics g);
+	public abstract void draw(float dt, Graphics g);
 	public void drawTopLayer(Graphics g) {}
 }

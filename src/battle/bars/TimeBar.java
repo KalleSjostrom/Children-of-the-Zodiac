@@ -76,7 +76,7 @@ public class TimeBar extends ProgressBar {
 	 * 
 	 * @param g the Graphics to draw on.
 	 */
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		g.rotate(90, 0, 0, 1);
 		super.draw(g, 1, -1);
 	}

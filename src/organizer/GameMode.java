@@ -419,7 +419,7 @@ public abstract class GameMode extends Fadeable {
 		}
 	}
 
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		updateFadeValue();
 		g.fadeOldSchool(fadeValue);
 	}

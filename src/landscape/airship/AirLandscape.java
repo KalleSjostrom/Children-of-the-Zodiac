@@ -31,7 +31,7 @@ public class AirLandscape extends AirLandscapeLoader {
 		if (currentNode.isCross()) {
 			currentNode = null;
 		}
-		airShip.standStill(Values.DOWN);
+		airShip.stop(Values.DOWN);
 		inputManager.resetAllGameActions();
 		
 		logicLoading = false;
@@ -49,7 +49,7 @@ public class AirLandscape extends AirLandscapeLoader {
 	}
 	
 	private void checkNodes() {
-		float[] pos = airShip.getPos();
+		float[] pos = airShip.pos;
 		if (currentNode == null || !checkNode(currentNode, pos)) {
 			boolean found = false;
 			for (int i = 0; i < nodes.size() && !found; i++) {
@@ -80,7 +80,7 @@ public class AirLandscape extends AirLandscapeLoader {
 	}
 
 	private void checkGameInput() {
-		if (airShip.isMoving()) {
+		if (airShip.moving) {
 			boolean shouldStop = true;
 			for (int i = UP; i <= LEFT; i++) {
 				if (!gameActions[i].isReleased()) {
@@ -119,12 +119,12 @@ public class AirLandscape extends AirLandscapeLoader {
 		}
 	}
 	
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		g.setColor(1);
 		g.setFontSize(30);
 		background.drawBottom(g);
-		airShip.draw(g);
-		background.drawTop(g, false, null);
+		airShip.draw(dt, g);
+		background.drawTop(g);
 		g.drawCenteredImage(nameBackGround, 10);
 		if (currentNode != null) {
 			String name = currentPlace;
@@ -137,6 +137,6 @@ public class AirLandscape extends AirLandscapeLoader {
 			g.drawStringCentered(name, 60);
 		}
 		super.checkMenu();
-		super.draw(g);
+		super.draw(dt, g);
 	}
 }

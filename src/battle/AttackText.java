@@ -60,10 +60,10 @@ public class AttackText {
 		return attackText;
 	}
 	
-	public void update(float elapsedTime) {
+	public void update(float dt) {
 		synchronized (this) {
 			for (int i = 0; i < textToDraw.size(); i++) {
-				if (!textToDraw.get(i).update()) {
+				if (!textToDraw.get(i).update(dt)) {
 					textToDraw.remove(i);
 					i--;
 				}
@@ -78,14 +78,14 @@ public class AttackText {
 	 * 
 	 * @param gl the GL to draw on.
 	 */
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		g.loadIdentity();
 		g.translate(0, 0, BattleValues.STANDARD_Z_DEPTH);
 		g.scale(.8f);
 		synchronized (this) {
 			for (int i = 0; i < textToDraw.size(); i++) {
 				Text t = textToDraw.get(i);
-				t.draw(g);
+				t.draw(dt, g);
 			}
 		}
 	}
@@ -241,7 +241,7 @@ public class AttackText {
 		 * 
 		 * @param g the GL object to use to draw.
 		 */
-		public void draw(Graphics g) {
+		public void draw(float dt, Graphics g) {
 			textRenderer.begin3DRendering();
 			g.setColor(color[0], color[1], color[2], life);
 			g.setBlendFunc(GL2.GL_ONE_MINUS_SRC_ALPHA);
@@ -257,8 +257,8 @@ public class AttackText {
 		 * 
 		 * @return true if life is above zero.
 		 */
-		public boolean update() {
-			life -= FADE * Values.LOGIC_INTERVAL;
+		public boolean update(float dt) {
+			life -= FADE * dt;
 			return life > 0;
 		}
 	}

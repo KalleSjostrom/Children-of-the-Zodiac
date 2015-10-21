@@ -32,20 +32,10 @@ public class AnimatedObjects extends Sprite {
 	 */
 	public AnimatedObjects(String path, String name, int[] pos, int size) {
 		this.pos = Values.convertToFloatArray(pos);
-		loadImages(Values.VillageImages + path + "/animobj/", name, size);
+		loadImage(Values.VillageImages + path + "/animobj/", name, size);
 		move();
-	}
-
-	/**
-	 * Draws the animated object on the given graphics. It takes the 
-	 * position of the background so it can calculate where on the screen 
-	 * to draw the object.
-	 * 
-	 * @param g the graphics to draw on.
-	 * @param x the x position of the background.
-	 * @param y the y position of the background.
-	 */
-	public void draw(Graphics g, int x, int y) {
-		super.drawAtPosition(g, (int) pos[Values.X] + x, (int) pos[Values.Y] + y);
+	}	
+	public void draw(float dt, Graphics g, int x, int y) {
+		super.draw(dt, g, (int) pos[Values.X] + x, (int) pos[Values.Y] + y);
 	}
 }

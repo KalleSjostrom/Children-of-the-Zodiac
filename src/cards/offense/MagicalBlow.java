@@ -7,7 +7,6 @@
  */
 package cards.offense;
 
-import info.Values;
 import particleSystem.ParticleSystem;
 import particleSystem.ParticleSystemPacket;
 import particleSystem.ParticleValues;
@@ -100,7 +99,7 @@ public class MagicalBlow extends Card {
 		settings.setValue(AnimSettings.NR_PARTICLES, 200);
 		settings.setValue(AnimSettings.SIZE, .03f);
 		settings.setValue(AnimSettings.EMITTER_TYPE, ParticleSystem.INTERPOLATING_EMITTER_TYPE);
-		settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, (Values.LOGIC_INTERVAL / 1000f) * .05f);
+		settings.setValue(AnimSettings.EMITTANCE_PERIOD, .05f);
 		psp.add(new ParticleSystem(settings), 0); // Normal
 		
 		settings.setValue(AnimSettings.SIZE_RANDOM_MULT, .02f);
@@ -138,7 +137,7 @@ public class MagicalBlow extends Card {
 ////		settings.setValue(AnimSettings.EMITTER_TYPE, ParticleSystem.DEFAULT_EMITTER_TYPE);
 //		settings.setValue(AnimSettings.EMITTER_TYPE, ParticleSystem.INTERPOLATING_EMITTER_TYPE);
 //		settings.setVector(AnimSettings.POSITION_NOISE, new Vector3f(.2f, .2f, .2f));
-//		settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, (Values.LOGIC_INTERVAL / 1000f) * .01f);
+//		settings.setValue(AnimSettings.EMITTANCE_SPEED, .01f);
 //		settings.setValue(AnimSettings.NR_TEXTURES, 1);
 //		settings.setValue(AnimSettings.NR_TEXTURES + 1, ParticleSystem.ROUND_WHITE);
 ////		settings.setValue(AnimSettings.NR_TEXTURES + 2, ParticleSystem.JITTER_2);
@@ -156,7 +155,7 @@ public class MagicalBlow extends Card {
 ////		settings.setValue(AnimSettings.EMITTER_TYPE, ParticleSystem.DEFAULT_EMITTER_TYPE);
 //		settings.setValue(AnimSettings.EMITTER_TYPE, ParticleSystem.INTERPOLATING_EMITTER_TYPE);
 //		settings.setVector(AnimSettings.POSITION_NOISE, new Vector3f(.2f, .2f, .2f));
-//		settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, (Values.LOGIC_INTERVAL / 1000f) * .01f);
+//		settings.setValue(AnimSettings.EMITTANCE_SPEED, .01f);
 //		settings.setValue(AnimSettings.NR_TEXTURES, 2);
 //		settings.setValue(AnimSettings.NR_TEXTURES + 1, ParticleSystem.JITTER_4);
 //		settings.setValue(AnimSettings.NR_TEXTURES + 2, ParticleSystem.JITTER_4_45);

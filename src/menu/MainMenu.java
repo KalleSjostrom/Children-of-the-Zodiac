@@ -290,12 +290,12 @@ public class MainMenu extends GameMode {
 	 * 
 	 * @param g the graphics to draw the menu on.
 	 */
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		g.setColor(1);
 		g.setAlphaFunc(.02f);
 		g.setFontSize(MenuValues.MENU_FONT_SIZE);
 		currentPage.draw3D(g);
-		super.draw(g);
+		super.draw(dt, g);
 	}
 
 	public void exitTo(String startLocation) {

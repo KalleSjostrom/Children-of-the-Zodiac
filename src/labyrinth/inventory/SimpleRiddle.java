@@ -48,7 +48,7 @@ public class SimpleRiddle extends Inventory {
 		scale2 = 2;
 	}
 	
-//	public void draw(Graphics g) {
+//	public void draw(float dt, Graphics g) {
 //		GL2 gl = Graphics.gl2;
 //		gl.glEnd();
 //		texture[0].bind(g);

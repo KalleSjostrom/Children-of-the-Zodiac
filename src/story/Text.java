@@ -96,7 +96,7 @@ public class Text extends Fadeable {
 	 * 
 	 * @param g the graphics to draw on.
 	 */
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		draw(g, fadeValue);
 	}
 

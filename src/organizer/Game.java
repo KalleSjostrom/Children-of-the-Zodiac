@@ -42,10 +42,7 @@ public class Game {
 	 * Should be empty.
 	 */
 	public static void main(String[] args) {
-		Object[] obs = null;
-//			new Object[1];
-//		obs[0] = new InputWiiManager();
-		run(args, obs);
+		run(args, null);
 	}
 	
 	public static void run(String[] args, Object[] obs) {

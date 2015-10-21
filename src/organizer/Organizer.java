@@ -275,10 +275,10 @@ public class Organizer extends GameCore {
 	 * @param elapsedTime the amount of time (in milliseconds) that has elapsed
 	 * since this method was last called.
 	 */
-	public void update(float elapsedTime) {
+	public void update(float dt) {
 		if (currentGameMode == null || currentGameMode.isLoading()) {return;}
 		
-		currentGameMode.update(elapsedTime);
+		currentGameMode.update(dt);
 		if (GameCore.inputManager.hasSelectDownBeenPressed() && !(currentGameMode instanceof Cheater)) {
 			currentGameMode.exitWithoutFading(Values.CHEATER);
 			mode = currentGameMode.getExitMode();
@@ -309,7 +309,7 @@ public class Organizer extends GameCore {
 	 * 
 	 * @param g the graphics which is used for drawing.
 	 */
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		ImageHandler.load(g);
 		if (ImageHandler.getLoadQueueSize() == 0) {
 			currentGameMode.loadingDone();
@@ -317,7 +317,7 @@ public class Organizer extends GameCore {
 		if (currentGameMode == null || currentGameMode.isLoading()) {
 			return;
 		}
-		currentGameMode.draw(g);
+		currentGameMode.draw(dt, g);
 	}
 	
 	/**

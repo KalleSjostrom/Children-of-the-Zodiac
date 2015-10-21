@@ -71,5 +71,5 @@ public class MapRenderer extends Hideable {
 	}
 
 	@Override
-	public void draw(Graphics g) {}
+	public void draw(float dt, Graphics g) {}
 }

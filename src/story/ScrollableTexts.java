@@ -17,11 +17,11 @@ public class ScrollableTexts {
 		texts.add(st);
 	}
 	
-	public void update(int elapsedTime) {
+	public void update(float dt) {
 		y -= speed;
 	}
 
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		g.setColor(1);
 		float yVal = y;
 		for (int i = 0; i < texts.size(); i++) {

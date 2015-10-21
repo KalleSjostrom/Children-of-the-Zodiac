@@ -53,8 +53,8 @@ public class Attack {
 		dest = (int) (512 - width);
 	}
 	
-	public void update() {
-		ab.update();
+	public void update(float dt) {
+		ab.update(dt);
 	}
 
 	/**
@@ -82,8 +82,8 @@ public class Attack {
 	 * 
 	 * @param g the Graphics to draw on.
 	 */
-	public void draw(Graphics g) {
-		ab.draw(g);
+	public void draw(float dt, Graphics g) {
+		ab.draw(dt, g);
 		if (visible) {
 			g.loadIdentity();
 			g.setFontSize(46);
@@ -93,8 +93,10 @@ public class Attack {
 				pos = dest;
 			}
 			int shadowX = Math.round(dest + (Math.abs(pos - dest)));
-			g.drawWithShadow(name,  shadowX + 3, Y_POS + 3, Color.BLACK);
-			g.drawWithShadow(name, Math.round(pos), Y_POS);
+			g.setColor(Graphics.BLACK);
+			g.drawString(name, shadowX + 3, Y_POS + 3);
+			g.setColor(Graphics.WHITE);
+			g.drawString(name, Math.round(pos), Y_POS);
 		}
 	}
 }

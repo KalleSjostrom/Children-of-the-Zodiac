@@ -13,11 +13,8 @@ import graphics.Graphics;
 import info.SoundMap;
 import info.Values;
 
-import java.awt.Color;
 import java.util.ArrayList;
-
 import sound.SoundPlayer;
-
 import equipment.AbstractEquipment;
 
 /**
@@ -29,7 +26,7 @@ import equipment.AbstractEquipment;
  */
 public class Node {
 
-	private static final float[] enableColor = Graphics.BLACK;
+	private static final float[] enableColor = Graphics.WHITE;
 	private static final float[] disableColor = Graphics.DARK_GRAY;
 
 	private Node parent;

@@ -115,10 +115,10 @@ public class Door extends AbstractDoor {
 	}
 
 	@Override
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		// The door is just a texture which is drawn by the wall renderer.
 		if (images.length > 0) {
-			super.draw(g);
+			super.draw(dt, g);
 		}
 	}
 	

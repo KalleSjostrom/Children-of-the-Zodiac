@@ -7,7 +7,6 @@
  */
 package cards.offense;
 
-import info.Values;
 import particleSystem.ParticleSystem;
 import particleSystem.ParticleSystemPacket;
 import particleSystem.ParticleValues;
@@ -142,7 +141,7 @@ public class LaceratingCut extends Card {
 			psp.add(new ParticleSystem(settings), 0);
 			settings.setValue(AnimSettings.NR_PARTICLES, 500);
 			settings.setValue(AnimSettings.SIZE, .06f);
-			settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, (Values.LOGIC_INTERVAL / 1000f) * .12f);
+			settings.setValue(AnimSettings.EMITTANCE_PERIOD, .12f);
 			settings.setValue(AnimSettings.PARTICLE_MASS, 0f);
 			settings.setValue(AnimSettings.FADE_RANDOM_ADD, .001f);
 			settings.setValue(AnimSettings.COLOR, ParticleValues.COLOR_RED);

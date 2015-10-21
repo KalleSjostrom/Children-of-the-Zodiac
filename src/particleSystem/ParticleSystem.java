@@ -161,7 +161,7 @@ public class ParticleSystem extends PointBody {
 	private int isDeadLimit;
 	private SystemDrawable drawable;
 
-	private float emitTimeStep;
+	private float emitPeriod;
 	private Vector3f destroyFadeGravity;
 	protected boolean additiveColoring;
 	private int destroyMode;
@@ -203,7 +203,7 @@ public class ParticleSystem extends PointBody {
 		this.settings = (AnimSettings) settings.clone();
 		setMass(settings.getValue(AnimSettings.SYSTEM_MASS));
 		gravity = settings.getVector(AnimSettings.GRAVITY);
-		emitTimeStep = settings.getValue(AnimSettings.EMITTANCE_TIME_STEP);
+		emitPeriod = settings.getValue(AnimSettings.EMITTANCE_PERIOD);
 		speed = settings.getValue(AnimSettings.SPEED);
 		color = (int) settings.getValue(AnimSettings.COLOR);
 		nrParticles = (int) settings.getValue(AnimSettings.NR_PARTICLES);
@@ -250,7 +250,7 @@ public class ParticleSystem extends PointBody {
 		setVelocity(direction);
 
 		particles = new ArrayList<Particle>();
-		if (emitTimeStep == 0) {
+		if (emitPeriod == 0) {
 			for (int i = 0; i < nrOfParticles; i++) {
 				Particle p = createParticle();
 				p.resurrect(this, null);
@@ -260,28 +260,28 @@ public class ParticleSystem extends PointBody {
 		int emitterType = (int) settings.getValue(AnimSettings.EMITTER_TYPE);
 		switch (emitterType) {
 		case DEMOLISH_EMITTER_TYPE:
-			emitter = new DemolishEmitter(particlePool, particles, info, emitTimeStep, nrOfParticles);
+			emitter = new DemolishEmitter(particlePool, particles, info, emitPeriod, nrOfParticles);
 			break;
 		case INTERPOLATING_EMITTER_TYPE:
-			emitter = new InterpolatingEmitter(particlePool, particles, info, emitTimeStep, nrOfParticles);
+			emitter = new InterpolatingEmitter(particlePool, particles, info, emitPeriod, nrOfParticles);
 			break;
 		case DEFAULT_EMITTER_TYPE:
-			emitter = new Emitter(particlePool, particles, info, emitTimeStep, nrOfParticles);
+			emitter = new Emitter(particlePool, particles, info, emitPeriod, nrOfParticles);
 			break;
 		case FLARE_EMITTER_TYPE:
-			emitter = new FlareEmitter(particlePool, particles, info, emitTimeStep, nrOfParticles);
+			emitter = new FlareEmitter(particlePool, particles, info, emitPeriod, nrOfParticles);
 			break;
 		case SHATTER_EMITTER_TYPE:
-			emitter = new ShatterEmitter(particlePool, particles, info, emitTimeStep, nrOfParticles);
+			emitter = new ShatterEmitter(particlePool, particles, info, emitPeriod, nrOfParticles);
 			break;
 		case TEST_EMITTER_TYPE:
-			emitter = new Emitter(particlePool, particles, info, emitTimeStep, nrOfParticles);
+			emitter = new Emitter(particlePool, particles, info, emitPeriod, nrOfParticles);
 			break;
 		case LINE_EMITTER_TYPE:
-			emitter = new LineEmitter(particlePool, particles, info, emitTimeStep, nrOfParticles);
+			emitter = new LineEmitter(particlePool, particles, info, emitPeriod, nrOfParticles);
 			break;
 		case FLAME_EMITTER_TYPE:
-			emitter = new Flame2Emitter(particlePool, particles, info, emitTimeStep, nrOfParticles);
+			emitter = new Flame2Emitter(particlePool, particles, info, emitPeriod, nrOfParticles);
 			break;
 		default:
 			break;
@@ -491,7 +491,7 @@ public class ParticleSystem extends PointBody {
 	 * 
 	 * @param gl the GL to draw on.
 	 */
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		if (!hasInited) {
 			loadGLTextures();
 			hasInited  = true;

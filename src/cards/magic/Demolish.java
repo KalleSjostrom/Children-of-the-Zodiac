@@ -8,7 +8,6 @@
 package cards.magic;
 
 import info.SoundMap;
-import info.Values;
 import particleSystem.SphereParticleSystem;
 import particleSystem.ParticleSystem;
 import particleSystem.ParticleSystemPacket;
@@ -141,7 +140,7 @@ public class Demolish extends Card {
 		
 		settings.setValue(AnimSettings.NR_PARTICLES, 1);
 		settings.setValue(AnimSettings.IS_DEAD_LIMIT, 0);
-		settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, 0);
+		settings.setValue(AnimSettings.EMITTANCE_PERIOD, 0);
 		settings.setValue(AnimSettings.FADE_RANDOM_MULT, 0);
 		settings.setValue(AnimSettings.FADE_RANDOM_ADD, 0);
 		settings.setValue(AnimSettings.VELOCITY_RANDOM_MULT, 0);
@@ -206,7 +205,7 @@ public class Demolish extends Card {
 		settings.setBoolean(AnimSettings.ADDITIVE_COLORING, false);
 		
 		settings.setValue(AnimSettings.NR_PARTICLES, 150);
-		settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, (Values.LOGIC_INTERVAL / 1000f) * .1f);
+		settings.setValue(AnimSettings.EMITTANCE_PERIOD, .1f);
 
 		InterpolationInfo info = ParticleSystem.calcInterpolationInfo(settings);
 		

@@ -51,7 +51,7 @@ public class FloorButton extends Inventory {
 		}
 	}
 	
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		texture[status].bind(g);
 		g.beginQuads();
 		node.drawOneFloor(g);

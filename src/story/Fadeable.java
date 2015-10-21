@@ -7,8 +7,6 @@
  */
 package story;
 
-import info.Values;
-
 /**
  * This class contains some method that handles fading of graphics.
  * It is possible to set fade in / out speeds. 
@@ -87,7 +85,7 @@ public abstract class Fadeable {
 	protected void checkFade(TimeLineEvent info) {
 		if (info.isFade()) {
 			float fadeInTime = info.getInfo(TimeLineEvent.FADE_TIME);
-			setFadeSpeed((1 / fadeInTime) * Values.INTERVAL); // Update in draw...
+			setFadeSpeed(fadeInTime);
 			fadein = info.getType() == TimeLineEvent.TYPE_FADE_IN;
 			fadeValue = fadein ? 0 : 1;
 			fadeout = !fadein;

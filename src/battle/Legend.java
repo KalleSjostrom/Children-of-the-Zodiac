@@ -52,7 +52,7 @@ public class Legend extends Hideable {
 	 * 
 	 * @param g the Graphics to draw on.
 	 */
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		g.loadIdentity();
 		g.setFontSize(40);
 		

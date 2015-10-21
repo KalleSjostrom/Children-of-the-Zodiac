@@ -237,14 +237,14 @@ public class Animation {
 	 * 
 	 * @param gl the GL to draw on.
 	 */
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		if (currentSystem != null) {
 			for (AnimationSystem s : currentSystem) {
 				ParticleSystemPacket psp = s.getSystem();
-				psp.draw(g);
+				psp.draw(dt, g);
 			}
 		}
-		attackText.draw(g);
+		attackText.draw(dt, g);
 	}
 	
 	/**

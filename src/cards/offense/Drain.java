@@ -118,7 +118,7 @@ public class Drain extends Card {
 		
 		settings.setValue(AnimSettings.NR_PARTICLES, 1000);
 		settings.setValue(AnimSettings.SIZE, .1f);
-//		settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, (Values.LOGIC_INTERVAL / 1000f) * .06f);
+//		settings.setValue(AnimSettings.EMITTANCE_SPEED, .06f);
 		settings.setValue(AnimSettings.PARTICLE_MASS, 0f);
 		settings.setValue(AnimSettings.FADE_RANDOM_ADD, .001f);
 		settings.setValue(AnimSettings.COLOR, ParticleValues.COLOR_RANDOM);

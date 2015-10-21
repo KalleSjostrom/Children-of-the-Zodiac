@@ -123,7 +123,7 @@ public abstract class Inventory implements Comparable<Inventory> {
 		width = texture[index].getWidth() * scale;
 	}
 	
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		if (currentTex != Object2D.INVISIBLE) {
 			GL2 gl = Graphics.gl2;
 			if (currentTex < texture.length) {

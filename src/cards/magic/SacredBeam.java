@@ -8,7 +8,6 @@
 package cards.magic;
 
 import info.SoundMap;
-import info.Values;
 import particleSystem.ParticleSystem;
 import particleSystem.ParticleSystemPacket;
 import particleSystem.ParticleValues;
@@ -160,7 +159,7 @@ public class SacredBeam extends Card {
 		settings.setValue(AnimSettings.SPEED, 7);
 		settings.setValue(AnimSettings.NR_PARTICLES, 350);
 
-		settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, (Values.LOGIC_INTERVAL / 1000f) * .1f);
+		settings.setValue(AnimSettings.EMITTANCE_PERIOD, 0.1f);
 		
 		psp.add(new ParticleSystem(settings), 0);
 		return psp;

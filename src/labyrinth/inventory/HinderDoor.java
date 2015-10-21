@@ -58,7 +58,7 @@ public class HinderDoor extends AbstractDoor {
 		}
 	}
 	
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		int tex = checkIfOpen() ? 0 : 1;
 		texture[tex].bind(g);
 		g.beginQuads();

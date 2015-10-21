@@ -152,7 +152,7 @@ public class GLHand extends Object2D {
 	 * 
 	 * @param g the Graphics to draw on.
 	 */
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		if (showing && !done) {
 			g.loadIdentity();
 			g.translate(pos[currentPos][0], pos[currentPos][1], -2);

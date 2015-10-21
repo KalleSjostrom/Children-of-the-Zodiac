@@ -25,7 +25,7 @@ public class Help {
 		this.text = text;
 	}
 
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 //		for (int i = 0; i < text.length; i++) {
 //			g.drawCenteredImage(AbstractPage.BUTTON_ICONS[GameMode.TRIANGLE], iconx + i * step, icony);
 //		}

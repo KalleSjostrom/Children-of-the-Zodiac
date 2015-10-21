@@ -94,19 +94,18 @@ public class TitleScreen extends GameMode {
 	 * @param elapsedTime the time between updates.
 	 */
 	public void update(float elapsedTime) {
+		boolean done_fading = index > .9f;
 		if (mode != Values.NO_MODE_IS_SELECTED) {
 			fadeout = true;
-		} else if (doneFading()) {
+		} else if (done_fading) {
 			checkGameInput();
 		} else if (gameActions[CROSS].isPressed()) {
 			fadein = fadeout = false;
 			index = fadeValue = 1;
 		}
 		
-		if (!fadein) {
-			if (index < .9) {
-				index += .005f;
-			}
+		if (!fadein && !done_fading) {
+			index += .005f;
 		}
 		super.update(elapsedTime);
 	}
@@ -152,27 +151,14 @@ public class TitleScreen extends GameMode {
 	 * 
 	 * @param g the graphics on which to draw.
 	 */
-	public void draw(Graphics g) {
-		/*g.setColor(1);
-		g.setFontSize(24);*/
+	public void draw(float dt, Graphics g) {
 		g.drawImage(background, x, y);
 		if (!fadein) {
 			g.drawImage(titleBackground, x, y, 1, index);
-			if (doneFading()) {
+			if (index > .9f) {
 				activeNode.drawAllChildren(g);
 			}
 		}
-		super.draw(g);
+		super.draw(dt, g);
 	}
-
-	/**
-	 * Checks if every fadeable item on the title screen has finished fading.
-	 * The fadeable item on the title screen is the dragon image and the
-	 * title text. This method return true if these images is opaque.
-	 * 
-	 * @return true if the title screen images is done fading.
-	 */
-	private boolean doneFading() {
-		return index > .9f;
-	}	
 }

@@ -8,10 +8,7 @@
 package cards.offense;
 
 import info.BattleValues;
-import info.Values;
-
 import java.util.ArrayList;
-
 import particleSystem.ParticleSystem;
 import particleSystem.ParticleSystemPacket;
 import particleSystem.ParticleValues;
@@ -121,7 +118,7 @@ public class EnemyDrain extends Card {
 		ParticleSystemPacket psp = new ParticleSystemPacket();
 		
 		AnimSettings settings = AnimationSettingsFactory.getDefault();
-		settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, (Values.LOGIC_INTERVAL / 1000f) * .2f);
+		settings.setValue(AnimSettings.EMITTANCE_PERIOD, .2f);
 		settings.setVector(AnimSettings.POSITION_NOISE, new Vector3f(.2f, .2f, .2f));
 		settings.setValue(AnimSettings.SPEED, .1f);
 		settings.setValue(AnimSettings.NR_PARTICLES, 50);

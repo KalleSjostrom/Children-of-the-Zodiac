@@ -114,7 +114,7 @@ public class LabyrinthMap {
 			if (isOnFloor) {
 				String string = getName();
 				int center = g.calcAlignCenter(string, pos[0] * 215 + 170);
-				g.drawWithShadow(string, pos[1] * 330 + 85, center, ON_FLOOR_COLOR);
+				g.drawStringWithShadow(string, pos[1] * 330 + 85, center, ON_FLOOR_COLOR);
 			} else {
 				g.drawStringCentered(this.getName(), pos[1] * 330 + 85, pos[0] * 215 + 170);
 			}

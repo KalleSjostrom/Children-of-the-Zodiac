@@ -64,9 +64,9 @@ public class Enemy3D extends Creature3D {
 	 * @param g the Graphics object to use when rendering the character.
 	 */
 	@Override
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		if (isVisible()) {
-			super.draw(g);
+			super.draw(dt, g);
 		}
 	}
 

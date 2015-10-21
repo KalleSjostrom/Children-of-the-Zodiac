@@ -139,15 +139,15 @@ public class BattleCard extends Card {
 		float size = 0;
 		switch (level) {
 		case 1:
-			settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, (Values.LOGIC_INTERVAL / 1000f) * .024f);
+			settings.setValue(AnimSettings.EMITTANCE_PERIOD, .024f);
 			size = .5f;
 			break;
 		case 2:
-			settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, (Values.LOGIC_INTERVAL / 1000f) * .022f);
+			settings.setValue(AnimSettings.EMITTANCE_PERIOD, .022f);
 			size = .6f;
 			break;
 		case 3:
-			settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, (Values.LOGIC_INTERVAL / 1000f) * .02f);
+			settings.setValue(AnimSettings.EMITTANCE_PERIOD, .02f);
 			size = .7f;
 			break;
 		default:

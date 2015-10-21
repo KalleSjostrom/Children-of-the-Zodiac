@@ -114,7 +114,7 @@ public class Blizzard extends PowerMagic {
 		}
 		
 		settings.setValue(AnimSettings.NR_PARTICLES, 200);
-		settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, (Values.LOGIC_INTERVAL / 1000f) * .1f);
+		settings.setValue(AnimSettings.EMITTANCE_PERIOD, .1f);
 		
 		settings.setValue(AnimSettings.NR_TEXTURES, 7);
 		settings.setValue(AnimSettings.NR_TEXTURES + 1, ParticleSystem.JITTER_1);

@@ -30,6 +30,7 @@ public class Material {
 
 	public int projection_location;
 	public int model_view_location;
+	public int color_location;
 	public int alpha_location;
 
 	public Texture texture;	
@@ -56,10 +57,14 @@ public class Material {
 		
 		projection_location = gl.glGetUniformLocation(program, "projection");
 		model_view_location = gl.glGetUniformLocation(program, "model_view");
+		color_location = gl.glGetUniformLocation(program, "color");
 		alpha_location = gl.glGetUniformLocation(program, "alpha");
 		
 		gl.glUniformMatrix4fv(projection_location, 1, true, Values.ORTHOGRAPHIC_PROJECTION, 0);
 		gl.glUniformMatrix4fv(model_view_location, 1, true, model_view, 0);
+
+		gl.glUniform4fv(color_location, 1, new float[]{1, 1, 1, 1}, 0);
+		// gl.glUniform4f(color_location, 1.0f, 1.0f, 1.0f, 1.0f);
 		gl.glUniform1f(alpha_location, 1.0f);
 	}
 	
@@ -92,6 +97,17 @@ public class Material {
 		buffer.vbo = vbo;
 		return buffer;
 	}
+	
+	public Buffer refillBuffer(GL4 gl, Buffer buffer, float[] buffer_position, float[] buffer_uv) {
+		gl.glBindBuffer(GL.GL_ARRAY_BUFFER, buffer.vbo[0]);
+		gl.glBufferData(GL.GL_ARRAY_BUFFER, buffer_position.length * Buffers.SIZEOF_FLOAT, FloatBuffer.wrap(buffer_position), GL.GL_STATIC_DRAW);
+
+		gl.glBindBuffer(GL.GL_ARRAY_BUFFER, buffer.vbo[1]);
+		gl.glBufferData(GL.GL_ARRAY_BUFFER, buffer_uv.length * Buffers.SIZEOF_FLOAT, FloatBuffer.wrap(buffer_uv), GL.GL_STATIC_DRAW);
+
+		return buffer;
+	}
+
 
 	public void destroy(GL4 gl) {
 		gl.glDeleteBuffers(buffer.vbo.length, buffer.vbo, 0);

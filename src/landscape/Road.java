@@ -159,9 +159,9 @@ public class Road {
 	 * 
 	 * @param g the graphics to draw on.
 	 */
-	protected void drawRoad(Graphics g) {
+	protected void drawRoad(float dt, Graphics g) {
 		for (int i = 0; i < dots.size(); i++) {
-			dots.get(i).draw(g);
+			dots.get(i).draw(dt, g);
 		}
 	}
 
@@ -243,7 +243,7 @@ public class Road {
 		 * 
 		 * @param g the graphics to draw the dot on.
 		 */
-		private void draw(Graphics g) {
+		private void draw(float dt, Graphics g) {
 			g.drawImage(dot, xpos, ypos);
 		}
 	}

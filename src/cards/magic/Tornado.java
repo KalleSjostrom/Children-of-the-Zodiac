@@ -8,7 +8,6 @@
 package cards.magic;
 
 import info.SoundMap;
-import info.Values;
 import particleSystem.ParticleSystem;
 import particleSystem.ParticleSystemPacket;
 import particleSystem.ParticleValues;
@@ -91,7 +90,7 @@ public class Tornado extends PowerMagic {
 		settings.setValue(AnimSettings.CHECK_DESTROY_MODE, ParticleSystem.POS_Y_GREATER_TARGET_Y);
 		settings.setValue(AnimSettings.COLOR, WIND_ELEMENT);
 		settings.setValue(AnimSettings.FADE_INCREASE_DISTANCE_MULTIPLIER, 0);
-		settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, (Values.LOGIC_INTERVAL / 1000f) * .04f);
+		settings.setValue(AnimSettings.EMITTANCE_PERIOD, .04f);
 		
 		settings.setValue(AnimSettings.NR_TEXTURES, 1);
 		settings.setValue(AnimSettings.NR_TEXTURES + 1, ParticleSystem.ROUND);
@@ -118,7 +117,7 @@ public class Tornado extends PowerMagic {
 		settings.setValue(AnimSettings.FADE_RANDOM_MULT, .03f);
 		settings.setValue(AnimSettings.FADE_RANDOM_ADD, .01f);
 		settings.setValue(AnimSettings.NR_PARTICLES, 25);
-		settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, (Values.LOGIC_INTERVAL / 1000f) * 3f);
+		settings.setValue(AnimSettings.EMITTANCE_PERIOD, 3f);
 		settings.setValue(AnimSettings.NR_TEXTURES + 1, ParticleSystem.STONE);
 		settings.setBoolean(AnimSettings.ADDITIVE_COLORING, false);
 		settings.setValue(AnimSettings.DESTROY_MODE, ParticleValues.PLAIN_DESTROY);

@@ -36,11 +36,11 @@ import character.Creature;
 
 /**
  * This class coordinates the graphics, input and animation for the village.
- * When the player is in the middle of the screen, the background moves
- * instead of the player, to put focus on the player. 
+ * When the player is in the middle of the screen, the background moves instead
+ * of the player, to put focus on the player.
  * 
- * @author 		Kalle Sjöström 
- * @version 	0.7.0 - 13 May 2008
+ * @author Kalle Sjöström
+ * @version 0.7.0 - 13 May 2008
  */
 public class Village extends VillageLoader {
 
@@ -50,7 +50,7 @@ public class Village extends VillageLoader {
 	private SortingElement[] elements;
 	private String exitName;
 	private String buildingName;
-	
+
 	private boolean showSignDialog = false;
 	private boolean inStore = false;
 	private boolean fromStory = false;
@@ -59,15 +59,16 @@ public class Village extends VillageLoader {
 	private static float[] fromHouse;
 	private boolean inHouse;
 	private static Logger logger = Logger.getLogger("Village");
-	
+
 	/**
-	 * Constructs a new village from the file with the given name.
-	 * This file contains information about the images to use, positions,
-	 * villagers, stores and so on. This information might be gotten 
-	 * from a database in the future.
+	 * Constructs a new village from the file with the given name. This file
+	 * contains information about the images to use, positions, villagers,
+	 * stores and so on. This information might be gotten from a database in the
+	 * future.
 	 * 
-	 * @param info a hash map containing some information like, which map to 
-	 * load, and the name of the music to play.
+	 * @param info
+	 *            a hash map containing some information like, which map to
+	 *            load, and the name of the music to play.
 	 */
 	public void init(final HashMap<String, String> info) {
 		logger.log(Level.FINE, "Init " + inStore + " " + inHouse + " " + Arrays.toString(fromHouse));
@@ -93,7 +94,7 @@ public class Village extends VillageLoader {
 			logicLoading = false;
 		}
 	}
-	
+
 	/**
 	 * Creates the list containing the sprites in this village. These includes
 	 * the villagers as well as the party members.
@@ -110,28 +111,30 @@ public class Village extends VillageLoader {
 		while (it.hasNext()) {
 			int index = it.next();
 			Sprite as = sprites.get(index);
-			elements[i++] = new SortingElement(as.getY(), index);
+			elements[i++] = new SortingElement(as.pos[Values.Y], index);
 		}
 	}
 
 	/**
-	 * This method is a shortcut to the init() method in VillageLoader.
-	 * This is done so that the init() method can be called from within
-	 * a thread or any other place where the reserved word "super" does
-	 * not reference the correct object.
+	 * This method is a shortcut to the init() method in VillageLoader. This is
+	 * done so that the init() method can be called from within a thread or any
+	 * other place where the reserved word "super" does not reference the
+	 * correct object.
 	 * 
-	 * @param info the info to initiate.
+	 * @param info
+	 *            the info to initiate.
 	 */
 	private void loadVillage(HashMap<String, String> info) {
 		super.init(info);
 	}
-	
+
 	/**
 	 * Resumes and restores this village.
 	 */
 	public void resume() {
-		logger.log(Level.FINE, "Resume " + fromStory + " " + inStore + " " + inHouse + " " + inside + " " + Arrays.toString(fromHouse) + " " + this.hashCode());
-		
+		logger.log(Level.FINE, "Resume " + fromStory + " " + inStore + " " + inHouse + " " + inside + " "
+				+ Arrays.toString(fromHouse) + " " + this.hashCode());
+
 		boolean fade = true;
 		if (inHouse || inside) {
 			fade = false;
@@ -147,51 +150,52 @@ public class Village extends VillageLoader {
 				dir = (int) (fromHouse[2] != -1 ? fromHouse[2] : Values.DOWN);
 			} else {
 				fromHouse = new float[3];
-				fromHouse[0] = player.getPos()[0];
-				fromHouse[1] = player.getPos()[1];
+				fromHouse[0] = player.pos[0];
+				fromHouse[1] = player.pos[1];
 			}
 			fromHouse[2] = dir;
 			player.setPos(fromHouse);
 			player.setPartyMembers();
-			inHouse = false;	
+			inHouse = false;
 		}
-		player.standStill();
+		player.stop();
 	}
 
 	/**
-	 * Updates the village. It checks the player input and updates the
-	 * villagers and player. It puts all the villagers that are higher up than
-	 * the player in one hash map and the others so they can be drawn on
-	 * different layers. If the player is in the edge of the screen the village
-	 * is exited and the landscape is normally initiated. 
+	 * Updates the village. It checks the player input and updates the villagers
+	 * and player. It puts all the villagers that are higher up than the player
+	 * in one hash map and the others so they can be drawn on different layers.
+	 * If the player is in the edge of the screen the village is exited and the
+	 * landscape is normally initiated.
 	 * 
-	 * @param elapsedTime the amount of time that has elapsed since this 
-	 * method was last called.
+	 * @param elapsedTime
+	 *            the amount of time that has elapsed since this method was last
+	 *            called.
 	 */
-	public synchronized void update(float elapsedTime) {
-		background.update(elapsedTime);
+	public synchronized void update(float dt) {
+		background.update(dt);
 		if (mode == Values.NO_MODE_IS_SELECTED) {
-			float x = player.getPos()[Values.X];
-			float y = player.getPos()[Values.Y];
-			
+			float x = player.pos[Values.X];
+			float y = player.pos[Values.Y];
+
 			if (x < 0 || x > backgroundWidth || y < 0 || y > backgroundHeight) {
-				if (!checkDoors(holeDoors, player.getDirection())) {
+				if (!checkDoors(holeDoors, player.direction)) {
 					Organizer.getOrganizer().deleteSuspended();
 					exit();
 				}
 				return;
 			}
-			checkGameInput();
-			player.update(elapsedTime);
+			checkGameInput(dt);
+			player.update(dt);
 		}
-		checkVillagers(elapsedTime);
-		super.update(elapsedTime);
+		checkVillagers(dt);
+		super.update(dt);
 	}
 
 	private boolean checkDoor(Door d, int direction) {
 		boolean entered = false;
 		if (d.canBeOpened(direction)) {
-			if (d.isLocked()){
+			if (d.isLocked()) {
 				logger.log(Level.FINE, "Door name: " + d.getName());
 				setSign(d.getSign());
 				if (sign == null) {
@@ -203,7 +207,7 @@ public class Village extends VillageLoader {
 				if (mode == Values.VILLAGE || mode == Values.SWITCH_BACK || mode == Values.HOUSE) {
 					setFade(d.getFadeMode());
 				}
-				
+
 				fromHouse = d.getToPos();
 				if (mode == Values.SWITCH_BACK) {
 					GameMode gm = Organizer.getOrganizer().getNextSuspendedMode();
@@ -233,7 +237,7 @@ public class Village extends VillageLoader {
 					staticStartPos = (int) (fromHouse != null ? fromHouse[2] : 0);
 					inHouse = true;
 					setSuspended(true, false, true);
-					
+
 					exit(Values.VILLAGE);
 				} else {
 					buildingName = d.getBuildingName();
@@ -249,17 +253,14 @@ public class Village extends VillageLoader {
 
 	private void setFade(int fadeMode) {
 		switch (fadeMode) {
-		case Door.FADE_UP :
-			setMusicMode(SoundValues.FADE_IN, SoundValues.FAST, 
-					SoundValues.ALL_THE_WAY, SoundValues.RESUME_PLAY);
+		case Door.FADE_UP:
+			setMusicMode(SoundValues.FADE_IN, SoundValues.FAST, SoundValues.ALL_THE_WAY, SoundValues.RESUME_PLAY);
 			break;
-		case Door.FADE_DOWN :
-			setMusicMode(SoundValues.FADE_OUT, SoundValues.FAST, 
-					SoundValues.ALL_THE_WAY, SoundValues.PAUSE);
+		case Door.FADE_DOWN:
+			setMusicMode(SoundValues.FADE_OUT, SoundValues.FAST, SoundValues.ALL_THE_WAY, SoundValues.PAUSE);
 			break;
-		case Door.FADE_TO_HALF :
-			setMusicMode(SoundValues.FADE_OUT, SoundValues.FAST, 
-					SoundValues.HALF, SoundValues.NORMAL);
+		case Door.FADE_TO_HALF:
+			setMusicMode(SoundValues.FADE_OUT, SoundValues.FAST, SoundValues.HALF, SoundValues.NORMAL);
 			break;
 		}
 	}
@@ -267,8 +268,9 @@ public class Village extends VillageLoader {
 	/**
 	 * Updates the villagers.
 	 * 
-	 * @param elapsedTime the amount of time that has elapsed since this 
-	 * method was last called.
+	 * @param elapsedTime
+	 *            the amount of time that has elapsed since this method was last
+	 *            called.
 	 */
 	public void checkVillagers(float elapsedTime) {
 		Iterator<Integer> it = sprites.keySet().iterator();
@@ -286,8 +288,8 @@ public class Village extends VillageLoader {
 	}
 
 	/**
-	 * Initiates the question dialog. This dialog is used when the villager
-	 * ask the player a question which the player can answer.
+	 * Initiates the question dialog. This dialog is used when the villager ask
+	 * the player a question which the player can answer.
 	 */
 	private void initQuestionDialog() {
 		question = true;
@@ -296,7 +298,7 @@ public class Village extends VillageLoader {
 
 	/**
 	 * Quits the question dialog. This is used when the player has answered a
-	 * question from the villager. 
+	 * question from the villager.
 	 */
 	private void exitQuestionDialog() {
 		question = false;
@@ -305,12 +307,12 @@ public class Village extends VillageLoader {
 	}
 
 	/**
-	 * Checks the input from the user and acts according to the button.
-	 * When a button is pressed the screen is repainted.
+	 * Checks the input from the user and acts according to the button. When a
+	 * button is pressed the screen is repainted.
 	 */
-	private void checkGameInput() {
+	private void checkGameInput(float dt) {
 		if (!(talkmode || showSignDialog)) {
-			if (player.isMoving()) {
+			if (player.moving) {
 				boolean shouldStop = true;
 				for (int i = UP; i <= LEFT; i++) {
 					if (!gameActions[i].isReleased()) {
@@ -318,11 +320,40 @@ public class Village extends VillageLoader {
 					}
 				}
 				if (shouldStop) {
-					player.standStill();
+					player.stop();
 				}
 			}
-			
-			checkDirectionalButtons();
+
+			int dir = -1;
+			int count = gameActions[LEFT].isPressed() ? 1 : 0;
+			boolean found = false;
+			for (int i = UP; i <= LEFT; i++) {
+				if (gameActions[i].isPressed()) {
+					count++;
+				} else {
+					if (count == 2) {
+						found = true;
+					} else {
+						count = 0;
+					}
+				}
+			}
+			if (!found) {
+				found = count == 2;
+			}
+			for (int i = UP; i <= LEFT; i++) {
+				if (gameActions[i].isPressed()) {
+					move(dt, dir = (i - UP), found);
+				}
+			}
+			if (dir != -1) {
+				player.setPartyMembersPositions();
+				// showSignDialog = false;
+				// doorSign = null;
+			} else {
+				background.stop();
+			}
+
 			if (isMenuButtonPressed(gameActions)) {
 				super.queueEnterMenu();
 			}
@@ -342,58 +373,19 @@ public class Village extends VillageLoader {
 	 * Sets whether or not the villager and the player has engaged in a
 	 * conversation.
 	 * 
-	 * @param talking true if the player and the villagers should start 
-	 * talking, false if they just stopped talking.
+	 * @param talking
+	 *            true if the player and the villagers should start talking,
+	 *            false if they just stopped talking.
 	 */
 	private void setTalking(boolean talking) {
 		talkmode = talking;
-		talkingVillager.setTalking(talking, 
-				Values.getCounterAngle(player.getDirection()));
-		player.standStill();
+		talkingVillager.setTalking(talking, Values.getCounterAngle(player.direction));
+		player.stop();
 	}
 
 	/**
-	 * Checks if any directional buttons has been pressed.
-	 * This method does not break the loop if one of the buttons has been
-	 * pressed, but keeps looping to check the rest. This is because the player
-	 * should be able to press both down and left to go south west.
-	 */
-	private void checkDirectionalButtons() {
-		int dir = -1;
-		int count = gameActions[LEFT].isPressed() ? 1 : 0;
-		boolean found = false;
-		for (int i = UP; i <= LEFT; i++) {
-			if (gameActions[i].isPressed()) {
-				count++;	
-			} else {
-				if (count == 2) {
-					found = true;
-				} else {
-					count = 0;
-				}
-			}
-		}
-		if (!found) {
-			found = count == 2;
-		}
-		for (int i = UP; i <= LEFT; i++) {
-			if (gameActions[i].isPressed()) {
-				move(dir = (i - UP), found);
-			}
-		}
-		if (dir != -1) {
-			player.setPartyMembersPositions();
-//			showSignDialog = false;
-//			doorSign = null;
-		} else {
-			background.stop();
-		}
-	}
-
-	/**
-	 * Checks the directional buttons when the player is answering a
-	 * question from the villager. This will cause the dialog to move
-	 * the pointer hand.
+	 * Checks the directional buttons when the player is answering a question
+	 * from the villager. This will cause the dialog to move the pointer hand.
 	 */
 	private void checkDirectionalButtonsForQuestion() {
 		for (int i = UP; i <= LEFT; i++) {
@@ -404,17 +396,18 @@ public class Village extends VillageLoader {
 	}
 
 	/**
-	 * Moves the player around in the village. The given argument is the 
+	 * Moves the player around in the village. The given argument is the
 	 * direction of the player, i.e. the direction to move the player.
 	 * 
-	 * @param direction the direction of the player.
+	 * @param direction
+	 *            the direction of the player.
 	 */
-	private void move(int direction, boolean diagonal) {
+	private void move(float dt, int direction, boolean diagonal) {
 		if (!checkDoors(holeDoors, direction)) {
-			if (checkVillagerCollision(direction)) {
+			if (checkVillagerCollision(dt, direction)) {
 				player.move(direction);
 			} else if (!showSignDialog) {
-				player.go(direction, diagonal, obstacleHandler);
+				player.go(dt, direction, diagonal, obstacleHandler);
 				if (setDrawPos(direction % 2)) {
 					int XorY = direction % 2;
 					background.setPos(XorY, BACK_POS[XorY]);
@@ -424,33 +417,32 @@ public class Village extends VillageLoader {
 			}
 		}
 	}
-	
+
 	private boolean setDrawPos(int XorY) {
-		float[] pos = player.getPos();
+		float[] pos = player.pos;
 		if (obstacleHandler.isInMiddle(pos[XorY], XorY)) {
 			BACK_POS[XorY] = obstacleHandler.getBackPos(pos[XorY], XorY);
 			return true;
 		}
 		return false;
 	}
-	
+
 	/**
 	 * This method is called when the action button (cross button) is pressed.
-	 * It checks if there are any villagers present to talk to or if the 
-	 * player wanted to enter a building. When the player talks the 
-	 * next dialog screen will be shown.
+	 * It checks if there are any villagers present to talk to or if the player
+	 * wanted to enter a building. When the player talks the next dialog screen
+	 * will be shown.
 	 */
 	private void crossPressed() {
 		if (!talkmode) {
-			if (checkLoot() || checkNearbyVillagers() || 
-					checkDoors(doors, player.getDirection()) || checkSigns()) {
+			if (checkLoot() || checkNearbyVillagers() || checkDoors(doors, player.direction) || checkSigns()) {
 				return;
 			}
 		} else {
 			if (question) {
 				exitQuestionDialog();
 			}
-			
+
 			Loot g = dialog.getGift();
 			if (g != null) {
 				Load.collectLoot(g);
@@ -509,32 +501,32 @@ public class Village extends VillageLoader {
 		boolean found = false;
 		for (int i = 0; i < loots.size() && !found; i++) {
 			Loot l = loots.get(i);
-			if (l.isInRange(player.getPos()) && l.checkPlayerDir(player.getDirection())) {
+			if (l.isInRange(player.pos) && l.checkPlayerDir(player.direction)) {
 				if (l.decrementStatus()) {
 					loots.remove(i);
 					Load.collectLoot(l);
 					createSign(l.getLine(0), l.getLine(1), l.getContent());
-					player.standStill();
+					player.stop();
 				}
 				found = true;
 			}
 		}
 		return found;
 	}
-	
+
 	private void createSign(String fl, String sl, Object content) {
 		setSign(new Sign(fl, sl, content));
 	}
-	
+
 	private void setSign(Sign s) {
 		showSignDialog = true;
 		sign = s;
-		player.standStill();
+		player.stop();
 	}
 
 	/**
-	 * Checks if there are any villagers nearby to talk to. This is checked
-	 * when the player presses the actions button (cross button).
+	 * Checks if there are any villagers nearby to talk to. This is checked when
+	 * the player presses the actions button (cross button).
 	 * 
 	 * @return true if there are any villagers to talk to.
 	 */
@@ -544,7 +536,7 @@ public class Village extends VillageLoader {
 			Sprite as = sprites.get(it.next());
 			if (as instanceof Villager) {
 				Villager v = (Villager) as;
-				if (v.checkTalkable(player.getPos(), player.getDirection())) {
+				if (v.checkTalkable(player.pos, player.direction)) {
 					return executeTalkableVillager(v);
 				}
 			}
@@ -553,25 +545,24 @@ public class Village extends VillageLoader {
 	}
 
 	/**
-	 * Executes the dialog sequence that the given villager has. This method
-	 * is called when the given villager is in range and the player has pressed
-	 * the cross button, wanting to talk to this villager. If the given 
-	 * villagers next dialog is a story sequence, one is initiated.
+	 * Executes the dialog sequence that the given villager has. This method is
+	 * called when the given villager is in range and the player has pressed the
+	 * cross button, wanting to talk to this villager. If the given villagers
+	 * next dialog is a story sequence, one is initiated.
 	 * 
-	 * @param v the villager whose dialog sequence to execute.
+	 * @param v
+	 *            the villager whose dialog sequence to execute.
 	 */
 	private boolean executeTalkableVillager(Villager v) {
 		boolean ans = false;
-		
+
 		if (v.isDialogSequence()) {
 			logger.log(Level.FINE, "Is dialog");
 			ans = true;
-			if (Creature.isOneInTeamDead(
-					Load.getCharactersAsCreatures())) {
+			if (Creature.isOneInTeamDead(Load.getCharactersAsCreatures())) {
 				// Can't happen in current version...
 				dialog.resetDialog();
-				dialog.setDS(new DialogSequence(
-								v.getName(), "...", "", true, false, false));
+				dialog.setDS(new DialogSequence(v.name, "...", "", true, false, false));
 			} else {
 				buildingName = null;
 				String filename = v.getSequenceFilename();
@@ -603,17 +594,16 @@ public class Village extends VillageLoader {
 		setTalking(true);
 		return ans;
 	}
-	
+
 	/**
-	 * Checks if there are any sings nearby to read. This is checked
-	 * when the player presses the actions button (cross button).
+	 * Checks if there are any sings nearby to read. This is checked when the
+	 * player presses the actions button (cross button).
 	 * 
 	 * @return true if there are any sings to read.
 	 */
 	private boolean checkSigns() {
 		for (int i = 0; i < signs.size(); i++) {
-			if (signs.get(i).isInRange(
-					player.getPos(), player.getDirection())) {
+			if (signs.get(i).isInRange(player.pos, player.direction)) {
 				setSign(signs.get(i));
 				return true;
 			}
@@ -622,9 +612,10 @@ public class Village extends VillageLoader {
 	}
 
 	/**
-	 * Checks if there are any doors around to enter. This is checked
-	 * when the player presses the actions button (cross button).
-	 * @param direction 
+	 * Checks if there are any doors around to enter. This is checked when the
+	 * player presses the actions button (cross button).
+	 * 
+	 * @param direction
 	 * 
 	 * @return true if there are any doors around to enter.
 	 */
@@ -632,29 +623,29 @@ public class Village extends VillageLoader {
 		boolean stopSeaching = false;
 		boolean found = false;
 		for (int i = 0; i < doors.size() && !stopSeaching; i++) {
-			stopSeaching = doors.get(i).isInRange(player.getPos());
+			stopSeaching = doors.get(i).isInRange(player.pos);
 			if (stopSeaching) {
 				found = checkDoor(doors.get(i), direction);
 			}
 		}
 		return found;
 	}
-	
+
 	/**
 	 * Executes the trigger associated with the given villager.
 	 * 
-	 * @param vil the villager which trigger to execute.
+	 * @param vil
+	 *            the villager which trigger to execute.
 	 */
 	public void executeTrigger(Villager vil) {
 		String s = vil.getStoredTriggers();
 		if (s != null) {
 			Database.storeTriggers("inn", s);
 		}
-		
+
 		dialog.resetDialog();
 	}
-	
-	
+
 	public void updateVillagerDialog(String name, int value) {
 		logger.log(Level.FINE, "Update villager dialog " + name + " " + value);
 		Villager v = getVillager(name);
@@ -665,10 +656,9 @@ public class Village extends VillageLoader {
 	}
 
 	/**
-	 * This method gets the information map for the next place, 
-	 * if the next place is one of this villages buildings.
-	 * If the next place to enter is the landscape this
-	 * method will return null.
+	 * This method gets the information map for the next place, if the next
+	 * place is one of this villages buildings. If the next place to enter is
+	 * the landscape this method will return null.
 	 * 
 	 * @return the information about the next place.
 	 */
@@ -678,7 +668,7 @@ public class Village extends VillageLoader {
 		}
 		return storyInfo;
 	}
-	
+
 	public HashMap<String, String> getTestInfoForType(String name) {
 		Iterator<String> it = buildingInfo.keySet().iterator();
 		while (it.hasNext()) {
@@ -693,58 +683,61 @@ public class Village extends VillageLoader {
 	/**
 	 * Checks if the player has collided with a villager.
 	 * 
-	 * @param direction the direction of the player.
+	 * @param direction
+	 *            the direction of the player.
 	 * @return true if a collision has occurred.
 	 */
-	private boolean checkVillagerCollision(int direction) {
+	private boolean checkVillagerCollision(float dt, int direction) {
 		boolean found = false;
 		Iterator<Integer> it = sprites.keySet().iterator();
 		while (it.hasNext() && !found) {
 			Sprite as = sprites.get(it.next());
 			if (as instanceof Villager) {
 				Villager v = (Villager) as;
-				found = player.checkCollision(v, direction);
+				found = player.checkCollision(dt, v, direction);
 			}
 		}
 		return found;
 	}
-	
-	/**
-	 * This method draws the village. It uses the game mode super class, to 
-	 * fade in and out. 
-	 * 
-	 * @param g the graphics to draw on.
-	 */
-	public void draw(Graphics g) {
-//		Graphics.gl.glTranslatef(-.25f * Values.RESOLUTIONS[Values.X], -.25f * Values.RESOLUTIONS[Values.Y], 1);
-		//super.drawNew(g);
-		g.setColor(1);
-		synchronized (this) {
-			drawBottom(g);
-			drawTop(g, sprites);
-		}
-//		if (Math.random() < .01f) {
-//			color[3] = 0;
-//		}
-//		if (color[3] <= .5f) {
-//			color[3]+=.08f;
-//			g.fadeOldSchoolColorWhite(1, .9f, 0, .3f - color[3]);
-//		} else {
-//			g.fadeOldSchoolColor(color[0], color[1], color[2], color[3]);
-//		}
-		super.checkMenu();
-		super.draw(g);
-	}
-		
 
 	/**
-	 * This method draws the bottom layer of the village on the given 
-	 * graphics. The things drawn on this layer are background, animated 
-	 * objects and villagers.
+	 * This method draws the village. It uses the game mode super class, to fade
+	 * in and out.
 	 * 
-	 * @param g the graphics to draw on.
+	 * @param g
+	 *            the graphics to draw on.
 	 */
-	public void drawBottom(Graphics g) {
+	public void draw(float dt, Graphics g) {
+		// Graphics.gl.glTranslatef(-.25f * Values.RESOLUTIONS[Values.X], -.25f
+		// * Values.RESOLUTIONS[Values.Y], 1);
+		// super.drawNew(g);
+		g.setColor(1);
+		synchronized (this) {
+			drawBottom(dt, g);
+			drawTop(dt, g, sprites);
+		}
+		// if (Math.random() < .01f) {
+		// color[3] = 0;
+		// }
+		// if (color[3] <= .5f) {
+		// color[3]+=.08f;
+		// g.fadeOldSchoolColorWhite(1, .9f, 0, .3f - color[3]);
+		// } else {
+		// g.fadeOldSchoolColor(color[0], color[1], color[2], color[3]);
+		// }
+		super.checkMenu();
+		super.draw(dt, g);
+	}
+
+	/**
+	 * This method draws the bottom layer of the village on the given graphics.
+	 * The things drawn on this layer are background, animated objects and
+	 * villagers.
+	 * 
+	 * @param g
+	 *            the graphics to draw on.
+	 */
+	public void drawBottom(float dt, Graphics g) {
 		background.drawBottom(g);
 		int x = (int) background.getPos()[Values.X];
 		int y = (int) background.getPos()[Values.Y];
@@ -752,7 +745,7 @@ public class Village extends VillageLoader {
 		int index = 0;
 		while (it.hasNext()) {
 			Sprite as = sprites.get(it.next());
-			float asy = as.getY();
+			float asy = as.pos[Values.Y];
 			elements[index].setYpos(asy);
 			elements[index++].setIndex(as.hashCode());
 		}
@@ -762,38 +755,34 @@ public class Village extends VillageLoader {
 		}
 		for (int i = 0; i < index; i++) {
 			Sprite as = sprites.get(elements[i].getIndex());
-			if (as instanceof PartyMember) {
-				int asx = Math.round(as.getX() + x);
-				int asy = Math.round(as.getY() + y);
-				as.draw(g, asx, asy);
-			} else {
-				as.draw(g, x, y);
-			}
+			int asx = Math.round(as.pos[Values.X] + x);
+			int asy = Math.round(as.pos[Values.Y] + y);
+			as.draw(dt, g, asx, asy);
 		}
 	}
 
 	/**
-	 * This method draws the top layer of the village on the given 
-	 * graphics. The things drawn on this layer are roofs and treetops,
-	 * dialogs and villagers that have a lower Y-value than the player.
+	 * This method draws the top layer of the village on the given graphics. The
+	 * things drawn on this layer are roofs and treetops, dialogs and villagers
+	 * that have a lower Y-value than the player.
 	 * 
-	 * @param g the graphics to draw on.
-	 * @param sprites 
+	 * @param g
+	 *            the graphics to draw on.
+	 * @param sprites
 	 */
-	public void drawTop(Graphics g, HashMap<Integer, Sprite> sprites) {
-		background.drawTop(g, true, sprites);
+	public void drawTop(float dt, Graphics g, HashMap<Integer, Sprite> sprites) {
+		background.drawTop(g);
 		if (sprites != null) {
 			Iterator<Integer> it = sprites.keySet().iterator();
 			while (it.hasNext()) {
 				sprites.get(it.next()).drawEmotions(g);
 			}
 		}
-		
+
 		if (talkmode) {
-			dialog.draw(g);
+			dialog.draw(dt, g);
 		} else if (showSignDialog) {
-			Dialog.getDialog().drawMessages(
-					g, sign.getText()[0], sign.getText()[1], true);
+			Dialog.getDialog().drawMessages(g, sign.getText()[0], sign.getText()[1], true);
 			Object content = sign.getContent();
 			if (content != null) {
 				if (content instanceof Card) {
@@ -815,8 +804,8 @@ public class Village extends VillageLoader {
 	/**
 	 * Gets the name of the folder where images and maps for this village is.
 	 * 
-	 * @return the name of the folder where the information about 
-	 * this village is.
+	 * @return the name of the folder where the information about this village
+	 *         is.
 	 */
 	public String getVillageFolderName() {
 		return folderName;
@@ -848,17 +837,18 @@ public class Village extends VillageLoader {
 	/**
 	 * Adds the given list of villagers to this village.
 	 * 
-	 * @param removedVillagers the villagers to add.
+	 * @param removedVillagers
+	 *            the villagers to add.
 	 */
 	public void addVillagers(ArrayList<Sprite> removedVillagers) {
 		for (int i = 0; i < removedVillagers.size(); i++) {
 			Sprite as = removedVillagers.get(i);
 			if (as instanceof Villager) {
 				Villager v = (Villager) as;
-				//v.setStartToPos(v.getPos());
-				//v.reset();
+				// v.setStartToPos(v.getPos());
+				// v.reset();
 				sprites.put(v.hashCode(), v);
-				//executeTrigger(v);
+				// executeTrigger(v);
 			}
 		}
 		for (int i = 0; i < player.getPartyMembers().size(); i++) {
@@ -867,21 +857,21 @@ public class Village extends VillageLoader {
 		}
 		updateSpriteList();
 	}
-	
+
 	public void addOnlyVillagers(ArrayList<Sprite> removedVillagers) {
 		for (int i = 0; i < removedVillagers.size(); i++) {
 			Sprite as = removedVillagers.get(i);
 			if (as instanceof Villager) {
 				Villager v = (Villager) as;
-				//v.setStartToPos(v.getPos());
-				//v.reset();
+				// v.setStartToPos(v.getPos());
+				// v.reset();
 				sprites.put(v.hashCode(), v);
-				//executeTrigger(v);
+				// executeTrigger(v);
 			}
 		}
 		updateSpriteList();
 	}
-	
+
 	public void addSprite(Sprite s) {
 		sprites.put(s.hashCode(), s);
 		updateSpriteList();
@@ -889,9 +879,9 @@ public class Village extends VillageLoader {
 
 	/**
 	 * Updates the sprite lists "z-buffering". Every sprite in the sprite list
-	 * is make sure to have a SortingElement which is used to draw them in
-	 * a sorted order. This will result in the sprites with low y-positions
-	 * to be drawn first.
+	 * is make sure to have a SortingElement which is used to draw them in a
+	 * sorted order. This will result in the sprites with low y-positions to be
+	 * drawn first.
 	 */
 	public void updateSpriteList() {
 		if (sprites.size() != elements.length) {
@@ -901,29 +891,31 @@ public class Village extends VillageLoader {
 			while (it.hasNext()) {
 				int index = it.next();
 				Sprite as = sprites.get(index);
-				elements[i] = new SortingElement(as.getY(), index);
+				elements[i] = new SortingElement(as.pos[Values.Y], index);
 				i++;
 			}
 		}
 	}
 
 	/**
-	 * This method is called when the story mode has finished and
-	 * the village should be initiated. The given position is the
-	 * position of the player when the store mode ended and the list
-	 * of villagers are those villagers who acted as actors in the story.
+	 * This method is called when the story mode has finished and the village
+	 * should be initiated. The given position is the position of the player
+	 * when the store mode ended and the list of villagers are those villagers
+	 * who acted as actors in the story.
 	 * 
-	 * @param pos the position to set the player to. This is normally the
-	 * position that the player have when the story is ended.
-	 * @param removedVillagers the list of villagers to add to the village.
-	 * @param nextPlace the nextPlace to set.
+	 * @param pos
+	 *            the position to set the player to. This is normally the
+	 *            position that the player have when the story is ended.
+	 * @param removedVillagers
+	 *            the list of villagers to add to the village.
+	 * @param nextPlace
+	 *            the nextPlace to set.
 	 */
-	public void initFromStory(float[] pos, 
-			ArrayList<Sprite> removedVillagers, String nextPlace) {
+	public void initFromStory(float[] pos, ArrayList<Sprite> removedVillagers, String nextPlace) {
 		logger.log(Level.FINE, "Init from story " + Arrays.toString(pos) + " " + this.hashCode());
 		logger.log(Level.FINE, "Next " + nextPlace);
 		player.setPos(pos);
-		player.update(Values.LOGIC_INTERVAL);
+		player.update(0);
 		addVillagers(removedVillagers);
 		if (nextPlace != null && !nextPlace.equals(" ") && !nextPlace.equals("_")) {
 			this.exitName = nextPlace;
@@ -943,8 +935,8 @@ public class Village extends VillageLoader {
 	}
 
 	/**
-	 * Exits the village. The destination depends on the value of the 
-	 * nextPlace. If this is null, the destination is the landscape.
+	 * Exits the village. The destination depends on the value of the nextPlace.
+	 * If this is null, the destination is the landscape.
 	 */
 	public void exit() {
 		nextPlace = exitName;
@@ -952,8 +944,8 @@ public class Village extends VillageLoader {
 		exit(Values.LANDSCAPE);
 	}
 
-	public void setBackground(String string) {
-		background.setExtraBack(string); 
+	public void setBackg_round(String string) {
+		// background.setExtraBack(string);
 	}
 
 	public ParticleSystem getParticleSystem(String name) {
@@ -961,7 +953,7 @@ public class Village extends VillageLoader {
 		while (it.hasNext()) {
 			Sprite s = it.next();
 			if (s instanceof ParticleSystem) {
-				if (s.getName().equals(name)) {
+				if (s.name.equals(name)) {
 					return (ParticleSystem) s;
 				}
 			}

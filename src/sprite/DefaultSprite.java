@@ -16,8 +16,8 @@ public class DefaultSprite extends Sprite {
 		name = path;
 	}
 
-	public void draw(Graphics g, int x, int y) {
-		super.drawAtPosition(g, (int) pos[Values.X] + x, (int) pos[Values.Y] + y);
+	public void draw(float dt, Graphics g, int x, int y) {
+		super.draw(dt, g, (int) pos[Values.X] + x, (int) pos[Values.Y] + y);
 	}
 	
 	public void placeOnTopLevel() {
@@ -36,7 +36,7 @@ public class DefaultSprite extends Sprite {
 			y = -10000 + offset;
 			break;
 		case VILLAGER_LAYER:
-			y = super.getY();
+			y = pos[Values.Y];
 			break;
 		case TOP_LAYER:
 			y = 10000 - offset;

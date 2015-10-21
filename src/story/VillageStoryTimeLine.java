@@ -235,7 +235,7 @@ public class VillageStoryTimeLine extends AbstractTimeLine {
 				boolean found = false;
 				String name = c.getName();
 				for (int i = 0; i < pmlist.size() && !found; i++) {
-					found = pmlist.get(i).getName().equalsIgnoreCase(name);
+					found = pmlist.get(i).name.equalsIgnoreCase(name);
 				}
 				if (!found) {
 					pmlist.add(new PartyMember(name));
@@ -244,15 +244,15 @@ public class VillageStoryTimeLine extends AbstractTimeLine {
 		}
 		for (int i = 0; i < pmlist.size(); i++) {
 			PartyMember pm = pmlist.get(i);
-			pm.setPos(pm.getPosAsFloatArray());
+			pm.pos = pm.getPosAsFloatArray();
 			ArrayList<String> actors = infoList.get(TimeLineEvent.ACTORS);
 			boolean found = false;
 			for (int j = 0; j < actors.size() && !found; j++) {
-				found = actors.get(j).equals(pm.getName());
+				found = actors.get(j).equals(pm.name);
 			}
 			if (found) {
 				Actor a = new Actor(pm);
-				int[] pos = positions.get(pm.getName());
+				int[] pos = positions.get(pm.name);
 				if (pos != null) {
 					if (this.fromVillage) {
 						float[] newPos = new float[2];
@@ -357,7 +357,7 @@ public class VillageStoryTimeLine extends AbstractTimeLine {
 				Sprite as = villagers.get(index);
 				if (as instanceof Villager) {
 					Villager v = (Villager) as;
-					if (actorName.startsWith(v.getName())) {
+					if (actorName.startsWith(v.name)) {
 						members.add(new Actor(v));
 						remove.add(index);
 						break;
@@ -394,19 +394,19 @@ public class VillageStoryTimeLine extends AbstractTimeLine {
 	 * @param time the amount of time that has elapsed since this method 
 	 * was last called.
 	 */
-	public synchronized void update(int elapsedTime) {
+	public synchronized void update(float dt) {
 		if (scrollText != null) {
-			scrollText.update(elapsedTime);
+			scrollText.update(dt);
 		}
 		if (doneMode != ALL_DONE) {
-			super.update(elapsedTime);
+			super.update(dt);
 			if (currentImage != null) {
 				currentImage.update();
 			}
 			if (centerScreen) {
 				centerScreen(centerScreenIndex);
 			}
-			boolean wait = checkWait(elapsedTime);
+			boolean wait = checkWait(dt);
 			if (wait && compareMode(WAITING_FOR_ACTORS)) {
 				setMode(NORMAL);
 			} else if (doneMode == INPUT_DONE) {
@@ -420,13 +420,13 @@ public class VillageStoryTimeLine extends AbstractTimeLine {
 				}
 				return;
 			}
-			background.update(elapsedTime);
+			background.update(dt);
 		}
 		if (scaling) {
-			float t2 = timeStep * timeStep;
-			if (x <= timeStep) {
-				velocity = 4*x*((1f/timeStep) - (x/t2));
-				float max = 2*timeStep - (4f/3f)*timeStep;
+			float t2 = dt * dt;
+			if (x <= dt) {
+				velocity = 4*x*((1f/dt) - (x/t2));
+				float max = 2*dt - (4f/3f)*dt;
 				x++;
 				scale2 += velocity;
 				scale = in ? scale2/max + 1 : 2 - scale2/max;
@@ -460,14 +460,10 @@ public class VillageStoryTimeLine extends AbstractTimeLine {
 	private float scale = 1;
 	private float scale2 = 0;
 	private int x = 0;
-	private float timeStep;
 	private boolean in;
 	private float[] staticPos;
 	private boolean useStaticPos;
 	private float bFadeTarget;
-	private float bFadeSpeed;
-	private boolean bFadeDown;
-	private boolean bFadeUp;
 	private ScrollableTexts scrollText;
 	
 	private void setScaling(int time, boolean in, boolean useStaticPos, float[] pos) {
@@ -475,7 +471,6 @@ public class VillageStoryTimeLine extends AbstractTimeLine {
 		velocity = 0;
 		scale2 = 0;
 		x = 0;
-		timeStep = time / Values.LOGIC_INTERVAL;
 		staticPos = pos;
 		this.useStaticPos = useStaticPos;
 		this.in = in;
@@ -507,15 +502,6 @@ public class VillageStoryTimeLine extends AbstractTimeLine {
 			bFadeTarget = event.getInfo(BACKGROUND_FADE_TARGET);
 			bFadeTarget = bFadeTarget == 0 ? 100 : bFadeTarget;
 			bFadeTarget /= 100;
-			if (fadeValue < bFadeTarget) {
-				bFadeUp = true;
-				bFadeDown = false;
-				bFadeSpeed = .02f;
-			} else {
-				bFadeUp = false;
-				bFadeDown = true;
-				bFadeSpeed = -.02f;
-			}
 			break;
 		case KIND_SCROLL_TEXT :
 			scrollText = scrollableText;
@@ -533,8 +519,9 @@ public class VillageStoryTimeLine extends AbstractTimeLine {
 				currentImage = null;
 			}
 			break;
-		case KIND_MUSIC :
-			initMusicKind(event, index);
+		case KIND_MUSIC:
+			if (Values.soundEnabled())
+				initMusicKind(event, index);
 			break;
 		case KIND_MUSIC_OVERWRITE_VILLAGE_MUSIC :
 			story.setOggplayerAsVillageCurrent(oggPlayers[index - 1]);
@@ -570,7 +557,7 @@ public class VillageStoryTimeLine extends AbstractTimeLine {
 				for (Sprite s : removedVillagers) {
 					if (s instanceof Villager) {
 						Villager v = (Villager) s;
-						if (v.getName().equalsIgnoreCase(key)) {
+						if (v.name.equalsIgnoreCase(key)) {
 							v.updateDialog(value);
 							found = true;
 						}
@@ -651,7 +638,6 @@ public class VillageStoryTimeLine extends AbstractTimeLine {
 			}
 			int dir = event.getInfo(MOVE_DIRECTION);
 			if (dir != -1) {
-				actor.setMoving(true);
 				actor.stop(dir);
 			}
 			break;
@@ -693,7 +679,7 @@ public class VillageStoryTimeLine extends AbstractTimeLine {
 			members.get(index).stop(direction);
 			break;
 		case KIND_ACTOR_DEACCELERATE :
-			members.get(index).deaccelerateActor();
+			// members.get(index).deaccelerateActor();
 			break;
 		case KIND_ACTOR_LOOK_TO :
 			x = event.getInfo(POS_X);
@@ -719,10 +705,8 @@ public class VillageStoryTimeLine extends AbstractTimeLine {
 			
 			int actorIndex = event.getInfo(TimeLineEvent.TARGET);
 			actor = members.get(actorIndex);
-			
-			int pos = event.getInfo(TimeLineEvent.ANIMATION_INDEX);
-			actor.addAnimation(name, pos);
-			actor.animate(pos);
+
+			actor.overrideImage(name);
 			break;
 		case KIND_ACTOR_EMOTION :
 			int emotion = event.getInfo(EMOTION);
@@ -741,9 +725,9 @@ public class VillageStoryTimeLine extends AbstractTimeLine {
 			colorSpeed[index] = event.getInfo(COLOR_SPEED) / 10000f;
 			break;
 		case KIND_SET_VILLAGE_BACKGROUND :
-			ArrayList<String> images = infoList.get(IMAGES);
+			/*ArrayList<String> images = infoList.get(IMAGES);
 			String newBack = index < 0 ? null : images.get(index);
-			village.setBackground(newBack);
+			village.setBackground(newBack);*/
 			break;
 		case KIND_SET_FADE_IMAGE :
 			Graphics.setFadeImage(event.getInfo(FADE_IMAGE));
@@ -892,7 +876,7 @@ public class VillageStoryTimeLine extends AbstractTimeLine {
 	 * call to this method.
 	 * @return true if all the actors are waiting. 
 	 */
-	private boolean checkWait(int time) {	
+	private boolean checkWait(float time) {	
 		boolean wait = true;
 		for (int i = 0; i < members.size(); i++) {
 			if (showing[i]) {
@@ -955,7 +939,7 @@ public class VillageStoryTimeLine extends AbstractTimeLine {
 	private Village village;
 	private boolean drawPause = false;
 	
-	public synchronized void draw(Graphics g) {
+	public synchronized void draw(float dt, Graphics g) {
 		updateFadeValue();
 		if (currentText != null) {
 			currentText.updateFadeValue();
@@ -975,7 +959,7 @@ public class VillageStoryTimeLine extends AbstractTimeLine {
 			}
 			
 			// g.setFadeColor(color[0], color[1], color[2], color[3]);
-			village.drawBottom(g);
+			village.drawBottom(dt, g);
 			if (imageMode == BACKFLASH_MODE) {
 				if (currentImage != null && currentImage.equals("black")) {
 					g.fadeOldSchool(0);
@@ -988,11 +972,8 @@ public class VillageStoryTimeLine extends AbstractTimeLine {
 		
 			for (int i = 0; i < members.size(); i++) {
 				Actor actor = members.get(i);
-				if (actor.getSprite() instanceof DefaultSprite) {
-					elements[i].setYpos(actor.getSprite().getY());
-				} else {
-					elements[i].setYpos(actor.getPos()[Values.Y]);
-				}
+				float[] pos = actor.getPos();
+				elements[i].setYpos(pos[Values.Y]);
 				elements[i].setIndex(i);
 			}
 			if (imageMode == TRANSLUCENT_MODE_UNDER_ACTOR) {
@@ -1005,17 +986,17 @@ public class VillageStoryTimeLine extends AbstractTimeLine {
 				int index = elements[i].getIndex();
 				if (showing[index]) {
 					Actor actor = members.get(index);
-					actor.draw(g, x, y);
+					actor.draw(dt, g, x, y);
 				}
 			}
 
 			if (imageMode != BACKFLASH_MODE) {
-				village.drawTop(g, null);
+				village.drawTop(dt, g, null);
 			}
 			for (int i = 0; i < members.size(); i++) {
 				members.get(i).drawEmotion(g);
 			}
-			drawTop(g);
+			drawTop(dt, g);
 		}
 	}
 
@@ -1025,7 +1006,7 @@ public class VillageStoryTimeLine extends AbstractTimeLine {
 	 * 
 	 * @param g the graphics to draw on.
 	 */
-	public void drawTop(Graphics g) {
+	public void drawTop(float dt, Graphics g) {
 		if (imageMode == COVERALL_MODE) {
 			currentImage.draw(g);
 		}
@@ -1041,7 +1022,7 @@ public class VillageStoryTimeLine extends AbstractTimeLine {
 		}
 		if (compareMode(DIALOG) || compareMode(WAITING_FOR_INPUT))  {
 			g.loadIdentity();
-			dialog.draw(g);
+			dialog.draw(dt, g);
 		}
 		if (fadeValue < 1 && 
 				imageMode != TRANSLUCENT_MODE_OVER_ACTOR && 
@@ -1049,10 +1030,10 @@ public class VillageStoryTimeLine extends AbstractTimeLine {
 			g.fadeOldSchool(fadeValue);
 		}
 		if (currentText != null) {
-			currentText.draw(g);
+			currentText.draw(dt, g);
 		}
 		if (scrollText != null) {
-			scrollText.draw(g);
+			scrollText.draw(dt, g);
 		}
 		if (imageMode == TRANSLUCENT_MODE_OVER_ACTOR) {
 			g.setColor(1, 1, 1, fadeValue);
@@ -1198,13 +1179,11 @@ public class VillageStoryTimeLine extends AbstractTimeLine {
 		
 		public float scroll;
 		public float scrollDownMax;
-		public float scrollDownMin;
 		public float offsetx;
 		public float offsety;
 		public float zoom = 1;
 		public float size = 1;
 		public String name;
-		public int width;
 		public int height;
 		private float scrollSpeed;
 		private int[] pos;
@@ -1224,14 +1203,7 @@ public class VillageStoryTimeLine extends AbstractTimeLine {
 			GameTexture tex = ImageHandler.getTexture(name);
 			scrollSpeed = info.getInfo(TimeLineEvent.INFO_IMAGE_SCROLL_SPEED) / 10000f;
 			float tempScroll = scroll;
-			width = tex.getWidth();
 			height = (int) (tex.getHeight() * size);
-//			if (!fadeout) {
-//				scroll = 0;
-//				zoom = 1;
-//				offsetx = 0;
-//				offsety = 0;
-//			}
 			switch (imageKind) {
 			case TimeLineEvent.IMAGE_SCROLL_MODE_ZOOM : 
 				zoom = 2f;

@@ -21,11 +21,9 @@ import java.util.Random;
  * @version 	0.7.0 - 03 Oct 2008
  */
 public class SoundPlayer {
-
-
 	private static HashMap<String, Sound> sounds = new HashMap<String, Sound>();
 	private static HashMap<String, Float> volumes;
-	private static boolean enabled = Values.soundEnabled();
+	private static boolean enabled = false; // Values.soundEnabled();
 	public static final float MAX_VOLUME = 1f;
 	
 	static {

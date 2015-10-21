@@ -12,17 +12,17 @@ import particleSystem.ParticleSystem.InterpolationInfo;
 public class InterpolatingEmitter extends Emitter {
 
 	public InterpolatingEmitter(Stack<Particle> particlePool,
-			ArrayList<Particle> particles, InterpolationInfo info, float emitTimeStep, int limit) {
-		super(particlePool, particles, info, emitTimeStep, limit);
+			ArrayList<Particle> particles, InterpolationInfo info, float emitPeriod, int limit) {
+		super(particlePool, particles, info, emitPeriod, limit);
 	}
 
 	public void update(ParticleSystem system, float elapsedTime) {
 		if (!isDestroyed()) {
 			addTime(elapsedTime);
 			boolean empty = false;
-			float nrToEmit = getTime() / getEmitTimeStep();
+			float nrToEmit = getTime() / getemitPeriod();
 			float timePerPart = elapsedTime / nrToEmit;
-			while (!empty && getTime() >= getEmitTimeStep()) {
+			while (!empty && getTime() >= getemitPeriod()) {
 				if (okToEmit()) {
 					Particle p = getParticle(system);
 					Vector3f pos = getInfo().interpolate(system.getPosition().clone(), getTimeCounter());
@@ -31,7 +31,7 @@ public class InterpolatingEmitter extends Emitter {
 					addTimeCounter(timePerPart);
 				}
 				empty = !okToEmit();
-				addTime(-Math.min(elapsedTime, getEmitTimeStep()));
+				addTime(-Math.min(elapsedTime, getemitPeriod()));
 			}
 		}
 	}

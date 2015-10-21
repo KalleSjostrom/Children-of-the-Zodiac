@@ -8,7 +8,6 @@
 package cards.magic;
 
 import info.SoundMap;
-import info.Values;
 import particleSystem.ParticleSystem;
 import particleSystem.ParticleSystemPacket;
 import settings.AnimSettings;
@@ -89,7 +88,7 @@ public class Earth extends Magic {
 			settings.setValue(AnimSettings.CHECK_DESTROY_MODE, ParticleSystem.POS_Z_GREATER_TARGET_Z);
 		}
 		
-		settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, (Values.LOGIC_INTERVAL / 1000f) * .05f);
+		settings.setValue(AnimSettings.EMITTANCE_PERIOD, .05f);
 		settings.setValue(AnimSettings.SPEED, 4);
 		settings.setValue(AnimSettings.SIZE, .2f);
 		settings.setValue(AnimSettings.LIFE_MULTIPLIER, .1f);

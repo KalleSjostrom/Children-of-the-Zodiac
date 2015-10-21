@@ -83,13 +83,11 @@ public class Labyrinth extends MenuStarter implements BattleStarter {
 	private int lastAddress;
 	private int drawList;
 	private int steps;
-	private int tempTotalSteps = 0;
 	private int currentStepsToBattle;
 	private int[] stepsToBattle;
 	private boolean hasEnemies;
 	private boolean runSubGameMode = false;
 	private WeatherSystem weatherSystem;
-	private int battles = 0;
 	private boolean noEncounters = false;
 	private String[] battleMusic;
 	private ArrayList<DialogSequence> dialogSequence;
@@ -201,7 +199,7 @@ public class Labyrinth extends MenuStarter implements BattleStarter {
 		renderer.renderSky(g);
 		g.setTextureEnabled(true);
 		g.setLightEnabled(true);
-		renderer.draw(g);
+		renderer.draw(0, g);
 		g.endList();
 		
 		renderer.setLight(g);
@@ -226,19 +224,19 @@ public class Labyrinth extends MenuStarter implements BattleStarter {
 	 * 
 	 * @param elapsedTime the amount of time since the game was last updated.
 	 */
-	public void update(float elapsedTime) {
-		mapRenderer.update();
+	public void update(float dt) {
+		mapRenderer.update(dt);
 		if (weatherSystem != null) {
 			weatherSystem.update();
 		}
 		if (runSubGameMode) {
-			labDrawable.update(elapsedTime);
-			super.update(elapsedTime);
+			labDrawable.update(dt);
+			super.update(dt);
 			return;
 		}
 		if (!fadeout) {
 		if (player.isMoving()) {
-			player.update((int) elapsedTime);
+			player.update(dt);
 		} else {
 			if (!checkBossFight() && checkSteps()) {
 				if (checkEnterBattle(dir)) {
@@ -251,7 +249,7 @@ public class Labyrinth extends MenuStarter implements BattleStarter {
 			}
 		}
 		}
-		super.update(elapsedTime);
+		super.update(dt);
 	}
 	
 	/**
@@ -342,7 +340,6 @@ public class Labyrinth extends MenuStarter implements BattleStarter {
 		runSubGameMode = true;
 		subGameModeInitiated = false;
 		// leaveBattle();
-		battles++;
 	}
 	
 	/**
@@ -504,7 +501,6 @@ public class Labyrinth extends MenuStarter implements BattleStarter {
 			player.moveTo(currentNode, this);
 			Load.getPartyItems().takeStep();
 			steps++;
-			tempTotalSteps++;
 			Load.cureParty();
 			inputManager.resetAllGameActions();
 		}
@@ -545,7 +541,7 @@ public class Labyrinth extends MenuStarter implements BattleStarter {
 	 * 
 	 * @param g the graphics to draw on.
 	 */
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		if (!labyrinthInitiaded) {
 			init3D(g);
 			labyrinthInitiaded = true;
@@ -553,7 +549,7 @@ public class Labyrinth extends MenuStarter implements BattleStarter {
 		
 		player.lookAt(g);
 		g.callList(drawList);
-		graph.drawInventory(g);
+		graph.drawInventory(dt, g);
 		g.setLightEnabled(false);
 		
 		if (weatherSystem != null) {
@@ -561,7 +557,7 @@ public class Labyrinth extends MenuStarter implements BattleStarter {
 		}
 		if (runSubGameMode) {
 			g.push();
-			drawExtra(g, false);
+			drawExtra(dt, g, false);
 			g.pop();
 		}
 		
@@ -578,18 +574,18 @@ public class Labyrinth extends MenuStarter implements BattleStarter {
 		g.loadIdentity();
 		GameEventListener.set2DNow(g);
 		if (mission != null) {
-			mission.draw(g);
+			mission.draw(dt, g);
 		}
 		if (dialog != null) {
 			g.setColor(1);
-			Dialog.getDialog().draw(g);
+			Dialog.getDialog().draw(dt, g);
 			if (card != null) {
 				DeckPage.drawCardInfo(g, card, 530);
 			}
 		}
 		if (runSubGameMode) {
 			g.push();
-			drawExtra(g, true);
+			drawExtra(dt, g, true);
 			g.pop();
 		}
 		if (!topLayer.isEmpty()) {
@@ -606,7 +602,7 @@ public class Labyrinth extends MenuStarter implements BattleStarter {
 //		g.drawString("currentStepsToBattle: " + currentStepsToBattle, 50, 400);
 //		g.drawString("hasEnemies: " + hasEnemies, 50, 450);
 //		g.drawString("checkSteps: " + checkSteps(), 50, 500);
-		super.draw(g);
+		super.draw(dt, g);
 		
 		// TODO: Don't think this is necessary...
 		g.setLightEnabled(true);
@@ -628,7 +624,7 @@ public class Labyrinth extends MenuStarter implements BattleStarter {
 	 * 
 	 * @param g the graphics to draw on.
 	 */
-	private void drawExtra(Graphics g, boolean topLayer) {
+	private void drawExtra(float dt, Graphics g, boolean topLayer) {
 		if (!subGameModeInitiated) {
 			labDrawable.initDraw(g);
 			subGameModeInitiated = true;
@@ -636,7 +632,7 @@ public class Labyrinth extends MenuStarter implements BattleStarter {
 		if (topLayer) {
 			labDrawable.drawTopLayer(g);
 		} else {
-			labDrawable.draw(g);
+			labDrawable.draw(dt, g);
 		}
 	}
 	

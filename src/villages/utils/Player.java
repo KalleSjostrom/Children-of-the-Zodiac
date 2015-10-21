@@ -14,7 +14,7 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import sprite.Instruction;
+import sprite.InstructionFollower.Instruction;
 import sprite.Sprite;
 import villages.Villager;
 import character.Character;
@@ -31,18 +31,15 @@ public class Player {
 
 	private static final int SIZE = 50;
 	private static final int DISTANCE_BETWEEN_MEMBERS = 10;
-	private static final float VELOCITY = .14f;
+	private static final float VELOCITY = 140f;
 	
-	private ArrayList<Position> posArray = 
-		new ArrayList<Position>(SIZE);
-	private ArrayList<PartyMember> partyMembers = 
-		new ArrayList<PartyMember>();
+	private ArrayList<Position> posArray = new ArrayList<Position>(SIZE);
+	private ArrayList<PartyMember> partyMembers = new ArrayList<PartyMember>();
 	
-	private int direction;
-	private int currentPartyMember = 0;
-	private float[] pos;
 	private float distance;
-	private boolean moving = false; 
+	public float[] pos;
+	public int direction;
+	public boolean moving = false; 
 
 	/**
 	 * The constructor of player.
@@ -52,10 +49,7 @@ public class Player {
 	 */
 	public Player(float[] sPos, int dir) {
 		fillPartyMembers(sPos, dir);
-		standStill();
-		for (int i = 0; i < SIZE; i++) {
-			posArray.add(new Position(sPos[Values.X], sPos[Values.Y], dir));
-		}
+		stop();
 		posArray.clear();
 		for (int i = 0; i < SIZE + 2; i++) {
 			posArray.add(new Position(sPos[Values.X], sPos[Values.Y], dir));
@@ -81,43 +75,31 @@ public class Player {
 		int y = Values.Y;
 		for (int i = 0; i < characters.size(); i++) {
 			PartyMember pm = new PartyMember(characters.get(i).getName());
-			pm.setCurrentPos(new Position(sPos[x], sPos[y], dir));
+			pm.updatePos(new Position(sPos[x], sPos[y], dir));
 			partyMembers.add(pm);
 		}
 		pos = sPos;
 	}
 
-	/**
-	 * Checks if the player has collided with the villager with the given
-	 * position p. This method checks the distance between the player and
-	 * the given position and if this distance is less than 30, it check
-	 * for collision.
-	 * 
-	 * @param v the position of the villager to check
-	 * @param direction the direction of the player.
-	 * @return true if this player has collided with the given villager.
-	 */
-	public boolean checkCollision(Villager v, int direction) {
+	// TODO(kalle): Replace Point2D
+	public boolean checkCollision(float dt, Villager v, int direction) {
 		int x = Values.X;
 		int y = Values.Y;
-		float[] villagerPos = v.getPos();
+		float[] villagerPos = v.pos;
 		float yy = villagerPos[y];
-		float xx = villagerPos[x] - ((Sprite.STANDARD_WIDTH - v.getWidth()) / 2);
+		float xx = villagerPos[x] - ((Sprite.STANDARD_WIDTH - v.width) / 2);
 		if (pos[y] > villagerPos[y]) {
-			yy = villagerPos[y] - (Sprite.STANDARD_HEIGHT - v.getHeight());
+			yy = villagerPos[y] - (Sprite.STANDARD_HEIGHT - v.height);
 		}
 		int dist = (int) Point2D.distance(xx, yy, pos[x], pos[y]);
 		
 		if (dist < 30) {
 			int newDist;
-			int check = Math.round(
-					pos[direction % 2] + Values.DIRECTIONS[direction] * Values.LOGIC_INTERVAL);
+			int check = Math.round(pos[direction % 2] + Values.DIRECTIONS[direction] * VELOCITY * dt);
 			if (direction % 2 == x) {
-				newDist = (int) Point2D.distance(
-						check, pos[y], xx, yy);
+				newDist = (int) Point2D.distance(check, pos[y], xx, yy);
 			} else {
-				newDist = (int) Point2D.distance(
-						pos[x], check, xx, yy);
+				newDist = (int) Point2D.distance(pos[x], check, xx, yy);
 			}
 			return newDist < dist;
 		}
@@ -142,14 +124,7 @@ public class Player {
 	}
 	
 	private static final double SIN45 = Math.sin(45);
-
-	private static final float[] DIRECTIONS = 
-		new float[]{-1, 1, 1, -1};
-	static {
-		for (int i = 0; i < DIRECTIONS.length; i++) {
-			DIRECTIONS[i] *= Values.LOGIC_INTERVAL * VELOCITY;
-		}
-	}
+	private static final float[] DIRECTIONS = new float[]{-1, 1, 1, -1};
 	
 	/**
 	 * This method moves the player in the given direction.
@@ -158,11 +133,11 @@ public class Player {
 	 * @param  
 	 * @return true if the player has collided.
 	 */
-	public void go(int dir, boolean diagonal, ObstacleHandler oh) {
+	public void go(float dt, int dir, boolean diagonal, ObstacleHandler oh) {
 		//if (!moving || direction != dir) {
 			move(dir);
 		//}
-		double dist = DIRECTIONS[dir] * (diagonal ? SIN45 : 1);
+		double dist = DIRECTIONS[dir] * (diagonal ? SIN45 : 1) * dt * VELOCITY;
 		float x = pos[Values.X];
 		float y = pos[Values.Y];
 		if (dir == Values.UP || dir == Values.DOWN) {
@@ -181,19 +156,6 @@ public class Player {
 	}
 
 	/**
-	 * Creates a Position object from the given values.
-	 * 
-	 * @param x the x coordinate of the position that will be created.
-	 * @param y the y coordinate of the position that will be created.
-	 * @param dir the direction coordinate of the position that will 
-	 * be created.
-	 * @return the newly created position object.
-	 */
-	private Position createPos(int x, int y, int dir) {
-		return new Position(x, y, dir);
-	}
-
-	/**
 	 * Adds all the party members position to the given hash map. It 
 	 * fills the hash map with the position of all the party members 
 	 * to be used in the village story mode when the mode should 
@@ -201,11 +163,10 @@ public class Player {
 	 * 
 	 * @param pos the hash map to fill with positions.
 	 */
-	public void addPartyMembersPosition(
-			HashMap<String, float[]> pos) {
+	public void addPartyMembersPosition(HashMap<String, float[]> pos) {
 		for (int i = 0; i < partyMembers.size(); i++) {
 			PartyMember pm = partyMembers.get(i);
-			pos.put(pm.getName(), pm.getPosAsFloatArray());
+			pos.put(pm.name, pm.getPosAsFloatArray());
 		}
 	}
 
@@ -227,21 +188,12 @@ public class Player {
 	/**
 	 * Changes the images of the party to the stand still images.
 	 */
-	public void standStill() {
+	public void stop() {
 		moving = false;
 		for (int i = 0; i < partyMembers.size(); i++) {
 			PartyMember pm = partyMembers.get(i);
-			pm.standStill();
+			pm.stop();
 		}
-	}
-
-	/**
-	 * Checks if this player is moving.
-	 * 
-	 * @return true if the player is moving.
-	 */
-	public boolean isMoving() {
-		return moving;
 	}
 
 	/**
@@ -250,7 +202,7 @@ public class Player {
 	 * @return the height of the player images.
 	 */
 	public int getHeight() {
-		return partyMembers.get(0).getHeight();
+		return partyMembers.get(0).height;
 	}
 
 	/**
@@ -259,32 +211,8 @@ public class Player {
 	 * @return the width of the player images.
 	 */
 	public int getWidth() {
-		return partyMembers.get(0).getWidth();
-	}
-
-	/**
-	 * Gets the direction of the current party member. 
-	 * 
-	 * @return the direction of the current party member.
-	 */
-	public int getDirection() {
-		return direction;
-	}
-
-	/**
-	 * Gets the position of the player.
-	 * 
-	 * @return the position of the player.
-	 */
-	public float[] getPos() {
-		return pos;
-	}
-
-	/**
-	 * Gets the position of the background.
-	 * 
-	 * @return the position of the background.
-	 */
+		return partyMembers.get(0).width;
+	}	
 
 	/**
 	 * Gets the players name.
@@ -292,7 +220,7 @@ public class Player {
 	 * @return the name of the player.
 	 */
 	protected String getName() {
-		return partyMembers.get(currentPartyMember).getName();
+		return partyMembers.get(0).name;
 	}
 
 	/**
@@ -305,11 +233,9 @@ public class Player {
 	 * @param dir the direction the party members should face.
 	 */
 	public void setDirectionForAll(int dir) {
-		PartyMember pm = partyMembers.get(currentPartyMember);
 		posArray.clear();
 		for (int i = 0; i < SIZE + 1; i++) {
-			Position p = pm.getPosition();
-			posArray.add(new Position(p.getX(), p.getY(), dir));
+			posArray.add(new Position(pos[Values.X], pos[Values.Y], direction));
 		}
 		move(dir);
 	}
@@ -331,10 +257,10 @@ public class Player {
 			partyMembers.clear();
 			for (int i = 0; i < characters.size(); i++) {
 				PartyMember pm = new PartyMember(characters.get(i).getName());
-				pm.setCurrentPos(posArray.get(SIZE - 1));
+				pm.updatePos(posArray.get(SIZE - 1));
 				partyMembers.add(pm);
 			}
-			standStill();
+			stop();
 		}
 	}
 	
@@ -360,8 +286,7 @@ public class Player {
 	 */
 	public void setPartyMembersPositions() {
 		posArray.remove(0);
-		posArray.add(SIZE, createPos(
-				(int) pos[1], (int) pos[0], direction));
+		posArray.add(SIZE, new Position((int) pos[Values.X], (int) pos[Values.Y], direction));
 	}
 
 	/**

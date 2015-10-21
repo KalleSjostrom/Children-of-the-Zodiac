@@ -7,6 +7,8 @@
  */
 package sprite;
 
+import java.util.ArrayList;
+
 import info.Values;
 
 /**
@@ -17,152 +19,141 @@ import info.Values;
  */
 public abstract class InstructionFollower extends Sprite {
 
-	protected Instructions instructions;
+	protected ArrayList<Instruction> instructions = new ArrayList<Instruction>();
 	protected Instruction instruction;
-	protected boolean storyDialog;
-	
-	protected Instructions currentInstructions;
+
 	private int destination;
-	private boolean start = true;
+	private int index = 0;
 
-	/**
-	 * Creates a new sprite which will follow instructions.
-	 * Examples of such sprites are villagers and actors.
-	 */
-	public InstructionFollower() {
-		instructions = new Instructions();
-		currentInstructions = instructions;
+	public void update(float dt) {
+		super.update(instruction.modifyTime(dt));
 	}
-
-	/**
-	 * Creates a new sprite which will follow instructions. Examples of such 
-	 * sprites are villagers and actors. The instructions is gotten from the
-	 * file with the given name and path.
-	 * 
-	 * @param path the path to the file containing the instructions.
-	 * @param filename the name of the file containing the instructions.
-	 */
-	/*
-	public InstructionFollower(String path, String filename) {
-		instructions = new Instructions(path, filename);
-		currentInstructions = instructions;
-		instruction = currentInstructions.getInstruction(0);
-	}
-	*/
-
-	/**
-	 * This method updates this instruction follower.
-	 * 
-	 * @param elapsedTime the amount of time that has elapsed since the last
-	 * call to this method.
-	 */
-	public void update(int elapsedTime) {
-		super.update(instruction.modifyTime(elapsedTime));
-	}
-
-	/**
-	 * Sets the current instruction from the list of instructions
-	 * with the given index. This will overwrite the current instruction
-	 * with the new one with the given index.
-	 * 
-	 * @param index the index of the instruction to load.
-	 */
-	protected void setInstructions(int index) {
-		instruction = currentInstructions.getInstruction(index);
-		setAttributes(false);
-	}
-
-	/**
-	 * Checks the instructions for any changes.
-	 * 
-	 * @param reset true if the instructions should be reseted.
-	 */
-	protected void checkInstructions(boolean reset) {
-		if (currentInstructions.isDone()) {
-			if (start) {
-				currentInstructions = instructions;
-				start = false;
-			}
-			return;
-		}
-		int ans = currentInstructions.checkInstruction(reset);
-		switch (ans) {
-		case 1 : 
-			setAttributes(true); 
-			break;
-		case 2 : 
-			if (reset) {
-				setAttributes(true);
-			}
-			break;
-		}
-	}
-
-	/**
-	 * This method resets the instruction follower so that the sprite will
-	 * move according to the first written instruction in the file.
-	 */
-	public void reset() {
-		instructions.reset();
-		currentInstructions = instructions;
-		setAttributes(true);
-	}
-
-	/**
-	 * Sets the attributes in the current instruction.
-	 * 
-	 * @param setInstructions true if this method should set the instructions
-	 * before setting the attributes, or use the attributes in the 
-	 * current instruction.
-	 */
-	private void setAttributes(boolean setInstructions) {
-		if (setInstructions) {
-			instruction = currentInstructions.getInstruction();
-		}
-		speed = instruction.getSpeed();
-		moving = instruction.isMoving();
-		direction = instruction.getDirection();
+	
+	private void setInstruction() {
+		instruction = instructions.get(index);
+		speed = instruction.speed;
+		moving = instruction.moving;
+		direction = instruction.direction;
 		destination = Math.round(
 				pos[direction % 2] + 
-				(instruction.getDistance() * Values.DIRECTIONS[direction]));
-		setImages();
+				(instruction.distance * Values.DIRECTIONS[direction]));
 	}
 
-	/**
-	 * This method moves the instruction follower.
-	 *  
-	 * @param reset true if the instruction follower should be reseted if
-	 * the last instruction is done.
-	 * @param elapsedTime the amount of time that has elapsed since the last call
-	 * to this method.
-	 * 
-	 * @see #reset()
-	 */
-	protected void move(boolean reset, float elapsedTime) {
-		checkInstructions(reset);
-		move(speed * elapsedTime, direction);
-		int extra = instruction.getExtraDirection();
+	protected void setInstructions(int index) {
+		this.index = index;
+		setInstruction();
+	}
+	
+	public void reset() {
+		instructions.get(index).reset();
+		index = 0;
+		setInstruction();
+	}
+
+	protected void move(boolean reset, float dt) {
+		if (index < instructions.size()) {
+			Instruction i = instructions.get(index);
+			if (i.distanceLeft <= 0) {
+				instructions.get(index).reset();
+				index++;
+				if (index >= instructions.size()) {
+					if (reset) {
+						index = 0;
+						setInstruction();
+					}
+				} else
+					setInstruction();
+			} else {
+				i.decrementDistance(dt);
+			}
+		}
+
+		move(speed * dt, direction);
+		int extra = instruction.extraDirection;
 		if (extra != -1) {
-			move(speed * elapsedTime, extra);
+			move(speed * dt, extra);
 		}
 	}
-
-	/**
-	 * Moves the instruction follower the given distance in the
-	 * given direction.
-	 * 
-	 * @param distance the distance to move the sprite.
-	 * @param direction the direction in which to move the sprite.
-	 */
+	
 	private void move(float distance, int direction) {
-		if (isMoving()) {
+		if (moving) {
 			int i = direction % 2;
 			if (Math.abs(distance) >= Math.abs(pos[i] - destination)) {
 				pos[i] = destination;
-				currentInstructions.getInstruction().resetDistance();
+				instructions.get(index).resetDistance();
 			} else {
 				pos[i] += distance * Values.DIRECTIONS[direction];
 			}
+		}
+	}
+	
+	static public class Instruction {
+
+		public static final int SLOWEST = 0;
+		public static final int SLOW = 1;
+		public static final int FAST = 2;
+		public static final int FASTEST = 3;
+		
+		private static final float[] SPEED = new float[]{.03f, .05f, .07f, .1f, .12f};
+		private static final float[] TIME_MODIFICATOR = new float[]{.4f, .6f, .8f, 1, 1.2f, 1.4f};
+
+		public int direction;
+		public boolean moving;
+		
+		private float distanceLeft;
+		private float speed = 50.0f;
+		private int distance;
+		private int extraDirection;
+		private int speedIndex;
+
+		public Instruction(int dir) {
+			direction = dir;
+			moving = false;
+		}
+
+		/**
+		 * Constructs a new instruction with the given values.
+		 * The direction parameter is taken as a string. This is because there
+		 * can be multiple directions. The string "12" consist of "1" = right
+		 * and "2" = down, so this direction is south east.
+		 * The arguments 11, 22, 13 and so on is not a valid direction, there are 
+		 * only n, nw, w, sw, s, se, e, ne and north.
+		 * 
+		 * @param dir the direction of the villager.
+		 * @param standStill true if the villager should stand still.
+		 * @param dist the distance to travel,
+		 * (or time if the villager stands still).
+		 * @param speed the speed.
+		 */
+		public Instruction(String dir, boolean standStill, int dist, int speed) {
+			if (dir.length() > 1) {
+				direction = Integer.parseInt(dir.substring(0, 1));
+				extraDirection = Integer.parseInt(dir.substring(1));
+			} else {
+				direction = Integer.parseInt(dir);
+				extraDirection = -1;
+			}
+			moving = !standStill;
+			distance = dist;
+			speedIndex = Math.abs(speed);
+			this.speed = (speed < 0 ? -1 : 1) * SPEED[speedIndex];
+			reset();
+		}
+
+		public float modifyTime(float dt) {
+			return modifyTime(dt, speedIndex);
+		}
+		public static float modifyTime(float dt, int speed) {
+			return TIME_MODIFICATOR[speed] * dt;
+		}
+		public void reset() {
+			distanceLeft = distance;
+		}
+		public void decrementDistance(float dt) {
+			distanceLeft -= Math.abs(speed) * dt;
+		}
+		public void resetDistance() {
+			distanceLeft = 0;
 		}
 	}
 }

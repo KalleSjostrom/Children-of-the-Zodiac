@@ -5,7 +5,6 @@ import info.Values;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import sprite.DefaultSprite;
 import sprite.Sprite;
@@ -16,21 +15,23 @@ public class Actor {
 	private Sprite actor;
 	private ArrayList<int[]> instructions = new ArrayList<int[]>();
 	private int[] target = new int[3];
-	private float[] step = new float[2];
 	private float speed = 1;
-	private double[] acc = new double[2];
+	private float[] velocity = new float[2];
 	private boolean waiting;
 	private boolean inControll = false;
-	private boolean animate;
+
+	private Rectangle boundingRect;
 
 	public Actor(Sprite sprite) {
 		actor = sprite;
+		boundingRect = new Rectangle(0, 0, sprite.width, sprite.height);
 	}
 	
-	public Actor(String path, int images) {
+	public Actor(String path, int size) {
 		actor = new DefaultSprite(path);
 		path = path.replace("Extras", "");
-		actor.loadImagesFromPath(Values.VillageImages + path, images);
+		actor.loadImage(Values.VillageImages, path);
+		boundingRect = new Rectangle(0, 0, actor.width, actor.height);
 	}
 	
 	public void setControll(boolean controll) {
@@ -41,35 +42,30 @@ public class Actor {
 		}
 	}
 
-	public void update(int elapsedTime) {
+	public void update(float dt) {
 		if (!inControll && (actor instanceof villages.Villager)) {
-			((villages.Villager) actor).updateVillager(Math.round(elapsedTime * speed));
+			((villages.Villager) actor).updateVillager(Math.round(dt * speed));
 		} else {
-			float[] pos = actor.getPos();
+			float[] pos = actor.pos;
 			float preDistance = calcDist(pos, target);
 			for (int i = 0; i < 2; i++) {
-				step[i] += acc[i];
-				pos[i] += step[i];
+				// velocity[i] += acc[i] * dt;
+				pos[i] += velocity[i] * dt;
 			}
 			float postDistance = calcDist(pos, target);
 			if (preDistance < postDistance) {
 				pos[0] = target[0];
 				pos[1] = target[1];
-				acc[0] = acc[1] = 0;
+				velocity[0] = velocity[1] = 0;
+				// acc[0] = acc[1] = 0;
 				if (instructions.size() > 0) {
 					int[] start = popInstruction();
 					move(start[0], start[1], start[2]);
-				} else if (actor.isMoving()) {
-					if (!animate) {
-						actor.standStillActor(target[2]);
-					} else {
-						actor.setMoving(false);
-					}
-					animate = false;
+				} else if (actor.moving) {
+					actor.stop(target[2]);
 				}
 			}
-			actor.setPos(pos);
-			actor.update(Math.round(elapsedTime * speed));
+			actor.update(Math.round(dt * speed));
 		}
 	}
 	
@@ -84,7 +80,7 @@ public class Actor {
 	}
 
 	public void stop(int direction) {
-		actor.standStillActor(direction);
+		actor.stop(direction);
 		target[2] = direction;
 	}
 	
@@ -103,8 +99,8 @@ public class Actor {
 		direction[Values.X] = x < 0 ? Values.LEFT : Values.RIGHT;
 		direction[Values.Y] = y < 0 ? Values.UP : Values.DOWN;
 		int faceDirection = direction[Math.abs(x) > Math.abs(y) ? Values.X : Values.Y];
-		actor.moveActor(faceDirection);
-		float[] pos = actor.getPos();
+		actor.move(faceDirection);
+		float[] pos = actor.pos;
 		target[Values.X] = (int) pos[Values.X] + x;
 		target[Values.Y] = (int) pos[Values.Y] + y;
 		target[2] = faceDirection;
@@ -112,13 +108,13 @@ public class Actor {
 	}
 	
 	public void moveToWithSpeed(int x, int y, float speed) {
-		float[] pos = actor.getPos();
+		float[] pos = actor.pos;
 		int[] direction = moveToRelative(Math.round(x - pos[Values.X]), Math.round(y - pos[Values.Y]));
 		setStepBasedOnSpeed(direction, speed);
 	}
 	
 	public void moveTo(int x, int y, float duration) {
-		float[] pos = actor.getPos();
+		float[] pos = actor.pos;
 		moveToRel(Math.round(x - pos[Values.X]), Math.round(y - pos[Values.Y]), duration);
 	}
 	
@@ -132,9 +128,9 @@ public class Actor {
 			stop(faceDirection);
 			return;
 		}
-		actor.moveActor(faceDirection);
+		actor.move(faceDirection);
 		target[2] = faceDirection;
-		float[] pos = actor.getPos();
+		float[] pos = actor.pos;
 		int index = direction % 2;
 		target[index] = (int) pos[index] + (distance * Values.DIRECTIONS[direction]);
 		index = Math.abs(index - 1);
@@ -147,16 +143,15 @@ public class Actor {
 	}
 	
 	private void setStepBasedOnDistance(int[] direction, float duration) {
-		float[] pos = actor.getPos();
-		duration /= Values.LOGIC_INTERVAL;
+		float[] pos = actor.pos;
 		for (int i = 0; i < 2; i++) {
-			step[i] = Math.abs(target[i] - pos[i]) / duration;
-			step[i] *= Values.DIRECTIONS[direction[i]];
+			velocity[i] = Math.abs(target[i] - pos[i]) / duration;
+			velocity[i] *= Values.DIRECTIONS[direction[i]];
 		}
 	}
 
 	private void setStepBasedOnSpeed(int[] direction, float speed) {
-		float[] pos = actor.getPos();
+		float[] pos = actor.pos;
 		double x = Math.abs(target[Values.X] - pos[Values.X]);
 		double y = Math.abs(target[Values.Y] - pos[Values.Y]);
 		double theta;
@@ -170,12 +165,12 @@ public class Actor {
 		speedComp[Values.X] = speed * Math.cos(theta);
 		speedComp[Values.Y] = speed * Math.sin(theta);
 		for (int i = 0; i < 2; i++) {
-			step[i] = (float) speedComp[i];
-			step[i] *= Values.DIRECTIONS[direction[i]];
+			velocity[i] = (float) speedComp[i];
+			velocity[i] *= Values.DIRECTIONS[direction[i]];
 		}		
-	//	this.speed = (step[0] * step[0] + step[1] * step[1]) * SPEED_CONSTANT;
 	}
 	
+	/*
 	public void deaccelerateActor() {
 		float pos[] = actor.getPos();
 		for (int i = 0; i < 2; i++) {			
@@ -188,41 +183,40 @@ public class Actor {
 			}
 		}
 	}
+	*/
 	
 	public void lookTo(int x, int y) {
-		float[] pos = actor.getPos();
+		float[] pos = actor.pos;
 		int xdir = x < pos[Values.X] ? Values.LEFT : Values.RIGHT;
 		int ydir = y < pos[Values.Y] ? Values.UP : Values.DOWN;
 		int direction = Math.abs(x - pos[Values.X]) > Math.abs(y - pos[Values.Y]) ? xdir : ydir;
-		actor.standStillActor(direction);
+		actor.stop(direction);
 		target[0] = (int) pos[0];
 		target[1] = (int) pos[1];
 		target[2] = direction;
 	}
-	
-	public float[] getPos() {
-		return actor.getPos();
-	}
 
-	public void setPos(float[] newPos) {
-		actor.setPos(newPos);		
+	public void setPos(float[] p) {
+		actor.pos = p;
 	}
-	
+	public float[] getPos() {
+		return actor.pos;
+	}
 	public void setPos(int[] p) {
-		actor.setPos(p);
+		actor.pos[0] = p[1];
+		actor.pos[1] = p[0];
+		stop(p[2]);
 	}
 
 	public boolean isMoving() {
-		return actor.isMoving();
+		return actor.moving;
 	}
 
-	public void addAnimation(String name, int pos) {
-		actor.addAnimation(name, pos);
+	public void add_Animation(String name, int pos) {
+		// actor.addAnimation(name, pos);
 	}
-
-	public void animate(int pos) {
-		animate = true;
-		actor.animate(pos);
+	// TODO(kalle): Implement a way of showing this image instead of the regular sprite
+	public void overrideImage(String name) {
 	}
 	
 	public boolean isWaiting() {
@@ -230,7 +224,7 @@ public class Actor {
 	}
 
 	public String getName() {
-		return actor.getName();
+		return actor.name;
 	}
 
 	public void setEmotion(boolean show, int emotion, boolean shake) {
@@ -247,11 +241,11 @@ public class Actor {
 	 * @param bx the x position of the background.
 	 * @param by the y position of the background.
 	 */
-	public void draw(Graphics g, int bx, int by) {
-		float[] pos = actor.getPos();
+	public void draw(float dt, Graphics g, int bx, int by) {
+		float[] pos = actor.pos;
 		int x = Math.round(pos[Values.X] + bx);
 		int y = Math.round(pos[Values.Y] + by);
-		actor.drawAtPosition(g, x, y);
+		actor.draw(dt, g, x, y);
 	}
 	
 	/**
@@ -293,6 +287,12 @@ public class Actor {
 	private static final int X_AXIS = 3;
 	private static final int Y_AXIS = 0;
 	
+	private Rectangle getRectangle() {
+		boundingRect.x = Math.round(actor.pos[Values.X]);
+		boundingRect.y = Math.round(actor.pos[Values.Y]);
+		return boundingRect;
+	}
+	
 	/**
 	 * Creates the starting instructions. These instructions should lead 
 	 * the villager to its starting location. The location is calculated
@@ -307,15 +307,15 @@ public class Actor {
 	private void createStartInstructions(
 			float[] positions, int startDir, 
 			ArrayList<Actor> villagers) {
-		float[] pos = actor.getPos();
+		float[] pos = actor.pos;
 		int xDif = Math.round(positions[Values.X] - pos[Values.X]);
 		int yDif = Math.round(positions[Values.Y] - pos[Values.Y]);
 
 		if (villagers.size() > 0) {
-			Rectangle villager = villagers.get(0).actor.getRectangle();
+			Rectangle villager = villagers.get(0).getRectangle();
 
 			if (pos[Values.Y] < villager.y) {
-				Rectangle player = actor.getRectangle();
+				Rectangle player = getRectangle();
 				player.height = yDif;
 				if (player.intersects(villager)) {
 					int point1 = villager.x - villager.width;
@@ -334,10 +334,10 @@ public class Actor {
 		createInstruction(X_AXIS, xDif);
 
 		if (xDif == 0 && yDif == 0) {
-			actor.standStillActor(startDir);
+			actor.stop(startDir);
 		} else {
 			instructions.add(new int[]{0, startDir, 0});
-			actor.moveActor();
+			actor.move(startDir);
 		}
 		if (instructions.size() > 0) {
 			int[] start = popInstruction();
@@ -367,8 +367,7 @@ public class Actor {
 	}
 	
 	public String toString() {
-		return actor.getName();
-		// + " - X: " + actor.getPos()[Values.X] + "Ê- Y: " + actor.getPos()[Values.Y] + " - a:Ê" + actor.getDirection();
+		return actor.name;
 	}
 
 	public void resetVillager() {
@@ -386,10 +385,6 @@ public class Actor {
 	}
 
 	public void setDirection(int dir) {
-		actor.setDirection(dir);
-	}
-
-	public void setMoving(boolean moving) {
-		actor.setMoving(moving);	
+		actor.direction = dir;
 	}
 }

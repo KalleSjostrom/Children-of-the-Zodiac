@@ -13,6 +13,8 @@ import info.Values;
 
 import java.awt.Color;
 
+import com.sun.corba.se.impl.orbutil.graph.Graph;
+
 import battle.bars.TimeBar;
 
 /**
@@ -109,7 +111,7 @@ public class Clock extends Hideable {
 	 * 
 	 * @param g the Graphics to draw on.
 	 */
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		g.loadIdentity();
 		g.setFontSize(40);
 		if (visible && fleeing) {
@@ -120,11 +122,14 @@ public class Clock extends Hideable {
 			}
 			int shadowX = Math.round(DEFAULT_X_POS - (fleeXpos + 144));
 			int hy = Values.ORIGINAL_RESOLUTION[Values.Y];
-			g.drawWithShadow("Fleeing",  shadowX + 4, hy, Color.BLACK);
-			g.drawWithShadow("Fleeing", Math.round(fleeXpos), hy);
+
+			g.setColor(Graphics.BLACK);
+			g.drawString("Fleeing", shadowX + 4, hy);
+			g.setColor(Graphics.WHITE);
+			g.drawString("Fleeing", Math.round(fleeXpos), hy);
 		}
 		translate(g);
-		timeBar.draw(g);
+		timeBar.draw(dt, g);
 	}
 
 	/**

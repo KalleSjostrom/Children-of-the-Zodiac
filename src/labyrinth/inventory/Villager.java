@@ -51,7 +51,7 @@ public class Villager extends Inventory {
 		scale2 = 2.4f;
 	}
 	
-//	public void draw(Graphics g) {
+//	public void draw(float dt, Graphics g) {
 //		GL2 gl = Graphics.gl2;
 //		gl.glEnd();
 //		texture[0].bind(g);

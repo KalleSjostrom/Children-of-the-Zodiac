@@ -1,6 +1,5 @@
 package cards;
 
-import info.Values;
 import particleSystem.ParticleSystem;
 import particleSystem.ParticleValues;
 import particleSystem.drawable.SwordBackground;
@@ -41,7 +40,7 @@ public class AnimationSettingsFactory {
 		settings.setValue(AnimSettings.FADE_RANDOM_ADD, .006f);
 		settings.setValue(AnimSettings.FADE_INCREASE_DISTANCE_POWER, 1f);
 		settings.setValue(AnimSettings.FADE_INCREASE_DISTANCE_MULTIPLIER, .05f);
-		settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, 0);
+		settings.setValue(AnimSettings.EMITTANCE_PERIOD, 0);
 		settings.setVector(AnimSettings.DESTROY_FADE_GRAVITY, new Vector3f(0, -.01f, 0));
 		settings.setBoolean(AnimSettings.ADDITIVE_COLORING, true);
 //		settings.setVector(AnimSettings.COLLISION_VECTOR, null);
@@ -87,7 +86,7 @@ public class AnimationSettingsFactory {
 		settings.setValue(AnimSettings.FADE_RANDOM_ADD, .08f);
 		settings.setValue(AnimSettings.FADE_INCREASE_DISTANCE_POWER, 1f);
 		settings.setValue(AnimSettings.FADE_INCREASE_DISTANCE_MULTIPLIER, 0);
-		settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, (Values.LOGIC_INTERVAL / 1000f) * .02f);
+		settings.setValue(AnimSettings.EMITTANCE_PERIOD, .02f);
 		settings.setVector(AnimSettings.DESTROY_FADE_GRAVITY, new Vector3f(0, 0, 0));
 		settings.setBoolean(AnimSettings.ADDITIVE_COLORING, true);
 		settings.setValue(AnimSettings.DESTROY_MODE, ParticleValues.PLAIN_DESTROY);
@@ -107,7 +106,7 @@ public class AnimationSettingsFactory {
 		settings.setValue(AnimSettings.FADE_RANDOM_MULT, 0);
 		settings.setValue(AnimSettings.FADE_RANDOM_ADD, 0);
 		settings.setValue(AnimSettings.FADE_INCREASE_DISTANCE_MULTIPLIER, 0);
-		settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, (Values.LOGIC_INTERVAL / 1000f) * .15f);
+		settings.setValue(AnimSettings.EMITTANCE_PERIOD, .15f);
 		
 		settings.setValue(AnimSettings.NR_TEXTURES, 2);
 		settings.setValue(AnimSettings.NR_TEXTURES + 1, ParticleSystem.ROUND);

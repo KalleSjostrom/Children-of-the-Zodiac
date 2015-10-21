@@ -544,8 +544,8 @@ public class DeckPage extends AbstractPage {
 			to.addCard(card);
 		}
 
-		private void update(float elapsedTime) {
-			currentTime += elapsedTime;
+		private void update(float dt) {
+			currentTime += dt;
 			
 			percent = currentTime / endTime;
 			currentPos = start.add(startToEnd.mult(percent));

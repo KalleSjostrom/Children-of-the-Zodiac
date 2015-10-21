@@ -32,7 +32,7 @@ public abstract class Mission extends Hideable {
 		return done;
 	}
 	
-	public abstract void draw(Graphics g);
+	public abstract void draw(float dt, Graphics g);
 	public abstract void init(ArrayList<String> info);
 	public abstract boolean isFinished(int status);
 	

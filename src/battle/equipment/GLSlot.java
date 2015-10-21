@@ -89,8 +89,8 @@ public class GLSlot extends FlatObj {
 	 * @param g the Graphics to draw on.
 	 * @param y the height of the slot.
 	 */
-	public void draw(Graphics g, float y) {
-		update();
+	public void draw(float dt, Graphics g, float y) {
+		update(dt);
 		g.loadIdentity();
 		g.translate(xPos, y, BattleValues.STANDARD_Z_DEPTH - .001f);
 		g.rotate(rotation, 0, 1, 0);
@@ -182,7 +182,7 @@ public class GLSlot extends FlatObj {
 	}
 
 	@Override
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		// TODO Auto-generated method stub
 		
 	}

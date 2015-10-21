@@ -79,7 +79,6 @@ public class BattleEnemy extends Object2D {
 	private static final float XS_ACC = .00003f;
 	private float xsSpeed;
 	private float life;
-	private float sliceFade;
 	private Battle battle;
 	private boolean shouldHit;
 	private ParticleSystemPacket preloadedSystem;
@@ -130,13 +129,13 @@ public class BattleEnemy extends Object2D {
 		card.initDraw(g);
 	}
 	
-	public void update(float elapsedTime) {
-		attack.update();
-		card.update();
+	public void update(float dt) {
+		attack.update(dt);
+		card.update(dt);
 		Iterator<ParticleSystemPacket> it = particleSystem.iterator();
 		while (it.hasNext()) {
 			ParticleSystemPacket psp = it.next();
-			psp.update(elapsedTime / 1000f);
+			psp.update(dt);
 			if (psp.isDead()) {
 				it.remove();
 			}
@@ -161,8 +160,6 @@ public class BattleEnemy extends Object2D {
 		xsSpeed = 0;
 		slice = true;
 		life = 2.5f;
-		float nrFadeSteps = 1500f / Values.LOGIC_INTERVAL;
-		sliceFade = 3 / nrFadeSteps;
 		new Thread() {
 			public void run() {
 				Values.sleep(1500);
@@ -183,7 +180,7 @@ public class BattleEnemy extends Object2D {
 	 * 
 	 * @param g the Graphics object to draw on.
 	 */
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		if (!killed) {
 			g.loadIdentity();
 			g.translate(shakeoffx, shakeoffy + risey, info.get(EnemyInfo.DEPTH));
@@ -191,8 +188,8 @@ public class BattleEnemy extends Object2D {
 			g.setColor(usedColor[0], usedColor[1], usedColor[2]);
 			if (isVisible()) {
 				if (slice) {
-					life -= sliceFade;
-					drawSlice(g, currentList, 0);
+					life -= 1.5f * dt;
+					drawSlice(dt, g, currentList, 0);
 				} else {
 					draw(g, currentList, 0);
 				}
@@ -202,29 +199,28 @@ public class BattleEnemy extends Object2D {
 			Iterator<ParticleSystemPacket> it = particleSystem.iterator();
 			while (it.hasNext()) {
 				ParticleSystemPacket psp = it.next();
-				psp.draw(g);
+				psp.draw(dt, g);
 			}
 			g.setColor(1);
 			g.setAlphaTestEnabled(true);
 			g.setAlphaFunc(.1f);
-			attack.draw(g);
+			attack.draw(dt, g);
 			g.setAlphaFunc(0);
-			card.draw(g);
+			card.draw(dt, g);
 		}
 		g.setColor(1);
 	}
 	
-	private void drawSlice(Graphics g, int texIndex, int coordIndex) {
+	private void drawSlice(float dt, Graphics g, int texIndex, int coordIndex) {
 		if (texture[texIndex] != null) {
 			float[][] cl = coordList[coordIndex];
-			drawSlice(g, texture[texIndex].getTexture(), cl[0], cl[1], cl[2]);
+			drawSlice(dt, g, texture[texIndex].getTexture(), cl[0], cl[1], cl[2]);
 		}
 	}
 	
-	private void drawSlice(
-			Graphics g, Texture texture, float[] x, float[] y, float[] z) {
+	private void drawSlice(float dt, Graphics g, Texture texture, float[] x, float[] y, float[] z) {
 		GL2 gl = Graphics.gl2;
-		xsSpeed += XS_ACC * Values.INTERVAL;
+		xsSpeed += XS_ACC * dt;
 		xs -= xsSpeed;
 		float ys = xs*.3f;
 		
@@ -444,20 +440,22 @@ public class BattleEnemy extends Object2D {
 	
 	private void rise(final int time, final float speed) {
 		new Thread() {
+			// TODO(kalle): WTH!
+			float logic_interval = 1000.0f / 60.0f;
 			public void run() {
 				float riseSpeed = 0;
 				int totalTime = 0;
 				while (totalTime < time / 2f) {
 					riseSpeed += speed;
 					risey += riseSpeed;
-					totalTime += (int) Values.LOGIC_INTERVAL;
-					Values.sleep((int) Values.LOGIC_INTERVAL);
+					totalTime += (int) logic_interval;
+					Values.sleep((int) logic_interval);
 				}
 				while (totalTime < time) {
 					riseSpeed -= speed;
 					risey += riseSpeed;
-					totalTime += (int) Values.LOGIC_INTERVAL;
-					Values.sleep((int) Values.LOGIC_INTERVAL);
+					totalTime += (int) logic_interval;
+					Values.sleep((int) logic_interval);
 				}
 			}
 		}.start();

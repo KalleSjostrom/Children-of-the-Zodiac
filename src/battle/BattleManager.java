@@ -228,12 +228,12 @@ public class BattleManager extends GameMode implements LabyrinthDrawable {
 	 * 
 	 * @param g the graphics to draw on.
 	 */
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		g.loadIdentity();
 		for (int i = 0; i < objects.size(); i++) {
-			objects.get(i).draw(g);
+			objects.get(i).draw(dt, g);
 		}
-		battle.drawBattle(g);
+		battle.drawBattle(dt, g);
 	}
 
 	/**

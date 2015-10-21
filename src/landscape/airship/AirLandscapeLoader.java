@@ -52,16 +52,11 @@ public abstract class AirLandscapeLoader extends MenuStarter {
 	private void loadImages() {
 		airShip = new AirShip();
 		airShip.init();
-		background = new DoubleBackground(
-				Values.ORIGINAL_RESOLUTION[Values.X], 
-				Values.ORIGINAL_RESOLUTION[Values.Y]);
-		String[] bg = new String[2];
-		bg[0] = "World/World" + Database.getStatusFor("airship");
-		bg[1] = "World";
-		background.setLandscapeImages(bg, false);
-		nameBackGround = 
-			ImageHandler.addToCurrentLoadOnUse(
-					Values.MenuImages + "Pieces/1.png");
+		background = new DoubleBackground(Values.ORIGINAL_RESOLUTION[Values.X], Values.ORIGINAL_RESOLUTION[Values.Y]);
+		String bg = "World/World" + Database.getStatusFor("airship");
+		boolean night = Landscape.isNight();
+		background.setLandscapeImages(bg, night);
+		nameBackGround = ImageHandler.addToCurrentLoadOnUse(Values.MenuImages + "Pieces/1.png");
 	}
 
 	protected AirLandNode getNode(String name) {

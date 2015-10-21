@@ -9,7 +9,6 @@ package battle.equipment;
 
 import graphics.Object2D;
 import info.BattleValues;
-import info.Values;
 import cards.Card;
 
 /**
@@ -62,9 +61,9 @@ public abstract class FlatObj extends Object2D {
 	 * done, the rotateDone() method is called. These methods does not
 	 * do anything and is free to override.
 	 */
-	protected void update() {
+	protected void update(float dt) {
 		if (targetRotation != rotation) {
-			rotation += (targetRotation == BACK ? speed : -speed) * Values.LOGIC_INTERVAL;
+			rotation += (targetRotation == BACK ? speed : -speed) * dt;
 			hasRotatedHalfWay();
 			if (targetRotation == rotation) {
 				rotateDone();

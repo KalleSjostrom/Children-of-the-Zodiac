@@ -125,7 +125,6 @@ public class Values {
 
 	/* Locations and directions */ 
 	public static final int[] DIRECTIONS = {-1, 1, 1, -1};
-	public static final int[] COUNTER_DIRECTIONS = {1, 1, -1, -1};
 	public static final float[] TO_ANGLE = {90, 180, -90, 0};
 	public static final int X = 1;
 	public static final int Y = 0;
@@ -133,11 +132,6 @@ public class Values {
 	public static final int RIGHT = 1;
 	public static final int DOWN = 2;
 	public static final int LEFT = 3;
-	
-		/* Frame rate */
-	public static int FPS = 60;
-	public static float INTERVAL = 1000f / FPS;
-	public static float LOGIC_INTERVAL = INTERVAL; // 1000f / 30;
 	
 	/* The resolution */
 	public static int[] RESOLUTIONS;
@@ -254,7 +248,7 @@ public class Values {
 	}
 	
 	public static boolean soundEnabled() {
-		return SETTINGS_MAP[SOUND_EFFECTS];
+		return SETTINGS_MAP[SOUND_EFFECTS] && SETTINGS_MAP[MUTE_MUSIC];
 	}
 	
 	public static void init() {
@@ -420,7 +414,7 @@ public class Values {
 	private static boolean[] createSettingsMap() {
 		boolean[] map = new boolean[5];
 		map[FULL_SCREEN] = true;
-		map[MUTE_MUSIC] = false;
+		map[MUTE_MUSIC] = true;
 		map[SOUND_EFFECTS] = true;
 		return map;
 	}
@@ -446,14 +440,7 @@ public class Values {
 		if (command.equals("set")) {
 			String[] args = Parser.getArgument(t.nextToken());
 			String setting = args[0];
-			if (setting.equals("fps")) {
-				try {
-					FPS = Integer.parseInt(args[1]);
-					INTERVAL = Math.round(1000.0 / FPS);
-				} catch (NumberFormatException e) {
-					error("It must be an integer number after fps in settings.txt");
-				}
-			} else if (setting.equals("resolution")) {
+			if (setting.equals("resolution")) {
 				if (args[1].equals("dynamic")) {
 					resMode = DYNAMIC_SIZE;
 				} else if (args[1].equals("smallest")) {
@@ -476,11 +463,12 @@ public class Values {
 			} else if (setting.equals("fullscreen")) {
 				SETTINGS_MAP[FULL_SCREEN] = Boolean.parseBoolean(args[1]);
 			}
-			
 		}
-		ALC alc = ALFactory.getALC();
 
-	       System.out.println("Available devices: " + alc.alcGetString(null, ALC.ALC_DEFAULT_DEVICE_SPECIFIER));
+		SETTINGS_MAP[MUTE_MUSIC] = true;
+		ALC alc = ALFactory.getALC();
+		System.out.println("Available devices: " + alc.alcGetString(null, ALC.ALC_DEFAULT_DEVICE_SPECIFIER));
+
 		// SETTINGS_MAP[MUTE_MUSIC] = true;
 //			String s = t.nextToken();
 //			if (s.equals("music")) {
@@ -493,12 +481,7 @@ public class Values {
 //				SETTINGS_MAP[SOUND_EFFECTS] = false;
 //			}
 //		}
-	}
-
-	private static void error(String string) {
-		logger.log(Level.SEVERE, "Fatal error: " + string);
-		logger.info("Setting default");
-	}
+	}	
 
 	/**
 	 * Sets the resolution of the screen to the given width and height.

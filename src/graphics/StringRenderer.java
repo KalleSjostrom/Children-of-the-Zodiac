@@ -39,16 +39,10 @@ public class StringRenderer {
 
 		material.createProgram(gl, ShaderLibrary.Shader.TEXT);
 	}
-		
-	public Text buildString(GL4 gl, String input) {
-		char[] glyphs = input.toCharArray();
-		int string_length = glyphs.length;
-
+	
+	private void fillBufferData(char[] glyphs, float[] position, float[] uv) {
 		float x = 0;
 		float y = 0;
-		
-		float[] quad_buffer = new float[8 * glyphs.length];
-		float[] quad_buffer_uv = new float[8 * glyphs.length];
 		
 		for (int i = 0; i < glyphs.length; i++) {
 			TextLoader.Character c = text_loader.characters[glyphs[i] - ' '];
@@ -67,23 +61,23 @@ public class StringRenderer {
 			float basex = x+xoff;
 			float basey = y+yoff;
 			
-			quad_buffer[i*8+0] = basex;
-			quad_buffer[i*8+1] = basey;
-			quad_buffer[i*8+2] = basex;
-			quad_buffer[i*8+3] = basey + cheight;
-			quad_buffer[i*8+4] = basex + cwidth;
-			quad_buffer[i*8+5] = basey;
-			quad_buffer[i*8+6] = basex + cwidth;
-			quad_buffer[i*8+7] = basey + cheight;
+			position[i*8+0] = basex;
+			position[i*8+1] = basey;
+			position[i*8+2] = basex;
+			position[i*8+3] = basey + cheight;
+			position[i*8+4] = basex + cwidth;
+			position[i*8+5] = basey;
+			position[i*8+6] = basex + cwidth;
+			position[i*8+7] = basey + cheight;
 			
-			quad_buffer_uv[i*8+0] = left;
-			quad_buffer_uv[i*8+1] = bottom;
-			quad_buffer_uv[i*8+2] = left;
-			quad_buffer_uv[i*8+3] = top;
-			quad_buffer_uv[i*8+4] = right;
-			quad_buffer_uv[i*8+5] = bottom;
-			quad_buffer_uv[i*8+6] = right;
-			quad_buffer_uv[i*8+7] = top;
+			uv[i*8+0] = left;
+			uv[i*8+1] = bottom;
+			uv[i*8+2] = left;
+			uv[i*8+3] = top;
+			uv[i*8+4] = right;
+			uv[i*8+5] = bottom;
+			uv[i*8+6] = right;
+			uv[i*8+7] = top;
 			
 			x += c.xadvance;
 			if (i < glyphs.length-1) {
@@ -91,6 +85,16 @@ public class StringRenderer {
 				x += kern;
 			}
 		}
+	}
+		
+	private Text buildString(GL4 gl, String input) {
+		char[] glyphs = input.toCharArray();
+		int string_length = glyphs.length;
+		
+		float[] quad_buffer = new float[8 * glyphs.length];
+		float[] quad_buffer_uv = new float[8 * glyphs.length];
+		
+		fillBufferData(glyphs, quad_buffer, quad_buffer_uv);
 		
 		Buffer buffer = material.createBuffer(gl, quad_buffer, quad_buffer_uv);
 		Text text = new Text();
@@ -99,19 +103,44 @@ public class StringRenderer {
 		return text;
 	}
 	
-	public void drawString(GL4 gl, String string, int x, int y, float alpha) {
-		gl.glUseProgram(material.program);
+	private void rebuildString(GL4 gl, Text text, String input) {
+		char[] glyphs = input.toCharArray();
+		int string_length = glyphs.length;
 		
+		float[] quad_buffer = new float[8 * glyphs.length];
+		float[] quad_buffer_uv = new float[8 * glyphs.length];
+		
+		fillBufferData(glyphs, quad_buffer, quad_buffer_uv);
+		
+		material.refillBuffer(gl, text.buffer, quad_buffer, quad_buffer_uv);
+		text.string_length = string_length;
+	}
+	
+	public void setTextColor(GL4 gl, float[] color) {
+		gl.glUseProgram(material.program);
+		gl.glUniform4fv(material.color_location, 1, color, 0);
+	}
+	
+	public void drawString(GL4 gl, String string, int x, int y, float scale, float alpha) {
+		gl.glUseProgram(material.program);
 		Text text;
-		if (!string_cache.containsKey(string)) {
-			text = buildString(gl, string);
-			string_cache.put(string, text);
+		if (string_cache.size() > 256) { // NOTE(kalle): is 256 max number of strings a reasonable value?
+			String key = string_cache.keySet().iterator().next();
+			text = string_cache.get(key);
+			rebuildString(gl, text, string);
 		} else {
-			text = string_cache.get(string);
+			if (!string_cache.containsKey(string)) {
+				text = buildString(gl, string);
+				string_cache.put(string, text);
+			} else {
+				text = string_cache.get(string);
+			}
 		}
 		
 		material.model_view[3] = x;
 		material.model_view[7] = y;
+		material.model_view[0] = scale;
+		material.model_view[5] = scale;
 
 		gl.glUniformMatrix4fv(material.model_view_location, 1, true, material.model_view, 0);
 		gl.glUniform1f(material.alpha_location, alpha);
@@ -122,10 +151,13 @@ public class StringRenderer {
 			gl.glDrawArrays(GL4.GL_TRIANGLE_STRIP, j*4, 4);
 		}
 		gl.glBindVertexArray(0);
-		
 	}
 
 	public int getWidth(String string) {
 		return 0;
+	}
+
+	public int getSize() {
+		return string_cache.size();
 	}
 }

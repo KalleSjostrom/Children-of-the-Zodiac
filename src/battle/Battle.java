@@ -196,15 +196,15 @@ public class Battle extends SubGameMode {
 	 * Updates the battle. Depending on which mode the battle
 	 * currently is in, different parts of the battle is updated.
 	 */
-	public void update(float elapsedTime) {
-		currentDeck.update();
-		glCharacters.update();
-		glEnemies.update();
-		legend.update();
-		monster.update(elapsedTime);
-		attackText.update(elapsedTime);
+	public void update(float dt) {
+		currentDeck.update(dt);
+		glCharacters.update(dt);
+		glEnemies.update(dt);
+		legend.update(dt);
+		monster.update(dt);
+		attackText.update(dt);
 		if (mode == BattleManager.ANIMATE && animate != null) {
-			update = animate.update(elapsedTime);
+			update = animate.update(dt);
 			
 			if (update) {
 				glEnemies.checkDead();
@@ -227,7 +227,7 @@ public class Battle extends SubGameMode {
 			}
 		}
 		if (mode == BattleManager.SPOILS) {
-			spoilsScreen.update(elapsedTime);
+			spoilsScreen.update(dt);
 		} else if (mode == BattleManager.IDLING) {
 			updateIdlingMode();
 		} else if (mode == BattleManager.BATTLING) {
@@ -246,7 +246,7 @@ public class Battle extends SubGameMode {
 				}
 			}
 		}
-		currentDeck.updatePos();
+		currentDeck.updatePos(dt);
 	}
 
 	private void killMonster() {
@@ -354,23 +354,23 @@ public class Battle extends SubGameMode {
 	 * 
 	 * @param g the graphics to draw on.
 	 */
-	public void drawBattle(Graphics g) {
+	public void drawBattle(float dt, Graphics g) {
 		if (mode == BattleManager.TALKING) {
 			manager.setDialog(dialog);
 		} else {
-			currentDeck.draw(g);
+			currentDeck.draw(dt, g);
 			if (update) {
 				glEnemies.updateTexture(g);
 				glCharacters.updateTexture(g);
 				update = false;
 			}
-			hand.draw(g);
+			hand.draw(dt, g);
 			legend.setSupport(isSupportMode());
-			legend.draw(g);
+			legend.draw(dt, g);
 			if (mode == BattleManager.ANIMATE) {
-				animate.draw(g);
+				animate.draw(dt, g);
 			}
-			attackText.draw(g);
+			attackText.draw(dt, g);
 		}
 	}
 
@@ -953,8 +953,7 @@ public class Battle extends SubGameMode {
 	 * Each creature chip in a time to a pot.
 	 */
 	public static void setUpdateTime(ArrayList<Creature> list) {
-		float timePerPerson = 3000; // in milliseconds.
-		float test = 100f / (timePerPerson / Values.LOGIC_INTERVAL);
+		float timePerPerson = 3.0f; // in seconds.
 		
 		float sum = 0;
 		for (int i = 0; i < list.size(); i++) {
@@ -964,7 +963,7 @@ public class Battle extends SubGameMode {
 		for (int i = 0; i < list.size(); i++) {
 			Creature c = list.get(i);
 			float updateTime = (c.getAttribute(Creature.AGILITY) / sum);
-			updateTime *= list.size() * test;
+			updateTime *= list.size() * timePerPerson;
 			c.setTime(updateTime);
 		}
 	}

@@ -110,7 +110,7 @@ public class Landscape extends LandscapeLoader {
 			}
 		}
 		player.setXandY(currentNode.getXpos(), currentNode.getYpos());
-		player.standStill(Values.DOWN);
+		player.stop(Values.DOWN);
 		inputManager.resetAllGameActions();
 		
 		music = NORMAL;
@@ -185,7 +185,7 @@ public class Landscape extends LandscapeLoader {
 			}
 		}
 		
-		player.standStill(playerAngle);
+		player.stop(playerAngle);
 		currentRoad = null;
 		resetAll();
 	}
@@ -304,22 +304,22 @@ public class Landscape extends LandscapeLoader {
 	 * 
 	 * @param g the graphics3D on which to draw.
 	 */
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		g.setColor(1);
 		g.setFontSize(30);
 		background.drawBottom(g);
 		Iterator<Integer> it = visitedRoads.keySet().iterator();
 		while (it.hasNext()) {
 			int address = it.next();
-			visitedRoads.get(address).drawRoad(g);
+			visitedRoads.get(address).drawRoad(dt, g);
 		}
 		for (int i = 0; i < nodes.size(); i++) {
 			if (nodes.get(i).isVisited()) {
-				nodes.get(i).draw(g);
+				nodes.get(i).draw(dt, g);
 			}
 		}
-		player.draw(g);
-		background.drawTop(g, false, null);
+		player.draw(dt, g);
+		background.drawTop(g);
 		g.drawCenteredImage(nameBackGround, 10);
 		if (!animate) {
 			if (!currentNode.getType().equals("crossroad")) {
@@ -334,7 +334,7 @@ public class Landscape extends LandscapeLoader {
 			Dialog.getDialog().draw(g, true, "Kin", "We can't enter now!", "", false);
 		}
 		super.checkMenu();
-		super.draw(g);
+		super.draw(dt, g);
 	}
 	
 	public String getName() {

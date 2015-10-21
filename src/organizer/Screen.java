@@ -84,22 +84,18 @@ public class Screen extends Frame {
 				checkCapabilities(capabilities);
 				
 				canvas = new GLCanvas(capabilities);
-				canvas.addGLEventListener(new GameEventListener(core));
+				GameEventListener game = new GameEventListener(core);
+				canvas.addGLEventListener(game);
 
 				add(canvas);
 				canvas.setCursor(getCursor());
 				
-				anim = new FPSAnimator(canvas, (int) (Values.FPS));
+				anim = new FPSAnimator(canvas, game);
 				screen.setVisible(true);
 				canvas.setFocusable(false);
 			}
 		};
 		return r;
-	}
-	public void setFPS(int fps) {
-		Values.FPS = fps;
-		Values.INTERVAL = 1000f / Values.FPS;
-		Values.LOGIC_INTERVAL = 1000f / Values.FPS;
 	}
 	
 	private Runnable startAnimation() {

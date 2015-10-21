@@ -39,13 +39,13 @@ public class BattleValues {
 	/**
 	 * The speed of the card flip. Used when flipping a card in battle.
 	 */
-	public static final float CARD_FLIP_SPEED = 0.6f;
+	public static final float CARD_FLIP_SPEED = 600.0f;
 	
 	/**
 	 * The speed of the card when it is moving.
 	 */
-	public static final float CARD_MOVE_SPEED = .0018f;
-	public static final float CARD_MOVE_SPEED_2 = .0024f;
+	public static final float CARD_MOVE_SPEED = 1.8f;
+	public static final float CARD_MOVE_SPEED_2 = 2.4f;
 	
 	/**
 	 * The y (height) offset to use when drawing a selected card.

@@ -4,14 +4,14 @@ import com.jogamp.opengl.GLAutoDrawable;
 
 public class FPSAnimator implements Runnable {
 
+	private GameEventListener game;
 	private GLAutoDrawable drawable;
 	private Thread thread;
-	private int targetduration;	
 	private boolean keeprunning;
 	
-	public FPSAnimator(GLAutoDrawable drawable, int fps) {
+	public FPSAnimator(GLAutoDrawable drawable, GameEventListener game) {
 		this.drawable = drawable;
-		setTargetfps(fps);		
+		this.game = game;
 	}
 	
 	public void start() {
@@ -27,23 +27,23 @@ public class FPSAnimator implements Runnable {
 	}
 
 	public void run() {
+		long previous_timestamp = System.nanoTime();
 		while (keeprunning) {
 			try {
-				long t1 = System.currentTimeMillis();
+				long now = System.nanoTime();
+				long duration = now - previous_timestamp;
+				previous_timestamp = now;
+				
+				game.update(duration);
 				drawable.display();
-				long t2 = System.currentTimeMillis();
-				int duration = (int) (t2 - t1);
-				int timetosleep = (int) (targetduration - duration);
-				if (timetosleep > 0) {
-					Thread.sleep(timetosleep);
-				}
+
+//				int timetosleep = (int) (targetduration - duration);
+//				if (timetosleep > 0) {
+//					Thread.sleep(timetosleep);
+//				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-	}
-	
-	public void setTargetfps(float targetfps) {
-		targetduration = (int) ((1f / targetfps) * 1000);
 	}
 }

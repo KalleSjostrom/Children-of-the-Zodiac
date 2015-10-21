@@ -55,7 +55,7 @@ public class Node {
 	 * 
 	 * @param g the graphics to draw on.
 	 */
-	protected void draw (Graphics g) {
+	protected void draw(float dt, Graphics g) {
 		g.drawImage(im, drawx, drawy);
 	}
 

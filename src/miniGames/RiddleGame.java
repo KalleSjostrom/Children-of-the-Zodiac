@@ -113,7 +113,7 @@ public class RiddleGame extends GameMode implements LabyrinthDrawable {
 		// TODO
 	}
 	
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		
 	}
 	

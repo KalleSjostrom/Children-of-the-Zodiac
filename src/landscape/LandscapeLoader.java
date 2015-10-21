@@ -72,17 +72,10 @@ public abstract class LandscapeLoader extends MenuStarter {
 	private void loadImages(String name) {
 		player = new LandPlayer();
 		player.init();
-		background = new DoubleBackground(
-				Values.ORIGINAL_RESOLUTION[Values.X], 
-				Values.ORIGINAL_RESOLUTION[Values.Y]);
-		String[] bg = new String[2];
-		bg[0] = name + "/" + name;
-		bg[1] = name;
+		background = new DoubleBackground(Values.ORIGINAL_RESOLUTION[Values.X], Values.ORIGINAL_RESOLUTION[Values.Y]);
 		boolean night = Landscape.isNight();
-		background.setLandscapeImages(bg, night);
-		nameBackGround = 
-			ImageHandler.addToCurrentLoadOnUse(
-					Values.MenuImages + "Pieces/1.png");
+		background.setLandscapeImages(name, night);
+		nameBackGround = ImageHandler.addToCurrentLoadOnUse(Values.MenuImages + "Pieces/1.png");
 	}
 
 	/**

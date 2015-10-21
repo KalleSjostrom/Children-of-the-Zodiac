@@ -77,9 +77,10 @@ public class SystemLoader extends AbstractMapLoader {
 			((MasterSlaveEmitter) emitter).setSystems(p, slave);
 			systems.add(slave);
 			int warmUp = p.getWarmUp();
+			float estimated_timestep = 1.0f/60.0f;
 			for (int i = 0; i < warmUp; i++) {
-				p.update(Values.LOGIC_INTERVAL);
-				slave.update(Values.LOGIC_INTERVAL);
+				p.update(estimated_timestep);
+				slave.update(estimated_timestep);
 			}
 			p.setWarmUp(0);
 		}

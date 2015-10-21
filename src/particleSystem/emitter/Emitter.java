@@ -13,7 +13,7 @@ public class Emitter {
 
 	private boolean destroyed;
 	private float time;
-	private float emitTimeStep;
+	private float emitPeriod;
 	private float timeCounter;
 	private ArrayList<Particle> particles;
 	private InterpolationInfo info;
@@ -21,26 +21,26 @@ public class Emitter {
 	private int limit = 1000;
 
 	public Emitter(Stack<Particle> particlePool,
-			ArrayList<Particle> particles, InterpolationInfo info, float emitTimeStep, int limit) {
+			ArrayList<Particle> particles, InterpolationInfo info, float emitPeriod, int limit) {
 		this.particlePool = particlePool;
 		this.particles = particles;
 		this.info = info;
 		this.limit = limit;
-		this.emitTimeStep = emitTimeStep;
+		this.emitPeriod = emitPeriod;
 	}
 
 	public void update(ParticleSystem system, float elapsedTime) {
 		if (!destroyed) {
 			time += elapsedTime;
 			boolean empty = false;
-			while (!empty && time >= emitTimeStep) {
+			while (!empty && time >= emitPeriod) {
 				if (okToEmit()) {
 					Particle p = getParticle(system);
 					p.resurrect(system, null);
 					particles.add(p);
 				}
 				empty = !okToEmit();
-				time -= emitTimeStep;
+				time -= emitPeriod;
 			}
 		}
 	}
@@ -67,8 +67,8 @@ public class Emitter {
 		return time;
 	}
 
-	protected float getEmitTimeStep() {
-		return emitTimeStep;
+	protected float getemitPeriod() {
+		return emitPeriod;
 	}
 
 	protected float getTimeCounter() {

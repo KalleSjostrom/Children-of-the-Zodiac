@@ -346,7 +346,7 @@ public class Deck {
 							
 							String string = "" + info.getIndex();
 							int xright = g.calcAlignRight(string, x + 116);
-							g.drawWithShadow(string, y + 169, xright);
+							g.drawStringWithShadow(string, y + 169, xright);
 						} else {
 							enabled = c.getPrice() <= gold;
 							drawCard(g, large, x, y, c, enabled);
@@ -373,7 +373,7 @@ public class Deck {
 				
 				String string = "" + info.getIndex();
 				int xright = g.calcAlignRight(string, x + 126);
-				g.drawWithShadow(string, y + 184, xright);
+				g.drawStringWithShadow(string, y + 184, xright);
 			} else {
 				if (currentCard.getPrice() <= gold) {
 					currentCard.drawCard(g, x - 15, y - 20, large ? 1.2f : .9f);

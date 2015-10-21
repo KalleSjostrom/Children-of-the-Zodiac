@@ -9,7 +9,7 @@ import bodies.system.SystemLoader;
 
 public abstract class AbstractEmitter extends Body {
 	
-	private float emitTimeStep = 2;
+	private float emitPeriod = 2;
 	private float time = 0;
 	private EmitterShape shape;
 	
@@ -21,7 +21,7 @@ public abstract class AbstractEmitter extends Body {
 
 	protected AbstractEmitter(EmitterSettings settings, EmitterShape shape) {
 		setForce(settings.getVector(EmitterSettings.FORCE));
-		emitTimeStep = 
+		emitPeriod = 
 			SystemLoader.getValueFromInterval(
 				settings.getString(EmitterSettings.EMITTANCE_TIME_STEP));
 		this.shape = shape;
@@ -30,14 +30,14 @@ public abstract class AbstractEmitter extends Body {
 	public void update(float elapsedTime) {
 		time += elapsedTime;
 		boolean empty = false;
-		while (!empty && time >= emitTimeStep) {
+		while (!empty && time >= emitPeriod) {
 			empty = emitFrom();
-			time -= emitTimeStep;
+			time -= emitPeriod;
 			if (fade) {
-				emitTimeStep += (increase ? 1 : -1) * Math.pow(emitTimeStep * speed, swiftness);
-				fade = increase ? emitTimeStep < cutoff : emitTimeStep > cutoff;
+				emitPeriod += (increase ? 1 : -1) * Math.pow(emitPeriod * speed, swiftness);
+				fade = increase ? emitPeriod < cutoff : emitPeriod > cutoff;
 				if (!fade) {
-					emitTimeStep = Float.MAX_VALUE;
+					emitPeriod = Float.MAX_VALUE;
 				}
 			}
 		}

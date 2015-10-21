@@ -15,8 +15,8 @@ public class FlareEmitter extends Emitter {
 	private float limit = .7f;
 
 	public FlareEmitter(Stack<Particle> particlePool,
-			ArrayList<Particle> particles, InterpolationInfo info, float emitTimeStep, int limit) {
-		super(particlePool, particles, info, emitTimeStep, limit);
+			ArrayList<Particle> particles, InterpolationInfo info, float emitPeriod, int limit) {
+		super(particlePool, particles, info, emitPeriod, limit);
 		particlePool.addAll(particles);
 		particles.clear();
 		for (int i = 0; i < 400; i++) {

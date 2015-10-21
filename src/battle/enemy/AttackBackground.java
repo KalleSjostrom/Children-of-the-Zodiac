@@ -31,7 +31,7 @@ public class AttackBackground extends Hideable {
 		createCoordFor(0, 0, 0, Z);
 	}
 	
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		super.translate(g);
 		draw(g, 0, 0, true);
 	}

@@ -25,7 +25,7 @@ public class AnimSettings extends Settings {
 	public static final int FADE_INCREASE_DISTANCE_POWER = 20;
 	public static final int FADE_INCREASE_DISTANCE_MULTIPLIER = 21;
 	public static final int POSITION_VECTOR_EQUATION = 22;
-	public static final int EMITTANCE_TIME_STEP = 23;
+	public static final int EMITTANCE_PERIOD = 23;
 	public static final int ADDITIVE_COLORING = 24;
 	public static final int VELOCITY_RANDOM_MULT = 25;
 	public static final int VELOCITY_RANDOM_ADD = 26;

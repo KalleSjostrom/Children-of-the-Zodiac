@@ -8,10 +8,7 @@
 package cards.offense;
 
 import info.BattleValues;
-import info.Values;
-
 import java.util.ArrayList;
-
 import particleSystem.ParticleSystem;
 import particleSystem.ParticleSystemPacket;
 import particleSystem.ParticleValues;
@@ -119,15 +116,15 @@ public class SpiritAssault extends Card {
 		float size = 0;
 		switch (info.getLevel()) {
 		case 1:
-			settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, (Values.LOGIC_INTERVAL / 1000f) * .024f);
+			settings.setValue(AnimSettings.EMITTANCE_PERIOD, .024f);
 			size = .5f;
 			break;
 		case 2:
-			settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, (Values.LOGIC_INTERVAL / 1000f) * .022f);
+			settings.setValue(AnimSettings.EMITTANCE_PERIOD, .022f);
 			size = .6f;
 			break;
 		case 3:
-			settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, (Values.LOGIC_INTERVAL / 1000f) * .02f);
+			settings.setValue(AnimSettings.EMITTANCE_PERIOD, .02f);
 			size = .7f;
 			break;
 		default:
@@ -139,7 +136,7 @@ public class SpiritAssault extends Card {
 		psp.add(new ParticleSystem(settings), 800);
 		
 		settings = AnimationSettingsFactory.getDefault();
-		settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, (Values.LOGIC_INTERVAL / 1000f) * .2f);
+		settings.setValue(AnimSettings.EMITTANCE_PERIOD, .2f);
 		settings.setVector(AnimSettings.POSITION_NOISE, new Vector3f(.2f, .2f, .2f));
 		settings.setValue(AnimSettings.SPEED, .1f);
 		settings.setValue(AnimSettings.NR_PARTICLES, 50);

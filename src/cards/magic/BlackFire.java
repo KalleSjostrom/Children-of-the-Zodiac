@@ -7,7 +7,6 @@
  */
 package cards.magic;
 
-import info.Values;
 import particleSystem.ParticleSystem;
 import particleSystem.ParticleSystemPacket;
 import settings.AnimSettings;
@@ -43,7 +42,7 @@ public class BlackFire extends Fire {
 		settings.setValue(AnimSettings.SPEED, 5);
 		
 		settings.setValue(AnimSettings.NR_PARTICLES, 200);
-		settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, (Values.LOGIC_INTERVAL / 1000f) * .05f);
+		settings.setValue(AnimSettings.EMITTANCE_PERIOD, .05f);
 		
 		if (!info.isOnEnemy()) {
 			Vector3f source = info.getEnemy().getTempSource();

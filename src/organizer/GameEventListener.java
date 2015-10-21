@@ -33,7 +33,7 @@ public class GameEventListener implements GLEventListener {
 		GL4 gl = drawable.getGL().getGL4();
 		// g.setGL(gl);
 		gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-		gl.setSwapInterval(1);
+		gl.setSwapInterval(0);
 		int[] res = Values.RESOLUTIONS;
 		gl.glViewport(0, 0, res[Values.X], res[Values.Y]);
 
@@ -50,14 +50,34 @@ public class GameEventListener implements GLEventListener {
 		System.out.println("Version: " + gl.glGetString(GL.GL_VERSION));
 	}
 	
+	private long last_duration;
+	private double elapsed_seconds;
+	private double fps;
+	private int frames;
+
+	public void update(long duration) {
+		last_duration = duration;
+	}
+	
 	public void display(GLAutoDrawable drawable) {
-		gameCore.update();
+		double seconds = last_duration / (1000.0f*1000.0f*1000.0f);
+
+		gameCore.coreUpdate((float) seconds);
 
 		GL4 gl = drawable.getGL().getGL4();
 		gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
 		Graphics.gl = gl;
 
-		gameCore.render(g, drawable);
+		gameCore.render((float) seconds, g, drawable);
+		elapsed_seconds += seconds;
+		frames++;
+		if (elapsed_seconds > 0.5f) {
+			fps = frames / elapsed_seconds;
+			frames = 0;
+			elapsed_seconds -= 0.5f;
+		}
+		String fps_string = String.format("Last Duration %.1f", fps);
+		g.drawString(fps_string, 0, 20, 0.70f, 1.0f);
 		
 		/*
 		GL2 gl = drawable.getGL().getGL2();
@@ -118,5 +138,5 @@ public class GameEventListener implements GLEventListener {
 
 	public static Graphics getG() {
 		return g;
-	}
+	}	
 }

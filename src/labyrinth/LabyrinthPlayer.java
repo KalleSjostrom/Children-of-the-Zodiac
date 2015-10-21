@@ -23,8 +23,8 @@ public class LabyrinthPlayer {
 	public static final int LEFT_TURN = -1;
 	public static final int RIGHT_TURN = 1;
 	
-	private static final float TURN_SPEED = 0.002f;
-	private static final float MOVE_SPEED = 0.002f;
+	private static final float TURN_SPEED = 2.0f;
+	private static final float MOVE_SPEED = 2.0f;
 	
 	public float[] pos = new float[3];
 
@@ -39,7 +39,6 @@ public class LabyrinthPlayer {
 	private float srcAngle;
 	private float destAngle;
 	private float angle;
-	private int turnDir;
 	private int dir;
 	private float from;
 	private float to;
@@ -108,7 +107,6 @@ public class LabyrinthPlayer {
 		turnProgress = 0;
 		srcAngle = position.getAngle();
 		destAngle = this.angle = angle;
-		this.turnDir = turnDir;
 
 		if (srcAngle < 0 && Math.round(destAngle) == 180) {
 			destAngle *= -1;
@@ -130,8 +128,8 @@ public class LabyrinthPlayer {
 	 * @param elapsedTime the amount of time that has passes since this method
 	 * was last called. 
 	 */
-	private void move(int elapsedTime) {
-		moveProgress += MOVE_SPEED * elapsedTime;
+	private void move(float dt) {
+		moveProgress += MOVE_SPEED * dt;
 		if (moveProgress < 1.0f) {
 			float p = slerp(from, to, moveProgress);
 			position.setValue(dir, p);
@@ -156,8 +154,8 @@ public class LabyrinthPlayer {
 	 * @param elapsedTime the amount of time that has passes since this method
 	 * was last called. 
 	 */
-	private void turn(int elapsedTime) {
-		turnProgress += TURN_SPEED * elapsedTime;
+	private void turn(float dt) {
+		turnProgress += TURN_SPEED * dt;
 		System.out.println(turnProgress);
 		if (turnProgress < 1.0f) {
 			float angle = slerp(srcAngle, destAngle, turnProgress);
@@ -203,11 +201,11 @@ public class LabyrinthPlayer {
 	 * @param elapsedTime the amount of time that has passes since this method
 	 * was last called. 
 	 */
-	protected void update(int elapsedTime) {
+	protected void update(float dt) {
 		if (turning) {
-			turn(elapsedTime);
+			turn(dt);
 		} else {
-			move(elapsedTime);
+			move(dt);
 		}
 	}
 

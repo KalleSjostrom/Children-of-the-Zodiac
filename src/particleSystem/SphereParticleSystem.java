@@ -87,7 +87,7 @@ public class SphereParticleSystem extends ParticleSystem {
 	}
 
 	@Override
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		for (Particle p : particles) {
 			p.drawParticle(g, false);
 		}

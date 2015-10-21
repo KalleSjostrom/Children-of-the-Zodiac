@@ -268,7 +268,7 @@ public class CesadurRiddle extends RiddleGame {
 	 * 
 	 * @param g the graphics to draw on.
 	 */
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		
 	}
 

@@ -50,11 +50,11 @@ public class FlameParticleSystem extends ParticleSystem {
 	protected void create(int nrOfParticles, AnimSettings settings) {
 		super.create(nrOfParticles, settings);
 		// For burning man
+		float dt = 1.0f/60.0f;
 		for (int i = 0; i < 200; i++) {
-			float elapsedTime = Values.LOGIC_INTERVAL / 1000f;
-			super.update(elapsedTime);
+			super.update(dt);
 			particlesLeft = particlesDestroyed = 0;
-			emitter.update(this, elapsedTime);
+			emitter.update(this, dt);
 			Iterator<Particle> it = particles.iterator();
 			while (it.hasNext()) {
 				Particle p = it.next();
@@ -66,7 +66,7 @@ public class FlameParticleSystem extends ParticleSystem {
 				} else {
 					p.addForce(g);
 				}
-				p.update(elapsedTime, this);
+				p.update(dt, this);
 				if (!p.isAlive()) {
 					it.remove();
 					particlePool.push(p);
@@ -76,7 +76,7 @@ public class FlameParticleSystem extends ParticleSystem {
 					particlesDestroyed += p.isDestroyed() ? 1 : 0;
 				}
 			}
-			emitter.update(this, elapsedTime);
+			emitter.update(this, dt);
 		}
 	}
 }

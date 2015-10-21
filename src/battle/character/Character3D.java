@@ -91,14 +91,14 @@ public class Character3D extends Creature3D {
 	 * @param g the Graphics object to use when rendering the character.
 	 */
 	@Override
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		if (isVisible()) {
 			g.push();
 			if (creature.hasTurn()) {
 				g.translate(-.03f, -.02f, 0);
 				g.scale(SCALE);
 			}
-			super.draw(g);
+			super.draw(dt, g);
 			g.pop();
 		} else {
 			if (criticalHit) {

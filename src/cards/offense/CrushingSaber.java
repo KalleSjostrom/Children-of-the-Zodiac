@@ -7,7 +7,6 @@
  */
 package cards.offense;
 
-import info.Values;
 import particleSystem.ParticleSystem;
 import particleSystem.ParticleSystemPacket;
 import particleSystem.ParticleValues;
@@ -188,7 +187,7 @@ public class CrushingSaber extends Card {
 			settings.setVector(AnimSettings.COLLISION_VECTOR, new Vector3f(-1.9f, 1.9f, -1.9f));
 			
 			settings.setValue(AnimSettings.NR_PARTICLES, 5000);
-			settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, (Values.LOGIC_INTERVAL / 1000f) * .005f);
+			settings.setValue(AnimSettings.EMITTANCE_PERIOD, .005f);
 			settings.setValue(AnimSettings.EMITTER_TYPE, ParticleSystem.SHATTER_EMITTER_TYPE);
 			settings.setValue(AnimSettings.IS_DEAD_LIMIT, 100);
 			settings.setValue(AnimSettings.DESTROY_MODE, ParticleValues.PLAIN_DESTROY);
@@ -229,7 +228,7 @@ public class CrushingSaber extends Card {
 			settings.setVector(AnimSettings.COLLISION_VECTOR, new Vector3f(-1.9f, 1.9f, -1.9f));
 
 			settings.setValue(AnimSettings.NR_PARTICLES, 5000);
-			settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, (Values.LOGIC_INTERVAL / 1000f) * .005f);
+			settings.setValue(AnimSettings.EMITTANCE_PERIOD, .005f);
 			settings.setValue(AnimSettings.EMITTER_TYPE, ParticleSystem.SHATTER_EMITTER_TYPE);
 			settings.setValue(AnimSettings.IS_DEAD_LIMIT, 100);
 

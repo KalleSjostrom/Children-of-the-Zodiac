@@ -34,22 +34,20 @@ import bodies.system.ParticleSystem;
 import bodies.system.SystemLoader;
 
 /**
- * This class loads all images and creates the animations and input mapping.
- * It has three subclasses: Dialog, Background and MapLoader.
+ * This class loads all images and creates the animations and input mapping. It
+ * has three subclasses: Dialog, Background and MapLoader.
  * 
- * @author 		Kalle Sjöström
- * @version 	0.7.0 - 19 Jan 2008
+ * @author Kalle Sjöström
+ * @version 0.7.0 - 19 Jan 2008
  */
 public abstract class VillageLoader extends MenuStarter {
 
 	public static int staticStartPos = 0;
-	
+
 	protected Player player;
 	protected Dialog dialog = Dialog.getDialog();
-	protected HashMap<Integer, Sprite> sprites = 
-		new HashMap<Integer, Sprite>();
-	protected HashMap<String, HashMap<String, String>> buildingInfo = 
-		new HashMap<String, HashMap<String, String>>();
+	protected HashMap<Integer, Sprite> sprites = new HashMap<Integer, Sprite>();
+	protected HashMap<String, HashMap<String, String>> buildingInfo = new HashMap<String, HashMap<String, String>>();
 	protected ArrayList<Loot> loots = new ArrayList<Loot>();
 	protected ArrayList<Door> doors = new ArrayList<Door>();
 	protected ArrayList<Door> holeDoors = new ArrayList<Door>();
@@ -71,28 +69,24 @@ public abstract class VillageLoader extends MenuStarter {
 	private static Logger logger = Logger.getLogger("VillageLoader");
 
 	/**
-	 * This method initializes the village loader and loads the village.
-	 * It gets the map name from the given information map and sends it
-	 * to the map loader of type MapLoader().
+	 * This method initializes the village loader and loads the village. It gets
+	 * the map name from the given information map and sends it to the map
+	 * loader of type MapLoader().
 	 * 
-	 * @param info he information to use when loading the village.
+	 * @param info
+	 *            he information to use when loading the village.
 	 */
 	public void init(HashMap<String, String> info) {
 		logger.log(Level.FINE, "Static start " + staticStartPos);
 		startPos = staticStartPos;
 		staticStartPos = 0;
-			
+
 		HashMap<String, String> newInfo = new HashMap<String, String>();
 		newInfo.putAll(info);
 		/*
-		if (!Values.DAY) {
-			String m = newInfo.get("music");
-			if (!m.contains("at Night")) {
-				m += "at Night";
-			}
-			newInfo.put("music", m);
-		}
-		*/
+		 * if (!Values.DAY) { String m = newInfo.get("music"); if (!m.contains(
+		 * "at Night")) { m += "at Night"; } newInfo.put("music", m); }
+		 */
 		newInfo.put("landname", "land" + newInfo.get("name"));
 		load(newInfo);
 		super.init(newInfo, Values.DETECT_ALL);
@@ -101,7 +95,8 @@ public abstract class VillageLoader extends MenuStarter {
 	/**
 	 * This method loads the information in the given map.
 	 * 
-	 * @param info the information map.
+	 * @param info
+	 *            the information map.
 	 */
 	public void load(HashMap<String, String> info) {
 		String map = info.get("name");
@@ -110,13 +105,13 @@ public abstract class VillageLoader extends MenuStarter {
 		status = status < 0 ? 0 : status;
 		String time = info.get("time");
 		if (time != null && time.equals("night")) {
-			map += " at Night - " + status + ".vil"; 
+			map += " at Night - " + status + ".vil";
 		} else {
-			map += " - " + status + ".vil"; 
+			map += " - " + status + ".vil";
 		}
-		/*} else {
-			map += " at Night - " + status + ".vil"; 
-		}*/
+		/*
+		 * } else { map += " at Night - " + status + ".vil"; }
+		 */
 		infoMap = info;
 		try {
 			new MapLoader().parseFile(folder + map);
@@ -127,25 +122,11 @@ public abstract class VillageLoader extends MenuStarter {
 	}
 
 	/**
-	 * This method loads the background images.
+	 * Gets the villager with the given name. It is used to execute triggers on
+	 * a villager with a certain name.
 	 * 
-	 * @param name the name of the image to load.
-	 * @param extra 
-	 */
-	private void loadImages(String name, boolean nightLayer, int extra) {
-		background = new DoubleBackground(backgroundWidth, backgroundHeight, actualWidth, actualHeight);
-		if (DoubleBackground.USE_CUT) {
-			background.init(name, nightLayer);
-		} else {
-			background.init(name, nightLayer, extra);
-		}
-	}
-
-	/**
-	 * Gets the villager with the given name. It is used to execute triggers
-	 * on a villager with a certain name.
-	 * 
-	 * @param name the name of the villager.
+	 * @param name
+	 *            the name of the villager.
 	 * @return the villager with the given name.
 	 */
 	protected Villager getVillager(String name) {
@@ -154,7 +135,7 @@ public abstract class VillageLoader extends MenuStarter {
 			Sprite as = sprites.get(it.next());
 			if (as instanceof Villager) {
 				Villager v = (Villager) as;
-				if (v.getName().equalsIgnoreCase(name)) {
+				if (v.name.equalsIgnoreCase(name)) {
 					return v;
 				}
 			}
@@ -165,8 +146,8 @@ public abstract class VillageLoader extends MenuStarter {
 	/**
 	 * This class loads the information about the village from a *.vil file
 	 * 
-	 * @author     Kalle Sjöström
-	 * @version    0.7.0  - 13 May 2008
+	 * @author Kalle Sjöström
+	 * @version 0.7.0 - 13 May 2008
 	 */
 	private class MapLoader extends AbstractMapLoader {
 
@@ -177,10 +158,11 @@ public abstract class VillageLoader extends MenuStarter {
 		private String villagerFolder;
 
 		/**
-		 * This method parses the file with the given filename in the 
-		 * villages map folder. (Values.VillageMaps)
+		 * This method parses the file with the given filename in the villages
+		 * map folder. (Values.VillageMaps)
 		 * 
-		 * @param filename the filename of the map to load
+		 * @param filename
+		 *            the filename of the map to load
 		 */
 		protected void parseFile(String filename) {
 			parseFile(Values.VillageMaps, filename);
@@ -195,8 +177,8 @@ public abstract class VillageLoader extends MenuStarter {
 				int y = Integer.parseInt(tok.nextToken());
 				int x2 = Integer.parseInt(tok.nextToken());
 				int y2 = Integer.parseInt(tok.nextToken());
-				obstacleHandler.addObstacle(Values.createNormalPoint(x, y),
-						Values.createNormalPoint(x2,y2), player.getHeight(), player.getWidth());
+				obstacleHandler.addObstacle(Values.createNormalPoint(x, y), Values.createNormalPoint(x2, y2),
+						player.getHeight(), player.getWidth());
 			} else if (command.equals("inside")) {
 				inside = true;
 			} else if (command.startsWith("start")) {
@@ -274,8 +256,7 @@ public abstract class VillageLoader extends MenuStarter {
 				String name = tok.nextToken().replace("_", " ");
 				int status = Database.getStatusFor(name);
 				if (status == -1) {
-					logger.log(Level.WARNING, 
-							"Could not find: " + name + " in the database.");
+					logger.log(Level.WARNING, "Could not find: " + name + " in the database.");
 					logger.info("Using default value!");
 					status = 1;
 					Database.addStatus(name, status);
@@ -311,17 +292,17 @@ public abstract class VillageLoader extends MenuStarter {
 						}
 						villagerLayer = layer == DoubleBackground.VILLAGER_LAYER;
 					}
-					
+
 					ArrayList<ParticleSystem> system = loader.buildSystem(name);
 					for (ParticleSystem p : system) {
-						p.setName(name);
+						p.name = name;
 						p.setActive(activate);
 						p.setActivateStatus(activationStatus);
 					}
 					if (villagerLayer) {
 						for (ParticleSystem p : system) {
 							sprites.put(p.hashCode(), p);
-//							background.addSystem(p, layer);
+							// background.addSystem(p, layer);
 						}
 					} else {
 						for (ParticleSystem p : system) {
@@ -329,7 +310,7 @@ public abstract class VillageLoader extends MenuStarter {
 						}
 					}
 					for (ParticleSystem p : system) {
-						p.warmUp();
+						// p.warmUp(1.0f / 60.0f);
 					}
 				}
 			} else if (command.equals("background")) {
@@ -345,16 +326,12 @@ public abstract class VillageLoader extends MenuStarter {
 					backgroundFolder = folderName;
 				}
 				nightLayer = !Boolean.parseBoolean(tok.nextToken()); // stands for day
-				if (tok.hasMoreTokens()) {
-					extraName = tok.nextToken().replace("_", " ");
-				}
 				villagerFolder = villageName;
 			} else if (command.equals("villagerFolder")) {
 				villagerFolder = Organizer.convertKeepCase(tok.nextToken());
 			} else if (command.equals("back")) {
 				backgroundWidth = Integer.parseInt(tok.nextToken());
 				backgroundHeight = Integer.parseInt(tok.nextToken());
-				int extra = 0;
 				actualWidth = backgroundWidth;
 				actualHeight = backgroundHeight;
 				if (tok.hasMoreTokens()) {
@@ -364,21 +341,10 @@ public abstract class VillageLoader extends MenuStarter {
 						String[] sa = s.split(":");
 						actualWidth = Integer.parseInt(sa[0]);
 						actualHeight = Integer.parseInt(sa[1]);
-					} else {
-					extra = Integer.parseInt(s);
 					}
 				}
-				if (extraName != null) {
-//					extraName = tok.nextToken().replace("_", " ");
-					background = new DoubleBackground(backgroundWidth, backgroundHeight, actualWidth, actualHeight);
-					if (DoubleBackground.USE_CUT) {
-						background.init(backgroundFolder, extraName, nightLayer);
-					} else {
-						background.init(backgroundFolder, extraName, nightLayer, extra);
-					}
-				} else {
-					loadImages(backgroundFolder, nightLayer, extra);
-				}
+				background = new DoubleBackground(backgroundWidth, backgroundHeight, actualWidth, actualHeight);
+				background.init(backgroundFolder, villageName, nightLayer);
 			} else if (command.equals("offset")) {
 				int width = Integer.parseInt(tok.nextToken());
 				int height = Integer.parseInt(tok.nextToken());
@@ -386,9 +352,8 @@ public abstract class VillageLoader extends MenuStarter {
 			} else if (command.equals("music")) {
 				infoMap.put("music", tok.nextToken());
 			} else if (command.equals("building")) {
-				HashMap<String, String> info = 
-					new HashMap<String, String>();
-				String buildingName = tok.nextToken(); 
+				HashMap<String, String> info = new HashMap<String, String>();
+				String buildingName = tok.nextToken();
 				info.put("storeName", buildingName);
 				info.put("background", tok.nextToken());
 				info.put("keeper", tok.nextToken());
@@ -396,7 +361,7 @@ public abstract class VillageLoader extends MenuStarter {
 				info.put("firstLine", tok.nextToken().replace("_", " "));
 				String secondLine = Organizer.convertKeepCase(tok.nextToken());
 				info.put("secondLine", secondLine);
-				
+
 				info.put("music", tok.nextToken().replace("_", " "));
 				info.put("villageName", villageName);
 				info.put("folderName", folderName);
@@ -416,28 +381,29 @@ public abstract class VillageLoader extends MenuStarter {
 		}
 
 		/**
-		 * Initiates the player and its positions. It also sets the position 
-		 * of the background.
+		 * Initiates the player and its positions. It also sets the position of
+		 * the background.
 		 * 
-		 * @param tok the tokenizer containing information.
+		 * @param tok
+		 *            the tokenizer containing information.
 		 */
 		private void initPlayerPos(StringTokenizer tok) {
 			int x = Integer.parseInt(tok.nextToken());
 			int y = Integer.parseInt(tok.nextToken());
 			int a = Integer.parseInt(tok.nextToken());
-			BACK_POS = new int[]{backgroundHeight, backgroundWidth};
+			BACK_POS = new int[] { backgroundHeight, backgroundWidth };
 			float[] pos = Values.createNormalFloatPoint(x, y);
 			if (obstacleHandler == null) {
 				obstacleHandler = new ObstacleHandler(BACK_POS);
 			}
 			player = new Player(pos, a);
-			
+
 			int ox = Values.ORIGINAL_RESOLUTION[Values.X];
 			int oy = Values.ORIGINAL_RESOLUTION[Values.Y];
-			
+
 			int hx = ox / 2;
 			int hy = oy / 2;
-			
+
 			int backgroundX = x - hx;
 			int backgroundY = y - hy;
 

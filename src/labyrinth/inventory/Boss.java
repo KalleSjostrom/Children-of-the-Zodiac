@@ -72,7 +72,7 @@ public class Boss extends Inventory {
 	 * 
 	 * @param g the Graphics to draw with.
 	 */
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		// The boss is just a texture which is drawn by the wall renderer.
 	}
 

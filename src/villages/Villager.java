@@ -26,7 +26,6 @@ import character.Character;
 
 import organizer.AbstractMapLoader;
 import organizer.ResourceLoader;
-
 import sprite.InstructionFollower;
 import sprite.Sprite;
 import villages.utils.DialogSequence;
@@ -53,6 +52,7 @@ public class Villager extends InstructionFollower {
 	private String[] constraints;
 	private String[] constraintTrigger;
 
+	private boolean storyDialog;
 	private boolean sequence = false;
 	private boolean pause = false;
 	private boolean talking;
@@ -79,18 +79,12 @@ public class Villager extends InstructionFollower {
 		setInstructions(0);
 	}
 
-	/**
-	 * Loads the images used to depict the villager with the given name.
-	 * 
-	 * @param name the prefix name of the images used.
-	 * @param nr the number of images in the sprite animation.
-	 */
-	public void loadImages(String name, int nr) {
+	public void loadImage(String name) {
 		if (name.startsWith("char/")) {
 			name = name.replace("char/", "");
-			super.loadImages(Values.VillageImages + "Characters/", name, nr);
+			super.loadImage(Values.VillageImages + "Characters/", name);
 		} else {
-			super.loadImages(Values.VillageImages + seqFilePath, name, nr);
+			super.loadImage(Values.VillageImages + seqFilePath, name);
 		}
 	}
 
@@ -138,16 +132,19 @@ public class Villager extends InstructionFollower {
 	protected void setTalking(boolean talking, int direction) {
 		this.talking = talking;
 		if (talking) {
-			int s = Database.getStatusFor(getName());
+			int s = Database.getStatusFor(name);
 			if (s != status) {
 				status = s;
 				updateDialog(s);
 			}
 			doCheck();
-			standStill(direction);
+			stop(direction);
 		} else {
-			moving = instruction.isMoving();
-			setImages();
+			this.moving = instruction.moving;
+			if (moving)
+				move(instruction.direction);
+			else
+				stop(instruction.direction);
 		}
 	}
 
@@ -248,7 +245,7 @@ public class Villager extends InstructionFollower {
 	 * @return true if a collision has occurred.
 	 */
 	protected boolean checkCollision(float[] p) {
-		return checkCollision(p, 25);
+		return checkCollision(p, 25, direction);
 	}
 
 	/**
@@ -260,9 +257,9 @@ public class Villager extends InstructionFollower {
 	 */
 	protected boolean checkTalkable(float[] p, int direction) {
 		boolean talkable = false;
-		if (inRange(p, range, true)) {
+		if (inRange(p, range)) {
 			float py = p[Values.Y] + Sprite.STANDARD_HEIGHT;
-			float posy = pos[Values.Y] + this.getHeight();
+			float posy = pos[Values.Y] + this.height;
 			float distx = Math.abs(p[Values.X] - pos[Values.X]);
 			float disty = Math.abs(py - posy);
 			switch (direction) {
@@ -296,19 +293,19 @@ public class Villager extends InstructionFollower {
 		super.update(f);
 		
 		if (player != null) {
-			setPause(checkCollision(player.getPos()));
+			setPause(checkCollision(player.pos));
 		}
 		if (!isBusy() && !storyDialog) {
 			move(reset, f);
 		}
-		return isMoving();
+		return moving;
 	}
 
 	public void setPause(boolean p) {
 		pause = p;
 		if (!prePause[0] && pause) {
-			if (prePause[1] = isMoving()) {
-				standStill();
+			if (prePause[1] = moving) {
+				stop();
 			}
 		}
 		if (prePause[0] && !pause) {
@@ -337,11 +334,11 @@ public class Villager extends InstructionFollower {
 	 * @param bx the x position of the background.
 	 * @param by the y position of the background.
 	 */
-	public void draw(Graphics g, int bx, int by) {
+	public void draw(float dt, Graphics g, int bx, int by) {
 		drawX = Math.round(pos[Values.X] + bx);
 		drawY = Math.round(pos[Values.Y] + by);
 		if (isVisible()) {
-			draw(g);
+			draw(dt, g);
 		}
 	}
 
@@ -483,12 +480,10 @@ public class Villager extends InstructionFollower {
 		 * @param line the line of text to be parsed in the execution.
 		 * @param tok the tokenizer used to get the tokens.
 		 */
-		private void executeDialogCommand(String command, String line, 
-				StringTokenizer tok) {
+		private void executeDialogCommand(String command, String line, StringTokenizer tok) {
 			if (command.equals("dialog")) {
 				int number = Integer.parseInt(tok.nextToken());
 				loadingDialog = number == status;
-				instructions.check();
 			}
 			if (loadingDialog) {
 				if (command.equals("check")) {
@@ -648,7 +643,16 @@ public class Villager extends InstructionFollower {
 				}
 			} else if (command.equals("in")) {
 				if (open) {
-					instructions.executeCommand(command, tokenizer);
+					String angle = tokenizer.nextToken();
+					String firstCommand = tokenizer.nextToken();
+					if (!firstCommand.equals("dialog")) {
+						int distance = Integer.parseInt(firstCommand);
+						boolean stopped = Boolean.parseBoolean(tokenizer.nextToken());
+						int speed = tokenizer.hasMoreTokens() ? Integer.parseInt(tokenizer.nextToken()) : 1;
+						instructions.add(new Instruction(angle, stopped, distance, speed));
+					} else {
+						instructions.add(new Instruction(Integer.parseInt(angle)));
+					}
 				}
 			} else if (command.equals("start")) {
 				if (open) {
@@ -674,7 +678,7 @@ public class Villager extends InstructionFollower {
 							width = STANDARD_WIDTH;
 						}
 					}
-					loadImages(name, number);
+					loadImage(name);
 				}
 			} else {
 				executeDialogCommand(command, lastLine, tokenizer);

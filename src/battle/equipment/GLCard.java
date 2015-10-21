@@ -171,17 +171,17 @@ public class GLCard extends FlatObj {
 	 * target location is separate from the current position this method 
 	 * will move the card towards the target.
 	 */
-	protected void update() {
-		super.update();
+	protected void update(float dt) {
+		super.update(dt);
 		if (xPos != xTarget) {
-			xPos = move(xPos, xTarget, MOVE_SPEED * Values.LOGIC_INTERVAL);
+			xPos = move(xPos, xTarget, MOVE_SPEED * dt);
 			if (xPos == xTarget) {
 				flip(FRONT);
 			}
 		}
 		if (yOffset != 0) {
 			if (k == Float.POSITIVE_INFINITY) {
-				yOffset = move(yOffset, 0, BattleValues.CARD_MOVE_SPEED_2 * Values.LOGIC_INTERVAL);
+				yOffset = move(yOffset, 0, BattleValues.CARD_MOVE_SPEED_2 * dt);
 			} else {
 				yOffset = (k * xPos) + m;
 			}
@@ -300,7 +300,7 @@ public class GLCard extends FlatObj {
 	}
 
 	@Override
-	public void draw(Graphics g) {
+	public void draw(float dt, Graphics g) {
 		// TODO Auto-generated method stub
 		
 	}
