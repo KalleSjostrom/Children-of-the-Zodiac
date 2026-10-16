@@ -122,7 +122,26 @@ static func readText(name: String) -> String:
 	if path == "":
 		push_error("ResourceLoader: file not found: " + name)
 		return ""
-	return FileAccess.get_file_as_string(path)
+	return _readFileText(path)
+
+
+## Reads a UTF-8 file, dropping NUL bytes. Some of the original data files
+## have stray NULs (e.g. "timea=450\0", "mark\00"); Godot stops decoding at
+## the first one, which silently cut those files short. Java kept them as
+## characters that trim() removed, so dropping them matches the original.
+static func _readFileText(path: String) -> String:
+	var bytes := FileAccess.get_file_as_bytes(path)
+	var nul := bytes.find(0)
+	if nul == -1:
+		return bytes.get_string_from_utf8()
+	var clean := PackedByteArray()
+	var start := 0
+	while nul != -1:
+		clean.append_array(bytes.slice(start, nul))
+		start = nul + 1
+		nul = bytes.find(0, start)
+	clean.append_array(bytes.slice(start))
+	return clean.get_string_from_utf8()
 
 
 ## Gets a line reader (java.io.BufferedReader) for the file path + filename.
@@ -132,7 +151,7 @@ func getBufferedReader(path: String, filename: String = "") -> BufferedReader:
 	if res == "":
 		push_error("ResourceLoader: file not found: " + full)
 		return null
-	return BufferedReader.new(FileAccess.get_file_as_string(res))
+	return BufferedReader.new(_readFileText(res))
 
 
 func parseFile(path: String, filename: String = "") -> void:

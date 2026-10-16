@@ -4,9 +4,12 @@ Movement in the backgrounds
     Both camera and in the actual images
 
 ## Village
-[Progress][Claude] Smoke from Celis house is not moving much [delta-time/elapsed time issue?]
-[Progress][Claude] Walking down-right is slower than other directions
-[Progress][Claude] Night layer during the cutscene where Celis wakes up looks like it's missing parts "C:\Users\c06ks\Work\nightlayer.png"
+[Done][Claude] Smoke from Celis house is not moving much [delta-time/elapsed time issue?]
+[Done][Claude] Walking down-right is slower than other directions
+[Done][Claude] Night layer during the cutscene where Celis wakes up looks like it's missing parts "C:\Users\c06ks\Work\nightlayer.png"
+
+### Cutscenes/storymode
+Holding Circle will speed up the game
 
 ## Battle
 Cards sometimes animate way too slowly, but other times not?
@@ -26,8 +29,9 @@ Some walls are seen through others
 Character cards look aweful
 Battle cards look inconsistent
 Replace papyrus font
-[Progress][Claude] Text runs out of the side paper background, looks like the spacing is too wide?
+[Done][Claude] Text runs out of the side paper background, looks like the spacing is too wide?
 The paper backgrounds looks "not in world"
+Pause menu doesn't quite work, it just shows the menu, but doesn't pause movement in the labyrinth
 
 Yes/No prompt should be vertical (No under Yes)
 
@@ -40,5 +44,12 @@ Wierd water sound on the world map
 ## Stores
 Weird looking characters
 
+## Cutscenes
+[Done][Claude] The Meanwhile in the Senate gets stuck after Teo says "I will do better!" - C:\Users\c06ks\Work\meanwhile-at-the-senate-stuck.png" - Probably the next scene not triggering?
+
 AUTOSAVES!!
 Saves should show last save data
+Right now we can save anywhere, but if you do at Grivera--First_floor, it breaks, like in this save "C:\Users\c06ks\Work\brokensave.sav"
+
+## Future
+Implement a debug console
