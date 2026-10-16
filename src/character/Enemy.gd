@@ -28,8 +28,10 @@ var nextPlace = null
 func _init(name = null, att = null, imageArray = null) -> void:
 	super(name, att)
 	images = imageArray
-	# Java: new Random(Math.abs(this.hashCode())).nextInt(70)
-	progress = float(JRandom.new(absi(get_instance_id())).nextInt(70))
+	# Java: new Random(Math.abs(this.hashCode())).nextInt(70). Deterministic
+	# mode derives the seed instead (instance ids depend on allocation order).
+	var seedValue = null if J.deterministic else absi(get_instance_id())
+	progress = float(JRandom.new(seedValue).nextInt(70))
 
 func getDbName():
 	return dbName

@@ -18,6 +18,8 @@ var talkmode: bool = false
 static var fromHouse = null
 var inHouse: bool = false
 
+const BRIDGE_TEST_SCENE := "res://tools/bridge_test/BridgeTest.tscn"
+
 ## Java Arrays.sort(elements) with SortingElement.compareTo (sorted on y).
 var _elementSorter: Callable = func(a, b): return a.yPos < b.yPos
 
@@ -478,6 +480,15 @@ func checkVillagerCollision(direction):
 	return found
 
 
+## Bridge test (Main --bridge-test, dev only; docs/ARCHITECTURE.md): a
+## placeholder scene stands in for the background tiles.
+func create_scene() -> Node:
+	if Main.bridge_test:
+		var packed: PackedScene = ResourceLoader.load(BRIDGE_TEST_SCENE)
+		return packed.instantiate()
+	return null
+
+
 ## Draws the village. GameMode.draw is used to fade in and out.
 func draw(g, alpha = null):
 	g.setColor(1)
@@ -490,7 +501,13 @@ func draw(g, alpha = null):
 ## Draws the bottom layer of the village: background, animated objects and
 ## villagers (sorted on their y position).
 func drawBottom(g):
-	background.drawBottom(g)
+	if scene_root != null:
+		# The scene shows instead of the background tiles (bridge test); the
+		# bottom layer particle systems are still drawn here.
+		if background.extraBackground == null:
+			background.drawSystem(g, background.systems.get(DoubleBackground.BOTTOM_LAYER))
+	else:
+		background.drawBottom(g)
 	var bpos = background.getPos()
 	var x: int = int(bpos[Values.X])
 	var y: int = int(bpos[Values.Y])

@@ -1,8 +1,8 @@
 # Modernization plan: from the GL emulation to Godot scenes
 
-Status: **proposal** (2026-10-16). Nothing here is implemented yet. The plan
+Status: **phase 0 done** (2026-10-16); phases 1–5 are proposals. The plan
 assumes the state described in `docs/HANDOFF.md` (all classes ported, main
-paths run).
+paths run). Conventions for new code: `docs/ARCHITECTURE.md`.
 
 ## 1. Goal
 
@@ -244,7 +244,7 @@ choosing per-second rates, so the target time base must be fixed first
 ```
 Main.tscn (Node)
 ├── World (Node)                    the active mode's scene: Village / Dungeon / Battle …
-├── LegacyLayer (CanvasLayer 1)     GLBackend canvas items while legacy draw code remains
+├── LegacyLayer (CanvasLayer 1)     GLBackend canvas items (under its Canvas Node2D) while legacy draw code remains
 ├── UI (CanvasLayer 2)              Dialog, SignBox, HUD, menu pages (Control + Theme)
 └── Transition (CanvasLayer 3)      fades (ColorRect + Tween)
 
@@ -286,6 +286,15 @@ tools/parity/             screenshot comparison
      `World`. When the mode is suspended (village → store/battle), it is
      removed from the tree but kept, so its state survives. When the mode is
      deleted, it is freed.
+   * *As built:* Main creates the scene (`GameMode.ensure_scene()`) and
+     shows it only once the mode is current and not loading, syncing at the
+     end of every frame (the loading flag drops inside `Organizer.draw`).
+     Modes are `RefCounted` and never freed explicitly, so "deleted" means
+     the last reference went: a mode stays alive as
+     `Organizer.previousGameMode` until the *next* mode switch, and its scene
+     is freed then (`NOTIFICATION_PREDELETE`). Main also resets the
+     viewport's canvas transform when the shown scene changes, because a
+     `Camera2D` leaving the tree leaves its scroll behind.
    * GLBackend parents its canvas items to a `Node2D` under `LegacyLayer`
      instead of to Main. Legacy drawing (dialogs, fades, menus, HUD) then
      appears on top of the scene and is not moved by a scene's `Camera2D`.
@@ -313,6 +322,14 @@ tools/parity/             screenshot comparison
      then diff the screenshots with a tolerance and write diff images.
    * Golden runs are recorded before each phase.
    * First test: a self-diff of the current renderer must be 0.
+   * *As built:* a self-diff is only 0 in a deterministic run
+     (`--seed=<n>`, see `docs/ARCHITECTURE.md` section 7). Besides the
+     seeds, it needed a game clock for `Scheduler` (its `sleep()` used
+     SceneTree timers, i.e. real time), `GameAction` key repeat and
+     `J.currentTimeMillis()`, and saves isolated from the player's: with
+     `--load`, a slot saved in `user://saves/` shadows the shipped one.
+     The tool also compares the AutoPlay state logs, and passes the engine
+     option `--fixed-fps 60` so node `delta`, timers and Tweens are fixed too.
 3. **Conventions.** Write `docs/ARCHITECTURE.md`. Point `PORTING.md` and
    `HANDOFF.md` to it.
 4. **Pilot choice.** Zazo exercises almost everything: four variants
@@ -700,7 +717,8 @@ When no mode draws through `g` any more:
   new (`tools/parity/`).
 * Data equivalence: `verify_villages.gd`, `verify_dungeons.gd`.
 * Performance: AutoPlay already prints `fps=` with every `log`/`shot`. Track
-  it per phase.
+  it per phase, from normal runs: parity runs are uncapped and fixed-step,
+  so their `fps=` values do not measure anything.
 
 ## 12. Risks
 

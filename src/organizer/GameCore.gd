@@ -53,7 +53,7 @@ static func enterCheat() -> void:
 	values = []
 	for s in strings:
 		values.append(str(Database.getStatusFor(str(s))))
-	zeroTime = Time.get_ticks_msec()
+	zeroTime = J.currentTimeMillis()
 
 
 func testDraw(g: Graphics) -> void:

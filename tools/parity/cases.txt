@@ -1,0 +1,15 @@
+# Parity cases: <case> <script in tools/autoplay (without .txt)> <game arguments>
+# The arguments are bash words (quote names with spaces). tools/parity/parity.sh
+# adds --mute --seed=<n> --uncapped --autoplay=... --shots=... to every run.
+# Cases marked "# extra" are only run when named explicitly.
+village_walk       village_walk       --load="Slot 1" --start=Alares
+village            village            --load="Slot 1" --start=Alares
+story_long         story_long
+newgame_to_forest  newgame_to_forest
+battle             battle             --load="Slot 1" --start="Forest of Reil--Forest Path-mark0"
+stores             stores             --load="Slot 1" --start=Alares
+menu_pages         menu_pages         --load="Slot 1" --start=Alares
+landscape          landscape          --load="Slot 1" --start=landAlares
+title_start        title_start
+boss               boss               --load="Slot 1" --start=Serphia
+bridge_test        bridge_test        --load="Slot 1" --start=Alares --bridge-test  # extra

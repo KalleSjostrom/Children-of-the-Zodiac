@@ -10,12 +10,39 @@ static var _regex_cache := {}
 static var _rng := RandomNumberGenerator.new()
 static var _rng_seeded := false
 
+## Deterministic mode (Main --seed=<n>, used by tools/parity): all random
+## numbers come from generators seeded from one seed, and currentTimeMillis()
+## reads the game clock (advanced by Main with the elapsed game time) instead
+## of the wall clock. Off in normal play.
+static var deterministic := false
+static var gameClockMs := 0.0
+static var _seed_rng := RandomNumberGenerator.new()
+
 
 static func _rand() -> RandomNumberGenerator:
 	if not _rng_seeded:
 		_rng.randomize()
 		_rng_seeded = true
 	return _rng
+
+
+## Turns on deterministic mode with the given seed (see `deterministic`).
+static func setDeterministic(seed_value: int) -> void:
+	deterministic = true
+	gameClockMs = 0.0
+	_seed_rng.seed = seed_value
+	_rng.seed = nextSeed()
+	_rng_seeded = true
+
+
+## A seed for a new generator, derived from the deterministic seed.
+static func nextSeed() -> int:
+	return _seed_rng.randi()
+
+
+## Advances the game clock by ms (Main, every frame, deterministic mode only).
+static func advanceGameClock(ms: float) -> void:
+	gameClockMs += ms
 
 
 ## Java's String.split(regex[, limit]): regex based, and trailing empty strings
@@ -198,13 +225,18 @@ static func toDegrees(rad: float) -> float:
 	return rad_to_deg(rad)
 
 
-## Java's System.currentTimeMillis() (monotonic in this port).
+## Java's System.currentTimeMillis() (monotonic in this port; the game clock
+## in deterministic mode).
 static func currentTimeMillis() -> int:
+	if deterministic:
+		return int(gameClockMs)
 	return Time.get_ticks_msec()
 
 
-## Java's System.nanoTime().
+## Java's System.nanoTime() (the game clock in deterministic mode).
 static func nanoTime() -> int:
+	if deterministic:
+		return int(gameClockMs * 1000000.0)
 	return Time.get_ticks_usec() * 1000
 
 

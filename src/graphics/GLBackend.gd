@@ -5,7 +5,8 @@ extends RefCounted
 ## The original game drew everything in immediate mode, mixing 2D (orthographic
 ## 1024x768, y down) and 3D (gluPerspective(45, 4/3, 1, 75)) in one frame.
 ## This backend keeps the draw order by splitting each frame into "chunks":
-##  - 2D chunks are canvas items (children of the Main node, ordered by index),
+##  - 2D chunks are canvas items (children of the canvas node: Main's
+##    LegacyLayer/Canvas, above the scene in World; ordered by index),
 ##  - 3D chunks are SubViewports rendering an ArrayMesh per batch; their
 ##    textures are composited into the canvas at the chunk's position.
 ## Batches inside a 3D chunk keep submission order via sorting_offset.
@@ -13,7 +14,7 @@ extends RefCounted
 const VIRTUAL_SIZE := Vector2(1024, 768)
 const MAX_SURFACE_VERTS := 60000
 
-var host: Node2D
+var host: Node # owns the SubViewports; its viewport is the screen
 var root_ci: RID
 
 # Canvas items reused between frames (pool), in draw order.
@@ -38,9 +39,10 @@ var vp_pixel_size := Vector2i(1024, 768)
 var stats_chunks := 0
 
 
-func _init(p_host: Node2D) -> void:
+## canvas: the parent of the 2D canvas items (default: the host itself).
+func _init(p_host: Node, canvas: CanvasItem = null) -> void:
 	host = p_host
-	root_ci = host.get_canvas_item()
+	root_ci = (canvas if canvas != null else p_host as CanvasItem).get_canvas_item()
 	_premult_material = CanvasItemMaterial.new()
 	_premult_material.blend_mode = CanvasItemMaterial.BLEND_MODE_PREMULT_ALPHA
 	_register_globals()

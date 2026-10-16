@@ -5,9 +5,14 @@ extends RefCounted
 var _rng := RandomNumberGenerator.new()
 
 
+## Without a seed: a random seed, or one derived from the deterministic seed
+## (J.setDeterministic).
 func _init(seed_value = null) -> void:
 	if seed_value == null:
-		_rng.randomize()
+		if J.deterministic:
+			_rng.seed = J.nextSeed()
+		else:
+			_rng.randomize()
 	else:
 		_rng.seed = int(seed_value)
 

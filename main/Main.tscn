@@ -2,5 +2,17 @@
 
 [ext_resource type="Script" uid="uid://dqn45itywyrqw" path="res://src/main/Main.gd" id="1"]
 
-[node name="Main" type="Node2D" unique_id=1032165671]
+[node name="Main" type="Node" unique_id=1032165671]
 script = ExtResource("1")
+
+[node name="World" type="Node" parent="." unique_id=1450381297]
+
+[node name="LegacyLayer" type="CanvasLayer" parent="." unique_id=873046152]
+
+[node name="Canvas" type="Node2D" parent="LegacyLayer" unique_id=1960572844]
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=410698035]
+layer = 2
+
+[node name="Transition" type="CanvasLayer" parent="." unique_id=1218839710]
+layer = 3

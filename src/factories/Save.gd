@@ -6,6 +6,14 @@ extends RefCounted
 
 ## Directory the save games are written to (and first read from by Load).
 const SAVE_DIR = "user://saves/"
+## Deterministic runs (J.deterministic) use their own directory, emptied by
+## Main at start, so they neither read nor overwrite the player's saves.
+const DETERMINISTIC_SAVE_DIR = "user://saves_deterministic/"
+
+
+## The directory saves are written to and read from (see above).
+static func saveDir() -> String:
+	return DETERMINISTIC_SAVE_DIR if J.deterministic else SAVE_DIR
 
 static var save = null
 var place = ""
@@ -32,7 +40,7 @@ func saveGame(saveSlot, place = null):
 		saveGame(saveSlot)
 		return
 	var filename: String = saveSlot
-	DirAccess.make_dir_recursive_absolute(SAVE_DIR)
+	DirAccess.make_dir_recursive_absolute(saveDir())
 	var writer := SaveWriter.new()
 	writeHeader(writer)
 	writeCharacters(writer, Load.getCharacters(), "character")
@@ -45,8 +53,8 @@ func saveGame(saveSlot, place = null):
 	writeBestiary(writer)
 	writer.println()
 	writer.println("end")
-	if not writer.writeTo(SAVE_DIR + filename + ".sav"):
-		push_error("Save: could not write " + SAVE_DIR + filename + ".sav")
+	if not writer.writeTo(saveDir() + filename + ".sav"):
+		push_error("Save: could not write " + saveDir() + filename + ".sav")
 
 
 ## Unused in the original (call commented out): writes an obfuscated copy
@@ -77,7 +85,7 @@ func crypt(file, filename):
 		if cnt <= 0:
 			break
 		pos += cnt
-	writer.writeTo(SAVE_DIR + str(filename) + ".sav1")
+	writer.writeTo(saveDir() + str(filename) + ".sav1")
 
 
 ## Writes the start location.

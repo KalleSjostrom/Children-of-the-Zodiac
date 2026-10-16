@@ -42,6 +42,9 @@ Developer options (after `--` on the command line):
 * `--mute`: no music.
 * `--autoplay=<file> --shots=<dir>`: scripted input and screenshots, see
   `src/main/AutoPlay.gd`.
+* `--seed=<n>` (deterministic run), `--fixed-step`, `--uncapped`,
+  `--legacy=<subsystems>`, `--bridge-test`: for parity testing, see
+  `docs/ARCHITECTURE.md` section 7 and `tools/parity/parity.sh`.
 
 Saves are written to Godot's user folder (`user://saves/`).
 
@@ -59,7 +62,9 @@ Saves are written to Godot's user folder (`user://saves/`).
   `file_index.txt` lists them for case-insensitive lookup; regenerate it with
   `python tools/gen_file_index.py` after adding files.
 * `docs/PORTING.md` describes the Java → GDScript conventions;
-  `docs/port_notes/` has per-package notes.
+  `docs/port_notes/` has per-package notes. New (non-legacy) code follows
+  `docs/ARCHITECTURE.md`; the modernization plan is
+  `docs/MODERNIZATION_PLAN.md`.
 * `tools/check.sh [folders]` compiles all scripts headlessly and prints errors.
 
 ## Exporting

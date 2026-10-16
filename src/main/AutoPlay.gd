@@ -103,7 +103,8 @@ func update(elapsed: float) -> void:
 
 
 ## "mode=<Java class of the current game mode> place=<current place>", so
-## headless runs show where the game is.
+## headless runs show where the game is. "world=<node>" when Main's World
+## shows a scene (docs/ARCHITECTURE.md).
 func _state() -> String:
 	var o := Organizer.getOrganizer()
 	if o == null or o.currentGameMode == null:
@@ -121,6 +122,8 @@ func _state() -> String:
 				for e in b.enemies:
 					names.append(str(e.getName()) if e != null and e.has_method("getName") else "?")
 				s += " enemies=%s" % ",".join(names).replace(" ", "_")
+	if Main.instance != null and Main.instance.world.get_child_count() > 0:
+		s += " world=%s" % Main.instance.world.get_child(0).name
 	return s + " place=%s fps=%d" % [str(o.nextPlace), Engine.get_frames_per_second()]
 
 

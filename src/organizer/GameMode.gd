@@ -10,6 +10,10 @@ extends Fadeable
 ##  - Java's protected resume(detectionMode[, fadein]) and
 ##    resume(detectionMode, fadeMusic, fadein) are resumeWith(...).
 ##  - update(elapsedTime) receives milliseconds; draw(g) has no time argument.
+##
+## Bridge to Godot scenes (new API, snake_case; docs/ARCHITECTURE.md): a mode
+## may own a scene (create_scene), which Main shows under its World node while
+## the mode is current and not loading.
 
 const TRIANGLE := 0
 const CIRCLE := 1
@@ -48,6 +52,35 @@ var loading := true
 var oggPlayer: OggStreamer
 var music = null
 var musicFadeOutSpeed := SoundValues.SLOW
+
+## The scene of this mode (null for a legacy mode), see create_scene().
+var scene_root: Node
+var _scene_requested := false
+
+
+## Override to return a new scene for this mode; null (the default) keeps the
+## mode purely legacy. The scene must not hold a strong reference to the mode
+## (the mode owns the scene, a reference back would leak both).
+func create_scene() -> Node:
+	return null
+
+
+## scene_root, created by create_scene() on the first call. Main calls this
+## once the mode is current and has finished loading.
+func ensure_scene() -> Node:
+	if not _scene_requested:
+		_scene_requested = true
+		scene_root = create_scene()
+	return scene_root
+
+
+## Game modes are dropped, not freed explicitly: free the scene with the mode.
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_PREDELETE and is_instance_valid(scene_root):
+		if scene_root.is_inside_tree():
+			scene_root.queue_free()
+		else:
+			scene_root.free()
 
 
 ## Initializes the game mode. Called by the Organizer when it is created.

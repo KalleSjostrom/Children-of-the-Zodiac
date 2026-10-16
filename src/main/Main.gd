@@ -1,9 +1,12 @@
-extends Node2D
+class_name Main
+extends Node
 ## Entry point of the port (the original's organizer.Game + Screen +
 ## FPSAnimator + GameEventListener.display()).
 ##
 ## Every frame: input -> scheduled tasks/music fades -> Organizer.update(ms)
-## -> draw through the OpenGL emulation (Graphics/GLBackend).
+## -> draw through the OpenGL emulation (Graphics/GLBackend, on LegacyLayer)
+## -> show the current game mode's scene under World (_sync_world).
+## The scene tree and the bridge are described in docs/ARCHITECTURE.md.
 ##
 ## Command line options (after "--"):
 ##   --start=<place>     start at a place from main.bank instead of the title
@@ -11,8 +14,23 @@ extends Node2D
 ##   --autoplay=<file>   feed scripted button presses (see tools/autoplay)
 ##   --shots=<dir>       save screenshots requested by the autoplay script
 ##   --quit-after-ms=<n> quit after n milliseconds of game time
+##   --fixed-step        advance the game by exactly 1000/60 ms per frame
+##   --seed=<n>          deterministic run (implies --fixed-step): seeded random
+##                       numbers and a game clock instead of the wall clock, so
+##                       two runs of an autoplay script give the same frames
+##   --uncapped          no frame rate cap or vsync (fast parity runs; with --seed)
+##   --legacy=<a,b,...>  keep the legacy path of these subsystems (is_legacy)
+##   --bridge-test       villages show tools/bridge_test/BridgeTest.tscn (dev only)
 
-static var instance: Node2D
+static var instance: Main
+## --bridge-test: Village.create_scene returns the bridge test scene.
+static var bridge_test := false
+static var _legacy: PackedStringArray = []
+
+## The current game mode's scene goes here (see _sync_world).
+@onready var world: Node = $World
+## Parent of GLBackend's canvas items (CanvasLayer 1, above World).
+@onready var legacy_canvas: Node2D = $LegacyLayer/Canvas
 
 var organizer: Organizer
 var graphics: Graphics
@@ -20,7 +38,9 @@ var backend: GLBackend
 var audio: Node
 var _zero_time := 0
 var _args := {}
+var _fixed_step := false
 var autoplay: AutoPlay
+var _world_scene: Node # the scene currently under World, if any
 
 
 func _ready() -> void:
@@ -28,6 +48,15 @@ func _ready() -> void:
 	Scheduler.tree = get_tree()
 	Engine.max_fps = Values.FPS
 	_parse_args()
+	_fixed_step = _args.has("fixed-step") or _args.has("seed")
+	if _args.has("seed"):
+		_init_deterministic(int(_args["seed"]))
+	if _args.has("uncapped"):
+		Engine.max_fps = 0
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+	if _args.has("legacy"):
+		_legacy = String(_args["legacy"]).split(",", false)
+	bridge_test = _args.has("bridge-test")
 
 	audio = Node.new()
 	audio.name = "Audio"
@@ -35,7 +64,7 @@ func _ready() -> void:
 	OggStreamer.audioParent = audio
 	SoundPlayer.audioParent = audio
 
-	backend = GLBackend.new(self)
+	backend = GLBackend.new(self, legacy_canvas)
 	graphics = Graphics.new(backend)
 	GameEventListener.g = graphics
 	GameCore.screen = self
@@ -60,6 +89,31 @@ func _ready() -> void:
 	_zero_time = Time.get_ticks_msec()
 
 
+## True when --legacy lists the subsystem (or "all"): code converted to
+## scenes keeps its legacy path for parity runs (docs/ARCHITECTURE.md).
+static func is_legacy(subsystem: String) -> bool:
+	return _legacy.has(subsystem) or _legacy.has("all")
+
+
+## Seeds every random generator from one seed and switches the game's time
+## reads to the game clock (J.deterministic). The JRandoms below are static
+## and were created (randomly seeded) when their scripts loaded.
+func _init_deterministic(seed_value: int) -> void:
+	J.setDeterministic(seed_value)
+	Values.rand.setSeed(J.nextSeed())
+	WeatherParticle.rand.setSeed(J.nextSeed())
+	SaveParticle.rand.setSeed(J.nextSeed())
+	BattleParticle.rand.setSeed(J.nextSeed())
+	# Godot's global generator (randf() & co. in new code), seeded without
+	# drawing from J's seed sequence.
+	seed(hash("global %d" % seed_value))
+	# Start from the shipped saves only (Save.saveDir()).
+	if DirAccess.dir_exists_absolute(Save.DETERMINISTIC_SAVE_DIR):
+		for f in DirAccess.get_files_at(Save.DETERMINISTIC_SAVE_DIR):
+			DirAccess.remove_absolute(Save.DETERMINISTIC_SAVE_DIR.path_join(f))
+	print("Main: deterministic run, seed %d" % seed_value)
+
+
 func _parse_args() -> void:
 	for a in OS.get_cmdline_user_args():
 		var s := String(a)
@@ -81,8 +135,10 @@ func _process(delta: float) -> void:
 	var now := Time.get_ticks_msec()
 	var elapsed := float(now - _zero_time)
 	_zero_time = now
-	if _args.has("fixed-step"):
+	if _fixed_step:
 		elapsed = 1000.0 / Values.FPS
+	if J.deterministic:
+		J.advanceGameClock(elapsed)
 	if autoplay != null:
 		autoplay.update(elapsed)
 	GameCore.inputManager.poll(elapsed)
@@ -96,11 +152,35 @@ func _process(delta: float) -> void:
 	graphics.beginFrame(GameEventListener.is3D())
 	organizer.testDraw(graphics)
 	backend.end_frame()
+	_sync_world()
 
 	if autoplay != null:
 		autoplay.after_draw(self)
+	if J.deterministic:
+		Scheduler.processTimers(elapsed)
 	if _args.has("quit-after-ms") and now - Engine.get_meta("start_ms", 0) > int(_args["quit-after-ms"]):
 		get_tree().quit()
+
+
+## Shows the current game mode's scene (GameMode.ensure_scene) under World
+## while the mode is not loading; the scene of a mode that is no longer
+## current is removed from the tree but not freed (GameMode frees it).
+func _sync_world() -> void:
+	var mode: GameMode = organizer.getCurrentMode()
+	var scene: Node = null
+	if mode != null and not mode.isLoading():
+		scene = mode.ensure_scene()
+	if not is_instance_valid(_world_scene):
+		_world_scene = null
+	if scene == _world_scene:
+		return
+	if _world_scene != null and _world_scene.get_parent() == world:
+		world.remove_child(_world_scene)
+	# A Camera2D in the removed scene leaves the canvas transform behind.
+	get_viewport().canvas_transform = Transform2D.IDENTITY
+	_world_scene = scene
+	if scene != null:
+		world.add_child(scene)
 
 
 func _enter_tree() -> void:

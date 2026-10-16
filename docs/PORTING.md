@@ -11,6 +11,14 @@ game behaves like the original. Do not redesign, simplify or "Godot-ify"
 gameplay code. Where Java needs a different construct in GDScript, use the
 mappings below.
 
+**Scope (since the modernization, `docs/MODERNIZATION_PLAN.md`):** these
+rules apply to the legacy code, i.e. the ported files under `src/` and edits
+to them. New code (scenes, resources, converters, tools, and the bridge
+members added to legacy classes) follows `docs/ARCHITECTURE.md` instead. The
+"Do not" list in section 8 was written for the porting agents; changes for
+the modernization may touch any file, but keep the Java names and structure
+of the legacy files they touch.
+
 ## 1. What already exists
 
 * **Framework (hand written, do NOT edit)** — `src/graphics/{Graphics, GLBackend,

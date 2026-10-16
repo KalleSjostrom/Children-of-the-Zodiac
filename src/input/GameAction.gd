@@ -5,7 +5,8 @@ extends RefCounted
 ##  - NORMAL: isPressed() is true for as long as the button is held,
 ##  - DETECT_INITAL_PRESS_ONLY: true once per press,
 ##  - DETECT_AS_KEY_LISTENER: true once, then repeating after 480 ms every 90 ms.
-## The Java version used threads for the repeat timing; here it uses timestamps.
+## The Java version used threads for the repeat timing; here it uses timestamps
+## (J.currentTimeMillis: the game clock in deterministic mode).
 
 const NORMAL := 0
 const DETECT_INITAL_PRESS_ONLY := 1
@@ -44,11 +45,11 @@ func reset() -> void:
 
 
 func _add() -> bool:
-	return _add_at_msec >= 0 and Time.get_ticks_msec() >= _add_at_msec
+	return _add_at_msec >= 0 and J.currentTimeMillis() >= _add_at_msec
 
 
 func _startThread(time: int) -> void:
-	_add_at_msec = Time.get_ticks_msec() + time
+	_add_at_msec = J.currentTimeMillis() + time
 
 
 ## Signals that the key was pressed.

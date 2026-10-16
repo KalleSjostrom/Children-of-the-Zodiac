@@ -1,4 +1,8 @@
-# Handoff: state of the Godot port (2026-10-16, after steps 1–3)
+# Handoff: state of the Godot port (2026-10-16, after steps 1–3 and modernization phase 0)
+
+Conventions: legacy (ported) code follows `docs/PORTING.md`; new code
+(scenes, resources, tools, bridge) follows `docs/ARCHITECTURE.md`. The
+modernization plan is `docs/MODERNIZATION_PLAN.md`.
 
 ## Done
 
@@ -40,7 +44,38 @@ the game over screen and save/load all run without script errors
 matrix and commands are in `docs/port_notes/integration.md`; the scripts are
 in `tools/autoplay/`.
 
+**Modernization phase 0 (groundwork): done** (`docs/MODERNIZATION_PLAN.md`
+section 5; conventions and workflow in `docs/ARCHITECTURE.md`):
+- Deterministic runs: `-- --seed=<n>` seeds `J`, every `JRandom` and Godot's
+  global generator from one seed; `J.currentTimeMillis()`, `Scheduler`
+  (`after`, `sleep`), `GameAction` (key repeat) and `GameCore.enterCheat`
+  read a game clock advanced by Main's elapsed time; it implies
+  `--fixed-step`; saves come only from the shipped files and go to
+  `user://saves_deterministic/`. `--uncapped` drops the 60 FPS cap.
+- Parity tool `tools/parity/parity.sh` (+ `diff_shots.gd`, `cases.txt`):
+  record AutoPlay screenshot sets, compare them pixel by pixel and compare
+  the AutoPlay state logs. Goldens of all 10 cases (176 shots) are in
+  `tools/parity/out/golden` (git-ignored; machine specific). A second run
+  (`golden2`) and the run after the bridge (`after`) are identical to them,
+  shot for shot and log for log.
+- Bridge: `main/Main.tscn` is `Main` (Node) → `World`, `LegacyLayer`
+  (CanvasLayer 1) / `Canvas` (GLBackend's canvas items), `UI` (2),
+  `Transition` (3). `GameMode.create_scene()` / `scene_root`; Main shows the
+  current mode's scene under `World` while it is not loading, removes it
+  (without freeing) when the mode is suspended or left, and `GameMode` frees
+  it in `NOTIFICATION_PREDELETE`. `--legacy=<a,b>` + `Main.is_legacy()` are
+  in place for later phases (unused).
+- Bridge test: `--bridge-test` + `tools/autoplay/bridge_test.txt` (parity case
+  `bridge_test`) shows `tools/bridge_test/BridgeTest.tscn` instead of the
+  Alares background tiles, through fade-in, walking, a dialog, a store round
+  trip, the menu (thumbnail) and leaving to the world map (the scene is freed
+  at the next mode switch).
+
 ## Plan (what is left)
+
+0. **Modernization:** phase 1 (villages as scenes) can start; see the plan
+   (section 6) and its open decisions (section 13). Record goldens before
+   each change (`tools/parity/parity.sh record golden`).
 
 1. **Performance (top priority):** labyrinths with rain/snow run at ≈30 FPS,
    battles there at 20–28 FPS (10 000 weather particles per frame through
@@ -68,7 +103,16 @@ in `tools/autoplay/`.
   scripts can loop (nested) with `mark` … `loopuntil [!]<text> <ms>` (see the
   header of `src/main/AutoPlay.gd` and `tools/autoplay/battle.txt`).
 - Use the shipped `Slot 1` (or `Start`) save with `--start`; the saves in
-  `maps/Banks/testStarts/` are from an older data version.
+  `maps/Banks/testStarts/` are from an older data version. Note that a normal
+  run reads `user://saves/<slot>.sav` first when it exists (a slot you saved
+  in the game shadows the shipped one); deterministic runs (`--seed`) read
+  only the shipped saves.
+- Parity: `tools/parity/parity.sh record <set>` / `compare <a> <b>` /
+  `ab "<args a>" "<args b>" [case…]`, see `docs/ARCHITECTURE.md` section 7.
+  Runs are windowed (screenshots need a renderer) and take about 4 minutes
+  for all cases (`--uncapped`; battles are bound by the weather at ~26 FPS).
+  The `fps=` values of parity runs are meaningless; measure performance in
+  normal runs.
 - The developer Cheater (SELECT + DOWN, i.e. Space + Down) jumps to any place
   or building; `tools/autoplay/stores.txt` shows how to drive it.
 - Time units: `update(elapsedTime)` in **ms**; `draw(g)` per frame at 60 FPS.

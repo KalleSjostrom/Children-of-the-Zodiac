@@ -4,7 +4,7 @@ extends AbstractMapLoader
 ## party (characters, equipment, items, time).
 ##
 ## Save files: "Start.sav" is read from Values.Banks (shipped, read only).
-## Other saves are read from Save.SAVE_DIR (user://saves/) when they exist
+## Other saves are read from Save.saveDir() (user://saves/) when they exist
 ## there, otherwise from Values.lib and then Values.Banks via
 ## GameResourceLoader (the shipped slot saves live in maps/Banks/).
 
@@ -66,7 +66,7 @@ func parseFile(path: String, filename: String = ""):
 	if filename.to_lower() == "start.sav":
 		super.parseFile(Values.Banks, filename)
 		return
-	var userPath: String = Save.SAVE_DIR + filename
+	var userPath: String = Save.saveDir() + filename
 	if FileAccess.file_exists(userPath):
 		_parseUserFile(userPath)
 	elif GameResourceLoader.fileExists(Values.lib + filename):
