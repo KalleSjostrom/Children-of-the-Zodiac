@@ -58,9 +58,10 @@ func buildSystem(name):
 		emitter.setSystems(p, slave)
 		systems.append(slave)
 		var warmUp: int = p.getWarmUp()
+		# Java: Values.LOGIC_INTERVAL; one step each (see ParticleSystem.update).
 		for i in range(warmUp):
-			p.update(Values.LOGIC_INTERVAL)
-			slave.update(Values.LOGIC_INTERVAL)
+			p.update(Values.ORIGINAL_FRAME_MS)
+			slave.update(Values.ORIGINAL_FRAME_MS)
 		p.setWarmUp(0)
 	return systems
 

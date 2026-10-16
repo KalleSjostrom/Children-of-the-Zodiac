@@ -21,7 +21,7 @@ Controls (as in the original, PlayStation-style buttons):
 |---|---|---|
 | Arrow keys | D-pad | move / navigate |
 | S | Cross | confirm / interact |
-| D | Circle | back / cancel |
+| D | Circle | back / cancel; hold to sprint in villages |
 | W | Triangle | open the menu |
 | A | Square | |
 | Q / E | L1 / R1 | |

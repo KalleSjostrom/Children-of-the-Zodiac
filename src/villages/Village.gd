@@ -224,27 +224,35 @@ func setTalking(talking):
 	player.standStill()
 
 
-## Checks if any directional buttons have been pressed (two buttons at the
-## same time move the player diagonally).
+## Checks if any directional buttons have been pressed (two buttons on
+## different axes move the player diagonally). Holding circle sprints.
 func checkDirectionalButtons():
-	var dir: int = -1
-	var count: int = 1 if gameActions[LEFT].isPressed() else 0
-	var found: bool = false
+	var dirs := []
 	for i in range(UP, LEFT + 1):
 		if gameActions[i].isPressed():
-			count += 1
-		else:
-			if count == 2:
-				found = true
-			else:
-				count = 0
-	if not found:
-		found = count == 2
-	for i in range(UP, LEFT + 1):
-		if gameActions[i].isPressed():
-			dir = i - UP
-			move(dir, found)
-	if dir != -1:
+			dirs.append(i - UP)
+	# The press is consumed so that holding circle into the menu or a store
+	# does not also count as "back" there.
+	gameActions[CIRCLE].isPressed()
+	player.sprinting = gameActions[CIRCLE].isPressedDontReset()
+	var speed: float = Player.SPRINT if player.sprinting else 1.0
+	# A diagonal move is as fast as a straight one, and if one of its
+	# directions is blocked the player slides along the obstacle at full speed.
+	var blocked := []
+	if dirs.size() == 2 and dirs[0] % 2 != dirs[1] % 2:
+		for dir in dirs:
+			if not canGo(dir, speed * Player.DIAGONAL):
+				blocked.append(dir)
+		if blocked.is_empty():
+			speed *= Player.DIAGONAL
+	# A blocked direction takes no step (but may still lead through a door),
+	# and goes first so that the player faces the way they slide.
+	for dir in blocked:
+		move(dir, 0.0)
+	for dir in dirs:
+		if not dir in blocked:
+			move(dir, speed)
+	if not dirs.is_empty():
 		player.setPartyMembersPositions()
 	else:
 		background.stop()
@@ -257,18 +265,26 @@ func checkDirectionalButtonsForQuestion():
 			dialog.move(i)
 
 
-## Moves the player in the given direction.
-func move(direction, diagonal = null):
+## Moves the player in the given direction (speed scales the step, see
+## Player.go).
+func move(direction, speed = 1.0):
 	if not checkDoors(holeDoors, direction):
 		if checkVillagerCollision(direction):
 			player.move(direction)
 		elif not showSignDialog:
-			player.go(direction, diagonal, obstacleHandler)
+			player.go(direction, speed, obstacleHandler)
 			if setDrawPos(direction % 2):
 				var XorY: int = direction % 2
 				background.setPos(XorY, BACK_POS[XorY])
 			else:
 				background.stop()
+
+
+## True if the player can take a step in the given direction (no villager
+## or obstacle in the way).
+func canGo(direction, speed):
+	return not checkVillagerCollision(direction) \
+			and player.canGo(direction, speed, obstacleHandler)
 
 
 func setDrawPos(XorY):

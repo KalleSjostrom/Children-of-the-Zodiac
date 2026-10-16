@@ -21,6 +21,8 @@ var backy: int = 0
 var activateStatus: int = -1
 static var windCommand = WindCommand.new()
 var zeroTime: int = 0
+# Not in Java: milliseconds not yet simulated (see update).
+var stepTime: float = 0.0
 
 
 ## Java: ParticleSystem(SystemSettings settings, ParticleSettings pSettings,
@@ -84,27 +86,38 @@ func getY():
 	return -(emitter.getPosition().y + 56)
 
 
-## Java: update(float elapsedTime) (milliseconds).
+## Java: update(float elapsedTime) (milliseconds). The particles fade per
+## update but move per second, so the port steps them as the original's real
+## frame rate did (Values.originalFrameStep). Stepping every 60 FPS frame made
+## the smoke rise a third as high, as a bright clump.
 func update(f, player = null, reset = null):
 	var elapsedTime: float = f
 	if active:
 		if elapsedTime < 5 * Values.LOGIC_INTERVAL:
-			elapsedTime /= 1000.0
-			enqueue(cq, elapsedTime)
-			cq.run(getBodies(), elapsedTime)
-
-			var b = getBodies()
-			var tempBody
-			var it = b.iterator()
-			var index: int = 0
-			while it.hasNext():
-				tempBody = it.next()
-				if tempBody.isDead():
-					emitter.postEmit(tempBody)
-				index += 1
+			stepTime += elapsedTime
+			var dt: float = Values.originalFrameStep(stepTime)
+			if dt > 0:
+				stepTime -= dt
+				step(dt / 1000.0)
 	elif activateStatus != -1:
 		if Database.getStatusFor(getName()) == activateStatus:
 			active = true
+
+
+## The body of Java's update, for one step of elapsedTime seconds.
+func step(elapsedTime):
+	enqueue(cq, elapsedTime)
+	cq.run(getBodies(), elapsedTime)
+
+	var b = getBodies()
+	var tempBody
+	var it = b.iterator()
+	var index: int = 0
+	while it.hasNext():
+		tempBody = it.next()
+		if tempBody.isDead():
+			emitter.postEmit(tempBody)
+		index += 1
 
 
 func drawSprite(g, x, y):
@@ -177,9 +190,10 @@ static func setWind(windForce, turbulence):
 	windCommand.setTurbulence(turbulence)
 
 
+## Java: update(Values.LOGIC_INTERVAL) warmUp times; here one step each.
 func warmUp():
 	for i in range(warmUp_):
-		self.update(Values.LOGIC_INTERVAL)
+		self.update(Values.ORIGINAL_FRAME_MS)
 
 
 func getWarmUp():

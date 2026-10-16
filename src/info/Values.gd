@@ -92,6 +92,11 @@ const LEFT := 3
 static var FPS := 60
 static var INTERVAL := 1000.0 / 60
 static var LOGIC_INTERVAL := 1000.0 / 60
+## Not in Java: the frame time the original really ran at. Its FPSAnimator
+## slept a fixed 23 ms after every vsynced frame, so it ran at about 30 FPS
+## (not FPS = 60). Logic that changes per update rather than per second (the
+## particles' fading) was tuned at this rate.
+const ORIGINAL_FRAME_MS := 1000.0 / 30
 
 # The resolution
 static var RESOLUTIONS := [768, 1024]
@@ -190,6 +195,17 @@ static func getFont(f: int, size: int = -1) -> Array:
 ## Scheduler.after / Scheduler.waitUntil / await Scheduler.sleep instead.
 static func sleep(time: int) -> void:
 	OS.delay_msec(time)
+
+
+## Not in Java: the length (ms) of the next update step for logic tuned at
+## the original's frame rate, given the ms not yet simulated; 0 = no step this
+## frame. Steps of ORIGINAL_FRAME_MS, but one step per frame for all the time
+## when a frame is longer (as the original did below 30 FPS), so no time is
+## lost and no frame does more than one step.
+static func originalFrameStep(pending: float) -> float:
+	if pending < ORIGINAL_FRAME_MS:
+		return 0.0
+	return ORIGINAL_FRAME_MS if pending < 2 * ORIGINAL_FRAME_MS else pending
 
 
 static func createNormalPoint(x: int, y: int) -> Array:

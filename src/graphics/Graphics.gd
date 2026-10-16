@@ -130,6 +130,10 @@ static var textColor := [0.0, 0.0, 0.0]
 static var _fontSize := 24
 static var _fontType := 0
 static var _fonts: Array = []
+# Caches for getStringWidth: ink extents Vector2(min x, max x) by
+# "font size glyph", and widths by "type size string".
+static var _glyphInks := {}
+static var _boundsWidths := {}
 
 # ---------------------------------------------------------------------------
 # Instance state
@@ -548,8 +552,46 @@ static func calcAlignCenterTest(string: String, center: int, rend, scale: float)
 	return center - halfWidth
 
 
+## JOGL TextRenderer.getBounds(string).getWidth(): the width of the glyphs'
+## ink (GlyphVector.getVisualBounds, so spaces do not count) plus a border of
+## max(1, 0.015 * size) pixels on each side. Not the advance width: Row adds
+## a space to every word, and the advance width spread the words too far.
 static func getStringWidth(string: String) -> int:
-	return J.round(_stringWidth(string))
+	var key := "%d %d %s" % [_fontType, _fontSize, string]
+	var w = _boundsWidths.get(key)
+	if w != null:
+		return w
+	var ts := TextServerManager.get_primary_interface()
+	var shaped := ts.create_shaped_text()
+	ts.shaped_text_add_string(shaped, string, getFont().get_rids(), _fontSize)
+	var pen := 0.0
+	var minx := INF
+	var maxx := -INF
+	for gl in ts.shaped_text_get_glyphs(shaped):
+		var ink := _glyphInk(ts, gl.font_rid, gl.font_size, gl.index)
+		if ink.x <= ink.y:
+			minx = minf(minx, pen + gl.offset.x + ink.x)
+			maxx = maxf(maxx, pen + gl.offset.x + ink.y)
+		pen += gl.advance
+	ts.free_rid(shaped)
+	var inkWidth := maxx - minx if minx <= maxx else 0.0
+	w = ceili(inkWidth + 2 * maxi(1, int(0.015 * _fontSize)))
+	_boundsWidths[key] = w
+	return w
+
+
+static func _glyphInk(ts: TextServer, font: RID, size: int, index: int) -> Vector2:
+	var key := "%d %d %d" % [font.get_id(), size, index]
+	var ink = _glyphInks.get(key)
+	if ink == null:
+		ink = Vector2(INF, -INF)
+		var points: PackedVector3Array = ts.font_get_glyph_contours(font, size, index).get(
+				"points", PackedVector3Array())
+		for p in points:
+			ink.x = minf(ink.x, p.x)
+			ink.y = maxf(ink.y, p.x)
+		_glyphInks[key] = ink
+	return ink
 
 
 func drawStringRightWithReg(text: String, y: int) -> void:

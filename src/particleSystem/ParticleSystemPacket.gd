@@ -8,6 +8,8 @@ var delays = {}
 var answerdAlready: bool = false
 var added: bool = false
 var useStartStop: bool = false
+# Not in Java: milliseconds not yet simulated (see update).
+var stepTime: float = 0.0
 
 ## Java overloads: ParticleSystemPacket() [= true] and (boolean useStartStop).
 func _init(p_useStartStop = null) -> void:
@@ -41,14 +43,22 @@ func draw(g):
 		if useStartStop:
 			systems[systems.size() - 1].end(g)
 
-## elaspsedTime in seconds (delays are in ms).
+## elaspsedTime in seconds (delays are in ms). The particles fade per update
+## but move per second, so the port steps the systems as the original's real
+## frame rate did (Values.originalFrameStep).
 func update(elaspsedTime):
+	stepTime += elaspsedTime * 1000
+	var dt: float = Values.originalFrameStep(stepTime)
+	if dt == 0:
+		return
+	stepTime -= dt
+	var step: float = dt / 1000.0
 	for ps in systems:
 		var delay: int = delays[ps]
 		if delay <= 0:
-			ps.update(elaspsedTime)
+			ps.update(step)
 		else:
-			delays[ps] = int(delay - elaspsedTime * 1000)
+			delays[ps] = int(delay - step * 1000)
 
 func isDestroyed():
 	var destroyed: bool = true

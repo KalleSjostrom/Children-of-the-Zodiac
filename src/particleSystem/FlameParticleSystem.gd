@@ -11,9 +11,10 @@ func update(elapsedTime, body = null):
 
 func create(nrOfParticles, p_settings):
 	super.create(nrOfParticles, p_settings)
-	# For burning man: pre-run the system.
+	# For burning man: pre-run the system (in the port's steps, see
+	# ParticleSystemPacket.update; Java: Values.LOGIC_INTERVAL).
 	for i in range(200):
-		var elapsedTime: float = Values.LOGIC_INTERVAL / 1000.0
+		var elapsedTime: float = Values.ORIGINAL_FRAME_MS / 1000.0
 		super.update(elapsedTime)
 		# Same as the particle loop of ParticleSystem.update (duplicated in Java).
 		_updateParticles(elapsedTime)

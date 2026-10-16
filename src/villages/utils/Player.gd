@@ -5,7 +5,13 @@ extends RefCounted
 
 const SIZE = 50
 const DISTANCE_BETWEEN_MEMBERS = 10
-const VELOCITY = 0.14
+const VELOCITY = 0.2
+## Speed factor while the sprint button (circle) is held.
+const SPRINT = 1.5
+## Step factor for each axis of a diagonal move, so that it is as fast as a
+## straight one. Java used Math.sin(45) (radians, 0.85), which made diagonal
+## moves about 20% faster than straight ones.
+const DIAGONAL = 0.70710678
 var posArray = []
 var partyMembers = []
 var direction: int = 0
@@ -13,22 +19,9 @@ var currentPartyMember: int = 0
 var pos = null
 var distance: float = 0.0
 var moving: bool = false
-static var SIN45: float = sin(45)
-static var DIRECTIONS = null
-
-
-## Java's static initializer, run on first use (as Java class init did): a
-## _static_init runs at script load, possibly before Values is initialized
-## (LOGIC_INTERVAL would read as 0 and the player could not move).
-static func _initDirections() -> void:
-	DIRECTIONS = [-1.0, 1.0, 1.0, -1.0]
-	for i in range(DIRECTIONS.size()):
-		DIRECTIONS[i] *= Values.LOGIC_INTERVAL * VELOCITY
-
+var sprinting: bool = false
 
 func _init(sPos = null, dir = null) -> void:
-	if DIRECTIONS == null:
-		_initDirections()
 	fillPartyMembers(sPos, dir)
 	standStill()
 	for i in range(SIZE):
@@ -78,6 +71,8 @@ func checkCollision(v, direction):
 
 
 func update(elapsedTime):
+	if sprinting:
+		elapsedTime *= SPRINT
 	for i in range(partyMembers.size()):
 		partyMembers[i].update(Instruction.modifyTimeStatic(elapsedTime, Instruction.FASTEST))
 		partyMembers[i].updatePos(getNextPos(i))
@@ -87,22 +82,29 @@ func getNextPos(member):
 	return posArray[SIZE - (member * DISTANCE_BETWEEN_MEMBERS)]
 
 
-## Moves the player in the given direction.
-func go(dir, diagonal, oh):
+## Moves the player in the given direction. speed scales the step (the
+## DIAGONAL and SPRINT factors).
+func go(dir, speed, oh):
 	move(dir)
-	var dist: float = DIRECTIONS[dir] * (SIN45 if diagonal else 1.0)
+	if canGo(dir, speed, oh):
+		var dist: float = Values.DIRECTIONS[dir] * Values.LOGIC_INTERVAL * VELOCITY * speed
+		pos[dir % 2] += dist
+		distance += abs(dist)
+		if distance >= 30:
+			Load.getPartyItems().takeStep()
+			distance = 0.0
+
+
+## True if a step in the given direction does not run into an obstacle.
+func canGo(dir, speed, oh):
+	var dist: float = Values.DIRECTIONS[dir] * Values.LOGIC_INTERVAL * VELOCITY * speed
 	var x: float = pos[Values.X]
 	var y: float = pos[Values.Y]
 	if dir == Values.UP or dir == Values.DOWN:
 		y += dist * 1.5
 	else:
 		x += dist * 2.5
-	if not oh.hasCollided(x, y, dir):
-		pos[dir % 2] += dist
-		distance += abs(dist)
-		if distance >= 30:
-			Load.getPartyItems().takeStep()
-			distance = 0.0
+	return not oh.hasCollided(x, y, dir)
 
 
 func createPos(x, y, dir):

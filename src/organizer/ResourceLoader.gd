@@ -12,6 +12,7 @@ var mainInfo := {}
 var variables := {}
 
 static var _index := {} # lower-case path -> real path (without res://)
+static var _dirs := {} # lower-case directories of the indexed files
 static var _index_loaded := false
 
 
@@ -27,7 +28,12 @@ static func _load_index() -> void:
 	_index_loaded = true
 	var text := FileAccess.get_file_as_string("res://file_index.txt")
 	for line in text.split("\n", false):
-		_index[line.to_lower()] = line
+		var lower := line.to_lower()
+		_index[lower] = line
+		var dir := lower.get_base_dir()
+		while dir != "" and not _dirs.has(dir):
+			_dirs[dir] = true
+			dir = dir.get_base_dir()
 
 
 static func _normalize(name: String) -> String:
@@ -58,9 +64,19 @@ static func resolve(name: String) -> String:
 	return "res://" + real
 
 
-## Checks if the file with the given name exists.
+## Checks if the file or directory with the given name exists (Java's
+## URL.getContent() also succeeds for directories, e.g. the tile folders
+## "<name> at Nightfolder" that DoubleBackground looks for).
 func exists(name: String) -> bool:
-	return resolve(name) != ""
+	return resolve(name) != "" or isDirectory(name)
+
+
+static func isDirectory(name: String) -> bool:
+	_load_index()
+	var p := _normalize(name).to_lower()
+	if p.ends_with("/"):
+		p = p.left(-1)
+	return _dirs.has(p)
 
 
 static func fileExists(name: String) -> bool:

@@ -72,6 +72,15 @@ in `tools/autoplay/`.
 - The developer Cheater (SELECT + DOWN, i.e. Space + Down) jumps to any place
   or building; `tools/autoplay/stores.txt` shows how to drive it.
 - Time units: `update(elapsedTime)` in **ms**; `draw(g)` per frame at 60 FPS.
+- The original really ran at ≈30 FPS, not `Values.FPS = 60`: its
+  `organizer/FPSAnimator` sleeps a fixed 23 ms after every vsynced frame.
+  Anything that changes per update instead of per ms runs twice as fast in the
+  port. The particles that fade per update but move per ms (village systems in
+  `bodies/system/ParticleSystem.update`, card/enemy effects in
+  `particleSystem/ParticleSystemPacket.update`) are stepped by
+  `Values.originalFrameStep` for this reason. The purely per-frame ones
+  (labyrinth weather, save points, battle background snow) still run at 60
+  updates per second.
 - Positions from `Values.createNormalPoint(x, y)` are `[y, x]`.
 - GDScript gotchas met so far: unqualified calls to methods named like builtins
   (`load()`) hit the builtin → use `self.load()`; inner classes may not shadow
