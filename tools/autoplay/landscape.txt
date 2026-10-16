@@ -1,0 +1,25 @@
+# --load="Slot 1" --start=landAlares: the world map. Move along the roads in
+# each direction, open the menu, enter a place with CROSS.
+wait 3500
+shot l01_start
+tap RIGHT
+wait 3000
+shot l02_right
+tap LEFT
+wait 3000
+shot l03_left
+tap UP
+wait 3000
+shot l04_up
+tap DOWN
+wait 3000
+shot l05_down
+tap TRIANGLE
+wait 2500
+shot l06_menu
+tap CIRCLE
+wait 2000
+tap CROSS
+wait 4000
+shot l07_enter
+quit

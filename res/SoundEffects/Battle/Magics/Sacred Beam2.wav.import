@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://7merpr6igdf2"
+path="res://.godot/imported/Sacred Beam2.wav-e0edc75dc7b77eeecd9e003342d2dae5.sample"
+
+[deps]
+
+source_file="res://res/SoundEffects/Battle/Magics/Sacred Beam2.wav"
+dest_files=["res://.godot/imported/Sacred Beam2.wav-e0edc75dc7b77eeecd9e003342d2dae5.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

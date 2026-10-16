@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://u3guf5v4g5n1"
+path="res://.godot/imported/Zazo Church2.ogg-0be08a1c1e12abf059c31220b4328dd1.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/Zazo Church2.ogg"
+dest_files=["res://.godot/imported/Zazo Church2.ogg-0be08a1c1e12abf059c31220b4328dd1.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

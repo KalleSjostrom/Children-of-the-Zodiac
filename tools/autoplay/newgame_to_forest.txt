@@ -1,0 +1,34 @@
+# New game, skip the three opening story sequences with START (as the
+# original allowed), arrive in the Forest of Reil labyrinth and walk.
+wait 4000
+tap CROSS
+wait 4000
+log prolog
+tap START
+wait 4000
+shot 01_after_skip1
+tap START
+wait 4000
+shot 02_after_skip2
+tap START
+wait 5000
+shot 03_after_skip3
+log arrived
+press UP
+wait 1500
+release UP
+shot 04_walk
+tap RIGHT
+wait 1500
+shot 05_turn
+press UP
+wait 2000
+release UP
+shot 06_walk2
+tap TRIANGLE
+wait 2500
+shot 07_menu
+tap CIRCLE
+wait 2000
+shot 08_back
+quit

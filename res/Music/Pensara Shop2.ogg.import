@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dca05hwaawfwd"
+path="res://.godot/imported/Pensara Shop2.ogg-cfbffe5acaee2e21ee03b479b7081b35.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/Pensara Shop2.ogg"
+dest_files=["res://.godot/imported/Pensara Shop2.ogg-cfbffe5acaee2e21ee03b479b7081b35.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

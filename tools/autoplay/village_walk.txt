@@ -1,0 +1,17 @@
+# --load="Slot 1" --start=Alares: walk up the main road, then left, then talk.
+wait 4000
+shot 01_start
+press UP
+wait 3000
+shot 02_up_holding
+release UP
+wait 500
+shot 03_after_up
+press LEFT
+wait 2000
+release LEFT
+shot 04_left
+tap CROSS
+wait 1000
+shot 05_cross
+quit

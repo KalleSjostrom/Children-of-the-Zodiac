@@ -1,0 +1,104 @@
+# --load="Slot 1" --start=Alares: open the four Alares buildings (weapon store,
+# card store, church, inn) through the developer Cheater (SELECT+DOWN ->
+# Buildings), browse, leave. Leaving a store returns to the Cheater's list
+# for that store type: CIRCLE, DOWN, CROSS, CROSS opens the next type.
+wait 3000
+press SELECT
+wait 100
+tap DOWN
+wait 200
+release SELECT
+wait 1000
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap CROSS
+wait 400
+tap CROSS
+wait 400
+tap CROSS
+wait 3500
+shot s_weapon_1_in
+log in_weapon
+tap DOWN
+wait 600
+tap DOWN
+wait 600
+shot s_weapon_2_moved
+mark
+tap CIRCLE
+wait 900
+loopuntil Cheater 15000
+wait 1000
+tap CIRCLE
+wait 500
+tap DOWN
+wait 300
+tap CROSS
+wait 400
+tap CROSS
+wait 3500
+shot s_card_1_in
+log in_card
+tap DOWN
+wait 600
+tap DOWN
+wait 600
+shot s_card_2_moved
+mark
+tap CIRCLE
+wait 900
+loopuntil Cheater 15000
+wait 1000
+tap CIRCLE
+wait 500
+tap DOWN
+wait 300
+tap CROSS
+wait 400
+tap CROSS
+wait 3500
+shot s_church_1_in
+log in_church
+tap DOWN
+wait 600
+tap DOWN
+wait 600
+shot s_church_2_moved
+mark
+tap CIRCLE
+wait 900
+loopuntil Cheater 15000
+wait 1000
+tap CIRCLE
+wait 500
+tap DOWN
+wait 300
+tap CROSS
+wait 400
+tap CROSS
+wait 3500
+shot s_inn_1_in
+log in_inn
+tap DOWN
+wait 600
+tap DOWN
+wait 600
+shot s_inn_2_moved
+mark
+tap CIRCLE
+wait 900
+loopuntil Cheater 15000
+wait 1000
+quit

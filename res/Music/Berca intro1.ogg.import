@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ckvcr88k0nos7"
+path="res://.godot/imported/Berca intro1.ogg-f47dd8ff12bde71a971460177763fa87.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/Berca intro1.ogg"
+dest_files=["res://.godot/imported/Berca intro1.ogg-f47dd8ff12bde71a971460177763fa87.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

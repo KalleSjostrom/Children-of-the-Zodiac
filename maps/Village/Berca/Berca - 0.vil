@@ -2,7 +2,8 @@ background Berca true
 
 back 2336 1197 1
 start 1192 1140 0
-#wind -80;0;0 1
+
+#wind -80;0;0 1
 #particlesystem sandsystem
 
 ### Trees ###
@@ -173,7 +174,8 @@ holeDoorSignFl Locked.
 holeDoor card bercaCardShop 1297 367 25 0
 building bercaCardShop bercaCardShop.jpg bercaCardShopRomero.png Romero Get_your_cards_here! _ Berca_Shop
 holeDoorSignFl Locked.
-door church Church 2088 590 40 0;1;2;3
+
+door church Church 2088 590 40 0;1;2;3
 building Church bercaChurch.jpg bercaPastorTemeth.png Temeth Welcome. How_can_I_be_of_assistance? Berca_Church
 holeDoorSignFl Locked.
 

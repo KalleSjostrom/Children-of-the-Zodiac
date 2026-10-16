@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cu0vodng2xqpc"
+path="res://.godot/imported/Wooden Chest.wav-9caaadee2c5d28dda57084a24a72399e.sample"
+
+[deps]
+
+source_file="res://res/SoundEffects/Labyrinth/Wooden Chest.wav"
+dest_files=["res://.godot/imported/Wooden Chest.wav-9caaadee2c5d28dda57084a24a72399e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

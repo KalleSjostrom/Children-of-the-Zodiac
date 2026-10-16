@@ -1,0 +1,17 @@
+# Title screen -> Start a new game -> watch the opening sequence.
+wait 2500
+shot 01_title
+wait 1500
+shot 02_title_menu
+tap CROSS
+wait 4000
+shot 03_after_start
+wait 4000
+shot 04_story
+tap CROSS
+wait 3000
+shot 05_story2
+tap CROSS
+wait 3000
+shot 06_story3
+quit

@@ -1,0 +1,42 @@
+# --load="Slot 1" --start="Forest of Reil--Forest Path-mark0": walk until a random
+# battle starts, then fight until it is over: wait for a party turn
+# (battlemode=1 = BATTLING; go on after 3 s anyway, e.g. on result screens),
+# choose cards (CROSS; RIGHT moves past cards that do not fit a slot), execute
+# with TRIANGLE. Pressing CROSS blindly can lock into passing every turn when
+# the first card in the hand never fits (seen with Protecting Barrier).
+wait 3000
+mark
+press UP
+wait 700
+release UP
+wait 300
+tap RIGHT
+wait 400
+loopuntil sub=battle 120000
+wait 1500
+shot b00_battle
+mark
+mark
+wait 200
+loopuntil battlemode=1 3000
+tap CROSS
+wait 300
+tap RIGHT
+wait 300
+tap CROSS
+wait 300
+tap RIGHT
+wait 300
+tap CROSS
+wait 300
+shot b_#_chosen
+tap TRIANGLE
+wait 1200
+shot b_#_exec
+wait 1300
+shot b_#_turn
+loopuntil !sub= 180000
+log battle_over
+wait 3000
+shot b99_after
+quit

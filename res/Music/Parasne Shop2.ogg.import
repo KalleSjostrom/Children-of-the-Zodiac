@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://diultkfdapb12"
+path="res://.godot/imported/Parasne Shop2.ogg-7088595901a4a8648fe37c3f046ad7c1.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/Parasne Shop2.ogg"
+dest_files=["res://.godot/imported/Parasne Shop2.ogg-7088595901a4a8648fe37c3f046ad7c1.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

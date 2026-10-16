@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dx7ff08grmim1"
+path="res://.godot/imported/Central Pass1.ogg-dff19c8e69e601e5f1d86ca42b4d63bb.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/Central Pass1.ogg"
+dest_files=["res://.godot/imported/Central Pass1.ogg-dff19c8e69e601e5f1d86ca42b4d63bb.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

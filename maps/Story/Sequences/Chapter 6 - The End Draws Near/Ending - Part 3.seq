@@ -106,19 +106,19 @@ ins type=fadein timea=fadestart index=18 fadetime=imagefadetime kind=image scrol
 ins type=fadeout timea=fadeend index=18 fadetime=imagefadetime kind=image scrollmode=normal size=imagesize movepos=470;150
 
 scrolltext text="Executive Producer:";"" x=headerx size=header
-	scrolltext text="Kalle Sjšstršm";"" x=namex size=name distance=longdistance
+	scrolltext text="Kalle SjÅ¡strÅ¡m";"" x=namex size=name distance=longdistance
 
 scrolltext text="Game concept:";"" x=headerx size=header
 	scrolltext text="Jonas Ahlmark Aspros";"" x=namex size=name
 	scrolltext text="Johannes Bergenheim";"" x=namex size=name
 	scrolltext text="Erik Lindgren";"" x=namex size=name
-	scrolltext text="Kalle Sjšstršm";"" x=namex size=name distance=longdistance
+	scrolltext text="Kalle SjÅ¡strÅ¡m";"" x=namex size=name distance=longdistance
 
 scrolltext text="All programming:";"" x=headerx size=header
-	scrolltext text="Kalle Sjšstršm";"" x=namex size=name distance=longdistance
+	scrolltext text="Kalle SjÅ¡strÅ¡m";"" x=namex size=name distance=longdistance
 
 scrolltext text="Scripting:";"" x=headerx size=header
-	scrolltext text="Kalle Sjšstršm";"" x=namex size=name distance=short
+	scrolltext text="Kalle SjÅ¡strÅ¡m";"" x=namex size=name distance=short
 
 	scrolltext text="Assisted by:";"" x=subheaderx size=subheader
 		scrolltext text="Jonas Ahlmark Aspros";"" x=subnamex size=subname distance=longdistance
@@ -127,10 +127,10 @@ scrolltext text="Story:";"" x=headerx size=header
 	scrolltext text="Jonas Ahlmark Aspros";"" x=namex size=name
 	scrolltext text="Johannes Bergenheim";"" x=namex size=name
 	scrolltext text="Erik Lindgren";"" x=namex size=name
-	scrolltext text="Kalle Sjšstršm";"" x=namex size=name distance=longdistance
+	scrolltext text="Kalle SjÅ¡strÅ¡m";"" x=namex size=name distance=longdistance
 	
 scrolltext text="Script:";"" x=headerx size=header
-	scrolltext text="Kalle Sjšstršm";"" x=namex size=name
+	scrolltext text="Kalle SjÅ¡strÅ¡m";"" x=namex size=name
 	scrolltext text="Jonas Ahlmark Aspros";"" x=namex size=name distance=longdistance
 
 scrolltext text="All music by:";"" x=headerx size=header
@@ -139,7 +139,7 @@ scrolltext text="All music by:";"" x=headerx size=header
 	scrolltext text="Except:";"" x=subheaderx size=subheader
 		scrolltext text="Theme of Alares";"" x=subnamex size=subname
 		scrolltext text="Theme of Zazo";"" x=subnamex size=subname
-			scrolltext text="Composed by Johan TjŠllman";"" x=subsubnamex size=subsubname distance=short
+			scrolltext text="Composed by Johan TjÅ llman";"" x=subsubnamex size=subsubname distance=short
 			
 		scrolltext text="The Great Mine";"" x=subnamex size=subname
 			scrolltext text="Composed by Johannes Bergenheim and Rickard N. Jokela";"" x=subsubnamex size=subsubname distance=short
@@ -151,19 +151,19 @@ scrolltext text="All instruments played by:";"" x=headerx size=header
 	scrolltext text="Johannes Bergenheim";"" x=namex size=name distance=short
 
 	scrolltext text="Except:";"" x=subheaderx size=subheader
-		scrolltext text="Elin Sšderberg, Cello:";"" x=subnamex size=subname
+		scrolltext text="Elin SÅ¡derberg, Cello:";"" x=subnamex size=subname
 			scrolltext text="Prologue pt 1, 2";"" x=subsubnamex size=subsubname
 			scrolltext text="Berca Shop";"" x=subsubnamex size=subsubname
 			scrolltext text="Menthu's Theme";"" x=subsubnamex size=subsubname distance=short
 
-		scrolltext text="Elin Sšderberg, Vocal:";"" x=subnamex size=subname
+		scrolltext text="Elin SÅ¡derberg, Vocal:";"" x=subnamex size=subname
 			scrolltext text="Pensara Church";"" x=subsubnamex size=subsubname distance=short
 
 		scrolltext text="Rickard N. Jokela, Bass:";"" x=subnamex size=subname
 			scrolltext text="The Great Mine";"" x=subsubnamex size=subsubname
 			scrolltext text="Berca Church";"" x=subsubnamex size=subsubname distance=short
 	
-		scrolltext text="Johan TjŠllman, Guitar:";"" x=subnamex size=subname
+		scrolltext text="Johan TjÅ llman, Guitar:";"" x=subnamex size=subname
 			scrolltext text="Theme of Alares";"" x=subsubnamex size=subsubname
 			scrolltext text="Theme of Zazo";"" x=subsubnamex size=subsubname
 			scrolltext text="Inn";"" x=subsubnamex size=subsubname distance=short
@@ -183,7 +183,7 @@ scrolltext text="Character design:";"" x=headerx size=header
 	scrolltext text="Erik Lindgren";"" x=namex size=name distance=short
 
 	scrolltext text="Except:";"" x=subheaderx size=subheader
-		scrolltext text="Erik Lindgren and John Sšderberg";"" x=subnamex size=subname
+		scrolltext text="Erik Lindgren and John SÅ¡derberg";"" x=subnamex size=subname
 			scrolltext text="Blacksmith";"" x=subsubnamex size=subsubname distance=longdistance
 
 scrolltext text="Prologue graphic design:";"" x=headerx size=header
@@ -207,20 +207,20 @@ scrolltext text="Village design:";"" x=headerx size=header
 
 scrolltext text="Dungeons:";"" x=headerx size=header
 	scrolltext text="Jonas Ahlmark Aspros";"" x=namex size=name
-	scrolltext text="Kalle Sjšstršm";"" x=namex size=name distance=short
+	scrolltext text="Kalle SjÅ¡strÅ¡m";"" x=namex size=name distance=short
 
 scrolltext text="Battle design:";"" x=headerx size=header
 	scrolltext text="Jonas Ahlmark Aspros";"" x=namex size=name
 	scrolltext text="Johannes Bergenheim";"" x=namex size=name
-	scrolltext text="Kalle Sjšstršm";"" x=namex size=name distance=longdistance
+	scrolltext text="Kalle SjÅ¡strÅ¡m";"" x=namex size=name distance=longdistance
 
 scrolltext text="Menu design:";"" x=headerx size=header
 	scrolltext text="Jonas Ahlmark Aspros";"" x=namex size=name
 	scrolltext text="Johannes Bergenheim";"" x=namex size=name
-	scrolltext text="Kalle Sjšstršm";"" x=namex size=name distance=longdistance
+	scrolltext text="Kalle SjÅ¡strÅ¡m";"" x=namex size=name distance=longdistance
 
 scrolltext text="Animations:";"" x=headerx size=header
-	scrolltext text="Kalle Sjšstršm";"" x=namex size=name distance=short
+	scrolltext text="Kalle SjÅ¡strÅ¡m";"" x=namex size=name distance=short
 
 	scrolltext text="Assisted by:";"" x=subheaderx size=subheader
 		scrolltext text="Jonas Ahlmark Aspros";"" x=subnamex size=subname distance=longdistance
@@ -242,7 +242,7 @@ scrolltext text="Music, story and concept inspiration:";"" x=headerx size=header
 scrolltext text="Special thanks to:";"" x=headerx size=header
 	scrolltext text="Johanna Samuelsson";"" x=namex size=name
 	scrolltext text="Frida Marklund";"" x=namex size=name
-	scrolltext text="Martin Sšderberg";"" x=namex size=name
+	scrolltext text="Martin SÅ¡derberg";"" x=namex size=name
 	scrolltext text="Victor Jonsson";"" x=namex size=name
 	scrolltext text="Albin Marklund Bergenheim";"" x=namex size=name
 	scrolltext text="Linnea Burstedt";"" x=namex size=name distance=longdistance

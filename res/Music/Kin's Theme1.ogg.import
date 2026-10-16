@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dw4jrt0qa8yi"
+path="res://.godot/imported/Kin's Theme1.ogg-afa4f4fc090d3f52787dbe0d13d95a69.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/Kin's Theme1.ogg"
+dest_files=["res://.godot/imported/Kin's Theme1.ogg-afa4f4fc090d3f52787dbe0d13d95a69.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

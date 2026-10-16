@@ -1,0 +1,18 @@
+# Start in a village (--start=Alares) and walk around.
+wait 3000
+shot 01_village
+press RIGHT
+wait 1500
+release RIGHT
+shot 02_walk_right
+press UP
+wait 1500
+release UP
+shot 03_walk_up
+tap TRIANGLE
+wait 2500
+shot 04_menu
+tap CIRCLE
+wait 2000
+shot 05_back
+quit

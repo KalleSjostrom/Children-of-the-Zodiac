@@ -19,7 +19,7 @@ Show the number of cards left in the deck, on the deck. Almost done (The numbers
 Show card info in lower right corner (?), when battling. Almost done.
 
 DONE -- Music: Great temple in Menthus place.
-DONE -- Darkworld musik på sista våningen i Wind Temple (ligga kvar under striderna).
+DONE -- Darkworld musik p≈í sista v≈íningen i Wind Temple (ligga kvar under striderna).
 Jonas -- No obstacles in Teo's House.
 
 Wall obstacles in houses are too narrow.
@@ -32,38 +32,38 @@ Make Uri sequence longer (Althea)
 
 From Jonas first hour:
 	DONE -- r1 och l1 byta gubbe i menyn.
-	DONE -- Level på firsta meny bilden.
-	DONE -- Scroll around i deck meny, när man går upp och hamnar längst ner
-	DONE -- Vägarna i landskapet sparas inte.
-	DONE -- Pass to Zazo - Placera en av vakterna för ingången istället för "Door is Locked" =)
+	DONE -- Level p≈í firsta meny bilden.
+	DONE -- Scroll around i deck meny, n≈†r man g≈ír upp och hamnar l≈†ngst ner
+	DONE -- V≈†garna i landskapet sparas inte.
+	DONE -- Pass to Zazo - Placera en av vakterna f≈°r ing≈íngen ist≈†llet f≈°r "Door is Locked" =)
 	DONE ?? -- Looparna kan utebli.
 	Mera loot.
-	DONE -- Då man trycker på eldar (Pass to Zazo) ska det stå aj! =)
-	DONE -- Elmer triggar inte sig själv. Meeting a crazy man. UpdateVillageTrigger
-	DONE -- Kolla så att då man inte har råd med innet så varnar han.
-	DONE -- Göra det gratis med inn då det är triggers.
+	DONE -- D≈í man trycker p≈í eldar (Pass to Zazo) ska det st≈í aj! =)
+	DONE -- Elmer triggar inte sig sj≈†lv. Meeting a crazy man. UpdateVillageTrigger
+	DONE -- Kolla s≈í att d≈í man inte har r≈íd med innet s≈í varnar han.
+	DONE -- G≈°ra det gratis med inn d≈í det ≈†r triggers.
 	Jonas -- Offense / defense text i strid syns knappt.
-	Pengarna i kistorna är inte bestämt.
-	DONE -- Namn på våningarna ovanför småkartorna.
-	DONE -- Ta bort where is pensara från borealis storyn
-	Lägg till på några bybor om vart pensara ligger och vad det är.
-	Storyn väntar inte på sista (?) dialog rutan.
+	Pengarna i kistorna ≈†r inte best≈†mt.
+	DONE -- Namn p≈í v≈íningarna ovanf≈°r sm≈íkartorna.
+	DONE -- Ta bort where is pensara fr≈ín borealis storyn
+	L≈†gg till p≈í n≈ígra bybor om vart pensara ligger och vad det ≈†r.
+	Storyn v≈†ntar inte p≈í sista (?) dialog rutan.
 	Sega magier.
-	DONE -- Hålet i Grivera är i taket men ska vara i golvet.
-	Spoils screen saknade level up mätarna...
-	DONE -- Bara mött blobbar i Grivera.
+	DONE -- H≈ílet i Grivera ≈†r i taket men ska vara i golvet.
+	Spoils screen saknade level up m≈†tarna...
+	DONE -- Bara m≈°tt blobbar i Grivera.
 	DONE -- Ta bort Farmer John sekvensen.
-	Lägg in ett extra minus steg då man byter vånging.
-	DONE -- Göra det omöjligt att röra handen då man sparar.
+	L≈†gg in ett extra minus steg d≈í man byter v≈ínging.
+	DONE -- G≈°ra det om≈°jligt att r≈°ra handen d≈í man sparar.
 	
 From Hampus first hour:
 	DONE -- Inn keeper image wrong.
-	Spoils screen saknade level up mätarna...
+	Spoils screen saknade level up m≈†tarna...
 	DONE -- Ta bort Farmer John sekvensen.
-	DONE -- Flytta kistorna på topp-våningen till fjärde våningen.
+	DONE -- Flytta kistorna p≈í topp-v≈íningen till fj≈†rde v≈íningen.
 
-Då man dör:
-	Menthu tema då man slåss
+D≈í man d≈°r:
+	Menthu tema d≈í man sl≈íss
 	Fada ut innan sista slaget
 	Bymode - Tyst
 	Stabbar oss - Stabbing teo

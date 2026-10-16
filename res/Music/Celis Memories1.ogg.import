@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bwq83cndvrbnl"
+path="res://.godot/imported/Celis Memories1.ogg-26707469fc5ff25a12ff7b021ff700f2.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/Celis Memories1.ogg"
+dest_files=["res://.godot/imported/Celis Memories1.ogg-26707469fc5ff25a12ff7b021ff700f2.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

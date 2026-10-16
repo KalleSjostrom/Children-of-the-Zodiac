@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dvclupf57vd3p"
+path="res://.godot/imported/Prepare For War2.ogg-975894deb71f8cfbe1845a64d530d361.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/Prepare For War2.ogg"
+dest_files=["res://.godot/imported/Prepare For War2.ogg-975894deb71f8cfbe1845a64d530d361.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

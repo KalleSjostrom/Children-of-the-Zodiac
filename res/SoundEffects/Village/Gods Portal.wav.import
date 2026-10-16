@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dv5tjt6t0nl3m"
+path="res://.godot/imported/Gods Portal.wav-9da3bcc615f12ec4a208d34365622d03.sample"
+
+[deps]
+
+source_file="res://res/SoundEffects/Village/Gods Portal.wav"
+dest_files=["res://.godot/imported/Gods Portal.wav-9da3bcc615f12ec4a208d34365622d03.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

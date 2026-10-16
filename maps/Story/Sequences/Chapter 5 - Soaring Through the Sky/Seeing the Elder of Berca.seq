@@ -23,11 +23,11 @@ ins timea=200 index=mizoram kind=stop direction=2
 dialogsingle starttimea=600 <= name="Mizoram" text="Oh, yes. I have been expecting you."
 ins timea=40 index=mizoram kind=emotion show=false
 ins timea=250 index=zalzi kind=dist distance=13 duration=200 direction=0
-dialogsingle starttimea=100 duration=100 <= name="Zalzi" text="Hey, Mizo!";"WhereÕs that weird stone?"
+dialogsingle starttimea=100 duration=100 <= name="Zalzi" text="Hey, Mizo!";"WhereÃ•s that weird stone?"
 
 ins timea=200 index=celis kind=emotion emotion=! show=true
 ins timea=0 index=celis kind=stop direction=1
-dialogsingle starttimea=150 duration=500 <= name="Celis" text="Zalzi! You canÕt talk to strangers like that!";""
+dialogsingle starttimea=150 duration=500 <= name="Celis" text="Zalzi! You canÃ•t talk to strangers like that!";""
 ins timea=350 index=zalzi kind=stop direction=3
 ins timea=100 index=kin kind=stop direction=1
 
@@ -54,7 +54,7 @@ dialogsingle starttimea=350 duration=450 <= name="Kin" text="Where's that?";""
 ins timea=350 index=mizoram kind=stop direction=3
 dialogsingle starttimea=350 <= name="Mizoram" text="The Temple of Aegis lies north east of here";"and I have studied its origin for ages."
 ins timea=350 index=zalzi kind=stop direction=3
-dialogsingle starttimea=150 duration=300 <= name="Zalzi" text="HeÕs been obsessed with that good-for-nothing";"place for as long as I can remember." whisper=true
+dialogsingle starttimea=150 duration=300 <= name="Zalzi" text="HeÃ•s been obsessed with that good-for-nothing";"place for as long as I can remember." whisper=true
 ins timea=250 index=celis kind=stop direction=1
 ins timea=350 index=mizoram kind=stop direction=2
 dialogsingle starttimea=150 duration=400 <= name="Mizoram" text="The origin of Aegis is not well known";"and it contains many secrets."

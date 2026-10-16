@@ -190,7 +190,7 @@ dialogsingle starttimea=150 duration=150 <= name="Celis" text="So where is this 
 ins timea=1300 index=farl kind=stop direction=3
 dialogsingle starttimea=500 <= name="Farl" text="Well... It doesn't say..."
 ins timea=800 index=farl kind=stop direction=2
-dialogsingle starttimea=150 <= name="Farl" text="But now I know whatÕs missing!";"This is so exciting!"
+dialogsingle starttimea=150 <= name="Farl" text="But now I know whatÃ•s missing!";"This is so exciting!"
 ins timea=800 index=zalzi kind=dist distance=10 direction=2 duration=400
 dialogsingle starttimea=200 duration=300 <= name="Zalzi" text="So we're back at square one then...";""
 ins timea=800 index=borealis kind=stop direction=1
@@ -199,7 +199,7 @@ ins timea=2000 index=borealis kind=dist distance=20 duration=600 direction=1
 ins timea=1500 index=borealis kind=dist distance=30 duration=400 direction=3
 ins timea=0 index=borealis kind=queue direction=0
 ins timea=0 index=borealis kind=emotion show=false
-dialogsingle starttimea=150 duration=150 <= name="Boreails" text="Hmm... This crystal. What about itÕs origin?";""
+dialogsingle starttimea=150 duration=150 <= name="Boreails" text="Hmm... This crystal. What about itÃ•s origin?";""
 ins timea=400 index=farl kind=dist distance=10 direction=0 facedirection=2 duration=100
 ins timea=0 index=farl kind=emotion emotion=!? show=true
 dialogpacket name=7 starttimea=350 duration=350
@@ -240,7 +240,7 @@ dialogpacket name=7.9 starttimea=0
 dialog packetname=7.9 name="Farl" text="This must be it!";"I looks exactly as the one described in the text."
 dialog packetname=7.9 name="Farl" text="The gods must truly be on our side!"
 ins timea=350 index=zalzi kind=emotion emotion=! show=true
-dialogsingle starttimea=150 duration=400 <= name="Zalzi" text="Finally some good news!";"LetÕs fix that ship and fly of."
+dialogsingle starttimea=150 duration=400 <= name="Zalzi" text="Finally some good news!";"LetÃ•s fix that ship and fly of."
 ins timea=500 index=zalzi kind=emotion show=false
 ins timea=100 index=farl kind=emotion show=false
 ins timea=800 index=farl kind=dist distance=10 direction=2 duration=300

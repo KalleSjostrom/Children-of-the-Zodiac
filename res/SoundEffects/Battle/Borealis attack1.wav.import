@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dh6b1ek64krt3"
+path="res://.godot/imported/Borealis attack1.wav-bb5fb3d52775836c95d5d408796e4f9e.sample"
+
+[deps]
+
+source_file="res://res/SoundEffects/Battle/Borealis attack1.wav"
+dest_files=["res://.godot/imported/Borealis attack1.wav-bb5fb3d52775836c95d5d408796e4f9e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

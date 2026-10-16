@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bcg6qleg1x4yd"
+path="res://.godot/imported/Celis attack1.wav-578466f4c02437681034d5dc6b616751.sample"
+
+[deps]
+
+source_file="res://res/SoundEffects/Battle/Celis attack1.wav"
+dest_files=["res://.godot/imported/Celis attack1.wav-578466f4c02437681034d5dc6b616751.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

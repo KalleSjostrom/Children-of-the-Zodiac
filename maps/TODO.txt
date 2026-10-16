@@ -15,8 +15,8 @@ Battle:
 	Missed crushing still makes the "sword hit" sound after one second.
 	Burning ophiuchus.
 
-	Inget ljud på Ultima!?	
-	Inget ljud på Slow..	
+	Inget ljud p≈í Ultima!?	
+	Inget ljud p≈í Slow..	
 	
 General:
 	Move save file location to lib.

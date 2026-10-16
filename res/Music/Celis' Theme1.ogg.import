@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b0712ilqwvyff"
+path="res://.godot/imported/Celis' Theme1.ogg-e455415b7f958378fd77ad0383407d9b.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/Celis' Theme1.ogg"
+dest_files=["res://.godot/imported/Celis' Theme1.ogg-e455415b7f958378fd77ad0383407d9b.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

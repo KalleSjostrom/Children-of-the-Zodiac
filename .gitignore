@@ -1,2 +1,4 @@
-*.class
-/bin/
+# Godot 4+ specific ignores
+.godot/
+/android/
+*.tmp

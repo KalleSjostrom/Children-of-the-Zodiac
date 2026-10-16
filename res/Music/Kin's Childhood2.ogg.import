@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dt26h2l8lob4s"
+path="res://.godot/imported/Kin's Childhood2.ogg-a688eee2c20e35f8ab8d026c31d8dfdd.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/Kin's Childhood2.ogg"
+dest_files=["res://.godot/imported/Kin's Childhood2.ogg-a688eee2c20e35f8ab8d026c31d8dfdd.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

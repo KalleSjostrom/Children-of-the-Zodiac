@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dhvwfnrco3sqa"
+path="res://.godot/imported/Crystal Room1.ogg-3f154e789398a21333d45a3fa91359b5.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/Crystal Room1.ogg"
+dest_files=["res://.godot/imported/Crystal Room1.ogg-3f154e789398a21333d45a3fa91359b5.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

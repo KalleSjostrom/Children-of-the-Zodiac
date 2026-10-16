@@ -16,7 +16,7 @@ card s Cure 1 25
 
 status 1
 
-# Affär 6
+# Aff≈†r 6
 card s HerbOfVitality 3 5300
 card s Cure 3 5300
 card s Cure 2 true 6000
@@ -24,7 +24,7 @@ card m Earth 3 5200
 
 status 2
 
-# Affär 8
+# Aff≈†r 8
 card s Cure 3 13000
 card s Cure 3 13000
 card s Resurrect 3 14300
@@ -77,7 +77,7 @@ card s HerbOfVitality 1 true 5000
 
 status 2
 
-# Affär 6
+# Aff≈†r 6
 card n TheElementOfEarth 1 true 5200
 card m Earth 2 true 5200
 card m Earth 2 true 5200
@@ -117,7 +117,7 @@ card s Cure 3 5400
 card s Resurrect 2 6000
 
 status 2
-# Affär 6
+# Aff≈†r 6
 card m Wind 2 true 5200
 card m Wind 2 true 5200
 card s Cure 2 true 6000
@@ -127,7 +127,7 @@ card s HerbOfVitality 3 5300
 
 status 3
 
-# Affär 8
+# Aff≈†r 8
 card n TheElementOfWind 1 2600
 card n TheElementOfFire 1 2600
 card n TheElementOfIce 1 2600
@@ -162,7 +162,7 @@ card s Cure 1 true 2800
 
 status 1
 
-# Affär 6
+# Aff≈†r 6
 card m Fire 3 5200
 card m Fire 3 5200
 card m Ice 3 5200
@@ -175,7 +175,7 @@ card s Cure 3 5400
 card s Resurrect 2 5900
 
 status 2
-# Affär 8
+# Aff≈†r 8
 card m SacredBeam 1 16900
 card m Flare 1 20200
 card o BattleCard 3 11700
@@ -208,7 +208,7 @@ card s HerbOfVitality 2 true 6400
 
 status 1
 
-# Affär 8
+# Aff≈†r 8
 card o Destroyer 1 15600
 card o Destroyer 1 15600
 card o Destroyer 1 15600

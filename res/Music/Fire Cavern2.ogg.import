@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://r2qtl8w2vp4a"
+path="res://.godot/imported/Fire Cavern2.ogg-20f687816630d4b44c43dc15202363ea.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/Fire Cavern2.ogg"
+dest_files=["res://.godot/imported/Fire Cavern2.ogg-20f687816630d4b44c43dc15202363ea.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

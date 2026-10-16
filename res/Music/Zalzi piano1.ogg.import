@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://8wadgrk5s4wq"
+path="res://.godot/imported/Zalzi piano1.ogg-5da65f4b09fbd170b4a21c7eb4cde002.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/Zalzi piano1.ogg"
+dest_files=["res://.godot/imported/Zalzi piano1.ogg-5da65f4b09fbd170b4a21c7eb4cde002.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

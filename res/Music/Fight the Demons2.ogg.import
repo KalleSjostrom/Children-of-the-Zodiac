@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dyn732vmefsvj"
+path="res://.godot/imported/Fight the Demons2.ogg-eac26f4f62c010400313498965b2c83d.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/Fight the Demons2.ogg"
+dest_files=["res://.godot/imported/Fight the Demons2.ogg-eac26f4f62c010400313498965b2c83d.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bcxw4wt3gydoh"
+path="res://.godot/imported/Activate Symbol.wav-4e1bd14e0ab2cc7ac97f241528a35de7.sample"
+
+[deps]
+
+source_file="res://res/SoundEffects/Labyrinth/Activate Symbol.wav"
+dest_files=["res://.godot/imported/Activate Symbol.wav-4e1bd14e0ab2cc7ac97f241528a35de7.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

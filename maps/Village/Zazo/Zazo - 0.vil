@@ -10,7 +10,8 @@ back 1993 1024
 start0 1205 955 0
 start1 1203 286 2
 
-wind 10;0;0 .1
+
+wind 10;0;0 .1
 particlesystem smokesystemBarackZazo smokesystemInnZazo smokesystemmayorZazo
 
 ##### OBSTICLES #####
@@ -226,10 +227,12 @@ signL Here lies our great leader and friend.
 sign 1620 819 25
 signL Just a small pile of wood...
 signL What did you expect?
-# Outside of Itemshop
+
+# Outside of Itemshop
 sign 721 879 30
 signL Some rocks... This is a mining town after all...
-# By the graveyard
+
+# By the graveyard
 sign 1720 580 40 1
 signL Rows of barrels.
 signL I wonder what they keep in them...
@@ -245,7 +248,8 @@ signL Ornamental flowers. Looks kinda shabby.
 # By the baracks
 sign 273 366 30
 signL Another crate of ore...
-# By the baracks
+
+# By the baracks
 sign 243 366 30
 signL Another pile of wood...
 

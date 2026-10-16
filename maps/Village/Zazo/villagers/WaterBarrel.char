@@ -12,7 +12,8 @@ n _
 fl Take some fresh water?
 sl end
 f true
-q 10
+
+q 10
 alt Sure!
 alt Hell_no!_It's_for_the_workers!
 alt _
@@ -27,13 +28,15 @@ gift Fresh_Water 1 1
 trigger WaterBarrel 2
 trigger LoneTree 2
 f true
-*12
+
+*12
 n _
 fl You leave the barrel untouched.
 sl end
 f true
 
-dialog 2
+dialog 2
+
 n _
 fl Have you not taken plenty already?
 sl end

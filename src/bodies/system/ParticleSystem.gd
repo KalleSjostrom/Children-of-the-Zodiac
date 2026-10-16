@@ -1,0 +1,202 @@
+class_name BodiesParticleSystem
+extends BodySystem
+## Port of bodies.system.ParticleSystem (GDScript class BodiesParticleSystem):
+## a system of particles emitted by an emitter and updated by commands.
+
+var UPDATE_COMMAND = UpdateCommand.new()
+var GRAVITY_COMMAND = GravityCommand.new()
+var EMITTER_COMMAND = EmitterUpdateCommand.new()
+var emitter = null
+var additiveBlending: bool = false
+var inited: bool = false
+var active: bool = true
+var cq = CommandQueue.new()
+var tex = null
+var position = Vector3f.new()
+var background = null
+var texture = null
+var warmUp_: int = 0
+var backx: int = 0
+var backy: int = 0
+var activateStatus: int = -1
+static var windCommand = WindCommand.new()
+var zeroTime: int = 0
+
+
+## Java: ParticleSystem(SystemSettings settings, ParticleSettings pSettings,
+## AbstractEmitter emitter, EmitterShape warmer).
+func _init(settings = null, pSettings = null, emitter = null, warmer = null) -> void:
+	super()
+	var particleType: int = int(pSettings.getValue(ParticleSettings.KIND))
+	var nrParticles: int = 0
+	if settings != null:
+		for type in SystemLoader.settingKeys(settings):
+			var s: String
+			match int(type):
+				SystemSettings.TEXTURE:
+					setTexture(settings.getString(type))
+				SystemSettings.ADDITIVE:
+					setAdditiveBlending(settings.getBoolean(type))
+				SystemSettings.NR_PARTICLES:
+					nrParticles = int(settings.getValue(type))
+				SystemSettings.WARM_UP_LENGTH:
+					warmUp_ = int(settings.getValue(type))
+				SystemSettings.BACKGROUND:
+					s = settings.getString(type)
+					var args = J.split(s, ";")
+					background = Values.ParticleSystemsImages + args[0]
+					backx = J.parseInt(args[1])
+					backy = J.parseInt(args[2])
+				_:
+					pass
+	self.emitter = emitter
+
+	for i in range(nrParticles):
+		var b = addBody(ParticleFactory.createParticle(particleType, pSettings))
+		b.setParent(self)
+		if warmer != null:
+			emitter.emitFrom(b, warmer)
+		else:
+			emitter.fillPool(b)
+	EMITTER_COMMAND.setEmitter(emitter)
+
+
+func setTexture(tex):
+	texture = ImageHandler.addPermanentlyLoadNow(Values.ParticleSystemsImages + tex)
+
+
+func setPos(p):
+	super.setPos(p)
+	var emitterPos = emitter.getPosition()
+	emitterPos.x = p[Values.X]
+	emitterPos.y = -p[Values.Y]
+
+
+func getPos():
+	return pos
+
+
+func getPosition():
+	return position
+
+
+func getY():
+	return -(emitter.getPosition().y + 56)
+
+
+## Java: update(float elapsedTime) (milliseconds).
+func update(f, player = null, reset = null):
+	var elapsedTime: float = f
+	if active:
+		if elapsedTime < 5 * Values.LOGIC_INTERVAL:
+			elapsedTime /= 1000.0
+			enqueue(cq, elapsedTime)
+			cq.run(getBodies(), elapsedTime)
+
+			var b = getBodies()
+			var tempBody
+			var it = b.iterator()
+			var index: int = 0
+			while it.hasNext():
+				tempBody = it.next()
+				if tempBody.isDead():
+					emitter.postEmit(tempBody)
+				index += 1
+	elif activateStatus != -1:
+		if Database.getStatusFor(getName()) == activateStatus:
+			active = true
+
+
+func drawSprite(g, x, y):
+	drawIt(g, x, y)
+
+
+## Java overloads: draw(Graphics g, int x, int y) and the inherited
+## draw(Graphics g) (x == null).
+func draw(g, x = null, y = null):
+	if x == null:
+		super.draw(g)
+		return
+	var pos = getPosition()
+	pos.x = x
+	pos.y = -y
+	drawIt(g, x, y)
+
+
+func drawIt(g, x, y):
+	if active:
+		if not inited:
+			init(g)
+			inited = true
+		if background != null:
+			g.drawImage(background, x + backx, y + backy)
+		g.beginBlend(false)
+		g.setBlendFunc(Graphics.GL_ONE if additiveBlending else Graphics.GL_ONE_MINUS_SRC_ALPHA)
+		tex.bind(g)
+		g.beginQuads()
+		var b = getBodies()
+		var it = b.iterator()
+		while it.hasNext():
+			var body = it.next()
+			if body.isAlive():
+				body.draw(g, tex, position)
+		g.end()
+		g.setBlendFunc(Graphics.GL_ONE_MINUS_SRC_ALPHA)
+		g.setAlphaFunc(0.1)
+		g.setColor(1)
+
+
+func init(g = null):
+	tex = ImageHandler.getTexture(texture)
+
+
+func enqueue(cq, elapsedTime):
+	cq.enqueue(UPDATE_COMMAND)
+	var bs = getBodies()
+	if bs.size() > 0 and bs.iterator().next() is SmokeParticle:
+		cq.enqueue(windCommand)
+	# cq.enqueue(DRAG_COMMAND)
+	cq.enqueue(GRAVITY_COMMAND)
+	cq.enqueue(EMITTER_COMMAND)
+
+
+func getCommandQueue():
+	return cq
+
+
+func setEmitter(emitter):
+	self.emitter = emitter
+
+
+func setAdditiveBlending(add):
+	additiveBlending = add
+
+
+static func setWind(windForce, turbulence):
+	windCommand.setForce(windForce)
+	windCommand.setTurbulence(turbulence)
+
+
+func warmUp():
+	for i in range(warmUp_):
+		self.update(Values.LOGIC_INTERVAL)
+
+
+func getWarmUp():
+	return warmUp_
+
+
+func setWarmUp(warm):
+	warmUp_ = warm
+
+
+func setActive(activate):
+	active = activate
+
+
+func setActivateStatus(status):
+	activateStatus = status
+
+
+func getEmitter():
+	return emitter

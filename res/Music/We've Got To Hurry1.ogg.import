@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cu4ha7x7vtm7f"
+path="res://.godot/imported/We've Got To Hurry1.ogg-da804f56b627edbf04b345bea27a4f7c.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/We've Got To Hurry1.ogg"
+dest_files=["res://.godot/imported/We've Got To Hurry1.ogg-da804f56b627edbf04b345bea27a4f7c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

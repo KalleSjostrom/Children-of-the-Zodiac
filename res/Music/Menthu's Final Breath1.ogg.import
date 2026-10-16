@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dkhqqgckdk5qh"
+path="res://.godot/imported/Menthu's Final Breath1.ogg-dbb73809000d4425e42e61652030708c.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/Menthu's Final Breath1.ogg"
+dest_files=["res://.godot/imported/Menthu's Final Breath1.ogg-dbb73809000d4425e42e61652030708c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

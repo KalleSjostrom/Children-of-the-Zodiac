@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bdiqsukl8iwx8"
+path="res://.godot/imported/Note 4.wav-944336fc43f015b3ffcef1962870ff92.sample"
+
+[deps]
+
+source_file="res://res/SoundEffects/Labyrinth/Note 4.wav"
+dest_files=["res://.godot/imported/Note 4.wav-944336fc43f015b3ffcef1962870ff92.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

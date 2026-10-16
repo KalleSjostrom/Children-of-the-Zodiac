@@ -13,9 +13,11 @@ background Alares true
 back 1953 1877 1
 start0 1333 1809 0
 start1 1805 1070 2
-wind 10;0;0 .1
+
+wind 10;0;0 .1
 particlesystem smokesystemAlares
-# rainsystem 
+
+# rainsystem 
 
 animObj fountain 1303 1279
 
@@ -167,7 +169,7 @@ o 1705 247 1734 281
 o 466 250 524 304
 o 988 194 1012 215
 
-# Plotter träd
+# Plotter tr≈†d
 o 1435 1812 1462 1841
 o 813 1178 840 1201
 o 1112 1180 1139 1203

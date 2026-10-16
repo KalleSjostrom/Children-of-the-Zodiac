@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dbggku8u04o6j"
+path="res://.godot/imported/Port of Alares1.ogg-fff007d14d351780bca5f8c13c137ba2.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/Port of Alares1.ogg"
+dest_files=["res://.godot/imported/Port of Alares1.ogg-fff007d14d351780bca5f8c13c137ba2.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

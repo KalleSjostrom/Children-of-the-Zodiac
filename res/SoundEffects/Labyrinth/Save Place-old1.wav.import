@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b51lvasppmnma"
+path="res://.godot/imported/Save Place-old1.wav-380ddf3f36e4d666a7f44dc79658a34c.sample"
+
+[deps]
+
+source_file="res://res/SoundEffects/Labyrinth/Save Place-old1.wav"
+dest_files=["res://.godot/imported/Save Place-old1.wav-380ddf3f36e4d666a7f44dc79658a34c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

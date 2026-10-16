@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c7kpmq8372fek"
+path="res://.godot/imported/Kin attack1.wav-66f766eb1c85ba38c900de295cd1629b.sample"
+
+[deps]
+
+source_file="res://res/SoundEffects/Battle/Kin attack1.wav"
+dest_files=["res://.godot/imported/Kin attack1.wav-66f766eb1c85ba38c900de295cd1629b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,171 @@
+# --load="Slot 1" --start=Alares: open every main menu page in turn (and one
+# level deeper where that is harmless), move around, back out with CIRCLE until
+# the village shows again, reopen the menu for the next page. Does not save.
+wait 3000
+tap TRIANGLE
+wait 2500
+tap CROSS
+wait 1500
+shot m01_deck_a
+tap CROSS
+wait 1500
+shot m01_deck_b
+tap DOWN
+wait 500
+tap RIGHT
+wait 500
+shot m01_deck_c
+mark
+tap CIRCLE
+wait 900
+loopuntil mode=villages 15000
+log back_from_deck
+wait 800
+tap TRIANGLE
+wait 2500
+tap DOWN
+wait 400
+tap CROSS
+wait 1500
+shot m02_equip_a
+tap CROSS
+wait 1500
+shot m02_equip_b
+tap DOWN
+wait 500
+tap RIGHT
+wait 500
+shot m02_equip_c
+mark
+tap CIRCLE
+wait 900
+loopuntil mode=villages 15000
+log back_from_equip
+wait 800
+tap TRIANGLE
+wait 2500
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap CROSS
+wait 1500
+shot m03_keyitems_a
+tap CROSS
+wait 1500
+shot m03_keyitems_b
+tap DOWN
+wait 500
+tap RIGHT
+wait 500
+shot m03_keyitems_c
+mark
+tap CIRCLE
+wait 900
+loopuntil mode=villages 15000
+log back_from_keyitems
+wait 800
+tap TRIANGLE
+wait 2500
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap CROSS
+wait 1500
+shot m04_tutorial_a
+tap DOWN
+wait 500
+tap RIGHT
+wait 500
+shot m04_tutorial_c
+mark
+tap CIRCLE
+wait 900
+loopuntil mode=villages 15000
+log back_from_tutorial
+wait 800
+tap TRIANGLE
+wait 2500
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap CROSS
+wait 1500
+shot m05_options_a
+tap DOWN
+wait 500
+tap RIGHT
+wait 500
+shot m05_options_c
+mark
+tap CIRCLE
+wait 900
+loopuntil mode=villages 15000
+log back_from_options
+wait 800
+tap TRIANGLE
+wait 2500
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap CROSS
+wait 1500
+shot m06_map_a
+tap CROSS
+wait 1500
+shot m06_map_b
+tap DOWN
+wait 500
+tap RIGHT
+wait 500
+shot m06_map_c
+mark
+tap CIRCLE
+wait 900
+loopuntil mode=villages 15000
+log back_from_map
+wait 800
+tap TRIANGLE
+wait 2500
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap CROSS
+wait 1500
+shot m07_save_a
+tap DOWN
+wait 500
+tap RIGHT
+wait 500
+shot m07_save_c
+mark
+tap CIRCLE
+wait 900
+loopuntil mode=villages 15000
+log back_from_save
+wait 800
+quit

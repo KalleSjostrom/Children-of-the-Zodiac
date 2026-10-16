@@ -36,7 +36,7 @@ ins timea=0 index=zalzi kind=dist distance=55 duration=1000 direction=2
 ins timea=800 index=kin kind=dist distance=15 duration=400 direction=0
 dialogpacket name=1 starttimea=200 duration=0
 dialog packetname=1 name="Kin" text="Oh, there you are.";"Now, show the way to Mizoram."
-dialog packetname=1 name="Zalzi" text="Can’t do that now." first=false
+dialog packetname=1 name="Zalzi" text="Can√ït do that now." first=false
 dialog packetname=1 name="Zalzi" text="The rebels are planning to blow up Pensara!" first=false 
 
 ins timea=300 index=zalzi kind=dist distance=50 duration=500 direction=1
@@ -65,7 +65,7 @@ ins timea=100 index=borealis kind=emotion show=false
 ins timea=300 index=celis kind=emotion show=false
 
 ins timea=500 index=kin kind=tor movepos=20;-10 duration=400
-dialogsingle starttimea=250 duration=200 <= name="Kin" text="Stop bombs?";"And how do you s’pose we do that?"
+dialogsingle starttimea=250 duration=200 <= name="Kin" text="Stop bombs?";"And how do you s√ïpose we do that?"
 
 ins timea=200 index=zalzi kind=stop direction=2
 dialogsingle starttimea=150 <= name="Zalzi" text="Supposedly, there are three bombs";"located in the sewers under Pensara."

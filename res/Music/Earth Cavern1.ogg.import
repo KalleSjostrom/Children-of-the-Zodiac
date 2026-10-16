@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cfvo7jhc2ka8q"
+path="res://.godot/imported/Earth Cavern1.ogg-b34a1752eeb11ec8d30f90ececff31d3.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/Earth Cavern1.ogg"
+dest_files=["res://.godot/imported/Earth Cavern1.ogg-b34a1752eeb11ec8d30f90ececff31d3.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

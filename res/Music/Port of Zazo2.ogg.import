@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bph0gw1eg64xd"
+path="res://.godot/imported/Port of Zazo2.ogg-fe502cdd8e86faac259614e122197bf2.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/Port of Zazo2.ogg"
+dest_files=["res://.godot/imported/Port of Zazo2.ogg-fe502cdd8e86faac259614e122197bf2.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

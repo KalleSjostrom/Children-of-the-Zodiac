@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c5mfujtgnotds"
+path="res://.godot/imported/Celis piano1.ogg-e8cddf99a77817cc0e56a899800b861b.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/Celis piano1.ogg"
+dest_files=["res://.godot/imported/Celis piano1.ogg-e8cddf99a77817cc0e56a899800b861b.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

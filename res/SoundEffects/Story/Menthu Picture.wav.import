@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bvewwy30weaq3"
+path="res://.godot/imported/Menthu Picture.wav-2c0eb16987864bd45b1a131bf138c3c2.sample"
+
+[deps]
+
+source_file="res://res/SoundEffects/Story/Menthu Picture.wav"
+dest_files=["res://.godot/imported/Menthu Picture.wav-2c0eb16987864bd45b1a131bf138c3c2.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

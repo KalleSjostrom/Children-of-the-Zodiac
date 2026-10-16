@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cu1sqo0j3etcr"
+path="res://.godot/imported/Air Temple1.ogg-0aa230ac663e7227454bd9d159da9e3c.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/Air Temple1.ogg"
+dest_files=["res://.godot/imported/Air Temple1.ogg-0aa230ac663e7227454bd9d159da9e3c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

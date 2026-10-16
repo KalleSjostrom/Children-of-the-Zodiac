@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bs0o5iucyrld"
+path="res://.godot/imported/Menthu prepare1.ogg-cf253b5761b68bccd727b5bf2e3bca73.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/Menthu prepare1.ogg"
+dest_files=["res://.godot/imported/Menthu prepare1.ogg-cf253b5761b68bccd727b5bf2e3bca73.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

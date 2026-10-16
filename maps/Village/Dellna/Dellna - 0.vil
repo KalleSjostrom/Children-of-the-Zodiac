@@ -124,7 +124,8 @@ building Church dellnaChurch.jpg dellnaPastorGid.png Pastor_Gid Praise_you_child
 
 door weapon dellnaWeapons 610 1140 30 0
 building dellnaWeapons dellnaWeaponShop.jpg dellnaWeaponShopFistrid.png Fistrid Always_try_to_be_as_best_equiped_as_possible? _ Dellna_Shop
-door card dellnaCardShop 997 923 40 0;1;3
+
+door card dellnaCardShop 997 923 40 0;1;3
 building dellnaCardShop dellnaCardShop.jpg dellnaCardShopHaness.png Haness If_you're_looking_for_the_greatest_cards_in_the_world, You've_come_to_the_right_place! Dellna_Shop
 
 loot enoCard 1008 640 2 cards.support.HerbOfVitality 2 2 true

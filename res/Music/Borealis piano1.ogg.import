@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://hi4tsybe3atn"
+path="res://.godot/imported/Borealis piano1.ogg-bd06200c25a829e70a775bc18093555e.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/Borealis piano1.ogg"
+dest_files=["res://.godot/imported/Borealis piano1.ogg-bd06200c25a829e70a775bc18093555e.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

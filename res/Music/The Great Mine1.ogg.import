@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dksbvb8cooxtr"
+path="res://.godot/imported/The Great Mine1.ogg-2e25f400025e6ab984695b42bf75600c.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/The Great Mine1.ogg"
+dest_files=["res://.godot/imported/The Great Mine1.ogg-2e25f400025e6ab984695b42bf75600c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -45,8 +45,10 @@ gift cards.offense.BattleCard 2 2 false
 take Fresh_Water
 trigger LoneTree 3
 f true
-dialog 3
-n _
+
+dialog 3
+
+n _
 fl It looks very happy now!
 sl end
 f true

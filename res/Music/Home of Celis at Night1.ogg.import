@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://d1xjoph83xx8g"
+path="res://.godot/imported/Home of Celis at Night1.ogg-9732f8e5a92893f921057c1f1523d496.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/Home of Celis at Night1.ogg"
+dest_files=["res://.godot/imported/Home of Celis at Night1.ogg-9732f8e5a92893f921057c1f1523d496.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

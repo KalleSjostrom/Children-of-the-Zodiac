@@ -31,7 +31,7 @@ ins timea=0 index=zalzi kind=show movepos=401;450;0
 
 /*
 After the party has disarmed the bombs they exit the sewers by the path that 
-leads directly inside the city walls. Kin walks towards Vincent’s resident in 
+leads directly inside the city walls. Kin walks towards Vincent√ïs resident in 
 determent steps. Borealis catches up to him and says:
 */ 
 
@@ -49,7 +49,7 @@ ins timea=100 index=zalzi kind=emotion emotion=? show=true
 ins timea=0 index=zalzi kind=stop direction=2
 
 ins timea=300 index=kin kind=emotion emotion=! show=true
-dialogsingle starttimea=150 duration=300 <= name="Kin" text="Back off!";"I’m in a mood for a little yelling!"
+dialogsingle starttimea=150 duration=300 <= name="Kin" text="Back off!";"I√ïm in a mood for a little yelling!"
 ins timea=200 index=borealis kind=emotion emotion=! show=false
 ins timea=250 index=kin kind=tor movepos=40;80 duration=1200
 ins timea=0 index=kin kind=queue direction=0
@@ -73,8 +73,8 @@ ins timea=200 index=celis kind=emotion show=false
 ins timea=400 index=borealis kind=tor movepos=15;25 duration=400
 ins timea=50 index=borealis kind=emotion emotion=! show=true
 dialogpacket name=2 starttimea=150 duration=200
-dialog packetname=2 name="Borealis" text="Vincent’s just going to put you in prison again!";""
-dialog packetname=2 name="Kin" text="You guys can stay here, but I’m going in!";"" first=false
+dialog packetname=2 name="Borealis" text="Vincent√ïs just going to put you in prison again!";""
+dialog packetname=2 name="Kin" text="You guys can stay here, but I√ïm going in!";"" first=false
 
 ins timea=400 index=kin kind=tor movepos=40;80 duration=1200
 

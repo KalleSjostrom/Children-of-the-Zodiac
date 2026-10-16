@@ -164,10 +164,10 @@ doorSignFl Locked.
 ##### SIGNS ######
 
 sign 223 903 28
-# "Skägget gör inte filosofen" Plutarkos
+# "Sk≈†gget g≈°r inte filosofen" Plutarkos
 signL Barba non facit philosophum
 
-# "Harmoniska medborgare är städernas murar"
+# "Harmoniska medborgare ≈†r st≈†dernas murar"
 sign 296 782 28
 signL Concordia civium murus urbium
 
@@ -175,7 +175,7 @@ signL Concordia civium murus urbium
 sign 435 1031 28
 signL Cui bono?
 
-# "Kunskap är makt." Francis Bacon, 1597.
+# "Kunskap ≈†r makt." Francis Bacon, 1597.
 sign 436 782 28
 signL Et ipsa scientia potestas est.
 
@@ -183,7 +183,7 @@ signL Et ipsa scientia potestas est.
 sign 296 1034 28
 signL Felix qui potuit rerum cognoscere causas
 
-# "Människor tror det de vill"
+# "M≈†nniskor tror det de vill"
 sign 225 780 28
 signL Homines quod volunt credunt
 
@@ -191,20 +191,20 @@ signL Homines quod volunt credunt
 sign 224 1031 28
 signL In dubio pro reo -- 
 
-# "Enade i mångfalden"
+# "Enade i m≈íngfalden"
 sign 365 785 28
 signL In varietate concordia
 
-# "Kunskapens rot är bitter, med dess frukter är söta"
+# "Kunskapens rot ≈†r bitter, med dess frukter ≈†r s≈°ta"
 sign 435 904 28
 signL Litterarum radices amarae, fructus dulces.
 
-# "Kom ihåg din dödlighet"
+# "Kom ih≈íg din d≈°dlighet"
 sign 364 1038 28
 signL Memento mori 
 
 # fountain middle grave
-# "Källa och ursprung
+# "K≈†lla och ursprung
 sign 324 889 28
 signL The words "fons et origo"
 signL is inscribed on the fountain

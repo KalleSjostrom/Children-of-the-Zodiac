@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bpilc6fys345j"
+path="res://.godot/imported/Celis at Night1.ogg-93ace99edc93ca6a8ec63ee5ac7a7780.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/Celis at Night1.ogg"
+dest_files=["res://.godot/imported/Celis at Night1.ogg-93ace99edc93ca6a8ec63ee5ac7a7780.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dw30vgvopjgsl"
+path="res://.godot/imported/Kin piano1.ogg-7a27fd1f5a61382eb9378b36eca40338.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/Kin piano1.ogg"
+dest_files=["res://.godot/imported/Kin piano1.ogg-7a27fd1f5a61382eb9378b36eca40338.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

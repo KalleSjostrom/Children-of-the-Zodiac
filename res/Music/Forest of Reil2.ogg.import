@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bcm312vsdn2vc"
+path="res://.godot/imported/Forest of Reil2.ogg-463bb732d157a8d61d34b0630b875790.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/Forest of Reil2.ogg"
+dest_files=["res://.godot/imported/Forest of Reil2.ogg-463bb732d157a8d61d34b0630b875790.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

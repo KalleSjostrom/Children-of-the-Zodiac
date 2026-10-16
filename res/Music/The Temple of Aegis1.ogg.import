@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b7q7t41g5m7le"
+path="res://.godot/imported/The Temple of Aegis1.ogg-86aa19230f7e9029f75d9bc7a016b3e7.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/The Temple of Aegis1.ogg"
+dest_files=["res://.godot/imported/The Temple of Aegis1.ogg-86aa19230f7e9029f75d9bc7a016b3e7.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

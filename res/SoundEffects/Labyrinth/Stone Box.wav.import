@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dxyru1sii502q"
+path="res://.godot/imported/Stone Box.wav-e5ce3210e70b2ef9bb0150283848ee3c.sample"
+
+[deps]
+
+source_file="res://res/SoundEffects/Labyrinth/Stone Box.wav"
+dest_files=["res://.godot/imported/Stone Box.wav-e5ce3210e70b2ef9bb0150283848ee3c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

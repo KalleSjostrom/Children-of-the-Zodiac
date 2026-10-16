@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://5ejghpdtcwi3"
+path="res://.godot/imported/Mt. Garr2.ogg-9c502e6d939ef588a2e9561a2cfadd1c.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/Mt. Garr2.ogg"
+dest_files=["res://.godot/imported/Mt. Garr2.ogg-9c502e6d939ef588a2e9561a2cfadd1c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://brpfjo268rjuj"
+path="res://.godot/imported/Dellna Shop2.ogg-c437c0cbf7dcad85e3bc7d023c8d4781.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/Dellna Shop2.ogg"
+dest_files=["res://.godot/imported/Dellna Shop2.ogg-c437c0cbf7dcad85e3bc7d023c8d4781.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

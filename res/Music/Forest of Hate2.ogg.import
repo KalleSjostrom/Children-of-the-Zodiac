@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dw0jey5l6t7lf"
+path="res://.godot/imported/Forest of Hate2.ogg-1f8d698dd9413c2bdee1fb7a876a5a6c.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/Forest of Hate2.ogg"
+dest_files=["res://.godot/imported/Forest of Hate2.ogg-1f8d698dd9413c2bdee1fb7a876a5a6c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b006hb8bkaw7u"
+path="res://.godot/imported/Berca Shop2.ogg-3776819632a497ae03ceaa5311b7488c.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/Berca Shop2.ogg"
+dest_files=["res://.godot/imported/Berca Shop2.ogg-3776819632a497ae03ceaa5311b7488c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

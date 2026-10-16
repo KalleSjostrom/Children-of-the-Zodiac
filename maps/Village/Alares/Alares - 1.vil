@@ -3,7 +3,8 @@ background Alares true
 
 back 1953 1877 1
 start 1333 1809 0
-animObj fountain 1303 1279
+
+animObj fountain 1303 1279
 
 villager Bella 
 villager Eve 

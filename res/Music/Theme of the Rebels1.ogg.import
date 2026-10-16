@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dan1wox8s3trl"
+path="res://.godot/imported/Theme of the Rebels1.ogg-7c4c1fe0412cf26b0fcb0f8b2182f0d2.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/Theme of the Rebels1.ogg"
+dest_files=["res://.godot/imported/Theme of the Rebels1.ogg-7c4c1fe0412cf26b0fcb0f8b2182f0d2.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

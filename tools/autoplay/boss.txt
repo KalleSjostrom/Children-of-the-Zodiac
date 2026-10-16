@@ -1,0 +1,19 @@
+# --load="Slot 1" --start=Serphia: boss battle area. Fight (CROSS, CROSS,
+# TRIANGLE; CROSS also advances boss dialogs) until the mode changes.
+wait 4000
+shot k00_start
+mark
+tap CROSS
+wait 400
+tap CROSS
+wait 400
+shot k_#_chosen
+tap TRIANGLE
+wait 2500
+shot k_#_turn
+loopuntil !BossBattleArea 240000
+wait 3000
+shot k99_after
+wait 5000
+shot k99_after2
+quit

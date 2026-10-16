@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dxfen2v7ff1qs"
+path="res://.godot/imported/Notes Done.wav-882547a5cb4ed9f7896fbcbd9d807913.sample"
+
+[deps]
+
+source_file="res://res/SoundEffects/Labyrinth/Notes Done.wav"
+dest_files=["res://.godot/imported/Notes Done.wav-882547a5cb4ed9f7896fbcbd9d807913.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

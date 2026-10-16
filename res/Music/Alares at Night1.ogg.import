@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://btrob8f52qb50"
+path="res://.godot/imported/Alares at Night1.ogg-3e921d37b3b573ec97997c0a054da7ca.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/Alares at Night1.ogg"
+dest_files=["res://.godot/imported/Alares at Night1.ogg-3e921d37b3b573ec97997c0a054da7ca.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

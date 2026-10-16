@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://78as7p4fowrt"
+path="res://.godot/imported/Enter Menu (short).wav-3736fdd5d2562c258ad3b94a0b3ac8d5.sample"
+
+[deps]
+
+source_file="res://res/SoundEffects/Menu/Enter Menu (short).wav"
+dest_files=["res://.godot/imported/Enter Menu (short).wav-3736fdd5d2562c258ad3b94a0b3ac8d5.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bpodo2iukpne7"
+path="res://.godot/imported/Berca Church1.ogg-6abfbb0e40e5df0d11ad4ca3d9a71fc1.oggvorbisstr"
+
+[deps]
+
+source_file="res://res/Music/Berca Church1.ogg"
+dest_files=["res://.godot/imported/Berca Church1.ogg-6abfbb0e40e5df0d11ad4ca3d9a71fc1.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
