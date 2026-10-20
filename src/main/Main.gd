@@ -10,7 +10,8 @@ extends Node
 ##
 ## Command line options (after "--"):
 ##   --start=<place>     start at a place from main.bank instead of the title
-##   --load=<slot>       load a saved game slot
+##   --load=<slot>       load a saved game slot (or an absolute path to a .sav
+##                       file, without the extension)
 ##   --start-time=<day|night>  dev only: start the first place at this time of
 ##                       day (villages load their "at Night" variant)
 ##   --status=<name>:<value>[,...]  dev only: set Database statuses after the

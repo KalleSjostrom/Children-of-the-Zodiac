@@ -94,7 +94,10 @@ func activate(labyrinth):
 		status = Database.getStatusFor(dataBaseName)
 		lab.exitLabyrinth(Values.EXIT)
 		status = 0 if status == -1 else status
-		var next: String = nextPlaces[status]
+		# A TriggerDoor marks its first arrival with status 2 (arrive), which
+		# is not an index into nextPlaces (those doors have one place):
+		# use the last place instead of reading past the end.
+		var next: String = nextPlaces[mini(status, nextPlaces.size() - 1)]
 		if next.contains("-pos"):
 			var split: Array = J.split(next, "-pos")
 			next = split[0]

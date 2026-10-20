@@ -66,6 +66,10 @@ func parseFile(path: String, filename: String = ""):
 	if filename.to_lower() == "start.sav":
 		super.parseFile(Values.Banks, filename)
 		return
+	if filename.is_absolute_path() and FileAccess.file_exists(filename):
+		# Dev: --load=<path to a .sav, without the extension> (ticket saves).
+		_parseUserFile(filename)
+		return
 	var userPath: String = Save.saveDir() + filename
 	if FileAccess.file_exists(userPath):
 		_parseUserFile(userPath)

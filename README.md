@@ -38,7 +38,8 @@ Developer options (after `--` on the command line):
 
 * `--start=<place>`: start at a place from `maps/Main/main.bank`
   (e.g. `--start=Prolog`).
-* `--load=<slot>`: load a saved game.
+* `--load=<slot>`: load a saved game. An absolute path to a `.sav` file
+  (without the extension) loads that file, e.g. a save attached to a ticket.
 * `--mute`: no music.
 * `--autoplay=<file> --shots=<dir>`: scripted input and screenshots, see
   `src/main/AutoPlay.gd`.

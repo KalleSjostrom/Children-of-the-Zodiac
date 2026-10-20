@@ -92,7 +92,9 @@ func moveQuestion(i):
 
 
 func isQuestion():
-	return index < dialogSec.size() and dialogSec[index].question
+	# dialogSec is null before the first dialog is set (e.g. pressing cross
+	# on a trigger door whose dialog was shown in an earlier visit).
+	return dialogSec != null and index < dialogSec.size() and dialogSec[index].question
 
 
 func isFinished():
