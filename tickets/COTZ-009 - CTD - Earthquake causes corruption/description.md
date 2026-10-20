@@ -1,0 +1,1 @@
+When battling the goblin, he cast some Earthquake ability and the labyrinth began to shake. The cards was a bit transparent, and the shaking didn't stop until I moved after the battle.

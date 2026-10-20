@@ -1,0 +1,1 @@
+In a battle, using the Demolish card causes a black. It stays like that until you restart the game, i.e. it won't return to normal even after battle/entering the menu for instance.

@@ -1,0 +1,1 @@
+I got into a battle standing in front of an invisible wall (by design in mt Cesadur). It should not be possible to get into a battle here. Also it highlights a bug where some of the interface is drawn in world coordinates behind the screen.

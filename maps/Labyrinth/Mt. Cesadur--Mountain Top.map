@@ -34,6 +34,7 @@ dir 116 2 117
 dir 117 2 118
 dir 118 2 119
 dir 119 2 120
+dir 120 2 121
 dir 121 1 137
 dir 105 1 121
 dir 137 1 153
@@ -50,9 +51,6 @@ mapEnd
 
 wall 1 155 3
 inv door--down 155 3 dontopen mt._cesadur--fourth_floor-mark4
-
-inv hinderDoor 119 0 2 Walls/demonfloordoor mt._cesadur--mountain_top-mark3
-inv hinderDoor 118 2 2 Walls/demonfloordoor mt._cesadur--mountain_top-mark2
 
 inv boss 117 -1 -1 Taur
 inv save 121 0 -1 -1

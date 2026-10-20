@@ -55,7 +55,7 @@ place mode="14" name="Meeting with Gerbias" music="continue" map=2
 
 # Demon Cave 2 - Part 1
 place mode="14" name="Senate is Disappointed" music="Prepare For War" nextPlace="mt. cesadur--entrance-mark2" map=2
-place mode="14" name="Menthu is Disappointed" music="Menthu's Theme" nextPlace="mt. cesadur--mountain top-mark1" map=2
+place mode="14" name="Menthu is Disappointed" music="Menthu's Theme" nextPlace="mt. cesadur--mountain top-mark0" map=2
 # 03:43 - ej aktuell
 # Demon Cave 2 - Part 2
 
@@ -416,8 +416,6 @@ place mode="4" name="Mt. Cesadur--Fourth Floor-mark4" start="4" music="Earth Cav
 place mode="4" name="Mt. Cesadur--Fourth Floor-save" start="-1" music="Earth Cavern" map="Mt. Cesadur--Fourth Floor.map" 
 
 place mode="4" name="Mt. Cesadur--Mountain Top-mark0" start="0" music="THe Theme of Demons" map="Mt. Cesadur--Mountain Top.map" 
-place mode="4" name="Mt. Cesadur--Mountain Top-mark1" start="1" music="The Theme of Demons" map="Mt. Cesadur--Mountain Top.map" 
-place mode="4" name="Mt. Cesadur--Mountain Top-mark2" start="2" music="The Theme of Demons" map="Mt. Cesadur--Mountain Top.map" 
 place mode="4" name="Mt. Cesadur--Mountain Top-save" start="-1" music="The Theme of Demons" map="Mt. Cesadur--Mountain Top.map"
 
 ## Earth Cavern ##

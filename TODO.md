@@ -9,7 +9,6 @@ Movement in the backgrounds
 [Done][Claude] Night layer during the cutscene where Celis wakes up looks like it's missing parts "C:\Users\c06ks\Work\nightlayer.png"
 
 ### Cutscenes/storymode
-Holding Circle will speed up the game
 
 ## Battle
 Cards sometimes animate way too slowly, but other times not?
@@ -47,9 +46,67 @@ Weird looking characters
 ## Cutscenes
 [Done][Claude] The Meanwhile in the Senate gets stuck after Teo says "I will do better!" - C:\Users\c06ks\Work\meanwhile-at-the-senate-stuck.png" - Probably the next scene not triggering?
 
-AUTOSAVES!!
-Saves should show last save data
-Right now we can save anywhere, but if you do at Grivera--First_floor, it breaks, like in this save "C:\Users\c06ks\Work\brokensave.sav"
+## Bugs
+Clicking one extra comfirm (X button) when you meet the gravera boss - guess the dialoge isn't showing/exiting too soon?
 
-## Future
-Implement a debug console
+
+Use explicit types more
+
+## Thoughts
+The class system seems weird, what's the purpose?? Overly complicated and if you miss it the first time around, you are toast. You can't beat the boss on max level on first class (@1:4).
+
+Maybe show deck status in the hud?
+
+Shortcut to map
+
+How can a class 2 level 1 fire at the boss weakness ice not deal any damage for kin?!
+
+@2:1 - I played three times against the boss and was destroyed each time. Too many shuffles, happened often back-to-back. 
+
+@2:2 - Played once, got to second phase (armor), survived that but not much further
+
+@2:3 - Played once, got way past second phase, but omg!!
+
+@2:4 - Played once, got past second phase, but not much longer
+@2:4 - Won!
+
+Death should only work on living things, also could you heal those? Resurrect?
+
+Save particles renderd above enemy in battle looking towards the save - not against a blob closer to the save though
+
+Zombies should be weak against fire
+
+Missed earth magic shouldn't shake the enemy    
+
+Why do we have slow all when there is only one enemy???
+
+Entering the map with one click takes two to get out
+
+Wth! I beat the boss in like a single round! Did it have the old hp still? I died and retried without a restart
+
+Boss scales ability causes slowdown
+
+Why does boss last resort heal less than the normal one?
+
+End of battle, very unsatisfying! just telport outside!?
+
+Remove "She is hiding something" from the cutscene
+
+You have to speak to Uri makes no sense to get the pass
+
+Make the speach bubbles like explemaian point more in line with artstile
+
+Repetative villager movement in Zazo
+
+You can interact with a door from too far
+
+Returning from the mines to Zazo, seemed to play a cutscene with Teo, but it ended after a few seconds
+
+New weapon not equipped properly?? Requirs a restart
+
+Auto select dead character with resurrect?
+
+@3:4 - Troll sword of fury in the new place takes 32 on kin and 22 on borealis, not very difficult
+
+I have waaaay too much gold, 4933 gp at entrance of mt. Cesadur. I've bought everything I could so far (except them blessing upgrades)
+

@@ -1,0 +1,3 @@
+Crash on the score screen after a battle with a Zombie. This save slot contains -2147483649 which ought to mean Not Available (N/A), meaning you can't get more experience with your current class. To increase class, you need to go to the Church and get Blessed.
+
+This only seemed to occur on class 1. Reaching max level on class 2. It did not occur, but there seem to be some issues still. I got two level-up notifications for Kin, after two battles, but no color on his bar. May require more information.

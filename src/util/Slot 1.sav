@@ -1,0 +1,3562 @@
+start Menthu's_Lair--Hall_of_Memories-save
+character Kin 1338 1330 1040 10 6 95 133 104 100 1338 2668 27 5 18077 7 
+rightHand Ivory_Sword 1
+leftHand Silver_Shield 1
+armor Plate_Armor 1
+
+characterdeck
+card cards.offense.BattleCard 2 true
+card cards.offense.BattleCard 2 false
+card cards.offense.BattleCard 2 false
+card cards.offense.BattleCard 2 false
+card cards.offense.BattleCard 2 false
+card cards.offense.BattleCard 2 false
+card cards.offense.BattleCard 3 false
+card cards.offense.CriticalBlow 2 false
+card cards.offense.CrushingSaber 2 false
+card cards.offense.Drain 2 false
+card cards.offense.LaceratingCut 2 false
+card cards.magic.Demolish 3 false
+card cards.magic.Demolish 3 false
+card cards.magic.Slow 1 true
+card cards.magic.Slow 2 true
+card cards.support.Cure 1 false
+card cards.support.Fungi 1 false
+card cards.support.Haste 2 true
+card cards.support.Haste 3 false
+card cards.support.HerbOfVitality 2 false
+card cards.support.ProtectingBarrier 1 true
+card cards.support.Resurrect 1 false
+card cards.support.Shield 2 false
+card cards.magic.Slow 2 false
+card cards.offense.BattleCard 3 false
+card cards.offense.Drain 2 false
+card cards.offense.BattleCard 2 false
+
+character Celis 1208 1170 1410 11 4 95 117 160 141 1208 3563 27 5 18049 7 
+rightHand Silver_Rod 1
+leftHand Heavens_Guard 1
+armor Silk_Mantle 1
+
+characterdeck
+card cards.offense.MagicalBlow 2 true
+card cards.offense.MagicalBlow 2 false
+card cards.offense.MagicalBlow 2 false
+card cards.offense.MagicalBlow 3 false
+card cards.magic.Blizzard 1 false
+card cards.magic.Earth 1 true
+card cards.magic.Earth 2 true
+card cards.magic.Earth 2 false
+card cards.magic.Earth 2 false
+card cards.magic.Ice 2 true
+card cards.magic.Ice 2 false
+card cards.magic.Ice 2 false
+card cards.magic.Ice 2 false
+card cards.magic.Tornado 1 false
+card cards.support.Cure 1 true
+card cards.support.Cure 1 false
+card cards.support.Cure 2 false
+card cards.support.Cure 2 false
+card cards.support.Focus 1 false
+card cards.support.Haste 2 true
+card cards.support.ProtectingBarrier 1 true
+card cards.support.Resurrect 1 true
+card cards.magic.Wind 3 false
+card cards.support.Fungi 1 false
+card cards.magic.Wind 2 false
+card cards.magic.Wind 2 false
+card cards.support.Cure 1 true
+
+character Zalzi 1293 1270 1260 12 7 100 127 129 118 1293 2974 27 5 18576 7 
+rightHand Orichalcum_Dagger 1
+leftHand Thief's_Ring 1
+armor Silver_Vest 1
+
+characterdeck
+card cards.offense.BattleCard 2 false
+card cards.offense.BattleCard 2 false
+card cards.offense.BattleCard 2 false
+card cards.offense.CriticalBlow 2 false
+card cards.offense.CrushingSaber 2 false
+card cards.offense.Drain 2 false
+card cards.offense.Drain 2 false
+card cards.offense.MagicalBlow 2 false
+card cards.magic.Demolish 1 false
+card cards.magic.Earth 2 false
+card cards.magic.Earth 2 false
+card cards.magic.Fire 3 false
+card cards.magic.Ice 2 false
+card cards.magic.Ice 2 false
+card cards.magic.Ice 2 false
+card cards.magic.Slow 2 true
+card cards.support.Cure 2 false
+card cards.support.Fungi 2 false
+card cards.support.Haste 1 true
+card cards.support.HerbOfVitality 2 false
+card cards.support.ProtectingBarrier 2 false
+card cards.support.Resurrect 1 false
+card cards.support.Shield 1 true
+card cards.magic.Fire 3 false
+card cards.magic.Fire 2 false
+card cards.magic.Fire 2 false
+card cards.support.Fungi 1 false
+
+exCharacter Borealis 1346 143 76 9 0 92 129 59 49 1346 3050 27 5 9075 5 
+rightHand Morning_Star 1
+leftHand Iron_Armlet 1
+armor Silver_Chainmail 1
+
+characterdeck
+card cards.offense.BattleCard 1 true
+card cards.offense.BattleCard 1 true
+card cards.offense.BattleCard 2 true
+card cards.offense.BattleCard 2 false
+card cards.offense.BattleCard 2 false
+card cards.offense.BattleCard 2 false
+card cards.offense.BattleCard 2 false
+card cards.offense.BattleCard 2 false
+card cards.offense.BattleCard 2 false
+card cards.offense.BattleCard 2 false
+card cards.offense.BattleCard 3 false
+card cards.offense.BattleCard 3 false
+card cards.offense.BattleCard 3 false
+card cards.offense.BattleCard 3 false
+card cards.offense.BattleCard 3 false
+card cards.offense.BattleCard 3 false
+card cards.offense.ChameleonStrike 1 false
+card cards.offense.CriticalBlow 2 false
+card cards.offense.CriticalBlow 2 false
+card cards.offense.CrushingSaber 2 false
+card cards.offense.CrushingSaber 2 false
+card cards.offense.Drain 2 false
+card cards.offense.Drain 2 false
+card cards.offense.LaceratingCut 2 false
+card cards.offense.LaceratingCut 2 false
+card cards.offense.LaceratingCut 3 false
+card cards.support.Resurrect 1 false
+
+partyweapons Silver_Knife 1
+partyweapons Iron_Axe 1
+partyweapons Silver_Lance 1
+partyweapons Sword_of_Terra 1
+partyweapons Arcane_Rod 1
+partyshields Silver_Ring 1
+partyarmors Tippet 1
+info 77304 16 05 14822 166
+item Ana's_Stone 1
+item The_Zodiac_Stone 2
+item Bananas 1
+item Letter_to_John 1
+maindeck
+card cards.offense.BattleCard 1 true
+card cards.offense.BattleCard 1 true
+card cards.offense.BattleCard 1 true
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 1 false
+card cards.offense.BattleCard 2 true
+card cards.offense.BattleCard 2 false
+card cards.offense.BattleCard 2 false
+card cards.offense.BattleCard 2 false
+card cards.offense.BattleCard 2 false
+card cards.offense.BattleCard 2 false
+card cards.offense.BattleCard 2 false
+card cards.offense.BattleCard 2 false
+card cards.offense.BattleCard 2 false
+card cards.offense.BattleCard 2 false
+card cards.offense.BattleCard 2 false
+card cards.offense.CriticalBlow 1 false
+card cards.offense.CriticalBlow 1 false
+card cards.offense.CriticalBlow 1 false
+card cards.offense.CriticalBlow 1 false
+card cards.offense.CriticalBlow 1 false
+card cards.offense.CrushingSaber 1 false
+card cards.offense.CrushingSaber 1 false
+card cards.offense.Drain 1 false
+card cards.offense.Drain 1 false
+card cards.offense.LaceratingCut 1 false
+card cards.offense.MagicalBlow 1 false
+card cards.offense.MagicalBlow 1 false
+card cards.offense.MagicalBlow 2 false
+card cards.magic.Death 1 false
+card cards.magic.Death 1 false
+card cards.magic.Death 2 false
+card cards.magic.Demolish 1 false
+card cards.magic.Demolish 2 false
+card cards.magic.Earth 1 false
+card cards.magic.Fire 1 false
+card cards.magic.Fire 2 true
+card cards.magic.Fire 2 false
+card cards.magic.Fire 2 false
+card cards.magic.Fire 2 false
+card cards.magic.Ice 1 true
+card cards.magic.Ice 1 true
+card cards.magic.Ice 1 false
+card cards.magic.Ice 1 false
+card cards.magic.Slow 1 false
+card cards.magic.Slow 1 false
+card cards.magic.Slow 2 false
+card cards.magic.Wind 1 true
+card cards.magic.Wind 1 false
+card cards.magic.Wind 1 false
+card cards.magic.Wind 1 false
+card cards.magic.Wind 1 false
+card cards.magic.Wind 2 false
+card cards.magic.Wind 2 false
+card cards.support.Cure 1 false
+card cards.support.Cure 1 false
+card cards.support.Haste 1 false
+card cards.support.Haste 1 false
+card cards.support.HerbOfVitality 1 false
+card cards.support.Shield 1 false
+card cards.neutral.TheElementOfEarth 1 false
+card cards.neutral.TheElementOfFire 1 true
+card cards.neutral.TheElementOfFire 1 false
+card cards.neutral.TheElementOfIce 1 true
+card cards.neutral.TheElementOfIce 1 false
+card cards.neutral.TheElementOfWind 1 false
+card cards.offense.MagicalBlow 1 true
+status hippo 1
+status celchild 1
+status the_sewers--south_west.maphinderdoor99havebeenin 1
+status alareschurch 0
+status the_great_mine--great_deep.mapbutton207 1
+status garli 3
+status argus1 1
+status pensara_prison--floor_5.maphinderdoor57 0
+status pensara_-_the_trade_districtinn 0
+status empyrian_temple--hall_of_wind.maphinderdoor135 0
+status temple_of_aegis--first_floor.mapriddle108 0
+status billy 3
+status berca_-_barberca 0
+status the_sewers--south_east.maphinderdoor106havebeenin 1
+status pensara_-_the_school_district_-_the_clock_tower_-_floor_1pensara_-_the_school_district 0
+status pensara_prison--floor_3.maphinderdoor102havebeenin 1
+status the_great_mine--the_mine_core.maphinderdoor111 1
+status the_sewers--north_east.mapbutton30 1
+status the_sewers--south_east.maphinderdoor6 1
+status passguard_marcus 2
+status mt._cesadur--third_floor.mapladderdoor94 0
+status berca_desert--north_east.mapdoor131havebeenin 1
+status the_great_mine--the_mine_core.maphinderdoor119 1
+status grivera--third_floor.mapladderdoor94 0
+status central_pass--central_part.mapchest199 1
+status parasnecardshop 1
+status dellna_-_ana's_home 0
+status the_great_mine--the_hall.maphinderdoor199 1
+status fire_cavern--hall_of_the_damned.mapchest67 1
+status fire_cavern--inferno.mapdoor195 0
+status the_great_mine--west_wing.mapchest71 1
+status zazochurch 0
+status the_great_mine--west_wing.mapchest76 1
+status menthu's_lair--hall_of_memories.mapdoor111havebeenin 1
+status dellna_-_elder_house_-_floor_1 0
+status dellna_-_elder_house_-_floor_3 0
+status dellna_-_elder_house_-_floor_2 0
+status the_sewers--south_east.mapbomb51 1
+status grivera--third_floor.mapladderdoor83 0
+status ulias 1
+status dellna 1
+status sarah 2
+status forest_of_reil--deep_forest.mapchest206 1
+status pensara_-_the_trade_district_-_house_2_-_floor_1pensara_-_the_trade_district_-_house_2_-_floor_2 0
+status fire_cavern--inferno.mapdoor3havebeenin 1
+status marge 1
+status zazocardshop111 0
+status zazocardshop110 0
+status benth 1
+status port_of_alarescard 1
+status churchlevels.tut 2
+status berca_desert--north_east.mapdoor131 0
+status serphia 1
+status mt._cesadur--fourth_floor.mapladderdoor55 0
+status pensara_prison--floor_2.maphinderdoor108havebeenin 1
+status pensara_-_the_trade_districtpensara_-_the_school_district 0
+status red 3
+status mt._cesadur--entrance.mapchest139 1
+status mt._cesadur--third_floor.mapchest70 1
+status zazocardshop112 0
+status zazocardshop113 0
+status galanda 2
+status zazocardshop114 0
+status cards.offense.battlecard 1
+status forest_of_bri--west_forest.mapdoor204 0
+status kurt 1
+status don_carlos 1
+status zazozazo_-_teo's_house -1
+status fire_cavern--hall_of_fire.mapdoor9havebeenin 1
+status berca_desert--south_west.mapchest24 1
+status berca_desert--north_east.mapdoor143 0
+status the_sewers--north_east.mapchest110 1
+status the_great_mine--tunnel.mapbutton189 1
+status farmer_janenight 1
+status pensara_-_the_north_district_-_farmer's_house 0
+status alaresbarrelloot 1
+status bercaberca_-_library_-_floor_1 0
+status borealis 0
+status pensara_-_the_trade_district_-_tentpensara_-_the_trade_district 0
+status the_sewers--south_east.mapchest8 1
+status thieving_looking_guy 1
+status alarescardshop 1
+status mizoram 2
+status alares_-_libraryalares 0
+status pensara_prison--floor_2.maphinderdoor57 0
+status temple_of_aegis--third_floor.mapchest76 1
+status the_great_mine--west_wing.mapbutton148 1
+status nodd 2
+status berca_desert--north.mapdoor206havebeenin 1
+status temple_of_aegis--first_floor.maphinderdoor207 1
+status mt._cesadur--basement.mapriddle155 0
+status grivera--second_floor.mapladderdoor203 0
+status menthu's_lair--hall_of_memories.mapchest165 0
+status home_of_celishome_of_celis_-_celis_home 0
+status temple_of_aegis--base_level.mapdoor15 0
+status temple_of_aegis--top_floor.mapdoor106 0
+status mt._cesadur--basement.mapriddle153 0
+status mt._cesadur--third_floor.mapladderdoor62 0
+status the_great_mine--the_mine_core.mapdoor103 0
+status parasnesoldier_8 1
+status parasnesoldier_9 1
+status dexter 9
+status home_of_celis_-_celis_home 0
+status the_sewers--north_west.mapbutton100 1
+status pensara_-_the_school_districtpensara_-_the_school_district_-_the_school 0
+status waterbarrel 2
+status farl 2
+status parasnesoldier_3 1
+status muhamder 1
+status parasnesoldier_2 1
+status parasnesoldier_1 1
+status parasnesoldier_7 1
+status parasnesoldier_6 1
+status parasnesoldier_5 1
+status temple_of_aegis--top_floor.mapdoor119 1
+status parasnesoldier_4 1
+status temple_of_aegis--second_floor.mapdoor104havebeenin 1
+status fire_cavern--hall_of_fire.mapdoor207 0
+status no_place 0
+status alaresalarescardshop 0
+status lecca 2
+status the_sewers--north_west.maphinderdoor92 0
+status the_sewers--north.maphinderdoor136havebeenin 1
+status pensara_forest--forest.mapchest87 1
+status the_sewers--north_east.mapbutton153 1
+status mt._cesadur--fourth_floor.mapladderdoor94 0
+status tord 1
+status the_sewers--south.maphinderdoor6havebeenin 1
+status mt._cesadur--basement.mapriddle173 0
+status menthu's_lair--hall_of_memories.mapchest185 0
+status the_sewers--north.mapdoor21 1
+status joharu 1
+status berca_desert--north.mapdoor206 0
+status rebel_hideout 0
+status home_of_celisnode 1
+status temple_of_aegis--first_floor.maphinderdoor207havebeenin 1
+status road0-17 0
+status road0-15 1
+status central_pass--north_part.maphinderdoor143 1
+status road0-19 1
+status road0-18 1
+status temple_of_aegis--third_floor.mapdoor74havebeenin 1
+status berca_desert--north_west.mapdoor159havebeenin 1
+status berca_desert--north_west.mapdoor204 0
+status berca_desert--south_west.mapdoor199 0
+status the_sewers--south_west.mapbutton52 1
+status the_sewers--south.mapchest78 1
+status dorma's_forest--forest_of_hate.maphinderdoor124havebeenin 1
+status the_great_mine--west_wing.mapbutton182 1
+status pensara_prison--floor_6.maphinderdoor109havebeenin 1
+status forah 4
+status sigge 1
+status dellnadellna_-_elder_house_-_floor_1 0
+status mt._cesadur--entrance.mapbutton4 1
+status gerbias1 2
+status gerbias0 2
+status pensara_prison--floor_1.maphinderdoor41havebeenin 1
+status the_great_mine--the_mine_core.maphinderdoor199 1
+status berca_desert--north_west.mapdoor159 0
+status polly 1
+status parasne_-_tavern 0
+status mt._cesadur--basement.mapriddle125 0
+status menthu's_lair--hall_of_memories.maphinderdoor99 0
+status menthu's_lair--hall_of_memories.mapchest159 0
+status mt._cesadur--mountain_top.mapchest77 0
+status ella 1
+status pensara_-_the_north_district_-_farmer_housepensara_-_the_north_district 0
+status grivera--corridor_of_agony.maphinderdoor79 1
+status the_sewers--north_west.maphinderdoor111havebeenin 1
+status berca_desert--north.mapchest134 1
+status the_sewers--north_east.maphinderdoor25havebeenin 1
+status parasnecardshop03 0
+status parasnecardshop02 0
+status zazo_-_farl's_housezazo 0
+status parasnecardshop01 0
+status temple_of_aegis--second_floor.mapchest73 1
+status empyrian_temple--sign_of_cancer.maphinderdoor99 0
+status parasnecardshop00 0
+status parasnecardshop07 0
+status parasnecardshop06 0
+status parasnecardshop05 0
+status central_pass--central_part.mapbutton175 1
+status parasnecardshop04 0
+status empyrian_temple--sign_of_cancer.maphinderdoor92 0
+status parasnecardshop09 0
+status empyrian_temple--sign_of_cancer.maphinderdoor91 0
+status parasnecardshop08 0
+status grivera--corridor_of_agony.mapdoor23 0
+status forest_of_reil--forest_path.tut 2
+status pensara_prison--floor_1.maphinderdoor57havebeenin 1
+status zazocardshop 1
+status the_sewers--south_west.maphinderdoor153havebeenin 1
+status parasneparasnecardshop 0
+status mt._cesadur--fourth_floor.mapladderdoor126 0
+status tito 2
+status grivera--second_floor.mapchest189 1
+status temple_of_aegis--first_floor.maphinderdoor15 1
+status berca_-_houseberca 0
+status port_of_alaresthe_ship_cabin 0
+status alsie 3
+status shaun 2
+status mt._cesadur--fourth_floor.mapladderdoor5 0
+status mt._cesadur--second_floor.mapladderdoor37 0
+status the_sewers--south_east.mapchest83 1
+status mt._cesadur--second_floor.mapladderdoor39 0
+status temple_of_aegis--third_floor.mapdoor74 0
+status pensara_-_the_trade_district_-_house_1_-_floor_2 0
+status dellnasnowweapons 0
+status grivera--corridor_of_agony.maphinderdoor95 1
+status pensara_-_the_trade_district_-_house_1_-_floor_1 0
+status empyrian_temple--the_zodiac.maphinderdoor111 0
+status temple_of_aegis--base_level.mapbutton73 1
+status empyrian_temple--the_zodiac.maphinderdoor108 0
+status empyrian_temple--the_zodiac.maphinderdoor109 0
+status mt._cesadur--fourth_floor.mapladderdoor180 0
+status empyrian_temple--the_zodiac.maphinderdoor104 0
+status grivera--third_floor.mapchest27 1
+status empyrian_temple--the_zodiac.maphinderdoor102 0
+status empyrian_temple--the_zodiac.maphinderdoor103 0
+status the_sewers--north.maphinderdoor124havebeenin 1
+status the_sewers--south.maphinderdoor42 1
+status the_sewers--south.maphinderdoor43 1
+status taur 0
+status pensara_prison--floor_3.mapchest185 1
+status mt._cesadur--second_floor.mapladderdoor29 0
+status herb 2
+status letter_to_john 1
+status empyrian_temple--the_zodiac.maphinderdoor101 0
+status pensara_prison--floor_6.maphinderdoor108havebeenin 1
+status zazo_-_miner's_home 0
+status home_of_the_godsmenthu's_lair--room_of_confusion-mark0 0
+status zazozazo_-_miner's_home2 0
+status greatminemission 4
+status empyrian_temple--hall_of_wind.maphinderdoor119 0
+status cold_drink 1
+status boris 2
+status forest_of_reil--forest_path.maphinderdoor111 0
+status lonetree 3
+status pensara_prison--floor_4.maphinderdoor153 0
+status fire_cavern--blazing_maze.maphinderdoor127 1
+status central_pass--north_east_part.mapdoor7 0
+status zazoinn 0
+status elthea 2
+status mt._cesadur--fourth_floor.mapladderdoor155 1
+status the_great_mine--great_deep.maphinderdoor201 1
+status the_sewers--south_east.mapbutton134 1
+status fire_cavern--hall_of_fire-mark0node 0
+status rebel_hideoutberca 0
+status earl 2
+status berca_desert--north.mapchest104 1
+status prisonmission 51
+status omer 1
+status rebel_2 2
+status mt._cesadur--second_floor.mapladderdoor67 0
+status cards.offense.criticalblow 1
+status mt._cesadur--second_floor.mapladderdoor62 0
+status stienie 1
+status pensara_-_the_trade_district_-_mezza's_housepensara_-_the_trade_district 0
+status rebel_1 2
+status missionafter_a_hard_days_work 1
+status pensara_forest--forest.mapchest159 1
+status zazoname2 1
+status the_great_mine--mine_shaft.mapchest91 1
+status fire_cavern--blazing_maze.mapchest24 1
+status the_great_mine--the_hall.mapchest147 1
+status pensara_-_the_school_district 0
+status fire_cavern--blazing_maze.mapchest20 1
+status pensara_prison--floor_6.maphinderdoor102havebeenin 1
+status mt._cesadur--entrance.mapladderdoor137 0
+status howorod 1
+status grivera--omnious_hall.mapladderdoor23 0
+status home_of_the_godsmenthu's_lair--entrance-mark0 0
+status the_sewers--south_east.mapchest45 1
+status flog 1
+status mt._cesadur--mountain_top.maphinderdoor118 1
+status mt._cesadur--mountain_top.maphinderdoor119 1
+status grivera--first_floor.mapladderdoor203 0
+status ludna 1
+status memorytaur 1
+status the_great_mine--mine_shaft.mapbutton93 1
+status the_sewers--south_west.mapbutton159 1
+status temple_of_aegis--top_floor.mapchest137 1
+status pensara_prison--floor_4.maphinderdoor102 1
+status eve 3
+status pensara_prison--floor_4.maphinderdoor108 2
+status belmetnight 1
+status temple_of_aegis--base_level.mapdoor195 0
+status pensara_-_the_trade_district_-_tent 0
+status the_sewers--south_east.maphinderdoor105havebeenin 1
+status temple_of_aegis--fourth_floor.mapdoor134havebeenin 1
+status central_pass--north_east_part.mapchest28 1
+status rashidar 1
+status central_pass--north_east_part.maphinderdoor166 1
+status central_pass--north_east_part.maphinderdoor165 1
+status the_great_mine--the_mine_core.maphinderdoor9 1
+status mt._cesadur--third_floor.mapchest200 1
+status ludmillha 1
+status the_great_mine--tunnel.maphinderdoor51 1
+status pensara_prison--floor_5.maphinderdoor153 0
+status the_great_mine--tunnel.maphinderdoor53 1
+status the_sewers--south_east.maphinderdoor53 0
+status the_sewers--south_east.maphinderdoor54 0
+status forest_of_reil--deep_forest.mapdoor200 0
+status pensara_prison--floor_5.maphinderdoor154 0
+status pensara_-_the_trade_districtpensara_-_the_trade_district_-_tent 0
+status pensara_-_the_trade_districtpensara_-_the_north_district 0
+status fire_cavern--inferno.mapmissionchest92 1
+status the_great_mine--mine_shaft.mapchest89 1
+status temple_of_aegis--fourth_floor.mapdoor104 0
+status mt._cesadur--third_floor.mapladderdoor180 0
+status temple_of_aegis--fourth_floor.mapdoor106 1
+status math 1
+status the_sewers--south_east.maphinderdoor6havebeenin 1
+status pensara_prison--floor_1.mapchest25 1
+status parasnesoldier_12 1
+status pensara_prison--floor_3.maphinderdoor108havebeenin 1
+status parasnesoldier_11 1
+status the_sewers--south_east.maphinderdoor156 0
+status parasnesoldier_13 1
+status the_sewers--south_east.maphinderdoor157 0
+status the_sewers--south_east.mapbutton169 1
+status fire_cavern--hall_of_fire.maphinderdoor115 1
+status parasnesoldier_10 1
+status frits1 1
+status frits0 2
+status pensarasoldier_2 1
+status pensarasoldier_3 1
+status alares_-_library 0
+status mt._cesadur--entrance.mapladderdoor67 0
+status pensarasoldier_1 1
+status central_pass--north_part.mapbutton40 1
+status belmet 4
+status memorysalmonman 1
+status forest_of_reil--forest_path.mapdoor10 0
+status mt._cesadur--entrance.mapladderdoor63 0
+status fresh_water 1
+status mt._cesadur--basement.mapchest87 1
+status pensara_prison--floor_4.maphinderdoor57 0
+status thom0 2
+status pensara_prison--floor_3.maphinderdoor153 1
+status thom1 1
+status pass_to_zazocentral_pass--west_part-mark0 0
+status empyrian_temple--sign_of_aries.maphinderdoor140 0
+status the_sewers--north.maphinderdoor136 1
+status temple_of_aegis--fourth_floor.mapdoor104havebeenin 1
+status sewers 2
+status the_great_mine--mine_shaft.mapbutton29 1
+status the_great_mine--mine_shaft.mapbutton28 1
+status dellnadellna_-_house 0
+status temple_of_aegis--first_floor.mapaegiscombobutton13 1
+status empyrian_temple--sign_of_cancer.maphinderdoor201 0
+status empyrian_temple--sign_of_aries.maphinderdoor156 0
+status pensara_prison--floor_3.maphinderdoor169 2
+status empyrian_temple--sign_of_aries.maphinderdoor10 0
+status uri 4
+status the_sewers--north.maphinderdoor124 1
+status port_of_alares_-_tavernport_of_alares 0
+status berca_-_library_-_floor_2berca_-_library_-_floor_1 0
+status valie 2
+status central_pass--north_part.maphinderdoor136 1
+status central_pass--north_part.maphinderdoor137 1
+status zazozazo_-_tent 0
+status bercablessing 1
+status temple_of_aegis--fourth_floor.mapdoor134 0
+status berca_desert--north.mapdoor12havebeenin 1
+status temple_of_aegis--base_level.mapdoor15havebeenin 1
+status putters 1
+status hulda 1
+status the_great_mine--tunnel.mapchest93 1
+status the_sewers--north.maphinderdoor108 1
+status the_great_mine--great_deep.mapvillager107 1
+status fire_cavern--hall_of_fire.mapdoor207havebeenin 1
+status gebb1 1
+status fire_cavern--passage_of_ifrit.mapchest73 1
+status dellnadellnacardshop 0
+status temple_of_aegis--first_floor.maphinderdoor3havebeenin 1
+status bobby 2
+status the_sewers--south_east.maphinderdoor90 1
+status the_sewers--south_west.maphinderdoor154havebeenin 1
+status the_port_of_alares 0
+status temple_of_aegis--first_floor.maphinderdoor195 1
+status airship 1
+status pensara_-_the_trade_district_-_house_2_-_floor_2pensara_-_the_trade_district_-_house_2_-_floor_1 0
+status the_great_mine--tunnel.mapchest87 1
+status ollie 2
+status temple_of_aegis--top_floor.mapdoor119havebeenin 1
+status forest_of_bri--west_forest.mapdoor199 0
+status fire_cavern--blazing_maze.maphinderdoor127havebeenin 1
+status pensarasoldier_4 1
+status temple_of_aegis--fourth_floor.mapdoor106havebeenin 1
+status pensarasoldier_7 1
+status pensarasoldier_9 1
+status celis 0
+status pensarasoldier_8 1
+status temple_of_aegis--first_floor.maphinderdoor104havebeenin 1
+status the_sewers--south_east.maphinderdoor104 1
+status fire_cavern--furnace.mapdoor15havebeenin 1
+status mt._cesadur--entrance.mapladderdoor29 0
+status the_sewers--south_east.maphinderdoor105 1
+status eufrin 1
+status the_great_mine--the_mine_core.mapvillager87 1
+status eufrim 1
+status the_sewers--south_east.maphinderdoor106 1
+status the_great_mine--the_mine_core.mapbutton159 1
+status central_pass--central_part.maphinderdoor131 1
+status the_great_mine--the_mine_core.mapbutton155 1
+status milo 1
+status farmer_jane 2
+status candy 3
+status the_sewers--north_west.maphinderdoor76 0
+status farmer_bob 6
+status grivera--second_floor.mapladderdoor116 0
+status pensara_-_the_school_districtpensara_-_the_school_district_-_the_clock_tower_-_floor_1 0
+status alares_-_celis 0
+status farmer_john 4
+status dellnanode 1
+status pensara_-_the_trade_districtnode 0
+status the_great_mine--west_wing.maphinderdoor201 1
+status mezza 1
+status pensara_prison--floor_5.maphinderdoor153havebeenin 1
+status the_sewers--north.maphinderdoor21 0
+status pensara_prison--floor_2.maphinderdoor102 1
+status tilly 3
+status menthu's_lair--hall_of_memories.mapchest63 0
+status grivera--omnious_hall.mapladderdoor85 0
+status the_great_mine--great_deep.mapchest105 1
+status alares_-_libraryloot1 0
+status pensara_prison--floor_3.maphinderdoor57 0
+status road0-3 1
+status jewel 1
+status menthu's_lair--room_of_doubt.maphinderdoor148 0
+status pensaranode 0
+status pensara_prison--floor_2.maphinderdoor108 2
+status road0-8 1
+status port_of_alareson_the_boat_to_pensara 0
+status guy 5
+status the_sewers--north.maphinderdoor143 1
+status ingo 1
+status mollie 1
+status uli 1
+status empyrian_temple--hall_of_wind.maphinderdoor9 0
+status gravekeeper 1
+status the_sewers--north.maphinderdoor137 1
+status pensara_-_the_north_districtthe_sewers--north-mark6 -1
+status pensara_-_the_trade_district_-_house_3 0
+status mt._cesadur--second_floor.mapladderdoor101 0
+status berca_desert--south_west.mapdoor147havebeenin 1
+status cards.support.resurrect 1
+status pensara_prison--floor_6.mapchest110 1
+status berca_desert--south_west.mapdoor204 0
+status the_sewers--south.maphinderdoor43havebeenin 1
+status mt._cesadur--second_floor.mapladderdoor137 1
+status grivera--omnious_hall.mapchest203 1
+status fire_cavern--hall_of_the_damned.mapdoor207 0
+status pensara_-_the_trade_districtpensara_-_the_trade_district_-_senate -1
+status marc 9
+status fire_cavern--blazing_maze.mapchest58 1
+status the_sewers--south_east.mapdoor111havebeenin 1
+status hillnar 1
+status the_great_mine--the_mine_core.mapbutton189 1
+status pensara_-_the_trade_district_-_tower_prisonpensara_-_the_trade_district 0
+status empyrian_temple--sign_of_aries.maphinderdoor99 0
+status mt._cesadur--second_floor.mapchest142 1
+status hendrick 2
+status dorma's_forest--forest_of_hate.mapdoor125havebeenin 1
+status pensara_-_the_school_districtblessing 1
+status pensara_-_the_north_districtpensara_-_the_trade_district 0
+status temple_of_aegis--first_floor.maphinderdoor104 1
+status pensara_-_the_trade_districtpensara_-_the_trade_district_-_house_2_-_floor_1 0
+status dorma's_forest--forest_of_hate.mapchest46 1
+status mt._cesadur--second_floor.mapchest134 1
+status mt._cesadur--entrance.mapladderdoor101 0
+status bananas 1
+status central_pass--north_east_part.mapchest68 0
+status berca_desert--north_east.mapchest77 0
+status laila 2
+status pensara_prison--floor_2.maphinderdoor153 0
+status zazonode 3
+status menthu's_lair--hall_of_memories.mapdoor106havebeenin 1
+status fire_cavern--hall_of_fire.mapchest204 1
+status the_great_mine--great_deep.mapdoor123 0
+status the_prison_cell 0
+status vincent's_office 0
+status fire_cavern--inferno.mapdoor3 0
+status the_sewers--south.mapbutton196 1
+status home_of_celis_-_celis_homehome_of_celis 0
+status elements.tut 2
+status the_sewers--south.maphinderdoor131havebeenin 1
+status pensara_-_the_trade_districtpensaraweapons 0
+status berca_-_bar 0
+status bercacommander_1 1
+status east_passage--west_mountain.mapdoor4 0
+status temple_of_aegis--third_floor.mapdoor134 0
+status pensara_-_the_north_district_-_library 0
+status dellnadellna_-_ana's_home -1
+status deel 1
+status fire_cavern--passage_of_ifrit.mapmissionchest182 1
+status port_of_alares 1
+status dellna_-_housedellna 0
+status bercacardshop00 0
+status bercacardshop02 0
+status the_sewers--north_east.maphinderdoor10 1
+status alaresgrasstownweapons 0
+status bercacardshop01 0
+status bercacardshop04 0
+status bercacardshop03 0
+status bercacardshop06 0
+status bercacardshop05 0
+status zazoblessing 1
+status the_sewers--south.mapchest120 1
+status bercacardshop08 0
+status orgaan 1
+status zazo_-_farl's_house 0
+status fire_cavern--passage_of_ifrit.mapifdoor3havebeenin 1
+status gabriel 0
+status zazoitembarrel 1
+status temple_of_aegis--first_floor.mapdoor106 0
+status bercasoldier_11 1
+status temple_of_aegis--first_floor.maphinderdoor15havebeenin 1
+status bercasoldier_10 1
+status the_sewers--south_west.mapchest10 1
+status recruiter 4
+status bercasoldier_13 1
+status temple_of_aegis--third_floor.mapdoor134havebeenin 1
+status bercasoldier_12 1
+status menthu's_lair--hall_of_memories.mapbutton37 0
+status central_pass--north_east_part.mapbutton110 1
+status hanah 1
+status pensara_prison--floor_4.maphinderdoor108havebeenin 1
+status dorma's_forest--forest_of_hate.mapriddle164 0
+status berca_desert--north.mapdoor12 0
+status crystal_roomserphia_hall 0
+status empyrian_temple--hall_of_wind.maphinderdoor201 0
+status woldou 1
+status the_ship_cabinport_of_alares 0
+status port_of_alares_-_tavern 0
+status dorma's_forest--forest_of_hate.mapriddle172 0
+status temple_of_aegis--third_floor.mapdoor106 0
+status temple_of_aegis--third_floor.mapdoor104 0
+status fire_cavern--blazing_maze.mapdoor211havebeenin 1
+status juha 2
+status pensara_-_the_trade_districtcard 1
+status zazo_-_miner's_homezazo 0
+status the_great_mine--great_deep.maphinderdoor139 1
+status bercaberca_-_dolly's_house 0
+status bercarebel_hideout 0
+status bercaberca_-_house 0
+status zazo_-_teo's_housezazo 0
+status the_sewers--north_east.maphinderdoor41havebeenin 1
+status the_sewers--north_east.maphinderdoor41 1
+status temple_of_aegis--base_level.mapdoor207 0
+status temple_of_aegis--first_floor.mapdoor106havebeenin 1
+status pensara_-_the_north_districtpensara_-_the_north_district_-_civil_house 0
+status gilo 1
+status sewermission 3
+status the_sewers--north_west.mapchest12 1
+status dorma's_forest--forest_of_hate.mapriddle76 0
+status zazo_-_teo 0
+status pensara_-_the_school_districtpensara_-_the_school_district_-_the_armory -1
+status the_sewers--south_west.maphinderdoor99 1
+status amy 1
+status marcus 2
+status berca_desert--south_west.mapdoor79havebeenin 1
+status the_great_mine--mine_shaft.maphinderdoor63 1
+status the_sewers--north_east.maphinderdoor25 1
+status dorma's_forest--forest_of_hate.mapriddle68 0
+status emma 1
+status pensarasoldier_13 1
+status mt._cesadur--basement.mapchest151 1
+status the_sewers--south_west.mapbomb56 1
+status pensarasoldier_11 1
+status pensarasoldier_12 1
+status forest_of_reil--deep_forest.mapchest67 1
+status temple_of_aegis--third_floor.mapchest138 1
+status pensarasoldier_10 1
+status berca_desert--north.mapdoor127 0
+status fire_cavern--hall_of_the_damned.mapdoor207havebeenin 1
+status temple_of_aegis--second_floor.mapdoor106 0
+status bercabercaweapons 0
+status pensarasoldier_19 1
+status pensarasoldier_17 1
+status pensarasoldier_18 1
+status central_pass--central_part.mapchest9 1
+status pensarasoldier_15 1
+status temple_of_aegis--second_floor.mapdoor104 0
+status pensarasoldier_16 1
+status dorma's_forest--forest_of_hate.mapchest206 1
+status dedric1 1
+status dorma's_forest--forest_of_hate.mapriddle56 0
+status ghertrudd 2
+status zazozazocardshop 1
+status fire_cavern--inferno.mapchest52 1
+status ross1 1
+status pensara_-_the_school_district_-_the_schoolpensara_-_the_school_district 0
+status passguard_seth 4
+status fire_cavern--furnace.mapdoor211 0
+status hilda1 1
+status east_passage--east_mountain.mapchest166 0
+status pensara_prison--floor_1.maphinderdoor102havebeenin 1
+status fire_cavern--hall_of_the_damned.mapdoor15havebeenin 1
+status mt._cesadur--third_floor.mapladderdoor5 0
+status fire_cavern--passage_of_ifrit.mapifdoor3 -2
+status grivera--first_floor.tut 2
+status pensara_-_the_trade_district_-_house_2_-_floor_1 0
+status temple_of_aegis--second_floor.mapchest137 1
+status cards.offense.laceratingcut 1
+status temple_of_aegis--first_floor.mapaegiscombobutton35 1
+status the_sewers--south_west.maphinderdoor198 1
+status alaresalares_-_belmet's_house 0
+status temple_of_aegis--fourth_floor.mapchest102 1
+status port_of_zazobottle 0
+status pavier 1
+status dorma's_forest--forest_of_hate.mapdoor115havebeenin 1
+status ylwaa 1
+status fire_cavern--inferno.mapdoor195havebeenin 1
+status the_great_mine--the_mine_core.mapchest85 1
+status dorma's_tranquility 0
+status grivera--omnious_hall.mapchest198 1
+status petir 2
+status pensara_-_the_trade_district_-_house_2_-_floor_2 0
+status forest_of_bri--east_forest.mapchest36 1
+status port_of_zazo 0
+status olda 1
+status port_of_alaresport_of_alares_-_tavern 0
+status gregory 2
+status fire_cavern--hall_of_the_damned.mapdoor15 0
+status temple_of_aegis--third_floor.mapdoor104havebeenin 1
+status the_sewers--north.mapbomb166 1
+status fire_cavern--passage_of_ifrit.mapdoor207 0
+status menthu's_lair--hall_of_memories.mapdoor102 0
+status the_sewers--north.mapdoor21havebeenin 1
+status mt._cesadur--basement.mapchest119 1
+status grivera--second_floor.mapladderdoor94 0
+status pensara_prison--floor_3.maphinderdoor169havebeenin 1
+status cards.magic.wind 1
+status the_sewers--south_west.maphinderdoor198havebeenin 1
+status bercacardshop012 0
+status pensara_prison--floor_5.maphinderdoor108 1
+status bercacardshop010 0
+status central_pass--central_part.maphinderdoor4 0
+status menthu's_lair--hall_of_memories.mapdoor106 0
+status pensara_prison--floor_5.maphinderdoor102 1
+status fire_cavern--inferno.mapchest15 1
+status menthu's_lair--hall_of_memories.mapdoor111 0
+status zazo_-_miner's_home2zazo 0
+status pensara_prison--floor_5.maphinderdoor108havebeenin 1
+status the_great_mine--tunnel.mapbutton25 1
+status flognight 1
+status the_great_mine--tunnel.mapbutton29 1
+status pensara_-_the_north_district_-_civil_housepensara_-_the_north_district 0
+status the_sewers--south.mapsave101 0
+status podd 2
+status forest_of_bri--west_forest.mapdoor115 0
+status pensara_prison--floor_6.maphinderdoor109 2
+status pensara_prison--floor_6.maphinderdoor108 1
+status dellnachurch -1
+status pensara_-_the_north_districtpensara_-_the_north_district_-_farmer_house 0
+status home_of_celis 0
+status pensara_prison--floor_6.maphinderdoor102 2
+status the_great_mine--great_deep.maphinderdoor127 1
+status berca_-_library_-_floor_2 0
+status the_sewers--north.maphinderdoor202havebeenin 1
+status pensara_prison--floor_3.maphinderdoor102 2
+status pensara_-_the_school_district_-_the_clock_tower_-_floor_2pensara_-_the_school_district_-_the_clock_tower_-_floor_1 0
+status pensara_prison--floor_3.maphinderdoor108 1
+status menthu's_lair--room_of_turmoil.maphinderdoor62 0
+status the_sewers--north_west.maphinderdoor106 0
+status quintis 1
+status the_sewers--north_west.maphinderdoor105 0
+status berca_-_library_-_floor_1 0
+status ylwa 2
+status bercabercacardshop 0
+status pensara_-_the_trade_districtpensara_-_the_trade_district_-_house_1_-_floor_1 0
+status pensara_-_the_north_district 0
+status temple_of_aegis--base_level.mapbutton137 1
+status temple_of_aegis--first_floor.mapaegiscombobutton175 1
+status fire_cavern--furnace.mapchest21 1
+status alarescardhouse -1
+status alaresnode 0
+status mt._cesadur--mountain_top.mapdoor55 0
+status mt._cesadur--entrance.mapchest26 1
+status polandera 1
+status zazo 1
+status menthu's_lair--hall_of_memories.maphinderdoor103 1
+status the_great_mine--the_mine_core.mapchest76 1
+status the_sewers--north_west.maphinderdoor111 1
+status pensara_prison--floor_2.maphinderdoor102havebeenin 1
+status berca_desert--south_west.mapdoor79 0
+status denese 1
+status fire_cavern--furnace.mapdoor211havebeenin 1
+status pensara_-_the_trade_district_-_house_1_-_floor_1pensara_-_the_trade_district_-_house_1_-_floor_2 0
+status pensara_-_the_trade_districtpensara_-_the_trade_district_-_soldier -1
+status fire_cavern--passage_of_ifrit.mapdoor207havebeenin 1
+status east_passage--east_mountain.mapdoor5 0
+status menthu's_lair--hall_of_memories.maphinderdoor107 1
+status mt._cesadur--third_floor.mapladderdoor126 0
+status the_sewers--north_west.mapchest150 1
+status the_great_mine--the_hall.maphinderdoor99 1
+status pensara_prison--floor_5.maphinderdoor102havebeenin 1
+status forest_of_reil--deep_forest.mapdoor7 0
+status berca_-_library_-_floor_2berca 0
+status grivera--first_floor.mapladderdoor116 0
+status emma1 1
+status menthu's_lair--hall_of_memories.maphinderdoor107havebeenin 1
+status parasne 1
+status temple_of_aegis--second_floor.mapdoor106havebeenin 1
+status temple_of_aegis--base_level.mapdoor195havebeenin 1
+status pensara_-_the_school_district_-_the_clock_tower_-_floor_1pensara_-_the_school_district_-_the_clock_tower_-_floor_2 0
+status pensaracardshop09 0
+status pensaracardshop08 0
+status dellna_-_elder_house_-_floor_2dellna_-_elder_house_-_floor_3 0
+status dellna_-_elder_house_-_floor_2dellna_-_elder_house_-_floor_1 0
+status pensaracardshop05 0
+status pensaracardshop04 0
+status pensaracardshop07 0
+status the_great_mine--mine_shaft.maphinderdoor7 1
+status pensaracardshop06 0
+status dellna_-_elder_house_-_floor_1dellna_-_elder_house_-_floor_2 0
+status pensara_prison--floor_1.maphinderdoor102 2
+status berca_-_library_-_floor_1berca_-_library_-_floor_2 0
+status forest_of_bri--east_forest.mapdoor12 0
+status empyrian_temple--sign_of_libra.maphinderdoor111 0
+status pensara_prison--floor_1.maphinderdoor108havebeenin 1
+status the_great_mine--west_wing.mapvillager140 1
+status dave 1
+status mt._cesadur--entrance.mapdoor105 0
+status pensara_prison--floor_6.maphinderdoor153 0
+status menthu's_lair--hall_of_memories.mapchest205 0
+status pensara_prison--floor_1.maphinderdoor108 1
+status hassan 1
+status the_sewers--south.maphinderdoor131 1
+status berca_desert--north_east.mapdoor14havebeenin 1
+status bella 3
+status pensara_forest--forest.mapdoor111 0
+status the_sewers--north.mapchest26 1
+status pensaracardshop 1
+status pensara_-_the_school_districtchurch 0
+status mt._cesadur--basement.mapriddle28 0
+status temple_of_aegis--base_level.mapbutton103 1
+status temple_of_aegis--base_level.mapbutton107 1
+status zazozazo_-_miner's_home 0
+status pensara_-_the_north_district_-_librarypensara_-_the_north_district 0
+status the_great_mine--tunnel.maphinderdoor7 1
+status mt._cesadur--basement.maphinderdoor199 1
+status bercaname 1
+status mt._cesadur--basement.maphinderdoor198 1
+status grivera--first_floor.mapchest9 1
+status the_sewers--south.maphinderdoor121 0
+status the_sewers--south.maphinderdoor120 0
+status the_sewers--north.mapchest30 1
+status the_great_mine--the_hall.maphinderdoor9 1
+status ingus1 2
+status temple_of_aegis--first_floor.mapaegiscombobutton197 1
+status serphia_hallcrystal_room 0
+status the_great_mine--the_hall.mapdoor109 0
+status pert 2
+status berca 0
+status pensara_-_the_trade_districtpensaracardshop 0
+status temple_of_aegis--top_floor.mapdoor106havebeenin 1
+status grivera--first_floor.mapdoor12 0
+status bercasoldier_3 1
+status longhorn 1
+status bercasoldier_4 1
+status bercasoldier_5 1
+status dolly 2
+status bercasoldier_6 1
+status bercasoldier_7 1
+status bercasoldier_8 1
+status parasne_-_tavernparasne 0
+status bercasoldier_9 1
+status buttenar 1
+status bercameeting_with_the_rebels -1
+status temple_of_aegis--base_level.mapdoor207havebeenin 1
+status bercasoldier_1 1
+status bercasoldier_2 1
+status the_sewers--north.maphinderdoor202 1
+status the_sewers--south.maphinderdoor42havebeenin 1
+status treasuremission 2
+status home_of_celisflower 1
+status the_great_mine--great_deep.mapchest203 1
+status christoffer1 1
+status zazo_-_tentzazo 0
+status alaresinn 0
+status the_ship_cabin 1
+status pensara_prison--floor_3.maphinderdoor153havebeenin 1
+status the_sewers--north_east.mapchest71 1
+status pensara_-_the_school_districtpensara_-_the_trade_district 0
+status crossroadnode 0
+status the_great_mine--west_wing.maphinderdoor108 1
+status the_sewers--north_east.maphinderdoor10havebeenin 1
+status mt._cesadur--third_floor.mapchest121 1
+status pensara_-_the_trade_districtpensara_-_the_trade_district_-_mezza's_house 0
+status pensara_-_the_trade_district_-_house_1_-_floor_2pensara_-_the_trade_district_-_house_1_-_floor_1 0
+status grivera--third_floor.maphinderdoor203 0
+status alarescardshop08 0
+status berca_desert--south_west-mark0node 0
+status the_sewers--south_west.maphinderdoor154 1
+status alares 0
+status alarescardshop05 0
+status berca_desert--north.mapchest8 1
+status the_sewers--south_west.maphinderdoor153 1
+status alarescardshop07 0
+status the_sewers--south_east.maphinderdoor104havebeenin 1
+status the_great_mine--west_wing.maphinderdoor115 1
+status alarescardshop00 0
+status fire_cavern--hall_of_fire.mapchest30 1
+status the_sewers--north_west.mapsave124 0
+status mt._cesadur--fourth_floor.mapchest157 1
+status berca_desert--north_east.mapdoor79 0
+status yolly 2
+status fire_cavern--hall_of_fire.mapchest36 1
+status ingerd1 1
+status pensara_prison--floor_1-mark0node -2
+status the_prison 0
+status meanwhile_-_teo_is_plotting_with_vincent 1
+status elviri 2
+status cardstore.tut 2
+status mt._cesadur--basement.mapriddle56 0
+status forest_of_reil--deep_forest.tut 2
+status weaponstore.tut 2
+status freddy 2
+status alares_-_belmet's_house 0
+status fire_cavern--blazing_maze.mapdoor211 0
+status berca_-_library_-_floor_1berca 0
+status crossroad 0
+status the_sewers--south.maphinderdoor198 1
+status mt._cesadur--mountain_top.mapdoor155 0
+status the_sewers--south_east.mapdoor111 0
+status berca_-_dolly's_house 0
+status samborg 1
+status cards.offense.magicalblow 1
+status pensara_prison--floor_1.maphinderdoor153 0
+status central_pass--north_east_part.mapdoor163 0
+status elmer 6
+status zalzi 0
+status the_sewers--south.mapbutton8 1
+status fire_cavern--hall_of_fire.mapdoor9 0
+status aldrin 1
+status sellie 2
+status central_pass--north_part.mapdoor199 1
+status alares_-_belmet's_housealares 0
+status the_sewers--south.maphinderdoor184 0
+status the_sewers--south.maphinderdoor185 0
+status grivera--third_floor.maphinderdoor219 0
+status fredric1 1
+status alaressoldier_6 1
+status alaressoldier_4 1
+status alaressoldier_5 1
+status alaressoldier_2 1
+status pensara_prison--floor_4.maphinderdoor102havebeenin 1
+status alaressoldier_1 1
+status the_sewers--south_west.maphinderdoor58 0
+status the_sewers--south_west.maphinderdoor57 0
+status temple_of_aegis--base_level.mapdoor3havebeenin 1
+status sailor 1
+status churchbless.tut 2
+status dorma's_forest--forest_of_hate.mapdoor125 0
+status east_passage--east_mountain.mapdoor127 0
+status pensara_-_the_trade_district_-_house_1_-_floor_1pensara_-_the_trade_district 0
+status menthu 1
+status pensara_prison--floor_1.maphinderdoor41 2
+status mt._cesadur--third_floor.mapladderdoor37 0
+status mt._cesadur--third_floor.mapladderdoor39 0
+status the_sewers--south.maphinderdoor6 1
+status pensara_-_the_north_district_-_civil_house 0
+status temeth 1
+status zazocardshop02 0
+status frigidu 1
+status zazocardshop03 0
+status zazocardshop04 0
+status zazocardshop05 0
+status bercainn 0
+status zazocardshop00 0
+status road0-10 1
+status zazocardshop01 0
+status empyrian_temple--hall_of_wind.maphinderdoor99 0
+status east_passage--west_mountain.mapchest138 1
+status alaresalares_-_library 0
+status pensara_-_the_trade_district 0
+status pensara_prison--floor_1.maphinderdoor57 1
+status the_sewers--south_west.mapchest120 1
+status willy 1
+status dellna_-_house 0
+status zazocardshop19 0
+status forest_of_bri--west_forest.mapchest39 1
+status mt._cesadur--entrance.mapladderdoor207 0
+status zazocardshop17 0
+status zazocardshop18 0
+status mt._cesadur--basement.mapladderdoor63 0
+status deck.tut 2
+status berca_-_house 0
+status road1-3 1
+status bercachurch 0
+status road1-1 1
+status mt._cesadur--second_floor.mapladderdoor207 0
+status berca_-_dolly's_houseberca 0
+status zazo_-_teo's_house 0
+status road1-7 1
+status road1-4 1
+status road1-5 1
+status zazocardshop16 0
+status berca_desert--north_west.mapdoor204havebeenin 1
+status temple_of_aegis--first_floor.maphinderdoor195havebeenin 1
+status road1-9 1
+status serphia_halltemple_of_aegis--top_floor-mark1 0
+status the_great_mine--west_wing.maphinderdoor124 2
+status empyrian_temple--sign_of_capricorn.maphinderdoor111 0
+status fire_cavern--furnace.mapdoor15 0
+status dellnaenocard 5
+status fire_cavern--furnace.mapchest191 1
+status grivera--second_floor.mapchest52 1
+status dellna_-_ana's_homedellna 0
+status killian 1
+status parasneparasne_-_tavern 0
+status the_sewers--south_east.mapsave56 0
+status the_sewers--south_east.maphinderdoor90havebeenin 1
+status menthu1 1
+status menthu2 1
+status temple_of_aegis--third_floor.mapdoor106havebeenin 1
+status zazo_-_miner's_tent 0
+status pensara_forest--forest.mapdoor179 0
+status memoryserphia 1
+status mt._cesadur--fourth_floor.mapchest23 1
+status forest_of_bri--east_forest.mapdoor7 0
+status fire_cavern--furnace.mapchest182 1
+status east_passage--west_mountain.mapdoor197 0
+status home_of_the_godsempyrian_temple--the_zodiac-mark1 0
+status empyrian_temple--hall_of_wind.maphinderdoor72 0
+status empyrian_temple--hall_of_wind.maphinderdoor73 0
+status grivera--corridor_of_agony.mapbutton106 1
+status zazozazo_-_farl's_house 0
+status alishia 2
+status thieving_looking_guynight 1
+status the_ship_cabinparasne 0
+status parasnecommander_1 1
+status central_pass--north_part.mapchest71 1
+status the_great_mine--the_hall.mapbutton68 1
+status ander1 1
+status fire_cavern--hall_of_fire.maphinderdoor115havebeenin 1
+status fortuneteller 2
+status pensara_prison--floor_6.maphinderdoor57 0
+status fire_cavern--blazing_maze.mapbutton201 1
+status zazozazoweapons 0
+status temple_of_aegis--top_floor.mapsave73 0
+status menthu's_lair--hall_of_memories.mapbutton25 1
+status the_sewers--south.maphinderdoor198havebeenin 1
+status pensara_-_the_north_districtpensara_-_the_north_district_-_library 0
+status temple_of_aegis--first_floor.mapsave103 0
+status friedrich 1
+status dido 1
+status the_great_mine--tunnel.mapdoor37 0
+status bercaberca_-_bar 0
+status parasnethe_ship_cabin 0
+status the_great_mine--the_hall.mapbutton72 1
+status grivera--first_floor.mapchest47 1
+status fire_cavern--hall_of_the_damned.mapchest165 1
+status berca_desert--south_west.mapdoor147 0
+status dorma's_forest--forest_of_hate.mapriddle184 0
+status temple_of_aegis--first_floor.maphinderdoor3 1
+status temple_of_aegis--fourth_floor.mapsave156 0
+status menthu's_lair--hall_of_memories.mapbutton13 1
+status temple_of_aegis--fourth_floor.mapdoor74havebeenin 1
+status temple_of_aegis--base_level.mapdoor3 0
+status dellna_-_elder_house_-_floor_1dellna 0
+status the_great_mine--great_deep.mapbutton189 1
+status the_sewers--north_east.mapsave104 0
+status menthu's_lair--hall_of_memories.mapsave109 0
+status forest_of_bri--east_forest.mapdoor175 0
+status kin's_place 0
+status salmonman 1
+status pretto 4
+status the_great_mine--the_hall.mapbutton38 1
+status mt._cesadur--entrance.mapchest196 1
+status berca_desert--north_east.mapdoor14 0
+status pensara_-_the_trade_districtpensara_-_the_trade_district_-_tower_prison 0
+status the_sewers--north_west.mapbutton58 1
+status grivera--corridor_of_agony.mapsave74 0
+status the_sewers--north.maphinderdoor137havebeenin 1
+status bercanode 0
+status the_great_mine--tunnel.mapvillager21 1
+status alaresblessing 1
+status temple_of_aegis--fourth_floor.mapdoor74 0
+status dellna_-_elder_house_-_floor_3dellna_-_elder_house_-_floor_2 0
+status pensara_-_the_trade_district_-_house_2_-_floor_1pensara_-_the_trade_district 0
+status dorma's_forest--forest_of_hate.mapdoor115 0
+status dorma's_forest--forest_of_hate.maphinderdoor124 1
+visitedNodes world0.map Forest_of_Reil--Deep_Forest-mark0
+visitedNodes world0.map Forest_of_Reil--Deep_Forest-mark1
+visitedNodes world0.map Zazo
+visitedNodes world0.map Forest_of_Bri--East_Forest-mark0
+visitedRoads world0.map 0
+visitedRoads world0.map 2
+visitedRoads world0.map 3
+visitedRoads world0.map 4
+visitedRoads world0.map 5
+visitedRoads world0.map 6
+visitedRoads world0.map 7
+visitedRoads world0.map 8
+visitedRoads world0.map 9
+visitedRoads world0.map 10
+visitedRoads world0.map 11
+visitedRoads world0.map 12
+visitedRoads world0.map 13
+visitedRoads world0.map 14
+visitedRoads world0.map 15
+visitedRoads world0.map 16
+visitedRoads world0.map 19
+visitedRoads world0.map 18
+visitedRoads world0.map 20
+visitedNodes world1.map Parasne
+visitedNodes world1.map Pensara_Forest--Forest-mark1
+visitedNodes world1.map Pensara_Prison--Floor_1-mark0
+visitedNodes world1.map Berca_Desert--North_East-mark0
+visitedRoads world1.map 0
+visitedRoads world1.map 1
+visitedRoads world1.map 2
+visitedRoads world1.map 3
+visitedRoads world1.map 4
+visitedRoads world1.map 5
+visitedRoads world1.map 6
+visitedRoads world1.map 7
+visitedRoads world1.map 8
+visitedRoads world1.map 9
+visitedRoads world1.map 10
+visitedRoads world1.map 11
+labmap The_Great_Mine--Great_Deep.map
+node 137 true true
+node 207 false true
+node 139 true true
+node 141 true true
+node 201 true true
+node 203 false true
+node 153 true true
+node 154 true true
+node 155 true true
+node 156 true true
+node 157 true true
+node 158 true true
+node 159 true true
+node 171 true true
+node 169 true true
+node 175 true true
+node 107 false true
+node 105 false true
+node 187 true true
+node 185 true true
+node 190 true true
+node 191 true true
+node 189 false true
+node 127 true true
+node 126 true true
+node 125 true true
+node 123 true true
+node 121 true true
+labmap The_Great_Mine--The_Mine_Core.map
+node 137 true true
+node 141 true true
+node 76 false true
+node 9 true true
+node 199 true true
+node 73 true true
+node 152 true true
+node 85 false true
+node 153 true true
+node 87 false true
+node 155 false true
+node 156 true true
+node 157 true true
+node 158 true true
+node 159 false true
+node 25 true true
+node 92 true true
+node 89 true true
+node 151 true true
+node 103 true true
+node 101 true true
+node 173 true true
+node 110 true true
+node 111 true true
+node 108 true true
+node 41 true true
+node 109 true true
+node 167 true true
+node 106 true true
+node 107 true true
+node 105 true true
+node 119 true true
+node 118 true true
+node 117 true true
+node 189 false true
+node 57 true true
+node 125 true true
+node 183 true true
+node 121 true true
+node 120 true true
+labmap The_Great_Mine--Mine_Shaft.map
+node 39 true true
+node 7 true true
+node 77 true true
+node 41 true true
+node 73 true true
+node 75 true true
+node 45 true true
+node 55 true true
+node 23 true true
+node 93 false true
+node 59 true true
+node 25 true true
+node 58 true true
+node 57 true true
+node 56 true true
+node 89 false true
+node 63 true true
+node 29 false true
+node 62 true true
+node 91 false true
+node 61 true true
+node 60 true true
+labmap The_Great_Mine--West_Wing.map
+node 137 true true
+node 71 false true
+node 201 true true
+node 140 false true
+node 76 false true
+node 152 true true
+node 153 true true
+node 87 true true
+node 92 true true
+node 148 false true
+node 149 true true
+node 150 true true
+node 151 true true
+node 103 true true
+node 169 true true
+node 108 true true
+node 106 true true
+node 107 true true
+node 166 true true
+node 104 true true
+node 105 true true
+node 119 true true
+node 118 true true
+node 117 true true
+node 185 true true
+node 116 true true
+node 115 true true
+node 124 true true
+node 182 false true
+node 121 true true
+labmap The_Great_Mine--The_Hall.map
+node 68 false true
+node 69 true true
+node 70 true true
+node 71 true true
+node 9 true true
+node 199 true true
+node 72 false true
+node 135 true true
+node 75 true true
+node 86 true true
+node 25 true true
+node 147 false true
+node 148 true true
+node 149 true true
+node 150 true true
+node 91 true true
+node 151 true true
+node 102 true true
+node 103 true true
+node 100 true true
+node 101 true true
+node 38 false true
+node 99 true true
+node 42 true true
+node 43 true true
+node 108 true true
+node 109 true true
+node 41 true true
+node 167 true true
+node 106 true true
+node 107 true true
+node 165 true true
+node 104 true true
+node 105 true true
+node 119 true true
+node 54 true true
+node 59 true true
+node 183 true true
+node 181 true true
+labmap The_Great_Mine--Tunnel.map
+node 7 true true
+node 74 true true
+node 87 false true
+node 21 false true
+node 23 true true
+node 93 false true
+node 25 false true
+node 92 true true
+node 27 true true
+node 26 true true
+node 29 false true
+node 89 true true
+node 28 true true
+node 88 true true
+node 91 true true
+node 90 true true
+node 39 true true
+node 37 true true
+node 43 true true
+node 51 true true
+node 55 true true
+node 54 true true
+node 53 true true
+node 52 true true
+node 59 true true
+node 58 true true
+node 57 true true
+node 56 true true
+labmap Forest_of_Reil--Forest_Path.map
+node 42 true true
+node 110 true true
+node 111 true true
+node 10 true true
+node 108 true true
+node 109 true true
+node 106 true true
+node 107 true true
+node 74 true true
+node 58 true true
+node 26 true true
+node 124 false false
+node 90 true true
+labmap Forest_of_Reil--Deep_Forest.map
+node 140 true true
+node 143 true true
+node 7 true true
+node 142 true true
+node 131 true true
+node 133 true true
+node 132 true true
+node 156 true true
+node 23 true true
+node 159 true true
+node 25 true true
+node 27 true true
+node 26 true true
+node 29 true true
+node 28 true true
+node 171 true true
+node 170 true true
+node 169 true true
+node 168 true true
+node 175 true true
+node 39 true true
+node 172 true true
+node 43 true true
+node 41 true true
+node 46 true true
+node 45 true true
+node 184 true true
+node 55 true true
+node 191 true true
+node 54 true true
+node 53 true true
+node 59 true true
+node 57 true true
+node 56 true true
+node 62 true true
+node 69 true true
+node 207 true true
+node 206 false true
+node 200 true true
+node 67 false true
+node 78 true true
+node 75 true true
+node 85 true true
+node 83 true true
+node 92 true true
+node 94 true true
+node 91 true true
+node 101 true true
+node 99 true true
+node 110 true true
+node 108 true true
+node 117 true true
+node 115 true true
+node 126 true true
+node 124 true true
+labmap Forest_of_Bri--West_Forest.map
+node 204 true true
+node 69 true true
+node 70 true true
+node 71 true true
+node 138 true true
+node 140 true true
+node 199 true true
+node 74 true true
+node 135 true true
+node 152 true true
+node 153 true true
+node 154 true true
+node 87 true true
+node 156 true true
+node 151 true true
+node 90 true true
+node 103 true true
+node 39 false true
+node 172 true true
+node 42 true true
+node 40 true true
+node 108 true true
+node 41 true true
+node 106 true true
+node 107 true true
+node 186 true true
+node 119 true true
+node 187 true true
+node 118 true true
+node 184 true true
+node 117 true true
+node 185 true true
+node 116 true true
+node 115 true true
+node 188 true true
+node 58 true true
+node 124 true true
+node 183 true true
+node 122 true true
+labmap Forest_of_Bri--East_Forest.map
+node 139 true true
+node 71 true true
+node 138 true true
+node 140 true true
+node 7 true true
+node 12 true true
+node 72 true true
+node 73 true true
+node 74 true true
+node 87 true true
+node 156 true true
+node 23 true true
+node 28 true true
+node 90 true true
+node 102 true true
+node 103 true true
+node 101 true true
+node 175 true true
+node 38 true true
+node 174 true true
+node 39 true true
+node 173 true true
+node 36 false true
+node 172 true true
+node 37 true true
+node 106 true true
+node 44 true true
+node 59 true true
+node 58 true true
+node 122 true true
+node 60 true true
+labmap Central_Pass--North_Part.map
+node 137 true true
+node 69 true true
+node 136 true true
+node 70 true true
+node 71 false true
+node 138 true true
+node 141 true true
+node 143 true true
+node 142 true true
+node 199 true true
+node 133 true true
+node 74 true true
+node 135 true true
+node 134 true true
+node 85 true true
+node 90 true true
+node 151 true true
+node 101 true true
+node 42 true true
+node 40 false true
+node 108 true true
+node 41 true true
+node 109 true true
+node 167 true true
+node 106 true true
+node 107 true true
+node 117 true true
+node 58 true true
+node 125 true true
+node 183 true true
+node 122 true true
+labmap Central_Pass--North_East_Part.map
+node 68 false false
+node 139 true true
+node 71 true true
+node 201 true true
+node 141 true true
+node 200 true true
+node 140 true true
+node 203 true true
+node 202 true true
+node 142 true true
+node 7 true true
+node 199 true true
+node 84 false false
+node 87 true true
+node 155 true true
+node 23 true true
+node 25 true true
+node 27 true true
+node 26 true true
+node 28 false true
+node 171 true true
+node 102 false true
+node 103 true true
+node 100 false false
+node 101 false false
+node 39 true true
+node 163 true true
+node 110 false true
+node 41 true true
+node 167 true true
+node 106 true true
+node 166 true true
+node 107 true true
+node 165 true true
+node 104 true true
+node 164 true true
+node 105 true true
+node 187 true true
+node 55 true true
+node 126 true true
+node 57 true true
+node 56 true true
+node 123 true true
+node 183 true true
+labmap Central_Pass--Central_Part.map
+node 137 true true
+node 139 true true
+node 138 true true
+node 71 true true
+node 4 true true
+node 141 true true
+node 140 true true
+node 197 true true
+node 9 false true
+node 199 false true
+node 131 true true
+node 198 true true
+node 133 true true
+node 132 true true
+node 153 true true
+node 87 true true
+node 157 true true
+node 20 true true
+node 25 true true
+node 89 true true
+node 149 true true
+node 88 true true
+node 91 true true
+node 90 true true
+node 169 true true
+node 168 true true
+node 175 false true
+node 38 true true
+node 174 true true
+node 39 true true
+node 173 true true
+node 36 true true
+node 37 true true
+node 110 true true
+node 40 true true
+node 41 true true
+node 109 true true
+node 167 true true
+node 166 true true
+node 165 true true
+node 105 true true
+node 55 true true
+node 125 true true
+node 121 true true
+node 181 true true
+labmap Grivera--First_Floor.map
+node 137 true true
+node 136 true true
+node 139 true true
+node 138 true true
+node 141 true true
+node 140 true true
+node 203 true true
+node 76 true true
+node 9 false true
+node 79 true true
+node 72 true true
+node 12 true true
+node 155 true true
+node 25 true true
+node 93 true true
+node 92 true true
+node 95 true true
+node 94 true true
+node 28 true true
+node 88 true true
+node 171 true true
+node 41 true true
+node 109 true true
+node 47 false true
+node 44 true true
+node 104 true true
+node 119 true true
+node 187 true true
+node 118 true true
+node 117 true true
+node 116 true true
+node 59 true true
+node 58 true true
+node 57 true true
+node 125 true true
+node 56 true true
+node 63 true true
+node 60 true true
+node 120 true true
+labmap Grivera--Second_Floor.map
+node 139 true true
+node 71 true true
+node 141 true true
+node 140 true true
+node 203 true true
+node 143 true true
+node 142 true true
+node 78 true true
+node 75 true true
+node 87 true true
+node 155 true true
+node 159 true true
+node 94 false true
+node 89 true true
+node 88 true true
+node 91 true true
+node 90 true true
+node 171 true true
+node 103 true true
+node 175 true true
+node 43 true true
+node 46 true true
+node 44 true true
+node 45 true true
+node 119 true true
+node 187 true true
+node 118 true true
+node 117 true true
+node 116 true true
+node 190 true true
+node 55 true true
+node 191 true true
+node 54 true true
+node 53 true true
+node 189 false true
+node 52 false true
+node 59 true true
+node 62 true true
+labmap Grivera--Third_Floor.map
+node 138 true true
+node 75 true true
+node 85 true true
+node 152 true true
+node 84 true true
+node 153 true true
+node 87 true true
+node 154 true true
+node 86 true true
+node 83 true true
+node 93 true true
+node 92 true true
+node 27 false true
+node 94 true true
+node 88 true true
+node 91 true true
+node 170 true true
+node 43 true true
+node 107 true true
+node 104 true true
+node 59 true true
+node 123 true true
+node 122 true true
+node 121 true true
+node 120 true true
+labmap Grivera--Corridor_of_Agony.map
+node 139 false false
+node 71 true true
+node 141 false true
+node 140 false false
+node 143 true true
+node 76 true true
+node 77 true true
+node 79 false true
+node 72 true true
+node 73 true true
+node 74 true true
+node 75 true true
+node 155 false false
+node 156 false true
+node 157 true true
+node 158 true true
+node 23 true true
+node 159 true true
+node 93 true true
+node 27 false false
+node 95 true true
+node 29 false false
+node 28 false false
+node 171 false false
+node 39 true true
+node 173 false true
+node 172 false false
+node 111 true true
+node 108 true true
+node 109 true true
+node 46 false false
+node 106 false true
+node 47 false false
+node 107 true true
+node 45 false false
+node 55 true true
+node 127 true true
+node 63 false false
+node 61 false true
+labmap Mt._Cesadur--Basement.map
+node 139 true true
+node 143 true true
+node 133 true true
+node 153 false true
+node 155 false true
+node 159 true true
+node 28 false true
+node 149 true true
+node 150 true true
+node 151 false true
+node 169 true true
+node 175 true true
+node 174 true true
+node 173 false true
+node 44 true true
+node 165 true true
+node 185 true true
+node 191 true true
+node 59 true true
+node 58 true true
+node 57 true true
+node 56 false true
+node 63 true true
+node 62 true true
+node 61 true true
+node 60 true true
+node 181 true true
+node 205 true true
+node 204 true true
+node 207 true true
+node 206 true true
+node 201 true true
+node 200 true true
+node 203 true true
+node 202 true true
+node 76 true true
+node 197 true true
+node 199 true true
+node 198 true true
+node 85 true true
+node 87 false true
+node 86 true true
+node 93 true true
+node 92 true true
+node 95 true true
+node 94 true true
+node 91 true true
+node 101 true true
+node 111 true true
+node 109 true true
+node 107 true true
+node 119 false true
+node 118 true true
+node 117 true true
+node 127 true true
+node 125 false true
+node 123 true true
+labmap Mt._Cesadur--Entrance.map
+node 137 true true
+node 136 true true
+node 139 false true
+node 4 false true
+node 6 true true
+node 7 true true
+node 142 true true
+node 8 true true
+node 133 true true
+node 132 true true
+node 135 true true
+node 134 true true
+node 155 true true
+node 20 true true
+node 157 true true
+node 158 true true
+node 22 true true
+node 159 true true
+node 24 true true
+node 26 false true
+node 148 true true
+node 29 true true
+node 171 true true
+node 38 true true
+node 175 true true
+node 36 true true
+node 173 true true
+node 37 true true
+node 42 true true
+node 40 true true
+node 167 true true
+node 166 true true
+node 165 true true
+node 45 true true
+node 164 true true
+node 186 true true
+node 187 true true
+node 184 true true
+node 185 true true
+node 191 true true
+node 188 true true
+node 189 true true
+node 59 true true
+node 58 true true
+node 56 true true
+node 63 true true
+node 62 true true
+node 183 true true
+node 61 true true
+node 180 true true
+node 60 true true
+node 68 true true
+node 69 true true
+node 70 true true
+node 207 false true
+node 71 true true
+node 67 true true
+node 77 true true
+node 196 false true
+node 72 true true
+node 93 true true
+node 92 true true
+node 94 true true
+node 91 true true
+node 102 true true
+node 103 true true
+node 101 false true
+node 110 true true
+node 107 true true
+node 104 true true
+node 105 true true
+node 116 true true
+node 126 true true
+labmap Mt._Cesadur--Second_Floor.map
+node 137 true true
+node 139 true true
+node 142 false true
+node 134 false true
+node 155 true true
+node 27 true true
+node 29 true true
+node 28 true true
+node 150 true true
+node 171 true true
+node 170 true true
+node 169 true true
+node 168 true true
+node 39 true true
+node 173 true true
+node 37 true true
+node 172 true true
+node 43 true true
+node 40 true true
+node 41 true true
+node 166 true true
+node 184 true true
+node 53 true true
+node 189 true true
+node 59 true true
+node 57 true true
+node 182 true true
+node 62 false true
+node 68 true true
+node 205 true true
+node 69 true true
+node 207 true true
+node 206 true true
+node 71 true true
+node 200 true true
+node 67 true true
+node 199 true true
+node 78 true true
+node 198 true true
+node 72 true true
+node 73 true true
+node 75 true true
+node 87 true true
+node 93 true true
+node 92 true true
+node 94 true true
+node 89 true true
+node 91 true true
+node 102 true true
+node 103 true true
+node 101 true true
+node 110 true true
+node 107 true true
+node 105 true true
+node 126 true true
+node 123 true true
+node 121 true true
+labmap Mt._Cesadur--Third_Floor.map
+node 70 false true
+node 139 true true
+node 3 true true
+node 71 true true
+node 4 true true
+node 5 true true
+node 200 false true
+node 76 true true
+node 133 true true
+node 72 true true
+node 132 true true
+node 73 true true
+node 74 true true
+node 134 true true
+node 152 true true
+node 153 true true
+node 19 true true
+node 154 true true
+node 155 true true
+node 93 true true
+node 92 true true
+node 94 false true
+node 148 true true
+node 150 true true
+node 151 true true
+node 35 true true
+node 168 true true
+node 39 true true
+node 36 true true
+node 37 true true
+node 42 true true
+node 40 true true
+node 41 true true
+node 164 true true
+node 119 true true
+node 118 true true
+node 184 true true
+node 126 true true
+node 58 true true
+node 125 true true
+node 124 true true
+node 123 true true
+node 62 true true
+node 180 false true
+node 61 true true
+node 121 false true
+node 60 true true
+node 120 true true
+labmap Mt._Cesadur--Fourth_Floor.map
+node 3 true true
+node 4 true true
+node 5 true true
+node 131 true true
+node 10 true true
+node 11 true true
+node 133 true true
+node 12 true true
+node 132 true true
+node 13 true true
+node 14 true true
+node 134 true true
+node 152 true true
+node 153 true true
+node 19 true true
+node 155 true true
+node 157 false true
+node 23 false true
+node 25 true true
+node 24 true true
+node 26 true true
+node 150 true true
+node 151 true true
+node 30 true true
+node 171 true true
+node 35 true true
+node 169 true true
+node 173 true true
+node 42 true true
+node 46 true true
+node 166 true true
+node 186 true true
+node 51 true true
+node 187 true true
+node 185 true true
+node 55 false true
+node 188 true true
+node 189 true true
+node 58 true true
+node 57 true true
+node 182 true true
+node 62 true true
+node 180 true true
+node 61 true true
+node 181 true true
+node 60 true true
+node 68 true true
+node 69 true true
+node 71 true true
+node 67 true true
+node 76 true true
+node 73 true true
+node 85 true true
+node 87 true true
+node 83 true true
+node 93 true true
+node 92 true true
+node 94 true true
+node 89 true true
+node 103 true true
+node 101 true true
+node 99 true true
+node 104 true true
+node 105 true true
+node 115 true true
+node 126 false true
+node 125 true true
+node 124 true true
+node 123 true true
+node 122 true true
+node 121 true true
+labmap Mt._Cesadur--Mountain_Top.map
+node 137 true true
+node 71 false false
+node 201 true true
+node 203 true true
+node 202 true true
+node 76 false false
+node 77 false false
+node 73 false false
+node 75 false false
+node 153 true true
+node 87 false false
+node 155 true true
+node 89 false false
+node 88 false false
+node 91 false false
+node 90 false false
+node 171 true true
+node 169 true true
+node 105 false false
+node 119 true true
+node 187 true true
+node 118 true true
+node 117 true true
+node 185 true true
+node 116 true true
+node 55 false false
+node 115 false true
+node 59 false false
+node 58 false false
+node 57 false false
+node 121 true true
+node 120 true true
+labmap East_Passage--West_Mountain.map
+node 103 true true
+node 138 false true
+node 71 true true
+node 4 true true
+node 36 true true
+node 197 true true
+node 133 true true
+node 106 true true
+node 165 true true
+node 135 true true
+node 134 true true
+node 119 true true
+node 87 true true
+node 55 true true
+node 20 true true
+node 54 true true
+node 53 true true
+node 52 true true
+node 89 true true
+node 149 true true
+node 122 true true
+node 88 true true
+node 181 true true
+node 90 true true
+labmap East_Passage--East_Mountain.map
+node 5 true true
+node 72 true true
+node 75 true true
+node 134 false false
+node 21 true true
+node 89 true true
+node 88 true true
+node 150 false false
+node 91 true true
+node 90 true true
+node 37 true true
+node 166 false false
+node 107 true true
+node 104 false true
+node 119 false false
+node 118 false false
+node 55 true true
+node 54 true true
+node 53 true true
+node 127 true true
+node 59 true true
+node 126 true true
+node 125 true true
+node 56 true true
+node 124 true true
+node 123 true true
+node 62 true true
+node 61 true true
+node 60 true true
+node 120 false false
+labmap Pensara_Forest--Forest.map
+node 139 true true
+node 138 true true
+node 141 true true
+node 140 true true
+node 152 true true
+node 153 true true
+node 154 true true
+node 87 false true
+node 159 false true
+node 89 true true
+node 88 true true
+node 150 true true
+node 90 true true
+node 151 true true
+node 169 true true
+node 175 true true
+node 110 true true
+node 111 true true
+node 109 true true
+node 106 true true
+node 166 true true
+node 186 true true
+node 187 true true
+node 185 true true
+node 190 true true
+node 191 true true
+node 188 true true
+node 189 true true
+node 179 true true
+node 125 true true
+node 182 true true
+node 122 true true
+node 180 true true
+node 181 true true
+labmap Fire_Cavern--Blazing_Maze.map
+node 138 true true
+node 132 true true
+node 135 true true
+node 154 true true
+node 155 true true
+node 21 true true
+node 156 true true
+node 20 false true
+node 157 true true
+node 23 true true
+node 22 true true
+node 24 false true
+node 148 true true
+node 149 true true
+node 150 true true
+node 151 true true
+node 38 true true
+node 173 true true
+node 165 true true
+node 186 true true
+node 187 true true
+node 185 true true
+node 54 true true
+node 188 true true
+node 189 true true
+node 58 false true
+node 179 true true
+node 180 true true
+node 181 true true
+node 68 true true
+node 69 true true
+node 70 true true
+node 71 true true
+node 201 false true
+node 74 true true
+node 195 true true
+node 84 true true
+node 87 true true
+node 93 true true
+node 92 true true
+node 91 true true
+node 211 true true
+node 90 true true
+node 103 true true
+node 100 true true
+node 109 true true
+node 106 true true
+node 119 true true
+node 116 true true
+node 127 true true
+node 126 true true
+node 125 true true
+node 122 true true
+node 121 true true
+node 120 true true
+labmap Fire_Cavern--Passage_of_Ifrit.map
+node 137 true true
+node 207 true true
+node 139 true true
+node 3 true true
+node 138 true true
+node 140 true true
+node 67 true true
+node 73 false true
+node 132 true true
+node 85 true true
+node 84 true true
+node 19 true true
+node 86 true true
+node 156 true true
+node 83 true true
+node 89 true true
+node 148 true true
+node 149 true true
+node 150 true true
+node 102 true true
+node 35 true true
+node 100 true true
+node 172 true true
+node 166 true true
+node 105 true true
+node 51 true true
+node 119 true true
+node 118 true true
+node 116 true true
+node 190 true true
+node 191 true true
+node 188 true true
+node 189 true true
+node 182 false true
+node 121 true true
+node 120 true true
+labmap Fire_Cavern--Hall_of_the_Damned.map
+node 139 true true
+node 135 true true
+node 15 true true
+node 155 true true
+node 31 true true
+node 151 true true
+node 171 true true
+node 38 true true
+node 39 true true
+node 174 true true
+node 173 true true
+node 37 true true
+node 172 true true
+node 40 true true
+node 167 true true
+node 47 true true
+node 166 true true
+node 165 false true
+node 186 true true
+node 187 true true
+node 184 true true
+node 185 true true
+node 190 true true
+node 53 true true
+node 56 true true
+node 63 true true
+node 183 true true
+node 68 true true
+node 69 true true
+node 207 true true
+node 206 true true
+node 67 false true
+node 79 true true
+node 72 true true
+node 87 true true
+node 93 true true
+node 95 true true
+node 94 true true
+node 89 true true
+node 88 true true
+node 103 true true
+node 109 true true
+node 105 true true
+node 119 true true
+node 125 true true
+node 124 true true
+node 123 true true
+node 122 true true
+node 121 true true
+labmap Fire_Cavern--Hall_of_Fire.map
+node 139 true true
+node 9 true true
+node 132 true true
+node 153 true true
+node 154 true true
+node 155 true true
+node 156 true true
+node 157 true true
+node 158 true true
+node 159 true true
+node 25 true true
+node 148 true true
+node 149 true true
+node 150 true true
+node 30 false true
+node 169 true true
+node 168 true true
+node 38 true true
+node 175 true true
+node 36 false true
+node 37 true true
+node 41 true true
+node 46 true true
+node 167 true true
+node 166 true true
+node 185 true true
+node 54 true true
+node 191 true true
+node 59 true true
+node 58 true true
+node 57 true true
+node 62 true true
+node 61 true true
+node 60 true true
+node 204 false true
+node 70 true true
+node 207 true true
+node 201 true true
+node 203 true true
+node 202 true true
+node 76 true true
+node 73 true true
+node 87 true true
+node 86 true true
+node 92 true true
+node 89 true true
+node 88 true true
+node 102 true true
+node 100 true true
+node 101 true true
+node 108 true true
+node 116 true true
+node 115 true true
+node 124 true true
+node 123 true true
+labmap Fire_Cavern--Furnace.map
+node 137 true true
+node 143 true true
+node 15 true true
+node 134 true true
+node 153 true true
+node 21 false true
+node 156 true true
+node 157 true true
+node 158 true true
+node 23 true true
+node 22 true true
+node 159 true true
+node 27 true true
+node 26 true true
+node 147 true true
+node 29 true true
+node 148 true true
+node 28 true true
+node 149 true true
+node 31 true true
+node 150 true true
+node 30 true true
+node 169 true true
+node 175 true true
+node 39 true true
+node 172 true true
+node 42 true true
+node 163 true true
+node 45 true true
+node 186 true true
+node 187 true true
+node 184 true true
+node 185 true true
+node 55 true true
+node 191 false true
+node 188 true true
+node 58 true true
+node 179 true true
+node 57 true true
+node 56 true true
+node 182 false true
+node 183 true true
+node 61 true true
+node 71 true true
+node 76 true true
+node 77 true true
+node 195 true true
+node 87 true true
+node 92 true true
+node 211 true true
+node 103 true true
+node 110 true true
+node 111 true true
+node 108 true true
+node 109 true true
+node 119 true true
+node 118 true true
+node 127 true true
+node 121 true true
+node 120 true true
+labmap Fire_Cavern--Inferno.map
+node 3 true true
+node 140 true true
+node 142 true true
+node 131 true true
+node 13 true true
+node 14 true true
+node 15 false true
+node 152 true true
+node 19 true true
+node 21 true true
+node 156 true true
+node 157 true true
+node 20 true true
+node 158 true true
+node 22 true true
+node 27 true true
+node 26 true true
+node 147 true true
+node 148 true true
+node 29 true true
+node 149 true true
+node 28 true true
+node 150 true true
+node 151 true true
+node 168 true true
+node 38 true true
+node 172 true true
+node 42 true true
+node 165 true true
+node 45 true true
+node 186 true true
+node 187 true true
+node 184 true true
+node 185 true true
+node 55 true true
+node 54 true true
+node 188 true true
+node 52 false true
+node 58 true true
+node 57 true true
+node 56 true true
+node 62 true true
+node 61 true true
+node 181 true true
+node 68 true true
+node 70 true true
+node 197 true true
+node 196 true true
+node 78 true true
+node 195 true true
+node 74 true true
+node 85 true true
+node 84 true true
+node 86 true true
+node 83 true true
+node 93 true true
+node 92 false true
+node 94 true true
+node 90 true true
+node 99 true true
+node 110 true true
+node 106 true true
+node 115 true true
+node 126 true true
+node 124 true true
+node 123 true true
+node 122 true true
+labmap Pensara_Prison--Floor_6.map
+node 137 false false
+node 102 true true
+node 103 true true
+node 110 false true
+node 108 true true
+node 109 true true
+node 106 true true
+node 73 false false
+node 107 true true
+node 104 true true
+node 105 true true
+node 153 false false
+node 57 false false
+node 89 false true
+node 121 false true
+labmap Pensara_Prison--Floor_5.map
+node 102 true true
+node 137 true true
+node 103 true true
+node 108 true true
+node 106 true true
+node 73 false false
+node 107 true true
+node 104 true true
+node 105 true true
+node 153 true true
+node 57 false false
+node 89 false true
+node 121 true true
+labmap Pensara_Prison--Floor_4.map
+node 102 true true
+node 137 false false
+node 103 true true
+node 108 true true
+node 106 true true
+node 73 false false
+node 107 true true
+node 104 true true
+node 105 true true
+node 153 false false
+node 57 false false
+node 89 false true
+node 121 false true
+labmap Pensara_Prison--Floor_3.map
+node 102 true true
+node 137 true true
+node 103 true true
+node 169 true true
+node 108 true true
+node 106 true true
+node 73 false false
+node 107 true true
+node 104 true true
+node 105 true true
+node 153 true true
+node 185 false true
+node 57 false false
+node 89 false true
+node 121 true true
+labmap Pensara_Prison--Floor_2.map
+node 102 true true
+node 137 false false
+node 103 true true
+node 108 true true
+node 106 true true
+node 73 false false
+node 107 true true
+node 104 true true
+node 105 true true
+node 153 false false
+node 57 false false
+node 89 false true
+node 121 false true
+labmap Pensara_Prison--Floor_1.map
+node 137 false false
+node 102 true true
+node 103 true true
+node 108 true true
+node 41 true true
+node 106 true true
+node 73 true true
+node 107 true true
+node 104 true true
+node 105 true true
+node 153 false false
+node 25 false true
+node 57 true true
+node 89 true true
+node 121 false true
+labmap Berca_Desert--North_West.map
+node 204 true true
+node 156 true true
+node 157 true true
+node 188 true true
+node 158 true true
+node 159 true true
+node 172 true true
+labmap Berca_Desert--North.map
+node 206 true true
+node 201 true true
+node 200 true true
+node 202 true true
+node 142 true true
+node 76 true true
+node 8 false true
+node 199 true true
+node 198 true true
+node 72 true true
+node 12 true true
+node 134 false true
+node 158 true true
+node 24 true true
+node 92 true true
+node 28 true true
+node 88 true true
+node 150 true true
+node 171 true true
+node 170 true true
+node 174 true true
+node 173 true true
+node 172 true true
+node 40 true true
+node 108 true true
+node 166 true true
+node 44 true true
+node 104 false true
+node 186 true true
+node 190 true true
+node 59 true true
+node 127 false true
+node 58 true true
+node 126 true true
+node 57 true true
+node 125 true true
+node 56 true true
+node 124 true true
+node 182 true true
+node 60 true true
+labmap Berca_Desert--North_East.map
+node 136 true true
+node 138 false false
+node 143 false false
+node 142 false false
+node 77 false false
+node 78 false false
+node 131 true true
+node 79 false false
+node 133 true true
+node 72 true true
+node 132 true true
+node 135 true true
+node 14 true true
+node 134 true true
+node 154 false false
+node 158 false false
+node 25 true true
+node 24 true true
+node 27 true true
+node 26 true true
+node 29 true true
+node 89 false true
+node 88 true true
+node 28 true true
+node 30 true true
+node 90 false false
+node 170 false false
+node 174 false false
+node 40 true true
+node 106 false false
+node 104 true true
+node 186 false false
+node 187 false false
+node 190 false false
+node 188 false false
+node 189 false false
+node 56 true true
+node 122 false false
+node 120 true true
+labmap Berca_Desert--South_West.map
+node 204 false false
+node 140 true true
+node 76 true true
+node 77 true true
+node 199 false false
+node 78 true true
+node 79 true true
+node 72 true true
+node 152 true true
+node 153 true true
+node 154 true true
+node 155 true true
+node 156 true true
+node 92 true true
+node 24 false true
+node 147 true true
+node 148 true true
+node 88 true true
+node 149 true true
+node 150 true true
+node 151 true true
+node 172 false true
+node 108 true true
+node 40 true true
+node 106 true true
+node 167 false true
+node 107 true true
+node 104 true true
+node 105 true true
+node 188 false false
+node 56 true true
+node 124 true true
+node 183 false false
+labmap Dorma's_Forest--Forest_of_Hate.map
+node 136 true true
+node 138 true true
+node 143 true true
+node 134 true true
+node 152 true true
+node 154 true true
+node 159 true true
+node 150 true true
+node 171 true true
+node 170 true true
+node 168 true true
+node 175 true true
+node 172 false true
+node 46 false true
+node 47 true true
+node 166 true true
+node 165 true true
+node 164 false true
+node 184 false true
+node 191 true true
+node 56 false true
+node 63 true true
+node 68 false true
+node 69 true true
+node 207 true true
+node 70 true true
+node 206 false true
+node 76 false true
+node 79 true true
+node 72 true true
+node 74 true true
+node 75 true true
+node 86 true true
+node 95 true true
+node 88 true true
+node 90 true true
+node 102 true true
+node 111 true true
+node 106 true true
+node 104 true true
+node 119 true true
+node 118 true true
+node 117 true true
+node 116 true true
+node 115 true true
+node 127 true true
+node 126 true true
+node 125 true true
+node 124 true true
+node 123 true true
+node 122 true true
+node 121 true true
+node 120 true true
+labmap The_Sewers--North_West.map
+node 71 true true
+node 142 true true
+node 76 true true
+node 12 false true
+node 135 true true
+node 152 true true
+node 87 true true
+node 158 true true
+node 92 true true
+node 28 true true
+node 150 false true
+node 151 true true
+node 102 true true
+node 103 true true
+node 100 false true
+node 101 true true
+node 174 true true
+node 110 true true
+node 111 true true
+node 108 true true
+node 109 true true
+node 106 true true
+node 107 true true
+node 44 true true
+node 104 true true
+node 105 true true
+node 119 true true
+node 55 true true
+node 54 true true
+node 59 true true
+node 126 true true
+node 58 false true
+node 56 true true
+node 124 true true
+node 61 true true
+node 60 true true
+labmap The_Sewers--North.map
+node 137 true true
+node 136 true true
+node 139 true true
+node 138 true true
+node 71 true true
+node 141 true true
+node 140 true true
+node 143 true true
+node 202 true true
+node 142 true true
+node 76 true true
+node 77 true true
+node 133 true true
+node 12 true true
+node 72 true true
+node 73 true true
+node 135 true true
+node 74 true true
+node 134 true true
+node 75 true true
+node 154 true true
+node 156 true true
+node 21 true true
+node 92 true true
+node 27 true true
+node 26 false true
+node 29 true true
+node 28 true true
+node 150 true true
+node 30 false true
+node 102 true true
+node 170 true true
+node 37 true true
+node 108 true true
+node 166 false true
+node 44 true true
+node 186 true true
+node 118 true true
+node 55 true true
+node 54 true true
+node 53 true true
+node 124 true true
+node 122 true true
+node 60 true true
+labmap The_Sewers--North_East.map
+node 137 true true
+node 71 false true
+node 10 true true
+node 73 true true
+node 153 false true
+node 23 true true
+node 22 true true
+node 25 true true
+node 24 true true
+node 92 true true
+node 27 true true
+node 26 true true
+node 29 true true
+node 89 true true
+node 28 true true
+node 30 false true
+node 39 true true
+node 110 false true
+node 108 true true
+node 109 true true
+node 41 true true
+node 106 true true
+node 107 true true
+node 104 true true
+node 105 true true
+node 55 true true
+node 57 true true
+node 124 true true
+node 121 true true
+labmap The_Sewers--South_West.map
+node 139 true true
+node 70 true true
+node 10 false true
+node 198 true true
+node 74 true true
+node 134 true true
+node 152 true true
+node 153 true true
+node 154 true true
+node 155 true true
+node 86 true true
+node 156 true true
+node 157 true true
+node 158 true true
+node 159 false true
+node 26 true true
+node 149 true true
+node 150 true true
+node 151 true true
+node 90 true true
+node 171 true true
+node 102 true true
+node 103 true true
+node 100 true true
+node 101 true true
+node 38 true true
+node 99 true true
+node 42 true true
+node 106 true true
+node 166 true true
+node 118 true true
+node 54 true true
+node 53 true true
+node 52 false true
+node 59 true true
+node 58 true true
+node 57 true true
+node 124 true true
+node 56 false true
+node 182 true true
+node 123 true true
+node 122 true true
+node 121 true true
+node 120 false true
+labmap The_Sewers--South.map
+node 68 true true
+node 69 true true
+node 70 true true
+node 6 true true
+node 197 true true
+node 8 false true
+node 196 false true
+node 9 true true
+node 131 true true
+node 10 true true
+node 78 false true
+node 198 true true
+node 11 true true
+node 133 true true
+node 132 true true
+node 134 true true
+node 86 true true
+node 21 true true
+node 20 true true
+node 22 true true
+node 26 true true
+node 150 true true
+node 30 true true
+node 102 true true
+node 168 true true
+node 101 true true
+node 38 true true
+node 39 true true
+node 42 true true
+node 43 true true
+node 40 true true
+node 41 true true
+node 46 true true
+node 166 true true
+node 44 true true
+node 45 true true
+node 119 true true
+node 118 true true
+node 184 true true
+node 54 true true
+node 182 true true
+node 183 true true
+node 62 true true
+node 120 false true
+labmap The_Sewers--South_East.map
+node 140 true true
+node 6 true true
+node 142 true true
+node 8 false true
+node 9 true true
+node 10 true true
+node 11 true true
+node 134 false true
+node 156 true true
+node 157 true true
+node 158 true true
+node 22 true true
+node 26 true true
+node 171 true true
+node 170 true true
+node 169 false true
+node 38 true true
+node 174 true true
+node 172 true true
+node 42 true true
+node 43 true true
+node 44 true true
+node 45 false true
+node 51 false true
+node 190 true true
+node 54 true true
+node 188 true true
+node 53 true true
+node 52 true true
+node 58 true true
+node 57 true true
+node 56 true true
+node 70 true true
+node 206 true true
+node 74 true true
+node 85 true true
+node 84 true true
+node 86 true true
+node 83 false true
+node 90 true true
+node 102 true true
+node 103 true true
+node 110 true true
+node 111 true true
+node 108 true true
+node 109 true true
+node 106 true true
+node 107 true true
+node 104 true true
+node 105 true true
+node 118 true true
+node 124 true true
+labmap Temple_of_Aegis--Base_Level.map
+node 137 false true
+node 139 true true
+node 138 true true
+node 3 true true
+node 141 true true
+node 4 true true
+node 140 true true
+node 5 true true
+node 6 true true
+node 142 true true
+node 7 true true
+node 8 true true
+node 9 true true
+node 131 true true
+node 133 true true
+node 135 true true
+node 15 true true
+node 158 true true
+node 25 true true
+node 27 true true
+node 147 true true
+node 29 true true
+node 149 true true
+node 28 true true
+node 31 true true
+node 151 true true
+node 171 true true
+node 170 true true
+node 169 true true
+node 38 true true
+node 174 true true
+node 39 true true
+node 173 true true
+node 36 true true
+node 172 true true
+node 37 true true
+node 163 true true
+node 43 true true
+node 40 true true
+node 41 true true
+node 167 true true
+node 47 true true
+node 165 true true
+node 45 true true
+node 185 true true
+node 52 true true
+node 59 true true
+node 179 true true
+node 182 true true
+node 63 true true
+node 183 true true
+node 61 true true
+node 181 true true
+node 205 true true
+node 68 true true
+node 204 true true
+node 69 true true
+node 207 true true
+node 70 true true
+node 206 true true
+node 71 true true
+node 201 true true
+node 203 true true
+node 202 true true
+node 77 true true
+node 79 true true
+node 72 true true
+node 73 false true
+node 195 true true
+node 75 true true
+node 93 true true
+node 95 true true
+node 91 true true
+node 103 false true
+node 100 true true
+node 101 true true
+node 99 true true
+node 110 true true
+node 111 true true
+node 109 true true
+node 107 false true
+node 119 true true
+node 117 true true
+node 115 true true
+labmap Temple_of_Aegis--First_Floor.map
+node 137 true true
+node 136 true true
+node 139 true true
+node 138 true true
+node 3 true true
+node 141 true true
+node 4 true true
+node 140 true true
+node 5 true true
+node 6 true true
+node 142 true true
+node 12 true true
+node 133 true true
+node 13 false true
+node 132 true true
+node 135 true true
+node 15 true true
+node 134 true true
+node 155 true true
+node 158 true true
+node 23 true true
+node 159 true true
+node 22 true true
+node 27 true true
+node 147 true true
+node 148 true true
+node 28 true true
+node 31 true true
+node 151 true true
+node 171 true true
+node 35 false true
+node 175 false true
+node 39 true true
+node 163 true true
+node 43 true true
+node 167 true true
+node 47 true true
+node 51 true true
+node 187 true true
+node 55 true true
+node 188 true true
+node 52 true true
+node 59 true true
+node 179 true true
+node 182 true true
+node 63 true true
+node 183 true true
+node 62 true true
+node 205 true true
+node 68 true true
+node 204 true true
+node 69 true true
+node 207 true true
+node 70 true true
+node 206 true true
+node 71 true true
+node 197 false true
+node 76 true true
+node 77 true true
+node 78 true true
+node 198 true true
+node 72 true true
+node 73 true true
+node 195 true true
+node 74 true true
+node 75 true true
+node 87 true true
+node 91 true true
+node 102 false false
+node 103 true true
+node 108 false true
+node 106 true true
+node 107 true true
+node 104 true true
+node 119 true true
+node 123 true true
+labmap Temple_of_Aegis--Second_Floor.map
+node 137 false true
+node 139 true true
+node 142 true true
+node 132 false false
+node 135 false false
+node 153 true true
+node 21 true true
+node 158 true true
+node 23 true true
+node 22 true true
+node 24 true true
+node 27 true true
+node 26 true true
+node 29 true true
+node 148 false false
+node 28 true true
+node 170 true true
+node 169 true true
+node 168 false true
+node 174 true true
+node 173 true true
+node 36 true true
+node 37 true true
+node 42 true true
+node 40 true true
+node 41 true true
+node 46 true true
+node 165 false false
+node 164 false false
+node 45 true true
+node 186 true true
+node 187 true true
+node 184 false false
+node 188 true true
+node 189 true true
+node 52 true true
+node 57 true true
+node 182 false false
+node 183 false false
+node 62 true true
+node 181 false false
+node 68 true true
+node 71 false false
+node 78 true true
+node 73 false true
+node 75 true true
+node 85 true true
+node 84 true true
+node 87 false true
+node 93 true true
+node 94 true true
+node 91 true true
+node 102 true true
+node 103 true true
+node 101 true true
+node 108 true true
+node 109 true true
+node 106 true true
+node 107 true true
+node 104 true true
+node 119 false true
+node 117 false true
+node 116 false false
+node 126 true true
+node 125 true true
+node 123 true true
+labmap Temple_of_Aegis--Third_Floor.map
+node 136 true true
+node 69 true true
+node 138 false true
+node 141 true true
+node 76 false true
+node 77 true true
+node 78 true true
+node 135 true true
+node 74 true true
+node 134 true true
+node 152 true true
+node 85 true true
+node 154 true true
+node 86 true true
+node 157 true true
+node 171 true true
+node 102 true true
+node 170 true true
+node 103 true true
+node 169 true true
+node 168 true true
+node 38 true true
+node 39 true true
+node 173 true true
+node 172 true true
+node 37 true true
+node 42 true true
+node 43 true true
+node 108 true true
+node 40 true true
+node 41 true true
+node 46 true true
+node 106 true true
+node 107 true true
+node 44 true true
+node 104 true true
+node 45 true true
+node 53 true true
+node 58 true true
+node 125 true true
+node 124 true true
+node 62 true true
+labmap Temple_of_Aegis--Fourth_Floor.map
+node 70 true true
+node 71 true true
+node 140 true true
+node 76 true true
+node 72 true true
+node 74 true true
+node 134 true true
+node 152 true true
+node 153 true true
+node 154 true true
+node 155 true true
+node 86 true true
+node 156 true true
+node 92 true true
+node 150 true true
+node 151 true true
+node 102 false true
+node 108 true true
+node 106 true true
+node 104 true true
+node 105 true true
+node 59 true true
+node 58 true true
+node 57 true true
+node 56 true true
+node 124 true true
+node 60 true true
+labmap Temple_of_Aegis--Top_Floor.map
+node 137 false true
+node 103 true true
+node 139 true true
+node 138 true true
+node 71 true true
+node 72 true true
+node 106 true true
+node 73 true true
+node 107 true true
+node 74 true true
+node 75 true true
+node 119 true true
+node 87 true true
+node 123 true true
+node 91 true true
+labmap Menthu's_Lair--Hall_of_Memories.map
+node 137 false false
+node 141 false false
+node 133 false false
+node 13 false true
+node 153 false false
+node 157 false false
+node 158 false false
+node 159 false false
+node 25 false true
+node 29 true true
+node 149 false false
+node 169 false false
+node 173 false false
+node 37 false false
+node 42 true true
+node 40 true true
+node 41 true true
+node 165 false false
+node 45 true true
+node 185 false false
+node 53 false false
+node 189 false false
+node 58 true true
+node 57 true true
+node 56 true true
+node 63 false false
+node 62 false true
+node 61 true true
+node 205 false false
+node 69 false false
+node 77 true true
+node 72 true true
+node 73 true true
+node 74 true true
+node 85 false false
+node 93 true true
+node 89 true true
+node 102 false false
+node 103 false false
+node 100 false false
+node 101 false false
+node 99 false false
+node 110 true true
+node 111 true true
+node 108 true true
+node 109 true true
+node 106 true true
+node 107 true true
+node 104 false true
+node 105 true true
+node 117 false false
+node 125 false true
+node 121 false true
+lastlab Menthu's_Lair--Hall_of_Memories
+counter boar 5 0
+counter boar1 0 0
+counter robber 0 0
+counter blob 5 0
+counter ghost 6 0
+counter zombie 5 0
+counter zombie2 4 0
+counter hexaroc 2 0
+counter bat 33 0
+counter goblin 10 0
+counter werewolf 23 0
+counter greaterhexaroc 4 0
+counter troll 9 0
+counter shadowboar 9 0
+counter hornedone 20 0
+counter stonecrusher 3 0
+counter tunnelworm 1 0
+counter stitchman 3 0
+counter porcupineblob 14 0
+counter ogre 3 0
+counter corpse 10 0
+counter ghoul 12 0
+counter winterwolf 0 0
+counter wraith 14 0
+counter screamer 12 0
+counter beastman 0 0
+counter walrus 0 0
+counter necromancer 3 0
+counter warlock 0 0
+counter puppet 0 0
+counter taur 0 0
+counter dragon 0 0
+counter memorytaur 0 0
+counter memorysalmonman 0 0
+counter salmonman 0 0
+counter serphia 0 0
+counter menthu2 0 0
+counter menthuattack 0 0
+counter memoryserphia 0 0
+counter menthu1 0 0
+counter menthuattack2 0 0
+
+end

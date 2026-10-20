@@ -1,0 +1,1 @@
+The game crashed when leaving Grivera first floor 

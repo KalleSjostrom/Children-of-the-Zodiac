@@ -1,0 +1,1 @@
+Holding circle (on pad), should tripple the game speed during cutscenes so movement goes faster. If this is too much hassle with particle effects, ask what to do before continuing.
