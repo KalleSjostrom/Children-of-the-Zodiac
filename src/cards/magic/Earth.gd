@@ -43,7 +43,11 @@ static func getStaticAnimation(info):
 		settings.setBoolean(AnimSettings.DESTROY_ENEMY_SHAKE, true)
 	else:
 		var source = info.getEnemy().getTempSource()
-		settings.setVector(AnimSettings.SOURCE, source)
+		# Enemy attacks may name the card without a source vector (goblin,
+		# Stonecrusher: "c=m+Earth"). Java passed the null on and the
+		# particle systems failed to build (COTZ-009); use the default the
+		# other magic cards use.
+		settings.setVector(AnimSettings.SOURCE, Vector3f.new(0.0, 0.0, -6.0) if source == null else source)
 		settings.setVector(AnimSettings.TARGET, Vector3f.new(0.0, -1.0, -3.0))
 		settings.setBoolean(AnimSettings.DESTROY_CAMERA_SHAKE, true)
 		settings.setValue(AnimSettings.CHECK_DESTROY_MODE, ParticleSystem.POS_Z_GREATER_TARGET_Z)
