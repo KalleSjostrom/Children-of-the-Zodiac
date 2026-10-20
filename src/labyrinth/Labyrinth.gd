@@ -191,13 +191,23 @@ func checkBossFight():
 
 func checkEnterBattle(dir):
 	var freeToBattle: bool = false
-	if not currentNode.hasInventory():
+	if not currentNode.hasInventory() and not hasWallTowards(currentNode, dir):
 		var n = currentNode.getNode(dir)
-		if n != null and not n.hasInventory():
+		if n != null and not n.hasInventory() and not hasWallTowards(n, dir):
 			n = n.getNode(dir)
 			if n != null and not n.hasInventory():
 				freeToBattle = true
 	return freeToBattle
+
+## True when a wall is drawn between the node and its neighbour in direction
+## d although the two are connected: the map's "wall" lines can put one
+## there (the walls the player can walk through in Mt. Cesadur). A battle
+## facing it showed the wall instead of the enemy behind it (COTZ-011).
+func hasWallTowards(node, d: int) -> bool:
+	var next = node.getNode(d)
+	if next == null:
+		return false
+	return node.walls[d] != -1 or next.walls[Values.getCounterAngle(d)] != -1
 
 func enterBattle(boss, bossName = null):
 	push()

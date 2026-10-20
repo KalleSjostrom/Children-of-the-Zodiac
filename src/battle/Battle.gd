@@ -223,6 +223,10 @@ func drawBattle(g):
 	if mode == BattleManager.TALKING:
 		manager.setDialog(dialog)
 	else:
+		# The battle interface is 3D geometry at z = STANDARD_Z_DEPTH (-2),
+		# the plane of the walls of the player's node: draw it without the
+		# depth test, so that a wall there does not hide it (COTZ-011).
+		g.ignore_depth_test = true
 		currentDeck.draw(g)
 		if update_:
 			glEnemies.updateTexture(g)
@@ -231,10 +235,13 @@ func drawBattle(g):
 		hand.draw(g)
 		legend.setSupport(isSupportMode())
 		legend.draw(g)
+		g.ignore_depth_test = false
 		g.loadIdentity()
 		if mode == BattleManager.ANIMATE:
 			animate.draw(g)
+		g.ignore_depth_test = true
 		attackText.draw(g)
+		g.ignore_depth_test = false
 
 
 ## Called when the cards have been played and the attack should be made.

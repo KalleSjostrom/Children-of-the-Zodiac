@@ -161,6 +161,12 @@ var _depth_mask := true
 var _cull_mode := GL_BACK
 var _bound: GameTexture = null
 var _attrib_stack: Array = []
+## Bridge (COTZ-011): while true, 3D drawing ignores the depth test and is
+## drawn over everything drawn before it, in submission order (every 3D batch
+## is in the transparent pass, sorted by submission). The battle interface
+## uses it: it is 3D geometry at z = -2, the plane of the walls of the
+## player's labyrinth node.
+var ignore_depth_test := false
 
 var _fog := {"mode": GL_EXP, "density": 1.0, "start": 0.0, "end": 1.0, "color": Color(0, 0, 0, 0)}
 var _lights: Array = []
@@ -1436,7 +1442,7 @@ func _material3D() -> ShaderMaterial:
 		"use_tex": tex != null,
 		"additive": _blend_dst == GL_ONE,
 		"opaque": not _caps.get(GL_BLEND, true),
-		"depth_test": _caps.get(GL_DEPTH_TEST, false),
+		"depth_test": _caps.get(GL_DEPTH_TEST, false) and not ignore_depth_test,
 		"depth_write": _depth_mask,
 		"cull": cull,
 		"lit": _caps.get(GL_LIGHTING, false),
