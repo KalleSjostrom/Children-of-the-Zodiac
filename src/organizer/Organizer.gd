@@ -210,11 +210,8 @@ func update(elapsedTime: float) -> void:
 	if currentGameMode == null or currentGameMode.isLoading():
 		return
 	currentGameMode.update(elapsedTime)
-	if GameCore.inputManager.hasSelectDownBeenPressed() and not (currentGameMode is Cheater):
-		currentGameMode.exitWithoutFading(Values.CHEATER)
-		mode = currentGameMode.getExitMode()
-		_initNext()
-		return
+	# Java: Select + Down opened the Cheater here; the debug console's
+	# "cheater" command does now (open_cheater, COTZ-006).
 	if currentGameMode.checkExit() != Values.NO_MODE_IS_SELECTED:
 		currentGameMode.finishOff()
 		mode = currentGameMode.getExitMode()
@@ -225,6 +222,29 @@ func update(elapsedTime: float) -> void:
 			_goBackToSuspendedMode()
 		else:
 			_initNext()
+
+
+## Bridge (COTZ-006, the debug console): goes to a main.bank place now,
+## leaving the current mode without its finishOff or a fade, as the
+## Cheater's jumps do. The "Start" game is loaded first when none is.
+func jump_to(place: String) -> void:
+	if not Load.hasLoaded():
+		Load.loadGame("Start")
+	if currentGameMode != null:
+		currentGameMode.exitWithoutFading(Values.EXIT)
+	nextPlace = place
+	next = true
+	_initNext()
+
+
+## Bridge (COTZ-006): opens the developer Cheater's menu of places (what
+## Select + Down did).
+func open_cheater() -> void:
+	if currentGameMode == null or currentGameMode is Cheater:
+		return
+	currentGameMode.exitWithoutFading(Values.CHEATER)
+	mode = currentGameMode.getExitMode()
+	_initNext()
 
 
 func draw(g: Graphics) -> void:

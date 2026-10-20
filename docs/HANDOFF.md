@@ -138,8 +138,10 @@ conventions in `docs/ARCHITECTURE.md` section 9):
   for all cases (`--uncapped`; battles are bound by the weather at ~26 FPS).
   The `fps=` values of parity runs are meaningless; measure performance in
   normal runs.
-- The developer Cheater (SELECT + DOWN, i.e. Space + Down) jumps to any place
-  or building; `tools/autoplay/stores.txt` shows how to drive it.
+- The developer console (§ / ` / F1 in debug builds, README) jumps to any
+  place (`goto`). It replaces the Cheater (formerly SELECT + DOWN, i.e.
+  Space + Down), whose menu of places, stories and buildings its `cheater`
+  command still opens; `tools/autoplay/stores.txt` shows how to drive it.
 - Time units: `update(elapsedTime)` in **ms**; `draw(g)` per frame at 60 FPS.
 - The original really ran at ≈30 FPS, not `Values.FPS = 60`: its
   `organizer/FPSAnimator` sleeps a fixed 23 ms after every vsynced frame.

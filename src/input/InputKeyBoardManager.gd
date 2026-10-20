@@ -4,9 +4,9 @@ extends InputManager
 ##
 ## Keys: arrows = directions, W = triangle (menu), D = circle (back),
 ## S = cross (confirm), A = square, Enter = start (pause), Space = select,
-## Q/E = L1/R1, 1/3 = L2/R2. Space + Down opens the cheat/debug menu.
-## Escape quits, F toggles full screen, 6/7/8 make an emergency save,
-## Shift+0 starts typing a cheat (Enter applies it).
+## Q/E = L1/R1, 1/3 = L2/R2. Escape quits, F toggles full screen, 6/7/8
+## make an emergency save. (Java: Space + Down opened the cheat menu and
+## Shift+0 started typing a cheat; the debug console replaces both, COTZ-006.)
 
 var keyMap := {} # Godot keycode -> GameAction
 
@@ -76,33 +76,13 @@ func handleEvent(event: InputEvent) -> void:
 
 
 func _keyPressed(e: InputEventKey) -> void:
-	if mode == CHEATING:
-		if e.keycode == KEY_BACKSPACE:
-			if cheat.length() > 0:
-				cheat = cheat.substr(0, cheat.length() - 1)
-		elif e.keycode == KEY_ENTER or e.keycode == KEY_KP_ENTER:
-			pass
-		elif e.unicode >= 32:
-			cheat += char(e.unicode)
-		if e.keycode == KEY_ENTER or e.keycode == KEY_KP_ENTER:
-			var cheater = ClassRegistry.forName("organizer.Cheater")
-			if cheater != null:
-				cheater.doCheat(cheat)
-			mode = NORMAL
-		elif e.keycode == KEY_ESCAPE:
-			mode = NORMAL
-	else:
-		if e.shift_pressed and e.keycode == KEY_0 and not e.echo:
-			mode = CHEATING
-			cheat = ""
-			GameCore.enterCheat()
-		if e.keycode == KEY_ESCAPE and not e.echo:
-			GameCore.exitGame()
-		elif e.keycode == KEY_F and not e.echo:
-			GameCore.setFullScreen()
-		var gameAction := _getKeyAction(e)
-		if gameAction != null:
-			gameAction.press()
+	if e.keycode == KEY_ESCAPE and not e.echo:
+		GameCore.exitGame()
+	elif e.keycode == KEY_F and not e.echo:
+		GameCore.setFullScreen()
+	var gameAction := _getKeyAction(e)
+	if gameAction != null:
+		gameAction.press()
 
 
 func _keyReleased(e: InputEventKey) -> void:

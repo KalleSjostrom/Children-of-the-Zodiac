@@ -111,7 +111,7 @@ static func attackTarget(enemy, characters, attackText, p_target, effects):
 			addition = "Crit"
 			damage *= AbstractCard.CRITICAL_INCREASE
 		if damage > 0:
-			damage = Difficulty.scale_enemy_damage(damage)
+			damage = 0 if GameCommands.god else Difficulty.scale_enemy_damage(damage)
 		if damage > 0:
 			targetChar.damage(damage)
 			if not targetChar.isAlive():
@@ -129,7 +129,7 @@ static func doit(enemy, character, attackText, effects, pos, power):
 	var hit = doit1(effects, enemy, attackText, character, pos)
 	var damage: int = 0
 	if hit != null:
-		if hit == Death.TEXT:
+		if hit == Death.TEXT and not GameCommands.god:
 			damage = character.damage(character.getAttribute(Creature.HP))
 			character.damage(damage)
 			attackText.addCenter(hit, pos[0], pos[1], false)
@@ -156,6 +156,8 @@ static func doit1(effects, enemy, text, p_target, pos):
 				b.dispelNegativeEffectWithChance(chance)
 			text.addCenter("Dispel", 0, y, true)
 		elif name == "DownTo":
+			if GameCommands.god:
+				continue # the debug console's god mode (COTZ-006)
 			var hp: int = eae.getValuei()
 			var damage: int = p_target.cure(hp - p_target.getAttribute(Creature.HP))
 			text.addCenter(str(-damage), pos[0], pos[1], false)

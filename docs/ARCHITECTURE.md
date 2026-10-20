@@ -36,6 +36,8 @@ scenes/
   dungeons/<Area>/        <Floor>.tscn
   dungeon_objects/        Chest.tscn, Door.tscn, HinderDoor.tscn, Lever.tscn, SavePoint.tscn …
   ui/                     Dialog.tscn, SignBox.tscn, menu pages
+  debug/                  DebugConsole (built in code, added by Main in debug builds),
+                          DebugCommands (registry, completion), GameCommands
 resources/
   sprite_frames/<folder>/<image>.tres          (SpriteFrames per villager image set, generated)
   sprite_frames/<folder>/animobj/<name>.tres   (per animObj series, generated)

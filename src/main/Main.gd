@@ -26,6 +26,9 @@ extends Node
 ##   --uncapped          no frame rate cap or vsync (fast parity runs; with --seed)
 ##   --legacy=<a,b,...>  keep the legacy path of these subsystems (is_legacy)
 ##   --bridge-test       villages show tools/bridge_test/BridgeTest.tscn (dev only)
+##
+## In debug builds the developer console (scenes/debug/DebugConsole.gd)
+## opens with the key under Escape or F1; it replaces the Cheater.
 
 static var instance: Main
 ## --bridge-test: Village.create_scene returns the bridge test scene.
@@ -45,6 +48,8 @@ var _zero_time := 0
 var _args := {}
 var _fixed_step := false
 var autoplay: AutoPlay
+## The developer console (debug builds only, else null).
+var debug_console: DebugConsole
 var _world_scene: Node # the scene currently under World, if any
 ## The cutscene mode last seen by _fast_cutscene (instance id), and whether
 ## Circle has been up since it started.
@@ -105,6 +110,10 @@ func _ready() -> void:
 			organizer.startStatuses[kv[0]] = int(kv[1])
 	organizer.init_(obs)
 	_zero_time = Time.get_ticks_msec()
+	if OS.is_debug_build():
+		debug_console = DebugConsole.new()
+		debug_console.name = "DebugConsole"
+		add_child(debug_console)
 
 
 ## True when --legacy lists the subsystem (or "all"): code converted to
@@ -145,6 +154,9 @@ func _parse_args() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	# While the console is open the keys are its (DebugConsole).
+	if debug_console != null and debug_console.is_open:
+		return
 	GameCore.inputManager.handleEvent(event)
 
 

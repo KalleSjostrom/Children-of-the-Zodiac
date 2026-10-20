@@ -1,13 +1,11 @@
 # --load="Slot 1" --start=Alares: open the four Alares buildings (weapon store,
-# card store, church, inn) through the developer Cheater (SELECT+DOWN ->
-# Buildings), browse, leave. Leaving a store returns to the Cheater's list
-# for that store type: CIRCLE, DOWN, CROSS, CROSS opens the next type.
-wait 3000
-press SELECT
-wait 100
-tap DOWN
+# card store, church, inn) through the developer Cheater (the debug
+# console's "cheater" -> Buildings), browse, leave. Leaving a store returns
+# to the Cheater's list for that store type: CIRCLE, DOWN, CROSS, CROSS opens
+# the next type.
+wait 3100
+console cheater
 wait 200
-release SELECT
 wait 1000
 tap DOWN
 wait 250

@@ -19,6 +19,11 @@ extends RefCounted
 ##                        ("mode=... sub=... place=...") contains <text>, or
 ##                        <ms> have passed since the mark was first reached
 ##                        ("!<text>": until the state does NOT contain <text>)
+##   key <KEY>            press and release a keyboard key (a real key event,
+##                        Godot's key names: F1, Enter, Escape, Tab, Up ...)
+##   type <text>          type the text as key events (for the debug console)
+##   console <line>       run a debug console command (DebugConsole, debug
+##                        builds), e.g. "console cheater", "console goto Alares"
 ##   quit                 quit the game
 ## Buttons: TRIANGLE CIRCLE CROSS SQUARE L1 R1 L2 R2 SELECT START UP DOWN LEFT RIGHT
 
@@ -101,11 +106,35 @@ func update(elapsed: float) -> void:
 					_marks.pop_back()
 				elif not _marks.is_empty():
 					pos = _marks.back()[0]
+			"key":
+				_send_key(OS.find_keycode_from_string(parts[1]), 0)
+			"type":
+				var text := lines[pos - 1].substr(lines[pos - 1].find(" ") + 1)
+				for ch in text:
+					_send_key(OS.find_keycode_from_string(ch.to_upper()) if ch != " " else KEY_SPACE,
+							ch.unicode_at(0))
+			"console":
+				var line := lines[pos - 1].substr(lines[pos - 1].find(" ") + 1)
+				if Main.instance != null and Main.instance.debug_console != null:
+					Main.instance.debug_console.run(line)
+				else:
+					push_warning("AutoPlay: no debug console for: " + line)
 			"quit":
 				print("[autoplay] quit at %.0f ms" % time_ms)
 				Scheduler.tree.quit()
 			_:
 				push_warning("AutoPlay: unknown command " + parts[0])
+
+
+## Sends a key press and release as real input events.
+static func _send_key(keycode: Key, unicode: int) -> void:
+	for pressed in [true, false]:
+		var ev := InputEventKey.new()
+		ev.keycode = keycode
+		ev.physical_keycode = keycode
+		ev.unicode = unicode
+		ev.pressed = pressed
+		Input.parse_input_event(ev)
 
 
 ## "mode=<Java class of the current game mode> place=<current place>", so

@@ -27,10 +27,11 @@ Controls (as in the original, PlayStation-style buttons):
 | Q / E | L1 / R1 | |
 | 1 / 3 | L2 / R2 | |
 | Enter | Start | pause |
-| Space | Select | (Space + Down opens the developer "Cheater" menu) |
+| Space | Select | |
 | F | | toggle full screen |
 | Esc | | quit |
 | 6 / 7 / 8 | | emergency save to slots E1–E3 |
+| § / ` / F1 | | developer console (debug builds), see below |
 
 A game pad works too (PlayStation layout: cross = bottom face button).
 
@@ -46,6 +47,26 @@ Developer options (after `--` on the command line):
 * `--seed=<n>` (deterministic run), `--fixed-step`, `--uncapped`,
   `--legacy=<subsystems>`, `--bridge-test`: for parity testing, see
   `docs/ARCHITECTURE.md` section 7 and `tools/parity/parity.sh`.
+
+Developer console (debug builds, e.g. run from the editor): the key under
+Escape (§ or `) or F1 opens it; `help` lists the commands. It replaces the
+old Cheater (Space + Down), whose menu the `cheater` command still opens.
+Tab completes names, Up/Down pick a suggestion or an earlier command.
+
+| Command | Does |
+|---|---|
+| `goto <place>` | goes anywhere: a village, a labyrinth door (`Grivera--First Floor-mark0`), a story, a world map node (`landAlares`) |
+| `exits`, `teleport <markN>` | lists / goes to the doors of the current labyrinth floor |
+| `savepoint` | goes to the save point of the current labyrinth (this floor's, else another floor's) |
+| `boss [labyrinth]` | goes next to the labyrinth's boss, facing it |
+| `heal <amount> [target]` | heals (negative: hurts) the party, a member, `enemies`, an enemy or `all` |
+| `god [on\|off]` | the party takes no damage |
+| `map` | reveals the whole map of the current labyrinth floor |
+| `roads [west\|east\|north]` | opens the roads of the world map |
+| `status`, `trigger <name> [value]`, `difficulty [level]`, `save <slot>` | where the game is; read/set a Database status; difficulty; save anywhere |
+
+New commands go in `scenes/debug/GameCommands.gd` (`c.add(name, help,
+callable, params)`); AutoPlay scripts can run them with `console <line>`.
 
 Saves are written to Godot's user folder (`user://saves/`). Where the game
 can be saved, and the autosave of Easy and Medium, depend on the difficulty
