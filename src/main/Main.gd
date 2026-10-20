@@ -46,6 +46,13 @@ var _args := {}
 var _fixed_step := false
 var autoplay: AutoPlay
 var _world_scene: Node # the scene currently under World, if any
+## The cutscene mode last seen by _fast_cutscene (instance id), and whether
+## Circle has been up since it started.
+var _cutscene_id := 0
+var _cutscene_armed := false
+
+## Updates per frame while Circle is held in a cutscene (COTZ-007).
+const CUTSCENE_SPEED := 3
 
 
 func _ready() -> void:
@@ -156,7 +163,7 @@ func _process(delta: float) -> void:
 	Scheduler.process(elapsed)
 	OggStreamer.tickAll(elapsed)
 
-	organizer.update(elapsed)
+	_update_organizer(elapsed)
 
 	# GameEventListener.display()
 	backend.begin_frame()
@@ -171,6 +178,38 @@ func _process(delta: float) -> void:
 		Scheduler.processTimers(elapsed)
 	if _args.has("quit-after-ms") and now - Engine.get_meta("start_ms", 0) > int(_args["quit-after-ms"]):
 		get_tree().quit()
+
+
+## Organizer.update, CUTSCENE_SPEED times while Circle is held in a cutscene
+## (VillageStory, COTZ-007). Most cutscene motion moves a fixed step per
+## update (actors, the camera, zooms), so the update is repeated instead of
+## given a longer elapsed time; the music, the Scheduler and the fades done
+## per drawn frame keep their pace. The extra updates stop when the mode
+## changes (the cutscene ends) or starts loading.
+func _update_organizer(elapsed: float) -> void:
+	var mode: GameMode = organizer.getCurrentMode()
+	var steps := CUTSCENE_SPEED if _fast_cutscene(mode) else 1
+	organizer.update(elapsed)
+	for i in range(steps - 1):
+		if organizer.getCurrentMode() != mode or mode.isLoading():
+			break
+		organizer.update(elapsed)
+
+
+## True while Circle is held in a cutscene. Circle has to be let go once
+## after the cutscene started: one held while sprinting into a story trigger
+## does not speed it up.
+func _fast_cutscene(mode: GameMode) -> bool:
+	if not (mode is VillageStory) or mode.isLoading():
+		_cutscene_id = 0
+		return false
+	var held: bool = GameCore.gameActions[GameMode.CIRCLE].isPressedDontReset()
+	if mode.get_instance_id() != _cutscene_id:
+		_cutscene_id = mode.get_instance_id()
+		_cutscene_armed = not held
+	elif not held:
+		_cutscene_armed = true
+	return held and _cutscene_armed
 
 
 ## Shows the current game mode's scene (GameMode.shown_scene) under World
