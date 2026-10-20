@@ -11,6 +11,10 @@ extends Node
 ## Command line options (after "--"):
 ##   --start=<place>     start at a place from main.bank instead of the title
 ##   --load=<slot>       load a saved game slot
+##   --start-time=<day|night>  dev only: start the first place at this time of
+##                       day (villages load their "at Night" variant)
+##   --status=<name>:<value>[,...]  dev only: set Database statuses after the
+##                       save is loaded ("_" in names stands for a space)
 ##   --autoplay=<file>   feed scripted button presses (see tools/autoplay)
 ##   --shots=<dir>       save screenshots requested by the autoplay script
 ##   --quit-after-ms=<n> quit after n milliseconds of game time
@@ -85,6 +89,12 @@ func _ready() -> void:
 		organizer.nextPlace = String(_args["start"]).replace("_", " ")
 	if _args.has("load"):
 		organizer.loadSlot = String(_args["load"])
+	if _args.has("start-time"):
+		organizer.startTime = String(_args["start-time"])
+	if _args.has("status"):
+		for s in String(_args["status"]).split(",", false):
+			var kv := s.split(":")
+			organizer.startStatuses[kv[0]] = int(kv[1])
 	organizer.init_(obs)
 	_zero_time = Time.get_ticks_msec()
 
@@ -162,14 +172,14 @@ func _process(delta: float) -> void:
 		get_tree().quit()
 
 
-## Shows the current game mode's scene (GameMode.ensure_scene) under World
+## Shows the current game mode's scene (GameMode.shown_scene) under World
 ## while the mode is not loading; the scene of a mode that is no longer
 ## current is removed from the tree but not freed (GameMode frees it).
 func _sync_world() -> void:
 	var mode: GameMode = organizer.getCurrentMode()
 	var scene: Node = null
 	if mode != null and not mode.isLoading():
-		scene = mode.ensure_scene()
+		scene = mode.shown_scene()
 	if not is_instance_valid(_world_scene):
 		_world_scene = null
 	if scene == _world_scene:

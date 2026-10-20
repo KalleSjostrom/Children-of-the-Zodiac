@@ -1,0 +1,29 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Ingerdsitting/Ingerdsitting1.png" id="1_1b51b"]
+
+[resource]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_1b51b")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

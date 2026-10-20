@@ -197,6 +197,15 @@ func draw(g, bx, by):
 	var y: int = J.round(pos[Values.Y] + by)
 	actor.drawAtPosition(g, x, y)
 
+## Bridge (phase 1 step B, docs/ARCHITECTURE.md): draw(g, bx, by) without
+## drawing: [what the sprite's drawSprite would draw (an image path, or a
+## particle view of a system), screen x, screen y].
+func place_view(bx, by) -> Array:
+	var pos = actor.getPos()
+	var x: int = J.round(pos[Values.X] + bx)
+	var y: int = J.round(pos[Values.Y] + by)
+	return [actor.place_sprite(x, y), x, y]
+
 func initStartLocation(pos, members):
 	if pos == null:
 		waiting = true

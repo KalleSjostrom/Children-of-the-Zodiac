@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Thom/Thom9.png" id="1_fdgix"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Thom/Thom10.png" id="2_wj4jd"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Thom/Thom11.png" id="3_61gm5"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Thom/Thom12.png" id="4_jbo63"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Thom/Thom13.png" id="5_83o2b"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Thom/Thom14.png" id="6_ws0j5"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Thom/Thom15.png" id="7_0tb1e"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Thom/Thom16.png" id="8_fw6ow"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Thom/Thom5.png" id="9_qninr"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Thom/Thom6.png" id="10_2fkeh"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Thom/Thom7.png" id="11_u8xuy"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Thom/Thom8.png" id="12_pstyp"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Thom/Thom1.png" id="13_pbftk"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Thom/Thom2.png" id="14_1byn1"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Thom/Thom3.png" id="15_4i6xa"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Thom/Thom4.png" id="16_nqlbk"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_fdgix")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_wj4jd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_61gm5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_jbo63")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_83o2b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ws0j5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_0tb1e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_fw6ow")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_qninr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_2fkeh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_u8xuy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_pstyp")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_pbftk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_1byn1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_4i6xa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_nqlbk")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

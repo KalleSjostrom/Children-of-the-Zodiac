@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Shaun/Shaun9.png" id="1_sv2cf"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Shaun/Shaun10.png" id="2_emyx7"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Shaun/Shaun11.png" id="3_ckuuf"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Shaun/Shaun12.png" id="4_1bc7o"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Shaun/Shaun13.png" id="5_b4i6g"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Shaun/Shaun14.png" id="6_twapg"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Shaun/Shaun15.png" id="7_cl6r0"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Shaun/Shaun16.png" id="8_lsqbj"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Shaun/Shaun5.png" id="9_a5pxr"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Shaun/Shaun6.png" id="10_ewh27"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Shaun/Shaun7.png" id="11_cf8d7"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Shaun/Shaun8.png" id="12_qkpjh"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Shaun/Shaun1.png" id="13_emcsf"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Shaun/Shaun2.png" id="14_qtayd"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Shaun/Shaun3.png" id="15_e2bfk"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Shaun/Shaun4.png" id="16_fbo40"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_sv2cf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_emyx7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ckuuf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_1bc7o")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_b4i6g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_twapg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_cl6r0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_lsqbj")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_a5pxr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ewh27")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_cf8d7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_qkpjh")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_emcsf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_qtayd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_e2bfk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_fbo40")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

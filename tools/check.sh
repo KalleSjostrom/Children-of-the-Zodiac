@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Compiles the port's GDScript files and prints only the errors.
 #
-#   tools/check.sh                 # everything under src/
+#   tools/check.sh                 # everything under src/, scenes/ and tools/
 #   tools/check.sh src/battle      # only some folders/files
 #
 # Refreshes Godot's global class cache (an editor --import pass) first so new

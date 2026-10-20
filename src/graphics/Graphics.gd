@@ -875,6 +875,23 @@ func setAlphaFunc(f: float) -> void:
 	glAlphaFunc(GL_GREATER, f)
 
 
+## Bridge (phase 1 step B, docs/ARCHITECTURE.md): the alpha test 2D drawing
+## uses now, as a threshold for scene nodes that stand in for legacy drawing
+## (VillageScene): fragments whose alpha is not above it are dropped; -1 when
+## every fragment passes.
+func alpha_threshold() -> float:
+	var fn := _effAlphaFunc()
+	if GLBackend._alpha_passes_all(fn, _alpha_ref):
+		return -1.0
+	match fn:
+		GL_GREATER:
+			return _alpha_ref
+		GL_GEQUAL:
+			return _alpha_ref - 0.5 / 255.0
+	push_warning("Graphics.alpha_threshold: alpha function 0x%x has no threshold" % fn)
+	return -1.0
+
+
 func drawGradient(c, topAlpha: float, bottomAlpha: float, xRight: float,
 		xLeft: float, yBottom: float, yTop: float, popPush: bool, beginQuadsFlag: bool) -> void:
 	if popPush:

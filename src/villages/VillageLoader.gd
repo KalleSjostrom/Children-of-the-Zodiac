@@ -55,8 +55,28 @@ func load(info):
 	else:
 		map += " - " + str(status) + ".vil"
 	infoMap = info
-	VillageLoaderMapLoader.new(self).parseFile(folder + map)
+	var scene = village_scene_for(folder + map)
+	if scene != null:
+		# The scene the village is built from also draws it (Village.create_scene).
+		scene.load_into(self)
+		scene_root = scene
+	else:
+		VillageLoaderMapLoader.new(self).parseFile(folder + map)
 	startTime = J.currentTimeMillis()
+
+
+## Bridge (phase 1, docs/ARCHITECTURE.md): a new instance of the scene made
+## from the .vil file maps/Village/<vil> (VillageScene, built by
+## tools/import/vil_to_scene.gd), or null when the place is not converted
+## or with --legacy=villages; the village is then read from the .vil file
+## and drawn by the legacy code.
+static func village_scene_for(vil: String) -> VillageScene:
+	if Main.is_legacy("villages"):
+		return null
+	var path := VillageScene.path_for(GameResourceLoader.resolve(Values.VillageMaps + vil))
+	if path == "":
+		return null
+	return (ResourceLoader.load(path) as PackedScene).instantiate()
 
 
 ## Java: private loadImages(String name, boolean nightLayer, int extra).

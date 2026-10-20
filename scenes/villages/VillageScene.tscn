@@ -1,0 +1,49 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/villages/VillageScene.gd" id="1_script"]
+[ext_resource type="Shader" path="res://scenes/common/alpha_test.gdshader" id="2_alpha"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_overhead"]
+shader = ExtResource("2_alpha")
+shader_parameter/alpha_ref = 0.9
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_night"]
+shader = ExtResource("2_alpha")
+shader_parameter/alpha_ref = 0.0
+
+[node name="VillageScene" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="Ground" type="Node2D" parent="."]
+
+[node name="Background" type="Sprite2D" parent="."]
+centered = false
+
+[node name="Actors" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Overhead" type="Node2D" parent="."]
+material = SubResource("ShaderMaterial_overhead")
+
+[node name="Night" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_night")
+scale = Vector2(2, 2)
+centered = false
+
+[node name="Effects" type="Node2D" parent="."]
+
+[node name="Obstacles" type="StaticBody2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="Spawns" type="Node2D" parent="."]
+
+[node name="Doors" type="Node2D" parent="."]
+
+[node name="Signs" type="Node2D" parent="."]
+
+[node name="Loot" type="Node2D" parent="."]
+
+[node name="Camera" type="Camera2D" parent="."]
+anchor_mode = 0

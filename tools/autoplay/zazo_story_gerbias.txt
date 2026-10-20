@@ -1,0 +1,81 @@
+# --load="Start demon2" --start="Meeting with Gerbias": Borealis asks Gerbias
+# about Farl (maps/Story/Sequences/Chapter 2 .../Meeting with Gerbias.seq).
+# Parity case zazo_story_gerbias (phase 1 pilot). The story sets status
+# Zazo 1 ("Zazo - 1") and starts without a fade (fadeValue 1); Gerbias1 is a
+# village villager taken over by the story (kind=controll). CROSS is tapped
+# every second; shots are taken just before a tap ("k" = tap number).
+wait 100
+shot sg_01_first_frame
+wait 500
+shot sg_02_k01
+tap CROSS
+wait 500
+wait 500
+shot sg_03_k02
+tap CROSS
+wait 500
+wait 500
+shot sg_04_k03
+tap CROSS
+wait 500
+wait 500
+shot sg_05_k04
+tap CROSS
+wait 500
+wait 500
+shot sg_06_k05
+tap CROSS
+wait 500
+wait 500
+shot sg_07_k06
+tap CROSS
+wait 500
+wait 500
+shot sg_08_k07
+tap CROSS
+wait 500
+wait 500
+shot sg_09_k08
+tap CROSS
+wait 500
+wait 500
+shot sg_10_k09
+tap CROSS
+wait 500
+wait 500
+shot sg_11_k10
+tap CROSS
+wait 500
+wait 500
+shot sg_12_k11
+tap CROSS
+wait 500
+wait 500
+shot sg_13_k12
+tap CROSS
+wait 500
+wait 500
+shot sg_14_k13
+tap CROSS
+wait 500
+wait 500
+shot sg_15_k14
+tap CROSS
+wait 500
+wait 500
+shot sg_16_k15
+tap CROSS
+wait 500
+wait 500
+tap CROSS
+wait 500
+wait 500
+tap CROSS
+wait 500
+log story_end
+pos after_story
+shot sg_17_village
+wait 1500
+shot sg_18_village_later
+log end
+quit

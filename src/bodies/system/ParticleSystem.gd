@@ -159,6 +159,53 @@ func drawIt(g, x, y):
 		g.setColor(1)
 
 
+## Bridge (phase 1 step B, docs/ARCHITECTURE.md): draw(g, x, y) without
+## drawing, for a scene that draws the system (LegacyParticles2D): sets the
+## position as draw does and returns place_particles(x, y).
+func place_view(x, y):
+	var pos = getPosition()
+	pos.x = x
+	pos.y = -y
+	return place_particles(x, y)
+
+
+## Bridge (phase 1 step B): drawSprite(g, x, y) (a story actor's draw)
+## without drawing: place_particles(x, y).
+func place_sprite(x, y):
+	return place_particles(x, y)
+
+
+## Bridge (phase 1 step B): drawIt(g, x, y) without drawing: initializes the
+## texture as drawIt does and returns what it would draw, for
+## LegacyParticles2D.show_systems: "texture", "additive", "corners" and
+## "colors" (four corners per particle, screen pixels, in drawi's vertex
+## order), and "image" / "image_at" for the background image. Empty when the
+## system is inactive (drawIt draws nothing).
+func place_particles(x, y) -> Dictionary:
+	if not active:
+		return {}
+	if not inited:
+		init()
+		inited = true
+	var corners := PackedVector2Array()
+	var colors := PackedColorArray()
+	var b = getBodies()
+	var it = b.iterator()
+	while it.hasNext():
+		var body = it.next()
+		if body.isAlive():
+			var quad: Array = body.place_quad(tex, position)
+			for i in 4:
+				corners.append(quad[i])
+				colors.append(quad[4])
+	var view := {"texture": tex.getGodotTexture(), "additive": additiveBlending,
+		"corners": corners, "colors": colors}
+	if background != null:
+		view["image"] = ImageHandler.getTexture(background).getGodotTexture()
+		view["image_at"] = Vector2i(x + backx, y + backy)
+	return view
+
+
 func init(g = null):
 	tex = ImageHandler.getTexture(texture)
 

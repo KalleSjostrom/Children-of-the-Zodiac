@@ -51,6 +51,14 @@ func init(name, lab = null, hinders = null):
 
 	logicLoading = false
 
+## Bridge (phase 1 step B, docs/ARCHITECTURE.md): a village story shows its
+## village's scene (VillageStoryTimeLine draws into it). The village owns
+## the scene and frees it; the story has no scene of its own.
+func shown_scene() -> Node:
+	if village != null and village.scene_root is VillageScene:
+		return village.scene_root
+	return null
+
 func setOggplayerAsVillageCurrent(player):
 	village.oggPlayer = player
 	village.music = player.getName()

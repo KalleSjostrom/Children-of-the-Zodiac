@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Ingerd/Ingerd9.png" id="1_5c7st"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Ingerd/Ingerd10.png" id="2_stdjh"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Ingerd/Ingerd11.png" id="3_h40xo"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Ingerd/Ingerd12.png" id="4_d5dqj"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Ingerd/Ingerd13.png" id="5_s3i2v"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Ingerd/Ingerd14.png" id="6_7mgfu"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Ingerd/Ingerd15.png" id="7_pqtvh"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Ingerd/Ingerd16.png" id="8_g1d3q"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Ingerd/Ingerd5.png" id="9_vxy2t"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Ingerd/Ingerd6.png" id="10_qib6m"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Ingerd/Ingerd7.png" id="11_byrf7"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Ingerd/Ingerd8.png" id="12_3dfbs"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Ingerd/Ingerd1.png" id="13_qcobe"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Ingerd/Ingerd2.png" id="14_b8ilq"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Ingerd/Ingerd3.png" id="15_fyisn"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Ingerd/Ingerd4.png" id="16_i2o6o"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_5c7st")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_stdjh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_h40xo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_d5dqj")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_s3i2v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_7mgfu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_pqtvh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_g1d3q")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_vxy2t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_qib6m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_byrf7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_3dfbs")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_qcobe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_b8ilq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_fyisn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_i2o6o")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

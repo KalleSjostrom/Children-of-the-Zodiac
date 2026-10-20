@@ -10,6 +10,10 @@ extends RefCounted
 ##   shot <name>          save a screenshot <shots dir>/<name>.png ("#" in the
 ##                        name becomes a running number, for shots in loops)
 ##   log <text>           print text (and the current game mode, see _state)
+##   pos [text]           print the player's village position (dev, for planning
+##                        routes): "pos <text> x=<x> y=<y> dir=<d> back=<x>,<y>"
+##                        in village pixels (back: the background scroll), or
+##                        "pos <text> -" outside a village
 ##   mark                 remember this line as the start of a loop (marks nest)
 ##   loopuntil <text> <ms> jump back to the last mark unless the state string
 ##                        ("mode=... sub=... place=...") contains <text>, or
@@ -78,6 +82,8 @@ func update(elapsed: float) -> void:
 				print("[autoplay %.0f ms] shot %s %s" % [time_ms, parts[1], _state()])
 			"log":
 				print("[autoplay %.0f ms] %s %s" % [time_ms, " ".join(parts.slice(1)), _state()])
+			"pos":
+				print("[autoplay %.0f ms] pos %s %s" % [time_ms, " ".join(parts.slice(1)), _player_pos()])
 			"mark":
 				# Marks nest: loopuntil uses (and on exit pops) the innermost one.
 				if _marks.is_empty() or _marks.back()[0] != pos:
@@ -125,6 +131,23 @@ func _state() -> String:
 	if Main.instance != null and Main.instance.world.get_child_count() > 0:
 		s += " world=%s" % Main.instance.world.get_child(0).name
 	return s + " place=%s fps=%d" % [str(o.nextPlace), Engine.get_frames_per_second()]
+
+
+## "x=<x> y=<y> dir=<d> back=<x>,<y>" of the village player (also during a
+## village story), "-" elsewhere. Positions are Values [y, x] arrays.
+func _player_pos() -> String:
+	var o := Organizer.getOrganizer()
+	if o == null or o.currentGameMode == null:
+		return "-"
+	var village = o.currentGameMode
+	if village is VillageStory:
+		village = village.village
+	if not (village is Village) or village.player == null:
+		return "-"
+	var p: Array = village.player.getPos()
+	var b: Array = village.background.getPos()
+	return "x=%.1f y=%.1f dir=%d back=%d,%d" % [p[Values.X], p[Values.Y],
+		village.player.getDirection(), int(b[Values.X]), int(b[Values.Y])]
 
 
 func after_draw(node: Node) -> void:

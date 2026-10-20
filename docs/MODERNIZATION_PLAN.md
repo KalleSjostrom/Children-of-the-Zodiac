@@ -1,6 +1,8 @@
 # Modernization plan: from the GL emulation to Godot scenes
 
-Status: **phase 0 done** (2026-10-16); phases 1–5 are proposals. The plan
+Status: **phase 0 done** (2026-10-16); **phase 1 pilot done** (Zazo and
+"Zazo - Miner's Home" through steps A and B, see 6.7); the rest of phase 1
+and phases 2–5 are proposals. The plan
 assumes the state described in `docs/HANDOFF.md` (all classes ported, main
 paths run). Conventions for new code: `docs/ARCHITECTURE.md`.
 
@@ -187,6 +189,17 @@ Couplings that matter for the plan:
   `BattleEnemy.draw`, `EnemySystem.draw`, `Creature3D.draw`, the
   `SlowParticleSystem`/`ImageParticleSystem` coroutines, and `drawEmotions`.
   Moving drawing to nodes must move these updates into `update`.
+  *Found in phase 1:* the village drawing changes state too: the y-sort of
+  `Village.elements` (Godot's sort is unstable, so its history matters),
+  `Villager.drawX`/`drawY`, the emotion bubble positions (`drawSprite`),
+  `ParticleSystem.position` and its texture init, `SmokeParticle.modifySize`
+  (clamps the particle's life while drawing), `PartyMember.getMemberPos`
+  in `DoubleBackground.drawTop`'s overlap test, the timeline's
+  `elements` sort, and the GL state (colour, alpha test) the next drawing
+  inherits. "Into `update`" is not equivalent while the frame order stays
+  legacy: in the frame in which the Organizer leaves a mode, its `update`
+  runs but its `draw` does not. Phase 1 therefore keeps these changes at
+  draw time (`Village.update_draw_state`, docs/ARCHITECTURE.md section 9).
 * **Saves store cards by Java class name** (`card cards.offense.BattleCard 2
   true`). The `ClassRegistry` names stay the stable IDs.
 
@@ -335,6 +348,7 @@ tools/parity/             screenshot comparison
 4. **Pilot choice.** Zazo exercises almost everything: four variants
    (day/night × two statuses), particles, doors, signs, loot and cutscenes.
    Add one small interior next to it (e.g. `Zazo - Teo's House`).
+   *As built:* the pilot interior is "Zazo - Miner's Home".
 
 **Exit:** a test mode with a scene renders under the legacy overlays and
 fades; the parity tool works.
@@ -376,6 +390,25 @@ Zazo.tscn (Node2D, VillageScene.gd)   @export place_name, music, land_name, insi
 * **Actors.** An `ActorView` (`AnimatedSprite2D`, `centered = false`) has its
   origin at the legacy `pos` (top-left), so Godot's y sort orders actors
   exactly as `Village.drawBottom` does.
+* *As built (pilot):* every place scene inherits a template,
+  `scenes/villages/VillageScene.tscn`, so there are three levels (template,
+  `<Place>.tscn`, variant). `Ground` comes before `Background`: the legacy
+  code draws the bottom-layer systems before the tiles. The scene types are
+  `VillageDoor`, `VillageSign`, `VillageLoot`, `VillageSpawn` (the plain
+  names are legacy classes); buildings are `VillageBuilding` resources.
+  Godot's y sort is *not* the legacy order: ties (party members stand on one
+  spot; the legacy sort is unstable), the sort keys of particle systems
+  (`-(emitter.y + 56)`) and cutscene props (±10000), and a cutscene draws its
+  actors after the village's own sprites. Step B therefore orders the
+  `Actors` children explicitly; y sort stays on for the editor.
+* *As built:* **the top layer claim is wrong for Zazo.** The PNG pieces are
+  not identical to the JPEG tiles under them (darker, crisper, up to 90/255
+  per channel). In the original a treetop visibly changes when a sprite
+  walks under it. Drawing the pieces always, as planned, makes them look the
+  same everywhere, but no longer pixel-identical to the legacy picture where
+  no sprite overlaps them; `--legacy=village_top_layer` keeps the legacy
+  rule for parity runs. 43 of the 3,530 `o` rectangles have zero width or
+  height; none are inverted.
 
 ### 6.2 Converter `tools/import/vil_to_scene.gd`
 
@@ -389,6 +422,17 @@ Zazo.tscn (Node2D, VillageScene.gd)   @export place_name, music, land_name, insi
   × 4 frames, 150 ms) and per `animObj` series.
 * Writes scenes with `PackedScene.pack()` + `ResourceSaver.save()`. Every
   created node needs `owner = root`, or it is silently left out.
+* *As built:* `pack()` cannot start an inherited scene by itself (the
+  inherited state is only set when a scene that already inherits is
+  instanced with an edit state): the converter writes a three-line bootstrap
+  file naming the base, instances it with `GEN_EDIT_STATE_MAIN`, adds the
+  nodes and packs. Godot 4.7 gives every node a random `unique_id`; the
+  converter removes them so that converting twice writes the same files. It
+  runs in two stages with Godot's `--import` between them (the scenes need
+  the stitched PNGs imported). Each `particlesystem` line gets one
+  `SystemLoader` (the legacy loader shares its settings objects between the
+  systems of a line; Home of the Gods depends on it). Workflow:
+  `docs/CONVERTING_VILLAGES.md`.
 
 ### 6.3 Step A: data from scenes, logic unchanged
 
@@ -401,6 +445,16 @@ Zazo.tscn (Node2D, VillageScene.gd)   @export place_name, music, land_name, insi
 * Gameplay is identical by construction.
 * `tools/import/verify_villages.gd` builds every variant both ways and
   compares the resulting objects field by field.
+* *As built:* the builder replays the commands in the order every `.vil`
+  file has (background, back, offset, start, o, wind, particlesystem, then
+  the rest; checked for all 89), so the Database writes, the random numbers
+  of the particle warm-up and the sprite map order match. Quirks are data:
+  a two-line sign is listed twice, a taken loot's `lootLine`s go to the
+  previous loot, unknown commands (`doorSignFL`, `sigin`, stray text) are
+  ignored. A dry run of all 89 files (data only) passes: 240 builds (every
+  start position, saves "Slot 1" and "Start"). "Zazo at Night - 0" names an
+  equipment "2" as loot, for which the original exits the game unless the
+  loot is already taken.
 
 ### 6.4 Step B: nodes draw the village
 
@@ -450,6 +504,18 @@ Zazo.tscn (Node2D, VillageScene.gd)   @export place_name, music, land_name, insi
   `_draw()`.
 * `--legacy=villages` keeps the old path available for parity runs until
   the phase ends.
+* *As built (pilot):* the village hands the scene what its legacy drawing
+  would have drawn, at the point where it drew (in `draw`, see 2.4), with
+  the GL colour and alpha test of each part: the sprites' soft edges are
+  alpha tested (0.1 after the particle systems), so mirroring positions and
+  frames alone is not pixel-exact. `LegacyParticles2D` draws the quads the
+  legacy particle draw computes (it does not run the simulation, so no time
+  base is needed). `StoryImage` only takes the image modes drawn under the
+  actors (backflash, translucent under actor): the others are drawn over the
+  emotion bubbles, which stay legacy until phase 3, so those images stay in
+  the legacy overlay too. A cutscene shows its village's scene through
+  `GameMode.shown_scene()`; the village keeps owning it. Details:
+  docs/ARCHITECTURE.md section 9.
 
 ### 6.5 Step C: logic (optional, later)
 
@@ -471,6 +537,39 @@ Zazo.tscn (Node2D, VillageScene.gd)   @export place_name, music, land_name, insi
 * **Exit:** all 89 variants load from scenes; `tools/autoplay/village*.txt`
   and the story scripts pass parity; `Village`/`VillageLoader` contain no
   world drawing.
+
+### 6.7 Pilot results (Zazo, Zazo - Miner's Home)
+
+* **Coverage:** six parity cases (`zazo_0`, `zazo_1`, `zazo_night_0`,
+  `zazo_night_1`, `zazo_story_node1`, `zazo_story_gerbias`; 113 shots),
+  recorded on unconverted code with the ten older cases (goldens of all 16);
+  a second recording of the new cases is identical.
+* **Step A:** golden vs. after step A: all 289 shots and all 16 logs
+  identical. `verify_villages.gd`: the pilot (20 builds: 5 variants × their
+  start positions × saves "Slot 1" and "Start") and a data-only dry run of
+  all 89 `.vil` files (240 builds) pass.
+* **Step B, other cases:** golden vs. after: 176 shots identical, logs
+  identical. The bridge test (Alares, unconverted) is identical to its
+  phase 0 recording.
+* **Step B, Zazo, legacy vs. scene with `--legacy=village_top_layer`:** 100
+  of 113 shots identical, logs identical. The 13 others are the frames of
+  Zazonode1's zoom (2× around 512,768): the legacy code magnifies each
+  256 px tile on its own, so its tile seams show; the stitched background
+  has none (322–914 pixels per frame over 4/255, all on the seams), and the
+  bilinear filtering of the magnified textures rounds differently (≤ 4/255,
+  mostly 1, on 1–3 % of the pixels).
+* **Step B, Zazo, default (top layer always drawn):** in addition, every
+  village frame differs inside the top layer pieces that no sprite overlaps
+  (the PNG pieces over the JPEG background, up to 90/255, 10–22 % of a
+  frame); cutscene frames are identical except the zoom.
+* **Frame rate** (normal runs, Zazo, `zazo_0` route): 60 FPS either way when
+  capped; uncapped about 240–255 FPS legacy and 400–485 FPS with the scene.
+* **Still legacy:** Village draws the emotion bubbles, dialogs, signs (and
+  their card info), the fade and the menu thumbnail capture;
+  VillageStoryTimeLine the emotions, dialogs, texts, scroll texts, fades and
+  the cover-all, story, village and translucent-over-actor images. The
+  `.vil` files stay (decision 5); the converter, the data check and
+  `--legacy=villages` read them.
 
 ## 7. Phase 2: dungeons as scenes
 

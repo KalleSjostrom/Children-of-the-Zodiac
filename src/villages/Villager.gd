@@ -214,6 +214,15 @@ func draw(g, x = null, y = null):
 		super.draw(g)
 
 
+## Bridge (phase 1 step B): draw(g, x, y) without drawing (see Sprite.place_view).
+func place_view(x, y):
+	drawX = J.round(pos[Values.X] + x)
+	drawY = J.round(pos[Values.Y] + y)
+	if isVisible():
+		return [place_sprite(drawX, drawY), drawX, drawY]
+	return []
+
+
 func getDialog():
 	return dialog
 

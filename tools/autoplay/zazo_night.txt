@@ -1,0 +1,107 @@
+# --start=Zazo --start-time=night with --load=Start (+ --status=Zazoname:1)
+# or --load="Slot 1": "Zazo at Night - 0" / "- 1". Parity cases zazo_night_0
+# and zazo_night_1 (phase 1 pilot). The night variants have no villagers, no
+# chimney smoke and locked houses; the night layer is standardOvernight.png.
+# Their Inn and Church name store images that do not exist (inn.jpg,
+# burt.png), so the Inn visit logs missing-image errors (legacy content).
+# Positions are village pixels.
+#
+# Fade-in.
+wait 100
+shot zn_01_fadein
+wait 250
+shot zn_02_fadein_later
+wait 1150
+shot zn_03_start
+pos start
+# Read the sign left of the start (1141,930), facing up.
+press LEFT
+wait 320
+release LEFT
+tap UP
+wait 200
+pos sign
+tap CROSS
+wait 800
+shot zn_04_sign
+tap CROSS
+wait 500
+# Back right, up, partly under the treetop at 1245,850.
+press RIGHT
+wait 320
+release RIGHT
+press UP
+wait 375
+release UP
+press RIGHT
+wait 230
+release RIGHT
+wait 100
+shot zn_05_under_treetop
+pos treetop
+press RIGHT
+wait 195
+release RIGHT
+# Up the east road (the background scrolls up).
+press UP
+wait 1000
+shot zn_06_scrolling_up
+wait 1050
+release UP
+wait 300
+shot zn_07_road
+pos road
+# Left and up to the Inn door (1201,272), enter the Inn, leave it.
+press LEFT
+wait 415
+release LEFT
+press UP
+wait 1000
+release UP
+pos inn_door
+tap CROSS
+wait 400
+shot zn_08_entering_inn
+wait 2000
+log in_inn
+tap CIRCLE
+wait 400
+shot zn_09_leaving_inn
+wait 2600
+shot zn_10_back_from_inn
+pos back
+# Down to the bridge corridor and left (the background scrolls left), partly
+# under the treetop at 822,465.
+press DOWN
+wait 775
+release DOWN
+press LEFT
+wait 1000
+shot zn_11_scrolling_left
+wait 775
+release LEFT
+wait 100
+shot zn_12_under_treetop_2
+pos treetop2
+# Over the bridge to the Miner's Home door: locked at night.
+press LEFT
+wait 2525
+release LEFT
+press UP
+wait 600
+release UP
+pos door
+tap CROSS
+wait 800
+shot zn_13_locked
+tap CROSS
+wait 500
+# The menu (thumbnail) and back.
+tap TRIANGLE
+wait 2500
+shot zn_14_menu
+tap CIRCLE
+wait 2000
+shot zn_15_after_menu
+log end
+quit

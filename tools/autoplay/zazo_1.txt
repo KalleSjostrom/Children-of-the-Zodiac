@@ -1,0 +1,108 @@
+# --load="Slot 1" --start=Zazo: "Zazo - 1" (Slot 1.sav has status zazo 1),
+# day, party of three. Parity case zazo_1 (phase 1 pilot). Same route as
+# zazo_0.txt; here Gerbias stands at 895,230 and has one dialog page, and
+# more villagers walk about. Positions are village pixels.
+#
+# Fade-in.
+wait 100
+shot z1_01_fadein
+wait 250
+shot z1_02_fadein_later
+wait 1150
+shot z1_03_start
+pos start
+# Up, then right, partly under the treetop at 1245,850.
+press UP
+wait 375
+release UP
+press RIGHT
+wait 230
+release RIGHT
+wait 100
+shot z1_04_under_treetop
+pos treetop
+press RIGHT
+wait 195
+release RIGHT
+# Up the east road (the background scrolls up); chimney smoke.
+press UP
+wait 1000
+shot z1_05_scrolling_up
+wait 1050
+release UP
+wait 300
+shot z1_06_smoke
+wait 700
+shot z1_07_smoke_later
+pos road
+# Left along the road (scrolls left), up to Gerbias (895,230).
+press LEFT
+wait 1200
+shot z1_08_scrolling_left
+wait 780
+release LEFT
+press UP
+wait 1300
+release UP
+pos gerbias
+tap CROSS
+wait 800
+shot z1_09_dialog
+tap CROSS
+wait 800
+# Ingerd walks by below Gerbias: let her pass. Then down to the bridge
+# corridor, over the river, up to the Miner's Home door.
+wait 2000
+press DOWN
+wait 925
+release DOWN
+press LEFT
+wait 1400
+shot z1_10_bridge
+wait 1350
+release LEFT
+press UP
+wait 600
+release UP
+wait 100
+shot z1_11_barrack_smoke
+pos door
+# Enter "Zazo - Miner's Home", walk around, leave by the hole door.
+tap CROSS
+wait 400
+shot z1_12_entering
+wait 1100
+shot z1_13_miners_fadein
+wait 1500
+shot z1_14_miners_home
+pos miners_home
+press UP
+wait 200
+release UP
+press LEFT
+wait 1000
+release LEFT
+wait 100
+shot z1_15_miners_walk
+press RIGHT
+wait 1000
+release RIGHT
+pos miners_back
+press DOWN
+wait 600
+release DOWN
+wait 300
+shot z1_16_leaving
+wait 1700
+shot z1_17_back_in_zazo
+pos back
+log back_in_zazo
+# The menu (thumbnail) and back.
+tap TRIANGLE
+wait 2500
+shot z1_18_menu
+tap CIRCLE
+wait 2000
+shot z1_19_after_menu
+log end
+quit

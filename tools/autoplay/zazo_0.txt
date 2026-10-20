@@ -1,0 +1,113 @@
+# --load=Start --start=Zazo: "Zazo - 0" (Start.sav has status Zazo 0), day,
+# party of one (Kin). Parity case zazo_0 (phase 1 pilot, docs/ARCHITECTURE.md).
+# Positions are village pixels, x,y of the player's sprite (start 1205,955,
+# background scroll -693,-256). The "pos" lines check the route.
+#
+# Fade-in.
+wait 100
+shot z0_01_fadein
+wait 250
+shot z0_02_fadein_later
+wait 1150
+shot z0_03_start
+pos start
+# Up, then right, partly under the treetop at 1245,850 (top.info 28.png).
+press UP
+wait 375
+release UP
+press RIGHT
+wait 230
+release RIGHT
+wait 100
+shot z0_04_under_treetop
+pos treetop
+press RIGHT
+wait 195
+release RIGHT
+# Up the east road to y 468: the background scrolls up (y band 384..640);
+# the inn and mayor chimneys smoke (wind 10;0;0 drifts it right).
+press UP
+wait 1000
+shot z0_05_scrolling_up
+wait 1050
+release UP
+wait 300
+shot z0_06_smoke
+wait 700
+shot z0_07_smoke_later
+pos road
+# Left along the road (the background scrolls left), then up to Gerbias in
+# front of the church (810,230).
+press LEFT
+wait 1200
+shot z0_08_scrolling_left
+wait 1190
+release LEFT
+press UP
+wait 1300
+release UP
+pos gerbias
+tap CROSS
+wait 800
+shot z0_09_dialog
+tap CROSS
+wait 800
+shot z0_10_dialog_page2
+tap CROSS
+wait 800
+# Down to the bridge (the anchor must stay within y 431..454 to cross it),
+# left over the river, up to the right door of the Miner's Home (340,332).
+press DOWN
+wait 925
+release DOWN
+press LEFT
+wait 1000
+shot z0_11_bridge
+wait 1350
+release LEFT
+press UP
+wait 600
+release UP
+wait 100
+shot z0_12_barrack_smoke
+pos door
+# Enter "Zazo - Miner's Home" (start0 729,520), walk around, leave by the
+# hole door below the start (back to Zazo at 337,352).
+tap CROSS
+wait 400
+shot z0_13_entering
+wait 1100
+shot z0_14_miners_fadein
+wait 1500
+shot z0_15_miners_home
+pos miners_home
+press UP
+wait 200
+release UP
+press LEFT
+wait 1000
+release LEFT
+wait 100
+shot z0_16_miners_walk
+press RIGHT
+wait 1000
+release RIGHT
+pos miners_back
+press DOWN
+wait 600
+release DOWN
+wait 300
+shot z0_17_leaving
+wait 1700
+shot z0_18_back_in_zazo
+pos back
+log back_in_zazo
+# The menu (its thumbnail is a copy of the village frame) and back.
+tap TRIANGLE
+wait 2500
+shot z0_19_menu
+tap CIRCLE
+wait 2000
+shot z0_20_after_menu
+log end
+quit

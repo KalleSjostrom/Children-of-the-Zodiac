@@ -22,6 +22,8 @@
 #   --max-pixels=<n>       pixels over the tolerance a shot may have (default 0)
 #   --name=<name>          set name prefix for ab (default ab)
 #   --timeout=<s>          per run (default 900)
+#   --ignore-world         compare the logs without AutoPlay's "world=<scene>"
+#                          (legacy vs. scene runs: only a scene run shows one)
 #
 # Every run gets the engine option --fixed-fps 60 (a fixed delta for nodes,
 # timers and tweens) and the game options --mute --seed=<n> --uncapped (see
@@ -39,6 +41,7 @@ TOLERANCE=0
 MAX_PIXELS=0
 NAME=ab
 TIMEOUT=900
+IGNORE_WORLD=0
 EXTRA_ARGS=""
 POS=()
 for a in "$@"; do
@@ -49,6 +52,7 @@ for a in "$@"; do
     --max-pixels=*) MAX_PIXELS="${a#--max-pixels=}" ;;
     --name=*) NAME="${a#--name=}" ;;
     --timeout=*) TIMEOUT="${a#--timeout=}" ;;
+    --ignore-world) IGNORE_WORLD=1 ;;
     *) POS+=("$a") ;;
   esac
 done
@@ -105,9 +109,12 @@ record() {
   done <<< "$lines"
 }
 
-# AutoPlay lines of a log without the fps value and the shot directory.
+# AutoPlay lines of a log without the fps value and the shot directory (and
+# without world=<scene> with --ignore-world).
 log_states() {
-  tr -d '\r' < "$1" | grep '^\[autoplay' | sed -E 's/ fps=[0-9]+//; s#screenshot .*/#screenshot #'
+  local world='s/^//'
+  [ "$IGNORE_WORLD" -eq 1 ] && world='s/ world=.* place=/ place=/'
+  tr -d '\r' < "$1" | grep '^\[autoplay' | sed -E 's/ fps=[0-9]+//; s#screenshot .*/#screenshot #' | sed -E "$world"
 }
 
 compare() {

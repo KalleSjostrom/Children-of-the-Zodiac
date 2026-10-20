@@ -336,6 +336,41 @@ func drawTop(g, removeAlpha, sprites):
 	drawSystem(g, systems.get(WEATHER_LAYER))
 
 
+## Bridge (phase 1 step B, docs/ARCHITECTURE.md): the overlap test of
+## drawTop without drawing: for each top layer piece, whether drawTop draws
+## it (with sprites, only where a visible sprite overlaps it; without, all).
+## Does what drawTop does besides drawing: loads the pieces' textures and
+## brings the party members' positions up to date (PartyMember.getMemberPos).
+func overlapped_pieces(sprites) -> Array:
+	var drawn := []
+	var spriteList = null
+	if sprites != null:
+		spriteList = sprites.values()
+	for entry in top:
+		var p: Array = entry[0]
+		var s: String = entry[1]
+		var found: bool = spriteList == null
+		var gt: GameTexture = ImageHandler.getTexture(s)
+		if spriteList != null:
+			var h: int = gt.getHeight()
+			var w: int = gt.getWidth()
+			for sprite in spriteList:
+				if sprite.isVisible():
+					var sPos
+					if sprite is PartyMember:
+						sPos = sprite.getMemberPos()
+					else:
+						sPos = sprite.getPos()
+					var temp: int = int(sPos[Values.X] - p[Values.X])
+					if (temp + 36) > 0 and temp < w:
+						var tempy: int = int(sPos[Values.Y] - p[Values.Y])
+						if (tempy + 55) > 0 and tempy < h:
+							found = true
+							break
+		drawn.append(found)
+	return drawn
+
+
 func drawSystem(g, systems):
 	if systems != null:
 		for p in systems:

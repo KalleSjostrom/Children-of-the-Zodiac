@@ -1,0 +1,8 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/common/StoryImage.gd" id="1_script"]
+
+[node name="StoryImage" type="Sprite2D"]
+visible = false
+centered = false
+script = ExtResource("1_script")

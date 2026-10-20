@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Dedric&Fredric/Dedric&Fredric9.png" id="1_w26sl"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Dedric&Fredric/Dedric&Fredric10.png" id="2_2vctg"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Dedric&Fredric/Dedric&Fredric11.png" id="3_3gehy"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Dedric&Fredric/Dedric&Fredric12.png" id="4_172st"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Dedric&Fredric/Dedric&Fredric13.png" id="5_tauo0"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Dedric&Fredric/Dedric&Fredric14.png" id="6_t0adt"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Dedric&Fredric/Dedric&Fredric15.png" id="7_55jc2"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Dedric&Fredric/Dedric&Fredric16.png" id="8_14rnb"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Dedric&Fredric/Dedric&Fredric5.png" id="9_0j0p4"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Dedric&Fredric/Dedric&Fredric6.png" id="10_ptmki"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Dedric&Fredric/Dedric&Fredric7.png" id="11_pnfme"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Dedric&Fredric/Dedric&Fredric8.png" id="12_535dt"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Dedric&Fredric/Dedric&Fredric1.png" id="13_tj4jo"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Dedric&Fredric/Dedric&Fredric2.png" id="14_si7vr"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Dedric&Fredric/Dedric&Fredric3.png" id="15_7gvug"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Dedric&Fredric/Dedric&Fredric4.png" id="16_yfjpp"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_w26sl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_2vctg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_3gehy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_172st")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_tauo0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_t0adt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_55jc2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_14rnb")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_0j0p4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ptmki")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_pnfme")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_535dt")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_tj4jo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_si7vr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_7gvug")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_yfjpp")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

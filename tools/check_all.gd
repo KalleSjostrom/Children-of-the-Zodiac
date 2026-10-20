@@ -1,7 +1,8 @@
 extends SceneTree
-## Compiles every GDScript under res://src (or the folders given after "--")
-## and prints a summary. Run through tools/check.sh, which refreshes the
-## global class cache first.
+## Compiles every GDScript under res://src, res://scenes and res://tools (or
+## the folders given after "--") and prints a summary. Run through
+## tools/check.sh, which refreshes the global class cache first. This script
+## skips itself (loading the running script again does not return).
 ##
 ##   godot --headless --path . --script res://tools/check_all.gd -- src/battle src/cards
 
@@ -11,13 +12,14 @@ func _init() -> void:
 	for a in OS.get_cmdline_user_args():
 		roots.append("res://" + String(a).trim_prefix("res://").trim_suffix("/"))
 	if roots.is_empty():
-		roots.append("res://src")
+		roots.append_array(["res://src", "res://scenes", "res://tools"])
 	var files: Array = []
 	for r in roots:
 		if r.ends_with(".gd"):
 			files.append(r)
 		else:
 			_collect(r, files)
+	files.erase((get_script() as Script).resource_path)
 	files.sort()
 	var failed := 0
 	for f in files:

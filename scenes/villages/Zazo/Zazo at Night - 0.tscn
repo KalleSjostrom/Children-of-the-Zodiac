@@ -1,0 +1,160 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Zazo/Zazo.tscn" id="1_base"]
+[ext_resource type="Script" path="res://scenes/villages/VillageBuilding.gd" id="2_p1gnm"]
+[ext_resource type="Texture2D" path="res://res/Village/standardOvernight.png" id="3_an1rr"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="4_gmtb5"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageSign.tscn" id="5_41pyw"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageLoot.tscn" id="6_3mqu2"]
+
+[sub_resource type="Resource" id="Resource_y8p42"]
+script = ExtResource("2_p1gnm")
+store_name = "Church"
+background = "church.jpg"
+keeper = "_"
+keeper_name = "Pastor Pai"
+first_line = "How can I be of assistance?"
+second_line = " "
+music = "alareschurch"
+
+[sub_resource type="Resource" id="Resource_jqigf"]
+script = ExtResource("2_p1gnm")
+store_name = "Inn"
+background = "inn.jpg"
+keeper = "burt.png"
+keeper_name = "Kurt"
+first_line = "Whaddaya want?!"
+second_line = " "
+music = "house"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vpdsj"]
+size = Vector2(0, 0)
+
+[node name="Zazo at Night - 0" instance=ExtResource("1_base")]
+day = false
+night_screen_fixed = true
+buildings = Array[ExtResource("2_p1gnm")]([SubResource("Resource_y8p42"), SubResource("Resource_jqigf")])
+
+[node name="Night" parent="." index="4"]
+visible = true
+texture = ExtResource("3_an1rr")
+
+[node name="V000" type="CollisionShape2D" parent="Obstacles" index="118"]
+position = Vector2(1576, 822)
+shape = SubResource("RectangleShape2D_vpdsj")
+
+[node name="00 HouseDL" parent="Doors" index="0" instance=ExtResource("4_gmtb5")]
+position = Vector2(197, 332)
+kinds = PackedStringArray("house")
+targets = PackedStringArray("HouseDL")
+directions = PackedInt32Array(0)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray()
+
+[node name="01 HouseDL" parent="Doors" index="1" instance=ExtResource("4_gmtb5")]
+position = Vector2(340, 332)
+kinds = PackedStringArray("house")
+targets = PackedStringArray("HouseDL")
+directions = PackedInt32Array(0)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray()
+
+[node name="02 Tent" parent="Doors" index="2" instance=ExtResource("4_gmtb5")]
+position = Vector2(307, 691)
+kinds = PackedStringArray("house")
+targets = PackedStringArray("Tent")
+directions = PackedInt32Array(0)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray()
+
+[node name="03 Church" parent="Doors" index="3" instance=ExtResource("4_gmtb5")]
+position = Vector2(840, 190)
+hole = true
+kinds = PackedStringArray("church")
+targets = PackedStringArray("Church")
+radius = 40
+directions = PackedInt32Array(0)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray()
+
+[node name="04 Inn" parent="Doors" index="4" instance=ExtResource("4_gmtb5")]
+position = Vector2(1201, 272)
+kinds = PackedStringArray("inn")
+targets = PackedStringArray("Inn")
+directions = PackedInt32Array(0)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray()
+
+[node name="05 zazoWeapons0" parent="Doors" index="5" instance=ExtResource("4_gmtb5")]
+position = Vector2(812, 775)
+kinds = PackedStringArray("weapon")
+targets = PackedStringArray("zazoWeapons0")
+directions = PackedInt32Array(0)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray(" Come back tomorrow")
+
+[node name="06 zazoCardShop0" parent="Doors" index="6" instance=ExtResource("4_gmtb5")]
+position = Vector2(1573, 775)
+kinds = PackedStringArray("card")
+targets = PackedStringArray("zazoCardShop0")
+directions = PackedInt32Array(0)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray(" Want cards?", " Open hours are 7-18.")
+
+[node name="07 House1" parent="Doors" index="7" instance=ExtResource("4_gmtb5")]
+position = Vector2(1562, 341)
+kinds = PackedStringArray("house")
+targets = PackedStringArray("House1")
+directions = PackedInt32Array(0)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray()
+
+[node name="08 House1" parent="Doors" index="8" instance=ExtResource("4_gmtb5")]
+position = Vector2(1844, 181)
+kinds = PackedStringArray("house")
+targets = PackedStringArray("House1")
+directions = PackedInt32Array(0)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray()
+
+[node name="00 Left_ Weapon shop_" parent="Signs" index="0" instance=ExtResource("5_41pyw")]
+position = Vector2(1141, 930)
+radius = 30
+directions = PackedInt32Array(0)
+lines = PackedStringArray("Left: Weapon shop.", "Right: Item shop, graveyard.")
+listed = Array[bool]([true, true])
+
+[node name="01 sign" parent="Signs" index="1" instance=ExtResource("5_41pyw")]
+position = Vector2(1275, 418)
+radius = 20
+directions = PackedInt32Array(0)
+lines = PackedStringArray()
+
+[node name="02 Mats Meadowgrove, wanted" parent="Signs" index="2" instance=ExtResource("5_41pyw")]
+position = Vector2(1300, 418)
+radius = 30
+directions = PackedInt32Array(0)
+lines = PackedStringArray("Mats Meadowgrove, wanted for thievery.\"")
+listed = Array[bool]([true])
+
+[node name="03 R_I_P" parent="Signs" index="3" instance=ExtResource("5_41pyw")]
+position = Vector2(1853, 474)
+radius = 40
+directions = PackedInt32Array(0)
+lines = PackedStringArray("R.I.P", "Here lies our great leader and friend.")
+listed = Array[bool]([true, true])
+
+[node name="04 signL" parent="Signs" index="4" instance=ExtResource("5_41pyw")]
+position = Vector2(1482, 798)
+radius = 30
+directions = PackedInt32Array(0)
+lines = PackedStringArray("signL")
+listed = Array[bool]([true])
+
+[node name="00 name" parent="Loot" index="0" instance=ExtResource("6_3mqu2")]
+position = Vector2(86, 342)
+loot_name = "name"
+directions = PackedInt32Array(0)
+content_name = "2"
+content_type = 3
+lines = PackedStringArray("You found a card lying among the stones.")

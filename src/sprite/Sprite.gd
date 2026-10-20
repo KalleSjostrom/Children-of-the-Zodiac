@@ -200,6 +200,25 @@ func drawSprite(g, x, y):
 		emotionY = y
 
 
+## Bridge (phase 1 step B, docs/ARCHITECTURE.md): drawSprite(g, x, y)
+## without drawing, for a mode whose scene draws the sprite (ActorView):
+## keeps what drawSprite sets (the emotion bubble's position) and returns
+## the image it would draw (an image path, or null).
+func place_sprite(x, y):
+	if currentEmotion != -1:
+		emotionX = x
+		emotionY = y
+	return anim.getImage()
+
+
+## Bridge (phase 1 step B): draw(g, x, y) without drawing, for the sprites of
+## a village scene: [image, screen x, screen y] as place_sprite, or [] when
+## draw(g, x, y) draws nothing (as here; subclasses draw). The particle
+## systems return their particles instead (BodiesParticleSystem.place_view).
+func place_view(x, y):
+	return []
+
+
 func drawEmotions(g):
 	if currentEmotion != -1:
 		if shakeEmotion:

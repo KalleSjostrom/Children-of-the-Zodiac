@@ -74,6 +74,14 @@ func ensure_scene() -> Node:
 	return scene_root
 
 
+## The scene Main shows under World while this mode is current: its own
+## (ensure_scene) by default. A mode that presents another mode's scene
+## overrides this (VillageStory shows its Village's); the scene stays owned
+## by the mode whose scene_root it is, which alone frees it.
+func shown_scene() -> Node:
+	return ensure_scene()
+
+
 ## Game modes are dropped, not freed explicitly: free the scene with the mode.
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_PREDELETE and is_instance_valid(scene_root):

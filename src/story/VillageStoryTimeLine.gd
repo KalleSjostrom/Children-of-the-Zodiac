@@ -614,38 +614,102 @@ func draw(g, alpha = null):
 				color[i] += colorSpeed[i]
 
 		g.setFadeColor(color[0], color[1], color[2], color[3])
-		village.drawBottom(g)
-		if imageMode == BACKFLASH_MODE:
-			# Java: currentImage.equals("black") compares an ImageSettings
-			# with a String and is therefore always false.
-			if currentImage != null:
+		if village.scene_root is VillageScene:
+			draw_scene(g)
+		else:
+			village.drawBottom(g)
+			if imageMode == BACKFLASH_MODE:
+				# Java: currentImage.equals("black") compares an ImageSettings
+				# with a String and is therefore always false.
+				if currentImage != null:
+					currentImage.draw(g)
+			var bx: int = int(background.getPos()[Values.X])
+			var by: int = int(background.getPos()[Values.Y])
+
+			if imageMode == TRANSLUCENT_MODE_UNDER_ACTOR:
+				g.setColor(1, 1, 1, fadeValue)
 				currentImage.draw(g)
-		var bx: int = int(background.getPos()[Values.X])
-		var by: int = int(background.getPos()[Values.Y])
+				g.setColor(1)
+			sortActors()
+			for i in range(elements.size()):
+				var index: int = elements[i].getIndex()
+				if showing[index]:
+					var actor = members[index]
+					actor.draw(g, bx, by)
 
-		for i in range(members.size()):
-			var actor = members[i]
-			if actor.getSprite() is DefaultSprite:
-				elements[i].setYpos(actor.getSprite().getY())
-			else:
-				elements[i].setYpos(actor.getPos()[Values.Y])
-			elements[i].setIndex(i)
-		if imageMode == TRANSLUCENT_MODE_UNDER_ACTOR:
-			g.setColor(1, 1, 1, fadeValue)
-			currentImage.draw(g)
-			g.setColor(1)
-		_stableSort(elements)
-		for i in range(elements.size()):
-			var index: int = elements[i].getIndex()
-			if showing[index]:
-				var actor = members[index]
-				actor.draw(g, bx, by)
-
-		if imageMode != BACKFLASH_MODE:
-			village.drawTop(g, null)
+			if imageMode != BACKFLASH_MODE:
+				village.drawTop(g, null)
 		for i in range(members.size()):
 			members[i].drawEmotion(g)
 		drawTop(g)
+	elif village.scene_root is VillageScene:
+		# The legacy code draws nothing of the village while paused.
+		village.scene_root.show_nothing()
+
+
+## Sorts the actors on their y position for drawing (elements).
+func sortActors():
+	for i in range(members.size()):
+		var actor = members[i]
+		if actor.getSprite() is DefaultSprite:
+			elements[i].setYpos(actor.getSprite().getY())
+		else:
+			elements[i].setYpos(actor.getPos()[Values.Y])
+		elements[i].setIndex(i)
+	_stableSort(elements)
+
+
+## Bridge (phase 1 step B, docs/ARCHITECTURE.md): the village's scene draws
+## the world of draw: the village (Village.scene_bottom, scene_sprites,
+## scene_top), the image modes drawn under the actors (StoryImage), the
+## actors, with the zoom as the camera's and the colour of setFadeColor as
+## each part's tint. The emotions, dialogs, texts and the image modes drawn
+## over them stay legacy overlays, so they are drawn after this.
+func draw_scene(g):
+	var scene = village.scene_root
+	var state = Village.SceneGLState.new(g)
+	var bpos = background.getPos()
+	var scroll := Vector2i(int(bpos[Values.X]), int(bpos[Values.Y]))
+	if scaling and useStaticPos:
+		scene.show_view(scroll, scale, Vector2(staticPos[Values.X], staticPos[Values.Y]))
+	else:
+		scene.show_view(scroll, 1.0, Vector2.ZERO)
+	village.update_draw_state()
+	village.scene_bottom(scene, state)
+	var entries: Array = village.scene_sprites(state, scroll)
+	if imageMode == BACKFLASH_MODE and currentImage != null:
+		entries.append(image_entry(scroll, state.color, state.alpha))
+	if imageMode == TRANSLUCENT_MODE_UNDER_ACTOR and currentImage != null:
+		entries.append(image_entry(scroll, Color(1, 1, 1, fadeValue), state.alpha))
+		state.reset_color()
+	sortActors()
+	for i in range(elements.size()):
+		var index: int = elements[i].getIndex()
+		if showing[index]:
+			var placed: Array = members[index].place_view(scroll.x, scroll.y)
+			var key: int = members[index].getSprite().get_instance_id()
+			if placed[0] is Dictionary:
+				entries.append(["particles"] + state.particles([key, placed[0]]))
+			else:
+				var t = ImageHandler.getTexture(placed[0]) if placed[0] != null else null
+				entries.append(["sprite", key, t.getGodotTexture() if t != null else null,
+						Vector2i(placed[1] - scroll.x, placed[2] - scroll.y), state.color, state.alpha])
+	scene.show_actors(entries)
+	if imageMode != BACKFLASH_MODE:
+		village.scene_top(scene, state)
+	else:
+		scene.show_top(false, [], state.color, false, state.color, [])
+	state.apply(g)
+	if imageMode != BACKFLASH_MODE:
+		village.drawOverlays(g, null)
+
+
+## The current image (ImageSettings.draw: drawImage(name, pos, size), in
+## screen pixels) as an entry for VillageScene.show_actors.
+func image_entry(scroll: Vector2i, c: Color, a: float) -> Array:
+	var t = ImageHandler.getTexture(currentImage.name)
+	var at := Vector2i(roundi(currentImage.pos[0]), roundi(currentImage.pos[1])) - scroll
+	return ["image", t.getGodotTexture() if t != null else null, at, currentImage.size, c, a]
 
 func drawTop(g, sprites = null):
 	if imageMode == COVERALL_MODE:

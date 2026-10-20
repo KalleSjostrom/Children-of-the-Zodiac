@@ -1,4 +1,4 @@
-# Handoff: state of the Godot port (2026-10-16, after steps 1–3 and modernization phase 0)
+# Handoff: state of the Godot port (2026-10-20, after steps 1–3, modernization phase 0 and the phase 1 pilot)
 
 Conventions: legacy (ported) code follows `docs/PORTING.md`; new code
 (scenes, resources, tools, bridge) follows `docs/ARCHITECTURE.md`. The
@@ -71,11 +71,35 @@ section 5; conventions and workflow in `docs/ARCHITECTURE.md`):
   trip, the menu (thumbnail) and leaving to the world map (the scene is freed
   at the next mode switch).
 
+**Modernization phase 1 pilot (villages as scenes): done** for Zazo (all
+four `.vil` variants) and "Zazo - Miner's Home", steps A and B (plan 6.7;
+conventions in `docs/ARCHITECTURE.md` section 9):
+- Scenes: `scenes/villages/VillageScene.tscn` (layout), `scenes/villages/Zazo/`
+  and `scenes/villages/Zazo - Miner's Home/` (base + one inherited scene per
+  `.vil`, stitched background PNG), shared types in `scenes/common/`,
+  SpriteFrames in `resources/sprite_frames/`. Made by
+  `tools/import/vil_to_scene.sh` (deterministic).
+- Step A: `VillageLoader.load` builds converted places from their scenes
+  (`VillageScene.load_into`); `tools/import/verify_villages.gd` compares
+  both ways field by field (pilot and a dry run of all 89 `.vil` files pass).
+- Step B: the scene draws the world (background, actors, top layer, night,
+  particles via `LegacyParticles2D`), also in cutscenes (camera zoom, tint,
+  under-actor images); emotions, dialogs, signs, fades and the over-actor
+  cutscene images stay legacy overlays. `--legacy=villages` keeps the old
+  path; `--legacy=village_top_layer` the legacy top-layer rule.
+- Parity: 6 Zazo cases (`tools/parity/cases.txt`), goldens of all 16 cases
+  recorded before the conversion; results in plan 6.7.
+- Dev options: `--start-time=night`, `--status=<name>:<value>`, AutoPlay
+  `pos`, parity `--ignore-world`; `tools/check.sh` also compiles `scenes/`
+  and `tools/`.
+
 ## Plan (what is left)
 
-0. **Modernization:** phase 1 (villages as scenes) can start; see the plan
-   (section 6) and its open decisions (section 13). Record goldens before
-   each change (`tools/parity/parity.sh record golden`).
+0. **Modernization:** phase 1 continues with the other places
+   (`docs/CONVERTING_VILLAGES.md`): interiors first, then the towns. Open
+   decisions that the next places touch: 5 (delete the `.vil` files: keep
+   them until then, the data check reads them) and 6 (time base, before any
+   particle preset or Tween). Record goldens before each change.
 
 1. **Performance (top priority):** labyrinths with rain/snow run at ≈30 FPS,
    battles there at 20–28 FPS (10 000 weather particles per frame through
@@ -94,8 +118,9 @@ section 5; conventions and workflow in `docs/ARCHITECTURE.md`):
 ## Useful facts
 
 - Godot: `C:\Users\c06ks\Work\Godot\Godot_v4.7-stable_win64_console.exe`.
-- `tools/check.sh [paths]`: import pass + compile, prints only errors (locked
-  for concurrent use). Run Godot with `< /dev/null` from bash.
+- `tools/check.sh [paths]`: import pass + compile (default: `src/`, `scenes/`,
+  `tools/`), prints only errors (locked for concurrent use). Run Godot with
+  `< /dev/null` from bash.
 - Run a test: `Godot --path . -- --mute [--load="Slot 1"] [--start=<place>]
   --autoplay=tools/autoplay/<script>.txt --shots=<dir>` (add `--headless` for
   a run without screenshots). AutoPlay prints `mode=<game mode> sub=<battle>
@@ -126,6 +151,11 @@ section 5; conventions and workflow in `docs/ARCHITECTURE.md`):
   (labyrinth weather, save points, battle background snow) still run at 60
   updates per second.
 - Positions from `Values.createNormalPoint(x, y)` are `[y, x]`.
+- Content quirks met in phase 1: "Zazo at Night - 0" quits the game unless
+  its loot `Zazoname` is taken (equipment "2"); the Zazo night stores name
+  images that do not exist (`inn.jpg`, `burt.png`); no story reaches Zazo
+  at night (`--start-time=night`); "Start demon2" is the shipped save with
+  Kin, Celis and Borealis.
 - GDScript gotchas met so far: unqualified calls to methods named like builtins
   (`load()`) hit the builtin → use `self.load()`; inner classes may not shadow
   global/native class names; overrides need ≥ parent parameter count with extras

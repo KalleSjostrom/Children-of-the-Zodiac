@@ -13,3 +13,16 @@ landscape          landscape          --load="Slot 1" --start=landAlares
 title_start        title_start
 boss               boss               --load="Slot 1" --start=Serphia
 bridge_test        bridge_test        --load="Slot 1" --start=Alares --bridge-test  # extra
+# Phase 1 pilot: Zazo (all four .vil variants, Zazo - Miner's Home inside the
+# day cases) and two Zazo cutscenes. Dev options (src/main/Main.gd):
+# --start-time=night reaches the night variants (no story starts Zazo at
+# night); --status=Zazoname:1 marks a loot of "Zazo at Night - 0" as taken
+# (its content is an equipment named "2", for which the original exits the
+# game); --status=Zazo:0 gives Zazonode1 its "Zazo - 0" with the party of
+# "Start demon2".
+zazo_0             zazo_0             --load=Start --start=Zazo
+zazo_1             zazo_1             --load="Slot 1" --start=Zazo
+zazo_night_0       zazo_night         --load=Start --start=Zazo --start-time=night --status=Zazoname:1
+zazo_night_1       zazo_night         --load="Slot 1" --start=Zazo --start-time=night
+zazo_story_node1   zazo_story_node1   --load="Start demon2" --status=Zazo:0 --start=Zazonode1
+zazo_story_gerbias zazo_story_gerbias --load="Start demon2" --start="Meeting with Gerbias"

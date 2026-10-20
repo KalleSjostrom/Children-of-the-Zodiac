@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Zazo - Miner's Home/villagers/Beorn/Beorn9.png" id="1_086al"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo - Miner's Home/villagers/Beorn/Beorn10.png" id="2_y0gfr"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo - Miner's Home/villagers/Beorn/Beorn11.png" id="3_mpq6y"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo - Miner's Home/villagers/Beorn/Beorn12.png" id="4_py5xw"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo - Miner's Home/villagers/Beorn/Beorn13.png" id="5_3nwpg"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo - Miner's Home/villagers/Beorn/Beorn14.png" id="6_5pyu3"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo - Miner's Home/villagers/Beorn/Beorn15.png" id="7_atqtd"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo - Miner's Home/villagers/Beorn/Beorn16.png" id="8_imphi"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo - Miner's Home/villagers/Beorn/Beorn5.png" id="9_wn0ow"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo - Miner's Home/villagers/Beorn/Beorn6.png" id="10_ldgld"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo - Miner's Home/villagers/Beorn/Beorn7.png" id="11_24wme"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo - Miner's Home/villagers/Beorn/Beorn8.png" id="12_6iegp"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo - Miner's Home/villagers/Beorn/Beorn1.png" id="13_idb8a"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo - Miner's Home/villagers/Beorn/Beorn2.png" id="14_e8puj"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo - Miner's Home/villagers/Beorn/Beorn3.png" id="15_of01g"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo - Miner's Home/villagers/Beorn/Beorn4.png" id="16_70lrt"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_086al")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_y0gfr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_mpq6y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_py5xw")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_3nwpg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_5pyu3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_atqtd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_imphi")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_wn0ow")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ldgld")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_24wme")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_6iegp")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_idb8a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_e8puj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_of01g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_70lrt")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

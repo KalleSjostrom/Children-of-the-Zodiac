@@ -13,6 +13,14 @@ var nextPlace = "Title Screen"
 ## Developer option (--load=<slot>): save slot loaded in init_ before the
 ## first game mode starts; the game then starts at the saved location.
 var loadSlot := ""
+## Developer option (--start-time=<day|night>): the first place is started
+## with this time of day (its info "time", read by VillageLoader.load), so
+## the "at Night" village variants can be reached without a story.
+var startTime := ""
+## Developer option (--status=<name>:<value>,...): Database statuses set
+## after the save slot is loaded, before the first game mode starts (for
+## example a village status for a story that a shipped save cannot reach).
+var startStatuses := {}
 var mainInfo := {}
 var currentInfo = {}
 var classMap := {}
@@ -43,6 +51,8 @@ func init_(obs: Array = []) -> void:
 		Load.loadGame(loadSlot)
 		if nextPlace == "Title Screen":
 			nextPlace = Load.getStartLocation()
+	for name in startStatuses:
+		Database.addStatus(Organizer.convert(name), startStatuses[name])
 	_initNext()
 
 
@@ -75,6 +85,11 @@ func _initNext() -> void:
 		continueMusic = false
 	else:
 		newInfo = currentInfo
+	if startTime != "" and newInfo is Dictionary:
+		# Developer option, first place only; main.bank's info is shared.
+		newInfo = newInfo.duplicate()
+		newInfo["time"] = startTime
+		startTime = ""
 	currentGameMode.init(newInfo)
 
 

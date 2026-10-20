@@ -480,20 +480,31 @@ func checkVillagerCollision(direction):
 	return found
 
 
-## Bridge test (Main --bridge-test, dev only; docs/ARCHITECTURE.md): a
-## placeholder scene stands in for the background tiles.
+## The scene of the village (docs/ARCHITECTURE.md): for a converted place the
+## VillageScene it was loaded from (VillageLoader.load), which draws the
+## world (phase 1 step B); for the others the bridge test's placeholder
+## (Main --bridge-test, dev only), which stands in for the background tiles.
 func create_scene() -> Node:
+	if scene_root != null:
+		return scene_root
 	if Main.bridge_test:
 		var packed: PackedScene = ResourceLoader.load(BRIDGE_TEST_SCENE)
 		return packed.instantiate()
 	return null
 
 
-## Draws the village. GameMode.draw is used to fade in and out.
+## Draws the village. GameMode.draw is used to fade in and out. A converted
+## place's scene draws the world (draw_scene); the emotions, dialogs and signs
+## stay legacy overlays until phase 3.
 func draw(g, alpha = null):
 	g.setColor(1)
-	drawBottom(g)
-	drawTop(g, sprites)
+	if scene_root is VillageScene:
+		update_draw_state()
+		draw_scene(g)
+		drawOverlays(g, sprites)
+	else:
+		drawBottom(g)
+		drawTop(g, sprites)
 	super.checkMenu()
 	super.draw(g)
 
@@ -511,18 +522,8 @@ func drawBottom(g):
 	var bpos = background.getPos()
 	var x: int = int(bpos[Values.X])
 	var y: int = int(bpos[Values.Y])
-	var index: int = 0
-	var n: int = elements.size()
-	for k in sprites:
-		if index < n:
-			var se = elements[index]
-			se.setYpos(sprites[k].getY())
-			se.setIndex(k)
-		index += 1
-	elements.sort_custom(_elementSorter)
-	if sprites.size() != n:
-		push_warning("Village: the sprite list and elements are not of equal length")
-	for i in range(mini(index, n)):
+	var n: int = sortSprites()
+	for i in range(n):
 		var s = sprites.get(elements[i].getIndex())
 		if s == null:
 			continue
@@ -534,10 +535,33 @@ func drawBottom(g):
 			s.draw(g, x, y)
 
 
+## Sorts the sprites on their y position for drawing (elements); returns how
+## many elements to draw.
+func sortSprites() -> int:
+	var index: int = 0
+	var n: int = elements.size()
+	for k in sprites:
+		if index < n:
+			var se = elements[index]
+			se.setYpos(sprites[k].getY())
+			se.setIndex(k)
+		index += 1
+	elements.sort_custom(_elementSorter)
+	if sprites.size() != n:
+		push_warning("Village: the sprite list and elements are not of equal length")
+	return mini(index, n)
+
+
 ## Draws the top layer of the village: roofs and treetops, emotions and
 ## dialogs.
 func drawTop(g, sprites = null):
 	background.drawTop(g, true, sprites)
+	drawOverlays(g, sprites)
+
+
+## Draws what is drawn over the village: the emotion bubbles of the given
+## sprites (none if null), the dialog or the sign.
+func drawOverlays(g, sprites = null):
 	if sprites != null:
 		for k in sprites:
 			sprites[k].drawEmotions(g)
@@ -550,6 +574,168 @@ func drawTop(g, sprites = null):
 		if content != null:
 			if content is Card:
 				DeckPage.drawCardInfo(g, content, 530)
+
+
+## Bridge (phase 1 step B, docs/ARCHITECTURE.md): what drawBottom and
+## drawTop would draw this frame, without drawing it. Prepared where they
+## would run (in draw, so the state they change changes at the same moment):
+## the sprites sorted (sortSprites) and placed (Sprite.place_view: the
+## villagers' drawX/drawY, the emotion bubbles' positions, the particle
+## systems' positions, textures and particle lives). draw_list holds the
+## sprites in draw order, [key, image path or null, screen x, screen y], or
+## [key, particle view] for a particle system; draw_systems holds the
+## background's particle systems per layer, [key, particle view] each.
+var draw_list := []
+var draw_systems := {}
+
+
+func update_draw_state():
+	var bpos = background.getPos()
+	var x: int = int(bpos[Values.X])
+	var y: int = int(bpos[Values.Y])
+	draw_systems.clear()
+	for layer in [DoubleBackground.BOTTOM_LAYER, DoubleBackground.UPPER_LAYER,
+			DoubleBackground.WEATHER_LAYER]:
+		var views := []
+		if layer != DoubleBackground.BOTTOM_LAYER or background.extraBackground == null:
+			var list = background.systems.get(layer)
+			if list != null:
+				for p in list:
+					views.append([p.get_instance_id(), p.place_view(x, y)])
+		draw_systems[layer] = views
+	draw_list.clear()
+	var n: int = sortSprites()
+	for i in range(n):
+		var key = elements[i].getIndex()
+		var s = sprites.get(key)
+		if s == null:
+			continue
+		var placed
+		if s is PartyMember:
+			placed = s.place_view(J.round(s.getX() + x), J.round(s.getY() + y))
+		else:
+			placed = s.place_view(x, y)
+		if placed is Dictionary:
+			draw_list.append([key, placed])
+		elif not placed.is_empty():
+			draw_list.append([key, placed[0], placed[1], placed[2]])
+
+
+## Bridge (phase 1 step B): the scene draws the world that drawBottom and
+## drawTop would draw (prepared by update_draw_state), with the colour and
+## alpha test each part would get, and the GL state is left as that drawing
+## would leave it for the overlays and the next frame.
+func draw_scene(g):
+	var scene: VillageScene = scene_root
+	var state := SceneGLState.new(g)
+	var bpos = background.getPos()
+	var scroll := Vector2i(int(bpos[Values.X]), int(bpos[Values.Y]))
+	scene.show_view(scroll, 1.0, Vector2.ZERO)
+	scene_bottom(scene, state)
+	scene.show_actors(scene_sprites(state, scroll))
+	scene_top(scene, state, sprites)
+	state.apply(g)
+
+
+## Bridge (phase 1 step B): DoubleBackground.drawBottom for the scene: the
+## bottom layer particle systems, then the tiles (or the extra background a
+## story sets).
+func scene_bottom(scene, state):
+	var extra: Texture2D = null
+	var systems := []
+	if background.extraBackground == null:
+		for entry in draw_systems.get(DoubleBackground.BOTTOM_LAYER, []):
+			systems.append(state.particles(entry))
+	else:
+		extra = ImageHandler.getTexture(background.extraBackground).getGodotTexture()
+	scene.show_bottom(extra, systems, state.color, state.alpha)
+
+
+## Bridge (phase 1 step B): the sprites of drawBottom as entries for
+## VillageScene.show_actors, in draw order.
+func scene_sprites(state, scroll: Vector2i) -> Array:
+	var entries := []
+	for d in draw_list:
+		if d.size() == 2:
+			entries.append(["particles"] + state.particles(d))
+		else:
+			var texture: Texture2D = null
+			if d[1] != null:
+				var t = ImageHandler.getTexture(d[1])
+				texture = t.getGodotTexture() if t != null else null
+			entries.append(["sprite", d[0], texture, Vector2i(d[2] - scroll.x, d[3] - scroll.y),
+					state.color, state.alpha])
+	return entries
+
+
+## Bridge (phase 1 step B): DoubleBackground.drawTop for the scene: the roofs
+## and treetops (alpha test 0.9), the night layer (alpha test 0), the upper
+## and weather particle systems. The scene always draws the roofs and
+## treetops (plan 6.1); the legacy code draws a piece only where a sprite
+## overlaps it (sprites given), which --legacy=village_top_layer keeps.
+## The overlap test runs either way: it is where drawTop brings the party
+## members' positions up to date (PartyMember.getMemberPos).
+func scene_top(scene, state, sprites = null):
+	var top: bool = background.extraBackground == null
+	var color: Color = state.color
+	var pieces := []
+	if top:
+		pieces = background.overlapped_pieces(sprites)
+		state.set_alpha(0)
+	if not Main.is_legacy("village_top_layer"):
+		pieces = []
+	var systems := []
+	for layer in [DoubleBackground.UPPER_LAYER, DoubleBackground.WEATHER_LAYER]:
+		for entry in draw_systems.get(layer, []):
+			systems.append(state.particles(entry))
+	scene.show_top(top, pieces, color, top and background.nightTop != null, color, systems)
+
+
+## Bridge (phase 1 step B): the GL state that the legacy world drawing passes
+## from part to part (the colour images are tinted with, the alpha test), as
+## it changes, and the changes to make to the real Graphics at the end.
+class SceneGLState extends RefCounted:
+	var color := Color(1, 1, 1, 1)
+	## Alpha test threshold (Graphics.alpha_threshold), -1: none.
+	var alpha := -1.0
+	var _alphaSet := false
+	var _colorReset := false
+	var _particlesDrawn := false
+
+	func _init(g) -> void:
+		color = g.getCurrentColor()
+		alpha = g.alpha_threshold()
+
+	## g.setAlphaFunc(a).
+	func set_alpha(a: float) -> void:
+		alpha = a
+		_alphaSet = true
+
+	## g.setColor(r, g, b, a) followed later by g.setColor(1).
+	func reset_color() -> void:
+		color = Color(1, 1, 1, 1)
+		_colorReset = true
+
+	## A particle system entry [key, view]: an active one (drawIt) draws its
+	## image in the current colour, then leaves blending on, alpha test 0.1
+	## and colour 1.
+	## Returns the entry with the image's colour.
+	func particles(entry: Array) -> Array:
+		var view: Dictionary = entry[1]
+		if not view.is_empty():
+			view["image_color"] = color
+			_particlesDrawn = true
+			set_alpha(0.1)
+			reset_color()
+		return entry
+
+	func apply(g) -> void:
+		if _particlesDrawn:
+			g.glEnable(Graphics.GL_BLEND)
+		if _alphaSet:
+			g.setAlphaFunc(alpha)
+		if _colorReset:
+			g.setColor(1)
 
 
 func getPlayer():

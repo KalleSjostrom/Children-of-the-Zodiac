@@ -1,0 +1,47 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Zazo - Miner's Home/Zazo - Miner's Home.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/ActorView.tscn" id="2_p7v2x"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Zazo - Miner's Home/Beorn.tres" id="3_k4e3f"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Zazo - Miner's Home/Leorn.tres" id="4_s7e0h"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="5_pnoog"]
+
+[node name="Zazo - Miner\'s Home - 0" instance=ExtResource("1_base")]
+
+[node name="00 Beorn" parent="Actors" index="0" instance=ExtResource("2_p7v2x")]
+position = Vector2(295, 440)
+sprite_frames = ExtResource("3_k4e3f")
+animation = &"down"
+role = 1
+villager_name = "Beorn"
+statuses = PackedInt32Array()
+villager_folder = "Zazo - Miner's Home"
+
+[node name="01 Leorn" parent="Actors" index="1" instance=ExtResource("2_p7v2x")]
+position = Vector2(380, 500)
+sprite_frames = ExtResource("4_s7e0h")
+animation = &"left"
+role = 1
+villager_name = "Leorn"
+statuses = PackedInt32Array()
+villager_folder = "Zazo - Miner's Home"
+
+[node name="00 Zazo" parent="Doors" index="0" instance=ExtResource("5_pnoog")]
+position = Vector2(729, 540)
+hole = true
+kinds = PackedStringArray("switch")
+targets = PackedStringArray("Zazo")
+directions = PackedInt32Array(2)
+fade = 1
+to_pos = PackedFloat64Array(352, 337, 2, -1)
+sign_lines = PackedStringArray()
+
+[node name="01 Zazo" parent="Doors" index="1" instance=ExtResource("5_pnoog")]
+position = Vector2(261, 540)
+hole = true
+kinds = PackedStringArray("switch")
+targets = PackedStringArray("Zazo")
+directions = PackedInt32Array(2)
+fade = 1
+to_pos = PackedFloat64Array(352, 194, 2, -1)
+sign_lines = PackedStringArray()

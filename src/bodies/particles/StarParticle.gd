@@ -29,6 +29,12 @@ func draw(g, t = null, pPos = null):
 		super.draw(g, t, pPos)
 
 
+## Bridge (phase 1 step B): draw's override for Body.place_quad: stars are
+## drawn without the system's position (fixed on the screen).
+func place_quad(t, pPos) -> Array:
+	return super.place_quad(t, Vector3f.ZERO)
+
+
 func getDefaultForce():
 	return force_.clone().multLocal(getMass())
 

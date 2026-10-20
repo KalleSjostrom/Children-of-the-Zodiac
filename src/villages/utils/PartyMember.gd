@@ -58,6 +58,12 @@ func draw(g, x = null, y = null):
 	super.drawAtPosition(g, x, y)
 
 
+## Bridge (phase 1 step B): draw(g, x, y) without drawing (see
+## Sprite.place_view); x and y are already the screen position.
+func place_view(x, y):
+	return [place_sprite(x, y), x, y]
+
+
 func getPosAsFloatArray():
 	return currentPos.getPosAsFloatArray()
 

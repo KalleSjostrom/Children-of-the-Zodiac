@@ -18,3 +18,10 @@ func draw(g, x = null, y = null):
 		super.draw(g)
 		return
 	super.drawAtPosition(g, int(pos[Values.X]) + x, int(pos[Values.Y]) + y)
+
+
+## Bridge (phase 1 step B): draw(g, x, y) without drawing (see Sprite.place_view).
+func place_view(x, y):
+	var sx: int = int(pos[Values.X]) + x
+	var sy: int = int(pos[Values.Y]) + y
+	return [place_sprite(sx, sy), sx, sy]
