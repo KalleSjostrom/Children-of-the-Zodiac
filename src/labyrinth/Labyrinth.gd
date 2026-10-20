@@ -177,7 +177,11 @@ func checkNode(n, pos = null):
 				graph.activateInventory(currentNode, self)
 		if not temp:
 			var node = currentNode.getNode(d)
-			if node != null and node.hasInventory():
+			# A door is on the far wall of its own node and is entered from
+			# there; from the node before it, it was entered from too far
+			# away (COTZ-010). Chests, levers and villagers in the next node
+			# are still used from here.
+			if node != null and node.hasInventory() and not node.getInventory() is AbstractDoor:
 				graph.activateInventory(node, self)
 
 func checkBossFight():
