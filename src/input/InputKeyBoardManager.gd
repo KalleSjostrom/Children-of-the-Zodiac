@@ -59,9 +59,10 @@ func _saveEmergency(nr: int) -> void:
 		return
 	var gm = o.getCurrentMode()
 	if gm != null:
-		var save = ClassRegistry.forName("factories.Save")
-		if save != null:
-			save.getSave().saveGame("E" + str(nr), gm.getName())
+		# Port fix (COTZ-005): the place and labyrinth position a menu save
+		# would write; Java wrote the mode's name, which is not a place in
+		# labyrinths and on the world map.
+		Save.save_game_in("E" + str(nr), gm)
 
 
 func handleEvent(event: InputEvent) -> void:

@@ -13,6 +13,38 @@ Three levels: **Easy**, **Medium** and **Original** (COTZ-004).
   2 Original), so it is written to and read from saves like any other
   status. A save without it (made before this) plays as Original.
 
+## Saving
+
+How the game can be saved depends on the level (COTZ-005):
+
+| | Easy | Medium | Original |
+|---|---|---|---|
+| Menu → Save in a labyrinth | anywhere | on a save point | on a save point |
+| Menu → Save elsewhere (villages, world map, airship) | yes | yes | yes |
+| Autosave | yes | yes | no |
+
+* Off a save point the menu's Save is greyed out (it was always enabled in
+  the original code, `if (true) // isOnSave`).
+* A save made in a labyrinth also stores the player's node and direction
+  (`labpos <floor> <address> <direction>` after the `start` line), so it
+  starts exactly there. An older save of a floor without a save point (the
+  COTZ-005 crash) starts at the floor's first door.
+* Autosaves go to the hidden slot `Autosave` (`user://saves/Autosave.sav`):
+  after every labyrinth battle (with the position), and when a village, a
+  labyrinth floor, the world map or the airship is entered from another
+  place (it then starts at that place's entrance). Loading a game does not
+  autosave, so an older slot never overwrites a newer autosave. The title's
+  Continue lists Autosave when it exists; the manual slot lists do not.
+* Every slot list (title, menu, church) shows when each slot was saved, in
+  local time, or "Empty".
+* The emergency keys 6/7/8 (slots E1–E3) now write the same place and
+  position as the menu.
+
+The code: `Save.place_for`, `save_game_in`, `autosave` (after a battle,
+`Labyrinth.leaveBattle`), `autosave_at` (`Organizer._initNext`), the
+position in `Labyrinth.save_position` / `Load.take_labyrinth_position`, the
+slots in `SaveSlots` (`scenes/common/SaveSlots.gd`).
+
 ## Tuning
 
 Each level is a `DifficultyLevel` resource in `resources/difficulty/`

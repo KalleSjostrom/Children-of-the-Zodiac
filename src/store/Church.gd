@@ -366,6 +366,8 @@ func draw3D(g3D):
 		drawHelp(g)
 	else:
 		activeNode.drawAllChildren(g)
+		if activeNode.getName() == "Save":
+			SaveSlots.draw_dates_under(g, activeNode, MenuValues.MENU_FONT_SIZE)
 	var n = activeNode.getParent()
 	if n != null and activeNode.getName() == "Bless":
 		n.drawChildren(g)
@@ -426,11 +428,10 @@ func fillSave():
 	var n = activeNode
 	n.removeChildren(true)
 	if not n.hasChildren():
-		n.insertChild("Slot 1")
-		n.insertChild("Slot 2")
-		n.insertChild("Slot 3")
+		for slot in SaveSlots.MANUAL:
+			n.insertChild(slot)
 		n.insertChild("Back")
-		n.setDistance(MenuValues.DISTANCE)
+		n.setDistance(SaveSlots.MENU_DISTANCE)
 		n.setPositions(MenuValues.MENU_TEXT_X, MenuValues.MENU_TEXT_Y)
 
 

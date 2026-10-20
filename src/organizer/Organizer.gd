@@ -57,6 +57,8 @@ func init_(obs: Array = []) -> void:
 
 
 func _initNext() -> void:
+	var newPlace: bool = next
+	var leaving: GameMode = currentGameMode
 	_checkNext()
 	ImageHandler.setGameMode(mode)
 	if mode == Values.LABYRINTH or mode == Values.BOSS_BATTLE_AREA:
@@ -91,6 +93,18 @@ func _initNext() -> void:
 		newInfo["time"] = startTime
 		startTime = ""
 	currentGameMode.init(newInfo)
+	_autosaveOnEntering(newPlace, leaving)
+
+
+## Port addition (COTZ-005): autosave (Easy and Medium) when a village, a
+## labyrinth floor, the world map or the airship is entered from another
+## place. Not when a game is loaded (from the title, the menu or the command
+## line): that would overwrite the autosave with an older game.
+func _autosaveOnEntering(newPlace: bool, leaving: GameMode) -> void:
+	if not newPlace or leaving == null or leaving is TitleScreen or leaving is MainMenu:
+		return
+	if mode == Values.VILLAGE or mode == Values.LABYRINTH or mode == Values.LANDSCAPE 			or mode == Values.AIR_SHIP:
+		Save.autosave_at(str(nextPlace))
 
 
 func _checkNext() -> void:

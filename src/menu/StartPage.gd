@@ -5,6 +5,11 @@ extends AbstractPage
 ## equipment of the characters, check the items, read the tutorials, check the
 ## labyrinth map and save the game. A screenshot of the screen before the menu
 ## was entered is shown in thumbnail size.
+##
+## Port additions (COTZ-005): in a labyrinth, Save is enabled only on a save
+## point (as the original intended), or anywhere on Easy; elsewhere always.
+## A save in a labyrinth keeps the player's node (Save.save_game_in). The
+## slot list shows when each slot was saved (SaveSlots).
 
 static var frame = ""
 static var miniScreenShot = null
@@ -105,14 +110,6 @@ func executeNode(name):
 		var save: bool = activeNode.getParent().getName() == "Save"
 		if save:
 			var prev = Organizer.getOrganizer().getPreviousMode()
-			var mainName: String = prev.getName()
-			if prev is Labyrinth:
-				mainName += "-save"
-			elif prev is Landscape:
-				mainName = "land" + mainName
-			elif prev is AirLandscape:
-				mainName = "air" + mainName
-			var finalMainName: String = mainName
 			var finalName: String = name
 			savingString = "Saving.  "
 			saving = true
@@ -125,7 +122,7 @@ func executeNode(name):
 				Scheduler.after(500, func():
 					savingString = "Saving..."
 					Scheduler.after(500, func():
-						Save.getSave().saveGame(finalName, finalMainName)
+						Save.save_game_in(finalName, prev)
 						saving = false
 						t.unLockInput())))
 		else:
@@ -160,10 +157,9 @@ func fillRoot(resetCursor = null):
 			isOnSave = inv is InventorySave
 	else:
 		isOnSave = true
-	if true: # isOnSave) {
-		activeNode.insertChild("Save")
-	else:
-		activeNode.insertChild("Load")
+	# Java: if (true) { // isOnSave: Save was always there.
+	activeNode.insertChild("Save").setEnabled(
+			isOnSave or Difficulty.current() == Difficulty.Level.EASY)
 
 
 ## Fills the character menu.
@@ -188,11 +184,8 @@ func fillItems():
 
 ## Fills the load menu.
 func fillLoad():
-	var list: Array = []
-	list.append("Slot 1")
-	list.append("Slot 2")
-	list.append("Slot 3")
-	fillMenu(list)
+	fillMenu(Array(SaveSlots.MANUAL), SaveSlots.MENU_DISTANCE,
+			MenuValues.MENU_TEXT_X, MenuValues.MENU_TEXT_Y)
 
 
 ## Inserts the elements in the list as children to the activeNode, using the
@@ -220,6 +213,8 @@ func draw3D(g):
 	var title = activeNode.getName()
 	var x: int = MenuValues.MENU_TEXT_X
 	g.drawString(title, x, MenuValues.MENU_TITLE_Y)
+	if not displayParent and activeNode.getName() == "Save":
+		SaveSlots.draw_dates_under(g, activeNode, MenuValues.MENU_FONT_SIZE)
 
 	for i in range(Load.getCharacters().size()):
 		var d: int = MenuValues.CHARACTER_DISTANCE * i

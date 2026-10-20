@@ -27,7 +27,8 @@ main/Main.tscn            the tree in section 4
 scenes/
   common/                 VillageDoor, VillageSign, VillageLoot, VillageSpawn, ActorView,
                           StoryImage (.tscn + .gd each), particles/LegacyParticles2D,
-                          alpha_test.gdshader; Difficulty + DifficultyLevel (docs/DIFFICULTY.md)
+                          alpha_test.gdshader; Difficulty + DifficultyLevel, SaveSlots
+                          (docs/DIFFICULTY.md)
   villages/               VillageScene.tscn + .gd (the layout every village inherits),
                           VillageBuilding.gd (resource)
   villages/<Place>/       <Place>.tscn (shared base) + one inherited scene per .vil variant,
@@ -206,7 +207,8 @@ not rename legacy members to suit new code.
 `Main.is_legacy("<subsystem>")`, `Main.bridge_test`, the snake_case
 methods of the scenes it owns (`VillageScene.load_into`, `show_*`) and the
 difficulty (`Difficulty.scale_experience`, `scale_enemy_damage`,
-`scale_ally_damage`, `start_with`, `lower_to`; docs/DIFFICULTY.md). Keep
+`scale_ally_damage`, `start_with`, `lower_to`; docs/DIFFICULTY.md) and the
+save slots (`SaveSlots`). Keep
 these calls few and obvious; they are the seams that later phases cut
 along. Bridge methods added to legacy classes so that new code can read
 their state are snake_case too (`Sprite.place_view`,

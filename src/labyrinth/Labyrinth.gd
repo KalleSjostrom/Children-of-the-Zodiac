@@ -82,6 +82,16 @@ func init(name, lab = null, hinders = null):
 				lastNameInMain = inv.getNameInMain()
 	var start: int = J.parseInt(info.get("start"))
 	currentNode = graph.getStartNode(start)
+	# COTZ-005: a game saved on this floor starts where it was saved; a
+	# "-save" place on a floor without a save point (saved before that)
+	# starts at the floor's first door instead of crashing.
+	var savedAt: Array = Load.take_labyrinth_position(self.name)
+	var savedDir: int = -1
+	if savedAt.size() == 2 and map.getNode(savedAt[0]) != null:
+		currentNode = map.getNode(savedAt[0])
+		savedDir = savedAt[1]
+	elif currentNode == null:
+		currentNode = graph.getStartNode(0)
 	currentNode.visit()
 	if currentNode.hasInventory():
 		var inv = currentNode.getInventory()
@@ -90,6 +100,8 @@ func init(name, lab = null, hinders = null):
 	renderer = mapLoader.getRenderer()
 	weatherSystem = renderer.getWeatherSystem()
 	dir = graph.getAngle()
+	if savedDir >= 0:
+		dir = savedDir
 	graph.setLabyrinth(self)
 	graph.sortInventory()
 	var nodePos = currentNode.getPos()
@@ -234,6 +246,12 @@ func leaveBattle():
 			c.cure(1)
 	resetSteps()
 	resume()
+	Save.autosave(self)
+
+## Bridge (COTZ-005): where the player is, for a save made here: [floor
+## name, node address, direction] (Save.labyrinthPosition, Load).
+func save_position() -> Array:
+	return [name, currentNode.getAddress(), dir]
 
 func gameOver():
 	exit("Game Over Screen", true)

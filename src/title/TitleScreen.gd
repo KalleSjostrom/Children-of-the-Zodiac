@@ -49,15 +49,17 @@ func fillStart():
 		n.setMenuCursor(Difficulty.Level.MEDIUM)
 
 
+## Fills the slots to continue from: the autosave (when there is one) and
+## the three slots, each with the date it was saved (COTZ-005).
 func fillContinue():
 	var n = activeNode
 	activeNode.setEnableColor(JColor.WHITE)
 	if not n.hasChildren():
-		n.insertChild("Slot 1")
-		n.insertChild("Slot 2")
-		n.insertChild("Slot 3")
+		var slots: PackedStringArray = SaveSlots.loadable()
+		for slot in slots:
+			n.insertChild(slot)
 		n.setDistance(50)
-		n.setPositions(Values.createNormalPoint(450, 600))
+		n.setPositions(Values.createNormalPoint(450, 750 - 50 * slots.size()))
 
 
 func loadImages(name = null, nightLayer = null, extra = null):
@@ -129,6 +131,8 @@ func draw(g, alpha = null):
 			activeNode.drawAllChildren(g)
 			if activeNode.getName() == "Start":
 				drawDifficultyInfo(g)
+			elif activeNode.getName() == "Continue":
+				SaveSlots.draw_dates_beside(g, activeNode, 620, 24)
 	super.draw(g)
 
 

@@ -17,6 +17,9 @@ static var exCharacter = []
 static var saveSlotName = "Start"
 static var charDeck: bool = false
 static var hasLoaded_: bool = false
+## Port addition (COTZ-005): the "labpos" of the loaded save ([floor,
+## address, direction]), until the labyrinth takes it (take_labyrinth_position).
+static var labyrinthPosition: Array = []
 var currentMap = null
 var currentCharacter = null
 
@@ -38,6 +41,7 @@ static func reset():
 	Visited.getVisited().clearVisited()
 	saveSlotName = "Start"
 	charDeck = false
+	labyrinthPosition = []
 
 
 ## Java overloads: loadGame(String save) and loadGame() (uses the slot set
@@ -237,9 +241,26 @@ static func setSlot(saveSlot):
 	saveSlotName = saveSlot
 
 
+## The node address and direction the loaded game was saved at on the given
+## labyrinth floor ([address, direction]), once; [] for another floor or
+## when it has been taken (COTZ-005).
+static func take_labyrinth_position(floor: String) -> Array:
+	if labyrinthPosition.size() != 3:
+		return []
+	var pos: Array = labyrinthPosition
+	labyrinthPosition = []
+	if Organizer.convert(pos[0]) != Organizer.convert(floor):
+		return []
+	return [pos[1], pos[2]]
+
+
 func executeCommand(command: String, tokenizer: StringTokenizer):
 	if command == "start":
 		startl = Organizer.convertKeepCase(tokenizer.nextToken())
+	elif command == "labpos":
+		var floor: String = Organizer.convertKeepCase(tokenizer.nextToken())
+		var address: int = J.parseInt(tokenizer.nextToken())
+		labyrinthPosition = [floor, address, J.parseInt(tokenizer.nextToken())]
 	elif command == "visitedNodes":
 		var zone: String = tokenizer.nextToken()
 		Visited.getVisited().getVnodes(zone).append(

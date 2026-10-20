@@ -47,7 +47,9 @@ Developer options (after `--` on the command line):
   `--legacy=<subsystems>`, `--bridge-test`: for parity testing, see
   `docs/ARCHITECTURE.md` section 7 and `tools/parity/parity.sh`.
 
-Saves are written to Godot's user folder (`user://saves/`).
+Saves are written to Godot's user folder (`user://saves/`). Where the game
+can be saved, and the autosave of Easy and Medium, depend on the difficulty
+(`docs/DIFFICULTY.md`).
 
 ## How the port is organized
 
