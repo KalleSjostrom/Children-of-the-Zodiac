@@ -66,6 +66,7 @@ Saves are written to Godot's user folder (`user://saves/`).
   `docs/port_notes/` has per-package notes. New (non-legacy) code follows
   `docs/ARCHITECTURE.md`; the modernization plan is
   `docs/MODERNIZATION_PLAN.md`.
+* Difficulty levels and their balancing: `docs/DIFFICULTY.md`.
 * `tools/check.sh [folders]` compiles all scripts headlessly and prints errors.
 
 ## Exporting

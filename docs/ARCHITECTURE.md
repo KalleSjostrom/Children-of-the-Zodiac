@@ -27,7 +27,7 @@ main/Main.tscn            the tree in section 4
 scenes/
   common/                 VillageDoor, VillageSign, VillageLoot, VillageSpawn, ActorView,
                           StoryImage (.tscn + .gd each), particles/LegacyParticles2D,
-                          alpha_test.gdshader
+                          alpha_test.gdshader; Difficulty + DifficultyLevel (docs/DIFFICULTY.md)
   villages/               VillageScene.tscn + .gd (the layout every village inherits),
                           VillageBuilding.gd (resource)
   villages/<Place>/       <Place>.tscn (shared base) + one inherited scene per .vil variant,
@@ -40,6 +40,7 @@ resources/
   sprite_frames/<folder>/animobj/<name>.tres   (per animObj series, generated)
   dungeon_layouts/*.tres      (DungeonLayout, generated)
   dungeon_styles/*.tres       (textures, materials, light, fog per area)
+  difficulty/*.tres           (DifficultyLevel: the balancing of each difficulty level)
   theme/game_theme.tres
 src/                      legacy code (shrinks over time)
 tools/import/             converters and their checks (headless `--script`): vil_to_scene.gd
@@ -202,8 +203,10 @@ not rename legacy members to suit new code.
 
 **Legacy → new.** Legacy code calls only small, documented entry points:
 `GameMode.create_scene()`, `scene_root`, `shown_scene()`,
-`Main.is_legacy("<subsystem>")`, `Main.bridge_test`, and the snake_case
-methods of the scenes it owns (`VillageScene.load_into`, `show_*`). Keep
+`Main.is_legacy("<subsystem>")`, `Main.bridge_test`, the snake_case
+methods of the scenes it owns (`VillageScene.load_into`, `show_*`) and the
+difficulty (`Difficulty.scale_experience`, `scale_enemy_damage`,
+`scale_ally_damage`, `start_with`, `lower_to`; docs/DIFFICULTY.md). Keep
 these calls few and obvious; they are the seams that later phases cut
 along. Bridge methods added to legacy classes so that new code can read
 their state are snake_case too (`Sprite.place_view`,

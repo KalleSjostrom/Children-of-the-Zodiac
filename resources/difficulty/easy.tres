@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="DifficultyLevel" format=3]
+
+[ext_resource type="Script" path="res://scenes/common/DifficultyLevel.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+display_name = "Easy"
+description = "More experience; enemies hit softer and you hit harder."
+experience_multiplier = 1.5
+enemy_damage_multiplier = 0.6
+ally_damage_multiplier = 1.3

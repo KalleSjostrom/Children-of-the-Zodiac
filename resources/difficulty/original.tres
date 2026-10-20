@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="DifficultyLevel" format=3]
+
+[ext_resource type="Script" path="res://scenes/common/DifficultyLevel.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+display_name = "Original"
+description = "The game as it was originally balanced."
+experience_multiplier = 1.0
+enemy_damage_multiplier = 1.0
+ally_damage_multiplier = 1.0

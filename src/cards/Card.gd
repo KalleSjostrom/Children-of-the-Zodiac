@@ -245,6 +245,8 @@ func actuallAttack(target, attacker, critPrecent, effect, attackType, defenseTyp
 			damage *= CRITICAL_INCREASE
 	else:
 		damage = 0
+	if damage > 0 and target is Enemy:
+		damage = Difficulty.scale_ally_damage(damage)
 	return HitElement.new(self, damage, hitType, effect)
 
 

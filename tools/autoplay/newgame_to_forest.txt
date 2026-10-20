@@ -1,6 +1,11 @@
-# New game, skip the three opening story sequences with START (as the
-# original allowed), arrive in the Forest of Reil labyrinth and walk.
+# New game (difficulty Original), skip the three opening story sequences
+# with START (as the original allowed), arrive in the Forest of Reil
+# labyrinth and walk.
 wait 4000
+tap CROSS
+wait 400
+tap DOWN
+wait 300
 tap CROSS
 wait 4000
 log prolog

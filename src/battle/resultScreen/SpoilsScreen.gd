@@ -133,6 +133,7 @@ func getSpoils(enemy, enemySize):
 		number = r.nextFloat() / 5.0
 		precent = 0.9 + number  # between 90 % and 110 %
 		gold += J.round(enemy.getSpoilGold() * precent)
+	exp = Difficulty.scale_experience(exp)
 	var status: int = Database.getStatusFor(enemy.getDbName() + "drop")
 	if status != 0 and J.random() < enemy.getDropRate():
 		droppedItem = enemy.getSpoilItem()

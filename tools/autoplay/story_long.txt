@@ -1,6 +1,11 @@
-# New game, then tap CROSS through the opening story for ~3 minutes.
+# New game (difficulty Original), then tap CROSS through the opening story
+# for ~3 minutes.
 # Logs the game mode every 10 s; shots every 30 s.
 wait 2500
+tap CROSS
+wait 400
+tap DOWN
+wait 300
 tap CROSS
 wait 1500
 tap CROSS

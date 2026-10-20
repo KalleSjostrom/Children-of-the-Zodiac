@@ -111,6 +111,8 @@ static func attackTarget(enemy, characters, attackText, p_target, effects):
 			addition = "Crit"
 			damage *= AbstractCard.CRITICAL_INCREASE
 		if damage > 0:
+			damage = Difficulty.scale_enemy_damage(damage)
+		if damage > 0:
 			targetChar.damage(damage)
 			if not targetChar.isAlive():
 				if targetChar.getName() == "Kin" or targetChar.getName() == "Borealis":
