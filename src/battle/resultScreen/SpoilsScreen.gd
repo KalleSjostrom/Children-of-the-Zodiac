@@ -110,7 +110,14 @@ func calcSpoils(enemy, enemySize):
 					info[i].all = cnext
 					info[i].rest = gottenExp - cnext
 					Character.levelUpStatic(c)
-					c.addAttribute(Creature.EXP_LEFT_TO_NEXT_LEVEL, -info[i].rest)
+					# At the last level of the class EXP_LEFT_TO_NEXT_LEVEL is
+					# NO_INCREASE and the rest is lost. Java subtracted it anyway
+					# (its 32-bit int wrapped around); here it would leave a
+					# value just below NO_INCREASE, which canLevelUp() took for
+					# a real one, and the next battle asked for a level that
+					# does not exist (COTZ-003).
+					if c.canLevelUp():
+						c.addAttribute(Creature.EXP_LEFT_TO_NEXT_LEVEL, -info[i].rest)
 			info[i].expToNextNext = c.getExpToNextLevel()
 
 
@@ -232,11 +239,17 @@ class LevelInfo extends RefCounted:
 				updateETN()
 
 				if etn >= 1:
+					hasLeveledUp = true
+					if expToNextNext == LevelFactory.NO_INCREASE:
+						# Reached the last level of the class: show the full
+						# (red) bar of a maxed character instead of counting
+						# towards a level that does not exist.
+						canLevelUp = false
+						return step
 					expToNext = expToNextNext
 					expLeftToNextLevel = expToNextNext
 					all = rest
 					rest = 0
-					hasLeveledUp = true
 
 					updateETN()
 			elif updateStep:

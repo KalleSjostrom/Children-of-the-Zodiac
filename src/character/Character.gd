@@ -129,11 +129,14 @@ func levelUp():
 ## Java: static levelUp(Character c). Levels up the character and sets the
 ## attributes of the new level.
 static func levelUpStatic(c):
-	c.levelUp()
-
-	var info: Dictionary = LevelFactory.getLevelFor(
-			c.getName(), c.getAttribute(Creature.LEVEL),
+	var info = LevelFactory.getLevelFor(
+			c.getName(), c.getAttribute(Creature.LEVEL) + 1,
 			c.getAttribute(Creature.CLASS))
+	if info == null:
+		# Already at the last level of the class (COTZ-003).
+		c.setAttribute(Creature.EXP_LEFT_TO_NEXT_LEVEL, LevelFactory.NO_INCREASE)
+		return
+	c.levelUp()
 
 	c.setAttribute(
 			Creature.EXP_LEFT_TO_NEXT_LEVEL,
@@ -355,7 +358,9 @@ func getTotal(att):
 func getExpToNextLevel():
 	var lvl: int = getAttribute(Creature.LEVEL)
 	var cClass: int = getAttribute(Creature.CLASS)
-	var info: Dictionary = LevelFactory.getLevelFor(getName(), lvl, cClass)
+	var info = LevelFactory.getLevelFor(getName(), lvl, cClass)
+	if info == null:
+		return LevelFactory.NO_INCREASE
 	return info.get(Creature.EXP_LEFT_TO_NEXT_LEVEL)
 
 
@@ -372,6 +377,26 @@ func getNameFor(i):
 
 func canLevelUp():
 	return getAttribute(EXP_LEFT_TO_NEXT_LEVEL) != LevelFactory.NO_INCREASE
+
+
+## Repairs a character loaded from a save written before the max level fix
+## (COTZ-003): such saves hold EXP_LEFT_TO_NEXT_LEVEL values just below
+## NO_INCREASE at the last level of a class, and a level past the last one
+## when a level up was cut short by the error. Characters without a level
+## table are left alone.
+func repairLevel() -> void:
+	var cClass: int = getAttribute(CLASS)
+	var lvl: int = getAttribute(LEVEL)
+	var last: int = lvl
+	while last > 1 and LevelFactory.getLevelFor(getName(), last, cClass) == null:
+		last -= 1
+	var info = LevelFactory.getLevelFor(getName(), last, cClass)
+	if info == null:
+		return
+	if last < lvl:
+		setAttribute(LEVEL, last)
+	if info.get(EXP_LEFT_TO_NEXT_LEVEL) == LevelFactory.NO_INCREASE:
+		setAttribute(EXP_LEFT_TO_NEXT_LEVEL, LevelFactory.NO_INCREASE)
 
 
 func getRoundCounter():

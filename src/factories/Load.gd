@@ -249,6 +249,7 @@ func executeCommand(command: String, tokenizer: StringTokenizer):
 		Visited.getVisited().getVroads(zone).append(J.parseInt(tokenizer.nextToken()))
 	elif command == "character":
 		currentCharacter = createCharacter(tokenizer)
+		currentCharacter.repairLevel()
 		var index: int = Values.characters.getCharacter(currentCharacter.getName()).getIndex()
 		if index <= characters.size():
 			characters.insert(index, currentCharacter)
@@ -256,6 +257,7 @@ func executeCommand(command: String, tokenizer: StringTokenizer):
 			characters.append(currentCharacter)
 	elif command == "exCharacter":
 		currentCharacter = createCharacter(tokenizer)
+		currentCharacter.repairLevel()
 		exCharacter.append(currentCharacter)
 	elif command == "rightHand" or command == "leftHand" or command == "armor":
 		var name: String = Organizer.convertKeepCase(tokenizer.nextToken())
