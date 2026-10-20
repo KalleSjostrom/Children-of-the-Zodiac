@@ -1046,8 +1046,16 @@ func glGetError() -> int:
 
 
 func glPushAttrib(mask: int) -> void:
-	_attrib_stack.append({"caps": _caps.duplicate(), "color": _cur_color,
-		"blend": _blend_dst, "afunc": _alpha_func, "aref": _alpha_ref, "dmask": _depth_mask})
+	var st := {"caps": _caps.duplicate(), "color": _cur_color,
+		"blend": _blend_dst, "afunc": _alpha_func, "aref": _alpha_ref, "dmask": _depth_mask}
+	if mask & GL_LIGHTING_BIT:
+		# Light and material parameters, as in GL. They are global shader
+		# parameters here, so whatever is not restored lights every later
+		# frame (the black labyrinth after Demolish's spheres, COTZ-002).
+		st["lights"] = _lights.duplicate(true)
+		st["mat"] = _mat.duplicate()
+		st["lma"] = _light_model_ambient
+	_attrib_stack.append(st)
 
 
 func glPopAttrib() -> void:
@@ -1060,6 +1068,10 @@ func glPopAttrib() -> void:
 	_alpha_func = st.afunc
 	_alpha_ref = st.aref
 	_depth_mask = st.dmask
+	if st.has("lights"):
+		_lights = st.lights
+		_mat = st.mat
+		_light_model_ambient = st.lma
 	_pushLightGlobals()
 
 
