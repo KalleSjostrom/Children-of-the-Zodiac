@@ -1,0 +1,71 @@
+# --load=Start --start="Forest of Reil--Deep Forest-mark0" --no-encounters:
+# walk from the door at node 7 to node 83 and open the crate at node 67 (its
+# second frame, the card dialog with the card info), then close the dialog.
+# Route (UP = +1, DOWN = -1, LEFT = +16, RIGHT = -16 in node addresses):
+# 7 L 23 L 39 L 55, D 54 D 53, L 69 L 85 L 101 L 117 L 133, D 132 D 131,
+# R 115 R 99 R 83, facing RIGHT: the crate.
+wait 3000
+shot c01_start
+pos start
+tap UP
+wait 700
+tap UP
+wait 700
+tap UP
+wait 700
+tap LEFT
+wait 700
+tap UP
+wait 700
+tap UP
+wait 700
+pos at_53
+shot c02_route
+tap RIGHT
+wait 700
+tap UP
+wait 700
+tap UP
+wait 700
+tap UP
+wait 700
+tap UP
+wait 700
+tap UP
+wait 700
+pos at_133
+shot c03_route
+tap LEFT
+wait 700
+tap UP
+wait 700
+tap UP
+wait 700
+tap LEFT
+wait 700
+tap UP
+wait 700
+tap UP
+wait 700
+shot c04_crate_far
+tap UP
+wait 700
+pos at_83
+shot c05_crate
+log crate
+tap CROSS
+wait 300
+shot c06_opened
+wait 1000
+shot c07_card_dialog
+log card_dialog
+tap CROSS
+wait 800
+shot c08_closed
+log closed
+tap RIGHT
+wait 700
+tap RIGHT
+wait 700
+shot c09_away
+quit

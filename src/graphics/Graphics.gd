@@ -1444,11 +1444,20 @@ func _emit2D(v: PackedVector3Array, uv: PackedVector2Array, c: PackedColorArray)
 
 
 func _material3D() -> ShaderMaterial:
+	return backend.material_3d(render_state_3d())
+
+
+## Bridge (phase 2 step B, docs/ARCHITECTURE.md section 10): the render state
+## the next 3D primitive is drawn with (GLBackend.material_3d's key: the
+## bound texture, blending, depth test and write, face culling (0 none, 1
+## back, 2 front faces), lighting, fog, the alpha test), for scene nodes that
+## stand in for legacy 3D drawing (DungeonScene).
+func render_state_3d() -> Dictionary:
 	var tex := _texForDraw()
 	var cull := 0
 	if _caps.get(GL_CULL_FACE, false):
 		cull = 2 if _cull_mode == GL_FRONT else 1
-	var st := {
+	return {
 		"tex_id": tex.get_instance_id() if tex else 0,
 		"texture": tex,
 		"use_tex": tex != null,
@@ -1462,7 +1471,24 @@ func _material3D() -> ShaderMaterial:
 		"alpha_func": _effAlphaFunc(),
 		"alpha_ref": _alpha_ref,
 	}
-	return backend.material_3d(st)
+
+
+## Bridge (phase 2 step B): the current normal and texture coordinate, which
+## the next vertex takes (glNormal3f, glTexCoord2f).
+func current_normal() -> Vector3:
+	return _cur_normal
+
+
+func current_tex_coord() -> Vector2:
+	return _cur_uv
+
+
+## Bridge (phase 2 step B): this frame's legacy 3D drawing goes into node, a
+## node of the current mode's 3D scene, until the first 2D drawing
+## (GLBackend.scene_3d).
+func use_scene_3d(node: Node3D) -> void:
+	if backend != null:
+		backend.scene_3d = node
 
 
 # --- Display lists ---

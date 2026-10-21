@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/minecavedoorbig0.png" id="1_45m7p"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/minecavedoorbig1.png" id="2_oh2w0"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_45m7p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_oh2w0")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}]

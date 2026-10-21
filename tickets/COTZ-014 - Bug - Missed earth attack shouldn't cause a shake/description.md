@@ -1,0 +1,1 @@
+When throwing earth, the enemy shakes as it hits, but it does it even if the result is a miss. The enemy should not shake if the result is a miss. There might be other similar attacks that should not affect the enemy.

@@ -1,0 +1,55 @@
+# --load="Slot 1" --start="Forest of Reil--Forest Path-mark0" --no-encounters:
+# walk part of the floor (new nodes are visited and seen), then the menu's
+# map page (LabyrinthMap.draw): Map is the sixth entry of the main menu.
+wait 3000
+tap UP
+wait 700
+tap UP
+wait 700
+tap UP
+wait 700
+tap UP
+wait 700
+tap UP
+wait 700
+tap LEFT
+wait 700
+tap UP
+wait 700
+tap UP
+wait 700
+pos walked
+shot p01_walked
+tap TRIANGLE
+wait 2500
+shot p02_menu
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap CROSS
+wait 1500
+shot p03_map
+log map_page
+tap CROSS
+wait 1500
+shot p04_map_cross
+tap DOWN
+wait 500
+tap RIGHT
+wait 500
+shot p05_map_moved
+mark
+tap CIRCLE
+wait 900
+loopuntil mode=labyrinth 15000
+wait 1500
+shot p06_back
+log back
+quit

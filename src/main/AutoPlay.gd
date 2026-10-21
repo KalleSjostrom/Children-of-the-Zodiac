@@ -13,8 +13,11 @@ extends RefCounted
 ##   log <text>           print text (and the current game mode, see _state)
 ##   pos [text]           print the player's village position (dev, for planning
 ##                        routes): "pos <text> x=<x> y=<y> dir=<d> back=<x>,<y>"
-##                        in village pixels (back: the background scroll), or
-##                        "pos <text> -" outside a village
+##                        in village pixels (back: the background scroll); in a
+##                        labyrinth "pos <text> node=<address> dir=<d>
+##                        cam=<x>,<z> angle=<a>" (the node, the facing 0-3 and
+##                        the camera's location and angle in dungeon units and
+##                        degrees); "pos <text> -" elsewhere
 ##   mark                 remember this line as the start of a loop (marks nest)
 ##   loopuntil <text> <ms> jump back to the last mark unless the state string
 ##                        ("mode=... sub=... place=...") contains <text>, or
@@ -262,15 +265,32 @@ func _state() -> String:
 
 
 ## "x=<x> y=<y> dir=<d> back=<x>,<y>" of the village player (also during a
-## village story), "-" elsewhere. Positions are Values [y, x] arrays.
+## village story), the labyrinth position (_labyrinth_pos), "-" elsewhere.
+## Village positions are Values [y, x] arrays.
 func _player_pos() -> String:
 	var village = _village()
 	if village == null:
-		return "-"
+		return _labyrinth_pos()
 	var p: Array = village.player.getPos()
 	var b: Array = village.background.getPos()
 	return "x=%.1f y=%.1f dir=%d back=%d,%d" % [p[Values.X], p[Values.Y],
 		village.player.getDirection(), int(b[Values.X]), int(b[Values.Y])]
+
+
+## "node=<address> dir=<facing 0-3> cam=<x>,<z> angle=<degrees>" in the
+## current labyrinth (also during its battles), "-" elsewhere. The camera's
+## location and angle are LabyrinthPlayer's, interpolated while moving or
+## turning.
+func _labyrinth_pos() -> String:
+	var o := Organizer.getOrganizer()
+	if o == null or not (o.currentGameMode is Labyrinth):
+		return "-"
+	var lab: Labyrinth = o.currentGameMode
+	if lab.isLoading() or lab.player == null or lab.currentNode == null:
+		return "-"
+	var cam = lab.player.camera
+	return "node=%d dir=%d cam=%.3f,%.3f angle=%.2f" % [lab.currentNode.getAddress(),
+		lab.dir, cam.location[LabyrinthPosition.X], cam.location[LabyrinthPosition.Z], cam.angle]
 
 
 func after_draw(node: Node) -> void:

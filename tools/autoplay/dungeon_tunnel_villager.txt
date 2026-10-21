@@ -1,0 +1,29 @@
+# --load=Start --start="The Great Mine--Tunnel-mark3" --no-encounters: the
+# mission display ("Rescued: 0/4", top right) and the villager object. mark3
+# is the door at node 37 (door index 3); the player faces RIGHT, at the miner
+# at node 21. CROSS talks (two lines); the third CROSS rescues him: the
+# mission counts 1/4 and the villager is gone (Villager.doneForGood).
+wait 300
+shot v01_fadein
+wait 2700
+shot v02_mission
+pos start
+log start
+tap CROSS
+wait 800
+shot v03_dialog1
+log dialog1
+tap CROSS
+wait 800
+shot v04_dialog2
+log dialog2
+tap CROSS
+wait 800
+shot v05_rescued
+log rescued
+wait 1500
+shot v06_rescued_later
+tap LEFT
+wait 700
+shot v07_turned
+quit

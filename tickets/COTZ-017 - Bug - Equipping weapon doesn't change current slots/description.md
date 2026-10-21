@@ -1,0 +1,1 @@
+I bought new weapons in Zazo, and it showed it correctly in the menu but the slots used in battle matched the old weapon. Saving the game and restarting it fixed the issue.

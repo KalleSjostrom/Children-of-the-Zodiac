@@ -97,6 +97,25 @@ func draw(gl, dir = null):
 		gl.glEnd()
 
 
+## Bridge (phase 2 step B, docs/ARCHITECTURE.md section 10): draw(g) without
+## the drawing, for a floor its scene draws (Graph.show_inventory): the same
+## checks and GL state changes (the texture it binds; its quad, recorded by
+## DungeonQuads, leaves the same normal and texture coordinate current), and
+## what it would draw: "visible", "frame" (the index of the texture),
+## "state" (the render state, Graphics.render_state_3d) and "quad" (its
+## vertices in eye space, as GLBackend would draw them).
+## DungeonScene.show_object shows it.
+func place_view(g, dir = null):
+	if currentTex == Object2D.INVISIBLE:
+		return {"visible": false}
+	if currentTex < texture.size() and texture[currentTex] != null:
+		texture[currentTex].bind(g)
+	var state: Dictionary = g.render_state_3d()
+	var quads := DungeonQuads.new(g)
+	_drawQuad(quads, self.dir)
+	return {"visible": true, "frame": currentTex, "state": state, "quad": quads.eye_space()}
+
+
 ## Java: protected void draw(GL2 gl, int dir).
 func _drawQuad(gl, dir: int) -> void:
 	var position = node.getPos()

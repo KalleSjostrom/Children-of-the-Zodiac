@@ -1,0 +1,30 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/dungeons/DungeonScene.gd" id="1_scene"]
+[ext_resource type="Script" path="res://scenes/dungeons/DungeonFloor.gd" id="2_floor"]
+[ext_resource type="Script" path="res://scenes/dungeons/DungeonWeather.gd" id="3_weather"]
+
+[sub_resource type="Environment" id="Environment_legacy"]
+background_mode = 0
+tonemap_mode = 0
+
+[node name="DungeonScene" type="Node3D"]
+script = ExtResource("1_scene")
+
+[node name="Layout" type="Node3D" parent="."]
+script = ExtResource("2_floor")
+
+[node name="Environment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_legacy")
+
+[node name="Objects" type="Node3D" parent="."]
+
+[node name="Weather" type="Node3D" parent="."]
+script = ExtResource("3_weather")
+
+[node name="Rig" type="Node3D" parent="."]
+
+[node name="Camera" type="Camera3D" parent="Rig"]
+fov = 45.0
+near = 1.0
+far = 75.0

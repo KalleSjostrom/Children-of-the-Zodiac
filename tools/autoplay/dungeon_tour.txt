@@ -1,0 +1,81 @@
+# A tour of a dungeon floor, one script for every floor (parity cases
+# dungeon_tour_*): --load=<save> --start="<Area>--<Floor>-mark0"
+# --no-encounters (no random battles; battles have cases of their own).
+# No route per floor: the fade-in, a settled shot, then a fixed sequence of
+# steps (UP, DOWN backwards) and turns both ways, with shots in the middle of
+# a step and of a turn (the camera interpolation) and pos lines; a step
+# into a wall does nothing. It ends with the minimap visible and the menu
+# (its thumbnail of the floor), and back.
+wait 100
+shot d01_fadein
+wait 400
+shot d02_fadein_later
+wait 2500
+shot d03_settled
+pos start
+log start
+tap UP
+wait 250
+shot d04_step_mid
+wait 450
+pos step1
+tap UP
+wait 700
+pos step2
+shot d05_ahead
+tap LEFT
+wait 250
+shot d06_turn_left_mid
+wait 450
+pos left
+tap UP
+wait 700
+tap UP
+wait 700
+pos left_steps
+shot d07_left
+tap RIGHT
+wait 700
+tap RIGHT
+wait 250
+shot d08_turn_right_mid
+wait 450
+pos turned_back
+tap UP
+wait 700
+tap UP
+wait 700
+tap UP
+wait 700
+pos back_steps
+shot d09_back
+tap RIGHT
+wait 700
+tap UP
+wait 700
+tap UP
+wait 700
+pos right_steps
+shot d10_right
+tap DOWN
+wait 350
+shot d11_backwards_mid
+wait 350
+pos backwards
+tap LEFT
+wait 700
+tap UP
+wait 700
+pos last
+wait 1000
+shot d12_minimap
+log minimap
+tap TRIANGLE
+wait 2500
+shot d13_menu
+log menu
+tap CIRCLE
+wait 2000
+shot d14_back
+log back
+quit

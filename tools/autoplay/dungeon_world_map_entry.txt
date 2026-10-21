@@ -1,0 +1,26 @@
+# --load="Slot 1" --start="landForest_of_Reil--Deep_Forest-mark0": enter the
+# Forest of Reil from the world map (its node at Deep Forest's door; no world
+# map node leads to Forest Path, which only the opening story reaches):
+# CROSS, the world map fades out, the floor loads and fades in.
+wait 3000
+shot w01_world_map
+log world_map
+tap CROSS
+wait 300
+shot w02_leaving
+mark
+wait 200
+loopuntil mode=labyrinth 15000
+log entered
+shot w03_fadein
+wait 300
+shot w04_fadein_later
+wait 600
+shot w05_fadein_end
+wait 2000
+shot w06_settled
+pos settled
+tap UP
+wait 700
+shot w07_step
+quit

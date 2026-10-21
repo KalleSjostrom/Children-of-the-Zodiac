@@ -1,0 +1,31 @@
+# --load="Slot 1" --start="Forest of Reil--Deep Forest-mark0" --no-encounters:
+# leave Deep Forest through the door at node 7 (the start; the player faces
+# away from it): turn around, CROSS, the labyrinth fades out (about 0.3 s),
+# then the world map.
+wait 3000
+shot e01_start
+tap RIGHT
+wait 700
+tap RIGHT
+wait 700
+pos facing_door
+shot e02_door
+tap CROSS
+wait 50
+shot e03_fade_out_start
+log leaving
+wait 100
+shot e04_fade_out
+wait 150
+shot e05_fade_out_later
+wait 300
+shot e06_fade_out_end
+mark
+wait 500
+loopuntil mode=landscape 15000
+wait 300
+shot e07_world_map_fade_in
+wait 2500
+shot e08_world_map
+log world_map
+quit

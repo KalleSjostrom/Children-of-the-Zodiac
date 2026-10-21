@@ -13,6 +13,11 @@ extends MenuStarter
 ##    (firstDialogImage, name, first, second, whisper), (DialogSequence) and
 ##    (ArrayList<DialogSequence>) on the type of the first argument.
 ##  - checkNode(dir) and move(dir) take the Java arguments (extra params unused).
+##
+## Phase 2 (docs/ARCHITECTURE.md section 10): a converted floor is built from
+## its scene (MapLoader, step A) and drawn by it (create_scene, step B): draw
+## hands the scene what the display list, the objects and the weather would
+## have drawn; the battle, the minimap and the 2D overlays stay legacy.
 
 var graph = null
 var player = null
@@ -108,6 +113,9 @@ func init(name, lab = null, hinders = null):
 	var pos = LabyrinthPosition.new(nodePos.getX(), nodePos.getZ(), Values.TO_ANGLE[dir])
 	player = LabyrinthPlayer.new(pos)
 	battleMusic = mapLoader.getBattleMusic()
+	# Dev only (--no-encounters, Main): the original never sets noEncounters.
+	if Main.no_encounters:
+		noEncounters = true
 
 	logicLoading = false
 	print("Logic loading done")
@@ -120,6 +128,68 @@ func updateCharacterDecks():
 		var deck = chars[i].get2DDeck()
 		if deck != null:
 			deck.setNeedUpdate(true)
+
+## Bridge (phase 2 step B, docs/ARCHITECTURE.md section 10): the floor's
+## scene (DungeonScene), which draws the walls, the objects and the weather
+## while the legacy objects stay in charge; null for a floor that is not
+## converted and with --legacy=dungeons (the legacy drawing draws it then).
+func create_scene() -> Node:
+	if mapLoader == null:
+		return null
+	return mapLoader.dungeon_scene_for(mapLoader.labyrinthName)
+
+
+## Bridge (phase 2 step B): init3D for a floor its scene draws, without the
+## display list: the same GL state (lights, material, fog, the clear colour,
+## and what compiling the walls leaves: the current colour, normal, texture
+## coordinate and texture, the enabled caps), the same textures, objects and
+## minimap set up. The scene builds the walls in the GL state they would
+## have been compiled in (DungeonScene.show_floor).
+func init_scene_3d(g, scene):
+	renderer.addLight(g)
+	renderer.setMaterial(g)
+	renderer.addFog(g)
+	renderer.init(g)
+	g.setTextureEnabled(false)
+	g.setLightEnabled(false)
+	g.clearColor(0)
+	var st: Dictionary = g.render_state_3d()
+	var left: Dictionary = scene.show_floor({"color": g.getCurrentColor(), "normal": g.current_normal(),
+		"uv": g.current_tex_coord(), "additive": st.additive, "opaque": st.opaque,
+		"alpha_func": st.alpha_func, "alpha_ref": st.alpha_ref, "depth_test": st.depth_test,
+		"depth_write": st.depth_write, "cull": st.cull})
+	if renderer.getSetting(MapLoader.SKY):
+		# renderSky's state changes (its matrix push and pop leave none).
+		g.setDepthTestEnabled(true)
+		g.getGL().glEnable(Graphics.GL_CULL_FACE)
+	g.getGL().glColor4f(left.color.r, left.color.g, left.color.b, left.color.a)
+	g.setTextureEnabled(true)
+	g.setLightEnabled(true)
+	if left.slot >= 0:
+		renderer.textures[left.slot].getTexture().bind(g)
+	g.getGL().glNormal3f(left.normal.x, left.normal.y, left.normal.z)
+	g.getGL().glTexCoord2f(left.uv.x, left.uv.y)
+	renderer.setLight(g)
+	graph.initDrawInventory(g)
+	mapRenderer.initDraw(g)
+
+
+## Bridge (phase 2 step B): where draw called the display list and
+## Graph.drawInventory: the camera (the modelview LabyrinthPlayer.lookAt
+## set) and the objects, handed to the scene; this frame's legacy 3D drawing
+## goes into the scene's 3D world (Graphics.use_scene_3d).
+func show_scene(g, scene):
+	g.use_scene_3d(scene.legacy_root())
+	scene.show_view(g.getModelView())
+	graph.show_inventory(g, scene)
+
+
+## Bridge (phase 2 step B): a weather pass for the scene (WeatherSystem.draw
+## without the drawing).
+func show_weather(g, scene, front):
+	var q: Dictionary = weatherSystem.place_particles(g, player, front)
+	scene.show_weather(&"front" if front else &"back", q)
+
 
 ## Sets light, fog and draws the labyrinth into a display list.
 func init3D(g):
@@ -256,6 +326,35 @@ func save_position() -> Array:
 func gameOver():
 	exit("Game Over Screen", true)
 
+
+## Port fix: Java's garbage collector freed the labyrinth together with its
+## graph, player and battle, which refer back to it; reference counting
+## cannot free that cycle, so every floor visited stayed in memory (and with
+## a converted floor its scene). The references back are dropped when the
+## floor is left (docs/ARCHITECTURE.md sections 8 and 10); not when it is
+## suspended for the menu, which also ends with finishOff.
+func finishOff() -> void:
+	super.finishOff()
+	if not isSuspended():
+		releaseBackReferences()
+
+
+## Also when the debug console jumps away (Organizer.jump_to skips finishOff);
+## not for the Cheater, which can switch back to the floor.
+func exitWithoutFading(p_mode: int) -> void:
+	super.exitWithoutFading(p_mode)
+	if p_mode == Values.EXIT:
+		releaseBackReferences()
+
+
+func releaseBackReferences():
+	if graph != null:
+		graph.setLabyrinth(null)
+	if player != null:
+		player.labyrinth = null
+	if labDrawable != null and "starter" in labDrawable:
+		labDrawable.starter = null
+
 ## Java exit(String next, boolean fadeBattleMusic); exit(int) is GameMode's.
 func exit(next = null, fadeBattleMusic = null):
 	if next is int:
@@ -352,24 +451,43 @@ func turn(turnDir):
 	inputManager.resetAllGameActions()
 
 func draw(g, alpha = null):
+	# Phase 2 step B: a converted floor's scene draws what the display list,
+	# the objects and the weather drew (show_scene, show_weather).
+	var scene = ensure_scene() as DungeonScene
 	if not labyrinthInitiaded:
-		init3D(g)
+		if scene != null:
+			init_scene_3d(g, scene)
+		else:
+			init3D(g)
 		labyrinthInitiaded = true
 
 	player.lookAt(g)
-	g.callList(drawList)
-	graph.drawInventory(g)
+	if scene != null:
+		show_scene(g, scene)
+	else:
+		g.callList(drawList)
+		graph.drawInventory(g)
 	g.setLightEnabled(false)
 
 	if weatherSystem != null:
-		weatherSystem.draw(g, player, false)
+		if scene != null:
+			show_weather(g, scene, false)
+		else:
+			weatherSystem.draw(g, player, false)
 	if runSubGameMode:
 		g.push()
 		drawExtra(g, false)
 		g.pop()
 
 	if weatherSystem != null:
-		weatherSystem.draw(g, player, true)
+		# Over a battle or riddle the legacy front pass draws (into the
+		# scene's 3D world, after the battle), as it did over the walls.
+		if scene != null and not runSubGameMode:
+			show_weather(g, scene, true)
+		else:
+			if scene != null:
+				scene.hide_weather(&"front")
+			weatherSystem.draw(g, player, true)
 	g.loadIdentity()
 	g.getGL().glDepthMask(false)
 	g.getGL().glDisable(Graphics.GL_DEPTH_TEST)

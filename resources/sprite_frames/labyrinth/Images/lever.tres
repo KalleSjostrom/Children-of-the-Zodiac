@@ -1,0 +1,38 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Images/lever0.png" id="1_magus"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Images/lever1.png" id="2_dulpm"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Images/lever2.png" id="3_3o118"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Images/lever3.png" id="4_yhvu1"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Images/lever4.png" id="5_p2bpa"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Images/lever5.png" id="6_5tyxi"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Images/lever6.png" id="7_vci8x"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_magus")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_dulpm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_3o118")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_yhvu1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_p2bpa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_5tyxi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vci8x")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}]

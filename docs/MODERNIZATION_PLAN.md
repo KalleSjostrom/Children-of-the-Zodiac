@@ -2,8 +2,10 @@
 
 Status: **phase 0 done** (2026-10-16); **phase 1 steps A and B done** for
 all 63 places and 89 variants (pilot: Zazo and "Zazo - Miner's Home", 6.7;
-rollout: the other 61 places, 6.8; closing the phase, 6.9); phases 2–5 are
-proposals. The plan
+rollout: the other 61 places, 6.8; closing the phase, 6.9); **phase 2
+pilot done** (steps A and B for Forest of Reil and The Great Mine--Tunnel,
+7.7; the other 77 floors pass the converter and the data check in a dry
+run); phases 3–5 are proposals. The plan
 assumes the state described in `docs/HANDOFF.md` (all classes ported, main
 paths run). Conventions for new code: `docs/ARCHITECTURE.md`.
 
@@ -734,6 +736,10 @@ Options considered:
   `LabyrinthNode.draw/drawOneWall`, `Horizontal` and `PillarWalls` from
   `glVertex3f` to `SurfaceTool`. A later editor plugin can toggle
   connections by clicking cell edges.
+* *As built (pilot, 7.7):* as chosen, with one surface per material of the
+  legacy display list (a texture with its GL state), in the list's order
+  (the passes floor, roof, wall, carpet, pillar; materials by first
+  appearance), all in one MeshInstance3D. No editor plugin yet.
 
 ### 7.2 Scene layout
 
@@ -762,12 +768,41 @@ Player rig (added at runtime): Node3D → Camera3D (fov 45, near 1, far 75) + Om
   are still derived from map name + kind + cell address, so saves and
   cross-floor links stay valid.
 
+*As built (pilot, 7.7; `docs/ARCHITECTURE.md` section 10)*, where it differs
+from the sketch:
+
+* `map_pos` is in the layout and the enemy colour in the style; the root
+  also exports `map_name` and the mission as MapLoader keeps it.
+* `Environment` has neither fog nor sky: the dungeon shader does fog and
+  light (decision 2), the background is the clear colour, and the sky is a
+  quad of the walls' mesh, as in the display list.
+* `Weather` is an interim node (`DungeonWeather`: the legacy simulation's
+  quads, one mesh per pass and frame), not `GPUParticles3D` (decision 6 is
+  open).
+* The rig is part of the scene (`Rig/Camera`, at mark 0 in the editor), with
+  no light: light0 is a shader uniform. At run time the camera stays at the
+  origin and the floor and objects move (7.5).
+* A style per distinct look, not per area: the floors of an area share
+  `<Area>.tres` where every value agrees (light, material, fog, sky,
+  textures, slot ranges, weather, enemy colour), a floor that differs has
+  its own. 25 of the 80 floors have their own (Forest Path and Deep Forest
+  differ in rain, fog, light1, sky and enemy colour).
+* The objects' Views (`AnimatedSprite3D` with SpriteFrames) show the floor in
+  the editor; at run time they only mirror their frame and stay hidden, and
+  the legacy quads are drawn instead (7.7).
+
 ### 7.3 Converter `tools/import/map_to_scene.gd`
 
 * Runs `MapLoader` on each `.map`, then writes the layout resource, the
   scene and the object nodes.
 * Groups floors by area (`<Area>--<Floor>.map`) and extracts the shared
   styles.
+* *As built:* a subclass of MapLoader reads each file, so every value is
+  the legacy loader's; the area's style is the look most of its floors
+  have. It also writes the image series' SpriteFrames and sets
+  `detect_3d/compress_to=0` in the used textures' `.import` files (the
+  editor would otherwise VRAM-compress a texture it sees on a 3D material,
+  which changes the legacy drawing too). Results in 7.7.
 
 ### 7.4 Step A: data from scenes
 
@@ -775,6 +810,11 @@ Player rig (added at runtime): Node3D → Camera3D (fov 45, near 1, far 75) + Om
   instead of from `MapLoader`.
 * A verifier compares the graph, walls, textures and inventory with the old
   loader output for all 80 files.
+* *As built:* `MapLoader._init` builds a converted floor from its scene, so
+  both `Labyrinth.init` and Load's saved floor maps use it.
+  `verify_dungeons.gd` also compares the renderer, the weather system, the
+  mission, the Database after the build and the random numbers, and
+  (`--meshes`) the walls' mesh with the display list.
 
 ### 7.5 Step B: nodes draw the dungeon
 
@@ -800,6 +840,56 @@ Player rig (added at runtime): Node3D → Camera3D (fov 45, near 1, far 75) + Om
   Compare `tools/autoplay/battle.txt` shots before and after, and decide
   deliberately.
 
+*As built (pilot, 7.7)*, where it differs:
+
+* The camera does not follow the player. It stays at the origin, and
+  `Layout` and `Objects` get the legacy modelview as their transform, as
+  GLBackend draws (its camera at the origin, the display list under the
+  modelview). A camera moved by the inverse view rounds differently, and
+  the eye-space meshes (objects, weather) need a camera at the origin. The
+  rig matters only in the editor; step C turns this around.
+* `init3D`, the display list and `graph.drawInventory` are not called on the
+  scene path; they stay for `--legacy=dungeons`.
+* **The weather is not GPU particles, and the scene does not fix the frame
+  rate.** Decision 6 is open, so the interim node draws the legacy
+  simulation's quads. In Forest Path the GDScript simulation
+  (`WeatherSystem.update`) takes ≈10 ms of a frame and computing the back
+  pass's quads ≈13 ms (the front pass ≈1 ms), in either path: ≈24 of the
+  ≈33 ms. The scene only saves the emulation's drawing of them (27 → 30
+  FPS). The FPS fix needs GPU particles (or a faster simulation), so it
+  depends on decision 6.
+* The minimap stays legacy (`MapRenderer`, 3D), drawn into the scene's
+  World3D by the 3D bridge. As a 2D `Control` its half-transparent disk
+  would blend in sRGB and come out darker. Recommended for phase 3: a 3D
+  node on the rig (or a SubViewport that blends in linear space).
+* **The walls-seen-through-walls bug stays; it is not a depth problem.**
+  GLBackend's lit shader multiplies the lit colour by the current glColor.
+  OpenGL 2 ignores glColor while lighting is on unless `GL_COLOR_MATERIAL`
+  is enabled, and the Java never enables it. On a floor with a sky the
+  display list is compiled after renderSky's last glColor, so the walls take
+  the sky's bottom colour and its alpha:
+  * Deep Forest: 0.8, blended, so walls show through walls (`TODO.md`:
+    "Some walls are seen through others").
+  * Forest Path: grey 0.45, darker.
+  * Empyrian Temple--Dark: 0;0;0, the walls and floors render black (one
+    legacy screenshot; its fog is thin and its light moderate).
+  * Five floors have a sky alpha of 0.8, 18 have a sky.
+
+  For the same reason the objects take the minimap arrow's yellow from the
+  previous frame. Decision 2's exact look reproduces all of this. A fix
+  changes GLBackend and the dungeon shader together (new goldens). The sky
+  gradient is a further emulation bug: the emulated display list does not
+  record renderSky's `glLoadIdentity`, so the sky is a world quad near the
+  origin and the view shows the clear colour.
+* **Battles: the listed consequences do not occur.** The 3D bridge
+  (`GLBackend.scene_3d`, ARCHITECTURE section 10) draws the frame's first 3D
+  chunk into the scene's World3D. So the battle shares the depth buffer and
+  the linear blending with the walls as before. The legacy front weather
+  pass stays over battles. The GL fog and light state is set as before
+  (`Labyrinth.init_scene_3d`). `battle` and `dungeon_tunnel_battle` are
+  identical legacy vs. scene. Whether walls ever clip enemies is still
+  unverified; it no longer matters for the hybrid period.
+
 ### 7.6 Step C: logic (later)
 
 * Moving and turning become Tweens on the rig.
@@ -809,6 +899,107 @@ Player rig (added at runtime): Node3D → Camera3D (fov 45, near 1, far 75) + Om
 **Exit:** all 80 floors load from scenes; the dungeon AutoPlay scripts
 (`newgame_to_forest`, `battle`, `boss`) pass; `src/labyrinth` contains no GL
 calls.
+
+### 7.7 Pilot results (Forest of Reil, The Great Mine--Tunnel)
+
+* **Baseline** (on the phase 1 commit): `tools/check.sh` 0 failed; goldens of
+  all cases. The dev additions for the coverage (`--no-encounters`, `pos`
+  in labyrinths) change none of the 117 older cases (2,770 shots identical
+  to a recording before them).
+* **Coverage:** 14 new cases (`dungeon_*`, 158 shots), recorded on
+  unconverted code. A second recording is identical:
+  * tours of the three floors with "Slot 1" and "Start" (one script,
+    `dungeon_tour.txt`);
+  * Forest Path in the rain and fog with its hinder door and save point;
+  * Deep Forest's crate and leaving through its door;
+  * the Tunnel's mission display and miner, its lever and the hinder door
+    it opens;
+  * a battle in the Tunnel (no weather);
+  * the menu's map page after a walk;
+  * entering the Forest of Reil from the world map. No world map node leads
+    to Forest Path; only the opening story does (`newgame_to_forest`).
+
+  Older cases through the pilot floors: `battle` (Forest Path, rain),
+  `newgame_to_forest`, `story_having_fun`. Labyrinth cases on unconverted
+  floors: `bridge_test`, `story_meanwhile_in_zazo`,
+  `story_menthu_kills_teo`, `story_senate_of_pensara`.
+* **Checked on the legacy drawing:**
+  * `Labyrinth.draw`'s order: the walls (display list), the objects in Graph
+    order, lighting off, the weather's back pass, a battle or riddle, the
+    front pass (also over a battle), then without depth the minimap (3D),
+    and in 2D the mission, dialog and card info, the battle's top layer, the
+    top layer and the fade.
+  * The projection is GLBackend's `gluPerspective(45, 4/3, 1, 75)`.
+  * light0 is set under the identity, so it is a headlamp; light3 has fixed
+    values (`LabyrinthRenderer.setLight`).
+  * The fog is `GL_EXP` with the map's density and colour.
+  * The two emulation bugs of 7.5 (glColor on lit vertices, the sky quad).
+  * The Labyrinth game mode was never freed (fixed below).
+* **Converter:** all 80 `.map` files convert in a dry run, with 124
+  warnings, none an error:
+  * an ignored `mapSize` line in all 80 files and an `end` line in 36;
+  * 8 repeated `dir` lines in Frozen Forest--Forest Passage, kept: the
+    legacy loader counts them as neighbours again.
+
+  Converting twice changes no file. Temple of Aegis's Base Level (carpets)
+  and First Floor (pillars) were built and previewed without converting
+  them for the game.
+* **Step A:** `verify_dungeons.gd` passes for the pilot and in the dry run
+  of all 80 floors: 160 of 160 builds ("Slot 1", "Start"), 80 of 80 meshes.
+  Golden vs. after step A: 2,927 of 2,928 shots and all 131 logs identical.
+  The one shot (`story_revelation_of_elmer`) is a dialog line removed from
+  its `.seq` during the session, not the conversion; the legacy run after
+  step A has it too.
+* **Step B, legacy vs. scene** (`ab "--legacy=dungeons" ""`, the 14 cases
+  plus `battle`, `newgame_to_forest`, `story_having_fun`): 189 of 189 shots
+  identical at tolerance 0, logs identical. Each of these was needed, found
+  by a failing shot:
+  * the exact materials (decision 2);
+  * the camera at the origin (7.5);
+  * the walls as one instance with the display list's surfaces (an instance
+    per surface changed the order of Godot's unstable sort for equal-depth
+    surfaces);
+  * the objects drawn as the legacy quads. Sprite3D's own vertices lost the
+    z-fight of the hinder door, which lies in its wall's plane, in some
+    turns: the door vanished.
+  * the quads batched as GLBackend batches them. One instance per object
+    changed some wall pixels by 1/255 with the "Start" save in the Tunnel;
+    the mechanism in the renderer was not found.
+* **Step B, other cases:** golden vs. after: 2,927 of 2,928 shots identical
+  (the same `.seq` shot), all 131 logs identical; the bridge test is
+  identical.
+* **Battles in the hybrid frame:** identical to legacy (7.5, the 3D
+  bridge): the enemies over the scene's walls, the rain's front pass over
+  the battle in Forest Path. Nothing of the legacy look is lost.
+* **Frame rate** (normal runs, windowed, "Slot 1"; median of the walk or
+  battle frames, legacy (`--legacy=dungeons`) → scene):
+
+  | Route | Capped | Uncapped |
+  |---|---|---|
+  | Forest Path, walking in the rain | 27 → 31 | 27 → 30 |
+  | Forest Path, a battle | 27 → 30 | 27 → 30 |
+  | The Great Mine--Tunnel, walking | 60 → 60 | 709 → 667 |
+
+  Forest Path is bound by the weather in GDScript (7.5: ≈24 ms of a frame).
+  The Tunnel is about 6 % slower uncapped (the ranges overlap: 642–729 vs.
+  620–694). Not profiled; likely the scene path's extra GDScript per frame:
+  recording the objects' quads and building their batch meshes.
+* **Fixed on the way:**
+  * The Labyrinth game mode leaked: its Graph, player and battle starter
+    keep references back to it (a RefCounted cycle). It is released when the
+    mode ends (`Labyrinth.releaseBackReferences`).
+  * Main frees the scenes of modes that are still referenced at exit and
+    the dungeon materials, so the renderer reports nothing new at exit.
+  * Not fixed: the MainMenu mode stays alive. Exit-time leak warnings
+    (textures, ObjectDB) exist in every run since before phase 2.
+* **Still legacy:**
+  * the minimap (in the scene's World3D), the mission display, dialogs and
+    card info, the top layer and the fade: phase 3;
+  * battles and riddles: phase 4;
+  * the weather and save point simulations (GDScript): decision 6;
+  * the 77 other floors: the rollout, `docs/CONVERTING_DUNGEONS.md`.
+
+  The `.map` files stay (decision 5).
 
 ## 8. Phase 3: shared UI and transitions
 
@@ -988,7 +1179,31 @@ When no mode draws through `g` any more:
   GPU particles cannot report how many particles are left, so those effects
   use CPUParticles or an explicit timer that matches the legacy timing.
 * **Battle in the hybrid period** (7.5): depth, fog and the weather front
-  pass behave differently until phase 4.
+  pass behave differently until phase 4. *Pilot:* avoided in the labyrinth
+  by the 3D bridge (7.5), which only covers the frame's first 3D chunk drawn
+  before any 2D. Later 3D chunks are separate SubViewports, composited in
+  sRGB.
+* **Pixel parity rests on renderer details** (7.7). These had to match
+  GLBackend exactly:
+  * Godot's transparent sort (depth minus `sorting_offset`, unstable for
+    equal depths);
+  * the batching;
+  * the vertex rounding that decides coplanar z-fights (hinder doors in
+    walls).
+
+  A Godot update can change any of them. Step C (real Sprite3D, a moving
+  camera) gives up exact parity by design, so it needs a tolerance or
+  accepted differences.
+* **Exact looks keep emulation bugs.** Decision 2 reproduces GLBackend,
+  including glColor on lit vertices (walls seen through walls, black walls
+  in Empyrian Temple--Dark, yellow objects) and the misplaced sky (7.5).
+  Fixing them changes both paths at once and needs new goldens.
+* **RefCounted cycles** keep game modes and their scenes alive (the
+  Labyrinth until phase 2, the world map until phase 1, the MainMenu still).
+  Check that a converted mode is freed when it ends.
+* **Texture import:** a texture used on a 3D material gets VRAM-compressed by
+  the editor (`detect_3d`). That changes the legacy drawing too, which uses
+  the same texture. The converters set `compress_to=0`.
 * **`Vector3f` aliasing** in card effects (9.4).
 
 ## 13. Open decisions
@@ -999,7 +1214,10 @@ When no mode draws through `g` any more:
    rollout):* one inherited scene per `.vil` variant on a shared base
    scene, as in the pilot.
 2. **Dungeon lighting:** exact fixed-function look (shader) vs. Godot lights
-   (more modern, slightly different).
+   (more modern, slightly different). *Applied for the pilot (phase 2):*
+   the exact look: GLBackend's spatial shader as a ShaderMaterial with the
+   style's values. It also keeps the emulation's glColor bug (7.5). The
+   Godot-lights variant was not tried.
 3. **Step C timing:** accept changes in movement and collision feel (and fix
    the speed TODOs) right after step B, or only after every mode is on
    scenes.
@@ -1016,7 +1234,9 @@ When no mode draws through `g` any more:
    * Today's port speed: about 2× for the per-update systems.
 
    Step B views that only mirror legacy positions do not need this
-   decision. Particles (phase 1) and Tweens do.
+   decision. Particles (phase 1) and Tweens do. The phase 2 pilot showed
+   the labyrinth weather's frame rate depends on it: the GDScript
+   simulation, not the drawing, holds the rainy floors at ≈30 FPS (7.5).
 7. **Village top layer** (from the pilot, 6.7): *decided (phase 1
    rollout):* roofs and treetops are always drawn (6.1, the pilot's
    default). The legacy rule draws a piece only where a sprite overlaps it,
@@ -1033,7 +1253,7 @@ Sizes are relative: S ≈ a focused session, XL ≈ many sessions.
 |---|---|---|---|---|
 | 0 | Groundwork: bridge, parity tool, `ARCHITECTURE.md` | S | — | everything |
 | 1 | Villages + cutscenes + village particles + SpriteFrames | L | 0; decisions 1, 6 | editable villages |
-| 2 | Dungeons + weather + minimap | L | 0; decision 2 | editable dungeons; FPS fix |
+| 2 | Dungeons + weather + minimap | L | 0; decision 2 (the weather: 6) | editable dungeons; FPS fix (with decision 6) |
 | 3 | Theme, Dialog, signs, emotions, fades, HUD | M | 1 (or 2) | most of the remaining `draw(g)` |
 | 4.1 | World map + airship | M | 1 (converter), 3 | — |
 | 4.2 | Title, game over, mini-games, stores, menu | L | 3 | — |

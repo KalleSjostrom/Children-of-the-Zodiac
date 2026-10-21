@@ -1,0 +1,9 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/dungeon_objects/DungeonHinderDoor.gd" id="1_script"]
+
+[node name="DungeonHinderDoor" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="View" type="AnimatedSprite3D" parent="."]
+pixel_size = 1.0

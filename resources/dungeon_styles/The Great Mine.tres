@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="DungeonStyle" format=3]
+
+[ext_resource type="Script" path="res://scenes/dungeons/DungeonStyle.gd" id="1_ibll8"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Floors/minecavefloor.jpg" id="2_gbfnl"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/minecavewall.png" id="3_ogipw"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/minecavedoorbig0.png" id="4_byrqu"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/minecavedoor0.png" id="5_ce6bl"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Roofs/minecaveroof.jpg" id="6_bm55x"]
+
+[resource]
+script = ExtResource("1_ibll8")
+texture_names = PackedStringArray("Floors/minecavefloor.jpg", "Walls/minecavewall.png", "Walls/minecavedoorbig0.png", "Walls/minecavedoor0.png", "Roofs/minecaveroof.jpg")
+textures = Array[Texture2D]([ExtResource("2_gbfnl"), ExtResource("3_ogipw"), ExtResource("4_byrqu"), ExtResource("5_ce6bl"), ExtResource("6_bm55x")])
+floor_slots = Vector2i(0, 1)
+wall_slots = Vector2i(1, 4)
+roof_slots = Vector2i(4, 5)
+light0 = true
+light0_position = Vector4(0, 0, 0, 1)
+light0_ambient = Color(0.8, 0.8, 0.8, 1)
+light0_diffuse = Color(0.8, 0.8, 0.8, 1)
+light0_specular = Color(0, 0, 0, 1)
+light0_attenuation = Vector3(1, 0.01, 0.015)
+material = true
+material_ambient = Color(0.4, 0.4, 0.4, 1)
+material_diffuse = Color(0.7, 0.7, 0.7, 1)
+material_specular = Color(0, 0, 0, 1)
+inv_material = true
+inv_material_ambient = Color(0.7, 0.7, 0.7, 1)
+inv_material_diffuse = Color(0.8, 0.8, 0.8, 1)
+inv_material_specular = Color(0.2, 0.2, 0.2, 1)
+inv_material_emission = Color(0.1, 0.1, 0.1, 1)
+inv_material_shininess = 5.0

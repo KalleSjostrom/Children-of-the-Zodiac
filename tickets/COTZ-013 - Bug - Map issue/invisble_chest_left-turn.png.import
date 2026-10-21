@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7w6yvfcc2v4l"
-path="res://.godot/imported/2026-10-18 13_59_22-Children of the Zodiac (DEBUG).png-cb6e3cf68892f5ff7777f394d7fd29a7.ctex"
+uid="uid://bhiy0ww45wey8"
+path="res://.godot/imported/invisble_chest_left-turn.png-598617444d6fc945b143e583bc290a8b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tickets/2026-10-18 13_59_22-Children of the Zodiac (DEBUG).png"
-dest_files=["res://.godot/imported/2026-10-18 13_59_22-Children of the Zodiac (DEBUG).png-cb6e3cf68892f5ff7777f394d7fd29a7.ctex"]
+source_file="res://tickets/COTZ-013 - Bug - Map issue/invisble_chest_left-turn.png"
+dest_files=["res://.godot/imported/invisble_chest_left-turn.png-598617444d6fc945b143e583bc290a8b.ctex"]
 
 [params]
 

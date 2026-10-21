@@ -10,6 +10,14 @@ extends RefCounted
 ##  - 3D chunks are SubViewports rendering an ArrayMesh per batch; their
 ##    textures are composited into the canvas at the chunk's position.
 ## Batches inside a 3D chunk keep submission order via sorting_offset.
+##
+## Bridge (phase 2 step B, docs/ARCHITECTURE.md section 10): while the current
+## mode shows a 3D scene in the main viewport (a converted dungeon floor),
+## the frame's first 3D chunk, when nothing 2D was drawn before it, goes into
+## that scene instead of a SubViewport (SceneChunk, under scene_3d): the
+## legacy 3D drawn there (a battle, the weather's front pass during it, the
+## minimap) shares the depth buffer and the blending with the scene, as it
+## shared one chunk with the legacy walls.
 
 const VIRTUAL_SIZE := Vector2(1024, 768)
 const MAX_SURFACE_VERTS := 60000
@@ -27,7 +35,13 @@ var _cur_ci_xform := Transform2D.IDENTITY
 
 var _vp_pool: Array = []
 var _vp_used := 0
-var _cur_vp: Viewport3D = null
+var _cur_vp: Chunk3D = null
+
+## Bridge: the node of the scene that this frame's first 3D chunk goes into, set by the mode while it draws (Graphics.use_scene_3d);
+## null at the start of every frame.
+var scene_3d: Node3D = null
+var _scene_chunk: SceneChunk = null
+var _scene_chunk_used := false
 
 var _canvas_materials := {} # key -> Material (or null)
 var _shader_cache := {} # render mode key -> Shader
@@ -98,6 +112,10 @@ func begin_frame() -> void:
 	for i in _vp_used:
 		_vp_pool[i].begin_frame()
 	_vp_used = 0
+	if _scene_chunk != null:
+		_scene_chunk.begin_frame()
+	_scene_chunk_used = false
+	scene_3d = null
 	_cur_kind = 0
 	_cur_ci = RID()
 	_cur_vp = null
@@ -109,6 +127,11 @@ func begin_frame() -> void:
 func end_frame() -> void:
 	for i in _vp_used:
 		_vp_pool[i].end_frame()
+	if _scene_chunk != null:
+		if _scene_chunk_used:
+			_scene_chunk.end_frame()
+		else:
+			_scene_chunk.set_active(false)
 	for i in range(_vp_used, _vp_pool.size()):
 		_vp_pool[i].set_active(false)
 	for i in range(_ci_used, _ci_pool.size()):
@@ -238,9 +261,19 @@ void fragment() {
 # ---------------------------------------------------------------------------
 
 ## Returns the current 3D chunk, starting a new one if needed.
-func vp_3d() -> Viewport3D:
+func vp_3d() -> Chunk3D:
 	if _cur_kind == 2:
 		return _cur_vp
+	if _ci_used == 0 and not _scene_chunk_used and is_instance_valid(scene_3d):
+		# Nothing 2D before it in this frame: the chunk is the scene's.
+		if _scene_chunk == null:
+			_scene_chunk = SceneChunk.new()
+		_scene_chunk.attach(scene_3d)
+		_scene_chunk_used = true
+		_cur_kind = 2
+		_cur_vp = _scene_chunk
+		_cur_2d_key = ""
+		return _scene_chunk
 	var vp: Viewport3D
 	if _vp_used < _vp_pool.size():
 		vp = _vp_pool[_vp_used]
@@ -392,52 +425,20 @@ void fragment() {
 """
 
 
-## One 3D chunk: a SubViewport with a camera matching the original projection
-## and a pool of mesh instances, one per batch.
-class Viewport3D extends RefCounted:
-	var vp: SubViewport
-	var cam: Camera3D
+## One 3D chunk: a pool of mesh instances, one per batch, under parent.
+class Chunk3D extends RefCounted:
+	var parent: Node
 	var instances: Array[MeshInstance3D] = []
 	var batches: Array = []
 	var used := 0
-
-	func _init(host: Node) -> void:
-		vp = SubViewport.new()
-		vp.transparent_bg = true
-		vp.own_world_3d = true
-		vp.render_target_update_mode = SubViewport.UPDATE_ALWAYS
-		vp.size = Vector2i(1024, 768)
-		vp.msaa_3d = Viewport.MSAA_DISABLED
-		vp.positional_shadow_atlas_size = 0
-		cam = Camera3D.new()
-		cam.fov = 45.0
-		cam.near = 1.0
-		cam.far = 75.0
-		cam.keep_aspect = Camera3D.KEEP_HEIGHT
-		vp.add_child(cam)
-		var env := Environment.new()
-		env.background_mode = Environment.BG_CLEAR_COLOR
-		env.tonemap_mode = Environment.TONE_MAPPER_LINEAR
-		var we := WorldEnvironment.new()
-		we.environment = env
-		vp.add_child(we)
-		host.add_child(vp)
-		cam.current = true
-
-	func texture_rid() -> RID:
-		return vp.get_texture().get_rid()
-
-	func set_size(px: Vector2i) -> void:
-		if vp.size != px:
-			vp.size = px
+	## Sorting offset of the first batch (later batches are drawn on top).
+	var base_offset := 0.0
 
 	func set_active(active: bool) -> void:
-		var mode := SubViewport.UPDATE_ALWAYS if active else SubViewport.UPDATE_DISABLED
-		if vp.render_target_update_mode != mode:
-			vp.render_target_update_mode = mode
 		if not active:
 			for mi in instances:
-				mi.visible = false
+				if is_instance_valid(mi):
+					mi.visible = false
 
 	func begin_frame() -> void:
 		batches.clear()
@@ -468,7 +469,7 @@ class Viewport3D extends RefCounted:
 			mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 			mi.sorting_use_aabb_center = false
 			mi.extra_cull_margin = 16384.0
-			vp.add_child(mi)
+			parent.add_child(mi)
 			instances.append(mi)
 		return instances[i]
 
@@ -497,9 +498,81 @@ class Viewport3D extends RefCounted:
 				mi.transform = Transform3D.IDENTITY
 			# Later batches are drawn on top: Godot sorts transparent objects by
 			# depth minus sorting_offset.
-			mi.sorting_offset = float(i) * 1000.0
+			mi.sorting_offset = base_offset + float(i) * 1000.0
 			mi.visible = true
 			i += 1
 		for j in range(i, instances.size()):
 			instances[j].visible = false
 		used = i
+
+
+## A 3D chunk in the current mode's 3D scene (GLBackend.scene_3d: a node with
+## the identity transform, in a world whose camera is at the origin, so the
+## batches' eye-space vertices are drawn as in a SubViewport chunk): its
+## batches are drawn after the scene's own instances (whose sorting offsets
+## are below 1e6).
+class SceneChunk extends Chunk3D:
+	func _init() -> void:
+		base_offset = 1000000.0
+
+	## Moves the chunk to another scene node (the pool of the old one is
+	## dropped: freed with its scene, or now).
+	func attach(node: Node3D) -> void:
+		if node == parent:
+			return
+		for mi in instances:
+			if is_instance_valid(mi):
+				mi.queue_free()
+		instances.clear()
+		parent = node
+
+	func set_active(active: bool) -> void:
+		if not is_instance_valid(parent):
+			instances.clear()
+			parent = null
+			return
+		super.set_active(active)
+
+
+## A 3D chunk of its own: a SubViewport with a camera matching the original
+## projection, composited into the canvas as a texture.
+class Viewport3D extends Chunk3D:
+	var vp: SubViewport
+	var cam: Camera3D
+
+	func _init(host: Node) -> void:
+		vp = SubViewport.new()
+		vp.transparent_bg = true
+		vp.own_world_3d = true
+		vp.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+		vp.size = Vector2i(1024, 768)
+		vp.msaa_3d = Viewport.MSAA_DISABLED
+		vp.positional_shadow_atlas_size = 0
+		cam = Camera3D.new()
+		cam.fov = 45.0
+		cam.near = 1.0
+		cam.far = 75.0
+		cam.keep_aspect = Camera3D.KEEP_HEIGHT
+		vp.add_child(cam)
+		var env := Environment.new()
+		env.background_mode = Environment.BG_CLEAR_COLOR
+		env.tonemap_mode = Environment.TONE_MAPPER_LINEAR
+		var we := WorldEnvironment.new()
+		we.environment = env
+		vp.add_child(we)
+		host.add_child(vp)
+		cam.current = true
+		parent = vp
+
+	func texture_rid() -> RID:
+		return vp.get_texture().get_rid()
+
+	func set_size(px: Vector2i) -> void:
+		if vp.size != px:
+			vp.size = px
+
+	func set_active(active: bool) -> void:
+		var mode := SubViewport.UPDATE_ALWAYS if active else SubViewport.UPDATE_DISABLED
+		if vp.render_target_update_mode != mode:
+			vp.render_target_update_mode = mode
+		super.set_active(active)

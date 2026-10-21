@@ -124,6 +124,20 @@ func drawInventory(g):
 		else:
 			inv.draw(g)
 
+## Bridge (phase 2 step B, docs/ARCHITECTURE.md section 10): drawInventory
+## for a floor its scene draws: each object's draw without the drawing
+## (place_view), in the same order, handed to the scene.
+func show_inventory(g, scene):
+	scene.begin_objects()
+	for i in range(inventories.size()):
+		var inv = inventories[i]
+		if inv is InventorySave:
+			scene.show_object(inv, inv.place_view(g, labyrinth.getPlayerAngle()))
+		else:
+			scene.show_object(inv, inv.place_view(g))
+	scene.end_objects()
+
+
 func setLabyrinth(lab):
 	labyrinth = lab
 

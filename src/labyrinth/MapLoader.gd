@@ -62,7 +62,27 @@ func _init(name = null) -> void:
 	textures = []
 	settings = J.array(SETTING_SIZE, false)
 	textureNorm = J.array2d(5, 2, 0)
-	parseFile(name)
+	# Phase 2 step A (docs/ARCHITECTURE.md section 10): a converted floor is
+	# built from its scene, which replays what parsing the file would do.
+	var scene = dungeon_scene_for(name)
+	if scene != null:
+		scene.load_into(self)
+		scene.free()
+	else:
+		parseFile(name)
+
+
+## Bridge (phase 2, docs/ARCHITECTURE.md section 10): a new instance of the
+## floor's scene (DungeonScene, made by tools/import/map_to_scene.gd), or
+## null when the floor is not converted or with --legacy=dungeons; the floor
+## is then read from its .map file.
+func dungeon_scene_for(name):
+	if Main.is_legacy("dungeons"):
+		return null
+	var path := DungeonScene.path_for(GameResourceLoader.resolve(Values.LabyrinthMaps + str(name)))
+	if path == "":
+		return null
+	return (ResourceLoader.load(path) as PackedScene).instantiate()
 
 func getFogMap():
 	var m := {}

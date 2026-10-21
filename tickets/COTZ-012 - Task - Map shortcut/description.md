@@ -1,0 +1,1 @@
+I'd like to be able to quickly open the map, by pressing square on the pad

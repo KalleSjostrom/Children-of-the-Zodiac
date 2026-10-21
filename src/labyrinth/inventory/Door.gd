@@ -66,6 +66,14 @@ func draw(gl, dir = null):
 		super.draw(gl)
 
 
+## Bridge (phase 2 step B): draw without the drawing (Inventory.place_view);
+## only a door with images (a ladder) draws.
+func place_view(g, dir = null):
+	if images.size() > 0:
+		return super.place_view(g)
+	return {"visible": false}
+
+
 func checkIfOpen():
 	return true
 

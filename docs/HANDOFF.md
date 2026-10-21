@@ -1,4 +1,4 @@
-# Handoff: state of the Godot port (2026-10-21, after steps 1–3, modernization phase 0 and phase 1 steps A and B)
+# Handoff: state of the Godot port (2026-10-21, after steps 1–3, modernization phase 0, phase 1 steps A and B, and the phase 2 pilot)
 
 Conventions: legacy (ported) code follows `docs/PORTING.md`; new code
 (scenes, resources, tools, bridge) follows `docs/ARCHITECTURE.md`. The
@@ -103,22 +103,60 @@ plan 6.7) and the rollout (the other 61 places, plan 6.8); conventions in
   `ARIGHT`, `[zoom]` lines; parity `--ignore-world`, `--jobs`; `--seed` runs
   read no game pad; `tools/check.sh` also compiles `scenes/` and `tools/`.
 
+**Modernization phase 2 (dungeons as scenes): the pilot is done** (steps A
+and B for Forest of Reil--Forest Path, Forest of Reil--Deep Forest and The
+Great Mine--Tunnel, plan 7.7); conventions in `docs/ARCHITECTURE.md`
+section 10, the procedure in `docs/CONVERTING_DUNGEONS.md`:
+- Scenes: `scenes/dungeons/DungeonScene.tscn` (layout: `Layout`
+  (`DungeonFloor`, builds the walls), `Environment`, `Objects`, `Weather`,
+  `Rig/Camera`), one inherited scene per floor in `scenes/dungeons/<Area>/`,
+  one scene per object kind in `scenes/dungeon_objects/`, layouts in
+  `resources/dungeon_layouts/`, styles in `resources/dungeon_styles/`,
+  SpriteFrames in `resources/sprite_frames/labyrinth/`. Made by
+  `tools/import/map_to_scene.sh` (deterministic). The converter and
+  `verify_dungeons.gd` pass all 80 `.map` files in a dry run (both saves,
+  also the walls' meshes); the other 77 floors are not converted.
+- Step A: `MapLoader` builds the pilot floors from their scenes
+  (`DungeonScene.load_into`), also for Load's saved floor maps.
+- Step B: the scene draws the walls, objects, save point particles and the
+  weather (the legacy simulation's quads); legacy vs. scene identical to
+  the pixel on all pilot cases. The camera stays at the origin and the
+  floor gets the legacy modelview; the walls use GLBackend's shader with
+  the style's values (decision 2, exact look). The 3D bridge
+  (`GLBackend.scene_3d`) draws the labyrinth's legacy 3D (battles, the
+  front weather pass over them, the minimap) into the scene's World3D.
+  `--legacy=dungeons` keeps the old path.
+- The Labyrinth game mode leaked (reference cycles with its Graph, player
+  and battle); fixed (`Labyrinth.releaseBackReferences`, ARCHITECTURE
+  section 8).
+- Parity coverage: 131 cases; the 14 new `dungeon_*` cases (tours of the
+  three floors with both saves, objects, leaving, the menu's map page, the
+  world map entry, a battle without weather). Dev options:
+  `--no-encounters`, AutoPlay `pos` in labyrinths
+  (`node= dir= cam= angle=`), `tools/parity/contact_sheet.gd`.
+
 ## Plan (what is left)
 
 0. **Modernization:** closing phase 1 (plan 6.9) needs decision 5 (delete
    the `.vil` files) and the removal of the legacy village path; GPU
-   particle presets need decision 6 (time base). Phase 2 (dungeons) and
-   phase 3 can start. Record goldens before each change.
+   particle presets need decision 6 (time base). Phase 2: the rollout of
+   the other 77 floors (`docs/CONVERTING_DUNGEONS.md`); the weather and the
+   save points stay the legacy simulation until decision 6. Phase 3 can
+   start. Record goldens before each change.
 
 1. **Performance (top priority):** labyrinths with rain/snow run at ≈30 FPS,
-   battles there at 20–28 FPS (10 000 weather particles per frame through
-   GDScript + the GL emulation in `src/weather`). Villages: Dellna's snow
+   battles there at 27–30 FPS (10 000 weather particles per frame through
+   GDScript in `src/weather`: in Forest Path the simulation takes ≈10 ms of
+   a frame and computing the back pass's quads ≈13 ms, in both paths; the
+   scene only saved the GL emulation's share, 27 → 30 FPS; plan 7.7).
+   Villages: Dellna's snow
    runs at 12 FPS in the legacy path and 18 with the scene, Home of the Gods
    at 6 FPS once its 12 god systems are active (the GDScript particle
    simulation; plan 6.8). The other villages measured run at 60 FPS.
-   Per-frame fades assume 60 FPS. Options: batch particle quads
-   into one mesh per frame in `GLBackend`, or tighten the weather loops.
-   Measure with the `fps=` value that AutoPlay prints with every `log`/`shot`.
+   Per-frame fades assume 60 FPS. Options: GPU particles for the weather
+   (decision 6), or tighten the weather loops (the per-particle view test
+   and vertex math in `WeatherParticle`). Measure with the `fps=` value
+   that AutoPlay prints with every `log`/`shot`, in normal runs.
 2. **More runtime coverage:** level-up screen, riddle mini-games
    (`src/miniGames`), buying/selling/merging cards, inn rest, the later
    chapters and their bosses. Compare look and timing with the original
@@ -146,12 +184,12 @@ plan 6.7) and the rollout (the other 61 places, plan 6.8); conventions in
   only the shipped saves.
 - Parity: `tools/parity/parity.sh record <set>` / `compare <a> <b>` /
   `ab "<args a>" "<args b>" [case…]`, see `docs/ARCHITECTURE.md` section 7.
-  Runs are windowed (screenshots need a renderer) and take about 40 minutes
-  for all 117 cases with `--jobs=5` (`--uncapped`; battles are bound by the
-  weather at ~26 FPS, `particles_hotg` by its particles at ~6 FPS). The
-  `fps=` values of parity runs are meaningless; measure performance in
-  normal runs. Do not type while a recording runs (a new run's window takes
-  the focus).
+  Runs are windowed (screenshots need a renderer); all 131 cases are about
+  38 minutes of runs, about 10 minutes with `--jobs=5` (`--uncapped`;
+  battles are bound by the weather at ~26 FPS, `particles_hotg` by its
+  particles at ~6 FPS). The `fps=` values of parity runs are meaningless;
+  measure performance in normal runs. Do not type while a recording runs (a
+  new run's window takes the focus).
 - The developer console (§ / ` / F1 in debug builds, README) jumps to any
   place (`goto`). It replaces the Cheater (formerly SELECT + DOWN, i.e.
   Space + Down), whose menu of places, stories and buildings its `cheater`

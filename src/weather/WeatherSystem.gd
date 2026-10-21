@@ -73,6 +73,51 @@ func draw(g, player, front):
 	g.setAlphaFunc(0.1)
 
 
+## Bridge (phase 2 step B, docs/ARCHITECTURE.md section 10): draw(g, player,
+## front) without the drawing, for a floor its scene draws (DungeonWeather):
+## the same GL state changes, the same particle state (the front list of the
+## back pass, each particle's cached view values), and the quads it would
+## draw, in eye space (the modelview applied, as GLBackend does): "vertices"
+## (4 per quad), "uvs", "colors" and the render state "state".
+func place_particles(g, player, front) -> Dictionary:
+	if not hasInited:
+		tex = ImageHandler.getTexture(particleTexture).getTexture()
+		hasInited = true
+	g.setBlendFunc(Graphics.GL_ONE)
+	setup(g)
+	tex.bind(g.getGL())
+	var out := {"vertices": PackedVector3Array(), "uvs": PackedVector2Array(),
+		"colors": PackedColorArray(), "state": g.render_state_3d(), "alpha": -1.0}
+	var pdir: int = player.getDirection()
+	var loc = player.getLocation()
+	var moving: bool = player.isMoving()
+	if not front:
+		list.clear()
+		var dir: int = Values.angleToDirection2(player.getDirection())
+		var ps: Array = particlesz if dir == 0 or dir == 2 else particlesx
+		if dir == 1 or dir == 2:
+			var i: int = NR_OF_PARTICLES - 1
+			while i >= 0:
+				if ps[i].place_quad(pdir, loc, moving, false, out):
+					list.append(ps[i])
+				i -= 1
+		elif dir == 0 or dir == 3:
+			for p in ps:
+				if p.place_quad(pdir, loc, moving, false, out):
+					list.append(p)
+	else:
+		for p in list:
+			p.place_quad(pdir, loc, moving, true, out)
+	if out.alpha >= 0.0:
+		var uvs: PackedVector2Array = out.uvs
+		g.glColor4f(1, 1, 1, out.alpha)
+		g.glTexCoord2f(uvs[uvs.size() - 1].x, uvs[uvs.size() - 1].y)
+	out.vertices = g.getModelView() * out.vertices
+	g.setBlendFunc(Graphics.GL_ONE_MINUS_SRC_ALPHA)
+	g.setAlphaFunc(0.1)
+	return out
+
+
 func loop(g, particles, player):
 	list.clear()
 	var pdir: int = player.getDirection()

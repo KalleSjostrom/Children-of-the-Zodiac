@@ -40,6 +40,20 @@ func draw(gl, dir = null):
 	g.setLightEnabled(true)
 
 
+## Bridge (phase 2 step B): draw(g, dir) without the drawing
+## (Inventory.place_view): the particles move (SaveSystem.update) and their
+## quads are placed as draw would draw them (SaveSystem.place_particles),
+## with lighting off meanwhile; "particles" holds them.
+func place_view(g, dir = null):
+	if dir == null:
+		return super.place_view(g)
+	g.setLightEnabled(false)
+	save.update()
+	var particles: Dictionary = save.place_particles(g, dir)
+	g.setLightEnabled(true)
+	return {"visible": true, "particles": particles}
+
+
 func setSettings():
 	scale = BattleValues.CARD_SCALE
 	zOff = 1.99

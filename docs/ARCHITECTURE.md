@@ -33,29 +33,43 @@ scenes/
                           VillageBuilding.gd (resource)
   villages/<Place>/       <Place>.tscn (shared base) + one inherited scene per .vil variant,
                           named after it ("Zazo - 0.tscn"); the stitched background PNG
-  dungeons/<Area>/        <Floor>.tscn
-  dungeon_objects/        Chest.tscn, Door.tscn, HinderDoor.tscn, Lever.tscn, SavePoint.tscn …
+  dungeons/               DungeonScene.tscn + .gd (the layout every floor inherits),
+                          DungeonFloor.gd (@tool, builds the walls), DungeonLayout.gd,
+                          DungeonCell.gd, DungeonStyle.gd (resources), DungeonMaterials.gd,
+                          dungeon_gl.gdshaderinc (decision 2's shader), DungeonWeather.gd
+                          (interim weather), DungeonQuads.gd (records legacy quads)
+  dungeons/<Area>/        <Floor>.tscn, one per .map file ("The Great Mine/Tunnel.tscn")
+  dungeon_objects/        DungeonObject.gd (base) and one scene per object kind:
+                          DungeonChest, DungeonDoor, DungeonHinderDoor, DungeonButton,
+                          DungeonSavePoint, DungeonVillager … (.tscn + .gd each)
   ui/                     Dialog.tscn, SignBox.tscn, menu pages
   debug/                  DebugConsole (built in code, added by Main in debug builds),
                           DebugCommands (registry, completion), GameCommands
 resources/
   sprite_frames/<folder>/<image>.tres          (SpriteFrames per villager image set, generated)
   sprite_frames/<folder>/animobj/<name>.tres   (per animObj series, generated)
-  dungeon_layouts/*.tres      (DungeonLayout, generated)
-  dungeon_styles/*.tres       (textures, materials, light, fog per area)
+  sprite_frames/labyrinth/<folder>/<image>.tres (per dungeon object image series, generated)
+  dungeon_layouts/<Area>--<Floor>.tres   (DungeonLayout, generated)
+  dungeon_styles/<Area>.tres             (DungeonStyle: textures, material, light, fog, sky,
+                                          weather; <Area>--<Floor>.tres for a floor whose look
+                                          differs from the area's)
   difficulty/*.tres           (DifficultyLevel: the balancing of each difficulty level)
   theme/game_theme.tres
 src/                      legacy code (shrinks over time)
 tools/import/             converters and their checks (headless `--script`): vil_to_scene.gd
-                          (+ vil_to_scene.sh), verify_villages.gd, scene_preview.gd (windowed)
-tools/parity/             screenshot comparison (section 7)
+                          (+ vil_to_scene.sh), verify_villages.gd, scene_preview.gd (windowed);
+                          map_to_scene.gd (+ map_to_scene.sh), verify_dungeons.gd,
+                          dungeon_preview.gd (windowed)
+tools/parity/             screenshot comparison (section 7), contact_sheet.gd
 tools/bridge_test/        the phase 0 bridge test scene (dev only)
 ```
 
 New scene types are named for what they are in their subsystem when the
 plain name is taken by a legacy class (`Sign`, `Loot`, `Obstacle`,
 `Building` and `Actor` are legacy `class_name`s): `VillageSign`,
-`VillageLoot`, `VillageBuilding`.
+`VillageLoot`, `VillageBuilding`. The dungeon types are all `Dungeon…`
+(`Chest`, `HinderDoor`, `Riddle` and most other object kinds are legacy
+`class_name`s).
 
 A scene's script lives next to the scene and has the same PascalCase name
 (`scenes/common/Door.tscn` + `scenes/common/Door.gd`, as in the plan and in
@@ -168,6 +182,14 @@ moves legacy drawing, and the legacy fade quad (`GameMode.draw` →
   a mode's `update` can run in a frame without `draw`).
 * `Graphics.copyFrame` (the menu thumbnail) reads the main viewport, so it
   includes `World`.
+* **A 3D scene** under `World` (a converted dungeon floor, section 10)
+  renders in the main viewport with its own camera, below every
+  `CanvasLayer`, so the legacy 2D overlays on `LegacyLayer` stay on top; the
+  canvas transform reset touches only 2D. The frame's legacy 3D drawing
+  that comes before any 2D drawing goes into that scene's 3D world instead
+  of a SubViewport chunk (`GLBackend.scene_3d`, section 10): it shares the
+  depth buffer and the blending with the scene, as it shared one chunk with
+  the legacy walls.
 * The Organizer is unchanged in phase 0: the loading gate, exit-after-fade,
   the suspended stack and the previous/current pair work as before. The
   bridge only adds and removes nodes.
@@ -206,15 +228,19 @@ not rename legacy members to suit new code.
 
 **Legacy → new.** Legacy code calls only small, documented entry points:
 `GameMode.create_scene()`, `scene_root`, `shown_scene()`,
-`Main.is_legacy("<subsystem>")`, `Main.bridge_test`, the snake_case
-methods of the scenes it owns (`VillageScene.load_into`, `show_*`) and the
+`Main.is_legacy("<subsystem>")`, `Main.bridge_test`, `Main.no_encounters`,
+`MapLoader.dungeon_scene_for`, `Graphics.use_scene_3d`, the snake_case
+methods of the scenes it owns (`VillageScene.load_into`, `show_*`;
+`DungeonScene.load_into`, `show_floor`, `show_view`, `show_object` …) and the
 difficulty (`Difficulty.scale_experience`, `scale_enemy_damage`,
 `scale_ally_damage`, `start_with`, `lower_to`; docs/DIFFICULTY.md) and the
 save slots (`SaveSlots`). Keep
 these calls few and obvious; they are the seams that later phases cut
 along. Bridge methods added to legacy classes so that new code can read
 their state are snake_case too (`Sprite.place_view`,
-`Graphics.alpha_threshold`, `Village.update_draw_state`); refactors of a
+`Graphics.alpha_threshold`, `Village.update_draw_state`,
+`Inventory.place_view`, `WeatherSystem.place_particles`,
+`Graphics.render_state_3d`); refactors of a
 legacy method's own code keep Java style (`Village.sortSprites`).
 
 **Flags in legacy code.** A subsystem being converted keeps its old path for
@@ -240,7 +266,8 @@ Game options go after `--` on the command line (see the header of
 | `--fixed-step` | The game advances exactly 1000/60 ms per frame, whatever the real frame time. |
 | `--seed=<n>` | Deterministic run (implies `--fixed-step`): every random generator (`J`, every `JRandom`, Godot's global one) is seeded from `n`; `J.currentTimeMillis()`, `Scheduler` and `GameAction` read a game clock advanced by the elapsed game time instead of the wall clock; saves are read from the shipped files and written to `user://saves_deterministic/` (emptied at start), never to the player's `user://saves/`; no game pad is read (`GameCore.init2`: an idle pad releases AutoPlay's buttons every 40 ms). Two runs of an AutoPlay script then produce the same frames. |
 | `--uncapped` | No 60 FPS cap and no vsync. With `--seed` the result is the same, only faster. |
-| `--legacy=<a,b,…>` | Keep the legacy path of the listed subsystems (`Main.is_legacy`). `all` keeps every one. `villages`: converted places are read from their `.vil` files and drawn by the legacy code (section 9). `village_top_layer`: the scene draws a roof or treetop only where a sprite overlaps it, as the legacy code does (for parity; by default it always draws them). |
+| `--legacy=<a,b,…>` | Keep the legacy path of the listed subsystems (`Main.is_legacy`). `all` keeps every one. `villages`: converted places are read from their `.vil` files and drawn by the legacy code (section 9). `village_top_layer`: the scene draws a roof or treetop only where a sprite overlaps it, as the legacy code does (for parity; by default it always draws them). `dungeons`: converted floors are read from their `.map` files and drawn by the legacy code (section 10). |
+| `--no-encounters` | Dev only: labyrinths start no random battles (`Labyrinth.noEncounters`, which nothing else sets; the steps are still counted), for parity tours of dungeon floors. |
 | `--bridge-test` | Dev only: the world map shows `tools/bridge_test/BridgeTest.tscn` instead of its background tiles (section 8). |
 | `--start-time=<day\|night>` | Dev only: the first place starts at this time of day (its info `time`): villages load their "at Night" variant, which no story reaches for most places. |
 | `--status=<name>:<value>,…` | Dev only: Database statuses set after the save is loaded, before the first mode (`_` stands for a space), e.g. a village status for a story the shipped saves cannot reach. |
@@ -286,8 +313,10 @@ tools/parity/parity.sh ab "--legacy=villages" "" village village_walk
   in a legacy vs. scene comparison only the scene run shows a scene.
 * `ab "<args a>" "<args b>" [case…]` records and compares in one go.
 * AutoPlay's `pos [text]` prints the player's village position, facing and
-  the background scroll (village pixels), for planning routes; it adds its
-  own log lines and leaves the others unchanged. `heading` remembers the
+  the background scroll (village pixels), for planning routes; in a
+  labyrinth the node address, the facing and the camera's location and
+  angle (`node=<a> dir=<d> cam=<x>,<z> angle=<a>`); it adds its own log
+  lines and leaves the others unchanged. `heading` remembers the
   player's facing for the buttons `AHEAD`, `BEHIND`, `ALEFT`, `ARIGHT`, and
   `guard <px>` lets go of a held direction before the player would leave
   the village (its edge, or a hole door that opens that way): together they
@@ -295,6 +324,8 @@ tools/parity/parity.sh ab "--legacy=villages" "" village village_walk
   A shot taken while a cutscene zoom is applied also prints
   `[zoom] <shot> scale=<s>` (not compared): the shots a zoom resamples,
   where the legacy drawing magnifies each 256 px tile on its own.
+* `tools/parity/contact_sheet.gd` puts shots (or `.diff.png` files) side
+  by side in one image, for looking at a set.
 
 Workflow for a change that must not alter the picture:
 
@@ -333,7 +364,13 @@ it uses the world map, which stays legacy until phase 4.1. Freeing needed a
 port fix: `LandscapeLoader` kept its map loader, which refers back to it,
 and that reference cycle kept every world map mode alive after it was left
 (`AirLandscapeLoader` has the same cycle; not fixed, the airship has no
-scene).
+scene). Phase 2 found the same for the labyrinth (its graph, player and
+battle refer back to it: every floor visited stayed in memory, and a
+converted floor's scene with it); `Labyrinth.finishOff` (not when it is
+only suspended for the menu) and the debug console's jump drop those
+references. Main frees, when the game quits, the scenes of modes that are
+not in the tree (suspended or previous), so the renderer reports no leaks.
+Grivera, which the test enters, stays legacy in phase 2.
 
 ## 9. Villages as scenes (phase 1)
 
@@ -463,3 +500,171 @@ draws it; the legacy objects stay in charge.
   differs slightly too; AutoPlay's `[zoom]` lines name these shots.
 * `LegacyParticles2D` draws the quads that the legacy draw would draw, one
   canvas item per legacy system (its blending), until a GPU preset matches.
+
+## 10. Dungeons as scenes (phase 2)
+
+The pilot converted Forest of Reil (Forest Path, Deep Forest) and The Great
+Mine--Tunnel through steps A and B (plan 7.7); the converter and the data
+check pass all 80 `.map` files in a dry run. The `.map` files stay
+(decision 5): the converter, the data check, Load of floors not converted
+and `--legacy=dungeons` read them. How to convert a floor:
+`docs/CONVERTING_DUNGEONS.md`.
+
+**Layout.** Every floor scene, `scenes/dungeons/<Area>/<Floor>.tscn`,
+inherits `scenes/dungeons/DungeonScene.tscn` (root script
+`DungeonScene.gd`):
+
+| Node | Content |
+|---|---|
+| `Layout` | `DungeonFloor` (`@tool`): builds the walls, floors and roofs from its `DungeonLayout` and the style's textures with SurfaceTool, in the editor and at run time; one instance, one surface per material in the legacy display list's order |
+| `Environment` | `WorldEnvironment`: the clear colour background, linear tonemapping, as GLBackend's chunks; no Godot fog or light (the dungeon shader does them) |
+| `Objects` | the `inv` lines in file order, one `DungeonObject` scene per line (`scenes/dungeon_objects/Dungeon<Kind>.tscn`): the order the legacy loader created them in (door indices, links, Database reads) |
+| `Weather` | `DungeonWeather`: the rain or snow, interim |
+| `Rig` / `Camera` | `Camera3D`, fov 45, near 1, far 75, keep height (GLBackend's projection); in the editor at the first door (mark 0) |
+
+The root exports `map_name` (the `.map` name the Database names start
+with), `style`, `steps_to_battle` (min, max), `battle_music`, and the
+mission (`has_mission`, `mission_kind`, `mission_name`, `mission_entries`
+as MapLoader keeps them). Units are the legacy dungeon units: 4 per cell, a
+cell's centre at `DungeonCell.center` (x = address / 16 · 4 + 2, z =
+(address % 16 − 15) · 4 − 2), floors at y −2, roofs at +2.
+
+* `DungeonLayout` (`resources/dungeon_layouts/<Area>--<Floor>.tres`): the
+  `size` and `mapPos` lines, and the cells in the legacy node order (first
+  appearance in the `dir` lines): `DungeonCell` with its address, the
+  neighbour in each direction, the texture slot of each wall (−1: none),
+  the floor and roof slots, the carpet (slot, rotation) and `extra_links`
+  (repeated `dir` lines, which the legacy loader counts as neighbours).
+  These are the values after the whole parse (mapEnd's sort, the `wall`,
+  `floor` and `roof` lines, the pillar walls' slots).
+* `DungeonStyle` (`resources/dungeon_styles/`): the texture slots (names as
+  the `.map` writes them, and the textures), the slot ranges of the five
+  passes, the carpet and pillar flags, light0 and light1, material and
+  invMaterial (parsed, never applied by the legacy code), fog, sky, the
+  enemy colour and the weather flags. Floors of an area share a style where
+  all these agree (`<Area>.tres`: the look most floors of the area have, ties
+  to the first by name); a floor that differs has `<Area>--<Floor>.tres`.
+  Colours and vectors are float32; the `.map` values have at most 4
+  decimals, so `DungeonStyle.legacy_float` reads them back as the float64
+  the legacy loader parsed.
+* Objects: `DungeonObject` (base) exports `kind` (the `.map` command:
+  `door--up` …), `cell`, `facing` (the legacy `Inventory.dir`), `image` and
+  `database_name` (`<map>.<kind><cell>`, lowercase: saves, links across
+  floors, the console and AutoPlay use it); each kind's script exports its
+  legacy constructor's arguments, typed (frames, contents, next places,
+  village start, hinders, dialogs …); doors and hinder doors export their
+  `mark` (door index). A `View` (AnimatedSprite3D with the image series'
+  SpriteFrames, `resources/sprite_frames/labyrinth/`) shows the object in
+  the editor; labels mark kinds, cells and marks.
+
+**Converter** (`tools/import/map_to_scene.gd`, through `map_to_scene.sh`):
+reads each `.map` with a subclass of MapLoader itself (`MapReader`:
+MapLoader parses, the reader records the `inv` lines and their legacy
+objects, the enemy colour and the warnings), so every value is the legacy
+loader's; parses each `inv` line's tokens as `Inventory.createInventory`
+consumes them into the kind's exports; computes the area's shared style
+from all its `.map` files; writes the layout, style, SpriteFrames and the
+inherited scene (bootstrap file, edit state, `unique_id`s removed: as the
+village converter, section 9); sets `detect_3d/compress_to=0` in the used
+textures' `.import` files. Converting twice writes the same files.
+
+**Step A.** `MapLoader._init` asks `dungeon_scene_for(name)` (null with
+`--legacy=dungeons` or for a floor without a scene; the converter's and the
+data check's subclasses override it) and lets the scene fill it
+(`DungeonScene.load_into`): the nodes in the layout's order with their
+links, walls, floors, roofs and carpets; the textures, slot ranges
+(`MapLoader.textureNorm`), settings and values from the style; steps,
+battle music, mission; the static enemy colour when the floor sets one and
+`PillarWalls.node`; then each object's `create_inventory` in file order (the
+same constructor with the same arguments, the same database name and status
+reads). This covers `Labyrinth.init` and Load's saved floor maps (`labmap`).
+`tools/import/verify_dungeons.gd` builds each floor both ways and compares
+everything field by field (also the Graph, the renderer, the weather
+system, the mission and the Database afterwards); `--meshes` also compares
+the walls' mesh with the legacy display list.
+
+**Step B.** `Labyrinth.create_scene()` returns a new instance of the floor's
+scene (null with `--legacy=dungeons`); `Labyrinth.draw` asks for it in the
+floor's first frame (`ensure_scene`), before Main adds it to `World`. Where
+`draw` drew, it now hands the scene what that drawing would have drawn:
+
+* the first frame: `init_scene_3d` instead of `init3D`: the same GL state
+  (lights, material, fog, the clear colour, the textures, and what the
+  display list's compile leaves: current colour, normal, texture coordinate
+  and texture, the enabled caps), the objects' and minimap's set-up; the
+  scene builds the walls in the GL state the list would have been compiled
+  in (`show_floor` → `DungeonFloor.build`). No display list.
+* every frame: `show_scene`: `Graphics.use_scene_3d` (the 3D bridge, below),
+  `show_view` with the legacy modelview (`Camera.lookAt`: the interpolated
+  position and angle, the battle's shake), and `Graph.show_inventory`: each
+  object's draw without the drawing (`place_view`: the same checks and GL
+  state changes; `HinderDoor` reads its status there, a save point moves its
+  particles there), handed to the scene in the legacy draw order. No
+  `Graph.drawInventory`.
+* the weather: `WeatherSystem.place_particles` (draw without the drawing:
+  the same GL state changes, the front list, the particles' cached view
+  values) for the back pass and, unless a battle or riddle runs, the front
+  pass; over a battle the legacy front pass draws (into the scene, after the
+  battle, as before).
+
+Decisions that make the scene draw the legacy pixels to the bit (legacy
+vs. scene on every pilot case: identical, tolerance 0):
+
+* Decision 2: the dungeon shader (`dungeon_gl.gdshaderinc`) is GLBackend's
+  spatial shader with material uniforms; `DungeonMaterials` makes its
+  render-mode variants from GL render states and sets the uniforms from the
+  style as `addLight`, `setMaterial` and `addFog` set the GL state.
+* The camera stays at the origin and `Layout` and `Objects` get the legacy
+  modelview as their transform, as GLBackend draws (its SubViewport camera
+  at the origin, the display list with the modelview): the walls go through
+  Godot's own transform with the same matrices, and the eye-space meshes
+  (the legacy batches, the objects' quads, the weather) need a camera at
+  the origin to be drawn as they are. A camera moving by the inverse view
+  would round both differently. Step C turns this around.
+* The walls are one instance with the display list's surfaces (one instance
+  per surface drew some pixels differently: the order Godot's unstable sort
+  gives equal-depth surfaces then changes).
+* Objects draw the legacy quads: `DungeonQuads` stands in for Graphics in
+  the legacy geometry code (`Inventory._drawQuad`, `LabyrinthNode.drawOneWall`
+  and `drawOneFloor`), records the vertices and passes the state on; their
+  eye-space vertices are drawn at the origin. A hinder door lies in its
+  wall's plane, and which shows is decided by depth rounding: Sprite3D's
+  own vertices lost that z-fight in some turns (the door vanished). The
+  quads are batched as GLBackend batches them (a quad with the previous
+  one's material extends that batch): one instance per object changed some
+  wall pixels by 1/255 (the Tunnel with the "Start" save; the mechanism in
+  the renderer was not found). So at run time the Views only mirror their
+  frame and stay hidden.
+* The weather and the save point's particles are eye-space meshes drawn at
+  the origin, one per pass (and per save point) and frame.
+
+Legacy look reproduced as it is (emulation bugs, not fixed; plan 7.5, 7.7):
+GLBackend multiplies lit vertices by the current glColor (OpenGL 2 ignores
+it without `GL_COLOR_MATERIAL`, which the original never enables). So
+objects are tinted by the minimap arrow's yellow of the previous frame
+(white while a dialog shows), and on a floor with a sky the walls take the
+sky's bottom colour: Deep Forest's walls are drawn at alpha 0.8, bluish, and
+show through each other (`TODO.md`). The sky gradient is a world quad near
+the origin, not the top of the view (the emulated display list does not
+record renderSky's glLoadIdentity). Black streaks show while turning in the
+rain (not explained).
+
+**The 3D bridge.** While a dungeon scene is shown, `GLBackend.scene_3d` (set
+by `Graphics.use_scene_3d`, cleared every frame) makes the frame's first 3D
+chunk, when nothing 2D was drawn before it, a `SceneChunk`: its batches are
+MeshInstance3D children of the scene's `Legacy` node, with GLBackend's
+materials, drawn after the scene's instances (sorting offsets from 1e6). So
+the legacy 3D of a labyrinth frame (a battle, the weather's front pass over
+it, the minimap, drawn with the depth test off) shares the depth buffer and
+the linear blending with the scene, as it shared one SubViewport with the
+walls. Composited as a separate transparent SubViewport it would blend in
+sRGB over the scene (the minimap's disk darker) and the battle would lose
+the walls' depth. Later 3D chunks (after 2D) stay SubViewports.
+
+**Lifetime.** The scene is the Labyrinth's `scene_root` and is freed with
+it; the Labyrinth is freed since phase 2 (section 8).
+
+**Still legacy** in Labyrinth's frame: the minimap (`MapRenderer`, 3D, in
+the scene's chunk), the mission display, dialogs and card info, the top
+layer (tutorials), the fade; battles and riddles (`labDrawable`); the
+weather and save point simulations (GDScript).

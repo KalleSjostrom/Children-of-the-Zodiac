@@ -42,6 +42,11 @@ func draw(gl, dir = null):
 
 
 ## Checks in the database if the boss is alive or not.
+## Bridge (phase 2 step B): a boss draws nothing.
+func place_view(g, dir = null):
+	return {"visible": false}
+
+
 func isAlive():
 	status = Database.getStatusFor(dataBaseName)
 	return status == 1

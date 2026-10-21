@@ -1,0 +1,74 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/Forest of Reil.tres" id="2_ubif6"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/Forest of Reil--Deep Forest.tres" id="3_8cu5p"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonDoor.tscn" id="4_swllw"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonChest.tscn" id="5_b2qws"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/stub.tres" id="6_yjyrh"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/crate.tres" id="7_vkfrk"]
+
+[node name="Deep Forest" instance=ExtResource("1_base")]
+map_name = "Forest of Reil--Deep Forest.map"
+style = ExtResource("2_ubif6")
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+mission_entries = PackedStringArray()
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_8cu5p")
+
+[node name="00 door 7" parent="Objects" index="0" instance=ExtResource("4_swllw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -34)
+open_roads = "dontopen"
+next_places = PackedStringArray("landforest_of_reil--deep_forest-mark0")
+kind = "door"
+cell = 7
+facing = 1
+database_name = "forest of reil--deep forest.mapdoor7"
+
+[node name="01 door 200" parent="Objects" index="1" instance=ExtResource("4_swllw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -30)
+open_roads = "0-3"
+next_places = PackedStringArray("landforest_of_reil--deep_forest-mark1")
+mark = 1
+kind = "door"
+cell = 200
+facing = 3
+database_name = "forest of reil--deep forest.mapdoor200"
+
+[node name="02 chest 206" parent="Objects" index="2" instance=ExtResource("5_b2qws")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -6)
+content_type = 2
+content_name = "cards.support.Fungi"
+content_info = PackedStringArray("1", "false")
+kind = "chest"
+cell = 206
+facing = 2
+image = "Images/stub.png"
+database_name = "forest of reil--deep forest.mapchest206"
+
+[node name="View" parent="Objects/02 chest 206" index="0"]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 1, 0, -1.474, 0)
+sprite_frames = ExtResource("6_yjyrh")
+
+[node name="03 chest 67" parent="Objects" index="3" instance=ExtResource("5_b2qws")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -50)
+frames = 2
+content_type = 2
+content_name = "cards.offense.CrushingSaber"
+content_info = PackedStringArray("1", "false")
+kind = "chest"
+cell = 67
+facing = 1
+image = "Images/crate"
+database_name = "forest of reil--deep forest.mapchest67"
+
+[node name="View" parent="Objects/03 chest 67" index="0"]
+transform = Transform3D(-2.6226832e-10, 0, 1, 0, 0.006, 0, -0.006, 0, -4.371139e-08, 0, -1.547, 0)
+sprite_frames = ExtResource("7_vkfrk")
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2, 0, -34)
+
+[editable path="Objects/02 chest 206"]
+[editable path="Objects/03 chest 67"]

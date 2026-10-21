@@ -159,3 +159,29 @@ story_elder_of_dellna                                   story_tour --load="Slot 
 story_ending_part3                                      story_tour --load="Slot 1" --start="Ending - Part 3"
 story_prolog                                            story_prolog --load=Start --start=Prolog
 story_circle                                             story_circle --load="Start demon2" --start="Encounter With an Ally"
+# Phase 2 pilot: dungeons as scenes (Forest of Reil: Forest Path and Deep
+# Forest; The Great Mine--Tunnel), group dungeon_*. --start=<Area>--<Floor>-mark<n>
+# starts at the n-th door or hinder door of the .map file (main.bank, mode 4);
+# --no-encounters (dev, src/main/Main.gd) switches random battles off for the
+# walks, battles have cases of their own (battle: Forest Path in the rain;
+# dungeon_tunnel_battle: no weather). Tours (script dungeon_tour, one for every
+# floor: steps and turns both ways, the minimap, the menu thumbnail) with both
+# saves: "Slot 1" has used every object of these floors (Tunnel: levers on,
+# chests open, the miner rescued; Forest Path's hinder door locked, Deep
+# Forest's chests open), "Start" none (only the Tunnel's hinder door 53 open).
+# No world map node leads to Forest Path (only the opening story,
+# newgame_to_forest); the world map enters the Forest of Reil at Deep Forest.
+dungeon_tour_forest_path        dungeon_tour --load="Slot 1" --start="Forest of Reil--Forest Path-mark0" --no-encounters
+dungeon_tour_forest_path_start  dungeon_tour --load=Start --start="Forest of Reil--Forest Path-mark0" --no-encounters
+dungeon_tour_deep_forest        dungeon_tour --load="Slot 1" --start="Forest of Reil--Deep Forest-mark0" --no-encounters
+dungeon_tour_deep_forest_start  dungeon_tour --load=Start --start="Forest of Reil--Deep Forest-mark0" --no-encounters
+dungeon_tour_tunnel             dungeon_tour --load="Slot 1" --start="The Great Mine--Tunnel-mark0" --no-encounters
+dungeon_tour_tunnel_start       dungeon_tour --load=Start --start="The Great Mine--Tunnel-mark0" --no-encounters
+dungeon_forest_path             dungeon_forest_path --load="Slot 1" --start="Forest of Reil--Forest Path-mark0" --no-encounters
+dungeon_deep_forest_chest       dungeon_deep_forest_chest --load=Start --start="Forest of Reil--Deep Forest-mark0" --no-encounters
+dungeon_deep_forest_exit        dungeon_deep_forest_exit --load="Slot 1" --start="Forest of Reil--Deep Forest-mark0" --no-encounters
+dungeon_tunnel_villager         dungeon_tunnel_villager --load=Start --start="The Great Mine--Tunnel-mark3" --no-encounters
+dungeon_tunnel_button           dungeon_tunnel_button --load=Start --start="The Great Mine--Tunnel-mark0" --no-encounters
+dungeon_tunnel_battle           battle --load="Slot 1" --start="The Great Mine--Tunnel-mark0"
+dungeon_map_page                dungeon_map_page --load="Slot 1" --start="Forest of Reil--Forest Path-mark0" --no-encounters
+dungeon_world_map_entry         dungeon_world_map_entry --load="Slot 1" --start="landForest_of_Reil--Deep_Forest-mark0"

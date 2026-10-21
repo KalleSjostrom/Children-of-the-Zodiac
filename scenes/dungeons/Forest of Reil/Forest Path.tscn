@@ -1,0 +1,56 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/Forest of Reil--Forest Path.tres" id="2_yhm87"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/Forest of Reil--Forest Path.tres" id="3_e4d4d"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonHinderDoor.tscn" id="4_uldn6"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Walls/forestdoor.tres" id="5_1fdu5"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonDoor.tscn" id="6_0jof4"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonSavePoint.tscn" id="7_y7vrb"]
+
+[node name="Forest Path" instance=ExtResource("1_base")]
+map_name = "Forest of Reil--Forest Path.map"
+style = ExtResource("2_yhm87")
+steps_to_battle = Vector2i(5, 6)
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+mission_entries = PackedStringArray()
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_e4d4d")
+
+[node name="00 hinderDoor 111" parent="Objects" index="0" instance=ExtResource("4_uldn6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -2)
+next_place = "_"
+kind = "hinderDoor"
+cell = 111
+image = "Walls/forestdoor"
+database_name = "forest of reil--forest path.maphinderdoor111"
+
+[node name="View" parent="Objects/00 hinderDoor 111" index="0"]
+transform = Transform3D(-0.0078125, 0, -8.742278e-08, 0, 0.0078125, 0, 6.8299044e-10, 0, -1, 0, 0, 2)
+flip_h = true
+sprite_frames = ExtResource("5_1fdu5")
+frame = 1
+
+[node name="01 door 10" parent="Objects" index="1" instance=ExtResource("6_0jof4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -22)
+open_roads = "dontopen"
+next_places = PackedStringArray("land::continue::forest_of_reil--deep_forest-mark0")
+mark = 1
+kind = "door"
+cell = 10
+facing = 1
+database_name = "forest of reil--forest path.mapdoor10"
+
+[node name="02 save 124" parent="Objects" index="2" instance=ExtResource("7_y7vrb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -14)
+kind = "save"
+cell = 124
+facing = 1
+image = "-1"
+database_name = "forest of reil--forest path.mapsave124"
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -2)
+
+[editable path="Objects/00 hinderDoor 111"]

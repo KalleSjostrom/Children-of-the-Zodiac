@@ -30,6 +30,16 @@ func draw(gl, dir = null):
 	g.end()
 
 
+## Bridge (phase 2 step B): draw without the drawing (Inventory.place_view):
+## the image of its status, drawn as its node's floor.
+func place_view(g, dir = null):
+	texture[status].bind(g)
+	var state: Dictionary = g.render_state_3d()
+	var quads := DungeonQuads.new(g)
+	node.drawOneFloor(quads)
+	return {"visible": true, "frame": status, "state": state, "quad": quads.eye_space()}
+
+
 func arrive(labyrinth):
 	if status == 0:
 		SoundPlayer.playSound(SoundMap.LABYRINTH_SECRET)

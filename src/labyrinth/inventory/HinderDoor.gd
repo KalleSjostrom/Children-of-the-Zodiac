@@ -53,6 +53,18 @@ func draw(gl, dir = null):
 	g.end()
 
 
+## Bridge (phase 2 step B): draw without the drawing (Inventory.place_view):
+## it reads its status (checkIfOpen) and binds the open or the locked image,
+## drawn as its node's wall; "frame" is 0 when open, 1 when locked.
+func place_view(g, dir = null):
+	var tex: int = 0 if checkIfOpen() else 1
+	texture[tex].bind(g)
+	var state: Dictionary = g.render_state_3d()
+	var quads := DungeonQuads.new(g)
+	node.drawOneWall(quads, self.dir, false)
+	return {"visible": true, "frame": tex, "state": state, "quad": quads.eye_space()}
+
+
 func setSettings():
 	scale = BattleValues.CARD_SCALE
 

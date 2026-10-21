@@ -1,0 +1,1 @@
+I battled against the first boss, died and retried without restarting the game and beat the boss in a single round. Did it have the old hp?

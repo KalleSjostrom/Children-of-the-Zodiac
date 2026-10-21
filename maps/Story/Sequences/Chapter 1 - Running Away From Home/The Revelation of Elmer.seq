@@ -235,7 +235,7 @@ dialogsingle starttimea=500 duration=2600 <= name="Celis" text="Oh, it's nothing
 ins timea=500 index=celis kind=dist distance=80 duration=5700 direction=2
 
 ins timea=1700 index=kin kind=dist distance=10 duration=700 direction=3 facedirection=1
-dialogsingle starttimea=500 duration=1300 <= name="Kin" text="Hmm.. Yeah, how do you reckon we get it?";"(She's hiding something..)"
+dialogsingle starttimea=500 duration=1300 <= name="Kin" text="Hmm.. Yeah, how do you reckon we get it?";""
 ins timea=1200 index=kin kind=stop direction=2
 
 ins timea=2000 index=celis kind=stop direction=0

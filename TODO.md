@@ -49,7 +49,6 @@ Weird looking characters
 ## Bugs
 Clicking one extra comfirm (X button) when you meet the gravera boss - guess the dialoge isn't showing/exiting too soon?
 
-
 Use explicit types more
 
 ## Thoughts
@@ -76,13 +75,7 @@ Save particles renderd above enemy in battle looking towards the save - not agai
 
 Zombies should be weak against fire
 
-Missed earth magic shouldn't shake the enemy    
-
-Why do we have slow all when there is only one enemy???
-
 Entering the map with one click takes two to get out
-
-Wth! I beat the boss in like a single round! Did it have the old hp still? I died and retried without a restart
 
 Boss scales ability causes slowdown
 
@@ -94,15 +87,9 @@ Remove "She is hiding something" from the cutscene
 
 You have to speak to Uri makes no sense to get the pass
 
-Make the speach bubbles like explemaian point more in line with artstile
+Make the speach bubbles like exclamation point more in line with artstyle
 
 Repetative villager movement in Zazo
-
-You can interact with a door from too far
-
-Returning from the mines to Zazo, seemed to play a cutscene with Teo, but it ended after a few seconds
-
-New weapon not equipped properly?? Requirs a restart
 
 Auto select dead character with resurrect?
 

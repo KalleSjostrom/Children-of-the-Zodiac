@@ -1,0 +1,103 @@
+# --load="Slot 1" --start="Forest of Reil--Forest Path-mark0" --no-encounters:
+# what the tour does not show of Forest Path (rain, fog, a sky, one save point,
+# one hinder door). mark0 is the hinder door at node 111 (door index 0), the
+# player faces away from it (DOWN, node 110).
+#
+# The hinder door (locked in "Slot 1"): turn around, CROSS shows "The door
+# is locked!", CROSS closes it (the second CROSS activates the door again,
+# which only toggles its dialog flag).
+wait 3000
+shot f01_start
+pos start
+tap RIGHT
+wait 700
+tap RIGHT
+wait 250
+shot f02_turning
+wait 450
+pos facing_door
+shot f03_hinder_door
+tap CROSS
+wait 700
+shot f04_locked
+log locked
+tap CROSS
+wait 700
+shot f05_closed
+# Back down the corridor in the rain: three steps to node 108, shots in the
+# middle of a step and standing.
+tap RIGHT
+wait 700
+tap RIGHT
+wait 700
+tap UP
+wait 250
+shot f06_walk_mid
+wait 450
+tap UP
+wait 700
+tap UP
+wait 700
+pos at_108
+shot f07_rain
+# The save point (node 124, LEFT of 108): turn right and step onto it. Its
+# dialog ("Your hp is restored ...") and particles; CROSS closes the dialog.
+tap RIGHT
+wait 700
+tap UP
+wait 250
+shot f08_to_save_mid
+wait 750
+shot f09_save_dialog
+pos at_save
+log save_dialog
+tap CROSS
+wait 700
+shot f10_save_particles
+wait 1000
+shot f11_save_particles_later
+tap LEFT
+wait 250
+shot f12_save_turn_mid
+wait 450
+shot f13_save_left
+tap LEFT
+wait 700
+shot f14_save_back
+# Walk the long corridor in the rain: back to 108, down to 106, then RIGHT
+# six nodes to the door at node 10 (not entered).
+tap UP
+wait 700
+tap RIGHT
+wait 700
+tap UP
+wait 700
+tap UP
+wait 700
+tap LEFT
+wait 700
+pos corridor
+shot f15_corridor
+tap UP
+wait 200
+shot f16_corridor_mid1
+wait 500
+tap UP
+wait 400
+shot f17_corridor_mid2
+wait 300
+tap UP
+wait 700
+tap UP
+wait 700
+shot f18_corridor_far
+tap UP
+wait 700
+tap UP
+wait 700
+pos at_door
+shot f19_door
+wait 1500
+shot f20_door_later
+log end
+quit

@@ -26,6 +26,8 @@ extends Node
 ##   --uncapped          no frame rate cap or vsync (fast parity runs; with --seed)
 ##   --legacy=<a,b,...>  keep the legacy path of these subsystems (is_legacy)
 ##   --bridge-test       the world map shows tools/bridge_test/BridgeTest.tscn (dev only)
+##   --no-encounters     dev only: no random battles in labyrinths (Labyrinth.noEncounters;
+##                       steps are still counted), for parity tours of dungeon floors
 ##
 ## In debug builds the developer console (scenes/debug/DebugConsole.gd)
 ## opens with the key under Escape or F1; it replaces the Cheater.
@@ -33,6 +35,8 @@ extends Node
 static var instance: Main
 ## --bridge-test: Landscape.create_scene returns the bridge test scene.
 static var bridge_test := false
+## --no-encounters: labyrinths start no random battles (Labyrinth.init).
+static var no_encounters := false
 static var _legacy: PackedStringArray = []
 
 ## The current game mode's scene goes here (see _sync_world).
@@ -74,6 +78,7 @@ func _ready() -> void:
 	if _args.has("legacy"):
 		_legacy = String(_args["legacy"]).split(",", false)
 	bridge_test = _args.has("bridge-test")
+	no_encounters = _args.has("no-encounters")
 
 	audio = Node.new()
 	audio.name = "Audio"
@@ -257,3 +262,13 @@ func _notification(what: int) -> void:
 func _exit_tree() -> void:
 	if backend != null:
 		backend.free_all()
+	# The scenes of modes that are not shown (suspended for the menu, or the
+	# previous mode) are not in the tree: free them, and the dungeon
+	# materials, before the renderer shuts down (it reports them otherwise).
+	if organizer != null:
+		var modes: Array = [organizer.currentGameMode, organizer.previousGameMode]
+		modes.append_array(organizer.suspendedGameModes.queue)
+		for m in modes:
+			if m != null and is_instance_valid(m.scene_root) and not m.scene_root.is_inside_tree():
+				m.scene_root.free()
+	DungeonMaterials.clear_cache()

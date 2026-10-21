@@ -49,6 +49,41 @@ func loopBackwards(g, particles, dir):
 	for i in range(NR_OF_PARTICLES - 1, -1, -1):
 		particles[i].drawParticle(g, dir)
 
+## Bridge (phase 2 step B, docs/ARCHITECTURE.md section 10): draw(g, dir)
+## without the drawing: the same GL state changes, and the quads it would
+## draw, in eye space (the modelview applied, as GLBackend does): "vertices"
+## (4 per quad), "uvs", "colors" and the render state "state".
+func place_particles(g, dir) -> Dictionary:
+	if not hasInited:
+		tex = ImageHandler.getTexture(particleTexture).getTexture()
+		hasInited = true
+	g.setBlendFunc(Graphics.GL_ONE)
+	g.setAlphaTestEnabled(true)
+	g.setAlphaFunc(0)
+	tex.bind(g.getGL())
+	var out := {"vertices": PackedVector3Array(), "uvs": PackedVector2Array(),
+		"colors": PackedColorArray(), "state": g.render_state_3d()}
+	if dir > -135 and dir < -45: # 0
+		for p in particlesz:
+			p.place_quad(g, 0, out)
+	elif dir > -45 and dir < 45: # 1
+		for i in range(NR_OF_PARTICLES - 1, -1, -1):
+			particlesx[i].place_quad(g, 1, out)
+	elif dir > 45 and dir < 135:
+		for i in range(NR_OF_PARTICLES - 1, -1, -1):
+			particlesz[i].place_quad(g, 2, out)
+	elif dir > 135 or dir < -135: # 3
+		for p in particlesx:
+			p.place_quad(g, 3, out)
+	var uvs: PackedVector2Array = out.uvs
+	if not uvs.is_empty():
+		g.glTexCoord2f(uvs[uvs.size() - 1].x, uvs[uvs.size() - 1].y)
+	out.vertices = g.getModelView() * out.vertices
+	g.setBlendFunc(Graphics.GL_ONE_MINUS_SRC_ALPHA)
+	g.setAlphaFunc(0.1)
+	return out
+
+
 func draw(g, dir):
 	if not hasInited:
 		tex = ImageHandler.getTexture(particleTexture).getTexture()

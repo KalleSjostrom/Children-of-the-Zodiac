@@ -1,0 +1,162 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/The Great Mine.tres" id="2_pba42"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/The Great Mine--Tunnel.tres" id="3_xpjcs"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonHinderDoor.tscn" id="4_bdlx2"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Walls/minecavedoorbig.tres" id="5_udisj"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Walls/minecavedoor.tres" id="6_rbj08"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonDoor.tscn" id="7_ixsng"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonButton.tscn" id="8_yte0l"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/lever.tres" id="9_f0sre"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonChest.tscn" id="10_6yp3g"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/chest.tres" id="11_4p3js"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonVillager.tscn" id="12_tkft8"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/minerchristoffer.tres" id="13_fnovu"]
+
+[node name="Tunnel" instance=ExtResource("1_base")]
+map_name = "The Great Mine--Tunnel.map"
+style = ExtResource("2_pba42")
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+has_mission = true
+mission_kind = "VillagerMission"
+mission_name = "greatminemission"
+mission_entries = PackedStringArray("trigger&&zazo&&2", "trigger&&zazonode&&2", "dialog&&Celis&&Seems that no more workers are here.&&Let\'s head back to Zazo!", "extranext&&2&&After a Hard Days Work")
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_xpjcs")
+
+[node name="00 hinderDoor 7" parent="Objects" index="0" instance=ExtResource("4_bdlx2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -34)
+next_place = "the_great_mine--the_hall-mark3"
+kind = "hinderDoor"
+cell = 7
+facing = 1
+image = "Walls/minecavedoorbig"
+database_name = "the great mine--tunnel.maphinderdoor7"
+
+[node name="View" parent="Objects/00 hinderDoor 7" index="0"]
+transform = Transform3D(-3.4149522e-10, 0, 1, 0, 0.0078125, 0, -0.0078125, 0, -4.371139e-08, -2, 0, 0)
+sprite_frames = ExtResource("5_udisj")
+frame = 1
+
+[node name="01 hinderDoor 51" parent="Objects" index="1" instance=ExtResource("4_bdlx2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -50)
+next_place = "the_great_mine--mine_shaft-mark0"
+mark = 1
+kind = "hinderDoor"
+cell = 51
+facing = 2
+image = "Walls/minecavedoorbig"
+database_name = "the great mine--tunnel.maphinderdoor51"
+
+[node name="View" parent="Objects/01 hinderDoor 51" index="0"]
+transform = Transform3D(0.0078125, 0, 0, 0, 0.0078125, 0, 0, 0, 1, 0, 0, -2)
+sprite_frames = ExtResource("5_udisj")
+frame = 1
+
+[node name="02 hinderDoor 53" parent="Objects" index="2" instance=ExtResource("4_bdlx2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -42)
+next_place = "the_great_mine--tunnel-mark3"
+mark = 2
+kind = "hinderDoor"
+cell = 53
+facing = 1
+image = "Walls/minecavedoor"
+database_name = "the great mine--tunnel.maphinderdoor53"
+
+[node name="View" parent="Objects/02 hinderDoor 53" index="0"]
+transform = Transform3D(-3.4149522e-10, 0, 1, 0, 0.0078125, 0, -0.0078125, 0, -4.371139e-08, -2, 0, 0)
+sprite_frames = ExtResource("6_rbj08")
+frame = 1
+
+[node name="03 door 37" parent="Objects" index="3" instance=ExtResource("7_ixsng")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -42)
+open_roads = "dontopen"
+next_places = PackedStringArray("the_great_mine--tunnel-mark2")
+mark = 3
+kind = "door"
+cell = 37
+facing = 3
+database_name = "the great mine--tunnel.mapdoor37"
+
+[node name="04 button 25" parent="Objects" index="4" instance=ExtResource("8_yte0l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -26)
+frames = 7
+hinders = PackedStringArray("The_Great_Mine--Tunnel.maphinderDoor51", "The_Great_Mine--Mine_Shaft.maphinderDoor63", "The_Great_Mine--Mine_Shaft.mapbutton93")
+kind = "button"
+cell = 25
+facing = 2
+image = "Images/lever"
+database_name = "the great mine--tunnel.mapbutton25"
+
+[node name="View" parent="Objects/04 button 25" index="0"]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 1, 0, -1.125, -1)
+sprite_frames = ExtResource("9_f0sre")
+
+[node name="05 button 29" parent="Objects" index="5" instance=ExtResource("8_yte0l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -10)
+frames = 7
+hinders = PackedStringArray("The_Great_Mine--Tunnel.maphinderDoor7", "The_Great_Mine--The_Hall.maphinderDoor199", "The_Great_Mine--The_Hall.mapbutton72")
+kind = "button"
+cell = 29
+image = "Images/lever"
+database_name = "the great mine--tunnel.mapbutton29"
+
+[node name="View" parent="Objects/05 button 29" index="0"]
+transform = Transform3D(-0.01, 0, -8.742278e-08, 0, 0.01, 0, 8.7422775e-10, 0, -1, 0, -1.125, 1)
+sprite_frames = ExtResource("9_f0sre")
+
+[node name="06 chest 87" parent="Objects" index="6" instance=ExtResource("10_6yp3g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -34)
+frames = 2
+content_name = "200"
+content_info = PackedStringArray()
+kind = "chest"
+cell = 87
+facing = 2
+image = "Images/chest"
+database_name = "the great mine--tunnel.mapchest87"
+
+[node name="View" parent="Objects/06 chest 87" index="0"]
+transform = Transform3D(0.007, 0, 0, 0, 0.007, 0, 0, 0, 1, 0, -1.2825, 0)
+sprite_frames = ExtResource("11_4p3js")
+
+[node name="07 chest 93" parent="Objects" index="7" instance=ExtResource("10_6yp3g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -10)
+frames = 2
+content_name = "50"
+content_info = PackedStringArray()
+kind = "chest"
+cell = 93
+image = "Images/chest"
+database_name = "the great mine--tunnel.mapchest93"
+
+[node name="View" parent="Objects/07 chest 93" index="0"]
+transform = Transform3D(-0.007, 0, -8.742278e-08, 0, 0.007, 0, 6.119594e-10, 0, -1, 0, -1.2825, 0)
+sprite_frames = ExtResource("11_4p3js")
+
+[node name="08 villager 21" parent="Objects" index="8" instance=ExtResource("12_tkft8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -42)
+dialogs = Array[PackedStringArray]([PackedStringArray("Villager", "Are you here to save me?!", ""), PackedStringArray("Villager", "Please let me follow you out!", "")])
+kind = "villager"
+cell = 21
+facing = 1
+image = "Images/minerchristoffer.png"
+database_name = "the great mine--tunnel.mapvillager21"
+
+[node name="View" parent="Objects/08 villager 21" index="0"]
+transform = Transform3D(-2.0981468e-10, 0, 1, 0, 0.0048, 0, -0.0048, 0, -4.371139e-08, 0, -0.6344, 0)
+sprite_frames = ExtResource("13_fnovu")
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2, 0, -34)
+
+[editable path="Objects/00 hinderDoor 7"]
+[editable path="Objects/01 hinderDoor 51"]
+[editable path="Objects/02 hinderDoor 53"]
+[editable path="Objects/04 button 25"]
+[editable path="Objects/05 button 29"]
+[editable path="Objects/06 chest 87"]
+[editable path="Objects/07 chest 93"]
+[editable path="Objects/08 villager 21"]
