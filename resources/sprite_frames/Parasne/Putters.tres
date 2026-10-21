@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Putters/Putters9.png" id="1_ix5t7"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Putters/Putters10.png" id="2_81ru5"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Putters/Putters11.png" id="3_2febc"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Putters/Putters12.png" id="4_vlke8"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Putters/Putters13.png" id="5_lrw73"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Putters/Putters14.png" id="6_qgtj2"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Putters/Putters15.png" id="7_e5k6j"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Putters/Putters16.png" id="8_mjx73"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Putters/Putters5.png" id="9_wrymk"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Putters/Putters6.png" id="10_c2rsl"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Putters/Putters7.png" id="11_lghim"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Putters/Putters8.png" id="12_u7inl"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Putters/Putters1.png" id="13_uqluv"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Putters/Putters2.png" id="14_7xt8v"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Putters/Putters3.png" id="15_nlfyr"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Putters/Putters4.png" id="16_s6qvq"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ix5t7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_81ru5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2febc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_vlke8")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_lrw73")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_qgtj2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_e5k6j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_mjx73")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_wrymk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_c2rsl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_lghim")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_u7inl")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_uqluv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_7xt8v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_nlfyr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_s6qvq")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

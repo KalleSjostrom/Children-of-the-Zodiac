@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Uli/Uli9.png" id="1_svdlo"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Uli/Uli10.png" id="2_bqy7e"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Uli/Uli11.png" id="3_rr3ed"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Uli/Uli12.png" id="4_cnqtu"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Uli/Uli13.png" id="5_rxopw"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Uli/Uli14.png" id="6_8wrsb"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Uli/Uli15.png" id="7_t587f"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Uli/Uli16.png" id="8_ynyk3"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Uli/Uli5.png" id="9_ib645"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Uli/Uli6.png" id="10_y2jim"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Uli/Uli7.png" id="11_cqbuh"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Uli/Uli8.png" id="12_70x6f"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Uli/Uli1.png" id="13_6co0h"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Uli/Uli2.png" id="14_7deai"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Uli/Uli3.png" id="15_exidw"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Uli/Uli4.png" id="16_wxf7d"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_svdlo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_bqy7e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_rr3ed")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_cnqtu")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_rxopw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_8wrsb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_t587f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ynyk3")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_ib645")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_y2jim")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_cqbuh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_70x6f")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_6co0h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_7deai")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_exidw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_wxf7d")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

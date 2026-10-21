@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Alaressolider/Alaressolider9.png" id="1_jm2p1"]
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Alaressolider/Alaressolider10.png" id="2_tstaw"]
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Alaressolider/Alaressolider11.png" id="3_okdw7"]
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Alaressolider/Alaressolider12.png" id="4_5ubk7"]
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Alaressolider/Alaressolider13.png" id="5_oukcc"]
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Alaressolider/Alaressolider14.png" id="6_ofhmd"]
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Alaressolider/Alaressolider15.png" id="7_wvdwl"]
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Alaressolider/Alaressolider16.png" id="8_atpy7"]
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Alaressolider/Alaressolider5.png" id="9_45xw6"]
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Alaressolider/Alaressolider6.png" id="10_tmv5n"]
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Alaressolider/Alaressolider7.png" id="11_vh3qj"]
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Alaressolider/Alaressolider8.png" id="12_rt4wk"]
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Alaressolider/Alaressolider1.png" id="13_m4hsc"]
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Alaressolider/Alaressolider2.png" id="14_31gnr"]
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Alaressolider/Alaressolider3.png" id="15_jvg2c"]
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Alaressolider/Alaressolider4.png" id="16_t32oo"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_jm2p1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_tstaw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_okdw7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_5ubk7")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_oukcc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ofhmd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_wvdwl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_atpy7")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_45xw6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_tmv5n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_vh3qj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_rt4wk")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_m4hsc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_31gnr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_jvg2c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_t32oo")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

@@ -1,0 +1,27 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Zazo - Tent/Zazo - Tent.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/ActorView.tscn" id="2_3vv26"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Zazo - Tent/Shaun.tres" id="3_b5c0k"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="4_owo7t"]
+
+[node name="Zazo - Tent - 0" instance=ExtResource("1_base")]
+
+[node name="00 Shaun" parent="Actors" index="0" instance=ExtResource("2_3vv26")]
+position = Vector2(540, 345)
+sprite_frames = ExtResource("3_b5c0k")
+animation = &"left"
+role = 1
+villager_name = "Shaun"
+statuses = PackedInt32Array(2)
+villager_folder = "Zazo - Tent"
+
+[node name="00 Zazo" parent="Doors" index="0" instance=ExtResource("4_owo7t")]
+position = Vector2(494, 440)
+hole = true
+kinds = PackedStringArray("switch")
+targets = PackedStringArray("Zazo")
+directions = PackedInt32Array(2)
+fade = 1
+to_pos = PackedFloat64Array(706, 308, 2, -1)
+sign_lines = PackedStringArray()

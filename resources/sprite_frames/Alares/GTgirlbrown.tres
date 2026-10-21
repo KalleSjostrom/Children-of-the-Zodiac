@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTgirlbrown/GTgirlbrown9.png" id="1_vvrnu"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTgirlbrown/GTgirlbrown10.png" id="2_kkevr"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTgirlbrown/GTgirlbrown11.png" id="3_hml5x"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTgirlbrown/GTgirlbrown12.png" id="4_ik7p5"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTgirlbrown/GTgirlbrown13.png" id="5_0jcbd"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTgirlbrown/GTgirlbrown14.png" id="6_p2ccj"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTgirlbrown/GTgirlbrown15.png" id="7_nt6ah"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTgirlbrown/GTgirlbrown16.png" id="8_ttwd5"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTgirlbrown/GTgirlbrown5.png" id="9_ux4ww"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTgirlbrown/GTgirlbrown6.png" id="10_uu4ts"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTgirlbrown/GTgirlbrown7.png" id="11_tvide"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTgirlbrown/GTgirlbrown8.png" id="12_scbnf"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTgirlbrown/GTgirlbrown1.png" id="13_mjp6f"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTgirlbrown/GTgirlbrown2.png" id="14_1pach"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTgirlbrown/GTgirlbrown3.png" id="15_wxv2r"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTgirlbrown/GTgirlbrown4.png" id="16_6xijf"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_vvrnu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_kkevr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_hml5x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ik7p5")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_0jcbd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_p2ccj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_nt6ah")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ttwd5")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_ux4ww")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_uu4ts")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_tvide")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_scbnf")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_mjp6f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_1pach")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_wxv2r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_6xijf")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

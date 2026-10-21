@@ -1,0 +1,27 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Pensara - The Trade District - Tent/Pensara - The Trade District - Tent.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/ActorView.tscn" id="2_tno7g"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The Trade District - Tent/Merchant Tord.tres" id="3_nj71d"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="4_25kuv"]
+
+[node name="Pensara - The Trade District - Tent - 0" instance=ExtResource("1_base")]
+
+[node name="00 Tord" parent="Actors" index="0" instance=ExtResource("2_tno7g")]
+position = Vector2(535, 330)
+sprite_frames = ExtResource("3_nj71d")
+animation = &"down"
+role = 1
+villager_name = "Tord"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The Trade District - Tent"
+
+[node name="00 Pensara_-_The_Trade_District" parent="Doors" index="0" instance=ExtResource("4_25kuv")]
+position = Vector2(494, 445)
+hole = true
+kinds = PackedStringArray("switch")
+targets = PackedStringArray("Pensara_-_The_Trade_District")
+directions = PackedInt32Array(2)
+fade = 1
+to_pos = PackedFloat64Array(970, 2083, 2, -1)
+sign_lines = PackedStringArray()

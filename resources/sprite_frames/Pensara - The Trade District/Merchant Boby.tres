@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Boby/Merchant Boby9.png" id="1_a2s5c"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Boby/Merchant Boby10.png" id="2_kkxof"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Boby/Merchant Boby11.png" id="3_l6pb8"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Boby/Merchant Boby12.png" id="4_kh81d"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Boby/Merchant Boby13.png" id="5_gex7p"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Boby/Merchant Boby14.png" id="6_3j7hw"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Boby/Merchant Boby15.png" id="7_agkdx"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Boby/Merchant Boby16.png" id="8_5coey"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Boby/Merchant Boby5.png" id="9_o83b8"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Boby/Merchant Boby6.png" id="10_fneh1"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Boby/Merchant Boby7.png" id="11_73fud"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Boby/Merchant Boby8.png" id="12_v4e3k"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Boby/Merchant Boby1.png" id="13_v45ru"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Boby/Merchant Boby2.png" id="14_u2y1d"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Boby/Merchant Boby3.png" id="15_bim85"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Boby/Merchant Boby4.png" id="16_lrfwv"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_a2s5c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_kkxof")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_l6pb8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_kh81d")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_gex7p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_3j7hw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_agkdx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_5coey")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_o83b8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_fneh1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_73fud")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_v4e3k")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_v45ru")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_u2y1d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_bim85")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_lrfwv")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

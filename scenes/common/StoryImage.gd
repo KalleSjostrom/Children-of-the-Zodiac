@@ -11,9 +11,10 @@ extends Sprite2D
 
 
 ## Shows texture with its top-left corner at at (village pixels), scaled by
-## image_scale.
-func show_image(texture: Texture2D, at: Vector2i, image_scale: float) -> void:
+## image_scale (per axis: the legacy drawing truncates the scaled size to
+## whole pixels).
+func show_image(texture: Texture2D, at: Vector2i, image_scale: Vector2) -> void:
 	self.texture = texture
 	position = Vector2(at)
-	scale = Vector2(image_scale, image_scale)
+	scale = image_scale
 	visible = texture != null

@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/Marge/Marge9.png" id="1_s3yd3"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/Marge/Marge10.png" id="2_7ex7w"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/Marge/Marge11.png" id="3_wsjbd"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/Marge/Marge12.png" id="4_3psb5"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/Marge/Marge13.png" id="5_0qorh"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/Marge/Marge14.png" id="6_rdtma"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/Marge/Marge15.png" id="7_h7e3r"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/Marge/Marge16.png" id="8_fwcvg"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/Marge/Marge5.png" id="9_uwmov"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/Marge/Marge6.png" id="10_37ny2"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/Marge/Marge7.png" id="11_gm6mt"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/Marge/Marge8.png" id="12_khuhu"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/Marge/Marge1.png" id="13_tqg1k"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/Marge/Marge2.png" id="14_1yx2i"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/Marge/Marge3.png" id="15_bddfx"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/Marge/Marge4.png" id="16_0t7ns"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_s3yd3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_7ex7w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wsjbd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_3psb5")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_0qorh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_rdtma")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_h7e3r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_fwcvg")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_uwmov")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_37ny2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_gm6mt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_khuhu")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_tqg1k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_1yx2i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_bddfx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_0t7ns")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

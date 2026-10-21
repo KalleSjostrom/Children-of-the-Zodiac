@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Belmet's House/villagers/BTScientist/BTScientist9.png" id="1_wo7wo"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Belmet's House/villagers/BTScientist/BTScientist10.png" id="2_r38ya"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Belmet's House/villagers/BTScientist/BTScientist11.png" id="3_i20oy"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Belmet's House/villagers/BTScientist/BTScientist12.png" id="4_aejqo"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Belmet's House/villagers/BTScientist/BTScientist13.png" id="5_707qg"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Belmet's House/villagers/BTScientist/BTScientist14.png" id="6_lqhwb"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Belmet's House/villagers/BTScientist/BTScientist15.png" id="7_sd6vc"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Belmet's House/villagers/BTScientist/BTScientist16.png" id="8_8er6u"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Belmet's House/villagers/BTScientist/BTScientist5.png" id="9_wlw4a"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Belmet's House/villagers/BTScientist/BTScientist6.png" id="10_k1nf8"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Belmet's House/villagers/BTScientist/BTScientist7.png" id="11_2b04s"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Belmet's House/villagers/BTScientist/BTScientist8.png" id="12_7lt6x"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Belmet's House/villagers/BTScientist/BTScientist1.png" id="13_ao4gq"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Belmet's House/villagers/BTScientist/BTScientist2.png" id="14_c880m"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Belmet's House/villagers/BTScientist/BTScientist3.png" id="15_lawvi"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Belmet's House/villagers/BTScientist/BTScientist4.png" id="16_myupy"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_wo7wo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_r38ya")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_i20oy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_aejqo")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_707qg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_lqhwb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_sd6vc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_8er6u")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_wlw4a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_k1nf8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_2b04s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_7lt6x")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_ao4gq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_c880m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_lawvi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_myupy")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

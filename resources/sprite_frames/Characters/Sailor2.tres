@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Sailor2/Sailor29.png" id="1_4eetp"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Sailor2/Sailor210.png" id="2_aihf3"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Sailor2/Sailor211.png" id="3_4pnqr"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Sailor2/Sailor212.png" id="4_8d7u4"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Sailor2/Sailor213.png" id="5_ccu0l"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Sailor2/Sailor214.png" id="6_h4hgu"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Sailor2/Sailor215.png" id="7_xhxls"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Sailor2/Sailor216.png" id="8_dmh8u"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Sailor2/Sailor25.png" id="9_ipinl"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Sailor2/Sailor26.png" id="10_t3kvr"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Sailor2/Sailor27.png" id="11_umgio"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Sailor2/Sailor28.png" id="12_mh3l7"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Sailor2/Sailor21.png" id="13_35v44"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Sailor2/Sailor22.png" id="14_0c355"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Sailor2/Sailor23.png" id="15_uho4d"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Sailor2/Sailor24.png" id="16_lelu4"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_4eetp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_aihf3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_4pnqr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_8d7u4")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_ccu0l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_h4hgu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_xhxls")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_dmh8u")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_ipinl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_t3kvr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_umgio")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_mh3l7")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_35v44")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_0c355")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_uho4d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_lelu4")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

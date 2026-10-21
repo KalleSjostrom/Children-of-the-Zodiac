@@ -8,7 +8,8 @@ extends RefCounted
 ##   press <BUTTON>       press and hold
 ##   release <BUTTON>     release
 ##   shot <name>          save a screenshot <shots dir>/<name>.png ("#" in the
-##                        name becomes a running number, for shots in loops)
+##                        name becomes a running number, for shots in loops);
+##                        in a zoomed cutscene also "[zoom] <name> scale=<s>"
 ##   log <text>           print text (and the current game mode, see _state)
 ##   pos [text]           print the player's village position (dev, for planning
 ##                        routes): "pos <text> x=<x> y=<y> dir=<d> back=<x>,<y>"
@@ -24,8 +25,17 @@ extends RefCounted
 ##   type <text>          type the text as key events (for the debug console)
 ##   console <line>       run a debug console command (DebugConsole, debug
 ##                        builds), e.g. "console cheater", "console goto Alares"
+##   heading              remember the village player's facing, for the buttons
+##                        AHEAD, BEHIND, ALEFT and ARIGHT (directions relative to
+##                        it; a village's start facing points into the village)
+##   guard <px>           in a village, let go of a held direction before the
+##                        player gets within px of the village's edge or into
+##                        the range of a hole door that opens in that direction
+##                        (so a walk stays in the place); 0: off.
+##                        Prints "guard <button> x=... y=..." when it lets go
 ##   quit                 quit the game
-## Buttons: TRIANGLE CIRCLE CROSS SQUARE L1 R1 L2 R2 SELECT START UP DOWN LEFT RIGHT
+## Buttons: TRIANGLE CIRCLE CROSS SQUARE L1 R1 L2 R2 SELECT START UP DOWN LEFT RIGHT,
+## and AHEAD BEHIND ALEFT ARIGHT after "heading"
 
 var input := FakeInputManager.new()
 var lines: PackedStringArray = []
@@ -37,6 +47,11 @@ var _releases: Array = []
 var time_ms := 0.0
 var _shot_counter := 0
 var _marks: Array = [] # [line after the mark, time first reached]
+var _heading := -1 # Values.UP.. LEFT, set by "heading"
+var _guard := 0.0 # "guard" distance in village pixels, 0: off
+var _held := {} # direction buttons held by press/tap -> true
+
+const RELATIVE := {"AHEAD": 0, "ARIGHT": 1, "BEHIND": 2, "ALEFT": 3}
 
 
 func _init(script_path: String, p_shots_dir: String) -> void:
@@ -59,12 +74,34 @@ static func button(name: String) -> int:
 	return map.get(name.to_upper(), -1)
 
 
+## button() for the relative names AHEAD, BEHIND, ALEFT and ARIGHT too
+## (relative to the facing remembered by "heading").
+func _button(name: String) -> int:
+	var rel: int = RELATIVE.get(name.to_upper(), -1)
+	if rel == -1:
+		return button(name)
+	if _heading == -1:
+		push_warning("AutoPlay: %s before heading; UP is ahead" % name)
+	return GameMode.UP + (maxi(_heading, 0) + rel) % 4
+
+
+func _press(b: int) -> void:
+	input.pressButton(b)
+	if b >= GameMode.UP and b <= GameMode.LEFT:
+		_held[b] = true
+
+
+func _release(b: int) -> void:
+	input.releaseButton(b)
+	_held.erase(b)
+
+
 func update(elapsed: float) -> void:
 	time_ms += elapsed
 	for r in _releases.duplicate():
 		r.t -= elapsed
 		if r.t <= 0:
-			input.releaseButton(r.b)
+			_release(r.b)
 			_releases.erase(r)
 	wait_ms -= elapsed
 	while wait_ms <= 0 and pos < lines.size():
@@ -74,17 +111,24 @@ func update(elapsed: float) -> void:
 			"wait":
 				wait_ms += float(parts[1])
 			"tap":
-				var b := button(parts[1])
-				input.pressButton(b)
+				var b := _button(parts[1])
+				_press(b)
 				_releases.append({"b": b, "t": float(parts[2]) if parts.size() > 2 else 120.0})
 			"press":
-				input.pressButton(button(parts[1]))
+				_press(_button(parts[1]))
 			"release":
-				input.releaseButton(button(parts[1]))
+				_release(_button(parts[1]))
+			"heading":
+				var village = _village()
+				_heading = village.player.getDirection() if village != null else Values.UP
+				print("[autoplay %.0f ms] heading %d" % [time_ms, _heading])
+			"guard":
+				_guard = float(parts[1])
 			"shot":
 				_shot_counter += 1
 				_pending_shot = parts[1].replace("#", "%03d" % _shot_counter)
 				print("[autoplay %.0f ms] shot %s %s" % [time_ms, parts[1], _state()])
+				_print_zoom()
 			"log":
 				print("[autoplay %.0f ms] %s %s" % [time_ms, " ".join(parts.slice(1)), _state()])
 			"pos":
@@ -124,6 +168,61 @@ func update(elapsed: float) -> void:
 				Scheduler.tree.quit()
 			_:
 				push_warning("AutoPlay: unknown command " + parts[0])
+	if _guard > 0.0 and not _held.is_empty():
+		_check_guard()
+
+
+## "guard": lets go of each held direction that would take the village player
+## within _guard pixels of the village's edge (Village.update leaves the
+## place there) or into a hole door's range. Positions are Values [y, x].
+func _check_guard() -> void:
+	var village = _village()
+	if village == null or Organizer.getOrganizer().currentGameMode != village:
+		return
+	var p: Array = village.player.getPos()
+	for b: int in _held.keys():
+		var d: int = b - GameMode.UP
+		var x: float = p[Values.X] + (_guard if d == Values.RIGHT else -_guard if d == Values.LEFT else 0.0)
+		var y: float = p[Values.Y] + (_guard if d == Values.DOWN else -_guard if d == Values.UP else 0.0)
+		var leaves: bool = x < 0 or x > village.backgroundWidth or y < 0 or y > village.backgroundHeight
+		if not leaves:
+			# A hole door takes the player only when walking in one of its
+			# directions (Door.canBeOpened, not called here: it may change the
+			# door's state).
+			var ahead := Values.createNormalFloatPoint(x, y)
+			for door in village.holeDoors:
+				if door.directions.has(d) and door.isInRange(ahead):
+					leaves = true
+					break
+		if leaves:
+			_release(b)
+			print("[autoplay %.0f ms] guard %d x=%.1f y=%.1f" % [time_ms, d, p[Values.X], p[Values.Y]])
+
+
+## For a shot in a cutscene that is zoomed (VillageStoryTimeLine scales the
+## drawing around a static position; after a zoom out the scale stays a
+## little above 1): "[zoom] <shot> scale=<s>". Not an "[autoplay" line, so
+## parity compares do not see it; it tells which shots a zoom resamples.
+func _print_zoom() -> void:
+	var o := Organizer.getOrganizer()
+	if o == null or not (o.currentGameMode is VillageStory) or o.currentGameMode.timeLine == null:
+		return
+	var t = o.currentGameMode.timeLine
+	if t.scaling and t.useStaticPos:
+		print("[zoom] %s scale=%.6f" % [_pending_shot, t.scale])
+
+
+## The current village (also the one under a village story), or null.
+func _village():
+	var o := Organizer.getOrganizer()
+	if o == null or o.currentGameMode == null:
+		return null
+	var village = o.currentGameMode
+	if village is VillageStory:
+		village = village.village
+	if not (village is Village) or village.player == null:
+		return null
+	return village
 
 
 ## Sends a key press and release as real input events.
@@ -165,13 +264,8 @@ func _state() -> String:
 ## "x=<x> y=<y> dir=<d> back=<x>,<y>" of the village player (also during a
 ## village story), "-" elsewhere. Positions are Values [y, x] arrays.
 func _player_pos() -> String:
-	var o := Organizer.getOrganizer()
-	if o == null or o.currentGameMode == null:
-		return "-"
-	var village = o.currentGameMode
-	if village is VillageStory:
-		village = village.village
-	if not (village is Village) or village.player == null:
+	var village = _village()
+	if village == null:
 		return "-"
 	var p: Array = village.player.getPos()
 	var b: Array = village.background.getPos()

@@ -1,0 +1,27 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Pensara - The School District - The Clock Tower - Floor 1/Pensara - The School District - The Clock Tower - Floor 1.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="2_7y4ps"]
+
+[node name="Pensara - The School District - The Clock Tower - Floor 1 - 0" instance=ExtResource("1_base")]
+
+[node name="00 Pensara_-_The_School_District" parent="Doors" index="0" instance=ExtResource("2_7y4ps")]
+position = Vector2(490, 588)
+hole = true
+kinds = PackedStringArray("switch")
+targets = PackedStringArray("Pensara_-_The_School_District")
+radius = 50
+directions = PackedInt32Array(2)
+fade = 2
+to_pos = PackedFloat64Array(1705, 336, 2, -1)
+sign_lines = PackedStringArray()
+
+[node name="01 Pensara_-_The_School_District_-_The_Clock_Tower_-_Floor_2" parent="Doors" index="1" instance=ExtResource("2_7y4ps")]
+position = Vector2(485, 370)
+hole = true
+kinds = PackedStringArray("house")
+targets = PackedStringArray("Pensara_-_The_School_District_-_The_Clock_Tower_-_Floor_2")
+directions = PackedInt32Array(1)
+fade = 0
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray()

@@ -1,0 +1,27 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Pensara - The Trade District - Mezza's House/Pensara - The Trade District - Mezza's House.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/ActorView.tscn" id="2_ev2ps"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The Trade District - Mezza's House/Mezza.tres" id="3_7w4qv"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="4_kiia8"]
+
+[node name="Pensara - The Trade District - Mezza\'s House - 0" instance=ExtResource("1_base")]
+
+[node name="00 Mezza" parent="Actors" index="0" instance=ExtResource("2_ev2ps")]
+position = Vector2(334, 460)
+sprite_frames = ExtResource("3_7w4qv")
+animation = &"up"
+role = 1
+villager_name = "Mezza"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The Trade District - Mezza's House"
+
+[node name="00 Pensara_-_The_Trade_District" parent="Doors" index="0" instance=ExtResource("4_kiia8")]
+position = Vector2(465, 570)
+hole = true
+kinds = PackedStringArray("switch")
+targets = PackedStringArray("Pensara_-_The_Trade_District")
+directions = PackedInt32Array(2)
+fade = 1
+to_pos = PackedFloat64Array(777, 666, 2, -1)
+sign_lines = PackedStringArray()

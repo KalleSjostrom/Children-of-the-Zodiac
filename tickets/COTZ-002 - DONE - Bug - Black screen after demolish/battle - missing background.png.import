@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bnuh4ibsfjvtg"
-path="res://.godot/imported/battle - missing background.png-c8d256d9a64e1dcdfeeaa706c911abeb.ctex"
+path="res://.godot/imported/battle - missing background.png-ee75e4038b742d041e29d6efcc4c05a1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tickets/COTZ-002 - Bug - Black screen after demolish/battle - missing background.png"
-dest_files=["res://.godot/imported/battle - missing background.png-c8d256d9a64e1dcdfeeaa706c911abeb.ctex"]
+source_file="res://tickets/COTZ-002 - DONE - Bug - Black screen after demolish/battle - missing background.png"
+dest_files=["res://.godot/imported/battle - missing background.png-ee75e4038b742d041e29d6efcc4c05a1.ctex"]
 
 [params]
 

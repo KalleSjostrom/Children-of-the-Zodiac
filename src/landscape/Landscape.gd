@@ -21,6 +21,8 @@ var zerotime: int = 0
 var animate: bool = false
 var message: bool = false
 
+const BRIDGE_TEST_SCENE := "res://tools/bridge_test/BridgeTest.tscn"
+
 
 ## Java: public void init(HashMap<String, String> info). The first argument
 ## is the info map.
@@ -215,11 +217,23 @@ func exitLandscape(p_mode, place):
 	exit(p_mode)
 
 
-## The drawing method of landscape.
+## The scene of the world map (docs/ARCHITECTURE.md): none, it is drawn by
+## legacy code until phase 4.1; with Main --bridge-test (dev only) the bridge
+## test's placeholder, which stands in for the background tiles.
+func create_scene() -> Node:
+	if Main.bridge_test:
+		var packed: PackedScene = ResourceLoader.load(BRIDGE_TEST_SCENE)
+		return packed.instantiate()
+	return null
+
+
+## The drawing method of landscape. With a scene (the bridge test) the scene
+## shows instead of the background tiles.
 func draw(g, alpha = null):
 	g.setColor(1)
 	g.setFontSize(30)
-	background.drawBottom(g)
+	if scene_root == null:
+		background.drawBottom(g)
 	for address in visitedRoads:
 		visitedRoads.get(address).drawRoad(g)
 	for i in range(nodes.size()):

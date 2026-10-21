@@ -1,0 +1,17 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Crystal Room/Crystal Room.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="2_nfm4f"]
+
+[node name="Crystal Room - 0" instance=ExtResource("1_base")]
+
+[node name="00 Serphia_Hall" parent="Doors" index="0" instance=ExtResource("2_nfm4f")]
+position = Vector2(480, 800)
+hole = true
+kinds = PackedStringArray("village")
+targets = PackedStringArray("Serphia_Hall")
+radius = 100
+directions = PackedInt32Array(2)
+fade = 0
+to_pos = PackedFloat64Array(0, 0, 1, -1)
+sign_lines = PackedStringArray()

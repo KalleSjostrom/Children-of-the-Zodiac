@@ -1,0 +1,19 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/VillageScene.tscn" id="1_base"]
+[ext_resource type="Texture2D" path="res://scenes/villages/Port of Alares/Port of Alares.png" id="2_4seh5"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageSpawn.tscn" id="3_xctnw"]
+
+[node name="Port of Alares" instance=ExtResource("1_base")]
+place_name = "Port of Alares"
+village_name = "Port of Alares"
+size = Vector2i(1024, 768)
+actual_size = Vector2i(1024, 768)
+wind_force = PackedFloat64Array(0, 0, 0)
+
+[node name="Background" parent="." index="1"]
+texture = ExtResource("2_4seh5")
+
+[node name="00 start" parent="Spawns" index="0" instance=ExtResource("3_xctnw")]
+position = Vector2(550, 0)
+facing = 2

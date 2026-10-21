@@ -1,0 +1,27 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Pensara - The School District - The Clock Tower - Floor 2/Pensara - The School District - The Clock Tower - Floor 2.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/ActorView.tscn" id="2_5ienb"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The School District - The Clock Tower - Floor 2/Howorod.tres" id="3_hdit3"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="4_lhpgo"]
+
+[node name="Pensara - The School District - The Clock Tower - Floor 2 - 0" instance=ExtResource("1_base")]
+
+[node name="00 Howorod" parent="Actors" index="0" instance=ExtResource("2_5ienb")]
+position = Vector2(380, 400)
+sprite_frames = ExtResource("3_hdit3")
+animation = &"right"
+role = 1
+villager_name = "Howorod"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The School District - The Clock Tower - Floor 2"
+
+[node name="00 Pensara_-_The_School_District_-_The_Clock_Tower_-_Floor_1" parent="Doors" index="0" instance=ExtResource("4_lhpgo")]
+position = Vector2(500, 314)
+hole = true
+kinds = PackedStringArray("switch")
+targets = PackedStringArray("Pensara_-_The_School_District_-_The_Clock_Tower_-_Floor_1")
+directions = PackedInt32Array(3)
+fade = 0
+to_pos = PackedFloat64Array(380, 470, 3, -1)
+sign_lines = PackedStringArray()

@@ -1,0 +1,36 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Pensara - The North District - Civil House/Pensara - The North District - Civil House.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/ActorView.tscn" id="2_18c5s"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The North District - Civil House/Pensara - The North District/villagers/Podd.tres" id="3_wvl18"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="4_8f86x"]
+
+[node name="Pensara - The North District - Civil House - 0" instance=ExtResource("1_base")]
+
+[node name="00 Podd" parent="Actors" index="0" instance=ExtResource("2_18c5s")]
+sprite_frames = ExtResource("3_wvl18")
+animation = &"down"
+role = 1
+villager_name = "Podd"
+statuses = PackedInt32Array(4, 5)
+villager_folder = "Pensara - The North District - Civil House"
+
+[node name="00 Pensara_-_The_North_District" parent="Doors" index="0" instance=ExtResource("4_8f86x")]
+position = Vector2(344, 660)
+hole = true
+kinds = PackedStringArray("switch")
+targets = PackedStringArray("Pensara_-_The_North_District")
+directions = PackedInt32Array(2)
+fade = 1
+to_pos = PackedFloat64Array(959, 300, 2, -1)
+sign_lines = PackedStringArray()
+
+[node name="01 Pensara_-_The_North_District" parent="Doors" index="1" instance=ExtResource("4_8f86x")]
+position = Vector2(655, 660)
+hole = true
+kinds = PackedStringArray("switch")
+targets = PackedStringArray("Pensara_-_The_North_District")
+directions = PackedInt32Array(2)
+fade = 1
+to_pos = PackedFloat64Array(959, 397, 2, -1)
+sign_lines = PackedStringArray()

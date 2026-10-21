@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Mizoram/Mizoram9.png" id="1_ro4wa"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Mizoram/Mizoram10.png" id="2_16pks"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Mizoram/Mizoram11.png" id="3_uyylo"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Mizoram/Mizoram12.png" id="4_bmrm2"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Mizoram/Mizoram13.png" id="5_qp4hh"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Mizoram/Mizoram14.png" id="6_pj682"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Mizoram/Mizoram15.png" id="7_ldchi"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Mizoram/Mizoram16.png" id="8_5mdaf"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Mizoram/Mizoram5.png" id="9_nxvtb"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Mizoram/Mizoram6.png" id="10_endhd"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Mizoram/Mizoram7.png" id="11_2yedt"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Mizoram/Mizoram8.png" id="12_t8ne1"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Mizoram/Mizoram1.png" id="13_wkhp6"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Mizoram/Mizoram2.png" id="14_1j50j"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Mizoram/Mizoram3.png" id="15_nj8hj"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Mizoram/Mizoram4.png" id="16_6i5qb"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ro4wa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_16pks")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_uyylo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_bmrm2")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_qp4hh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_pj682")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ldchi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_5mdaf")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_nxvtb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_endhd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_2yedt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_t8ne1")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_wkhp6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_1j50j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_nj8hj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_6i5qb")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

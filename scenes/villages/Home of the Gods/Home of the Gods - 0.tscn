@@ -1,0 +1,257 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Home of the Gods/Home of the Gods.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/particles/LegacyParticles2D.tscn" id="2_bu60b"]
+[ext_resource type="PackedScene" path="res://scenes/common/ActorView.tscn" id="3_ary6o"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="4_i7ab2"]
+
+[node name="Home of the Gods - 0" instance=ExtResource("1_base")]
+
+[node name="00 starsystem" parent="Ground" index="0" instance=ExtResource("2_bu60b")]
+system_name = "starsystem"
+layer = -1
+
+[node name="01 starsystem2" parent="Ground" index="1" instance=ExtResource("2_bu60b")]
+system_name = "starsystem2"
+layer = -1
+build_order = 1
+
+[node name="02 starsystem3" parent="Ground" index="2" instance=ExtResource("2_bu60b")]
+system_name = "starsystem3"
+layer = -1
+build_order = 2
+
+[node name="03 starsystem4" parent="Ground" index="3" instance=ExtResource("2_bu60b")]
+system_name = "starsystem4"
+layer = -1
+build_order = 3
+
+[node name="04 godAquariusSystem" parent="Actors" index="0" instance=ExtResource("2_bu60b")]
+position = Vector2(444, 1046)
+system_name = "godAquariusSystem"
+layer = 0
+start_active = false
+activation_status = 1
+build_order = 4
+line = 1
+
+[node name="05 godAriesSystem" parent="Actors" index="1" instance=ExtResource("2_bu60b")]
+position = Vector2(332, 552)
+system_name = "godAriesSystem"
+layer = 0
+start_active = false
+activation_status = 1
+build_order = 5
+line = 1
+
+[node name="06 godCancerSystem" parent="Actors" index="2" instance=ExtResource("2_bu60b")]
+position = Vector2(896, 252)
+system_name = "godCancerSystem"
+layer = 0
+start_active = false
+activation_status = 1
+build_order = 6
+line = 1
+
+[node name="07 godCapricornSystem" parent="Actors" index="3" instance=ExtResource("2_bu60b")]
+position = Vector2(672, 1160)
+system_name = "godCapricornSystem"
+layer = 0
+start_active = false
+activation_status = 1
+build_order = 7
+line = 1
+
+[node name="08 godGeminiSystem" parent="Actors" index="4" instance=ExtResource("2_bu60b")]
+position = Vector2(664, 252)
+system_name = "godGeminiSystem"
+layer = 0
+start_active = false
+activation_status = 1
+build_order = 8
+line = 1
+
+[node name="09 godLeoSystem" parent="Actors" index="5" instance=ExtResource("2_bu60b")]
+position = Vector2(1116, 328)
+system_name = "godLeoSystem"
+layer = 0
+start_active = false
+activation_status = 1
+build_order = 9
+line = 1
+
+[node name="10 godLibraSystem" parent="Actors" index="6" instance=ExtResource("2_bu60b")]
+position = Vector2(1230, 802)
+system_name = "godLibraSystem"
+layer = 0
+start_active = false
+activation_status = 1
+build_order = 10
+line = 2
+
+[node name="11 godPiscesSystem" parent="Actors" index="7" instance=ExtResource("2_bu60b")]
+position = Vector2(338, 802)
+system_name = "godPiscesSystem"
+layer = 0
+start_active = false
+activation_status = 1
+build_order = 11
+line = 2
+
+[node name="12 godSagittariusSystem" parent="Actors" index="8" instance=ExtResource("2_bu60b")]
+position = Vector2(898, 1162)
+system_name = "godSagittariusSystem"
+layer = 0
+start_active = false
+activation_status = 1
+build_order = 12
+line = 2
+
+[node name="13 godScorpiusSystem" parent="Actors" index="9" instance=ExtResource("2_bu60b")]
+position = Vector2(1120, 1042)
+system_name = "godScorpiusSystem"
+layer = 0
+start_active = false
+activation_status = 1
+build_order = 13
+line = 2
+
+[node name="14 godTaurusSystem" parent="Actors" index="10" instance=ExtResource("2_bu60b")]
+position = Vector2(438, 328)
+system_name = "godTaurusSystem"
+layer = 0
+start_active = false
+activation_status = 1
+build_order = 14
+line = 2
+
+[node name="15 godVirgoSystem" parent="Actors" index="11" instance=ExtResource("2_bu60b")]
+position = Vector2(1224, 552)
+system_name = "godVirgoSystem"
+layer = 0
+start_active = false
+activation_status = 1
+build_order = 15
+line = 2
+
+[node name="16 godDoorEntrySystem" parent="Actors" index="12" instance=ExtResource("2_bu60b")]
+position = Vector2(860, 497)
+system_name = "godDoorEntrySystem"
+layer = 0
+build_order = 16
+line = 3
+
+[node name="17 godDoorExitSystem" parent="Actors" index="13" instance=ExtResource("2_bu60b")]
+position = Vector2(860, 689)
+system_name = "godDoorExitSystem"
+layer = 0
+start_active = false
+activation_status = 11
+build_order = 17
+line = 4
+
+[node name="14 Aquarius" parent="Actors" index="14" instance=ExtResource("3_ary6o")]
+position = Vector2(608, 962)
+role = 1
+villager_name = "Aquarius"
+statuses = PackedInt32Array()
+villager_folder = "Home of the Gods"
+
+[node name="15 Aries" parent="Actors" index="15" instance=ExtResource("3_ary6o")]
+position = Vector2(544, 678)
+role = 1
+villager_name = "Aries"
+statuses = PackedInt32Array()
+villager_folder = "Home of the Gods"
+
+[node name="16 Cancer" parent="Actors" index="16" instance=ExtResource("3_ary6o")]
+position = Vector2(928, 446)
+role = 1
+villager_name = "Cancer"
+statuses = PackedInt32Array()
+villager_folder = "Home of the Gods"
+
+[node name="17 Capricorn" parent="Actors" index="17" instance=ExtResource("3_ary6o")]
+position = Vector2(800, 1058)
+role = 1
+villager_name = "Capricorn"
+statuses = PackedInt32Array()
+villager_folder = "Home of the Gods"
+
+[node name="18 Gemini" parent="Actors" index="18" instance=ExtResource("3_ary6o")]
+position = Vector2(800, 448)
+role = 1
+villager_name = "Gemini"
+statuses = PackedInt32Array()
+villager_folder = "Home of the Gods"
+
+[node name="19 Leo" parent="Actors" index="19" instance=ExtResource("3_ary6o")]
+position = Vector2(1120, 546)
+role = 1
+villager_name = "Leo"
+statuses = PackedInt32Array()
+villager_folder = "Home of the Gods"
+
+[node name="20 Libra" parent="Actors" index="20" instance=ExtResource("3_ary6o")]
+position = Vector2(1184, 802)
+role = 1
+villager_name = "Libra"
+statuses = PackedInt32Array()
+villager_folder = "Home of the Gods"
+
+[node name="21 Pisces" parent="Actors" index="21" instance=ExtResource("3_ary6o")]
+position = Vector2(544, 804)
+role = 1
+villager_name = "Pisces"
+statuses = PackedInt32Array()
+villager_folder = "Home of the Gods"
+
+[node name="22 Sagittarius" parent="Actors" index="22" instance=ExtResource("3_ary6o")]
+position = Vector2(928, 1060)
+role = 1
+villager_name = "Sagittarius"
+statuses = PackedInt32Array()
+villager_folder = "Home of the Gods"
+
+[node name="23 Scorpius" parent="Actors" index="23" instance=ExtResource("3_ary6o")]
+position = Vector2(1120, 964)
+role = 1
+villager_name = "Scorpius"
+statuses = PackedInt32Array()
+villager_folder = "Home of the Gods"
+
+[node name="24 Taurus" parent="Actors" index="24" instance=ExtResource("3_ary6o")]
+position = Vector2(608, 550)
+role = 1
+villager_name = "Taurus"
+statuses = PackedInt32Array()
+villager_folder = "Home of the Gods"
+
+[node name="25 Virgo" parent="Actors" index="25" instance=ExtResource("3_ary6o")]
+position = Vector2(1184, 676)
+role = 1
+villager_name = "Virgo"
+statuses = PackedInt32Array()
+villager_folder = "Home of the Gods"
+
+[node name="00 Empyrian_Temple--Hall_of_Wind-mark4" parent="Doors" index="0" instance=ExtResource("4_i7ab2")]
+position = Vector2(860, 444)
+hole = true
+kinds = PackedStringArray("labyrinth")
+targets = PackedStringArray("Empyrian_Temple--Hall_of_Wind-mark4")
+radius = 40
+directions = PackedInt32Array(0)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray()
+
+[node name="01 menthu\'s_lair--room_of_confusion-mark0" parent="Doors" index="1" instance=ExtResource("4_i7ab2")]
+position = Vector2(860, 636)
+hole = true
+kinds = PackedStringArray("labyrinth")
+targets = PackedStringArray("menthu\'s_lair--room_of_confusion-mark0")
+radius = 40
+directions = PackedInt32Array(0)
+activation_status = 11
+fade = 2
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray()

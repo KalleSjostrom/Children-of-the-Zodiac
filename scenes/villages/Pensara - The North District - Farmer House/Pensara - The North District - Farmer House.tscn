@@ -1,0 +1,189 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/VillageScene.tscn" id="1_base"]
+[ext_resource type="Texture2D" path="res://scenes/villages/Pensara - The North District - Farmer House/Pensara - The North District - Farmer House.png" id="2_tccw2"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/top/0.png" id="3_o7t7o"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/top/1.png" id="4_0vvoy"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/top/2.png" id="5_6gpwe"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageSpawn.tscn" id="6_n77kk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lln8i"]
+size = Vector2(88, 70)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t1vrg"]
+size = Vector2(9, 42)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v6xla"]
+size = Vector2(24, 123)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1hoj1"]
+size = Vector2(20, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yvute"]
+size = Vector2(232, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aidt3"]
+size = Vector2(21, 377)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r67kl"]
+size = Vector2(35, 47)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a3qga"]
+size = Vector2(66, 46)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yk7cb"]
+size = Vector2(461, 77)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cp2k5"]
+size = Vector2(51, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1vg1f"]
+size = Vector2(169, 91)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k1umu"]
+size = Vector2(169, 91)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7oc52"]
+size = Vector2(35, 47)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_34xqy"]
+size = Vector2(173, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u6yoa"]
+size = Vector2(21, 377)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7edpw"]
+size = Vector2(20, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4vs2a"]
+size = Vector2(164, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gg7el"]
+size = Vector2(10, 94)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nq2m6"]
+size = Vector2(10, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4i645"]
+size = Vector2(10, 93)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7u1hn"]
+size = Vector2(10, 22)
+
+[node name="Pensara - The North District - Farmer House" instance=ExtResource("1_base")]
+place_name = "Pensara - The North District - Farmer House"
+folder_name = "Pensara - The North District - Farmer House"
+village_name = "Pensara - The North District - Farmer House"
+background_folder = "Pensara - The North District - Farmer House"
+size = Vector2i(1024, 768)
+actual_size = Vector2i(1024, 768)
+inside = true
+wind_force = PackedFloat64Array(0, 0, 0)
+
+[node name="Background" parent="." index="1"]
+texture = ExtResource("2_tccw2")
+
+[node name="00 0" type="Sprite2D" parent="Overhead" index="0"]
+use_parent_material = true
+position = Vector2(319, 363)
+texture = ExtResource("3_o7t7o")
+centered = false
+
+[node name="01 1" type="Sprite2D" parent="Overhead" index="1"]
+use_parent_material = true
+position = Vector2(534, 363)
+texture = ExtResource("4_0vvoy")
+centered = false
+
+[node name="02 2" type="Sprite2D" parent="Overhead" index="2"]
+use_parent_material = true
+position = Vector2(319, 488)
+texture = ExtResource("5_6gpwe")
+centered = false
+
+[node name="O000" type="CollisionShape2D" parent="Obstacles" index="0"]
+position = Vector2(627, 314)
+shape = SubResource("RectangleShape2D_lln8i")
+
+[node name="O001" type="CollisionShape2D" parent="Obstacles" index="1"]
+position = Vector2(345.5, 353)
+shape = SubResource("RectangleShape2D_t1vrg")
+
+[node name="O002" type="CollisionShape2D" parent="Obstacles" index="2"]
+position = Vector2(329, 339.5)
+shape = SubResource("RectangleShape2D_v6xla")
+
+[node name="O003" type="CollisionShape2D" parent="Obstacles" index="3"]
+position = Vector2(329, 442.5)
+shape = SubResource("RectangleShape2D_1hoj1")
+
+[node name="O004" type="CollisionShape2D" parent="Obstacles" index="4"]
+position = Vector2(458, 290.5)
+shape = SubResource("RectangleShape2D_yvute")
+
+[node name="O005" type="CollisionShape2D" parent="Obstacles" index="5"]
+position = Vector2(706.5, 466.5)
+shape = SubResource("RectangleShape2D_aidt3")
+
+[node name="O006" type="CollisionShape2D" parent="Obstacles" index="6"]
+position = Vector2(679.5, 459.5)
+shape = SubResource("RectangleShape2D_r67kl")
+
+[node name="O007" type="CollisionShape2D" parent="Obstacles" index="7"]
+position = Vector2(372, 460)
+shape = SubResource("RectangleShape2D_a3qga")
+
+[node name="O008" type="CollisionShape2D" parent="Obstacles" index="8"]
+position = Vector2(520.5, 239.5)
+shape = SubResource("RectangleShape2D_yk7cb")
+
+[node name="O009" type="CollisionShape2D" parent="Obstacles" index="9"]
+position = Vector2(461.5, 445)
+shape = SubResource("RectangleShape2D_cp2k5")
+
+[node name="O010" type="CollisionShape2D" parent="Obstacles" index="10"]
+position = Vector2(403.5, 647.5)
+shape = SubResource("RectangleShape2D_1vg1f")
+
+[node name="O011" type="CollisionShape2D" parent="Obstacles" index="11"]
+position = Vector2(618.5, 647.5)
+shape = SubResource("RectangleShape2D_k1umu")
+
+[node name="O012" type="CollisionShape2D" parent="Obstacles" index="12"]
+position = Vector2(561.5, 459.5)
+shape = SubResource("RectangleShape2D_7oc52")
+
+[node name="O013" type="CollisionShape2D" parent="Obstacles" index="13"]
+position = Vector2(405.5, 418)
+shape = SubResource("RectangleShape2D_34xqy")
+
+[node name="O014" type="CollisionShape2D" parent="Obstacles" index="14"]
+position = Vector2(308.5, 466.5)
+shape = SubResource("RectangleShape2D_u6yoa")
+
+[node name="O015" type="CollisionShape2D" parent="Obstacles" index="15"]
+position = Vector2(415, 443.5)
+shape = SubResource("RectangleShape2D_7edpw")
+
+[node name="O016" type="CollisionShape2D" parent="Obstacles" index="16"]
+position = Vector2(614, 417)
+shape = SubResource("RectangleShape2D_4vs2a")
+
+[node name="O017" type="CollisionShape2D" parent="Obstacles" index="17"]
+position = Vector2(538, 445)
+shape = SubResource("RectangleShape2D_gg7el")
+
+[node name="O018" type="CollisionShape2D" parent="Obstacles" index="18"]
+position = Vector2(538, 574)
+shape = SubResource("RectangleShape2D_nq2m6")
+
+[node name="O019" type="CollisionShape2D" parent="Obstacles" index="19"]
+position = Vector2(431, 484.5)
+shape = SubResource("RectangleShape2D_4i645")
+
+[node name="O020" type="CollisionShape2D" parent="Obstacles" index="20"]
+position = Vector2(431, 591)
+shape = SubResource("RectangleShape2D_7u1hn")
+
+[node name="00 start" parent="Spawns" index="0" instance=ExtResource("6_n77kk")]
+position = Vector2(500, 540)

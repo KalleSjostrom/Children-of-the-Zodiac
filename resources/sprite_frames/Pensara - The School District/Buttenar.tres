@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Buttenar/Buttenar9.png" id="1_fg1qu"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Buttenar/Buttenar10.png" id="2_baxgm"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Buttenar/Buttenar11.png" id="3_xmppd"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Buttenar/Buttenar12.png" id="4_b215f"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Buttenar/Buttenar13.png" id="5_vw7bs"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Buttenar/Buttenar14.png" id="6_k6dd3"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Buttenar/Buttenar15.png" id="7_basfd"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Buttenar/Buttenar16.png" id="8_6w142"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Buttenar/Buttenar5.png" id="9_qes7v"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Buttenar/Buttenar6.png" id="10_mvu2m"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Buttenar/Buttenar7.png" id="11_l2a4e"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Buttenar/Buttenar8.png" id="12_k22sn"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Buttenar/Buttenar1.png" id="13_v1tr0"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Buttenar/Buttenar2.png" id="14_i0xku"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Buttenar/Buttenar3.png" id="15_n2o8w"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Buttenar/Buttenar4.png" id="16_kkm8c"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_fg1qu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_baxgm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xmppd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_b215f")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_vw7bs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_k6dd3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_basfd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_6w142")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_qes7v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_mvu2m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_l2a4e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_k22sn")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_v1tr0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_i0xku")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_n2o8w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_kkm8c")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

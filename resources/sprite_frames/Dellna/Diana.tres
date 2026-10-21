@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Diana/Diana9.png" id="1_2xhfh"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Diana/Diana10.png" id="2_h0c26"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Diana/Diana11.png" id="3_megex"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Diana/Diana12.png" id="4_d4rev"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Diana/Diana13.png" id="5_dmev6"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Diana/Diana14.png" id="6_7wwxt"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Diana/Diana15.png" id="7_gtyj2"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Diana/Diana16.png" id="8_hwgi6"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Diana/Diana5.png" id="9_yud12"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Diana/Diana6.png" id="10_wiv5n"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Diana/Diana7.png" id="11_prgd6"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Diana/Diana8.png" id="12_jtnqx"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Diana/Diana1.png" id="13_yyd6b"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Diana/Diana2.png" id="14_d8n6j"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Diana/Diana3.png" id="15_40of2"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Diana/Diana4.png" id="16_gkyjc"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_2xhfh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_h0c26")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_megex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_d4rev")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_dmev6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_7wwxt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_gtyj2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_hwgi6")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_yud12")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_wiv5n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_prgd6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_jtnqx")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_yyd6b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_d8n6j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_40of2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_gkyjc")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

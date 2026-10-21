@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Fortuneteller/Fortuneteller9.png" id="1_hexax"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Fortuneteller/Fortuneteller10.png" id="2_wr4od"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Fortuneteller/Fortuneteller11.png" id="3_q1nn0"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Fortuneteller/Fortuneteller12.png" id="4_qcj4q"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Fortuneteller/Fortuneteller13.png" id="5_resjx"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Fortuneteller/Fortuneteller14.png" id="6_djyw3"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Fortuneteller/Fortuneteller15.png" id="7_esbie"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Fortuneteller/Fortuneteller16.png" id="8_qh00k"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Fortuneteller/Fortuneteller5.png" id="9_a1dlw"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Fortuneteller/Fortuneteller6.png" id="10_mpoe8"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Fortuneteller/Fortuneteller7.png" id="11_dsvuk"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Fortuneteller/Fortuneteller8.png" id="12_fdfb1"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Fortuneteller/Fortuneteller1.png" id="13_u5ych"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Fortuneteller/Fortuneteller2.png" id="14_h5wwe"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Fortuneteller/Fortuneteller3.png" id="15_aefb5"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Fortuneteller/Fortuneteller4.png" id="16_vupvh"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_hexax")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_wr4od")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_q1nn0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qcj4q")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_resjx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_djyw3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_esbie")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_qh00k")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_a1dlw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_mpoe8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_dsvuk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_fdfb1")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_u5ych")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_h5wwe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_aefb5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_vupvh")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

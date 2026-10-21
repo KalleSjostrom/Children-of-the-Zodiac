@@ -1,0 +1,5 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Home of Celis - Memory/Home of Celis - Memory.tscn" id="1_base"]
+
+[node name="Home of Celis - Memory - 0" instance=ExtResource("1_base")]

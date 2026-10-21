@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Melker/Melker9.png" id="1_cme7w"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Melker/Melker10.png" id="2_124lx"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Melker/Melker11.png" id="3_8kpp3"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Melker/Melker12.png" id="4_k7vm8"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Melker/Melker13.png" id="5_ea844"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Melker/Melker14.png" id="6_lskoa"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Melker/Melker15.png" id="7_uur1w"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Melker/Melker16.png" id="8_mulsq"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Melker/Melker5.png" id="9_kjke6"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Melker/Melker6.png" id="10_kr80h"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Melker/Melker7.png" id="11_pxubk"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Melker/Melker8.png" id="12_3wcs3"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Melker/Melker1.png" id="13_5y36p"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Melker/Melker2.png" id="14_npxmd"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Melker/Melker3.png" id="15_jdn66"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Melker/Melker4.png" id="16_i3bsh"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_cme7w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_124lx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_8kpp3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_k7vm8")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_ea844")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_lskoa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_uur1w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_mulsq")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_kjke6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_kr80h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_pxubk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_3wcs3")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_5y36p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_npxmd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_jdn66")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_i3bsh")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

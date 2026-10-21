@@ -1,0 +1,47 @@
+# The fire of Pass to Zazo, for the parity case particles_pass_to_zazo
+# (phase 1 rollout): "firesystem" (650;500, master and slave: the fire
+# spawns smoke) is in the villager layer, sorted with the sprites by its key
+# -(emitter y + 56), i.e. like a sprite at y 444. The player walks up to the
+# fire pit (in front of it, y > 444), then around it to its back (y < 444).
+# Positions are village pixels.
+wait 100
+shot pz_01_fadein
+wait 1400
+shot pz_02_start
+pos start
+guard 24
+press UP
+wait 900
+release UP
+press RIGHT
+wait 600
+release RIGHT
+press UP
+wait 800
+release UP
+wait 100
+shot pz_03_in_front
+pos in_front
+press LEFT
+wait 600
+release LEFT
+press UP
+wait 600
+release UP
+press RIGHT
+wait 600
+release RIGHT
+wait 100
+shot pz_04_behind
+pos behind
+press RIGHT
+wait 600
+release RIGHT
+press DOWN
+wait 900
+release DOWN
+wait 100
+shot pz_05_side
+pos side
+log end
+quit

@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTboyfarmer/GTboyfarmer9.png" id="1_owwr7"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTboyfarmer/GTboyfarmer10.png" id="2_0g4ps"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTboyfarmer/GTboyfarmer11.png" id="3_hyknm"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTboyfarmer/GTboyfarmer12.png" id="4_d0kel"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTboyfarmer/GTboyfarmer13.png" id="5_jqqce"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTboyfarmer/GTboyfarmer14.png" id="6_xrn1d"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTboyfarmer/GTboyfarmer15.png" id="7_v1y87"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTboyfarmer/GTboyfarmer16.png" id="8_6xmw1"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTboyfarmer/GTboyfarmer5.png" id="9_4rd5i"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTboyfarmer/GTboyfarmer6.png" id="10_ub7qj"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTboyfarmer/GTboyfarmer7.png" id="11_e7crl"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTboyfarmer/GTboyfarmer8.png" id="12_inbwr"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTboyfarmer/GTboyfarmer1.png" id="13_kypa6"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTboyfarmer/GTboyfarmer2.png" id="14_ggqtu"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTboyfarmer/GTboyfarmer3.png" id="15_qb1ki"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTboyfarmer/GTboyfarmer4.png" id="16_0vc1x"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_owwr7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_0g4ps")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_hyknm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_d0kel")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_jqqce")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_xrn1d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_v1y87")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_6xmw1")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_4rd5i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ub7qj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_e7crl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_inbwr")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_kypa6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_ggqtu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_qb1ki")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_0vc1x")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

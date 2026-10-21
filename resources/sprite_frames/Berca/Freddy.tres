@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Freddy/Freddy9.png" id="1_wnljc"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Freddy/Freddy10.png" id="2_c21vr"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Freddy/Freddy11.png" id="3_xxxsu"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Freddy/Freddy12.png" id="4_w2ci8"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Freddy/Freddy13.png" id="5_d7sf3"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Freddy/Freddy14.png" id="6_142l4"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Freddy/Freddy15.png" id="7_ytx6i"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Freddy/Freddy16.png" id="8_ihgcc"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Freddy/Freddy5.png" id="9_pv5op"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Freddy/Freddy6.png" id="10_0tngp"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Freddy/Freddy7.png" id="11_5fydl"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Freddy/Freddy8.png" id="12_cfva0"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Freddy/Freddy1.png" id="13_mut10"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Freddy/Freddy2.png" id="14_se8io"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Freddy/Freddy3.png" id="15_te1vk"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Freddy/Freddy4.png" id="16_apc0t"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_wnljc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_c21vr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xxxsu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_w2ci8")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_d7sf3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_142l4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ytx6i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ihgcc")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_pv5op")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_0tngp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_5fydl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_cfva0")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_mut10")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_se8io")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_te1vk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_apc0t")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

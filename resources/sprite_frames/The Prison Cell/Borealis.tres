@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/The Prison Cell/villagers/Borealis/Borealis9.png" id="1_r0bf6"]
+[ext_resource type="Texture2D" path="res://res/Village/The Prison Cell/villagers/Borealis/Borealis10.png" id="2_fynrf"]
+[ext_resource type="Texture2D" path="res://res/Village/The Prison Cell/villagers/Borealis/Borealis11.png" id="3_dkack"]
+[ext_resource type="Texture2D" path="res://res/Village/The Prison Cell/villagers/Borealis/Borealis12.png" id="4_83ew2"]
+[ext_resource type="Texture2D" path="res://res/Village/The Prison Cell/villagers/Borealis/Borealis13.png" id="5_s2x8v"]
+[ext_resource type="Texture2D" path="res://res/Village/The Prison Cell/villagers/Borealis/Borealis14.png" id="6_4qc16"]
+[ext_resource type="Texture2D" path="res://res/Village/The Prison Cell/villagers/Borealis/Borealis15.png" id="7_ps2tu"]
+[ext_resource type="Texture2D" path="res://res/Village/The Prison Cell/villagers/Borealis/Borealis16.png" id="8_ipb3w"]
+[ext_resource type="Texture2D" path="res://res/Village/The Prison Cell/villagers/Borealis/Borealis5.png" id="9_uu5no"]
+[ext_resource type="Texture2D" path="res://res/Village/The Prison Cell/villagers/Borealis/Borealis6.png" id="10_3v68f"]
+[ext_resource type="Texture2D" path="res://res/Village/The Prison Cell/villagers/Borealis/Borealis7.png" id="11_c04k6"]
+[ext_resource type="Texture2D" path="res://res/Village/The Prison Cell/villagers/Borealis/Borealis8.png" id="12_42rnk"]
+[ext_resource type="Texture2D" path="res://res/Village/The Prison Cell/villagers/Borealis/Borealis1.png" id="13_ouibt"]
+[ext_resource type="Texture2D" path="res://res/Village/The Prison Cell/villagers/Borealis/Borealis2.png" id="14_gpy3i"]
+[ext_resource type="Texture2D" path="res://res/Village/The Prison Cell/villagers/Borealis/Borealis3.png" id="15_6aeo4"]
+[ext_resource type="Texture2D" path="res://res/Village/The Prison Cell/villagers/Borealis/Borealis4.png" id="16_hmyu2"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_r0bf6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_fynrf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_dkack")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_83ew2")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_s2x8v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_4qc16")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ps2tu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ipb3w")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_uu5no")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_3v68f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_c04k6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_42rnk")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_ouibt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_gpy3i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_6aeo4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_hmyu2")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

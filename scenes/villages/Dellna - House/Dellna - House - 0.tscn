@@ -1,0 +1,57 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Dellna - House/Dellna - House.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/ActorView.tscn" id="2_5cppf"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Dellna - House/Gullie.tres" id="3_jl7xd"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Dellna - House/Smallie.tres" id="4_btkee"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Dellna - House/Kilty.tres" id="5_0vywk"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="6_vstp6"]
+
+[node name="Dellna - House - 0" instance=ExtResource("1_base")]
+
+[node name="00 Gullie" parent="Actors" index="0" instance=ExtResource("2_5cppf")]
+position = Vector2(280, 290)
+sprite_frames = ExtResource("3_jl7xd")
+animation = &"up"
+role = 1
+villager_name = "Gullie"
+statuses = PackedInt32Array()
+villager_folder = "Dellna - House"
+
+[node name="01 Smallie" parent="Actors" index="1" instance=ExtResource("2_5cppf")]
+position = Vector2(670, 300)
+sprite_frames = ExtResource("4_btkee")
+animation = &"right"
+role = 1
+villager_name = "Smallie"
+statuses = PackedInt32Array()
+villager_folder = "Dellna - House"
+
+[node name="02 Kilty" parent="Actors" index="2" instance=ExtResource("2_5cppf")]
+position = Vector2(915, 330)
+sprite_frames = ExtResource("5_0vywk")
+animation = &"up"
+role = 1
+villager_name = "Kilty"
+statuses = PackedInt32Array()
+villager_folder = "Dellna - House"
+
+[node name="00 Dellna" parent="Doors" index="0" instance=ExtResource("6_vstp6")]
+position = Vector2(192, 569)
+hole = true
+kinds = PackedStringArray("switch")
+targets = PackedStringArray("Dellna")
+directions = PackedInt32Array(2)
+fade = 1
+to_pos = PackedFloat64Array(813, 76, 2, -1)
+sign_lines = PackedStringArray()
+
+[node name="01 Dellna" parent="Doors" index="1" instance=ExtResource("6_vstp6")]
+position = Vector2(810, 569)
+hole = true
+kinds = PackedStringArray("switch")
+targets = PackedStringArray("Dellna")
+directions = PackedInt32Array(2)
+fade = 1
+to_pos = PackedFloat64Array(813, 378, 2, -1)
+sign_lines = PackedStringArray()

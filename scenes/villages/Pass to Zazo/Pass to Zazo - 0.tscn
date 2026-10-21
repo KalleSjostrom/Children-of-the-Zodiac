@@ -1,0 +1,78 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Pass to Zazo/Pass to Zazo.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/particles/LegacyParticles2D.tscn" id="2_a44es"]
+[ext_resource type="PackedScene" path="res://scenes/common/ActorView.tscn" id="3_ko2j7"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pass to Zazo/Alaressolider.tres" id="4_6ipn2"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pass to Zazo/Passguard.tres" id="5_vci2x"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageSpawn.tscn" id="6_1orrg"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="7_d3ip4"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageSign.tscn" id="8_xljhy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_scpmb"]
+size = Vector2(27, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tun77"]
+size = Vector2(23, 89)
+
+[node name="Pass to Zazo - 0" instance=ExtResource("1_base")]
+has_wind = true
+wind_force = PackedFloat64Array(10, 0, 0)
+wind_turbulence = 0.1
+
+[node name="00 firesystem" parent="Actors" index="0" instance=ExtResource("2_a44es")]
+position = Vector2(660, 500)
+system_name = "firesystem"
+layer = 0
+
+[node name="01 Passguard Marcus" parent="Actors" index="1" instance=ExtResource("3_ko2j7")]
+position = Vector2(459, 372)
+sprite_frames = ExtResource("4_6ipn2")
+animation = &"down"
+role = 1
+villager_name = "Passguard Marcus"
+statuses = PackedInt32Array()
+villager_folder = "Pass to Zazo"
+
+[node name="02 Passguard Seth" parent="Actors" index="2" instance=ExtResource("3_ko2j7")]
+position = Vector2(404, 381)
+sprite_frames = ExtResource("5_vci2x")
+animation = &"down"
+role = 1
+villager_name = "Passguard Seth"
+statuses = PackedInt32Array()
+villager_folder = "Pass to Zazo"
+
+[node name="V000" type="CollisionShape2D" parent="Obstacles" index="45"]
+position = Vector2(662.5, 500)
+shape = SubResource("RectangleShape2D_scpmb")
+
+[node name="V001" type="CollisionShape2D" parent="Obstacles" index="46"]
+position = Vector2(708.5, 505.5)
+shape = SubResource("RectangleShape2D_tun77")
+
+[node name="00 start0" parent="Spawns" index="0" instance=ExtResource("6_1orrg")]
+position = Vector2(512, 710)
+number = 0
+
+[node name="01 start1" parent="Spawns" index="1" instance=ExtResource("6_1orrg")]
+position = Vector2(458, 374)
+number = 1
+facing = 2
+
+[node name="00 Central_Pass--West_Part-mark0" parent="Doors" index="0" instance=ExtResource("7_d3ip4")]
+position = Vector2(463, 314)
+hole = true
+kinds = PackedStringArray("labyrinth")
+targets = PackedStringArray("Central_Pass--West_Part-mark0")
+radius = 50
+directions = PackedInt32Array(0)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray()
+
+[node name="00 Ouch!" parent="Signs" index="0" instance=ExtResource("8_xljhy")]
+position = Vector2(640, 450)
+radius = 40
+directions = PackedInt32Array(0, 1, 2, 3)
+lines = PackedStringArray("Ouch!", "Fire is hot... Who knew...")
+listed = Array[bool]([true, false])

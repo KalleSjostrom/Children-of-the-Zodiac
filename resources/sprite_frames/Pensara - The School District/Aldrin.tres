@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Aldrin/Aldrin9.png" id="1_3kvji"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Aldrin/Aldrin10.png" id="2_1g3fp"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Aldrin/Aldrin11.png" id="3_y45di"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Aldrin/Aldrin12.png" id="4_vk4e1"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Aldrin/Aldrin13.png" id="5_2o7ei"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Aldrin/Aldrin14.png" id="6_fwdya"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Aldrin/Aldrin15.png" id="7_2272w"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Aldrin/Aldrin16.png" id="8_6iny0"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Aldrin/Aldrin5.png" id="9_d73k1"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Aldrin/Aldrin6.png" id="10_mgx2m"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Aldrin/Aldrin7.png" id="11_h006f"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Aldrin/Aldrin8.png" id="12_0m02q"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Aldrin/Aldrin1.png" id="13_vqalw"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Aldrin/Aldrin2.png" id="14_j5wi5"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Aldrin/Aldrin3.png" id="15_hcvrw"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Aldrin/Aldrin4.png" id="16_oavgd"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_3kvji")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_1g3fp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_y45di")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_vk4e1")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_2o7ei")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_fwdya")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_2272w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_6iny0")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_d73k1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_mgx2m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_h006f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_0m02q")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_vqalw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_j5wi5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_hcvrw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_oavgd")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

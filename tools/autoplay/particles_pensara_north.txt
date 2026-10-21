@@ -1,0 +1,37 @@
+# The smoke of Pensara - The North District, for the parity case
+# particles_pensara_north (phase 1 rollout): the armory (1651,741) and the
+# hut (1845,393) with wind -10;0;0 and turbulence 1 (the only place with
+# turbulence 1). Up the main road, east along the cross road under the
+# lamps, then north on the grass beside the armory. Positions are village
+# pixels.
+wait 100
+shot pn_01_fadein
+wait 1400
+shot pn_02_start
+pos start
+guard 24
+press UP
+wait 700
+release UP
+press RIGHT
+wait 1500
+shot pn_03_road
+wait 1500
+release RIGHT
+shot pn_04_armory
+pos road_east
+press RIGHT
+wait 1000
+release RIGHT
+press UP
+wait 1250
+shot pn_05_north
+wait 1250
+release UP
+wait 100
+shot pn_06_hut
+pos hut
+wait 1000
+shot pn_07_hut_later
+log end
+quit

@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Benth/Benth9.png" id="1_ln73r"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Benth/Benth10.png" id="2_t0l0a"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Benth/Benth11.png" id="3_hl2y4"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Benth/Benth12.png" id="4_qp3f4"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Benth/Benth13.png" id="5_qo6i4"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Benth/Benth14.png" id="6_6iupf"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Benth/Benth15.png" id="7_2cp88"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Benth/Benth16.png" id="8_ebvxw"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Benth/Benth5.png" id="9_b7wll"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Benth/Benth6.png" id="10_xo0b5"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Benth/Benth7.png" id="11_ti5fb"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Benth/Benth8.png" id="12_ixcbm"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Benth/Benth1.png" id="13_0wx6l"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Benth/Benth2.png" id="14_23t2y"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Benth/Benth3.png" id="15_pdnkq"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Benth/Benth4.png" id="16_ig4nb"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ln73r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_t0l0a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_hl2y4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qp3f4")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_qo6i4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_6iupf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_2cp88")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ebvxw")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_b7wll")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_xo0b5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ti5fb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ixcbm")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_0wx6l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_23t2y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_pdnkq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_ig4nb")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

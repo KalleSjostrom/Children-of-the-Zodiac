@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Tent/villagers/Merchant Tord/Merchant Tord9.png" id="1_qqp7j"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Tent/villagers/Merchant Tord/Merchant Tord10.png" id="2_plhua"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Tent/villagers/Merchant Tord/Merchant Tord11.png" id="3_7t2s0"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Tent/villagers/Merchant Tord/Merchant Tord12.png" id="4_08t5m"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Tent/villagers/Merchant Tord/Merchant Tord13.png" id="5_d232w"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Tent/villagers/Merchant Tord/Merchant Tord14.png" id="6_wgoaa"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Tent/villagers/Merchant Tord/Merchant Tord15.png" id="7_ruqqm"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Tent/villagers/Merchant Tord/Merchant Tord16.png" id="8_mg7f5"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Tent/villagers/Merchant Tord/Merchant Tord5.png" id="9_3dfgi"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Tent/villagers/Merchant Tord/Merchant Tord6.png" id="10_qbgof"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Tent/villagers/Merchant Tord/Merchant Tord7.png" id="11_tx4ng"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Tent/villagers/Merchant Tord/Merchant Tord8.png" id="12_oysid"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Tent/villagers/Merchant Tord/Merchant Tord1.png" id="13_nbbph"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Tent/villagers/Merchant Tord/Merchant Tord2.png" id="14_g7pwj"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Tent/villagers/Merchant Tord/Merchant Tord3.png" id="15_ccssf"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Tent/villagers/Merchant Tord/Merchant Tord4.png" id="16_ndym8"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_qqp7j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_plhua")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_7t2s0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_08t5m")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_d232w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_wgoaa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ruqqm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_mg7f5")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_3dfgi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_qbgof")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_tx4ng")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_oysid")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_nbbph")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_g7pwj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_ccssf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_ndym8")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

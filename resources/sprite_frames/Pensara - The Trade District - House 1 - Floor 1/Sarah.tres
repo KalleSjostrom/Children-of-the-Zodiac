@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Sarah/Sarah9.png" id="1_1t4v7"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Sarah/Sarah10.png" id="2_j5jbj"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Sarah/Sarah11.png" id="3_wu6dd"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Sarah/Sarah12.png" id="4_ww2t2"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Sarah/Sarah13.png" id="5_5ns8k"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Sarah/Sarah14.png" id="6_kh042"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Sarah/Sarah15.png" id="7_muf8h"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Sarah/Sarah16.png" id="8_ngn8v"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Sarah/Sarah5.png" id="9_7advi"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Sarah/Sarah6.png" id="10_hilyc"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Sarah/Sarah7.png" id="11_loas4"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Sarah/Sarah8.png" id="12_e4fff"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Sarah/Sarah1.png" id="13_drq55"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Sarah/Sarah2.png" id="14_hayvb"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Sarah/Sarah3.png" id="15_stw67"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Sarah/Sarah4.png" id="16_50n7h"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_1t4v7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_j5jbj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wu6dd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ww2t2")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_5ns8k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_kh042")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_muf8h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ngn8v")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_7advi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_hilyc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_loas4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_e4fff")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_drq55")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_hayvb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_stw67")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_50n7h")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

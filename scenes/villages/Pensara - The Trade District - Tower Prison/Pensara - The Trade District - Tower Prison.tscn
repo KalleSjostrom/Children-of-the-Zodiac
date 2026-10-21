@@ -1,0 +1,70 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/VillageScene.tscn" id="1_base"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Tower Prison/Pensara - The Trade District - Tower Prison.jpg" id="2_t84ca"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Tower Prison/top/0.png" id="3_cdv7e"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageSpawn.tscn" id="4_2jup1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4jeo3"]
+size = Vector2(30, 176)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wtldx"]
+size = Vector2(58, 117)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d2a7a"]
+size = Vector2(296, 112)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uox1v"]
+size = Vector2(79, 47)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yix4t"]
+size = Vector2(79, 47)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oc0fw"]
+size = Vector2(115, 103)
+
+[node name="Pensara - The Trade District - Tower Prison" instance=ExtResource("1_base")]
+place_name = "Pensara - The Trade District - Tower Prison"
+folder_name = "Pensara - The Trade District - Tower Prison"
+village_name = "Pensara - The Trade District - Tower Prison"
+background_folder = "Pensara - The Trade District - Tower Prison"
+size = Vector2i(1024, 768)
+actual_size = Vector2i(1024, 768)
+inside = true
+wind_force = PackedFloat64Array(0, 0, 0)
+
+[node name="Background" parent="." index="1"]
+texture = ExtResource("2_t84ca")
+
+[node name="00 0" type="Sprite2D" parent="Overhead" index="0"]
+use_parent_material = true
+position = Vector2(399, 456)
+texture = ExtResource("3_cdv7e")
+centered = false
+
+[node name="O000" type="CollisionShape2D" parent="Obstacles" index="0"]
+position = Vector2(384, 451)
+shape = SubResource("RectangleShape2D_4jeo3")
+
+[node name="O001" type="CollisionShape2D" parent="Obstacles" index="1"]
+position = Vector2(647, 523.5)
+shape = SubResource("RectangleShape2D_wtldx")
+
+[node name="O002" type="CollisionShape2D" parent="Obstacles" index="2"]
+position = Vector2(511, 307)
+shape = SubResource("RectangleShape2D_d2a7a")
+
+[node name="O003" type="CollisionShape2D" parent="Obstacles" index="3"]
+position = Vector2(583.5, 545.5)
+shape = SubResource("RectangleShape2D_uox1v")
+
+[node name="O004" type="CollisionShape2D" parent="Obstacles" index="4"]
+position = Vector2(438.5, 544.5)
+shape = SubResource("RectangleShape2D_yix4t")
+
+[node name="O005" type="CollisionShape2D" parent="Obstacles" index="5"]
+position = Vector2(617.5, 412.5)
+shape = SubResource("RectangleShape2D_oc0fw")
+
+[node name="00 start" parent="Spawns" index="0" instance=ExtResource("4_2jup1")]
+position = Vector2(490, 465)

@@ -1,0 +1,57 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/VillageScene.tscn" id="1_base"]
+[ext_resource type="Texture2D" path="res://scenes/villages/Dellna - Ana's Home Memory/Dellna - Ana's Home Memory.png" id="2_y1w1r"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna - Ana's Home Memory/top/4.png" id="3_l1xbt"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna - Ana's Home Memory/top/3.png" id="4_copqx"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna - Ana's Home Memory/top/0.png" id="5_5egp7"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna - Ana's Home Memory/top/1.png" id="6_atmkh"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna - Ana's Home Memory/top/2.png" id="7_mapub"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageSpawn.tscn" id="8_j5ls2"]
+
+[node name="Dellna - Ana\'s Home Memory" instance=ExtResource("1_base")]
+place_name = "Dellna - Ana's Home Memory"
+folder_name = "Dellna - Ana's Home Memory"
+village_name = "Dellna - Ana's Home Memory"
+background_folder = "Dellna - Ana's Home Memory"
+size = Vector2i(1024, 768)
+actual_size = Vector2i(1024, 768)
+inside = true
+wind_force = PackedFloat64Array(0, 0, 0)
+
+[node name="Background" parent="." index="1"]
+texture = ExtResource("2_y1w1r")
+
+[node name="00 4" type="Sprite2D" parent="Overhead" index="0"]
+use_parent_material = true
+position = Vector2(319, 457)
+texture = ExtResource("3_l1xbt")
+centered = false
+
+[node name="01 3" type="Sprite2D" parent="Overhead" index="1"]
+use_parent_material = true
+position = Vector2(320, 415)
+texture = ExtResource("4_copqx")
+centered = false
+
+[node name="02 0" type="Sprite2D" parent="Overhead" index="2"]
+use_parent_material = true
+position = Vector2(621, 289)
+texture = ExtResource("5_5egp7")
+centered = false
+
+[node name="03 1" type="Sprite2D" parent="Overhead" index="3"]
+use_parent_material = true
+position = Vector2(319, 363)
+texture = ExtResource("6_atmkh")
+centered = false
+
+[node name="04 2" type="Sprite2D" parent="Overhead" index="4"]
+use_parent_material = true
+position = Vector2(534, 363)
+texture = ExtResource("7_mapub")
+centered = false
+
+[node name="00 start" parent="Spawns" index="0" instance=ExtResource("8_j5ls2")]
+position = Vector2(886, 193)
+facing = 2

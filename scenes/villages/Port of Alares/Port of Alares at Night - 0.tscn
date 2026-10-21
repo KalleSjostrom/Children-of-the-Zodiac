@@ -1,0 +1,45 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Port of Alares/Port of Alares.tscn" id="1_base"]
+[ext_resource type="Texture2D" path="res://scenes/villages/Port of Alares/Port of Alares at Night.png" id="2_81k0x"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares/top/4.png" id="3_d3qw5"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares/top/0.png" id="4_lu46a"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares/top/1.png" id="5_n6obp"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares/top/2.png" id="6_3tq7n"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares/Port of Alares at Night - 1.png" id="7_p6ivo"]
+
+[node name="Port of Alares at Night - 0" instance=ExtResource("1_base")]
+folder_name = "Port of Alares"
+background_folder = "Port of Alares"
+day = false
+
+[node name="Background" parent="." index="1"]
+texture = ExtResource("2_81k0x")
+
+[node name="00 4" type="Sprite2D" parent="Overhead" index="0"]
+use_parent_material = true
+position = Vector2(41, 168)
+texture = ExtResource("3_d3qw5")
+centered = false
+
+[node name="01 0" type="Sprite2D" parent="Overhead" index="1"]
+use_parent_material = true
+position = Vector2(150, 0)
+texture = ExtResource("4_lu46a")
+centered = false
+
+[node name="02 1" type="Sprite2D" parent="Overhead" index="2"]
+use_parent_material = true
+position = Vector2(763, 29)
+texture = ExtResource("5_n6obp")
+centered = false
+
+[node name="03 2" type="Sprite2D" parent="Overhead" index="3"]
+use_parent_material = true
+position = Vector2(380, 62)
+texture = ExtResource("6_3tq7n")
+centered = false
+
+[node name="Night" parent="." index="4"]
+visible = true
+texture = ExtResource("7_p6ivo")

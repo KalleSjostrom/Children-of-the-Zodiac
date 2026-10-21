@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Polandera/Polandera9.png" id="1_1x1n3"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Polandera/Polandera10.png" id="2_2thlk"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Polandera/Polandera11.png" id="3_2v0qn"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Polandera/Polandera12.png" id="4_px0re"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Polandera/Polandera13.png" id="5_choat"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Polandera/Polandera14.png" id="6_qsyje"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Polandera/Polandera15.png" id="7_fyian"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Polandera/Polandera16.png" id="8_ujg36"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Polandera/Polandera5.png" id="9_7j7vv"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Polandera/Polandera6.png" id="10_unfoa"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Polandera/Polandera7.png" id="11_4pe2i"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Polandera/Polandera8.png" id="12_diuby"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Polandera/Polandera1.png" id="13_vv1xr"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Polandera/Polandera2.png" id="14_3ywq8"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Polandera/Polandera3.png" id="15_168c6"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Polandera/Polandera4.png" id="16_os7cj"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_1x1n3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_2thlk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2v0qn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_px0re")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_choat")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_qsyje")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_fyian")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ujg36")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_7j7vv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_unfoa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_4pe2i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_diuby")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_vv1xr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_3ywq8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_168c6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_os7cj")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

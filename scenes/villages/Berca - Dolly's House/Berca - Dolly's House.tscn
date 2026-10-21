@@ -1,0 +1,119 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/VillageScene.tscn" id="1_base"]
+[ext_resource type="Texture2D" path="res://scenes/villages/Berca - Dolly's House/Berca - Dolly's House.png" id="2_qxplb"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Dolly's House/top/0.png" id="3_jrwjl"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageSpawn.tscn" id="4_eud4l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dbido"]
+size = Vector2(32, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_777hn"]
+size = Vector2(143, 117)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m1vol"]
+size = Vector2(152, 119)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wpwkb"]
+size = Vector2(7, 132)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nqjsh"]
+size = Vector2(323, 430)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r7cah"]
+size = Vector2(25, 49)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ev6ee"]
+size = Vector2(20, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yg8x7"]
+size = Vector2(33, 49)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ohukh"]
+size = Vector2(340, 714)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_crek4"]
+size = Vector2(43, 108)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mk7ni"]
+size = Vector2(664, 285)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f8hgr"]
+size = Vector2(222, 36)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bgcj0"]
+size = Vector2(60, 14)
+
+[node name="Berca - Dolly\'s House" instance=ExtResource("1_base")]
+place_name = "Berca - Dolly's House"
+folder_name = "Berca - Dolly's House"
+village_name = "Berca - Dolly's House"
+background_folder = "Berca - Dolly's House"
+size = Vector2i(1024, 768)
+actual_size = Vector2i(1024, 768)
+inside = true
+wind_force = PackedFloat64Array(0, 0, 0)
+
+[node name="Background" parent="." index="1"]
+texture = ExtResource("2_qxplb")
+
+[node name="00 0" type="Sprite2D" parent="Overhead" index="0"]
+use_parent_material = true
+position = Vector2(342, 548)
+texture = ExtResource("3_jrwjl")
+centered = false
+
+[node name="O000" type="CollisionShape2D" parent="Obstacles" index="0"]
+position = Vector2(664, 296.5)
+shape = SubResource("RectangleShape2D_dbido")
+
+[node name="O001" type="CollisionShape2D" parent="Obstacles" index="1"]
+position = Vector2(412.5, 654.5)
+shape = SubResource("RectangleShape2D_777hn")
+
+[node name="O002" type="CollisionShape2D" parent="Obstacles" index="2"]
+position = Vector2(605, 655.5)
+shape = SubResource("RectangleShape2D_m1vol")
+
+[node name="O003" type="CollisionShape2D" parent="Obstacles" index="3"]
+position = Vector2(561.5, 351)
+shape = SubResource("RectangleShape2D_wpwkb")
+
+[node name="O004" type="CollisionShape2D" parent="Obstacles" index="4"]
+position = Vector2(843.5, 501)
+shape = SubResource("RectangleShape2D_nqjsh")
+
+[node name="O005" type="CollisionShape2D" parent="Obstacles" index="5"]
+position = Vector2(356.5, 496.5)
+shape = SubResource("RectangleShape2D_r7cah")
+
+[node name="O006" type="CollisionShape2D" parent="Obstacles" index="6"]
+position = Vector2(584, 294)
+shape = SubResource("RectangleShape2D_ev6ee")
+
+[node name="O007" type="CollisionShape2D" parent="Obstacles" index="7"]
+position = Vector2(624.5, 310.5)
+shape = SubResource("RectangleShape2D_yg8x7")
+
+[node name="O008" type="CollisionShape2D" parent="Obstacles" index="8"]
+position = Vector2(171, 358)
+shape = SubResource("RectangleShape2D_ohukh")
+
+[node name="O009" type="CollisionShape2D" parent="Obstacles" index="9"]
+position = Vector2(506.5, 657)
+shape = SubResource("RectangleShape2D_crek4")
+
+[node name="O010" type="CollisionShape2D" parent="Obstacles" index="10"]
+position = Vector2(674, 142.5)
+shape = SubResource("RectangleShape2D_mk7ni")
+
+[node name="O011" type="CollisionShape2D" parent="Obstacles" index="11"]
+position = Vector2(453, 435)
+shape = SubResource("RectangleShape2D_f8hgr")
+
+[node name="O012" type="CollisionShape2D" parent="Obstacles" index="12"]
+position = Vector2(532, 461)
+shape = SubResource("RectangleShape2D_bgcj0")
+
+[node name="00 start" parent="Spawns" index="0" instance=ExtResource("4_eud4l")]
+position = Vector2(496, 540)

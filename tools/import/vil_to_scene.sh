@@ -10,9 +10,12 @@
 set -u
 PROJ="$(cd "$(dirname "$0")/../.." && pwd)"
 GODOT="${GODOT:-/c/Users/c06ks/Work/Godot/Godot_v4.7-stable_win64_console.exe}"
+# J.parseInt's own error report (with its backtrace) is left out: the
+# converter names such tokens in a warning with the file and line.
 run() {
   "$GODOT" --headless --path "$PROJ" --script res://tools/import/vil_to_scene.gd -- "$@" < /dev/null 2>&1 \
-    | grep -v "^Godot Engine\|^$"
+    | grep -v "^Godot Engine\|^$" \
+    | grep -Ev "^ERROR: J\.parseInt: not an int|^   at: push_error|^   GDScript backtrace|^       \[[0-9]+\] "
 }
 if [[ " $* " != *" --data-only "* ]]; then
   run --stage=art "$@" || exit 1

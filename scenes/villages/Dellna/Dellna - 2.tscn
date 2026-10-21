@@ -1,0 +1,111 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Dellna/Dellna.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/ActorView.tscn" id="2_n5hpy"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Dellna/Eno.tres" id="3_u5f0t"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Dellna/Haness.tres" id="4_f7kjr"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Dellna/Helen.tres" id="5_4ajrk"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Dellna/Marlo.tres" id="6_pv0c7"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Dellna/Math.tres" id="7_qotqf"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Dellna/Melker.tres" id="8_hxtui"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Dellna/Ribby.tres" id="9_k26oy"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Dellna/Merchant Tori.tres" id="10_jkslc"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Dellna/Ulph.tres" id="11_rnoih"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Dellna/Wilko.tres" id="12_7orpc"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageSpawn.tscn" id="13_30f23"]
+
+[node name="Dellna - 2" instance=ExtResource("1_base")]
+
+[node name="00 Eno" parent="Actors" index="0" instance=ExtResource("2_n5hpy")]
+position = Vector2(1650, 750)
+sprite_frames = ExtResource("3_u5f0t")
+animation = &"up"
+role = 1
+villager_name = "Eno"
+statuses = PackedInt32Array()
+villager_folder = "Dellna"
+
+[node name="01 Haness" parent="Actors" index="1" instance=ExtResource("2_n5hpy")]
+position = Vector2(997, 923)
+sprite_frames = ExtResource("4_f7kjr")
+animation = &"down"
+role = 1
+villager_name = "Haness"
+statuses = PackedInt32Array()
+villager_folder = "Dellna"
+
+[node name="02 Helen" parent="Actors" index="2" instance=ExtResource("2_n5hpy")]
+position = Vector2(220, 785)
+sprite_frames = ExtResource("5_4ajrk")
+animation = &"down"
+role = 1
+villager_name = "Helen"
+statuses = PackedInt32Array()
+villager_folder = "Dellna"
+
+[node name="03 Marlo" parent="Actors" index="3" instance=ExtResource("2_n5hpy")]
+position = Vector2(660, 1160)
+sprite_frames = ExtResource("6_pv0c7")
+animation = &"down"
+role = 1
+villager_name = "Marlo"
+statuses = PackedInt32Array()
+villager_folder = "Dellna"
+
+[node name="04 Math" parent="Actors" index="4" instance=ExtResource("2_n5hpy")]
+position = Vector2(215, 1115)
+sprite_frames = ExtResource("7_qotqf")
+animation = &"down"
+role = 1
+villager_name = "Math"
+statuses = PackedInt32Array()
+villager_folder = "Dellna"
+
+[node name="05 Melker" parent="Actors" index="5" instance=ExtResource("2_n5hpy")]
+position = Vector2(60, 430)
+sprite_frames = ExtResource("8_hxtui")
+animation = &"down"
+role = 1
+villager_name = "Melker"
+statuses = PackedInt32Array()
+villager_folder = "Dellna"
+
+[node name="06 Ribby" parent="Actors" index="6" instance=ExtResource("2_n5hpy")]
+position = Vector2(35, 850)
+sprite_frames = ExtResource("9_k26oy")
+animation = &"down"
+role = 1
+villager_name = "Ribby"
+statuses = PackedInt32Array()
+villager_folder = "Dellna"
+
+[node name="07 Tori" parent="Actors" index="7" instance=ExtResource("2_n5hpy")]
+position = Vector2(597, 623)
+sprite_frames = ExtResource("10_jkslc")
+animation = &"down"
+role = 1
+villager_name = "Tori"
+statuses = PackedInt32Array()
+villager_folder = "Dellna"
+
+[node name="08 Ulph" parent="Actors" index="8" instance=ExtResource("2_n5hpy")]
+position = Vector2(1075, 975)
+sprite_frames = ExtResource("11_rnoih")
+animation = &"right"
+role = 1
+villager_name = "Ulph"
+statuses = PackedInt32Array()
+villager_folder = "Dellna"
+
+[node name="09 Wilko" parent="Actors" index="9" instance=ExtResource("2_n5hpy")]
+position = Vector2(1265, 620)
+sprite_frames = ExtResource("12_7orpc")
+animation = &"down"
+role = 1
+villager_name = "Wilko"
+statuses = PackedInt32Array()
+villager_folder = "Dellna"
+
+[node name="00 start0" parent="Spawns" index="0" instance=ExtResource("13_30f23")]
+position = Vector2(400, 1200)
+number = 0

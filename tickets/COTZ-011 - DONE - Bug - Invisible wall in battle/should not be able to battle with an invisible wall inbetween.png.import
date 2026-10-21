@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bu8rs2po8wwyr"
-path="res://.godot/imported/should not be able to battle with an invisible wall inbetween.png-b8b6594cb55e772c814b5f6027de901e.ctex"
+path="res://.godot/imported/should not be able to battle with an invisible wall inbetween.png-2117f911a8fa6736fc02243d312fb9f1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tickets/COTZ-011 - Bug - Invisible wall in battle/should not be able to battle with an invisible wall inbetween.png"
-dest_files=["res://.godot/imported/should not be able to battle with an invisible wall inbetween.png-b8b6594cb55e772c814b5f6027de901e.ctex"]
+source_file="res://tickets/COTZ-011 - DONE - Bug - Invisible wall in battle/should not be able to battle with an invisible wall inbetween.png"
+dest_files=["res://.godot/imported/should not be able to battle with an invisible wall inbetween.png-2117f911a8fa6736fc02243d312fb9f1.ctex"]
 
 [params]
 

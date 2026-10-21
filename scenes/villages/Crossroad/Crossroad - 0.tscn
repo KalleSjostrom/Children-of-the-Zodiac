@@ -1,0 +1,46 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Crossroad/Crossroad.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageSpawn.tscn" id="2_pcnt0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nl06m"]
+size = Vector2(29, 42)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ouia1"]
+size = Vector2(29, 42)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8wef4"]
+size = Vector2(29, 42)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_umokl"]
+size = Vector2(29, 42)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w1qo8"]
+size = Vector2(19, 30)
+
+[node name="Crossroad - 0" instance=ExtResource("1_base")]
+
+[node name="V000" type="CollisionShape2D" parent="Obstacles" index="0"]
+position = Vector2(848.5, 282)
+shape = SubResource("RectangleShape2D_nl06m")
+
+[node name="V001" type="CollisionShape2D" parent="Obstacles" index="1"]
+position = Vector2(445.5, 247)
+shape = SubResource("RectangleShape2D_ouia1")
+
+[node name="V002" type="CollisionShape2D" parent="Obstacles" index="2"]
+position = Vector2(801.5, 545)
+shape = SubResource("RectangleShape2D_8wef4")
+
+[node name="V003" type="CollisionShape2D" parent="Obstacles" index="3"]
+position = Vector2(163.5, 154)
+shape = SubResource("RectangleShape2D_umokl")
+
+[node name="V004" type="CollisionShape2D" parent="Obstacles" index="4"]
+position = Vector2(570.5, 375)
+shape = SubResource("RectangleShape2D_w1qo8")
+
+[node name="00 start0" parent="Spawns" index="0" instance=ExtResource("2_pcnt0")]
+position = Vector2(0, 368)
+number = 0
+facing = 1

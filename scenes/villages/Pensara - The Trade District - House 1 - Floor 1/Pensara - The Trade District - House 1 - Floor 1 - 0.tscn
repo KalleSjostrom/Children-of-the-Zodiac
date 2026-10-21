@@ -1,0 +1,55 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Pensara - The Trade District - House 1 - Floor 1/Pensara - The Trade District - House 1 - Floor 1.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/ActorView.tscn" id="2_trqbg"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The Trade District - House 1 - Floor 1/Sarah.tres" id="3_oaetl"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The Trade District - House 1 - Floor 1/Ylwa.tres" id="4_rtvoi"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="5_8nyb5"]
+
+[node name="Pensara - The Trade District - House 1 - Floor 1 - 0" instance=ExtResource("1_base")]
+
+[node name="00 Sarah" parent="Actors" index="0" instance=ExtResource("2_trqbg")]
+position = Vector2(450, 280)
+sprite_frames = ExtResource("3_oaetl")
+animation = &"down"
+role = 1
+villager_name = "Sarah"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The Trade District - House 1 - Floor 1"
+
+[node name="01 Ylwa" parent="Actors" index="1" instance=ExtResource("2_trqbg")]
+position = Vector2(430, 300)
+sprite_frames = ExtResource("4_rtvoi")
+animation = &"down"
+role = 1
+villager_name = "Ylwa"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The Trade District - House 1 - Floor 1"
+
+[node name="02 Piano" parent="Actors" index="2" instance=ExtResource("2_trqbg")]
+position = Vector2(375, 427)
+role = 1
+villager_name = "Piano"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The Trade District - House 1 - Floor 1"
+
+[node name="00 Pensara_-_The_Trade_District" parent="Doors" index="0" instance=ExtResource("5_8nyb5")]
+position = Vector2(465, 570)
+hole = true
+kinds = PackedStringArray("switch")
+targets = PackedStringArray("Pensara_-_The_Trade_District")
+directions = PackedInt32Array(2)
+fade = 1
+to_pos = PackedFloat64Array(761, 1503, 2, -1)
+sign_lines = PackedStringArray()
+
+[node name="01 Pensara_-_The_Trade_District_-_House_1_-_Floor_2" parent="Doors" index="1" instance=ExtResource("5_8nyb5")]
+position = Vector2(592, 520)
+hole = true
+kinds = PackedStringArray("house")
+targets = PackedStringArray("Pensara_-_The_Trade_District_-_House_1_-_Floor_2")
+radius = 25
+directions = PackedInt32Array(0)
+fade = 0
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray()

@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hippo/Hippo9.png" id="1_gb7e4"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hippo/Hippo10.png" id="2_lt6vo"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hippo/Hippo11.png" id="3_uw127"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hippo/Hippo12.png" id="4_qllpn"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hippo/Hippo13.png" id="5_86obq"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hippo/Hippo14.png" id="6_mk4qe"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hippo/Hippo15.png" id="7_wlrvj"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hippo/Hippo16.png" id="8_i7du0"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hippo/Hippo5.png" id="9_dtj52"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hippo/Hippo6.png" id="10_qy5of"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hippo/Hippo7.png" id="11_ok50f"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hippo/Hippo8.png" id="12_t2nh4"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hippo/Hippo1.png" id="13_xh0xa"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hippo/Hippo2.png" id="14_7lk6x"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hippo/Hippo3.png" id="15_mrkxd"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hippo/Hippo4.png" id="16_u7ppm"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_gb7e4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_lt6vo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_uw127")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qllpn")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_86obq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_mk4qe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_wlrvj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_i7du0")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_dtj52")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_qy5of")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ok50f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_t2nh4")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_xh0xa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_7lk6x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_mrkxd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_u7ppm")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

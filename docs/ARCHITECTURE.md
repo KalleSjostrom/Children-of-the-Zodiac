@@ -238,10 +238,10 @@ Game options go after `--` on the command line (see the header of
 | Flag | Effect |
 |---|---|
 | `--fixed-step` | The game advances exactly 1000/60 ms per frame, whatever the real frame time. |
-| `--seed=<n>` | Deterministic run (implies `--fixed-step`): every random generator (`J`, every `JRandom`, Godot's global one) is seeded from `n`; `J.currentTimeMillis()`, `Scheduler` and `GameAction` read a game clock advanced by the elapsed game time instead of the wall clock; saves are read from the shipped files and written to `user://saves_deterministic/` (emptied at start), never to the player's `user://saves/`. Two runs of an AutoPlay script then produce the same frames. |
+| `--seed=<n>` | Deterministic run (implies `--fixed-step`): every random generator (`J`, every `JRandom`, Godot's global one) is seeded from `n`; `J.currentTimeMillis()`, `Scheduler` and `GameAction` read a game clock advanced by the elapsed game time instead of the wall clock; saves are read from the shipped files and written to `user://saves_deterministic/` (emptied at start), never to the player's `user://saves/`; no game pad is read (`GameCore.init2`: an idle pad releases AutoPlay's buttons every 40 ms). Two runs of an AutoPlay script then produce the same frames. |
 | `--uncapped` | No 60 FPS cap and no vsync. With `--seed` the result is the same, only faster. |
 | `--legacy=<a,b,…>` | Keep the legacy path of the listed subsystems (`Main.is_legacy`). `all` keeps every one. `villages`: converted places are read from their `.vil` files and drawn by the legacy code (section 9). `village_top_layer`: the scene draws a roof or treetop only where a sprite overlaps it, as the legacy code does (for parity; by default it always draws them). |
-| `--bridge-test` | Dev only: unconverted villages show `tools/bridge_test/BridgeTest.tscn` instead of their background tiles (section 8). |
+| `--bridge-test` | Dev only: the world map shows `tools/bridge_test/BridgeTest.tscn` instead of its background tiles (section 8). |
 | `--start-time=<day\|night>` | Dev only: the first place starts at this time of day (its info `time`): villages load their "at Night" variant, which no story reaches for most places. |
 | `--status=<name>:<value>,…` | Dev only: Database statuses set after the save is loaded, before the first mode (`_` stands for a space), e.g. a village status for a story the shipped saves cannot reach. |
 
@@ -258,14 +258,21 @@ root). Cases (AutoPlay script + game arguments) are listed in
 and by Godot's importer).
 
 ```
-tools/parity/parity.sh record golden               # all cases, current code
-tools/parity/parity.sh record after                # after a change
-tools/parity/parity.sh compare golden after        # diff images + summary
+tools/parity/parity.sh record golden --jobs=5       # all cases, current code
+tools/parity/parity.sh record after 'tour_*'        # a group, after a change
+tools/parity/parity.sh compare golden after         # diff images + summary
 tools/parity/parity.sh ab "--legacy=villages" "" village village_walk
 ```
 
 * `record <set> [case…]` runs each case windowed (screenshots need a
-  renderer; never `--headless`) and keeps the shots and the log.
+  renderer; never `--headless`) and keeps the shots and the log. A case
+  name may be a pattern (`'tour_*'`, `'story_*'`: the groups of
+  `cases.txt`). `--jobs=<n>` runs n cases at a time, each job with its own
+  user data folder (`APPDATA` = `out/.userdata/<set>-job<k>`), so that the
+  deterministic saves of concurrent runs do not mix; the shots are the same
+  as from one job at a time (checked: Zazo's 113 shots). The keyboard still
+  reaches a run's window when it has the focus (a new window takes it):
+  do not type while recording.
 * `compare <a> <b> [case…]` compares the shots pixel by pixel
   (`tools/parity/diff_shots.gd`, headless Godot, no Python needed) and the
   AutoPlay state lines of the logs (mode, sub mode, place; fps removed).
@@ -280,7 +287,14 @@ tools/parity/parity.sh ab "--legacy=villages" "" village village_walk
 * `ab "<args a>" "<args b>" [case…]` records and compares in one go.
 * AutoPlay's `pos [text]` prints the player's village position, facing and
   the background scroll (village pixels), for planning routes; it adds its
-  own log lines and leaves the others unchanged.
+  own log lines and leaves the others unchanged. `heading` remembers the
+  player's facing for the buttons `AHEAD`, `BEHIND`, `ALEFT`, `ARIGHT`, and
+  `guard <px>` lets go of a held direction before the player would leave
+  the village (its edge, or a hole door that opens that way): together they
+  give one walk for every village (`tools/autoplay/village_tour.txt`).
+  A shot taken while a cutscene zoom is applied also prints
+  `[zoom] <shot> scale=<s>` (not compared): the shots a zoom resamples,
+  where the legacy drawing magnifies each 256 px tile on its own.
 
 Workflow for a change that must not alter the picture:
 
@@ -300,22 +314,33 @@ were recorded with; record both sides of a comparison on the same machine.
 
 ## 8. The bridge test
 
-`--bridge-test` (with `--load="Slot 1" --start=Alares`, script
+`--bridge-test` (with `--load="Slot 1" --start=landAlares`, script
 `tools/autoplay/bridge_test.txt`, parity case `bridge_test`) makes
-`Village.create_scene()` of an unconverted village (a converted one shows
-its own scene) return `tools/bridge_test/BridgeTest.tscn`: a
+`Landscape.create_scene()` return `tools/bridge_test/BridgeTest.tscn`: a
 full-screen panel with a grid, a label counting the frames the node has
-processed, and a current `Camera2D` with offset (48, 32). The village then
-skips only its background tiles; sprites, roofs and treetops, the particle
-systems, emotions, dialogs and fades are still drawn by legacy code, on top.
-It is the template for phase 1's village scenes and the regression test for
-the bridge: run it after changing Main, GameMode, GLBackend or the
-Organizer.
+processed, and a current `Camera2D` with offset (48, 32). The world map
+then skips only its background tiles; the roads, nodes, player, top layer,
+node name and fades are still drawn by legacy code, on top. The script
+walks a road, opens the menu (the scene leaves the tree and keeps its
+state), comes back (the counter continues), enters Grivera (the fade-out
+covers the scene) and opens the menu in the labyrinth: that mode switch
+drops the world map, which frees the scene ("BridgeTest: freed" in the
+log). It is the regression test for the bridge: run it after changing
+Main, GameMode, GLBackend or the Organizer.
+
+The test used Alares until phase 1; since every village has its own scene,
+it uses the world map, which stays legacy until phase 4.1. Freeing needed a
+port fix: `LandscapeLoader` kept its map loader, which refers back to it,
+and that reference cycle kept every world map mode alive after it was left
+(`AirLandscapeLoader` has the same cycle; not fixed, the airship has no
+scene).
 
 ## 9. Villages as scenes (phase 1)
 
-Pilot: Zazo (four `.vil` variants) and "Zazo - Miner's Home" are converted
-through steps A and B. How to convert the next place:
+Every place of `maps/Village` (63 places, 89 `.vil` variants) is converted
+through steps A and B: the pilot (Zazo, "Zazo - Miner's Home") and the
+rollout. The `.vil` files stay (decision 5): the converter, the data check
+and `--legacy=villages` read them. How to convert a place again:
 `docs/CONVERTING_VILLAGES.md`.
 
 **Layout.** Every village scene inherits `scenes/villages/VillageScene.tscn`
@@ -324,7 +349,7 @@ through steps A and B. How to convert the next place:
 | Node | Content |
 |---|---|
 | `Ground` | bottom-layer particle systems (`LegacyParticles2D`); the legacy code draws them before the tiles, so they only show through transparent parts of the background |
-| `Background` | `Sprite2D`, the stitched background (`<Place>/<image>.png`, at the `offset` line's shift) |
+| `Background` | `Sprite2D`, the stitched background (`<Place>/<image>.png`, at the `offset` line's shift), or the image itself when it has no tile folder |
 | `Actors` | `ActorView`s (villagers, animated objects; party members and cutscene actors are added at run time), villager-layer `LegacyParticles2D`, the cutscene `StoryImage` |
 | `Overhead` | one `Sprite2D` per `top/top.info` line, in file order; the node's material is the 0.9 alpha test |
 | `Night` | the night layer (`Sprite2D`, scale 2, alpha test 0); `night_screen_fixed` for `standardOvernight.png` |
@@ -333,12 +358,14 @@ through steps A and B. How to convert the next place:
 | `Spawns`, `Doors`, `Signs`, `Loot` | `VillageSpawn`, `VillageDoor`, `VillageSign`, `VillageLoot` in file order (the first door or sign in range wins) |
 | `Camera` | `Camera2D`, top-left anchor |
 
-`<Place>/<Place>.tscn` (base) inherits the template and holds what every
-variant shares: the root values they agree on, the background and top
-layer when they are the same, the obstacles all of them have (as a
-multiset) and the spawns when they are identical. One scene per `.vil`
+`<Place>/<Place>.tscn` (base) inherits the template and holds what the
+variants share: the root values they agree on, the background most of them
+draw, the top layer when all have the same, the obstacles all of them have
+(as a multiset) and the spawns when they are identical. One scene per `.vil`
 file inherits the base, named like it (`Zazo at Night - 1.tscn`), and adds
-the rest. `VillageScene.path_for(vil)` maps a `.vil` file to its scene.
+the rest; a variant that draws another background (Dellna2, Parasne1, Port
+of Alares - With Boat, a night image of its own) overrides the inherited
+`Background` node, and one with another top layer adds its own pieces. `VillageScene.path_for(vil)` maps a `.vil` file to its scene.
 Markers (doors, signs, loot, spawns, particle emitters) draw in the editor
 and with `--debug-collisions`.
 
@@ -348,11 +375,16 @@ tokenizer and parsers, records every command into typed node properties
 (text lines exactly as the legacy loader cuts them, floats as 64-bit
 values), and writes:
 
-* the art stage: the stitched backgrounds (tile pixels as imported, saved as
-  PNG with an `.import` file: lossless, no mipmaps, no alpha-border fix,
-  kept when it already has these settings) and one `SpriteFrames` per
-  villager image set (`up`, `right`, `down`, `left`, 4 images each, 150 ms)
-  and per `animObj` series (`default`);
+* the art stage: the stitched backgrounds (the tiles `DoubleBackground`
+  draws: `x<i>y<j>` up to the `back … as=` size, PNG tiles with their alpha;
+  tile pixels as imported, saved as PNG with an `.import` file: lossless,
+  no mipmaps, no alpha-border fix, kept when it already has these settings;
+  a background from another place's art folder goes into that place's
+  folder, so it is stitched once; a background without a tile folder is
+  not copied: the scene uses the image, which `DoubleBackground.cutImage2`
+  cuts in memory) and one `SpriteFrames` per villager image set (`up`,
+  `right`, `down`, `left`, 4 images each, 150 ms) and per `animObj` series
+  (`default`);
 * Godot's import of the new images (`--import`);
 * the scene stage: inherited scenes are built from a bootstrap file that
   names the base (`[node … instance=ExtResource(base)]`), instanced with an
@@ -402,7 +434,11 @@ draws it; the legacy objects stay in charge.
   frame. `Graphics.alpha_threshold()` reads the current alpha test.
 * `Actors` does not y-sort while it mirrors: `show_actors` orders the
   children as the legacy sort did (equal y, the special sort keys of
-  particle systems and cutscene props).
+  particle systems and cutscene props). A sprite the legacy code draws
+  twice in a frame gets a second view: a cutscene prop that the timeline
+  adds to the village's layers (`addspritetobottomlayer` /
+  `addspritetotoplayer`, "Arrival at the Port Town of Parasne") is drawn
+  among the village's sprites and again as an actor.
 * The camera's position is the negated scroll; a cutscene zoom around a
   static position is the camera zoom with position
   `-scroll + center * (1 - 1 / zoom)`. Screen-space legacy images (the
@@ -417,6 +453,13 @@ draws it; the legacy objects stay in charge.
   the zoom and the `setFadeColor` tint. The image modes drawn over the
   emotion bubbles (cover-all, story image, village image, translucent over
   actor) stay in the legacy overlay, as do emotions, dialogs, texts and
-  fades.
+  fades. A scaled image covers the rectangle the legacy drawing covers
+  (`GameTexture.drawPart` truncates its far corner to whole pixels), so its
+  scale is per axis (`VillageStoryTimeLine.image_entry`).
+* A cutscene zoom resamples the frame: the legacy drawing magnifies each
+  256 px tile on its own (seams show), the scene magnifies the stitched
+  background, so zoomed frames differ by bilinear rounding (plan 6.7, 6.8).
+  After a zoom out the scale stays 1.00007, so the rest of such a cutscene
+  differs slightly too; AutoPlay's `[zoom]` lines name these shots.
 * `LegacyParticles2D` draws the quads that the legacy draw would draw, one
   canvas item per legacy system (its blending), until a GPU preset matches.

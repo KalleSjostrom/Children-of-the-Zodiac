@@ -1,0 +1,14 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Vincents Office/animobj/desk/desk1.png" id="1_uk1jb"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_uk1jb")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 6.666666666666667
+}]

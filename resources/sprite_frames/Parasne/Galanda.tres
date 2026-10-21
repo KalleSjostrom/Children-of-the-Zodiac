@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Galanda/Galanda9.png" id="1_i5qom"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Galanda/Galanda10.png" id="2_xb8rb"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Galanda/Galanda11.png" id="3_gtkis"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Galanda/Galanda12.png" id="4_df5y3"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Galanda/Galanda13.png" id="5_aq8g1"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Galanda/Galanda14.png" id="6_s5iq8"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Galanda/Galanda15.png" id="7_8s88g"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Galanda/Galanda16.png" id="8_6so28"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Galanda/Galanda5.png" id="9_k4ray"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Galanda/Galanda6.png" id="10_menpk"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Galanda/Galanda7.png" id="11_4327x"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Galanda/Galanda8.png" id="12_qj0ka"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Galanda/Galanda1.png" id="13_pexnv"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Galanda/Galanda2.png" id="14_a1nnw"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Galanda/Galanda3.png" id="15_gjib8"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Galanda/Galanda4.png" id="16_uyknm"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_i5qom")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_xb8rb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_gtkis")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_df5y3")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_aq8g1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_s5iq8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_8s88g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_6so28")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_k4ray")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_menpk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_4327x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_qj0ka")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_pexnv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_a1nnw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_gjib8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_uyknm")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

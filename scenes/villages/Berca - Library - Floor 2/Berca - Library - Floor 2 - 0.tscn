@@ -1,0 +1,27 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Berca - Library - Floor 2/Berca - Library - Floor 2.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/ActorView.tscn" id="2_ox6ih"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Berca - Library - Floor 2/Garli.tres" id="3_byyto"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="4_dbmbu"]
+
+[node name="Berca - Library - Floor 2 - 0" instance=ExtResource("1_base")]
+
+[node name="00 Garli" parent="Actors" index="0" instance=ExtResource("2_ox6ih")]
+position = Vector2(550, 250)
+sprite_frames = ExtResource("3_byyto")
+animation = &"down"
+role = 1
+villager_name = "Garli"
+statuses = PackedInt32Array()
+villager_folder = "Berca - Library - Floor 2"
+
+[node name="00 Berca_-_Library_-_Floor_1" parent="Doors" index="0" instance=ExtResource("4_dbmbu")]
+position = Vector2(496, 328)
+hole = true
+kinds = PackedStringArray("switch")
+targets = PackedStringArray("Berca_-_Library_-_Floor_1")
+directions = PackedInt32Array(2)
+fade = 2
+to_pos = PackedFloat64Array(464, 496, 2, -1)
+sign_lines = PackedStringArray()

@@ -1,0 +1,107 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/VillageScene.tscn" id="1_base"]
+[ext_resource type="Texture2D" path="res://scenes/villages/Dellna/Dellna.png" id="2_2wvqo"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/top/0.png" id="3_rfv4s"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/top/2.png" id="4_p3drm"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/top/3.png" id="5_3t287"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/top/4.png" id="6_u3xk7"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/top/5.png" id="7_0r121"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/top/6.png" id="8_ntmwe"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/top/7.png" id="9_l4xbq"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/top/10.png" id="10_klp6u"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/top/11.png" id="11_tlw0d"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/top/12.png" id="12_vjbwa"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/top/13.png" id="13_r5i4h"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/top/14.png" id="14_welph"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/top/15.png" id="15_4y74i"]
+
+[node name="Dellna" instance=ExtResource("1_base")]
+place_name = "Dellna"
+folder_name = "Dellna"
+village_name = "Dellna"
+background_folder = "Dellna"
+size = Vector2i(1727, 1262)
+actual_size = Vector2i(1727, 1262)
+wind_force = PackedFloat64Array(0, 0, 0)
+
+[node name="Background" parent="." index="1"]
+texture = ExtResource("2_2wvqo")
+
+[node name="00 0" type="Sprite2D" parent="Overhead" index="0"]
+use_parent_material = true
+position = Vector2(305, 232)
+texture = ExtResource("3_rfv4s")
+centered = false
+
+[node name="01 2" type="Sprite2D" parent="Overhead" index="1"]
+use_parent_material = true
+position = Vector2(1345, 232)
+texture = ExtResource("4_p3drm")
+centered = false
+
+[node name="02 3" type="Sprite2D" parent="Overhead" index="2"]
+use_parent_material = true
+position = Vector2(1173, 356)
+texture = ExtResource("5_3t287")
+centered = false
+
+[node name="03 4" type="Sprite2D" parent="Overhead" index="3"]
+use_parent_material = true
+position = Vector2(594, 412)
+texture = ExtResource("6_u3xk7")
+centered = false
+
+[node name="04 5" type="Sprite2D" parent="Overhead" index="4"]
+use_parent_material = true
+position = Vector2(918, 505)
+texture = ExtResource("7_0r121")
+centered = false
+
+[node name="05 6" type="Sprite2D" parent="Overhead" index="5"]
+use_parent_material = true
+position = Vector2(14, 585)
+texture = ExtResource("8_ntmwe")
+centered = false
+
+[node name="06 7" type="Sprite2D" parent="Overhead" index="6"]
+use_parent_material = true
+position = Vector2(980, 814)
+texture = ExtResource("9_l4xbq")
+centered = false
+
+[node name="07 10" type="Sprite2D" parent="Overhead" index="7"]
+use_parent_material = true
+position = Vector2(1496, 848)
+texture = ExtResource("10_klp6u")
+centered = false
+
+[node name="08 11" type="Sprite2D" parent="Overhead" index="8"]
+use_parent_material = true
+position = Vector2(80, 936)
+texture = ExtResource("11_tlw0d")
+centered = false
+
+[node name="09 12" type="Sprite2D" parent="Overhead" index="9"]
+use_parent_material = true
+position = Vector2(550, 942)
+texture = ExtResource("12_vjbwa")
+centered = false
+
+[node name="10 13" type="Sprite2D" parent="Overhead" index="10"]
+use_parent_material = true
+position = Vector2(0, 950)
+texture = ExtResource("13_r5i4h")
+centered = false
+
+[node name="11 14" type="Sprite2D" parent="Overhead" index="11"]
+use_parent_material = true
+position = Vector2(0, 970)
+texture = ExtResource("14_welph")
+centered = false
+
+[node name="12 15" type="Sprite2D" parent="Overhead" index="12"]
+use_parent_material = true
+position = Vector2(760, 1033)
+texture = ExtResource("15_4y74i")
+centered = false

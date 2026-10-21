@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTthief/GTthief9.png" id="1_risnr"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTthief/GTthief10.png" id="2_whdtg"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTthief/GTthief11.png" id="3_njgm1"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTthief/GTthief12.png" id="4_n7hhp"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTthief/GTthief13.png" id="5_wlh5e"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTthief/GTthief14.png" id="6_nu0cx"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTthief/GTthief15.png" id="7_uukfq"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTthief/GTthief16.png" id="8_1xyay"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTthief/GTthief5.png" id="9_5f4nt"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTthief/GTthief6.png" id="10_jo1nt"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTthief/GTthief7.png" id="11_qrohs"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTthief/GTthief8.png" id="12_tbsw6"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTthief/GTthief1.png" id="13_ya8a6"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTthief/GTthief2.png" id="14_traew"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTthief/GTthief3.png" id="15_aq103"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTthief/GTthief4.png" id="16_t2hvp"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_risnr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_whdtg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_njgm1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_n7hhp")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_wlh5e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_nu0cx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_uukfq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_1xyay")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_5f4nt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_jo1nt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_qrohs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_tbsw6")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_ya8a6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_traew")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_aq103")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_t2hvp")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

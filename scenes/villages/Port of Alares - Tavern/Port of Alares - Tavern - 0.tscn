@@ -1,0 +1,47 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Port of Alares - Tavern/Port of Alares - Tavern.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/ActorView.tscn" id="2_6ff5w"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Port of Alares - Tavern/Earl.tres" id="3_xcb61"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Port of Alares - Tavern/Felix.tres" id="4_a28qn"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Port of Alares - Tavern/Herb.tres" id="5_r0g46"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="6_gl1sm"]
+
+[node name="Port of Alares - Tavern - 0" instance=ExtResource("1_base")]
+
+[node name="00 Earl" parent="Actors" index="0" instance=ExtResource("2_6ff5w")]
+position = Vector2(655, 440)
+sprite_frames = ExtResource("3_xcb61")
+animation = &"left"
+role = 1
+villager_name = "Earl"
+statuses = PackedInt32Array()
+villager_folder = "Port of Alares - Tavern"
+
+[node name="01 Felix" parent="Actors" index="1" instance=ExtResource("2_6ff5w")]
+position = Vector2(348, 300)
+sprite_frames = ExtResource("4_a28qn")
+animation = &"up"
+role = 1
+villager_name = "Felix"
+statuses = PackedInt32Array()
+villager_folder = "Port of Alares - Tavern"
+
+[node name="02 Herb" parent="Actors" index="2" instance=ExtResource("2_6ff5w")]
+position = Vector2(575, 290)
+sprite_frames = ExtResource("5_r0g46")
+animation = &"down"
+role = 1
+villager_name = "Herb"
+statuses = PackedInt32Array()
+villager_folder = "Port of Alares - Tavern"
+
+[node name="00 Port_of_Alares" parent="Doors" index="0" instance=ExtResource("6_gl1sm")]
+position = Vector2(413, 563)
+hole = true
+kinds = PackedStringArray("switch")
+targets = PackedStringArray("Port_of_Alares")
+directions = PackedInt32Array(2)
+fade = 1
+to_pos = PackedFloat64Array(189, 810, 2, -1)
+sign_lines = PackedStringArray()

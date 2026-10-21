@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Berca - House/villagers/Yolly/Yolly9.png" id="1_ian1g"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - House/villagers/Yolly/Yolly10.png" id="2_xd242"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - House/villagers/Yolly/Yolly11.png" id="3_7fwhh"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - House/villagers/Yolly/Yolly12.png" id="4_12ypf"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - House/villagers/Yolly/Yolly13.png" id="5_lncms"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - House/villagers/Yolly/Yolly14.png" id="6_x4ndp"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - House/villagers/Yolly/Yolly15.png" id="7_h5in7"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - House/villagers/Yolly/Yolly16.png" id="8_vtfgd"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - House/villagers/Yolly/Yolly5.png" id="9_a5ovn"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - House/villagers/Yolly/Yolly6.png" id="10_c4bm6"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - House/villagers/Yolly/Yolly7.png" id="11_lp6dn"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - House/villagers/Yolly/Yolly8.png" id="12_u1q14"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - House/villagers/Yolly/Yolly1.png" id="13_wkg6e"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - House/villagers/Yolly/Yolly2.png" id="14_xt6de"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - House/villagers/Yolly/Yolly3.png" id="15_jf0k0"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - House/villagers/Yolly/Yolly4.png" id="16_hiql1"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ian1g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_xd242")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_7fwhh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_12ypf")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_lncms")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_x4ndp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_h5in7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_vtfgd")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_a5ovn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_c4bm6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_lp6dn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_u1q14")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_wkg6e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_xt6de")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_jf0k0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_hiql1")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

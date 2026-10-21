@@ -1,0 +1,15 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Vincent's Office/Vincent's Office.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/ActorView.tscn" id="2_0jtcy"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Vincents Office/animobj/desk.tres" id="3_nfvud"]
+
+[node name="Vincent\'s Office - 0" instance=ExtResource("1_base")]
+
+[node name="00 desk" parent="Actors" index="0" instance=ExtResource("2_0jtcy")]
+position = Vector2(780, 269)
+sprite_frames = ExtResource("3_nfvud")
+role = 2
+statuses = PackedInt32Array()
+object_name = "desk"
+image_count = 1

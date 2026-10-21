@@ -1,0 +1,17 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Pensara - The Trade District/Pensara - The Trade District.tscn" id="1_base"]
+[ext_resource type="Texture2D" path="res://res/Village/standardOvernight.png" id="2_4sm16"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageSpawn.tscn" id="3_fq24j"]
+
+[node name="Pensara - The Trade District at Night - 0" instance=ExtResource("1_base")]
+day = false
+night_screen_fixed = true
+
+[node name="Night" parent="." index="4"]
+visible = true
+texture = ExtResource("2_4sm16")
+
+[node name="00 start0" parent="Spawns" index="0" instance=ExtResource("3_fq24j")]
+position = Vector2(1081, 1380)
+number = 0

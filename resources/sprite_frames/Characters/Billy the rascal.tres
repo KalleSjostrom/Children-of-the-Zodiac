@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Billy the rascal/Billy the rascal9.png" id="1_0l7pq"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Billy the rascal/Billy the rascal10.png" id="2_122ks"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Billy the rascal/Billy the rascal11.png" id="3_kcdxk"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Billy the rascal/Billy the rascal12.png" id="4_oromc"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Billy the rascal/Billy the rascal13.png" id="5_byx8m"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Billy the rascal/Billy the rascal14.png" id="6_q5mcg"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Billy the rascal/Billy the rascal15.png" id="7_3xuv0"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Billy the rascal/Billy the rascal16.png" id="8_jij7t"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Billy the rascal/Billy the rascal5.png" id="9_irvjl"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Billy the rascal/Billy the rascal6.png" id="10_6e68m"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Billy the rascal/Billy the rascal7.png" id="11_dk7x8"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Billy the rascal/Billy the rascal8.png" id="12_oevfd"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Billy the rascal/Billy the rascal1.png" id="13_2dtjr"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Billy the rascal/Billy the rascal2.png" id="14_ot80k"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Billy the rascal/Billy the rascal3.png" id="15_x71u2"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Billy the rascal/Billy the rascal4.png" id="16_qmcgl"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_0l7pq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_122ks")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_kcdxk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_oromc")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_byx8m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_q5mcg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_3xuv0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_jij7t")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_irvjl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_6e68m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_dk7x8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_oevfd")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_2dtjr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_ot80k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_x71u2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_qmcgl")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

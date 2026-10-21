@@ -1,7 +1,9 @@
 # New game (difficulty Original), then tap CROSS through the opening story
 # for ~3 minutes.
 # Logs the game mode every 10 s; shots every 30 s.
-wait 2500
+# The title menu takes input from about 4 s (as in title_start): a CROSS at
+# 2.5 s was lost, and the DOWN + CROSS then loaded a save into Menthu's Lair.
+wait 4000
 tap CROSS
 wait 400
 tap DOWN

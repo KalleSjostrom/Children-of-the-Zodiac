@@ -2,7 +2,8 @@
 # Screenshot parity: run AutoPlay scripts deterministically and compare shots.
 #
 #   tools/parity/parity.sh record <set> [options] [case...]
-#       Runs the cases (all non-extra cases of cases.txt when none are named)
+#       Runs the cases (all non-extra cases of cases.txt when none are named;
+#       a name may be a pattern, e.g. 'tour_*')
 #       and keeps their shots in tools/parity/out/<set>/<case>/ and the game
 #       output in tools/parity/out/<set>/<case>.log.
 #   tools/parity/parity.sh compare <set_a> <set_b> [options] [case...]
@@ -24,6 +25,10 @@
 #   --timeout=<s>          per run (default 900)
 #   --ignore-world         compare the logs without AutoPlay's "world=<scene>"
 #                          (legacy vs. scene runs: only a scene run shows one)
+#   --jobs=<n>             record n cases at a time (default 1); each job has
+#                          its own user data folder (APPDATA =
+#                          out/.userdata/<set>-job<k>), so the deterministic
+#                          saves of concurrent runs do not mix
 #
 # Every run gets the engine option --fixed-fps 60 (a fixed delta for nodes,
 # timers and tweens) and the game options --mute --seed=<n> --uncapped (see
@@ -42,11 +47,13 @@ MAX_PIXELS=0
 NAME=ab
 TIMEOUT=900
 IGNORE_WORLD=0
+JOBS=1
 EXTRA_ARGS=""
 POS=()
 for a in "$@"; do
   case "$a" in
     --args=*) EXTRA_ARGS="${a#--args=}" ;;
+    --jobs=*) JOBS="${a#--jobs=}" ;;
     --seed=*) SEED="${a#--seed=}" ;;
     --tolerance=*) TOLERANCE="${a#--tolerance=}" ;;
     --max-pixels=*) MAX_PIXELS="${a#--max-pixels=}" ;;
@@ -72,10 +79,40 @@ select_cases() {
       echo "$line"
     else
       for w in "${want[@]}"; do
-        [ "$w" == "$name" ] && echo "$line"
+        # A name may be a pattern ("tour_*", quoted for the shell).
+        if [[ "$name" == $w ]]; then echo "$line"; break; fi
       done
     fi
   done < "$CASES"
+}
+
+# Runs one case line of set $1 (APPDATA $3 when not empty: the job's own user
+# data folder).
+record_case() {
+  local set="$1" line="$2" appdata="$3"
+  line="${line%%# extra*}"
+  local -a words
+  eval "words=($line)"
+  local name="${words[0]}" script="${words[1]}"
+  local -a game_args=("${words[@]:2}")
+  local -a extra=()
+  [ -n "$EXTRA_ARGS" ] && eval "extra=($EXTRA_ARGS)"
+  local shots="$OUT_REL/$set/$name"
+  rm -rf "$PROJ/$shots"
+  mkdir -p "$PROJ/$shots"
+  local log="$OUT/$set/$name.log"
+  local start=$SECONDS
+  echo "== record $set/$name: ${game_args[*]} ${extra[*]}"
+  (cd "$PROJ" && if [ -n "$appdata" ]; then export APPDATA="$appdata"; fi \
+    && timeout "$TIMEOUT" "$GODOT" --path "$PROJ" --fixed-fps 60 -- --mute --seed="$SEED" --uncapped \
+    "${game_args[@]}" "${extra[@]}" --autoplay="tools/autoplay/$script.txt" --shots="$shots") \
+    < /dev/null > "$log" 2>&1
+  local code=$?
+  local nshots errors
+  nshots=$(ls "$PROJ/$shots" | grep -c '\.png$')
+  # Errors during the run (the leak reports at exit are not counted).
+  errors=$(grep -E "^(SCRIPT )?ERROR" "$log" | grep -cv "leaked at exit\|still in use at exit")
+  echo "   $set/$name: exit $code, $((SECONDS - start)) s, $nshots shots, $errors errors ($OUT_REL/$set/$name.log)"
 }
 
 record() {
@@ -83,30 +120,37 @@ record() {
   local lines
   lines="$(select_cases "$@")"
   if [ -z "$lines" ]; then echo "no such case: $*" >&2; return 2; fi
-  while IFS= read -r line; do
-    line="${line%%# extra*}"
-    local -a words
-    eval "words=($line)"
-    local name="${words[0]}" script="${words[1]}"
-    local -a game_args=("${words[@]:2}")
-    local -a extra=()
-    [ -n "$EXTRA_ARGS" ] && eval "extra=($EXTRA_ARGS)"
-    local shots="$OUT_REL/$set/$name"
-    rm -rf "$PROJ/$shots"
-    mkdir -p "$PROJ/$shots"
-    local log="$OUT/$set/$name.log"
-    local start=$SECONDS
-    echo "== record $set/$name: ${game_args[*]} ${extra[*]}"
-    (cd "$PROJ" && timeout "$TIMEOUT" "$GODOT" --path "$PROJ" --fixed-fps 60 -- --mute --seed="$SEED" --uncapped \
-      "${game_args[@]}" "${extra[@]}" --autoplay="tools/autoplay/$script.txt" --shots="$shots") \
-      < /dev/null > "$log" 2>&1
-    local code=$?
-    local nshots errors
-    nshots=$(ls "$PROJ/$shots" | grep -c '\.png$')
-    # Errors during the run (the leak reports at exit are not counted).
-    errors=$(grep -E "^(SCRIPT )?ERROR" "$log" | grep -cv "leaked at exit\|still in use at exit")
-    echo "   exit $code, $((SECONDS - start)) s, $nshots shots, $errors errors ($OUT_REL/$set/$name.log)"
-  done <<< "$lines"
+  if [ "$JOBS" -le 1 ]; then
+    while IFS= read -r line; do
+      record_case "$set" "$line" ""
+    done <<< "$lines"
+    return
+  fi
+  # A pool of JOBS workers takes the cases in order from a shared counter.
+  local -a all
+  mapfile -t all <<< "$lines"
+  local queue="$OUT/.queue-$set-$$"
+  mkdir -p "$queue"
+  echo 0 > "$queue/next"
+  local k
+  for ((k = 0; k < JOBS; k++)); do
+    (
+      local appdata
+      appdata="$(cygpath -w "$OUT/.userdata/$set-job$k" 2>/dev/null || echo "$OUT/.userdata/$set-job$k")"
+      mkdir -p "$OUT/.userdata/$set-job$k"
+      while true; do
+        until mkdir "$queue/lock" 2>/dev/null; do sleep 0.1; done
+        local i
+        i=$(cat "$queue/next")
+        echo $((i + 1)) > "$queue/next"
+        rmdir "$queue/lock"
+        [ "$i" -ge ${#all[@]} ] && break
+        record_case "$set" "${all[$i]}" "$appdata"
+      done
+    ) &
+  done
+  wait
+  rm -rf "$queue"
 }
 
 # AutoPlay lines of a log without the fps value and the shot directory (and
@@ -119,6 +163,17 @@ log_states() {
 
 compare() {
   local a="$1" b="$2"; shift 2
+  # Patterns ("tour_*") name the cases recorded in set a.
+  local -a cases=()
+  local w d
+  for w in "$@"; do
+    if [[ "$w" == *[*?[]* ]]; then
+      for d in "$OUT/$a"/$w; do [ -d "$d" ] && cases+=("$(basename "$d")"); done
+    else
+      cases+=("$w")
+    fi
+  done
+  set -- "${cases[@]}"
   local diff_rel="$OUT_REL/diff-$a-vs-$b"
   rm -rf "$PROJ/$diff_rel"
   mkdir -p "$PROJ/$diff_rel"
@@ -132,12 +187,13 @@ compare() {
       [ -d "$OUT/$b/$c" ] && cp -r "$OUT/$b/$c" "$PROJ/$dir_b/"
     done
   fi
+  local diff_output="$OUT/.diff_output-$a-vs-$b"
   (cd "$PROJ" && "$GODOT" --headless --path "$PROJ" --script res://tools/parity/diff_shots.gd -- \
     "$dir_a" "$dir_b" "$diff_rel" --tolerance="$TOLERANCE" --max-pixels="$MAX_PIXELS") < /dev/null 2>&1 \
-    | grep -E "^(A|B|tolerance|PASS|FAIL|RESULT)" | tee "$OUT/.diff_output"
+    | grep -E "^(A|B|tolerance|PASS|FAIL|RESULT)" | tee "$diff_output"
   local shots_ok=1
-  grep -q "^RESULT PASS" "$OUT/.diff_output" || shots_ok=0
-  rm -rf "$PROJ/$diff_rel/.a" "$PROJ/$diff_rel/.b" "$OUT/.diff_output"
+  grep -q "^RESULT PASS" "$diff_output" || shots_ok=0
+  rm -rf "$PROJ/$diff_rel/.a" "$PROJ/$diff_rel/.b" "$diff_output"
   local logs_ok=1
   local -a names=("$@")
   if [ ${#names[@]} -eq 0 ]; then

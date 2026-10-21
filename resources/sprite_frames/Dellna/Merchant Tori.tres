@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Merchant Tori/Merchant Tori9.png" id="1_r20en"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Merchant Tori/Merchant Tori10.png" id="2_kambj"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Merchant Tori/Merchant Tori11.png" id="3_64t4u"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Merchant Tori/Merchant Tori12.png" id="4_3idco"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Merchant Tori/Merchant Tori13.png" id="5_tpvdf"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Merchant Tori/Merchant Tori14.png" id="6_n1378"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Merchant Tori/Merchant Tori15.png" id="7_ogfjj"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Merchant Tori/Merchant Tori16.png" id="8_wikfj"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Merchant Tori/Merchant Tori5.png" id="9_o70vd"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Merchant Tori/Merchant Tori6.png" id="10_e6yy3"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Merchant Tori/Merchant Tori7.png" id="11_nxpt3"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Merchant Tori/Merchant Tori8.png" id="12_nud6i"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Merchant Tori/Merchant Tori1.png" id="13_qk2lf"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Merchant Tori/Merchant Tori2.png" id="14_3rxsg"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Merchant Tori/Merchant Tori3.png" id="15_ixhbg"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Merchant Tori/Merchant Tori4.png" id="16_6vuqs"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_r20en")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_kambj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_64t4u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_3idco")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_tpvdf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_n1378")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ogfjj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_wikfj")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_o70vd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_e6yy3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_nxpt3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_nud6i")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_qk2lf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_3rxsg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_ixhbg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_6vuqs")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

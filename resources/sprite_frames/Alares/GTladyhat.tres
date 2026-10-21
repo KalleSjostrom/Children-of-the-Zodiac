@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTladyhat/GTladyhat9.png" id="1_2vf0o"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTladyhat/GTladyhat10.png" id="2_34cq4"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTladyhat/GTladyhat11.png" id="3_2xehm"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTladyhat/GTladyhat12.png" id="4_w4826"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTladyhat/GTladyhat13.png" id="5_5c7u2"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTladyhat/GTladyhat14.png" id="6_8gamw"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTladyhat/GTladyhat15.png" id="7_wweg7"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTladyhat/GTladyhat16.png" id="8_vlp4i"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTladyhat/GTladyhat5.png" id="9_ylglw"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTladyhat/GTladyhat6.png" id="10_grvjb"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTladyhat/GTladyhat7.png" id="11_yatcg"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTladyhat/GTladyhat8.png" id="12_qmoqd"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTladyhat/GTladyhat1.png" id="13_fe6iq"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTladyhat/GTladyhat2.png" id="14_70ko0"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTladyhat/GTladyhat3.png" id="15_8bmng"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/GTladyhat/GTladyhat4.png" id="16_nigkj"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_2vf0o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_34cq4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2xehm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_w4826")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_5c7u2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_8gamw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_wweg7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_vlp4i")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_ylglw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_grvjb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_yatcg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_qmoqd")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_fe6iq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_70ko0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_8bmng")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_nigkj")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Red/Red9.png" id="1_82rp8"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Red/Red10.png" id="2_3rsxa"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Red/Red11.png" id="3_g56s2"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Red/Red12.png" id="4_6qy3x"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Red/Red13.png" id="5_f0svl"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Red/Red14.png" id="6_6lkr7"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Red/Red15.png" id="7_una4p"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Red/Red16.png" id="8_bfjv5"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Red/Red5.png" id="9_vfnlb"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Red/Red6.png" id="10_0gb3m"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Red/Red7.png" id="11_is01s"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Red/Red8.png" id="12_ly0ul"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Red/Red1.png" id="13_bwd71"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Red/Red2.png" id="14_06g7h"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Red/Red3.png" id="15_fy1gc"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Red/Red4.png" id="16_aat3s"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_82rp8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_3rsxa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_g56s2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6qy3x")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_f0svl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_6lkr7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_una4p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_bfjv5")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_vfnlb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_0gb3m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_is01s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ly0ul")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_bwd71")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_06g7h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_fy1gc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_aat3s")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

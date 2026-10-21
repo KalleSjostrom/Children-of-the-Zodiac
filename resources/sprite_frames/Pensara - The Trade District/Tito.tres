@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Tito/Tito9.png" id="1_7itee"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Tito/Tito10.png" id="2_s44mh"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Tito/Tito11.png" id="3_igra2"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Tito/Tito12.png" id="4_46qdv"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Tito/Tito13.png" id="5_oy26o"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Tito/Tito14.png" id="6_thtae"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Tito/Tito15.png" id="7_bo1uy"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Tito/Tito16.png" id="8_bcie4"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Tito/Tito5.png" id="9_omrik"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Tito/Tito6.png" id="10_80bm0"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Tito/Tito7.png" id="11_4mt1v"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Tito/Tito8.png" id="12_g2wo3"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Tito/Tito1.png" id="13_5ohas"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Tito/Tito2.png" id="14_qhu75"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Tito/Tito3.png" id="15_1hqiq"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Tito/Tito4.png" id="16_kyin5"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_7itee")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_s44mh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_igra2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_46qdv")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_oy26o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_thtae")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_bo1uy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_bcie4")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_omrik")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_80bm0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_4mt1v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_g2wo3")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_5ohas")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_qhu75")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_1hqiq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_kyin5")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

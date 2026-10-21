@@ -1,0 +1,541 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Parasne/Parasne.tscn" id="1_base"]
+[ext_resource type="Texture2D" path="res://scenes/villages/Parasne/Parasne1.png" id="2_d7nbg"]
+[ext_resource type="PackedScene" path="res://scenes/common/ActorView.tscn" id="3_nk3nk"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Parasne/Amy.tres" id="4_it3vo"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Parasne/Dave.tres" id="5_scab1"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Parasne/Dexter.tres" id="6_4q02i"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Parasne/Fortuneteller.tres" id="7_cxmv0"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Parasne/Hendrick.tres" id="8_q5t8o"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Parasne/Kurt.tres" id="9_ool45"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Parasne/Ludmillha.tres" id="10_hm34d"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Parasne/Marc.tres" id="11_1m6ho"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Parasne/Orgaan.tres" id="12_g8qf7"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Parasne/Pert.tres" id="13_mtvly"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Parasne/Pretto.tres" id="14_4lm7n"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Parasne/Putters.tres" id="15_3x1uo"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Characters/Samborg.tres" id="16_x17cq"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Parasne/Stienie.tres" id="17_vvmit"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Parasne/Willy.tres" id="18_gtxyq"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Parasne/Woldou.tres" id="19_crjii"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/69.png" id="20_q02e5"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/51.png" id="21_vrkna"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/22.png" id="22_r7g4n"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/4.png" id="23_hdu7p"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/31.png" id="24_3pxyx"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/74.png" id="25_0m7xp"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/50.png" id="26_rg1ep"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/68.png" id="27_2q5wb"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/65.png" id="28_a8bxc"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/36.png" id="29_xjfjl"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/3.png" id="30_oc0y6"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/49.png" id="31_hienh"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/44.png" id="32_pckb4"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/43.png" id="33_nc8xn"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/45.png" id="34_dmnn7"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/0.png" id="35_eg2wn"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/76.png" id="36_lcvqf"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/48.png" id="37_uxs0f"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/47.png" id="38_0713q"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/33.png" id="39_7x4a3"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/64.png" id="40_k537c"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/25.png" id="41_i3h7o"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/8.png" id="42_1dgda"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/34.png" id="43_jbc60"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/32.png" id="44_fnatm"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/9.png" id="45_ddycv"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/66.png" id="46_h7qyo"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/75.png" id="47_4eh3r"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/5.png" id="48_u73eh"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/73.png" id="49_ge0ax"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/42.png" id="50_u2qoc"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/61.png" id="51_b0lxg"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/7.png" id="52_7jps4"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/27.png" id="53_81qa1"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/62.png" id="54_k64w2"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/1.png" id="55_njb7i"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/63.png" id="56_eyih8"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/24.png" id="57_pa64t"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/60.png" id="58_t5rgx"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/18.png" id="59_p80cp"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/71.png" id="60_k5jkd"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/67.png" id="61_nfnaq"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/19.png" id="62_vyeat"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/35.png" id="63_p7g78"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/30.png" id="64_x3mfd"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/70.png" id="65_4jenu"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/20.png" id="66_6b4kt"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/41.png" id="67_8gw7y"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/6.png" id="68_0uxqk"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/72.png" id="69_sbfys"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/2.png" id="70_mkox1"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne1/top/77.png" id="71_7axhc"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageSpawn.tscn" id="72_o453q"]
+
+[node name="Parasne - 2" instance=ExtResource("1_base")]
+folder_name = "Parasne--1"
+background_folder = "Parasne1"
+
+[node name="Background" parent="." index="1"]
+texture = ExtResource("2_d7nbg")
+
+[node name="00 Amy" parent="Actors" index="0" instance=ExtResource("3_nk3nk")]
+position = Vector2(980, 480)
+sprite_frames = ExtResource("4_it3vo")
+animation = &"down"
+role = 1
+villager_name = "Amy"
+statuses = PackedInt32Array()
+villager_folder = "Parasne"
+
+[node name="01 Dave" parent="Actors" index="1" instance=ExtResource("3_nk3nk")]
+position = Vector2(870, 300)
+sprite_frames = ExtResource("5_scab1")
+animation = &"down"
+role = 1
+villager_name = "Dave"
+statuses = PackedInt32Array()
+villager_folder = "Parasne"
+
+[node name="02 Dexter" parent="Actors" index="2" instance=ExtResource("3_nk3nk")]
+position = Vector2(1640, 1125)
+sprite_frames = ExtResource("6_4q02i")
+animation = &"up"
+role = 1
+villager_name = "Dexter"
+statuses = PackedInt32Array()
+villager_folder = "Parasne"
+
+[node name="03 Fortuneteller" parent="Actors" index="3" instance=ExtResource("3_nk3nk")]
+position = Vector2(403, 172)
+sprite_frames = ExtResource("7_cxmv0")
+animation = &"down"
+role = 1
+villager_name = "Fortuneteller"
+statuses = PackedInt32Array()
+villager_folder = "Parasne"
+
+[node name="04 Hendrick" parent="Actors" index="4" instance=ExtResource("3_nk3nk")]
+position = Vector2(950, 100)
+sprite_frames = ExtResource("8_q5t8o")
+animation = &"left"
+role = 1
+villager_name = "Hendrick"
+statuses = PackedInt32Array()
+villager_folder = "Parasne"
+
+[node name="05 Kurt" parent="Actors" index="5" instance=ExtResource("3_nk3nk")]
+position = Vector2(364, 699)
+sprite_frames = ExtResource("9_ool45")
+animation = &"down"
+role = 1
+villager_name = "Kurt"
+statuses = PackedInt32Array()
+villager_folder = "Parasne"
+
+[node name="06 Ludmillha" parent="Actors" index="6" instance=ExtResource("3_nk3nk")]
+position = Vector2(670, 270)
+sprite_frames = ExtResource("10_hm34d")
+animation = &"left"
+role = 1
+villager_name = "Ludmillha"
+statuses = PackedInt32Array()
+villager_folder = "Parasne"
+
+[node name="07 Marc" parent="Actors" index="7" instance=ExtResource("3_nk3nk")]
+position = Vector2(1430, 895)
+sprite_frames = ExtResource("11_1m6ho")
+animation = &"up"
+role = 1
+villager_name = "Marc"
+statuses = PackedInt32Array(1, 2, 3, 4, 5, 6, 7, 8)
+villager_folder = "Parasne"
+
+[node name="08 Orgaan" parent="Actors" index="8" instance=ExtResource("3_nk3nk")]
+position = Vector2(450, 500)
+sprite_frames = ExtResource("12_g8qf7")
+animation = &"down"
+role = 1
+villager_name = "Orgaan"
+statuses = PackedInt32Array()
+villager_folder = "Parasne"
+
+[node name="09 Pert" parent="Actors" index="9" instance=ExtResource("3_nk3nk")]
+position = Vector2(1340, 370)
+sprite_frames = ExtResource("13_mtvly")
+animation = &"down"
+role = 1
+villager_name = "Pert"
+statuses = PackedInt32Array()
+villager_folder = "Parasne"
+
+[node name="10 Pretto" parent="Actors" index="10" instance=ExtResource("3_nk3nk")]
+position = Vector2(975, 360)
+sprite_frames = ExtResource("14_4lm7n")
+animation = &"left"
+role = 1
+villager_name = "Pretto"
+statuses = PackedInt32Array()
+villager_folder = "Parasne"
+
+[node name="11 Putters" parent="Actors" index="11" instance=ExtResource("3_nk3nk")]
+position = Vector2(200, 800)
+sprite_frames = ExtResource("15_3x1uo")
+animation = &"left"
+role = 1
+villager_name = "Putters"
+statuses = PackedInt32Array()
+villager_folder = "Parasne"
+
+[node name="12 Sailor" parent="Actors" index="12" instance=ExtResource("3_nk3nk")]
+position = Vector2(1515, 2240)
+sprite_frames = ExtResource("16_x17cq")
+animation = &"right"
+role = 1
+villager_name = "Sailor"
+statuses = PackedInt32Array()
+villager_folder = "Parasne"
+
+[node name="13 Stienie" parent="Actors" index="13" instance=ExtResource("3_nk3nk")]
+position = Vector2(320, 930)
+sprite_frames = ExtResource("17_vvmit")
+animation = &"up"
+role = 1
+villager_name = "Stienie"
+statuses = PackedInt32Array()
+villager_folder = "Parasne"
+
+[node name="14 Willy" parent="Actors" index="14" instance=ExtResource("3_nk3nk")]
+position = Vector2(297, 699)
+sprite_frames = ExtResource("18_gtxyq")
+animation = &"down"
+role = 1
+villager_name = "Willy"
+statuses = PackedInt32Array()
+villager_folder = "Parasne"
+
+[node name="15 Woldou" parent="Actors" index="15" instance=ExtResource("3_nk3nk")]
+position = Vector2(700, 700)
+sprite_frames = ExtResource("19_crjii")
+animation = &"right"
+role = 1
+villager_name = "Woldou"
+statuses = PackedInt32Array()
+villager_folder = "Parasne"
+
+[node name="00 69" type="Sprite2D" parent="Overhead" index="0"]
+use_parent_material = true
+position = Vector2(1240, 982)
+texture = ExtResource("20_q02e5")
+centered = false
+
+[node name="01 51" type="Sprite2D" parent="Overhead" index="1"]
+use_parent_material = true
+position = Vector2(1072, 735)
+texture = ExtResource("21_vrkna")
+centered = false
+
+[node name="02 22" type="Sprite2D" parent="Overhead" index="2"]
+use_parent_material = true
+position = Vector2(479, 181)
+texture = ExtResource("22_r7g4n")
+centered = false
+
+[node name="03 4" type="Sprite2D" parent="Overhead" index="3"]
+use_parent_material = true
+position = Vector2(1095, 0)
+texture = ExtResource("23_hdu7p")
+centered = false
+
+[node name="04 31" type="Sprite2D" parent="Overhead" index="4"]
+use_parent_material = true
+position = Vector2(614, 437)
+texture = ExtResource("24_3pxyx")
+centered = false
+
+[node name="05 74" type="Sprite2D" parent="Overhead" index="5"]
+use_parent_material = true
+position = Vector2(1079, 1336)
+texture = ExtResource("25_0m7xp")
+centered = false
+
+[node name="06 50" type="Sprite2D" parent="Overhead" index="6"]
+use_parent_material = true
+position = Vector2(885, 734)
+texture = ExtResource("26_rg1ep")
+centered = false
+
+[node name="07 68" type="Sprite2D" parent="Overhead" index="7"]
+use_parent_material = true
+position = Vector2(1157, 904)
+texture = ExtResource("27_2q5wb")
+centered = false
+
+[node name="08 65" type="Sprite2D" parent="Overhead" index="8"]
+use_parent_material = true
+position = Vector2(1114, 881)
+texture = ExtResource("28_a8bxc")
+centered = false
+
+[node name="09 36" type="Sprite2D" parent="Overhead" index="9"]
+use_parent_material = true
+position = Vector2(288, 523)
+texture = ExtResource("29_xjfjl")
+centered = false
+
+[node name="10 3" type="Sprite2D" parent="Overhead" index="10"]
+use_parent_material = true
+position = Vector2(801, 0)
+texture = ExtResource("30_oc0y6")
+centered = false
+
+[node name="11 49" type="Sprite2D" parent="Overhead" index="11"]
+use_parent_material = true
+position = Vector2(592, 734)
+texture = ExtResource("31_hienh")
+centered = false
+
+[node name="12 44" type="Sprite2D" parent="Overhead" index="12"]
+use_parent_material = true
+position = Vector2(1077, 607)
+texture = ExtResource("32_pckb4")
+centered = false
+
+[node name="13 43" type="Sprite2D" parent="Overhead" index="13"]
+use_parent_material = true
+position = Vector2(778, 602)
+texture = ExtResource("33_nc8xn")
+centered = false
+
+[node name="14 45" type="Sprite2D" parent="Overhead" index="14"]
+use_parent_material = true
+position = Vector2(1666, 705)
+texture = ExtResource("34_dmnn7")
+centered = false
+
+[node name="15 0" type="Sprite2D" parent="Overhead" index="15"]
+use_parent_material = true
+position = Vector2(146, 0)
+texture = ExtResource("35_eg2wn")
+centered = false
+
+[node name="16 76" type="Sprite2D" parent="Overhead" index="16"]
+use_parent_material = true
+position = Vector2(1771, 1494)
+texture = ExtResource("36_lcvqf")
+centered = false
+
+[node name="17 48" type="Sprite2D" parent="Overhead" index="17"]
+use_parent_material = true
+position = Vector2(405, 733)
+texture = ExtResource("37_uxs0f")
+centered = false
+
+[node name="18 47" type="Sprite2D" parent="Overhead" index="18"]
+use_parent_material = true
+position = Vector2(259, 733)
+texture = ExtResource("38_0713q")
+centered = false
+
+[node name="19 33" type="Sprite2D" parent="Overhead" index="19"]
+use_parent_material = true
+position = Vector2(908, 446)
+texture = ExtResource("39_7x4a3")
+centered = false
+
+[node name="20 64" type="Sprite2D" parent="Overhead" index="20"]
+use_parent_material = true
+position = Vector2(1789, 868)
+texture = ExtResource("40_k537c")
+centered = false
+
+[node name="21 25" type="Sprite2D" parent="Overhead" index="21"]
+use_parent_material = true
+position = Vector2(933, 242)
+texture = ExtResource("41_i3h7o")
+centered = false
+
+[node name="22 8" type="Sprite2D" parent="Overhead" index="22"]
+use_parent_material = true
+position = Vector2(246, 11)
+texture = ExtResource("42_1dgda")
+centered = false
+
+[node name="23 34" type="Sprite2D" parent="Overhead" index="23"]
+use_parent_material = true
+position = Vector2(591, 486)
+texture = ExtResource("43_jbc60")
+centered = false
+
+[node name="24 32" type="Sprite2D" parent="Overhead" index="24"]
+use_parent_material = true
+position = Vector2(955, 441)
+texture = ExtResource("44_fnatm")
+centered = false
+
+[node name="25 9" type="Sprite2D" parent="Overhead" index="25"]
+use_parent_material = true
+position = Vector2(1813, 23)
+texture = ExtResource("45_ddycv")
+centered = false
+
+[node name="26 66" type="Sprite2D" parent="Overhead" index="26"]
+use_parent_material = true
+position = Vector2(1241, 881)
+texture = ExtResource("46_h7qyo")
+centered = false
+
+[node name="27 75" type="Sprite2D" parent="Overhead" index="27"]
+use_parent_material = true
+position = Vector2(1599, 1488)
+texture = ExtResource("47_4eh3r")
+centered = false
+
+[node name="28 5" type="Sprite2D" parent="Overhead" index="28"]
+use_parent_material = true
+position = Vector2(1275, 0)
+texture = ExtResource("48_u73eh")
+centered = false
+
+[node name="29 73" type="Sprite2D" parent="Overhead" index="29"]
+use_parent_material = true
+position = Vector2(1042, 1195)
+texture = ExtResource("49_ge0ax")
+centered = false
+
+[node name="30 42" type="Sprite2D" parent="Overhead" index="30"]
+use_parent_material = true
+position = Vector2(1575, 595)
+texture = ExtResource("50_u2qoc")
+centered = false
+
+[node name="31 61" type="Sprite2D" parent="Overhead" index="31"]
+use_parent_material = true
+position = Vector2(1308, 850)
+texture = ExtResource("51_b0lxg")
+centered = false
+
+[node name="32 7" type="Sprite2D" parent="Overhead" index="32"]
+use_parent_material = true
+position = Vector2(1163, 10)
+texture = ExtResource("52_7jps4")
+centered = false
+
+[node name="33 27" type="Sprite2D" parent="Overhead" index="33"]
+use_parent_material = true
+position = Vector2(1563, 267)
+texture = ExtResource("53_81qa1")
+centered = false
+
+[node name="34 62" type="Sprite2D" parent="Overhead" index="34"]
+use_parent_material = true
+position = Vector2(1404, 850)
+texture = ExtResource("54_k64w2")
+centered = false
+
+[node name="35 1" type="Sprite2D" parent="Overhead" index="35"]
+use_parent_material = true
+position = Vector2(396, 0)
+texture = ExtResource("55_njb7i")
+centered = false
+
+[node name="36 63" type="Sprite2D" parent="Overhead" index="36"]
+use_parent_material = true
+position = Vector2(1488, 866)
+texture = ExtResource("56_eyih8")
+centered = false
+
+[node name="37 24" type="Sprite2D" parent="Overhead" index="37"]
+use_parent_material = true
+position = Vector2(457, 222)
+texture = ExtResource("57_pa64t")
+centered = false
+
+[node name="38 60" type="Sprite2D" parent="Overhead" index="38"]
+use_parent_material = true
+position = Vector2(766, 774)
+texture = ExtResource("58_t5rgx")
+centered = false
+
+[node name="39 18" type="Sprite2D" parent="Overhead" index="39"]
+use_parent_material = true
+position = Vector2(761, 113)
+texture = ExtResource("59_p80cp")
+centered = false
+
+[node name="40 71" type="Sprite2D" parent="Overhead" index="40"]
+use_parent_material = true
+position = Vector2(1067, 1174)
+texture = ExtResource("60_k5jkd")
+centered = false
+
+[node name="41 67" type="Sprite2D" parent="Overhead" index="41"]
+use_parent_material = true
+position = Vector2(606, 901)
+texture = ExtResource("61_nfnaq")
+centered = false
+
+[node name="42 19" type="Sprite2D" parent="Overhead" index="42"]
+use_parent_material = true
+position = Vector2(393, 125)
+texture = ExtResource("62_vyeat")
+centered = false
+
+[node name="43 35" type="Sprite2D" parent="Overhead" index="43"]
+use_parent_material = true
+position = Vector2(603, 492)
+texture = ExtResource("63_p7g78")
+centered = false
+
+[node name="44 30" type="Sprite2D" parent="Overhead" index="44"]
+use_parent_material = true
+position = Vector2(289, 413)
+texture = ExtResource("64_x3mfd")
+centered = false
+
+[node name="45 70" type="Sprite2D" parent="Overhead" index="45"]
+use_parent_material = true
+position = Vector2(1631, 1169)
+texture = ExtResource("65_4jenu")
+centered = false
+
+[node name="46 20" type="Sprite2D" parent="Overhead" index="46"]
+use_parent_material = true
+position = Vector2(1601, 141)
+texture = ExtResource("66_6b4kt")
+centered = false
+
+[node name="47 41" type="Sprite2D" parent="Overhead" index="47"]
+use_parent_material = true
+position = Vector2(604, 595)
+texture = ExtResource("67_8gw7y")
+centered = false
+
+[node name="48 6" type="Sprite2D" parent="Overhead" index="48"]
+use_parent_material = true
+position = Vector2(1710, 0)
+texture = ExtResource("68_0uxqk")
+centered = false
+
+[node name="49 72" type="Sprite2D" parent="Overhead" index="49"]
+use_parent_material = true
+position = Vector2(1599, 1189)
+texture = ExtResource("69_sbfys")
+centered = false
+
+[node name="50 2" type="Sprite2D" parent="Overhead" index="50"]
+use_parent_material = true
+position = Vector2(600, 0)
+texture = ExtResource("70_mkox1")
+centered = false
+
+[node name="51 77" type="Sprite2D" parent="Overhead" index="51"]
+use_parent_material = true
+position = Vector2(1142, 1504)
+texture = ExtResource("71_7axhc")
+centered = false
+
+[node name="00 start" parent="Spawns" index="0" instance=ExtResource("72_o453q")]
+position = Vector2(980, 1)
+facing = 2

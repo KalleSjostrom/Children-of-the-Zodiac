@@ -1,0 +1,218 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Pensara - The North District/Pensara - The North District.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/ActorView.tscn" id="2_f17pl"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Characters/Billy the rascal.tres" id="3_8e6rj"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The North District/Farmer Bob.tres" id="4_t0spq"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The North District/Nodd.tres" id="5_vmn0u"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Characters/Pensarasoldier.tres" id="6_0uht1"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The North District/Podd.tres" id="7_1ccyw"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The North District/GTthief.tres" id="8_pb3si"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The North District/Uli.tres" id="9_jk8d5"]
+[ext_resource type="PackedScene" path="res://scenes/common/particles/LegacyParticles2D.tscn" id="10_moa6b"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="11_kqxjy"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageSign.tscn" id="12_32syd"]
+
+[node name="Pensara - The North District - 0" instance=ExtResource("1_base")]
+
+[node name="00 Billy" parent="Actors" index="0" instance=ExtResource("2_f17pl")]
+position = Vector2(1940, 750)
+sprite_frames = ExtResource("3_8e6rj")
+animation = &"down"
+role = 1
+villager_name = "Billy"
+statuses = PackedInt32Array(3)
+villager_folder = "Pensara - The North District"
+
+[node name="01 Farmer Bob" parent="Actors" index="1" instance=ExtResource("2_f17pl")]
+position = Vector2(1970, 750)
+sprite_frames = ExtResource("4_t0spq")
+animation = &"down"
+role = 1
+villager_name = "Farmer Bob"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The North District"
+
+[node name="02 Nodd" parent="Actors" index="2" instance=ExtResource("2_f17pl")]
+position = Vector2(265, 960)
+sprite_frames = ExtResource("5_vmn0u")
+animation = &"down"
+role = 1
+villager_name = "Nodd"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The North District"
+
+[node name="03 PensaraSoldier 15" parent="Actors" index="3" instance=ExtResource("2_f17pl")]
+position = Vector2(300, 1090)
+sprite_frames = ExtResource("6_0uht1")
+animation = &"down"
+role = 1
+villager_name = "PensaraSoldier 15"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The North District"
+
+[node name="04 PensaraSoldier 16" parent="Actors" index="4" instance=ExtResource("2_f17pl")]
+position = Vector2(1035, 723)
+sprite_frames = ExtResource("6_0uht1")
+animation = &"down"
+role = 1
+villager_name = "PensaraSoldier 16"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The North District"
+
+[node name="05 PensaraSoldier 17" parent="Actors" index="5" instance=ExtResource("2_f17pl")]
+position = Vector2(1135, 723)
+sprite_frames = ExtResource("6_0uht1")
+animation = &"down"
+role = 1
+villager_name = "PensaraSoldier 17"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The North District"
+
+[node name="06 PensaraSoldier 18" parent="Actors" index="6" instance=ExtResource("2_f17pl")]
+position = Vector2(1620, 970)
+sprite_frames = ExtResource("6_0uht1")
+animation = &"down"
+role = 1
+villager_name = "PensaraSoldier 18"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The North District"
+
+[node name="07 PensaraSoldier 19" parent="Actors" index="7" instance=ExtResource("2_f17pl")]
+position = Vector2(1980, 540)
+sprite_frames = ExtResource("6_0uht1")
+animation = &"down"
+role = 1
+villager_name = "PensaraSoldier 19"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The North District"
+
+[node name="08 Podd" parent="Actors" index="8" instance=ExtResource("2_f17pl")]
+position = Vector2(430, 965)
+sprite_frames = ExtResource("7_1ccyw")
+animation = &"down"
+role = 1
+villager_name = "Podd"
+statuses = PackedInt32Array(1, 2, 3)
+villager_folder = "Pensara - The North District"
+
+[node name="09 Thieving looking guy" parent="Actors" index="9" instance=ExtResource("2_f17pl")]
+position = Vector2(415, 280)
+sprite_frames = ExtResource("8_pb3si")
+animation = &"down"
+role = 1
+villager_name = "Thieving looking guy"
+statuses = PackedInt32Array(6, 8)
+villager_folder = "Pensara - The North District"
+
+[node name="10 Uli" parent="Actors" index="10" instance=ExtResource("2_f17pl")]
+position = Vector2(1670, 1050)
+sprite_frames = ExtResource("9_jk8d5")
+animation = &"down"
+role = 1
+villager_name = "Uli"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The North District"
+
+[node name="00 smokesystemHut" parent="Effects" index="0" instance=ExtResource("10_moa6b")]
+position = Vector2(1845, 393)
+system_name = "smokesystemHut"
+
+[node name="01 smokesystemArmory" parent="Effects" index="1" instance=ExtResource("10_moa6b")]
+position = Vector2(1651, 741)
+system_name = "smokesystemArmory"
+build_order = 1
+
+[node name="00 Pensara_-_The_Trade_District" parent="Doors" index="0" instance=ExtResource("11_kqxjy")]
+position = Vector2(1094, 1363)
+hole = true
+kinds = PackedStringArray("village")
+targets = PackedStringArray("Pensara_-_The_Trade_District")
+radius = 96
+directions = PackedInt32Array(2)
+fade = 0
+to_pos = PackedFloat64Array(0, 0, 3, -1)
+sign_lines = PackedStringArray()
+
+[node name="01 Vincent" parent="Doors" index="1" instance=ExtResource("11_kqxjy")]
+position = Vector2(1074, 678)
+kinds = PackedStringArray("house")
+targets = PackedStringArray("Vincent")
+radius = 60
+directions = PackedInt32Array(0)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray()
+
+[node name="02 Pensara_-_The_North_District_-_Farmer_House" parent="Doors" index="2" instance=ExtResource("11_kqxjy")]
+position = Vector2(1840, 559)
+kinds = PackedStringArray("house")
+targets = PackedStringArray("Pensara_-_The_North_District_-_Farmer_House")
+directions = PackedInt32Array(0)
+fade = 2
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray()
+
+[node name="03 Pensara_-_The_North_District_-_Library" parent="Doors" index="3" instance=ExtResource("11_kqxjy")]
+position = Vector2(1666, 930)
+hole = true
+kinds = PackedStringArray("house")
+targets = PackedStringArray("Pensara_-_The_North_District_-_Library")
+radius = 40
+directions = PackedInt32Array(0)
+fade = 2
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray()
+
+[node name="04 Pensara_-_The_North_District_-_Civil_House" parent="Doors" index="4" instance=ExtResource("11_kqxjy")]
+position = Vector2(300, 944)
+kinds = PackedStringArray("house")
+targets = PackedStringArray("Pensara_-_The_North_District_-_Civil_House")
+directions = PackedInt32Array(0)
+fade = 2
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray()
+
+[node name="05 Pensara_-_The_North_District_-_Civil_House" parent="Doors" index="5" instance=ExtResource("11_kqxjy")]
+position = Vector2(397, 944)
+kinds = PackedStringArray("house")
+targets = PackedStringArray("Pensara_-_The_North_District_-_Civil_House")
+directions = PackedInt32Array(0)
+fade = 2
+to_pos = PackedFloat64Array(0, 0, 1, -1)
+sign_lines = PackedStringArray()
+
+[node name="06 The_Sewers--North-mark6" parent="Doors" index="6" instance=ExtResource("11_kqxjy")]
+position = Vector2(326, 415)
+kinds = PackedStringArray("labyrinth")
+targets = PackedStringArray("The_Sewers--North-mark6")
+directions = PackedInt32Array(0)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray()
+
+[node name="00 A weird statue_" parent="Signs" index="0" instance=ExtResource("12_32syd")]
+position = Vector2(1152, 983)
+radius = 40
+directions = PackedInt32Array(0)
+lines = PackedStringArray("A weird statue.")
+listed = Array[bool]([true])
+
+[node name="01 A weird statue_" parent="Signs" index="1" instance=ExtResource("12_32syd")]
+position = Vector2(999, 983)
+radius = 40
+directions = PackedInt32Array(0)
+lines = PackedStringArray("A weird statue.")
+listed = Array[bool]([true])
+
+[node name="02 Seems someone has choppe" parent="Signs" index="2" instance=ExtResource("12_32syd")]
+position = Vector2(1654, 569)
+radius = 30
+directions = PackedInt32Array(0)
+lines = PackedStringArray("Seems someone has chopped wood here.")
+listed = Array[bool]([true])
+
+[node name="03 R_I_P_" parent="Signs" index="3" instance=ExtResource("12_32syd")]
+position = Vector2(1574, 332)
+radius = 30
+directions = PackedInt32Array(0)
+lines = PackedStringArray("R.I.P.", "Here lies Inu the dog.")
+listed = Array[bool]([true, true])

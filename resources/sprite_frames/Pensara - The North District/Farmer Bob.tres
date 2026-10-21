@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Farmer Bob/Farmer Bob9.png" id="1_suami"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Farmer Bob/Farmer Bob10.png" id="2_rqojk"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Farmer Bob/Farmer Bob11.png" id="3_0g5he"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Farmer Bob/Farmer Bob12.png" id="4_iihso"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Farmer Bob/Farmer Bob13.png" id="5_7i1pv"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Farmer Bob/Farmer Bob14.png" id="6_bf520"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Farmer Bob/Farmer Bob15.png" id="7_arqfq"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Farmer Bob/Farmer Bob16.png" id="8_2xxav"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Farmer Bob/Farmer Bob5.png" id="9_40tv7"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Farmer Bob/Farmer Bob6.png" id="10_lyjkk"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Farmer Bob/Farmer Bob7.png" id="11_kb8bh"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Farmer Bob/Farmer Bob8.png" id="12_pmbn0"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Farmer Bob/Farmer Bob1.png" id="13_quctq"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Farmer Bob/Farmer Bob2.png" id="14_bmdy1"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Farmer Bob/Farmer Bob3.png" id="15_6tq7s"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Farmer Bob/Farmer Bob4.png" id="16_y0r41"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_suami")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_rqojk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_0g5he")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_iihso")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_7i1pv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_bf520")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_arqfq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_2xxav")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_40tv7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_lyjkk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_kb8bh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_pmbn0")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_quctq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_bmdy1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_6tq7s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_y0r41")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

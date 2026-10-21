@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Dido/Dido9.png" id="1_c6pj1"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Dido/Dido10.png" id="2_qqhfd"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Dido/Dido11.png" id="3_1fcus"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Dido/Dido12.png" id="4_eeb3o"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Dido/Dido13.png" id="5_di618"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Dido/Dido14.png" id="6_bf5ku"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Dido/Dido15.png" id="7_e0y1f"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Dido/Dido16.png" id="8_h6rs5"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Dido/Dido5.png" id="9_isgll"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Dido/Dido6.png" id="10_cpb70"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Dido/Dido7.png" id="11_n6d7l"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Dido/Dido8.png" id="12_xgluq"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Dido/Dido1.png" id="13_11by5"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Dido/Dido2.png" id="14_h3th6"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Dido/Dido3.png" id="15_c1rp3"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Dido/Dido4.png" id="16_sfiuc"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_c6pj1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_qqhfd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_1fcus")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_eeb3o")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_di618")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_bf5ku")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_e0y1f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_h6rs5")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_isgll")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_cpb70")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_n6d7l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_xgluq")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_11by5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_h3th6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_c1rp3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_sfiuc")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

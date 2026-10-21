@@ -1,0 +1,209 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/VillageScene.tscn" id="1_base"]
+[ext_resource type="Texture2D" path="res://scenes/villages/Alares/Alares.png" id="2_jevgh"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/top/6.png" id="3_t2e34"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/top/9.png" id="4_yd6xk"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/top/7.png" id="5_v4rq7"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/top/12.png" id="6_42rw1"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/top/5.png" id="7_kvl5f"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/top/22.png" id="8_4c7sq"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/top/4.png" id="9_rdmif"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/top/26.png" id="10_xwksl"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/top/31.png" id="11_esovv"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/top/27.png" id="12_r1s0o"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/top/1.png" id="13_puji3"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/top/11.png" id="14_wnw68"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/top/24.png" id="15_hd74t"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/top/3.png" id="16_50d83"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/top/29.png" id="17_8e164"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/top/0.png" id="18_s23qr"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/top/28.png" id="19_o5sis"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/top/25.png" id="20_6e5ie"]
+
+[node name="Alares" instance=ExtResource("1_base")]
+place_name = "Alares"
+folder_name = "Alares"
+village_name = "Alares"
+background_folder = "Alares"
+size = Vector2i(1953, 1877)
+actual_size = Vector2i(1953, 1877)
+back_extra = 1
+wind_force = PackedFloat64Array(0, 0, 0)
+
+[node name="Background" parent="." index="1"]
+texture = ExtResource("2_jevgh")
+
+[node name="00 6" type="Sprite2D" parent="Overhead" index="0"]
+use_parent_material = true
+position = Vector2(1390, 1688)
+texture = ExtResource("3_t2e34")
+centered = false
+
+[node name="01 9" type="Sprite2D" parent="Overhead" index="1"]
+use_parent_material = true
+position = Vector2(1577, 661)
+texture = ExtResource("4_yd6xk")
+centered = false
+
+[node name="02 7" type="Sprite2D" parent="Overhead" index="2"]
+use_parent_material = true
+position = Vector2(1066, 1052)
+texture = ExtResource("5_v4rq7")
+centered = false
+
+[node name="03 12" type="Sprite2D" parent="Overhead" index="3"]
+use_parent_material = true
+position = Vector2(1236, 803)
+texture = ExtResource("6_42rw1")
+centered = false
+
+[node name="04 5" type="Sprite2D" parent="Overhead" index="4"]
+use_parent_material = true
+position = Vector2(623, 371)
+texture = ExtResource("7_kvl5f")
+centered = false
+
+[node name="05 22" type="Sprite2D" parent="Overhead" index="5"]
+use_parent_material = true
+position = Vector2(0, 1096)
+texture = ExtResource("8_4c7sq")
+centered = false
+
+[node name="06 4" type="Sprite2D" parent="Overhead" index="6"]
+use_parent_material = true
+position = Vector2(1134, 345)
+texture = ExtResource("9_rdmif")
+centered = false
+
+[node name="07 26" type="Sprite2D" parent="Overhead" index="7"]
+use_parent_material = true
+position = Vector2(969, 1333)
+texture = ExtResource("10_xwksl")
+centered = false
+
+[node name="08 31" type="Sprite2D" parent="Overhead" index="8"]
+use_parent_material = true
+position = Vector2(1184, 1639)
+texture = ExtResource("11_esovv")
+centered = false
+
+[node name="09 7" type="Sprite2D" parent="Overhead" index="9"]
+use_parent_material = true
+position = Vector2(28, 459)
+texture = ExtResource("5_v4rq7")
+centered = false
+
+[node name="10 27" type="Sprite2D" parent="Overhead" index="10"]
+use_parent_material = true
+position = Vector2(1498, 1333)
+texture = ExtResource("12_r1s0o")
+centered = false
+
+[node name="11 1" type="Sprite2D" parent="Overhead" index="11"]
+use_parent_material = true
+position = Vector2(55, 87)
+texture = ExtResource("13_puji3")
+centered = false
+
+[node name="12 7" type="Sprite2D" parent="Overhead" index="12"]
+use_parent_material = true
+position = Vector2(579, 739)
+texture = ExtResource("5_v4rq7")
+centered = false
+
+[node name="13 11" type="Sprite2D" parent="Overhead" index="13"]
+use_parent_material = true
+position = Vector2(580, 895)
+texture = ExtResource("14_wnw68")
+centered = false
+
+[node name="14 7" type="Sprite2D" parent="Overhead" index="14"]
+use_parent_material = true
+position = Vector2(579, 1051)
+texture = ExtResource("5_v4rq7")
+centered = false
+
+[node name="15 11" type="Sprite2D" parent="Overhead" index="15"]
+use_parent_material = true
+position = Vector2(769, 739)
+texture = ExtResource("14_wnw68")
+centered = false
+
+[node name="16 7" type="Sprite2D" parent="Overhead" index="16"]
+use_parent_material = true
+position = Vector2(768, 900)
+texture = ExtResource("5_v4rq7")
+centered = false
+
+[node name="17 7" type="Sprite2D" parent="Overhead" index="17"]
+use_parent_material = true
+position = Vector2(768, 1050)
+texture = ExtResource("5_v4rq7")
+centered = false
+
+[node name="18 24" type="Sprite2D" parent="Overhead" index="18"]
+use_parent_material = true
+position = Vector2(1907, 1267)
+texture = ExtResource("15_hd74t")
+centered = false
+
+[node name="19 6" type="Sprite2D" parent="Overhead" index="19"]
+use_parent_material = true
+position = Vector2(1497, 1035)
+texture = ExtResource("3_t2e34")
+centered = false
+
+[node name="20 3" type="Sprite2D" parent="Overhead" index="20"]
+use_parent_material = true
+position = Vector2(142, 289)
+texture = ExtResource("16_50d83")
+centered = false
+
+[node name="21 6" type="Sprite2D" parent="Overhead" index="21"]
+use_parent_material = true
+position = Vector2(869, 1633)
+texture = ExtResource("3_t2e34")
+centered = false
+
+[node name="22 29" type="Sprite2D" parent="Overhead" index="22"]
+use_parent_material = true
+position = Vector2(1383, 1403)
+texture = ExtResource("17_8e164")
+centered = false
+
+[node name="23 0" type="Sprite2D" parent="Overhead" index="23"]
+use_parent_material = true
+position = Vector2(367, 0)
+texture = ExtResource("18_s23qr")
+centered = false
+
+[node name="24 6" type="Sprite2D" parent="Overhead" index="24"]
+use_parent_material = true
+position = Vector2(898, 1050)
+texture = ExtResource("3_t2e34")
+centered = false
+
+[node name="25 28" type="Sprite2D" parent="Overhead" index="25"]
+use_parent_material = true
+position = Vector2(1621, 1395)
+texture = ExtResource("19_o5sis")
+centered = false
+
+[node name="26 6" type="Sprite2D" parent="Overhead" index="26"]
+use_parent_material = true
+position = Vector2(995, 380)
+texture = ExtResource("3_t2e34")
+centered = false
+
+[node name="27 25" type="Sprite2D" parent="Overhead" index="27"]
+use_parent_material = true
+position = Vector2(1338, 1277)
+texture = ExtResource("20_6e5ie")
+centered = false
+
+[node name="28 6" type="Sprite2D" parent="Overhead" index="28"]
+use_parent_material = true
+position = Vector2(377, 566)
+texture = ExtResource("3_t2e34")
+centered = false

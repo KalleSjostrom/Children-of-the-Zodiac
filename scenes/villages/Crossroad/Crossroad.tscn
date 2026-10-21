@@ -1,0 +1,51 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/VillageScene.tscn" id="1_base"]
+[ext_resource type="Texture2D" path="res://scenes/villages/Crossroad/Crossroad.png" id="2_axolj"]
+[ext_resource type="Texture2D" path="res://res/Village/Crossroad/top/4.png" id="3_irt5e"]
+[ext_resource type="Texture2D" path="res://res/Village/Crossroad/top/3.png" id="4_34eab"]
+[ext_resource type="Texture2D" path="res://res/Village/Crossroad/top/0.png" id="5_vspah"]
+[ext_resource type="Texture2D" path="res://res/Village/Crossroad/top/1.png" id="6_cc5i2"]
+[ext_resource type="Texture2D" path="res://res/Village/Crossroad/top/2.png" id="7_0h5mb"]
+
+[node name="Crossroad" instance=ExtResource("1_base")]
+place_name = "Crossroad"
+folder_name = "Crossroad"
+village_name = "Crossroad"
+background_folder = "Crossroad"
+size = Vector2i(1024, 768)
+actual_size = Vector2i(1024, 768)
+wind_force = PackedFloat64Array(0, 0, 0)
+
+[node name="Background" parent="." index="1"]
+texture = ExtResource("2_axolj")
+
+[node name="00 4" type="Sprite2D" parent="Overhead" index="0"]
+use_parent_material = true
+position = Vector2(741, 412)
+texture = ExtResource("3_irt5e")
+centered = false
+
+[node name="01 3" type="Sprite2D" parent="Overhead" index="1"]
+use_parent_material = true
+position = Vector2(544, 347)
+texture = ExtResource("4_34eab")
+centered = false
+
+[node name="02 0" type="Sprite2D" parent="Overhead" index="2"]
+use_parent_material = true
+position = Vector2(103, 20)
+texture = ExtResource("5_vspah")
+centered = false
+
+[node name="03 1" type="Sprite2D" parent="Overhead" index="3"]
+use_parent_material = true
+position = Vector2(384, 112)
+texture = ExtResource("6_cc5i2")
+centered = false
+
+[node name="04 2" type="Sprite2D" parent="Overhead" index="4"]
+use_parent_material = true
+position = Vector2(788, 147)
+texture = ExtResource("7_0h5mb")
+centered = false

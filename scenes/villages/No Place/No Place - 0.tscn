@@ -1,0 +1,9 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/No Place/No Place.tscn" id="1_base"]
+
+[node name="No Place - 0" instance=ExtResource("1_base")]
+folder_name = "No Place"
+village_name = "No Place"
+background_folder = "No Place"
+actual_size = Vector2i(1, 1)

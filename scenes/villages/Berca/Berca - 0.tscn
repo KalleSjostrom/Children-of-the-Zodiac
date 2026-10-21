@@ -1,0 +1,648 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Berca/Berca.tscn" id="1_base"]
+[ext_resource type="Script" path="res://scenes/villages/VillageBuilding.gd" id="2_onsgo"]
+[ext_resource type="PackedScene" path="res://scenes/common/ActorView.tscn" id="3_83n36"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Berca/Alishia.tres" id="4_4vlql"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Characters/Pensaracommander.tres" id="5_3ofw4"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Characters/Pensarasoldier.tres" id="6_1lftm"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Berca/Eufrim.tres" id="7_sxrmn"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Berca/Freddy.tres" id="8_wjad7"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Characters/Guy.tres" id="9_5kox7"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Berca/Hassan.tres" id="10_tn5u7"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Berca/Ingo.tres" id="11_wm67o"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Berca/Laila.tres" id="12_m7x1m"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Berca/Muhamer.tres" id="13_hyb3w"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Berca/Olda.tres" id="14_lghsq"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Berca/Omer.tres" id="15_qox7t"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Berca/Petir.tres" id="16_kpxa5"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Berca/Rashidar.tres" id="17_j3b4r"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Characters/rebelred.tres" id="18_p8b8b"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Berca/Temeth.tres" id="19_ewn66"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Berca/Tilly.tres" id="20_3v3qs"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageSpawn.tscn" id="21_y2a4s"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="22_0eih8"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageSign.tscn" id="23_81avm"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageLoot.tscn" id="24_58d57"]
+
+[sub_resource type="Resource" id="Resource_uhql8"]
+script = ExtResource("2_onsgo")
+store_name = "bercaCardShop"
+background = "bercaCardShop.jpg"
+keeper = "bercaCardShopRomero.png"
+keeper_name = "Romero"
+first_line = "Get your cards here!"
+second_line = " "
+music = "Berca Shop"
+
+[sub_resource type="Resource" id="Resource_ap7or"]
+script = ExtResource("2_onsgo")
+store_name = "Church"
+background = "bercaChurch.jpg"
+keeper = "bercaPastorTemeth.png"
+keeper_name = "Temeth"
+first_line = "Welcome."
+second_line = "How can I be of assistance?"
+music = "Berca Church"
+
+[sub_resource type="Resource" id="Resource_eo4j7"]
+script = ExtResource("2_onsgo")
+store_name = "Inn"
+background = "bercaInn.jpg"
+keeper = "bercaInnKeeperSamuler.png"
+keeper_name = "Samuler"
+first_line = "Welcome."
+second_line = " "
+music = "House"
+
+[sub_resource type="Resource" id="Resource_itkuf"]
+script = ExtResource("2_onsgo")
+store_name = "bercaWeapons"
+background = "bercaWeaponShop.jpg"
+keeper = "bercaWeaponShopHelgar.png"
+keeper_name = "Helgar"
+first_line = "I have weapons from all around the world!"
+second_line = "Interested?"
+music = "Berca Shop"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sm36r"]
+size = Vector2(18, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rfjm7"]
+size = Vector2(63, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vscmk"]
+size = Vector2(14, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d4pxx"]
+size = Vector2(18, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4nw7m"]
+size = Vector2(12, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_772gl"]
+size = Vector2(15, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uopyj"]
+size = Vector2(6, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f8rao"]
+size = Vector2(43, 33)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x0ume"]
+size = Vector2(26, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tc63i"]
+size = Vector2(5, 291)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vhai4"]
+size = Vector2(29, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xgbfb"]
+size = Vector2(28, 42)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x7r37"]
+size = Vector2(4, 369)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a2ilu"]
+size = Vector2(59, 44)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t8anx"]
+size = Vector2(311, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b0exf"]
+size = Vector2(35, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k1qps"]
+size = Vector2(49, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bse0m"]
+size = Vector2(205, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fha4x"]
+size = Vector2(125, 64)
+
+[node name="Berca - 0" instance=ExtResource("1_base")]
+buildings = Array[ExtResource("2_onsgo")]([SubResource("Resource_uhql8"), SubResource("Resource_ap7or"), SubResource("Resource_eo4j7"), SubResource("Resource_itkuf")])
+
+[node name="00 Alishia" parent="Actors" index="0" instance=ExtResource("3_83n36")]
+position = Vector2(400, 600)
+sprite_frames = ExtResource("4_4vlql")
+animation = &"down"
+role = 1
+villager_name = "Alishia"
+statuses = PackedInt32Array()
+villager_folder = "Berca"
+
+[node name="01 BercaCommander 1" parent="Actors" index="1" instance=ExtResource("3_83n36")]
+position = Vector2(360, 700)
+sprite_frames = ExtResource("5_3ofw4")
+animation = &"down"
+role = 1
+villager_name = "BercaCommander 1"
+statuses = PackedInt32Array()
+villager_folder = "Berca"
+
+[node name="02 BercaSoldier 10" parent="Actors" index="2" instance=ExtResource("3_83n36")]
+position = Vector2(1245, 620)
+sprite_frames = ExtResource("6_1lftm")
+animation = &"right"
+role = 1
+villager_name = "BercaSoldier 10"
+statuses = PackedInt32Array()
+villager_folder = "Berca"
+
+[node name="03 BercaSoldier 11" parent="Actors" index="3" instance=ExtResource("3_83n36")]
+position = Vector2(1250, 880)
+sprite_frames = ExtResource("6_1lftm")
+animation = &"right"
+role = 1
+villager_name = "BercaSoldier 11"
+statuses = PackedInt32Array()
+villager_folder = "Berca"
+
+[node name="04 BercaSoldier 12" parent="Actors" index="4" instance=ExtResource("3_83n36")]
+position = Vector2(2160, 50)
+sprite_frames = ExtResource("6_1lftm")
+animation = &"down"
+role = 1
+villager_name = "BercaSoldier 12"
+statuses = PackedInt32Array()
+villager_folder = "Berca"
+
+[node name="05 BercaSoldier 13" parent="Actors" index="5" instance=ExtResource("3_83n36")]
+position = Vector2(2160, 120)
+sprite_frames = ExtResource("6_1lftm")
+animation = &"down"
+role = 1
+villager_name = "BercaSoldier 13"
+statuses = PackedInt32Array()
+villager_folder = "Berca"
+
+[node name="06 BercaSoldier 1" parent="Actors" index="6" instance=ExtResource("3_83n36")]
+position = Vector2(1140, 1110)
+sprite_frames = ExtResource("6_1lftm")
+animation = &"down"
+role = 1
+villager_name = "BercaSoldier 1"
+statuses = PackedInt32Array(1)
+villager_folder = "Berca"
+
+[node name="07 BercaSoldier 2" parent="Actors" index="7" instance=ExtResource("3_83n36")]
+position = Vector2(1250, 1110)
+sprite_frames = ExtResource("6_1lftm")
+animation = &"down"
+role = 1
+villager_name = "BercaSoldier 2"
+statuses = PackedInt32Array(1)
+villager_folder = "Berca"
+
+[node name="08 BercaSoldier 3" parent="Actors" index="8" instance=ExtResource("3_83n36")]
+position = Vector2(100, 760)
+sprite_frames = ExtResource("6_1lftm")
+animation = &"right"
+role = 1
+villager_name = "BercaSoldier 3"
+statuses = PackedInt32Array()
+villager_folder = "Berca"
+
+[node name="09 BercaSoldier 4" parent="Actors" index="9" instance=ExtResource("3_83n36")]
+position = Vector2(220, 760)
+sprite_frames = ExtResource("6_1lftm")
+animation = &"right"
+role = 1
+villager_name = "BercaSoldier 4"
+statuses = PackedInt32Array()
+villager_folder = "Berca"
+
+[node name="10 BercaSoldier 5" parent="Actors" index="10" instance=ExtResource("3_83n36")]
+position = Vector2(340, 760)
+sprite_frames = ExtResource("6_1lftm")
+animation = &"right"
+role = 1
+villager_name = "BercaSoldier 5"
+statuses = PackedInt32Array()
+villager_folder = "Berca"
+
+[node name="11 BercaSoldier 6" parent="Actors" index="11" instance=ExtResource("3_83n36")]
+position = Vector2(100, 860)
+sprite_frames = ExtResource("6_1lftm")
+animation = &"right"
+role = 1
+villager_name = "BercaSoldier 6"
+statuses = PackedInt32Array()
+villager_folder = "Berca"
+
+[node name="12 BercaSoldier 7" parent="Actors" index="12" instance=ExtResource("3_83n36")]
+position = Vector2(340, 860)
+sprite_frames = ExtResource("6_1lftm")
+animation = &"right"
+role = 1
+villager_name = "BercaSoldier 7"
+statuses = PackedInt32Array()
+villager_folder = "Berca"
+
+[node name="13 BercaSoldier 8" parent="Actors" index="13" instance=ExtResource("3_83n36")]
+position = Vector2(220, 860)
+sprite_frames = ExtResource("6_1lftm")
+animation = &"right"
+role = 1
+villager_name = "BercaSoldier 8"
+statuses = PackedInt32Array()
+villager_folder = "Berca"
+
+[node name="14 BercaSoldier 9" parent="Actors" index="14" instance=ExtResource("3_83n36")]
+position = Vector2(790, 230)
+sprite_frames = ExtResource("6_1lftm")
+animation = &"left"
+role = 1
+villager_name = "BercaSoldier 9"
+statuses = PackedInt32Array()
+villager_folder = "Berca"
+
+[node name="15 Eufrim" parent="Actors" index="15" instance=ExtResource("3_83n36")]
+position = Vector2(710, 210)
+sprite_frames = ExtResource("7_sxrmn")
+animation = &"down"
+role = 1
+villager_name = "Eufrim"
+statuses = PackedInt32Array()
+villager_folder = "Berca"
+
+[node name="16 Freddy" parent="Actors" index="16" instance=ExtResource("3_83n36")]
+position = Vector2(1120, 900)
+sprite_frames = ExtResource("8_wjad7")
+animation = &"down"
+role = 1
+villager_name = "Freddy"
+statuses = PackedInt32Array()
+villager_folder = "Berca"
+
+[node name="17 Guy" parent="Actors" index="17" instance=ExtResource("3_83n36")]
+position = Vector2(850, 1030)
+sprite_frames = ExtResource("9_5kox7")
+animation = &"down"
+role = 1
+villager_name = "Guy"
+statuses = PackedInt32Array(1, 2)
+villager_folder = "Berca"
+
+[node name="18 Hassan" parent="Actors" index="18" instance=ExtResource("3_83n36")]
+position = Vector2(1000, 700)
+sprite_frames = ExtResource("10_tn5u7")
+animation = &"down"
+role = 1
+villager_name = "Hassan"
+statuses = PackedInt32Array()
+villager_folder = "Berca"
+
+[node name="19 Ingo" parent="Actors" index="19" instance=ExtResource("3_83n36")]
+position = Vector2(330, 1050)
+sprite_frames = ExtResource("11_wm67o")
+animation = &"down"
+role = 1
+villager_name = "Ingo"
+statuses = PackedInt32Array()
+villager_folder = "Berca"
+
+[node name="20 Laila" parent="Actors" index="20" instance=ExtResource("3_83n36")]
+position = Vector2(1940, 530)
+sprite_frames = ExtResource("12_m7x1m")
+animation = &"down"
+role = 1
+villager_name = "Laila"
+statuses = PackedInt32Array()
+villager_folder = "Berca"
+
+[node name="21 Muhamder" parent="Actors" index="21" instance=ExtResource("3_83n36")]
+position = Vector2(1500, 200)
+sprite_frames = ExtResource("13_hyb3w")
+animation = &"down"
+role = 1
+villager_name = "Muhamder"
+statuses = PackedInt32Array()
+villager_folder = "Berca"
+
+[node name="22 Olda" parent="Actors" index="22" instance=ExtResource("3_83n36")]
+position = Vector2(1200, 1000)
+sprite_frames = ExtResource("14_lghsq")
+animation = &"down"
+role = 1
+villager_name = "Olda"
+statuses = PackedInt32Array(1)
+villager_folder = "Berca"
+
+[node name="23 Omer" parent="Actors" index="23" instance=ExtResource("3_83n36")]
+position = Vector2(1500, 1000)
+sprite_frames = ExtResource("15_qox7t")
+animation = &"right"
+role = 1
+villager_name = "Omer"
+statuses = PackedInt32Array()
+villager_folder = "Berca"
+
+[node name="24 Petir" parent="Actors" index="24" instance=ExtResource("3_83n36")]
+position = Vector2(660, 170)
+sprite_frames = ExtResource("16_kpxa5")
+animation = &"down"
+role = 1
+villager_name = "Petir"
+statuses = PackedInt32Array()
+villager_folder = "Berca"
+
+[node name="25 Rashidar" parent="Actors" index="25" instance=ExtResource("3_83n36")]
+position = Vector2(1170, 400)
+sprite_frames = ExtResource("17_j3b4r")
+animation = &"right"
+role = 1
+villager_name = "Rashidar"
+statuses = PackedInt32Array()
+villager_folder = "Berca"
+
+[node name="26 Rebel 2" parent="Actors" index="26" instance=ExtResource("3_83n36")]
+position = Vector2(2110, 920)
+sprite_frames = ExtResource("18_p8b8b")
+animation = &"left"
+role = 1
+villager_name = "Rebel 2"
+statuses = PackedInt32Array()
+villager_folder = "Berca"
+
+[node name="27 Temeth" parent="Actors" index="27" instance=ExtResource("3_83n36")]
+position = Vector2(2088, 587)
+sprite_frames = ExtResource("19_ewn66")
+animation = &"down"
+role = 1
+villager_name = "Temeth"
+statuses = PackedInt32Array()
+villager_folder = "Berca"
+
+[node name="28 Tilly" parent="Actors" index="28" instance=ExtResource("3_83n36")]
+position = Vector2(360, 1045)
+sprite_frames = ExtResource("20_3v3qs")
+animation = &"right"
+role = 1
+villager_name = "Tilly"
+statuses = PackedInt32Array()
+villager_folder = "Berca"
+
+[node name="V000" type="CollisionShape2D" parent="Obstacles" index="102"]
+position = Vector2(1335, 1104)
+shape = SubResource("RectangleShape2D_sm36r")
+
+[node name="V001" type="CollisionShape2D" parent="Obstacles" index="103"]
+position = Vector2(1374.5, 1095)
+shape = SubResource("RectangleShape2D_rfjm7")
+
+[node name="V002" type="CollisionShape2D" parent="Obstacles" index="104"]
+position = Vector2(1319, 1043.5)
+shape = SubResource("RectangleShape2D_vscmk")
+
+[node name="V003" type="CollisionShape2D" parent="Obstacles" index="105"]
+position = Vector2(1320, 1109)
+shape = SubResource("RectangleShape2D_d4pxx")
+
+[node name="V004" type="CollisionShape2D" parent="Obstacles" index="106"]
+position = Vector2(1407, 1048)
+shape = SubResource("RectangleShape2D_4nw7m")
+
+[node name="V005" type="CollisionShape2D" parent="Obstacles" index="107"]
+position = Vector2(1334.5, 1035.5)
+shape = SubResource("RectangleShape2D_772gl")
+
+[node name="V006" type="CollisionShape2D" parent="Obstacles" index="108"]
+position = Vector2(1403, 1075.5)
+shape = SubResource("RectangleShape2D_uopyj")
+
+[node name="V007" type="CollisionShape2D" parent="Obstacles" index="109"]
+position = Vector2(1289.5, 1047.5)
+shape = SubResource("RectangleShape2D_f8rao")
+
+[node name="V008" type="CollisionShape2D" parent="Obstacles" index="110"]
+position = Vector2(1376, 168)
+shape = SubResource("RectangleShape2D_x0ume")
+
+[node name="V009" type="CollisionShape2D" parent="Obstacles" index="111"]
+position = Vector2(1156.5, 258.5)
+shape = SubResource("RectangleShape2D_tc63i")
+
+[node name="V010" type="CollisionShape2D" parent="Obstacles" index="112"]
+position = Vector2(1186.5, 217)
+shape = SubResource("RectangleShape2D_vhai4")
+
+[node name="V011" type="CollisionShape2D" parent="Obstacles" index="113"]
+position = Vector2(1217, 133)
+shape = SubResource("RectangleShape2D_xgbfb")
+
+[node name="V012" type="CollisionShape2D" parent="Obstacles" index="114"]
+position = Vector2(1463, 297.5)
+shape = SubResource("RectangleShape2D_x7r37")
+
+[node name="V013" type="CollisionShape2D" parent="Obstacles" index="115"]
+position = Vector2(1412.5, 150)
+shape = SubResource("RectangleShape2D_a2ilu")
+
+[node name="V014" type="CollisionShape2D" parent="Obstacles" index="116"]
+position = Vector2(1309.5, 104)
+shape = SubResource("RectangleShape2D_t8anx")
+
+[node name="V015" type="CollisionShape2D" parent="Obstacles" index="117"]
+position = Vector2(1238.5, 168)
+shape = SubResource("RectangleShape2D_b0exf")
+
+[node name="V016" type="CollisionShape2D" parent="Obstacles" index="118"]
+position = Vector2(1384.5, 199)
+shape = SubResource("RectangleShape2D_k1qps")
+
+[node name="V017" type="CollisionShape2D" parent="Obstacles" index="119"]
+position = Vector2(1357.5, 120.5)
+shape = SubResource("RectangleShape2D_bse0m")
+
+[node name="V018" type="CollisionShape2D" parent="Obstacles" index="120"]
+position = Vector2(1087.5, 887)
+shape = SubResource("RectangleShape2D_fha4x")
+
+[node name="00 start" parent="Spawns" index="0" instance=ExtResource("21_y2a4s")]
+position = Vector2(1192, 1140)
+
+[node name="00 Berca_-_Library_-_Floor_1" parent="Doors" index="0" instance=ExtResource("22_0eih8")]
+position = Vector2(1822, 355)
+hole = true
+kinds = PackedStringArray("house")
+targets = PackedStringArray("Berca_-_Library_-_Floor_1")
+radius = 43
+directions = PackedInt32Array(0)
+fade = 2
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray()
+
+[node name="01 Berca_-_Bar" parent="Doors" index="1" instance=ExtResource("22_0eih8")]
+position = Vector2(1655, 825)
+hole = true
+kinds = PackedStringArray("house")
+targets = PackedStringArray("Berca_-_Bar")
+radius = 25
+directions = PackedInt32Array(0)
+fade = 2
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray(" Locked.")
+
+[node name="02 Meeting_With_the_Rebels" parent="Doors" index="2" instance=ExtResource("22_0eih8")]
+position = Vector2(553, 723)
+hole = true
+kinds = PackedStringArray("story", "house")
+targets = PackedStringArray("Meeting_With_the_Rebels", "Rebel_Hideout")
+directions = PackedInt32Array(0)
+fade = 2
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray(" Not now!", " We must hurry!")
+
+[node name="03 RedDrape" parent="Doors" index="3" instance=ExtResource("22_0eih8")]
+position = Vector2(1105, 1012)
+kinds = PackedStringArray("house")
+targets = PackedStringArray("RedDrape")
+radius = 25
+directions = PackedInt32Array(0)
+fade = 2
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray(" No entry!")
+
+[node name="04 Berca_-_Dolly\'s_House" parent="Doors" index="4" instance=ExtResource("22_0eih8")]
+position = Vector2(937, 1010)
+hole = true
+kinds = PackedStringArray("house")
+targets = PackedStringArray("Berca_-_Dolly\'s_House")
+radius = 25
+directions = PackedInt32Array(0)
+fade = 2
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray(" Locked.")
+
+[node name="05 House6" parent="Doors" index="5" instance=ExtResource("22_0eih8")]
+position = Vector2(1038, 870)
+kinds = PackedStringArray("house")
+targets = PackedStringArray("House6")
+radius = 25
+directions = PackedInt32Array(0)
+fade = 2
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray(" Don\'t come in!")
+
+[node name="06 Berca_-_House" parent="Doors" index="6" instance=ExtResource("22_0eih8")]
+position = Vector2(1365, 983)
+hole = true
+kinds = PackedStringArray("house")
+targets = PackedStringArray("Berca_-_House")
+radius = 25
+directions = PackedInt32Array(0)
+fade = 2
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray(" Locked.")
+
+[node name="07 House8" parent="Doors" index="7" instance=ExtResource("22_0eih8")]
+position = Vector2(1819, 138)
+hole = true
+kinds = PackedStringArray("house")
+targets = PackedStringArray("House8")
+radius = 25
+directions = PackedInt32Array(0)
+fade = 2
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray(" Locked.")
+
+[node name="08 bercaCardShop" parent="Doors" index="8" instance=ExtResource("22_0eih8")]
+position = Vector2(1297, 367)
+hole = true
+kinds = PackedStringArray("card")
+targets = PackedStringArray("bercaCardShop")
+radius = 25
+directions = PackedInt32Array(0)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray(" Locked.")
+
+[node name="09 Church" parent="Doors" index="9" instance=ExtResource("22_0eih8")]
+position = Vector2(2088, 590)
+kinds = PackedStringArray("church")
+targets = PackedStringArray("Church")
+radius = 40
+directions = PackedInt32Array(0, 1, 2, 3)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray()
+
+[node name="10 Inn" parent="Doors" index="10" instance=ExtResource("22_0eih8")]
+position = Vector2(1026, 506)
+hole = true
+kinds = PackedStringArray("inn")
+targets = PackedStringArray("Inn")
+radius = 25
+directions = PackedInt32Array(0)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray()
+
+[node name="11 bercaWeapons" parent="Doors" index="11" instance=ExtResource("22_0eih8")]
+position = Vector2(825, 211)
+hole = true
+kinds = PackedStringArray("weapon")
+targets = PackedStringArray("bercaWeapons")
+radius = 25
+directions = PackedInt32Array(0)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray()
+
+[node name="00 West_ Inn and an item sh" parent="Signs" index="0" instance=ExtResource("23_81avm")]
+position = Vector2(1550, 572)
+radius = 27
+directions = PackedInt32Array(0)
+lines = PackedStringArray("West: Inn and an item shop on the roof.", "East: Holy square.")
+listed = Array[bool]([true, true])
+
+[node name="01 What a butt ugly statue!" parent="Signs" index="1" instance=ExtResource("23_81avm")]
+position = Vector2(1905, 120)
+radius = 41
+directions = PackedInt32Array(0)
+lines = PackedStringArray("What a butt ugly statue!")
+listed = Array[bool]([true])
+
+[node name="02 This statue is kind of n" parent="Signs" index="2" instance=ExtResource("23_81avm")]
+position = Vector2(1744, 119)
+radius = 41
+directions = PackedInt32Array(0)
+lines = PackedStringArray("This statue is kind of nice!")
+listed = Array[bool]([true])
+
+[node name="03 Welcome to the Village o" parent="Signs" index="3" instance=ExtResource("23_81avm")]
+position = Vector2(1242, 781)
+radius = 31
+directions = PackedInt32Array(0)
+lines = PackedStringArray("Welcome to the Village of the Sun!")
+listed = Array[bool]([true])
+
+[node name="04 The water looks fresh_" parent="Signs" index="4" instance=ExtResource("23_81avm")]
+position = Vector2(310, 248)
+radius = 30
+directions = PackedInt32Array(0)
+lines = PackedStringArray("The water looks fresh.")
+listed = Array[bool]([true])
+
+[node name="05 Item shop_" parent="Signs" index="5" instance=ExtResource("23_81avm")]
+position = Vector2(1362, 186)
+radius = 45
+directions = PackedInt32Array(0)
+lines = PackedStringArray("Item shop.")
+listed = Array[bool]([true])
+
+[node name="06 Drink the water on your" parent="Signs" index="6" instance=ExtResource("23_81avm")]
+position = Vector2(617, 342)
+radius = 30
+directions = PackedInt32Array(0)
+lines = PackedStringArray("Drink the water on your own risk!")
+listed = Array[bool]([true])
+
+[node name="00 name" parent="Loot" index="0" instance=ExtResource("24_58d57")]
+position = Vector2(575, 270)
+loot_name = "name"
+directions = PackedInt32Array(0)
+content_name = "cards.support.Shield"
+content_type = 2
+card_level = 2
+lines = PackedStringArray("A card was wedged in between the bricks in the well!")

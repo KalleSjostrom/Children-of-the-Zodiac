@@ -1,0 +1,16 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Dellna - Ana's Home/Dellna - Ana's Home.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="2_geygl"]
+
+[node name="Dellna - Ana\'s Home - 0" instance=ExtResource("1_base")]
+
+[node name="00 Dellna" parent="Doors" index="0" instance=ExtResource("2_geygl")]
+position = Vector2(501, 566)
+hole = true
+kinds = PackedStringArray("switch")
+targets = PackedStringArray("Dellna")
+directions = PackedInt32Array(2)
+fade = 1
+to_pos = PackedFloat64Array(576, 1234, 2, -1)
+sign_lines = PackedStringArray()

@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Ylwa/Ylwa9.png" id="1_vjh62"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Ylwa/Ylwa10.png" id="2_47hpi"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Ylwa/Ylwa11.png" id="3_7kgxj"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Ylwa/Ylwa12.png" id="4_v4htr"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Ylwa/Ylwa13.png" id="5_d48m7"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Ylwa/Ylwa14.png" id="6_wh41d"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Ylwa/Ylwa15.png" id="7_i08nb"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Ylwa/Ylwa16.png" id="8_6um7l"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Ylwa/Ylwa5.png" id="9_j8kmx"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Ylwa/Ylwa6.png" id="10_q42ym"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Ylwa/Ylwa7.png" id="11_nl2ia"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Ylwa/Ylwa8.png" id="12_d0at5"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Ylwa/Ylwa1.png" id="13_k6wt6"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Ylwa/Ylwa2.png" id="14_71eqc"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Ylwa/Ylwa3.png" id="15_1gv3u"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Ylwa/Ylwa4.png" id="16_8nqqj"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_vjh62")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_47hpi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_7kgxj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_v4htr")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_d48m7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_wh41d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_i08nb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_6um7l")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_j8kmx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_q42ym")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_nl2ia")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_d0at5")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_k6wt6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_71eqc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_1gv3u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_8nqqj")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

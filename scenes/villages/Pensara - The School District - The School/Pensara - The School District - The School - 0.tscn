@@ -1,0 +1,43 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Pensara - The School District - The School/Pensara - The School District - The School.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/ActorView.tscn" id="2_7h8cw"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The School District - The School/Teacher Eufrin.tres" id="3_vn7ew"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="4_ipnbe"]
+
+[node name="Pensara - The School District - The School - 0" instance=ExtResource("1_base")]
+
+[node name="00 Eufrin" parent="Actors" index="0" instance=ExtResource("2_7h8cw")]
+position = Vector2(500, 240)
+sprite_frames = ExtResource("3_vn7ew")
+animation = &"down"
+role = 1
+villager_name = "Eufrin"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The School District - The School"
+
+[node name="00 Pensara_-_The_School_District" parent="Doors" index="0" instance=ExtResource("4_ipnbe")]
+position = Vector2(503, 708)
+hole = true
+kinds = PackedStringArray("switch")
+targets = PackedStringArray("Pensara_-_The_School_District")
+directions = PackedInt32Array(2)
+fade = 1
+to_pos = PackedFloat64Array(2201, 755, 2, -1)
+sign_lines = PackedStringArray()
+
+[node name="01 _" parent="Doors" index="1" instance=ExtResource("4_ipnbe")]
+position = Vector2(357, 217)
+kinds = PackedStringArray("house")
+targets = PackedStringArray("_")
+directions = PackedInt32Array(0)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray(" Locked.")
+
+[node name="02 _" parent="Doors" index="2" instance=ExtResource("4_ipnbe")]
+position = Vector2(646, 217)
+kinds = PackedStringArray("house")
+targets = PackedStringArray("_")
+directions = PackedInt32Array(0)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray(" Occupied.")

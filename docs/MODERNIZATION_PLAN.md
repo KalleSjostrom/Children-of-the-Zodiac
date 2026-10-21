@@ -1,8 +1,9 @@
 # Modernization plan: from the GL emulation to Godot scenes
 
-Status: **phase 0 done** (2026-10-16); **phase 1 pilot done** (Zazo and
-"Zazo - Miner's Home" through steps A and B, see 6.7); the rest of phase 1
-and phases 2–5 are proposals. The plan
+Status: **phase 0 done** (2026-10-16); **phase 1 steps A and B done** for
+all 63 places and 89 variants (pilot: Zazo and "Zazo - Miner's Home", 6.7;
+rollout: the other 61 places, 6.8; closing the phase, 6.9); phases 2–5 are
+proposals. The plan
 assumes the state described in `docs/HANDOFF.md` (all classes ported, main
 paths run). Conventions for new code: `docs/ARCHITECTURE.md`.
 
@@ -54,7 +55,7 @@ widescreen (see section 13); rewriting the cutscene language.
   High-level `Graphics` calls (`drawImage`, `drawString`, …) are mostly in
   `menu`, `battle`, `store` and `villages`.
 
-### 2.2 Villages (89 `.vil` files, 60 places)
+### 2.2 Villages (89 `.vil` files, 63 places)
 
 * **Which file loads:** `maps/Village/<Place>/<Place>[ at Night] - <status>.vil`.
   `VillageLoader.load` chooses it from `Database.getStatusFor(place)` and the
@@ -74,6 +75,11 @@ widescreen (see section 13); rewriting the cutscene language.
 * **Art:**
   * The background ships pre-cut into 256×256 tiles
     (`res/Village/<Place>/<Place>folder/xNyM.jpg`), up to 2820×1442 px.
+    *Found in the rollout:* three places have one JPEG and no tile folder
+    (Menthu Battle, Zazo - Farl's House, Pensara - The Trade District -
+    Tower Prison; `DoubleBackground.cutImage2` cuts them in memory), Home
+    of the Gods and No Place have PNG tiles with alpha, No Place's
+    `as=1:1` draws one 1×1 tile, and Dorma's Tranquility has no art.
   * The "top" pieces (roofs, treetops) are in `top/`, positioned by
     `top/top.info` (`name:x:y`).
   * Night overlay: `<Place> at Night - 1.png` or `standardOvernight.png`.
@@ -537,6 +543,11 @@ Zazo.tscn (Node2D, VillageScene.gd)   @export place_name, music, land_name, insi
 * **Exit:** all 89 variants load from scenes; `tools/autoplay/village*.txt`
   and the story scripts pass parity; `Village`/`VillageLoader` contain no
   world drawing.
+* *As built:* the pilot did Zazo; the rollout converted the 36 interiors,
+  then the 25 other places, in one session each (the converter is fast:
+  about 20 s per batch). Steps A and B are done for all 89 variants (6.8).
+  No `.vil` file is deleted (decision 5 is open), so `--legacy=villages`
+  and the data check still work. What closing the phase needs is in 6.9.
 
 ### 6.7 Pilot results (Zazo, Zazo - Miner's Home)
 
@@ -570,6 +581,140 @@ Zazo.tscn (Node2D, VillageScene.gd)   @export place_name, music, land_name, insi
   the cover-all, story, village and translucent-over-actor images. The
   `.vil` files stay (decision 5); the converter, the data check and
   `--legacy=villages` read them.
+
+### 6.8 Rollout results (the other 61 places)
+
+* **Baseline** (on the commit after the tickets COTZ-001 to 011): goldens of
+  the 17 existing cases; a second recording of the six Zazo cases is
+  identical (113 shots); the pilot's check (`ab "--legacy=villages"
+  "--legacy=village_top_layer"` on the Zazo cases) gives exactly 6.7's
+  result: 100 of 113 shots identical, the 13 others the frames of
+  Zazonode1's zoom, with the same pixel counts. `story_long` no longer
+  reached the opening story (its first CROSS came before the title menu
+  took input, so it loaded a save into Menthu's Lair); fixed (first wait
+  4 s), it shows the Prolog for 3 minutes.
+* **Coverage:** 101 new cases (`tools/parity/cases.txt`), recorded on
+  unconverted code: a tour of each of the 72 variants a main.bank place
+  reaches (`tour_*`, one script for all: `village_tour.txt`), four particle
+  cases (`particles_*`: Home of the Gods with every god system active,
+  Dellna's snow and four smokes, Pensara North's wind -10 and turbulence 1,
+  the Pass to Zazo fire sorted with the sprites) and 24 cutscenes
+  (`story_*`: backflash, translucent under actor with the village
+  background swap, colour tints, props on the bottom and top layers,
+  cover-all and story images, scroll text, zooms, Circle held, and every
+  place only cutscenes reach). A second recording of the 101 is identical
+  (2,487 shots, logs identical). Two findings on the way: a game pad that
+  connects during a deterministic run releases AutoPlay's buttons (fixed:
+  `--seed` runs read no pad), and the world map mode leaked (fixed, 8).
+* **Not reachable:** Dorma's Tranquility and Menthu Battle (no place, story,
+  door or world map node names them), "Pensara - The North District -
+  Farmer House" (quits the game on entry: a villager's patrol is not
+  closed), Tutorial1 (no main.bank entry): data check and preview only.
+  `fadeparticlesystem` and the rain/sand particles never run (appendix).
+* **Converter:** the pilot's converter handled one-image backgrounds,
+  PNG tiles with alpha, `as=1:1` and own night images already; the
+  rollout added the base/variant split of the art (the background most
+  variants draw goes into the base, the others override it; the top layer
+  is shared on its own), stitching a background shared by two places once,
+  `animObj` SpriteFrames (an untyped array broke them; the pilot had no
+  `animObj`) and warnings for tokens that are no integers. Converting twice
+  changes none of the 455 files; the pilot's scenes are unchanged.
+* **Step A:** `verify_villages.gd --all` with the saves "Slot 1" and
+  "Start": 240 builds (89 variants × their start positions × 2 saves), all
+  pass.
+* **Step B, legacy vs. scene with `--legacy=village_top_layer`** (the 113
+  cases that show villages, 2,639 shots, `--ignore-world`): all logs
+  identical; 2,213 shots identical: every tour, the particle cases, the
+  Alares cases (`village`, `village_walk`, `stores`, `menu_pages`), the
+  Prolog cases (`story_long`, `title_start`, `newgame_to_forest`) and every
+  cutscene frame without a zoom. The 426 others:
+  * 334 frames of cutscene zooms in nine stories and `zazo_story_node1`
+    (each one confirmed by AutoPlay's `[zoom]` line): the legacy tile seams
+    and the bilinear rounding of 6.7, up to 75/255 on 0.01–5 % of a frame.
+    After a zoom out the timeline's scale stays at 1.00007 (its velocity sum
+    is 79.994/80) and `scaling` is never reset, so every later frame of the
+    cutscene is resampled too, with differences of 1–3/255.
+  * 92 frames of "Ending - Part 3": its credit images are drawn at size
+    0.65 under the actors (image mode 0, backflash); 1/255 on at most 212
+    pixels (resampling rounding), after the fix below.
+* **Step B, legacy vs. scene, default** (the top layer always drawn,
+  decision 7): in addition, 1,090 shots differ, and exactly where the two
+  scene runs differ (`compare stop sdef`): inside the roofs and treetops no
+  sprite overlaps. No cutscene frame changes (the legacy cutscene draws
+  every piece); the 24 such shots of story cases are taken in the village
+  after the story.
+* **Fixed in the bridge** (both in code the pilot never ran): a cutscene
+  prop added to the village's layers is drawn twice by the legacy code
+  (among the village sprites and again as an actor), so `show_actors` gives
+  a repeated key a second view ("Arrival at the Port Town of Parasne");
+  a scaled under-actor image covers the legacy's whole-pixel rectangle
+  (`GameTexture.drawPart` truncates its far corner), so
+  `VillageStoryTimeLine.image_entry` scales it per axis.
+* **Cases that stay legacy** (`battle`, `boss`, `landscape`,
+  `bridge_test`): golden vs. after differs in 51 of 131 shots, all from the
+  game pad: golden was recorded while a DualSense was connected (PlayStation
+  button hints in the battle help panel, the floor message's state in the
+  bridge test's menu thumbnail), the runs after the pad fix show keyboard
+  hints. The same cases recorded with `--legacy=villages` are identical to
+  the run without it (131 of 131), so the conversion does not touch them.
+  Likewise golden vs. the legacy run after the conversion
+  (`--legacy=villages`): 2,516 of 2,526 shots identical; the others are the
+  pad (9 `menu_pages` shots) and Zazo (already a scene in golden).
+* **Frame rate** (normal runs, windowed, the tour or particle route; the
+  median of the village frames, legacy (`--legacy=villages`) → scene):
+
+  | Place | Capped | Uncapped |
+  |---|---|---|
+  | Alares | 60 → 60 | 401 → 738 |
+  | Pensara - The Trade District | 60 → 60 | 292 → 471 |
+  | Home of the Gods (stars, door systems) | 60 → 60 | 258 → 434 |
+  | Home of the Gods, all 12 god systems active | 6 → 6–7 | 6 → 6 |
+  | Dellna - 0 (snow) | 12 → 18 | 12 → 18 |
+
+  The last two are bound by the particle simulation in GDScript (6,000 snow
+  particles; 12 × 3,000 god particles), in both paths: the drawing is not
+  the bottleneck there. This contradicts HANDOFF's "everything else runs
+  at 60 FPS": Dellna's snow runs at 12 FPS in normal play. A GPU preset
+  (6.4, after decision 6) is the way to remove it.
+
+### 6.9 Closing phase 1 (prepared, not done)
+
+Removing the legacy village path deletes or changes (line counts as of the
+rollout, including doc comments):
+
+| Part | Lines | Still used by |
+|---|---|---|
+| `.vil` loading: `VillageLoader.VillageLoaderMapLoader` (inner class) | 244 | `--legacy=villages`, `tools/import/verify_villages.gd` |
+| `Door.getDoor` (a door line), `Loot.getLoot` (a loot line) | 40 + 25 | only `VillageLoaderMapLoader` |
+| `VillageLoader.village_scene_for`'s `--legacy` check, `load`'s `.vil` branch | ~5 | — |
+| `Village.drawBottom`, `drawTop` and the legacy branch of `draw` | 18 + 5 + 3 | `--legacy=villages`; `sortSprites` (15) and `drawOverlays` (15) stay (the scene path and the overlays use them) |
+| `VillageStoryTimeLine.draw`'s legacy branch | ~25 of 47 | `--legacy=villages`; `draw_scene`, `sortActors`, `drawTop` (overlays) stay |
+| `DoubleBackground`: `loadImages` (village tiles), `init`, `putextra` (dead while `USE_CUT`) | 24 + 19 + 2 | the scene path still builds a `DoubleBackground` per village (`load_into` → `loadImages`), for its scroll logic, particle system lists and top-layer list: it also loads the tile textures the scene does not draw (wasted texture memory until the scroll moves to the camera, step C) |
+| `DoubleBackground`: `doit`, `cutImage`, `cutImage2`, `generateNames`, `doTopLayer`, `drawBottom`, `drawBottomLayer`, `drawTop`, `drawSystem` | 29+14+40+14+19+5+22+42+4 | stay: the world map and the airship (`setLandscapeImages`, `drawBottom`, `drawTop(g, false, null)`) until phase 4.1 |
+| `DoubleBackground.overlapped_pieces` | 33 | stays while `PartyMember.getMemberPos` is updated there (a state change of the legacy `drawTop`) and for `--legacy=village_top_layer` |
+| Sprite draws: `Villager.draw` 10, `PartyMember.draw` 6, `AnimatedObjects.draw` 6, `DefaultSprite.draw` 6, `Actor.draw` 5, `bodies.system.ParticleSystem.draw`/`drawIt` 31, `BodySystem.draw` 5, `Body.draw` 8 | 77 | `--legacy=villages` only; `Sprite.draw`/`drawSprite`/`drawAtPosition` stay (the world map's `LandPlayer`); the `place_*` twins stay (the scene path) |
+| `--legacy=villages` and `--legacy=village_top_layer` (`Main.is_legacy` calls in `VillageLoader`, `Village.scene_top`) and the parity cases' legacy runs | ~10 | `Main.is_legacy` stays for later phases |
+| `tools/import/verify_villages.gd` | 242 | needs `VillageLoaderMapLoader` and the `.vil` files |
+| the 89 `.vil` files (decision 5) | 6,865 (132 KB) | the converter (`vil_to_scene.gd`, 911 lines), the data check, `--legacy=villages` |
+
+What keeps the exit criteria of 6.6 from being met today:
+
+* "All 89 variants load from scenes": met.
+* "`village*.txt` and the story scripts pass parity": met except the frames
+  of cutscene zooms, where the legacy drawing magnifies each 256 px tile on
+  its own (seams) and rounds differently (6.7, 6.8); and by default the
+  top layer is always drawn (decision 7). Closing needs these accepted as
+  the expected differences (a tolerance or a list), not fixed.
+* "`Village`/`VillageLoader` contain no world drawing": not met while
+  `--legacy=villages` exists (`drawBottom`, `drawTop`, the legacy branch of
+  `VillageStoryTimeLine.draw`).
+* "Delete each `.vil`": decision 5 is open.
+* Particles are still `LegacyParticles2D` (the legacy simulation's quads):
+  a GPU preset needs decision 6 (time base). The exit criteria do not
+  require it, 6.4 does.
+* The emotion bubbles, dialogs, signs, fades and the cover-all/story/
+  translucent-over-actor cutscene images are legacy overlays until phase 3
+  (not part of the exit criteria).
 
 ## 7. Phase 2: dungeons as scenes
 
@@ -850,7 +995,9 @@ When no mode draws through `g` any more:
 
 1. **Village variants:** inherited scene per `.vil` (recommended: maps 1:1 to
    today's file choice) vs. one scene per place with per-node status filters
-   (fewer files, harder to see a single variant).
+   (fewer files, harder to see a single variant). *Decided (phase 1
+   rollout):* one inherited scene per `.vil` variant on a shared base
+   scene, as in the pilot.
 2. **Dungeon lighting:** exact fixed-function look (shader) vs. Godot lights
    (more modern, slightly different).
 3. **Step C timing:** accept changes in movement and collision feel (and fix
@@ -870,6 +1017,13 @@ When no mode draws through `g` any more:
 
    Step B views that only mirror legacy positions do not need this
    decision. Particles (phase 1) and Tweens do.
+7. **Village top layer** (from the pilot, 6.7): *decided (phase 1
+   rollout):* roofs and treetops are always drawn (6.1, the pilot's
+   default). The legacy rule draws a piece only where a sprite overlaps it,
+   and the PNG pieces differ from the JPEG background under them, so the
+   villages look slightly different where no sprite is near a roof or
+   treetop. `--legacy=village_top_layer` keeps the legacy rule for parity
+   runs.
 
 ## 14. Suggested order and size
 
@@ -910,8 +1064,11 @@ fixed or deleted at any time.
 * **Latent bugs:**
   * The particle kinds `rainparticle` and `sandparticle` have no class in
     `ParticleFactory`, so they create null bodies. The same bug is in the
-    Java original. `rainCelissystem` is used by `Home of Celisnode1.seq`;
-    this has not been run-tested.
+    Java original. It never runs: `Home of Celisnode1.seq` only lists
+    `rainCelissystem` (`load particleSystem=`, a name in a list), and its
+    `fadeparticlesystem` line is commented out; no sequence runs
+    `fadeparticlesystem` or builds a rain or sand system (checked in the
+    phase 1 rollout).
   * `HelpPage`'s volume options never match (9.2).
   * `VillageStoryTimeLine` calls `updateFadeValue()` in both `update` and
     `draw` (`:262-265`, `:602-604`), so its fades may step twice per frame.

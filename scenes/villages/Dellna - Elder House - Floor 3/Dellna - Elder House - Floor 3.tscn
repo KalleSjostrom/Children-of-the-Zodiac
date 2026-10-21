@@ -1,0 +1,91 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/VillageScene.tscn" id="1_base"]
+[ext_resource type="Texture2D" path="res://scenes/villages/Dellna - Elder House - Floor 3/Dellna - Elder House - Floor 3.png" id="2_w2mht"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna - Elder House - Floor 3/top/0.png" id="3_s3xtr"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageSpawn.tscn" id="4_jlvqv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ddlq"]
+size = Vector2(37, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xfcmd"]
+size = Vector2(7, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_as7al"]
+size = Vector2(27, 277)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oynjb"]
+size = Vector2(307, 101)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yhnc1"]
+size = Vector2(37, 111)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lqskq"]
+size = Vector2(229, 62)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rek0u"]
+size = Vector2(27, 277)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7c4y7"]
+size = Vector2(9, 31)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ru8u1"]
+size = Vector2(93, 14)
+
+[node name="Dellna - Elder House - Floor 3" instance=ExtResource("1_base")]
+place_name = "Dellna - Elder House - Floor 3"
+folder_name = "Dellna - Elder House - Floor 3"
+village_name = "Dellna - Elder House - Floor 3"
+background_folder = "Dellna - Elder House - Floor 3"
+size = Vector2i(1024, 768)
+actual_size = Vector2i(1024, 768)
+inside = true
+wind_force = PackedFloat64Array(0, 0, 0)
+
+[node name="Background" parent="." index="1"]
+texture = ExtResource("2_w2mht")
+
+[node name="00 0" type="Sprite2D" parent="Overhead" index="0"]
+use_parent_material = true
+position = Vector2(392, 490)
+texture = ExtResource("3_s3xtr")
+centered = false
+
+[node name="O000" type="CollisionShape2D" parent="Obstacles" index="0"]
+position = Vector2(608.5, 335)
+shape = SubResource("RectangleShape2D_2ddlq")
+
+[node name="O001" type="CollisionShape2D" parent="Obstacles" index="1"]
+position = Vector2(433.5, 376)
+shape = SubResource("RectangleShape2D_xfcmd")
+
+[node name="O002" type="CollisionShape2D" parent="Obstacles" index="2"]
+position = Vector2(380.5, 453.5)
+shape = SubResource("RectangleShape2D_as7al")
+
+[node name="O003" type="CollisionShape2D" parent="Obstacles" index="3"]
+position = Vector2(520.5, 263.5)
+shape = SubResource("RectangleShape2D_oynjb")
+
+[node name="O004" type="CollisionShape2D" parent="Obstacles" index="4"]
+position = Vector2(413.5, 435.5)
+shape = SubResource("RectangleShape2D_yhnc1")
+
+[node name="O005" type="CollisionShape2D" parent="Obstacles" index="5"]
+position = Vector2(508.5, 559)
+shape = SubResource("RectangleShape2D_lqskq")
+
+[node name="O006" type="CollisionShape2D" parent="Obstacles" index="6"]
+position = Vector2(634.5, 452.5)
+shape = SubResource("RectangleShape2D_rek0u")
+
+[node name="O007" type="CollisionShape2D" parent="Obstacles" index="7"]
+position = Vector2(436.5, 355.5)
+shape = SubResource("RectangleShape2D_7c4y7")
+
+[node name="O008" type="CollisionShape2D" parent="Obstacles" index="8"]
+position = Vector2(543.5, 321)
+shape = SubResource("RectangleShape2D_ru8u1")
+
+[node name="00 start" parent="Spawns" index="0" instance=ExtResource("4_jlvqv")]
+position = Vector2(402, 300)

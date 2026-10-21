@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Bar/villagers/Don Carlos/Don Carlos9.png" id="1_gcrby"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Bar/villagers/Don Carlos/Don Carlos10.png" id="2_su64p"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Bar/villagers/Don Carlos/Don Carlos11.png" id="3_jgsh1"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Bar/villagers/Don Carlos/Don Carlos12.png" id="4_gpb1v"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Bar/villagers/Don Carlos/Don Carlos13.png" id="5_taaae"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Bar/villagers/Don Carlos/Don Carlos14.png" id="6_7pig3"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Bar/villagers/Don Carlos/Don Carlos15.png" id="7_e5p2i"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Bar/villagers/Don Carlos/Don Carlos16.png" id="8_wyw6o"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Bar/villagers/Don Carlos/Don Carlos5.png" id="9_4b4g8"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Bar/villagers/Don Carlos/Don Carlos6.png" id="10_phrch"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Bar/villagers/Don Carlos/Don Carlos7.png" id="11_iiiw6"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Bar/villagers/Don Carlos/Don Carlos8.png" id="12_cxdny"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Bar/villagers/Don Carlos/Don Carlos1.png" id="13_olbmt"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Bar/villagers/Don Carlos/Don Carlos2.png" id="14_4r486"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Bar/villagers/Don Carlos/Don Carlos3.png" id="15_g3l2v"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Bar/villagers/Don Carlos/Don Carlos4.png" id="16_x8rso"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_gcrby")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_su64p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_jgsh1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_gpb1v")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_taaae")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_7pig3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_e5p2i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_wyw6o")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_4b4g8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_phrch")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_iiiw6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_cxdny")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_olbmt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_4r486")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_g3l2v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_x8rso")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

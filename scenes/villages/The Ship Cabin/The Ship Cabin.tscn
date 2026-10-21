@@ -1,0 +1,141 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/VillageScene.tscn" id="1_base"]
+[ext_resource type="Texture2D" path="res://scenes/villages/The Ship Cabin/The Ship Cabin.png" id="2_mp4x3"]
+[ext_resource type="Texture2D" path="res://res/Village/The Ship Cabin/top/0.png" id="3_b7lur"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageSpawn.tscn" id="4_n648h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r0gya"]
+size = Vector2(7, 31)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vusta"]
+size = Vector2(67, 348)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xlf5c"]
+size = Vector2(34, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rk0da"]
+size = Vector2(34, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_76gyc"]
+size = Vector2(54, 74)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4xvb0"]
+size = Vector2(56, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oye3e"]
+size = Vector2(25, 347)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_22mhm"]
+size = Vector2(34, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4u8cl"]
+size = Vector2(7, 31)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1c026"]
+size = Vector2(34, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_refwn"]
+size = Vector2(85, 52)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_21tx7"]
+size = Vector2(21, 46)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rjpsv"]
+size = Vector2(20, 45)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yn3l8"]
+size = Vector2(517, 62)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_757wj"]
+size = Vector2(498, 69)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_whdbt"]
+size = Vector2(57, 17)
+
+[node name="The Ship Cabin" instance=ExtResource("1_base")]
+place_name = "The Ship Cabin"
+folder_name = "The Ship Cabin"
+village_name = "The Ship Cabin"
+background_folder = "The Ship Cabin"
+size = Vector2i(1024, 768)
+actual_size = Vector2i(1024, 768)
+inside = true
+wind_force = PackedFloat64Array(0, 0, 0)
+
+[node name="Background" parent="." index="1"]
+texture = ExtResource("2_mp4x3")
+
+[node name="00 0" type="Sprite2D" parent="Overhead" index="0"]
+use_parent_material = true
+position = Vector2(253, 471)
+texture = ExtResource("3_b7lur")
+centered = false
+
+[node name="O000" type="CollisionShape2D" parent="Obstacles" index="0"]
+position = Vector2(325.5, 327.5)
+shape = SubResource("RectangleShape2D_r0gya")
+
+[node name="O001" type="CollisionShape2D" parent="Obstacles" index="1"]
+position = Vector2(759.5, 408)
+shape = SubResource("RectangleShape2D_vusta")
+
+[node name="O002" type="CollisionShape2D" parent="Obstacles" index="2"]
+position = Vector2(682, 331)
+shape = SubResource("RectangleShape2D_xlf5c")
+
+[node name="O003" type="CollisionShape2D" parent="Obstacles" index="3"]
+position = Vector2(618, 331)
+shape = SubResource("RectangleShape2D_rk0da")
+
+[node name="O004" type="CollisionShape2D" parent="Obstacles" index="4"]
+position = Vector2(703, 388)
+shape = SubResource("RectangleShape2D_76gyc")
+
+[node name="O005" type="CollisionShape2D" parent="Obstacles" index="5"]
+position = Vector2(366, 412.5)
+shape = SubResource("RectangleShape2D_4xvb0")
+
+[node name="O006" type="CollisionShape2D" parent="Obstacles" index="6"]
+position = Vector2(273.5, 410.5)
+shape = SubResource("RectangleShape2D_oye3e")
+
+[node name="O007" type="CollisionShape2D" parent="Obstacles" index="7"]
+position = Vector2(554, 331)
+shape = SubResource("RectangleShape2D_22mhm")
+
+[node name="O008" type="CollisionShape2D" parent="Obstacles" index="8"]
+position = Vector2(366.5, 328.5)
+shape = SubResource("RectangleShape2D_4u8cl")
+
+[node name="O009" type="CollisionShape2D" parent="Obstacles" index="9"]
+position = Vector2(490, 331)
+shape = SubResource("RectangleShape2D_1c026")
+
+[node name="O010" type="CollisionShape2D" parent="Obstacles" index="10"]
+position = Vector2(366.5, 446)
+shape = SubResource("RectangleShape2D_refwn")
+
+[node name="O011" type="CollisionShape2D" parent="Obstacles" index="11"]
+position = Vector2(309.5, 449)
+shape = SubResource("RectangleShape2D_21tx7")
+
+[node name="O012" type="CollisionShape2D" parent="Obstacles" index="12"]
+position = Vector2(423, 448.5)
+shape = SubResource("RectangleShape2D_rjpsv")
+
+[node name="O013" type="CollisionShape2D" parent="Obstacles" index="13"]
+position = Vector2(536.5, 555)
+shape = SubResource("RectangleShape2D_yn3l8")
+
+[node name="O014" type="CollisionShape2D" parent="Obstacles" index="14"]
+position = Vector2(525, 277.5)
+shape = SubResource("RectangleShape2D_757wj")
+
+[node name="O015" type="CollisionShape2D" parent="Obstacles" index="15"]
+position = Vector2(414.5, 320.5)
+shape = SubResource("RectangleShape2D_whdbt")
+
+[node name="00 start" parent="Spawns" index="0" instance=ExtResource("4_n648h")]
+position = Vector2(328, 310)
+facing = 2

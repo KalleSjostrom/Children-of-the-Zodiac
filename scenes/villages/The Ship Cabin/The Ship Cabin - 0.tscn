@@ -1,0 +1,16 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/The Ship Cabin/The Ship Cabin.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="2_rjxnr"]
+
+[node name="The Ship Cabin - 0" instance=ExtResource("1_base")]
+
+[node name="00 Port_of_Alares" parent="Doors" index="0" instance=ExtResource("2_rjxnr")]
+position = Vector2(328, 280)
+hole = true
+kinds = PackedStringArray("switch")
+targets = PackedStringArray("Port_of_Alares")
+directions = PackedInt32Array(0)
+fade = 1
+to_pos = PackedFloat64Array(624, 718, 0, -1)
+sign_lines = PackedStringArray()

@@ -1,0 +1,10 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Alares - Celis/Alares - Celis.tscn" id="1_base"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Celis/Alares - Celis at Night - 1.png" id="2_rclrt"]
+
+[node name="Alares - Celis at Night - 0" instance=ExtResource("1_base")]
+
+[node name="Night" parent="." index="4"]
+visible = true
+texture = ExtResource("2_rclrt")

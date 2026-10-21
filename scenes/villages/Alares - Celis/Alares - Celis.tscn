@@ -1,0 +1,120 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/VillageScene.tscn" id="1_base"]
+[ext_resource type="Texture2D" path="res://scenes/villages/Alares - Celis/Alares - Celis at Night.png" id="2_urb2a"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Celis/top/9.png" id="3_57mjh"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Celis/top/12.png" id="4_x12gv"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Celis/top/5.png" id="5_5r4bw"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Celis/top/4.png" id="6_h6m6x"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Celis/top/13.png" id="7_ynerm"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Celis/top/7.png" id="8_k7ufk"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Celis/top/11.png" id="9_yojl7"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Celis/top/1.png" id="10_tqjwi"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Celis/top/10.png" id="11_v33ix"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Celis/top/3.png" id="12_o86px"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Celis/top/0.png" id="13_fhpeh"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Celis/top/6.png" id="14_tt50o"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Celis/top/8.png" id="15_yc75j"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Celis/top/2.png" id="16_8woru"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageSpawn.tscn" id="17_aqxwo"]
+
+[node name="Alares - Celis" instance=ExtResource("1_base")]
+place_name = "Alares - Celis"
+folder_name = "Alares - Celis"
+village_name = "Alares - Celis"
+background_folder = "Alares - Celis"
+day = false
+size = Vector2i(1024, 768)
+actual_size = Vector2i(1024, 768)
+wind_force = PackedFloat64Array(0, 0, 0)
+
+[node name="Background" parent="." index="1"]
+texture = ExtResource("2_urb2a")
+
+[node name="00 9" type="Sprite2D" parent="Overhead" index="0"]
+use_parent_material = true
+position = Vector2(575, 462)
+texture = ExtResource("3_57mjh")
+centered = false
+
+[node name="01 12" type="Sprite2D" parent="Overhead" index="1"]
+use_parent_material = true
+position = Vector2(8, 762)
+texture = ExtResource("4_x12gv")
+centered = false
+
+[node name="02 5" type="Sprite2D" parent="Overhead" index="2"]
+use_parent_material = true
+position = Vector2(766, 229)
+texture = ExtResource("5_5r4bw")
+centered = false
+
+[node name="03 4" type="Sprite2D" parent="Overhead" index="3"]
+use_parent_material = true
+position = Vector2(143, 181)
+texture = ExtResource("6_h6m6x")
+centered = false
+
+[node name="04 13" type="Sprite2D" parent="Overhead" index="4"]
+use_parent_material = true
+position = Vector2(0, 767)
+texture = ExtResource("7_ynerm")
+centered = false
+
+[node name="05 7" type="Sprite2D" parent="Overhead" index="5"]
+use_parent_material = true
+position = Vector2(415, 406)
+texture = ExtResource("8_k7ufk")
+centered = false
+
+[node name="06 11" type="Sprite2D" parent="Overhead" index="6"]
+use_parent_material = true
+position = Vector2(874, 532)
+texture = ExtResource("9_yojl7")
+centered = false
+
+[node name="07 1" type="Sprite2D" parent="Overhead" index="7"]
+use_parent_material = true
+position = Vector2(722, 0)
+texture = ExtResource("10_tqjwi")
+centered = false
+
+[node name="08 10" type="Sprite2D" parent="Overhead" index="8"]
+use_parent_material = true
+position = Vector2(460, 532)
+texture = ExtResource("11_v33ix")
+centered = false
+
+[node name="09 3" type="Sprite2D" parent="Overhead" index="9"]
+use_parent_material = true
+position = Vector2(0, 179)
+texture = ExtResource("12_o86px")
+centered = false
+
+[node name="10 0" type="Sprite2D" parent="Overhead" index="10"]
+use_parent_material = true
+position = Vector2(313, 0)
+texture = ExtResource("13_fhpeh")
+centered = false
+
+[node name="11 6" type="Sprite2D" parent="Overhead" index="11"]
+use_parent_material = true
+position = Vector2(984, 405)
+texture = ExtResource("14_tt50o")
+centered = false
+
+[node name="12 8" type="Sprite2D" parent="Overhead" index="12"]
+use_parent_material = true
+position = Vector2(46, 462)
+texture = ExtResource("15_yc75j")
+centered = false
+
+[node name="13 2" type="Sprite2D" parent="Overhead" index="13"]
+use_parent_material = true
+position = Vector2(574, 164)
+texture = ExtResource("16_8woru")
+centered = false
+
+[node name="00 start" parent="Spawns" index="0" instance=ExtResource("17_aqxwo")]
+position = Vector2(886, 193)
+facing = 2

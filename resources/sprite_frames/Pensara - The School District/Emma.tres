@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Emma/Emma9.png" id="1_oaoo8"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Emma/Emma10.png" id="2_aovkc"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Emma/Emma11.png" id="3_0uxiy"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Emma/Emma12.png" id="4_48m0y"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Emma/Emma13.png" id="5_ljg68"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Emma/Emma14.png" id="6_duuwf"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Emma/Emma15.png" id="7_a03nv"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Emma/Emma16.png" id="8_o8u8c"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Emma/Emma5.png" id="9_bco4q"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Emma/Emma6.png" id="10_gxj74"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Emma/Emma7.png" id="11_ggse6"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Emma/Emma8.png" id="12_g7h7n"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Emma/Emma1.png" id="13_2syp2"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Emma/Emma2.png" id="14_dooy8"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Emma/Emma3.png" id="15_eoyi2"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Emma/Emma4.png" id="16_8mj6a"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_oaoo8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_aovkc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_0uxiy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_48m0y")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_ljg68")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_duuwf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_a03nv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_o8u8c")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_bco4q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_gxj74")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ggse6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_g7h7n")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_2syp2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_dooy8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_eoyi2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_8mj6a")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

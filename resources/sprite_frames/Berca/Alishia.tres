@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Alishia/Alishia9.png" id="1_vxk87"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Alishia/Alishia10.png" id="2_mrjib"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Alishia/Alishia11.png" id="3_ygxsc"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Alishia/Alishia12.png" id="4_71nmm"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Alishia/Alishia13.png" id="5_rjv43"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Alishia/Alishia14.png" id="6_qeuv5"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Alishia/Alishia15.png" id="7_l378d"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Alishia/Alishia16.png" id="8_fhqln"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Alishia/Alishia5.png" id="9_mvu2j"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Alishia/Alishia6.png" id="10_08kj6"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Alishia/Alishia7.png" id="11_gh6yw"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Alishia/Alishia8.png" id="12_ak8t7"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Alishia/Alishia1.png" id="13_cg45h"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Alishia/Alishia2.png" id="14_6yxs6"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Alishia/Alishia3.png" id="15_1t85w"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Alishia/Alishia4.png" id="16_nubqx"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_vxk87")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_mrjib")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ygxsc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_71nmm")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_rjv43")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_qeuv5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_l378d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_fhqln")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_mvu2j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_08kj6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_gh6yw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ak8t7")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_cg45h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_6yxs6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_1t85w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_nubqx")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

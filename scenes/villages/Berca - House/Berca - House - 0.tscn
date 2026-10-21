@@ -1,0 +1,37 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Berca - House/Berca - House.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/ActorView.tscn" id="2_wd5pu"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Berca - House/Gregory.tres" id="3_ky855"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Berca - House/Yolly.tres" id="4_qtwri"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="5_bj7ox"]
+
+[node name="Berca - House - 0" instance=ExtResource("1_base")]
+
+[node name="00 Gregory" parent="Actors" index="0" instance=ExtResource("2_wd5pu")]
+position = Vector2(560, 300)
+sprite_frames = ExtResource("3_ky855")
+animation = &"down"
+role = 1
+villager_name = "Gregory"
+statuses = PackedInt32Array()
+villager_folder = "Berca - House"
+
+[node name="01 Yolly" parent="Actors" index="1" instance=ExtResource("2_wd5pu")]
+position = Vector2(355, 480)
+sprite_frames = ExtResource("4_qtwri")
+animation = &"down"
+role = 1
+villager_name = "Yolly"
+statuses = PackedInt32Array()
+villager_folder = "Berca - House"
+
+[node name="00 Berca" parent="Doors" index="0" instance=ExtResource("5_bj7ox")]
+position = Vector2(496, 560)
+hole = true
+kinds = PackedStringArray("switch")
+targets = PackedStringArray("Berca")
+directions = PackedInt32Array(2)
+fade = 1
+to_pos = PackedFloat64Array(1000, 1365, 2, -1)
+sign_lines = PackedStringArray()

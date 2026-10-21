@@ -1,0 +1,203 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/VillageScene.tscn" id="1_base"]
+[ext_resource type="Texture2D" path="res://scenes/villages/Home of Celis - Celis Home/Home of Celis - Celis Home.png" id="2_fhjuv"]
+[ext_resource type="Texture2D" path="res://res/Village/Home of Celis - Celis Home/top/4.png" id="3_3d1sy"]
+[ext_resource type="Texture2D" path="res://res/Village/Home of Celis - Celis Home/top/3.png" id="4_j4bp2"]
+[ext_resource type="Texture2D" path="res://res/Village/Home of Celis - Celis Home/top/0.png" id="5_uffbl"]
+[ext_resource type="Texture2D" path="res://res/Village/Home of Celis - Celis Home/top/5.png" id="6_bxjtg"]
+[ext_resource type="Texture2D" path="res://res/Village/Home of Celis - Celis Home/top/1.png" id="7_qtqno"]
+[ext_resource type="Texture2D" path="res://res/Village/Home of Celis - Celis Home/top/2.png" id="8_73xcv"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageSpawn.tscn" id="9_aalhf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nu73c"]
+size = Vector2(173, 35)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rv48o"]
+size = Vector2(18, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1cse3"]
+size = Vector2(57, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m2mwk"]
+size = Vector2(60, 430)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o5hmj"]
+size = Vector2(167, 33)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fhmcc"]
+size = Vector2(10, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cs5uf"]
+size = Vector2(19, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0av02"]
+size = Vector2(23, 63)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c7ku0"]
+size = Vector2(78, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gfi4n"]
+size = Vector2(33, 37)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_401k6"]
+size = Vector2(9, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e6gyk"]
+size = Vector2(114, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jcq2h"]
+size = Vector2(34, 39)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p6d48"]
+size = Vector2(468, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q3qu3"]
+size = Vector2(165, 44)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d25ak"]
+size = Vector2(10, 93)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_acs0w"]
+size = Vector2(225, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d3q1i"]
+size = Vector2(10, 59)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lbvac"]
+size = Vector2(165, 44)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ohdhd"]
+size = Vector2(60, 430)
+
+[node name="Home of Celis - Celis Home" instance=ExtResource("1_base")]
+place_name = "Home of Celis - Celis Home"
+folder_name = "Home of Celis - Celis Home"
+village_name = "Home of Celis - Celis Home"
+background_folder = "Home of Celis - Celis Home"
+size = Vector2i(1024, 768)
+actual_size = Vector2i(1024, 768)
+inside = true
+wind_force = PackedFloat64Array(0, 0, 0)
+
+[node name="Background" parent="." index="1"]
+texture = ExtResource("2_fhjuv")
+
+[node name="00 4" type="Sprite2D" parent="Overhead" index="0"]
+use_parent_material = true
+position = Vector2(534, 363)
+texture = ExtResource("3_3d1sy")
+centered = false
+
+[node name="01 3" type="Sprite2D" parent="Overhead" index="1"]
+use_parent_material = true
+position = Vector2(319, 363)
+texture = ExtResource("4_j4bp2")
+centered = false
+
+[node name="02 0" type="Sprite2D" parent="Overhead" index="2"]
+use_parent_material = true
+position = Vector2(371, 311)
+texture = ExtResource("5_uffbl")
+centered = false
+
+[node name="03 5" type="Sprite2D" parent="Overhead" index="3"]
+use_parent_material = true
+position = Vector2(319, 488)
+texture = ExtResource("6_bxjtg")
+centered = false
+
+[node name="04 1" type="Sprite2D" parent="Overhead" index="4"]
+use_parent_material = true
+position = Vector2(349, 327)
+texture = ExtResource("7_qtqno")
+centered = false
+
+[node name="05 2" type="Sprite2D" parent="Overhead" index="5"]
+use_parent_material = true
+position = Vector2(441, 327)
+texture = ExtResource("8_73xcv")
+centered = false
+
+[node name="O000" type="CollisionShape2D" parent="Obstacles" index="0"]
+position = Vector2(406.5, 421.5)
+shape = SubResource("RectangleShape2D_nu73c")
+
+[node name="O001" type="CollisionShape2D" parent="Obstacles" index="1"]
+position = Vector2(333, 288)
+shape = SubResource("RectangleShape2D_rv48o")
+
+[node name="O002" type="CollisionShape2D" parent="Obstacles" index="2"]
+position = Vector2(399.5, 445)
+shape = SubResource("RectangleShape2D_1cse3")
+
+[node name="O003" type="CollisionShape2D" parent="Obstacles" index="3"]
+position = Vector2(290, 493)
+shape = SubResource("RectangleShape2D_m2mwk")
+
+[node name="O004" type="CollisionShape2D" parent="Obstacles" index="4"]
+position = Vector2(616.5, 421.5)
+shape = SubResource("RectangleShape2D_o5hmj")
+
+[node name="O005" type="CollisionShape2D" parent="Obstacles" index="5"]
+position = Vector2(432, 588)
+shape = SubResource("RectangleShape2D_fhmcc")
+
+[node name="O006" type="CollisionShape2D" parent="Obstacles" index="6"]
+position = Vector2(463.5, 445)
+shape = SubResource("RectangleShape2D_cs5uf")
+
+[node name="O007" type="CollisionShape2D" parent="Obstacles" index="7"]
+position = Vector2(686.5, 310.5)
+shape = SubResource("RectangleShape2D_0av02")
+
+[node name="O008" type="CollisionShape2D" parent="Obstacles" index="8"]
+position = Vector2(658, 443.5)
+shape = SubResource("RectangleShape2D_c7ku0")
+
+[node name="O009" type="CollisionShape2D" parent="Obstacles" index="9"]
+position = Vector2(335.5, 456.5)
+shape = SubResource("RectangleShape2D_gfi4n")
+
+[node name="O010" type="CollisionShape2D" parent="Obstacles" index="10"]
+position = Vector2(538.5, 571)
+shape = SubResource("RectangleShape2D_401k6")
+
+[node name="O011" type="CollisionShape2D" parent="Obstacles" index="11"]
+position = Vector2(404, 355)
+shape = SubResource("RectangleShape2D_e6gyk")
+
+[node name="O012" type="CollisionShape2D" parent="Obstacles" index="12"]
+position = Vector2(561, 455.5)
+shape = SubResource("RectangleShape2D_jcq2h")
+
+[node name="O013" type="CollisionShape2D" parent="Obstacles" index="13"]
+position = Vector2(530, 238)
+shape = SubResource("RectangleShape2D_p6d48")
+
+[node name="O014" type="CollisionShape2D" parent="Obstacles" index="14"]
+position = Vector2(619.5, 624)
+shape = SubResource("RectangleShape2D_q3qu3")
+
+[node name="O015" type="CollisionShape2D" parent="Obstacles" index="15"]
+position = Vector2(432, 486.5)
+shape = SubResource("RectangleShape2D_d25ak")
+
+[node name="O016" type="CollisionShape2D" parent="Obstacles" index="16"]
+position = Vector2(562.5, 290)
+shape = SubResource("RectangleShape2D_acs0w")
+
+[node name="O017" type="CollisionShape2D" parent="Obstacles" index="17"]
+position = Vector2(538, 467.5)
+shape = SubResource("RectangleShape2D_d3q1i")
+
+[node name="O018" type="CollisionShape2D" parent="Obstacles" index="18"]
+position = Vector2(403.5, 624)
+shape = SubResource("RectangleShape2D_lbvac")
+
+[node name="O019" type="CollisionShape2D" parent="Obstacles" index="19"]
+position = Vector2(726, 493)
+shape = SubResource("RectangleShape2D_ohdhd")
+
+[node name="00 start" parent="Spawns" index="0" instance=ExtResource("9_aalhf")]
+position = Vector2(495, 528)

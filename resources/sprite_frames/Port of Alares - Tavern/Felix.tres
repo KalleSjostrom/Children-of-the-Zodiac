@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Felix/Felix9.png" id="1_q3xoq"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Felix/Felix10.png" id="2_1adw8"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Felix/Felix11.png" id="3_m0wy8"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Felix/Felix12.png" id="4_ofw0q"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Felix/Felix13.png" id="5_kd2ih"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Felix/Felix14.png" id="6_lwiys"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Felix/Felix15.png" id="7_8xbim"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Felix/Felix16.png" id="8_vvsfm"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Felix/Felix5.png" id="9_pu70d"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Felix/Felix6.png" id="10_xmepo"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Felix/Felix7.png" id="11_52uny"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Felix/Felix8.png" id="12_c7fsn"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Felix/Felix1.png" id="13_ftha5"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Felix/Felix2.png" id="14_56s7m"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Felix/Felix3.png" id="15_tdbt8"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Felix/Felix4.png" id="16_fhaor"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_q3xoq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_1adw8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_m0wy8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ofw0q")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_kd2ih")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_lwiys")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_8xbim")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_vvsfm")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_pu70d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_xmepo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_52uny")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_c7fsn")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_ftha5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_56s7m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_tdbt8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_fhaor")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

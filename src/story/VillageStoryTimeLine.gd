@@ -705,11 +705,22 @@ func draw_scene(g):
 
 
 ## The current image (ImageSettings.draw: drawImage(name, pos, size), in
-## screen pixels) as an entry for VillageScene.show_actors.
+## screen pixels) as an entry for VillageScene.show_actors. A scaled image
+## covers the rectangle GameTexture.drawPart draws, whose far corner is
+## truncated to whole pixels (int(x + width * size)), so the entry's scale
+## is that rectangle's size over the texture's, per axis.
 func image_entry(scroll: Vector2i, c: Color, a: float) -> Array:
 	var t = ImageHandler.getTexture(currentImage.name)
-	var at := Vector2i(roundi(currentImage.pos[0]), roundi(currentImage.pos[1])) - scroll
-	return ["image", t.getGodotTexture() if t != null else null, at, currentImage.size, c, a]
+	var px: int = roundi(currentImage.pos[0])
+	var py: int = roundi(currentImage.pos[1])
+	var image_scale := Vector2(currentImage.size, currentImage.size)
+	if t != null and t.getWidth() > 0 and t.getHeight() > 0:
+		var w: int = t.getWidth()
+		var h: int = t.getHeight()
+		image_scale = Vector2(float(int(px + w * currentImage.size) - px) / w,
+				float(int(py + h * currentImage.size) - py) / h)
+	var at := Vector2i(px, py) - scroll
+	return ["image", t.getGodotTexture() if t != null else null, at, image_scale, c, a]
 
 func drawTop(g, sprites = null):
 	if imageMode == COVERALL_MODE:

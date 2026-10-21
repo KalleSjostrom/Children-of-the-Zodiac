@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Friedrich/Friedrich9.png" id="1_li3vs"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Friedrich/Friedrich10.png" id="2_dm21c"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Friedrich/Friedrich11.png" id="3_rkxy5"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Friedrich/Friedrich12.png" id="4_g807y"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Friedrich/Friedrich13.png" id="5_1ymlo"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Friedrich/Friedrich14.png" id="6_c2h6q"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Friedrich/Friedrich15.png" id="7_dq2fu"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Friedrich/Friedrich16.png" id="8_75fn1"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Friedrich/Friedrich5.png" id="9_xrn1g"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Friedrich/Friedrich6.png" id="10_f1hsf"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Friedrich/Friedrich7.png" id="11_rdm1p"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Friedrich/Friedrich8.png" id="12_kqqg1"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Friedrich/Friedrich1.png" id="13_6aws4"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Friedrich/Friedrich2.png" id="14_e51qo"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Friedrich/Friedrich3.png" id="15_17yle"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Friedrich/Friedrich4.png" id="16_ytg2h"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_li3vs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_dm21c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_rkxy5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_g807y")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_1ymlo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_c2h6q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_dq2fu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_75fn1")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_xrn1g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_f1hsf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_rdm1p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_kqqg1")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_6aws4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_e51qo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_17yle")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_ytg2h")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

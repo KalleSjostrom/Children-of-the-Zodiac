@@ -1,0 +1,54 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Pass to Zazo/Pass to Zazo.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/ActorView.tscn" id="2_lo24u"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pass to Zazo/Alaressolider.tres" id="3_nnc4n"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pass to Zazo/Passguard.tres" id="4_qox10"]
+[ext_resource type="Texture2D" path="res://res/Village/standardOvernight.png" id="5_2skeo"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageSpawn.tscn" id="6_qibua"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="7_e8f0b"]
+
+[node name="Pass to Zazo at Night - 0" instance=ExtResource("1_base")]
+day = false
+night_screen_fixed = true
+
+[node name="00 Passguard Marcus" parent="Actors" index="0" instance=ExtResource("2_lo24u")]
+position = Vector2(459, 372)
+sprite_frames = ExtResource("3_nnc4n")
+animation = &"down"
+role = 1
+villager_name = "Passguard Marcus"
+statuses = PackedInt32Array()
+villager_folder = "Pass to Zazo"
+
+[node name="01 Passguard Seth" parent="Actors" index="1" instance=ExtResource("2_lo24u")]
+position = Vector2(404, 381)
+sprite_frames = ExtResource("4_qox10")
+animation = &"down"
+role = 1
+villager_name = "Passguard Seth"
+statuses = PackedInt32Array()
+villager_folder = "Pass to Zazo"
+
+[node name="Night" parent="." index="4"]
+visible = true
+texture = ExtResource("5_2skeo")
+
+[node name="00 start0" parent="Spawns" index="0" instance=ExtResource("6_qibua")]
+position = Vector2(512, 710)
+number = 0
+
+[node name="01 start2" parent="Spawns" index="1" instance=ExtResource("6_qibua")]
+position = Vector2(458, 374)
+number = 2
+facing = 2
+
+[node name="00 central_pass--south_part-mark1" parent="Doors" index="0" instance=ExtResource("7_e8f0b")]
+position = Vector2(463, 314)
+hole = true
+kinds = PackedStringArray("labyrinth", "story")
+targets = PackedStringArray("central_pass--south_part-mark1", "Chapter_Two")
+radius = 50
+directions = PackedInt32Array(0)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray()

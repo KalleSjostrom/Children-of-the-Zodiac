@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Serphia Hall/villagers/Serphia/Serphia9.png" id="1_omocb"]
+[ext_resource type="Texture2D" path="res://res/Village/Serphia Hall/villagers/Serphia/Serphia10.png" id="2_2tsl1"]
+[ext_resource type="Texture2D" path="res://res/Village/Serphia Hall/villagers/Serphia/Serphia11.png" id="3_sikv6"]
+[ext_resource type="Texture2D" path="res://res/Village/Serphia Hall/villagers/Serphia/Serphia12.png" id="4_i1h3e"]
+[ext_resource type="Texture2D" path="res://res/Village/Serphia Hall/villagers/Serphia/Serphia13.png" id="5_tq8rh"]
+[ext_resource type="Texture2D" path="res://res/Village/Serphia Hall/villagers/Serphia/Serphia14.png" id="6_ywwps"]
+[ext_resource type="Texture2D" path="res://res/Village/Serphia Hall/villagers/Serphia/Serphia15.png" id="7_ogcgi"]
+[ext_resource type="Texture2D" path="res://res/Village/Serphia Hall/villagers/Serphia/Serphia16.png" id="8_c8156"]
+[ext_resource type="Texture2D" path="res://res/Village/Serphia Hall/villagers/Serphia/Serphia5.png" id="9_i4ey5"]
+[ext_resource type="Texture2D" path="res://res/Village/Serphia Hall/villagers/Serphia/Serphia6.png" id="10_kmc5e"]
+[ext_resource type="Texture2D" path="res://res/Village/Serphia Hall/villagers/Serphia/Serphia7.png" id="11_vaewf"]
+[ext_resource type="Texture2D" path="res://res/Village/Serphia Hall/villagers/Serphia/Serphia8.png" id="12_mxtd3"]
+[ext_resource type="Texture2D" path="res://res/Village/Serphia Hall/villagers/Serphia/Serphia1.png" id="13_4f4lq"]
+[ext_resource type="Texture2D" path="res://res/Village/Serphia Hall/villagers/Serphia/Serphia2.png" id="14_bxpaj"]
+[ext_resource type="Texture2D" path="res://res/Village/Serphia Hall/villagers/Serphia/Serphia3.png" id="15_tor4a"]
+[ext_resource type="Texture2D" path="res://res/Village/Serphia Hall/villagers/Serphia/Serphia4.png" id="16_3niw1"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_omocb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_2tsl1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_sikv6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_i1h3e")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_tq8rh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ywwps")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ogcgi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_c8156")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_i4ey5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_kmc5e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_vaewf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_mxtd3")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_4f4lq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_bxpaj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_tor4a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_3niw1")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

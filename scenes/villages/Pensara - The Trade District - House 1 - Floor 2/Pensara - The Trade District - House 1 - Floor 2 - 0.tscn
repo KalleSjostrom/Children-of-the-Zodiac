@@ -1,0 +1,16 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Pensara - The Trade District - House 1 - Floor 2/Pensara - The Trade District - House 1 - Floor 2.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="2_daqgh"]
+
+[node name="Pensara - The Trade District - House 1 - Floor 2 - 0" instance=ExtResource("1_base")]
+
+[node name="00 Pensara_-_The_Trade_District_-_House_1_-_Floor_1" parent="Doors" index="0" instance=ExtResource("2_daqgh")]
+position = Vector2(592, 450)
+hole = true
+kinds = PackedStringArray("switch")
+targets = PackedStringArray("Pensara_-_The_Trade_District_-_House_1_-_Floor_1")
+directions = PackedInt32Array(2)
+fade = 0
+to_pos = PackedFloat64Array(530, 592, 2, -1)
+sign_lines = PackedStringArray()

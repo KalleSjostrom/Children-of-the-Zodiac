@@ -1,7 +1,8 @@
 extends SceneTree
 ## Converts the .vil files of maps/Village into village scenes
-## (docs/MODERNIZATION_PLAN.md 6.2; the workflow is in docs/ARCHITECTURE.md,
-## "Converting a village"). Run headless from the project root; the wrapper
+## (docs/MODERNIZATION_PLAN.md 6.2; the conventions are in
+## docs/ARCHITECTURE.md section 9, the workflow in docs/CONVERTING_VILLAGES.md).
+## Run headless from the project root; the wrapper
 ## tools/import/vil_to_scene.sh runs the two stages with Godot's import
 ## between them:
 ##
@@ -9,10 +10,19 @@ extends SceneTree
 ##
 ## For a place (a folder maps/Village/<Place>) it writes:
 ##   scenes/villages/<Place>/<Place>.tscn      the base: inherits VillageScene.tscn;
-##                                              background, top layer, the obstacles
-##                                              (and spawns) all variants share
-##   scenes/villages/<Place>/<variant>.tscn    one per .vil file, inherits the base
-##   scenes/villages/<Place>/<image>.png       the background's 256 px tiles in one image
+##                                              the background most variants draw,
+##                                              the top layer and the spawns if all
+##                                              variants have the same, the obstacles
+##                                              all of them have
+##   scenes/villages/<Place>/<variant>.tscn    one per .vil file, inherits the base;
+##                                              overrides Background when it draws
+##                                              another image (Dellna2, Parasne1, a
+##                                              night image of its own)
+##   scenes/villages/<Place>/<image>.png       a background's 256 px tiles in one image
+##                                              (in the folder of the place whose art
+##                                              it is, when a variant uses another
+##                                              place's art); a background without a
+##                                              tile folder is used as it is
 ##   resources/sprite_frames/<folder>/<image>.tres            one per villager image set
 ##   resources/sprite_frames/<folder>/animobj/<name>.tres     one per animObj series
 ##
@@ -139,21 +149,30 @@ class VilReader extends AbstractMapLoader:
 	var _sign = null
 	var _villager_folder := ""
 
+	## J.parseInt, with a warning for a token that is no integer (content
+	## quirks: the legacy loader reads it the same way, as J.parseInt's 0).
+	func _int(s: String) -> int:
+		var value := J.parseInt(s)
+		if not s.strip_edges().trim_prefix("+").is_valid_int():
+			warnings.append("line %d: '%s' is not an integer, read as %d (as by the legacy loader)"
+					% [lineCount, s, value])
+		return value
+
 	func executeCommand(command: String, tok: StringTokenizer) -> void:
 		if command == "o":
-			var x := J.parseInt(tok.nextToken())
-			var y := J.parseInt(tok.nextToken())
-			var x2 := J.parseInt(tok.nextToken())
-			var y2 := J.parseInt(tok.nextToken())
+			var x := _int(tok.nextToken())
+			var y := _int(tok.nextToken())
+			var x2 := _int(tok.nextToken())
+			var y2 := _int(tok.nextToken())
 			model["obstacles"].append(Rect2i(x, y, x2 - x, y2 - y))
 		elif command == "inside":
 			model["inside"] = true
 		elif command.begins_with("start"):
 			var s := command.replace("start", "")
-			var number := -1 if s == "" else J.parseInt(s)
-			var x := J.parseInt(tok.nextToken())
-			var y := J.parseInt(tok.nextToken())
-			var a := J.parseInt(tok.nextToken())
+			var number := -1 if s == "" else _int(s)
+			var x := _int(tok.nextToken())
+			var y := _int(tok.nextToken())
+			var a := _int(tok.nextToken())
 			model["spawns"].append({"number": number, "x": x, "y": y, "facing": a})
 		elif command.contains("landname"):
 			model["land_name"] = tok.nextToken()
@@ -187,15 +206,15 @@ class VilReader extends AbstractMapLoader:
 			else:
 				door["sign_lines"].append(text)
 		elif command == "sign":
-			var x := J.parseInt(tok.nextToken())
-			var y := J.parseInt(tok.nextToken())
+			var x := _int(tok.nextToken())
+			var y := _int(tok.nextToken())
 			var w := -1
 			if tok.hasMoreTokens():
-				w = J.parseInt(tok.nextToken())
+				w = _int(tok.nextToken())
 			var dirs: Array = []
 			if tok.hasMoreTokens():
 				for s in J.split(tok.nextToken(), ";"):
-					dirs.append(J.parseInt(s))
+					dirs.append(_int(s))
 			else:
 				dirs.append(0)
 			_sign = {"x": x, "y": y, "radius": w, "directions": dirs, "lines": [], "listed": []}
@@ -210,7 +229,7 @@ class VilReader extends AbstractMapLoader:
 			var name := tok.nextToken().replace("_", " ")
 			var statuses: Array = []
 			while tok.hasMoreTokens():
-				statuses.append(J.parseInt(tok.nextToken()))
+				statuses.append(_int(tok.nextToken()))
 			model["actors"].append({"kind": "villager", "name": name, "statuses": statuses,
 				"folder": _villager_folder})
 		elif command == "particlesystem":
@@ -224,11 +243,11 @@ class VilReader extends AbstractMapLoader:
 				if name.contains(":"):
 					var temp: Array = J.split(name, ":")
 					name = temp[0]
-					layer = J.parseInt(temp[1])
+					layer = _int(temp[1])
 					if temp.size() > 2:
 						active = J.parseBoolean(temp[2])
 					if temp.size() > 3:
-						status = J.parseInt(temp[3])
+						status = _int(temp[3])
 				var p := {"name": name, "layer": layer, "active": active, "status": status,
 					"order": model["particles"].size(), "line": line_index}
 				model["particles"].append(p)
@@ -251,8 +270,8 @@ class VilReader extends AbstractMapLoader:
 		elif command == "villagerFolder":
 			_villager_folder = Organizer.convertKeepCase(tok.nextToken())
 		elif command == "back":
-			var w := J.parseInt(tok.nextToken())
-			var h := J.parseInt(tok.nextToken())
+			var w := _int(tok.nextToken())
+			var h := _int(tok.nextToken())
 			model["size"] = Vector2i(w, h)
 			model["actual_size"] = Vector2i(w, h)
 			model["back_extra"] = 0
@@ -260,12 +279,12 @@ class VilReader extends AbstractMapLoader:
 				var s := tok.nextToken()
 				if s.contains("as="):
 					var sa: Array = J.split(s.replace("as=", ""), ":")
-					model["actual_size"] = Vector2i(J.parseInt(sa[0]), J.parseInt(sa[1]))
+					model["actual_size"] = Vector2i(_int(sa[0]), _int(sa[1]))
 				else:
-					model["back_extra"] = J.parseInt(s)
+					model["back_extra"] = _int(s)
 		elif command == "offset":
-			var x := J.parseInt(tok.nextToken())
-			var y := J.parseInt(tok.nextToken())
+			var x := _int(tok.nextToken())
+			var y := _int(tok.nextToken())
 			model["offset"] = Vector2i(x, y)
 		elif command == "music":
 			model["music"] = tok.nextToken()
@@ -281,11 +300,11 @@ class VilReader extends AbstractMapLoader:
 			model["buildings"].append(b)
 		elif command == "animObj":
 			var name := tok.nextToken()
-			var x := J.parseInt(tok.nextToken())
-			var y := J.parseInt(tok.nextToken())
+			var x := _int(tok.nextToken())
+			var y := _int(tok.nextToken())
 			var count := 4
 			if tok.hasMoreTokens():
-				count = J.parseInt(tok.nextToken())
+				count = _int(tok.nextToken())
 			model["actors"].append({"kind": "animObj", "name": name, "x": x, "y": y, "count": count})
 		else:
 			warnings.append("line %d: unknown command '%s' ignored (as by the legacy loader)" % [lineCount, command])
@@ -294,23 +313,23 @@ class VilReader extends AbstractMapLoader:
 	func _door(tok: StringTokenizer, hole: bool) -> Dictionary:
 		var kinds: Array = J.split(tok.nextToken(), ";")
 		var targets: Array = J.split(tok.nextToken(), ";")
-		var x := J.parseInt(tok.nextToken())
-		var y := J.parseInt(tok.nextToken())
-		var w := J.parseInt(tok.nextToken())
+		var x := _int(tok.nextToken())
+		var y := _int(tok.nextToken())
+		var w := _int(tok.nextToken())
 		var directions := tok.nextToken()
 		var dirs: Array = []
 		var activation := -1
 		if directions.contains(";"):
 			for d in J.split(directions, ";"):
 				if d.contains("s"):
-					activation = J.parseInt(d.replace("s", ""))
+					activation = _int(d.replace("s", ""))
 				else:
-					dirs.append(J.parseInt(d))
+					dirs.append(_int(d))
 		else:
-			dirs.append(J.parseInt(directions))
+			dirs.append(_int(directions))
 		var fade := StoreDoor.FADE_DOWN
 		if tok.hasMoreTokens():
-			fade = J.parseInt(tok.nextToken())
+			fade = _int(tok.nextToken())
 		var to_pos: Array = []
 		if tok.hasMoreTokens():
 			to_pos = [-1.0, -1.0, -1.0, -1.0]
@@ -330,32 +349,32 @@ class VilReader extends AbstractMapLoader:
 	## Loot.getLoot's reading of a loot line (all of it: the legacy loader
 	## stops after the name when the loot is taken).
 	func _loot(tok: StringTokenizer) -> Dictionary:
-		var l := {"name": tok.nextToken(), "x": J.parseInt(tok.nextToken()),
-			"y": J.parseInt(tok.nextToken()), "lines": [], "triggers": {}, "amount": 0,
+		var l := {"name": tok.nextToken(), "x": _int(tok.nextToken()),
+			"y": _int(tok.nextToken()), "lines": [], "triggers": {}, "amount": 0,
 			"card_level": 0, "all_cards": false, "life": 0.0}
 		var dirs: Array = []
 		for s in J.split(tok.nextToken(), ";"):
-			dirs.append(J.parseInt(s))
+			dirs.append(_int(s))
 		l["directions"] = dirs
 		var c_name := tok.nextToken()
 		if c_name.begins_with("trigger="):
 			for s in J.split(c_name.replace("trigger=", ""), "--"):
 				var temp: Array = J.split(s, ":")
-				l["triggers"][temp[0]] = J.parseInt(temp[1])
+				l["triggers"][temp[0]] = _int(temp[1])
 			c_name = tok.nextToken()
 		l["content_name"] = c_name
-		var t := J.parseInt(tok.nextToken())
+		var t := _int(tok.nextToken())
 		l["type"] = t
 		var spaced := c_name.replace("_", " ")
 		match t:
 			Loot.GOLD:
-				l["amount"] = J.parseInt(spaced)
+				l["amount"] = _int(spaced)
 			Loot.ITEM:
 				l["amount"] = 1
 				if tok.hasMoreTokens():
-					l["amount"] = J.parseInt(tok.nextToken())
+					l["amount"] = _int(tok.nextToken())
 			Loot.CARD:
-				l["card_level"] = J.parseInt(tok.nextToken())
+				l["card_level"] = _int(tok.nextToken())
 				if tok.hasMoreTokens():
 					l["all_cards"] = J.parseBoolean(tok.nextToken())
 			Loot.LIFE:
@@ -433,11 +452,22 @@ func _write_art(v: Dictionary) -> void:
 			_write_frames(_anim_obj_images(v["folder_name"], a["name"], a["count"]))
 
 
+## The stitched background of v: in the folder of the place whose art it is
+## when that is another place (No Place at Night uses Zazo - Teo's night
+## background), so a background is stitched once; else in v's place folder.
+func _background_path(v: Dictionary) -> String:
+	var folder: String = v.get("background_folder", "")
+	var place: String = v["place"]
+	if folder != "" and folder != place and DirAccess.dir_exists_absolute("res://" + VIL_DIR + folder):
+		place = folder
+	return SCENE_DIR + "/" + place + "/" + v["background_png"]
+
+
 ## Stitches the tiles DoubleBackground.generateNames draws (x<i>y<j> for
 ## i < ceil(actual width / 256), j < ceil(actual height / 256)) into one
 ## image, pixel for pixel as imported.
 func _stitch(v: Dictionary) -> void:
-	var path: String = SCENE_DIR + "/" + v["place"] + "/" + v["background_png"]
+	var path := _background_path(v)
 	var columns := ceili(v["actual_size"].x / float(TILE))
 	var rows := ceili(v["actual_size"].y / float(TILE))
 	var images := {}
@@ -527,7 +557,9 @@ func _write_frames(image_set: Array) -> void:
 	var paths: Array = image_set[1]
 	var frames := SpriteFrames.new()
 	var per_anim := mini(paths.size(), 4)
-	var anims: Array[StringName] = DIRECTION_ANIMS if image_set[2] else [&"default"]
+	var anims: Array[StringName] = [&"default"]
+	if image_set[2]:
+		anims = DIRECTION_ANIMS
 	if image_set[2]:
 		frames.remove_animation(&"default")
 	for d in anims.size():
@@ -553,19 +585,26 @@ func _write_frames(image_set: Array) -> void:
 # Base / variant split (decision 1: one inherited scene per .vil file)
 # ---------------------------------------------------------------------------
 
-## What every variant has in common: the root values, the art, the obstacles
-## (as a multiset: the legacy obstacle order does not matter, collision tests
-## all of them) and the spawns (if all variants list the same).
+## What the variants have in common: the root values, the background (the
+## one most variants draw, ties to the first in file order; a variant with
+## another one overrides the base's Background node), the top layer (if all
+## have the same), the obstacles (as a multiset: the legacy obstacle order
+## does not matter, collision tests all of them) and the spawns (if all
+## variants list the same).
 func _shared(variants: Array[Dictionary]) -> Dictionary:
 	var first: Dictionary = variants[0]
-	var shared := {"root": {}, "obstacles": [], "spawns": [], "art": true}
+	var shared := {"root": {}, "obstacles": [], "spawns": [], "background": first, "top": true}
 	for key in _root_values(first):
 		var value = _root_values(first)[key]
 		if variants.all(func(v: Dictionary) -> bool: return _root_values(v)[key] == value):
 			shared["root"][key] = value
-	shared["art"] = variants.all(func(v: Dictionary) -> bool:
-		return (v["background_key"] == first["background_key"] and v["top"] == first["top"]
-			and v.get("offset") == first.get("offset")))
+	var best := 0
+	for v in variants:
+		var count := variants.filter(func(w: Dictionary) -> bool: return _same_background(v, w)).size()
+		if count > best:
+			best = count
+			shared["background"] = v
+	shared["top"] = variants.all(func(v: Dictionary) -> bool: return v["top"] == first["top"])
 	var common: Array = first["obstacles"].duplicate()
 	for v in variants.slice(1):
 		var rest: Array = v["obstacles"].duplicate()
@@ -598,12 +637,18 @@ func _root_values(v: Dictionary) -> Dictionary:
 	}
 
 
+## Whether variants a and b draw the same background image at the same shift.
+static func _same_background(a: Dictionary, b: Dictionary) -> bool:
+	return a["background_key"] == b["background_key"] and a.get("offset") == b.get("offset")
+
+
 func _build_base(place: String, variants: Array[Dictionary], shared: Dictionary) -> Callable:
 	return func(root: VillageScene) -> void:
 		for key in shared["root"]:
 			root.set(key, shared["root"][key])
-		if shared["art"]:
-			_add_art(root, variants[0])
+		_add_background(root, shared["background"])
+		if shared["top"]:
+			_add_top(root, variants[0])
 		var shapes := root.get_node("Obstacles")
 		for i in shared["obstacles"].size():
 			_add_obstacle(root, shapes, "O%03d" % i, shared["obstacles"][i])
@@ -617,8 +662,10 @@ func _build_variant(v: Dictionary, shared: Dictionary) -> Callable:
 		var values := _root_values(v)
 		for key in values:
 			root.set(key, values[key])
-		if not shared["art"]:
-			_add_art(root, v)
+		if not _same_background(v, shared["background"]):
+			_add_background(root, v)
+		if not shared["top"]:
+			_add_top(root, v)
 		if v["night_top"] != "" and not _data_only:
 			var night: Sprite2D = root.get_node("Night")
 			night.texture = _texture(v["night_top"])
@@ -653,15 +700,25 @@ func _build_variant(v: Dictionary, shared: Dictionary) -> Callable:
 			index += 1
 
 
-func _add_art(root: VillageScene, v: Dictionary) -> void:
+## The background DoubleBackground draws for v: its stitched tiles, or the
+## image itself when it has no tile folder (DoubleBackground.cutImage2 cuts
+## it in memory), at the offset line's shift; no texture when the image is
+## missing (the legacy code draws nothing either).
+func _add_background(root: VillageScene, v: Dictionary) -> void:
 	if _data_only:
 		return
 	var background: Sprite2D = root.get_node("Background")
 	background.position = Vector2(v.get("offset", Vector2i.ZERO))
 	if v["tiles"] != "":
-		background.texture = load(SCENE_DIR + "/" + v["place"] + "/" + v["background_png"])
+		background.texture = load(_background_path(v))
 	else:
 		background.texture = _texture(v["image"])
+
+
+## The roofs and treetops of top/top.info, one Sprite2D each, in file order.
+func _add_top(root: VillageScene, v: Dictionary) -> void:
+	if _data_only:
+		return
 	var overhead := root.get_node("Overhead")
 	for i in v["top"].size():
 		var piece := Sprite2D.new()

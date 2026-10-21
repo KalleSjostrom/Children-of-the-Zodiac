@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Library - Floor 2/villagers/Garli/Garli9.png" id="1_5h03i"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Library - Floor 2/villagers/Garli/Garli10.png" id="2_keptr"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Library - Floor 2/villagers/Garli/Garli11.png" id="3_ua875"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Library - Floor 2/villagers/Garli/Garli12.png" id="4_qhqqv"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Library - Floor 2/villagers/Garli/Garli13.png" id="5_stntj"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Library - Floor 2/villagers/Garli/Garli14.png" id="6_ts0ie"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Library - Floor 2/villagers/Garli/Garli15.png" id="7_40d2c"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Library - Floor 2/villagers/Garli/Garli16.png" id="8_4lkyl"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Library - Floor 2/villagers/Garli/Garli5.png" id="9_k5djy"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Library - Floor 2/villagers/Garli/Garli6.png" id="10_uv1fe"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Library - Floor 2/villagers/Garli/Garli7.png" id="11_6o7n3"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Library - Floor 2/villagers/Garli/Garli8.png" id="12_psyww"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Library - Floor 2/villagers/Garli/Garli1.png" id="13_kvr4t"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Library - Floor 2/villagers/Garli/Garli2.png" id="14_wctfu"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Library - Floor 2/villagers/Garli/Garli3.png" id="15_1m8tt"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Library - Floor 2/villagers/Garli/Garli4.png" id="16_1qtio"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_5h03i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_keptr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ua875")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qhqqv")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_stntj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ts0ie")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_40d2c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_4lkyl")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_k5djy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_uv1fe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_6o7n3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_psyww")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_kvr4t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_wctfu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_1m8tt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_1qtio")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

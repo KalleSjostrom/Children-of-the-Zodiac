@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Library/villagers/Onrod/Onrod9.png" id="1_23udp"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Library/villagers/Onrod/Onrod10.png" id="2_rah4f"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Library/villagers/Onrod/Onrod11.png" id="3_qnb18"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Library/villagers/Onrod/Onrod12.png" id="4_60k38"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Library/villagers/Onrod/Onrod13.png" id="5_7faax"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Library/villagers/Onrod/Onrod14.png" id="6_k2s4q"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Library/villagers/Onrod/Onrod15.png" id="7_y8syb"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Library/villagers/Onrod/Onrod16.png" id="8_ncnsq"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Library/villagers/Onrod/Onrod5.png" id="9_p8peb"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Library/villagers/Onrod/Onrod6.png" id="10_sdm83"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Library/villagers/Onrod/Onrod7.png" id="11_ukpbn"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Library/villagers/Onrod/Onrod8.png" id="12_vgw4j"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Library/villagers/Onrod/Onrod1.png" id="13_7ijn4"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Library/villagers/Onrod/Onrod2.png" id="14_kw6vh"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Library/villagers/Onrod/Onrod3.png" id="15_v5gn1"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares - Library/villagers/Onrod/Onrod4.png" id="16_bvl2h"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_23udp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_rah4f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_qnb18")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_60k38")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_7faax")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_k2s4q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_y8syb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ncnsq")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_p8peb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_sdm83")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ukpbn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_vgw4j")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_7ijn4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_kw6vh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_v5gn1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_bvl2h")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

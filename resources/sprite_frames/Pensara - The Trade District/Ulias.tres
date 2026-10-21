@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Ulias/Ulias9.png" id="1_bi4ex"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Ulias/Ulias10.png" id="2_4nrp2"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Ulias/Ulias11.png" id="3_vdyqh"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Ulias/Ulias12.png" id="4_ojcbg"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Ulias/Ulias13.png" id="5_rvm44"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Ulias/Ulias14.png" id="6_0vfxt"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Ulias/Ulias15.png" id="7_e3o33"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Ulias/Ulias16.png" id="8_yplyl"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Ulias/Ulias5.png" id="9_hb3x0"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Ulias/Ulias6.png" id="10_77ubq"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Ulias/Ulias7.png" id="11_efq2k"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Ulias/Ulias8.png" id="12_38w3t"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Ulias/Ulias1.png" id="13_2psot"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Ulias/Ulias2.png" id="14_0fs15"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Ulias/Ulias3.png" id="15_gvob4"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Ulias/Ulias4.png" id="16_23e13"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_bi4ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_4nrp2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_vdyqh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ojcbg")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_rvm44")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_0vfxt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_e3o33")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_yplyl")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_hb3x0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_77ubq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_efq2k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_38w3t")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_2psot")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_0fs15")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_gvob4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_23e13")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

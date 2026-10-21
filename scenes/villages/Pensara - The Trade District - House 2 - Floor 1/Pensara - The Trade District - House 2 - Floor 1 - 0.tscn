@@ -1,0 +1,38 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Pensara - The Trade District - House 2 - Floor 1/Pensara - The Trade District - House 2 - Floor 1.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/ActorView.tscn" id="2_ivivy"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The Trade District - House 2 - Floor 1/Elviri.tres" id="3_adw3x"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="4_6rd1j"]
+
+[node name="Pensara - The Trade District - House 2 - Floor 1 - 0" instance=ExtResource("1_base")]
+
+[node name="00 Elviri" parent="Actors" index="0" instance=ExtResource("2_ivivy")]
+position = Vector2(585, 373)
+sprite_frames = ExtResource("3_adw3x")
+animation = &"up"
+role = 1
+villager_name = "Elviri"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The Trade District - House 2 - Floor 1"
+
+[node name="00 Pensara_-_The_Trade_District" parent="Doors" index="0" instance=ExtResource("4_6rd1j")]
+position = Vector2(465, 570)
+hole = true
+kinds = PackedStringArray("switch")
+targets = PackedStringArray("Pensara_-_The_Trade_District")
+directions = PackedInt32Array(2)
+fade = 1
+to_pos = PackedFloat64Array(342, 306, 2, -1)
+sign_lines = PackedStringArray()
+
+[node name="01 Pensara_-_The_Trade_District_-_House_2_-_Floor_2" parent="Doors" index="1" instance=ExtResource("4_6rd1j")]
+position = Vector2(592, 520)
+hole = true
+kinds = PackedStringArray("house")
+targets = PackedStringArray("Pensara_-_The_Trade_District_-_House_2_-_Floor_2")
+radius = 25
+directions = PackedInt32Array(0)
+fade = 0
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray()

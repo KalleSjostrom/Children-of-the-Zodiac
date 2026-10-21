@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Ollie/Merchant Ollie9.png" id="1_fvi1d"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Ollie/Merchant Ollie10.png" id="2_tt4cp"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Ollie/Merchant Ollie11.png" id="3_0ja8m"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Ollie/Merchant Ollie12.png" id="4_1mnmr"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Ollie/Merchant Ollie13.png" id="5_dji0u"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Ollie/Merchant Ollie14.png" id="6_fgymq"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Ollie/Merchant Ollie15.png" id="7_yb1xk"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Ollie/Merchant Ollie16.png" id="8_q6iwc"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Ollie/Merchant Ollie5.png" id="9_pydnq"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Ollie/Merchant Ollie6.png" id="10_lll72"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Ollie/Merchant Ollie7.png" id="11_edv7j"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Ollie/Merchant Ollie8.png" id="12_caxyw"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Ollie/Merchant Ollie1.png" id="13_gkgp1"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Ollie/Merchant Ollie2.png" id="14_ariev"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Ollie/Merchant Ollie3.png" id="15_o0g2v"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Ollie/Merchant Ollie4.png" id="16_be7ce"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_fvi1d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_tt4cp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_0ja8m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_1mnmr")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_dji0u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_fgymq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_yb1xk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_q6iwc")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_pydnq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_lll72")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_edv7j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_caxyw")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_gkgp1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_ariev")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_o0g2v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_be7ce")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

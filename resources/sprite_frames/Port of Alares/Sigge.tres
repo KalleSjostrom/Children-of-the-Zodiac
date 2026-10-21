@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares/villagers/Sigge/Sigge9.png" id="1_4vgnk"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares/villagers/Sigge/Sigge10.png" id="2_focnj"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares/villagers/Sigge/Sigge11.png" id="3_hdp3n"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares/villagers/Sigge/Sigge12.png" id="4_2frdp"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares/villagers/Sigge/Sigge13.png" id="5_k2k88"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares/villagers/Sigge/Sigge14.png" id="6_jsihf"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares/villagers/Sigge/Sigge15.png" id="7_2wh8k"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares/villagers/Sigge/Sigge16.png" id="8_bjyeu"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares/villagers/Sigge/Sigge5.png" id="9_4e43g"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares/villagers/Sigge/Sigge6.png" id="10_wpcgi"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares/villagers/Sigge/Sigge7.png" id="11_akd23"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares/villagers/Sigge/Sigge8.png" id="12_bf5gn"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares/villagers/Sigge/Sigge1.png" id="13_1tkes"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares/villagers/Sigge/Sigge2.png" id="14_msom6"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares/villagers/Sigge/Sigge3.png" id="15_dr8ys"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares/villagers/Sigge/Sigge4.png" id="16_06hlm"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_4vgnk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_focnj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_hdp3n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_2frdp")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_k2k88")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_jsihf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_2wh8k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_bjyeu")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_4e43g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_wpcgi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_akd23")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_bf5gn")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_1tkes")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_msom6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_dr8ys")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_06hlm")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

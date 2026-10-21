@@ -1,0 +1,15 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Zazo - Teo/Zazo - Teo.tscn" id="1_base"]
+[ext_resource type="Texture2D" path="res://scenes/villages/Zazo - Teo/Zazo - Teo at Night.png" id="2_y837k"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo - Teo/Zazo - Teo at Night - 1.png" id="3_edi3v"]
+
+[node name="Zazo - Teo at Night - 0" instance=ExtResource("1_base")]
+day = false
+
+[node name="Background" parent="." index="1"]
+texture = ExtResource("2_y837k")
+
+[node name="Night" parent="." index="4"]
+visible = true
+texture = ExtResource("3_edi3v")

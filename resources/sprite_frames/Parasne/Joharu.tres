@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Joharu/Joharu9.png" id="1_oh4k7"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Joharu/Joharu10.png" id="2_6m07e"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Joharu/Joharu11.png" id="3_0dys6"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Joharu/Joharu12.png" id="4_g62fs"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Joharu/Joharu13.png" id="5_q7ygv"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Joharu/Joharu14.png" id="6_g8qfp"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Joharu/Joharu15.png" id="7_m376k"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Joharu/Joharu16.png" id="8_mhxp3"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Joharu/Joharu5.png" id="9_7etd7"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Joharu/Joharu6.png" id="10_nei2b"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Joharu/Joharu7.png" id="11_g4qad"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Joharu/Joharu8.png" id="12_dtjpr"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Joharu/Joharu1.png" id="13_l1848"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Joharu/Joharu2.png" id="14_b2073"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Joharu/Joharu3.png" id="15_1lms4"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Joharu/Joharu4.png" id="16_goh6r"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_oh4k7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_6m07e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_0dys6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_g62fs")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_q7ygv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_g8qfp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_m376k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_mhxp3")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_7etd7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_nei2b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_g4qad")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_dtjpr")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_l1848")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_b2073")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_1lms4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_goh6r")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

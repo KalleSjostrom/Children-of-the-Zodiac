@@ -1,0 +1,78 @@
+# A tour of any village variant, for the parity cases tour_* (phase 1
+# rollout, tools/parity/cases.txt): fade-in, a settled shot, then a fixed
+# walk in all four directions, long enough to scroll the largest village
+# (2820x1442; the player moves 200 px/s), the menu (its thumbnail is a copy of
+# the village frame) and back. No route per place: the walk bumps into
+# obstacles and villagers, which is fine in a deterministic run.
+#
+# The directions are relative to the start facing ("heading"), which points
+# into the place: a start at the edge of a town (where the world map enters)
+# or above the exit of an interior. "guard 24" lets go of a direction 24 px
+# before the player would leave the place (its edge or a hole door), so the
+# tour stays in it: an interior entered with --start has no town to go back
+# to (its exit door would load the town at start -1, with no player). The
+# "pos" lines print the player's position, facing and the background scroll.
+#
+# Fade-in.
+wait 100
+shot t01_fadein
+wait 250
+shot t02_fadein_later
+wait 1150
+shot t03_settled
+pos start
+heading
+guard 24
+log start
+# Ahead for 3 s.
+press AHEAD
+wait 1500
+shot t04_ahead
+wait 1500
+release AHEAD
+wait 100
+shot t05_ahead_end
+pos ahead
+# To the left for 4 s.
+press ALEFT
+wait 2000
+shot t06_left
+wait 2000
+release ALEFT
+wait 100
+shot t07_left_end
+pos left
+# To the right for 8 s.
+press ARIGHT
+wait 2700
+shot t08_right
+wait 2700
+shot t09_right_later
+wait 2600
+release ARIGHT
+wait 100
+shot t10_right_end
+pos right
+log before_menu
+# The menu and back.
+tap TRIANGLE
+wait 2500
+shot t11_menu
+tap CIRCLE
+wait 2000
+shot t12_after_menu
+log after_menu
+# Back (towards the start side) for 4 s.
+press BEHIND
+wait 2000
+shot t13_behind
+wait 2000
+release BEHIND
+wait 100
+shot t14_behind_end
+pos behind
+wait 1500
+shot t15_end
+pos end
+log end
+quit

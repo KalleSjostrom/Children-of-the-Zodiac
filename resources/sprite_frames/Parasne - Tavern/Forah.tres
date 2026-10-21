@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Parasne - Tavern/villagers/Forah/Forah9.png" id="1_lrap6"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne - Tavern/villagers/Forah/Forah10.png" id="2_jmir7"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne - Tavern/villagers/Forah/Forah11.png" id="3_218i6"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne - Tavern/villagers/Forah/Forah12.png" id="4_iy8qf"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne - Tavern/villagers/Forah/Forah13.png" id="5_eep7u"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne - Tavern/villagers/Forah/Forah14.png" id="6_n4qs8"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne - Tavern/villagers/Forah/Forah15.png" id="7_6jkfl"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne - Tavern/villagers/Forah/Forah16.png" id="8_hwgnu"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne - Tavern/villagers/Forah/Forah5.png" id="9_hbvgw"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne - Tavern/villagers/Forah/Forah6.png" id="10_oclqj"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne - Tavern/villagers/Forah/Forah7.png" id="11_piawh"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne - Tavern/villagers/Forah/Forah8.png" id="12_or74v"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne - Tavern/villagers/Forah/Forah1.png" id="13_jkygd"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne - Tavern/villagers/Forah/Forah2.png" id="14_xx5i5"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne - Tavern/villagers/Forah/Forah3.png" id="15_ir5lw"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne - Tavern/villagers/Forah/Forah4.png" id="16_ob5ob"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_lrap6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_jmir7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_218i6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_iy8qf")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_eep7u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_n4qs8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_6jkfl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_hwgnu")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_hbvgw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_oclqj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_piawh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_or74v")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_jkygd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_xx5i5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_ir5lw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_ob5ob")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

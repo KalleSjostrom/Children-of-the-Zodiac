@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Denese/Denese9.png" id="1_y0x6v"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Denese/Denese10.png" id="2_tpchw"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Denese/Denese11.png" id="3_lovn3"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Denese/Denese12.png" id="4_3jo0w"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Denese/Denese13.png" id="5_3hrmu"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Denese/Denese14.png" id="6_1d3la"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Denese/Denese15.png" id="7_vsl5w"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Denese/Denese16.png" id="8_x6twn"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Denese/Denese5.png" id="9_bqxc8"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Denese/Denese6.png" id="10_e7ko7"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Denese/Denese7.png" id="11_ae8id"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Denese/Denese8.png" id="12_5m0p4"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Denese/Denese1.png" id="13_6hjsd"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Denese/Denese2.png" id="14_6fhv1"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Denese/Denese3.png" id="15_b1x2l"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Denese/Denese4.png" id="16_0h2f2"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_y0x6v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_tpchw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_lovn3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_3jo0w")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_3hrmu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_1d3la")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vsl5w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_x6twn")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_bqxc8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_e7ko7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ae8id")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_5m0p4")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_6hjsd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_6fhv1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_b1x2l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_0h2f2")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

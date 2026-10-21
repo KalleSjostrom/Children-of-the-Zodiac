@@ -1,0 +1,24 @@
+# The Prolog (No Place) from its start (--start=Prolog), for the parity case
+# story_prolog (phase 1 rollout): the questions (text), the zooming and
+# scrolling story images, then at about 250 s the village background swap
+# (setvillageback) with the translucent-under-actor image fading in over it,
+# and the switch to "Celis Memory - Having Fun". story_long covers the first
+# 3 minutes with a shot every 30 s; this case shoots every 10 s, then every
+# second from 240 s.
+wait 100
+shot p_00_start
+mark
+wait 10000
+shot p_#
+loopuntil !VillageStory 240000
+mark
+wait 1000
+shot p_#
+loopuntil !place=Prolog 40000
+log after_prolog
+wait 1000
+shot p_after_1
+wait 2000
+shot p_after_2
+log end
+quit

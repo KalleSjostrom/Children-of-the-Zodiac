@@ -1,0 +1,37 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Pensara - The North District - Farmer House/Pensara - The North District - Farmer House.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/ActorView.tscn" id="2_r43rn"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The North District - Farmer House/Dido.tres" id="3_te7ti"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The North District - Farmer House/Ella.tres" id="4_ypo4d"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="5_fsqqb"]
+
+[node name="Pensara - The North District - Farmer House - 0" instance=ExtResource("1_base")]
+
+[node name="00 Dido" parent="Actors" index="0" instance=ExtResource("2_r43rn")]
+position = Vector2(635, 440)
+sprite_frames = ExtResource("3_te7ti")
+animation = &"up"
+role = 1
+villager_name = "Dido"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The North District - Farmer House"
+
+[node name="01 Ella" parent="Actors" index="1" instance=ExtResource("2_r43rn")]
+position = Vector2(400, 275)
+sprite_frames = ExtResource("4_ypo4d")
+animation = &"down"
+role = 1
+villager_name = "Ella"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The North District - Farmer House"
+
+[node name="00 Pensara_-_The_North_District" parent="Doors" index="0" instance=ExtResource("5_fsqqb")]
+position = Vector2(500, 560)
+hole = true
+kinds = PackedStringArray("switch")
+targets = PackedStringArray("Pensara_-_The_North_District")
+directions = PackedInt32Array(2)
+fade = 1
+to_pos = PackedFloat64Array(575, 1840, 2, -1)
+sign_lines = PackedStringArray()

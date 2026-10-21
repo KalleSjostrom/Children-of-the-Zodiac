@@ -25,13 +25,13 @@ extends Node
 ##                       two runs of an autoplay script give the same frames
 ##   --uncapped          no frame rate cap or vsync (fast parity runs; with --seed)
 ##   --legacy=<a,b,...>  keep the legacy path of these subsystems (is_legacy)
-##   --bridge-test       villages show tools/bridge_test/BridgeTest.tscn (dev only)
+##   --bridge-test       the world map shows tools/bridge_test/BridgeTest.tscn (dev only)
 ##
 ## In debug builds the developer console (scenes/debug/DebugConsole.gd)
 ## opens with the key under Escape or F1; it replaces the Cheater.
 
 static var instance: Main
-## --bridge-test: Village.create_scene returns the bridge test scene.
+## --bridge-test: Landscape.create_scene returns the bridge test scene.
 static var bridge_test := false
 static var _legacy: PackedStringArray = []
 

@@ -1,0 +1,29 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Port of Zazo/Port of Zazo.tscn" id="1_base"]
+[ext_resource type="Texture2D" path="res://res/Village/standardOvernight.png" id="2_jgfiw"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="3_wigt4"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageSign.tscn" id="4_3w5kp"]
+
+[node name="Port of Zazo at Night - 0" instance=ExtResource("1_base")]
+day = false
+night_screen_fixed = true
+
+[node name="Night" parent="." index="4"]
+visible = true
+texture = ExtResource("2_jgfiw")
+
+[node name="00 House" parent="Doors" index="0" instance=ExtResource("3_wigt4")]
+position = Vector2(87, 121)
+kinds = PackedStringArray("house")
+targets = PackedStringArray("House")
+directions = PackedInt32Array(0)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray(" Closed by order from Teo of Zazo.")
+
+[node name="00 Welcome to the port of Z" parent="Signs" index="0" instance=ExtResource("4_3w5kp")]
+position = Vector2(46, 226)
+radius = 30
+directions = PackedInt32Array(0)
+lines = PackedStringArray("Welcome to the port of Zazo")
+listed = Array[bool]([true])

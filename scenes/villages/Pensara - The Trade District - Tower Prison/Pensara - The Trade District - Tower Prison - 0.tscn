@@ -1,0 +1,24 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Pensara - The Trade District - Tower Prison/Pensara - The Trade District - Tower Prison.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="2_n0yf3"]
+
+[node name="Pensara - The Trade District - Tower Prison - 0" instance=ExtResource("1_base")]
+
+[node name="00 Pensara_-_The_Trade_District" parent="Doors" index="0" instance=ExtResource("2_n0yf3")]
+position = Vector2(490, 485)
+hole = true
+kinds = PackedStringArray("switch")
+targets = PackedStringArray("Pensara_-_The_Trade_District")
+directions = PackedInt32Array(2)
+fade = 1
+to_pos = PackedFloat64Array(190, 2060, 2, -1)
+sign_lines = PackedStringArray()
+
+[node name="01 _" parent="Doors" index="1" instance=ExtResource("2_n0yf3")]
+position = Vector2(581, 424)
+kinds = PackedStringArray("house")
+targets = PackedStringArray("_")
+directions = PackedInt32Array(0)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray(" Locked.")

@@ -1,0 +1,74 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Home of Celis/Home of Celis.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/particles/LegacyParticles2D.tscn" id="2_p8nqh"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="3_hsbe1"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageSign.tscn" id="4_re8pg"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageLoot.tscn" id="5_qrejh"]
+
+[node name="Home of Celis - 0" instance=ExtResource("1_base")]
+
+[node name="00 smokesystem" parent="Effects" index="0" instance=ExtResource("2_p8nqh")]
+position = Vector2(650, 280)
+system_name = "smokesystem"
+
+[node name="00 Home_of_Celis_-_Celis_Home" parent="Doors" index="0" instance=ExtResource("3_hsbe1")]
+position = Vector2(650, 457)
+kinds = PackedStringArray("house")
+targets = PackedStringArray("Home_of_Celis_-_Celis_Home")
+directions = PackedInt32Array(0)
+fade = 2
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray(" The door is locked.")
+
+[node name="00 Welcome to the home of" parent="Signs" index="0" instance=ExtResource("4_re8pg")]
+position = Vector2(750, 679)
+radius = 30
+directions = PackedInt32Array(0)
+lines = PackedStringArray("Welcome to the home of", "Ryold and Celis")
+listed = Array[bool]([true, true])
+
+[node name="00 flower" parent="Loot" index="0" instance=ExtResource("5_qrejh")]
+position = Vector2(334, 529)
+loot_name = "flower"
+directions = PackedInt32Array(0, 1, 2, 3)
+content_name = "Lovely_Flower"
+content_type = 1
+amount = 1
+lines = PackedStringArray("You picked a lovely flower.")
+
+[node name="01 flower" parent="Loot" index="1" instance=ExtResource("5_qrejh")]
+position = Vector2(309, 250)
+loot_name = "flower"
+directions = PackedInt32Array(0, 1, 2, 3)
+content_name = "Lovely_Flower"
+content_type = 1
+amount = 1
+lines = PackedStringArray("You picked a lovely flower.")
+
+[node name="02 flower" parent="Loot" index="2" instance=ExtResource("5_qrejh")]
+position = Vector2(300, 96)
+loot_name = "flower"
+directions = PackedInt32Array(0, 1, 2, 3)
+content_name = "Lovely_Flower"
+content_type = 1
+amount = 1
+lines = PackedStringArray("You picked a lovely flower.")
+
+[node name="03 flower" parent="Loot" index="3" instance=ExtResource("5_qrejh")]
+position = Vector2(243, 678)
+loot_name = "flower"
+directions = PackedInt32Array(0, 1, 2, 3)
+content_name = "Lovely_Flower"
+content_type = 1
+amount = 1
+lines = PackedStringArray("You picked a lovely flower.")
+
+[node name="04 flower" parent="Loot" index="4" instance=ExtResource("5_qrejh")]
+position = Vector2(184, 665)
+loot_name = "flower"
+directions = PackedInt32Array(0, 1, 2, 3)
+content_name = "Lovely_Flower"
+content_type = 1
+amount = 1
+lines = PackedStringArray("You picked a lovely flower.")

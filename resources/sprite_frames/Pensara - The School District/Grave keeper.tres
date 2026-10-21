@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Grave keeper/Grave keeper9.png" id="1_udroe"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Grave keeper/Grave keeper10.png" id="2_cb2y7"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Grave keeper/Grave keeper11.png" id="3_v5nbw"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Grave keeper/Grave keeper12.png" id="4_4r6vy"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Grave keeper/Grave keeper13.png" id="5_ac0c6"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Grave keeper/Grave keeper14.png" id="6_2qwe8"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Grave keeper/Grave keeper15.png" id="7_waxqk"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Grave keeper/Grave keeper16.png" id="8_wq6iu"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Grave keeper/Grave keeper5.png" id="9_vijul"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Grave keeper/Grave keeper6.png" id="10_3e2v0"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Grave keeper/Grave keeper7.png" id="11_7kpth"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Grave keeper/Grave keeper8.png" id="12_d4kjv"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Grave keeper/Grave keeper1.png" id="13_8crxp"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Grave keeper/Grave keeper2.png" id="14_5ohiq"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Grave keeper/Grave keeper3.png" id="15_r7wr2"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Grave keeper/Grave keeper4.png" id="16_i1ssu"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_udroe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_cb2y7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_v5nbw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_4r6vy")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_ac0c6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_2qwe8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_waxqk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_wq6iu")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_vijul")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_3e2v0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_7kpth")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_d4kjv")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_8crxp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_5ohiq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_r7wr2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_i1ssu")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

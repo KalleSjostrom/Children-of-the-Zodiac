@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Parasne - Tavern/villagers/Alsie/Alsie9.png" id="1_rq3wj"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne - Tavern/villagers/Alsie/Alsie10.png" id="2_01wnb"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne - Tavern/villagers/Alsie/Alsie11.png" id="3_fwm0c"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne - Tavern/villagers/Alsie/Alsie12.png" id="4_0ef2m"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne - Tavern/villagers/Alsie/Alsie13.png" id="5_osj4e"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne - Tavern/villagers/Alsie/Alsie14.png" id="6_mef0q"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne - Tavern/villagers/Alsie/Alsie15.png" id="7_1p75q"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne - Tavern/villagers/Alsie/Alsie16.png" id="8_jy16n"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne - Tavern/villagers/Alsie/Alsie5.png" id="9_ce0pt"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne - Tavern/villagers/Alsie/Alsie6.png" id="10_yy0sf"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne - Tavern/villagers/Alsie/Alsie7.png" id="11_7am42"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne - Tavern/villagers/Alsie/Alsie8.png" id="12_jfrs7"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne - Tavern/villagers/Alsie/Alsie1.png" id="13_bmayu"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne - Tavern/villagers/Alsie/Alsie2.png" id="14_y1w7p"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne - Tavern/villagers/Alsie/Alsie3.png" id="15_awl5q"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne - Tavern/villagers/Alsie/Alsie4.png" id="16_5jhst"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_rq3wj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_01wnb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_fwm0c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_0ef2m")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_osj4e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_mef0q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_1p75q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_jy16n")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_ce0pt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_yy0sf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_7am42")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_jfrs7")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_bmayu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_y1w7p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_awl5q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_5jhst")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

@@ -1,0 +1,1673 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Pensara - The Trade District/Pensara - The Trade District.tscn" id="1_base"]
+[ext_resource type="Script" path="res://scenes/villages/VillageBuilding.gd" id="2_pmv2b"]
+[ext_resource type="PackedScene" path="res://scenes/common/ActorView.tscn" id="3_i1b3t"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The Trade District/Benth.tres" id="4_rdxds"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Characters/Billy the rascal.tres" id="5_u7jy4"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The Trade District/Merchant Boby.tres" id="6_dgyh5"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The Trade District/Candy.tres" id="7_mee4i"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The Trade District/Deel.tres" id="8_elfjk"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The Trade District/Denese.tres" id="9_ndu5l"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The Trade District/Frigidu.tres" id="10_xs2gq"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The Trade District/Hillnar.tres" id="11_yy2tv"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The Trade District/Hippo.tres" id="12_scbxm"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The Trade District/Hulda.tres" id="13_2bjr3"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The Trade District/Juha.tres" id="14_23i2a"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The Trade District/Longhorn.tres" id="15_vs2a6"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The Trade District/Mollie.tres" id="16_tr0cb"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The Trade District/Merchant Ollie.tres" id="17_sgh74"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Characters/Pensarasoldier.tres" id="18_urxbq"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The Trade District/Polandera.tres" id="19_vkcpn"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The Trade District/Tito.tres" id="20_apijc"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The Trade District/Ulias.tres" id="21_oo25h"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The Trade District/Ylwaa.tres" id="22_ga0w0"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageSpawn.tscn" id="23_u2iwk"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="24_4ml3o"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageSign.tscn" id="25_sdb8x"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageLoot.tscn" id="26_c1i7y"]
+
+[sub_resource type="Resource" id="Resource_s4cbk"]
+script = ExtResource("2_pmv2b")
+store_name = "pensaraWeapons"
+background = "pensaraWeaponShop.jpg"
+keeper = "pensaraWeaponShopDenril.png"
+keeper_name = "Denril"
+first_line = "I may look ruff but I have the finest quality weapons,"
+second_line = " there is."
+music = "Pensara Shop"
+
+[sub_resource type="Resource" id="Resource_47rj8"]
+script = ExtResource("2_pmv2b")
+store_name = "Inn"
+background = "pensaraInn.jpg"
+keeper = "pensaraInnKeeperGustel.png"
+keeper_name = "Gustel"
+first_line = "Greetings, fellow citizen!"
+second_line = " "
+music = "House"
+
+[sub_resource type="Resource" id="Resource_5bsi1"]
+script = ExtResource("2_pmv2b")
+store_name = "pensaraCardShop"
+background = "pensaraCardShop.jpg"
+keeper = "pensaraCardShopDeel.png"
+keeper_name = "Deel"
+first_line = "Great cards at low, low prices!"
+second_line = " "
+music = "Pensara Shop"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qbe4h"]
+size = Vector2(59, 43)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5aknc"]
+size = Vector2(59, 43)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yrdp3"]
+size = Vector2(59, 43)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mft3p"]
+size = Vector2(59, 43)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t4vnc"]
+size = Vector2(29, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lwv7f"]
+size = Vector2(59, 43)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ow3qe"]
+size = Vector2(29, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l2xnb"]
+size = Vector2(59, 43)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0wxuh"]
+size = Vector2(59, 43)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m51b2"]
+size = Vector2(59, 43)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8kqym"]
+size = Vector2(29, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nvwcp"]
+size = Vector2(59, 43)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jdiuu"]
+size = Vector2(29, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wqblp"]
+size = Vector2(29, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x5jcr"]
+size = Vector2(29, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v4kub"]
+size = Vector2(59, 43)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_li3e8"]
+size = Vector2(29, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kfrl2"]
+size = Vector2(29, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_205ov"]
+size = Vector2(59, 43)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xoyaw"]
+size = Vector2(29, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_arcd4"]
+size = Vector2(29, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eqw8n"]
+size = Vector2(29, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fetr4"]
+size = Vector2(59, 43)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0i6kk"]
+size = Vector2(29, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7hnwa"]
+size = Vector2(29, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0h0ge"]
+size = Vector2(59, 43)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dvxqc"]
+size = Vector2(59, 43)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q2cjf"]
+size = Vector2(29, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d6cyk"]
+size = Vector2(146, 122)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_25nsl"]
+size = Vector2(144, 171)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pplwn"]
+size = Vector2(142, 123)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wop3q"]
+size = Vector2(6, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_saidv"]
+size = Vector2(8, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ypif"]
+size = Vector2(8, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xer3s"]
+size = Vector2(142, 123)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xuol"]
+size = Vector2(126, 94)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hbp5n"]
+size = Vector2(172, 111)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2qhd"]
+size = Vector2(140, 95)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nll2e"]
+size = Vector2(160, 118)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eb8nb"]
+size = Vector2(8, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2gw5m"]
+size = Vector2(258, 217)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7d1nn"]
+size = Vector2(244, 131)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_donmw"]
+size = Vector2(142, 172)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ui3sx"]
+size = Vector2(26, 36)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bt0aq"]
+size = Vector2(28, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a0jwx"]
+size = Vector2(7, 44)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h6cn6"]
+size = Vector2(42, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j7y31"]
+size = Vector2(334, 45)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x1117"]
+size = Vector2(26, 43)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q2yec"]
+size = Vector2(9, 44)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gxssx"]
+size = Vector2(34, 46)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t1cax"]
+size = Vector2(131, 39)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xdue8"]
+size = Vector2(99, 29)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tnq4h"]
+size = Vector2(28, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o8e0e"]
+size = Vector2(7, 44)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f43ll"]
+size = Vector2(32, 31)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mrji5"]
+size = Vector2(42, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yb52n"]
+size = Vector2(28, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ux7f1"]
+size = Vector2(27, 42)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cnw6h"]
+size = Vector2(32, 37)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n1o1a"]
+size = Vector2(59, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7daji"]
+size = Vector2(7, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_knh1f"]
+size = Vector2(51, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2gi1m"]
+size = Vector2(244, 41)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tf5m2"]
+size = Vector2(27, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xhqki"]
+size = Vector2(1, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bi76m"]
+size = Vector2(26, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xyfoe"]
+size = Vector2(10, 33)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c0cns"]
+size = Vector2(61, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rumcx"]
+size = Vector2(34, 67)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dbkxu"]
+size = Vector2(7, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sum1w"]
+size = Vector2(31, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3oii6"]
+size = Vector2(115, 44)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2a2sn"]
+size = Vector2(49, 29)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hw4gc"]
+size = Vector2(7, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qsyw3"]
+size = Vector2(27, 42)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i8trk"]
+size = Vector2(55, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mtd67"]
+size = Vector2(14, 41)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_38235"]
+size = Vector2(9, 45)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hn5v6"]
+size = Vector2(23, 19)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yhu5d"]
+size = Vector2(13, 72)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uh2lq"]
+size = Vector2(54, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wtcdf"]
+size = Vector2(34, 54)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u1gvi"]
+size = Vector2(7, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_74foi"]
+size = Vector2(36, 19)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oc7q5"]
+size = Vector2(32, 36)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7csbh"]
+size = Vector2(14, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rnd22"]
+size = Vector2(53, 31)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pj0hq"]
+size = Vector2(13, 61)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lcqsi"]
+size = Vector2(26, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fsp6l"]
+size = Vector2(35, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wlj5p"]
+size = Vector2(28, 33)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e22b6"]
+size = Vector2(49, 29)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s15p8"]
+size = Vector2(28, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1sok0"]
+size = Vector2(49, 39)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dqcp7"]
+size = Vector2(28, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pqnvt"]
+size = Vector2(28, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jab43"]
+size = Vector2(52, 42)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h37wl"]
+size = Vector2(35, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5n88v"]
+size = Vector2(28, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bglwb"]
+size = Vector2(27, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_npc4m"]
+size = Vector2(7, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1v62u"]
+size = Vector2(28, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1f52r"]
+size = Vector2(7, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_57v8e"]
+size = Vector2(9, 44)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eqld5"]
+size = Vector2(24, 27)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1q6vi"]
+size = Vector2(31, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_efky7"]
+size = Vector2(24, 57)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e30iq"]
+size = Vector2(32, 37)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mpfeq"]
+size = Vector2(9, 44)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0dt15"]
+size = Vector2(31, 53)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4w4gc"]
+size = Vector2(23, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6mstt"]
+size = Vector2(56, 31)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t7pry"]
+size = Vector2(27, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u4wt3"]
+size = Vector2(7, 44)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qor27"]
+size = Vector2(28, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_owisy"]
+size = Vector2(7, 44)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8mo22"]
+size = Vector2(18, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xgjlh"]
+size = Vector2(27, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qso24"]
+size = Vector2(23, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s2ru5"]
+size = Vector2(127, 54)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k6msl"]
+size = Vector2(28, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y8vhm"]
+size = Vector2(25, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ye6i"]
+size = Vector2(64, 33)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u064i"]
+size = Vector2(28, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_snqn6"]
+size = Vector2(7, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tl5eg"]
+size = Vector2(27, 61)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u4l2o"]
+size = Vector2(67, 43)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ykrpk"]
+size = Vector2(49, 39)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_46brl"]
+size = Vector2(57, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0hce4"]
+size = Vector2(29, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_anduk"]
+size = Vector2(54, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h261h"]
+size = Vector2(28, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ni3q3"]
+size = Vector2(31, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nicqy"]
+size = Vector2(400, 97)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fb1el"]
+size = Vector2(400, 97)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sb804"]
+size = Vector2(225, 97)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hvt3f"]
+size = Vector2(95, 240)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lr3p3"]
+size = Vector2(95, 325)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_brwmv"]
+size = Vector2(137, 98)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lxinl"]
+size = Vector2(486, 98)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_65n4h"]
+size = Vector2(95, 325)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5d5gs"]
+size = Vector2(486, 98)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rdevs"]
+size = Vector2(95, 325)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_apvmu"]
+size = Vector2(486, 98)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jchqo"]
+size = Vector2(35, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ba3ao"]
+size = Vector2(9, 421)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ig58y"]
+size = Vector2(13, 279)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nhaf2"]
+size = Vector2(9, 181)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s4b12"]
+size = Vector2(8, 317)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6gdv2"]
+size = Vector2(143, 351)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ksj3w"]
+size = Vector2(144, 224)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hq8lg"]
+size = Vector2(35, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uecku"]
+size = Vector2(466, 112)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kw3rb"]
+size = Vector2(466, 112)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y57i0"]
+size = Vector2(620, 110)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vfhlu"]
+size = Vector2(179, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_33p10"]
+size = Vector2(437, 111)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kudie"]
+size = Vector2(261, 109)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cq0g5"]
+size = Vector2(144, 311)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hngaa"]
+size = Vector2(146, 321)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1cxww"]
+size = Vector2(17, 92)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_egjpw"]
+size = Vector2(31, 127)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xtc5w"]
+size = Vector2(20, 47)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v28ym"]
+size = Vector2(40, 197)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xgiv5"]
+size = Vector2(30, 54)
+
+[node name="Pensara - The Trade District - 0" instance=ExtResource("1_base")]
+buildings = Array[ExtResource("2_pmv2b")]([SubResource("Resource_s4cbk"), SubResource("Resource_47rj8"), SubResource("Resource_5bsi1")])
+
+[node name="00 Benth" parent="Actors" index="0" instance=ExtResource("3_i1b3t")]
+position = Vector2(275, 395)
+sprite_frames = ExtResource("4_rdxds")
+animation = &"left"
+role = 1
+villager_name = "Benth"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The Trade District"
+
+[node name="01 Billy" parent="Actors" index="1" instance=ExtResource("3_i1b3t")]
+position = Vector2(2100, 770)
+sprite_frames = ExtResource("5_u7jy4")
+animation = &"up"
+role = 1
+villager_name = "Billy"
+statuses = PackedInt32Array(1, 2, 4)
+villager_folder = "Pensara - The Trade District"
+
+[node name="02 Bobby" parent="Actors" index="2" instance=ExtResource("3_i1b3t")]
+position = Vector2(915, 225)
+sprite_frames = ExtResource("6_dgyh5")
+animation = &"down"
+role = 1
+villager_name = "Bobby"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The Trade District"
+
+[node name="03 Candy" parent="Actors" index="3" instance=ExtResource("3_i1b3t")]
+position = Vector2(1165, 215)
+sprite_frames = ExtResource("7_mee4i")
+animation = &"down"
+role = 1
+villager_name = "Candy"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The Trade District"
+
+[node name="04 Deel" parent="Actors" index="4" instance=ExtResource("3_i1b3t")]
+position = Vector2(2511, 281)
+sprite_frames = ExtResource("8_elfjk")
+animation = &"down"
+role = 1
+villager_name = "Deel"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The Trade District"
+
+[node name="05 Denese" parent="Actors" index="5" instance=ExtResource("3_i1b3t")]
+position = Vector2(970, 720)
+sprite_frames = ExtResource("9_ndu5l")
+animation = &"up"
+role = 1
+villager_name = "Denese"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The Trade District"
+
+[node name="06 Frigidu" parent="Actors" index="6" instance=ExtResource("3_i1b3t")]
+position = Vector2(90, 100)
+sprite_frames = ExtResource("10_xs2gq")
+animation = &"down"
+role = 1
+villager_name = "Frigidu"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The Trade District"
+
+[node name="07 Hillnar" parent="Actors" index="7" instance=ExtResource("3_i1b3t")]
+position = Vector2(1800, 800)
+sprite_frames = ExtResource("11_yy2tv")
+animation = &"up"
+role = 1
+villager_name = "Hillnar"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The Trade District"
+
+[node name="08 Hippo" parent="Actors" index="8" instance=ExtResource("3_i1b3t")]
+position = Vector2(1020, 560)
+sprite_frames = ExtResource("12_scbxm")
+animation = &"down"
+role = 1
+villager_name = "Hippo"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The Trade District"
+
+[node name="09 Hulda" parent="Actors" index="9" instance=ExtResource("3_i1b3t")]
+position = Vector2(915, 320)
+sprite_frames = ExtResource("13_2bjr3")
+animation = &"left"
+role = 1
+villager_name = "Hulda"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The Trade District"
+
+[node name="10 Juha" parent="Actors" index="10" instance=ExtResource("3_i1b3t")]
+position = Vector2(265, 870)
+sprite_frames = ExtResource("14_23i2a")
+animation = &"up"
+role = 1
+villager_name = "Juha"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The Trade District"
+
+[node name="11 Longhorn" parent="Actors" index="11" instance=ExtResource("3_i1b3t")]
+position = Vector2(1230, 540)
+sprite_frames = ExtResource("15_vs2a6")
+animation = &"right"
+role = 1
+villager_name = "Longhorn"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The Trade District"
+
+[node name="12 Mollie" parent="Actors" index="12" instance=ExtResource("3_i1b3t")]
+position = Vector2(60, 190)
+sprite_frames = ExtResource("16_tr0cb")
+animation = &"down"
+role = 1
+villager_name = "Mollie"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The Trade District"
+
+[node name="13 Ollie" parent="Actors" index="13" instance=ExtResource("3_i1b3t")]
+position = Vector2(1250, 260)
+sprite_frames = ExtResource("17_sgh74")
+animation = &"left"
+role = 1
+villager_name = "Ollie"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The Trade District"
+
+[node name="14 PensaraSoldier 1" parent="Actors" index="14" instance=ExtResource("3_i1b3t")]
+position = Vector2(990, 1290)
+sprite_frames = ExtResource("18_urxbq")
+animation = &"down"
+role = 1
+villager_name = "PensaraSoldier 1"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The Trade District"
+
+[node name="15 PensaraSoldier 2" parent="Actors" index="15" instance=ExtResource("3_i1b3t")]
+position = Vector2(1160, 1290)
+sprite_frames = ExtResource("18_urxbq")
+animation = &"down"
+role = 1
+villager_name = "PensaraSoldier 2"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The Trade District"
+
+[node name="16 PensaraSoldier 3" parent="Actors" index="16" instance=ExtResource("3_i1b3t")]
+position = Vector2(80, 390)
+sprite_frames = ExtResource("18_urxbq")
+animation = &"right"
+role = 1
+villager_name = "PensaraSoldier 3"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The Trade District"
+
+[node name="17 PensaraSoldier 4" parent="Actors" index="17" instance=ExtResource("3_i1b3t")]
+position = Vector2(80, 480)
+sprite_frames = ExtResource("18_urxbq")
+animation = &"right"
+role = 1
+villager_name = "PensaraSoldier 4"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The Trade District"
+
+[node name="18 PensaraSoldier 7" parent="Actors" index="18" instance=ExtResource("3_i1b3t")]
+position = Vector2(1446, 330)
+sprite_frames = ExtResource("18_urxbq")
+animation = &"down"
+role = 1
+villager_name = "PensaraSoldier 7"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The Trade District"
+
+[node name="19 PensaraSoldier 8" parent="Actors" index="19" instance=ExtResource("3_i1b3t")]
+position = Vector2(1516, 330)
+sprite_frames = ExtResource("18_urxbq")
+animation = &"down"
+role = 1
+villager_name = "PensaraSoldier 8"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The Trade District"
+
+[node name="20 PensaraSoldier 9" parent="Actors" index="20" instance=ExtResource("3_i1b3t")]
+position = Vector2(1830, 330)
+sprite_frames = ExtResource("18_urxbq")
+animation = &"down"
+role = 1
+villager_name = "PensaraSoldier 9"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The Trade District"
+
+[node name="21 PensaraSoldier 10" parent="Actors" index="21" instance=ExtResource("3_i1b3t")]
+position = Vector2(1900, 330)
+sprite_frames = ExtResource("18_urxbq")
+animation = &"down"
+role = 1
+villager_name = "PensaraSoldier 10"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The Trade District"
+
+[node name="22 PensaraSoldier 11" parent="Actors" index="22" instance=ExtResource("3_i1b3t")]
+position = Vector2(1045, 110)
+sprite_frames = ExtResource("18_urxbq")
+animation = &"down"
+role = 1
+villager_name = "PensaraSoldier 11"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The Trade District"
+
+[node name="23 PensaraSoldier 12" parent="Actors" index="23" instance=ExtResource("3_i1b3t")]
+position = Vector2(1110, 110)
+sprite_frames = ExtResource("18_urxbq")
+animation = &"down"
+role = 1
+villager_name = "PensaraSoldier 12"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The Trade District"
+
+[node name="24 Polandera" parent="Actors" index="24" instance=ExtResource("3_i1b3t")]
+position = Vector2(600, 600)
+sprite_frames = ExtResource("19_vkcpn")
+animation = &"down"
+role = 1
+villager_name = "Polandera"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The Trade District"
+
+[node name="25 Tito" parent="Actors" index="25" instance=ExtResource("3_i1b3t")]
+position = Vector2(2600, 865)
+sprite_frames = ExtResource("20_apijc")
+animation = &"down"
+role = 1
+villager_name = "Tito"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The Trade District"
+
+[node name="26 Ulias" parent="Actors" index="26" instance=ExtResource("3_i1b3t")]
+position = Vector2(2000, 250)
+sprite_frames = ExtResource("21_oo25h")
+animation = &"down"
+role = 1
+villager_name = "Ulias"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The Trade District"
+
+[node name="27 Ylwaa" parent="Actors" index="27" instance=ExtResource("3_i1b3t")]
+position = Vector2(2500, 400)
+sprite_frames = ExtResource("22_ga0w0")
+animation = &"left"
+role = 1
+villager_name = "Ylwaa"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The Trade District"
+
+[node name="V000" type="CollisionShape2D" parent="Obstacles" index="0"]
+position = Vector2(1010.5, 1025.5)
+shape = SubResource("RectangleShape2D_qbe4h")
+
+[node name="V001" type="CollisionShape2D" parent="Obstacles" index="1"]
+position = Vector2(586.5, 552.5)
+shape = SubResource("RectangleShape2D_5aknc")
+
+[node name="V002" type="CollisionShape2D" parent="Obstacles" index="2"]
+position = Vector2(1583.5, 575.5)
+shape = SubResource("RectangleShape2D_yrdp3")
+
+[node name="V003" type="CollisionShape2D" parent="Obstacles" index="3"]
+position = Vector2(1180.5, 855.5)
+shape = SubResource("RectangleShape2D_mft3p")
+
+[node name="V004" type="CollisionShape2D" parent="Obstacles" index="4"]
+position = Vector2(869.5, 1022)
+shape = SubResource("RectangleShape2D_t4vnc")
+
+[node name="V005" type="CollisionShape2D" parent="Obstacles" index="5"]
+position = Vector2(998.5, 142.5)
+shape = SubResource("RectangleShape2D_lwv7f")
+
+[node name="V006" type="CollisionShape2D" parent="Obstacles" index="6"]
+position = Vector2(2607.5, 745)
+shape = SubResource("RectangleShape2D_ow3qe")
+
+[node name="V007" type="CollisionShape2D" parent="Obstacles" index="7"]
+position = Vector2(183.5, 1002.5)
+shape = SubResource("RectangleShape2D_l2xnb")
+
+[node name="V008" type="CollisionShape2D" parent="Obstacles" index="8"]
+position = Vector2(1181.5, 1024.5)
+shape = SubResource("RectangleShape2D_0wxuh")
+
+[node name="V009" type="CollisionShape2D" parent="Obstacles" index="9"]
+position = Vector2(401.5, 554.5)
+shape = SubResource("RectangleShape2D_m51b2")
+
+[node name="V010" type="CollisionShape2D" parent="Obstacles" index="10"]
+position = Vector2(2479.5, 224)
+shape = SubResource("RectangleShape2D_8kqym")
+
+[node name="V011" type="CollisionShape2D" parent="Obstacles" index="11"]
+position = Vector2(162.5, 739.5)
+shape = SubResource("RectangleShape2D_nvwcp")
+
+[node name="V012" type="CollisionShape2D" parent="Obstacles" index="12"]
+position = Vector2(2452.5, 802)
+shape = SubResource("RectangleShape2D_jdiuu")
+
+[node name="V013" type="CollisionShape2D" parent="Obstacles" index="13"]
+position = Vector2(2533.5, 163)
+shape = SubResource("RectangleShape2D_wqblp")
+
+[node name="V014" type="CollisionShape2D" parent="Obstacles" index="14"]
+position = Vector2(2509.5, 725)
+shape = SubResource("RectangleShape2D_x5jcr")
+
+[node name="V015" type="CollisionShape2D" parent="Obstacles" index="15"]
+position = Vector2(1974.5, 846.5)
+shape = SubResource("RectangleShape2D_v4kub")
+
+[node name="V016" type="CollisionShape2D" parent="Obstacles" index="16"]
+position = Vector2(2577.5, 244)
+shape = SubResource("RectangleShape2D_li3e8")
+
+[node name="V017" type="CollisionShape2D" parent="Obstacles" index="17"]
+position = Vector2(2392.5, 204)
+shape = SubResource("RectangleShape2D_kfrl2")
+
+[node name="V018" type="CollisionShape2D" parent="Obstacles" index="18"]
+position = Vector2(1011.5, 849.5)
+shape = SubResource("RectangleShape2D_205ov")
+
+[node name="V019" type="CollisionShape2D" parent="Obstacles" index="19"]
+position = Vector2(2507.5, 83)
+shape = SubResource("RectangleShape2D_xoyaw")
+
+[node name="V020" type="CollisionShape2D" parent="Obstacles" index="20"]
+position = Vector2(2574.5, 604)
+shape = SubResource("RectangleShape2D_arcd4")
+
+[node name="V021" type="CollisionShape2D" parent="Obstacles" index="21"]
+position = Vector2(2420.5, 298)
+shape = SubResource("RectangleShape2D_eqw8n")
+
+[node name="V022" type="CollisionShape2D" parent="Obstacles" index="22"]
+position = Vector2(1197.5, 144.5)
+shape = SubResource("RectangleShape2D_fetr4")
+
+[node name="V023" type="CollisionShape2D" parent="Obstacles" index="23"]
+position = Vector2(2592.5, 101)
+shape = SubResource("RectangleShape2D_0i6kk")
+
+[node name="V024" type="CollisionShape2D" parent="Obstacles" index="24"]
+position = Vector2(2461.5, 619)
+shape = SubResource("RectangleShape2D_7hnwa")
+
+[node name="V025" type="CollisionShape2D" parent="Obstacles" index="25"]
+position = Vector2(64.5, 150.5)
+shape = SubResource("RectangleShape2D_0h0ge")
+
+[node name="V026" type="CollisionShape2D" parent="Obstacles" index="26"]
+position = Vector2(1813.5, 568.5)
+shape = SubResource("RectangleShape2D_dvxqc")
+
+[node name="V027" type="CollisionShape2D" parent="Obstacles" index="27"]
+position = Vector2(2420.5, 708)
+shape = SubResource("RectangleShape2D_q2cjf")
+
+[node name="V028" type="CollisionShape2D" parent="Obstacles" index="28"]
+position = Vector2(1519, 737)
+shape = SubResource("RectangleShape2D_d6cyk")
+
+[node name="V029" type="CollisionShape2D" parent="Obstacles" index="29"]
+position = Vector2(1497, 281.5)
+shape = SubResource("RectangleShape2D_25nsl")
+
+[node name="V030" type="CollisionShape2D" parent="Obstacles" index="30"]
+position = Vector2(318, 747.5)
+shape = SubResource("RectangleShape2D_pplwn")
+
+[node name="V031" type="CollisionShape2D" parent="Obstacles" index="31"]
+position = Vector2(2167, 1003.5)
+shape = SubResource("RectangleShape2D_wop3q")
+
+[node name="V032" type="CollisionShape2D" parent="Obstacles" index="32"]
+position = Vector2(2033, 914.5)
+shape = SubResource("RectangleShape2D_saidv")
+
+[node name="V033" type="CollisionShape2D" parent="Obstacles" index="33"]
+position = Vector2(2033, 1003.5)
+shape = SubResource("RectangleShape2D_6ypif")
+
+[node name="V034" type="CollisionShape2D" parent="Obstacles" index="34"]
+position = Vector2(323, 315.5)
+shape = SubResource("RectangleShape2D_xer3s")
+
+[node name="V035" type="CollisionShape2D" parent="Obstacles" index="35"]
+position = Vector2(2100, 959)
+shape = SubResource("RectangleShape2D_0xuol")
+
+[node name="V036" type="CollisionShape2D" parent="Obstacles" index="36"]
+position = Vector2(2084, 168.5)
+shape = SubResource("RectangleShape2D_hbp5n")
+
+[node name="V037" type="CollisionShape2D" parent="Obstacles" index="37"]
+position = Vector2(1876, 750.5)
+shape = SubResource("RectangleShape2D_h2qhd")
+
+[node name="V038" type="CollisionShape2D" parent="Obstacles" index="38"]
+position = Vector2(680, 752)
+shape = SubResource("RectangleShape2D_nll2e")
+
+[node name="V039" type="CollisionShape2D" parent="Obstacles" index="39"]
+position = Vector2(2167, 914.5)
+shape = SubResource("RectangleShape2D_eb8nb")
+
+[node name="V040" type="CollisionShape2D" parent="Obstacles" index="40"]
+position = Vector2(628, 266.5)
+shape = SubResource("RectangleShape2D_2gw5m")
+
+[node name="V041" type="CollisionShape2D" parent="Obstacles" index="41"]
+position = Vector2(1691, 239.5)
+shape = SubResource("RectangleShape2D_7d1nn")
+
+[node name="V042" type="CollisionShape2D" parent="Obstacles" index="42"]
+position = Vector2(1882, 282)
+shape = SubResource("RectangleShape2D_donmw")
+
+[node name="V043" type="CollisionShape2D" parent="Obstacles" index="43"]
+position = Vector2(1382, 510)
+shape = SubResource("RectangleShape2D_ui3sx")
+
+[node name="V044" type="CollisionShape2D" parent="Obstacles" index="44"]
+position = Vector2(2140, 415)
+shape = SubResource("RectangleShape2D_bt0aq")
+
+[node name="V045" type="CollisionShape2D" parent="Obstacles" index="45"]
+position = Vector2(973.5, 256)
+shape = SubResource("RectangleShape2D_a0jwx")
+
+[node name="V046" type="CollisionShape2D" parent="Obstacles" index="46"]
+position = Vector2(927, 656)
+shape = SubResource("RectangleShape2D_h6cn6")
+
+[node name="V047" type="CollisionShape2D" parent="Obstacles" index="47"]
+position = Vector2(2498, 678.5)
+shape = SubResource("RectangleShape2D_j7y31")
+
+[node name="V048" type="CollisionShape2D" parent="Obstacles" index="48"]
+position = Vector2(2439, 856.5)
+shape = SubResource("RectangleShape2D_x1117")
+
+[node name="V049" type="CollisionShape2D" parent="Obstacles" index="49"]
+position = Vector2(1165.5, 631)
+shape = SubResource("RectangleShape2D_q2yec")
+
+[node name="V050" type="CollisionShape2D" parent="Obstacles" index="50"]
+position = Vector2(2603, 307)
+shape = SubResource("RectangleShape2D_gxssx")
+
+[node name="V051" type="CollisionShape2D" parent="Obstacles" index="51"]
+position = Vector2(2557.5, 819.5)
+shape = SubResource("RectangleShape2D_t1cax")
+
+[node name="V052" type="CollisionShape2D" parent="Obstacles" index="52"]
+position = Vector2(1619.5, 320.5)
+shape = SubResource("RectangleShape2D_xdue8")
+
+[node name="V053" type="CollisionShape2D" parent="Obstacles" index="53"]
+position = Vector2(802, 528)
+shape = SubResource("RectangleShape2D_tnq4h")
+
+[node name="V054" type="CollisionShape2D" parent="Obstacles" index="54"]
+position = Vector2(1037.5, 257)
+shape = SubResource("RectangleShape2D_o8e0e")
+
+[node name="V055" type="CollisionShape2D" parent="Obstacles" index="55"]
+position = Vector2(2166, 827.5)
+shape = SubResource("RectangleShape2D_f43ll")
+
+[node name="V056" type="CollisionShape2D" parent="Obstacles" index="56"]
+position = Vector2(762, 801)
+shape = SubResource("RectangleShape2D_mrji5")
+
+[node name="V057" type="CollisionShape2D" parent="Obstacles" index="57"]
+position = Vector2(965, 261)
+shape = SubResource("RectangleShape2D_yb52n")
+
+[node name="V058" type="CollisionShape2D" parent="Obstacles" index="58"]
+position = Vector2(750.5, 360)
+shape = SubResource("RectangleShape2D_ux7f1")
+
+[node name="V059" type="CollisionShape2D" parent="Obstacles" index="59"]
+position = Vector2(2438, 401.5)
+shape = SubResource("RectangleShape2D_cnw6h")
+
+[node name="V060" type="CollisionShape2D" parent="Obstacles" index="60"]
+position = Vector2(1323.5, 318.5)
+shape = SubResource("RectangleShape2D_n1o1a")
+
+[node name="V061" type="CollisionShape2D" parent="Obstacles" index="61"]
+position = Vector2(888.5, 299)
+shape = SubResource("RectangleShape2D_7daji")
+
+[node name="V062" type="CollisionShape2D" parent="Obstacles" index="62"]
+position = Vector2(246.5, 388)
+shape = SubResource("RectangleShape2D_knh1f")
+
+[node name="V063" type="CollisionShape2D" parent="Obstacles" index="63"]
+position = Vector2(2512, 1036.5)
+shape = SubResource("RectangleShape2D_2gi1m")
+
+[node name="V064" type="CollisionShape2D" parent="Obstacles" index="64"]
+position = Vector2(1621.5, 342.5)
+shape = SubResource("RectangleShape2D_tf5m2")
+
+[node name="V065" type="CollisionShape2D" parent="Obstacles" index="65"]
+position = Vector2(1808.5, 906)
+shape = SubResource("RectangleShape2D_xhqki")
+
+[node name="V066" type="CollisionShape2D" parent="Obstacles" index="66"]
+position = Vector2(1290, 581)
+shape = SubResource("RectangleShape2D_bi76m")
+
+[node name="V067" type="CollisionShape2D" parent="Obstacles" index="67"]
+position = Vector2(556, 881.5)
+shape = SubResource("RectangleShape2D_xyfoe")
+
+[node name="V068" type="CollisionShape2D" parent="Obstacles" index="68"]
+position = Vector2(630.5, 388)
+shape = SubResource("RectangleShape2D_c0cns")
+
+[node name="V069" type="CollisionShape2D" parent="Obstacles" index="69"]
+position = Vector2(881, 576.5)
+shape = SubResource("RectangleShape2D_rumcx")
+
+[node name="V070" type="CollisionShape2D" parent="Obstacles" index="70"]
+position = Vector2(1348.5, 229)
+shape = SubResource("RectangleShape2D_dbkxu")
+
+[node name="V071" type="CollisionShape2D" parent="Obstacles" index="71"]
+position = Vector2(1819.5, 373.5)
+shape = SubResource("RectangleShape2D_sum1w")
+
+[node name="V072" type="CollisionShape2D" parent="Obstacles" index="72"]
+position = Vector2(1263.5, 259)
+shape = SubResource("RectangleShape2D_3oii6")
+
+[node name="V073" type="CollisionShape2D" parent="Obstacles" index="73"]
+position = Vector2(1739.5, 330.5)
+shape = SubResource("RectangleShape2D_2a2sn")
+
+[node name="V074" type="CollisionShape2D" parent="Obstacles" index="74"]
+position = Vector2(1002.5, 571)
+shape = SubResource("RectangleShape2D_hw4gc")
+
+[node name="V075" type="CollisionShape2D" parent="Obstacles" index="75"]
+position = Vector2(503.5, 359)
+shape = SubResource("RectangleShape2D_qsyw3")
+
+[node name="V076" type="CollisionShape2D" parent="Obstacles" index="76"]
+position = Vector2(1014.5, 260.5)
+shape = SubResource("RectangleShape2D_i8trk")
+
+[node name="V077" type="CollisionShape2D" parent="Obstacles" index="77"]
+position = Vector2(348, 405.5)
+shape = SubResource("RectangleShape2D_mtd67")
+
+[node name="V078" type="CollisionShape2D" parent="Obstacles" index="78"]
+position = Vector2(1199.5, 387.5)
+shape = SubResource("RectangleShape2D_38235")
+
+[node name="V079" type="CollisionShape2D" parent="Obstacles" index="79"]
+position = Vector2(294.5, 380.5)
+shape = SubResource("RectangleShape2D_hn5v6")
+
+[node name="V080" type="CollisionShape2D" parent="Obstacles" index="80"]
+position = Vector2(2386.5, 862)
+shape = SubResource("RectangleShape2D_yhu5d")
+
+[node name="V081" type="CollisionShape2D" parent="Obstacles" index="81"]
+position = Vector2(1297, 840)
+shape = SubResource("RectangleShape2D_uh2lq")
+
+[node name="V082" type="CollisionShape2D" parent="Obstacles" index="82"]
+position = Vector2(1337, 381)
+shape = SubResource("RectangleShape2D_wtcdf")
+
+[node name="V083" type="CollisionShape2D" parent="Obstacles" index="83"]
+position = Vector2(1350.5, 575)
+shape = SubResource("RectangleShape2D_u1gvi")
+
+[node name="V084" type="CollisionShape2D" parent="Obstacles" index="84"]
+position = Vector2(1223, 387.5)
+shape = SubResource("RectangleShape2D_74foi")
+
+[node name="V085" type="CollisionShape2D" parent="Obstacles" index="85"]
+position = Vector2(2545, 272)
+shape = SubResource("RectangleShape2D_oc7q5")
+
+[node name="V086" type="CollisionShape2D" parent="Obstacles" index="86"]
+position = Vector2(1211, 404.5)
+shape = SubResource("RectangleShape2D_7csbh")
+
+[node name="V087" type="CollisionShape2D" parent="Obstacles" index="87"]
+position = Vector2(888.5, 251.5)
+shape = SubResource("RectangleShape2D_rnd22")
+
+[node name="V088" type="CollisionShape2D" parent="Obstacles" index="88"]
+position = Vector2(2383.5, 1024.5)
+shape = SubResource("RectangleShape2D_pj0hq")
+
+[node name="V089" type="CollisionShape2D" parent="Obstacles" index="89"]
+position = Vector2(255, 813)
+shape = SubResource("RectangleShape2D_lcqsi")
+
+[node name="V090" type="CollisionShape2D" parent="Obstacles" index="90"]
+position = Vector2(949.5, 587)
+shape = SubResource("RectangleShape2D_fsp6l")
+
+[node name="V091" type="CollisionShape2D" parent="Obstacles" index="91"]
+position = Vector2(2589, 855.5)
+shape = SubResource("RectangleShape2D_wlj5p")
+
+[node name="V092" type="CollisionShape2D" parent="Obstacles" index="92"]
+position = Vector2(1704.5, 313.5)
+shape = SubResource("RectangleShape2D_e22b6")
+
+[node name="V093" type="CollisionShape2D" parent="Obstacles" index="93"]
+position = Vector2(1034, 199)
+shape = SubResource("RectangleShape2D_s15p8")
+
+[node name="V094" type="CollisionShape2D" parent="Obstacles" index="94"]
+position = Vector2(874.5, 359.5)
+shape = SubResource("RectangleShape2D_1sok0")
+
+[node name="V095" type="CollisionShape2D" parent="Obstacles" index="95"]
+position = Vector2(715, 382.5)
+shape = SubResource("RectangleShape2D_dqcp7")
+
+[node name="V096" type="CollisionShape2D" parent="Obstacles" index="96"]
+position = Vector2(2386, 414)
+shape = SubResource("RectangleShape2D_pqnvt")
+
+[node name="V097" type="CollisionShape2D" parent="Obstacles" index="97"]
+position = Vector2(1096, 477)
+shape = SubResource("RectangleShape2D_jab43")
+
+[node name="V098" type="CollisionShape2D" parent="Obstacles" index="98"]
+position = Vector2(2367.5, 764)
+shape = SubResource("RectangleShape2D_h37wl")
+
+[node name="V099" type="CollisionShape2D" parent="Obstacles" index="99"]
+position = Vector2(2385, 515)
+shape = SubResource("RectangleShape2D_5n88v")
+
+[node name="V100" type="CollisionShape2D" parent="Obstacles" index="100"]
+position = Vector2(1260.5, 390.5)
+shape = SubResource("RectangleShape2D_bglwb")
+
+[node name="V101" type="CollisionShape2D" parent="Obstacles" index="101"]
+position = Vector2(1165.5, 569)
+shape = SubResource("RectangleShape2D_npc4m")
+
+[node name="V102" type="CollisionShape2D" parent="Obstacles" index="102"]
+position = Vector2(65, 516)
+shape = SubResource("RectangleShape2D_1v62u")
+
+[node name="V103" type="CollisionShape2D" parent="Obstacles" index="103"]
+position = Vector2(833.5, 299)
+shape = SubResource("RectangleShape2D_1f52r")
+
+[node name="V104" type="CollisionShape2D" parent="Obstacles" index="104"]
+position = Vector2(1294.5, 728)
+shape = SubResource("RectangleShape2D_57v8e")
+
+[node name="V105" type="CollisionShape2D" parent="Obstacles" index="105"]
+position = Vector2(1011, 246.5)
+shape = SubResource("RectangleShape2D_eqld5")
+
+[node name="V106" type="CollisionShape2D" parent="Obstacles" index="106"]
+position = Vector2(1949.5, 372.5)
+shape = SubResource("RectangleShape2D_1q6vi")
+
+[node name="V107" type="CollisionShape2D" parent="Obstacles" index="107"]
+position = Vector2(1212, 639.5)
+shape = SubResource("RectangleShape2D_efky7")
+
+[node name="V108" type="CollisionShape2D" parent="Obstacles" index="108"]
+position = Vector2(1044, 874.5)
+shape = SubResource("RectangleShape2D_e30iq")
+
+[node name="V109" type="CollisionShape2D" parent="Obstacles" index="109"]
+position = Vector2(1286.5, 386)
+shape = SubResource("RectangleShape2D_mpfeq")
+
+[node name="V110" type="CollisionShape2D" parent="Obstacles" index="110"]
+position = Vector2(2481.5, 298.5)
+shape = SubResource("RectangleShape2D_0dt15")
+
+[node name="V111" type="CollisionShape2D" parent="Obstacles" index="111"]
+position = Vector2(2454.5, 304)
+shape = SubResource("RectangleShape2D_4w4gc")
+
+[node name="V112" type="CollisionShape2D" parent="Obstacles" index="112"]
+position = Vector2(1313, 716.5)
+shape = SubResource("RectangleShape2D_6mstt")
+
+[node name="V113" type="CollisionShape2D" parent="Obstacles" index="113"]
+position = Vector2(2437.5, 989)
+shape = SubResource("RectangleShape2D_t7pry")
+
+[node name="V114" type="CollisionShape2D" parent="Obstacles" index="114"]
+position = Vector2(1200.5, 258)
+shape = SubResource("RectangleShape2D_u4wt3")
+
+[node name="V115" type="CollisionShape2D" parent="Obstacles" index="115"]
+position = Vector2(67, 415)
+shape = SubResource("RectangleShape2D_qor27")
+
+[node name="V116" type="CollisionShape2D" parent="Obstacles" index="116"]
+position = Vector2(833.5, 359)
+shape = SubResource("RectangleShape2D_owisy")
+
+[node name="V117" type="CollisionShape2D" parent="Obstacles" index="117"]
+position = Vector2(1191, 648)
+shape = SubResource("RectangleShape2D_8mo22")
+
+[node name="V118" type="CollisionShape2D" parent="Obstacles" index="118"]
+position = Vector2(2591.5, 989)
+shape = SubResource("RectangleShape2D_xgjlh")
+
+[node name="V119" type="CollisionShape2D" parent="Obstacles" index="119"]
+position = Vector2(1343.5, 742)
+shape = SubResource("RectangleShape2D_qso24")
+
+[node name="V120" type="CollisionShape2D" parent="Obstacles" index="120"]
+position = Vector2(944.5, 723)
+shape = SubResource("RectangleShape2D_s2ru5")
+
+[node name="V121" type="CollisionShape2D" parent="Obstacles" index="121"]
+position = Vector2(1160, 199)
+shape = SubResource("RectangleShape2D_k6msl")
+
+[node name="V122" type="CollisionShape2D" parent="Obstacles" index="122"]
+position = Vector2(983.5, 647)
+shape = SubResource("RectangleShape2D_y8vhm")
+
+[node name="V123" type="CollisionShape2D" parent="Obstacles" index="123"]
+position = Vector2(160, 138.5)
+shape = SubResource("RectangleShape2D_5ye6i")
+
+[node name="V124" type="CollisionShape2D" parent="Obstacles" index="124"]
+position = Vector2(2139, 515)
+shape = SubResource("RectangleShape2D_u064i")
+
+[node name="V125" type="CollisionShape2D" parent="Obstacles" index="125"]
+position = Vector2(1220.5, 570)
+shape = SubResource("RectangleShape2D_snqn6")
+
+[node name="V126" type="CollisionShape2D" parent="Obstacles" index="126"]
+position = Vector2(2572.5, 303.5)
+shape = SubResource("RectangleShape2D_tl5eg")
+
+[node name="V127" type="CollisionShape2D" parent="Obstacles" index="127"]
+position = Vector2(1426.5, 359.5)
+shape = SubResource("RectangleShape2D_u4l2o")
+
+[node name="V128" type="CollisionShape2D" parent="Obstacles" index="128"]
+position = Vector2(1783.5, 887.5)
+shape = SubResource("RectangleShape2D_ykrpk")
+
+[node name="V129" type="CollisionShape2D" parent="Obstacles" index="129"]
+position = Vector2(614.5, 826)
+shape = SubResource("RectangleShape2D_46brl")
+
+[node name="V130" type="CollisionShape2D" parent="Obstacles" index="130"]
+position = Vector2(835.5, 374)
+shape = SubResource("RectangleShape2D_0hce4")
+
+[node name="V131" type="CollisionShape2D" parent="Obstacles" index="131"]
+position = Vector2(2407, 323)
+shape = SubResource("RectangleShape2D_anduk")
+
+[node name="V132" type="CollisionShape2D" parent="Obstacles" index="132"]
+position = Vector2(1392, 403)
+shape = SubResource("RectangleShape2D_h261h")
+
+[node name="V133" type="CollisionShape2D" parent="Obstacles" index="133"]
+position = Vector2(352.5, 882)
+shape = SubResource("RectangleShape2D_ni3q3")
+
+[node name="V134" type="CollisionShape2D" parent="Obstacles" index="134"]
+position = Vector2(200, 1263.5)
+shape = SubResource("RectangleShape2D_nicqy")
+
+[node name="V135" type="CollisionShape2D" parent="Obstacles" index="135"]
+position = Vector2(600, 1263.5)
+shape = SubResource("RectangleShape2D_fb1el")
+
+[node name="V136" type="CollisionShape2D" parent="Obstacles" index="136"]
+position = Vector2(912.5, 1263.5)
+shape = SubResource("RectangleShape2D_sb804")
+
+[node name="V137" type="CollisionShape2D" parent="Obstacles" index="137"]
+position = Vector2(2713.5, 1094)
+shape = SubResource("RectangleShape2D_hvt3f")
+
+[node name="V138" type="CollisionShape2D" parent="Obstacles" index="138"]
+position = Vector2(2713.5, 487.5)
+shape = SubResource("RectangleShape2D_lr3p3")
+
+[node name="V139" type="CollisionShape2D" parent="Obstacles" index="139"]
+position = Vector2(2691.5, 1263)
+shape = SubResource("RectangleShape2D_brwmv")
+
+[node name="V140" type="CollisionShape2D" parent="Obstacles" index="140"]
+position = Vector2(2379, 1263)
+shape = SubResource("RectangleShape2D_lxinl")
+
+[node name="V141" type="CollisionShape2D" parent="Obstacles" index="141"]
+position = Vector2(2713.5, 812.5)
+shape = SubResource("RectangleShape2D_65n4h")
+
+[node name="V142" type="CollisionShape2D" parent="Obstacles" index="142"]
+position = Vector2(1407, 1263)
+shape = SubResource("RectangleShape2D_5d5gs")
+
+[node name="V143" type="CollisionShape2D" parent="Obstacles" index="143"]
+position = Vector2(2713.5, 162.5)
+shape = SubResource("RectangleShape2D_rdevs")
+
+[node name="V144" type="CollisionShape2D" parent="Obstacles" index="144"]
+position = Vector2(1893, 1263)
+shape = SubResource("RectangleShape2D_apvmu")
+
+[node name="V145" type="CollisionShape2D" parent="Obstacles" index="145"]
+position = Vector2(17.5, 407)
+shape = SubResource("RectangleShape2D_jchqo")
+
+[node name="V146" type="CollisionShape2D" parent="Obstacles" index="146"]
+position = Vector2(4.5, 918.5)
+shape = SubResource("RectangleShape2D_ba3ao")
+
+[node name="V147" type="CollisionShape2D" parent="Obstacles" index="147"]
+position = Vector2(6.5, 249.5)
+shape = SubResource("RectangleShape2D_ig58y")
+
+[node name="V148" type="CollisionShape2D" parent="Obstacles" index="148"]
+position = Vector2(4.5, 617.5)
+shape = SubResource("RectangleShape2D_nhaf2")
+
+[node name="V149" type="CollisionShape2D" parent="Obstacles" index="149"]
+position = Vector2(4, 1287.5)
+shape = SubResource("RectangleShape2D_s4b12")
+
+[node name="V150" type="CollisionShape2D" parent="Obstacles" index="150"]
+position = Vector2(2265.5, 1048.5)
+shape = SubResource("RectangleShape2D_6gdv2")
+
+[node name="V151" type="CollisionShape2D" parent="Obstacles" index="151"]
+position = Vector2(2266, 1336)
+shape = SubResource("RectangleShape2D_ksj3w")
+
+[node name="V152" type="CollisionShape2D" parent="Obstacles" index="152"]
+position = Vector2(17.5, 520)
+shape = SubResource("RectangleShape2D_hq8lg")
+
+[node name="V153" type="CollisionShape2D" parent="Obstacles" index="153"]
+position = Vector2(1837, 56)
+shape = SubResource("RectangleShape2D_uecku")
+
+[node name="V154" type="CollisionShape2D" parent="Obstacles" index="154"]
+position = Vector2(1371, 56)
+shape = SubResource("RectangleShape2D_kw3rb")
+
+[node name="V155" type="CollisionShape2D" parent="Obstacles" index="155"]
+position = Vector2(310, 55)
+shape = SubResource("RectangleShape2D_y57i0")
+
+[node name="V156" type="CollisionShape2D" parent="Obstacles" index="156"]
+position = Vector2(2262.5, 513.5)
+shape = SubResource("RectangleShape2D_vfhlu")
+
+[node name="V157" type="CollisionShape2D" parent="Obstacles" index="157"]
+position = Vector2(838.5, 55.5)
+shape = SubResource("RectangleShape2D_33p10")
+
+[node name="V158" type="CollisionShape2D" parent="Obstacles" index="158"]
+position = Vector2(2200.5, 57.5)
+shape = SubResource("RectangleShape2D_kudie")
+
+[node name="V159" type="CollisionShape2D" parent="Obstacles" index="159"]
+position = Vector2(2260, 267.5)
+shape = SubResource("RectangleShape2D_cq0g5")
+
+[node name="V160" type="CollisionShape2D" parent="Obstacles" index="160"]
+position = Vector2(2262, 686.5)
+shape = SubResource("RectangleShape2D_hngaa")
+
+[node name="V161" type="CollisionShape2D" parent="Obstacles" index="161"]
+position = Vector2(975.5, 1396)
+shape = SubResource("RectangleShape2D_1cxww")
+
+[node name="V162" type="CollisionShape2D" parent="Obstacles" index="162"]
+position = Vector2(1242.5, 1329.5)
+shape = SubResource("RectangleShape2D_egjpw")
+
+[node name="V163" type="CollisionShape2D" parent="Obstacles" index="163"]
+position = Vector2(1246, 1417.5)
+shape = SubResource("RectangleShape2D_xtc5w")
+
+[node name="V164" type="CollisionShape2D" parent="Obstacles" index="164"]
+position = Vector2(946, 1351.5)
+shape = SubResource("RectangleShape2D_v28ym")
+
+[node name="V165" type="CollisionShape2D" parent="Obstacles" index="165"]
+position = Vector2(1883, 340)
+shape = SubResource("RectangleShape2D_xgiv5")
+
+[node name="00 start0" parent="Spawns" index="0" instance=ExtResource("23_u2iwk")]
+position = Vector2(1081, 1380)
+number = 0
+
+[node name="01 start3" parent="Spawns" index="1" instance=ExtResource("23_u2iwk")]
+position = Vector2(1081, 20)
+number = 3
+facing = 2
+
+[node name="02 start4" parent="Spawns" index="2" instance=ExtResource("23_u2iwk")]
+position = Vector2(15, 435)
+number = 4
+facing = 1
+
+[node name="00 Pensara_-_The_North_District" parent="Doors" index="0" instance=ExtResource("24_4ml3o")]
+position = Vector2(1095, -80)
+hole = true
+kinds = PackedStringArray("village")
+targets = PackedStringArray("Pensara_-_The_North_District")
+radius = 92
+directions = PackedInt32Array(0)
+fade = 0
+to_pos = PackedFloat64Array(0, 0, 0, -1)
+sign_lines = PackedStringArray()
+
+[node name="01 Pensara_-_The_School_District" parent="Doors" index="1" instance=ExtResource("24_4ml3o")]
+position = Vector2(-70, 442)
+hole = true
+kinds = PackedStringArray("village")
+targets = PackedStringArray("Pensara_-_The_School_District")
+radius = 92
+directions = PackedInt32Array(3)
+fade = 0
+to_pos = PackedFloat64Array(0, 0, 0, -1)
+sign_lines = PackedStringArray()
+
+[node name="02 Pensara_-_The_Trade_District_-_Tower_Prison" parent="Doors" index="2" instance=ExtResource("24_4ml3o")]
+position = Vector2(2060, 170)
+kinds = PackedStringArray("house")
+targets = PackedStringArray("Pensara_-_The_Trade_District_-_Tower_Prison")
+radius = 40
+directions = PackedInt32Array(0)
+fade = 2
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray(" Locked.")
+
+[node name="03 Pensara_-_The_Trade_District_-_Senate" parent="Doors" index="3" instance=ExtResource("24_4ml3o")]
+position = Vector2(563, 320)
+kinds = PackedStringArray("house")
+targets = PackedStringArray("Pensara_-_The_Trade_District_-_Senate")
+directions = PackedInt32Array(0)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray(" The House of The Senate.", " Authorized personnel only!")
+
+[node name="04 Pensara_-_The_Trade_District_-_Senate" parent="Doors" index="4" instance=ExtResource("24_4ml3o")]
+position = Vector2(665, 321)
+kinds = PackedStringArray("house")
+targets = PackedStringArray("Pensara_-_The_Trade_District_-_Senate")
+directions = PackedInt32Array(0)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray(" The House of The Senate.", " Authorized personnel only!")
+
+[node name="05 Pensara_-_The_Trade_District_-_Tent" parent="Doors" index="5" instance=ExtResource("24_4ml3o")]
+position = Vector2(2086, 950)
+hole = true
+kinds = PackedStringArray("house")
+targets = PackedStringArray("Pensara_-_The_Trade_District_-_Tent")
+directions = PackedInt32Array(0)
+fade = 2
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray(" Can\'t talk, eating!")
+
+[node name="06 Pensara_-_The_Trade_District_-_Soldier" parent="Doors" index="6" instance=ExtResource("24_4ml3o")]
+position = Vector2(1868, 313)
+kinds = PackedStringArray("house")
+targets = PackedStringArray("Pensara_-_The_Trade_District_-_Soldier")
+directions = PackedInt32Array(0)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray(" Authorized personnel only.")
+
+[node name="07 Pensara_-_The_Trade_District_-_Soldier" parent="Doors" index="7" instance=ExtResource("24_4ml3o")]
+position = Vector2(1484, 313)
+kinds = PackedStringArray("house")
+targets = PackedStringArray("Pensara_-_The_Trade_District_-_Soldier")
+directions = PackedInt32Array(0)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray(" Authorized personnel only.")
+
+[node name="08 Pensara_-_The_Trade_District_-_House_1_-_Floor_1" parent="Doors" index="8" instance=ExtResource("24_4ml3o")]
+position = Vector2(1503, 741)
+kinds = PackedStringArray("house")
+targets = PackedStringArray("Pensara_-_The_Trade_District_-_House_1_-_Floor_1")
+directions = PackedInt32Array(0)
+fade = 2
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray(" Not home")
+
+[node name="09 Pensara_-_The_Trade_District_-_House_2_-_Floor_1" parent="Doors" index="9" instance=ExtResource("24_4ml3o")]
+position = Vector2(308, 322)
+kinds = PackedStringArray("house")
+targets = PackedStringArray("Pensara_-_The_Trade_District_-_House_2_-_Floor_1")
+directions = PackedInt32Array(0)
+fade = 2
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray(" Locked.")
+
+[node name="10 Pensara_-_The_Trade_District_-_Mezza\'s_House" parent="Doors" index="10" instance=ExtResource("24_4ml3o")]
+position = Vector2(666, 756)
+kinds = PackedStringArray("house")
+targets = PackedStringArray("Pensara_-_The_Trade_District_-_Mezza\'s_House")
+directions = PackedInt32Array(0)
+fade = 2
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray(" Locked.")
+
+[node name="11 pensaraWeapons" parent="Doors" index="11" instance=ExtResource("24_4ml3o")]
+position = Vector2(1865, 740)
+hole = true
+kinds = PackedStringArray("weapon")
+targets = PackedStringArray("pensaraWeapons")
+directions = PackedInt32Array(0)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray()
+
+[node name="12 Inn" parent="Doors" index="12" instance=ExtResource("24_4ml3o")]
+position = Vector2(304, 754)
+kinds = PackedStringArray("inn")
+targets = PackedStringArray("Inn")
+directions = PackedInt32Array(0)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray()
+
+[node name="13 pensaraCardShop" parent="Doors" index="13" instance=ExtResource("24_4ml3o")]
+position = Vector2(2511, 281)
+kinds = PackedStringArray("card")
+targets = PackedStringArray("pensaraCardShop")
+directions = PackedInt32Array(0, 1, 3)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray()
+
+[node name="00 Welcome to Pensara weapo" parent="Signs" index="0" instance=ExtResource("25_sdb8x")]
+position = Vector2(1760, 870)
+radius = 47
+directions = PackedInt32Array(0)
+lines = PackedStringArray("Welcome to Pensara weapon shop!", "Lowest prices in all of Pensara!")
+listed = Array[bool]([true, true])
+
+[node name="01 Rest here at the finest" parent="Signs" index="1" instance=ExtResource("25_sdb8x")]
+position = Vector2(338, 863)
+radius = 30
+directions = PackedInt32Array(0)
+lines = PackedStringArray("Rest here at the finest Inn you\'ll ever visit!", "Four beds for the price of three!")
+listed = Array[bool]([true, true])
+
+[node name="02 North_ Vincent\'s residen" parent="Signs" index="2" instance=ExtResource("25_sdb8x")]
+position = Vector2(1367, 492)
+radius = 30
+directions = PackedInt32Array(0)
+lines = PackedStringArray("North: Vincent\'s resident.", "West: School district.")
+listed = Array[bool]([true, true])
+
+[node name="03 Step by the greatest car" parent="Signs" index="3" instance=ExtResource("25_sdb8x")]
+position = Vector2(2424, 385)
+radius = 30
+directions = PackedInt32Array(0)
+lines = PackedStringArray("Step by the greatest card shop, you\'ll ever see!", "Speak with the bald man in the stand up above.")
+listed = Array[bool]([true, true])
+
+[node name="04 West_ The inn of Pensara" parent="Signs" index="4" instance=ExtResource("25_sdb8x")]
+position = Vector2(1028, 856)
+radius = 30
+directions = PackedInt32Array(0)
+lines = PackedStringArray("West: The inn of Pensara.", "East: The weapon shop.")
+listed = Array[bool]([true, true])
+
+[node name="05 Out of order_" parent="Signs" index="5" instance=ExtResource("25_sdb8x")]
+position = Vector2(1072, 456)
+radius = 30
+directions = PackedInt32Array(0)
+lines = PackedStringArray("Out of order.")
+listed = Array[bool]([true])
+
+[node name="06 The mailbox seems empty_" parent="Signs" index="6" instance=ExtResource("25_sdb8x")]
+position = Vector2(341, 385)
+radius = 15
+directions = PackedInt32Array(0)
+lines = PackedStringArray("The mailbox seems empty...")
+listed = Array[bool]([true])
+
+[node name="00 card" parent="Loot" index="0" instance=ExtResource("26_c1i7y")]
+position = Vector2(555, 868)
+loot_name = "card"
+directions = PackedInt32Array(0)
+content_name = "cards.support.Fungi"
+content_type = 2
+card_level = 1
+lines = PackedStringArray("You found a card shoved inside the mail box!")

@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Ella/Ella9.png" id="1_06cdw"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Ella/Ella10.png" id="2_3gjbc"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Ella/Ella11.png" id="3_8h038"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Ella/Ella12.png" id="4_ak70k"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Ella/Ella13.png" id="5_12j0s"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Ella/Ella14.png" id="6_6jeva"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Ella/Ella15.png" id="7_mi3yd"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Ella/Ella16.png" id="8_sivji"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Ella/Ella5.png" id="9_pn31w"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Ella/Ella6.png" id="10_6c50s"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Ella/Ella7.png" id="11_pke0q"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Ella/Ella8.png" id="12_gw5yl"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Ella/Ella1.png" id="13_oqj4n"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Ella/Ella2.png" id="14_vyolw"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Ella/Ella3.png" id="15_jun6u"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Ella/Ella4.png" id="16_ixlro"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_06cdw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_3gjbc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_8h038")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ak70k")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_12j0s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_6jeva")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_mi3yd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_sivji")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_pn31w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_6c50s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_pke0q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_gw5yl")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_oqj4n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_vyolw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_jun6u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_ixlro")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

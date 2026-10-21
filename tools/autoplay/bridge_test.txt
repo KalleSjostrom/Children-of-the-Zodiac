@@ -1,103 +1,66 @@
-# --load="Slot 1" --start=Alares --bridge-test: the phase 0 bridge test
-# (docs/ARCHITECTURE.md section 8; parity case bridge_test). Alares shows
-# tools/bridge_test/BridgeTest.tscn (panel, grid, frame counter, Camera2D with
-# an offset) instead of its background tiles; everything else is legacy drawn
-# on top. Positions below are village pixels (start 1333,1809).
+# --load="Slot 1" --start=landAlares --bridge-test: the bridge test
+# (docs/ARCHITECTURE.md section 8; parity case bridge_test). The world map
+# (legacy until phase 4.1) shows tools/bridge_test/BridgeTest.tscn (panel,
+# grid, frame counter, Camera2D with an offset) instead of its background
+# tiles; roads, nodes, the player, the top layer and the node name are legacy
+# drawn on top. Since phase 1 every village has its own scene, so the test
+# moved here from Alares.
 #
 # Fade-in: the legacy fade quad covers the scene.
 wait 150
 shot bt01_fadein
 wait 200
 shot bt02_fadein_later
-wait 1150
+wait 3150
 shot bt03_start
 log start
-# Walk up the main road until Marge blocks it (y 1722): sprites and treetops
-# over the scene, not moved by the Camera2D.
-press UP
-wait 400
-shot bt04_walking
-wait 200
-release UP
-wait 100
-# Talk to Marge (one page): the dialog box over the scene.
-tap CROSS
-wait 1000
-shot bt05_dialog
-tap CROSS
+# Walk the road down to East Cross: the player and the road dots over the
+# scene, not moved by its Camera2D.
+tap DOWN
 wait 600
-# Down, left, up and left again to the weapon shop door (1006,1518).
-press DOWN
-wait 435
-release DOWN
-press LEFT
-wait 1170
-release LEFT
-wait 100
-press UP
-wait 800
-release UP
-wait 100
-press LEFT
-wait 485
-release LEFT
-wait 100
-press UP
-wait 1000
-release UP
-wait 100
-log at_shop_door
-# Enter the store: the village fades out over the scene, then the store
-# shows and World is empty (no world= in the log).
+shot bt04_walking
+wait 2400
+shot bt05_east_cross
+log east_cross
+# Open the menu: the world map is suspended, its scene leaves the tree but
+# is kept (no world= in the log); the menu's thumbnail includes the scene.
+tap TRIANGLE
+wait 2500
+shot bt06_menu
+log in_menu
+# Back: the scene is in the tree again, its frame counter continued.
+mark
+tap CIRCLE
+wait 900
+loopuntil mode=landscape 15000
+wait 1500
+shot bt07_back_from_menu
+log back_from_menu
+# Right to Grivera and into the labyrinth: the world map fades out over the
+# scene, then the labyrinth shows and World is empty. The world map is still
+# Organizer.previousGameMode, so its scene is not freed yet.
+tap RIGHT
+wait 3000
+shot bt08_grivera
 tap CROSS
 wait 300
-shot bt06_entering_store
-wait 2500
-shot bt07_in_store
-log in_store
-# Leave the store: the scene is back, its frame counter continued.
-mark
-tap CIRCLE
-wait 900
-loopuntil mode=villages 15000
-wait 100
-shot bt08_back_fading_in
-wait 1500
-shot bt09_back
-log back_from_store
-# Open the menu: its thumbnail of the village includes the scene.
-tap TRIANGLE
-wait 2500
-shot bt10_menu
-log in_menu
-mark
-tap CIRCLE
-wait 900
-loopuntil mode=villages 15000
-wait 1500
-shot bt11_back_from_menu
-log back_from_menu
-# Leave the town at the bottom of the main road, to the world map. World is
-# empty there; the village is still Organizer.previousGameMode.
-press DOWN
-wait 600
-release DOWN
-press RIGHT
-wait 1450
-release RIGHT
-press DOWN
-wait 1600
-release DOWN
+shot bt09_leaving
 mark
 wait 500
-loopuntil mode=landscape 15000
-wait 2500
-shot bt12_world_map
-log world_map
-# Open the menu on the world map: the next mode switch drops the village,
-# which frees its scene ("BridgeTest: freed" in the output).
+loopuntil mode=labyrinth 15000
+wait 2000
+shot bt10_labyrinth
+log labyrinth
+# Close the floor's message and open the menu in the labyrinth: the next
+# mode switch drops the world map, which frees its scene ("BridgeTest: freed"
+# in the output).
+mark
+tap CROSS
+wait 500
 tap TRIANGLE
-wait 2500
-shot bt13_world_map_menu
-log world_map_menu
+wait 1000
+loopuntil mode=menu 15000
+wait 1500
+shot bt11_labyrinth_menu
+log labyrinth_menu
 quit

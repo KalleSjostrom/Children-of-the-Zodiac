@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Petir/Petir9.png" id="1_eawiu"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Petir/Petir10.png" id="2_4ylsp"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Petir/Petir11.png" id="3_xky04"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Petir/Petir12.png" id="4_wromq"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Petir/Petir13.png" id="5_qmclk"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Petir/Petir14.png" id="6_umepx"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Petir/Petir15.png" id="7_cqekh"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Petir/Petir16.png" id="8_k52qk"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Petir/Petir5.png" id="9_xtii3"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Petir/Petir6.png" id="10_ye0xv"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Petir/Petir7.png" id="11_cr5v4"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Petir/Petir8.png" id="12_rjph0"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Petir/Petir1.png" id="13_tif8e"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Petir/Petir2.png" id="14_4gowv"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Petir/Petir3.png" id="15_7bspf"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Petir/Petir4.png" id="16_c4q20"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_eawiu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_4ylsp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xky04")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_wromq")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_qmclk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_umepx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_cqekh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_k52qk")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_xtii3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ye0xv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_cr5v4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_rjph0")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_tif8e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_4gowv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_7bspf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_c4q20")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

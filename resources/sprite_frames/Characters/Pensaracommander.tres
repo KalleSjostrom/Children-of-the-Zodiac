@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Pensaracommander/Pensaracommander9.png" id="1_ktr2a"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Pensaracommander/Pensaracommander10.png" id="2_ql4do"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Pensaracommander/Pensaracommander11.png" id="3_nqgef"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Pensaracommander/Pensaracommander12.png" id="4_a1tgo"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Pensaracommander/Pensaracommander13.png" id="5_y8s5v"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Pensaracommander/Pensaracommander14.png" id="6_ugxhf"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Pensaracommander/Pensaracommander15.png" id="7_y1tog"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Pensaracommander/Pensaracommander16.png" id="8_tigck"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Pensaracommander/Pensaracommander5.png" id="9_o1r0h"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Pensaracommander/Pensaracommander6.png" id="10_jhkak"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Pensaracommander/Pensaracommander7.png" id="11_wj140"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Pensaracommander/Pensaracommander8.png" id="12_yj4kx"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Pensaracommander/Pensaracommander1.png" id="13_u6mji"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Pensaracommander/Pensaracommander2.png" id="14_pbrlg"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Pensaracommander/Pensaracommander3.png" id="15_dnaux"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Pensaracommander/Pensaracommander4.png" id="16_rpvpq"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ktr2a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ql4do")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_nqgef")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_a1tgo")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_y8s5v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ugxhf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_y1tog")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_tigck")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_o1r0h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_jhkak")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_wj140")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_yj4kx")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_u6mji")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_pbrlg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_dnaux")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_rpvpq")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

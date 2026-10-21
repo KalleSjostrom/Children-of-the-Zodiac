@@ -1,0 +1,27 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Alares - Belmet's House/Alares - Belmet's House.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/ActorView.tscn" id="2_e7dr8"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Alares - Belmet's House/BTScientist.tres" id="3_ny4pj"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="4_ai5cd"]
+
+[node name="Alares - Belmet\'s House - 0" instance=ExtResource("1_base")]
+
+[node name="00 Belmet" parent="Actors" index="0" instance=ExtResource("2_e7dr8")]
+position = Vector2(439, 288)
+sprite_frames = ExtResource("3_ny4pj")
+animation = &"down"
+role = 1
+villager_name = "Belmet"
+statuses = PackedInt32Array()
+villager_folder = "Alares - Belmet's House"
+
+[node name="00 Alares" parent="Doors" index="0" instance=ExtResource("4_ai5cd")]
+position = Vector2(462, 567)
+hole = true
+kinds = PackedStringArray("switch")
+targets = PackedStringArray("Alares")
+directions = PackedInt32Array(2)
+fade = 1
+to_pos = PackedFloat64Array(1530, 1569, 2, -1)
+sign_lines = PackedStringArray()

@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Woldou/Woldou9.png" id="1_p5apm"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Woldou/Woldou10.png" id="2_sfkkr"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Woldou/Woldou11.png" id="3_hc3a8"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Woldou/Woldou12.png" id="4_6ekhn"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Woldou/Woldou13.png" id="5_j87x2"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Woldou/Woldou14.png" id="6_ltd03"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Woldou/Woldou15.png" id="7_cjlr4"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Woldou/Woldou16.png" id="8_yh7qm"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Woldou/Woldou5.png" id="9_u6xpl"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Woldou/Woldou6.png" id="10_hinit"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Woldou/Woldou7.png" id="11_o6uva"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Woldou/Woldou8.png" id="12_q4imo"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Woldou/Woldou1.png" id="13_jpv4i"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Woldou/Woldou2.png" id="14_hp8nm"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Woldou/Woldou3.png" id="15_q23f0"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Woldou/Woldou4.png" id="16_kweo6"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_p5apm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_sfkkr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_hc3a8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6ekhn")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_j87x2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ltd03")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_cjlr4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_yh7qm")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_u6xpl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_hinit")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_o6uva")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_q4imo")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_jpv4i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_hp8nm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_q23f0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_kweo6")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

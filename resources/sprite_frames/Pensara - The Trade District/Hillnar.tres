@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hillnar/Hillnar9.png" id="1_cags1"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hillnar/Hillnar10.png" id="2_thn4f"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hillnar/Hillnar11.png" id="3_cpq7m"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hillnar/Hillnar12.png" id="4_baq63"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hillnar/Hillnar13.png" id="5_6ayt0"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hillnar/Hillnar14.png" id="6_maqyy"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hillnar/Hillnar15.png" id="7_rpiyr"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hillnar/Hillnar16.png" id="8_blr3m"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hillnar/Hillnar5.png" id="9_g32tg"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hillnar/Hillnar6.png" id="10_dt83y"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hillnar/Hillnar7.png" id="11_wk78u"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hillnar/Hillnar8.png" id="12_rws5e"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hillnar/Hillnar1.png" id="13_f8rrp"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hillnar/Hillnar2.png" id="14_4d3fu"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hillnar/Hillnar3.png" id="15_cnxh1"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hillnar/Hillnar4.png" id="16_vijbs"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_cags1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_thn4f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_cpq7m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_baq63")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_6ayt0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_maqyy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_rpiyr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_blr3m")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_g32tg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_dt83y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_wk78u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_rws5e")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_f8rrp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_4d3fu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_cnxh1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_vijbs")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

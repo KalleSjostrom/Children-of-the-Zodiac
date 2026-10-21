@@ -1,0 +1,16 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Home of Celis - Celis Home/Home of Celis - Celis Home.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="2_eriov"]
+
+[node name="Home of Celis - Celis Home - 0" instance=ExtResource("1_base")]
+
+[node name="00 Home_of_Celis" parent="Doors" index="0" instance=ExtResource("2_eriov")]
+position = Vector2(495, 566)
+hole = true
+kinds = PackedStringArray("switch")
+targets = PackedStringArray("Home_of_Celis")
+directions = PackedInt32Array(2)
+fade = 1
+to_pos = PackedFloat64Array(472, 650, 2, -1)
+sign_lines = PackedStringArray()

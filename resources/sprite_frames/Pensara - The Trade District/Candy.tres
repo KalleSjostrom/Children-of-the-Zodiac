@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Candy/Candy9.png" id="1_id1x5"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Candy/Candy10.png" id="2_ubyrx"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Candy/Candy11.png" id="3_wp602"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Candy/Candy12.png" id="4_cu7p6"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Candy/Candy13.png" id="5_de6jx"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Candy/Candy14.png" id="6_i6y3g"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Candy/Candy15.png" id="7_l1vhh"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Candy/Candy16.png" id="8_8hb1v"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Candy/Candy5.png" id="9_v4iis"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Candy/Candy6.png" id="10_th3dl"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Candy/Candy7.png" id="11_7hy5y"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Candy/Candy8.png" id="12_imo3j"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Candy/Candy1.png" id="13_a2uia"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Candy/Candy2.png" id="14_rv5f4"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Candy/Candy3.png" id="15_n4tks"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Candy/Candy4.png" id="16_xrq5p"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_id1x5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ubyrx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wp602")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_cu7p6")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_de6jx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_i6y3g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_l1vhh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_8hb1v")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_v4iis")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_th3dl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_7hy5y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_imo3j")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_a2uia")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_rv5f4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_n4tks")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_xrq5p")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

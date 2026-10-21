@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Lecca/Lecca9.png" id="1_pqhfb"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Lecca/Lecca10.png" id="2_y1fsq"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Lecca/Lecca11.png" id="3_dfu2q"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Lecca/Lecca12.png" id="4_jvs5n"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Lecca/Lecca13.png" id="5_qhxyo"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Lecca/Lecca14.png" id="6_teh3v"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Lecca/Lecca15.png" id="7_qius5"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Lecca/Lecca16.png" id="8_1cguk"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Lecca/Lecca5.png" id="9_18o68"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Lecca/Lecca6.png" id="10_75uwk"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Lecca/Lecca7.png" id="11_1f7oo"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Lecca/Lecca8.png" id="12_i5ovl"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Lecca/Lecca1.png" id="13_60d6u"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Lecca/Lecca2.png" id="14_kqg8h"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Lecca/Lecca3.png" id="15_qnku3"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Lecca/Lecca4.png" id="16_fq2ol"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_pqhfb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_y1fsq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_dfu2q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_jvs5n")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_qhxyo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_teh3v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_qius5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_1cguk")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_18o68")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_75uwk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_1f7oo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_i5ovl")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_60d6u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_kqg8h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_qnku3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_fq2ol")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

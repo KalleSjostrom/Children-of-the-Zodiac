@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Marlo/Marlo9.png" id="1_ytck2"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Marlo/Marlo10.png" id="2_3lrq8"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Marlo/Marlo11.png" id="3_meqj2"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Marlo/Marlo12.png" id="4_xlx8c"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Marlo/Marlo13.png" id="5_wtsuy"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Marlo/Marlo14.png" id="6_kyfm6"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Marlo/Marlo15.png" id="7_3kymt"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Marlo/Marlo16.png" id="8_mgqln"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Marlo/Marlo5.png" id="9_k11fo"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Marlo/Marlo6.png" id="10_hoxmu"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Marlo/Marlo7.png" id="11_af1oj"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Marlo/Marlo8.png" id="12_qx208"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Marlo/Marlo1.png" id="13_jehvt"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Marlo/Marlo2.png" id="14_4vknx"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Marlo/Marlo3.png" id="15_k6h3l"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Marlo/Marlo4.png" id="16_2dx65"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ytck2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_3lrq8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_meqj2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_xlx8c")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_wtsuy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_kyfm6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_3kymt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_mgqln")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_k11fo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_hoxmu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_af1oj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_qx208")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_jehvt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_4vknx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_k6h3l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_2dx65")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

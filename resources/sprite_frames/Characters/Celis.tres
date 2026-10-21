@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Celis/Celis9.png" id="1_gegas"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Celis/Celis10.png" id="2_iu1nf"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Celis/Celis11.png" id="3_hjui1"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Celis/Celis12.png" id="4_nu71v"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Celis/Celis13.png" id="5_kcsda"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Celis/Celis14.png" id="6_8om2k"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Celis/Celis15.png" id="7_vtvj0"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Celis/Celis16.png" id="8_iuyrr"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Celis/Celis5.png" id="9_7puxu"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Celis/Celis6.png" id="10_iw2sv"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Celis/Celis7.png" id="11_3nwo7"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Celis/Celis8.png" id="12_wq7h5"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Celis/Celis1.png" id="13_5xq01"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Celis/Celis2.png" id="14_bf6gv"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Celis/Celis3.png" id="15_bnh7f"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Celis/Celis4.png" id="16_a2eae"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_gegas")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_iu1nf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_hjui1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_nu71v")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_kcsda")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_8om2k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vtvj0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_iuyrr")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_7puxu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_iw2sv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_3nwo7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_wq7h5")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_5xq01")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_bf6gv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_bnh7f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_a2eae")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

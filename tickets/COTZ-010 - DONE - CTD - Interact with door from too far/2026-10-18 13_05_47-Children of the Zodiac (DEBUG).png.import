@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b747ghnt6pr1r"
-path="res://.godot/imported/2026-10-18 13_05_47-Children of the Zodiac (DEBUG).png-5191ad862fc6f6c8a76a9cce843b883a.ctex"
+path="res://.godot/imported/2026-10-18 13_05_47-Children of the Zodiac (DEBUG).png-71d6ba085b77879fd76da4217c9d0de1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tickets/COTZ-010 - CTD - Interact with door from too far/2026-10-18 13_05_47-Children of the Zodiac (DEBUG).png"
-dest_files=["res://.godot/imported/2026-10-18 13_05_47-Children of the Zodiac (DEBUG).png-5191ad862fc6f6c8a76a9cce843b883a.ctex"]
+source_file="res://tickets/COTZ-010 - DONE - CTD - Interact with door from too far/2026-10-18 13_05_47-Children of the Zodiac (DEBUG).png"
+dest_files=["res://.godot/imported/2026-10-18 13_05_47-Children of the Zodiac (DEBUG).png-71d6ba085b77879fd76da4217c9d0de1.ctex"]
 
 [params]
 

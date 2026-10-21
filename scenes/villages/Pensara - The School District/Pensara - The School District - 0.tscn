@@ -1,0 +1,234 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Pensara - The School District/Pensara - The School District.tscn" id="1_base"]
+[ext_resource type="Script" path="res://scenes/villages/VillageBuilding.gd" id="2_47d4t"]
+[ext_resource type="PackedScene" path="res://scenes/common/ActorView.tscn" id="3_ycxk0"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The School District/Aldrin.tres" id="4_uatok"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The School District/Buttenar.tres" id="5_8pe68"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The School District/Emma.tres" id="6_xq3o2"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The School District/Grave keeper.tres" id="7_1n56m"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The School District/Lecca.tres" id="8_72bg1"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Characters/Pensarasoldier.tres" id="9_kqt4w"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Pensara - The School District/Valie.tres" id="10_3qgaf"]
+[ext_resource type="PackedScene" path="res://scenes/common/particles/LegacyParticles2D.tscn" id="11_k5xv1"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="12_qik7s"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageSign.tscn" id="13_e02sr"]
+
+[sub_resource type="Resource" id="Resource_goeqh"]
+script = ExtResource("2_47d4t")
+store_name = "Church"
+background = "pensaraChurch.jpg"
+keeper = "pensaraPastorKai.png"
+keeper_name = "Pastor Kai"
+first_line = "How can I be of assistance?"
+second_line = " "
+music = "Pensara Church"
+
+[node name="Pensara - The School District - 0" instance=ExtResource("1_base")]
+buildings = Array[ExtResource("2_47d4t")]([SubResource("Resource_goeqh")])
+
+[node name="00 Aldrin" parent="Actors" index="0" instance=ExtResource("3_ycxk0")]
+position = Vector2(685, 1060)
+sprite_frames = ExtResource("4_uatok")
+animation = &"down"
+role = 1
+villager_name = "Aldrin"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The School District"
+
+[node name="01 Buttenar" parent="Actors" index="1" instance=ExtResource("3_ycxk0")]
+position = Vector2(900, 790)
+sprite_frames = ExtResource("5_8pe68")
+animation = &"left"
+role = 1
+villager_name = "Buttenar"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The School District"
+
+[node name="02 Emma" parent="Actors" index="2" instance=ExtResource("3_ycxk0")]
+position = Vector2(480, 1710)
+sprite_frames = ExtResource("6_xq3o2")
+animation = &"down"
+role = 1
+villager_name = "Emma"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The School District"
+
+[node name="03 Gravekeeper" parent="Actors" index="3" instance=ExtResource("3_ycxk0")]
+position = Vector2(400, 790)
+sprite_frames = ExtResource("7_1n56m")
+animation = &"left"
+role = 1
+villager_name = "Gravekeeper"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The School District"
+
+[node name="04 Lecca" parent="Actors" index="4" instance=ExtResource("3_ycxk0")]
+position = Vector2(805, 1663)
+sprite_frames = ExtResource("8_72bg1")
+animation = &"down"
+role = 1
+villager_name = "Lecca"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The School District"
+
+[node name="05 PensaraSoldier 13" parent="Actors" index="5" instance=ExtResource("3_ycxk0")]
+position = Vector2(375, 2090)
+sprite_frames = ExtResource("9_kqt4w")
+animation = &"down"
+role = 1
+villager_name = "PensaraSoldier 13"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The School District"
+
+[node name="06 Valie" parent="Actors" index="6" instance=ExtResource("3_ycxk0")]
+position = Vector2(220, 1050)
+sprite_frames = ExtResource("10_3qgaf")
+animation = &"up"
+role = 1
+villager_name = "Valie"
+statuses = PackedInt32Array()
+villager_folder = "Pensara - The School District"
+
+[node name="00 smokesystemSchool" parent="Effects" index="0" instance=ExtResource("11_k5xv1")]
+position = Vector2(736, 1908)
+system_name = "smokesystemSchool"
+
+[node name="00 Pensara_-_The_Trade_District" parent="Doors" index="0" instance=ExtResource("12_qik7s")]
+position = Vector2(1097, 1746)
+hole = true
+kinds = PackedStringArray("village")
+targets = PackedStringArray("Pensara_-_The_Trade_District")
+radius = 50
+directions = PackedInt32Array(1)
+fade = 0
+to_pos = PackedFloat64Array(0, 0, 4, -1)
+sign_lines = PackedStringArray()
+
+[node name="01 Pensara_-_The_School_District_-_The_Clock_Tower_-_Floor_1" parent="Doors" index="1" instance=ExtResource("12_qik7s")]
+position = Vector2(329, 1679)
+kinds = PackedStringArray("house")
+targets = PackedStringArray("Pensara_-_The_School_District_-_The_Clock_Tower_-_Floor_1")
+radius = 62
+directions = PackedInt32Array(0)
+fade = 2
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray(" Locked.")
+
+[node name="02 Pensara_-_The_School_District_-_The_School" parent="Doors" index="2" instance=ExtResource("12_qik7s")]
+position = Vector2(755, 2186)
+kinds = PackedStringArray("house")
+targets = PackedStringArray("Pensara_-_The_School_District_-_The_School")
+directions = PackedInt32Array(0)
+fade = 2
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray(" Locked.")
+
+[node name="03 Church" parent="Doors" index="3" instance=ExtResource("12_qik7s")]
+position = Vector2(661, 978)
+kinds = PackedStringArray("church")
+targets = PackedStringArray("Church")
+radius = 60
+directions = PackedInt32Array(0)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray()
+
+[node name="04 Pensara_-_The_School_District_-_The_Armory" parent="Doors" index="4" instance=ExtResource("12_qik7s")]
+position = Vector2(344, 2078)
+kinds = PackedStringArray("house")
+targets = PackedStringArray("Pensara_-_The_School_District_-_The_Armory")
+directions = PackedInt32Array(0)
+fade = 2
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray(" Locked.")
+
+[node name="00 Barba non facit philosop" parent="Signs" index="0" instance=ExtResource("13_e02sr")]
+position = Vector2(223, 903)
+radius = 28
+directions = PackedInt32Array(0)
+lines = PackedStringArray("Barba non facit philosophum")
+listed = Array[bool]([true])
+
+[node name="01 Concordia civium murus u" parent="Signs" index="1" instance=ExtResource("13_e02sr")]
+position = Vector2(296, 782)
+radius = 28
+directions = PackedInt32Array(0)
+lines = PackedStringArray("Concordia civium murus urbium")
+listed = Array[bool]([true])
+
+[node name="02 Cui bono?" parent="Signs" index="2" instance=ExtResource("13_e02sr")]
+position = Vector2(435, 1031)
+radius = 28
+directions = PackedInt32Array(0)
+lines = PackedStringArray("Cui bono?")
+listed = Array[bool]([true])
+
+[node name="03 Et ipsa scientia potesta" parent="Signs" index="3" instance=ExtResource("13_e02sr")]
+position = Vector2(436, 782)
+radius = 28
+directions = PackedInt32Array(0)
+lines = PackedStringArray("Et ipsa scientia potestas est.")
+listed = Array[bool]([true])
+
+[node name="04 Felix qui potuit rerum c" parent="Signs" index="4" instance=ExtResource("13_e02sr")]
+position = Vector2(296, 1034)
+radius = 28
+directions = PackedInt32Array(0)
+lines = PackedStringArray("Felix qui potuit rerum cognoscere causas")
+listed = Array[bool]([true])
+
+[node name="05 Homines quod volunt cred" parent="Signs" index="5" instance=ExtResource("13_e02sr")]
+position = Vector2(225, 780)
+radius = 28
+directions = PackedInt32Array(0)
+lines = PackedStringArray("Homines quod volunt credunt")
+listed = Array[bool]([true])
+
+[node name="06 In dubio pro reo --" parent="Signs" index="6" instance=ExtResource("13_e02sr")]
+position = Vector2(224, 1031)
+radius = 28
+directions = PackedInt32Array(0)
+lines = PackedStringArray("In dubio pro reo --")
+listed = Array[bool]([true])
+
+[node name="07 In varietate concordia" parent="Signs" index="7" instance=ExtResource("13_e02sr")]
+position = Vector2(365, 785)
+radius = 28
+directions = PackedInt32Array(0)
+lines = PackedStringArray("In varietate concordia")
+listed = Array[bool]([true])
+
+[node name="08 Litterarum radices amara" parent="Signs" index="8" instance=ExtResource("13_e02sr")]
+position = Vector2(435, 904)
+radius = 28
+directions = PackedInt32Array(0)
+lines = PackedStringArray("Litterarum radices amarae, fructus dulces.")
+listed = Array[bool]([true])
+
+[node name="09 Memento mori" parent="Signs" index="9" instance=ExtResource("13_e02sr")]
+position = Vector2(364, 1038)
+radius = 28
+directions = PackedInt32Array(0)
+lines = PackedStringArray("Memento mori")
+listed = Array[bool]([true])
+
+[node name="10 The words _fons et origo" parent="Signs" index="10" instance=ExtResource("13_e02sr")]
+position = Vector2(324, 889)
+radius = 28
+directions = PackedInt32Array(0)
+lines = PackedStringArray("The words \"fons et origo\"", "is inscribed on the fountain")
+listed = Array[bool]([true, true])
+
+[node name="11 The mailbox is full of l" parent="Signs" index="11" instance=ExtResource("13_e02sr")]
+position = Vector2(568, 2200)
+radius = 28
+directions = PackedInt32Array(0)
+lines = PackedStringArray("The mailbox is full of letters to the school.")
+listed = Array[bool]([true])
+
+[node name="12 Welcome to Pensara Cathe" parent="Signs" index="12" instance=ExtResource("13_e02sr")]
+position = Vector2(602, 1118)
+radius = 28
+directions = PackedInt32Array(0)
+lines = PackedStringArray("Welcome to Pensara Cathedral.")
+listed = Array[bool]([true])

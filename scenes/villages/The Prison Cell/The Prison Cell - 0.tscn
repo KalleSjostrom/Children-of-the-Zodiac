@@ -1,0 +1,20 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/The Prison Cell/The Prison Cell.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageSpawn.tscn" id="2_eoxj1"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageLoot.tscn" id="3_vwokc"]
+
+[node name="The Prison Cell - 0" instance=ExtResource("1_base")]
+
+[node name="00 start" parent="Spawns" index="0" instance=ExtResource("2_eoxj1")]
+position = Vector2(368, 389)
+facing = 1
+
+[node name="00 card" parent="Loot" index="0" instance=ExtResource("3_vwokc")]
+position = Vector2(615, 310)
+loot_name = "card"
+directions = PackedInt32Array(1, 0)
+content_name = "cards.offense.BattleCard"
+content_type = 2
+card_level = 3
+lines = PackedStringArray("You found a card in the toilet!", "(Kinda gross...)")

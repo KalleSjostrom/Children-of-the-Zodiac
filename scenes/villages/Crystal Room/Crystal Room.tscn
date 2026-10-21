@@ -1,0 +1,41 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/VillageScene.tscn" id="1_base"]
+[ext_resource type="Texture2D" path="res://scenes/villages/Crystal Room/Crystal Room.png" id="2_f00vu"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageSpawn.tscn" id="3_23gsw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_etsxw"]
+size = Vector2(65, 539)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qh4a4"]
+size = Vector2(128, 74)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ptkq"]
+size = Vector2(65, 539)
+
+[node name="Crystal Room" instance=ExtResource("1_base")]
+place_name = "Crystal Room"
+folder_name = "Crystal Room"
+village_name = "Crystal Room"
+background_folder = "Crystal Room"
+size = Vector2i(1024, 768)
+actual_size = Vector2i(1024, 768)
+wind_force = PackedFloat64Array(0, 0, 0)
+
+[node name="Background" parent="." index="1"]
+texture = ExtResource("2_f00vu")
+
+[node name="O000" type="CollisionShape2D" parent="Obstacles" index="0"]
+position = Vector2(441.5, 521.5)
+shape = SubResource("RectangleShape2D_etsxw")
+
+[node name="O001" type="CollisionShape2D" parent="Obstacles" index="1"]
+position = Vector2(512, 264)
+shape = SubResource("RectangleShape2D_qh4a4")
+
+[node name="O002" type="CollisionShape2D" parent="Obstacles" index="2"]
+position = Vector2(581.5, 518.5)
+shape = SubResource("RectangleShape2D_3ptkq")
+
+[node name="00 start" parent="Spawns" index="0" instance=ExtResource("3_23gsw")]
+position = Vector2(495, 710)

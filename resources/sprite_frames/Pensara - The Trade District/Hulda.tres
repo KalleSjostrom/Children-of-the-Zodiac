@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hulda/Hulda9.png" id="1_djh3l"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hulda/Hulda10.png" id="2_mg3ci"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hulda/Hulda11.png" id="3_q7esn"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hulda/Hulda12.png" id="4_a45kx"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hulda/Hulda13.png" id="5_3db2f"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hulda/Hulda14.png" id="6_nn0c5"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hulda/Hulda15.png" id="7_ndjhx"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hulda/Hulda16.png" id="8_d285l"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hulda/Hulda5.png" id="9_5rmwm"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hulda/Hulda6.png" id="10_8s4qs"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hulda/Hulda7.png" id="11_60lm8"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hulda/Hulda8.png" id="12_7jee6"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hulda/Hulda1.png" id="13_8cg23"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hulda/Hulda2.png" id="14_nol0h"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hulda/Hulda3.png" id="15_oip4u"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Hulda/Hulda4.png" id="16_876uy"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_djh3l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_mg3ci")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_q7esn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_a45kx")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_3db2f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_nn0c5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ndjhx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_d285l")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_5rmwm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_8s4qs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_60lm8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_7jee6")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_8cg23")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_nol0h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_oip4u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_876uy")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

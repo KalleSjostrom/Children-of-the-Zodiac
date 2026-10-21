@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Frigidu/Frigidu9.png" id="1_onk5n"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Frigidu/Frigidu10.png" id="2_2xuel"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Frigidu/Frigidu11.png" id="3_76ich"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Frigidu/Frigidu12.png" id="4_s3ukv"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Frigidu/Frigidu13.png" id="5_s01tt"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Frigidu/Frigidu14.png" id="6_mtmbk"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Frigidu/Frigidu15.png" id="7_2vfoj"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Frigidu/Frigidu16.png" id="8_71pme"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Frigidu/Frigidu5.png" id="9_24u5m"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Frigidu/Frigidu6.png" id="10_74h3c"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Frigidu/Frigidu7.png" id="11_npcnr"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Frigidu/Frigidu8.png" id="12_jwmq7"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Frigidu/Frigidu1.png" id="13_772ru"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Frigidu/Frigidu2.png" id="14_6txc0"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Frigidu/Frigidu3.png" id="15_6pj71"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Frigidu/Frigidu4.png" id="16_k7mvf"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_onk5n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_2xuel")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_76ich")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_s3ukv")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_s01tt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_mtmbk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_2vfoj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_71pme")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_24u5m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_74h3c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_npcnr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_jwmq7")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_772ru")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_6txc0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_6pj71")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_k7mvf")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

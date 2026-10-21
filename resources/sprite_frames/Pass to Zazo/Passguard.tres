@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Passguard/Passguard9.png" id="1_cmvg8"]
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Passguard/Passguard10.png" id="2_qojxp"]
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Passguard/Passguard11.png" id="3_w1wqk"]
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Passguard/Passguard12.png" id="4_hxjjt"]
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Passguard/Passguard13.png" id="5_yfk4l"]
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Passguard/Passguard14.png" id="6_q2e2r"]
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Passguard/Passguard15.png" id="7_xyjss"]
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Passguard/Passguard16.png" id="8_0xnwu"]
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Passguard/Passguard5.png" id="9_u1x2i"]
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Passguard/Passguard6.png" id="10_pp1b2"]
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Passguard/Passguard7.png" id="11_neb7o"]
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Passguard/Passguard8.png" id="12_hcrpt"]
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Passguard/Passguard1.png" id="13_6ljky"]
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Passguard/Passguard2.png" id="14_ouidk"]
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Passguard/Passguard3.png" id="15_o0xaq"]
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Passguard/Passguard4.png" id="16_473mt"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_cmvg8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_qojxp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_w1wqk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_hxjjt")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_yfk4l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_q2e2r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_xyjss")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_0xnwu")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_u1x2i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_pp1b2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_neb7o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_hcrpt")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_6ljky")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_ouidk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_o0xaq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_473mt")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

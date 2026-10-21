@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Samborg/Samborg9.png" id="1_w0i2c"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Samborg/Samborg10.png" id="2_imv62"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Samborg/Samborg11.png" id="3_xejos"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Samborg/Samborg12.png" id="4_5nlri"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Samborg/Samborg13.png" id="5_jwlhg"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Samborg/Samborg14.png" id="6_jf1yr"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Samborg/Samborg15.png" id="7_g2ehd"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Samborg/Samborg16.png" id="8_0ty27"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Samborg/Samborg5.png" id="9_pjg2k"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Samborg/Samborg6.png" id="10_kvjwx"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Samborg/Samborg7.png" id="11_28u78"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Samborg/Samborg8.png" id="12_fse5k"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Samborg/Samborg1.png" id="13_a6ntr"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Samborg/Samborg2.png" id="14_qo80k"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Samborg/Samborg3.png" id="15_v0mc1"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Samborg/Samborg4.png" id="16_314ko"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_w0i2c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_imv62")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xejos")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_5nlri")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_jwlhg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_jf1yr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_g2ehd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_0ty27")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_pjg2k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_kvjwx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_28u78")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_fse5k")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_a6ntr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_qo80k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_v0mc1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_314ko")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

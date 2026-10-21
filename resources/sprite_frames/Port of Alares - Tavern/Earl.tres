@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Earl/Earl9.png" id="1_u41os"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Earl/Earl10.png" id="2_3thg7"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Earl/Earl11.png" id="3_6mlmr"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Earl/Earl12.png" id="4_e6p62"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Earl/Earl13.png" id="5_sd45o"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Earl/Earl14.png" id="6_lrn6m"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Earl/Earl15.png" id="7_yfx1k"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Earl/Earl16.png" id="8_3gkm4"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Earl/Earl5.png" id="9_ajl18"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Earl/Earl6.png" id="10_om57d"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Earl/Earl7.png" id="11_eamr8"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Earl/Earl8.png" id="12_0rc23"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Earl/Earl1.png" id="13_x1xp8"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Earl/Earl2.png" id="14_1p32n"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Earl/Earl3.png" id="15_wiykq"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Earl/Earl4.png" id="16_nrr6o"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_u41os")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_3thg7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6mlmr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_e6p62")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_sd45o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_lrn6m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_yfx1k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_3gkm4")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_ajl18")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_om57d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_eamr8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_0rc23")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_x1xp8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_1p32n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_wiykq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_nrr6o")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

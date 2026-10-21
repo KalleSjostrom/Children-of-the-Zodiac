@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Berca - House/villagers/Gregory/Gregory9.png" id="1_6hwme"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - House/villagers/Gregory/Gregory10.png" id="2_gyqj5"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - House/villagers/Gregory/Gregory11.png" id="3_7p72o"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - House/villagers/Gregory/Gregory12.png" id="4_n4jw5"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - House/villagers/Gregory/Gregory13.png" id="5_e4kke"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - House/villagers/Gregory/Gregory14.png" id="6_vrl2c"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - House/villagers/Gregory/Gregory15.png" id="7_sttcp"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - House/villagers/Gregory/Gregory16.png" id="8_faf37"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - House/villagers/Gregory/Gregory5.png" id="9_qkgit"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - House/villagers/Gregory/Gregory6.png" id="10_2ewuk"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - House/villagers/Gregory/Gregory7.png" id="11_ouwo8"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - House/villagers/Gregory/Gregory8.png" id="12_xtfqb"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - House/villagers/Gregory/Gregory1.png" id="13_kur12"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - House/villagers/Gregory/Gregory2.png" id="14_ilavd"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - House/villagers/Gregory/Gregory3.png" id="15_bignb"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - House/villagers/Gregory/Gregory4.png" id="16_tfskw"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_6hwme")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_gyqj5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_7p72o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_n4jw5")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_e4kke")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_vrl2c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_sttcp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_faf37")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_qkgit")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_2ewuk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ouwo8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_xtfqb")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_kur12")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_ilavd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_bignb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_tfskw")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

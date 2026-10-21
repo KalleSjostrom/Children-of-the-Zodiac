@@ -88,6 +88,7 @@ var _background_texture: Texture2D
 var _background_position := Vector2.ZERO
 var _scroll := Vector2i.ZERO
 var _views := {} # legacy sprite key -> its node in Actors (ActorView or LegacyParticles2D)
+var _repeats := {} # "<key>:<n>" -> the node that draws the key's n-th entry of a frame
 var _systems := {} # legacy particle system key -> the LegacyParticles2D built with it
 var _story_image: StoryImage
 
@@ -346,24 +347,33 @@ func show_bottom(extra: Texture2D, systems: Array, color: Color, alpha_ref: floa
 
 ## The sprites of Village.drawBottom and a cutscene's images and actors, in
 ## draw order: ["sprite", key, texture, position, color, alpha_ref],
-## ["particles", key, view] or ["image", texture, position, scale, color,
-## alpha_ref] (positions in village pixels, keys as in the legacy sprite
-## maps). The order is the legacy sort's (equal y and the special sort keys
-## of particle systems and cutscene props included), so Actors does not
-## y-sort while it mirrors. Actors not listed are hidden.
+## ["particles", key, view] or ["image", texture, position, scale (a
+## Vector2), color, alpha_ref] (positions in village pixels, keys as in the
+## legacy sprite maps). The order is the legacy sort's (equal y and the
+## special sort keys of particle systems and cutscene props included), so
+## Actors does not y-sort while it mirrors. Actors not listed are hidden. A key listed twice
+## is drawn twice, by a second view: a cutscene prop that the timeline adds
+## to the village's sprites (addspritetobottomlayer / addspritetotoplayer)
+## is drawn by the village and again as an actor.
 func show_actors(entries: Array) -> void:
 	_bind()
 	var order: Array[Node] = []
+	var seen := {}
 	for e: Array in entries:
+		var occurrence: int = seen.get(e[1], 0) if e[0] != "image" else 0
+		if e[0] != "image":
+			seen[e[1]] = occurrence + 1
 		match e[0]:
 			"sprite":
-				var view: ActorView = _actor_view(e[1])
+				var view: ActorView = (_actor_view(e[1]) if occurrence == 0
+						else _repeat_view(e[1], occurrence))
 				view.show_frame(e[2], e[3])
 				view.modulate = e[4]
 				view.material = alpha_material(e[5])
 				order.append(view)
 			"particles":
-				var node: LegacyParticles2D = _actor_particles(e[1])
+				var node: LegacyParticles2D = (_actor_particles(e[1]) if occurrence == 0
+						else _repeat_view(e[1], occurrence))
 				node.show_systems([e[2]], _scroll)
 				order.append(node)
 			"image":
@@ -453,6 +463,19 @@ func _actor_view(key: int) -> ActorView:
 		view.sprite_key = key
 		_actors.add_child(view, true)
 		_views[key] = view
+	return view
+
+
+## The view that draws the key a second (third, ...) time in a frame (see
+## show_actors): an ActorView, or a LegacyParticles2D for a particle system.
+func _repeat_view(key: int, occurrence: int) -> Node2D:
+	var id := "%d:%d" % [key, occurrence]
+	var view: Node2D = _repeats.get(id)
+	if view == null:
+		view = (PARTICLES if _views.get(key) is LegacyParticles2D else ACTOR_VIEW).instantiate()
+		view.name = "Runtime"
+		_actors.add_child(view, true)
+		_repeats[id] = view
 	return view
 
 

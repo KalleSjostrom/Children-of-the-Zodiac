@@ -34,7 +34,11 @@ func _fillRoot() -> void:
 
 
 func init2(obs: Array = []) -> void:
-	if GamePadController.areThereAnyGamePadControllers():
+	# Determinism hook: a deterministic run (Main --seed, driven by AutoPlay)
+	# reads no game pad. A connected pad, even untouched, releases every
+	# button it does not hold each poll, so AutoPlay's presses would end
+	# after one frame (and connecting it pauses the game).
+	if GamePadController.areThereAnyGamePadControllers() and not J.deterministic:
 		inputManager.addInputManager(InputGamePadManager.new())
 	for o in obs:
 		if o is InputManager:

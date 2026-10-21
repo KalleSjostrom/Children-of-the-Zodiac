@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://by2q7pggfs3ya"
-path="res://.godot/imported/callstack.png-9112465870ea4f2de775c3299f0a2666.ctex"
+path="res://.godot/imported/callstack.png-2715ebb5eb35fa9651c98cda49fb93d0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tickets/COTZ-001 - CTD - Leaving grivera on first floor/callstack.png"
-dest_files=["res://.godot/imported/callstack.png-9112465870ea4f2de775c3299f0a2666.ctex"]
+source_file="res://tickets/COTZ-001 - DONE - CTD - Leaving grivera on first floor/callstack.png"
+dest_files=["res://.godot/imported/callstack.png-2715ebb5eb35fa9651c98cda49fb93d0.ctex"]
 
 [params]
 

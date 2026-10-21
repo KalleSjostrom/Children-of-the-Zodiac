@@ -1,0 +1,97 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/VillageScene.tscn" id="1_base"]
+[ext_resource type="Texture2D" path="res://scenes/villages/Pensara - The School District - The Clock Tower - Floor 1/Pensara - The School District - The Clock Tower - Floor 1.png" id="2_hjpkv"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 1/top/0.png" id="3_vnf3p"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 1/top/1.png" id="4_hvfqu"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageSpawn.tscn" id="5_wr21h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dfm53"]
+size = Vector2(226, 35)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5qfol"]
+size = Vector2(18, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nsict"]
+size = Vector2(46, 389)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jcbwo"]
+size = Vector2(254, 33)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3xm0x"]
+size = Vector2(44, 369)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_86l8l"]
+size = Vector2(169, 71)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lbaxu"]
+size = Vector2(142, 70)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yu5gs"]
+size = Vector2(481, 102)
+
+[node name="Pensara - The School District - The Clock Tower - Floor 1" instance=ExtResource("1_base")]
+place_name = "Pensara - The School District - The Clock Tower - Floor 1"
+folder_name = "Pensara - The School District - The Clock Tower - Floor 1"
+village_name = "Pensara - The School District - The Clock Tower - Floor 1"
+background_folder = "Pensara - The School District - The Clock Tower - Floor 1"
+size = Vector2i(1024, 768)
+actual_size = Vector2i(1024, 768)
+inside = true
+wind_force = PackedFloat64Array(0, 0, 0)
+
+[node name="Background" parent="." index="1"]
+texture = ExtResource("2_hjpkv")
+
+[node name="00 0" type="Sprite2D" parent="Overhead" index="0"]
+use_parent_material = true
+position = Vector2(475, 339)
+texture = ExtResource("3_vnf3p")
+centered = false
+
+[node name="01 1" type="Sprite2D" parent="Overhead" index="1"]
+use_parent_material = true
+position = Vector2(327, 575)
+texture = ExtResource("4_hvfqu")
+centered = false
+
+[node name="O000" type="CollisionShape2D" parent="Obstacles" index="0"]
+position = Vector2(624, 432.5)
+shape = SubResource("RectangleShape2D_dfm53")
+
+[node name="O001" type="CollisionShape2D" parent="Obstacles" index="1"]
+position = Vector2(504, 445.5)
+shape = SubResource("RectangleShape2D_5qfol")
+
+[node name="O002" type="CollisionShape2D" parent="Obstacles" index="2"]
+position = Vector2(306, 484.5)
+shape = SubResource("RectangleShape2D_nsict")
+
+[node name="O003" type="CollisionShape2D" parent="Obstacles" index="3"]
+position = Vector2(602, 396.5)
+shape = SubResource("RectangleShape2D_jcbwo")
+
+[node name="O004" type="CollisionShape2D" parent="Obstacles" index="4"]
+position = Vector2(743, 473.5)
+shape = SubResource("RectangleShape2D_3xm0x")
+
+[node name="O005" type="CollisionShape2D" parent="Obstacles" index="5"]
+position = Vector2(644.5, 653.5)
+shape = SubResource("RectangleShape2D_86l8l")
+
+[node name="O006" type="CollisionShape2D" parent="Obstacles" index="6"]
+position = Vector2(400, 653)
+shape = SubResource("RectangleShape2D_lbaxu")
+
+[node name="O007" type="CollisionShape2D" parent="Obstacles" index="7"]
+position = Vector2(510.5, 239)
+shape = SubResource("RectangleShape2D_yu5gs")
+
+[node name="00 start0" parent="Spawns" index="0" instance=ExtResource("5_wr21h")]
+position = Vector2(490, 568)
+number = 0
+
+[node name="01 start1" parent="Spawns" index="1" instance=ExtResource("5_wr21h")]
+position = Vector2(508, 390)
+number = 1
+facing = 3

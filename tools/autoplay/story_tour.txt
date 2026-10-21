@@ -1,0 +1,25 @@
+# A cutscene from its start (--start=<story>), for the parity cases story_*
+# (phase 1 rollout, tools/parity/cases.txt): a shot every 1.5 s and a CROSS
+# every 0.5 s (it ends a dialog page that waits for input; it does nothing
+# while actors move), until the game mode is no longer VillageStory or for
+# at most 180 s. Stories that chain into the next one (Elder of Dellna Saves
+# the Day -> Celis Wakes Up, ...) keep going until the time is up. The shots
+# are numbered (s_002, s_003, ...); the log lines name the story, so a
+# parity compare also checks the timing of every switch.
+wait 100
+shot s_00_start
+mark
+wait 250
+tap CROSS
+wait 500
+shot s_#
+wait 250
+tap CROSS
+wait 500
+tap CROSS
+log tick
+loopuntil !VillageStory 180000
+wait 1500
+shot s_99_after
+log end
+quit

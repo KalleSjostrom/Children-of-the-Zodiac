@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Laila/Laila9.png" id="1_4c1rt"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Laila/Laila10.png" id="2_e22q6"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Laila/Laila11.png" id="3_44bnn"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Laila/Laila12.png" id="4_g5ia0"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Laila/Laila13.png" id="5_ju1xs"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Laila/Laila14.png" id="6_vh38l"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Laila/Laila15.png" id="7_luqmj"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Laila/Laila16.png" id="8_kbikh"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Laila/Laila5.png" id="9_6ytl1"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Laila/Laila6.png" id="10_6s3hn"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Laila/Laila7.png" id="11_vhvwq"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Laila/Laila8.png" id="12_mqlsd"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Laila/Laila1.png" id="13_duoka"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Laila/Laila2.png" id="14_12xff"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Laila/Laila3.png" id="15_y173i"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Laila/Laila4.png" id="16_0frix"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_4c1rt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_e22q6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_44bnn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_g5ia0")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_ju1xs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_vh38l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_luqmj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_kbikh")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_6ytl1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_6s3hn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_vhvwq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_mqlsd")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_duoka")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_12xff")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_y173i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_0frix")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

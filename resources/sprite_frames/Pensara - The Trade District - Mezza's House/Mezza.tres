@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Mezza's House/villagers/Mezza/Mezza9.png" id="1_vur0a"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Mezza's House/villagers/Mezza/Mezza10.png" id="2_pve8g"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Mezza's House/villagers/Mezza/Mezza11.png" id="3_0x1l7"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Mezza's House/villagers/Mezza/Mezza12.png" id="4_idof7"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Mezza's House/villagers/Mezza/Mezza13.png" id="5_paflp"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Mezza's House/villagers/Mezza/Mezza14.png" id="6_icbg5"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Mezza's House/villagers/Mezza/Mezza15.png" id="7_h4724"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Mezza's House/villagers/Mezza/Mezza16.png" id="8_8507j"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Mezza's House/villagers/Mezza/Mezza5.png" id="9_1m0cp"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Mezza's House/villagers/Mezza/Mezza6.png" id="10_y66oc"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Mezza's House/villagers/Mezza/Mezza7.png" id="11_o0mgu"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Mezza's House/villagers/Mezza/Mezza8.png" id="12_057dc"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Mezza's House/villagers/Mezza/Mezza1.png" id="13_rbgus"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Mezza's House/villagers/Mezza/Mezza2.png" id="14_o6sdj"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Mezza's House/villagers/Mezza/Mezza3.png" id="15_5xbxc"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - Mezza's House/villagers/Mezza/Mezza4.png" id="16_symsi"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_vur0a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_pve8g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_0x1l7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_idof7")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_paflp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_icbg5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_h4724")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_8507j")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_1m0cp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_y66oc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_o0mgu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_057dc")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_rbgus")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_o6sdj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_5xbxc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_symsi")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

@@ -1,0 +1,42 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/VillageScene.tscn" id="1_base"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo - Farl's House/Zazo - Farl's House.jpg" id="2_5mp2b"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo - Farl's House/top/0.png" id="3_qvpau"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo - Farl's House/top/1.png" id="4_0nvs4"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo - Farl's House/top/2.png" id="5_mwrwo"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageSpawn.tscn" id="6_k8371"]
+
+[node name="Zazo - Farl\'s House" instance=ExtResource("1_base")]
+place_name = "Zazo - Farl's House"
+folder_name = "Zazo - Farl's House"
+village_name = "Zazo - Farl's House"
+background_folder = "Zazo - Farl's House"
+size = Vector2i(1024, 768)
+actual_size = Vector2i(1024, 768)
+inside = true
+wind_force = PackedFloat64Array(0, 0, 0)
+
+[node name="Background" parent="." index="1"]
+texture = ExtResource("2_5mp2b")
+
+[node name="00 0" type="Sprite2D" parent="Overhead" index="0"]
+use_parent_material = true
+position = Vector2(512, 378)
+texture = ExtResource("3_qvpau")
+centered = false
+
+[node name="01 1" type="Sprite2D" parent="Overhead" index="1"]
+use_parent_material = true
+position = Vector2(628, 378)
+texture = ExtResource("4_0nvs4")
+centered = false
+
+[node name="02 2" type="Sprite2D" parent="Overhead" index="2"]
+use_parent_material = true
+position = Vector2(324, 561)
+texture = ExtResource("5_mwrwo")
+centered = false
+
+[node name="00 start" parent="Spawns" index="0" instance=ExtResource("6_k8371")]
+position = Vector2(486, 535)

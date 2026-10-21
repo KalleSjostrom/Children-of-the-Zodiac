@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 2 - Floor 1/villagers/Elviri/Elviri9.png" id="1_gue8m"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 2 - Floor 1/villagers/Elviri/Elviri10.png" id="2_ey5dh"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 2 - Floor 1/villagers/Elviri/Elviri11.png" id="3_2egsf"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 2 - Floor 1/villagers/Elviri/Elviri12.png" id="4_u3cdk"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 2 - Floor 1/villagers/Elviri/Elviri13.png" id="5_e0fya"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 2 - Floor 1/villagers/Elviri/Elviri14.png" id="6_bxigw"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 2 - Floor 1/villagers/Elviri/Elviri15.png" id="7_q708f"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 2 - Floor 1/villagers/Elviri/Elviri16.png" id="8_kebht"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 2 - Floor 1/villagers/Elviri/Elviri5.png" id="9_tleqb"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 2 - Floor 1/villagers/Elviri/Elviri6.png" id="10_wmcck"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 2 - Floor 1/villagers/Elviri/Elviri7.png" id="11_api12"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 2 - Floor 1/villagers/Elviri/Elviri8.png" id="12_fu6x6"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 2 - Floor 1/villagers/Elviri/Elviri1.png" id="13_rjv6q"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 2 - Floor 1/villagers/Elviri/Elviri2.png" id="14_tg7hu"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 2 - Floor 1/villagers/Elviri/Elviri3.png" id="15_stuwr"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District - House 2 - Floor 1/villagers/Elviri/Elviri4.png" id="16_exxf2"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_gue8m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ey5dh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2egsf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_u3cdk")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_e0fya")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_bxigw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_q708f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_kebht")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_tleqb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_wmcck")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_api12")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_fu6x6")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_rjv6q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_tg7hu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_stuwr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_exxf2")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

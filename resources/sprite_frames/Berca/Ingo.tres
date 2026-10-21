@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Ingo/Ingo9.png" id="1_5iw7n"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Ingo/Ingo10.png" id="2_3syum"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Ingo/Ingo11.png" id="3_hn5x2"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Ingo/Ingo12.png" id="4_axjxm"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Ingo/Ingo13.png" id="5_dixqx"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Ingo/Ingo14.png" id="6_b3rof"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Ingo/Ingo15.png" id="7_kgdwm"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Ingo/Ingo16.png" id="8_x28q4"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Ingo/Ingo5.png" id="9_xj5bh"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Ingo/Ingo6.png" id="10_jeqel"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Ingo/Ingo7.png" id="11_djghw"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Ingo/Ingo8.png" id="12_iihlh"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Ingo/Ingo1.png" id="13_ltqxw"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Ingo/Ingo2.png" id="14_yc8yt"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Ingo/Ingo3.png" id="15_1qggv"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Ingo/Ingo4.png" id="16_j1vwu"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_5iw7n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_3syum")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_hn5x2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_axjxm")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_dixqx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_b3rof")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_kgdwm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_x28q4")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_xj5bh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_jeqel")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_djghw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_iihlh")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_ltqxw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_yc8yt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_1qggv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_j1vwu")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

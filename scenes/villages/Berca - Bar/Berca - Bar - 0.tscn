@@ -1,0 +1,57 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Berca - Bar/Berca - Bar.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/ActorView.tscn" id="2_k2hst"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Berca - Bar/Don Carlos.tres" id="3_l1fl8"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Berca - Bar/Gilo.tres" id="4_01gnv"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Berca - Bar/Milo.tres" id="5_4rxob"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Berca - Bar/Quintis.tres" id="6_iuc27"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="7_vw84x"]
+
+[node name="Berca - Bar - 0" instance=ExtResource("1_base")]
+
+[node name="00 Don Carlos" parent="Actors" index="0" instance=ExtResource("2_k2hst")]
+position = Vector2(620, 280)
+sprite_frames = ExtResource("3_l1fl8")
+animation = &"down"
+role = 1
+villager_name = "Don Carlos"
+statuses = PackedInt32Array()
+villager_folder = "Berca - Bar"
+
+[node name="01 Gilo" parent="Actors" index="1" instance=ExtResource("2_k2hst")]
+position = Vector2(535, 340)
+sprite_frames = ExtResource("4_01gnv")
+animation = &"down"
+role = 1
+villager_name = "Gilo"
+statuses = PackedInt32Array()
+villager_folder = "Berca - Bar"
+
+[node name="02 Milo" parent="Actors" index="2" instance=ExtResource("2_k2hst")]
+position = Vector2(690, 450)
+sprite_frames = ExtResource("5_4rxob")
+animation = &"left"
+role = 1
+villager_name = "Milo"
+statuses = PackedInt32Array()
+villager_folder = "Berca - Bar"
+
+[node name="03 Quintis" parent="Actors" index="3" instance=ExtResource("2_k2hst")]
+position = Vector2(370, 510)
+sprite_frames = ExtResource("6_iuc27")
+animation = &"up"
+role = 1
+villager_name = "Quintis"
+statuses = PackedInt32Array()
+villager_folder = "Berca - Bar"
+
+[node name="00 Berca" parent="Doors" index="0" instance=ExtResource("7_vw84x")]
+position = Vector2(453, 553)
+hole = true
+kinds = PackedStringArray("switch")
+targets = PackedStringArray("Berca")
+directions = PackedInt32Array(2)
+fade = 1
+to_pos = PackedFloat64Array(847, 1655, 2, -1)
+sign_lines = PackedStringArray()

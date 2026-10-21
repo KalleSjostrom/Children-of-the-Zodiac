@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/The Prison Cell/villagers/Zalzi/Zalzi9.png" id="1_esxnb"]
+[ext_resource type="Texture2D" path="res://res/Village/The Prison Cell/villagers/Zalzi/Zalzi10.png" id="2_yhclt"]
+[ext_resource type="Texture2D" path="res://res/Village/The Prison Cell/villagers/Zalzi/Zalzi11.png" id="3_gefrc"]
+[ext_resource type="Texture2D" path="res://res/Village/The Prison Cell/villagers/Zalzi/Zalzi12.png" id="4_h3kjs"]
+[ext_resource type="Texture2D" path="res://res/Village/The Prison Cell/villagers/Zalzi/Zalzi13.png" id="5_nm4vt"]
+[ext_resource type="Texture2D" path="res://res/Village/The Prison Cell/villagers/Zalzi/Zalzi14.png" id="6_csr7k"]
+[ext_resource type="Texture2D" path="res://res/Village/The Prison Cell/villagers/Zalzi/Zalzi15.png" id="7_rsdmr"]
+[ext_resource type="Texture2D" path="res://res/Village/The Prison Cell/villagers/Zalzi/Zalzi16.png" id="8_2kccr"]
+[ext_resource type="Texture2D" path="res://res/Village/The Prison Cell/villagers/Zalzi/Zalzi5.png" id="9_383o4"]
+[ext_resource type="Texture2D" path="res://res/Village/The Prison Cell/villagers/Zalzi/Zalzi6.png" id="10_golon"]
+[ext_resource type="Texture2D" path="res://res/Village/The Prison Cell/villagers/Zalzi/Zalzi7.png" id="11_7sn5n"]
+[ext_resource type="Texture2D" path="res://res/Village/The Prison Cell/villagers/Zalzi/Zalzi8.png" id="12_es7p6"]
+[ext_resource type="Texture2D" path="res://res/Village/The Prison Cell/villagers/Zalzi/Zalzi1.png" id="13_vu8cq"]
+[ext_resource type="Texture2D" path="res://res/Village/The Prison Cell/villagers/Zalzi/Zalzi2.png" id="14_hs6we"]
+[ext_resource type="Texture2D" path="res://res/Village/The Prison Cell/villagers/Zalzi/Zalzi3.png" id="15_e3nbj"]
+[ext_resource type="Texture2D" path="res://res/Village/The Prison Cell/villagers/Zalzi/Zalzi4.png" id="16_dcpov"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_esxnb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_yhclt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_gefrc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_h3kjs")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_nm4vt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_csr7k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_rsdmr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_2kccr")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_383o4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_golon")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_7sn5n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_es7p6")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_vu8cq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_hs6we")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_e3nbj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_dcpov")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

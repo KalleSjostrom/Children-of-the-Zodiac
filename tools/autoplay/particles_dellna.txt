@@ -1,0 +1,48 @@
+# Dellna's particle systems, for the parity case particles_dellna (phase 1
+# rollout): "Dellna - 0" (--status=Dellna:0) has snow (6000 particles,
+# weather layer) and four chimney smokes with wind 10;0;0 .1 (upper layer):
+# the weapon shop (656,988), the inn (184,958), the big house (66,604) and
+# Ana's home (1240,376), all in view along this zigzag to the north-east.
+# Positions are village pixels.
+wait 100
+shot pd_01_fadein
+wait 1400
+shot pd_02_start
+pos start
+guard 24
+press UP
+wait 800
+release UP
+press RIGHT
+wait 1500
+release RIGHT
+shot pd_03_weapon_inn
+pos r1
+press UP
+wait 1500
+release UP
+shot pd_04_big
+press RIGHT
+wait 1500
+release RIGHT
+pos r2
+press UP
+wait 1500
+release UP
+press RIGHT
+wait 1500
+release RIGHT
+shot pd_05_scrolling
+press UP
+wait 1500
+release UP
+press RIGHT
+wait 1500
+release RIGHT
+wait 100
+shot pd_06_ana
+pos ana
+wait 1000
+shot pd_07_ana_later
+log end
+quit

@@ -12,7 +12,7 @@ menu_pages         menu_pages         --load="Slot 1" --start=Alares
 landscape          landscape          --load="Slot 1" --start=landAlares
 title_start        title_start
 boss               boss               --load="Slot 1" --start=Serphia
-bridge_test        bridge_test        --load="Slot 1" --start=Alares --bridge-test  # extra
+bridge_test        bridge_test        --load="Slot 1" --start=landAlares --bridge-test  # extra
 # Phase 1 pilot: Zazo (all four .vil variants, Zazo - Miner's Home inside the
 # day cases) and two Zazo cutscenes. Dev options (src/main/Main.gd):
 # --start-time=night reaches the night variants (no story starts Zazo at
@@ -26,3 +26,136 @@ zazo_night_0       zazo_night         --load=Start --start=Zazo --start-time=nig
 zazo_night_1       zazo_night         --load="Slot 1" --start=Zazo --start-time=night
 zazo_story_node1   zazo_story_node1   --load="Start demon2" --status=Zazo:0 --start=Zazonode1
 zazo_story_gerbias zazo_story_gerbias --load="Start demon2" --start="Meeting with Gerbias"
+# Phase 1 rollout: one tour per remaining .vil variant that a main.bank place
+# reaches (group tour_*, script village_tour: a guarded walk ahead, left,
+# right, the menu, back; see its header). --start=<place> starts at the
+# place's start0; --status=<place>:<n> picks the variant "<place> - <n>",
+# --start-time=night the "at Night" one (src/main/Main.gd). Which shipped
+# save reaches a status: "Slot 1" has Dellna 1, Parasne 1, Port of Alares 1,
+# The Ship Cabin 1 and Zazo 1, "Start" The Prison Cell 1, the others 0; no
+# save reaches Alares 1, Berca 1/2, Dellna 2, Parasne 2, the Dellna Elder
+# House floors 1 or Dellna - House 1. Night variants are reached only by
+# stories (none for Pass to Zazo, Port of Zazo and Zazo). Content quirks
+# (legacy, kept): Berca - 1 names a villager Herman without a .char file
+# (errors every update); Zazo - Tent has no villager images (Shaun: an
+# error every frame).
+# "Pensara - The North District - Farmer House" has no case: its villager
+# Dido's patrol is not a closed loop, and Instructions.check then quits
+# the game (as the original does).
+tour_alares_belmets_house_0                             village_tour --load="Slot 1" --start="Alares - Belmet's House"
+tour_alares_library_0                                   village_tour --load="Slot 1" --start="Alares - Library"
+tour_alares_0                                           village_tour --load="Slot 1" --start="Alares" --status="Alares:0"
+tour_alares_1                                           village_tour --load="Slot 1" --start="Alares" --status="Alares:1"
+tour_berca_bar_0                                        village_tour --load="Slot 1" --start="Berca - Bar"
+tour_berca_dollys_house_0                               village_tour --load="Slot 1" --start="Berca - Dolly's House"
+tour_berca_house_0                                      village_tour --load="Slot 1" --start="Berca - House"
+tour_berca_library_floor_1_0                            village_tour --load="Slot 1" --start="Berca - Library - Floor 1"
+tour_berca_library_floor_2_0                            village_tour --load="Slot 1" --start="Berca - Library - Floor 2"
+tour_berca_0                                            village_tour --load="Slot 1" --start="Berca" --status="Berca:0"
+tour_berca_1                                            village_tour --load="Slot 1" --start="Berca" --status="Berca:1"
+tour_berca_2                                            village_tour --load="Slot 1" --start="Berca" --status="Berca:2"
+tour_crossroad_0                                        village_tour --load="Slot 1" --start="Crossroad" --status="Crossroad:0"
+tour_crossroad_night_0                                  village_tour --load="Slot 1" --start="Crossroad" --status="Crossroad:0" --start-time=night
+tour_crystal_room_0                                     village_tour --load="Slot 1" --start="Crystal Room"
+tour_dellna_anas_home_0                                 village_tour --load="Slot 1" --start="Dellna - Ana's Home"
+tour_dellna_elder_house_floor_1_0                       village_tour --load="Slot 1" --start="Dellna - Elder House - Floor 1" --status="Dellna - Elder House - Floor 1:0"
+tour_dellna_elder_house_floor_1_1                       village_tour --load="Slot 1" --start="Dellna - Elder House - Floor 1" --status="Dellna - Elder House - Floor 1:1"
+tour_dellna_elder_house_floor_2_0                       village_tour --load="Slot 1" --start="Dellna - Elder House - Floor 2" --status="Dellna - Elder House - Floor 2:0"
+tour_dellna_elder_house_floor_2_1                       village_tour --load="Slot 1" --start="Dellna - Elder House - Floor 2" --status="Dellna - Elder House - Floor 2:1"
+tour_dellna_elder_house_floor_3_0                       village_tour --load="Slot 1" --start="Dellna - Elder House - Floor 3" --status="Dellna - Elder House - Floor 3:0"
+tour_dellna_elder_house_floor_3_1                       village_tour --load="Slot 1" --start="Dellna - Elder House - Floor 3" --status="Dellna - Elder House - Floor 3:1"
+tour_dellna_house_0                                     village_tour --load="Slot 1" --start="Dellna - House" --status="Dellna - House:0"
+tour_dellna_house_1                                     village_tour --load="Slot 1" --start="Dellna - House" --status="Dellna - House:1"
+tour_dellna_0                                           village_tour --load="Slot 1" --start="Dellna" --status="Dellna:0"
+tour_dellna_1                                           village_tour --load="Slot 1" --start="Dellna" --status="Dellna:1"
+tour_dellna_2                                           village_tour --load="Slot 1" --start="Dellna" --status="Dellna:2"
+tour_home_of_celis_celis_home_0                         village_tour --load="Slot 1" --start="Home of Celis - Celis Home"
+tour_home_of_celis_0                                    village_tour --load="Slot 1" --start="Home of Celis" --status="Home of Celis:0"
+tour_home_of_celis_night_0                              village_tour --load="Slot 1" --start="Home of Celis" --status="Home of Celis:0" --start-time=night
+tour_home_of_the_gods_0                                 village_tour --load="Slot 1" --start="Home of the Gods"
+tour_kins_place_0                                       village_tour --load="Slot 1" --start="Kin's Place"
+tour_parasne_tavern_0                                   village_tour --load="Slot 1" --start="Parasne - Tavern"
+tour_parasne_0                                          village_tour --load="Slot 1" --start="Parasne" --status="Parasne:0"
+tour_parasne_1                                          village_tour --load="Slot 1" --start="Parasne" --status="Parasne:1"
+tour_parasne_2                                          village_tour --load="Slot 1" --start="Parasne" --status="Parasne:2"
+tour_parasne_night_0                                    village_tour --load="Slot 1" --start="Parasne" --status="Parasne:0" --start-time=night
+tour_pass_to_zazo_0                                     village_tour --load="Slot 1" --start="Pass to Zazo" --status="Pass to Zazo:0"
+tour_pass_to_zazo_night_0                               village_tour --load="Slot 1" --start="Pass to Zazo" --status="Pass to Zazo:0" --start-time=night
+tour_pensara_the_north_district_civil_house_0           village_tour --load="Slot 1" --start="Pensara - The North District - Civil House"
+tour_pensara_the_north_district_library_0               village_tour --load="Slot 1" --start="Pensara - The North District - Library"
+tour_pensara_the_north_district_0                       village_tour --load="Slot 1" --start="Pensara - The North District"
+tour_pensara_the_school_district_the_clock_tower_floor_1_0 village_tour --load="Slot 1" --start="Pensara - The School District - The Clock Tower - Floor 1"
+tour_pensara_the_school_district_the_clock_tower_floor_2_0 village_tour --load="Slot 1" --start="Pensara - The School District - The Clock Tower - Floor 2"
+tour_pensara_the_school_district_the_school_0           village_tour --load="Slot 1" --start="Pensara - The School District - The School"
+tour_pensara_the_school_district_0                      village_tour --load="Slot 1" --start="Pensara - The School District"
+tour_pensara_the_trade_district_house_1_floor_1_0       village_tour --load="Slot 1" --start="Pensara - The Trade District - House 1 - Floor 1"
+tour_pensara_the_trade_district_house_1_floor_2_0       village_tour --load="Slot 1" --start="Pensara - The Trade District - House 1 - Floor 2"
+tour_pensara_the_trade_district_house_2_floor_1_0       village_tour --load="Slot 1" --start="Pensara - The Trade District - House 2 - Floor 1"
+tour_pensara_the_trade_district_house_2_floor_2_0       village_tour --load="Slot 1" --start="Pensara - The Trade District - House 2 - Floor 2"
+tour_pensara_the_trade_district_mezzas_house_0          village_tour --load="Slot 1" --start="Pensara - The Trade District - Mezza's House"
+tour_pensara_the_trade_district_tent_0                  village_tour --load="Slot 1" --start="Pensara - The Trade District - Tent"
+tour_pensara_the_trade_district_tower_prison_0          village_tour --load="Slot 1" --start="Pensara - The Trade District - Tower Prison"
+tour_pensara_the_trade_district_0                       village_tour --load="Slot 1" --start="Pensara - The Trade District" --status="Pensara - The Trade District:0"
+tour_pensara_the_trade_district_night_0                 village_tour --load="Slot 1" --start="Pensara - The Trade District" --status="Pensara - The Trade District:0" --start-time=night
+tour_port_of_alares_tavern_0                            village_tour --load="Slot 1" --start="Port of Alares - Tavern"
+tour_port_of_alares_0                                   village_tour --load="Slot 1" --start="Port of Alares" --status="Port of Alares:0"
+tour_port_of_alares_1                                   village_tour --load="Slot 1" --start="Port of Alares" --status="Port of Alares:1"
+tour_port_of_alares_night_0                             village_tour --load="Slot 1" --start="Port of Alares" --status="Port of Alares:0" --start-time=night
+tour_port_of_zazo_0                                     village_tour --load="Slot 1" --start="Port of Zazo" --status="Port of Zazo:0"
+tour_port_of_zazo_night_0                               village_tour --load="Slot 1" --start="Port of Zazo" --status="Port of Zazo:0" --start-time=night
+tour_rebel_hideout_0                                    village_tour --load="Slot 1" --start="Rebel Hideout"
+tour_serphia_hall_0                                     village_tour --load="Slot 1" --start="Serphia Hall"
+tour_the_prison_cell_0                                  village_tour --load="Slot 1" --start="The Prison Cell" --status="The Prison Cell:0"
+tour_the_prison_cell_1                                  village_tour --load="Slot 1" --start="The Prison Cell" --status="The Prison Cell:1"
+tour_the_ship_cabin_0                                   village_tour --load="Slot 1" --start="The Ship Cabin" --status="The Ship Cabin:0"
+tour_the_ship_cabin_1                                   village_tour --load="Slot 1" --start="The Ship Cabin" --status="The Ship Cabin:1"
+tour_vincents_office_0                                  village_tour --load="Slot 1" --start="Vincent's Office"
+tour_zazo_farls_house_0                                 village_tour --load="Slot 1" --start="Zazo - Farl's House"
+tour_zazo_miners_home2_0                                village_tour --load="Slot 1" --start="Zazo - Miner's Home2"
+tour_zazo_tent_0                                        village_tour --load="Slot 1" --start="Zazo - Tent"
+tour_zazo_teos_house_0                                  village_tour --load="Slot 1" --start="Zazo - Teo's House"
+# Phase 1 rollout: particle systems the tours do not show well. Home of the
+# Gods with every god system active (the villager-layer systems wait for
+# their status: the gods' dialogs set them) and the exit door's system
+# (status 11), on the tour.
+particles_hotg                                           village_tour --load="Slot 1" --start="Home of the Gods" --status=godAquariusSystem:1,godAriesSystem:1,godCancerSystem:1,godCapricornSystem:1,godGeminiSystem:1,godLeoSystem:1,godLibraSystem:1,godPiscesSystem:1,godSagittariusSystem:1,godScorpiusSystem:1,godTaurusSystem:1,godVirgoSystem:1,godDoorExitSystem:11
+particles_dellna                                         particles_dellna --load="Slot 1" --start=Dellna --status=Dellna:0
+particles_pensara_north                                  particles_pensara_north --load="Slot 1" --start="Pensara - The North District"
+particles_pass_to_zazo                                   particles_pass_to_zazo --load="Slot 1" --start="Pass to Zazo" --status="Pass to Zazo:0"
+# Phase 1 rollout: cutscenes (group story_*, script story_tour: a shot every
+# 1.5 s, CROSS every 0.5 s, until the story mode ends or 180 s), chosen for
+# the image modes, tints, zooms, props and particle fades they use and for
+# the places only cutscenes reach (no main.bank place): Alares - Celis,
+# Dellna - Ana's Home Memory, Home of Celis - Memory, No Place (day and
+# night), The Senate, The Ship Cabin - Story, Zazo - Teo (day and night). The
+# save gives the story its party. Content quirks: Zazonode2's timeline is
+# commented out (/*), so it ends after 3 s; the Celis Memory stories go on to
+# "Running Away From Home", which is no main.bank place (the title screen
+# follows); Tutorial1 is in no main.bank entry and named by nothing, so no
+# case reaches it. story_prolog (script story_prolog) waits for the
+# Prolog's village background swap and translucent-under-actor image at
+# about 250 s; story_circle holds Circle through a cutscene (COTZ-007).
+story_having_fun                                        story_tour --load=Start --start="Celis Memory - Having Fun"
+story_someones_comming                                  story_tour --load=Start --start="Celis Memory - Someone's Comming"
+story_ana_reaction                                      story_tour --load=Start --start="Celis Memory - Ana's Reaction"
+story_home_of_celisnode1                                story_tour --load="Start demon1" --start="Home of Celisnode1"
+story_revelation_of_elmer                               story_tour --load="Start demon1" --start="The Revelation of Elmer"
+story_someones_calling                                  story_tour --load="Start demon1" --start="Someone's Calling"
+story_senate_of_pensara                                 story_tour --load=Start --start="The Senate of Pensara"
+story_farl_story                                        story_tour --load="Start demon2" --start="The Farl Story"
+story_meanwhile_in_zazo                                 story_tour --load="Start demon2" --start="Meanwhile in Zazo"
+story_zazonode2                                         story_tour --load="Start demon2" --start="Zazonode2"
+story_encounter_with_an_ally                            story_tour --load="Start demon2" --start="Encounter With an Ally"
+story_arrival_parasne                                   story_tour --load="Start demon2" --start="Arrival at the Port Town of Parasne"
+story_boat_to_pensara                                   story_tour --load="Start demon2" --start="On the Boat to Pensara"
+story_call_from_the_gods                                story_tour --load="Start demon2" --start="A Call From the Gods"
+story_meeting_with_the_rebels                           story_tour --load="Start Menthu1" --start="Meeting With the Rebels"
+story_menthu_kills_teo                                  story_tour --load="Slot 1" --start="Meanwhile - Menthu Kills Teo"
+story_zazonode3                                         story_tour --load="Slot 1" --start="Zazonode3"
+story_crystal_of_levitation                             story_tour --load="Slot 1" --start="Getting the Crystal of Levitation"
+story_arrival_new_home                                  story_tour --load="Slot 1" --start="Celis Memory - Arrival at the New Home"
+story_the_killing                                       story_tour --load="Slot 1" --start="Celis Memory - The Killing"
+story_elder_of_dellna                                   story_tour --load="Slot 1" --start="Elder of Dellna Saves the Day"
+story_ending_part3                                      story_tour --load="Slot 1" --start="Ending - Part 3"
+story_prolog                                            story_prolog --load=Start --start=Prolog
+story_circle                                             story_circle --load="Start demon2" --start="Encounter With an Ally"

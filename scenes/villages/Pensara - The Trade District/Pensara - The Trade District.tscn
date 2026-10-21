@@ -1,0 +1,486 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/VillageScene.tscn" id="1_base"]
+[ext_resource type="Texture2D" path="res://scenes/villages/Pensara - The Trade District/Pensara - The Trade District.png" id="2_qy6dy"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/54.png" id="3_utg60"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/58.png" id="4_tf8tc"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/40.png" id="5_04leb"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/57.png" id="6_1hxhs"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/51.png" id="7_8tyvv"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/22.png" id="8_ous16"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/4.png" id="9_87uaw"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/13.png" id="10_74sgj"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/26.png" id="11_bb4d3"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/31.png" id="12_dnj1w"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/11.png" id="13_ry7yx"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/52.png" id="14_wdfu0"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/10.png" id="15_8y3pm"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/50.png" id="16_ylqqx"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/55.png" id="17_fs4rm"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/16.png" id="18_47kw3"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/65.png" id="19_7vci1"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/36.png" id="20_3hteq"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/3.png" id="21_y8fxx"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/56.png" id="22_fw5o7"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/49.png" id="23_ufw0f"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/44.png" id="24_hts32"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/37.png" id="25_3nhbf"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/43.png" id="26_8yevo"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/29.png" id="27_4oowc"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/45.png" id="28_3goh2"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/53.png" id="29_q0c70"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/0.png" id="30_m8ico"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/28.png" id="31_fp2s2"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/38.png" id="32_4dyc3"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/48.png" id="33_se3nh"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/47.png" id="34_qmd72"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/33.png" id="35_rhnmn"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/64.png" id="36_x2guw"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/25.png" id="37_tjasa"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/8.png" id="38_h70iy"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/34.png" id="39_ldwyy"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/32.png" id="40_ldd52"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/59.png" id="41_yfb3a"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/39.png" id="42_6jhkk"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/9.png" id="43_cphr7"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/21.png" id="44_e6807"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/5.png" id="45_30jnt"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/12.png" id="46_ysr8d"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/42.png" id="47_ghhx7"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/61.png" id="48_s8uu1"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/17.png" id="49_j83fd"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/7.png" id="50_ktd2b"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/27.png" id="51_5hxgi"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/62.png" id="52_3vidw"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/1.png" id="53_5epk2"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/63.png" id="54_y8h2i"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/66.png" id="55_ikybm"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/23.png" id="56_jhea1"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/24.png" id="57_jv15d"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/60.png" id="58_6haev"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/15.png" id="59_1vo1k"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/18.png" id="60_elaed"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/19.png" id="61_jnffm"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/35.png" id="62_bwxgm"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/30.png" id="63_k5y7v"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/20.png" id="64_mqnyv"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/46.png" id="65_nxfyd"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/41.png" id="66_tseau"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/6.png" id="67_45vxy"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/14.png" id="68_qdh31"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/top/2.png" id="69_6laik"]
+
+[node name="Pensara - The Trade District" instance=ExtResource("1_base")]
+place_name = "Pensara - The Trade District"
+folder_name = "Pensara - The Trade District"
+village_name = "Pensara - The Trade District"
+background_folder = "Pensara - The Trade District"
+size = Vector2i(2820, 1442)
+actual_size = Vector2i(2820, 1442)
+back_extra = 1
+wind_force = PackedFloat64Array(0, 0, 0)
+
+[node name="Background" parent="." index="1"]
+texture = ExtResource("2_qy6dy")
+
+[node name="00 54" type="Sprite2D" parent="Overhead" index="0"]
+use_parent_material = true
+position = Vector2(1123, 881)
+texture = ExtResource("3_utg60")
+centered = false
+
+[node name="01 58" type="Sprite2D" parent="Overhead" index="1"]
+use_parent_material = true
+position = Vector2(2599, 950)
+texture = ExtResource("4_tf8tc")
+centered = false
+
+[node name="02 40" type="Sprite2D" parent="Overhead" index="2"]
+use_parent_material = true
+position = Vector2(1804, 597)
+texture = ExtResource("5_04leb")
+centered = false
+
+[node name="03 57" type="Sprite2D" parent="Overhead" index="3"]
+use_parent_material = true
+position = Vector2(2580, 931)
+texture = ExtResource("6_1hxhs")
+centered = false
+
+[node name="04 51" type="Sprite2D" parent="Overhead" index="4"]
+use_parent_material = true
+position = Vector2(1761, 865)
+texture = ExtResource("7_8tyvv")
+centered = false
+
+[node name="05 22" type="Sprite2D" parent="Overhead" index="5"]
+use_parent_material = true
+position = Vector2(343, 411)
+texture = ExtResource("8_ous16")
+centered = false
+
+[node name="06 4" type="Sprite2D" parent="Overhead" index="6"]
+use_parent_material = true
+position = Vector2(1141, 6)
+texture = ExtResource("9_87uaw")
+centered = false
+
+[node name="07 13" type="Sprite2D" parent="Overhead" index="7"]
+use_parent_material = true
+position = Vector2(756, 328)
+texture = ExtResource("10_74sgj")
+centered = false
+
+[node name="08 26" type="Sprite2D" parent="Overhead" index="8"]
+use_parent_material = true
+position = Vector2(2123, 440)
+texture = ExtResource("11_bb4d3")
+centered = false
+
+[node name="09 31" type="Sprite2D" parent="Overhead" index="9"]
+use_parent_material = true
+position = Vector2(2332, 473)
+texture = ExtResource("12_dnj1w")
+centered = false
+
+[node name="10 11" type="Sprite2D" parent="Overhead" index="10"]
+use_parent_material = true
+position = Vector2(494, 325)
+texture = ExtResource("13_ry7yx")
+centered = false
+
+[node name="11 52" type="Sprite2D" parent="Overhead" index="11"]
+use_parent_material = true
+position = Vector2(1798, 865)
+texture = ExtResource("14_wdfu0")
+centered = false
+
+[node name="12 10" type="Sprite2D" parent="Overhead" index="12"]
+use_parent_material = true
+position = Vector2(829, 253)
+texture = ExtResource("15_8y3pm")
+centered = false
+
+[node name="13 50" type="Sprite2D" parent="Overhead" index="13"]
+use_parent_material = true
+position = Vector2(349, 860)
+texture = ExtResource("16_ylqqx")
+centered = false
+
+[node name="14 55" type="Sprite2D" parent="Overhead" index="14"]
+use_parent_material = true
+position = Vector2(809, 883)
+texture = ExtResource("17_fs4rm")
+centered = false
+
+[node name="15 16" type="Sprite2D" parent="Overhead" index="15"]
+use_parent_material = true
+position = Vector2(2124, 339)
+texture = ExtResource("18_47kw3")
+centered = false
+
+[node name="16 65" type="Sprite2D" parent="Overhead" index="16"]
+use_parent_material = true
+position = Vector2(1197, 1440)
+texture = ExtResource("19_7vci1")
+centered = false
+
+[node name="17 36" type="Sprite2D" parent="Overhead" index="17"]
+use_parent_material = true
+position = Vector2(880, 527)
+texture = ExtResource("20_3hteq")
+centered = false
+
+[node name="18 3" type="Sprite2D" parent="Overhead" index="18"]
+use_parent_material = true
+position = Vector2(941, 5)
+texture = ExtResource("21_y8fxx")
+centered = false
+
+[node name="19 56" type="Sprite2D" parent="Overhead" index="19"]
+use_parent_material = true
+position = Vector2(2424, 925)
+texture = ExtResource("22_fw5o7")
+centered = false
+
+[node name="20 49" type="Sprite2D" parent="Overhead" index="20"]
+use_parent_material = true
+position = Vector2(2029, 852)
+texture = ExtResource("23_ufw0f")
+centered = false
+
+[node name="21 44" type="Sprite2D" parent="Overhead" index="21"]
+use_parent_material = true
+position = Vector2(240, 772)
+texture = ExtResource("24_hts32")
+centered = false
+
+[node name="22 37" type="Sprite2D" parent="Overhead" index="22"]
+use_parent_material = true
+position = Vector2(238, 540)
+texture = ExtResource("25_3nhbf")
+centered = false
+
+[node name="23 43" type="Sprite2D" parent="Overhead" index="23"]
+use_parent_material = true
+position = Vector2(758, 757)
+texture = ExtResource("26_8yevo")
+centered = false
+
+[node name="24 29" type="Sprite2D" parent="Overhead" index="24"]
+use_parent_material = true
+position = Vector2(2172, 465)
+texture = ExtResource("27_4oowc")
+centered = false
+
+[node name="25 45" type="Sprite2D" parent="Overhead" index="25"]
+use_parent_material = true
+position = Vector2(590, 796)
+texture = ExtResource("28_3goh2")
+centered = false
+
+[node name="26 53" type="Sprite2D" parent="Overhead" index="26"]
+use_parent_material = true
+position = Vector2(952, 881)
+texture = ExtResource("29_q0c70")
+centered = false
+
+[node name="27 0" type="Sprite2D" parent="Overhead" index="27"]
+use_parent_material = true
+position = Vector2(483, 0)
+texture = ExtResource("30_m8ico")
+centered = false
+
+[node name="28 28" type="Sprite2D" parent="Overhead" index="28"]
+use_parent_material = true
+position = Vector2(786, 452)
+texture = ExtResource("31_fp2s2")
+centered = false
+
+[node name="29 38" type="Sprite2D" parent="Overhead" index="29"]
+use_parent_material = true
+position = Vector2(600, 567)
+texture = ExtResource("32_4dyc3")
+centered = false
+
+[node name="30 48" type="Sprite2D" parent="Overhead" index="30"]
+use_parent_material = true
+position = Vector2(1040, 852)
+texture = ExtResource("33_se3nh")
+centered = false
+
+[node name="31 47" type="Sprite2D" parent="Overhead" index="31"]
+use_parent_material = true
+position = Vector2(118, 842)
+texture = ExtResource("34_qmd72")
+centered = false
+
+[node name="32 33" type="Sprite2D" parent="Overhead" index="32"]
+use_parent_material = true
+position = Vector2(1378, 488)
+texture = ExtResource("35_rhnmn")
+centered = false
+
+[node name="33 64" type="Sprite2D" parent="Overhead" index="33"]
+use_parent_material = true
+position = Vector2(979, 1440)
+texture = ExtResource("36_x2guw")
+centered = false
+
+[node name="34 25" type="Sprite2D" parent="Overhead" index="34"]
+use_parent_material = true
+position = Vector2(50, 439)
+texture = ExtResource("37_tjasa")
+centered = false
+
+[node name="35 8" type="Sprite2D" parent="Overhead" index="35"]
+use_parent_material = true
+position = Vector2(861, 188)
+texture = ExtResource("38_h70iy")
+centered = false
+
+[node name="36 34" type="Sprite2D" parent="Overhead" index="36"]
+use_parent_material = true
+position = Vector2(1161, 526)
+texture = ExtResource("39_ldwyy")
+centered = false
+
+[node name="37 32" type="Sprite2D" parent="Overhead" index="37"]
+use_parent_material = true
+position = Vector2(1368, 488)
+texture = ExtResource("40_ldd52")
+centered = false
+
+[node name="38 59" type="Sprite2D" parent="Overhead" index="38"]
+use_parent_material = true
+position = Vector2(2377, 959)
+texture = ExtResource("41_yfb3a")
+centered = false
+
+[node name="39 39" type="Sprite2D" parent="Overhead" index="39"]
+use_parent_material = true
+position = Vector2(104, 595)
+texture = ExtResource("42_6jhkk")
+centered = false
+
+[node name="40 9" type="Sprite2D" parent="Overhead" index="40"]
+use_parent_material = true
+position = Vector2(1195, 188)
+texture = ExtResource("43_cphr7")
+centered = false
+
+[node name="41 21" type="Sprite2D" parent="Overhead" index="41"]
+use_parent_material = true
+position = Vector2(528, 408)
+texture = ExtResource("44_e6807")
+centered = false
+
+[node name="42 5" type="Sprite2D" parent="Overhead" index="42"]
+use_parent_material = true
+position = Vector2(7, 13)
+texture = ExtResource("45_30jnt")
+centered = false
+
+[node name="43 12" type="Sprite2D" parent="Overhead" index="43"]
+use_parent_material = true
+position = Vector2(1376, 327)
+texture = ExtResource("46_ysr8d")
+centered = false
+
+[node name="44 42" type="Sprite2D" parent="Overhead" index="44"]
+use_parent_material = true
+position = Vector2(1123, 711)
+texture = ExtResource("47_ghhx7")
+centered = false
+
+[node name="45 61" type="Sprite2D" parent="Overhead" index="45"]
+use_parent_material = true
+position = Vector2(2495, 992)
+texture = ExtResource("48_s8uu1")
+centered = false
+
+[node name="46 17" type="Sprite2D" parent="Overhead" index="46"]
+use_parent_material = true
+position = Vector2(2370, 339)
+texture = ExtResource("49_j83fd")
+centered = false
+
+[node name="47 7" type="Sprite2D" parent="Overhead" index="47"]
+use_parent_material = true
+position = Vector2(243, 106)
+texture = ExtResource("50_ktd2b")
+centered = false
+
+[node name="48 27" type="Sprite2D" parent="Overhead" index="48"]
+use_parent_material = true
+position = Vector2(2369, 440)
+texture = ExtResource("51_5hxgi")
+centered = false
+
+[node name="49 62" type="Sprite2D" parent="Overhead" index="49"]
+use_parent_material = true
+position = Vector2(2540, 1001)
+texture = ExtResource("52_3vidw")
+centered = false
+
+[node name="50 1" type="Sprite2D" parent="Overhead" index="50"]
+use_parent_material = true
+position = Vector2(1998, 0)
+texture = ExtResource("53_5epk2")
+centered = false
+
+[node name="51 63" type="Sprite2D" parent="Overhead" index="51"]
+use_parent_material = true
+position = Vector2(0, 1069)
+texture = ExtResource("54_y8h2i")
+centered = false
+
+[node name="52 66" type="Sprite2D" parent="Overhead" index="52"]
+use_parent_material = true
+position = Vector2(1333, 1069)
+texture = ExtResource("55_ikybm")
+centered = false
+
+[node name="53 23" type="Sprite2D" parent="Overhead" index="53"]
+use_parent_material = true
+position = Vector2(1755, 430)
+texture = ExtResource("56_jhea1")
+centered = false
+
+[node name="54 24" type="Sprite2D" parent="Overhead" index="54"]
+use_parent_material = true
+position = Vector2(1438, 432)
+texture = ExtResource("57_jv15d")
+centered = false
+
+[node name="55 60" type="Sprite2D" parent="Overhead" index="55"]
+use_parent_material = true
+position = Vector2(2425, 992)
+texture = ExtResource("58_6haev")
+centered = false
+
+[node name="56 15" type="Sprite2D" parent="Overhead" index="56"]
+use_parent_material = true
+position = Vector2(51, 338)
+texture = ExtResource("59_1vo1k")
+centered = false
+
+[node name="57 18" type="Sprite2D" parent="Overhead" index="57"]
+use_parent_material = true
+position = Vector2(230, 349)
+texture = ExtResource("60_elaed")
+centered = false
+
+[node name="58 19" type="Sprite2D" parent="Overhead" index="58"]
+use_parent_material = true
+position = Vector2(1073, 368)
+texture = ExtResource("61_jnffm")
+centered = false
+
+[node name="59 35" type="Sprite2D" parent="Overhead" index="59"]
+use_parent_material = true
+position = Vector2(1290, 526)
+texture = ExtResource("62_bwxgm")
+centered = false
+
+[node name="60 30" type="Sprite2D" parent="Overhead" index="60"]
+use_parent_material = true
+position = Vector2(0, 467)
+texture = ExtResource("63_k5y7v")
+centered = false
+
+[node name="61 20" type="Sprite2D" parent="Overhead" index="61"]
+use_parent_material = true
+position = Vector2(2435, 379)
+texture = ExtResource("64_mqnyv")
+centered = false
+
+[node name="62 46" type="Sprite2D" parent="Overhead" index="62"]
+use_parent_material = true
+position = Vector2(1279, 800)
+texture = ExtResource("65_nxfyd")
+centered = false
+
+[node name="63 41" type="Sprite2D" parent="Overhead" index="63"]
+use_parent_material = true
+position = Vector2(1916, 702)
+texture = ExtResource("66_tseau")
+centered = false
+
+[node name="64 6" type="Sprite2D" parent="Overhead" index="64"]
+use_parent_material = true
+position = Vector2(1419, 24)
+texture = ExtResource("67_45vxy")
+centered = false
+
+[node name="65 14" type="Sprite2D" parent="Overhead" index="65"]
+use_parent_material = true
+position = Vector2(1410, 331)
+texture = ExtResource("68_qdh31")
+centered = false
+
+[node name="66 2" type="Sprite2D" parent="Overhead" index="66"]
+use_parent_material = true
+position = Vector2(2332, 0)
+texture = ExtResource("69_6laik")
+centered = false

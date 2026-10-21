@@ -1,0 +1,37 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Berca - Dolly's House/Berca - Dolly's House.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/ActorView.tscn" id="2_uly6m"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Characters/Guy.tres" id="3_fs0ul"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Berca - Dolly's House/Dolly.tres" id="4_hnb1l"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="5_45ug0"]
+
+[node name="Berca - Dolly\'s House - 0" instance=ExtResource("1_base")]
+
+[node name="00 Guy" parent="Actors" index="0" instance=ExtResource("2_uly6m")]
+position = Vector2(387, 437)
+sprite_frames = ExtResource("3_fs0ul")
+animation = &"down"
+role = 1
+villager_name = "Guy"
+statuses = PackedInt32Array(3, 4, 5)
+villager_folder = "Berca - Dolly's House"
+
+[node name="01 Dolly" parent="Actors" index="1" instance=ExtResource("2_uly6m")]
+position = Vector2(565, 416)
+sprite_frames = ExtResource("4_hnb1l")
+animation = &"down"
+role = 1
+villager_name = "Dolly"
+statuses = PackedInt32Array()
+villager_folder = "Berca - Dolly's House"
+
+[node name="00 Berca" parent="Doors" index="0" instance=ExtResource("5_45ug0")]
+position = Vector2(496, 560)
+hole = true
+kinds = PackedStringArray("switch")
+targets = PackedStringArray("Berca")
+directions = PackedInt32Array(2)
+fade = 1
+to_pos = PackedFloat64Array(1028, 937, 2, -1)
+sign_lines = PackedStringArray()

@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Valie/Valie9.png" id="1_g44tb"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Valie/Valie10.png" id="2_k1h62"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Valie/Valie11.png" id="3_2545q"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Valie/Valie12.png" id="4_qqib8"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Valie/Valie13.png" id="5_24k25"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Valie/Valie14.png" id="6_kqjbc"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Valie/Valie15.png" id="7_yxcsr"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Valie/Valie16.png" id="8_j6snp"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Valie/Valie5.png" id="9_0unja"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Valie/Valie6.png" id="10_2p1xg"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Valie/Valie7.png" id="11_w8etr"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Valie/Valie8.png" id="12_u2cba"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Valie/Valie1.png" id="13_q45ul"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Valie/Valie2.png" id="14_h4rrb"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Valie/Valie3.png" id="15_ldjnb"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Valie/Valie4.png" id="16_sjdte"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_g44tb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_k1h62")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2545q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qqib8")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_24k25")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_kqjbc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_yxcsr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_j6snp")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_0unja")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_2p1xg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_w8etr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_u2cba")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_q45ul")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_h4rrb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_ldjnb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_sjdte")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

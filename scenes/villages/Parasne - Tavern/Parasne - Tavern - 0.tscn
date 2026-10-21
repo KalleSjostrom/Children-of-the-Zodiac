@@ -1,0 +1,47 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Parasne - Tavern/Parasne - Tavern.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/ActorView.tscn" id="2_wf7cg"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Parasne - Tavern/Alsie.tres" id="3_u84j0"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Parasne - Tavern/Boris.tres" id="4_pk6x6"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Parasne - Tavern/Forah.tres" id="5_flccn"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="6_ny1dy"]
+
+[node name="Parasne - Tavern - 0" instance=ExtResource("1_base")]
+
+[node name="00 Alsie" parent="Actors" index="0" instance=ExtResource("2_wf7cg")]
+position = Vector2(540, 420)
+sprite_frames = ExtResource("3_u84j0")
+animation = &"down"
+role = 1
+villager_name = "Alsie"
+statuses = PackedInt32Array()
+villager_folder = "Parasne - Tavern"
+
+[node name="01 Boris" parent="Actors" index="1" instance=ExtResource("2_wf7cg")]
+position = Vector2(400, 300)
+sprite_frames = ExtResource("4_pk6x6")
+animation = &"down"
+role = 1
+villager_name = "Boris"
+statuses = PackedInt32Array()
+villager_folder = "Parasne - Tavern"
+
+[node name="02 Forah" parent="Actors" index="2" instance=ExtResource("2_wf7cg")]
+position = Vector2(325, 365)
+sprite_frames = ExtResource("5_flccn")
+animation = &"down"
+role = 1
+villager_name = "Forah"
+statuses = PackedInt32Array()
+villager_folder = "Parasne - Tavern"
+
+[node name="00 Parasne" parent="Doors" index="0" instance=ExtResource("6_ny1dy")]
+position = Vector2(494, 569)
+hole = true
+kinds = PackedStringArray("switch")
+targets = PackedStringArray("Parasne")
+directions = PackedInt32Array(2)
+fade = 1
+to_pos = PackedFloat64Array(226, 1229, 2, -1)
+sign_lines = PackedStringArray()

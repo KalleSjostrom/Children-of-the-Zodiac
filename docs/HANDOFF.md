@@ -1,4 +1,4 @@
-# Handoff: state of the Godot port (2026-10-20, after steps 1–3, modernization phase 0 and the phase 1 pilot)
+# Handoff: state of the Godot port (2026-10-21, after steps 1–3, modernization phase 0 and phase 1 steps A and B)
 
 Conventions: legacy (ported) code follows `docs/PORTING.md`; new code
 (scenes, resources, tools, bridge) follows `docs/ARCHITECTURE.md`. The
@@ -67,44 +67,56 @@ section 5; conventions and workflow in `docs/ARCHITECTURE.md`):
   in place for later phases (unused).
 - Bridge test: `--bridge-test` + `tools/autoplay/bridge_test.txt` (parity case
   `bridge_test`) shows `tools/bridge_test/BridgeTest.tscn` instead of the
-  Alares background tiles, through fade-in, walking, a dialog, a store round
-  trip, the menu (thumbnail) and leaving to the world map (the scene is freed
-  at the next mode switch).
+  world map's background tiles (Alares until the phase 1 rollout), through
+  fade-in, walking a road, the menu (thumbnail), entering a labyrinth and
+  the menu there (the scene is freed at that mode switch).
 
-**Modernization phase 1 pilot (villages as scenes): done** for Zazo (all
-four `.vil` variants) and "Zazo - Miner's Home", steps A and B (plan 6.7;
-conventions in `docs/ARCHITECTURE.md` section 9):
-- Scenes: `scenes/villages/VillageScene.tscn` (layout), `scenes/villages/Zazo/`
-  and `scenes/villages/Zazo - Miner's Home/` (base + one inherited scene per
-  `.vil`, stitched background PNG), shared types in `scenes/common/`,
-  SpriteFrames in `resources/sprite_frames/`. Made by
-  `tools/import/vil_to_scene.sh` (deterministic).
-- Step A: `VillageLoader.load` builds converted places from their scenes
-  (`VillageScene.load_into`); `tools/import/verify_villages.gd` compares
-  both ways field by field (pilot and a dry run of all 89 `.vil` files pass).
+**Modernization phase 1 (villages as scenes): steps A and B done** for all
+63 places and 89 `.vil` variants: the pilot (Zazo, "Zazo - Miner's Home",
+plan 6.7) and the rollout (the other 61 places, plan 6.8); conventions in
+`docs/ARCHITECTURE.md` section 9, the procedure in
+`docs/CONVERTING_VILLAGES.md`:
+- Scenes: `scenes/villages/VillageScene.tscn` (layout), one folder per place
+  in `scenes/villages/` (base + one inherited scene per `.vil`, stitched
+  background PNGs), shared types in `scenes/common/`, SpriteFrames in
+  `resources/sprite_frames/`. Made by `tools/import/vil_to_scene.sh --all`
+  (deterministic: converting twice changes no file).
+- Step A: `VillageLoader.load` builds every place from its scene
+  (`VillageScene.load_into`); `tools/import/verify_villages.gd --all` with
+  the saves "Slot 1" and "Start": 240 builds, all pass.
 - Step B: the scene draws the world (background, actors, top layer, night,
   particles via `LegacyParticles2D`), also in cutscenes (camera zoom, tint,
   under-actor images); emotions, dialogs, signs, fades and the over-actor
   cutscene images stay legacy overlays. `--legacy=villages` keeps the old
-  path; `--legacy=village_top_layer` the legacy top-layer rule.
-- Parity: 6 Zazo cases (`tools/parity/cases.txt`), goldens of all 16 cases
-  recorded before the conversion; results in plan 6.7.
+  path; `--legacy=village_top_layer` the legacy top-layer rule. Parity:
+  identical except cutscene zooms (tile seams, rounding) and, by default,
+  the always-drawn top layer (decision 7); plan 6.8.
+- Parity coverage: 117 cases (`tools/parity/cases.txt`): the 17 older ones,
+  a tour of every variant a main.bank place reaches (`tour_*`), four
+  particle cases and 24 cutscenes (`story_*`). `parity.sh --jobs=<n>` and
+  case patterns make a full run about 40 minutes.
+- The `.vil` files stay (decision 5); closing the phase is prepared in plan
+  6.9 (what removing the legacy village path deletes, and what keeps the
+  exit criteria from being met).
 - Dev options: `--start-time=night`, `--status=<name>:<value>`, AutoPlay
-  `pos`, parity `--ignore-world`; `tools/check.sh` also compiles `scenes/`
-  and `tools/`.
+  `pos`, `heading`, `guard`, the relative buttons `AHEAD`/`BEHIND`/`ALEFT`/
+  `ARIGHT`, `[zoom]` lines; parity `--ignore-world`, `--jobs`; `--seed` runs
+  read no game pad; `tools/check.sh` also compiles `scenes/` and `tools/`.
 
 ## Plan (what is left)
 
-0. **Modernization:** phase 1 continues with the other places
-   (`docs/CONVERTING_VILLAGES.md`): interiors first, then the towns. Open
-   decisions that the next places touch: 5 (delete the `.vil` files: keep
-   them until then, the data check reads them) and 6 (time base, before any
-   particle preset or Tween). Record goldens before each change.
+0. **Modernization:** closing phase 1 (plan 6.9) needs decision 5 (delete
+   the `.vil` files) and the removal of the legacy village path; GPU
+   particle presets need decision 6 (time base). Phase 2 (dungeons) and
+   phase 3 can start. Record goldens before each change.
 
 1. **Performance (top priority):** labyrinths with rain/snow run at ≈30 FPS,
    battles there at 20–28 FPS (10 000 weather particles per frame through
-   GDScript + the GL emulation in `src/weather`). Everything else measured
-   runs at 60 FPS. Per-frame fades assume 60 FPS. Options: batch particle quads
+   GDScript + the GL emulation in `src/weather`). Villages: Dellna's snow
+   runs at 12 FPS in the legacy path and 18 with the scene, Home of the Gods
+   at 6 FPS once its 12 god systems are active (the GDScript particle
+   simulation; plan 6.8). The other villages measured run at 60 FPS.
+   Per-frame fades assume 60 FPS. Options: batch particle quads
    into one mesh per frame in `GLBackend`, or tighten the weather loops.
    Measure with the `fps=` value that AutoPlay prints with every `log`/`shot`.
 2. **More runtime coverage:** level-up screen, riddle mini-games
@@ -134,10 +146,12 @@ conventions in `docs/ARCHITECTURE.md` section 9):
   only the shipped saves.
 - Parity: `tools/parity/parity.sh record <set>` / `compare <a> <b>` /
   `ab "<args a>" "<args b>" [case…]`, see `docs/ARCHITECTURE.md` section 7.
-  Runs are windowed (screenshots need a renderer) and take about 4 minutes
-  for all cases (`--uncapped`; battles are bound by the weather at ~26 FPS).
-  The `fps=` values of parity runs are meaningless; measure performance in
-  normal runs.
+  Runs are windowed (screenshots need a renderer) and take about 40 minutes
+  for all 117 cases with `--jobs=5` (`--uncapped`; battles are bound by the
+  weather at ~26 FPS, `particles_hotg` by its particles at ~6 FPS). The
+  `fps=` values of parity runs are meaningless; measure performance in
+  normal runs. Do not type while a recording runs (a new run's window takes
+  the focus).
 - The developer console (§ / ` / F1 in debug builds, README) jumps to any
   place (`goto`). It replaces the Cheater (formerly SELECT + DOWN, i.e.
   Space + Down), whose menu of places, stories and buildings its `cheater`
@@ -153,11 +167,21 @@ conventions in `docs/ARCHITECTURE.md` section 9):
   (labyrinth weather, save points, battle background snow) still run at 60
   updates per second.
 - Positions from `Values.createNormalPoint(x, y)` are `[y, x]`.
-- Content quirks met in phase 1: "Zazo at Night - 0" quits the game unless
-  its loot `Zazoname` is taken (equipment "2"); the Zazo night stores name
-  images that do not exist (`inn.jpg`, `burt.png`); no story reaches Zazo
-  at night (`--start-time=night`); "Start demon2" is the shipped save with
-  Kin, Celis and Borealis.
+- Content quirks met in phase 1 (kept): "Zazo at Night - 0" quits the game
+  unless its loot `Zazoname` is taken (equipment "2"); the Zazo night stores
+  name images that do not exist (`inn.jpg`, `burt.png`); no story reaches
+  Zazo, Pass to Zazo or Port of Zazo at night (`--start-time=night`);
+  "Pensara - The North District - Farmer House" quits the game on entry
+  (villager Dido's patrol is not closed, `Instructions.check`); Berca - 1
+  names a villager Herman without a `.char` file; Zazo - Tent has no
+  villager images; Podd's image path (Civil House) cannot resolve; a
+  Berca - 1 loot line lacks its directions; Alares - 1, Dellna - 2,
+  Parasne - 2, Kin's Place, Zazo - Farl's House and several night variants
+  have no obstacles; Zazonode2's timeline is commented out; Tutorial1,
+  Dorma's Tranquility and Menthu Battle are reached by nothing. Saves:
+  "Start demon1" has Kin and Celis, "Start demon2" adds Borealis, "Start
+  Menthu1" and "Start d3" add Zalzi; "Slot 2" and "Slot 3" are an older
+  data version (loading them quits).
 - GDScript gotchas met so far: unqualified calls to methods named like builtins
   (`load()`) hit the builtin → use `self.load()`; inner classes may not shadow
   global/native class names; overrides need ≥ parent parameter count with extras

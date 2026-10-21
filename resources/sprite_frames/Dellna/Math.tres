@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Math/Math9.png" id="1_pjguw"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Math/Math10.png" id="2_jpg7w"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Math/Math11.png" id="3_tbcg1"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Math/Math12.png" id="4_ukbxt"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Math/Math13.png" id="5_2frdj"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Math/Math14.png" id="6_t20gs"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Math/Math15.png" id="7_n23oo"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Math/Math16.png" id="8_fb22c"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Math/Math5.png" id="9_o0eym"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Math/Math6.png" id="10_5fr23"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Math/Math7.png" id="11_epgl3"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Math/Math8.png" id="12_5kxvi"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Math/Math1.png" id="13_gq4o0"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Math/Math2.png" id="14_p6i6d"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Math/Math3.png" id="15_g2vjj"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Math/Math4.png" id="16_q6awo"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_pjguw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_jpg7w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_tbcg1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ukbxt")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_2frdj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_t20gs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_n23oo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_fb22c")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_o0eym")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_5fr23")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_epgl3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_5kxvi")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_gq4o0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_p6i6d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_g2vjj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_q6awo")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

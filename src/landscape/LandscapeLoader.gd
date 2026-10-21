@@ -27,6 +27,10 @@ func init(name, lab = null, hinders = null):
 		push_error("LandscapeLoader: no landscape map for start node " + str(sn))
 	else:
 		mapLoader.parseFile(landscape)
+	# Port fix: the map loader refers back to this loader (Java's inner class
+	# reference), and the RefCounted cycle would keep the mode, and its scene,
+	# alive after it is left. It is not used after parsing.
+	mapLoader = null
 	releaseAll()
 
 

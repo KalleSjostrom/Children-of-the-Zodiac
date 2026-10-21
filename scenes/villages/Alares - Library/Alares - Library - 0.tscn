@@ -1,0 +1,57 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/Alares - Library/Alares - Library.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/ActorView.tscn" id="2_wfeqv"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Alares - Library/Falk.tres" id="3_6no60"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Alares - Library/Ginis.tres" id="4_u2mgl"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Alares - Library/Onrod.tres" id="5_yf6y5"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="6_mmwyh"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageLoot.tscn" id="7_iedxi"]
+
+[node name="Alares - Library - 0" instance=ExtResource("1_base")]
+
+[node name="00 Falk" parent="Actors" index="0" instance=ExtResource("2_wfeqv")]
+position = Vector2(565, 515)
+sprite_frames = ExtResource("3_6no60")
+animation = &"right"
+role = 1
+villager_name = "Falk"
+statuses = PackedInt32Array()
+villager_folder = "Alares - Library"
+
+[node name="01 Ginis" parent="Actors" index="1" instance=ExtResource("2_wfeqv")]
+position = Vector2(555, 500)
+sprite_frames = ExtResource("4_u2mgl")
+animation = &"down"
+role = 1
+villager_name = "Ginis"
+statuses = PackedInt32Array()
+villager_folder = "Alares - Library"
+
+[node name="02 Onrod" parent="Actors" index="2" instance=ExtResource("2_wfeqv")]
+position = Vector2(175, 390)
+sprite_frames = ExtResource("5_yf6y5")
+animation = &"up"
+role = 1
+villager_name = "Onrod"
+statuses = PackedInt32Array()
+villager_folder = "Alares - Library"
+
+[node name="00 Alares" parent="Doors" index="0" instance=ExtResource("6_mmwyh")]
+position = Vector2(494, 609)
+hole = true
+kinds = PackedStringArray("switch")
+targets = PackedStringArray("Alares")
+directions = PackedInt32Array(2)
+fade = 1
+to_pos = PackedFloat64Array(533, 1317, 2, -1)
+sign_lines = PackedStringArray()
+
+[node name="00 loot1" parent="Loot" index="0" instance=ExtResource("7_iedxi")]
+position = Vector2(243, 678)
+loot_name = "loot1"
+directions = PackedInt32Array(0)
+content_name = "Book_of_Nature"
+content_type = 1
+amount = 1
+lines = PackedStringArray("You found Book of Nature.", "(It is added to your Key Items.)")

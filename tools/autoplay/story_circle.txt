@@ -1,0 +1,25 @@
+# A cutscene with Circle held (COTZ-007: Organizer.update runs three times
+# per drawn frame), for the parity case story_circle (phase 1 rollout):
+# "Encounter With an Ally" (Pass to Zazo: actors walking, a zoom, dialogs).
+# Circle is pressed after the story has started (it must be up once after
+# the start) and held to the end; CROSS taps end the dialog pages.
+wait 100
+shot c_00_start
+wait 900
+press CIRCLE
+mark
+wait 250
+tap CROSS
+wait 500
+shot c_#
+wait 250
+tap CROSS
+wait 500
+tap CROSS
+log tick
+loopuntil !VillageStory 90000
+release CIRCLE
+wait 1500
+shot c_99_after
+log end
+quit

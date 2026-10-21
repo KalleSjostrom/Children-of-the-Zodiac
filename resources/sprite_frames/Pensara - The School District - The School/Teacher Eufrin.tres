@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin9.png" id="1_vgwqb"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin10.png" id="2_8q4s4"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin11.png" id="3_pytna"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin12.png" id="4_46bxs"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin13.png" id="5_k27kb"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin14.png" id="6_vq5wr"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin15.png" id="7_8p4dk"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin16.png" id="8_jpmtt"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin5.png" id="9_wgfy5"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin6.png" id="10_ylscs"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin7.png" id="11_wfwjx"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin8.png" id="12_ow878"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin1.png" id="13_okww0"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin2.png" id="14_nsa8q"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin3.png" id="15_wwyxg"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin4.png" id="16_07mqw"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_vgwqb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_8q4s4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_pytna")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_46bxs")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_k27kb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_vq5wr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_8p4dk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_jpmtt")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_wgfy5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ylscs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_wfwjx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ow878")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_okww0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_nsa8q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_wwyxg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_07mqw")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

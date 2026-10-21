@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod9.png" id="1_4ymex"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod10.png" id="2_ngvkf"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod11.png" id="3_ggpx0"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod12.png" id="4_g33bh"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod13.png" id="5_trupd"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod14.png" id="6_s1x34"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod15.png" id="7_7beaf"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod16.png" id="8_e72nq"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod5.png" id="9_jdbdv"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod6.png" id="10_710a0"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod7.png" id="11_vdtk8"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod8.png" id="12_n1ilu"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod1.png" id="13_o8pqi"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod2.png" id="14_h2y1y"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod3.png" id="15_ektld"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod4.png" id="16_1jnmu"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_4ymex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ngvkf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ggpx0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_g33bh")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_trupd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_s1x34")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_7beaf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_e72nq")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_jdbdv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_710a0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_vdtk8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_n1ilu")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_o8pqi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_h2y1y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_ektld")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_1jnmu")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

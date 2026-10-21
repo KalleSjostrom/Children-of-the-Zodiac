@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Podd/Podd9.png" id="1_bhdcl"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Podd/Podd10.png" id="2_oex0p"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Podd/Podd11.png" id="3_deqcm"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Podd/Podd12.png" id="4_56htm"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Podd/Podd13.png" id="5_lqox0"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Podd/Podd14.png" id="6_m63rx"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Podd/Podd15.png" id="7_ncwh6"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Podd/Podd16.png" id="8_3kfoo"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Podd/Podd5.png" id="9_3tgbi"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Podd/Podd6.png" id="10_ekh0q"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Podd/Podd7.png" id="11_vahsm"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Podd/Podd8.png" id="12_6n0q4"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Podd/Podd1.png" id="13_22yp7"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Podd/Podd2.png" id="14_vol50"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Podd/Podd3.png" id="15_j4xal"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Podd/Podd4.png" id="16_pmell"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_bhdcl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_oex0p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_deqcm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_56htm")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_lqox0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_m63rx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ncwh6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_3kfoo")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_3tgbi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ekh0q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_vahsm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_6n0q4")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_22yp7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_vol50")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_j4xal")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_pmell")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]

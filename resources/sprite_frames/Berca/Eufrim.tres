@@ -1,0 +1,89 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Eufrim/Eufrim9.png" id="1_u26ft"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Eufrim/Eufrim10.png" id="2_cnrej"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Eufrim/Eufrim11.png" id="3_6vpxv"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Eufrim/Eufrim12.png" id="4_qqhax"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Eufrim/Eufrim13.png" id="5_2qjry"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Eufrim/Eufrim14.png" id="6_ymbuu"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Eufrim/Eufrim15.png" id="7_cx17s"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Eufrim/Eufrim16.png" id="8_arau5"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Eufrim/Eufrim5.png" id="9_b4qar"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Eufrim/Eufrim6.png" id="10_v1n8b"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Eufrim/Eufrim7.png" id="11_k756o"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Eufrim/Eufrim8.png" id="12_ggc8j"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Eufrim/Eufrim1.png" id="13_4pr78"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Eufrim/Eufrim2.png" id="14_uf08q"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Eufrim/Eufrim3.png" id="15_jjfxd"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca/villagers/Eufrim/Eufrim4.png" id="16_d54c7"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_u26ft")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_cnrej")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6vpxv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qqhax")
+}],
+"loop": 1,
+"name": &"down",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_2qjry")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ymbuu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_cx17s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_arau5")
+}],
+"loop": 1,
+"name": &"left",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_b4qar")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_v1n8b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_k756o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ggc8j")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 6.666666666666667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_4pr78")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_uf08q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_jjfxd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_d54c7")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 6.666666666666667
+}]
