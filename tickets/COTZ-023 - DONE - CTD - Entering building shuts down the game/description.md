@@ -1,0 +1,1 @@
+Entering the building shown on the image (pressing X when Kin is at that location), shuts down the game. I'm running it through the Godot editor, and usually the game halts on crashes, but this just shuts it down as if I terminated it manually.

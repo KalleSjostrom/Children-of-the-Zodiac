@@ -1,0 +1,1 @@
+Pressing square button in a labyrinth only shows the map for a brief time, a few frames at max. Holding it doesn't matter. Press should toggle it
