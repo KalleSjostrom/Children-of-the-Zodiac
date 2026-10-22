@@ -17,6 +17,10 @@ var image = ""
 var roundCounter = 0
 var element = 0
 var charEnum = null
+## True when the equipment changed after the battle deck's slots (GLWeapon)
+## were made; get2DDeck makes them again (COTZ-017: Java made them once, so
+## a new weapon's slots showed in battle only after loading the game).
+var equipmentChanged: bool = false
 
 
 ## Creates a character with the specified name, attributes (Array of
@@ -66,6 +70,7 @@ func equip(ae, playSound):
 	else:
 		equipLeftHand(ae, playSound)
 	ae.setEquiped(true)
+	equipmentChanged = true
 
 
 func equipArmor(ae, playSound):
@@ -119,6 +124,7 @@ func unequip(mode):
 		else:
 			SoundPlayer.playSound(SoundMap.MENU_ERROR)
 		rightHand = null
+	equipmentChanged = true
 
 
 ## Increases the level by one.
@@ -277,13 +283,19 @@ func set2DDeck(p_deck):
 	deckGL.setNeedUpdate(true)
 
 
-## Gets the GLDeck of this character, updating it if the deck has changed.
+## Gets the GLDeck of this character, updating it if the deck or the
+## equipment has changed.
 func get2DDeck():
 	if deck.hasChanged():
 		if deckGL != null:
 			deckGL.update(self)
 			deckGL.setNeedUpdate(true)
 		deck.resetChange()
+	if equipmentChanged:
+		if deckGL != null:
+			deckGL.setWeaponDeck(GLWeapon.new(self))
+			deckGL.setNeedUpdate(true)
+		equipmentChanged = false
 	return deckGL
 
 
