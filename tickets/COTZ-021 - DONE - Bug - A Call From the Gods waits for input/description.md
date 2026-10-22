@@ -1,0 +1,1 @@
+A Call From the Gods doesn't autoplay the text: Celis's two lines ("Who is this?" and "Why?!") are dialogs that wait for X before the scene goes on. It should play by itself until the end, with her lines shown like the text lines in Prolog.seq.
