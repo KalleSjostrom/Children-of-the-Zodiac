@@ -2,9 +2,9 @@ class_name GameCommands
 extends RefCounted
 ## The game's commands for the debug console (COTZ-006, DebugConsole):
 ## places (goto, exits, teleport, savepoint, boss, cheater), the party and
-## battles (heal, god), the world (map, roads) and development (status,
-## trigger, difficulty, save). They replace the developer Cheater, whose menu
-## the "cheater" command still opens.
+## battles (heal, god, kill, skip), the world (map, roads, noenemies) and
+## development (status, trigger, difficulty, save). They replace the
+## developer Cheater, whose menu the "cheater" command still opens.
 ##
 ## Jumps go through Organizer.jump_to, as the Cheater's did. A position on a
 ## labyrinth floor (boss) is handed to the labyrinth the way a save's is
@@ -18,6 +18,7 @@ static var god := false
 static var _instance: GameCommands
 
 const ROAD_ZONES := {"west": 0, "east": 1, "north": 2}
+const SKIPPABLE: PackedStringArray = ["battle", "cutscene"]
 const SAVE_SLOTS := {"1": "Slot 1", "2": "Slot 2", "3": "Slot 3", "autosave": SaveSlots.AUTOSAVE}
 const LEVELS := {"easy": Difficulty.Level.EASY, "medium": Difficulty.Level.MEDIUM,
 	"original": Difficulty.Level.ORIGINAL}
@@ -48,10 +49,14 @@ func _register(c: DebugCommands) -> void:
 		DebugCommands.arg("amount", Callable(), "hp, negative hurts"),
 		DebugCommands.opt("target", _heal_targets, "party if left out; all, enemies or a name").loose()])
 	c.add("god", "The party takes no damage", _god, [DebugCommands.switch()])
+	c.add("kill", "Kills the enemies of the battle, bosses too: the battle is won", _kill)
+	c.add("skip", "Leaves the battle (no experience or gold, a boss lives on) or runs the cutscene to its end", _skip, [
+		DebugCommands.opt("what", func() -> PackedStringArray: return SKIPPABLE, "the battle or cutscene going on if left out")])
 	c.group("World")
 	c.add("map", "Shows the whole map of this labyrinth floor", _map)
 	c.add("roads", "Opens the roads of the world map", _roads, [
 		DebugCommands.opt("continent", func() -> PackedStringArray: return PackedStringArray(ROAD_ZONES.keys()), "all if left out")])
+	c.add("noenemies", "No random battles in labyrinths", _noenemies, [DebugCommands.switch()])
 	c.group("Game")
 	c.add("status", "Where the game is: mode, place, labyrinth position, difficulty", _status)
 	c.add("trigger", "Shows or sets a Database status (trigger)", _trigger, [
@@ -78,8 +83,11 @@ static func _labyrinth() -> Labyrinth:
 	return gm as Labyrinth
 
 
-## The battle being fought in the labyrinth, or null.
+## The battle being fought in the labyrinth or a story's battle area, or null.
 static func _battle() -> Battle:
+	var area := _mode() as BossBattleArea
+	if area != null:
+		return null if area.bm == null else area.bm.battle
 	var lab := _labyrinth()
 	if lab == null or not lab.runSubGameMode or not (lab.labDrawable is BattleManager):
 		return null
@@ -375,6 +383,72 @@ func _god(args: PackedStringArray) -> DebugCommands.Result:
 	return DebugCommands.done("God mode %s" % DebugCommands.on_off(god))
 
 
+## Kills the enemies and ends the battle the way a killing blow does (spoils,
+## a boss's last words, its next place). On a party member's turn the cards
+## in the slots are not played.
+func _kill(_args: PackedStringArray) -> DebugCommands.Result:
+	var battle := _battle()
+	if battle == null:
+		return DebugCommands.fail("Not in a battle")
+	var mode: int = battle.getMode()
+	if mode != BattleManager.IDLING and mode != BattleManager.BATTLING:
+		return DebugCommands.fail("Not now: on a party member's turn or while the bars fill")
+	var killed := PackedStringArray()
+	for enemy in battle.enemies:
+		if enemy.isAlive():
+			enemy.damage(enemy.getAttribute(Creature.HP))
+			killed.append(enemy.getName())
+	battle.glEnemies.checkDead()
+	battle.glEnemies.check()
+	battle.killMonster()
+	if mode == BattleManager.BATTLING:
+		# Battle.finishRound without the attack.
+		battle.currentDeck.finish()
+		battle.clock.hide()
+		battle.legend.hide()
+		battle.clock.finish()
+		battle.hand.hide()
+		battle.glCharacters.setTarget(-1, false)
+	battle.checkIfEnemiesAreDead(mode == BattleManager.BATTLING)
+	return DebugCommands.done("Killed %s" % ", ".join(killed))
+
+
+func _skip(args: PackedStringArray) -> DebugCommands.Result:
+	var what := "" if args.is_empty() else args[0]
+	if what == "battle" or (what == "" and _battle() != null):
+		return _skip_battle()
+	if what == "cutscene" or (what == "" and _mode() is VillageStory):
+		return _skip_cutscene()
+	return DebugCommands.fail("Neither in a battle nor in a cutscene")
+
+
+## Leaves the battle the way fleeing does (Battle.flee).
+func _skip_battle() -> DebugCommands.Result:
+	var battle := _battle()
+	if battle == null:
+		return DebugCommands.fail("Not in a battle")
+	if _mode() is BossBattleArea:
+		return DebugCommands.fail("This battle has no way back (kill wins it)")
+	var mode: int = battle.getMode()
+	if mode in [BattleManager.EXIT, BattleManager.EXIT_TO_NEXT, BattleManager.GAME_OVER]:
+		return DebugCommands.fail("The battle is ending")
+	if mode == BattleManager.TALKING:
+		battle.manager.setDialog(null)
+	battle.hide()
+	battle.setMode(BattleManager.EXIT)
+	return DebugCommands.done("Leaving the battle")
+
+
+## Runs the cutscene to its end, answering its dialogs (Main.skip_cutscene),
+## so its triggers, gifts and the party's places are as after watching it.
+func _skip_cutscene() -> DebugCommands.Result:
+	var story := _mode() as VillageStory
+	if story == null:
+		return DebugCommands.fail("Not in a cutscene")
+	Main.instance.skip_cutscene(story)
+	return DebugCommands.done("Skipping %s" % story.getName())
+
+
 # --- World ---
 
 func _map(_args: PackedStringArray) -> DebugCommands.Result:
@@ -401,6 +475,14 @@ func _roads(args: PackedStringArray) -> DebugCommands.Result:
 	if gm is Landscape:
 		gm.openRoads(LandscapeLoader.checkPlace(gm.getName()))
 	return DebugCommands.done("Opened %d roads" % opened)
+
+
+func _noenemies(args: PackedStringArray) -> DebugCommands.Result:
+	Main.no_encounters = DebugCommands.flip(args, Main.no_encounters)
+	var lab := _labyrinth()
+	if lab != null:
+		lab.noEncounters = Main.no_encounters
+	return DebugCommands.done("No random battles %s" % DebugCommands.on_off(Main.no_encounters))
 
 
 # --- Game ---

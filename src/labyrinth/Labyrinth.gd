@@ -113,7 +113,8 @@ func init(name, lab = null, hinders = null):
 	var pos = LabyrinthPosition.new(nodePos.getX(), nodePos.getZ(), Values.TO_ANGLE[dir])
 	player = LabyrinthPlayer.new(pos)
 	battleMusic = mapLoader.getBattleMusic()
-	# Dev only (--no-encounters, Main): the original never sets noEncounters.
+	# Dev only (--no-encounters, the console's noenemies; Main): the original
+	# never sets noEncounters.
 	if Main.no_encounters:
 		noEncounters = true
 

@@ -27,7 +27,8 @@ extends Node
 ##   --legacy=<a,b,...>  keep the legacy path of these subsystems (is_legacy)
 ##   --bridge-test       the world map shows tools/bridge_test/BridgeTest.tscn (dev only)
 ##   --no-encounters     dev only: no random battles in labyrinths (Labyrinth.noEncounters;
-##                       steps are still counted), for parity tours of dungeon floors
+##                       steps are still counted), for parity tours of dungeon floors;
+##                       the console's "noenemies" switches it
 ##
 ## In debug builds the developer console (scenes/debug/DebugConsole.gd)
 ## opens with the key under Escape or F1; it replaces the Cheater.
@@ -59,9 +60,14 @@ var _world_scene: Node # the scene currently under World, if any
 ## Circle has been up since it started.
 var _cutscene_id := 0
 var _cutscene_armed := false
+## The cutscene the console's "skip cutscene" runs to its end (instance id,
+## COTZ-018), 0: none.
+var _skip_cutscene_id := 0
 
 ## Updates per frame while Circle is held in a cutscene (COTZ-007).
 const CUTSCENE_SPEED := 3
+## Updates per frame while a cutscene is skipped.
+const CUTSCENE_SKIP_SPEED := 40
 
 
 func _ready() -> void:
@@ -202,15 +208,38 @@ func _process(delta: float) -> void:
 ## update (actors, the camera, zooms), so the update is repeated instead of
 ## given a longer elapsed time; the music, the Scheduler and the fades done
 ## per drawn frame keep their pace. The extra updates stop when the mode
-## changes (the cutscene ends) or starts loading.
+## changes (the cutscene ends) or starts loading. A skipped cutscene gets
+## CUTSCENE_SKIP_SPEED updates and Cross before each of them.
 func _update_organizer(elapsed: float) -> void:
 	var mode: GameMode = organizer.getCurrentMode()
+	var skipped: VillageStory = mode as VillageStory if _skipping_cutscene(mode) else null
 	var steps := CUTSCENE_SPEED if _fast_cutscene(mode) else 1
+	if skipped != null:
+		steps = CUTSCENE_SKIP_SPEED
+		skipped.timeLine.crossPressed()
 	organizer.update(elapsed)
 	for i in range(steps - 1):
 		if organizer.getCurrentMode() != mode or mode.isLoading():
 			break
+		if skipped != null:
+			skipped.timeLine.crossPressed()
 		organizer.update(elapsed)
+
+
+## Runs the given cutscene to its end: its updates and dialogs as fast as
+## _update_organizer goes (the console's "skip cutscene", COTZ-018).
+func skip_cutscene(story: VillageStory) -> void:
+	_skip_cutscene_id = story.get_instance_id()
+
+
+## True while the cutscene to skip is the current mode and has loaded.
+func _skipping_cutscene(mode: GameMode) -> bool:
+	if _skip_cutscene_id == 0:
+		return false
+	if mode == null or mode.get_instance_id() != _skip_cutscene_id:
+		_skip_cutscene_id = 0
+		return false
+	return not mode.isLoading()
 
 
 ## True while Circle is held in a cutscene. Circle has to be let go once

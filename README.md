@@ -61,8 +61,11 @@ Tab completes names, Up/Down pick a suggestion or an earlier command.
 | `boss [labyrinth]` | goes next to the labyrinth's boss, facing it |
 | `heal <amount> [target]` | heals (negative: hurts) the party, a member, `enemies`, an enemy or `all` |
 | `god [on\|off]` | the party takes no damage |
+| `kill` | kills the enemies of the battle, bosses too: the battle is won (spoils, a boss's last words) |
+| `skip [battle\|cutscene]` | leaves the battle like fleeing (no experience or gold; a boss lives on), or runs the cutscene to its end at high speed, answering its dialogs |
 | `map` | reveals the whole map of the current labyrinth floor |
 | `roads [west\|east\|north]` | opens the roads of the world map |
+| `noenemies [on\|off]` | no random battles in labyrinths |
 | `status`, `trigger <name> [value]`, `difficulty [level]`, `save <slot>` | where the game is; read/set a Database status; difficulty; save anywhere |
 
 New commands go in `scenes/debug/GameCommands.gd` (`c.add(name, help,
