@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bhiy0ww45wey8"
-path="res://.godot/imported/invisble_chest_left-turn.png-598617444d6fc945b143e583bc290a8b.ctex"
+path="res://.godot/imported/invisble_chest_left-turn.png-2e21270de0f9573c95a58e2631f94ecd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tickets/COTZ-013 - Bug - Map issue/invisble_chest_left-turn.png"
-dest_files=["res://.godot/imported/invisble_chest_left-turn.png-598617444d6fc945b143e583bc290a8b.ctex"]
+source_file="res://tickets/COTZ-013 - DONE - Bug - Map issue/invisble_chest_left-turn.png"
+dest_files=["res://.godot/imported/invisble_chest_left-turn.png-2e21270de0f9573c95a58e2631f94ecd.ctex"]
 
 [params]
 
