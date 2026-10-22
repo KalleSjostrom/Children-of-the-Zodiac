@@ -77,7 +77,7 @@ Where each would go (legacy code, `src/`):
 | Store prices (buy and sell) | `store/CardStore.gd` (price), `store/WeaponStore.gd` (`/ div`, selling gives half), `equipment/AbstractEquipment.gd`, `cards/AbstractCard.gd` |
 | Inn and church prices | `store/Inn.gd` (rest 50 gp), `store/Church.gd` (resurrect 200 gp, bless cost) |
 | Encounter rate | `labyrinth/Labyrinth.gd` `resetSteps` (steps to the next battle; default 13–20 in `MapLoader.gd`, `steps` lines per map) |
-| Enemy HP / stats | `battle/Battle.gd` after `fillIdling` (normal enemies are copied per battle). Bosses come from `EnemyFactory.getBoss()` as the shared bank instance: scale a copy, or the values compound every fight |
+| Enemy HP / stats | `battle/Battle.gd` after `fillIdling` (normal enemies are copied per battle; `EnemyFactory.getBoss()` loads a boss anew for each battle, COTZ-015) |
 | A separate boss multiplier | the same places as the damage multipliers, checking whether the battle is a boss battle (TODO.md has several notes on bosses being too hard or too easy) |
 | Number of enemies per battle | `battle/Battle.gd` `fillIdling` |
 | Healing | `factories/Load.gd` `cureParty` (0.5 % per labyrinth step), `cards/SupportCard.gd` `cure`, `labyrinth/inventory/Save.gd` (full cure at save points) |

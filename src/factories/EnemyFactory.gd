@@ -79,8 +79,16 @@ func createEnemy(name):
 	return enemyLoader.getEnemy()
 
 
+## Gets the boss with the given name, loaded anew from its .enemy file for
+## each battle. Port fix (COTZ-015): Java returned the bank's enemy, which
+## the battle changes (hp, element, boosts, the script's phase and spent
+## moves, the dialogs said), so a boss that won faced the party again
+## with those after a game over and Continue. The bank's enemy stays for
+## the bestiary.
 func getBoss(string):
-	return enemyBank.get(string)
+	if not enemyBank.has(string):
+		return null
+	return createEnemy(string)
 
 
 ## Java test main: loads the start game and draws ten random enemies.
