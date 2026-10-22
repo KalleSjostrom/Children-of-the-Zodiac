@@ -53,11 +53,9 @@ the legacy drawing.
   story, door or world map node); only the data check and a preview cover
   them.
 * Content quirks are kept and noted in the case's comment, not fixed:
-  "Zazo at Night - 0" quits the game unless its loot is taken; "Pensara -
-  The North District - Farmer House" quits the game on entry (a villager's
-  patrol is not a closed loop, `Instructions.check`); Berca - 1 names a
-  villager without a `.char` file; Zazo - Tent has no villager images;
-  the night stores of Zazo name images that do not exist.
+  "Zazo at Night - 0" quits the game unless its loot is taken; Berca - 1
+  names a villager without a `.char` file; Zazo - Tent has no villager
+  images; the night stores of Zazo name images that do not exist.
 * Record the new cases a second time (`record golden2`) and
   `compare golden golden2`: must be identical.
 

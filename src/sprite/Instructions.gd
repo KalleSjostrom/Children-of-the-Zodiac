@@ -56,9 +56,11 @@ func executeCommand(command, tok):
 func isDone():
 	return index >= instructions.size()
 
-func check():
+## True when the moves end where they start (Java's sum: up - down + right -
+## left). Port fix (COTZ-023): Java exited the game otherwise; the villager
+## reports it instead (Villager.executeDialogCommand).
+func check() -> bool:
 	var test := J.array(4, 0)
 	for i in instructions:
 		test[i.getDirection()] += i.getDistance() if i.isMoving() else 0
-	if (test[0] - test[2]) + (test[1] - test[3]) != 0:
-		GameCore.exitGame()
+	return (test[0] - test[2]) + (test[1] - test[3]) == 0

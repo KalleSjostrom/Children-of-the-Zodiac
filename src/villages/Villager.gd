@@ -323,7 +323,9 @@ class VillagerLoader extends AbstractMapLoader:
 		if command == "dialog":
 			var number: int = J.parseInt(tok.nextToken())
 			v.loadingDialog = number == v.status
-			v.instructions.check()
+			# Port fix (COTZ-023): an error, once, instead of quitting the game.
+			if v.loadingDialog and not v.instructions.check():
+				push_error("Villager %s: its walk does not end where it starts" % v.name)
 		if v.loadingDialog:
 			if command == "check":
 				var trigName: String = tok.nextToken().replace("_", " ")

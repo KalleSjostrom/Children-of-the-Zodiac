@@ -39,9 +39,9 @@ zazo_story_gerbias zazo_story_gerbias --load="Start demon2" --start="Meeting wit
 # (legacy, kept): Berca - 1 names a villager Herman without a .char file
 # (errors every update); Zazo - Tent has no villager images (Shaun: an
 # error every frame).
-# "Pensara - The North District - Farmer House" has no case: its villager
-# Dido's patrol is not a closed loop, and Instructions.check then quits
-# the game (as the original does).
+# "Pensara - The North District - Farmer House" quit the game on entry (as
+# the original did) until COTZ-023: its villager Dido's patrol was not a
+# closed loop (Instructions.check). Its case has no golden.
 tour_alares_belmets_house_0                             village_tour --load="Slot 1" --start="Alares - Belmet's House"
 tour_alares_library_0                                   village_tour --load="Slot 1" --start="Alares - Library"
 tour_alares_0                                           village_tour --load="Slot 1" --start="Alares" --status="Alares:0"
@@ -82,6 +82,7 @@ tour_parasne_night_0                                    village_tour --load="Slo
 tour_pass_to_zazo_0                                     village_tour --load="Slot 1" --start="Pass to Zazo" --status="Pass to Zazo:0"
 tour_pass_to_zazo_night_0                               village_tour --load="Slot 1" --start="Pass to Zazo" --status="Pass to Zazo:0" --start-time=night
 tour_pensara_the_north_district_civil_house_0           village_tour --load="Slot 1" --start="Pensara - The North District - Civil House"
+tour_pensara_the_north_district_farmer_house_0          village_tour --load="Slot 1" --start="Pensara - The North District - Farmer House"
 tour_pensara_the_north_district_library_0               village_tour --load="Slot 1" --start="Pensara - The North District - Library"
 tour_pensara_the_north_district_0                       village_tour --load="Slot 1" --start="Pensara - The North District"
 tour_pensara_the_school_district_the_clock_tower_floor_1_0 village_tour --load="Slot 1" --start="Pensara - The School District - The Clock Tower - Floor 1"

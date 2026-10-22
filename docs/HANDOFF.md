@@ -229,8 +229,9 @@ procedure in `docs/CONVERTING_DUNGEONS.md`:
   unless its loot `Zazoname` is taken (equipment "2"); the Zazo night stores
   name images that do not exist (`inn.jpg`, `burt.png`); no story reaches
   Zazo, Pass to Zazo or Port of Zazo at night (`--start-time=night`);
-  "Pensara - The North District - Farmer House" quits the game on entry
-  (villager Dido's patrol is not closed, `Instructions.check`); Berca - 1
+  "Pensara - The North District - Farmer House" quit the game on entry
+  until COTZ-023 (villager Dido's patrol was not closed; `Instructions.check`
+  now has the villager report an error instead of quitting); Berca - 1
   names a villager Herman without a `.char` file; Zazo - Tent has no
   villager images; Podd's image path (Civil House) cannot resolve; a
   Berca - 1 loot line lacks its directions; Alares - 1, Dellna - 2,
