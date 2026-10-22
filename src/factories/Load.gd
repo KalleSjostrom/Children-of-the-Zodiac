@@ -271,6 +271,8 @@ func executeCommand(command: String, tokenizer: StringTokenizer):
 	elif command == "character":
 		currentCharacter = createCharacter(tokenizer)
 		currentCharacter.repairLevel()
+		if _isLoaded(currentCharacter.getName()):
+			return
 		var index: int = Values.characters.getCharacter(currentCharacter.getName()).getIndex()
 		if index <= characters.size():
 			characters.insert(index, currentCharacter)
@@ -279,7 +281,8 @@ func executeCommand(command: String, tokenizer: StringTokenizer):
 	elif command == "exCharacter":
 		currentCharacter = createCharacter(tokenizer)
 		currentCharacter.repairLevel()
-		exCharacter.append(currentCharacter)
+		if not _isLoaded(currentCharacter.getName()):
+			exCharacter.append(currentCharacter)
 	elif command == "rightHand" or command == "leftHand" or command == "armor":
 		var name: String = Organizer.convertKeepCase(tokenizer.nextToken())
 		var ae = EquipmentFactory.getEquipment(name)
@@ -357,6 +360,21 @@ func executeCommand(command: String, tokenizer: StringTokenizer):
 		currentMap.getNode(address).setVisitedAndSeen(isVisited, isSeen)
 	elif command == "lastlab":
 		Database.setLastVisitedLabyrinth(LabyrinthMap.convert(tokenizer.nextToken()))
+
+
+## Port fix (COTZ-019): true (with a warning) when the save listed the
+## character with the given name already, in the party or among the extra
+## characters. Such a save loads each character once: one listed the party
+## twice, and the party of six put the battle's character row off screen
+## (BattleValues.setCharacterPosition). The second copy's equipment and deck
+## lines go to that copy, which is dropped.
+func _isLoaded(name: String) -> bool:
+	var loaded: bool = getCharacterIndex(name) != -1
+	for c in exCharacter:
+		loaded = loaded or c.getName() == name
+	if loaded:
+		push_warning("Load: " + name + " is in the save twice; loaded once")
+	return loaded
 
 
 ## Converts a labyrinth name to the "Capitalized Words" form used as key
