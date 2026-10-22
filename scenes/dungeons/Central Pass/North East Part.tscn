@@ -1,0 +1,123 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/Central Pass.tres" id="2_2ctwl"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/Central Pass--North East Part.tres" id="3_q8i8t"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonDoor.tscn" id="4_ytgtm"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonHinderDoor.tscn" id="5_gh7ah"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Walls/southpassdoor.tres" id="6_mt6wq"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonButton.tscn" id="7_glpvr"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/lever.tres" id="8_0ld7p"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonChest.tscn" id="9_cp5ga"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/chest.tres" id="10_v3vmd"]
+
+[node name="North East Part" instance=ExtResource("1_base")]
+map_name = "Central Pass--North East Part.map"
+style = ExtResource("2_2ctwl")
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+mission_entries = PackedStringArray()
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_q8i8t")
+
+[node name="00 door 163" parent="Objects" index="0" instance=ExtResource("4_ytgtm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -50)
+open_roads = "0-10"
+next_places = PackedStringArray("landcentral_pass--north_east_part-mark0")
+kind = "door"
+cell = 163
+facing = 2
+database_name = "central pass--north east part.mapdoor163"
+
+[node name="01 door 7" parent="Objects" index="1" instance=ExtResource("4_ytgtm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -34)
+open_roads = "dontopen"
+next_places = PackedStringArray("central_pass--north_part-mark1")
+mark = 1
+kind = "door"
+cell = 7
+facing = 1
+database_name = "central pass--north east part.mapdoor7"
+
+[node name="02 hinderDoor 165" parent="Objects" index="2" instance=ExtResource("5_gh7ah")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -42)
+next_place = "central_pass--north_east_part-mark3"
+mark = 2
+kind = "hinderDoor"
+cell = 165
+image = "Walls/southpassdoor"
+database_name = "central pass--north east part.maphinderdoor165"
+
+[node name="View" parent="Objects/02 hinderDoor 165" index="0"]
+transform = Transform3D(-0.0078125, 0, -8.742278e-08, 0, 0.0078125, 0, 6.8299044e-10, 0, -1, 0, 0, 2)
+flip_h = true
+sprite_frames = ExtResource("6_mt6wq")
+frame = 1
+
+[node name="03 hinderDoor 166" parent="Objects" index="3" instance=ExtResource("5_gh7ah")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -38)
+next_place = "central_pass--north_east_part-mark2"
+mark = 3
+kind = "hinderDoor"
+cell = 166
+facing = 2
+image = "Walls/southpassdoor"
+database_name = "central pass--north east part.maphinderdoor166"
+
+[node name="View" parent="Objects/03 hinderDoor 166" index="0"]
+transform = Transform3D(0.0078125, 0, 0, 0, 0.0078125, 0, 0, 0, 1, 0, 0, -2)
+sprite_frames = ExtResource("6_mt6wq")
+frame = 1
+
+[node name="04 button 110" parent="Objects" index="4" instance=ExtResource("7_glpvr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -6)
+frames = 7
+hinders = PackedStringArray("Central_Pass--North_East_Part.maphinderDoor165", "Central_Pass--North_East_Part.maphinderDoor166")
+kind = "button"
+cell = 110
+facing = 1
+image = "Images/lever"
+database_name = "central pass--north east part.mapbutton110"
+
+[node name="View" parent="Objects/04 button 110" index="0"]
+transform = Transform3D(-4.3711387e-10, 0, 1, 0, 0.01, 0, -0.01, 0, -4.371139e-08, -1, -1.125, 0)
+sprite_frames = ExtResource("8_0ld7p")
+
+[node name="05 chest 28" parent="Objects" index="5" instance=ExtResource("9_cp5ga")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -14)
+frames = 2
+content_name = "100"
+content_info = PackedStringArray()
+kind = "chest"
+cell = 28
+image = "Images/chest"
+database_name = "central pass--north east part.mapchest28"
+
+[node name="View" parent="Objects/05 chest 28" index="0"]
+transform = Transform3D(-0.007, 0, -8.742278e-08, 0, 0.007, 0, 6.119594e-10, 0, -1, 0, -1.2825, 0)
+sprite_frames = ExtResource("10_v3vmd")
+
+[node name="06 chest 68" parent="Objects" index="6" instance=ExtResource("9_cp5ga")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -46)
+frames = 2
+content_type = 2
+content_name = "cards.offense.BattleCard"
+content_info = PackedStringArray("2", "false")
+kind = "chest"
+cell = 68
+facing = 1
+image = "Images/chest"
+database_name = "central pass--north east part.mapchest68"
+
+[node name="View" parent="Objects/06 chest 68" index="0"]
+transform = Transform3D(-3.059797e-10, 0, 1, 0, 0.007, 0, -0.007, 0, -4.371139e-08, 0, -1.2825, 0)
+sprite_frames = ExtResource("10_v3vmd")
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 42, 0, -50)
+
+[editable path="Objects/02 hinderDoor 165"]
+[editable path="Objects/03 hinderDoor 166"]
+[editable path="Objects/04 button 110"]
+[editable path="Objects/05 chest 28"]
+[editable path="Objects/06 chest 68"]

@@ -1,0 +1,69 @@
+# A random battle on a floor, bounded in time (parity cases dungeon_battle_*,
+# phase 2 rollout): --load="Slot 1" --start="<floor>-mark0"
+# --start-node=<address>:<direction>, a cell with at least three free cells
+# straight ahead (Labyrinth.checkEnterBattle wants two free cells ahead of
+# the player). Steps forward and back (DOWN walks backwards, the facing
+# stays) until a battle starts, shots of its start (the weather's front pass
+# over it, the enemy colour), one round (cards with CROSS and RIGHT, TRIANGLE
+# executes; CROSS pages its result screen, battlemode 5), then the console's
+# "kill" at the next party turn, CROSS through the result screens, back on
+# the floor.
+wait 3000
+shot b01_start
+pos start
+log start
+mark
+tap UP
+wait 700
+tap DOWN
+wait 700
+loopuntil sub=battle 90000
+wait 300
+shot b02_battle_start
+wait 1500
+shot b03_battle
+log battle
+mark
+wait 200
+loopuntil battlemode=1 8000
+shot b04_party_turn
+tap CROSS
+wait 300
+tap RIGHT
+wait 300
+tap CROSS
+wait 300
+shot b05_chosen
+tap TRIANGLE
+wait 1200
+shot b06_exec
+wait 1300
+shot b07_turn
+log round
+mark
+wait 200
+loopuntil !battlemode=4 15000
+mark
+tap CROSS
+wait 600
+loopuntil !battlemode=5 15000
+mark
+wait 200
+loopuntil battlemode=1 20000
+console kill
+wait 1000
+shot b08_killed
+log killed
+mark
+tap CROSS
+wait 800
+shot b_#_result
+loopuntil !sub= 60000
+wait 2000
+shot b09_after
+log after
+pos after
+tap LEFT
+wait 700
+shot b10_turned
+quit

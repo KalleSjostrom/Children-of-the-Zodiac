@@ -1,0 +1,205 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/Temple of Aegis--First Floor.tres" id="2_4727v"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/Temple of Aegis--First Floor.tres" id="3_35hdo"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonDoor.tscn" id="4_uuai6"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonHinderDoor.tscn" id="5_paong"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Walls/aegisstairsup.tres" id="6_4fmio"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Walls/aegisstairsdown.tres" id="7_t6twl"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonAegisComboButton.tscn" id="8_q82ix"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/aegis0.tres" id="9_hwerd"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/aegis1.tres" id="10_r6x4n"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/aegis2.tres" id="11_r74hr"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/aegis3.tres" id="12_r70q1"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonRiddle.tscn" id="13_l6y7f"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/stonetablet.tres" id="14_jc48r"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonSavePoint.tscn" id="15_3j65x"]
+
+[node name="First Floor" instance=ExtResource("1_base")]
+map_name = "Temple of Aegis--First Floor.map"
+style = ExtResource("2_4727v")
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+mission_entries = PackedStringArray()
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_35hdo")
+
+[node name="00 door 106" parent="Objects" index="0" instance=ExtResource("4_uuai6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -22)
+open_roads = "dontopen"
+next_places = PackedStringArray("landtemple_of_aegis--first_floor-mark0")
+kind = "door"
+cell = 106
+facing = 2
+database_name = "temple of aegis--first floor.mapdoor106"
+
+[node name="01 hinderDoor--up 104" parent="Objects" index="1" instance=ExtResource("5_paong")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -30)
+next_place = "temple_of_aegis--second_floor-mark0"
+mark = 1
+kind = "hinderDoor--up"
+cell = 104
+image = "Walls/aegisstairsup"
+database_name = "temple of aegis--first floor.maphinderdoor104"
+
+[node name="View" parent="Objects/01 hinderDoor--up 104" index="0"]
+transform = Transform3D(-0.0078125, 0, -8.742278e-08, 0, 0.0078125, 0, 6.8299044e-10, 0, -1, 0, 0, 2)
+flip_h = true
+sprite_frames = ExtResource("6_4fmio")
+frame = 1
+
+[node name="02 hinderDoor--down 3" parent="Objects" index="2" instance=ExtResource("5_paong")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -50)
+next_place = "temple_of_aegis--base_level-mark0"
+mark = 2
+kind = "hinderDoor--down"
+cell = 3
+facing = 2
+image = "Walls/aegisstairsdown"
+database_name = "temple of aegis--first floor.maphinderdoor3"
+
+[node name="View" parent="Objects/02 hinderDoor--down 3" index="0"]
+transform = Transform3D(0.0078125, 0, 0, 0, 0.0078125, 0, 0, 0, 1, 0, 0, -2)
+sprite_frames = ExtResource("7_t6twl")
+frame = 1
+
+[node name="03 hinderDoor--down 195" parent="Objects" index="3" instance=ExtResource("5_paong")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -50)
+next_place = "temple_of_aegis--base_level-mark1"
+mark = 3
+kind = "hinderDoor--down"
+cell = 195
+facing = 3
+image = "Walls/aegisstairsdown"
+database_name = "temple of aegis--first floor.maphinderdoor195"
+
+[node name="View" parent="Objects/03 hinderDoor--down 195" index="0"]
+transform = Transform3D(-3.4149522e-10, 0, -1, 0, 0.0078125, 0, 0.0078125, 0, -4.371139e-08, 2, 0, 0)
+flip_h = true
+sprite_frames = ExtResource("7_t6twl")
+frame = 1
+
+[node name="04 hinderDoor--down 15" parent="Objects" index="4" instance=ExtResource("5_paong")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+next_place = "temple_of_aegis--base_level-mark2"
+mark = 4
+kind = "hinderDoor--down"
+cell = 15
+facing = 1
+image = "Walls/aegisstairsdown"
+database_name = "temple of aegis--first floor.maphinderdoor15"
+
+[node name="View" parent="Objects/04 hinderDoor--down 15" index="0"]
+transform = Transform3D(-3.4149522e-10, 0, 1, 0, 0.0078125, 0, -0.0078125, 0, -4.371139e-08, -2, 0, 0)
+sprite_frames = ExtResource("7_t6twl")
+frame = 1
+
+[node name="05 hinderDoor--down 207" parent="Objects" index="5" instance=ExtResource("5_paong")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -2)
+next_place = "temple_of_aegis--base_level-mark3"
+mark = 5
+kind = "hinderDoor--down"
+cell = 207
+image = "Walls/aegisstairsdown"
+database_name = "temple of aegis--first floor.maphinderdoor207"
+
+[node name="View" parent="Objects/05 hinderDoor--down 207" index="0"]
+transform = Transform3D(-0.0078125, 0, -8.742278e-08, 0, 0.0078125, 0, 6.8299044e-10, 0, -1, 0, 0, 2)
+flip_h = true
+sprite_frames = ExtResource("7_t6twl")
+frame = 1
+
+[node name="06 aegisComboButton 13" parent="Objects" index="6" instance=ExtResource("8_q82ix")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -10)
+frames = 2
+buttons = PackedStringArray()
+kind = "aegisComboButton"
+cell = 13
+image = "Images/aegis0"
+database_name = "temple of aegis--first floor.mapaegiscombobutton13"
+
+[node name="View" parent="Objects/06 aegisComboButton 13" index="0"]
+transform = Transform3D(-0.006, 0, -8.742278e-08, 0, 0.006, 0, 5.2453664e-10, 0, -1, 0, -0.821, 1.9899998)
+sprite_frames = ExtResource("9_hwerd")
+
+[node name="07 aegisComboButton 197" parent="Objects" index="7" instance=ExtResource("8_q82ix")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -42)
+frames = 2
+image_nr = 1
+buttons = PackedStringArray("temple_of_aegis--first_floor.mapaegisComboButton13")
+kind = "aegisComboButton"
+cell = 197
+facing = 2
+image = "Images/aegis1"
+database_name = "temple of aegis--first floor.mapaegiscombobutton197"
+
+[node name="View" parent="Objects/07 aegisComboButton 197" index="0"]
+transform = Transform3D(0.006, 0, 0, 0, 0.006, 0, 0, 0, 1, 0, -0.821, -1.9900017)
+sprite_frames = ExtResource("10_r6x4n")
+
+[node name="08 aegisComboButton 175" parent="Objects" index="8" instance=ExtResource("8_q82ix")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -2)
+frames = 2
+image_nr = 2
+buttons = PackedStringArray("temple_of_aegis--first_floor.mapaegisComboButton13", "temple_of_aegis--first_floor.mapaegisComboButton197")
+kind = "aegisComboButton"
+cell = 175
+facing = 3
+image = "Images/aegis2"
+database_name = "temple of aegis--first floor.mapaegiscombobutton175"
+
+[node name="View" parent="Objects/08 aegisComboButton 175" index="0"]
+transform = Transform3D(-2.6226832e-10, 0, -1, 0, 0.006, 0, 0.006, 0, -4.371139e-08, 1.9900017, -0.821, 0)
+sprite_frames = ExtResource("11_r74hr")
+
+[node name="09 aegisComboButton 35" parent="Objects" index="9" instance=ExtResource("8_q82ix")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -50)
+frames = 2
+image_nr = 3
+buttons = PackedStringArray("temple_of_aegis--first_floor.mapaegisComboButton13", "temple_of_aegis--first_floor.mapaegisComboButton197", "temple_of_aegis--first_floor.mapaegisComboButton175")
+open_door = "temple_of_aegis--first_floor.maphinderDoor3"
+kind = "aegisComboButton"
+cell = 35
+facing = 1
+image = "Images/aegis3"
+database_name = "temple of aegis--first floor.mapaegiscombobutton35"
+
+[node name="View" parent="Objects/09 aegisComboButton 35" index="0"]
+transform = Transform3D(-2.6226832e-10, 0, 1, 0, 0.006, 0, -0.006, 0, -4.371139e-08, -1.9899998, -0.821, 0)
+sprite_frames = ExtResource("12_r70q1")
+
+[node name="10 riddle 108" parent="Objects" index="10" instance=ExtResource("13_l6y7f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -14)
+riddle_name = "aegis"
+riddle_class = "AegisRiddle"
+hinders = PackedStringArray()
+kind = "riddle"
+cell = 108
+image = "Images/stonetablet.png"
+database_name = "temple of aegis--first floor.mapriddle108"
+
+[node name="View" parent="Objects/10 riddle 108" index="0"]
+transform = Transform3D(-0.008, 0, -8.742278e-08, 0, 0.008, 0, 6.993822e-10, 0, -1, 0, 0.366, 1.9899998)
+sprite_frames = ExtResource("14_jc48r")
+
+[node name="11 save 102" parent="Objects" index="11" instance=ExtResource("15_3j65x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -38)
+kind = "save"
+cell = 102
+image = "-1"
+database_name = "temple of aegis--first floor.mapsave102"
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 26, 0, -22)
+
+[editable path="Objects/01 hinderDoor--up 104"]
+[editable path="Objects/02 hinderDoor--down 3"]
+[editable path="Objects/03 hinderDoor--down 195"]
+[editable path="Objects/04 hinderDoor--down 15"]
+[editable path="Objects/05 hinderDoor--down 207"]
+[editable path="Objects/06 aegisComboButton 13"]
+[editable path="Objects/07 aegisComboButton 197"]
+[editable path="Objects/08 aegisComboButton 175"]
+[editable path="Objects/09 aegisComboButton 35"]
+[editable path="Objects/10 riddle 108"]

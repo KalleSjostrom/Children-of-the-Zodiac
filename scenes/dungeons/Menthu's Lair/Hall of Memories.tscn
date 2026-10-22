@@ -1,0 +1,231 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/Menthu's Lair--Hall of Memories.tres" id="2_c4xie"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/Menthu's Lair--Hall of Memories.tres" id="3_1t0ef"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonDoor.tscn" id="4_ujgtc"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonHinderDoor.tscn" id="5_p2qa8"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Walls/demonfloordoor.tres" id="6_x3w3m"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonSavePoint.tscn" id="7_bbp8g"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonBoss.tscn" id="8_thdsu"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonButton.tscn" id="9_dkq43"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/lever.tres" id="10_uhxnv"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonChest.tscn" id="11_luj58"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/chest.tres" id="12_6xor8"]
+
+[node name="Hall of Memories" instance=ExtResource("1_base")]
+map_name = "Menthu's Lair--Hall of Memories.map"
+style = ExtResource("2_c4xie")
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+mission_entries = PackedStringArray()
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_1t0ef")
+
+[node name="00 door 111" parent="Objects" index="0" instance=ExtResource("4_ujgtc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -2)
+open_roads = "dontopen"
+next_places = PackedStringArray("Menthu\'s_Lair--Room_of_Confusion-mark0")
+kind = "door"
+cell = 111
+database_name = "menthu's lair--hall of memories.mapdoor111"
+
+[node name="01 door 99" parent="Objects" index="1" instance=ExtResource("4_ujgtc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -50)
+open_roads = "dontopen"
+next_places = PackedStringArray("MemorySerphia", "Menthu\'s_Lair--Throne_of_Serpents-mark0")
+mark = 1
+kind = "door"
+cell = 99
+facing = 2
+database_name = "menthu's lair--hall of memories.mapdoor99"
+
+[node name="02 door 106" parent="Objects" index="2" instance=ExtResource("4_ujgtc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -22)
+open_roads = "dontopen"
+next_places = PackedStringArray("Menthu\'s_Lair--Hall_of_Memories-mark3")
+mark = 2
+kind = "door"
+cell = 106
+database_name = "menthu's lair--hall of memories.mapdoor106"
+
+[node name="03 hinderDoor 107" parent="Objects" index="3" instance=ExtResource("5_p2qa8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -18)
+next_place = "Menthu's_Lair--Hall_of_Memories-mark2"
+mark = 3
+kind = "hinderDoor"
+cell = 107
+facing = 2
+image = "Walls/demonfloordoor"
+database_name = "menthu's lair--hall of memories.maphinderdoor107"
+
+[node name="View" parent="Objects/03 hinderDoor 107" index="0"]
+transform = Transform3D(0.0078125, 0, 0, 0, 0.0078125, 0, 0, 0, 1, 0, 0, -2)
+sprite_frames = ExtResource("6_x3w3m")
+frame = 1
+
+[node name="04 door 102" parent="Objects" index="4" instance=ExtResource("4_ujgtc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -38)
+open_roads = "dontopen"
+next_places = PackedStringArray("Menthu\'s_Lair--Hall_of_Memories-mark5")
+mark = 4
+kind = "door"
+cell = 102
+database_name = "menthu's lair--hall of memories.mapdoor102"
+
+[node name="05 hinderDoor 103" parent="Objects" index="5" instance=ExtResource("5_p2qa8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -34)
+next_place = "Menthu's_Lair--Hall_of_Memories-mark4"
+mark = 5
+kind = "hinderDoor"
+cell = 103
+facing = 2
+image = "Walls/demonfloordoor"
+database_name = "menthu's lair--hall of memories.maphinderdoor103"
+
+[node name="View" parent="Objects/05 hinderDoor 103" index="0"]
+transform = Transform3D(0.0078125, 0, 0, 0, 0.0078125, 0, 0, 0, 1, 0, 0, -2)
+sprite_frames = ExtResource("6_x3w3m")
+frame = 1
+
+[node name="06 save 109" parent="Objects" index="6" instance=ExtResource("7_bbp8g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -10)
+kind = "save"
+cell = 109
+facing = 2
+image = "-1"
+database_name = "menthu's lair--hall of memories.mapsave109"
+
+[node name="07 boss 45" parent="Objects" index="7" instance=ExtResource("8_thdsu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -10)
+kind = "boss"
+cell = 45
+facing = 1
+image = "MemoryTaur"
+database_name = "memorytaur"
+
+[node name="08 boss 57" parent="Objects" index="8" instance=ExtResource("8_thdsu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -26)
+kind = "boss"
+cell = 57
+facing = 1
+image = "MemorySalmonman"
+database_name = "memorysalmonman"
+
+[node name="09 button 13" parent="Objects" index="9" instance=ExtResource("9_dkq43")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -10)
+frames = 7
+hinders = PackedStringArray("Menthu\'s_Lair--Hall_of_Memories.maphinderDoor107")
+kind = "button"
+cell = 13
+facing = 1
+image = "Images/lever"
+database_name = "menthu's lair--hall of memories.mapbutton13"
+
+[node name="View" parent="Objects/09 button 13" index="0"]
+transform = Transform3D(-4.3711387e-10, 0, 1, 0, 0.01, 0, -0.01, 0, -4.371139e-08, -1, -1.125, 0)
+sprite_frames = ExtResource("10_uhxnv")
+
+[node name="10 button 25" parent="Objects" index="10" instance=ExtResource("9_dkq43")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -26)
+frames = 7
+hinders = PackedStringArray("Menthu\'s_Lair--Hall_of_Memories.maphinderDoor103")
+kind = "button"
+cell = 25
+facing = 1
+image = "Images/lever"
+database_name = "menthu's lair--hall of memories.mapbutton25"
+
+[node name="View" parent="Objects/10 button 25" index="0"]
+transform = Transform3D(-4.3711387e-10, 0, 1, 0, 0.01, 0, -0.01, 0, -4.371139e-08, -1, -1.125, 0)
+sprite_frames = ExtResource("10_uhxnv")
+
+[node name="11 chest 165" parent="Objects" index="11" instance=ExtResource("11_luj58")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -42)
+frames = 2
+content_type = 2
+content_name = "cards.magic.Quake"
+content_info = PackedStringArray("1", "true")
+kind = "chest"
+cell = 165
+facing = 3
+image = "Images/chest"
+database_name = "menthu's lair--hall of memories.mapchest165"
+
+[node name="View" parent="Objects/11 chest 165" index="0"]
+transform = Transform3D(-3.059797e-10, 0, -1, 0, 0.007, 0, 0.007, 0, -4.371139e-08, 0, -1.2825, 0)
+sprite_frames = ExtResource("12_6xor8")
+
+[node name="12 chest 185" parent="Objects" index="12" instance=ExtResource("11_luj58")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46, 0, -26)
+frames = 2
+content_type = 2
+content_name = "cards.support.Resurrect"
+content_info = PackedStringArray("3", "true")
+kind = "chest"
+cell = 185
+facing = 3
+image = "Images/chest"
+database_name = "menthu's lair--hall of memories.mapchest185"
+
+[node name="View" parent="Objects/12 chest 185" index="0"]
+transform = Transform3D(-3.059797e-10, 0, -1, 0, 0.007, 0, 0.007, 0, -4.371139e-08, 0, -1.2825, 0)
+sprite_frames = ExtResource("12_6xor8")
+
+[node name="13 chest 205" parent="Objects" index="13" instance=ExtResource("11_luj58")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -10)
+frames = 2
+content_type = 2
+content_name = "cards.support.Cure"
+content_info = PackedStringArray("3", "true")
+kind = "chest"
+cell = 205
+facing = 3
+image = "Images/chest"
+database_name = "menthu's lair--hall of memories.mapchest205"
+
+[node name="View" parent="Objects/13 chest 205" index="0"]
+transform = Transform3D(-3.059797e-10, 0, -1, 0, 0.007, 0, 0.007, 0, -4.371139e-08, 0, -1.2825, 0)
+sprite_frames = ExtResource("12_6xor8")
+
+[node name="14 chest 159" parent="Objects" index="14" instance=ExtResource("11_luj58")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -2)
+frames = 2
+content_type = 2
+content_name = "cards.magic.Blizzard"
+content_info = PackedStringArray("3", "true")
+kind = "chest"
+cell = 159
+image = "Images/chest"
+database_name = "menthu's lair--hall of memories.mapchest159"
+
+[node name="View" parent="Objects/14 chest 159" index="0"]
+transform = Transform3D(-0.007, 0, -8.742278e-08, 0, 0.007, 0, 6.119594e-10, 0, -1, 0, -1.2825, 0)
+sprite_frames = ExtResource("12_6xor8")
+
+[node name="15 chest 63" parent="Objects" index="15" instance=ExtResource("11_luj58")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -2)
+frames = 2
+content_name = "10000"
+content_info = PackedStringArray()
+kind = "chest"
+cell = 63
+image = "Images/chest"
+database_name = "menthu's lair--hall of memories.mapchest63"
+
+[node name="View" parent="Objects/15 chest 63" index="0"]
+transform = Transform3D(-0.007, 0, -8.742278e-08, 0, 0.007, 0, 6.119594e-10, 0, -1, 0, -1.2825, 0)
+sprite_frames = ExtResource("12_6xor8")
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -2)
+
+[editable path="Objects/03 hinderDoor 107"]
+[editable path="Objects/05 hinderDoor 103"]
+[editable path="Objects/09 button 13"]
+[editable path="Objects/10 button 25"]
+[editable path="Objects/11 chest 165"]
+[editable path="Objects/12 chest 185"]
+[editable path="Objects/13 chest 205"]
+[editable path="Objects/14 chest 159"]
+[editable path="Objects/15 chest 63"]

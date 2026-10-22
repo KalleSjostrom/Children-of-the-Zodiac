@@ -785,8 +785,9 @@ from the sketch:
 * A style per distinct look, not per area: the floors of an area share
   `<Area>.tres` where every value agrees (light, material, fog, sky,
   textures, slot ranges, weather, enemy colour), a floor that differs has
-  its own. 25 of the 80 floors have their own (Forest Path and Deep Forest
-  differ in rain, fog, light1, sky and enemy colour).
+  its own. 23 of the 80 floors have their own, 57 share their area's (20
+  area styles; the pilot counted 25, 7.8). Forest Path and Deep Forest
+  differ in rain, fog, light1, sky and enemy colour.
 * The objects' Views (`AnimatedSprite3D` with SpriteFrames) show the floor in
   the editor; at run time they only mirror their frame and stay hidden, and
   the legacy quads are drawn instead (7.7).
@@ -863,6 +864,7 @@ from the sketch:
   would blend in sRGB and come out darker. Recommended for phase 3: a 3D
   node on the rig (or a SubViewport that blends in linear space).
 * **The walls-seen-through-walls bug stays; it is not a depth problem.**
+  *(Fixed in the rollout, in both paths: 7.8.)*
   GLBackend's lit shader multiplies the lit colour by the current glColor.
   OpenGL 2 ignores glColor while lighting is on unless `GL_COLOR_MATERIAL`
   is enabled, and the Java never enables it. On a floor with a sky the
@@ -880,7 +882,9 @@ from the sketch:
   changes GLBackend and the dungeon shader together (new goldens). The sky
   gradient is a further emulation bug: the emulated display list does not
   record renderSky's `glLoadIdentity`, so the sky is a world quad near the
-  origin and the view shows the clear colour.
+  origin and the view shows the clear colour. *(Both fixed in the rollout:
+  a lit vertex ignores glColor, the display list keeps renderSky's
+  gradient in eye space; 7.8.)*
 * **Battles: the listed consequences do not occur.** The 3D bridge
   (`GLBackend.scene_3d`, ARCHITECTURE section 10) draws the frame's first 3D
   chunk into the scene's World3D. So the battle shares the depth buffer and
@@ -997,9 +1001,255 @@ calls.
     card info, the top layer and the fade: phase 3;
   * battles and riddles: phase 4;
   * the weather and save point simulations (GDScript): decision 6;
-  * the 77 other floors: the rollout, `docs/CONVERTING_DUNGEONS.md`.
+  * the 77 other floors: the rollout (7.8), `docs/CONVERTING_DUNGEONS.md`.
 
   The `.map` files stay (decision 5).
+
+### 7.8 Rollout results (the other 77 floors)
+
+* **Baseline** (on the commit after the tickets COTZ-012 to 018):
+  `tools/check.sh` 0 failed; goldens of the 131 cases (2,959 shots); a
+  second recording of the 14 `dungeon_*` cases is identical (158 shots, the
+  logs too); the pilot's check (`ab "--legacy=dungeons" ""` on the 14 cases,
+  `battle`, `newgame_to_forest`, `story_having_fun`) gives 7.7's result: 189
+  of 189 shots identical, logs identical.
+* **Coverage:** 205 new cases (`tools/parity/cases.txt`; 336 in all, 5,690
+  shots), recorded on unconverted code: a tour of each of the 76 floors
+  main.bank reaches, with both saves (`dungeon_tour_*`, the pilot's
+  script), and 53 hand-written cases by shared script
+  (`docs/CONVERTING_DUNGEONS.md` section 1): doors and floor changes
+  (`dungeon_door_*`: a Grivera ladder, a Mt. Cesadur ladder down and
+  door--down, Temple of Aegis's stairs, a door to its own floor, a prison
+  hinderDoor--up, the NUL-named door, the if door both ways, the hidden,
+  additive and riddle doors), objects (`dungeon_use_*`: an ice button, the
+  Ice Cavern and Aegis combos, a villager, a bomb, the mission chest, a
+  chest of each of the nine images), floor buttons and a save point
+  (`dungeon_step_*`), a trigger door, nine riddles (each class; two under
+  weather), six battles (snow, rain, the enemy colours .7, .8 and 1), two
+  bosses, the map page of the largest floors, saving on a floor and loading
+  it (COTZ-005), the console's goto, teleport and savepoint (COTZ-006). A
+  second recording of the 219 `dungeon_*` cases is identical (2,889 shots,
+  logs identical; one shot of the title's Continue list, which shows the
+  slot file's time, was dropped). The dev additions (`--start-node`,
+  `loopuntil … dialog`, the freeing reports, the ladder fix below) change
+  none of the 131 older cases (2,959 shots identical to the baseline).
+  Boss--Test is reached by nothing (no place, no size line, no textures):
+  data check and preview only. Ice Cavern--Mysterious Forest and Dorma's
+  Forest have no enemy group (`enemyBank.bank`): no random battles; their
+  weather is covered by tours and riddles.
+* **Cases that switch to scenes:** `bridge_test` (Grivera--First Floor),
+  `story_meanwhile_in_zazo` (Central Pass--North East Part),
+  `story_menthu_kills_teo` (Temple of Aegis--Top Floor),
+  `story_senate_of_pensara` (Grivera--Third Floor); no other case's log
+  names a labyrinth. All four are identical legacy vs. scene; the bridge
+  test still passes.
+* **Fixed on the way** (found by the coverage, before the goldens):
+  COTZ-010 had made every ladder of Grivera and Mt. Cesadur unusable. It
+  skips doors in the cell ahead, but a ladder's cell cannot be entered
+  (`LadderDoor.isPassable` is false, as in the Java), so a ladder is used
+  from the cell before it; only the one the player arrived at worked.
+  `Labyrinth.checkNode` uses ladders from the cell before again.
+* **Converter:** all 80 files convert, 134 warnings, none an error: the
+  pilot's 124 and 10 lines with a NUL byte in a hinder door's link name
+  (The Great Mine--The Hall 69; The Sewers--South East 84, 86, 87, 89; The
+  Sewers--South 99, 100, 101, 104, 105), which the converter now names.
+  `GameResourceLoader` drops NUL bytes when it reads a file, the scene holds
+  the name without it, and the Java kept the NUL but `Organizer.convert`
+  dropped it wherever the name was looked up: the doors lead where they
+  should in all three (`dungeon_door_nul_name`). Converting twice changes
+  none of the 553 output files; the pilot's files do not change; 188
+  `.import` files only get `detect_3d/compress_to=0`. 23 floors have a style
+  of their own, 57 share their area's (20 area styles); 7.2's 25 was not
+  right. Five demon floors (Grivera--Corridor of Agony, Menthu's Lair--Hall
+  of Memories and --Throne of Serpents, Mt. Cesadur--Mountain Top, Temple
+  of Aegis--Top Floor) have no floor or roof texture: their walls stand in
+  black, as in the legacy drawing. The previews of all 80 floors (rig and
+  top views) show the layouts and looks; three opened in the editor build
+  without errors.
+* **Step A:** `verify_dungeons.gd --all` with "Slot 1" and "Start": 160 of
+  160 builds pass; `--meshes`: 80 of 80. `--legacy=dungeon_drawing` (new,
+  dev) builds floors from their scenes and draws them the legacy way:
+  golden vs. after step A: 5,690 of 5,690 shots and all 336 logs identical
+  (17 pilot-floor logs with `--ignore-world`, their floors were scenes in
+  the golden).
+* **Step B, legacy vs. scene** (the look still GLBackend's, bugs included;
+  the 219 `dungeon_*` cases and the 7 cases through floors, 3,046 shots,
+  tolerance 0, `--ignore-world`): all 226 logs identical; 2,981 shots
+  identical; 65 differ:
+  * 17 shots of the snow floors (Frozen Forest, Ice Cavern--Frozen Field and
+    --Mysterious Forest), up to 111/255 on up to 21 % of the frame: their sky
+    has alpha 0.8, so the glColor bug drew their walls at alpha 0.8, and
+    where two of them overlap the result depends on which surface of the
+    walls' instance Godot draws first. Equal-depth transparent surfaces are
+    ordered by an unstable sort whose result depends on the whole render
+    list, and the scene's list differs from GLBackend's chunk.
+  * 1 shot of Dorma's Forest in a turn, up to 48/255: the misplaced sky quad
+    (a surface of the walls without depth test) drawn after some walls in
+    the legacy frame, before them in the scene: the same sort.
+  * 47 shots by 1/255 (below).
+* **The look: the glColor bug and the sky, fixed in both paths** (decision
+  2's exact look kept, its emulation bugs removed; ARCHITECTURE section 10).
+  A lit vertex ignores the current colour (OpenGL 2 without
+  `GL_COLOR_MATERIAL`): GLBackend's shader and the dungeon shader. The
+  emulated display list records renderSky's glLoadIdentity: its gradient is
+  in eye space (the list's eye-space part, drawn with the identity; in the
+  scene the floor's `Sky` mesh at the camera, drawn first). So Deep Forest's
+  and the snow floors' walls are opaque (no walls seen through walls),
+  Empyrian Temple--Dark's are not black, the objects are not yellow, and the
+  18 skies fill the top of the view. Scene before vs. after: 1,031 of 5,690
+  shots change, all in the 142 cases that show a labyrinth floor (floors
+  without a sky only where an object is in view: their walls were baked
+  white); all 336 logs identical; nothing else changes (lighting is on only
+  for the labyrinth's walls and objects and the Demolish card's spheres;
+  no case outside a labyrinth changes). New goldens: `afterC`. Not emulated still: the
+  specular term (light and material specular on Fire Cavern--Blazing Maze
+  and the four Grivera floors) and the black streaks while turning in the
+  rain.
+* **Step B after the fix** (the same 226 cases): all logs identical; 2,962
+  of 3,046 shots identical; the 84 others differ by 1/255 in one channel
+  (on 0.0003–2.2 % of a frame, both ways: 67,026 channel values brighter in
+  the scene, 191,574 darker). Tolerance 1, chosen deliberately: all 3,046
+  pass. The opaque walls and the separate sky removed the order effects.
+  What the 1/255 is: Godot's rounding where legacy drawing blends over the
+  floor. In the ice button case the scene and the legacy frame are
+  identical without the minimap, and its batches are identical in both
+  paths (vertices, colours, textures, order); the 1/255 stays when the
+  scene's walls use GLBackend's own materials, and when GLBackend's
+  SubViewport is opaque. The shots are the minimap over walls (after the
+  menu, after a lever), the weather, and alpha-textured walls (Silent
+  Ruin). The stage in the renderer that rounds differently was not found;
+  the pilot met the same (7.7, the Tunnel's 1/255) and avoided it by
+  batching, which here is already as GLBackend's.
+* **Other cases:** the 110 cases that never show a converted floor: 2,644
+  of 2,644 shots and all logs identical to the golden (before and after the
+  fix).
+* **Bridge code checked:** every Inventory class that overrides `draw` has
+  a `place_view` twin (Inventory, Door, HinderDoor, FloorButton, Boss,
+  Save); the classes that change what is drawn through other overrides
+  (`checkIfOpen` of the hinder doors, `currentTex` of chests, levers,
+  combos, villagers, bombs and mission chests, a ladder's images) go
+  through the same checks in the twins; every state change of the draws
+  the scene path skips (texture binds, the save point's update and
+  lighting, the weather's front list and cached view values, the last
+  colour and texture coordinate) happens in the twins. Every floor change
+  and exit frees the old Labyrinth mode and its scene at the next mode
+  switch (both log it: 29 modes and 254 scenes in the 336 cases; the floor
+  current at quit only its scene, Main frees it). The exit-time leak
+  reports are those of the golden in all 336 cases.
+* **Battles, riddles and the weather in the hybrid frame:** as in the
+  pilot: the battle is the scene's first legacy 3D chunk (the 3D bridge),
+  over the walls with their depth, the snow's or rain's front pass over it,
+  the enemy colour as before; a boss battle runs inside the labyrinth's
+  frame (what the boss leads to afterwards can be a mode of its own: Memory
+  Taur's win starts Memory Salmonman's BossBattleArea). A riddle draws
+  nothing in 3D, all of it is its 2D top layer after the minimap; under rain
+  or snow the front pass before it stays in the scene's chunk. Nothing of
+  the legacy look is lost.
+* **Frame rate** (normal runs, windowed, "Slot 1"; median of the walk or
+  battle frames, legacy (`--legacy=dungeons`) → scene; after the fix,
+  before the weather change below):
+
+  | Route | Capped | Uncapped |
+  |---|---|---|
+  | Ice Cavern--Frozen Field, walking in the snow (115 cells) | 41 → 42 | 41 → 41 |
+  | Ice Cavern--Frozen Field, a battle | 35 → 39 | 37 → 39 |
+  | Empyrian Temple--Light (169 cells) | 60 → 60 | 766 → 696 |
+  | Silent Ruin--The Great Ruins (25 objects) | 60 → 60 | 727 → 633 |
+  | Temple of Aegis--Base Level (carpets) | 60 → 60 | 1,110 → 1,047 |
+
+  The snow floor is bound by the weather in GDScript in both paths. The
+  scene is 6–13 % slower uncapped on the others: the per-frame GDScript of
+  the objects' quads and batches (7.7).
+* **Load time** of the largest floor (Empyrian Temple--Light): the legacy
+  path parses the `.map` file in 3.6 ms and compiles the display list in
+  1.6 ms. The scene path loads the floor's scene twice, about 80 ms each
+  (the text `.tscn` and its layout of 169 cell sub-resources; step A's
+  MapLoader frees its instance, so the PackedScene leaves the cache before
+  `create_scene` loads it again), and the first frame builds the walls in
+  about 20 ms (the materials' shader variants; 1.6 ms once they exist).
+  About 180 ms instead of 5 ms, during the black loading screen; Silent
+  Ruin 20 ms per load, Frozen Field 8 ms. Keeping the PackedScene from step
+  A to step B would halve it; a binary layout or packed cell arrays would
+  cut the rest.
+* **The weather's cost** (deliverable 7 of the rollout, without decision
+  6): `WeatherSystem.place_particles` does `drawParticle`'s arithmetic for
+  all particles of a pass at once (the per-pass values once, one vertex
+  array, texture coordinates and colours filled natively; the copy of the
+  growing arrays per particle is gone), `DungeonWeather` builds the quads'
+  index array once. Every vertex, colour and random number is the same:
+  the 222 dungeon and weather cases are identical before and after (2,920
+  shots, logs). Back pass 11.0 → 8.8 ms per frame, front pass 0.8 → 0.6 ms; Forest
+  Path 33 → 36 FPS (capped and uncapped), Ice Cavern--Frozen Field 41 →
+  47–48. The rest is the view test of all 10,000 particles in GDScript and
+  the simulation (`WeatherSystem.update`, ≈10 ms): GPU particles need
+  decision 6.
+* **Content quirks found** (kept, not fixed):
+  * Silent Ruin's door at node 29 leads to `-mark12`, which main.bank
+    lacks: using it drops the game to the title screen ("unknown place").
+  * Three Great Mine levers name objects that do not exist: Great Deep's
+    lever 189 names `The_Great_Mine--Mine_Core…` (the floor is "The Mine
+    Core"), so it opens neither the Mine Core's door 9 nor flips its lever
+    (the Mine Core's own lever opens that door); Mine Shaft's lever 29 names
+    a Tunnel lever 189 and the Mine Core's lever 189 a Mine Shaft lever 28,
+    neither of which exists.
+  * Silent Ruin's riddle at node 86 (RubicsPuzzle19) uses the 4×4 tile set;
+    the magic square check knows only 3×3 and 5×5, so any key solves it
+    (the Java too).
+  * main.bank's Fire Cavern--First Floor places have no `.map` file; nothing
+    leads there.
+  * Ten hinder doors lead to `_` (Pensara Prison's side cells, Menthu's
+    Lair, Forest Path's): locked, they lead nowhere.
+  * With `--mute`, a boss win that keeps its battle music
+    (`BattleManager.dontFadeBattleMusic`) calls `overwriteStarterMusic` on a
+    labyrinth without a music player: a script error (Memory Taur's case),
+    no visible effect. A floor with "No Music" would do the same unmuted
+    (the Java would throw there too).
+
+### 7.9 Closing phase 2 (prepared, not done)
+
+Removing the legacy dungeon path deletes or changes (line counts as of the
+rollout, including doc comments):
+
+| Part | Lines | Still used by |
+|---|---|---|
+| MapLoader's `.map` parsing: `parseFile` 6, `executeCommand` 124, `addSettings` 11, `addTexture` 3, `InsertNodes` 13, `sort` 9, the key maps 31 | 197 | the converter (`map_to_scene.gd`'s MapReader reads every value through it), `verify_dungeons.gd`, `--legacy=dungeons`. Load's saved floor maps are built from the scenes (`MapLoader._init`). `AbstractMapLoader` stays (the other loaders) |
+| The shapes mapEnd's sort chooses: `LabyrinthNode.setFloor` 5, `addCarpetFloor` 25, `setWalls` 7; `Horizontal`'s setters 22; `PillarWalls` 98 | 157 | only the parse (the layout stores the results); `Horizontal` stays as data (the scene gives nodes their carpet), `PillarWalls.node` is set by `load_into` |
+| `Labyrinth.init3D` | 24 | `--legacy=dungeons` |
+| Display lists: `Graphics.glGenLists`/`glNewList`/`glEndList`/`glCallList`/`glDeleteLists` and the Java wrappers (`generateList`, `compileDrawList`, `endList`, `callList`) 36, `DisplayList` 60, the eye-space bookkeeping 12; `ImageHandler.generateDrawList` 2 | 110 | `--legacy=dungeons`, `verify_dungeons.gd --meshes`; nothing else compiles a list |
+| `LabyrinthRenderer.draw` 26, `renderSky` 22 | 48 | `--legacy=dungeons`, `--meshes`; `addLight`, `setMaterial`, `addFog`, `setLight`, `init` stay: `init_scene_3d` sets the GL state the battle still reads |
+| `LabyrinthNode.draw` 17, `drawRoof` 3, `drawFloors` 5, `drawWall` 4; `Horizontal.draw` 30 | 59 | `--legacy=dungeons`; `drawOneWall` (34) and `drawOneFloor` (2) stay: hinder doors and floor buttons draw through them (`DungeonQuads`) |
+| `Graph.drawInventory` 7; `draw` of Inventory 13, HinderDoor 10, FloorButton 9, Boss 5, Save 9, Door 7 | 60 | `--legacy=dungeons`; `Inventory._drawQuad` (69) stays (`place_view`) |
+| `Labyrinth.draw`'s legacy branches | ~8 | `--legacy=dungeons` |
+| `WeatherSystem.loop`, `loopBackwards` and the back pass of `draw` | ~25 of 47 | `--legacy=dungeons`; `draw`'s front pass and `WeatherParticle.drawParticle` (72) stay: the front pass over a battle or riddle |
+| `SaveSystem.draw` 21, `loop` 3, `loopBackwards` 3; `SaveParticle.drawParticle` 18 | 45 | `--legacy=dungeons` |
+| `--legacy=dungeons` and `dungeon_drawing` (`MapLoader.dungeon_scene_for`, `Labyrinth.create_scene`) and the parity cases' legacy runs | ~5 | `Main.is_legacy` stays for later phases |
+| `tools/import/verify_dungeons.gd` | 325 | needs the parse and the `.map` files |
+| the 80 `.map` files (decision 5) | 7,328 (325 KB) | the converter (`map_to_scene.gd`, 715 lines), the data check, `--legacy=dungeons`. COTZ-013 edited three of them: a content change today is a `.map` edit and a conversion |
+
+Battles read the GL fog and light state (`init_scene_3d` sets it as
+`init3D` did) until phase 4.
+
+What keeps the exit criteria of 7.6 from being met:
+
+* "All 80 floors load from scenes": met.
+* "The dungeon AutoPlay scripts (`newgame_to_forest`, `battle`, `boss`)
+  pass": met; `newgame_to_forest` and `battle` are identical legacy vs.
+  scene, `boss` (a village's boss battle area) never shows a floor.
+* "`src/labyrinth` contains no GL calls": not met. About 300 GL-style calls
+  remain in `src/labyrinth`, `src/weather` and the save point's particles:
+  the minimap (`MapRenderer`, `LabyrinthMap`: phase 3), the 2D overlays
+  (mission, dialogs, the top layer, the fade), `init_scene_3d`'s GL state
+  for the battle, the `place_*` twins (texture binds, blend and alpha state,
+  lighting: they keep the legacy GL state for whatever draws after them),
+  `Inventory._drawQuad`, `drawOneWall` and `drawOneFloor` (emitted into
+  `DungeonQuads`), and the whole `--legacy=dungeons` path.
+* The weather and the save points are still the legacy simulation drawn as
+  quads (`DungeonWeather`): GPU particles need decision 6. The Views
+  (`AnimatedSprite3D`) only mirror at run time; real Sprite3D objects and a
+  moving camera are step C (7.6), which gives up exact parity.
+* Delete the `.map` files: decision 5 is open.
+* Parity at tolerance 0 is not reached everywhere (the 1/255 of 7.8); closing
+  needs that tolerance accepted, or the renderer stage found.
 
 ## 8. Phase 3: shared UI and transitions
 
@@ -1194,10 +1444,22 @@ When no mode draws through `g` any more:
   A Godot update can change any of them. Step C (real Sprite3D, a moving
   camera) gives up exact parity by design, so it needs a tolerance or
   accepted differences.
-* **Exact looks keep emulation bugs.** Decision 2 reproduces GLBackend,
-  including glColor on lit vertices (walls seen through walls, black walls
-  in Empyrian Temple--Dark, yellow objects) and the misplaced sky (7.5).
-  Fixing them changes both paths at once and needs new goldens.
+* **Exact looks keep emulation bugs.** Decision 2 reproduces GLBackend:
+  the glColor on lit vertices and the misplaced sky (7.5) were fixed in the
+  rollout in both paths at once, with new goldens (7.8). The specular term
+  is still missing (GLBackend never had one). Fix such a bug in GLBackend
+  and the dungeon shader together.
+* **Order-dependent blending.** Godot orders equal-depth transparent
+  surfaces with an unstable sort whose result depends on the whole render
+  list, so two paths that draw the same surfaces can blend them in a
+  different order: up to 111/255 on the translucent walls of the rollout's
+  first step B (7.8). Keep surfaces that blend with each other at distinct
+  depths or sorting offsets (the sky is its own instance now), or opaque.
+  A 1/255 rounding where legacy drawing blends over a scene remains
+  unexplained (7.8).
+* **Load time.** A floor's scene is a text `.tscn` with a layout of one
+  sub-resource per cell, loaded twice per floor entry: about 180 ms on the
+  largest floor where the `.map` path took 5 ms (7.8).
 * **RefCounted cycles** keep game modes and their scenes alive (the
   Labyrinth until phase 2, the world map until phase 1, the MainMenu still).
   Check that a converted mode is freed when it ends.
@@ -1216,8 +1478,9 @@ When no mode draws through `g` any more:
 2. **Dungeon lighting:** exact fixed-function look (shader) vs. Godot lights
    (more modern, slightly different). *Applied for the pilot (phase 2):*
    the exact look: GLBackend's spatial shader as a ShaderMaterial with the
-   style's values. It also keeps the emulation's glColor bug (7.5). The
-   Godot-lights variant was not tried.
+   style's values. It also kept the emulation's glColor bug (7.5); *the
+   rollout applied it to every floor and fixed that bug and the misplaced
+   sky in both paths (7.8).* The Godot-lights variant was not tried.
 3. **Step C timing:** accept changes in movement and collision feel (and fix
    the speed TODOs) right after step B, or only after every mode is on
    scenes.

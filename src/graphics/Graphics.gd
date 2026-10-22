@@ -184,6 +184,10 @@ var _im_n := PackedVector3Array()
 var _next_list := 1
 var _lists := {}
 var _compiling: DisplayList = null
+# While compiling: a glLoadIdentity inside the list (and not undone by its
+# glPopMatrix) puts what follows in eye space when the list is called.
+var _list_eye := false
+var _list_eye_stack: Array[bool] = []
 
 
 func _init(p_backend: GLBackend = null) -> void:
@@ -1118,11 +1122,17 @@ func glMatrixMode(mode: int) -> void:
 func glLoadIdentity() -> void:
 	if _matrix_mode == GL_MODELVIEW:
 		_mv = Transform3D.IDENTITY
+		# GL records the call in a list being compiled and runs it when the
+		# list is called: what follows is in eye space then (DisplayList).
+		if _compiling != null:
+			_list_eye = true
 
 
 func glPushMatrix() -> void:
 	if _matrix_mode == GL_MODELVIEW:
 		_mv_stack.append(_mv)
+		if _compiling != null:
+			_list_eye_stack.append(_list_eye)
 
 
 func glPopMatrix() -> void:
@@ -1131,6 +1141,8 @@ func glPopMatrix() -> void:
 			push_warning("glPopMatrix: stack underflow")
 		else:
 			_mv = _mv_stack.pop_back()
+		if _compiling != null and not _list_eye_stack.is_empty():
+			_list_eye = _list_eye_stack.pop_back()
 
 
 func glTranslatef(x: float, y: float, z: float) -> void:
@@ -1503,6 +1515,8 @@ func glNewList(list: int, mode: int) -> void:
 	_compiling = DisplayList.new()
 	_compiling.base_inv = _mv.affine_inverse()
 	_lists[list] = _compiling
+	_list_eye = false
+	_list_eye_stack.clear()
 
 
 func glEndList() -> void:
@@ -1513,12 +1527,13 @@ func glEndList() -> void:
 
 func glCallList(list: int) -> void:
 	var dl: DisplayList = _lists.get(list)
-	if dl == null or dl.mesh == null or backend == null:
+	if dl == null or dl.parts.is_empty() or backend == null:
 		return
 	if not _proj3d:
 		push_warning("glCallList in 2D projection is not supported")
 		return
-	backend.vp_3d().add_mesh(dl.mesh, _mv)
+	for part: Array in dl.parts:
+		backend.vp_3d().add_mesh(part[1], Transform3D.IDENTITY if part[0] else _mv)
 
 
 func glDeleteLists(list: int, range_count: int) -> void:
@@ -1581,24 +1596,31 @@ func glUseProgram(program: int) -> void:
 	pass
 
 
-## A compiled display list (glNewList/glEndList): an ArrayMesh with one surface
-## per material, relative to the matrix active when the list was started.
+## A compiled display list (glNewList/glEndList): ArrayMeshes with one surface
+## per material, relative to the matrix active when the list was started, or
+## in eye space for what a glLoadIdentity inside the list put there (GL runs
+## the recorded call when the list is called: LabyrinthRenderer.renderSky's
+## gradient fills the top of the view). parts is [eye space, mesh] in the
+## order the list draws them; glCallList draws each part with the identity or
+## the current modelview.
 class DisplayList extends RefCounted:
 	var base_inv := Transform3D.IDENTITY
-	var groups := {} # material -> [v, uv, c, n]
+	var groups := {} # [eye space, material] -> [v, uv, c, n]
 	var order: Array = []
-	var mesh: ArrayMesh
+	var parts: Array = []
 
 	func add(g: Graphics, v: PackedVector3Array, uv: PackedVector2Array,
 			c: PackedColorArray, n: PackedVector3Array) -> void:
 		if g.backend == null:
 			return
 		var mat := g._material3D()
-		var rel := base_inv * g.getModelView()
-		if not groups.has(mat):
-			groups[mat] = [PackedVector3Array(), PackedVector2Array(), PackedColorArray(), PackedVector3Array()]
-			order.append(mat)
-		var grp: Array = groups[mat]
+		var eye: bool = g._list_eye
+		var rel := g.getModelView() if eye else base_inv * g.getModelView()
+		var key := [eye, mat]
+		if not groups.has(key):
+			groups[key] = [PackedVector3Array(), PackedVector2Array(), PackedColorArray(), PackedVector3Array()]
+			order.append(key)
+		var grp: Array = groups[key]
 		var gv: PackedVector3Array = grp[0]
 		var gn: PackedVector3Array = grp[3]
 		for i in v.size():
@@ -1613,13 +1635,18 @@ class DisplayList extends RefCounted:
 		gc.append_array(c)
 		grp[2] = gc
 
+	## One mesh per run of groups in the same space, in the list's order.
 	func finish() -> void:
-		mesh = ArrayMesh.new()
-		var s := 0
-		for mat in order:
-			var grp: Array = groups[mat]
+		var mesh: ArrayMesh = null
+		var mesh_eye := false
+		for key: Array in order:
+			var grp: Array = groups[key]
 			if grp[0].is_empty():
 				continue
+			if mesh == null or key[0] != mesh_eye:
+				mesh = ArrayMesh.new()
+				mesh_eye = key[0]
+				parts.append([mesh_eye, mesh])
 			var arrays := []
 			arrays.resize(Mesh.ARRAY_MAX)
 			arrays[Mesh.ARRAY_VERTEX] = grp[0]
@@ -1627,6 +1654,5 @@ class DisplayList extends RefCounted:
 			arrays[Mesh.ARRAY_COLOR] = grp[2]
 			arrays[Mesh.ARRAY_NORMAL] = grp[3]
 			mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-			mesh.surface_set_material(s, mat)
-			s += 1
+			mesh.surface_set_material(mesh.get_surface_count() - 1, key[1])
 		groups.clear()

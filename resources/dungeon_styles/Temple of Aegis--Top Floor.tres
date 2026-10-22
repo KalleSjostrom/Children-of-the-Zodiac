@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="DungeonStyle" format=3]
+
+[ext_resource type="Script" path="res://scenes/dungeons/DungeonStyle.gd" id="1_3j04c"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/demonfloorwall.png" id="2_hvch6"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/demonfloordoor0.png" id="3_7dh8m"]
+
+[resource]
+script = ExtResource("1_3j04c")
+texture_names = PackedStringArray("Walls/demonfloorwall.png", "Walls/demonfloordoor0.png")
+textures = Array[Texture2D]([ExtResource("2_hvch6"), ExtResource("3_7dh8m")])
+wall_slots = Vector2i(0, 2)
+roof_slots = Vector2i(2, 2)
+light0 = true
+light0_position = Vector4(0, 0, 0, 1)
+light0_ambient = Color(1, 1, 1, 1)
+light0_diffuse = Color(1, 1, 1, 1)
+light0_specular = Color(0, 0, 0, 1)
+light0_attenuation = Vector3(1, 0.01, 0.015)
+material = true
+material_ambient = Color(0.8, 0.8, 0.8, 1)
+material_diffuse = Color(0.7, 0.7, 0.7, 1)
+material_specular = Color(0, 0, 0, 1)
+inv_material = true
+inv_material_ambient = Color(0.7, 0.7, 0.7, 1)
+inv_material_diffuse = Color(0.8, 0.8, 0.8, 1)
+inv_material_specular = Color(0.2, 0.2, 0.2, 1)
+inv_material_emission = Color(0.1, 0.1, 0.1, 1)
+inv_material_shininess = 5.0
+has_enemy_color = true
+enemy_color = Color(0.7, 0.7, 0.7, 1)

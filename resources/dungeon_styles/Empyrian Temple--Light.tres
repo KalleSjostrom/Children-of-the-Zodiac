@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="DungeonStyle" format=3]
+
+[ext_resource type="Script" path="res://scenes/dungeons/DungeonStyle.gd" id="1_p3eb2"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Floors/airtemplefloor.jpg" id="2_l20oy"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/airtemplewall.png" id="3_qvlml"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/airtempledoor0.png" id="4_dx4mr"]
+
+[resource]
+script = ExtResource("1_p3eb2")
+texture_names = PackedStringArray("Floors/airtemplefloor.jpg", "Walls/airtemplewall.png", "Walls/airtempledoor0.png")
+textures = Array[Texture2D]([ExtResource("2_l20oy"), ExtResource("3_qvlml"), ExtResource("4_dx4mr")])
+floor_slots = Vector2i(0, 1)
+wall_slots = Vector2i(1, 3)
+light0 = true
+light0_position = Vector4(0, 0, 0, 1)
+light0_ambient = Color(0.8, 0.8, 0.8, 1)
+light0_diffuse = Color(0.8, 0.8, 0.8, 1)
+light0_specular = Color(0, 0, 0, 1)
+light0_attenuation = Vector3(1, 0.01, 0.015)
+light1 = true
+light1_ambient = Color(0.8, 0.8, 0.8, 1)
+light1_diffuse = Color(0.8, 0.8, 0.8, 1)
+light1_specular = Color(0, 0, 0, 1)
+light1_attenuation = Vector3(1, 0.01, 0.015)
+material = true
+material_ambient = Color(0.4, 0.4, 0.4, 1)
+material_diffuse = Color(0.7, 0.7, 0.7, 1)
+material_specular = Color(0, 0, 0, 1)
+material_emission = Color(0.1, 0.1, 0.1, 1)
+material_shininess = 5.0
+inv_material = true
+inv_material_ambient = Color(0.4, 0.4, 0.4, 1)
+inv_material_diffuse = Color(0.7, 0.7, 0.7, 1)
+inv_material_specular = Color(0, 0, 0, 1)
+inv_material_emission = Color(0.1, 0.1, 0.1, 1)
+inv_material_shininess = 5.0
+fog = true
+fog_color = Color(0.6, 0.6, 0.7, 0.8)
+fog_density = 0.02
+sky = true
+sky_top = Color(0.3, 0.3, 0.5, 0.8)
+sky_bottom = Color(0.8, 0.8, 1, 0.8)

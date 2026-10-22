@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/icecavedoor0.png" id="1_8mqod"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/icecavedoor1.png" id="2_xo5q3"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_8mqod")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_xo5q3")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}]

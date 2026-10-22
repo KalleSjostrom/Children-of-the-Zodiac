@@ -1,0 +1,100 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/Grivera--First Floor.tres" id="2_1amtw"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/Grivera--First Floor.tres" id="3_br33j"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonTriggerDoor.tscn" id="4_eoqda"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonLadderDoor.tscn" id="5_a8rgg"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/ladderup.tres" id="6_u3ld6"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonChest.tscn" id="7_0jykb"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/chest.tres" id="8_djwqt"]
+
+[node name="First Floor" instance=ExtResource("1_base")]
+map_name = "Grivera--First Floor.map"
+style = ExtResource("2_1amtw")
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+mission_entries = PackedStringArray()
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_br33j")
+
+[node name="00 triggerDoor 12" parent="Objects" index="0" instance=ExtResource("4_eoqda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -14)
+trigger = "Grivera_-_New_Tutorial"
+open_roads = "dontopen"
+next_places = PackedStringArray("landgrivera--first_floor-mark0")
+kind = "triggerDoor"
+cell = 12
+facing = 1
+database_name = "grivera--first floor.maptriggerdoor12"
+
+[node name="01 ladderDoor 116" parent="Objects" index="1" instance=ExtResource("5_a8rgg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -46)
+going_up = true
+open_roads = "dontopen"
+next_places = PackedStringArray("grivera--second_floor-mark0")
+mark = 1
+kind = "ladderDoor"
+cell = 116
+facing = 2
+image = "Images/ladderup.png"
+database_name = "grivera--first floor.mapladderdoor116"
+
+[node name="View" parent="Objects/01 ladderDoor 116" index="0"]
+transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 1, 0, 0.2375, -0.29999924)
+sprite_frames = ExtResource("6_u3ld6")
+
+[node name="02 ladderDoor 203" parent="Objects" index="2" instance=ExtResource("5_a8rgg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -18)
+going_up = true
+open_roads = "dontopen"
+next_places = PackedStringArray("grivera--second_floor-mark1")
+mark = 2
+kind = "ladderDoor"
+cell = 203
+facing = 3
+image = "Images/ladderup.png"
+database_name = "grivera--first floor.mapladderdoor203"
+
+[node name="View" parent="Objects/02 ladderDoor 203" index="0"]
+transform = Transform3D(-2.1855694e-10, 0, -1, 0, 0.005, 0, 0.005, 0, -4.371139e-08, 0.29999924, 0.2375, 0)
+sprite_frames = ExtResource("6_u3ld6")
+
+[node name="03 chest 9" parent="Objects" index="3" instance=ExtResource("7_0jykb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -26)
+frames = 2
+content_name = "80"
+content_info = PackedStringArray()
+kind = "chest"
+cell = 9
+facing = 1
+image = "Images/chest"
+database_name = "grivera--first floor.mapchest9"
+
+[node name="View" parent="Objects/03 chest 9" index="0"]
+transform = Transform3D(-3.059797e-10, 0, 1, 0, 0.007, 0, -0.007, 0, -4.371139e-08, 0, -1.2825, 0)
+sprite_frames = ExtResource("8_djwqt")
+
+[node name="04 chest 47" parent="Objects" index="4" instance=ExtResource("7_0jykb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -2)
+frames = 2
+content_type = 2
+content_name = "cards.offense.BattleCard"
+content_info = PackedStringArray("2", "false")
+kind = "chest"
+cell = 47
+facing = 1
+image = "Images/chest"
+database_name = "grivera--first floor.mapchest47"
+
+[node name="View" parent="Objects/04 chest 47" index="0"]
+transform = Transform3D(-3.059797e-10, 0, 1, 0, 0.007, 0, -0.007, 0, -4.371139e-08, 0, -1.2825, 0)
+sprite_frames = ExtResource("8_djwqt")
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2, 0, -14)
+
+[editable path="Objects/01 ladderDoor 116"]
+[editable path="Objects/02 ladderDoor 203"]
+[editable path="Objects/03 chest 9"]
+[editable path="Objects/04 chest 47"]

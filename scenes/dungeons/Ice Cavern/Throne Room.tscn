@@ -1,0 +1,278 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/Ice Cavern.tres" id="2_6ohpy"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/Ice Cavern--Throne Room.tres" id="3_eppkm"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonDoor.tscn" id="4_qm7x2"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonRiddleDoor.tscn" id="5_xpden"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Walls/icecavedoor.tres" id="6_k3qkc"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonIceComboButton.tscn" id="7_c137x"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/note1.tres" id="8_8vogl"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/note2.tres" id="9_uu1ly"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/note3.tres" id="10_n5i2n"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/note4.tres" id="11_huldo"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/note5.tres" id="12_yqnub"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonChest.tscn" id="13_n2uvc"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/icepot.tres" id="14_qwj8c"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonBoss.tscn" id="15_12nst"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonSavePoint.tscn" id="16_6f41q"]
+
+[node name="Throne Room" instance=ExtResource("1_base")]
+map_name = "Ice Cavern--Throne Room.map"
+style = ExtResource("2_6ohpy")
+battle_music = PackedStringArray("Battle", "Menthu\'s Theme")
+mission_entries = PackedStringArray()
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_eppkm")
+
+[node name="00 door 15" parent="Objects" index="0" instance=ExtResource("4_qm7x2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+open_roads = "dontopen"
+next_places = PackedStringArray("Ice_Cavern--Hall_of_Confusion-mark0")
+kind = "door"
+cell = 15
+facing = 1
+database_name = "ice cavern--throne room.mapdoor15"
+
+[node name="01 door 207" parent="Objects" index="1" instance=ExtResource("4_qm7x2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -2)
+open_roads = "dontopen"
+next_places = PackedStringArray("Ice_Cavern--Hall_of_Anguish-mark0")
+mark = 1
+kind = "door"
+cell = 207
+facing = 3
+database_name = "ice cavern--throne room.mapdoor207"
+
+[node name="02 door 203" parent="Objects" index="2" instance=ExtResource("4_qm7x2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -18)
+open_roads = "dontopen"
+next_places = PackedStringArray("Ice_Cavern--Hall_of_Anguish-mark2")
+mark = 2
+kind = "door"
+cell = 203
+facing = 3
+database_name = "ice cavern--throne room.mapdoor203"
+
+[node name="03 door 197" parent="Objects" index="3" instance=ExtResource("4_qm7x2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -42)
+open_roads = "dontopen"
+next_places = PackedStringArray("Ice_Cavern--Hall_of_Anguish-mark3")
+mark = 3
+kind = "door"
+cell = 197
+facing = 3
+database_name = "ice cavern--throne room.mapdoor197"
+
+[node name="04 door 5" parent="Objects" index="4" instance=ExtResource("4_qm7x2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -42)
+open_roads = "dontopen"
+next_places = PackedStringArray("Ice_Cavern--Hall_of_Confusion-mark3")
+mark = 4
+kind = "door"
+cell = 5
+facing = 1
+database_name = "ice cavern--throne room.mapdoor5"
+
+[node name="05 door 11" parent="Objects" index="5" instance=ExtResource("4_qm7x2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -18)
+open_roads = "dontopen"
+next_places = PackedStringArray("Ice_Cavern--Hall_of_Confusion-mark2")
+mark = 5
+kind = "door"
+cell = 11
+facing = 1
+database_name = "ice cavern--throne room.mapdoor11"
+
+[node name="06 riddleDoor 102" parent="Objects" index="6" instance=ExtResource("5_xpden")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -38)
+next_place = "Ice_Cavern--Throne_Room-mark7"
+mark = 6
+kind = "riddleDoor"
+cell = 102
+facing = 2
+image = "Walls/icecavedoor"
+database_name = "ice cavern--throne room.mapriddledoor102"
+
+[node name="View" parent="Objects/06 riddleDoor 102" index="0"]
+transform = Transform3D(0.0078125, 0, 0, 0, 0.0078125, 0, 0, 0, 1, 0, 0, -2)
+sprite_frames = ExtResource("6_k3qkc")
+frame = 1
+
+[node name="07 door 101" parent="Objects" index="7" instance=ExtResource("4_qm7x2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -42)
+open_roads = "dontopen"
+next_places = PackedStringArray("Ice_Cavern--Throne_Room-mark6")
+mark = 7
+kind = "door"
+cell = 101
+database_name = "ice cavern--throne room.mapdoor101"
+
+[node name="08 iceComboButton 35" parent="Objects" index="8" instance=ExtResource("7_c137x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -50)
+sound = "Labyrinth/Note_1.wav"
+frames = 2
+buttons = PackedStringArray()
+kind = "iceComboButton"
+cell = 35
+facing = 1
+image = "Images/note1"
+database_name = "ice cavern--throne room.mapicecombobutton35"
+
+[node name="View" parent="Objects/08 iceComboButton 35" index="0"]
+transform = Transform3D(-2.6226832e-10, 0, 1, 0, 0.006, 0, -0.006, 0, -4.371139e-08, -1.9899998, 0.259, 0)
+sprite_frames = ExtResource("8_8vogl")
+
+[node name="09 iceComboButton 58" parent="Objects" index="9" instance=ExtResource("7_c137x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -22)
+sound = "Labyrinth/Note_2.wav"
+frames = 2
+buttons = PackedStringArray("ice_cavern--throne_room.mapiceComboButton35")
+kind = "iceComboButton"
+cell = 58
+facing = 1
+image = "Images/note2"
+database_name = "ice cavern--throne room.mapicecombobutton58"
+
+[node name="View" parent="Objects/09 iceComboButton 58" index="0"]
+transform = Transform3D(-2.6226832e-10, 0, 1, 0, 0.006, 0, -0.006, 0, -4.371139e-08, -1.9899998, 0.259, 0)
+sprite_frames = ExtResource("9_uu1ly")
+
+[node name="10 iceComboButton 163" parent="Objects" index="10" instance=ExtResource("7_c137x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -50)
+sound = "Labyrinth/Note_3.wav"
+frames = 2
+buttons = PackedStringArray("ice_cavern--throne_room.mapiceComboButton35", "ice_cavern--throne_room.mapiceComboButton58")
+kind = "iceComboButton"
+cell = 163
+facing = 3
+image = "Images/note3"
+database_name = "ice cavern--throne room.mapicecombobutton163"
+
+[node name="View" parent="Objects/10 iceComboButton 163" index="0"]
+transform = Transform3D(-2.6226832e-10, 0, -1, 0, 0.006, 0, 0.006, 0, -4.371139e-08, 1.9900017, 0.259, 0)
+sprite_frames = ExtResource("10_n5i2n")
+
+[node name="11 iceComboButton 154" parent="Objects" index="11" instance=ExtResource("7_c137x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -22)
+sound = "Labyrinth/Note_4.wav"
+frames = 2
+buttons = PackedStringArray("ice_cavern--throne_room.mapiceComboButton35", "ice_cavern--throne_room.mapiceComboButton58", "ice_cavern--throne_room.mapiceComboButton163")
+kind = "iceComboButton"
+cell = 154
+facing = 3
+image = "Images/note4"
+database_name = "ice cavern--throne room.mapicecombobutton154"
+
+[node name="View" parent="Objects/11 iceComboButton 154" index="0"]
+transform = Transform3D(-2.6226832e-10, 0, -1, 0, 0.006, 0, 0.006, 0, -4.371139e-08, 1.9900017, 0.259, 0)
+sprite_frames = ExtResource("11_huldo")
+
+[node name="12 iceComboButton 77" parent="Objects" index="12" instance=ExtResource("7_c137x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -10)
+sound = "Labyrinth/Note_5.wav"
+frames = 2
+buttons = PackedStringArray("ice_cavern--throne_room.mapiceComboButton35", "ice_cavern--throne_room.mapiceComboButton58", "ice_cavern--throne_room.mapiceComboButton163", "ice_cavern--throne_room.mapiceComboButton154")
+open_door = "ice_cavern--throne_room.mapriddleDoor102"
+kind = "iceComboButton"
+cell = 77
+facing = 1
+image = "Images/note5"
+database_name = "ice cavern--throne room.mapicecombobutton77"
+
+[node name="View" parent="Objects/12 iceComboButton 77" index="0"]
+transform = Transform3D(-2.6226832e-10, 0, 1, 0, 0.006, 0, -0.006, 0, -4.371139e-08, -1.9899998, 0.259, 0)
+sprite_frames = ExtResource("12_yqnub")
+
+[node name="13 chest 41" parent="Objects" index="13" instance=ExtResource("13_n2uvc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -26)
+frames = 2
+content_type = 2
+content_name = "cards.offense.Destroyer"
+content_info = PackedStringArray("1")
+kind = "chest"
+cell = 41
+image = "Images/icepot"
+database_name = "ice cavern--throne room.mapchest41"
+
+[node name="View" parent="Objects/13 chest 41" index="0"]
+transform = Transform3D(-0.004, 0, -8.742278e-08, 0, 0.004, 0, 3.496911e-10, 0, -1, 0, -1.394, 0)
+sprite_frames = ExtResource("14_qwj8c")
+
+[node name="14 chest 43" parent="Objects" index="14" instance=ExtResource("13_n2uvc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -18)
+frames = 2
+content_type = 2
+content_name = "cards.offense.CriticalBlow"
+content_info = PackedStringArray("3")
+kind = "chest"
+cell = 43
+facing = 3
+image = "Images/icepot"
+database_name = "ice cavern--throne room.mapchest43"
+
+[node name="View" parent="Objects/14 chest 43" index="0"]
+transform = Transform3D(-1.7484555e-10, 0, -1, 0, 0.004, 0, 0.004, 0, -4.371139e-08, 0, -1.394, 0)
+sprite_frames = ExtResource("14_qwj8c")
+
+[node name="15 chest 171" parent="Objects" index="15" instance=ExtResource("13_n2uvc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -18)
+frames = 2
+content_type = 2
+content_name = "cards.offense.ChameleonStrike"
+content_info = PackedStringArray("3")
+kind = "chest"
+cell = 171
+facing = 1
+image = "Images/icepot"
+database_name = "ice cavern--throne room.mapchest171"
+
+[node name="View" parent="Objects/15 chest 171" index="0"]
+transform = Transform3D(-1.7484555e-10, 0, 1, 0, 0.004, 0, -0.004, 0, -4.371139e-08, 0, -1.394, 0)
+sprite_frames = ExtResource("14_qwj8c")
+
+[node name="16 chest 169" parent="Objects" index="16" instance=ExtResource("13_n2uvc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -26)
+frames = 2
+content_type = 2
+content_name = "cards.magic.SacredBeam"
+content_info = PackedStringArray("1")
+kind = "chest"
+cell = 169
+image = "Images/icepot"
+database_name = "ice cavern--throne room.mapchest169"
+
+[node name="View" parent="Objects/16 chest 169" index="0"]
+transform = Transform3D(-0.004, 0, -8.742278e-08, 0, 0.004, 0, 3.496911e-10, 0, -1, 0, -1.394, 0)
+sprite_frames = ExtResource("14_qwj8c")
+
+[node name="17 boss 100" parent="Objects" index="17" instance=ExtResource("15_12nst")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -46)
+kind = "boss"
+cell = 100
+facing = 1
+image = "Menthu1"
+database_name = "menthu1"
+
+[node name="18 save 141" parent="Objects" index="18" instance=ExtResource("16_6f41q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -10)
+kind = "save"
+cell = 141
+facing = 1
+image = "-1"
+database_name = "ice cavern--throne room.mapsave141"
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2, 0, -2)
+
+[editable path="Objects/06 riddleDoor 102"]
+[editable path="Objects/08 iceComboButton 35"]
+[editable path="Objects/09 iceComboButton 58"]
+[editable path="Objects/10 iceComboButton 163"]
+[editable path="Objects/11 iceComboButton 154"]
+[editable path="Objects/12 iceComboButton 77"]
+[editable path="Objects/13 chest 41"]
+[editable path="Objects/14 chest 43"]
+[editable path="Objects/15 chest 171"]
+[editable path="Objects/16 chest 169"]

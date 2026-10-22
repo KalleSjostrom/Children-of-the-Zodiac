@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Floors/airtemplefloorcancer0.jpg" id="1_2510u"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Floors/airtemplefloorcancer1.jpg" id="2_mbcnv"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_2510u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_mbcnv")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}]

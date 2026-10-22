@@ -1,0 +1,43 @@
+# Enters labyrinth floors through the developer console (parity case
+# dungeon_console_goto, phase 2 rollout; COTZ-006): --load="Slot 1"
+# --start=Alares. "goto Grivera--Second Floor-mark0" from the village (the
+# floor loads at its first door), a step, "teleport mark2" (the same floor
+# again, at another door), "savepoint" (at its save point), then "goto" a
+# floor of another area, and the menu.
+wait 3000
+shot g01_village
+log village
+console goto Grivera--Second Floor-mark0
+wait 4000
+shot g02_goto
+wait 2500
+shot g03_arrived
+pos arrived
+log arrived
+tap UP
+wait 700
+shot g04_step
+console teleport mark2
+wait 4000
+shot g05_teleported
+pos teleported
+log teleported
+console savepoint
+wait 4000
+shot g06_save_point
+pos save_point
+log save_point
+console goto The Sewers--South East-mark0
+wait 4500
+shot g07_other_floor
+pos other_floor
+log other_floor
+tap TRIANGLE
+wait 2500
+shot g08_menu
+log menu
+tap CIRCLE
+wait 2000
+shot g09_after_menu
+log after_menu
+quit

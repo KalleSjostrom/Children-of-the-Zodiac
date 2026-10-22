@@ -1,0 +1,14 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Images/earth.png" id="1_hdx5b"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_hdx5b")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}]

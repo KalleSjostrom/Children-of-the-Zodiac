@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="DungeonStyle" format=3]
+
+[ext_resource type="Script" path="res://scenes/dungeons/DungeonStyle.gd" id="1_nnx5e"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Floors/sewerfloor.jpg" id="2_qsfuq"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/sewerwall.png" id="3_gaf7m"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/sewerdoor0.png" id="4_6h3vc"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/sewerdoor1.png" id="5_cjevq"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Roofs/sewerroof.jpg" id="6_5y0lh"]
+
+[resource]
+script = ExtResource("1_nnx5e")
+texture_names = PackedStringArray("Floors/sewerfloor.jpg", "Walls/sewerwall.png", "Walls/sewerdoor0.png", "Walls/sewerdoor1.png", "Roofs/sewerroof.jpg")
+textures = Array[Texture2D]([ExtResource("2_qsfuq"), ExtResource("3_gaf7m"), ExtResource("4_6h3vc"), ExtResource("5_cjevq"), ExtResource("6_5y0lh")])
+floor_slots = Vector2i(0, 1)
+wall_slots = Vector2i(1, 4)
+roof_slots = Vector2i(4, 5)
+light0 = true
+light0_position = Vector4(0, 0, 0, 1)
+light0_ambient = Color(0.8, 0.8, 0.8, 1)
+light0_diffuse = Color(0.8, 0.8, 0.8, 1)
+light0_specular = Color(0, 0, 0, 1)
+light0_attenuation = Vector3(1, 0.01, 0.015)
+material = true
+material_ambient = Color(0.4, 0.4, 0.4, 1)
+material_diffuse = Color(0.7, 0.7, 0.7, 1)
+material_specular = Color(0, 0, 0, 1)
+inv_material = true
+inv_material_ambient = Color(0.4, 0.4, 0.4, 1)
+inv_material_diffuse = Color(0.4, 0.4, 0.4, 1)
+inv_material_specular = Color(0, 0, 0, 1)
+fog = true
+fog_color = Color(0.2, 1, 0.6, 0.0008)
+fog_density = 0.003
+fog_end = 10.0

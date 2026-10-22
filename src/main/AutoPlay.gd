@@ -22,7 +22,9 @@ extends RefCounted
 ##   loopuntil <text> <ms> jump back to the last mark unless the state string
 ##                        ("mode=... sub=... place=...") contains <text>, or
 ##                        <ms> have passed since the mark was first reached
-##                        ("!<text>": until the state does NOT contain <text>)
+##                        ("!<text>": until the state does NOT contain <text>);
+##                        it also matches "dialog" while a labyrinth shows a
+##                        dialog (not printed in the state lines)
 ##   key <KEY>            press and release a keyboard key (a real key event,
 ##                        Godot's key names: F1, Enter, Escape, Tab, Up ...)
 ##   type <text>          type the text as key events (for the debug console)
@@ -143,7 +145,8 @@ func update(elapsed: float) -> void:
 			"loopuntil":
 				var st := _state()
 				var want: String = parts[1]
-				var met: bool = (not st.contains(want.substr(1))) if want.begins_with("!") else st.contains(want)
+				var seen := st + _hidden_state()
+				var met: bool = (not seen.contains(want.substr(1))) if want.begins_with("!") else seen.contains(want)
 				var mark_time: float = _marks.back()[1] if not _marks.is_empty() else time_ms
 				if met:
 					print("[autoplay %.0f ms] loopuntil %s reached: %s" % [time_ms, parts[1], st])
@@ -173,6 +176,16 @@ func update(elapsed: float) -> void:
 				push_warning("AutoPlay: unknown command " + parts[0])
 	if _guard > 0.0 and not _held.is_empty():
 		_check_guard()
+
+
+## Words "loopuntil" also tests that the state lines do not print (so the
+## logs of older runs stay comparable): " dialog" while a labyrinth shows a
+## dialog (its objects talk until CROSS has paged through it).
+func _hidden_state() -> String:
+	var o := Organizer.getOrganizer()
+	if o != null and o.currentGameMode is Labyrinth and o.currentGameMode.dialog != null:
+		return " dialog"
+	return ""
 
 
 ## "guard": lets go of each held direction that would take the village player

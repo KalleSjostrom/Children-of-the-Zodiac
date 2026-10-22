@@ -12,14 +12,16 @@ extends Node3D
 ## order, one surface per material in the order the display list made them.
 ##
 ## Like the display list it bakes the GL state it was compiled in: the
-## current colour (the walls are tinted by it: the sky's bottom colour on a
-## floor with a sky), the current normal (carpets set none), the alpha test
-## and blending. build() takes that state; the editor uses GL's defaults.
-## On a floor with a sky the gradient quad that renderSky adds is part of
-## the mesh too, where the emulated display list put it: GLBackend bakes the
-## vertices relative to the matrix at glNewList and does not record
-## renderSky's glLoadIdentity, so the quad stands at world (-2..2, 0..0.827,
-## -2) instead of filling the top of the view.
+## current colour (the sky's bottom colour on a floor with a sky; lit
+## vertices ignore it, as OpenGL 2 does without GL_COLOR_MATERIAL), the
+## current normal (carpets set none), the alpha test and blending. build()
+## takes that state; the editor uses GL's defaults.
+## On a floor with a sky the gradient quad that renderSky adds before the
+## walls is in eye space (its glLoadIdentity runs when the list is called):
+## it fills the top of the view. It is a mesh of its own (Sky, top level),
+## at the camera the floor is seen from (set_sky_camera: the origin at run
+## time, where the camera stays) and drawn before the walls, as
+## Graphics.DisplayList draws the list's eye-space part first.
 
 const FLOOR_HEIGHT := -2.0
 const ROOF_HEIGHT := 2.0
@@ -30,16 +32,23 @@ const WALL := 1
 const ROOF := 2
 const CARPET := 3
 const PILLAR := 4
+## The sky is drawn before the walls (sorting offset 0) and everything else
+## of the scene (DungeonScene.SORT_STEP and up).
+const SKY_SORTING_OFFSET := -1000.0
 
 ## The cells to build.
 @export var layout: DungeonLayout
 
 var _mesh: MeshInstance3D
+var _sky_mesh: MeshInstance3D
 var _built := ""
 # The display list's groups while building: material -> [vertices, normals,
-# uvs, colours], and their order.
+# uvs, colours], and their order; the sky's (eye space) apart.
 var _groups := {}
 var _order: Array[ShaderMaterial] = []
+var _sky_groups := {}
+var _sky_order: Array[ShaderMaterial] = []
+var _in_sky := false
 var _normal := Vector3(0, 0, 1)
 var _color := Color(1, 1, 1, 1)
 var _uv := Vector2.ZERO
@@ -68,7 +77,18 @@ func build(style: DungeonStyle, gl := {}) -> Dictionary:
 		# Sorted by its origin, as GLBackend's display list instance.
 		_mesh.sorting_use_aabb_center = false
 		add_child(_mesh, false, Node.INTERNAL_MODE_BACK)
+	if _sky_mesh == null:
+		_sky_mesh = MeshInstance3D.new()
+		_sky_mesh.name = "Sky"
+		_sky_mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		_sky_mesh.sorting_use_aabb_center = false
+		_sky_mesh.sorting_offset = SKY_SORTING_OFFSET
+		_sky_mesh.extra_cull_margin = 16384.0
+		# In the camera's space, not the floor's (Layout gets the modelview).
+		_sky_mesh.top_level = true
+		add_child(_sky_mesh, false, Node.INTERNAL_MODE_FRONT)
 	_mesh.mesh = null
+	_sky_mesh.mesh = null
 	_color = gl.get("color", Color(1, 1, 1, 1))
 	_normal = gl.get("normal", Vector3(0, 0, 1))
 	_uv = gl.get("uv", Vector2.ZERO)
@@ -78,38 +98,48 @@ func build(style: DungeonStyle, gl := {}) -> Dictionary:
 		return _left
 	_groups.clear()
 	_order.clear()
+	_sky_groups.clear()
+	_sky_order.clear()
 	var base := DungeonMaterials.state()
 	for k in ["additive", "opaque", "alpha_func", "alpha_ref", "depth_test", "depth_write", "cull"]:
 		if gl.has(k):
 			base[k] = gl[k]
 	base.fog = style.fog
 	if style.sky:
+		_in_sky = true
 		_sky(style, base)
+		_in_sky = false
 		# renderSky turns the depth test and face culling on again.
 		base.depth_test = true
 		base.cull = 1
 	_passes(style, base)
-	var mesh := ArrayMesh.new()
-	for m in _order:
-		var g: Array = _groups[m]
-		var st := SurfaceTool.new()
-		st.begin(Mesh.PRIMITIVE_TRIANGLES)
-		var v: PackedVector3Array = g[0]
-		var n: PackedVector3Array = g[1]
-		var uv: PackedVector2Array = g[2]
-		var c: PackedColorArray = g[3]
-		for i in v.size():
-			st.set_color(c[i])
-			st.set_normal(n[i])
-			st.set_uv(uv[i])
-			st.add_vertex(v[i])
-		st.set_material(m)
-		st.commit(mesh)
-	_mesh.mesh = mesh
+	_mesh.mesh = _commit(_groups, _order)
+	_sky_mesh.mesh = _commit(_sky_groups, _sky_order) if not _sky_order.is_empty() else null
 	_groups.clear()
 	_order.clear()
+	_sky_groups.clear()
+	_sky_order.clear()
 	_left = {"color": _color, "normal": _normal, "uv": _uv, "slot": _slot}
 	return _left
+
+
+## The camera the sky is drawn for (its eye space): the camera's global
+## transform. At run time the camera stays at the origin (the default); the
+## editor and dungeon_preview.gd show it from the scene's Rig camera.
+func set_sky_camera(camera: Transform3D) -> void:
+	if _sky_mesh != null:
+		_sky_mesh.transform = camera
+
+
+## The sky's mesh (eye space) and the walls', floors' and roofs' mesh, as
+## built; null where there is none (verify_dungeons.gd compares them with the
+## parts of the legacy display list).
+func sky_mesh() -> ArrayMesh:
+	return _sky_mesh.mesh as ArrayMesh if _sky_mesh != null else null
+
+
+func walls_mesh() -> ArrayMesh:
+	return _mesh.mesh as ArrayMesh if _mesh != null else null
 
 
 ## The materials of the mesh's surfaces, in order.
@@ -122,7 +152,7 @@ func surface_materials() -> Array[Material]:
 
 
 ## LabyrinthRenderer.renderSky: the gradient quad, unlit and untextured,
-## without depth test or culling.
+## without depth test or culling, in eye space (its glLoadIdentity).
 func _sky(style: DungeonStyle, base: Dictionary) -> void:
 	var st := base.duplicate()
 	st.texture = null
@@ -280,11 +310,12 @@ func _vertex(uv: Vector2, pos: Vector3) -> void:
 	_quad.append([pos, _normal, uv, _color])
 	if _quad.size() < 4:
 		return
-	var g: Array = _groups.get(_material, [])
+	var groups: Dictionary = _sky_groups if _in_sky else _groups
+	var g: Array = groups.get(_material, [])
 	if g.is_empty():
 		g = [PackedVector3Array(), PackedVector3Array(), PackedVector2Array(), PackedColorArray()]
-		_groups[_material] = g
-		_order.append(_material)
+		groups[_material] = g
+		(_sky_order if _in_sky else _order).append(_material)
 	# Packed arrays are values: append to locals and store them back.
 	var v: PackedVector3Array = g[0]
 	var n: PackedVector3Array = g[1]
@@ -301,3 +332,24 @@ func _vertex(uv: Vector2, pos: Vector3) -> void:
 	g[2] = uvs
 	g[3] = c
 	_quad.clear()
+
+
+# One surface per material group, in order.
+static func _commit(groups: Dictionary, order: Array[ShaderMaterial]) -> ArrayMesh:
+	var mesh := ArrayMesh.new()
+	for m in order:
+		var g: Array = groups[m]
+		var st := SurfaceTool.new()
+		st.begin(Mesh.PRIMITIVE_TRIANGLES)
+		var v: PackedVector3Array = g[0]
+		var n: PackedVector3Array = g[1]
+		var uv: PackedVector2Array = g[2]
+		var c: PackedColorArray = g[3]
+		for i in v.size():
+			st.set_color(c[i])
+			st.set_normal(n[i])
+			st.set_uv(uv[i])
+			st.add_vertex(v[i])
+		st.set_material(m)
+		st.commit(mesh)
+	return mesh

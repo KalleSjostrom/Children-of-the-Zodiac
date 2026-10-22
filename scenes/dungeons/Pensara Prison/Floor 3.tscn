@@ -1,0 +1,123 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/Pensara Prison.tres" id="2_m3u5s"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/Pensara Prison--Floor 3.tres" id="3_6s6bg"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonHinderDoor.tscn" id="4_qh65k"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Walls/prisondooru.tres" id="5_ahd53"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Walls/prisondoord.tres" id="6_8j213"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Walls/prisondoor.tres" id="7_t31v1"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonChest.tscn" id="8_dd8kd"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/chest.tres" id="9_ya2h3"]
+
+[node name="Floor 3" instance=ExtResource("1_base")]
+map_name = "Pensara Prison--Floor 3.map"
+style = ExtResource("2_m3u5s")
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+has_mission = true
+mission_kind = "TimeMission"
+mission_name = "prisonmission"
+mission_entries = PackedStringArray()
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_6s6bg")
+
+[node name="00 hinderDoor--up 102" parent="Objects" index="0" instance=ExtResource("4_qh65k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -38)
+next_place = "pensara_prison--floor_4-mark0"
+kind = "hinderDoor--up"
+cell = 102
+facing = 2
+image = "Walls/prisondooru"
+database_name = "pensara prison--floor 3.maphinderdoor102"
+
+[node name="View" parent="Objects/00 hinderDoor--up 102" index="0"]
+transform = Transform3D(0.0078125, 0, 0, 0, 0.0078125, 0, 0, 0, 1, 0, 0, -2)
+sprite_frames = ExtResource("5_ahd53")
+frame = 1
+
+[node name="01 hinderDoor--down 108" parent="Objects" index="1" instance=ExtResource("4_qh65k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -14)
+next_place = "pensara_prison--floor_2-mark1"
+mark = 1
+kind = "hinderDoor--down"
+cell = 108
+image = "Walls/prisondoord"
+database_name = "pensara prison--floor 3.maphinderdoor108"
+
+[node name="View" parent="Objects/01 hinderDoor--down 108" index="0"]
+transform = Transform3D(-0.0078125, 0, -8.742278e-08, 0, 0.0078125, 0, 6.8299044e-10, 0, -1, 0, 0, 2)
+flip_h = true
+sprite_frames = ExtResource("6_8j213")
+frame = 1
+
+[node name="02 hinderDoor 169" parent="Objects" index="2" instance=ExtResource("4_qh65k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -26)
+next_place = "pensara_prison--floor_3-mark3"
+mark = 2
+kind = "hinderDoor"
+cell = 169
+facing = 1
+image = "Walls/prisondoor"
+database_name = "pensara prison--floor 3.maphinderdoor169"
+
+[node name="View" parent="Objects/02 hinderDoor 169" index="0"]
+transform = Transform3D(-3.4149522e-10, 0, 1, 0, 0.0078125, 0, -0.0078125, 0, -4.371139e-08, -2, 0, 0)
+sprite_frames = ExtResource("7_t31v1")
+frame = 1
+
+[node name="03 hinderDoor 153" parent="Objects" index="3" instance=ExtResource("4_qh65k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -26)
+next_place = "pensara_prison--floor_3-mark2"
+mark = 3
+kind = "hinderDoor"
+cell = 153
+facing = 3
+image = "Walls/prisondoor"
+database_name = "pensara prison--floor 3.maphinderdoor153"
+
+[node name="View" parent="Objects/03 hinderDoor 153" index="0"]
+transform = Transform3D(-3.4149522e-10, 0, -1, 0, 0.0078125, 0, 0.0078125, 0, -4.371139e-08, 2, 0, 0)
+flip_h = true
+sprite_frames = ExtResource("7_t31v1")
+frame = 1
+
+[node name="04 hinderDoor 57" parent="Objects" index="4" instance=ExtResource("4_qh65k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -26)
+next_place = "_"
+mark = 4
+kind = "hinderDoor"
+cell = 57
+facing = 1
+image = "Walls/prisondoor"
+database_name = "pensara prison--floor 3.maphinderdoor57"
+
+[node name="View" parent="Objects/04 hinderDoor 57" index="0"]
+transform = Transform3D(-3.4149522e-10, 0, 1, 0, 0.0078125, 0, -0.0078125, 0, -4.371139e-08, -2, 0, 0)
+sprite_frames = ExtResource("7_t31v1")
+frame = 1
+
+[node name="05 chest 185" parent="Objects" index="5" instance=ExtResource("8_dd8kd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46, 0, -26)
+frames = 2
+content_name = "932"
+content_info = PackedStringArray()
+kind = "chest"
+cell = 185
+facing = 3
+image = "Images/chest"
+database_name = "pensara prison--floor 3.mapchest185"
+
+[node name="View" parent="Objects/05 chest 185" index="0"]
+transform = Transform3D(-3.059797e-10, 0, -1, 0, 0.007, 0, 0.007, 0, -4.371139e-08, 0, -1.2825, 0)
+sprite_frames = ExtResource("9_ya2h3")
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 26, 0, -38)
+
+[editable path="Objects/00 hinderDoor--up 102"]
+[editable path="Objects/01 hinderDoor--down 108"]
+[editable path="Objects/02 hinderDoor 169"]
+[editable path="Objects/03 hinderDoor 153"]
+[editable path="Objects/04 hinderDoor 57"]
+[editable path="Objects/05 chest 185"]

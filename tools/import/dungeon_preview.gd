@@ -30,6 +30,8 @@ func _init() -> void:
 		o._add_editor_marker()
 	var cam := _scene.get_node(^"Rig/Camera") as Camera3D
 	cam.current = true
+	# The sky is in eye space: in front of the Rig's camera.
+	(_scene.get_node(^"Layout") as DungeonFloor).set_sky_camera(cam.global_transform)
 
 
 func _process(_delta: float) -> bool:

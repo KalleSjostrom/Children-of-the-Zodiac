@@ -1,0 +1,72 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/Menthu's Lair--Throne of Serpents.tres" id="2_o5gc4"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/Menthu's Lair--Throne of Serpents.tres" id="3_8q0y2"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonDoor.tscn" id="4_l426e"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonBoss.tscn" id="5_yt8b3"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonChest.tscn" id="6_f0v25"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/chest.tres" id="7_eyryp"]
+
+[node name="Throne of Serpents" instance=ExtResource("1_base")]
+map_name = "Menthu's Lair--Throne of Serpents.map"
+style = ExtResource("2_o5gc4")
+battle_music = PackedStringArray("Battle", "Menthu\'s Theme")
+mission_entries = PackedStringArray()
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_8q0y2")
+
+[node name="00 door 111" parent="Objects" index="0" instance=ExtResource("4_l426e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -2)
+open_roads = "dontopen"
+next_places = PackedStringArray("Menthu\'s_Lair--Hall_of_Memories-mark1")
+kind = "door"
+cell = 111
+database_name = "menthu's lair--throne of serpents.mapdoor111"
+
+[node name="01 boss 104" parent="Objects" index="1" instance=ExtResource("5_yt8b3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -30)
+kind = "boss"
+cell = 104
+facing = 1
+image = "Menthu2"
+database_name = "menthu2"
+
+[node name="02 chest 43" parent="Objects" index="2" instance=ExtResource("6_f0v25")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -18)
+frames = 2
+content_type = 2
+content_name = "cards.magic.Ultima"
+content_info = PackedStringArray("1", "true")
+kind = "chest"
+cell = 43
+facing = 1
+image = "Images/chest"
+database_name = "menthu's lair--throne of serpents.mapchest43"
+
+[node name="View" parent="Objects/02 chest 43" index="0"]
+transform = Transform3D(-3.059797e-10, 0, 1, 0, 0.007, 0, -0.007, 0, -4.371139e-08, 0, -1.2825, 0)
+sprite_frames = ExtResource("7_eyryp")
+
+[node name="03 chest 171" parent="Objects" index="3" instance=ExtResource("6_f0v25")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -18)
+frames = 2
+content_type = 2
+content_name = "cards.magic.Flare"
+content_info = PackedStringArray("1", "true")
+kind = "chest"
+cell = 171
+facing = 3
+image = "Images/chest"
+database_name = "menthu's lair--throne of serpents.mapchest171"
+
+[node name="View" parent="Objects/03 chest 171" index="0"]
+transform = Transform3D(-3.059797e-10, 0, -1, 0, 0.007, 0, 0.007, 0, -4.371139e-08, 0, -1.2825, 0)
+sprite_frames = ExtResource("7_eyryp")
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -2)
+
+[editable path="Objects/02 chest 43"]
+[editable path="Objects/03 chest 171"]

@@ -21,6 +21,11 @@ var startTime := ""
 ## after the save slot is loaded, before the first game mode starts (for
 ## example a village status for a story that a shipped save cannot reach).
 var startStatuses := {}
+## Developer option (--start-node=<address>:<direction>): when the first
+## place is a labyrinth floor, it starts at this node and direction instead
+## of at its door, as a game saved there does (Load.labyrinthPosition,
+## COTZ-005); for parity cases of the floor's objects.
+var startNode: Array = []
 var mainInfo := {}
 var currentInfo = {}
 var classMap := {}
@@ -53,6 +58,10 @@ func init_(obs: Array = []) -> void:
 			nextPlace = Load.getStartLocation()
 	for name in startStatuses:
 		Database.addStatus(Organizer.convert(name), startStatuses[name])
+	if startNode.size() == 2:
+		var info = mainInfo.get(Organizer.convert(nextPlace))
+		if info != null and info.has("map"):
+			Load.labyrinthPosition = [String(info["map"]).replace(".map", ""), startNode[0], startNode[1]]
 	_initNext()
 
 

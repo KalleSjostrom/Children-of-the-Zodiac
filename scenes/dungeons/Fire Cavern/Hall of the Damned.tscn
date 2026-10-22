@@ -1,0 +1,83 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/Fire Cavern.tres" id="2_a2eta"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/Fire Cavern--Hall of the Damned.tres" id="3_ylbct"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonDoor.tscn" id="4_a2q8q"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonChest.tscn" id="5_dd8wo"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/volcano.tres" id="6_73irw"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonSavePoint.tscn" id="7_ergfw"]
+
+[node name="Hall of the Damned" instance=ExtResource("1_base")]
+map_name = "Fire Cavern--Hall of the Damned.map"
+style = ExtResource("2_a2eta")
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+has_mission = true
+mission_kind = "FireMission"
+mission_name = "treasuremission"
+mission_entries = PackedStringArray("trigger&&crossroadnode&&2", "dialog&&Zalzi&&That\'s both of them!&&Let\'s head out!")
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_ylbct")
+
+[node name="00 door 15" parent="Objects" index="0" instance=ExtResource("4_a2q8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+open_roads = "dontopen"
+next_places = PackedStringArray("fire_cavern--passage_of_ifrit-mark1")
+kind = "door"
+cell = 15
+facing = 1
+database_name = "fire cavern--hall of the damned.mapdoor15"
+
+[node name="01 door 207" parent="Objects" index="1" instance=ExtResource("4_a2q8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -2)
+open_roads = "dontopen"
+next_places = PackedStringArray("fire_cavern--inferno-mark1")
+mark = 1
+kind = "door"
+cell = 207
+database_name = "fire cavern--hall of the damned.mapdoor207"
+
+[node name="02 chest 165" parent="Objects" index="2" instance=ExtResource("5_dd8wo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -42)
+content_type = 2
+content_name = "cards.magic.Fire"
+content_info = PackedStringArray("3", "false")
+kind = "chest"
+cell = 165
+facing = 2
+image = "Images/volcano.png"
+database_name = "fire cavern--hall of the damned.mapchest165"
+
+[node name="View" parent="Objects/02 chest 165" index="0"]
+transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 1, 0, -1.6925, 0)
+sprite_frames = ExtResource("6_73irw")
+
+[node name="03 chest 67" parent="Objects" index="3" instance=ExtResource("5_dd8wo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -50)
+content_type = 2
+content_name = "cards.offense.Drain"
+content_info = PackedStringArray("2", "false")
+kind = "chest"
+cell = 67
+facing = 2
+image = "Images/volcano.png"
+database_name = "fire cavern--hall of the damned.mapchest67"
+
+[node name="View" parent="Objects/03 chest 67" index="0"]
+transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 1, 0, -1.6925, 0)
+sprite_frames = ExtResource("6_73irw")
+
+[node name="04 save 95" parent="Objects" index="4" instance=ExtResource("7_ergfw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -2)
+kind = "save"
+cell = 95
+facing = 1
+image = "-1"
+database_name = "fire cavern--hall of the damned.mapsave95"
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2, 0, -2)
+
+[editable path="Objects/02 chest 165"]
+[editable path="Objects/03 chest 67"]

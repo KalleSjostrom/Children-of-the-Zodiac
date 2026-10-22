@@ -266,8 +266,9 @@ Game options go after `--` on the command line (see the header of
 | `--fixed-step` | The game advances exactly 1000/60 ms per frame, whatever the real frame time. |
 | `--seed=<n>` | Deterministic run (implies `--fixed-step`): every random generator (`J`, every `JRandom`, Godot's global one) is seeded from `n`; `J.currentTimeMillis()`, `Scheduler` and `GameAction` read a game clock advanced by the elapsed game time instead of the wall clock; saves are read from the shipped files and written to `user://saves_deterministic/` (emptied at start), never to the player's `user://saves/`; no game pad is read (`GameCore.init2`: an idle pad releases AutoPlay's buttons every 40 ms). Two runs of an AutoPlay script then produce the same frames. |
 | `--uncapped` | No 60 FPS cap and no vsync. With `--seed` the result is the same, only faster. |
-| `--legacy=<a,b,…>` | Keep the legacy path of the listed subsystems (`Main.is_legacy`). `all` keeps every one. `villages`: converted places are read from their `.vil` files and drawn by the legacy code (section 9). `village_top_layer`: the scene draws a roof or treetop only where a sprite overlaps it, as the legacy code does (for parity; by default it always draws them). `dungeons`: converted floors are read from their `.map` files and drawn by the legacy code (section 10). |
+| `--legacy=<a,b,…>` | Keep the legacy path of the listed subsystems (`Main.is_legacy`). `all` keeps every one. `villages`: converted places are read from their `.vil` files and drawn by the legacy code (section 9). `village_top_layer`: the scene draws a roof or treetop only where a sprite overlaps it, as the legacy code does (for parity; by default it always draws them). `dungeons`: converted floors are read from their `.map` files and drawn by the legacy code (section 10). `dungeon_drawing` (dev): floors are built from their scenes (step A) and drawn by the legacy code, for checking step A on its own. |
 | `--no-encounters` | Dev only: labyrinths start no random battles (`Labyrinth.noEncounters`, which nothing else sets; the steps are still counted), for parity tours of dungeon floors. |
+| `--start-node=<address>:<direction>` | Dev only: a labyrinth `--start` place starts at this node and facing (0-3), as a game saved there does (`Load.labyrinthPosition`, COTZ-005), not at its door: parity cases start in front of the object they use. |
 | `--bridge-test` | Dev only: the world map shows `tools/bridge_test/BridgeTest.tscn` instead of its background tiles (section 8). |
 | `--start-time=<day\|night>` | Dev only: the first place starts at this time of day (its info `time`): villages load their "at Night" variant, which no story reaches for most places. |
 | `--status=<name>:<value>,…` | Dev only: Database statuses set after the save is loaded, before the first mode (`_` stands for a space), e.g. a village status for a story the shipped saves cannot reach. |
@@ -316,7 +317,9 @@ tools/parity/parity.sh ab "--legacy=villages" "" village village_walk
   the background scroll (village pixels), for planning routes; in a
   labyrinth the node address, the facing and the camera's location and
   angle (`node=<a> dir=<d> cam=<x>,<z> angle=<a>`); it adds its own log
-  lines and leaves the others unchanged. `heading` remembers the
+  lines and leaves the others unchanged. `loopuntil` also matches `dialog`
+  while a labyrinth shows a dialog (not printed: the state lines stay
+  comparable with older runs). `heading` remembers the
   player's facing for the buttons `AHEAD`, `BEHIND`, `ALEFT`, `ARIGHT`, and
   `guard <px>` lets go of a held direction before the player would leave
   the village (its edge, or a hole door that opens that way): together they
@@ -370,7 +373,8 @@ converted floor's scene with it); `Labyrinth.finishOff` (not when it is
 only suspended for the menu) and the debug console's jump drop those
 references. Main frees, when the game quits, the scenes of modes that are
 not in the tree (suspended or previous), so the renderer reports no leaks.
-Grivera, which the test enters, stays legacy in phase 2.
+Grivera--First Floor, which the test enters, is a scene since the phase 2
+rollout; the test passes legacy vs. scene (plan 7.8).
 
 ## 9. Villages as scenes (phase 1)
 
@@ -503,12 +507,11 @@ draws it; the legacy objects stay in charge.
 
 ## 10. Dungeons as scenes (phase 2)
 
-The pilot converted Forest of Reil (Forest Path, Deep Forest) and The Great
-Mine--Tunnel through steps A and B (plan 7.7); the converter and the data
-check pass all 80 `.map` files in a dry run. The `.map` files stay
-(decision 5): the converter, the data check, Load of floors not converted
-and `--legacy=dungeons` read them. How to convert a floor:
-`docs/CONVERTING_DUNGEONS.md`.
+All 80 floors of `maps/Labyrinth` are converted through steps A and B: the
+pilot (Forest of Reil--Forest Path and --Deep Forest, The Great Mine--Tunnel;
+plan 7.7) and the rollout (the other 77; plan 7.8). The `.map` files stay
+(decision 5): the converter, the data check and `--legacy=dungeons` read
+them. How to convert a floor again: `docs/CONVERTING_DUNGEONS.md`.
 
 **Layout.** Every floor scene, `scenes/dungeons/<Area>/<Floor>.tscn`,
 inherits `scenes/dungeons/DungeonScene.tscn` (root script
@@ -516,7 +519,7 @@ inherits `scenes/dungeons/DungeonScene.tscn` (root script
 
 | Node | Content |
 |---|---|
-| `Layout` | `DungeonFloor` (`@tool`): builds the walls, floors and roofs from its `DungeonLayout` and the style's textures with SurfaceTool, in the editor and at run time; one instance, one surface per material in the legacy display list's order |
+| `Layout` | `DungeonFloor` (`@tool`): builds the walls, floors and roofs from its `DungeonLayout` and the style's textures with SurfaceTool, in the editor and at run time; one instance, one surface per material in the legacy display list's order; on a floor with a sky also `Sky` (top level, in the camera's space: renderSky's gradient, drawn first) |
 | `Environment` | `WorldEnvironment`: the clear colour background, linear tonemapping, as GLBackend's chunks; no Godot fog or light (the dungeon shader does them) |
 | `Objects` | the `inv` lines in file order, one `DungeonObject` scene per line (`scenes/dungeon_objects/Dungeon<Kind>.tscn`): the order the legacy loader created them in (door indices, links, Database reads) |
 | `Weather` | `DungeonWeather`: the rain or snow, interim |
@@ -581,7 +584,9 @@ reads). This covers `Labyrinth.init` and Load's saved floor maps (`labmap`).
 `tools/import/verify_dungeons.gd` builds each floor both ways and compares
 everything field by field (also the Graph, the renderer, the weather
 system, the mission and the Database afterwards); `--meshes` also compares
-the walls' mesh with the legacy display list.
+the walls' and the sky's meshes with the legacy display list's parts.
+`--legacy=dungeon_drawing` (dev) keeps the legacy drawing of floors built
+from their scenes, so that a parity run checks step A on its own.
 
 **Step B.** `Labyrinth.create_scene()` returns a new instance of the floor's
 scene (null with `--legacy=dungeons`); `Labyrinth.draw` asks for it in the
@@ -608,7 +613,9 @@ floor's first frame (`ensure_scene`), before Main adds it to `World`. Where
   battle, as before).
 
 Decisions that make the scene draw the legacy pixels to the bit (legacy
-vs. scene on every pilot case: identical, tolerance 0):
+vs. scene: identical at tolerance 0 on every pilot case, and on 2,962 of
+the rollout's 3,046 dungeon shots; the other 84 differ by 1/255 at most,
+plan 7.8):
 
 * Decision 2: the dungeon shader (`dungeon_gl.gdshaderinc`) is GLBackend's
   spatial shader with material uniforms; `DungeonMaterials` makes its
@@ -623,7 +630,12 @@ vs. scene on every pilot case: identical, tolerance 0):
   would round both differently. Step C turns this around.
 * The walls are one instance with the display list's surfaces (one instance
   per surface drew some pixels differently: the order Godot's unstable sort
-  gives equal-depth surfaces then changes).
+  gives equal-depth surfaces then changes). That order still decides where
+  two of them blend: before the rollout's fix of the look (below) the walls
+  of the floors with a translucent sky were drawn at alpha 0.8 and the sky
+  quad without depth test was one of them, and the two paths differed by up
+  to 111/255 there (plan 7.8). The sky is now an instance of its own, drawn
+  first, and the walls are opaque.
 * Objects draw the legacy quads: `DungeonQuads` stands in for Graphics in
   the legacy geometry code (`Inventory._drawQuad`, `LabyrinthNode.drawOneWall`
   and `drawOneFloor`), records the vertices and passes the state on; their
@@ -638,16 +650,27 @@ vs. scene on every pilot case: identical, tolerance 0):
 * The weather and the save point's particles are eye-space meshes drawn at
   the origin, one per pass (and per save point) and frame.
 
-Legacy look reproduced as it is (emulation bugs, not fixed; plan 7.5, 7.7):
-GLBackend multiplies lit vertices by the current glColor (OpenGL 2 ignores
-it without `GL_COLOR_MATERIAL`, which the original never enables). So
-objects are tinted by the minimap arrow's yellow of the previous frame
-(white while a dialog shows), and on a floor with a sky the walls take the
-sky's bottom colour: Deep Forest's walls are drawn at alpha 0.8, bluish, and
-show through each other (`TODO.md`). The sky gradient is a world quad near
-the origin, not the top of the view (the emulated display list does not
-record renderSky's glLoadIdentity). Black streaks show while turning in the
-rain (not explained).
+The look follows OpenGL 2, in both paths (fixed in the phase 2 rollout,
+plan 7.5 and 7.8; until then GLBackend multiplied lit vertices by the
+current glColor and baked the sky into the walls' world space):
+
+* A lit vertex takes the material's colours and its diffuse alpha, not the
+  current colour (OpenGL 2 ignores glColor while lighting is on unless
+  `GL_COLOR_MATERIAL` is enabled, which the original never does): GLBackend's
+  spatial shader and `dungeon_gl.gdshaderinc` alike. Objects are no longer
+  tinted by the minimap arrow's yellow, the walls of a floor with a sky no
+  longer take its bottom colour (Deep Forest's are opaque: no walls seen
+  through walls; Empyrian Temple--Dark's are not black). Lighting is on only
+  while a labyrinth draws its walls and objects and in the Demolish card's
+  lit spheres (`SphereParticleSystem`), so nothing else changed.
+* A display list records the matrix calls: what follows a glLoadIdentity
+  inside the list is in eye space when the list is called
+  (`Graphics.DisplayList.parts`). renderSky's gradient fills the top of the
+  view behind the walls, as in the original.
+* Still not emulated: the specular term (Fire Cavern--Blazing Maze and the
+  Grivera floors have a specular light and material, a highlight of up to
+  0.2 is missing), and the black streaks while turning in the rain (not
+  explained).
 
 **The 3D bridge.** While a dungeon scene is shown, `GLBackend.scene_3d` (set
 by `Graphics.use_scene_3d`, cleared every frame) makes the frame's first 3D
@@ -662,7 +685,20 @@ sRGB over the scene (the minimap's disk darker) and the battle would lose
 the walls' depth. Later 3D chunks (after 2D) stay SubViewports.
 
 **Lifetime.** The scene is the Labyrinth's `scene_root` and is freed with
-it; the Labyrinth is freed since phase 2 (section 8).
+it; the Labyrinth is freed since phase 2 (section 8). Each logs it
+(`Labyrinth: freed <floor>`, `DungeonScene: freed <floor>.map`): a floor
+left is freed at the next mode switch (it stays the Organizer's previous
+mode until then); Main frees the scene of the floor still current when the
+game quits.
+
+**Objects in the rollout.** Every kind of `inv` line is a `DungeonObject`
+scene; how each is used, from where, and what the rollout's cases show of
+it, is in `docs/CONVERTING_DUNGEONS.md`. Riddles draw nothing in 3D (their
+`draw` is empty): all of a riddle is its top layer, 2D after the minimap,
+so the front weather pass before it stays in the scene's chunk. A boss
+battle runs inside the labyrinth's frame (`Labyrinth.enterBattle`, its sub
+game mode); what a boss leads to after the win (another boss's
+`BossBattleArea`, a story, the world map) is a mode of its own.
 
 **Still legacy** in Labyrinth's frame: the minimap (`MapRenderer`, 3D, in
 the scene's chunk), the mission display, dialogs and card info, the top

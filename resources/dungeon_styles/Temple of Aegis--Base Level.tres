@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="DungeonStyle" format=3]
+
+[ext_resource type="Script" path="res://scenes/dungeons/DungeonStyle.gd" id="1_iujch"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Floors/templefloor0.jpg" id="2_7wx2c"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Floors/templefloor1.jpg" id="3_s21l8"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Floors/templefloor2.jpg" id="4_s44tn"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Floors/templefloor3.jpg" id="5_25fhm"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Floors/templefloor4.jpg" id="6_11n4q"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/templewall.png" id="7_vpfly"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/templestairsup.png" id="8_dxxks"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Roofs/templeroof.jpg" id="9_vu0lx"]
+
+[resource]
+script = ExtResource("1_iujch")
+texture_names = PackedStringArray("Floors/templefloor0.jpg", "Floors/templefloor1.jpg", "Floors/templefloor2.jpg", "Floors/templefloor3.jpg", "Floors/templefloor4.jpg", "Walls/templewall.png", "Walls/templestairsup.png", "Roofs/templeroof.jpg")
+textures = Array[Texture2D]([ExtResource("2_7wx2c"), ExtResource("3_s21l8"), ExtResource("4_s44tn"), ExtResource("5_25fhm"), ExtResource("6_11n4q"), ExtResource("7_vpfly"), ExtResource("8_dxxks"), ExtResource("9_vu0lx")])
+floor_slots = Vector2i(0, 5)
+wall_slots = Vector2i(5, 7)
+roof_slots = Vector2i(7, 8)
+carpet_slots = Vector2i(0, 5)
+carpet_floors = true
+light0 = true
+light0_position = Vector4(0, 0, 0, 1)
+light0_ambient = Color(0.8, 0.8, 0.8, 1)
+light0_diffuse = Color(0.8, 0.8, 0.8, 1)
+light0_specular = Color(0, 0, 0, 1)
+light0_attenuation = Vector3(1, 0.01, 0.015)
+material = true
+material_ambient = Color(0.4, 0.4, 0.4, 1)
+material_diffuse = Color(0.5, 0.5, 0.5, 1)
+material_specular = Color(0, 0, 0, 1)

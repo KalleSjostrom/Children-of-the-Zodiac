@@ -121,10 +121,33 @@ class MapReader extends MapLoader:
 	var enemy_color = null
 	var seen_end := false
 	var links := {}
+	var nul_lines := {}
 
 	func _init(p_file: String) -> void:
 		file = p_file
+		nul_lines = _nul_lines(p_file)
 		super(p_file)
+
+	## The numbers of the file's lines that hold NUL bytes. GameResourceLoader
+	## drops them when it reads the file, so the legacy loader (and this
+	## reader) never sees them: "mark<NUL>0" is read as "mark0", which is what
+	## the Java used too (it kept the NUL in the name, Organizer.convert
+	## dropped it wherever the name was looked up).
+	static func _nul_lines(p_file: String) -> Dictionary:
+		var lines := {}
+		var path := GameResourceLoader.resolve(Values.LabyrinthMaps + p_file)
+		if path == "":
+			return lines
+		var bytes := FileAccess.get_file_as_bytes(path)
+		var line := 1
+		var nul := bytes.find(0)
+		var from := 0
+		while nul != -1:
+			line += bytes.slice(from, nul).count(10)
+			lines[line] = true
+			from = nul
+			nul = bytes.find(0, nul + 1)
+		return lines
 
 	## Always the .map file (MapLoader builds converted floors from their scene).
 	func dungeon_scene_for(_name):
@@ -134,6 +157,8 @@ class MapReader extends MapLoader:
 		warnings.append("%s:%d: %s" % [file, lineCount, text])
 
 	func executeCommand(command: String, t: StringTokenizer):
+		if nul_lines.has(lineCount):
+			warn("NUL byte in the line, dropped as the legacy loader drops it (GameResourceLoader._readFileText): '%s'" % lastLine)
 		var words := StringTokenizer.new(lastLine)
 		words.nextToken()
 		var w: PackedStringArray = []

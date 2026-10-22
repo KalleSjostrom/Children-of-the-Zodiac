@@ -1,0 +1,51 @@
+[gd_resource type="Resource" script_class="DungeonLayout" format=3]
+
+[ext_resource type="Script" path="res://scenes/dungeons/DungeonCell.gd" id="1_6mtpn"]
+[ext_resource type="Script" path="res://scenes/dungeons/DungeonLayout.gd" id="2_20ekk"]
+
+[sub_resource type="Resource" id="Resource_obwnq"]
+script = ExtResource("1_6mtpn")
+address = 156
+neighbours = PackedInt32Array(157, -1, -1, 172)
+walls = PackedInt32Array(-1, 1, 1, -1)
+
+[sub_resource type="Resource" id="Resource_tnmli"]
+script = ExtResource("1_6mtpn")
+address = 172
+neighbours = PackedInt32Array(-1, 156, -1, 188)
+walls = PackedInt32Array(1, -1, 1, -1)
+
+[sub_resource type="Resource" id="Resource_1d0lf"]
+script = ExtResource("1_6mtpn")
+address = 157
+neighbours = PackedInt32Array(158, -1, 156, -1)
+walls = PackedInt32Array(-1, 1, -1, 1)
+
+[sub_resource type="Resource" id="Resource_0h4ab"]
+script = ExtResource("1_6mtpn")
+address = 158
+neighbours = PackedInt32Array(159, -1, 157, -1)
+walls = PackedInt32Array(-1, 1, -1, 1)
+
+[sub_resource type="Resource" id="Resource_tghak"]
+script = ExtResource("1_6mtpn")
+address = 159
+neighbours = PackedInt32Array(-1, -1, 158, -1)
+walls = PackedInt32Array(2, 1, -1, 1)
+
+[sub_resource type="Resource" id="Resource_y7qj6"]
+script = ExtResource("1_6mtpn")
+address = 188
+neighbours = PackedInt32Array(-1, 172, -1, 204)
+walls = PackedInt32Array(1, -1, 1, -1)
+
+[sub_resource type="Resource" id="Resource_6mh6j"]
+script = ExtResource("1_6mtpn")
+address = 204
+neighbours = PackedInt32Array(-1, 188, -1, -1)
+walls = PackedInt32Array(1, -1, 1, 2)
+
+[resource]
+script = ExtResource("2_20ekk")
+size = 206
+cells = Array[ExtResource("1_6mtpn")]([SubResource("Resource_obwnq"), SubResource("Resource_tnmli"), SubResource("Resource_1d0lf"), SubResource("Resource_0h4ab"), SubResource("Resource_tghak"), SubResource("Resource_y7qj6"), SubResource("Resource_6mh6j")])

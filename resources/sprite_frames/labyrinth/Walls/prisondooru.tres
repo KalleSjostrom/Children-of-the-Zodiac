@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/prisondooru0.png" id="1_6vo77"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/prisondooru1.png" id="2_pysnm"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_6vo77")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_pysnm")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}]

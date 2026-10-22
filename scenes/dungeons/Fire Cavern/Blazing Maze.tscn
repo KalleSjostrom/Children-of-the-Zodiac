@@ -1,0 +1,122 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/Fire Cavern--Blazing Maze.tres" id="2_w3e68"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/Fire Cavern--Blazing Maze.tres" id="3_vwvhj"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonHinderDoor.tscn" id="4_wa1fk"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Walls/firecavedoor.tres" id="5_yvk22"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonDoor.tscn" id="6_hkrpq"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonChest.tscn" id="7_8ryk2"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/volcano.tres" id="8_05n5s"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonButton.tscn" id="9_kmwhr"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/lever.tres" id="10_vxy7t"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonSavePoint.tscn" id="11_15t2f"]
+
+[node name="Blazing Maze" instance=ExtResource("1_base")]
+map_name = "Fire Cavern--Blazing Maze.map"
+style = ExtResource("2_w3e68")
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+has_mission = true
+mission_kind = "FireMission"
+mission_name = "treasuremission"
+mission_entries = PackedStringArray("trigger&&crossroadnode&&2", "dialog&&Zalzi&&That\'s both of them!&&Let\'s head out!")
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_vwvhj")
+
+[node name="00 hinderDoor 127" parent="Objects" index="0" instance=ExtResource("4_wa1fk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -2)
+next_place = "fire_cavern--hall_of_fire-mark1"
+kind = "hinderDoor"
+cell = 127
+image = "Walls/firecavedoor"
+database_name = "fire cavern--blazing maze.maphinderdoor127"
+
+[node name="View" parent="Objects/00 hinderDoor 127" index="0"]
+transform = Transform3D(-0.0078125, 0, -8.742278e-08, 0, 0.0078125, 0, 6.8299044e-10, 0, -1, 0, 0, 2)
+flip_h = true
+sprite_frames = ExtResource("5_yvk22")
+frame = 1
+
+[node name="01 door 211" parent="Objects" index="1" instance=ExtResource("6_hkrpq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54, 0, -50)
+open_roads = "dontopen"
+next_places = PackedStringArray("fire_cavern--passage_of_ifrit-mark0")
+mark = 1
+kind = "door"
+cell = 211
+facing = 3
+database_name = "fire cavern--blazing maze.mapdoor211"
+
+[node name="02 chest 58" parent="Objects" index="2" instance=ExtResource("7_8ryk2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -22)
+content_type = 2
+content_name = "cards.support.Cure"
+content_info = PackedStringArray("2", "false")
+kind = "chest"
+cell = 58
+facing = 1
+image = "Images/volcano.png"
+database_name = "fire cavern--blazing maze.mapchest58"
+
+[node name="View" parent="Objects/02 chest 58" index="0"]
+transform = Transform3D(-2.1855694e-10, 0, 1, 0, 0.005, 0, -0.005, 0, -4.371139e-08, 0, -1.6925, 0)
+sprite_frames = ExtResource("8_05n5s")
+
+[node name="03 chest 24" parent="Objects" index="3" instance=ExtResource("7_8ryk2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -30)
+content_type = 2
+content_name = "cards.magic.Ice"
+content_info = PackedStringArray("2", "false")
+kind = "chest"
+cell = 24
+image = "Images/volcano.png"
+database_name = "fire cavern--blazing maze.mapchest24"
+
+[node name="View" parent="Objects/03 chest 24" index="0"]
+transform = Transform3D(-0.005, 0, -8.742278e-08, 0, 0.005, 0, 4.3711387e-10, 0, -1, 0, -1.6925, 0)
+sprite_frames = ExtResource("8_05n5s")
+
+[node name="04 chest 20" parent="Objects" index="4" instance=ExtResource("7_8ryk2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -46)
+content_name = "1500"
+content_info = PackedStringArray()
+kind = "chest"
+cell = 20
+facing = 2
+image = "Images/volcano.png"
+database_name = "fire cavern--blazing maze.mapchest20"
+
+[node name="View" parent="Objects/04 chest 20" index="0"]
+transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 1, 0, -1.6925, 0)
+sprite_frames = ExtResource("8_05n5s")
+
+[node name="05 button 201" parent="Objects" index="5" instance=ExtResource("9_kmwhr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -26)
+frames = 7
+hinders = PackedStringArray("Fire_Cavern--Blazing_Maze.maphinderDoor127", "Fire_Cavern--Hall_of_Fire.maphinderDoor115")
+kind = "button"
+cell = 201
+facing = 3
+image = "Images/lever"
+database_name = "fire cavern--blazing maze.mapbutton201"
+
+[node name="View" parent="Objects/05 button 201" index="0"]
+transform = Transform3D(-4.3711387e-10, 0, -1, 0, 0.01, 0, 0.01, 0, -4.371139e-08, 1, -1.125, 0)
+sprite_frames = ExtResource("10_vxy7t")
+
+[node name="06 save 149" parent="Objects" index="6" instance=ExtResource("11_15t2f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -42)
+kind = "save"
+cell = 149
+image = "-1"
+database_name = "fire cavern--blazing maze.mapsave149"
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -2)
+
+[editable path="Objects/00 hinderDoor 127"]
+[editable path="Objects/02 chest 58"]
+[editable path="Objects/03 chest 24"]
+[editable path="Objects/04 chest 20"]
+[editable path="Objects/05 button 201"]

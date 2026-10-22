@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="DungeonStyle" format=3]
+
+[ext_resource type="Script" path="res://scenes/dungeons/DungeonStyle.gd" id="1_e4xvr"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Floors/aegisfloor.jpg" id="2_28yr2"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/aegisstairsdown0.png" id="3_lskbm"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/aegisstairsup0.png" id="4_yb344"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/aegiswall0.png" id="5_q3m41"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/aegiswall1.png" id="6_4kju7"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/aegiswall2.png" id="7_nfkvo"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/aegiswall3.png" id="8_2ir2d"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Roofs/aegisroof.jpg" id="9_c112q"]
+
+[resource]
+script = ExtResource("1_e4xvr")
+texture_names = PackedStringArray("Floors/aegisfloor.jpg", "Walls/aegisstairsdown0.png", "Walls/aegisstairsup0.png", "Walls/aegiswall0.png", "Walls/aegiswall1.png", "Walls/aegiswall2.png", "Walls/aegiswall3.png", "Roofs/aegisroof.jpg")
+textures = Array[Texture2D]([ExtResource("2_28yr2"), ExtResource("3_lskbm"), ExtResource("4_yb344"), ExtResource("5_q3m41"), ExtResource("6_4kju7"), ExtResource("7_nfkvo"), ExtResource("8_2ir2d"), ExtResource("9_c112q")])
+floor_slots = Vector2i(0, 1)
+wall_slots = Vector2i(1, 7)
+roof_slots = Vector2i(7, 8)
+pillar_slots = Vector2i(3, 7)
+pillar_walls = true
+light0 = true
+light0_position = Vector4(0, 0, 0, 1)
+light0_ambient = Color(1, 1, 1, 1)
+light0_diffuse = Color(1, 1, 1, 1)
+light0_specular = Color(0, 0, 0, 1)
+light0_attenuation = Vector3(1, 0.02, 0.03)
+light1 = true
+light1_ambient = Color(0.2, 0.2, 0.2, 0.2)
+light1_diffuse = Color(0.2, 0.2, 0.2, 0.2)
+light1_specular = Color(0, 0, 0, 1)
+material = true
+material_ambient = Color(0.7, 0.7, 0.7, 1)
+material_diffuse = Color(0.7, 0.7, 0.7, 1)
+material_specular = Color(0, 0, 0, 1)
+fog = true
+fog_color = Color(0.4, 0.3, 0, 0.01)
+fog_density = 0.01

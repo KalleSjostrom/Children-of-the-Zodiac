@@ -1,0 +1,14 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Images/hate4.png" id="1_55por"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_55por")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}]

@@ -1,0 +1,208 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/Ice Cavern--Mysterious Forest.tres" id="2_aon7r"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/Ice Cavern--Mysterious Forest.tres" id="3_ra4dh"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonDoor.tscn" id="4_grkpa"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonRiddle.tscn" id="5_ve4dy"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/iceriddle.tres" id="6_cquax"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonChest.tscn" id="7_ddjg6"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/icepot.tres" id="8_j3xmx"]
+
+[node name="Mysterious Forest" instance=ExtResource("1_base")]
+map_name = "Ice Cavern--Mysterious Forest.map"
+style = ExtResource("2_aon7r")
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+mission_entries = PackedStringArray()
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_ra4dh")
+
+[node name="00 door 7" parent="Objects" index="0" instance=ExtResource("4_grkpa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -34)
+open_roads = "dontopen"
+next_places = PackedStringArray("Ice_Cavern--Pillar_Room-mark1")
+kind = "door"
+cell = 7
+facing = 1
+database_name = "ice cavern--mysterious forest.mapdoor7"
+
+[node name="01 door 54" parent="Objects" index="1" instance=ExtResource("4_grkpa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -38)
+open_roads = "dontopen"
+next_places = PackedStringArray("Ice_Cavern--Mysterious_Forest-mark0")
+mark = 1
+kind = "door"
+cell = 54
+database_name = "ice cavern--mysterious forest.mapdoor54"
+
+[node name="02 door 71" parent="Objects" index="2" instance=ExtResource("4_grkpa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -34)
+open_roads = "dontopen"
+next_places = PackedStringArray("Ice_Cavern--Mysterious_Forest-mark4")
+mark = 2
+kind = "door"
+cell = 71
+facing = 1
+database_name = "ice cavern--mysterious forest.mapdoor71"
+
+[node name="03 door 56" parent="Objects" index="3" instance=ExtResource("4_grkpa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -30)
+open_roads = "dontopen"
+next_places = PackedStringArray("Ice_Cavern--Mysterious_Forest-mark0")
+mark = 3
+kind = "door"
+cell = 56
+facing = 2
+database_name = "ice cavern--mysterious forest.mapdoor56"
+
+[node name="04 riddle 39" parent="Objects" index="4" instance=ExtResource("5_ve4dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -34)
+riddle_name = "iceriddle"
+riddle_class = "RiddleGame"
+hinders = PackedStringArray()
+kind = "riddle"
+cell = 39
+facing = 3
+image = "Images/iceriddle.png"
+database_name = "ice cavern--mysterious forest.mapriddle39"
+
+[node name="View" parent="Objects/04 riddle 39" index="0"]
+transform = Transform3D(-3.496911e-10, 0, -1, 0, 0.008, 0, 0.008, 0, -4.371139e-08, 1.9899998, 0.342, 0)
+sprite_frames = ExtResource("6_cquax")
+
+[node name="05 door 150" parent="Objects" index="5" instance=ExtResource("4_grkpa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -38)
+open_roads = "dontopen"
+next_places = PackedStringArray("Ice_Cavern--Mysterious_Forest-mark0")
+mark = 4
+kind = "door"
+cell = 150
+database_name = "ice cavern--mysterious forest.mapdoor150"
+
+[node name="06 chest 167" parent="Objects" index="6" instance=ExtResource("7_ddjg6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -34)
+frames = 2
+content_type = 2
+content_name = "cards.offense.SpiritAssault"
+content_info = PackedStringArray("1")
+kind = "chest"
+cell = 167
+facing = 1
+image = "Images/icepot"
+database_name = "ice cavern--mysterious forest.mapchest167"
+
+[node name="View" parent="Objects/06 chest 167" index="0"]
+transform = Transform3D(-1.7484555e-10, 0, 1, 0, 0.004, 0, -0.004, 0, -4.371139e-08, 0, -1.394, 0)
+sprite_frames = ExtResource("8_j3xmx")
+
+[node name="07 door 152" parent="Objects" index="7" instance=ExtResource("4_grkpa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -30)
+open_roads = "dontopen"
+next_places = PackedStringArray("Ice_Cavern--Mysterious_Forest-mark0")
+mark = 5
+kind = "door"
+cell = 152
+facing = 2
+database_name = "ice cavern--mysterious forest.mapdoor152"
+
+[node name="08 door 135" parent="Objects" index="8" instance=ExtResource("4_grkpa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -34)
+open_roads = "dontopen"
+next_places = PackedStringArray("Ice_Cavern--Mysterious_Forest-mark9")
+mark = 6
+kind = "door"
+cell = 135
+facing = 3
+database_name = "ice cavern--mysterious forest.mapdoor135"
+
+[node name="09 chest 60" parent="Objects" index="9" instance=ExtResource("7_ddjg6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -14)
+frames = 2
+content_type = 2
+content_name = "cards.support.Shield"
+content_info = PackedStringArray("2", "true")
+kind = "chest"
+cell = 60
+image = "Images/icepot"
+database_name = "ice cavern--mysterious forest.mapchest60"
+
+[node name="View" parent="Objects/09 chest 60" index="0"]
+transform = Transform3D(-0.004, 0, -8.742278e-08, 0, 0.004, 0, 3.496911e-10, 0, -1, 0, -1.394, 0)
+sprite_frames = ExtResource("8_j3xmx")
+
+[node name="10 door 77" parent="Objects" index="10" instance=ExtResource("4_grkpa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -10)
+open_roads = "dontopen"
+next_places = PackedStringArray("Ice_Cavern--Mysterious_Forest-mark0")
+mark = 7
+kind = "door"
+cell = 77
+facing = 1
+database_name = "ice cavern--mysterious forest.mapdoor77"
+
+[node name="11 door 62" parent="Objects" index="11" instance=ExtResource("4_grkpa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -6)
+open_roads = "dontopen"
+next_places = PackedStringArray("Ice_Cavern--Mysterious_Forest-mark11")
+mark = 8
+kind = "door"
+cell = 62
+facing = 2
+database_name = "ice cavern--mysterious forest.mapdoor62"
+
+[node name="12 door 45" parent="Objects" index="12" instance=ExtResource("4_grkpa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -10)
+open_roads = "dontopen"
+next_places = PackedStringArray("Ice_Cavern--Mysterious_Forest-mark0")
+mark = 9
+kind = "door"
+cell = 45
+facing = 3
+database_name = "ice cavern--mysterious forest.mapdoor45"
+
+[node name="13 door 156" parent="Objects" index="13" instance=ExtResource("4_grkpa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -14)
+open_roads = "dontopen"
+next_places = PackedStringArray("Ice_Cavern--Mysterious_Forest-mark0")
+mark = 10
+kind = "door"
+cell = 156
+database_name = "ice cavern--mysterious forest.mapdoor156"
+
+[node name="14 door 173" parent="Objects" index="14" instance=ExtResource("4_grkpa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -10)
+open_roads = "dontopen"
+next_places = PackedStringArray("Ice_Cavern--Hall_of_Anguish-mark1")
+mark = 11
+kind = "door"
+cell = 173
+facing = 1
+database_name = "ice cavern--mysterious forest.mapdoor173"
+
+[node name="15 door 158" parent="Objects" index="15" instance=ExtResource("4_grkpa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -6)
+open_roads = "dontopen"
+next_places = PackedStringArray("Ice_Cavern--Mysterious_Forest-mark0")
+mark = 12
+kind = "door"
+cell = 158
+facing = 2
+database_name = "ice cavern--mysterious forest.mapdoor158"
+
+[node name="16 door 141" parent="Objects" index="16" instance=ExtResource("4_grkpa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -10)
+open_roads = "dontopen"
+next_places = PackedStringArray("Ice_Cavern--Mysterious_Forest-mark0")
+mark = 13
+kind = "door"
+cell = 141
+facing = 3
+database_name = "ice cavern--mysterious forest.mapdoor141"
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2, 0, -34)
+
+[editable path="Objects/04 riddle 39"]
+[editable path="Objects/06 chest 167"]
+[editable path="Objects/09 chest 60"]

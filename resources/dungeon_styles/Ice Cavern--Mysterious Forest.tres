@@ -1,0 +1,50 @@
+[gd_resource type="Resource" script_class="DungeonStyle" format=3]
+
+[ext_resource type="Script" path="res://scenes/dungeons/DungeonStyle.gd" id="1_6abn7"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Floors/snowhedgefloor.jpg" id="2_3st1l"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/snowhedgewall.png" id="3_hdiyx"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/snowhedgedoor.png" id="4_o7d4e"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/IceRiddle/d1603.png" id="5_ji3m3"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/IceRiddle/d2.png" id="6_15ffv"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/IceRiddle/d3.png" id="7_sv2ru"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/IceRiddle/d4.png" id="8_jel3b"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/IceRiddle/d5476.png" id="9_r7e5q"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/IceRiddle/d6768.png" id="10_0t0xl"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/IceRiddle/d7.png" id="11_7c11n"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/IceRiddle/d8345.png" id="12_1ivwh"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/IceRiddle/d9.png" id="13_1mbji"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/IceRiddle/d10.png" id="14_5ns4y"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/IceRiddle/d11.png" id="15_u4g56"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/IceRiddle/d12.png" id="16_56mk0"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/IceRiddle/d13.png" id="17_eq1wq"]
+
+[resource]
+script = ExtResource("1_6abn7")
+texture_names = PackedStringArray("Floors/snowhedgefloor.jpg", "Walls/snowhedgewall.png", "Walls/snowhedgedoor.png", "Walls/IceRiddle/d1603.png", "Walls/IceRiddle/d2.png", "Walls/IceRiddle/d3.png", "Walls/IceRiddle/d4.png", "Walls/IceRiddle/d5476.png", "Walls/IceRiddle/d6768.png", "Walls/IceRiddle/d7.png", "Walls/IceRiddle/d8345.png", "Walls/IceRiddle/d9.png", "Walls/IceRiddle/d10.png", "Walls/IceRiddle/d11.png", "Walls/IceRiddle/d12.png", "Walls/IceRiddle/d13.png")
+textures = Array[Texture2D]([ExtResource("2_3st1l"), ExtResource("3_hdiyx"), ExtResource("4_o7d4e"), ExtResource("5_ji3m3"), ExtResource("6_15ffv"), ExtResource("7_sv2ru"), ExtResource("8_jel3b"), ExtResource("9_r7e5q"), ExtResource("10_0t0xl"), ExtResource("11_7c11n"), ExtResource("12_1ivwh"), ExtResource("13_1mbji"), ExtResource("14_5ns4y"), ExtResource("15_u4g56"), ExtResource("16_56mk0"), ExtResource("17_eq1wq")])
+floor_slots = Vector2i(0, 1)
+wall_slots = Vector2i(1, 16)
+light0 = true
+light0_position = Vector4(0, 0, 0, 1)
+light0_ambient = Color(0.8, 0.8, 0.8, 1)
+light0_diffuse = Color(0.8, 0.8, 0.8, 1)
+light0_specular = Color(0, 0, 0, 1)
+light0_attenuation = Vector3(1, 0.01, 0.015)
+light1 = true
+light1_ambient = Color(0.8, 0.8, 0.8, 1)
+light1_diffuse = Color(0.8, 0.8, 0.8, 1)
+light1_specular = Color(0, 0, 0, 1)
+light1_attenuation = Vector3(1, 0.01, 0.015)
+material = true
+material_ambient = Color(0.4, 0.4, 0.4, 1)
+material_diffuse = Color(0.7, 0.7, 0.7, 1)
+material_specular = Color(0, 0, 0, 1)
+material_emission = Color(0.1, 0.1, 0.1, 1)
+material_shininess = 5.0
+fog = true
+fog_color = Color(0.8, 0.8, 1, 0.8)
+fog_density = 0.02
+sky = true
+sky_top = Color(0.3, 0.3, 0.5, 0.8)
+sky_bottom = Color(0.8, 0.8, 1, 0.8)
+snow = true

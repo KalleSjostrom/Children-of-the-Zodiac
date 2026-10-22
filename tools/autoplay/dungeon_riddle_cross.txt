@@ -1,0 +1,39 @@
+# Opens a riddle, shows it and leaves it with CROSS (parity cases
+# dungeon_riddle_*, phase 2 rollout; the riddles of src/miniGames: RiddleGame, GriveraRiddle and AegisRiddle (CROSS pages their texts and leaves at the end)):
+# --start-node=<address>:<direction> starts before the riddle's tablet,
+# facing it (src/main/Main.gd). CROSS opens it (the labyrinth runs it as its
+# sub game mode, drawn in 2D over the floor: its top layer), shots while it
+# fades in and after the cursor moved, then CROSS until the labyrinth is back,
+# the fade out, a turn away and back.
+wait 3000
+shot r01_before
+pos before
+log before
+tap CROSS
+wait 300
+shot r02_opening
+wait 1200
+shot r03_open
+log open
+tap RIGHT
+wait 400
+tap DOWN
+wait 400
+shot r04_moved
+log moved
+mark
+tap CROSS
+wait 700
+shot r_#_leaving
+loopuntil !sub=miniGames 12000
+wait 1500
+shot r05_left
+log left
+tap LEFT
+wait 700
+shot r06_away
+tap RIGHT
+wait 700
+shot r07_back
+log back
+quit

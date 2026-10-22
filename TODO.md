@@ -22,7 +22,7 @@ Sometimes the cards do not appear, I can still select and press triangle to atta
 [Claude] I used the Demolish card on an enemy and the background disapeared - "C:\Users\c06ks\Work\battle - missing background.png"
 
 ## Labyrinth
-Some walls are seen through others
+[Done][Claude] Some walls are seen through others (the emulation's glColor bug, fixed in the phase 2 rollout: docs/MODERNIZATION_PLAN.md 7.8)
 
 ## UI
 Character cards look aweful

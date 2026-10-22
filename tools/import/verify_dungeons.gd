@@ -23,8 +23,10 @@ extends SceneTree
 ##   --all            every floor scene in the scenes folder
 ##   --meshes         also compare the walls' mesh: the legacy display list
 ##                    (Labyrinth.init3D's renderSky and LabyrinthRenderer.draw,
-##                    compiled by Graphics) with DungeonFloor.build, surface by
-##                    surface and array by array, both in GL's default state.
+##                    compiled by Graphics: the sky's eye-space part, then the
+##                    walls) with DungeonFloor.build (its sky and walls meshes),
+##                    surface by surface and array by array, both in GL's
+##                    default state.
 ##                    Needs a renderer: run it without --headless
 ##
 ## AbstractMapLoader's parse bookkeeping (lastLine, lineCount, comment) is not
@@ -194,29 +196,35 @@ func _diff_meshes(renderer, scene_path: String) -> void:
 	g.setLightEnabled(true)
 	renderer.draw(g)
 	g.endList()
-	var legacy: ArrayMesh = g._lists[list].mesh
+	# [mesh, surface, eye space] of the list's parts and of the floor's
+	# meshes (the sky, then the walls), in order.
+	var legacy: Array = []
+	for part: Array in g._lists[list].parts:
+		for k in part[1].get_surface_count():
+			legacy.append([part[1], k, part[0]])
 	g.deleteList(list)
 	var scene: DungeonScene = (ResourceLoader.load(scene_path) as PackedScene).instantiate()
 	var floor_node := scene.get_node(^"Layout") as DungeonFloor
 	floor_node.build(scene.style, gl)
-	# [mesh, surface] of the floor's instances, in order.
 	var mine: Array = []
-	for c in floor_node.get_children(true):
-		if c is MeshInstance3D and c.mesh != null:
-			for k in c.mesh.get_surface_count():
-				mine.append([c.mesh, k])
-	var surfaces: int = legacy.get_surface_count() if legacy != null else 0
-	if surfaces != mine.size():
-		_errors.append("mesh: %d surfaces vs %d" % [surfaces, mine.size()])
-	for i in mini(surfaces, mine.size()):
+	for m: Array in [[floor_node.sky_mesh(), true], [floor_node.walls_mesh(), false]]:
+		if m[0] != null:
+			for k in m[0].get_surface_count():
+				mine.append([m[0], k, m[1]])
+	if legacy.size() != mine.size():
+		_errors.append("mesh: %d surfaces vs %d" % [legacy.size(), mine.size()])
+	for i in mini(legacy.size(), mine.size()):
+		var lmesh: Mesh = legacy[i][0]
+		var li: int = legacy[i][1]
 		var m: Mesh = mine[i][0]
 		var j: int = mine[i][1]
-		var la := legacy.surface_get_arrays(i)
+		_diff(legacy[i][2], mine[i][2], "mesh[%d].eye_space" % i)
+		var la := lmesh.surface_get_arrays(li)
 		var ma: Array = m.surface_get_arrays(j)
-		_diff(legacy.surface_get_format(i), m.surface_get_format(j), "mesh[%d].format" % i)
+		_diff(lmesh.surface_get_format(li), m.surface_get_format(j), "mesh[%d].format" % i)
 		for k in [Mesh.ARRAY_VERTEX, Mesh.ARRAY_NORMAL, Mesh.ARRAY_TEX_UV, Mesh.ARRAY_COLOR]:
 			_diff(la[k], ma[k], "mesh[%d].arrays[%d]" % [i, k])
-		var lm: ShaderMaterial = legacy.surface_get_material(i)
+		var lm: ShaderMaterial = lmesh.surface_get_material(li)
 		var mm: ShaderMaterial = m.surface_get_material(j)
 		if lm.get_shader_parameter("tex") != mm.get_shader_parameter("tex"):
 			_errors.append("mesh[%d]: texture %s vs %s" % [i, lm.get_shader_parameter("tex"), mm.get_shader_parameter("tex")])

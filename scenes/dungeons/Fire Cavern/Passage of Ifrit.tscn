@@ -1,0 +1,75 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/Fire Cavern.tres" id="2_w56e7"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/Fire Cavern--Passage of Ifrit.tres" id="3_otf3a"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonIfDoor.tscn" id="4_lujix"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonChest.tscn" id="5_sk068"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/volcano.tres" id="6_wh1t8"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonMissionChest.tscn" id="7_ly7q7"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/chest.tres" id="8_7us58"]
+
+[node name="Passage of Ifrit" instance=ExtResource("1_base")]
+map_name = "Fire Cavern--Passage of Ifrit.map"
+style = ExtResource("2_w56e7")
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+has_mission = true
+mission_kind = "FireMission"
+mission_name = "treasuremission"
+mission_entries = PackedStringArray("trigger&&crossroadnode&&2", "dialog&&Zalzi&&That\'s both of them!&&Let\'s head out!")
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_otf3a")
+
+[node name="00 ifDoor 3" parent="Objects" index="0" instance=ExtResource("4_lujix")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -50)
+open_roads = "dontopen"
+next_places = PackedStringArray("treasureMission==2", "Meanwhile_-_Teo_is_Plotting_With_Vincent", "fire_cavern--blazing_maze-mark1")
+kind = "ifDoor"
+cell = 3
+facing = 1
+database_name = "fire cavern--passage of ifrit.mapifdoor3"
+
+[node name="01 ifDoor 207" parent="Objects" index="1" instance=ExtResource("4_lujix")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -2)
+open_roads = "dontopen"
+next_places = PackedStringArray("treasureMission==2", "Meanwhile_-_Teo_is_Plotting_With_Vincent", "fire_cavern--hall_of_the_damned-mark0")
+mark = 1
+kind = "ifDoor"
+cell = 207
+facing = 3
+database_name = "fire cavern--passage of ifrit.mapifdoor207"
+
+[node name="02 chest 73" parent="Objects" index="2" instance=ExtResource("5_sk068")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -26)
+content_type = 2
+content_name = "cards.magic.Ice"
+content_info = PackedStringArray("2", "false")
+kind = "chest"
+cell = 73
+facing = 1
+image = "Images/volcano.png"
+database_name = "fire cavern--passage of ifrit.mapchest73"
+
+[node name="View" parent="Objects/02 chest 73" index="0"]
+transform = Transform3D(-2.1855694e-10, 0, 1, 0, 0.005, 0, -0.005, 0, -4.371139e-08, 0, -1.6925, 0)
+sprite_frames = ExtResource("6_wh1t8")
+
+[node name="03 missionChest 182" parent="Objects" index="3" instance=ExtResource("7_ly7q7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46, 0, -38)
+dialogs = Array[PackedStringArray]([PackedStringArray("Zalzi", "Ahh! Finally Here!", ""), PackedStringArray("Kin", "What are you waiting for?", "Just open it, already!"), PackedStringArray("Zalzi", "Ok, ok!", ""), PackedStringArray("gift", "a Neclace", ""), PackedStringArray("Celis", "Oh, it\'s beautiful!", ""), PackedStringArray("Kin", "Yes yes! Beautiful...", "We better head on.")])
+kind = "missionChest"
+cell = 182
+facing = 3
+image = "Images/chest"
+database_name = "fire cavern--passage of ifrit.mapmissionchest182"
+
+[node name="View" parent="Objects/03 missionChest 182" index="0"]
+transform = Transform3D(-3.059797e-10, 0, -1, 0, 0.007, 0, 0.007, 0, -4.371139e-08, 0, -1.2825, 0)
+sprite_frames = ExtResource("8_7us58")
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2, 0, -50)
+
+[editable path="Objects/02 chest 73"]
+[editable path="Objects/03 missionChest 182"]

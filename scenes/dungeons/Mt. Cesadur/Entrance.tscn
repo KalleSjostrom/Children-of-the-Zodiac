@@ -1,0 +1,203 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/Mt. Cesadur--Entrance.tres" id="2_60k21"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/Mt. Cesadur--Entrance.tres" id="3_cg87s"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonDoor.tscn" id="4_8n070"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonLadderDoor.tscn" id="5_fph0g"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/ladderup.tres" id="6_iird3"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/ladderdown.tres" id="7_0wer0"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonChest.tscn" id="8_cqxod"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/stub.tres" id="9_ve780"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonSavePoint.tscn" id="10_2du0n"]
+
+[node name="Entrance" instance=ExtResource("1_base")]
+map_name = "Mt. Cesadur--Entrance.map"
+style = ExtResource("2_60k21")
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+mission_entries = PackedStringArray()
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_cg87s")
+
+[node name="00 door 105" parent="Objects" index="0" instance=ExtResource("4_8n070")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -26)
+open_roads = "dontopen"
+next_places = PackedStringArray("landmt._cesadur--entrance-mark0")
+kind = "door"
+cell = 105
+database_name = "mt. cesadur--entrance.mapdoor105"
+
+[node name="01 ladderDoor 101" parent="Objects" index="1" instance=ExtResource("5_fph0g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -42)
+going_up = true
+open_roads = "dontopen"
+next_places = PackedStringArray("mt._cesadur--second_floor-mark0")
+mark = 1
+kind = "ladderDoor"
+cell = 101
+facing = 2
+image = "Images/ladderup.png"
+database_name = "mt. cesadur--entrance.mapladderdoor101"
+
+[node name="View" parent="Objects/01 ladderDoor 101" index="0"]
+transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 1, 0, 0.2375, -0.29999924)
+sprite_frames = ExtResource("6_iird3")
+
+[node name="02 ladderDoor 137" parent="Objects" index="2" instance=ExtResource("5_fph0g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -26)
+going_up = true
+open_roads = "dontopen"
+next_places = PackedStringArray("mt._cesadur--second_floor-mark1")
+mark = 2
+kind = "ladderDoor"
+cell = 137
+image = "Images/ladderup.png"
+database_name = "mt. cesadur--entrance.mapladderdoor137"
+
+[node name="View" parent="Objects/02 ladderDoor 137" index="0"]
+transform = Transform3D(-0.005, 0, -8.742278e-08, 0, 0.005, 0, 4.3711387e-10, 0, -1, 0, 0.2375, 0.29999924)
+sprite_frames = ExtResource("6_iird3")
+
+[node name="03 ladderDoor 67" parent="Objects" index="3" instance=ExtResource("5_fph0g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -50)
+going_up = true
+open_roads = "dontopen"
+next_places = PackedStringArray("mt._cesadur--second_floor-mark2")
+mark = 3
+kind = "ladderDoor"
+cell = 67
+facing = 2
+image = "Images/ladderup.png"
+database_name = "mt. cesadur--entrance.mapladderdoor67"
+
+[node name="View" parent="Objects/03 ladderDoor 67" index="0"]
+transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 1, 0, 0.2375, -0.29999924)
+sprite_frames = ExtResource("6_iird3")
+
+[node name="04 ladderDoor 207" parent="Objects" index="4" instance=ExtResource("5_fph0g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -2)
+going_up = true
+open_roads = "dontopen"
+next_places = PackedStringArray("Mt._Cesadur--Second_Floor-mark3")
+mark = 4
+kind = "ladderDoor"
+cell = 207
+facing = 3
+image = "Images/ladderup.png"
+database_name = "mt. cesadur--entrance.mapladderdoor207"
+
+[node name="View" parent="Objects/04 ladderDoor 207" index="0"]
+transform = Transform3D(-2.1855694e-10, 0, -1, 0, 0.005, 0, 0.005, 0, -4.371139e-08, 0.29999924, 0.2375, 0)
+sprite_frames = ExtResource("6_iird3")
+
+[node name="05 ladderDoor 29" parent="Objects" index="5" instance=ExtResource("5_fph0g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -10)
+going_up = true
+open_roads = "dontopen"
+next_places = PackedStringArray("Mt._Cesadur--Second_Floor-mark4")
+mark = 5
+kind = "ladderDoor"
+cell = 29
+facing = 1
+image = "Images/ladderup.png"
+database_name = "mt. cesadur--entrance.mapladderdoor29"
+
+[node name="View" parent="Objects/05 ladderDoor 29" index="0"]
+transform = Transform3D(-2.1855694e-10, 0, 1, 0, 0.005, 0, -0.005, 0, -4.371139e-08, -0.3000002, 0.2375, 0)
+sprite_frames = ExtResource("6_iird3")
+
+[node name="06 ladderDoor 63" parent="Objects" index="6" instance=ExtResource("5_fph0g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -2)
+open_roads = "dontopen"
+next_places = PackedStringArray("mt._cesadur--basement-mark0")
+mark = 6
+kind = "ladderDoor"
+cell = 63
+image = "Images/ladderdown.png"
+database_name = "mt. cesadur--entrance.mapladderdoor63"
+
+[node name="View" parent="Objects/06 ladderDoor 63" index="0"]
+transform = Transform3D(-0.005, 0, -8.742278e-08, 0, 0.005, 0, 4.3711387e-10, 0, -1, 0, -2.2625, 0.29999995)
+sprite_frames = ExtResource("7_0wer0")
+
+[node name="07 chest 196" parent="Objects" index="7" instance=ExtResource("8_cqxod")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -46)
+content_type = 2
+content_name = "cards.offense.MagicalBlow"
+content_info = PackedStringArray("1", "true")
+kind = "chest"
+cell = 196
+facing = 3
+image = "Images/stub.png"
+database_name = "mt. cesadur--entrance.mapchest196"
+
+[node name="View" parent="Objects/07 chest 196" index="0"]
+transform = Transform3D(-1.7484555e-10, 0, -1, 0, 0.004, 0, 0.004, 0, -4.371139e-08, 0, -1.474, 0)
+sprite_frames = ExtResource("9_ve780")
+
+[node name="08 chest 139" parent="Objects" index="8" instance=ExtResource("8_cqxod")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -18)
+content_type = 2
+content_name = "cards.offense.BattleCard"
+content_info = PackedStringArray("1", "true")
+kind = "chest"
+cell = 139
+facing = 1
+image = "Images/stub.png"
+database_name = "mt. cesadur--entrance.mapchest139"
+
+[node name="View" parent="Objects/08 chest 139" index="0"]
+transform = Transform3D(-1.7484555e-10, 0, 1, 0, 0.004, 0, -0.004, 0, -4.371139e-08, 0, -1.474, 0)
+sprite_frames = ExtResource("9_ve780")
+
+[node name="09 chest 26" parent="Objects" index="9" instance=ExtResource("8_cqxod")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -22)
+content_name = "600"
+content_info = PackedStringArray()
+kind = "chest"
+cell = 26
+facing = 1
+image = "Images/stub.png"
+database_name = "mt. cesadur--entrance.mapchest26"
+
+[node name="View" parent="Objects/09 chest 26" index="0"]
+transform = Transform3D(-1.7484555e-10, 0, 1, 0, 0.004, 0, -0.004, 0, -4.371139e-08, 0, -1.474, 0)
+sprite_frames = ExtResource("9_ve780")
+
+[node name="10 chest 4" parent="Objects" index="10" instance=ExtResource("8_cqxod")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -46)
+content_type = 2
+content_name = "cards.offense.BattleCard"
+content_info = PackedStringArray("1", "true")
+kind = "chest"
+cell = 4
+facing = 1
+image = "Images/stub.png"
+database_name = "mt. cesadur--entrance.mapchest4"
+
+[node name="View" parent="Objects/10 chest 4" index="0"]
+transform = Transform3D(-1.7484555e-10, 0, 1, 0, 0.004, 0, -0.004, 0, -4.371139e-08, 0, -1.474, 0)
+sprite_frames = ExtResource("9_ve780")
+
+[node name="11 save 107" parent="Objects" index="11" instance=ExtResource("10_2du0n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -18)
+kind = "save"
+cell = 107
+facing = 1
+image = "-1"
+database_name = "mt. cesadur--entrance.mapsave107"
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -26)
+
+[editable path="Objects/01 ladderDoor 101"]
+[editable path="Objects/02 ladderDoor 137"]
+[editable path="Objects/03 ladderDoor 67"]
+[editable path="Objects/04 ladderDoor 207"]
+[editable path="Objects/05 ladderDoor 29"]
+[editable path="Objects/06 ladderDoor 63"]
+[editable path="Objects/07 chest 196"]
+[editable path="Objects/08 chest 139"]
+[editable path="Objects/09 chest 26"]
+[editable path="Objects/10 chest 4"]

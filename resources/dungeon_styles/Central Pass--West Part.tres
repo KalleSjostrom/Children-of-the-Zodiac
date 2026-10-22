@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="DungeonStyle" format=3]
+
+[ext_resource type="Script" path="res://scenes/dungeons/DungeonStyle.gd" id="1_p6c03"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Floors/southpassfloor.jpg" id="2_iojig"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/southpasswall.png" id="3_qw21p"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/southpassdoor0.png" id="4_fseqk"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Roofs/southpassroof.jpg" id="5_8crt6"]
+
+[resource]
+script = ExtResource("1_p6c03")
+texture_names = PackedStringArray("Floors/southpassfloor.jpg", "Walls/southpasswall.png", "Walls/southpassdoor0.png", "Roofs/southpassroof.jpg")
+textures = Array[Texture2D]([ExtResource("2_iojig"), ExtResource("3_qw21p"), ExtResource("4_fseqk"), ExtResource("5_8crt6")])
+floor_slots = Vector2i(0, 1)
+wall_slots = Vector2i(1, 3)
+roof_slots = Vector2i(3, 4)
+light0 = true
+light0_position = Vector4(0, 0, 0, 1)
+light0_ambient = Color(0.8, 0.8, 0.8, 1)
+light0_diffuse = Color(0.8, 0.8, 0.8, 1)
+light0_specular = Color(0, 0, 0, 1)
+light0_attenuation = Vector3(1, 0.01, 0.015)
+light1 = true
+light1_ambient = Color(0.2, 0.2, 0.2, 1)
+light1_diffuse = Color(0.2, 0.2, 0.2, 1)
+light1_specular = Color(0, 0, 0, 1)
+material = true
+material_ambient = Color(0.4, 0.4, 0.4, 1)
+material_diffuse = Color(0.7, 0.7, 0.7, 1)
+material_specular = Color(0, 0, 0, 1)

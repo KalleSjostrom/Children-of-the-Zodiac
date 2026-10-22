@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="DungeonStyle" format=3]
+
+[ext_resource type="Script" path="res://scenes/dungeons/DungeonStyle.gd" id="1_bv10r"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Floors/prisonfloor.jpg" id="2_nr43v"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/prisonwall.png" id="3_28kvl"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Roofs/prisonroof.jpg" id="4_cwur2"]
+
+[resource]
+script = ExtResource("1_bv10r")
+texture_names = PackedStringArray("Floors/prisonfloor.jpg", "Walls/prisonwall.png", "Roofs/prisonroof.jpg")
+textures = Array[Texture2D]([ExtResource("2_nr43v"), ExtResource("3_28kvl"), ExtResource("4_cwur2")])
+floor_slots = Vector2i(0, 1)
+wall_slots = Vector2i(1, 2)
+roof_slots = Vector2i(2, 3)
+light0 = true
+light0_position = Vector4(0, 0, 0, 1)
+light0_ambient = Color(0.8, 0.8, 0.8, 1)
+light0_diffuse = Color(0.8, 0.8, 0.8, 1)
+light0_specular = Color(0, 0, 0, 1)
+light0_attenuation = Vector3(1, 0.01, 0.015)
+material = true
+material_ambient = Color(0.4, 0.4, 0.4, 1)
+material_diffuse = Color(0.7, 0.7, 0.7, 1)
+material_specular = Color(0, 0, 0, 1)

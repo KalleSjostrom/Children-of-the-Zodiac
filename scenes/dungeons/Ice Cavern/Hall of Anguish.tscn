@@ -1,0 +1,257 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/Ice Cavern.tres" id="2_uu3f7"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/Ice Cavern--Hall of Anguish.tres" id="3_pirn0"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonHinderDoor.tscn" id="4_gfip4"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Walls/icecavedoor.tres" id="5_03ew2"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonDoor.tscn" id="6_tlicv"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonIceButton.tscn" id="7_iqwmx"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/note2.tres" id="8_0hhx3"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/note4.tres" id="9_05jrt"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/note3.tres" id="10_g3d35"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/note5.tres" id="11_3fqlc"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonChest.tscn" id="12_gcqkc"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/icepot.tres" id="13_vxu1g"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonSavePoint.tscn" id="14_kqisy"]
+
+[node name="Hall of Anguish" instance=ExtResource("1_base")]
+map_name = "Ice Cavern--Hall of Anguish.map"
+style = ExtResource("2_uu3f7")
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+mission_entries = PackedStringArray()
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_pirn0")
+
+[node name="00 hinderDoor 15" parent="Objects" index="0" instance=ExtResource("4_gfip4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+next_place = "Ice_Cavern--Throne_Room-mark1"
+kind = "hinderDoor"
+cell = 15
+facing = 1
+image = "Walls/icecavedoor"
+database_name = "ice cavern--hall of anguish.maphinderdoor15"
+
+[node name="View" parent="Objects/00 hinderDoor 15" index="0"]
+transform = Transform3D(-3.4149522e-10, 0, 1, 0, 0.0078125, 0, -0.0078125, 0, -4.371139e-08, -2, 0, 0)
+sprite_frames = ExtResource("5_03ew2")
+frame = 1
+
+[node name="01 door 175" parent="Objects" index="1" instance=ExtResource("6_tlicv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -2)
+open_roads = "dontopen"
+next_places = PackedStringArray("Ice_Cavern--Mysterious_Forest-mark11")
+mark = 1
+kind = "door"
+cell = 175
+database_name = "ice cavern--hall of anguish.mapdoor175"
+
+[node name="02 hinderDoor 11" parent="Objects" index="2" instance=ExtResource("4_gfip4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -18)
+next_place = "Ice_Cavern--Throne_Room-mark2"
+mark = 2
+kind = "hinderDoor"
+cell = 11
+facing = 1
+image = "Walls/icecavedoor"
+database_name = "ice cavern--hall of anguish.maphinderdoor11"
+
+[node name="View" parent="Objects/02 hinderDoor 11" index="0"]
+transform = Transform3D(-3.4149522e-10, 0, 1, 0, 0.0078125, 0, -0.0078125, 0, -4.371139e-08, -2, 0, 0)
+sprite_frames = ExtResource("5_03ew2")
+frame = 1
+
+[node name="03 hinderDoor 5" parent="Objects" index="3" instance=ExtResource("4_gfip4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -42)
+next_place = "Ice_Cavern--Throne_Room-mark3"
+mark = 3
+kind = "hinderDoor"
+cell = 5
+facing = 1
+image = "Walls/icecavedoor"
+database_name = "ice cavern--hall of anguish.maphinderdoor5"
+
+[node name="View" parent="Objects/03 hinderDoor 5" index="0"]
+transform = Transform3D(-3.4149522e-10, 0, 1, 0, 0.0078125, 0, -0.0078125, 0, -4.371139e-08, -2, 0, 0)
+sprite_frames = ExtResource("5_03ew2")
+frame = 1
+
+[node name="04 hinderDoor 94" parent="Objects" index="4" instance=ExtResource("4_gfip4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -6)
+next_place = "Ice_Cavern--Hall_of_Anguish-mark5"
+mark = 4
+kind = "hinderDoor"
+cell = 94
+image = "Walls/icecavedoor"
+database_name = "ice cavern--hall of anguish.maphinderdoor94"
+
+[node name="View" parent="Objects/04 hinderDoor 94" index="0"]
+transform = Transform3D(-0.0078125, 0, -8.742278e-08, 0, 0.0078125, 0, 6.8299044e-10, 0, -1, 0, 0, 2)
+flip_h = true
+sprite_frames = ExtResource("5_03ew2")
+frame = 1
+
+[node name="05 hinderDoor 95" parent="Objects" index="5" instance=ExtResource("4_gfip4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -2)
+next_place = "Ice_Cavern--Hall_of_Anguish-mark4"
+mark = 5
+kind = "hinderDoor"
+cell = 95
+facing = 2
+image = "Walls/icecavedoor"
+database_name = "ice cavern--hall of anguish.maphinderdoor95"
+
+[node name="View" parent="Objects/05 hinderDoor 95" index="0"]
+transform = Transform3D(0.0078125, 0, 0, 0, 0.0078125, 0, 0, 0, 1, 0, 0, -2)
+sprite_frames = ExtResource("5_03ew2")
+frame = 1
+
+[node name="06 iceButton 143" parent="Objects" index="6" instance=ExtResource("7_iqwmx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -2)
+sound = "Labyrinth/Note_2.wav"
+frames = 2
+hinders = PackedStringArray("Ice_Cavern--Hall_of_Anguish.maphinderdoor15", "Ice_Cavern--Hall_of_Confusion.maphinderdoor207", "Ice_Cavern--Hall_of_Confusion.mapicebutton79")
+kind = "iceButton"
+cell = 143
+facing = 3
+image = "Images/note2"
+database_name = "ice cavern--hall of anguish.mapicebutton143"
+
+[node name="View" parent="Objects/06 iceButton 143" index="0"]
+transform = Transform3D(-2.6226832e-10, 0, -1, 0, 0.006, 0, 0.006, 0, -4.371139e-08, 1.9900017, 0.259, 0)
+sprite_frames = ExtResource("8_0hhx3")
+
+[node name="07 iceButton 140" parent="Objects" index="7" instance=ExtResource("7_iqwmx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -14)
+sound = "Labyrinth/Note_4.wav"
+frames = 2
+hinders = PackedStringArray("Ice_Cavern--Hall_of_Anguish.maphinderdoor5", "Ice_Cavern--Hall_of_Confusion.maphinderdoor197", "Ice_Cavern--Hall_of_Confusion.mapicebutton76")
+kind = "iceButton"
+cell = 140
+facing = 3
+image = "Images/note4"
+database_name = "ice cavern--hall of anguish.mapicebutton140"
+
+[node name="View" parent="Objects/07 iceButton 140" index="0"]
+transform = Transform3D(-2.6226832e-10, 0, -1, 0, 0.006, 0, 0.006, 0, -4.371139e-08, 1.9900017, 0.259, 0)
+sprite_frames = ExtResource("9_05jrt")
+
+[node name="08 iceButton 117" parent="Objects" index="8" instance=ExtResource("7_iqwmx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -42)
+sound = "Labyrinth/Note_3.wav"
+frames = 2
+hinders = PackedStringArray("Ice_Cavern--Hall_of_Anguish.maphinderdoor94", "Ice_Cavern--Hall_of_Anguish.maphinderdoor95", "Ice_Cavern--Hall_of_Confusion.maphinderdoor126", "Ice_Cavern--Hall_of_Confusion.maphinderdoor127", "Ice_Cavern--Hall_of_Confusion.mapicebutton85")
+kind = "iceButton"
+cell = 117
+facing = 3
+image = "Images/note3"
+database_name = "ice cavern--hall of anguish.mapicebutton117"
+
+[node name="View" parent="Objects/08 iceButton 117" index="0"]
+transform = Transform3D(-2.6226832e-10, 0, -1, 0, 0.006, 0, 0.006, 0, -4.371139e-08, 1.9899998, 0.259, 0)
+sprite_frames = ExtResource("10_g3d35")
+
+[node name="09 iceButton 74" parent="Objects" index="9" instance=ExtResource("7_iqwmx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -22)
+sound = "Labyrinth/Note_5.wav"
+frames = 2
+hinders = PackedStringArray("Ice_Cavern--Hall_of_Anguish.maphinderdoor11", "Ice_Cavern--Hall_of_Confusion.maphinderdoor203", "Ice_Cavern--Hall_of_Confusion.mapicebutton138")
+kind = "iceButton"
+cell = 74
+facing = 1
+image = "Images/note5"
+database_name = "ice cavern--hall of anguish.mapicebutton74"
+
+[node name="View" parent="Objects/09 iceButton 74" index="0"]
+transform = Transform3D(-2.6226832e-10, 0, 1, 0, 0.006, 0, -0.006, 0, -4.371139e-08, -1.9899998, 0.259, 0)
+sprite_frames = ExtResource("11_3fqlc")
+
+[node name="10 chest 195" parent="Objects" index="10" instance=ExtResource("12_gcqkc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -50)
+frames = 2
+content_type = 2
+content_name = "cards.offense.ChameleonStrike"
+content_info = PackedStringArray("3")
+kind = "chest"
+cell = 195
+facing = 3
+image = "Images/icepot"
+database_name = "ice cavern--hall of anguish.mapchest195"
+
+[node name="View" parent="Objects/10 chest 195" index="0"]
+transform = Transform3D(-1.7484555e-10, 0, -1, 0, 0.004, 0, 0.004, 0, -4.371139e-08, 0, -1.394, 0)
+sprite_frames = ExtResource("13_vxu1g")
+
+[node name="11 chest 198" parent="Objects" index="11" instance=ExtResource("12_gcqkc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -38)
+frames = 2
+content_type = 2
+content_name = "cards.offense.BattleCard"
+content_info = PackedStringArray("3", "true")
+kind = "chest"
+cell = 198
+facing = 3
+image = "Images/icepot"
+database_name = "ice cavern--hall of anguish.mapchest198"
+
+[node name="View" parent="Objects/11 chest 198" index="0"]
+transform = Transform3D(-1.7484555e-10, 0, -1, 0, 0.004, 0, 0.004, 0, -4.371139e-08, 0, -1.394, 0)
+sprite_frames = ExtResource("13_vxu1g")
+
+[node name="12 chest 201" parent="Objects" index="12" instance=ExtResource("12_gcqkc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -26)
+frames = 2
+content_type = 2
+content_name = "cards.offense.Drain"
+content_info = PackedStringArray("3")
+kind = "chest"
+cell = 201
+facing = 3
+image = "Images/icepot"
+database_name = "ice cavern--hall of anguish.mapchest201"
+
+[node name="View" parent="Objects/12 chest 201" index="0"]
+transform = Transform3D(-1.7484555e-10, 0, -1, 0, 0.004, 0, 0.004, 0, -4.371139e-08, 0, -1.394, 0)
+sprite_frames = ExtResource("13_vxu1g")
+
+[node name="13 chest 204" parent="Objects" index="13" instance=ExtResource("12_gcqkc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -14)
+frames = 2
+content_type = 2
+content_name = "cards.offense.SpiritAssault"
+content_info = PackedStringArray("1")
+kind = "chest"
+cell = 204
+facing = 3
+image = "Images/icepot"
+database_name = "ice cavern--hall of anguish.mapchest204"
+
+[node name="View" parent="Objects/13 chest 204" index="0"]
+transform = Transform3D(-1.7484555e-10, 0, -1, 0, 0.004, 0, 0.004, 0, -4.371139e-08, 0, -1.394, 0)
+sprite_frames = ExtResource("13_vxu1g")
+
+[node name="14 save 173" parent="Objects" index="14" instance=ExtResource("14_kqisy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -10)
+kind = "save"
+cell = 173
+facing = 2
+image = "-1"
+database_name = "ice cavern--hall of anguish.mapsave173"
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2, 0, -2)
+
+[editable path="Objects/00 hinderDoor 15"]
+[editable path="Objects/02 hinderDoor 11"]
+[editable path="Objects/03 hinderDoor 5"]
+[editable path="Objects/04 hinderDoor 94"]
+[editable path="Objects/05 hinderDoor 95"]
+[editable path="Objects/06 iceButton 143"]
+[editable path="Objects/07 iceButton 140"]
+[editable path="Objects/08 iceButton 117"]
+[editable path="Objects/09 iceButton 74"]
+[editable path="Objects/10 chest 195"]
+[editable path="Objects/11 chest 198"]
+[editable path="Objects/12 chest 201"]
+[editable path="Objects/13 chest 204"]

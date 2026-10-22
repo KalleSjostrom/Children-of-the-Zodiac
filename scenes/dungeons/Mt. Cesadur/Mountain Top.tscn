@@ -1,0 +1,64 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/Mt. Cesadur--Mountain Top.tres" id="2_0h8ar"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/Mt. Cesadur--Mountain Top.tres" id="3_d8jje"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonDoor.tscn" id="4_5gxct"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonBoss.tscn" id="5_ifaht"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonSavePoint.tscn" id="6_nbweb"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonChest.tscn" id="7_rprcw"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/chest.tres" id="8_0fvcn"]
+
+[node name="Mountain Top" instance=ExtResource("1_base")]
+map_name = "Mt. Cesadur--Mountain Top.map"
+style = ExtResource("2_0h8ar")
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+mission_entries = PackedStringArray()
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_d8jje")
+
+[node name="00 door--down 155" parent="Objects" index="0" instance=ExtResource("4_5gxct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -18)
+open_roads = "dontopen"
+next_places = PackedStringArray("mt._cesadur--fourth_floor-mark4")
+kind = "door--down"
+cell = 155
+facing = 1
+database_name = "mt. cesadur--mountain top.mapdoor155"
+
+[node name="01 boss 117" parent="Objects" index="1" instance=ExtResource("5_ifaht")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -42)
+kind = "boss"
+cell = 117
+facing = 1
+image = "Taur"
+database_name = "taur"
+
+[node name="02 save 121" parent="Objects" index="2" instance=ExtResource("6_nbweb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -26)
+kind = "save"
+cell = 121
+facing = 2
+image = "-1"
+database_name = "mt. cesadur--mountain top.mapsave121"
+
+[node name="03 chest 77" parent="Objects" index="3" instance=ExtResource("7_rprcw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -10)
+frames = 2
+content_type = 2
+content_name = "cards.offense.BattleCard"
+content_info = PackedStringArray("2", "false")
+kind = "chest"
+cell = 77
+image = "Images/chest"
+database_name = "mt. cesadur--mountain top.mapchest77"
+
+[node name="View" parent="Objects/03 chest 77" index="0"]
+transform = Transform3D(-0.007, 0, -8.742278e-08, 0, 0.007, 0, 6.119594e-10, 0, -1, 0, -1.2825, 0)
+sprite_frames = ExtResource("8_0fvcn")
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 38, 0, -18)
+
+[editable path="Objects/03 chest 77"]

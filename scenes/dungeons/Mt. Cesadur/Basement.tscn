@@ -1,0 +1,221 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/Mt. Cesadur--Basement.tres" id="2_o3mog"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/Mt. Cesadur--Basement.tres" id="3_0tabx"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonLadderDoor.tscn" id="4_yi0kd"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/ladderup.tres" id="5_5x4ju"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonHinderDoor.tscn" id="6_1nm26"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Walls/earthcavedoor.tres" id="7_s624q"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonRiddle.tscn" id="8_rkxq6"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/riddle.tres" id="9_qhm14"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/earth.tres" id="10_etia2"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/sun.tres" id="11_1il4y"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/water.tres" id="12_cp6xd"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/moon.tres" id="13_rc1a7"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/riddleImage.tres" id="14_yae2q"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonChest.tscn" id="15_7ha5n"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/chest.tres" id="16_m72kg"]
+
+[node name="Basement" instance=ExtResource("1_base")]
+map_name = "Mt. Cesadur--Basement.map"
+style = ExtResource("2_o3mog")
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+mission_entries = PackedStringArray()
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_0tabx")
+
+[node name="00 ladderDoor 63" parent="Objects" index="0" instance=ExtResource("4_yi0kd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -2)
+going_up = true
+open_roads = "dontopen"
+next_places = PackedStringArray("Mt._Cesadur--Entrance-mark6")
+kind = "ladderDoor"
+cell = 63
+image = "Images/ladderup.png"
+database_name = "mt. cesadur--basement.mapladderdoor63"
+
+[node name="View" parent="Objects/00 ladderDoor 63" index="0"]
+transform = Transform3D(-0.005, 0, -8.742278e-08, 0, 0.005, 0, 4.3711387e-10, 0, -1, 0, 0.2375, 0.29999995)
+sprite_frames = ExtResource("5_5x4ju")
+
+[node name="01 hinderDoor 199" parent="Objects" index="1" instance=ExtResource("6_1nm26")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -34)
+next_place = "Mt._Cesadur--Basement-mark2"
+mark = 1
+kind = "hinderDoor"
+cell = 199
+facing = 2
+image = "Walls/earthcavedoor"
+database_name = "mt. cesadur--basement.maphinderdoor199"
+
+[node name="View" parent="Objects/01 hinderDoor 199" index="0"]
+transform = Transform3D(0.0078125, 0, 0, 0, 0.0078125, 0, 0, 0, 1, 0, 0, -2)
+sprite_frames = ExtResource("7_s624q")
+frame = 1
+
+[node name="02 hinderDoor 198" parent="Objects" index="2" instance=ExtResource("6_1nm26")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -38)
+next_place = "Mt._Cesadur--Basement-mark1"
+mark = 2
+kind = "hinderDoor"
+cell = 198
+image = "Walls/earthcavedoor"
+database_name = "mt. cesadur--basement.maphinderdoor198"
+
+[node name="View" parent="Objects/02 hinderDoor 198" index="0"]
+transform = Transform3D(-0.0078125, 0, -8.742278e-08, 0, 0.0078125, 0, 6.8299044e-10, 0, -1, 0, 0, 2)
+flip_h = true
+sprite_frames = ExtResource("7_s624q")
+frame = 1
+
+[node name="03 riddle 153" parent="Objects" index="3" instance=ExtResource("8_rkxq6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -26)
+riddle_name = "testriddle"
+riddle_class = "CesadurRiddle"
+hinders = PackedStringArray("Mt._Cesadur--Basement.maphinderDoor199")
+kind = "riddle"
+cell = 153
+facing = 1
+image = "Images/riddle.png"
+database_name = "mt. cesadur--basement.mapriddle153"
+
+[node name="View" parent="Objects/03 riddle 153" index="0"]
+transform = Transform3D(-3.496911e-10, 0, 1, 0, 0.008, 0, -0.008, 0, -4.371139e-08, -1.9900017, 0.042, 0)
+sprite_frames = ExtResource("9_qhm14")
+
+[node name="04 riddle 28" parent="Objects" index="4" instance=ExtResource("8_rkxq6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -14)
+riddle_name = "earth"
+riddle_class = "RiddleGame"
+hinders = PackedStringArray()
+kind = "riddle"
+cell = 28
+facing = 1
+image = "Images/earth.png"
+database_name = "mt. cesadur--basement.mapriddle28"
+
+[node name="View" parent="Objects/04 riddle 28" index="0"]
+transform = Transform3D(-3.496911e-10, 0, 1, 0, 0.008, 0, -0.008, 0, -4.371139e-08, -1.9899998, -0.038, 0)
+sprite_frames = ExtResource("10_etia2")
+
+[node name="05 riddle 56" parent="Objects" index="5" instance=ExtResource("8_rkxq6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -30)
+riddle_name = "sun"
+riddle_class = "RiddleGame"
+hinders = PackedStringArray()
+kind = "riddle"
+cell = 56
+facing = 2
+image = "Images/sun.png"
+database_name = "mt. cesadur--basement.mapriddle56"
+
+[node name="View" parent="Objects/05 riddle 56" index="0"]
+transform = Transform3D(0.008, 0, 0, 0, 0.008, 0, 0, 0, 1, 0, -0.038, -1.9899998)
+sprite_frames = ExtResource("11_1il4y")
+
+[node name="06 riddle 125" parent="Objects" index="6" instance=ExtResource("8_rkxq6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -10)
+riddle_name = "water"
+riddle_class = "RiddleGame"
+hinders = PackedStringArray()
+kind = "riddle"
+cell = 125
+facing = 3
+image = "Images/water.png"
+database_name = "mt. cesadur--basement.mapriddle125"
+
+[node name="View" parent="Objects/06 riddle 125" index="0"]
+transform = Transform3D(-3.496911e-10, 0, -1, 0, 0.008, 0, 0.008, 0, -4.371139e-08, 1.9899998, -0.038, 0)
+sprite_frames = ExtResource("12_cp6xd")
+
+[node name="07 riddle 155" parent="Objects" index="7" instance=ExtResource("8_rkxq6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -18)
+riddle_name = "moon"
+riddle_class = "RiddleGame"
+hinders = PackedStringArray()
+kind = "riddle"
+cell = 155
+facing = 3
+image = "Images/moon.png"
+database_name = "mt. cesadur--basement.mapriddle155"
+
+[node name="View" parent="Objects/07 riddle 155" index="0"]
+transform = Transform3D(-3.496911e-10, 0, -1, 0, 0.008, 0, 0.008, 0, -4.371139e-08, 1.9900017, -0.038, 0)
+sprite_frames = ExtResource("13_rc1a7")
+
+[node name="08 riddle 173" parent="Objects" index="8" instance=ExtResource("8_rkxq6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -10)
+riddle_name = "riddle"
+riddle_class = "RiddleGame"
+hinders = PackedStringArray()
+kind = "riddle"
+cell = 173
+facing = 2
+image = "Images/riddleImage.png"
+database_name = "mt. cesadur--basement.mapriddle173"
+
+[node name="View" parent="Objects/08 riddle 173" index="0"]
+transform = Transform3D(0.008, 0, 0, 0, 0.008, 0, 0, 0, 1, 0, -0.038, -1.9899998)
+sprite_frames = ExtResource("14_yae2q")
+
+[node name="09 chest 151" parent="Objects" index="9" instance=ExtResource("15_7ha5n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -34)
+frames = 2
+content_name = "2000"
+content_info = PackedStringArray()
+kind = "chest"
+cell = 151
+image = "Images/chest"
+database_name = "mt. cesadur--basement.mapchest151"
+
+[node name="View" parent="Objects/09 chest 151" index="0"]
+transform = Transform3D(-0.007, 0, -8.742278e-08, 0, 0.007, 0, 6.119594e-10, 0, -1, 0, -1.2825, 0)
+sprite_frames = ExtResource("16_m72kg")
+
+[node name="10 chest 119" parent="Objects" index="10" instance=ExtResource("15_7ha5n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -34)
+frames = 2
+content_type = 2
+content_name = "cards.offense.BattleCard"
+content_info = PackedStringArray("3", "false")
+kind = "chest"
+cell = 119
+image = "Images/chest"
+database_name = "mt. cesadur--basement.mapchest119"
+
+[node name="View" parent="Objects/10 chest 119" index="0"]
+transform = Transform3D(-0.007, 0, -8.742278e-08, 0, 0.007, 0, 6.119594e-10, 0, -1, 0, -1.2825, 0)
+sprite_frames = ExtResource("16_m72kg")
+
+[node name="11 chest 87" parent="Objects" index="11" instance=ExtResource("15_7ha5n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -34)
+frames = 2
+content_type = 1
+content_name = "Sword_of_Terra"
+content_info = PackedStringArray()
+kind = "chest"
+cell = 87
+image = "Images/chest"
+database_name = "mt. cesadur--basement.mapchest87"
+
+[node name="View" parent="Objects/11 chest 87" index="0"]
+transform = Transform3D(-0.007, 0, -8.742278e-08, 0, 0.007, 0, 6.119594e-10, 0, -1, 0, -1.2825, 0)
+sprite_frames = ExtResource("16_m72kg")
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -2)
+
+[editable path="Objects/00 ladderDoor 63"]
+[editable path="Objects/01 hinderDoor 199"]
+[editable path="Objects/02 hinderDoor 198"]
+[editable path="Objects/03 riddle 153"]
+[editable path="Objects/04 riddle 28"]
+[editable path="Objects/05 riddle 56"]
+[editable path="Objects/06 riddle 125"]
+[editable path="Objects/07 riddle 155"]
+[editable path="Objects/08 riddle 173"]
+[editable path="Objects/09 chest 151"]
+[editable path="Objects/10 chest 119"]
+[editable path="Objects/11 chest 87"]

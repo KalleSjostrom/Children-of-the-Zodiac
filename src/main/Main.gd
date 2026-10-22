@@ -16,6 +16,9 @@ extends Node
 ##                       day (villages load their "at Night" variant)
 ##   --status=<name>:<value>[,...]  dev only: set Database statuses after the
 ##                       save is loaded ("_" in names stands for a space)
+##   --start-node=<address>:<direction>  dev only: a labyrinth --start place
+##                       starts at this node, facing this direction (0-3), as
+##                       a game saved there does (COTZ-005), not at its door
 ##   --autoplay=<file>   feed scripted button presses (see tools/autoplay)
 ##   --shots=<dir>       save screenshots requested by the autoplay script
 ##   --quit-after-ms=<n> quit after n milliseconds of game time
@@ -24,7 +27,8 @@ extends Node
 ##                       numbers and a game clock instead of the wall clock, so
 ##                       two runs of an autoplay script give the same frames
 ##   --uncapped          no frame rate cap or vsync (fast parity runs; with --seed)
-##   --legacy=<a,b,...>  keep the legacy path of these subsystems (is_legacy)
+##   --legacy=<a,b,...>  keep the legacy path of these subsystems (is_legacy;
+##                       docs/ARCHITECTURE.md section 7 lists them)
 ##   --bridge-test       the world map shows tools/bridge_test/BridgeTest.tscn (dev only)
 ##   --no-encounters     dev only: no random battles in labyrinths (Labyrinth.noEncounters;
 ##                       steps are still counted), for parity tours of dungeon floors;
@@ -119,6 +123,9 @@ func _ready() -> void:
 		for s in String(_args["status"]).split(",", false):
 			var kv := s.split(":")
 			organizer.startStatuses[kv[0]] = int(kv[1])
+	if _args.has("start-node"):
+		var nd := String(_args["start-node"]).split(":")
+		organizer.startNode = [int(nd[0]), int(nd[1])]
 	organizer.init_(obs)
 	_zero_time = Time.get_ticks_msec()
 	if OS.is_debug_build():

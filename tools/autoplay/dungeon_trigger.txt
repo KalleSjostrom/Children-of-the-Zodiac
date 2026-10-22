@@ -1,0 +1,35 @@
+# A trigger door's arrival (parity cases dungeon_trigger_*, phase 2 rollout):
+# --load=Start --start="<floor>-mark0", where mark0 is a trigger door that
+# has not been arrived at (TriggerDoor.arrive: after the fade-in its dialogs
+# of maps/Labyrinth/Triggers/<trigger>.trig, its triggers, a tutorial offer).
+# Shots while the floor fades in and the dialogs start, CROSS with a shot
+# each until no dialog shows, then a turn, a step and the menu.
+wait 1000
+shot t01_fade_in
+wait 2000
+shot t02_arrived
+log arrived
+mark
+tap CROSS
+wait 900
+shot t_#_dialog
+loopuntil !dialog 30000
+log talked
+wait 1500
+shot t03_after_dialogs
+log after_dialogs
+tap LEFT
+wait 700
+tap UP
+wait 700
+shot t04_walked
+pos walked
+tap TRIANGLE
+wait 2500
+shot t05_menu
+log menu
+tap CIRCLE
+wait 2000
+shot t06_after_menu
+log after_menu
+quit

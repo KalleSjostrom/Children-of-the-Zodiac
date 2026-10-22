@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Floors/airtemplefloorvirgo0.jpg" id="1_nkf1k"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Floors/airtemplefloorvirgo1.jpg" id="2_sxsgs"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_nkf1k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_sxsgs")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}]

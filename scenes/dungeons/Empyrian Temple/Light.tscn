@@ -1,0 +1,130 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/Empyrian Temple--Light.tres" id="2_skhlu"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/Empyrian Temple--Light.tres" id="3_arluk"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonDoor.tscn" id="4_dt08d"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonFloorButton.tscn" id="5_vjoxe"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Floors/airtempleflooraquarius.tres" id="6_jyghr"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Floors/airtemplefloorsagittarius.tres" id="7_b0b6w"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Floors/airtemplefloorcancer.tres" id="8_cgq1n"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Floors/airtemplefloorgemini.tres" id="9_0eo0x"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Floors/airtemplefloorleo.tres" id="10_8tej5"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Floors/airtemplefloortaurus.tres" id="11_mxljj"]
+
+[node name="Light" instance=ExtResource("1_base")]
+map_name = "Empyrian Temple--Light.map"
+style = ExtResource("2_skhlu")
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+mission_entries = PackedStringArray()
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_arluk")
+
+[node name="00 door 111" parent="Objects" index="0" instance=ExtResource("4_dt08d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -2)
+open_roads = "dontopen"
+next_places = PackedStringArray("empyrian_temple--tower_of_strength-mark7")
+kind = "door"
+cell = 111
+database_name = "empyrian temple--light.mapdoor111"
+
+[node name="01 floorButton 107" parent="Objects" index="1" instance=ExtResource("5_vjoxe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -18)
+frames = 2
+hinders = PackedStringArray("empyrian_temple--hall_of_wind.mapadddoor104")
+kind = "floorButton"
+cell = 107
+facing = 2
+image = "Floors/airtempleflooraquarius"
+database_name = "empyrian temple--light.mapfloorbutton107"
+
+[node name="View" parent="Objects/01 floorButton 107" index="0"]
+transform = Transform3D(0.0078125, 0, 0, 0, -3.4149522e-10, 1, 0, -0.0078125, -4.371139e-08, 0, -2, 0)
+visible = false
+sprite_frames = ExtResource("6_jyghr")
+
+[node name="02 floorButton 103" parent="Objects" index="2" instance=ExtResource("5_vjoxe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -34)
+frames = 2
+hinders = PackedStringArray("empyrian_temple--hall_of_wind.mapadddoor104")
+kind = "floorButton"
+cell = 103
+facing = 2
+image = "Floors/airtemplefloorsagittarius"
+database_name = "empyrian temple--light.mapfloorbutton103"
+
+[node name="View" parent="Objects/02 floorButton 103" index="0"]
+transform = Transform3D(0.0078125, 0, 0, 0, -3.4149522e-10, 1, 0, -0.0078125, -4.371139e-08, 0, -2, 0)
+visible = false
+sprite_frames = ExtResource("7_b0b6w")
+
+[node name="03 floorButton 167" parent="Objects" index="3" instance=ExtResource("5_vjoxe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -34)
+frames = 2
+hinders = PackedStringArray("empyrian_temple--hall_of_wind.mapadddoor104")
+kind = "floorButton"
+cell = 167
+facing = 2
+image = "Floors/airtemplefloorcancer"
+database_name = "empyrian temple--light.mapfloorbutton167"
+
+[node name="View" parent="Objects/03 floorButton 167" index="0"]
+transform = Transform3D(0.0078125, 0, 0, 0, -3.4149522e-10, 1, 0, -0.0078125, -4.371139e-08, 0, -2, 0)
+visible = false
+sprite_frames = ExtResource("8_cgq1n")
+
+[node name="04 floorButton 171" parent="Objects" index="4" instance=ExtResource("5_vjoxe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -18)
+frames = 2
+hinders = PackedStringArray("empyrian_temple--hall_of_wind.mapadddoor104")
+kind = "floorButton"
+cell = 171
+facing = 2
+image = "Floors/airtemplefloorgemini"
+database_name = "empyrian temple--light.mapfloorbutton171"
+
+[node name="View" parent="Objects/04 floorButton 171" index="0"]
+transform = Transform3D(0.0078125, 0, 0, 0, -3.4149522e-10, 1, 0, -0.0078125, -4.371139e-08, 0, -2, 0)
+visible = false
+sprite_frames = ExtResource("9_0eo0x")
+
+[node name="05 floorButton 39" parent="Objects" index="5" instance=ExtResource("5_vjoxe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -34)
+frames = 2
+hinders = PackedStringArray("empyrian_temple--hall_of_wind.mapadddoor104")
+kind = "floorButton"
+cell = 39
+facing = 2
+image = "Floors/airtemplefloorleo"
+database_name = "empyrian temple--light.mapfloorbutton39"
+
+[node name="View" parent="Objects/05 floorButton 39" index="0"]
+transform = Transform3D(0.0078125, 0, 0, 0, -3.4149522e-10, 1, 0, -0.0078125, -4.371139e-08, 0, -2, 0)
+visible = false
+sprite_frames = ExtResource("10_8tej5")
+
+[node name="06 floorButton 43" parent="Objects" index="6" instance=ExtResource("5_vjoxe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -18)
+frames = 2
+hinders = PackedStringArray("empyrian_temple--hall_of_wind.mapadddoor104")
+kind = "floorButton"
+cell = 43
+facing = 2
+image = "Floors/airtemplefloortaurus"
+database_name = "empyrian temple--light.mapfloorbutton43"
+
+[node name="View" parent="Objects/06 floorButton 43" index="0"]
+transform = Transform3D(0.0078125, 0, 0, 0, -3.4149522e-10, 1, 0, -0.0078125, -4.371139e-08, 0, -2, 0)
+visible = false
+sprite_frames = ExtResource("11_mxljj")
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -2)
+
+[editable path="Objects/01 floorButton 107"]
+[editable path="Objects/02 floorButton 103"]
+[editable path="Objects/03 floorButton 167"]
+[editable path="Objects/04 floorButton 171"]
+[editable path="Objects/05 floorButton 39"]
+[editable path="Objects/06 floorButton 43"]

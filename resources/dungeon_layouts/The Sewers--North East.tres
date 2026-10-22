@@ -1,0 +1,213 @@
+[gd_resource type="Resource" script_class="DungeonLayout" format=3]
+
+[ext_resource type="Script" path="res://scenes/dungeons/DungeonCell.gd" id="1_fvv6s"]
+[ext_resource type="Script" path="res://scenes/dungeons/DungeonLayout.gd" id="2_7ns64"]
+
+[sub_resource type="Resource" id="Resource_r687d"]
+script = ExtResource("1_fvv6s")
+address = 10
+neighbours = PackedInt32Array(-1, -1, -1, 26)
+walls = PackedInt32Array(1, 1, 1, -1)
+roof = 4
+
+[sub_resource type="Resource" id="Resource_ra3uw"]
+script = ExtResource("1_fvv6s")
+address = 26
+neighbours = PackedInt32Array(27, 10, 25, -1)
+walls = PackedInt32Array(-1, -1, -1, 1)
+roof = 4
+
+[sub_resource type="Resource" id="Resource_lmhgc"]
+script = ExtResource("1_fvv6s")
+address = 22
+neighbours = PackedInt32Array(23, -1, -1, -1)
+walls = PackedInt32Array(-1, 1, 1, 1)
+roof = 4
+
+[sub_resource type="Resource" id="Resource_agulr"]
+script = ExtResource("1_fvv6s")
+address = 23
+neighbours = PackedInt32Array(24, -1, 22, 39)
+walls = PackedInt32Array(-1, 1, -1, -1)
+roof = 4
+
+[sub_resource type="Resource" id="Resource_ofca8"]
+script = ExtResource("1_fvv6s")
+address = 39
+neighbours = PackedInt32Array(-1, 23, -1, 55)
+walls = PackedInt32Array(1, -1, 1, -1)
+roof = 4
+
+[sub_resource type="Resource" id="Resource_4gypl"]
+script = ExtResource("1_fvv6s")
+address = 24
+neighbours = PackedInt32Array(25, -1, 23, -1)
+walls = PackedInt32Array(-1, 1, -1, 1)
+roof = 4
+
+[sub_resource type="Resource" id="Resource_mlmja"]
+script = ExtResource("1_fvv6s")
+address = 25
+neighbours = PackedInt32Array(26, -1, 24, 41)
+walls = PackedInt32Array(-1, 1, -1, -1)
+roof = 4
+
+[sub_resource type="Resource" id="Resource_mxuxn"]
+script = ExtResource("1_fvv6s")
+address = 41
+neighbours = PackedInt32Array(-1, 25, -1, 57)
+walls = PackedInt32Array(1, -1, 1, -1)
+roof = 4
+
+[sub_resource type="Resource" id="Resource_sfum8"]
+script = ExtResource("1_fvv6s")
+address = 27
+neighbours = PackedInt32Array(28, -1, 26, -1)
+walls = PackedInt32Array(-1, 1, -1, 1)
+roof = 4
+
+[sub_resource type="Resource" id="Resource_i2ox5"]
+script = ExtResource("1_fvv6s")
+address = 28
+neighbours = PackedInt32Array(29, -1, 27, -1)
+walls = PackedInt32Array(-1, 1, -1, 1)
+roof = 4
+
+[sub_resource type="Resource" id="Resource_mlvn4"]
+script = ExtResource("1_fvv6s")
+address = 29
+neighbours = PackedInt32Array(30, -1, 28, -1)
+walls = PackedInt32Array(-1, 1, -1, 1)
+roof = 4
+
+[sub_resource type="Resource" id="Resource_tvtcc"]
+script = ExtResource("1_fvv6s")
+address = 30
+neighbours = PackedInt32Array(-1, -1, 29, -1)
+walls = PackedInt32Array(1, 1, -1, 1)
+roof = 4
+
+[sub_resource type="Resource" id="Resource_ws1xy"]
+script = ExtResource("1_fvv6s")
+address = 55
+neighbours = PackedInt32Array(-1, 39, -1, 71)
+walls = PackedInt32Array(1, -1, 1, -1)
+roof = 4
+
+[sub_resource type="Resource" id="Resource_bewcd"]
+script = ExtResource("1_fvv6s")
+address = 57
+neighbours = PackedInt32Array(-1, 41, -1, 73)
+walls = PackedInt32Array(1, -1, 1, -1)
+roof = 4
+
+[sub_resource type="Resource" id="Resource_whoyi"]
+script = ExtResource("1_fvv6s")
+address = 71
+neighbours = PackedInt32Array(-1, 55, -1, -1)
+walls = PackedInt32Array(1, -1, 1, 1)
+roof = 4
+
+[sub_resource type="Resource" id="Resource_o86xy"]
+script = ExtResource("1_fvv6s")
+address = 73
+neighbours = PackedInt32Array(-1, 57, -1, 89)
+walls = PackedInt32Array(1, -1, 1, -1)
+roof = 4
+
+[sub_resource type="Resource" id="Resource_5omcu"]
+script = ExtResource("1_fvv6s")
+address = 89
+neighbours = PackedInt32Array(-1, 73, -1, 105)
+walls = PackedInt32Array(1, -1, 1, -1)
+roof = 4
+
+[sub_resource type="Resource" id="Resource_822ty"]
+script = ExtResource("1_fvv6s")
+address = 105
+neighbours = PackedInt32Array(106, 89, 104, 121)
+walls = PackedInt32Array(-1, -1, -1, -1)
+roof = 4
+
+[sub_resource type="Resource" id="Resource_mbkcs"]
+script = ExtResource("1_fvv6s")
+address = 92
+neighbours = PackedInt32Array(-1, -1, -1, 108)
+walls = PackedInt32Array(1, 1, 1, -1)
+roof = 4
+
+[sub_resource type="Resource" id="Resource_ik2wt"]
+script = ExtResource("1_fvv6s")
+address = 108
+neighbours = PackedInt32Array(109, 92, 107, 124)
+walls = PackedInt32Array(-1, -1, -1, -1)
+roof = 4
+
+[sub_resource type="Resource" id="Resource_grrmv"]
+script = ExtResource("1_fvv6s")
+address = 104
+neighbours = PackedInt32Array(105, -1, -1, -1)
+walls = PackedInt32Array(-1, 1, 1, 1)
+roof = 4
+
+[sub_resource type="Resource" id="Resource_lo8kb"]
+script = ExtResource("1_fvv6s")
+address = 121
+neighbours = PackedInt32Array(-1, 105, -1, 137)
+walls = PackedInt32Array(1, -1, 1, -1)
+roof = 4
+
+[sub_resource type="Resource" id="Resource_cu1ui"]
+script = ExtResource("1_fvv6s")
+address = 106
+neighbours = PackedInt32Array(107, -1, 105, -1)
+walls = PackedInt32Array(-1, 1, -1, 1)
+roof = 4
+
+[sub_resource type="Resource" id="Resource_1nd0f"]
+script = ExtResource("1_fvv6s")
+address = 107
+neighbours = PackedInt32Array(108, -1, 106, -1)
+walls = PackedInt32Array(-1, 1, -1, 1)
+roof = 4
+
+[sub_resource type="Resource" id="Resource_nfq7x"]
+script = ExtResource("1_fvv6s")
+address = 124
+neighbours = PackedInt32Array(-1, 108, -1, -1)
+walls = PackedInt32Array(1, -1, 1, 1)
+roof = 4
+
+[sub_resource type="Resource" id="Resource_vjg5q"]
+script = ExtResource("1_fvv6s")
+address = 109
+neighbours = PackedInt32Array(110, -1, 108, -1)
+walls = PackedInt32Array(-1, 1, -1, 1)
+roof = 4
+
+[sub_resource type="Resource" id="Resource_74mx2"]
+script = ExtResource("1_fvv6s")
+address = 110
+neighbours = PackedInt32Array(-1, -1, 109, -1)
+walls = PackedInt32Array(1, 1, -1, 1)
+roof = 4
+
+[sub_resource type="Resource" id="Resource_xijm5"]
+script = ExtResource("1_fvv6s")
+address = 137
+neighbours = PackedInt32Array(-1, 121, -1, 153)
+walls = PackedInt32Array(1, -1, 1, -1)
+roof = 4
+
+[sub_resource type="Resource" id="Resource_3tc8x"]
+script = ExtResource("1_fvv6s")
+address = 153
+neighbours = PackedInt32Array(-1, 137, -1, -1)
+walls = PackedInt32Array(1, -1, 1, 1)
+roof = 4
+
+[resource]
+script = ExtResource("2_7ns64")
+size = 249
+map_pos = Vector2i(2, 0)
+cells = Array[ExtResource("1_fvv6s")]([SubResource("Resource_r687d"), SubResource("Resource_ra3uw"), SubResource("Resource_lmhgc"), SubResource("Resource_agulr"), SubResource("Resource_ofca8"), SubResource("Resource_4gypl"), SubResource("Resource_mlmja"), SubResource("Resource_mxuxn"), SubResource("Resource_sfum8"), SubResource("Resource_i2ox5"), SubResource("Resource_mlvn4"), SubResource("Resource_tvtcc"), SubResource("Resource_ws1xy"), SubResource("Resource_bewcd"), SubResource("Resource_whoyi"), SubResource("Resource_o86xy"), SubResource("Resource_5omcu"), SubResource("Resource_822ty"), SubResource("Resource_mbkcs"), SubResource("Resource_ik2wt"), SubResource("Resource_grrmv"), SubResource("Resource_lo8kb"), SubResource("Resource_cu1ui"), SubResource("Resource_1nd0f"), SubResource("Resource_nfq7x"), SubResource("Resource_vjg5q"), SubResource("Resource_74mx2"), SubResource("Resource_xijm5"), SubResource("Resource_3tc8x")])

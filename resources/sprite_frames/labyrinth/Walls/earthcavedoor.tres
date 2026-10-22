@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/earthcavedoor0.png" id="1_cmebm"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/earthcavedoor1.png" id="2_wxufb"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_cmebm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_wxufb")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}]

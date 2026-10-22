@@ -1,0 +1,100 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/Fire Cavern.tres" id="2_lwtjl"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/Fire Cavern--Inferno.tres" id="3_4klum"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonDoor.tscn" id="4_xa1g8"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonChest.tscn" id="5_7l3uv"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/volcano.tres" id="6_gctkq"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonMissionChest.tscn" id="7_w05vm"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/chest.tres" id="8_f6h36"]
+
+[node name="Inferno" instance=ExtResource("1_base")]
+map_name = "Fire Cavern--Inferno.map"
+style = ExtResource("2_lwtjl")
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+has_mission = true
+mission_kind = "FireMission"
+mission_name = "treasuremission"
+mission_entries = PackedStringArray("trigger&&crossroadnode&&2", "dialog&&Zalzi&&That\'s both of them!&&Let\'s head out!")
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_4klum")
+
+[node name="00 door 3" parent="Objects" index="0" instance=ExtResource("4_xa1g8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -50)
+open_roads = "dontopen"
+next_places = PackedStringArray("fire_cavern--furnace-mark1")
+kind = "door"
+cell = 3
+facing = 1
+database_name = "fire cavern--inferno.mapdoor3"
+
+[node name="01 door 195" parent="Objects" index="1" instance=ExtResource("4_xa1g8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -50)
+open_roads = "dontopen"
+next_places = PackedStringArray("fire_cavern--hall_of_the_damned-mark1")
+mark = 1
+kind = "door"
+cell = 195
+facing = 2
+database_name = "fire cavern--inferno.mapdoor195"
+
+[node name="02 door 200" parent="Objects" index="2" instance=ExtResource("4_xa1g8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -30)
+open_roads = "dontopen"
+next_places = PackedStringArray("landfire_cavern--inferno-mark2")
+mark = 2
+kind = "door"
+cell = 200
+facing = 3
+database_name = "fire cavern--inferno.mapdoor200"
+
+[node name="03 chest 52" parent="Objects" index="3" instance=ExtResource("5_7l3uv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -46)
+content_type = 2
+content_name = "cards.magic.Fire"
+content_info = PackedStringArray("2", "false")
+kind = "chest"
+cell = 52
+facing = 1
+image = "Images/volcano.png"
+database_name = "fire cavern--inferno.mapchest52"
+
+[node name="View" parent="Objects/03 chest 52" index="0"]
+transform = Transform3D(-2.1855694e-10, 0, 1, 0, 0.005, 0, -0.005, 0, -4.371139e-08, 0, -1.6925, 0)
+sprite_frames = ExtResource("6_gctkq")
+
+[node name="04 chest 15" parent="Objects" index="4" instance=ExtResource("5_7l3uv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+content_type = 2
+content_name = "cards.offense.CrushingSaber"
+content_info = PackedStringArray("2", "false")
+kind = "chest"
+cell = 15
+image = "Images/volcano.png"
+database_name = "fire cavern--inferno.mapchest15"
+
+[node name="View" parent="Objects/04 chest 15" index="0"]
+transform = Transform3D(-0.005, 0, -8.742278e-08, 0, 0.005, 0, 4.3711387e-10, 0, -1, 0, -1.6925, 0)
+sprite_frames = ExtResource("6_gctkq")
+
+[node name="05 missionChest 92" parent="Objects" index="5" instance=ExtResource("7_w05vm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -14)
+dialogs = Array[PackedStringArray]([PackedStringArray("Zalzi", "Oh! Here it is!", ""), PackedStringArray("gift", "Cleopatras Earring", ""), PackedStringArray("Borealis", "That must be worth a fortune!", ""), PackedStringArray("Zalzi", "Well...", "")])
+kind = "missionChest"
+cell = 92
+facing = 2
+image = "Images/chest"
+database_name = "fire cavern--inferno.mapmissionchest92"
+
+[node name="View" parent="Objects/05 missionChest 92" index="0"]
+transform = Transform3D(0.007, 0, 0, 0, 0.007, 0, 0, 0, 1, 0, -1.2825, 0)
+sprite_frames = ExtResource("8_f6h36")
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2, 0, -50)
+
+[editable path="Objects/03 chest 52"]
+[editable path="Objects/04 chest 15"]
+[editable path="Objects/05 missionChest 92"]

@@ -1,0 +1,58 @@
+# Saves on a labyrinth floor, away from its save point, and loads that save
+# (parity case dungeon_save_load, phase 2 rollout; COTZ-005: a save made in a
+# labyrinth keeps the node and direction, "labpos"): --load="Slot 1"
+# --start="<floor>-mark0" --no-encounters. A walk, the console's "save 2"
+# (with --seed the save goes to user://saves_deterministic/, which loading
+# reads first), the console's "goto Title Screen", Continue, Slot 2: the floor
+# loads at the node and facing it was saved at; a walk there. No shot of the
+# Continue list: it shows when each slot was saved (the file's time,
+# SaveSlots), which differs from run to run.
+wait 3000
+tap UP
+wait 700
+tap UP
+wait 700
+tap LEFT
+wait 700
+tap UP
+wait 700
+pos saved_at
+shot v01_saved_at
+console save 2
+wait 500
+log saved
+console goto Title Screen
+wait 4500
+shot v02_title
+log title
+tap DOWN
+wait 400
+tap CROSS
+wait 600
+tap DOWN
+wait 600
+log continue
+tap CROSS
+wait 1500
+shot v04_loading
+wait 1500
+shot v05_fade_in
+wait 2000
+shot v06_loaded
+pos loaded
+log loaded
+tap UP
+wait 700
+tap RIGHT
+wait 700
+shot v07_walked
+pos walked
+tap TRIANGLE
+wait 2500
+shot v08_menu
+log menu
+tap CIRCLE
+wait 2000
+shot v09_after_menu
+log after_menu
+quit

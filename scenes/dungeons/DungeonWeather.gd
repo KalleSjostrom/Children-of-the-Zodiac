@@ -14,6 +14,7 @@ extends Node3D
 ## set_quads draws a save point's particles the same way (DungeonSavePoint).
 
 var _meshes := {}
+static var _indices := PackedInt32Array()
 
 
 ## Shows one pass (&"back", &"front"): quads of 4 vertices each, with their
@@ -38,18 +39,8 @@ static func set_quads(mi: MeshInstance3D, vertices: PackedVector3Array, uvs: Pac
 	if vertices.is_empty():
 		mi.visible = false
 		return
-	var quads := vertices.size() / 4
-	var indices := PackedInt32Array()
-	indices.resize(quads * 6)
-	for q in quads:
-		var i := q * 4
-		var k := q * 6
-		indices[k] = i
-		indices[k + 1] = i + 1
-		indices[k + 2] = i + 2
-		indices[k + 3] = i
-		indices[k + 4] = i + 2
-		indices[k + 5] = i + 3
+	@warning_ignore("integer_division")
+	var indices := _quad_indices(vertices.size() / 4)
 	var arrays := []
 	arrays.resize(Mesh.ARRAY_MAX)
 	arrays[Mesh.ARRAY_VERTEX] = vertices
@@ -72,6 +63,26 @@ static func set_quads(mi: MeshInstance3D, vertices: PackedVector3Array, uvs: Pac
 	am.surface_set_material(0, material)
 	mi.sorting_offset = sorting_offset
 	mi.visible = true
+
+
+## The triangles 0 1 2 and 0 2 3 of each of quads quads: a slice of an index
+## array that grows to the most quads drawn so far (built once, not per
+## frame: a pass of 10 000 particles can draw thousands).
+static func _quad_indices(quads: int) -> PackedInt32Array:
+	@warning_ignore("integer_division")
+	var have: int = _indices.size() / 6
+	if have < quads:
+		_indices.resize(quads * 6)
+		for q in range(have, quads):
+			var i := q * 4
+			var k := q * 6
+			_indices[k] = i
+			_indices[k + 1] = i + 1
+			_indices[k + 2] = i + 2
+			_indices[k + 3] = i
+			_indices[k + 4] = i + 2
+			_indices[k + 5] = i + 3
+	return _indices.slice(0, quads * 6)
 
 
 func _mesh(pass_name: StringName) -> MeshInstance3D:

@@ -1,0 +1,44 @@
+# Uses the object ahead, one script for every kind (parity cases dungeon_use_*,
+# phase 2 rollout): --start-node=<address>:<direction> starts on the cell
+# before the object, facing it (src/main/Main.gd). CROSS uses it (a chest
+# opens, a lever or button plays its frames, a hidden door takes a push, a
+# villager, bomb or mission chest starts talking), shots during its
+# animation; then CROSS with a shot each until no dialog shows (dialogs page
+# on and close; a lever shows its "already pulled" message once, as for a
+# player who presses again), a look away and back, the menu (its thumbnail)
+# and back.
+wait 3000
+shot u01_before
+pos before
+log before
+tap CROSS
+wait 150
+shot u02_using
+wait 550
+shot u03_using_later
+wait 1300
+shot u04_used
+log used
+mark
+tap CROSS
+wait 900
+shot u_#_dialog
+loopuntil !dialog 15000
+log talked
+pos after
+tap LEFT
+wait 700
+shot u05_away
+tap RIGHT
+wait 700
+shot u06_back
+log back
+tap TRIANGLE
+wait 2500
+shot u07_menu
+log menu
+tap CIRCLE
+wait 2000
+shot u08_after_menu
+log after_menu
+quit

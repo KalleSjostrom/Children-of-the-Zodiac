@@ -1,0 +1,194 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/Dorma's Forest.tres" id="2_6waeb"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/Dorma's Forest--Forest of Hate.tres" id="3_l4nvp"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonDoor.tscn" id="4_5idbj"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonHinderDoor.tscn" id="5_g4gy3"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Walls/forestdoor.tres" id="6_oijpf"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonRiddle.tscn" id="7_h281t"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/hatetest.tres" id="8_s84po"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/hate1.tres" id="9_rrwwx"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/hate2.tres" id="10_tdhct"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/hate3.tres" id="11_lx74j"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/hate4.tres" id="12_ja08g"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/hate5.tres" id="13_ncxdo"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonChest.tscn" id="14_0ckte"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/chest.tres" id="15_ibd3t"]
+
+[node name="Forest of Hate" instance=ExtResource("1_base")]
+map_name = "Dorma's Forest--Forest of Hate.map"
+style = ExtResource("2_6waeb")
+steps_to_battle = Vector2i(6, 9)
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+mission_entries = PackedStringArray()
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_l4nvp")
+
+[node name="00 door 115" parent="Objects" index="0" instance=ExtResource("4_5idbj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -50)
+open_roads = "dontopen"
+next_places = PackedStringArray("landDorma\'s_Forest--Forest_of_Hate-mark0")
+kind = "door"
+cell = 115
+facing = 2
+database_name = "dorma's forest--forest of hate.mapdoor115"
+
+[node name="01 hinderDoor 124" parent="Objects" index="1" instance=ExtResource("5_g4gy3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -14)
+next_place = "Dorma's_Forest--Forest_of_Hate-mark2"
+mark = 1
+kind = "hinderDoor"
+cell = 124
+image = "Walls/forestdoor"
+database_name = "dorma's forest--forest of hate.maphinderdoor124"
+
+[node name="View" parent="Objects/01 hinderDoor 124" index="0"]
+transform = Transform3D(-0.0078125, 0, -8.742278e-08, 0, 0.0078125, 0, 6.8299044e-10, 0, -1, 0, 0, 2)
+flip_h = true
+sprite_frames = ExtResource("6_oijpf")
+frame = 1
+
+[node name="02 door 125" parent="Objects" index="2" instance=ExtResource("4_5idbj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -10)
+open_roads = "dontopen"
+next_places = PackedStringArray("Dorma\'s_Forest--Forest_of_Hate-mark1")
+mark = 2
+kind = "door"
+cell = 125
+facing = 2
+database_name = "dorma's forest--forest of hate.mapdoor125"
+
+[node name="03 riddle 172" parent="Objects" index="3" instance=ExtResource("7_h281t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -14)
+riddle_name = "hateriddle"
+riddle_class = "HateRiddle"
+hinders = PackedStringArray("Dorma\'s_Forest--Forest_of_Hate.maphinderDoor124")
+kind = "riddle"
+cell = 172
+image = "Images/hatetest.png"
+database_name = "dorma's forest--forest of hate.mapriddle172"
+
+[node name="View" parent="Objects/03 riddle 172" index="0"]
+transform = Transform3D(-0.008, 0, -8.742278e-08, 0, 0.008, 0, 6.993822e-10, 0, -1, 0, -0.158, 1.9899998)
+sprite_frames = ExtResource("8_s84po")
+
+[node name="04 riddle 68" parent="Objects" index="4" instance=ExtResource("7_h281t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -46)
+riddle_name = "hate1"
+riddle_class = "RiddleGame"
+hinders = PackedStringArray()
+kind = "riddle"
+cell = 68
+facing = 2
+image = "Images/hate1.png"
+database_name = "dorma's forest--forest of hate.mapriddle68"
+
+[node name="View" parent="Objects/04 riddle 68" index="0"]
+transform = Transform3D(0.008, 0, 0, 0, 0.008, 0, 0, 0, 1, 0, -0.038, -1.9900017)
+sprite_frames = ExtResource("9_rrwwx")
+
+[node name="05 riddle 164" parent="Objects" index="5" instance=ExtResource("7_h281t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -46)
+riddle_name = "hate2"
+riddle_class = "RiddleGame"
+hinders = PackedStringArray()
+kind = "riddle"
+cell = 164
+facing = 2
+image = "Images/hate2.png"
+database_name = "dorma's forest--forest of hate.mapriddle164"
+
+[node name="View" parent="Objects/05 riddle 164" index="0"]
+transform = Transform3D(0.008, 0, 0, 0, 0.008, 0, 0, 0, 1, 0, -0.038, -1.9900017)
+sprite_frames = ExtResource("10_tdhct")
+
+[node name="06 riddle 56" parent="Objects" index="6" instance=ExtResource("7_h281t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -30)
+riddle_name = "hate3"
+riddle_class = "RiddleGame"
+hinders = PackedStringArray()
+kind = "riddle"
+cell = 56
+facing = 1
+image = "Images/hate3.png"
+database_name = "dorma's forest--forest of hate.mapriddle56"
+
+[node name="View" parent="Objects/06 riddle 56" index="0"]
+transform = Transform3D(-3.496911e-10, 0, 1, 0, 0.008, 0, -0.008, 0, -4.371139e-08, -1.9899998, -0.038, 0)
+sprite_frames = ExtResource("11_lx74j")
+
+[node name="07 riddle 184" parent="Objects" index="7" instance=ExtResource("7_h281t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46, 0, -30)
+riddle_name = "hate4"
+riddle_class = "RiddleGame"
+hinders = PackedStringArray()
+kind = "riddle"
+cell = 184
+facing = 3
+image = "Images/hate4.png"
+database_name = "dorma's forest--forest of hate.mapriddle184"
+
+[node name="View" parent="Objects/07 riddle 184" index="0"]
+transform = Transform3D(-3.496911e-10, 0, -1, 0, 0.008, 0, 0.008, 0, -4.371139e-08, 1.9900017, -0.038, 0)
+sprite_frames = ExtResource("12_ja08g")
+
+[node name="08 riddle 76" parent="Objects" index="8" instance=ExtResource("7_h281t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -14)
+riddle_name = "hate5"
+riddle_class = "RiddleGame"
+hinders = PackedStringArray()
+kind = "riddle"
+cell = 76
+image = "Images/hate5.png"
+database_name = "dorma's forest--forest of hate.mapriddle76"
+
+[node name="View" parent="Objects/08 riddle 76" index="0"]
+transform = Transform3D(-0.008, 0, -8.742278e-08, 0, 0.008, 0, 6.993822e-10, 0, -1, 0, -0.038, 1.9899998)
+sprite_frames = ExtResource("13_ncxdo")
+
+[node name="09 chest 46" parent="Objects" index="9" instance=ExtResource("14_0ckte")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -6)
+frames = 2
+content_type = 2
+content_name = "cards.magic.Tornado"
+content_info = PackedStringArray("1", "false")
+kind = "chest"
+cell = 46
+facing = 2
+image = "Images/chest"
+database_name = "dorma's forest--forest of hate.mapchest46"
+
+[node name="View" parent="Objects/09 chest 46" index="0"]
+transform = Transform3D(0.007, 0, 0, 0, 0.007, 0, 0, 0, 1, 0, -1.2825, 0)
+sprite_frames = ExtResource("15_ibd3t")
+
+[node name="10 chest 206" parent="Objects" index="10" instance=ExtResource("14_0ckte")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -6)
+frames = 2
+content_type = 2
+content_name = "cards.magic.Blizzard"
+content_info = PackedStringArray("1", "false")
+kind = "chest"
+cell = 206
+facing = 2
+image = "Images/chest"
+database_name = "dorma's forest--forest of hate.mapchest206"
+
+[node name="View" parent="Objects/10 chest 206" index="0"]
+transform = Transform3D(0.007, 0, 0, 0, 0.007, 0, 0, 0, 1, 0, -1.2825, 0)
+sprite_frames = ExtResource("15_ibd3t")
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 30, 0, -50)
+
+[editable path="Objects/01 hinderDoor 124"]
+[editable path="Objects/03 riddle 172"]
+[editable path="Objects/04 riddle 68"]
+[editable path="Objects/05 riddle 164"]
+[editable path="Objects/06 riddle 56"]
+[editable path="Objects/07 riddle 184"]
+[editable path="Objects/08 riddle 76"]
+[editable path="Objects/09 chest 46"]
+[editable path="Objects/10 chest 206"]

@@ -79,6 +79,15 @@ func draw(g, player, front):
 ## back pass, each particle's cached view values), and the quads it would
 ## draw, in eye space (the modelview applied, as GLBackend does): "vertices"
 ## (4 per quad), "uvs", "colors" and the render state "state".
+##
+## WeatherParticle.drawParticle's arithmetic for all particles of a pass at
+## once (_place_pass; phase 2 rollout, for the frame rate): what is the same
+## for every particle is worked out once per pass (the view angle's cosine
+## and sine, the clip distances, the corners' order and texture coordinates,
+## the size and the colour: the particles of a system share their class's),
+## the vertices go into one local array, and the texture coordinates and
+## colours are filled in at the end. Every vertex, colour and cached value
+## is the one drawParticle computes.
 func place_particles(g, player, front) -> Dictionary:
 	if not hasInited:
 		tex = ImageHandler.getTexture(particleTexture).getTexture()
@@ -91,31 +100,115 @@ func place_particles(g, player, front) -> Dictionary:
 	var pdir: int = player.getDirection()
 	var loc = player.getLocation()
 	var moving: bool = player.isMoving()
+	var v: PackedVector3Array
 	if not front:
 		list.clear()
 		var dir: int = Values.angleToDirection2(player.getDirection())
 		var ps: Array = particlesz if dir == 0 or dir == 2 else particlesx
-		if dir == 1 or dir == 2:
-			var i: int = NR_OF_PARTICLES - 1
-			while i >= 0:
-				if ps[i].place_quad(pdir, loc, moving, false, out):
-					list.append(ps[i])
-				i -= 1
-		elif dir == 0 or dir == 3:
-			for p in ps:
-				if p.place_quad(pdir, loc, moving, false, out):
-					list.append(p)
+		v = _place_pass(ps, dir == 1 or dir == 2, pdir, loc, moving, false)
 	else:
-		for p in list:
-			p.place_quad(pdir, loc, moving, true, out)
-	if out.alpha >= 0.0:
-		var uvs: PackedVector2Array = out.uvs
-		g.glColor4f(1, 1, 1, out.alpha)
-		g.glTexCoord2f(uvs[uvs.size() - 1].x, uvs[uvs.size() - 1].y)
-	out.vertices = g.getModelView() * out.vertices
+		v = _place_pass(list, false, pdir, loc, moving, true)
+	if not v.is_empty():
+		# drawParticle's corner order: texture coordinates 0,0 0,1 1,1 1,0 when
+		# the player looks along one axis, 0,0 1,0 1,1 0,1 along the other.
+		var d: int = pdir
+		var quad_uv := PackedVector2Array([Vector2(0, 0), Vector2(0, 1), Vector2(1, 1), Vector2(1, 0)]) 				if (d > 45 and d < 225) or d < -135 				else PackedVector2Array([Vector2(0, 0), Vector2(1, 0), Vector2(1, 1), Vector2(0, 1)])
+		var uvs := quad_uv
+		while uvs.size() < v.size():
+			uvs.append_array(uvs)
+		uvs.resize(v.size())
+		var alpha: float = particlesx[0].color[3]
+		var colors := PackedColorArray()
+		colors.resize(v.size())
+		colors.fill(Color(1, 1, 1, alpha))
+		out.uvs = uvs
+		out.colors = colors
+		out.alpha = alpha
+		g.glColor4f(1, 1, 1, alpha)
+		g.glTexCoord2f(quad_uv[3].x, quad_uv[3].y)
+	out.vertices = g.getModelView() * v
 	g.setBlendFunc(Graphics.GL_ONE_MINUS_SRC_ALPHA)
 	g.setAlphaFunc(0.1)
 	return out
+
+
+## Bridge (phase 2 step B): WeatherParticle.drawParticle without the drawing,
+## for each particle of ps in order (backwards when asked): the same view
+## test and cached values (vars, resurrected); the back pass collects the
+## particles close to the player into list (drawn again in the front pass).
+## Returns the vertices of the quads it would draw (4 each, in the
+## particles' space).
+func _place_pass(ps: Array, backwards: bool, d: int, fs, changed: bool, front: bool) -> PackedVector3Array:
+	var v := PackedVector3Array()
+	var n: int = ps.size()
+	if n == 0:
+		return v
+	var a: Array = WeatherParticle.angles[d + 180]
+	var ca: float = a[0]
+	var sa: float = a[1]
+	var fx: float = fs[0]
+	var fz: float = fs[1]
+	var far_clip: float = 7.5 if front else 20.0
+	var near_clip: float = 3.0 if front else 7.5
+	var upper: bool = (d > 45 and d < 225) or d < -135
+	var across: bool = (d > -135 and d < -45) or (d > 45 and d < 135)
+	var size: Array = ps[0].size
+	var width: float = size[WeatherParticle.WIDTH]
+	var height: float = size[WeatherParticle.HEIGHT]
+	var half_w: float = width / 2.0
+	var half_h: float = height / 2.0
+	var i: int = n - 1 if backwards else 0
+	var step: int = -1 if backwards else 1
+	for k in n:
+		var p: WeatherParticle = ps[i]
+		i += step
+		var vars: Array = p.vars
+		var s: float
+		var sx: float
+		var sz: float
+		if changed or p.resurrected:
+			var pos: Array = p.pos
+			sx = pos[0] - fx
+			sz = pos[2] - fz
+			vars[WeatherParticle.SX] = sx
+			vars[WeatherParticle.SZ] = sz
+			s = sx * ca + sz * sa
+			vars[WeatherParticle.S] = s
+			p.resurrected = false
+		else:
+			sx = vars[WeatherParticle.SX]
+			sz = vars[WeatherParticle.SZ]
+			s = vars[WeatherParticle.S]
+		if not front and s > 3 and s < 7:
+			list.append(p)
+		if s > near_clip and s < far_clip and (3.7 * (sx * sx + sz * sz)) < 5 * (s * s):
+			var pos: Array = p.pos
+			var x1: float = pos[0] - half_w
+			var y1: float = pos[1] - half_h
+			var y2: float = y1 + height
+			var z1: float = pos[2] - half_w
+			v.append(Vector3(x1, y1, z1))
+			if upper:
+				v.append(Vector3(x1, y2, z1))
+				if across:
+					var x2: float = x1 + width
+					v.append(Vector3(x2, y2, z1))
+					v.append(Vector3(x2, y1, z1))
+				else:
+					var z2: float = z1 + width
+					v.append(Vector3(x1, y2, z2))
+					v.append(Vector3(x1, y1, z2))
+			else:
+				if across:
+					var x2: float = x1 + width
+					v.append(Vector3(x2, y1, z1))
+					v.append(Vector3(x2, y2, z1))
+				else:
+					var z2: float = z1 + width
+					v.append(Vector3(x1, y1, z2))
+					v.append(Vector3(x1, y2, z2))
+				v.append(Vector3(x1, y2, z1))
+	return v
 
 
 func loop(g, particles, player):

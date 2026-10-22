@@ -1,0 +1,385 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/Silent Ruin.tres" id="2_ghdf3"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/Silent Ruin--The Great Ruins.tres" id="3_g8wm6"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonDoor.tscn" id="4_31jgi"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonHinderDoor.tscn" id="5_os113"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Walls/ruinedtempledoor.tres" id="6_wiq5i"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonChest.tscn" id="7_6mwow"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/chest.tres" id="8_thkrb"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonRiddle.tscn" id="9_oxsdn"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/5x5small.tres" id="10_nnxh8"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/4x4small.tres" id="11_ub5nr"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/riddle.tres" id="12_65wvn"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/1-9small.tres" id="13_e4sgr"]
+
+[node name="The Great Ruins" instance=ExtResource("1_base")]
+map_name = "Silent Ruin--The Great Ruins.map"
+style = ExtResource("2_ghdf3")
+steps_to_battle = Vector2i(6, 9)
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+mission_entries = PackedStringArray()
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_g8wm6")
+
+[node name="00 door 127" parent="Objects" index="0" instance=ExtResource("4_31jgi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -2)
+open_roads = "dontopen"
+next_places = PackedStringArray("landSilent_Ruin--The_Great_Ruins-mark0")
+kind = "door"
+cell = 127
+database_name = "silent ruin--the great ruins.mapdoor127"
+
+[node name="01 door 19" parent="Objects" index="1" instance=ExtResource("4_31jgi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -50)
+open_roads = "dontopen"
+next_places = PackedStringArray("Silent_Ruin--The_Great_Ruins-mark2")
+mark = 1
+kind = "door"
+cell = 19
+facing = 3
+database_name = "silent ruin--the great ruins.mapdoor19"
+
+[node name="02 hinderDoor 35" parent="Objects" index="2" instance=ExtResource("5_os113")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -50)
+next_place = "Silent_Ruin--The_Great_Ruins-mark1"
+mark = 2
+kind = "hinderDoor"
+cell = 35
+facing = 1
+image = "Walls/ruinedtempledoor"
+database_name = "silent ruin--the great ruins.maphinderdoor35"
+
+[node name="View" parent="Objects/02 hinderDoor 35" index="0"]
+transform = Transform3D(-3.4149522e-10, 0, 1, 0, 0.0078125, 0, -0.0078125, 0, -4.371139e-08, -2, 0, 0)
+sprite_frames = ExtResource("6_wiq5i")
+frame = 1
+
+[node name="03 door 21" parent="Objects" index="3" instance=ExtResource("4_31jgi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -42)
+open_roads = "dontopen"
+next_places = PackedStringArray("Silent_Ruin--The_Great_Ruins-mark4")
+mark = 3
+kind = "door"
+cell = 21
+facing = 3
+database_name = "silent ruin--the great ruins.mapdoor21"
+
+[node name="04 hinderDoor 37" parent="Objects" index="4" instance=ExtResource("5_os113")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -42)
+next_place = "Silent_Ruin--The_Great_Ruins-mark3"
+mark = 4
+kind = "hinderDoor"
+cell = 37
+facing = 1
+image = "Walls/ruinedtempledoor"
+database_name = "silent ruin--the great ruins.maphinderdoor37"
+
+[node name="View" parent="Objects/04 hinderDoor 37" index="0"]
+transform = Transform3D(-3.4149522e-10, 0, 1, 0, 0.0078125, 0, -0.0078125, 0, -4.371139e-08, -2, 0, 0)
+sprite_frames = ExtResource("6_wiq5i")
+frame = 1
+
+[node name="05 door 23" parent="Objects" index="5" instance=ExtResource("4_31jgi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -34)
+open_roads = "dontopen"
+next_places = PackedStringArray("Silent_Ruin--The_Great_Ruins-mark6")
+mark = 5
+kind = "door"
+cell = 23
+facing = 3
+database_name = "silent ruin--the great ruins.mapdoor23"
+
+[node name="06 hinderDoor 39" parent="Objects" index="6" instance=ExtResource("5_os113")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -34)
+next_place = "Silent_Ruin--The_Great_Ruins-mark5"
+mark = 6
+kind = "hinderDoor"
+cell = 39
+facing = 1
+image = "Walls/ruinedtempledoor"
+database_name = "silent ruin--the great ruins.maphinderdoor39"
+
+[node name="View" parent="Objects/06 hinderDoor 39" index="0"]
+transform = Transform3D(-3.4149522e-10, 0, 1, 0, 0.0078125, 0, -0.0078125, 0, -4.371139e-08, -2, 0, 0)
+sprite_frames = ExtResource("6_wiq5i")
+frame = 1
+
+[node name="07 door 25" parent="Objects" index="7" instance=ExtResource("4_31jgi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -26)
+open_roads = "dontopen"
+next_places = PackedStringArray("Silent_Ruin--The_Great_Ruins-mark8")
+mark = 7
+kind = "door"
+cell = 25
+facing = 3
+database_name = "silent ruin--the great ruins.mapdoor25"
+
+[node name="08 hinderDoor 41" parent="Objects" index="8" instance=ExtResource("5_os113")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -26)
+next_place = "Silent_Ruin--The_Great_Ruins-mark7"
+mark = 8
+kind = "hinderDoor"
+cell = 41
+facing = 1
+image = "Walls/ruinedtempledoor"
+database_name = "silent ruin--the great ruins.maphinderdoor41"
+
+[node name="View" parent="Objects/08 hinderDoor 41" index="0"]
+transform = Transform3D(-3.4149522e-10, 0, 1, 0, 0.0078125, 0, -0.0078125, 0, -4.371139e-08, -2, 0, 0)
+sprite_frames = ExtResource("6_wiq5i")
+frame = 1
+
+[node name="09 door 27" parent="Objects" index="9" instance=ExtResource("4_31jgi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -18)
+open_roads = "dontopen"
+next_places = PackedStringArray("Silent_Ruin--The_Great_Ruins-mark10")
+mark = 9
+kind = "door"
+cell = 27
+facing = 3
+database_name = "silent ruin--the great ruins.mapdoor27"
+
+[node name="10 hinderDoor 43" parent="Objects" index="10" instance=ExtResource("5_os113")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -18)
+next_place = "Silent_Ruin--The_Great_Ruins-mark9"
+mark = 10
+kind = "hinderDoor"
+cell = 43
+facing = 1
+image = "Walls/ruinedtempledoor"
+database_name = "silent ruin--the great ruins.maphinderdoor43"
+
+[node name="View" parent="Objects/10 hinderDoor 43" index="0"]
+transform = Transform3D(-3.4149522e-10, 0, 1, 0, 0.0078125, 0, -0.0078125, 0, -4.371139e-08, -2, 0, 0)
+sprite_frames = ExtResource("6_wiq5i")
+frame = 1
+
+[node name="11 door 29" parent="Objects" index="11" instance=ExtResource("4_31jgi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -10)
+open_roads = "dontopen"
+next_places = PackedStringArray("Silent_Ruin--The_Great_Ruins-mark12")
+mark = 11
+kind = "door"
+cell = 29
+facing = 3
+database_name = "silent ruin--the great ruins.mapdoor29"
+
+[node name="12 hinderDoor 45" parent="Objects" index="12" instance=ExtResource("5_os113")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -10)
+next_place = "Silent_Ruin--The_Great_Ruins-mark11"
+mark = 12
+kind = "hinderDoor"
+cell = 45
+facing = 1
+image = "Walls/ruinedtempledoor"
+database_name = "silent ruin--the great ruins.maphinderdoor45"
+
+[node name="View" parent="Objects/12 hinderDoor 45" index="0"]
+transform = Transform3D(-3.4149522e-10, 0, 1, 0, 0.0078125, 0, -0.0078125, 0, -4.371139e-08, -2, 0, 0)
+sprite_frames = ExtResource("6_wiq5i")
+frame = 1
+
+[node name="13 chest 3" parent="Objects" index="13" instance=ExtResource("7_6mwow")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -50)
+frames = 2
+content_name = "50"
+content_info = PackedStringArray()
+kind = "chest"
+cell = 3
+facing = 1
+image = "Images/chest"
+database_name = "silent ruin--the great ruins.mapchest3"
+
+[node name="View" parent="Objects/13 chest 3" index="0"]
+transform = Transform3D(-3.059797e-10, 0, 1, 0, 0.007, 0, -0.007, 0, -4.371139e-08, 0, -1.2825, 0)
+sprite_frames = ExtResource("8_thkrb")
+
+[node name="14 chest 5" parent="Objects" index="14" instance=ExtResource("7_6mwow")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -42)
+frames = 2
+content_name = "50"
+content_info = PackedStringArray()
+kind = "chest"
+cell = 5
+facing = 1
+image = "Images/chest"
+database_name = "silent ruin--the great ruins.mapchest5"
+
+[node name="View" parent="Objects/14 chest 5" index="0"]
+transform = Transform3D(-3.059797e-10, 0, 1, 0, 0.007, 0, -0.007, 0, -4.371139e-08, 0, -1.2825, 0)
+sprite_frames = ExtResource("8_thkrb")
+
+[node name="15 chest 7" parent="Objects" index="15" instance=ExtResource("7_6mwow")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -34)
+frames = 2
+content_name = "50"
+content_info = PackedStringArray()
+kind = "chest"
+cell = 7
+facing = 1
+image = "Images/chest"
+database_name = "silent ruin--the great ruins.mapchest7"
+
+[node name="View" parent="Objects/15 chest 7" index="0"]
+transform = Transform3D(-3.059797e-10, 0, 1, 0, 0.007, 0, -0.007, 0, -4.371139e-08, 0, -1.2825, 0)
+sprite_frames = ExtResource("8_thkrb")
+
+[node name="16 chest 9" parent="Objects" index="16" instance=ExtResource("7_6mwow")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -26)
+frames = 2
+content_name = "50"
+content_info = PackedStringArray()
+kind = "chest"
+cell = 9
+facing = 1
+image = "Images/chest"
+database_name = "silent ruin--the great ruins.mapchest9"
+
+[node name="View" parent="Objects/16 chest 9" index="0"]
+transform = Transform3D(-3.059797e-10, 0, 1, 0, 0.007, 0, -0.007, 0, -4.371139e-08, 0, -1.2825, 0)
+sprite_frames = ExtResource("8_thkrb")
+
+[node name="17 chest 11" parent="Objects" index="17" instance=ExtResource("7_6mwow")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -18)
+frames = 2
+content_name = "50"
+content_info = PackedStringArray()
+kind = "chest"
+cell = 11
+facing = 1
+image = "Images/chest"
+database_name = "silent ruin--the great ruins.mapchest11"
+
+[node name="View" parent="Objects/17 chest 11" index="0"]
+transform = Transform3D(-3.059797e-10, 0, 1, 0, 0.007, 0, -0.007, 0, -4.371139e-08, 0, -1.2825, 0)
+sprite_frames = ExtResource("8_thkrb")
+
+[node name="18 chest 13" parent="Objects" index="18" instance=ExtResource("7_6mwow")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -10)
+frames = 2
+content_name = "50"
+content_info = PackedStringArray()
+kind = "chest"
+cell = 13
+facing = 1
+image = "Images/chest"
+database_name = "silent ruin--the great ruins.mapchest13"
+
+[node name="View" parent="Objects/18 chest 13" index="0"]
+transform = Transform3D(-3.059797e-10, 0, 1, 0, 0.007, 0, -0.007, 0, -4.371139e-08, 0, -1.2825, 0)
+sprite_frames = ExtResource("8_thkrb")
+
+[node name="19 riddle 90" parent="Objects" index="19" instance=ExtResource("9_oxsdn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -22)
+riddle_name = "puzzle55"
+riddle_class = "RubicsPuzzle"
+hinders = PackedStringArray("Silent_Ruin--The_Great_Ruins.maphinderdoor35")
+kind = "riddle"
+cell = 90
+facing = 1
+image = "Images/5x5small.png"
+database_name = "silent ruin--the great ruins.mapriddle90"
+
+[node name="View" parent="Objects/19 riddle 90" index="0"]
+transform = Transform3D(-2.6226832e-10, 0, 1, 0, 0.006, 0, -0.006, 0, -4.371139e-08, -1.9899998, -0.1, 0)
+sprite_frames = ExtResource("10_nnxh8")
+
+[node name="20 riddle 154" parent="Objects" index="20" instance=ExtResource("9_oxsdn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -22)
+riddle_name = "puzzle44"
+riddle_class = "Puzzle"
+hinders = PackedStringArray("Silent_Ruin--The_Great_Ruins.maphinderdoor37")
+kind = "riddle"
+cell = 154
+facing = 3
+image = "Images/4x4small.png"
+database_name = "silent ruin--the great ruins.mapriddle154"
+
+[node name="View" parent="Objects/20 riddle 154" index="0"]
+transform = Transform3D(-2.6226832e-10, 0, -1, 0, 0.006, 0, 0.006, 0, -4.371139e-08, 1.9900017, -0.1, 0)
+sprite_frames = ExtResource("11_ub5nr")
+
+[node name="21 riddle 88" parent="Objects" index="21" instance=ExtResource("9_oxsdn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -30)
+riddle_name = "puzzle55"
+riddle_class = "Puzzle"
+hinders = PackedStringArray("Silent_Ruin--The_Great_Ruins.maphinderdoor39")
+kind = "riddle"
+cell = 88
+facing = 3
+image = "Images/5x5small.png"
+database_name = "silent ruin--the great ruins.mapriddle88"
+
+[node name="View" parent="Objects/21 riddle 88" index="0"]
+transform = Transform3D(-2.6226832e-10, 0, -1, 0, 0.006, 0, 0.006, 0, -4.371139e-08, 1.9899998, -0.1, 0)
+sprite_frames = ExtResource("10_nnxh8")
+
+[node name="22 riddle 150" parent="Objects" index="22" instance=ExtResource("9_oxsdn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -38)
+riddle_name = "silent"
+riddle_class = "GriveraRiddle"
+hinders = PackedStringArray()
+kind = "riddle"
+cell = 150
+facing = 3
+image = "Images/riddle.png"
+database_name = "silent ruin--the great ruins.mapriddle150"
+
+[node name="View" parent="Objects/22 riddle 150" index="0"]
+transform = Transform3D(-3.496911e-10, 0, -1, 0, 0.008, 0, 0.008, 0, -4.371139e-08, 1.9900017, 0.042, 0)
+sprite_frames = ExtResource("12_65wvn")
+
+[node name="23 riddle 86" parent="Objects" index="23" instance=ExtResource("9_oxsdn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -38)
+riddle_name = "puzzle44"
+riddle_class = "RubicsPuzzle19"
+hinders = PackedStringArray("Silent_Ruin--The_Great_Ruins.maphinderdoor43")
+kind = "riddle"
+cell = 86
+facing = 1
+image = "Images/1-9small.png"
+database_name = "silent ruin--the great ruins.mapriddle86"
+
+[node name="View" parent="Objects/23 riddle 86" index="0"]
+transform = Transform3D(-2.6226832e-10, 0, 1, 0, 0.006, 0, -0.006, 0, -4.371139e-08, -1.9899998, -0.1, 0)
+sprite_frames = ExtResource("13_e4sgr")
+
+[node name="24 riddle 152" parent="Objects" index="24" instance=ExtResource("9_oxsdn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -30)
+riddle_name = "puzzle44"
+riddle_class = "RubicsPuzzle"
+hinders = PackedStringArray("Silent_Ruin--The_Great_Ruins.maphinderdoor41")
+kind = "riddle"
+cell = 152
+facing = 1
+image = "Images/4x4small.png"
+database_name = "silent ruin--the great ruins.mapriddle152"
+
+[node name="View" parent="Objects/24 riddle 152" index="0"]
+transform = Transform3D(-2.6226832e-10, 0, 1, 0, 0.006, 0, -0.006, 0, -4.371139e-08, -1.9900017, -0.1, 0)
+sprite_frames = ExtResource("11_ub5nr")
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -2)
+
+[editable path="Objects/02 hinderDoor 35"]
+[editable path="Objects/04 hinderDoor 37"]
+[editable path="Objects/06 hinderDoor 39"]
+[editable path="Objects/08 hinderDoor 41"]
+[editable path="Objects/10 hinderDoor 43"]
+[editable path="Objects/12 hinderDoor 45"]
+[editable path="Objects/13 chest 3"]
+[editable path="Objects/14 chest 5"]
+[editable path="Objects/15 chest 7"]
+[editable path="Objects/16 chest 9"]
+[editable path="Objects/17 chest 11"]
+[editable path="Objects/18 chest 13"]
+[editable path="Objects/19 riddle 90"]
+[editable path="Objects/20 riddle 154"]
+[editable path="Objects/21 riddle 88"]
+[editable path="Objects/22 riddle 150"]
+[editable path="Objects/23 riddle 86"]
+[editable path="Objects/24 riddle 152"]

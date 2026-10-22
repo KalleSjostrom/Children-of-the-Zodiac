@@ -1,0 +1,107 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/Ice Cavern--Frozen Field.tres" id="2_q1xew"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/Ice Cavern--Frozen Field.tres" id="3_teirj"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonDoor.tscn" id="4_2dvbc"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonChest.tscn" id="5_u7rvf"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/icepot.tres" id="6_4w2mf"]
+
+[node name="Frozen Field" instance=ExtResource("1_base")]
+map_name = "Ice Cavern--Frozen Field.map"
+style = ExtResource("2_q1xew")
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+mission_entries = PackedStringArray()
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_teirj")
+
+[node name="00 door 35" parent="Objects" index="0" instance=ExtResource("4_2dvbc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -50)
+open_roads = "dontopen"
+next_places = PackedStringArray("Ice_Cavern--Hall_of_Confusion-mark1")
+kind = "door"
+cell = 35
+facing = 2
+database_name = "ice cavern--frozen field.mapdoor35"
+
+[node name="01 door 195" parent="Objects" index="1" instance=ExtResource("4_2dvbc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -50)
+open_roads = "dontopen"
+next_places = PackedStringArray("Ice_Cavern--Pillar_Room-mark2")
+mark = 1
+kind = "door"
+cell = 195
+facing = 3
+database_name = "ice cavern--frozen field.mapdoor195"
+
+[node name="02 chest 14" parent="Objects" index="2" instance=ExtResource("5_u7rvf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -6)
+frames = 2
+content_type = 2
+content_name = "cards.magic.Death"
+content_info = PackedStringArray("3")
+kind = "chest"
+cell = 14
+facing = 1
+image = "Images/icepot"
+database_name = "ice cavern--frozen field.mapchest14"
+
+[node name="View" parent="Objects/02 chest 14" index="0"]
+transform = Transform3D(-1.7484555e-10, 0, 1, 0, 0.004, 0, -0.004, 0, -4.371139e-08, 0, -1.394, 0)
+sprite_frames = ExtResource("6_4w2mf")
+
+[node name="03 chest 74" parent="Objects" index="3" instance=ExtResource("5_u7rvf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -22)
+frames = 2
+content_type = 2
+content_name = "cards.offense.Destroyer"
+content_info = PackedStringArray("1")
+kind = "chest"
+cell = 74
+facing = 2
+image = "Images/icepot"
+database_name = "ice cavern--frozen field.mapchest74"
+
+[node name="View" parent="Objects/03 chest 74" index="0"]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 1, 0, -1.394, 0)
+sprite_frames = ExtResource("6_4w2mf")
+
+[node name="04 chest 111" parent="Objects" index="4" instance=ExtResource("5_u7rvf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -2)
+frames = 2
+content_type = 2
+content_name = "cards.magic.Fire"
+content_info = PackedStringArray("3", "true")
+kind = "chest"
+cell = 111
+image = "Images/icepot"
+database_name = "ice cavern--frozen field.mapchest111"
+
+[node name="View" parent="Objects/04 chest 111" index="0"]
+transform = Transform3D(-0.004, 0, -8.742278e-08, 0, 0.004, 0, 3.496911e-10, 0, -1, 0, -1.394, 0)
+sprite_frames = ExtResource("6_4w2mf")
+
+[node name="05 chest 68" parent="Objects" index="5" instance=ExtResource("5_u7rvf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -46)
+frames = 2
+content_type = 2
+content_name = "cards.magic.Ultima"
+content_info = PackedStringArray("1")
+kind = "chest"
+cell = 68
+facing = 2
+image = "Images/icepot"
+database_name = "ice cavern--frozen field.mapchest68"
+
+[node name="View" parent="Objects/05 chest 68" index="0"]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 1, 0, -1.394, 0)
+sprite_frames = ExtResource("6_4w2mf")
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 10, 0, -50)
+
+[editable path="Objects/02 chest 14"]
+[editable path="Objects/03 chest 74"]
+[editable path="Objects/04 chest 111"]
+[editable path="Objects/05 chest 68"]

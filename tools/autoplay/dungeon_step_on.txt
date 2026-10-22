@@ -1,0 +1,51 @@
+# Steps onto the cell ahead and back (parity cases dungeon_step_*, phase 2
+# rollout): --start-node=<address>:<direction> starts before a floor button
+# (it is pressed on arrival: its floor tile changes, the doors it adds to
+# count on) or a save point (arrival cures the party; its particles stand
+# around the cell, and a dialog says so). Shots in the middle of the step
+# and after, CROSS until no dialog shows (with none, CROSS faces nothing to
+# use), a turn around on the cell, a step back (the cell ahead again), the
+# menu and back.
+wait 3000
+shot s01_before
+pos before
+log before
+tap UP
+wait 250
+shot s02_step_mid
+wait 450
+shot s03_on_it
+wait 1000
+shot s04_on_it_later
+pos on_it
+log on_it
+mark
+tap CROSS
+wait 900
+shot s_#_dialog
+loopuntil !dialog 15000
+tap RIGHT
+wait 250
+shot s05_turn_mid
+wait 450
+tap RIGHT
+wait 700
+shot s06_turned
+tap UP
+wait 700
+tap RIGHT
+wait 700
+tap RIGHT
+wait 700
+shot s07_ahead_again
+pos back
+log back
+tap TRIANGLE
+wait 2500
+shot s08_menu
+log menu
+tap CIRCLE
+wait 2000
+shot s09_after_menu
+log after_menu
+quit

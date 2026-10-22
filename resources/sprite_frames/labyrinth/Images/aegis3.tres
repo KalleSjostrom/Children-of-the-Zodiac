@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Images/aegis30.png" id="1_e4i7l"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Images/aegis31.png" id="2_wvsyo"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_e4i7l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_wvsyo")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}]

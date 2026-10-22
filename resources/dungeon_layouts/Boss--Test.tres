@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="DungeonLayout" format=3]
+
+[ext_resource type="Script" path="res://scenes/dungeons/DungeonCell.gd" id="1_atax7"]
+[ext_resource type="Script" path="res://scenes/dungeons/DungeonLayout.gd" id="2_ykqno"]
+
+[sub_resource type="Resource" id="Resource_uj88w"]
+script = ExtResource("1_atax7")
+address = 13
+neighbours = PackedInt32Array(-1, -1, -1, 29)
+walls = PackedInt32Array(0, 0, 0, -1)
+
+[sub_resource type="Resource" id="Resource_1qtic"]
+script = ExtResource("1_atax7")
+address = 29
+neighbours = PackedInt32Array(-1, 13, -1, -1)
+walls = PackedInt32Array(0, -1, 0, 0)
+
+[resource]
+script = ExtResource("2_ykqno")
+map_pos = Vector2i(2, 1)
+cells = Array[ExtResource("1_atax7")]([SubResource("Resource_uj88w"), SubResource("Resource_1qtic")])

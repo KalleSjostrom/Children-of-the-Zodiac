@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Floors/airtemplefloorscorpio0.jpg" id="1_0t355"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Floors/airtemplefloorscorpio1.jpg" id="2_0dbxa"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_0t355")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_0dbxa")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}]

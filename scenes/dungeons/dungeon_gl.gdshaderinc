@@ -4,7 +4,8 @@
 // place of its global uniforms, so that a dungeon scene shows the same pixels
 // in the editor and at run time, with the values of its DungeonStyle.
 // Per-vertex lighting in eye space from light0 and light1 and the material
-// (no specular term, as in GLBackend), per-fragment fog (exp, exp2 or linear
+// (no specular term, as in GLBackend; a lit vertex ignores the current colour,
+// as OpenGL 2 does without GL_COLOR_MATERIAL), per-fragment fog (exp, exp2 or linear
 // by eye distance), the GL alpha test and texture modulation. The arithmetic
 // is GLBackend's, line by line; keep the two in step.
 //
@@ -66,7 +67,10 @@ void vertex() {
 		vec3 c = mat_emission.rgb + light_model_ambient.rgb * mat_ambient.rgb;
 		if (light0_att.w > 0.5) { c += light_term(light0_pos, light0_amb, light0_dif, light0_att, ep, en); }
 		if (light1_att.w > 0.5) { c += light_term(light1_pos, light1_amb, light1_dif, light1_att, ep, en); }
-		v_color = vec4(clamp(c, 0.0, 1.0) * COLOR.rgb, mat_diffuse.a * COLOR.a);
+		// OpenGL 2 without GL_COLOR_MATERIAL (the original never enables it):
+		// a lit vertex takes the material's colours and its diffuse alpha, not
+		// the current colour (glColor).
+		v_color = vec4(clamp(c, 0.0, 1.0), mat_diffuse.a);
 	}
 }
 

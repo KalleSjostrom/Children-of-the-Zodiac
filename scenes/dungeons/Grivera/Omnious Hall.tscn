@@ -1,0 +1,113 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/Grivera--Omnious Hall.tres" id="2_4otq7"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/Grivera--Omnious Hall.tres" id="3_rbk2h"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonLadderDoor.tscn" id="4_bctxu"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/ladderdown.tres" id="5_yslcy"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonHiddenHinderDoor.tscn" id="6_hluk8"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Walls/demoncave1doorhidden.tres" id="7_aqn73"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonChest.tscn" id="8_mhde3"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/chest.tres" id="9_jnxq4"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonRiddle.tscn" id="10_8kn8h"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/riddle.tres" id="11_h3lrv"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonSavePoint.tscn" id="12_tmaln"]
+
+[node name="Omnious Hall" instance=ExtResource("1_base")]
+map_name = "Grivera--Omnious Hall.map"
+style = ExtResource("2_4otq7")
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+mission_entries = PackedStringArray()
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_rbk2h")
+
+[node name="00 ladderDoor 83" parent="Objects" index="0" instance=ExtResource("4_bctxu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -50)
+open_roads = "dontopen"
+next_places = PackedStringArray("grivera--third_floor-mark1")
+kind = "ladderDoor"
+cell = 83
+facing = 2
+image = "Images/ladderdown.png"
+database_name = "grivera--omnious hall.mapladderdoor83"
+
+[node name="View" parent="Objects/00 ladderDoor 83" index="0"]
+transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 1, 0, -2.2625, -0.29999924)
+sprite_frames = ExtResource("5_yslcy")
+
+[node name="01 hiddenHinderDoor 151" parent="Objects" index="1" instance=ExtResource("6_hluk8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -34)
+next_place = "grivera--corridor_of_agony-mark0"
+mark = 1
+kind = "hiddenHinderDoor"
+cell = 151
+facing = 3
+image = "Walls/demoncave1doorhidden"
+database_name = "grivera--omnious hall.maphiddenhinderdoor151"
+
+[node name="View" parent="Objects/01 hiddenHinderDoor 151" index="0"]
+transform = Transform3D(-3.4149522e-10, 0, -1, 0, 0.0078125, 0, 0.0078125, 0, -4.371139e-08, 2, 0, 0)
+flip_h = true
+sprite_frames = ExtResource("7_aqn73")
+frame = 1
+
+[node name="02 chest 28" parent="Objects" index="2" instance=ExtResource("8_mhde3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -14)
+frames = 2
+content_type = 2
+content_name = "cards.magic.Death"
+content_info = PackedStringArray("1", "false")
+kind = "chest"
+cell = 28
+image = "Images/chest"
+database_name = "grivera--omnious hall.mapchest28"
+
+[node name="View" parent="Objects/02 chest 28" index="0"]
+transform = Transform3D(-0.007, 0, -8.742278e-08, 0, 0.007, 0, 6.119594e-10, 0, -1, 0, -1.2825, 0)
+sprite_frames = ExtResource("9_jnxq4")
+
+[node name="03 chest 156" parent="Objects" index="3" instance=ExtResource("8_mhde3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -14)
+frames = 2
+content_name = "50"
+content_info = PackedStringArray()
+kind = "chest"
+cell = 156
+image = "Images/chest"
+database_name = "grivera--omnious hall.mapchest156"
+
+[node name="View" parent="Objects/03 chest 156" index="0"]
+transform = Transform3D(-0.007, 0, -8.742278e-08, 0, 0.007, 0, 6.119594e-10, 0, -1, 0, -1.2825, 0)
+sprite_frames = ExtResource("9_jnxq4")
+
+[node name="04 riddle 124" parent="Objects" index="4" instance=ExtResource("10_8kn8h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -14)
+riddle_name = "grivera"
+riddle_class = "GriveraRiddle"
+hinders = PackedStringArray()
+kind = "riddle"
+cell = 124
+image = "Images/riddle.png"
+database_name = "grivera--omnious hall.mapriddle124"
+
+[node name="View" parent="Objects/04 riddle 124" index="0"]
+transform = Transform3D(-0.008, 0, -8.742278e-08, 0, 0.008, 0, 6.993822e-10, 0, -1, 0, 0.042, 1.9899998)
+sprite_frames = ExtResource("11_h3lrv")
+
+[node name="05 save 92" parent="Objects" index="5" instance=ExtResource("12_tmaln")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -14)
+kind = "save"
+cell = 92
+facing = 2
+image = "-1"
+database_name = "grivera--omnious hall.mapsave92"
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 22, 0, -50)
+
+[editable path="Objects/00 ladderDoor 83"]
+[editable path="Objects/01 hiddenHinderDoor 151"]
+[editable path="Objects/02 chest 28"]
+[editable path="Objects/03 chest 156"]
+[editable path="Objects/04 riddle 124"]

@@ -1,0 +1,175 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/The Great Mine.tres" id="2_g1xul"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/The Great Mine--Great Deep.tres" id="3_hn1tf"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonHinderDoor.tscn" id="4_pm03h"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Walls/minecavedoorbig.tres" id="5_yv1ki"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Walls/minecavedoor.tres" id="6_32cwo"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonDoor.tscn" id="7_h3afp"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonButton.tscn" id="8_i1kn4"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/lever.tres" id="9_h4rao"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonChest.tscn" id="10_ix8s2"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/chest.tres" id="11_ifaa7"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonVillager.tscn" id="12_r43gl"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/minermarcus.tres" id="13_igk85"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonSavePoint.tscn" id="14_hyj2w"]
+
+[node name="Great Deep" instance=ExtResource("1_base")]
+map_name = "The Great Mine--Great Deep.map"
+style = ExtResource("2_g1xul")
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+has_mission = true
+mission_kind = "VillagerMission"
+mission_name = "greatminemission"
+mission_entries = PackedStringArray("trigger&&zazo&&2", "trigger&&zazonode&&2", "dialog&&Celis&&Seems that no more workers are here.&&Let\'s head back to Zazo!", "extranext&&2&&After a Hard Days Work")
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_hn1tf")
+
+[node name="00 hinderDoor 127" parent="Objects" index="0" instance=ExtResource("4_pm03h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -2)
+next_place = "the_great_mine--west_wing-mark1"
+kind = "hinderDoor"
+cell = 127
+image = "Walls/minecavedoorbig"
+database_name = "the great mine--great deep.maphinderdoor127"
+
+[node name="View" parent="Objects/00 hinderDoor 127" index="0"]
+transform = Transform3D(-0.0078125, 0, -8.742278e-08, 0, 0.0078125, 0, 6.8299044e-10, 0, -1, 0, 0, 2)
+flip_h = true
+sprite_frames = ExtResource("5_yv1ki")
+frame = 1
+
+[node name="01 hinderDoor 201" parent="Objects" index="1" instance=ExtResource("4_pm03h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -26)
+next_place = "the_great_mine--the_mine_core-mark1"
+mark = 1
+kind = "hinderDoor"
+cell = 201
+facing = 3
+image = "Walls/minecavedoorbig"
+database_name = "the great mine--great deep.maphinderdoor201"
+
+[node name="View" parent="Objects/01 hinderDoor 201" index="0"]
+transform = Transform3D(-3.4149522e-10, 0, -1, 0, 0.0078125, 0, 0.0078125, 0, -4.371139e-08, 2, 0, 0)
+flip_h = true
+sprite_frames = ExtResource("5_yv1ki")
+frame = 1
+
+[node name="02 hinderDoor 139" parent="Objects" index="2" instance=ExtResource("4_pm03h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -18)
+next_place = "the_great_mine--great_deep-mark3"
+mark = 2
+kind = "hinderDoor"
+cell = 139
+facing = 1
+image = "Walls/minecavedoor"
+database_name = "the great mine--great deep.maphinderdoor139"
+
+[node name="View" parent="Objects/02 hinderDoor 139" index="0"]
+transform = Transform3D(-3.4149522e-10, 0, 1, 0, 0.0078125, 0, -0.0078125, 0, -4.371139e-08, -2, 0, 0)
+sprite_frames = ExtResource("6_32cwo")
+frame = 1
+
+[node name="03 door 123" parent="Objects" index="3" instance=ExtResource("7_h3afp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -18)
+open_roads = "dontopen"
+next_places = PackedStringArray("the_great_mine--great_deep-mark2")
+mark = 3
+kind = "door"
+cell = 123
+facing = 3
+database_name = "the great mine--great deep.mapdoor123"
+
+[node name="04 button 189" parent="Objects" index="4" instance=ExtResource("8_i1kn4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46, 0, -10)
+frames = 7
+hinders = PackedStringArray("The_Great_Mine--Great_Deep.maphinderDoor201", "The_Great_Mine--Mine_Core.maphinderDoor9", "The_Great_Mine--Mine_Core.mapbutton155")
+kind = "button"
+cell = 189
+facing = 2
+image = "Images/lever"
+database_name = "the great mine--great deep.mapbutton189"
+
+[node name="View" parent="Objects/04 button 189" index="0"]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 1, 0, -1.125, -1)
+sprite_frames = ExtResource("9_h4rao")
+
+[node name="05 button 207" parent="Objects" index="5" instance=ExtResource("8_i1kn4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -2)
+frames = 7
+hinders = PackedStringArray("The_Great_Mine--Great_Deep.maphinderDoor127", "The_Great_Mine--West_Wing.maphinderDoor115", "The_Great_Mine--West_Wing.mapbutton148")
+kind = "button"
+cell = 207
+facing = 3
+image = "Images/lever"
+database_name = "the great mine--great deep.mapbutton207"
+
+[node name="View" parent="Objects/05 button 207" index="0"]
+transform = Transform3D(-4.3711387e-10, 0, -1, 0, 0.01, 0, 0.01, 0, -4.371139e-08, 1, -1.125, 0)
+sprite_frames = ExtResource("9_h4rao")
+
+[node name="06 chest 105" parent="Objects" index="6" instance=ExtResource("10_ix8s2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -26)
+frames = 2
+content_name = "125"
+content_info = PackedStringArray()
+kind = "chest"
+cell = 105
+facing = 1
+image = "Images/chest"
+database_name = "the great mine--great deep.mapchest105"
+
+[node name="View" parent="Objects/06 chest 105" index="0"]
+transform = Transform3D(-3.059797e-10, 0, 1, 0, 0.007, 0, -0.007, 0, -4.371139e-08, 0, -1.2825, 0)
+sprite_frames = ExtResource("11_ifaa7")
+
+[node name="07 chest 203" parent="Objects" index="7" instance=ExtResource("10_ix8s2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -18)
+frames = 2
+content_type = 2
+content_name = "cards.magic.Earth"
+content_info = PackedStringArray("2", "false")
+kind = "chest"
+cell = 203
+facing = 3
+image = "Images/chest"
+database_name = "the great mine--great deep.mapchest203"
+
+[node name="View" parent="Objects/07 chest 203" index="0"]
+transform = Transform3D(-3.059797e-10, 0, -1, 0, 0.007, 0, 0.007, 0, -4.371139e-08, 0, -1.2825, 0)
+sprite_frames = ExtResource("11_ifaa7")
+
+[node name="08 villager 107" parent="Objects" index="8" instance=ExtResource("12_r43gl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -18)
+dialogs = Array[PackedStringArray]([PackedStringArray("Villager", "Aggh!", "You scared me!"), PackedStringArray("Villager", "I\'ve hidden in this tool shed.", "We should be safe in here..."), PackedStringArray("Kin", "Come on! Just follow us out!", ""), PackedStringArray("Villager", "Alright, alright...", "You don\'t have to yell!")])
+kind = "villager"
+cell = 107
+facing = 1
+image = "Images/minermarcus.png"
+database_name = "the great mine--great deep.mapvillager107"
+
+[node name="View" parent="Objects/08 villager 107" index="0"]
+transform = Transform3D(-2.0981468e-10, 0, 1, 0, 0.0048, 0, -0.0048, 0, -4.371139e-08, 0, -0.6344, 0)
+sprite_frames = ExtResource("13_igk85")
+
+[node name="09 save 155" parent="Objects" index="9" instance=ExtResource("14_hyj2w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -18)
+kind = "save"
+cell = 155
+facing = 2
+image = "-1"
+database_name = "the great mine--great deep.mapsave155"
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -2)
+
+[editable path="Objects/00 hinderDoor 127"]
+[editable path="Objects/01 hinderDoor 201"]
+[editable path="Objects/02 hinderDoor 139"]
+[editable path="Objects/04 button 189"]
+[editable path="Objects/05 button 207"]
+[editable path="Objects/06 chest 105"]
+[editable path="Objects/07 chest 203"]
+[editable path="Objects/08 villager 107"]

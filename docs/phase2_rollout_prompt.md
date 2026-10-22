@@ -14,7 +14,7 @@ Read first:
 - docs/port_notes/labyrinth.md and docs/port_notes/inventory-weather.md.
 
 State:
-- The pilot is committed (<commit>).   <-- ADD THE COMMIT
+- The pilot is committed (ad786ff6fa96c6b35b20749e67eeb2fc43556fcb).
   * It added the converter (tools/import/map_to_scene.sh), the data check
     (verify_dungeons.gd, also --meshes), dungeon_preview.gd and
     tools/parity/contact_sheet.gd.
@@ -29,8 +29,8 @@ State:
 - A dry run of all 80 files already passes: 80 convert (124 warnings), 160 of 160 data
   checks ("Slot 1", "Start"), 80 of 80 meshes. That was data only, outside the project.
   This task converts the 77 floors for the game.
-- Ticket fixes may have landed since the pilot. The goldens in tools/parity/out are
-  stale either way.   <-- EDIT IF NEEDED
+- Ticket fixes have landed since the pilot. The goldens in tools/parity/out are
+  stale either way.
 - --seed runs read no game pad. Do not type while a recording runs: a new run's window
   takes the focus.
 - If the Godot editor is open on the project, it reimports the .import files the
@@ -40,15 +40,13 @@ State:
 Decisions (plan section 13):
 - Decision 2, dungeon lighting: the exact fixed-function look for every floor, as in the
   pilot (DungeonMaterials, dungeon_gl.gdshaderinc, values from the DungeonStyle).
-  <-- EDIT IF NEEDED
 - The emulation's glColor bug and the misplaced sky (plan 7.5) stay in this task: the
   scene reproduces GLBackend. The glColor bug: lit vertices are multiplied by the
   current glColor. Its symptoms:
   * walls show through walls on Deep Forest;
   * Empyrian Temple--Dark's walls are black;
   * objects are tinted yellow.
-  Fixing them is a separate task, for both paths at once, with new goldens.
-  <-- EDIT IF NEEDED
+  Fixing them is part of this task
 - Decision 6, time base: not made, and nothing in this task may need it.
   * The weather and the save points keep their legacy simulation and the interim nodes.
     No GPUParticles3D.
@@ -215,7 +213,6 @@ recorded on unconverted code.
      place_* twins still set GL state.
 
 7. Optional, only if parity stays identical: the weather's cost without decision 6
-   <-- DELETE IF NOT WANTED
    - In Forest Path, computing the back pass's quads takes ≈13 ms of a ≈33 ms frame.
      That is bridge code: WeatherSystem.place_particles and WeatherParticle.place_quad.
    - Make it faster without changing a single vertex, colour or random number: packed
@@ -233,7 +230,7 @@ Constraints:
 - Do not change legacy game logic or content to make parity pass; content quirks stay.
   A port bug that the new coverage finds may be fixed before the goldens are recorded,
   as its own listed change. A port bug is a place where the GDScript does what the
-  Java does not.   <-- EDIT IF NEEDED
+  Java does not.
 - Dev-only flags are fine if documented; normal play must not change.
 - Legacy files follow PORTING.md (Java names, no redesign; bridge members snake_case).
   New files follow ARCHITECTURE.md.

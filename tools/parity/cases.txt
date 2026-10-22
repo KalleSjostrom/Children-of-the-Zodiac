@@ -184,3 +184,264 @@ dungeon_tunnel_button           dungeon_tunnel_button --load=Start --start="The 
 dungeon_tunnel_battle           battle --load="Slot 1" --start="The Great Mine--Tunnel-mark0"
 dungeon_map_page                dungeon_map_page --load="Slot 1" --start="Forest of Reil--Forest Path-mark0" --no-encounters
 dungeon_world_map_entry         dungeon_world_map_entry --load="Slot 1" --start="landForest_of_Reil--Deep_Forest-mark0"
+# Phase 2 rollout: the other 76 floors main.bank reaches (Boss--Test is
+# reached by nothing: data check and preview only; main.bank's Fire
+# Cavern--First Floor has no .map file). Tours with both saves (group
+# dungeon_tour_*, script dungeon_tour as in the pilot): "Slot 1" has used
+# the objects of most floors up to the Temple of Aegis, none of the Ice
+# Cavern, Empyrian Temple, Silent Ruin or Menthu's Lair; "Start" none but
+# some doors (docs/CONVERTING_DUNGEONS.md). Content quirks, kept: the
+# tours of Central Pass--West Part and Grivera--First Floor start at a
+# trigger door whose dialogs hold the keys (with both saves); Menthu's
+# Lair--Hall of Memories' tour walks onto its save point, whose dialog holds
+# them.
+dungeon_tour_grivera_first_floor                          dungeon_tour --load="Slot 1" --start="Grivera--First Floor-mark0" --no-encounters
+dungeon_tour_grivera_first_floor_start                    dungeon_tour --load=Start --start="Grivera--First Floor-mark0" --no-encounters
+dungeon_tour_grivera_second_floor                         dungeon_tour --load="Slot 1" --start="Grivera--Second Floor-mark0" --no-encounters
+dungeon_tour_grivera_second_floor_start                   dungeon_tour --load=Start --start="Grivera--Second Floor-mark0" --no-encounters
+dungeon_tour_grivera_third_floor                          dungeon_tour --load="Slot 1" --start="Grivera--Third Floor-mark0" --no-encounters
+dungeon_tour_grivera_third_floor_start                    dungeon_tour --load=Start --start="Grivera--Third Floor-mark0" --no-encounters
+dungeon_tour_grivera_omnious_hall                         dungeon_tour --load="Slot 1" --start="Grivera--Omnious Hall-mark0" --no-encounters
+dungeon_tour_grivera_omnious_hall_start                   dungeon_tour --load=Start --start="Grivera--Omnious Hall-mark0" --no-encounters
+dungeon_tour_grivera_corridor_of_agony                    dungeon_tour --load="Slot 1" --start="Grivera--Corridor of Agony-mark0" --no-encounters
+dungeon_tour_grivera_corridor_of_agony_start              dungeon_tour --load=Start --start="Grivera--Corridor of Agony-mark0" --no-encounters
+dungeon_tour_central_pass_west_part                       dungeon_tour --load="Slot 1" --start="Central Pass--West Part-mark0" --no-encounters
+dungeon_tour_central_pass_west_part_start                 dungeon_tour --load=Start --start="Central Pass--West Part-mark0" --no-encounters
+dungeon_tour_central_pass_central_part                    dungeon_tour --load="Slot 1" --start="Central Pass--Central Part-mark0" --no-encounters
+dungeon_tour_central_pass_central_part_start              dungeon_tour --load=Start --start="Central Pass--Central Part-mark0" --no-encounters
+dungeon_tour_central_pass_north_part                      dungeon_tour --load="Slot 1" --start="Central Pass--North Part-mark0" --no-encounters
+dungeon_tour_central_pass_north_part_start                dungeon_tour --load=Start --start="Central Pass--North Part-mark0" --no-encounters
+dungeon_tour_central_pass_north_east_part                 dungeon_tour --load="Slot 1" --start="Central Pass--North East Part-mark0" --no-encounters
+dungeon_tour_central_pass_north_east_part_start           dungeon_tour --load=Start --start="Central Pass--North East Part-mark0" --no-encounters
+dungeon_tour_the_great_mine_the_hall                      dungeon_tour --load="Slot 1" --start="The Great Mine--The Hall-mark0" --no-encounters
+dungeon_tour_the_great_mine_the_hall_start                dungeon_tour --load=Start --start="The Great Mine--The Hall-mark0" --no-encounters
+dungeon_tour_the_great_mine_west_wing                     dungeon_tour --load="Slot 1" --start="The Great Mine--West Wing-mark0" --no-encounters
+dungeon_tour_the_great_mine_west_wing_start               dungeon_tour --load=Start --start="The Great Mine--West Wing-mark0" --no-encounters
+dungeon_tour_the_great_mine_great_deep                    dungeon_tour --load="Slot 1" --start="The Great Mine--Great Deep-mark0" --no-encounters
+dungeon_tour_the_great_mine_great_deep_start              dungeon_tour --load=Start --start="The Great Mine--Great Deep-mark0" --no-encounters
+dungeon_tour_the_great_mine_the_mine_core                 dungeon_tour --load="Slot 1" --start="The Great Mine--The Mine Core-mark0" --no-encounters
+dungeon_tour_the_great_mine_the_mine_core_start           dungeon_tour --load=Start --start="The Great Mine--The Mine Core-mark0" --no-encounters
+dungeon_tour_the_great_mine_mine_shaft                    dungeon_tour --load="Slot 1" --start="The Great Mine--Mine Shaft-mark0" --no-encounters
+dungeon_tour_the_great_mine_mine_shaft_start              dungeon_tour --load=Start --start="The Great Mine--Mine Shaft-mark0" --no-encounters
+dungeon_tour_east_passage_west_mountain                   dungeon_tour --load="Slot 1" --start="East Passage--West_Mountain-mark0" --no-encounters
+dungeon_tour_east_passage_west_mountain_start             dungeon_tour --load=Start --start="East Passage--West_Mountain-mark0" --no-encounters
+dungeon_tour_east_passage_east_mountain                   dungeon_tour --load="Slot 1" --start="East Passage--East_Mountain-mark0" --no-encounters
+dungeon_tour_east_passage_east_mountain_start             dungeon_tour --load=Start --start="East Passage--East_Mountain-mark0" --no-encounters
+dungeon_tour_forest_of_bri_west_forest                    dungeon_tour --load="Slot 1" --start="Forest of Bri--West_Forest-mark0" --no-encounters
+dungeon_tour_forest_of_bri_west_forest_start              dungeon_tour --load=Start --start="Forest of Bri--West_Forest-mark0" --no-encounters
+dungeon_tour_forest_of_bri_east_forest                    dungeon_tour --load="Slot 1" --start="Forest of Bri--East_Forest-mark0" --no-encounters
+dungeon_tour_forest_of_bri_east_forest_start              dungeon_tour --load=Start --start="Forest of Bri--East_Forest-mark0" --no-encounters
+dungeon_tour_mt_cesadur_basement                          dungeon_tour --load="Slot 1" --start="Mt. Cesadur--Basement-mark0" --no-encounters
+dungeon_tour_mt_cesadur_basement_start                    dungeon_tour --load=Start --start="Mt. Cesadur--Basement-mark0" --no-encounters
+dungeon_tour_mt_cesadur_entrance                          dungeon_tour --load="Slot 1" --start="Mt. Cesadur--Entrance-mark0" --no-encounters
+dungeon_tour_mt_cesadur_entrance_start                    dungeon_tour --load=Start --start="Mt. Cesadur--Entrance-mark0" --no-encounters
+dungeon_tour_mt_cesadur_second_floor                      dungeon_tour --load="Slot 1" --start="Mt. Cesadur--Second Floor-mark0" --no-encounters
+dungeon_tour_mt_cesadur_second_floor_start                dungeon_tour --load=Start --start="Mt. Cesadur--Second Floor-mark0" --no-encounters
+dungeon_tour_mt_cesadur_third_floor                       dungeon_tour --load="Slot 1" --start="Mt. Cesadur--Third Floor-mark0" --no-encounters
+dungeon_tour_mt_cesadur_third_floor_start                 dungeon_tour --load=Start --start="Mt. Cesadur--Third Floor-mark0" --no-encounters
+dungeon_tour_mt_cesadur_fourth_floor                      dungeon_tour --load="Slot 1" --start="Mt. Cesadur--Fourth Floor-mark0" --no-encounters
+dungeon_tour_mt_cesadur_fourth_floor_start                dungeon_tour --load=Start --start="Mt. Cesadur--Fourth Floor-mark0" --no-encounters
+dungeon_tour_mt_cesadur_mountain_top                      dungeon_tour --load="Slot 1" --start="Mt. Cesadur--Mountain Top-mark0" --no-encounters
+dungeon_tour_mt_cesadur_mountain_top_start                dungeon_tour --load=Start --start="Mt. Cesadur--Mountain Top-mark0" --no-encounters
+dungeon_tour_dormas_forest_forest_of_hate                 dungeon_tour --load="Slot 1" --start="Dorma's Forest--Forest of Hate-mark0" --no-encounters
+dungeon_tour_dormas_forest_forest_of_hate_start           dungeon_tour --load=Start --start="Dorma's Forest--Forest of Hate-mark0" --no-encounters
+dungeon_tour_pensara_forest_forest                        dungeon_tour --load="Slot 1" --start="Pensara Forest--Forest-mark0" --no-encounters
+dungeon_tour_pensara_forest_forest_start                  dungeon_tour --load=Start --start="Pensara Forest--Forest-mark0" --no-encounters
+dungeon_tour_fire_cavern_hall_of_fire                     dungeon_tour --load="Slot 1" --start="Fire Cavern--Hall of Fire-mark0" --no-encounters
+dungeon_tour_fire_cavern_hall_of_fire_start               dungeon_tour --load=Start --start="Fire Cavern--Hall of Fire-mark0" --no-encounters
+dungeon_tour_fire_cavern_blazing_maze                     dungeon_tour --load="Slot 1" --start="Fire Cavern--Blazing Maze-mark0" --no-encounters
+dungeon_tour_fire_cavern_blazing_maze_start               dungeon_tour --load=Start --start="Fire Cavern--Blazing Maze-mark0" --no-encounters
+dungeon_tour_fire_cavern_passage_of_ifrit                 dungeon_tour --load="Slot 1" --start="Fire Cavern--Passage of Ifrit-mark0" --no-encounters
+dungeon_tour_fire_cavern_passage_of_ifrit_start           dungeon_tour --load=Start --start="Fire Cavern--Passage of Ifrit-mark0" --no-encounters
+dungeon_tour_fire_cavern_hall_of_the_damned               dungeon_tour --load="Slot 1" --start="Fire Cavern--Hall of the Damned-mark0" --no-encounters
+dungeon_tour_fire_cavern_hall_of_the_damned_start         dungeon_tour --load=Start --start="Fire Cavern--Hall of the Damned-mark0" --no-encounters
+dungeon_tour_fire_cavern_furnace                          dungeon_tour --load="Slot 1" --start="Fire Cavern--Furnace-mark0" --no-encounters
+dungeon_tour_fire_cavern_furnace_start                    dungeon_tour --load=Start --start="Fire Cavern--Furnace-mark0" --no-encounters
+dungeon_tour_fire_cavern_inferno                          dungeon_tour --load="Slot 1" --start="Fire Cavern--Inferno-mark0" --no-encounters
+dungeon_tour_fire_cavern_inferno_start                    dungeon_tour --load=Start --start="Fire Cavern--Inferno-mark0" --no-encounters
+dungeon_tour_silent_ruin_the_great_ruins                  dungeon_tour --load="Slot 1" --start="Silent Ruin--The Great Ruins-mark0" --no-encounters
+dungeon_tour_silent_ruin_the_great_ruins_start            dungeon_tour --load=Start --start="Silent Ruin--The Great Ruins-mark0" --no-encounters
+dungeon_tour_pensara_prison_floor_1                       dungeon_tour --load="Slot 1" --start="Pensara Prison--Floor 1-mark0" --no-encounters
+dungeon_tour_pensara_prison_floor_1_start                 dungeon_tour --load=Start --start="Pensara Prison--Floor 1-mark0" --no-encounters
+dungeon_tour_pensara_prison_floor_2                       dungeon_tour --load="Slot 1" --start="Pensara Prison--Floor 2-mark0" --no-encounters
+dungeon_tour_pensara_prison_floor_2_start                 dungeon_tour --load=Start --start="Pensara Prison--Floor 2-mark0" --no-encounters
+dungeon_tour_pensara_prison_floor_3                       dungeon_tour --load="Slot 1" --start="Pensara Prison--Floor 3-mark0" --no-encounters
+dungeon_tour_pensara_prison_floor_3_start                 dungeon_tour --load=Start --start="Pensara Prison--Floor 3-mark0" --no-encounters
+dungeon_tour_pensara_prison_floor_4                       dungeon_tour --load="Slot 1" --start="Pensara Prison--Floor 4-mark0" --no-encounters
+dungeon_tour_pensara_prison_floor_4_start                 dungeon_tour --load=Start --start="Pensara Prison--Floor 4-mark0" --no-encounters
+dungeon_tour_pensara_prison_floor_5                       dungeon_tour --load="Slot 1" --start="Pensara Prison--Floor 5-mark0" --no-encounters
+dungeon_tour_pensara_prison_floor_5_start                 dungeon_tour --load=Start --start="Pensara Prison--Floor 5-mark0" --no-encounters
+dungeon_tour_pensara_prison_floor_6                       dungeon_tour --load="Slot 1" --start="Pensara Prison--Floor 6-mark0" --no-encounters
+dungeon_tour_pensara_prison_floor_6_start                 dungeon_tour --load=Start --start="Pensara Prison--Floor 6-mark0" --no-encounters
+dungeon_tour_berca_desert_south_west                      dungeon_tour --load="Slot 1" --start="Berca Desert--South West-mark0" --no-encounters
+dungeon_tour_berca_desert_south_west_start                dungeon_tour --load=Start --start="Berca Desert--South West-mark0" --no-encounters
+dungeon_tour_berca_desert_south                           dungeon_tour --load="Slot 1" --start="Berca Desert--South-mark0" --no-encounters
+dungeon_tour_berca_desert_south_start                     dungeon_tour --load=Start --start="Berca Desert--South-mark0" --no-encounters
+dungeon_tour_berca_desert_south_east                      dungeon_tour --load="Slot 1" --start="Berca Desert--South East-mark0" --no-encounters
+dungeon_tour_berca_desert_south_east_start                dungeon_tour --load=Start --start="Berca Desert--South East-mark0" --no-encounters
+dungeon_tour_berca_desert_north_west                      dungeon_tour --load="Slot 1" --start="Berca Desert--North West-mark0" --no-encounters
+dungeon_tour_berca_desert_north_west_start                dungeon_tour --load=Start --start="Berca Desert--North West-mark0" --no-encounters
+dungeon_tour_berca_desert_north                           dungeon_tour --load="Slot 1" --start="Berca Desert--North-mark0" --no-encounters
+dungeon_tour_berca_desert_north_start                     dungeon_tour --load=Start --start="Berca Desert--North-mark0" --no-encounters
+dungeon_tour_berca_desert_north_east                      dungeon_tour --load="Slot 1" --start="Berca Desert--North East-mark0" --no-encounters
+dungeon_tour_berca_desert_north_east_start                dungeon_tour --load=Start --start="Berca Desert--North East-mark0" --no-encounters
+dungeon_tour_the_sewers_south_east                        dungeon_tour --load="Slot 1" --start="The Sewers--South East-mark0" --no-encounters
+dungeon_tour_the_sewers_south_east_start                  dungeon_tour --load=Start --start="The Sewers--South East-mark0" --no-encounters
+dungeon_tour_the_sewers_south                             dungeon_tour --load="Slot 1" --start="The Sewers--South-mark0" --no-encounters
+dungeon_tour_the_sewers_south_start                       dungeon_tour --load=Start --start="The Sewers--South-mark0" --no-encounters
+dungeon_tour_the_sewers_south_west                        dungeon_tour --load="Slot 1" --start="The Sewers--South West-mark0" --no-encounters
+dungeon_tour_the_sewers_south_west_start                  dungeon_tour --load=Start --start="The Sewers--South West-mark0" --no-encounters
+dungeon_tour_the_sewers_north_west                        dungeon_tour --load="Slot 1" --start="The Sewers--North West-mark0" --no-encounters
+dungeon_tour_the_sewers_north_west_start                  dungeon_tour --load=Start --start="The Sewers--North West-mark0" --no-encounters
+dungeon_tour_the_sewers_north                             dungeon_tour --load="Slot 1" --start="The Sewers--North-mark0" --no-encounters
+dungeon_tour_the_sewers_north_start                       dungeon_tour --load=Start --start="The Sewers--North-mark0" --no-encounters
+dungeon_tour_the_sewers_north_east                        dungeon_tour --load="Slot 1" --start="The Sewers--North East-mark0" --no-encounters
+dungeon_tour_the_sewers_north_east_start                  dungeon_tour --load=Start --start="The Sewers--North East-mark0" --no-encounters
+dungeon_tour_temple_of_aegis_first_floor                  dungeon_tour --load="Slot 1" --start="Temple of Aegis--First Floor-mark0" --no-encounters
+dungeon_tour_temple_of_aegis_first_floor_start            dungeon_tour --load=Start --start="Temple of Aegis--First Floor-mark0" --no-encounters
+dungeon_tour_temple_of_aegis_base_level                   dungeon_tour --load="Slot 1" --start="Temple of Aegis--Base Level-mark0" --no-encounters
+dungeon_tour_temple_of_aegis_base_level_start             dungeon_tour --load=Start --start="Temple of Aegis--Base Level-mark0" --no-encounters
+dungeon_tour_temple_of_aegis_second_floor                 dungeon_tour --load="Slot 1" --start="Temple of Aegis--Second Floor-mark0" --no-encounters
+dungeon_tour_temple_of_aegis_second_floor_start           dungeon_tour --load=Start --start="Temple of Aegis--Second Floor-mark0" --no-encounters
+dungeon_tour_temple_of_aegis_third_floor                  dungeon_tour --load="Slot 1" --start="Temple of Aegis--Third Floor-mark0" --no-encounters
+dungeon_tour_temple_of_aegis_third_floor_start            dungeon_tour --load=Start --start="Temple of Aegis--Third Floor-mark0" --no-encounters
+dungeon_tour_temple_of_aegis_fourth_floor                 dungeon_tour --load="Slot 1" --start="Temple of Aegis--Fourth Floor-mark0" --no-encounters
+dungeon_tour_temple_of_aegis_fourth_floor_start           dungeon_tour --load=Start --start="Temple of Aegis--Fourth Floor-mark0" --no-encounters
+dungeon_tour_temple_of_aegis_top_floor                    dungeon_tour --load="Slot 1" --start="Temple of Aegis--Top Floor-mark0" --no-encounters
+dungeon_tour_temple_of_aegis_top_floor_start              dungeon_tour --load=Start --start="Temple of Aegis--Top Floor-mark0" --no-encounters
+dungeon_tour_frozen_forest_forest_passage                 dungeon_tour --load="Slot 1" --start="Frozen Forest--Forest Passage-mark0" --no-encounters
+dungeon_tour_frozen_forest_forest_passage_start           dungeon_tour --load=Start --start="Frozen Forest--Forest Passage-mark0" --no-encounters
+dungeon_tour_ice_cavern_pillar_room                       dungeon_tour --load="Slot 1" --start="Ice Cavern--Pillar Room-mark0" --no-encounters
+dungeon_tour_ice_cavern_pillar_room_start                 dungeon_tour --load=Start --start="Ice Cavern--Pillar Room-mark0" --no-encounters
+dungeon_tour_ice_cavern_frozen_field                      dungeon_tour --load="Slot 1" --start="Ice Cavern--Frozen Field-mark0" --no-encounters
+dungeon_tour_ice_cavern_frozen_field_start                dungeon_tour --load=Start --start="Ice Cavern--Frozen Field-mark0" --no-encounters
+dungeon_tour_ice_cavern_mysterious_forest                 dungeon_tour --load="Slot 1" --start="Ice Cavern--Mysterious Forest-mark0" --no-encounters
+dungeon_tour_ice_cavern_mysterious_forest_start           dungeon_tour --load=Start --start="Ice Cavern--Mysterious Forest-mark0" --no-encounters
+dungeon_tour_ice_cavern_hall_of_anguish                   dungeon_tour --load="Slot 1" --start="Ice Cavern--Hall of Anguish-mark0" --no-encounters
+dungeon_tour_ice_cavern_hall_of_anguish_start             dungeon_tour --load=Start --start="Ice Cavern--Hall of Anguish-mark0" --no-encounters
+dungeon_tour_ice_cavern_hall_of_confusion                 dungeon_tour --load="Slot 1" --start="Ice Cavern--Hall of Confusion-mark0" --no-encounters
+dungeon_tour_ice_cavern_hall_of_confusion_start           dungeon_tour --load=Start --start="Ice Cavern--Hall of Confusion-mark0" --no-encounters
+dungeon_tour_ice_cavern_throne_room                       dungeon_tour --load="Slot 1" --start="Ice Cavern--Throne Room-mark0" --no-encounters
+dungeon_tour_ice_cavern_throne_room_start                 dungeon_tour --load=Start --start="Ice Cavern--Throne Room-mark0" --no-encounters
+dungeon_tour_empyrian_temple_hall_of_wind                 dungeon_tour --load="Slot 1" --start="Empyrian Temple--Hall of Wind-mark0" --no-encounters
+dungeon_tour_empyrian_temple_hall_of_wind_start           dungeon_tour --load=Start --start="Empyrian Temple--Hall of Wind-mark0" --no-encounters
+dungeon_tour_empyrian_temple_tower_of_magic               dungeon_tour --load="Slot 1" --start="Empyrian Temple--Tower of Magic-mark0" --no-encounters
+dungeon_tour_empyrian_temple_tower_of_magic_start         dungeon_tour --load=Start --start="Empyrian Temple--Tower of Magic-mark0" --no-encounters
+dungeon_tour_empyrian_temple_tower_of_strength            dungeon_tour --load="Slot 1" --start="Empyrian Temple--Tower of Strength-mark0" --no-encounters
+dungeon_tour_empyrian_temple_tower_of_strength_start      dungeon_tour --load=Start --start="Empyrian Temple--Tower of Strength-mark0" --no-encounters
+dungeon_tour_empyrian_temple_light                        dungeon_tour --load="Slot 1" --start="Empyrian Temple--Light-mark0" --no-encounters
+dungeon_tour_empyrian_temple_light_start                  dungeon_tour --load=Start --start="Empyrian Temple--Light-mark0" --no-encounters
+dungeon_tour_empyrian_temple_dark                         dungeon_tour --load="Slot 1" --start="Empyrian Temple--Dark-mark0" --no-encounters
+dungeon_tour_empyrian_temple_dark_start                   dungeon_tour --load=Start --start="Empyrian Temple--Dark-mark0" --no-encounters
+dungeon_tour_empyrian_temple_hall_of_memories             dungeon_tour --load="Slot 1" --start="Empyrian Temple--Hall of Memories-mark0" --no-encounters
+dungeon_tour_empyrian_temple_hall_of_memories_start       dungeon_tour --load=Start --start="Empyrian Temple--Hall of Memories-mark0" --no-encounters
+dungeon_tour_menthus_lair_room_of_confusion               dungeon_tour --load="Slot 1" --start="Menthu's Lair--Room of Confusion-mark0" --no-encounters
+dungeon_tour_menthus_lair_room_of_confusion_start         dungeon_tour --load=Start --start="Menthu's Lair--Room of Confusion-mark0" --no-encounters
+dungeon_tour_menthus_lair_room_of_doubt                   dungeon_tour --load="Slot 1" --start="Menthu's Lair--Room of Doubt-mark0" --no-encounters
+dungeon_tour_menthus_lair_room_of_doubt_start             dungeon_tour --load=Start --start="Menthu's Lair--Room of Doubt-mark0" --no-encounters
+dungeon_tour_menthus_lair_room_of_turmoil                 dungeon_tour --load="Slot 1" --start="Menthu's Lair--Room of Turmoil-mark0" --no-encounters
+dungeon_tour_menthus_lair_room_of_turmoil_start           dungeon_tour --load=Start --start="Menthu's Lair--Room of Turmoil-mark0" --no-encounters
+dungeon_tour_menthus_lair_room_of_chaos                   dungeon_tour --load="Slot 1" --start="Menthu's Lair--Room of Chaos-mark0" --no-encounters
+dungeon_tour_menthus_lair_room_of_chaos_start             dungeon_tour --load=Start --start="Menthu's Lair--Room of Chaos-mark0" --no-encounters
+dungeon_tour_menthus_lair_hall_of_memories                dungeon_tour --load="Slot 1" --start="Menthu's Lair--Hall of Memories-mark0" --no-encounters
+dungeon_tour_menthus_lair_hall_of_memories_start          dungeon_tour --load=Start --start="Menthu's Lair--Hall of Memories-mark0" --no-encounters
+dungeon_tour_menthus_lair_throne_of_serpents              dungeon_tour --load="Slot 1" --start="Menthu's Lair--Throne of Serpents-mark0" --no-encounters
+dungeon_tour_menthus_lair_throne_of_serpents_start        dungeon_tour --load=Start --start="Menthu's Lair--Throne of Serpents-mark0" --no-encounters
+# Phase 2 rollout: what a tour does not show, hand-written (dev options in
+# src/main/Main.gd: --start-node=<address>:<direction> starts the floor at a
+# node, as a game saved there does; --status presets objects). Doors and
+# floor changes (script dungeon_door: from the cell before the door, CROSS,
+# the next floor, the menu, back): a ladder up (Grivera), a ladder down and a
+# door--down (Mt. Cesadur), Temple of Aegis's stairs up, a door to its own
+# floor (Tower of Magic, door--up), a prison hinderDoor--up, a hinder door
+# whose link name has a NUL byte in the .map file (The Sewers--South East:84,
+# opened by --status), an if door both ways (treasureMission 2: its story),
+# the hidden hinder door (two pushes preset: the third opens it), the
+# additive hinder door (its status preset to the 12 the floor buttons add up
+# to), the riddle door of the Ice Cavern (opened as its combo opens it). Each
+# floor change frees the floor left at the next mode switch ("Labyrinth:
+# freed" in the log; "DungeonScene: freed" for a scene).
+dungeon_door_grivera_ladder           dungeon_door --load="Slot 1" --start="Grivera--First Floor-mark0" --start-node=117:2 --no-encounters
+dungeon_door_cesadur_ladder_down      dungeon_door --load="Slot 1" --start="Mt. Cesadur--Entrance-mark0" --start-node=62:0 --no-encounters
+dungeon_door_cesadur_door_down        dungeon_door --load="Slot 1" --start="Mt. Cesadur--Mountain Top-mark0" --start-node=171:1 --no-encounters
+dungeon_door_aegis_stairs             dungeon_door --load="Slot 1" --start="Temple of Aegis--Base Level-mark0" --start-node=4:2 --no-encounters
+dungeon_door_tower_same_floor         dungeon_door --load="Slot 1" --start="Empyrian Temple--Tower of Magic-mark0" --start-node=90:1 --no-encounters
+dungeon_door_prison_up                dungeon_door --load=Start --start="Pensara Prison--Floor 1-mark0" --start-node=103:2 --no-encounters
+dungeon_door_nul_name                 dungeon_door --load=Start --start="The Sewers--South East-mark0" --start-node=22:1 --status=the_sewers--south_east.maphinderdoor6:1 --no-encounters
+dungeon_door_if_door                  dungeon_door --load=Start --start="Fire Cavern--Passage of Ifrit-mark0" --start-node=191:3 --no-encounters
+dungeon_door_if_door_story            dungeon_door --load=Start --start="Fire Cavern--Passage of Ifrit-mark0" --start-node=191:3 --status=treasureMission:2 --no-encounters
+dungeon_door_hidden                   dungeon_door --load="Slot 1" --start="Grivera--Omnious Hall-mark0" --start-node=135:3 --status=grivera--omnious_hall.maphiddenhinderdoor151:2 --no-encounters
+dungeon_door_add_door                 dungeon_door --load="Slot 1" --start="Empyrian Temple--Hall of Wind-mark0" --start-node=103:0 --status=empyrian_temple--hall_of_wind.mapadddoor104:12 --no-encounters
+dungeon_door_riddle_door              dungeon_door --load="Slot 1" --start="Ice Cavern--Throne Room-mark0" --start-node=103:2 --status=ice_cavern--throne_room.mapriddledoor102:1 --no-encounters
+# Objects used (script dungeon_use: from the cell before, CROSS, its
+# animation and dialogs): an ice button (its notes open doors on two floors),
+# the Ice Cavern's last combo note with the four before it on (it opens the
+# riddle door), the Temple of Aegis combo: its first symbol, and one out of
+# order (all reset), a villager of another Great Mine floor, a bomb of The
+# Sewers (its mission), the mission chest of Fire Cavern--Passage of Ifrit,
+# and a chest of every image kind ("Start": unopened).
+dungeon_use_ice_button                dungeon_use --load=Start --start="Ice Cavern--Hall of Anguish-mark0" --start-node=127:3 --no-encounters
+dungeon_use_ice_combo                 dungeon_use --load="Slot 1" --start="Ice Cavern--Throne Room-mark0" --start-node=93:1 --status=ice_cavern--throne_room.mapicecombobutton35:1,ice_cavern--throne_room.mapicecombobutton58:1,ice_cavern--throne_room.mapicecombobutton163:1,ice_cavern--throne_room.mapicecombobutton154:1 --no-encounters
+dungeon_use_aegis_combo               dungeon_use --load=Start --start="Temple of Aegis--First Floor-mark0" --start-node=12:0 --no-encounters
+dungeon_use_aegis_combo_wrong         dungeon_use --load=Start --start="Temple of Aegis--First Floor-mark0" --start-node=159:3 --no-encounters
+dungeon_use_villager                  dungeon_use --load=Start --start="The Great Mine--West Wing-mark0" --start-node=124:3 --no-encounters
+dungeon_use_bomb                      dungeon_use --load=Start --start="The Sewers--South West-mark0" --start-node=57:2 --no-encounters
+dungeon_use_mission_chest             dungeon_use --load=Start --start="Fire Cavern--Passage of Ifrit-mark0" --start-node=166:3 --no-encounters
+dungeon_use_chest                     dungeon_use --load=Start --start="Grivera--First Floor-mark0" --start-node=25:1 --no-encounters
+dungeon_use_chest_pot                 dungeon_use --load=Start --start="Berca Desert--South West-mark0" --start-node=40:1 --no-encounters
+dungeon_use_chest_icepot              dungeon_use --load=Start --start="Ice Cavern--Hall of Anguish-mark0" --start-node=179:3 --no-encounters
+dungeon_use_chest_crate               dungeon_use --load=Start --start="Berca Desert--North East-mark0" --start-node=78:2 --no-encounters
+dungeon_use_chest_snowcrate           dungeon_use --load=Start --start="Frozen Forest--Forest Passage-mark0" --start-node=43:0 --no-encounters
+dungeon_use_chest_stub                dungeon_use --load=Start --start="Mt. Cesadur--Entrance-mark0" --start-node=42:1 --no-encounters
+dungeon_use_chest_volcano             dungeon_use --load=Start --start="Fire Cavern--Blazing Maze-mark0" --start-node=74:1 --no-encounters
+dungeon_use_chest_woodenbox           dungeon_use --load=Start --start="Forest of Bri--East_Forest-mark0" --start-node=37:2 --no-encounters
+dungeon_use_chest_stonebox            dungeon_use --load=Start --start="Temple of Aegis--Second Floor-mark0" --start-node=57:3 --no-encounters
+# Stepped on (script dungeon_step_on): a floor button of Empyrian
+# Temple--Dark and --Light (drawn as the cell's floor tile; it adds to the
+# Hall of Wind's door), a save point.
+dungeon_step_floor_button_dark        dungeon_step_on --load=Start --start="Empyrian Temple--Dark-mark0" --start-node=108:2 --no-encounters
+dungeon_step_floor_button_light       dungeon_step_on --load=Start --start="Empyrian Temple--Light-mark0" --start-node=108:2 --no-encounters
+dungeon_step_save_point               dungeon_step_on --load=Start --start="Ice Cavern--Hall of Anguish-mark0" --start-node=174:2 --no-encounters
+# A trigger door's arrival (script dungeon_trigger): Central Pass--West
+# Part's tutorial door (its mark0), first time ("Start").
+dungeon_trigger_central_pass          dungeon_trigger --load=Start --start="Central Pass--West Part-mark0" --no-encounters
+# Riddles (src/miniGames, never run before; scripts dungeon_riddle_<key>,
+# by the key that leaves them): one of every class, two under weather
+# (Dorma's Forest: rain, Mysterious Forest: snow). A riddle draws nothing in
+# 3D (its draw is empty): all of it is its top layer, in 2D after the
+# minimap, so the front weather pass before it stays in the scene's chunk.
+dungeon_riddle_hate                   dungeon_riddle_circle --load=Start --start="Dorma's Forest--Forest of Hate-mark0" --start-node=171:0 --no-encounters
+dungeon_riddle_hate1                  dungeon_riddle_cross --load=Start --start="Dorma's Forest--Forest of Hate-mark0" --start-node=69:2 --no-encounters
+dungeon_riddle_ice                    dungeon_riddle_cross --load=Start --start="Ice Cavern--Mysterious Forest-mark0" --start-node=23:3 --no-encounters
+dungeon_riddle_grivera                dungeon_riddle_cross --load=Start --start="Grivera--Omnious Hall-mark0" --start-node=123:0 --no-encounters
+dungeon_riddle_cesadur                dungeon_riddle_triangle --load=Start --start="Mt. Cesadur--Basement-mark0" --start-node=169:1 --no-encounters
+dungeon_riddle_rubics                 dungeon_riddle_circle --load=Start --start="Silent Ruin--The Great Ruins-mark0" --start-node=106:1 --no-encounters
+dungeon_riddle_puzzle                 dungeon_riddle_circle --load=Start --start="Silent Ruin--The Great Ruins-mark0" --start-node=138:3 --no-encounters
+dungeon_riddle_rubics19               dungeon_riddle_circle --load=Start --start="Silent Ruin--The Great Ruins-mark0" --start-node=102:1 --no-encounters
+dungeon_riddle_aegis                  dungeon_riddle_cross --load=Start --start="Temple of Aegis--First Floor-mark0" --start-node=107:0 --no-encounters
+# Battles (script dungeon_battle: steps forward and back in a straight
+# corridor until one starts, a round, the console's kill): under snow (the
+# front pass over the battle) on Frozen Forest--Forest Passage and Ice
+# Cavern--Frozen Field, under rain on Pensara Forest (Ice Cavern--Mysterious
+# Forest and Dorma's Forest have no enemy group in enemyBank.bank: no random
+# battles), and the enemy colours .7 (Grivera), .8 (Forest of Bri, with a
+# sky) and 1 (Berca Desert, with a sky). Bosses (script dungeon_boss):
+# Salmonman (Grivera) and Memory Taur (Empyrian Temple, its win leads to the
+# Memory Salmonman battle, a mode of its own), alive in "Slot 1"; their
+# battle runs inside the labyrinth's frame.
+dungeon_battle_frozen_forest          dungeon_battle --load="Slot 1" --start="Frozen Forest--Forest Passage-mark0" --start-node=70:0
+dungeon_battle_frozen_field           dungeon_battle --load="Slot 1" --start="Ice Cavern--Frozen Field-mark0" --start-node=21:0
+dungeon_battle_pensara_forest         dungeon_battle --load="Slot 1" --start="Pensara Forest--Forest-mark0" --start-node=90:3
+dungeon_battle_grivera                dungeon_battle --load="Slot 1" --start="Grivera--Second Floor-mark0" --start-node=43:0
+dungeon_battle_forest_of_bri          dungeon_battle --load="Slot 1" --start="Forest of Bri--East_Forest-mark0" --start-node=58:3
+dungeon_battle_berca                  dungeon_battle --load="Slot 1" --start="Berca Desert--South-mark0" --start-node=20:3
+dungeon_boss_salmonman                dungeon_boss --load="Slot 1" --start="Grivera--Corridor of Agony-mark0"
+dungeon_boss_memory_taur              dungeon_boss --load="Slot 1" --start="Empyrian Temple--Hall of Memories-mark0"
+# The largest floor (Empyrian Temple--Light, 169 cells) and the one with
+# the most objects (Silent Ruin, 25): the menu's map page after a walk
+# (script dungeon_map_page). Saving on a floor and loading it (COTZ-005),
+# the console's goto, teleport and savepoint (COTZ-006).
+dungeon_map_page_empyrian_light       dungeon_map_page --load="Slot 1" --start="Empyrian Temple--Light-mark0" --no-encounters
+dungeon_map_page_silent_ruin          dungeon_map_page --load="Slot 1" --start="Silent Ruin--The Great Ruins-mark0" --no-encounters
+dungeon_save_load                     dungeon_save_load --load="Slot 1" --start="Grivera--Second Floor-mark0" --no-encounters
+dungeon_console_goto                  dungeon_console_goto --load="Slot 1" --start=Alares --no-encounters

@@ -1,0 +1,105 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/Menthu's Lair.tres" id="2_0vlyu"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/Menthu's Lair--Room of Confusion.tres" id="3_nmigk"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonDoor.tscn" id="4_ybyai"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonChest.tscn" id="5_utj0h"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/chest.tres" id="6_u18vp"]
+
+[node name="Room of Confusion" instance=ExtResource("1_base")]
+map_name = "Menthu's Lair--Room of Confusion.map"
+style = ExtResource("2_0vlyu")
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+mission_entries = PackedStringArray()
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_nmigk")
+
+[node name="00 door 182" parent="Objects" index="0" instance=ExtResource("4_ybyai")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46, 0, -38)
+open_roads = "dontopen"
+next_places = PackedStringArray("Home_of_the_Gods-pos1")
+kind = "door"
+cell = 182
+facing = 3
+database_name = "menthu's lair--room of confusion.mapdoor182"
+
+[node name="01 door 148" parent="Objects" index="1" instance=ExtResource("4_ybyai")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -46)
+open_roads = "dontopen"
+next_places = PackedStringArray("Menthu\'s_Lair--Room_of_Doubt-mark6")
+mark = 1
+kind = "door"
+cell = 148
+facing = 2
+database_name = "menthu's lair--room of confusion.mapdoor148"
+
+[node name="02 door 118" parent="Objects" index="2" instance=ExtResource("4_ybyai")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -38)
+open_roads = "dontopen"
+next_places = PackedStringArray("Menthu\'s_Lair--Room_of_Chaos-mark0")
+mark = 2
+kind = "door"
+cell = 118
+facing = 1
+database_name = "menthu's lair--room of confusion.mapdoor118"
+
+[node name="03 door 152" parent="Objects" index="3" instance=ExtResource("4_ybyai")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -30)
+open_roads = "dontopen"
+next_places = PackedStringArray("Menthu\'s_Lair--Room_of_Turmoil-mark4")
+mark = 3
+kind = "door"
+cell = 152
+database_name = "menthu's lair--room of confusion.mapdoor152"
+
+[node name="04 door 92" parent="Objects" index="4" instance=ExtResource("4_ybyai")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -14)
+open_roads = "dontopen"
+next_places = PackedStringArray("Menthu\'s_Lair--Room_of_Chaos-mark1")
+mark = 4
+kind = "door"
+cell = 92
+facing = 3
+database_name = "menthu's lair--room of confusion.mapdoor92"
+
+[node name="05 door 58" parent="Objects" index="5" instance=ExtResource("4_ybyai")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -22)
+open_roads = "dontopen"
+next_places = PackedStringArray("Menthu\'s_Lair--Room_of_Turmoil-mark2")
+mark = 5
+kind = "door"
+cell = 58
+facing = 2
+database_name = "menthu's lair--room of confusion.mapdoor58"
+
+[node name="06 door 62" parent="Objects" index="6" instance=ExtResource("4_ybyai")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -6)
+open_roads = "dontopen"
+next_places = PackedStringArray("Menthu\'s_Lair--Room_of_Doubt-mark0")
+mark = 6
+kind = "door"
+cell = 62
+database_name = "menthu's lair--room of confusion.mapdoor62"
+
+[node name="07 chest 28" parent="Objects" index="7" instance=ExtResource("5_utj0h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -14)
+frames = 2
+content_type = 2
+content_name = "cards.offense.Destroyer"
+content_info = PackedStringArray("1", "false")
+kind = "chest"
+cell = 28
+facing = 1
+image = "Images/chest"
+database_name = "menthu's lair--room of confusion.mapchest28"
+
+[node name="View" parent="Objects/07 chest 28" index="0"]
+transform = Transform3D(-3.059797e-10, 0, 1, 0, 0.007, 0, -0.007, 0, -4.371139e-08, 0, -1.2825, 0)
+sprite_frames = ExtResource("6_u18vp")
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(1.1924881e-08, 0, 1, 0, 1, 0, -1, 0, 1.1924881e-08, 46, 0, -38)
+
+[editable path="Objects/07 chest 28"]

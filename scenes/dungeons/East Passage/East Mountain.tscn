@@ -1,0 +1,56 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/East Passage.tres" id="2_ccqnt"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/East Passage--East Mountain.tres" id="3_y62r6"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonDoor.tscn" id="4_v15fd"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonChest.tscn" id="5_7x3go"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/chest.tres" id="6_lb10a"]
+
+[node name="East Mountain" instance=ExtResource("1_base")]
+map_name = "East Passage--East Mountain.map"
+style = ExtResource("2_ccqnt")
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+mission_entries = PackedStringArray()
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_y62r6")
+
+[node name="00 door 127" parent="Objects" index="0" instance=ExtResource("4_v15fd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -2)
+open_roads = "dontopen"
+next_places = PackedStringArray("forest_of_bri--west_forest-mark0")
+kind = "door"
+cell = 127
+database_name = "east passage--east mountain.mapdoor127"
+
+[node name="01 door 5" parent="Objects" index="1" instance=ExtResource("4_v15fd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -42)
+open_roads = "dontopen"
+next_places = PackedStringArray("east_passage--west_mountain-mark1")
+mark = 1
+kind = "door"
+cell = 5
+facing = 1
+database_name = "east passage--east mountain.mapdoor5"
+
+[node name="02 chest 166" parent="Objects" index="2" instance=ExtResource("5_7x3go")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -38)
+frames = 2
+content_type = 2
+content_name = "cards.magic.Earth"
+content_info = PackedStringArray("1", "true")
+kind = "chest"
+cell = 166
+facing = 3
+image = "Images/chest"
+database_name = "east passage--east mountain.mapchest166"
+
+[node name="View" parent="Objects/02 chest 166" index="0"]
+transform = Transform3D(-3.059797e-10, 0, -1, 0, 0.007, 0, 0.007, 0, -4.371139e-08, 0, -1.2825, 0)
+sprite_frames = ExtResource("6_lb10a")
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -2)
+
+[editable path="Objects/02 chest 166"]

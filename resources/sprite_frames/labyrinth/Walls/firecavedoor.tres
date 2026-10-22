@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/firecavedoor0.png" id="1_yv6jj"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/firecavedoor1.png" id="2_jdaml"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_yv6jj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_jdaml")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}]

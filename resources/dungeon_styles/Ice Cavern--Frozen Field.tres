@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="DungeonStyle" format=3]
+
+[ext_resource type="Script" path="res://scenes/dungeons/DungeonStyle.gd" id="1_acxuv"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Floors/snowhedgefloor.jpg" id="2_pw7ay"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/snowhedgewall.png" id="3_hwcke"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/snowhedgedoor.png" id="4_q1gnq"]
+
+[resource]
+script = ExtResource("1_acxuv")
+texture_names = PackedStringArray("Floors/snowhedgefloor.jpg", "Walls/snowhedgewall.png", "Walls/snowhedgedoor.png")
+textures = Array[Texture2D]([ExtResource("2_pw7ay"), ExtResource("3_hwcke"), ExtResource("4_q1gnq")])
+floor_slots = Vector2i(0, 1)
+wall_slots = Vector2i(1, 3)
+light0 = true
+light0_position = Vector4(0, 0, 0, 1)
+light0_ambient = Color(0.8, 0.8, 0.8, 1)
+light0_diffuse = Color(0.8, 0.8, 0.8, 1)
+light0_specular = Color(0, 0, 0, 1)
+light0_attenuation = Vector3(1, 0.01, 0.015)
+light1 = true
+light1_ambient = Color(0.8, 0.8, 0.8, 1)
+light1_diffuse = Color(0.8, 0.8, 0.8, 1)
+light1_specular = Color(0, 0, 0, 1)
+light1_attenuation = Vector3(1, 0.01, 0.015)
+material = true
+material_ambient = Color(0.4, 0.4, 0.4, 1)
+material_diffuse = Color(0.7, 0.7, 0.7, 1)
+material_specular = Color(0, 0, 0, 1)
+material_emission = Color(0.1, 0.1, 0.1, 1)
+material_shininess = 5.0
+fog = true
+fog_color = Color(0.8, 0.8, 1, 0.8)
+fog_density = 0.02
+sky = true
+sky_top = Color(0.3, 0.3, 0.5, 0.8)
+sky_bottom = Color(0.8, 0.8, 1, 0.8)
+snow = true

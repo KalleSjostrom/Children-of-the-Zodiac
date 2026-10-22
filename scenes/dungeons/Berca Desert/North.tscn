@@ -1,0 +1,109 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/Berca Desert.tres" id="2_4tt17"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/Berca Desert--North.tres" id="3_7loui"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonDoor.tscn" id="4_vggwl"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonChest.tscn" id="5_5um5a"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/crate.tres" id="6_4b1am"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonSavePoint.tscn" id="7_w0xyb"]
+
+[node name="North" instance=ExtResource("1_base")]
+map_name = "Berca Desert--North.map"
+style = ExtResource("2_4tt17")
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+mission_entries = PackedStringArray()
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_7loui")
+
+[node name="00 door 127" parent="Objects" index="0" instance=ExtResource("4_vggwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -2)
+open_roads = "dontopen"
+next_places = PackedStringArray("berca_desert--south-mark0")
+kind = "door"
+cell = 127
+database_name = "berca desert--north.mapdoor127"
+
+[node name="01 door 12" parent="Objects" index="1" instance=ExtResource("4_vggwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -14)
+open_roads = "dontopen"
+next_places = PackedStringArray("berca_desert--north_west-mark1")
+mark = 1
+kind = "door"
+cell = 12
+facing = 1
+database_name = "berca desert--north.mapdoor12"
+
+[node name="02 door 206" parent="Objects" index="2" instance=ExtResource("4_vggwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -6)
+open_roads = "dontopen"
+next_places = PackedStringArray("berca_desert--north_east-mark2")
+mark = 2
+kind = "door"
+cell = 206
+facing = 3
+database_name = "berca desert--north.mapdoor206"
+
+[node name="03 chest 134" parent="Objects" index="3" instance=ExtResource("5_5um5a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -38)
+frames = 2
+content_type = 2
+content_name = "cards.magic.Earth"
+content_info = PackedStringArray("2", "true")
+kind = "chest"
+cell = 134
+facing = 1
+image = "Images/crate"
+database_name = "berca desert--north.mapchest134"
+
+[node name="View" parent="Objects/03 chest 134" index="0"]
+transform = Transform3D(-2.6226832e-10, 0, 1, 0, 0.006, 0, -0.006, 0, -4.371139e-08, 0, -1.547, 0)
+sprite_frames = ExtResource("6_4b1am")
+
+[node name="04 chest 8" parent="Objects" index="4" instance=ExtResource("5_5um5a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -30)
+frames = 2
+content_type = 2
+content_name = "cards.offense.Drain"
+content_info = PackedStringArray("2", "false")
+kind = "chest"
+cell = 8
+facing = 1
+image = "Images/crate"
+database_name = "berca desert--north.mapchest8"
+
+[node name="View" parent="Objects/04 chest 8" index="0"]
+transform = Transform3D(-2.6226832e-10, 0, 1, 0, 0.006, 0, -0.006, 0, -4.371139e-08, 0, -1.547, 0)
+sprite_frames = ExtResource("6_4b1am")
+
+[node name="05 chest 104" parent="Objects" index="5" instance=ExtResource("5_5um5a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -30)
+frames = 2
+content_type = 2
+content_name = "cards.magic.Earth"
+content_info = PackedStringArray("2", "false")
+kind = "chest"
+cell = 104
+facing = 3
+image = "Images/crate"
+database_name = "berca desert--north.mapchest104"
+
+[node name="View" parent="Objects/05 chest 104" index="0"]
+transform = Transform3D(-2.6226832e-10, 0, -1, 0, 0.006, 0, 0.006, 0, -4.371139e-08, 0, -1.547, 0)
+sprite_frames = ExtResource("6_4b1am")
+
+[node name="06 save 174" parent="Objects" index="6" instance=ExtResource("7_w0xyb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -6)
+kind = "save"
+cell = 174
+facing = 3
+image = "-1"
+database_name = "berca desert--north.mapsave174"
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -2)
+
+[editable path="Objects/03 chest 134"]
+[editable path="Objects/04 chest 8"]
+[editable path="Objects/05 chest 104"]

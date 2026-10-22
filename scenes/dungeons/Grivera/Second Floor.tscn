@@ -1,0 +1,112 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/Grivera.tres" id="2_0y5qc"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/Grivera--Second Floor.tres" id="3_iix2o"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonLadderDoor.tscn" id="4_3pis7"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/ladderdown.tres" id="5_3a62g"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/ladderup.tres" id="6_2atj0"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonChest.tscn" id="7_00m57"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/chest.tres" id="8_ty16s"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonSavePoint.tscn" id="9_ui8jf"]
+
+[node name="Second Floor" instance=ExtResource("1_base")]
+map_name = "Grivera--Second Floor.map"
+style = ExtResource("2_0y5qc")
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+mission_entries = PackedStringArray()
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_iix2o")
+
+[node name="00 ladderDoor 116" parent="Objects" index="0" instance=ExtResource("4_3pis7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -46)
+open_roads = "dontopen"
+next_places = PackedStringArray("grivera--first_floor-mark1")
+kind = "ladderDoor"
+cell = 116
+facing = 2
+image = "Images/ladderdown.png"
+database_name = "grivera--second floor.mapladderdoor116"
+
+[node name="View" parent="Objects/00 ladderDoor 116" index="0"]
+transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 1, 0, -2.2625, -0.29999924)
+sprite_frames = ExtResource("5_3a62g")
+
+[node name="01 ladderDoor 203" parent="Objects" index="1" instance=ExtResource("4_3pis7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -18)
+open_roads = "dontopen"
+next_places = PackedStringArray("grivera--first_floor-mark2")
+mark = 1
+kind = "ladderDoor"
+cell = 203
+facing = 3
+image = "Images/ladderdown.png"
+database_name = "grivera--second floor.mapladderdoor203"
+
+[node name="View" parent="Objects/01 ladderDoor 203" index="0"]
+transform = Transform3D(-2.1855694e-10, 0, -1, 0, 0.005, 0, 0.005, 0, -4.371139e-08, 0.29999924, -2.2625, 0)
+sprite_frames = ExtResource("5_3a62g")
+
+[node name="02 ladderDoor 94" parent="Objects" index="2" instance=ExtResource("4_3pis7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -6)
+going_up = true
+open_roads = "dontopen"
+next_places = PackedStringArray("The_Senate_of_Pensara", "grivera--third_floor-mark0")
+mark = 2
+kind = "ladderDoor"
+cell = 94
+facing = 3
+image = "Images/ladderup.png"
+database_name = "grivera--second floor.mapladderdoor94"
+
+[node name="View" parent="Objects/02 ladderDoor 94" index="0"]
+transform = Transform3D(-2.1855694e-10, 0, -1, 0, 0.005, 0, 0.005, 0, -4.371139e-08, 0.29999924, 0.2375, 0)
+sprite_frames = ExtResource("6_2atj0")
+
+[node name="03 chest 52" parent="Objects" index="3" instance=ExtResource("7_00m57")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -46)
+frames = 2
+content_name = "20"
+content_info = PackedStringArray()
+kind = "chest"
+cell = 52
+facing = 2
+image = "Images/chest"
+database_name = "grivera--second floor.mapchest52"
+
+[node name="View" parent="Objects/03 chest 52" index="0"]
+transform = Transform3D(0.007, 0, 0, 0, 0.007, 0, 0, 0, 1, 0, -1.2825, 0)
+sprite_frames = ExtResource("8_ty16s")
+
+[node name="04 chest 189" parent="Objects" index="4" instance=ExtResource("7_00m57")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46, 0, -10)
+frames = 2
+content_type = 2
+content_name = "cards.magic.Slow"
+content_info = PackedStringArray("2", "false")
+kind = "chest"
+cell = 189
+facing = 2
+image = "Images/chest"
+database_name = "grivera--second floor.mapchest189"
+
+[node name="View" parent="Objects/04 chest 189" index="0"]
+transform = Transform3D(0.007, 0, 0, 0, 0.007, 0, 0, 0, 1, 0, -1.2825, 0)
+sprite_frames = ExtResource("8_ty16s")
+
+[node name="05 save 87" parent="Objects" index="5" instance=ExtResource("9_ui8jf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -34)
+kind = "save"
+cell = 87
+image = "-1"
+database_name = "grivera--second floor.mapsave87"
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 30, 0, -46)
+
+[editable path="Objects/00 ladderDoor 116"]
+[editable path="Objects/01 ladderDoor 203"]
+[editable path="Objects/02 ladderDoor 94"]
+[editable path="Objects/03 chest 52"]
+[editable path="Objects/04 chest 189"]

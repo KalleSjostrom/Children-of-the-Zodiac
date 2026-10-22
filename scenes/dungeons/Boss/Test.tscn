@@ -1,0 +1,35 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/Boss.tres" id="2_f1dqa"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/Boss--Test.tres" id="3_8cpas"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonDoor.tscn" id="4_57cm6"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonBoss.tscn" id="5_1sb0t"]
+
+[node name="Test" instance=ExtResource("1_base")]
+map_name = "Boss--Test.map"
+style = ExtResource("2_f1dqa")
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+mission_entries = PackedStringArray()
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_8cpas")
+
+[node name="00 door 13" parent="Objects" index="0" instance=ExtResource("4_57cm6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -10)
+open_roads = "dontopen"
+next_places = PackedStringArray("_")
+kind = "door"
+cell = 13
+database_name = "boss--test.mapdoor13"
+
+[node name="01 boss 29" parent="Objects" index="1" instance=ExtResource("5_1sb0t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -10)
+kind = "boss"
+cell = 29
+facing = 1
+image = "Menthu"
+database_name = "menthu"
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -10)

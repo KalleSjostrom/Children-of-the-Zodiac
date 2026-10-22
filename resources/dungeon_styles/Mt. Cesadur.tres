@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="DungeonStyle" format=3]
+
+[ext_resource type="Script" path="res://scenes/dungeons/DungeonStyle.gd" id="1_aqh0l"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Floors/earthcavefloor.jpg" id="2_afshw"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Floors/earthcaveflooropen.jpg" id="3_kulue"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/earthcavewall.png" id="4_kkavw"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/earthcavedoor.png" id="5_o0lpk"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Roofs/earthcaveroof.jpg" id="6_n7ss4"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Roofs/earthcaveroofopen.jpg" id="7_v48hm"]
+
+[resource]
+script = ExtResource("1_aqh0l")
+texture_names = PackedStringArray("Floors/earthcavefloor.jpg", "Floors/earthcaveflooropen.jpg", "Walls/earthcavewall.png", "Walls/earthcavedoor.png", "Roofs/earthcaveroof.jpg", "Roofs/earthcaveroofopen.jpg")
+textures = Array[Texture2D]([ExtResource("2_afshw"), ExtResource("3_kulue"), ExtResource("4_kkavw"), ExtResource("5_o0lpk"), ExtResource("6_n7ss4"), ExtResource("7_v48hm")])
+floor_slots = Vector2i(0, 2)
+wall_slots = Vector2i(2, 4)
+roof_slots = Vector2i(4, 6)
+light0 = true
+light0_position = Vector4(0, 0, 0, 1)
+light0_ambient = Color(1, 1, 1, 1)
+light0_diffuse = Color(1, 1, 1, 1)
+light0_specular = Color(0, 0, 0, 1)
+light0_attenuation = Vector3(1, 0.02, 0.03)
+light1 = true
+light1_ambient = Color(0.2, 0.2, 0.2, 0.2)
+light1_diffuse = Color(0.2, 0.2, 0.2, 0.2)
+light1_specular = Color(0, 0, 0, 1)
+material = true
+material_ambient = Color(0.7, 0.7, 0.7, 1)
+material_diffuse = Color(0.7, 0.7, 0.7, 1)
+material_specular = Color(0, 0, 0, 1)
+fog = true
+fog_color = Color(0.4, 0.3, 0, 0.01)
+fog_density = 0.01

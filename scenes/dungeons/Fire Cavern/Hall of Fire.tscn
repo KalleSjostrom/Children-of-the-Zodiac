@@ -1,0 +1,107 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/Fire Cavern.tres" id="2_2exga"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/Fire Cavern--Hall of Fire.tres" id="3_kq2om"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonDoor.tscn" id="4_s7ymv"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonHinderDoor.tscn" id="5_kgbmk"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Walls/firecavedoor.tres" id="6_dfhgd"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonChest.tscn" id="7_r6bf0"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/volcano.tres" id="8_cltua"]
+
+[node name="Hall of Fire" instance=ExtResource("1_base")]
+map_name = "Fire Cavern--Hall of Fire.map"
+style = ExtResource("2_2exga")
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+has_mission = true
+mission_kind = "FireMission"
+mission_name = "treasuremission"
+mission_entries = PackedStringArray("trigger&&crossroadnode&&2", "dialog&&Zalzi&&That\'s both of them!&&Let\'s head out!")
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_kq2om")
+
+[node name="00 door 9" parent="Objects" index="0" instance=ExtResource("4_s7ymv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -26)
+open_roads = "dontopen"
+next_places = PackedStringArray("landfire_cavern--hall_of_fire-mark0")
+kind = "door"
+cell = 9
+facing = 1
+database_name = "fire cavern--hall of fire.mapdoor9"
+
+[node name="01 hinderDoor 115" parent="Objects" index="1" instance=ExtResource("5_kgbmk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -50)
+next_place = "fire_cavern--blazing_maze-mark0"
+mark = 1
+kind = "hinderDoor"
+cell = 115
+facing = 2
+image = "Walls/firecavedoor"
+database_name = "fire cavern--hall of fire.maphinderdoor115"
+
+[node name="View" parent="Objects/01 hinderDoor 115" index="0"]
+transform = Transform3D(0.0078125, 0, 0, 0, 0.0078125, 0, 0, 0, 1, 0, 0, -2)
+sprite_frames = ExtResource("6_dfhgd")
+frame = 1
+
+[node name="02 door 207" parent="Objects" index="2" instance=ExtResource("4_s7ymv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -2)
+open_roads = "dontopen"
+next_places = PackedStringArray("fire_cavern--furnace-mark0")
+mark = 2
+kind = "door"
+cell = 207
+facing = 3
+database_name = "fire cavern--hall of fire.mapdoor207"
+
+[node name="03 chest 36" parent="Objects" index="3" instance=ExtResource("7_r6bf0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -46)
+content_type = 2
+content_name = "cards.offense.MagicalBlow"
+content_info = PackedStringArray("2", "false")
+kind = "chest"
+cell = 36
+facing = 2
+image = "Images/volcano.png"
+database_name = "fire cavern--hall of fire.mapchest36"
+
+[node name="View" parent="Objects/03 chest 36" index="0"]
+transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 1, 0, -1.6925, 0)
+sprite_frames = ExtResource("8_cltua")
+
+[node name="04 chest 30" parent="Objects" index="4" instance=ExtResource("7_r6bf0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -6)
+content_type = 2
+content_name = "cards.magic.Fire"
+content_info = PackedStringArray("2", "false")
+kind = "chest"
+cell = 30
+facing = 1
+image = "Images/volcano.png"
+database_name = "fire cavern--hall of fire.mapchest30"
+
+[node name="View" parent="Objects/04 chest 30" index="0"]
+transform = Transform3D(-2.1855694e-10, 0, 1, 0, 0.005, 0, -0.005, 0, -4.371139e-08, 0, -1.6925, 0)
+sprite_frames = ExtResource("8_cltua")
+
+[node name="05 chest 204" parent="Objects" index="5" instance=ExtResource("7_r6bf0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -14)
+content_name = "1800"
+content_info = PackedStringArray()
+kind = "chest"
+cell = 204
+image = "Images/volcano.png"
+database_name = "fire cavern--hall of fire.mapchest204"
+
+[node name="View" parent="Objects/05 chest 204" index="0"]
+transform = Transform3D(-0.005, 0, -8.742278e-08, 0, 0.005, 0, 4.3711387e-10, 0, -1, 0, -1.6925, 0)
+sprite_frames = ExtResource("8_cltua")
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2, 0, -26)
+
+[editable path="Objects/01 hinderDoor 115"]
+[editable path="Objects/03 chest 36"]
+[editable path="Objects/04 chest 30"]
+[editable path="Objects/05 chest 204"]

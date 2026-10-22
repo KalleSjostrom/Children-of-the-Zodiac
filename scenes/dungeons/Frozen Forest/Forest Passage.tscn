@@ -1,0 +1,72 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/Frozen Forest.tres" id="2_cpivp"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/Frozen Forest--Forest Passage.tres" id="3_l70en"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonDoor.tscn" id="4_qq13u"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonChest.tscn" id="5_nicon"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/snowcrate.tres" id="6_7d8iy"]
+
+[node name="Forest Passage" instance=ExtResource("1_base")]
+map_name = "Frozen Forest--Forest Passage.map"
+style = ExtResource("2_cpivp")
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+mission_entries = PackedStringArray()
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_l70en")
+
+[node name="00 door 143" parent="Objects" index="0" instance=ExtResource("4_qq13u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -2)
+open_roads = "dontopen"
+next_places = PackedStringArray("landfrozen_forest--forest_passage-mark0")
+kind = "door"
+cell = 143
+database_name = "frozen forest--forest passage.mapdoor143"
+
+[node name="01 door 99" parent="Objects" index="1" instance=ExtResource("4_qq13u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -50)
+open_roads = "dontopen"
+next_places = PackedStringArray("Vincent_Tries_to_Cool_Down_the_War", "ice_cavern--pillar_room-mark0")
+mark = 1
+kind = "door"
+cell = 99
+facing = 2
+database_name = "frozen forest--forest passage.mapdoor99"
+
+[node name="02 chest 44" parent="Objects" index="2" instance=ExtResource("5_nicon")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -14)
+frames = 2
+content_type = 2
+content_name = "cards.offense.BattleCard"
+content_info = PackedStringArray("3", "true")
+kind = "chest"
+cell = 44
+image = "Images/snowcrate"
+database_name = "frozen forest--forest passage.mapchest44"
+
+[node name="View" parent="Objects/02 chest 44" index="0"]
+transform = Transform3D(-0.006, 0, -8.742278e-08, 0, 0.006, 0, 5.2453664e-10, 0, -1, 0, -1.52, 0)
+sprite_frames = ExtResource("6_7d8iy")
+
+[node name="03 chest 198" parent="Objects" index="3" instance=ExtResource("5_nicon")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -38)
+frames = 2
+content_type = 2
+content_name = "cards.support.ProtectingBarrier"
+content_info = PackedStringArray("3", "true")
+kind = "chest"
+cell = 198
+facing = 2
+image = "Images/snowcrate"
+database_name = "frozen forest--forest passage.mapchest198"
+
+[node name="View" parent="Objects/03 chest 198" index="0"]
+transform = Transform3D(0.006, 0, 0, 0, 0.006, 0, 0, 0, 1, 0, -1.52, 0)
+sprite_frames = ExtResource("6_7d8iy")
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -2)
+
+[editable path="Objects/02 chest 44"]
+[editable path="Objects/03 chest 198"]

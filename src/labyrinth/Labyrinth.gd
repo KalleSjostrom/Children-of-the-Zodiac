@@ -134,8 +134,10 @@ func updateCharacterDecks():
 ## scene (DungeonScene), which draws the walls, the objects and the weather
 ## while the legacy objects stay in charge; null for a floor that is not
 ## converted and with --legacy=dungeons (the legacy drawing draws it then).
+## --legacy=dungeon_drawing (dev, for checking step A on its own) keeps the
+## legacy drawing of a floor built from its scene.
 func create_scene() -> Node:
-	if mapLoader == null:
+	if mapLoader == null or Main.is_legacy("dungeon_drawing"):
 		return null
 	return mapLoader.dungeon_scene_for(mapLoader.labyrinthName)
 
@@ -263,8 +265,13 @@ func checkNode(n, pos = null):
 			# A door is on the far wall of its own node and is entered from
 			# there; from the node before it, it was entered from too far
 			# away (COTZ-010). Chests, levers and villagers in the next node
-			# are still used from here.
-			if node != null and node.hasInventory() and not node.getInventory() is AbstractDoor:
+			# are still used from here, and so are ladders: a ladder's node
+			# cannot be entered (LadderDoor.isPassable), so it is climbed from
+			# the node before it, as in the Java (COTZ-010 had made the
+			# ladders of Grivera and Mt. Cesadur unusable; found in the phase
+			# 2 rollout).
+			if node != null and node.hasInventory() and \
+					(not node.getInventory() is AbstractDoor or node.getInventory() is LadderDoor):
 				graph.activateInventory(node, self)
 
 func checkBossFight():
@@ -346,6 +353,14 @@ func exitWithoutFading(p_mode: int) -> void:
 	super.exitWithoutFading(p_mode)
 	if p_mode == Values.EXIT:
 		releaseBackReferences()
+
+
+## Phase 2 (docs/ARCHITECTURE.md section 10): reports in the log that the
+## floor's mode is freed (its scene with it), so parity runs show that every
+## floor left is.
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_PREDELETE:
+		print("Labyrinth: freed %s" % name)
 
 
 func releaseBackReferences():

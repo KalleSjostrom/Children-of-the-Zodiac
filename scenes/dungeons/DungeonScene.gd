@@ -88,6 +88,17 @@ func _ready() -> void:
 	var floor_node := get_node_or_null(^"Layout") as DungeonFloor
 	if floor_node != null and Engine.is_editor_hint():
 		floor_node.build(style)
+		# The sky (eye space) as the Rig's camera sees it.
+		var cam := get_node_or_null(^"Rig/Camera") as Node3D
+		if cam != null:
+			floor_node.set_sky_camera(cam.global_transform)
+
+
+## Reports in the log that a floor's run-time scene is freed (with its
+## Labyrinth mode), for the parity runs.
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_PREDELETE and _run_time:
+		print("DungeonScene: freed %s" % map_name)
 
 
 ## Step B: the node the frame's legacy 3D drawing goes into

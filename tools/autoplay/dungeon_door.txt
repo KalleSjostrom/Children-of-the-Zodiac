@@ -1,0 +1,66 @@
+# Leaves a floor through a door and comes back (parity cases dungeon_door_*,
+# phase 2 rollout): --start-node=<address>:<direction> starts on the cell
+# before the door's, facing the door (src/main/Main.gd); a step onto the
+# door's cell (a ladder in front of its wall is then too close to be seen:
+# inside the near plane, as in the legacy drawing). CROSS leaves (the
+# fade-out), the next floor loads and fades in (the player stands at the
+# door it names, facing away from it), the menu (the mode switch that frees
+# the floor left: "Labyrinth: freed" and, for a scene, "DungeonScene: freed"
+# in the log), then a turn around to the door the player came through, CROSS
+# back, and the menu again.
+wait 3000
+shot o00_approach
+tap UP
+wait 250
+shot o00_step_mid
+wait 450
+shot o01_door
+pos door
+log door
+tap CROSS
+wait 50
+shot o02_leaving
+wait 300
+shot o03_fading
+wait 600
+shot o04_faded
+wait 2200
+shot o05_arriving
+wait 600
+shot o06_arrived
+wait 2200
+shot o07_settled
+pos arrived
+log arrived
+tap TRIANGLE
+wait 2500
+shot o08_menu
+log menu
+tap CIRCLE
+wait 2000
+shot o09_after_menu
+log after_menu
+tap RIGHT
+wait 700
+tap RIGHT
+wait 700
+pos turned
+shot o10_door_back
+tap CROSS
+wait 300
+shot o11_leaving_back
+wait 3500
+shot o12_arriving_back
+wait 2500
+shot o13_back
+pos back
+log back
+tap TRIANGLE
+wait 2500
+shot o14_menu
+log menu_back
+tap CIRCLE
+wait 2000
+shot o15_after_menu
+log after_menu_back
+quit

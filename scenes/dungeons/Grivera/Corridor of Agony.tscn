@@ -1,0 +1,97 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/Grivera--Corridor of Agony.tres" id="2_38dwn"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/Grivera--Corridor of Agony.tres" id="3_4l3pr"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonDoor.tscn" id="4_k3xrx"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonHinderDoor.tscn" id="5_u8wx2"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Walls/demonfloordoor.tres" id="6_sc511"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonSavePoint.tscn" id="7_ao6tf"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonButton.tscn" id="8_n4q4n"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/lever.tres" id="9_kvvt1"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonBoss.tscn" id="10_jy03a"]
+
+[node name="Corridor of Agony" instance=ExtResource("1_base")]
+map_name = "Grivera--Corridor of Agony.map"
+style = ExtResource("2_38dwn")
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+mission_entries = PackedStringArray()
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_4l3pr")
+
+[node name="00 door 23" parent="Objects" index="0" instance=ExtResource("4_k3xrx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -34)
+open_roads = "dontopen"
+next_places = PackedStringArray("grivera--omnious_hall-mark1")
+kind = "door"
+cell = 23
+facing = 1
+database_name = "grivera--corridor of agony.mapdoor23"
+
+[node name="01 hinderDoor 79" parent="Objects" index="1" instance=ExtResource("5_u8wx2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -2)
+next_place = "grivera--corridor_of_agony-mark2"
+mark = 1
+kind = "hinderDoor"
+cell = 79
+facing = 3
+image = "Walls/demonfloordoor"
+database_name = "grivera--corridor of agony.maphinderdoor79"
+
+[node name="View" parent="Objects/01 hinderDoor 79" index="0"]
+transform = Transform3D(-3.4149522e-10, 0, -1, 0, 0.0078125, 0, 0.0078125, 0, -4.371139e-08, 2, 0, 0)
+flip_h = true
+sprite_frames = ExtResource("6_sc511")
+frame = 1
+
+[node name="02 hinderDoor 95" parent="Objects" index="2" instance=ExtResource("5_u8wx2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -2)
+next_place = "grivera--corridor_of_agony-mark1"
+mark = 2
+kind = "hinderDoor"
+cell = 95
+facing = 1
+image = "Walls/demonfloordoor"
+database_name = "grivera--corridor of agony.maphinderdoor95"
+
+[node name="View" parent="Objects/02 hinderDoor 95" index="0"]
+transform = Transform3D(-3.4149522e-10, 0, 1, 0, 0.0078125, 0, -0.0078125, 0, -4.371139e-08, -2, 0, 0)
+sprite_frames = ExtResource("6_sc511")
+frame = 1
+
+[node name="03 save 74" parent="Objects" index="3" instance=ExtResource("7_ao6tf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -22)
+kind = "save"
+cell = 74
+image = "-1"
+database_name = "grivera--corridor of agony.mapsave74"
+
+[node name="04 button 106" parent="Objects" index="4" instance=ExtResource("8_n4q4n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -22)
+frames = 7
+hinders = PackedStringArray("Grivera--Corridor_of_Agony.maphinderDoor79", "Grivera--Corridor_of_Agony.maphinderDoor95")
+kind = "button"
+cell = 106
+facing = 2
+image = "Images/lever"
+database_name = "grivera--corridor of agony.mapbutton106"
+
+[node name="View" parent="Objects/04 button 106" index="0"]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 1, 0, -1.125, -1)
+sprite_frames = ExtResource("9_kvvt1")
+
+[node name="05 boss 156" parent="Objects" index="5" instance=ExtResource("10_jy03a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -14)
+kind = "boss"
+cell = 156
+facing = 1
+image = "Salmonman"
+database_name = "salmonman"
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 6, 0, -34)
+
+[editable path="Objects/01 hinderDoor 79"]
+[editable path="Objects/02 hinderDoor 95"]
+[editable path="Objects/04 button 106"]

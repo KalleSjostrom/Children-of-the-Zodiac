@@ -1,0 +1,180 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/The Sewers.tres" id="2_3cu0s"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/The Sewers--North.tres" id="3_yvyuw"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonHinderDoor.tscn" id="4_6gjcf"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Walls/sewerdoor.tres" id="5_dmfbm"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonDoor.tscn" id="6_5nl7e"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonChest.tscn" id="7_8o5wt"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/chest.tres" id="8_ars8a"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonBomb.tscn" id="9_4d8dl"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/bomb.tres" id="10_rvqqc"]
+
+[node name="North" instance=ExtResource("1_base")]
+map_name = "The Sewers--North.map"
+style = ExtResource("2_3cu0s")
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+has_mission = true
+mission_kind = "BombMission"
+mission_name = "sewermission"
+mission_entries = PackedStringArray("trigger&&the sewers--north.maphinderdoor108&&1", "trigger&&the sewers--north.maphinderdoor124&&1", "dialog&&Kin&&Let\'s get out of here!")
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_yvyuw")
+
+[node name="00 hinderDoor 143" parent="Objects" index="0" instance=ExtResource("4_6gjcf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -2)
+next_place = "the_sewers--south-mark1"
+kind = "hinderDoor"
+cell = 143
+image = "Walls/sewerdoor"
+database_name = "the sewers--north.maphinderdoor143"
+
+[node name="View" parent="Objects/00 hinderDoor 143" index="0"]
+transform = Transform3D(-0.0078125, 0, -8.742278e-08, 0, 0.0078125, 0, 6.8299044e-10, 0, -1, 0, 0, 2)
+flip_h = true
+sprite_frames = ExtResource("5_dmfbm")
+frame = 1
+
+[node name="01 hinderDoor 202" parent="Objects" index="1" instance=ExtResource("4_6gjcf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -22)
+next_place = "the_sewers--north_east-mark0"
+mark = 1
+kind = "hinderDoor"
+cell = 202
+facing = 3
+image = "Walls/sewerdoor"
+database_name = "the sewers--north.maphinderdoor202"
+
+[node name="View" parent="Objects/01 hinderDoor 202" index="0"]
+transform = Transform3D(-3.4149522e-10, 0, -1, 0, 0.0078125, 0, 0.0078125, 0, -4.371139e-08, 2, 0, 0)
+flip_h = true
+sprite_frames = ExtResource("5_dmfbm")
+frame = 1
+
+[node name="02 hinderDoor 136" parent="Objects" index="2" instance=ExtResource("4_6gjcf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -30)
+next_place = "the_sewers--north-mark3"
+mark = 2
+kind = "hinderDoor"
+cell = 136
+image = "Walls/sewerdoor"
+database_name = "the sewers--north.maphinderdoor136"
+
+[node name="View" parent="Objects/02 hinderDoor 136" index="0"]
+transform = Transform3D(-0.0078125, 0, -8.742278e-08, 0, 0.0078125, 0, 6.8299044e-10, 0, -1, 0, 0, 2)
+flip_h = true
+sprite_frames = ExtResource("5_dmfbm")
+frame = 1
+
+[node name="03 hinderDoor 137" parent="Objects" index="3" instance=ExtResource("4_6gjcf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -26)
+next_place = "the_sewers--north-mark2"
+mark = 3
+kind = "hinderDoor"
+cell = 137
+facing = 2
+image = "Walls/sewerdoor"
+database_name = "the sewers--north.maphinderdoor137"
+
+[node name="View" parent="Objects/03 hinderDoor 137" index="0"]
+transform = Transform3D(0.0078125, 0, 0, 0, 0.0078125, 0, 0, 0, 1, 0, 0, -2)
+sprite_frames = ExtResource("5_dmfbm")
+frame = 1
+
+[node name="04 hinderDoor 108" parent="Objects" index="4" instance=ExtResource("4_6gjcf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -14)
+next_place = "the_sewers--north-mark5"
+mark = 4
+kind = "hinderDoor"
+cell = 108
+facing = 3
+image = "Walls/sewerdoor"
+database_name = "the sewers--north.maphinderdoor108"
+
+[node name="View" parent="Objects/04 hinderDoor 108" index="0"]
+transform = Transform3D(-3.4149522e-10, 0, -1, 0, 0.0078125, 0, 0.0078125, 0, -4.371139e-08, 2, 0, 0)
+flip_h = true
+sprite_frames = ExtResource("5_dmfbm")
+frame = 1
+
+[node name="05 hinderDoor 124" parent="Objects" index="5" instance=ExtResource("4_6gjcf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -14)
+next_place = "the_sewers--north-mark4"
+mark = 5
+kind = "hinderDoor"
+cell = 124
+facing = 1
+image = "Walls/sewerdoor"
+database_name = "the sewers--north.maphinderdoor124"
+
+[node name="View" parent="Objects/05 hinderDoor 124" index="0"]
+transform = Transform3D(-3.4149522e-10, 0, 1, 0, 0.0078125, 0, -0.0078125, 0, -4.371139e-08, -2, 0, 0)
+sprite_frames = ExtResource("5_dmfbm")
+frame = 1
+
+[node name="06 door 21" parent="Objects" index="6" instance=ExtResource("6_5nl7e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -42)
+open_roads = "dontopen"
+next_places = PackedStringArray("Emerge_From_The_Sewers", "pensara_-_the_north_district-pos2")
+mark = 6
+kind = "door"
+cell = 21
+facing = 1
+database_name = "the sewers--north.mapdoor21"
+
+[node name="07 chest 26" parent="Objects" index="7" instance=ExtResource("7_8o5wt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -22)
+frames = 2
+content_name = "900"
+content_info = PackedStringArray()
+kind = "chest"
+cell = 26
+facing = 2
+image = "Images/chest"
+database_name = "the sewers--north.mapchest26"
+
+[node name="View" parent="Objects/07 chest 26" index="0"]
+transform = Transform3D(0.007, 0, 0, 0, 0.007, 0, 0, 0, 1, 0, -1.2825, 0)
+sprite_frames = ExtResource("8_ars8a")
+
+[node name="08 chest 30" parent="Objects" index="8" instance=ExtResource("7_8o5wt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -6)
+frames = 2
+content_name = "1300"
+content_info = PackedStringArray()
+kind = "chest"
+cell = 30
+image = "Images/chest"
+database_name = "the sewers--north.mapchest30"
+
+[node name="View" parent="Objects/08 chest 30" index="0"]
+transform = Transform3D(-0.007, 0, -8.742278e-08, 0, 0.007, 0, 6.119594e-10, 0, -1, 0, -1.2825, 0)
+sprite_frames = ExtResource("8_ars8a")
+
+[node name="09 bomb 166" parent="Objects" index="9" instance=ExtResource("9_4d8dl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -38)
+dialogs = Array[PackedStringArray]([PackedStringArray("Zalzi", "Vincent...", ""), PackedStringArray("0-Kin()", "What are those rebels thinking?", "How can they justify this??"), PackedStringArray("1-Kin()", "They must have been really desperate to do something", "like this, and Vincent is the one who..."), PackedStringArray("1-Kin()", "My own flesh and blood...", ""), PackedStringArray("2-Kin()", "I must make my father see...", "I must stop his oppression to end this!")])
+kind = "bomb"
+cell = 166
+facing = 3
+image = "Images/bomb.png"
+database_name = "the sewers--north.mapbomb166"
+
+[node name="View" parent="Objects/09 bomb 166" index="0"]
+transform = Transform3D(-2.6226832e-10, 0, -1, 0, 0.006, 0, 0.006, 0, -4.371139e-08, 1.9900017, -0.029, 0)
+sprite_frames = ExtResource("10_rvqqc")
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -2)
+
+[editable path="Objects/00 hinderDoor 143"]
+[editable path="Objects/01 hinderDoor 202"]
+[editable path="Objects/02 hinderDoor 136"]
+[editable path="Objects/03 hinderDoor 137"]
+[editable path="Objects/04 hinderDoor 108"]
+[editable path="Objects/05 hinderDoor 124"]
+[editable path="Objects/07 chest 26"]
+[editable path="Objects/08 chest 30"]
+[editable path="Objects/09 bomb 166"]

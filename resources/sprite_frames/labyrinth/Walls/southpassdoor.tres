@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/southpassdoor0.png" id="1_l0gpa"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/southpassdoor1.png" id="2_msd2w"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_l0gpa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_msd2w")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}]

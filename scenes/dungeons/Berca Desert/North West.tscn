@@ -1,0 +1,36 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/Berca Desert.tres" id="2_woisq"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/Berca Desert--North West.tres" id="3_6vhek"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonDoor.tscn" id="4_c4jvw"]
+
+[node name="North West" instance=ExtResource("1_base")]
+map_name = "Berca Desert--North West.map"
+style = ExtResource("2_woisq")
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+mission_entries = PackedStringArray()
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_6vhek")
+
+[node name="00 door 159" parent="Objects" index="0" instance=ExtResource("4_c4jvw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -2)
+open_roads = "dontopen"
+next_places = PackedStringArray("berca_desert--south_west-mark3")
+kind = "door"
+cell = 159
+database_name = "berca desert--north west.mapdoor159"
+
+[node name="01 door 204" parent="Objects" index="1" instance=ExtResource("4_c4jvw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -14)
+open_roads = "dontopen"
+next_places = PackedStringArray("berca_desert--north-mark1")
+mark = 1
+kind = "door"
+cell = 204
+facing = 3
+database_name = "berca desert--north west.mapdoor204"
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -2)

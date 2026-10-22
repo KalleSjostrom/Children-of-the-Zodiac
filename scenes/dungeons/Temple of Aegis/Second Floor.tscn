@@ -1,0 +1,73 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/dungeons/DungeonScene.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://resources/dungeon_styles/Temple of Aegis.tres" id="2_lfqkn"]
+[ext_resource type="Resource" path="res://resources/dungeon_layouts/Temple of Aegis--Second Floor.tres" id="3_u0sm3"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonDoor.tscn" id="4_av4nq"]
+[ext_resource type="PackedScene" path="res://scenes/dungeon_objects/DungeonChest.tscn" id="5_3ovhb"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/labyrinth/Images/stonebox.tres" id="6_u6qwm"]
+
+[node name="Second Floor" instance=ExtResource("1_base")]
+map_name = "Temple of Aegis--Second Floor.map"
+style = ExtResource("2_lfqkn")
+battle_music = PackedStringArray("Battle", "Fight the Demons")
+mission_entries = PackedStringArray()
+
+[node name="Layout" parent="." index="0"]
+layout = ExtResource("3_u0sm3")
+
+[node name="00 door--down 104" parent="Objects" index="0" instance=ExtResource("4_av4nq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -30)
+open_roads = "dontopen"
+next_places = PackedStringArray("temple_of_aegis--first_floor-mark1")
+kind = "door--down"
+cell = 104
+database_name = "temple of aegis--second floor.mapdoor104"
+
+[node name="01 door--up 106" parent="Objects" index="1" instance=ExtResource("4_av4nq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -22)
+open_roads = "dontopen"
+next_places = PackedStringArray("temple_of_aegis--third_floor-mark0")
+mark = 1
+kind = "door--up"
+cell = 106
+facing = 2
+database_name = "temple of aegis--second floor.mapdoor106"
+
+[node name="02 chest 73" parent="Objects" index="2" instance=ExtResource("5_3ovhb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -26)
+frames = 2
+content_type = 2
+content_name = "cards.offense.BattleCard"
+content_info = PackedStringArray("3", "false")
+kind = "chest"
+cell = 73
+facing = 3
+image = "Images/stonebox"
+database_name = "temple of aegis--second floor.mapchest73"
+
+[node name="View" parent="Objects/02 chest 73" index="0"]
+transform = Transform3D(-3.059797e-10, 0, -1, 0, 0.007, 0, 0.007, 0, -4.371139e-08, 0, -1.4785, 0)
+sprite_frames = ExtResource("6_u6qwm")
+
+[node name="03 chest 137" parent="Objects" index="3" instance=ExtResource("5_3ovhb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -26)
+frames = 2
+content_type = 2
+content_name = "cards.offense.MagicalBlow"
+content_info = PackedStringArray("2", "false")
+kind = "chest"
+cell = 137
+facing = 1
+image = "Images/stonebox"
+database_name = "temple of aegis--second floor.mapchest137"
+
+[node name="View" parent="Objects/03 chest 137" index="0"]
+transform = Transform3D(-3.059797e-10, 0, 1, 0, 0.007, 0, -0.007, 0, -4.371139e-08, 0, -1.4785, 0)
+sprite_frames = ExtResource("6_u6qwm")
+
+[node name="Rig" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -30)
+
+[editable path="Objects/02 chest 73"]
+[editable path="Objects/03 chest 137"]

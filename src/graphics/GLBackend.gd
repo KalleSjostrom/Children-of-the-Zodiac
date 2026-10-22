@@ -394,7 +394,10 @@ void vertex() {
 		vec3 c = gl_mat_emission.rgb + gl_light_model_ambient.rgb * gl_mat_ambient.rgb;
 		if (gl_light0_att.w > 0.5) { c += light_term(gl_light0_pos, gl_light0_amb, gl_light0_dif, gl_light0_att, ep, en); }
 		if (gl_light1_att.w > 0.5) { c += light_term(gl_light1_pos, gl_light1_amb, gl_light1_dif, gl_light1_att, ep, en); }
-		v_color = vec4(clamp(c, 0.0, 1.0) * COLOR.rgb, gl_mat_diffuse.a * COLOR.a);
+		// OpenGL 2 without GL_COLOR_MATERIAL (the original never enables it):
+		// a lit vertex takes the material's colours and its diffuse alpha, not
+		// the current colour (glColor).
+		v_color = vec4(clamp(c, 0.0, 1.0), gl_mat_diffuse.a);
 	}
 }
 

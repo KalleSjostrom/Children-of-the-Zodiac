@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Images/woodenbox0.png" id="1_6r6uj"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Images/woodenbox1.png" id="2_s5c3p"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_6r6uj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_s5c3p")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}]

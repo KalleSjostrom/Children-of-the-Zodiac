@@ -1,0 +1,47 @@
+# A labyrinth boss (parity cases dungeon_boss_*, phase 2 rollout):
+# --load="Slot 1" (the boss alive) --start="<floor>-mark0". The console's
+# "boss" goes next to the boss, facing it (it enters the floor again at its
+# save point and starts at that node, Load.labyrinthPosition); a step forward
+# starts the boss battle, which runs inside the labyrinth's frame
+# (Labyrinth.enterBattle: its sub game mode, drawn over the floor); CROSS
+# pages the boss's dialog until the party's turn, the console's "kill" wins
+# it, CROSS pages the result screens and the dialogs after it until the
+# battle is over (and the story the boss starts, if any).
+wait 3000
+shot k01_start
+console boss
+wait 4000
+shot k02_next_to_boss
+pos next_to_boss
+log next_to_boss
+tap UP
+wait 300
+shot k03_stepping
+wait 1200
+shot k04_battle
+log battle
+mark
+tap CROSS
+wait 500
+shot k_#_dialog
+loopuntil battlemode=1 30000
+shot k05_party_turn
+log party_turn
+console kill
+wait 1000
+shot k06_killed
+wait 2000
+shot k07_killed_later
+log killed
+mark
+tap CROSS
+wait 800
+shot k_#_after
+loopuntil !sub= 60000
+wait 2000
+shot k08_over
+log over
+wait 3000
+shot k09_later
+log later
+quit

@@ -1,0 +1,14 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Images/4x4small.png" id="1_majmy"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_majmy")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}]

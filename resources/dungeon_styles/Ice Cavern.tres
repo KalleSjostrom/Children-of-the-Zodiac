@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="DungeonStyle" format=3]
+
+[ext_resource type="Script" path="res://scenes/dungeons/DungeonStyle.gd" id="1_s2nmy"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Floors/icecavefloor.jpg" id="2_8axyw"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/icecavewall.png" id="3_6xcxh"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/icecavedoor0.png" id="4_o3cvg"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Roofs/icecaveroof.jpg" id="5_3ktwh"]
+
+[resource]
+script = ExtResource("1_s2nmy")
+texture_names = PackedStringArray("Floors/icecavefloor.jpg", "Walls/icecavewall.png", "Walls/icecavedoor0.png", "Roofs/icecaveroof.jpg")
+textures = Array[Texture2D]([ExtResource("2_8axyw"), ExtResource("3_6xcxh"), ExtResource("4_o3cvg"), ExtResource("5_3ktwh")])
+floor_slots = Vector2i(0, 1)
+wall_slots = Vector2i(1, 3)
+roof_slots = Vector2i(3, 4)
+light0 = true
+light0_position = Vector4(0, 0, 0, 1)
+light0_ambient = Color(0.7, 0.7, 0.7, 1)
+light0_diffuse = Color(0.7, 0.7, 0.7, 1)
+light0_specular = Color(0, 0, 0, 1)
+light0_attenuation = Vector3(1, 0.02, 0.03)
+material = true
+material_ambient = Color(0.3, 0.3, 0.3, 1)
+material_diffuse = Color(0.3, 0.3, 0.4, 1)
+material_specular = Color(0, 0, 0, 1)
+has_enemy_color = true
+enemy_color = Color(1, 1, 1, 1)

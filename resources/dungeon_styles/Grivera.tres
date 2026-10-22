@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="DungeonStyle" format=3]
+
+[ext_resource type="Script" path="res://scenes/dungeons/DungeonStyle.gd" id="1_y470o"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Floors/demoncave1floor.jpg" id="2_bajxg"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Floors/demoncave1flooropen.jpg" id="3_5xjxt"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/demoncave1wall.png" id="4_sccuy"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Walls/demoncave1door0.png" id="5_8hhqw"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Roofs/demoncave1roof.jpg" id="6_0mssi"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Roofs/demoncave1roofopen.jpg" id="7_1s2pr"]
+
+[resource]
+script = ExtResource("1_y470o")
+texture_names = PackedStringArray("Floors/demoncave1floor.jpg", "Floors/demoncave1flooropen.jpg", "Walls/demoncave1wall.png", "Walls/demoncave1door0.png", "Roofs/demoncave1roof.jpg", "Roofs/demoncave1roofopen.jpg")
+textures = Array[Texture2D]([ExtResource("2_bajxg"), ExtResource("3_5xjxt"), ExtResource("4_sccuy"), ExtResource("5_8hhqw"), ExtResource("6_0mssi"), ExtResource("7_1s2pr")])
+floor_slots = Vector2i(0, 2)
+wall_slots = Vector2i(2, 4)
+roof_slots = Vector2i(4, 6)
+light0 = true
+light0_position = Vector4(0, 0, 0, 1)
+light0_ambient = Color(0.8, 0.8, 0.8, 1)
+light0_diffuse = Color(0.8, 0.8, 0.8, 1)
+light0_specular = Color(0.2, 0.2, 0.2, 1)
+light0_attenuation = Vector3(1, 0.01, 0.015)
+material = true
+material_ambient = Color(0.7, 0.7, 0.7, 1)
+material_diffuse = Color(0.8, 0.8, 0.8, 1)
+material_specular = Color(0.2, 0.2, 0.2, 1)
+inv_material = true
+inv_material_ambient = Color(0.7, 0.7, 0.7, 1)
+inv_material_diffuse = Color(0.8, 0.8, 0.8, 1)
+inv_material_specular = Color(0.2, 0.2, 0.2, 1)
+inv_material_emission = Color(0.1, 0.1, 0.1, 1)
+inv_material_shininess = 5.0
+has_enemy_color = true
+enemy_color = Color(0.7, 0.7, 0.7, 1)

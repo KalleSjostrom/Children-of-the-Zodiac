@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Images/note10.png" id="1_n4tdk"]
+[ext_resource type="Texture2D" path="res://res/Labyrinth/Images/note11.png" id="2_3vmkp"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_n4tdk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_3vmkp")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}]
