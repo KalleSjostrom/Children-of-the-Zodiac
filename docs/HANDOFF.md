@@ -225,13 +225,14 @@ procedure in `docs/CONVERTING_DUNGEONS.md`:
   (labyrinth weather, save points, battle background snow) still run at 60
   updates per second.
 - Positions from `Values.createNormalPoint(x, y)` are `[y, x]`.
-- Content quirks met in phase 1 (kept): "Zazo at Night - 0" quits the game
+- Content quirks met in phase 1 (kept; all of them, with the dungeons', are
+  in `tickets/triage.md`): "Zazo at Night - 0" asserts (Java quit the game)
   unless its loot `Zazoname` is taken (equipment "2"); the Zazo night stores
   name images that do not exist (`inn.jpg`, `burt.png`); no story reaches
   Zazo, Pass to Zazo or Port of Zazo at night (`--start-time=night`);
   "Pensara - The North District - Farmer House" quit the game on entry
   until COTZ-023 (villager Dido's patrol was not closed; `Instructions.check`
-  now has the villager report an error instead of quitting); Berca - 1
+  now has the villager assert instead); Berca - 1
   names a villager Herman without a `.char` file; Zazo - Tent has no
   villager images; Podd's image path (Civil House) cannot resolve; a
   Berca - 1 loot line lacks its directions; Alares - 1, Dellna - 2,
@@ -241,7 +242,10 @@ procedure in `docs/CONVERTING_DUNGEONS.md`:
   Dorma's Tranquility and Menthu Battle are reached by nothing. Saves:
   "Start demon1" has Kin and Celis, "Start demon2" adds Borealis, "Start
   Menthu1" and "Start d3" add Zalzi; "Slot 2" and "Slot 3" are an older
-  data version (loading them quits).
+  data version (loading them asserts for each missing labyrinth node).
+- The game's code never quits: Java's `System.exit` checks are `assert`s
+  (the editor's debugger stops there; a console run prints a SCRIPT ERROR
+  and goes on), and `GameCore.exitGame()` is only the player's Escape.
 - GDScript gotchas met so far: unqualified calls to methods named like builtins
   (`load()`) hit the builtin → use `self.load()`; inner classes may not shadow
   global/native class names; overrides need ≥ parent parameter count with extras

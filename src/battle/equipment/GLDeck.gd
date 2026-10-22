@@ -405,9 +405,8 @@ func _updateFromCharacter(c) -> void:
 	var size: int = deckCards.size() + shownCards.size()
 	deckCards.append_array(shownCards)
 	shownCards.clear()
-	if size != deckCards.size():
-		push_error("Size is not the same for deck cards, exiting12")
-		GameCore.exitGame()
+	# Java exited the game on a wrong size, here and below.
+	assert(size == deckCards.size(), "GLDeck: the shown cards did not all go back to the deck")
 	if savedCard != null:
 		deckCards.append(savedCard)
 
@@ -415,9 +414,7 @@ func _updateFromCharacter(c) -> void:
 	var newCards: Array = getNewCards()
 	size = deckCards.size()
 	removeFromAllCards()
-	if size != deckCards.size():
-		push_error("Size is not the same for deck cards, exiting1")
-		GameCore.exitGame()
+	assert(size == deckCards.size(), "GLDeck: removeFromAllCards changed the deck")
 	allCards.append_array(newCards)
 
 	var nrAvailable: int = availableCards.size()

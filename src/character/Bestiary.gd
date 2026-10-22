@@ -43,9 +43,8 @@ func getSize():
 
 ## Adds the given enemy in the bestiary together with the given stats.
 func addEnemy(enemy, stats):
+	assert(enemy != null, "Bestiary: a null enemy") # Java exited the game
 	if enemy == null:
-		push_error("Null enemy!")
-		GameCore.exitGame()
 		return
 	enemyList[getSize()] = Stats.new(enemy, stats)
 

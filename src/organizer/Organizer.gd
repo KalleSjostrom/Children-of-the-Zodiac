@@ -267,10 +267,6 @@ func draw(g: Graphics) -> void:
 	currentGameMode.draw(g)
 
 
-func closeGame(status: int) -> void:
-	GameCore.exitGame()
-
-
 func getPreviousMode() -> GameMode:
 	return previousGameMode
 

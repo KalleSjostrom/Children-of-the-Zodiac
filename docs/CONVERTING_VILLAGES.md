@@ -42,7 +42,8 @@ the legacy drawing.
   (`src/main/Main.gd`). "Slot 1" reaches Dellna 1, Parasne 1, Port of
   Alares 1, The Ship Cabin 1 and Zazo 1; "Start" The Prison Cell 1; no save
   reaches the other non-zero statuses. "Slot 2" and "Slot 3" are an older
-  data version (their labyrinth nodes no longer exist: loading them quits).
+  data version (their labyrinth nodes no longer exist: loading them asserts
+  for each, 22 for "Slot 2").
   Pick a save whose party the cutscene names (`actor name="Kin"` etc.):
   "Start demon1" (Kin, Celis), "Start demon2" (+ Borealis), "Start Menthu1"
   (+ Zalzi), "Slot 1" (Kin, Celis, Zalzi).
@@ -53,9 +54,10 @@ the legacy drawing.
   story, door or world map node); only the data check and a preview cover
   them.
 * Content quirks are kept and noted in the case's comment, not fixed:
-  "Zazo at Night - 0" quits the game unless its loot is taken; Berca - 1
-  names a villager without a `.char` file; Zazo - Tent has no villager
-  images; the night stores of Zazo name images that do not exist.
+  "Zazo at Night - 0" asserts unless its loot is taken (Java quit the
+  game); Berca - 1 names a villager without a `.char` file; Zazo - Tent has
+  no villager images; the night stores of Zazo name images that do not
+  exist. `tickets/triage.md` lists all known quirks.
 * Record the new cases a second time (`record golden2`) and
   `compare golden golden2`: must be identical.
 

@@ -20,9 +20,8 @@ static func _getFactory():
 ## Gets the equipment with the specified name.
 static func getEquipment(name):
 	var ae = _getFactory().bank.get(name)
-	if ae == null:
-		push_error("There are no equipment with the name " + str(name) + " in the equipment factory")
-		GameCore.exitGame()
+	# Java exited the game; null for the caller (in a release build).
+	assert(ae != null, "EquipmentFactory: no equipment named " + str(name))
 	return ae
 
 

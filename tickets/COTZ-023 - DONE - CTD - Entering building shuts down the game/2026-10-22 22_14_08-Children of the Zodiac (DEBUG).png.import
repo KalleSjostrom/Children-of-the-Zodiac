@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://f4uvvx5sa8c0"
-path="res://.godot/imported/2026-10-22 22_14_08-Children of the Zodiac (DEBUG).png-597a8d38244ef40af3edfd81914858b4.ctex"
+path="res://.godot/imported/2026-10-22 22_14_08-Children of the Zodiac (DEBUG).png-235cfa0ce9af138c6ca44e4c4f68bfe4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tickets/COTZ-023 - CTD - Entering building shuts down the game/2026-10-22 22_14_08-Children of the Zodiac (DEBUG).png"
-dest_files=["res://.godot/imported/2026-10-22 22_14_08-Children of the Zodiac (DEBUG).png-597a8d38244ef40af3edfd81914858b4.ctex"]
+source_file="res://tickets/COTZ-023 - DONE - CTD - Entering building shuts down the game/2026-10-22 22_14_08-Children of the Zodiac (DEBUG).png"
+dest_files=["res://.godot/imported/2026-10-22 22_14_08-Children of the Zodiac (DEBUG).png-235cfa0ce9af138c6ca44e4c4f68bfe4.ctex"]
 
 [params]
 

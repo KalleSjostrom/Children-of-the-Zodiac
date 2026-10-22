@@ -353,9 +353,9 @@ func executeCommand(command: String, tokenizer: StringTokenizer):
 		var address: int = J.parseInt(tokenizer.nextToken())
 		var isVisited: bool = J.parseBoolean(tokenizer.nextToken())
 		var isSeen: bool = J.parseBoolean(tokenizer.nextToken())
+		# Java exited the game (an older save's floors).
+		assert(currentMap.getNode(address) != null, "Load: no node with address " + str(address))
 		if currentMap.getNode(address) == null:
-			push_error("Load: no node with address " + str(address))
-			GameCore.exitGame()
 			return
 		currentMap.getNode(address).setVisitedAndSeen(isVisited, isSeen)
 	elif command == "lastlab":

@@ -62,8 +62,8 @@ EquipmentFactory, LevelFactory, Load, Save, WeaponStoreFactory}.gd`, `src/info/D
   `LevelFactory.levelFactory = null` in `Database.reset()`.
 - `LandscapeLoader.init`: when the start node has no map, `push_error` replaces the swallowed
   Java exception. As in Java, `placeMap.get(startNode)` is not converted.
-- `EquipmentFactory.getEquipment` with an unknown name: `push_error` + `GameCore.exitGame()`
-  (Java: `System.exit`).
+- `EquipmentFactory.getEquipment` with an unknown name: an `assert`, and null in a release
+  build (Java: `System.exit`; the game never quits from code).
 - Logger and debug `System.out` lines were removed.
 
 ## Cross-unit dependencies to verify

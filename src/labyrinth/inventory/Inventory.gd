@@ -409,13 +409,11 @@ static func createInventory(t, map, labName):
 		inv = InventoryBoss.new(n, image)
 	elif command == "save":
 		inv = InventorySave.new(n, dir)
-	if inv != null:
-		inv.setDatabaseName(dbName)
-		inv.checkHaveBeen()
-	else:
-		push_error("The inventory " + dbName + " is null! exiting...")
-		GameCore.exitGame()
+	assert(inv != null, "Inventory: no inventory for " + dbName) # Java exited the game
+	if inv == null:
 		return null
+	inv.setDatabaseName(dbName)
+	inv.checkHaveBeen()
 	n.setInventory(inv)
 	return inv
 

@@ -1387,8 +1387,9 @@ func switchToNext():
 
 	# No matching case... #
 	else:
-		push_warning("Cheater: No matching case... Current: " + current + " - Next: " + next)
-		GameCore.exitGame()
+		# Java exited the game; the menu stays open.
+		@warning_ignore("assert_always_false")
+		assert(false, "Cheater: No matching case... Current: " + current + " - Next: " + next)
 
 
 func setBossBattleArea(name):

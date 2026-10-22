@@ -104,6 +104,9 @@ static func isPaused() -> bool:
 	return paused
 
 
+## Quits the game; only for the player's own quit (Escape). The game's code
+## never quits: a broken invariant or bad data asserts instead (Java's
+## System.exit calls, the debugger stops there).
 static func exitGame() -> void:
 	inputManager.exit()
 	OggStreamer.stopAll()

@@ -140,7 +140,7 @@ CachedUrlStream/OggDecoder/VorbisInputStream/Sound`,
 | `Graphics2D g = img.createGraphics()` | `var g := ImageGraphics.new(img)` (setColor, setFont, drawString, fillRect, drawImage) — then `ImageHandler.updateImage(img)` or `GameTexture.updateImage` |
 | `Logger`, `logger.log(...)` | remove (or `print` for important info) |
 | `System.out.println` | `print` (remove noisy debug prints) |
-| `System.exit(n)` | `GameCore.exitGame()` |
+| `System.exit(n)` | `assert(<what must hold>, "<message>")` plus a guard for release builds; the game's code never quits (`GameCore.exitGame()` is only the player's Escape) |
 | `try/catch` | remove; validate instead (`push_error` for unexpected states) |
 | `synchronized`, `volatile`, `Semaphore` | remove |
 | Threads (`new Thread(){run(){…}}.start()`, `Values.sleep` in threads) | see section 5 |

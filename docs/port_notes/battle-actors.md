@@ -66,7 +66,7 @@ they were not changed.
 * `EnemyLogic.calcTarget` and `GLDeck.shuffleCards` use a fresh `JRandom` as
   Java did with `new Random()`. The sequences are not reproducible either way.
 * Logging was removed. `System.exit(0)` in `GLDeck.update(Character)` became
-  `push_error` + `GameCore.exitGame()`.
+  an `assert` (the game never quits from code).
 
 ## Cross-unit dependencies
 
