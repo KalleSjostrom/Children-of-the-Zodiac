@@ -49,6 +49,11 @@ Files: `src/sprite/{Sprite (already ported), DefaultSprite, Instruction, Instruc
   already in the framework part.
 - `currentImage.equals("black")` (an ImageSettings compared with a String, always false in Java)
   is dropped from the code, with the same result.
+- `ImageSettings.draw` ignored `scroll` in Java, so `scrollmode=right` and `scrollmode=down`
+  never moved the image. Since COTZ-020 the image is drawn moved by the scroll (`drawPos`, also
+  for the scene's image entry), `scrollSpeed` per `ORIGINAL_FRAME_MS` of elapsed time (the
+  original's ~30 FPS, which the sequences are timed to), and the right scroll stops at the image's
+  right edge. The zoom mode's `zoom` and offsets are still read by nothing, as in Java.
 
 ## Cross-unit issues
 

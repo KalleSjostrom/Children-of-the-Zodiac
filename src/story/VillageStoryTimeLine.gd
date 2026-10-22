@@ -236,7 +236,7 @@ func update(elapsedTime: float):
 	if doneMode != ALL_DONE:
 		super.update(et)
 		if currentImage != null:
-			currentImage.update()
+			currentImage.update(et)
 		if centerScreen_:
 			centerScreen(centerScreenIndex)
 		var wait: bool = checkWait(et)
@@ -704,15 +704,16 @@ func draw_scene(g):
 		village.drawOverlays(g, null)
 
 
-## The current image (ImageSettings.draw: drawImage(name, pos, size), in
+## The current image (ImageSettings.draw: drawImage(name, drawPos, size), in
 ## screen pixels) as an entry for VillageScene.show_actors. A scaled image
 ## covers the rectangle GameTexture.drawPart draws, whose far corner is
 ## truncated to whole pixels (int(x + width * size)), so the entry's scale
 ## is that rectangle's size over the texture's, per axis.
 func image_entry(scroll: Vector2i, c: Color, a: float) -> Array:
 	var t = ImageHandler.getTexture(currentImage.name)
-	var px: int = roundi(currentImage.pos[0])
-	var py: int = roundi(currentImage.pos[1])
+	var p: Array = currentImage.drawPos()
+	var px: int = roundi(p[0])
+	var py: int = roundi(p[1])
 	var image_scale := Vector2(currentImage.size, currentImage.size)
 	if t != null and t.getWidth() > 0 and t.getHeight() > 0:
 		var w: int = t.getWidth()
@@ -827,6 +828,8 @@ class ImageSettings extends RefCounted:
 	var scroll: float = 0.0
 	var scrollDownMax: float = 0.0
 	var scrollDownMin: float = 0.0
+	## Not in Java: how far the right scroll goes, to the image's right edge.
+	var scrollRightMax: float = 0.0
 	var offsetx: float = 0.0
 	var offsety: float = 0.0
 	var zoom: float = 1.0
@@ -860,6 +863,7 @@ class ImageSettings extends RefCounted:
 				offsetx = -270
 				offsety = -80
 			TimeLineEvent.IMAGE_SCROLL_MODE_SCROLL_RIGHT:
+				scrollRightMax = maxf(0.0, width * size - Values.ORIGINAL_RESOLUTION[Values.X])
 				scrollingRight = true
 				scrollingDown = false
 			TimeLineEvent.IMAGE_SCROLL_MODE_NORMAL:
@@ -867,24 +871,39 @@ class ImageSettings extends RefCounted:
 				scrollingDown = false
 			TimeLineEvent.IMAGE_SCROLL_MODE_SCROLL_DOWN:
 				scroll = 0
-				scrollDownMax = absf(height) - absf(Values.WIDE_SCREEN_HEIGHT)
+				scrollDownMax = maxf(0.0, absf(height) - absf(Values.WIDE_SCREEN_HEIGHT))
 				scrollingRight = false
 				scrollingDown = true
 			TimeLineEvent.PAUSE:
 				scroll = tempScroll
 
+	## Not in Java: pos moved by the scroll (left as it scrolls right, up as
+	## it scrolls down). Java's draw ignored the scroll, so scrollmode right
+	## and down never moved the image (COTZ-020).
+	func drawPos() -> Array:
+		if scrollingRight:
+			return [pos[0] + scroll, pos[1]]
+		if scrollingDown:
+			return [pos[0], pos[1] - scroll]
+		return [pos[0], pos[1]]
+
 	func draw(g):
-		g.drawImage(name, pos[0], pos[1], size)
+		var p: Array = drawPos()
+		g.drawImage(name, p[0], p[1], size)
 
 	func drawTextBack(g):
 		g.loadIdentity()
 		g.drawImage(Graphics.textBack, 0, 576, 1)
 
-	func update():
+	## The scroll moved scrollSpeed per update at the original's frame rate,
+	## which the sequences are timed to, so the port moves it that much per
+	## ORIGINAL_FRAME_MS of elapsedTime (ms).
+	func update(elapsedTime):
 		zoom = 1.0 if zoom <= 1 else zoom - .0007 * zoom
+		var step: float = scrollSpeed * elapsedTime / Values.ORIGINAL_FRAME_MS
 		if scrollingRight:
-			scroll -= scrollSpeed
+			scroll = maxf(-scrollRightMax, scroll - step)
 		elif timeLine.currentImage.scrollingDown:
-			scroll = minf(scrollDownMax, scroll + scrollSpeed)
+			scroll = minf(scrollDownMax, scroll + step)
 		offsetx += 0.0 if offsetx >= 0 else .3
 		offsety += 0.0 if offsety >= 0 else .084375
