@@ -45,7 +45,7 @@ func _init(p_shortcut = false) -> void:
 			if not found:
 				downPressed(false)
 			i += 1
-		crossPressed(false)
+		zoomIn(false)
 		if floor != null:
 			activeNode.setCurrentChild(floor)
 			update()
@@ -54,10 +54,14 @@ func _init(p_shortcut = false) -> void:
 		name = labInfo[0]
 		floor = labInfo[1]
 		activeNode.setCurrentChild(name)
-		crossPressed(false)
+		zoomIn(false)
 		if floor != null:
 			activeNode.setCurrentChild(floor)
 			update()
+	# Port change: the page opens on the whole labyrinth (every floor), with
+	# the hand on it in the list of visited labyrinths, not on one floor.
+	if not isZoomedOut():
+		zoomOut()
 	setPage(BESTIARY_PAGE)
 
 
@@ -71,10 +75,17 @@ func getRootNode():
 	return n
 
 
-## Java overloads crossPressed() (plays the sound) and crossPressed(playSound).
+## Port change: Cross does nothing, the map is only shown whole. Java's
+## crossPressed is zoomIn.
 func crossPressed(playSound = null):
-	if playSound == null:
-		playSound = true
+	pass
+
+
+## Down a level: from a labyrinth to its floors, one floor shown. Java's
+## crossPressed (Java overloads crossPressed(), which plays the sound, and
+## crossPressed(playSound)). Nothing shows a single floor any more, but
+## upPressed, downPressed and _init use it to load a labyrinth's floors.
+func zoomIn(playSound = true):
 	var name = activeNode.getCurrentChild().getName()
 	var li = Database.getMap(name)
 	if li != null:
@@ -108,7 +119,7 @@ func upPressed():
 	activeNode.previousChild()
 	if isZoomedOut():
 		update()
-		crossPressed(false)
+		zoomIn(false)
 		zoomOut()
 	else:
 		update()
@@ -132,7 +143,7 @@ func downPressed(playSound = null):
 	activeNode.nextChild(playSound)
 	if isZoomedOut():
 		update()
-		crossPressed(false)
+		zoomIn(false)
 		zoomOut()
 	else:
 		update()
@@ -154,7 +165,8 @@ func L1Pressed():
 	pass
 
 
-## Zooms out, or leaves the menu when opened with Square.
+## Back to the start page (the page is always zoomed out), or leaves the menu
+## when opened with Square.
 func circlePressed(pressAnyWay = null):
 	if shortcut:
 		MainMenu.getMainMenu().exit()
@@ -163,7 +175,7 @@ func circlePressed(pressAnyWay = null):
 
 
 ## Up a level: to the labyrinths, then the start page. Java's circlePressed;
-## upPressed and downPressed use it too (also while _init looks for the
+## upPressed, downPressed and _init use it too (also while _init looks for the
 ## labyrinth the player is in, COTZ-022), so it never leaves the menu.
 func zoomOut():
 	var n = activeNode.getParent()
@@ -231,13 +243,12 @@ func drawHelp(g, drawAll = null):
 	var helpxicons: int = helpx - 28
 	var helpyicons: int = helpy - 23
 
+	# Port change: no Cross (Select), see crossPressed; Circle takes its place.
 	g.drawCenteredImage(AbstractPage.BUTTON_ICONS[GameMode.TRIANGLE], helpxicons, helpyicons)
-	g.drawCenteredImage(AbstractPage.BUTTON_ICONS[GameMode.CROSS], helpxicons + step, helpyicons)
-	g.drawCenteredImage(AbstractPage.BUTTON_ICONS[GameMode.CIRCLE], helpxicons + 2 * step, helpyicons)
+	g.drawCenteredImage(AbstractPage.BUTTON_ICONS[GameMode.CIRCLE], helpxicons + step, helpyicons)
 
 	g.drawString("Exit", helpx, helpy)
-	g.drawString("Select", helpx + step, helpy)
 	if shortcut:
-		g.drawString("Back", helpx + 2 * step, helpy)
+		g.drawString("Back", helpx + step, helpy)
 	else:
-		g.drawString("To main menu" if drawAll else "Zoom out", helpx + 2 * step, helpy)
+		g.drawString("To main menu" if drawAll else "Zoom out", helpx + step, helpy)

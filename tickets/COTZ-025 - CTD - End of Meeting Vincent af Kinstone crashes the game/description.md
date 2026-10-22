@@ -1,0 +1,1 @@
+At the ending of Meeting Vincent af Kinstone.seq, a crash to desktop occurs. Callstack in screenshot

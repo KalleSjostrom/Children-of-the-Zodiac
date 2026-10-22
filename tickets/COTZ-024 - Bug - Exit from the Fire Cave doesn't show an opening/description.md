@@ -1,0 +1,1 @@
+Exit from the Fire Cave doesn't show an opening

@@ -97,3 +97,6 @@ Auto select dead character with resurrect?
 
 I have waaaay too much gold, 4933 gp at entrance of mt. Cesadur. I've bought everything I could so far (except them blessing upgrades)
 
+Uri says You must hurry and save those miners even though we've done it
+
+Couldn't pass by fire cave on the way back, why?

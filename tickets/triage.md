@@ -26,23 +26,6 @@ dev-only or cosmetic.
 
 ## Villages
 
-### V1. Two loot lines lack their directions (Zazo at Night - 0, Berca - 1) — Medium
-
-* **Where:** `maps/Village/Zazo/Zazo at Night - 0.vil:211` and
-  `maps/Village/Berca/Berca - 1.vil:228`, both
-  `loot name <x> <y> cards.offense.BattleCard 2 3 2 false`.
-* **Effect:** the card's class is read as the directions and `2` as the
-  content, an equipment "2" that does not exist: `EquipmentFactory` asserts
-  when the village loads (Java quit the game), and the loot holds nothing.
-  Only when the loot is not taken: the day variants share its status
-  (`zazoname`, `bercaname`), and "Slot 1" has both. Zazo at night is
-  reached by no story (V7); Berca - 1 is reachable in play.
-* **Fix idea:** the sibling lines (`Zazo - 0.vil:201` `loot name 90 310 2
-  cards.magic.Earth 2 2 false`, `Berca - 0.vil:230` `loot name 575 270 0
-  cards.support.Shield 2 2 false`) suggest the `2` after the class is a
-  misplaced direction: `loot name 86 342 2 cards.offense.BattleCard 3 2
-  false` (and `0` or `2` for Berca). Check which card was meant.
-
 ### V2. Berca - 1 names a villager Herman without a `.char` file — Medium
 
 * **Where:** `maps/Village/Berca/Berca - 1.vil:233` `villager Herman`; no

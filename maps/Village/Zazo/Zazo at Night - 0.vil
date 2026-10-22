@@ -208,7 +208,7 @@ signL Here lies our great leader and friend.
 sign 1482 798 30
 signL 
 
-loot name 86 342 cards.offense.BattleCard 2 3 2 false
+loot name 90 310 2 cards.magic.Earth 2 2 false
 lootLine You found a card lying among the stones.
 
 ##### VILLAGERS #####
