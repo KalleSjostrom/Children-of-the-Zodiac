@@ -56,11 +56,12 @@ func executeCommand(command, tok):
 func isDone():
 	return index >= instructions.size()
 
-## True when the moves end where they start (Java's sum: up - down + right -
-## left). Port fix (COTZ-023): Java exited the game otherwise; the villager
-## reports it instead (Villager.executeDialogCommand).
+## True when the moves end where they start. Port fix (COTZ-023): Java
+## exited the game otherwise, and summed up - down + right - left, which let
+## a walk off by as much on both axes through (Omer in Berca); the villager
+## asserts it instead (Villager.executeDialogCommand).
 func check() -> bool:
 	var test := J.array(4, 0)
 	for i in instructions:
 		test[i.getDirection()] += i.getDistance() if i.isMoving() else 0
-	return (test[0] - test[2]) + (test[1] - test[3]) == 0
+	return test[0] == test[2] and test[1] == test[3]
