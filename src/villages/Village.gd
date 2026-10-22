@@ -208,6 +208,8 @@ func checkGameInput():
 		checkDirectionalButtons()
 		if MenuStarter.isMenuButtonPressed(gameActions):
 			super.queueEnterMenu()
+		elif MenuStarter.isMapButtonPressed(gameActions):
+			super.queueEnterMap()
 	elif question:
 		checkDirectionalButtonsForQuestion()
 	if gameActions[CROSS].isPressed():

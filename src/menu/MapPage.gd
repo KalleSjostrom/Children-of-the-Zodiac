@@ -15,6 +15,9 @@ static var mappiece = ImageHandler.addPermanentlyLoadNow(Values.MenuImages + "ma
 static var mappiece2 = ImageHandler.addPermanentlyLoadNow(Values.MenuImages + "mappiece2.png")
 static var mappiece3 = _createMappiece3()
 var floor = null
+## Port addition (COTZ-012): opened with Square from the game: Circle and
+## Square go straight back to it.
+var shortcut := false
 
 
 static func _createMappiece3() -> Array:
@@ -24,7 +27,8 @@ static func _createMappiece3() -> Array:
 	return m
 
 
-func _init() -> void:
+func _init(p_shortcut = false) -> void:
+	shortcut = p_shortcut
 	var name = null
 	var gameMode = Organizer.getOrganizer().getPreviousMode()
 	activeNode = getRootNode()
@@ -134,6 +138,12 @@ func downPressed(playSound = null):
 		update()
 
 
+func squarePressed():
+	if shortcut:
+		SoundPlayer.playSound(SoundMap.MENU_EXIT)
+		MainMenu.getMainMenu().exit()
+
+
 func R1Pressed():
 	# Change floor in the map
 	pass
@@ -144,9 +154,14 @@ func L1Pressed():
 	pass
 
 
+## Up a level (to the labyrinths, then the start page), or out of the menu
+## when opened with Square. upPressed and downPressed use the first, but
+## only on the list of labyrinths, which Square does not open on.
 func circlePressed(pressAnyWay = null):
 	var n = activeNode.getParent()
-	if n != null:
+	if shortcut:
+		MainMenu.getMainMenu().exit()
+	elif n != null:
 		activeNode = MenuNode.switchNode(activeNode, n)
 		activeNode.updateHandPos()
 	else:
@@ -216,4 +231,7 @@ func drawHelp(g, drawAll = null):
 
 	g.drawString("Exit", helpx, helpy)
 	g.drawString("Select", helpx + step, helpy)
-	g.drawString("To main menu" if drawAll else "Zoom out", helpx + 2 * step, helpy)
+	if shortcut:
+		g.drawString("Back", helpx + 2 * step, helpy)
+	else:
+		g.drawString("To main menu" if drawAll else "Zoom out", helpx + 2 * step, helpy)

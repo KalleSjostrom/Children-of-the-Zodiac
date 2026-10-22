@@ -406,6 +406,8 @@ func checkButtons():
 			turn(LabyrinthPlayer.RIGHT_TURN)
 		if MenuStarter.isMenuButtonPressed(gameActions):
 			super.queueEnterMenu()
+		elif MenuStarter.isMapButtonPressed(gameActions):
+			super.queueEnterMap()
 	else:
 		var button: int = -1
 		if gameActions[UP].isPressed():

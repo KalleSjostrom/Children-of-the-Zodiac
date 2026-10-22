@@ -82,6 +82,8 @@ func checkGameInput():
 		crossPressed()
 	elif MenuStarter.isMenuButtonPressed(gameActions):
 		super.queueEnterMenu()
+	elif MenuStarter.isMapButtonPressed(gameActions):
+		super.queueEnterMap()
 
 
 func checkDirectionalButtons():

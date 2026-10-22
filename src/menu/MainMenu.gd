@@ -36,6 +36,12 @@ func init(name, lab = null, hinders = null):
 
 	thumbNailScreen = getScreenShot()
 	initStartPage(0)
+	var gm = Organizer.getOrganizer().getPreviousMode()
+	if gm is MenuStarter and gm.menuOnMap:
+		# Square (COTZ-012): on to the map (which draws the start page's
+		# thumbnail, set up above).
+		gm.menuOnMap = false
+		initMapPage(true)
 
 	logicLoading = false
 
@@ -154,8 +160,9 @@ func initHelpPage():
 	currentPage = HelpPage.new()
 
 
-func initMapPage():
-	currentPage = MapPage.new()
+## shortcut: opened with Square from the game (MapPage.shortcut).
+func initMapPage(shortcut = false):
+	currentPage = MapPage.new(shortcut)
 
 
 ## Wraps the given enemy index into the range of the bestiary.
