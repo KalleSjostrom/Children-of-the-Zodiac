@@ -109,7 +109,7 @@ func upPressed():
 	if isZoomedOut():
 		update()
 		crossPressed(false)
-		circlePressed()
+		zoomOut()
 	else:
 		update()
 
@@ -133,7 +133,7 @@ func downPressed(playSound = null):
 	if isZoomedOut():
 		update()
 		crossPressed(false)
-		circlePressed()
+		zoomOut()
 	else:
 		update()
 
@@ -154,14 +154,20 @@ func L1Pressed():
 	pass
 
 
-## Up a level (to the labyrinths, then the start page), or out of the menu
-## when opened with Square. upPressed and downPressed use the first, but
-## only on the list of labyrinths, which Square does not open on.
+## Zooms out, or leaves the menu when opened with Square.
 func circlePressed(pressAnyWay = null):
-	var n = activeNode.getParent()
 	if shortcut:
 		MainMenu.getMainMenu().exit()
-	elif n != null:
+	else:
+		zoomOut()
+
+
+## Up a level: to the labyrinths, then the start page. Java's circlePressed;
+## upPressed and downPressed use it too (also while _init looks for the
+## labyrinth the player is in, COTZ-022), so it never leaves the menu.
+func zoomOut():
+	var n = activeNode.getParent()
+	if n != null:
 		activeNode = MenuNode.switchNode(activeNode, n)
 		activeNode.updateHandPos()
 	else:
