@@ -177,12 +177,12 @@ inv hinderDoor 43 3 2 Walls/ruinedtempledoor Silent_Ruin--The_Great_Ruins-mark9
 inv door 29 1 dontopen Silent_Ruin--The_Great_Ruins-mark12
 inv hinderDoor 45 3 2 Walls/ruinedtempledoor Silent_Ruin--The_Great_Ruins-mark11
 
-inv chest 3 1 2 Images/chest 0 50 
-inv chest 5 1 2 Images/chest 0 50
-inv chest 7 1 2 Images/chest 0 50 
-inv chest 9 1 2 Images/chest 0 50 
-inv chest 11 1 2 Images/chest 0 50 
-inv chest 13 1 2 Images/chest 0 50
+inv chest 3 3 2 Images/chest 0 50 
+inv chest 5 3 2 Images/chest 0 50
+inv chest 7 3 2 Images/chest 0 50 
+inv chest 9 3 2 Images/chest 0 50 
+inv chest 11 3 2 Images/chest 0 50 
+inv chest 13 3 2 Images/chest 0 50
 
 inv riddle 90 3 1 Images/5x5small.png puzzle55 RubicsPuzzle Silent_Ruin--The_Great_Ruins.maphinderdoor35
 inv riddle 154 1 1 Images/4x4small.png puzzle44 Puzzle Silent_Ruin--The_Great_Ruins.maphinderdoor37

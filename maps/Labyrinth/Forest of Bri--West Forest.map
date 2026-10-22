@@ -69,5 +69,5 @@ inv door 115 0 dontopen east_passage--east_mountain-mark0
 inv door 199 1 dontopen forest_of_bri--east_forest-mark1
 inv door 204 1 dontopen forest_of_bri--east_forest-mark2
 
-inv chest 39 2 2 Images/woodenbox 0 100
+inv chest 39 0 2 Images/woodenbox 0 100
 

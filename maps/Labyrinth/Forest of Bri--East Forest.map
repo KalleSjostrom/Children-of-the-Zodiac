@@ -60,5 +60,6 @@ inv door 175 2 0-19 landforest_of_bri--east_forest-mark0
 inv door 7 3 dontopen forest_of_bri--west_forest-mark1
 inv door 12 3 dontopen forest_of_bri--west_forest-mark2
 
-inv chest 36 2 2 Images/woodenbox 2 cards.magic.Earth 1 true
-inv chest 39 3 2 Images/woodenbox 2 cards.magic.Earth 1 true
+inv chest 36 0 2 Images/woodenbox 2 cards.magic.Earth 1 true
+# COTZ-013: this chest stood in the corner at node 39 and blocked the way to the one at node 36
+# inv chest 39 3 2 Images/woodenbox 2 cards.magic.Earth 1 true
