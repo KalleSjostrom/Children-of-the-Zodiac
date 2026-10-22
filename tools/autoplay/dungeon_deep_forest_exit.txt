@@ -1,7 +1,8 @@
 # --load="Slot 1" --start="Forest of Reil--Deep Forest-mark0" --no-encounters:
 # leave Deep Forest through the door at node 7 (the start; the player faces
 # away from it): turn around, CROSS, the labyrinth fades out (about 0.3 s),
-# then the world map.
+# then the world map. Any floor whose --start mark is a world map exit works
+# the same (dungeon_exit_* in tools/parity/cases.txt).
 wait 3000
 shot e01_start
 tap RIGHT

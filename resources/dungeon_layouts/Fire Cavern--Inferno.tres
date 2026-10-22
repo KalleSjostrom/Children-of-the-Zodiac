@@ -476,7 +476,7 @@ roof = 3
 script = ExtResource("1_uqd8q")
 address = 200
 neighbours = PackedInt32Array(-1, 184, -1, -1)
-walls = PackedInt32Array(1, -1, 1, 1)
+walls = PackedInt32Array(1, -1, 1, 2)
 roof = 3
 
 [resource]

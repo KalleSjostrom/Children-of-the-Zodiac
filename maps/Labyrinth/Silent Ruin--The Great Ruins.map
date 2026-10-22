@@ -162,6 +162,7 @@ dir 204 2 205
 
 mapEnd
 
+wall 2 127 2
 inv door 127 2 dontopen landSilent_Ruin--The_Great_Ruins-mark0
 
 inv door 19 1 dontopen Silent_Ruin--The_Great_Ruins-mark2

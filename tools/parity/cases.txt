@@ -446,3 +446,8 @@ dungeon_map_page_empyrian_light       dungeon_map_page --load="Slot 1" --start="
 dungeon_map_page_silent_ruin          dungeon_map_page --load="Slot 1" --start="Silent Ruin--The Great Ruins-mark0" --no-encounters
 dungeon_save_load                     dungeon_save_load --load="Slot 1" --start="Grivera--Second Floor-mark0" --no-encounters
 dungeon_console_goto                  dungeon_console_goto --load="Slot 1" --start=Alares --no-encounters
+# The world map exits of Fire Cavern--Inferno (node 200) and Silent Ruin
+# (node 127) showed a plain wall until COTZ-024: they had no "wall" line for
+# the door texture. Left as Deep Forest is (script dungeon_deep_forest_exit).
+dungeon_exit_inferno                  dungeon_deep_forest_exit --load="Slot 1" --start="Fire Cavern--Inferno-mark2" --no-encounters
+dungeon_exit_silent_ruin              dungeon_deep_forest_exit --load="Slot 1" --start="Silent Ruin--The Great Ruins-mark0" --no-encounters

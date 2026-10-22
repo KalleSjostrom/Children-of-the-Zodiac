@@ -95,6 +95,7 @@ wall 2 3 3
 inv door 3 3 dontopen fire_cavern--furnace-mark1
 wall 2 195 0
 inv door 195 0 dontopen fire_cavern--hall_of_the_damned-mark1
+wall 2 200 1
 inv door 200 1 dontopen landfire_cavern--inferno-mark2
 
 # inv chest 92 0 1 Images/volcano.png 2 cards.offense.CrushingSaber 2 false
