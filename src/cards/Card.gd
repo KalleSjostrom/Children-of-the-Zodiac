@@ -14,6 +14,36 @@ const DEFENSE_BOOST = 1
 var storeStatus: int = 0
 var sortingValue: String = ""
 var databaseName = null
+## Port addition (COTZ-014): the attacks rolled by roll_hits, target ->
+## HitElement, until use() takes them (rolled_hit).
+var rolledHits := {}
+
+
+## Port addition (COTZ-014): rolls this card's attack on the creatures its
+## animation goes to (AnimationInfo.getTargetCreatures) when the animation
+## starts, so that the animation can leave a missed enemy alone (Earth's
+## shake, Destroyer's slice; Java rolled at the impact and shook anyway).
+## True unless every one of them is missed. use() returns the rolls.
+func roll_hits(info) -> bool:
+	rolledHits.clear()
+	if not info.isOnEnemy() or info.getTargetCreatures().is_empty():
+		return true
+	var hit := false
+	for target in info.getTargetCreatures():
+		var he = attack(target, info.getAttacker())
+		rolledHits[target] = he
+		hit = hit or not he.isMiss(0)
+	return hit
+
+
+## use() of a card that rolls its hits before the animation: the roll for
+## the target, else a new attack.
+func rolled_hit(target, attacker):
+	var he = rolledHits.get(target)
+	if he == null:
+		return attack(target, attacker)
+	rolledHits.erase(target)
+	return he
 
 
 ## This method creates the value that this card should have.

@@ -129,9 +129,18 @@ func getSystem(c, color):
 	info.setAttacker(attacker)
 	info.setCharacters(characters)
 	info.setLevel(c.getLevel())
+	info.setTargetCreatures(_attacked(c))
 	var aps = c.getAnimation(info)
 
 	return aps
+
+
+## The creatures the card is used on (attackTarget): every living target,
+## or the chosen one if it lives (Resurrect aside).
+func _attacked(c) -> Array:
+	if c.isAll():
+		return targets.filter(func(t): return t.isAlive())
+	return [targets[target]] if targets[target].isAlive() else []
 
 
 ## Draws the current particle systems and the attack texts.
@@ -155,8 +164,8 @@ func update(elapsedTime):
 				psp.add()
 				var isEnemy: bool = targets[target] is Enemy
 
-				attackTarget(isEnemy, s.index)
-				if isEnemy:
+				var landed: bool = attackTarget(isEnemy, s.index)
+				if isEnemy and landed:
 					var e = hitElements[hitElements.size() - 1]
 					enemy.setHideTimer(200, e.isCrit())
 			if psp.isReady():
@@ -172,7 +181,9 @@ func update(elapsedTime):
 	return checkUpdate()
 
 
-## Damages the targets with the card at the given index.
+## Damages the targets with the card at the given index. Returns whether it
+## landed: false when every target was missed, and then the enemy is not
+## tinted (nor blinks, see update): port addition, COTZ-014.
 func attackTarget(onEnemy, index):
 	update_ = true
 	var c = list[index].getCard()
@@ -180,6 +191,7 @@ func attackTarget(onEnemy, index):
 	var damage: int = 0
 	var testElem = null
 	var cureElement = null
+	var landed := false
 	if onAll:
 		for i in range(targets.size()):
 			if targets[i].isAlive() or c is Resurrect:
@@ -192,19 +204,22 @@ func attackTarget(onEnemy, index):
 						cureElement.cureMerge(tempCure)
 				hitElements.append(newElement)
 				damage += damageEnemy(i, onEnemy, newElement, index)
+				landed = landed or not newElement.isMiss(0)
 	else:
 		if targets[target].isAlive() or c is Resurrect:
 			testElem = c.use(targets[target], attacker)
 			damage = damageEnemy(target, onEnemy, testElem, index)
 			hitElements.append(testElem)
 			cureElement = testElem.getCureElement()
-	if onEnemy and c.getType() != Slot.SUPPORT:
+			landed = not testElem.isMiss(0)
+	if onEnemy and c.getType() != Slot.SUPPORT and landed:
 		enemy.changeColor(currentSystem[0].getSystem().getColor())
 
 	# Only for drain!
 	if cureElement != null:
 		attacker.cure(cureElement.getAttackDamage())
 		createAttackTextForAttacker(cureElement)
+	return landed
 
 
 ## Damages the creature, creates the attack text and returns the damage.
@@ -314,6 +329,9 @@ class AnimationSystem extends RefCounted:
 class AnimationInfo extends RefCounted:
 	var nrTarget: int = 0
 	var target: int = 0
+	## Port addition (COTZ-014): the creatures the card is used on, for the
+	## party's cards (Card.roll_hits); empty for an enemy's attack.
+	var targetCreatures: Array = []
 	var onEnemy: bool = false
 	var onAll: bool = false
 	var enemy = null
@@ -347,6 +365,12 @@ class AnimationInfo extends RefCounted:
 
 	func getLevel():
 		return level
+
+	func getTargetCreatures():
+		return targetCreatures
+
+	func setTargetCreatures(p_targetCreatures):
+		self.targetCreatures = p_targetCreatures
 
 	func setNrTarget(p_nrTarget):
 		self.nrTarget = p_nrTarget

@@ -22,8 +22,13 @@ func getVeryShortInfo():
 	return SHORT_INFO
 
 
+func use(target, attacker):
+	return rolled_hit(target, attacker)
+
+
+## The hit is rolled first: a missed enemy does not shake (COTZ-014).
 func getAnimation(info):
-	return Colliding.getStaticAnimation(info)
+	return Colliding.getStaticAnimation(info, roll_hits(info))
 
 
 func getSoundEffect():
@@ -34,7 +39,8 @@ func getSoundEffectDelay():
 	return DELAYS
 
 
-static func getStaticAnimation(info):
+## hit: false when every enemy attacked is missed (no enemy shake).
+static func getStaticAnimation(info, hit = true):
 	var psp := ParticleSystemPacket.new()
 	var settings = AnimationSettingsFactory.getDefault()
 	settings.setValue(AnimSettings.EMITTANCE_TIME_STEP, (Values.LOGIC_INTERVAL / 1000.0) * 0.05)
@@ -63,7 +69,7 @@ static func getStaticAnimation(info):
 	settings.setValue(AnimSettings.VELOCITY_RANDOM_ADD, 1)
 	settings.setValue(AnimSettings.LIFE_MULTIPLIER, 0.18)
 	settings.setBoolean(AnimSettings.DESTROY_CAMERA_SHAKE, true)
-	settings.setBoolean(AnimSettings.DESTROY_ENEMY_SHAKE, true)
+	settings.setBoolean(AnimSettings.DESTROY_ENEMY_SHAKE, hit)
 
 	settings.setVector(AnimSettings.SOURCE, Vector3f.new(-4.0, 3.0, -5.9))
 	psp.add(ParticleSystem.new(settings), 0)

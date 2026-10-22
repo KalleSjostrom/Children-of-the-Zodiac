@@ -22,9 +22,14 @@ func getVeryShortInfo():
 	return SHORT_INFO
 
 
+func use(target, attacker):
+	return rolled_hit(target, attacker)
+
+
+## The hit is rolled first: a missed enemy does not shake (COTZ-014).
 func getAnimation(info):
 	info.setLevel(getLevel())
-	return Earth.getStaticAnimation(info)
+	return Earth.getStaticAnimation(info, roll_hits(info))
 
 
 func getSoundEffect():
@@ -35,12 +40,13 @@ func getSoundEffectDelay():
 	return DELAYS
 
 
-static func getStaticAnimation(info):
+## hit: false when every enemy attacked is missed (no shake).
+static func getStaticAnimation(info, hit = true):
 	var psp := ParticleSystemPacket.new()
 	var settings = AnimationSettingsFactory.getDefault()
 	if info.isOnEnemy():
 		settings.setVector(AnimSettings.SOURCE, Vector3f.new((J.random() - 0.5) * 2, 3.0, -5.9))
-		settings.setBoolean(AnimSettings.DESTROY_ENEMY_SHAKE, true)
+		settings.setBoolean(AnimSettings.DESTROY_ENEMY_SHAKE, hit)
 	else:
 		var source = info.getEnemy().getTempSource()
 		# Enemy attacks may name the card without a source vector (goblin,

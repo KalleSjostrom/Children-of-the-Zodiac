@@ -10,7 +10,7 @@ var lastAttacker = 0
 
 
 func use(target, attacker):
-	return attack(target, attacker)
+	return rolled_hit(target, attacker)
 
 
 func createAttackPercent():
@@ -38,7 +38,9 @@ func playSound():
 	BattleCard.playBattleSound(s, i[0])
 
 
+## The hit is rolled first: a missed enemy is not sliced (COTZ-014).
 func getAnimation(info):
+	var hit := roll_hits(info)
 	var attacker = info.getAttacker()
 	if attacker != null:
 		lastAttacker = attacker.getIndex()
@@ -50,7 +52,7 @@ func getAnimation(info):
 	var d: float = info.getEnemy().getInfo().get_(EnemyInfo.DEPTH)
 	settings.setVector(AnimSettings.SOURCE, Vector3f.new(-1.115, middle - 0.325, d))
 	settings.setVector(AnimSettings.TARGET, Vector3f.new(1.115, middle + 0.325, d))
-	settings.setBoolean(AnimSettings.DESTROY_ENEMY_SLICE, true)
+	settings.setBoolean(AnimSettings.DESTROY_ENEMY_SLICE, hit)
 	settings.setValue(AnimSettings.READY_MODE, float(ParticleSystem.IS_DELAYED))
 	settings.setValue(AnimSettings.READY_MODE_DELAY_TIME, 1500.0)
 
