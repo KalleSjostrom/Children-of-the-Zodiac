@@ -1,0 +1,1 @@
+The Farl Story's first image (the man sitting, greed) has scrollmode=down and scrollSpeed=8000, but it doesn't scroll: only its top part is shown. The Prolog's two scrollmode=right images don't pan either. When fixed, the right scroll should stop at the image's right edge (the Prolog's second one would run past it).
