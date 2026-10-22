@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bd1sp3y2b83j"
-path="res://.godot/imported/screenshot.png-8442a4fee76be597075889bf1e7a893b.ctex"
+uid="uid://dxmoi75bqg8hk"
+path="res://.godot/imported/screenshot-silent-ruin.png-448c02e0677c554cab93963c3bf81077.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tickets/COTZ-024 - Bug - Exit from the Fire Cave doesn't show an opening/screenshot.png"
-dest_files=["res://.godot/imported/screenshot.png-8442a4fee76be597075889bf1e7a893b.ctex"]
+source_file="res://tickets/COTZ-024 - DONE - Bug - Exit from the Fire Cave doesn't show an opening/screenshot-silent-ruin.png"
+dest_files=["res://.godot/imported/screenshot-silent-ruin.png-448c02e0677c554cab93963c3bf81077.ctex"]
 
 [params]
 
