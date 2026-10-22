@@ -30,8 +30,17 @@ func makeMove(lifePercent):
 	return EnemyLogic.makeMove(script_.getMove(lifePercent))
 
 
+## Java overloads: setDialog(int i, Dialog d) here (sets the dialog for i,
+## never called) and BattleEnemy's setDialog(int i) (the dialog to show
+## next: BossDialog.ENEMY_DEAD or PARTY_DEAD at the end of the battle). Port
+## fix: one argument is BattleEnemy's; this override used to erase the
+## boss's last words, and a boss with a dialog for the round went on
+## fighting after its death.
 func setDialog(i, d = null):
-	dialogs.set_(i, d)
+	if d == null:
+		super.setDialog(i)
+	else:
+		dialogs.set_(i, d)
 
 
 func wantsToTalk(i):
