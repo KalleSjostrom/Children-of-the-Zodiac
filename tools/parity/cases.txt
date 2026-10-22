@@ -159,6 +159,11 @@ story_elder_of_dellna                                   story_tour --load="Slot 
 story_ending_part3                                      story_tour --load="Slot 1" --start="Ending - Part 3"
 story_prolog                                            story_prolog --load=Start --start=Prolog
 story_circle                                             story_circle --load="Start demon2" --start="Encounter With an Ally"
+# Meeting Vincent af Kinstone unloads Celis, Borealis and Zalzi (it shows them
+# as Extras); The Prison Cell - Celis Speaks Up, which follows, loads them back
+# (COTZ-025: it had Kin only, a script error for every other actor). The case
+# plays both and ends on Pensara Prison--Floor 5.
+story_meeting_vincent                                   story_tour --load="Start Menthu1" --start="Meeting Vincent af Kinstone"
 # Phase 2 pilot: dungeons as scenes (Forest of Reil: Forest Path and Deep
 # Forest; The Great Mine--Tunnel), group dungeon_*. --start=<Area>--<Floor>-mark<n>
 # starts at the n-th door or hinder door of the .map file (main.bank, mode 4);
