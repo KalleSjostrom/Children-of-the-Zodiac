@@ -215,7 +215,8 @@ section 10, the procedure in `docs/CONVERTING_DUNGEONS.md`:
   villager images; Podd's image path (Civil House) cannot resolve; a
   Berca - 1 loot line lacks its directions; Alares - 1, Dellna - 2,
   Parasne - 2, Kin's Place, Zazo - Farl's House and several night variants
-  have no obstacles; Zazonode2's timeline is commented out; Tutorial1,
+  have no obstacles (Zazonode2's timeline was commented out, restored
+  in COTZ-016); Tutorial1,
   Dorma's Tranquility and Menthu Battle are reached by nothing. Saves:
   "Start demon1" has Kin and Celis, "Start demon2" adds Borealis, "Start
   Menthu1" and "Start d3" add Zalzi; "Slot 2" and "Slot 3" are an older

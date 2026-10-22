@@ -57,8 +57,7 @@ the legacy drawing.
   The North District - Farmer House" quits the game on entry (a villager's
   patrol is not a closed loop, `Instructions.check`); Berca - 1 names a
   villager without a `.char` file; Zazo - Tent has no villager images;
-  Zazonode2's timeline is commented out; the night stores of Zazo name
-  images that do not exist.
+  the night stores of Zazo name images that do not exist.
 * Record the new cases a second time (`record golden2`) and
   `compare golden golden2`: must be identical.
 

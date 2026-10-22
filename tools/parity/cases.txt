@@ -128,10 +128,9 @@ particles_pass_to_zazo                                   particles_pass_to_zazo 
 # the places only cutscenes reach (no main.bank place): Alares - Celis,
 # Dellna - Ana's Home Memory, Home of Celis - Memory, No Place (day and
 # night), The Senate, The Ship Cabin - Story, Zazo - Teo (day and night). The
-# save gives the story its party. Content quirks: Zazonode2's timeline is
-# commented out (/*), so it ends after 3 s; the Celis Memory stories go on to
-# "Running Away From Home", which is no main.bank place (the title screen
-# follows); Tutorial1 is in no main.bank entry and named by nothing, so no
+# save gives the story its party. Content quirks: the Celis Memory stories
+# go on to "Running Away From Home", which is no main.bank place (the title
+# screen follows); Tutorial1 is in no main.bank entry and named by nothing, so no
 # case reaches it. story_prolog (script story_prolog) waits for the
 # Prolog's village background swap and translucent-under-actor image at
 # about 250 s; story_circle holds Circle through a cutscene (COTZ-007).

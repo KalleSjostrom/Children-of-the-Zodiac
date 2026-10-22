@@ -50,7 +50,6 @@ ins index=noette timea=0 kind=stop direction=2
 
 ins type=fadeout timea=0 index=0 fadetime=0 kind=music mode=pause
 ins type=fadein timea=0 index=1 fadetime=0 kind=music mode=play
-/*
 ins index=teo timea=500 kind=dist distance=20 duration=800 direction=2
 dialogpacket name=1 starttimea=500 duration=300
 dialog packetname=1 name="Teo" text="Fellow citizens of Zazo.";""
@@ -341,7 +340,6 @@ ins index=shaun timea=100 kind=stop direction=2
 
 ins index=borealis timea=300 kind=dist distance=10 duration=400 direction=0
 dialogsingle starttimea=200 duration=200 <= name="Borealis" text="No need to thank me...";"You are my fellow Zazoians after all!"
-*/
 load trigger="Zazo"
 ins index=0 timea=0 kind=trigger value=1
 load trigger="zazozazoWeapons"
