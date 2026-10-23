@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://unniqr3f43hd"
-path="res://.godot/imported/2026-10-23 16_37_55-Children of the Zodiac (DEBUG).png-ed535cb102f4ac5aa9be03b267421cbe.ctex"
+uid="uid://b6u43a23u6nq"
+path="res://.godot/imported/2026-10-23 16_39_08-Children of the Zodiac (DEBUG).png-fe44dff008588f4ef8bf33a064c1ddb3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tickets/COTZ-025 - Bug - Empyrian Temple showed weird map information/2026-10-23 16_37_55-Children of the Zodiac (DEBUG).png"
-dest_files=["res://.godot/imported/2026-10-23 16_37_55-Children of the Zodiac (DEBUG).png-ed535cb102f4ac5aa9be03b267421cbe.ctex"]
+source_file="res://tickets/COTZ-026 - DONE - Bug - Empyrian Temple showed weird map information/2026-10-23 16_39_08-Children of the Zodiac (DEBUG).png"
+dest_files=["res://.godot/imported/2026-10-23 16_39_08-Children of the Zodiac (DEBUG).png-fe44dff008588f4ef8bf33a064c1ddb3.ctex"]
 
 [params]
 
