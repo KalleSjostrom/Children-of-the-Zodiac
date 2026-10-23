@@ -285,6 +285,6 @@ roof = 2
 
 [resource]
 script = ExtResource("2_rdo6h")
-size = 239
+size = 538
 map_pos = Vector2i(1, 0)
 cells = Array[ExtResource("1_o1y1r")]([SubResource("Resource_epjsk"), SubResource("Resource_oyv40"), SubResource("Resource_x4qys"), SubResource("Resource_crfgp"), SubResource("Resource_fi5gq"), SubResource("Resource_j8rk8"), SubResource("Resource_usv1p"), SubResource("Resource_sqtbq"), SubResource("Resource_rvtgg"), SubResource("Resource_qh0e8"), SubResource("Resource_4d48w"), SubResource("Resource_80tel"), SubResource("Resource_kvelv"), SubResource("Resource_2jqmf"), SubResource("Resource_vyev7"), SubResource("Resource_bfsjw"), SubResource("Resource_0ukwk"), SubResource("Resource_dt4u6"), SubResource("Resource_62wn5"), SubResource("Resource_r6b4i"), SubResource("Resource_aga5m"), SubResource("Resource_l4a53"), SubResource("Resource_qdbiy"), SubResource("Resource_6y68l"), SubResource("Resource_65cnd"), SubResource("Resource_2q2go"), SubResource("Resource_pl1hp"), SubResource("Resource_cd1jc"), SubResource("Resource_hjvid"), SubResource("Resource_8e8o8"), SubResource("Resource_h0dn6"), SubResource("Resource_77dc5"), SubResource("Resource_fxw5r"), SubResource("Resource_4jhkj"), SubResource("Resource_550bn"), SubResource("Resource_xnj2o"), SubResource("Resource_gr6ic"), SubResource("Resource_g7wey"), SubResource("Resource_66wyc"), SubResource("Resource_47pnq")])

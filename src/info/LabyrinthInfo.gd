@@ -34,6 +34,9 @@ func addFloor(name, labyrinthMap):
 		labyrinthMap.setName(name)
 		var p = labyrinthMap.getMapPos()
 		var preferredIndex: int = p[1] * 3 + p[0]
+		# Java replaced the floor already there, which lost its explored nodes
+		# (Empyrian Temple's Light and Dark had the Tower of Magic's mapPos).
+		assert(not floors.has(preferredIndex), "LabyrinthInfo: " + name + " has the mapPos of another floor in " + labyrinthName)
 		floors[preferredIndex] = labyrinthMap
 
 func getFloors():

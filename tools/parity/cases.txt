@@ -449,6 +449,10 @@ dungeon_boss_memory_taur              dungeon_boss --load="Slot 1" --start="Empy
 # the console's goto, teleport and savepoint (COTZ-006).
 dungeon_map_page_empyrian_light       dungeon_map_page --load="Slot 1" --start="Empyrian Temple--Light-mark0" --no-encounters
 dungeon_map_page_silent_ruin          dungeon_map_page --load="Slot 1" --start="Silent Ruin--The Great Ruins-mark0" --no-encounters
+# Empyrian Temple's Light and Dark had the Tower of Magic's place on the map
+# page until COTZ-026: each top floor replaced the tower there (which came
+# back unexplored) and the page read "Explored: 10200 %" (their "size 1").
+dungeon_map_page_floors               dungeon_map_page_floors --load="Slot 1" --start="Empyrian Temple--Hall of Wind-mark0" --no-encounters
 dungeon_save_load                     dungeon_save_load --load="Slot 1" --start="Grivera--Second Floor-mark0" --no-encounters
 dungeon_console_goto                  dungeon_console_goto --load="Slot 1" --start=Alares --no-encounters
 # The world map exits of Fire Cavern--Inferno (node 200) and Silent Ruin

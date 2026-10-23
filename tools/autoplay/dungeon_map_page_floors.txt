@@ -1,0 +1,76 @@
+# --load="Slot 1" --start="Empyrian Temple--Hall of Wind-mark0" --no-encounters:
+# floors of one area through the debug console, then the menu's map page
+# (COTZ-026): up the Tower of Magic to Dark and down again (the map page),
+# then up the Tower of Strength to Light (the map page). Each floor has its
+# own place on the page and keeps its explored nodes.
+wait 3000
+tap UP
+wait 700
+console goto Empyrian Temple--Tower of Magic-mark0
+wait 4500
+tap UP
+wait 700
+tap UP
+wait 700
+console goto Empyrian Temple--Dark-mark0
+wait 4500
+tap UP
+wait 700
+tap UP
+wait 700
+console goto Empyrian Temple--Tower of Magic-mark7
+wait 4500
+pos magic_down
+tap TRIANGLE
+wait 2500
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap CROSS
+wait 1500
+shot f01_magic_after_dark
+log magic_after_dark
+tap CIRCLE
+wait 1500
+tap CIRCLE
+mark
+wait 300
+loopuntil mode=labyrinth 15000
+wait 1500
+console goto Empyrian Temple--Tower of Strength-mark0
+wait 4500
+tap UP
+wait 700
+tap UP
+wait 700
+console goto Empyrian Temple--Light-mark0
+wait 4500
+tap UP
+wait 700
+tap UP
+wait 700
+pos light
+tap TRIANGLE
+wait 2500
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap CROSS
+wait 1500
+shot f02_light
+log light
+quit
