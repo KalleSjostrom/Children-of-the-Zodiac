@@ -48,8 +48,11 @@ func check():
 func checkDead():
 	for i in enemies.size():
 		if not enemies[i].isAlive():
-			var sound: String = enemies[i].getDieSound()
-			SoundPlayer.playSound(Values.BattleSoundEffects + "Monster/" + sound + ".wav")
+			# Some .enemy files have no diesound (menthuattack2, dragon, ...);
+			# Java built "Monster/null.wav" and played nothing.
+			var sound = enemies[i].getDieSound()
+			if sound != null:
+				SoundPlayer.playSound(Values.BattleSoundEffects + "Monster/" + sound + ".wav")
 
 
 func drawBack(g):

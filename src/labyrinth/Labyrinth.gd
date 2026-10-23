@@ -650,6 +650,7 @@ func notifySwitchMusic(music, fadeSpeed):
 
 func overwriteStarterMusic(music, oggPlayer):
 	print("Overwrite")
-	self.oggPlayer.exit()
+	if self.oggPlayer != null:
+		self.oggPlayer.exit()
 	self.oggPlayer = oggPlayer
 	self.music = music

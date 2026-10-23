@@ -54,6 +54,10 @@ Files: `src/sprite/{Sprite (already ported), DefaultSprite, Instruction, Instruc
   for the scene's image entry), `scrollSpeed` per `ORIGINAL_FRAME_MS` of elapsed time (the
   original's ~30 FPS, which the sequences are timed to), and the right scroll stops at the image's
   right edge. The zoom mode's `zoom` and offsets are still read by nothing, as in Java.
+- `ScrollableTexts.update` (the credits) moved `speed` per update in Java; the port moves it per
+  `ORIGINAL_FRAME_MS` of elapsed time, like `ImageSettings`, so at 60 FPS it is not twice as
+  fast. "Ending - Part 3" ended with `endseq` ~22 minutes in (a music fade-out at
+  `timea=1200000`); it now ends right after "The end." scrolls off (~246 s).
 
 ## Cross-unit issues
 

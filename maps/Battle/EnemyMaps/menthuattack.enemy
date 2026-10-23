@@ -27,7 +27,7 @@ attackSpec {
 	name=Wrath_of_Ophiuchus
 	power=0
 	onAll=true
-	anim=(f=1,a=1000,cm=2)--(f=1,a=4000,r=.0001,se=Monster/Menthu/transformfire)--(f=1,a=2000,c=m+Flame,pl=true)--(f=2,c=m+Flame,a=1500)--(f=2,c=m+Fire:-1.2;1.1;-6,a=500,cm=1)--(f=2,c=m+Fire:1.35;1.1;-6,a=500)--(f=2,c=m+Fire:-1.2;1.1;-6,a=500)--(f=2,c=m+Fire:1.35;1.1;-6,a=500)--(f=2,a=2000,h=true)--(f=2,a=30,exit=true,d=true)
+	anim=(f=1,a=1000,cm=2)--(f=1,a=4000,r=.00005,se=Monster/Menthu/transformfire)--(f=1,a=2000,c=m+Flame,pl=true)--(f=2,c=m+Flame,a=1500)--(f=2,c=m+Fire:-1.2;1.1;-6,a=500,cm=1)--(f=2,c=m+Fire:1.35;1.1;-6,a=500)--(f=2,c=m+Fire:-1.2;1.1;-6,a=500)--(f=2,c=m+Fire:1.35;1.1;-6,a=500)--(f=2,a=2000,h=true)--(f=2,a=30,exit=true,d=true)
 	effect=(DownTo=1)
 }
 

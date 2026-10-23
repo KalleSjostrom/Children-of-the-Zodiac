@@ -16,8 +16,11 @@ func _init() -> void:
 func add(st):
 	texts.append(st)
 
+## The texts moved speed per update at the original's frame rate, which the
+## sequences are timed to, so the port moves them that much per
+## ORIGINAL_FRAME_MS of elapsedTime (ms).
 func update(elapsedTime):
-	y -= speed
+	y -= speed * elapsedTime / Values.ORIGINAL_FRAME_MS
 
 func draw(g):
 	g.setTextColorAndApply(1, 1)

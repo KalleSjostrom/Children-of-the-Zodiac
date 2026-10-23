@@ -33,7 +33,7 @@ database_name = "menthu's lair--hall of memories.mapdoor111"
 [node name="01 door 99" parent="Objects" index="1" instance=ExtResource("4_ujgtc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -50)
 open_roads = "dontopen"
-next_places = PackedStringArray("MemorySerphia", "Menthu\'s_Lair--Throne_of_Serpents-mark0")
+next_places = PackedStringArray("Menthu\'s_Lair--Throne_of_Serpents-mark0")
 mark = 1
 kind = "door"
 cell = 99
@@ -95,22 +95,6 @@ cell = 109
 facing = 2
 image = "-1"
 database_name = "menthu's lair--hall of memories.mapsave109"
-
-[node name="07 boss 45" parent="Objects" index="7" instance=ExtResource("8_thdsu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -10)
-kind = "boss"
-cell = 45
-facing = 1
-image = "MemoryTaur"
-database_name = "memorytaur"
-
-[node name="08 boss 57" parent="Objects" index="8" instance=ExtResource("8_thdsu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -26)
-kind = "boss"
-cell = 57
-facing = 1
-image = "MemorySalmonman"
-database_name = "memorysalmonman"
 
 [node name="09 button 13" parent="Objects" index="9" instance=ExtResource("9_dkq43")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -10)

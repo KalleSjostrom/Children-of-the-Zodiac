@@ -144,6 +144,9 @@ func notifySwitchMusic(p_music, fadeSpeed):
 
 func overwriteStarterMusic(p_music, p_oggPlayer):
 	print("Overwrite")
-	self.oggPlayer.exit()
+	# Null when this area's music is "No Music" and no switchMusic has run yet,
+	# e.g. Menthuattack2 killed before Wrath_of_Ophiuchus (Java threw an NPE).
+	if self.oggPlayer != null:
+		self.oggPlayer.exit()
 	self.oggPlayer = p_oggPlayer
 	self.music = p_music

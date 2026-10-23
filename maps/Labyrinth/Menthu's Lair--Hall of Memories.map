@@ -88,16 +88,13 @@ wall 1 102 2
 wall 1 99 0
 
 inv door 111 2 dontopen Menthu's_Lair--Room_of_Confusion-mark0
-inv door 99 0 dontopen MemorySerphia Menthu's_Lair--Throne_of_Serpents-mark0
+inv door 99 0 dontopen Menthu's_Lair--Throne_of_Serpents-mark0
 inv door 106 2 dontopen Menthu's_Lair--Hall_of_Memories-mark3
 inv hinderDoor 107 0 2 Walls/demonfloordoor Menthu's_Lair--Hall_of_Memories-mark2
 inv door 102 2 dontopen Menthu's_Lair--Hall_of_Memories-mark5
 inv hinderDoor 103 0 2 Walls/demonfloordoor Menthu's_Lair--Hall_of_Memories-mark4
 
 inv save 109 0 -1 -1 
-
-inv boss 45 -1 -1 MemoryTaur
-inv boss 57 -1 -1 MemorySalmonman
 
 inv button 13 3 7 Images/lever Menthu's_Lair--Hall_of_Memories.maphinderDoor107
 inv button 25 3 7 Images/lever Menthu's_Lair--Hall_of_Memories.maphinderDoor103
