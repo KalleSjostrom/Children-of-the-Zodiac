@@ -1,0 +1,3 @@
+When going through the Empyrian Temple, it showed me weird map data. I first went up the Tower of Magic (shown as the bottom right map), and got to the top floor. The map of the Top Floor covered the Tower of Magic map when viewed (again the bottom right map). When I went down, it showed me an unexplored map (nodes weren't filled in). I could still reach the bottom floor as normal. I then went to the Tower of Strength (which showed as the bottom left on the map view) and when reaching it's top floor, it covered the bottom right one again. When reaching the top of the Tower of Strength, it once again covered the bottom right map. 
+
+Screenshots of the different views in the ticket. Also, note the Explored: 10200% in one of the screenshots

@@ -225,7 +225,7 @@ func _teleport(args: PackedStringArray) -> DebugCommands.Result:
 	var not_now := _ready_for_jump()
 	if not_now != null:
 		return not_now
-	var place := lab.getName() + "-" + args[0]
+	var place: String = lab.getName() + "-" + args[0]
 	_organizer().jump_to(place)
 	return DebugCommands.done("Going to %s" % place)
 

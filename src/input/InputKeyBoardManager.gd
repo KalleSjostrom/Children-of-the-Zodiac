@@ -4,8 +4,9 @@ extends InputManager
 ##
 ## Keys: arrows = directions, W = triangle (menu), D = circle (back),
 ## S = cross (confirm), A = square, Enter = start (pause), Space = select,
-## Q/E = L1/R1, 1/3 = L2/R2. Escape quits, F toggles full screen, 6/7/8
-## make an emergency save. (Java: Space + Down opened the cheat menu and
+## Q/E = L1/R1, 1/3 = L2/R2. Escape quits, F toggles full screen (so does
+## Alt+Enter, which Main._input takes before it gets here), 6/7/8 make an
+## emergency save. (Java: Space + Down opened the cheat menu and
 ## Shift+0 started typing a cheat; the debug console replaces both, COTZ-006.)
 
 var keyMap := {} # Godot keycode -> GameAction

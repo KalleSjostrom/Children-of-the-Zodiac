@@ -116,3 +116,5 @@ Hold Circle to move three times as fast in the labyrinth
 Empyrian temple, funky map, Explored 10200%
 
 Beating all shadow-bosses (Empyrian Palace), got me to the Zodiac place and there two pieces of music are playing at the same time. Sounds like the prolog music, together with the result screen music
+
+Did the prolog scrolling end at the edge of the screen?

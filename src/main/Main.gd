@@ -36,6 +36,10 @@ extends Node
 ##
 ## In debug builds the developer console (scenes/debug/DebugConsole.gd)
 ## opens with the key under Escape or F1; it replaces the Cheater.
+##
+## Exported builds start in (borderless) full screen, run from the editor
+## windowed (project.godot: display/window/size/mode.template); F and
+## Alt+Enter toggle it (GameCore.setFullScreen).
 
 static var instance: Main
 ## --bridge-test: Landscape.create_scene returns the bridge test scene.
@@ -172,6 +176,15 @@ func _parse_args() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	# Alt+Enter toggles full screen, also while the console is open; the
+	# game does not see it (Enter alone is Start).
+	var key := event as InputEventKey
+	if key != null and key.pressed and key.alt_pressed \
+			and (key.keycode == KEY_ENTER or key.keycode == KEY_KP_ENTER):
+		if not key.echo:
+			GameCore.setFullScreen()
+		get_viewport().set_input_as_handled()
+		return
 	# While the console is open the keys are its (DebugConsole).
 	if debug_console != null and debug_console.is_open:
 		return

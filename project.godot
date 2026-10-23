@@ -44,6 +44,7 @@ gdscript/warnings/inference_on_variant=0
 window/size/viewport_width=1024
 window/size/viewport_height=768
 window/stretch/mode="canvas_items"
+window/size/mode.template=3
 
 [rendering]
 

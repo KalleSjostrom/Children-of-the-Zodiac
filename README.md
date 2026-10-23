@@ -15,6 +15,10 @@ Open the folder in Godot 4.7 and press Play (main scene `main/Main.tscn`), or:
 Godot_v4.7-stable_win64.exe --path "C:/Users/c06ks/Work/Children of the Zodiac"
 ```
 
+That runs in a window (Godot's `--fullscreen`, before `--`, starts it in full
+screen); an exported build starts in (borderless) full screen. F or Alt+Enter
+switches between the two.
+
 Controls (as in the original, PlayStation-style buttons):
 
 | Key | Button | Use |
@@ -28,7 +32,7 @@ Controls (as in the original, PlayStation-style buttons):
 | 1 / 3 | L2 / R2 | |
 | Enter | Start | pause |
 | Space | Select | |
-| F | | toggle full screen |
+| F / Alt+Enter | | toggle full screen |
 | Esc | | quit |
 | 6 / 7 / 8 | | emergency save to slots E1–E3 |
 | § / ` / F1 | | developer console (debug builds), see below |

@@ -114,6 +114,7 @@ static func exitGame() -> void:
 		screen.get_tree().quit()
 
 
+## Toggles between a window and borderless full screen (F, Alt+Enter).
 static func setFullScreen() -> void:
 	var w := DisplayServer.window_get_mode()
 	if w == DisplayServer.WINDOW_MODE_FULLSCREEN or w == DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN:
