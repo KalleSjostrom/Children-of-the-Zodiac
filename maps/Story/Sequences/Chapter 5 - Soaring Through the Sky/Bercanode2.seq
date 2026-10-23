@@ -99,7 +99,7 @@ ins timea=1000 index=zalzi kind=stop direction=1
 
 ins type=fadein timea=2000 index=1 fadetime=0 kind=music mode=play
 ins timea=2500 index=borealis kind=dist distance=40 direction=3 duration=1500
-dialogsingle starttimea=500 duration=500 <= name="Borealis" text="I canÕt stay here any longer.";"I must get to Zazo as fast as I can!"
+dialogsingle starttimea=500 duration=500 <= name="Borealis" text="I can't stay here any longer.";"I must get to Zazo as fast as I can!"
 
 ins timea=750 index=celis kind=dist distance=10 direction=1 duration=100
 ins timea=0 index=celis kind=emotion emotion=?! show=true
@@ -111,26 +111,26 @@ ins timea=2000 index=kin kind=tor movepos=20;-20 duration=1500
 ins timea=0 index=kin kind=emotion emotion=? show=true
 dialogsingle starttimea=1200 duration=300 <= name="Kin" text="How?"
 ins timea=200 index=borealis kind=look_at actor=kin
-dialogsingle starttimea=250 duration=500 <= name="Borealis" text="I donÕt have it figured out quite yet, but I have to go."
+dialogsingle starttimea=250 duration=500 <= name="Borealis" text="I don't have it figured out quite yet, but I have to go."
 ins timea=400 index=kin kind=emotion show=false
 
 ins timea=1000 index=borealis kind=stop direction=1
 ins timea=0 index=borealis kind=emotion show=false
-dialogsingle starttimea=150 <= name="Borealis" text="IÕve already made up my mind.";"My people needs me."
+dialogsingle starttimea=150 <= name="Borealis" text="I've already made up my mind.";"My people needs me."
 ins timea=250 index=celis kind=dist distance=10 direction=1 duration=200
 ins timea=0 index=celis kind=emotion emotion=! show=true
 dialogsingle starttimea=150 duration=300 <= name="Celis" text="We'll help you!"
 ins timea=250 index=borealis kind=look_at actor=celis
 ins timea=250 index=borealis kind=dist distance=20 direction=1 duration=1000
-dialogsingle starttimea=500 duration=500 <= name="Borealis" text="ThatÕs very kind of you, but I think it will";"be faster and easier to go alone."
+dialogsingle starttimea=500 duration=500 <= name="Borealis" text="That's very kind of you, but I think it will";"be faster and easier to go alone."
 ins timea=400 index=celis kind=emotion show=false
 ins timea=1000 index=borealis kind=stop direction=1
-dialogsingle starttimea=1000 <= name="Borealis" text="Besides, youÕve got your own thing."
+dialogsingle starttimea=1000 <= name="Borealis" text="Besides, you've got your own thing."
 ins timea=1000 index=celis kind=emotion emotion=... show=true
 dialogsingle starttimea=1500 duration=500 <= name="Celis" text="..."
 ins timea=1000 index=kin kind=dist distance=25 direction=1 duration=1500
 ins timea=0 index=kin kind=queue direction=0
-dialogsingle starttimea=250 duration=250 <= name="Kin" text="ItÕs been a pleasure traveling with you!";""
+dialogsingle starttimea=250 duration=250 <= name="Kin" text="It's been a pleasure traveling with you!";""
 ins timea=500 index=borealis kind=stop direction=2
 dialogsingle starttimea=150 <= name="Borealis" text="With you too!";"Come visit, ok?"
 ins timea=300 index=zalzi kind=dist distance=40 direction=1 duration=1500
