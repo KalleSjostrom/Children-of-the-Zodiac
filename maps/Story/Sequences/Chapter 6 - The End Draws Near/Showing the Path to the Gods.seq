@@ -161,7 +161,7 @@ dialogsingle starttimea=300 duration=300 <= name="Celis" text="I wonder if I can
 
 ins timea=500 index=borealis kind=dist distance=15 direction=2 duration=200
 ins timea=0 index=borealis kind=emotion emotion=! show=true
-dialogsingle starttimea=300 duration=400 <= name="Borealis" text="We'll be there for you, Celis! "
+dialogsingle starttimea=300 duration=400 <= name="Borealis" text="We'll be there for you, Celis!"
 ins timea=300 index=celis kind=stop direction=0
 ins timea=0 index=celis kind=emotion show=false
 
