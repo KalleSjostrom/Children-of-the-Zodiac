@@ -100,3 +100,5 @@ I have waaaay too much gold, 4933 gp at entrance of mt. Cesadur. I've bought eve
 Uri says You must hurry and save those miners even though we've done it
 
 Couldn't pass by fire cave on the way back, why?
+
+Speaking to the Math guy only shows the image once!, until a restart

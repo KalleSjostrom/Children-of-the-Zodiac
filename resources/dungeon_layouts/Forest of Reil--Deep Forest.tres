@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="DungeonLayout" format=3]
+[gd_resource type="Resource" script_class="DungeonLayout" format=3 uid="uid://blp3shqg0k7ia"]
 
-[ext_resource type="Script" path="res://scenes/dungeons/DungeonCell.gd" id="1_3o87g"]
-[ext_resource type="Script" path="res://scenes/dungeons/DungeonLayout.gd" id="2_5je7u"]
+[ext_resource type="Script" uid="uid://l16e1gpyh3u8" path="res://scenes/dungeons/DungeonCell.gd" id="1_3o87g"]
+[ext_resource type="Script" uid="uid://binvxamvcxfxb" path="res://scenes/dungeons/DungeonLayout.gd" id="2_5je7u"]
 
 [sub_resource type="Resource" id="Resource_bkju3"]
 script = ExtResource("1_3o87g")
