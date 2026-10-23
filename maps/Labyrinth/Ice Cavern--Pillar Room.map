@@ -129,7 +129,7 @@ mapEnd
 
 wall 2 111 2
 
-inv door 111 2 dontopen landIce_Cavern--Pillar_Room-mark0
+inv door 111 2 dontopen Frozen_Forest--Forest_Passage-mark1
 inv hinderDoor 199 1 2 Walls/icecavedoor Ice_Cavern--Mysterious_Forest-mark0
 inv hinderDoor 4 3 2 Walls/icecavedoor Ice_Cavern--Frozen_Field-mark1
 

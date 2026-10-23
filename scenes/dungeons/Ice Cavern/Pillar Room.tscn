@@ -23,7 +23,7 @@ layout = ExtResource("3_hkpr6")
 [node name="00 door 111" parent="Objects" index="0" instance=ExtResource("4_2fgfm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -2)
 open_roads = "dontopen"
-next_places = PackedStringArray("landIce_Cavern--Pillar_Room-mark0")
+next_places = PackedStringArray("Frozen_Forest--Forest_Passage-mark1")
 kind = "door"
 cell = 111
 database_name = "ice cavern--pillar room.mapdoor111"

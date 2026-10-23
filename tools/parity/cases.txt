@@ -456,3 +456,8 @@ dungeon_console_goto                  dungeon_console_goto --load="Slot 1" --sta
 # the door texture. Left as Deep Forest is (script dungeon_deep_forest_exit).
 dungeon_exit_inferno                  dungeon_deep_forest_exit --load="Slot 1" --start="Fire Cavern--Inferno-mark2" --no-encounters
 dungeon_exit_silent_ruin              dungeon_deep_forest_exit --load="Slot 1" --start="Silent Ruin--The Great Ruins-mark0" --no-encounters
+# The Ice Cavern's entrance (Pillar Room, door 111) led to a world map node
+# "Ice Cavern--Pillar Room-mark0" that no world map has: a script error, then
+# the title screen. It leads back to the Forest Passage's door 99, which led
+# in (script dungeon_door; door 99's status 1: its story is seen).
+dungeon_door_ice_cavern_entrance      dungeon_door --load="Slot 1" --start="Ice Cavern--Pillar Room-mark0" --start-node=110:0 --status=frozen_forest--forest_passage.mapdoor99:1 --no-encounters
