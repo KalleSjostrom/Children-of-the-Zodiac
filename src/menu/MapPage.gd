@@ -15,9 +15,12 @@ static var mappiece = ImageHandler.addPermanentlyLoadNow(Values.MenuImages + "ma
 static var mappiece2 = ImageHandler.addPermanentlyLoadNow(Values.MenuImages + "mappiece2.png")
 static var mappiece3 = _createMappiece3()
 var floor = null
-## Port addition (COTZ-012): opened with Square from the game: Circle and
-## Square go straight back to it.
+## Port addition (COTZ-012): opened with Square from the game: Square goes
+## straight back to it, Circle from the whole labyrinth.
 var shortcut := false
+## Port addition: the labyrinth the page opens on (the player's, or the last
+## one visited). Cross shows it on floor, any other on its first floor.
+var homeLab = null
 
 
 static func _createMappiece3() -> Array:
@@ -35,6 +38,7 @@ func _init(p_shortcut = false) -> void:
 	if gameMode is Labyrinth:
 		lab = gameMode
 		name = lab.getSimpleName()
+		homeLab = name
 		floor = lab.getFloorName()
 		currentNode = lab.getCurrentNode()
 		var found: bool = false
@@ -52,6 +56,7 @@ func _init(p_shortcut = false) -> void:
 	else:
 		var labInfo = Database.getLastVisitedLabyrinth()
 		name = labInfo[0]
+		homeLab = name
 		floor = labInfo[1]
 		activeNode.setCurrentChild(name)
 		zoomIn(false)
@@ -59,7 +64,8 @@ func _init(p_shortcut = false) -> void:
 			activeNode.setCurrentChild(floor)
 			update()
 	# Port change: the page opens on the whole labyrinth (every floor), with
-	# the hand on it in the list of visited labyrinths, not on one floor.
+	# the hand on it in the list of visited labyrinths, not on one floor
+	# (Cross zooms in on that).
 	if not isZoomedOut():
 		zoomOut()
 	setPage(BESTIARY_PAGE)
@@ -75,16 +81,17 @@ func getRootNode():
 	return n
 
 
-## Port change: Cross does nothing, the map is only shown whole. Java's
-## crossPressed is zoomIn.
+## Zooms in from the whole labyrinth to one floor. On a floor it does
+## nothing, as in Java (a floor is no labyrinth for zoomIn).
 func crossPressed(playSound = null):
-	pass
+	if isZoomedOut():
+		zoomIn()
 
 
 ## Down a level: from a labyrinth to its floors, one floor shown. Java's
 ## crossPressed (Java overloads crossPressed(), which plays the sound, and
-## crossPressed(playSound)). Nothing shows a single floor any more, but
-## upPressed, downPressed and _init use it to load a labyrinth's floors.
+## crossPressed(playSound)). upPressed, downPressed and _init also use it to
+## load a labyrinth's floors.
 func zoomIn(playSound = true):
 	var name = activeNode.getCurrentChild().getName()
 	var li = Database.getMap(name)
@@ -98,17 +105,20 @@ func zoomIn(playSound = true):
 func setCurrent(li, name):
 	var n = MenuNode.new(activeNode, name)
 	if not n.hasChildren():
+		# Port change: only homeLab starts on floor. Java tried floor in every
+		# labyrinth, but floor names repeat (Second Floor is in three).
+		var f = floor if str(name).to_lower() == str(homeLab).to_lower() else null
 		currentFloors = li.getFloors()
 		for i in range(currentFloors.size()):
 			n.insertChild(currentFloors[i].getName())
 		n.setDistance(MenuValues.DISTANCE)
 		n.setPositions(MenuValues.MENU_TEXT_X, MenuValues.MENU_TEXT_Y)
-		n.setCurrentChild(floor)
+		n.setCurrentChild(f)
 		var found: bool = false
 		var i: int = 0
 		while i < currentFloors.size() and not found:
 			# Java: floor.equals(...) (a null floor would throw there).
-			found = floor != null and floor == currentFloors[i].getName()
+			found = f != null and f == currentFloors[i].getName()
 			if found:
 				map = currentFloors[i]
 			i += 1
@@ -165,10 +175,10 @@ func L1Pressed():
 	pass
 
 
-## Back to the start page (the page is always zoomed out), or leaves the menu
-## when opened with Square.
+## Zooms out: from a floor to the whole labyrinth, then to the start page, or
+## out of the menu when opened with Square.
 func circlePressed(pressAnyWay = null):
-	if shortcut:
+	if shortcut and isZoomedOut():
 		MainMenu.getMainMenu().exit()
 	else:
 		zoomOut()
@@ -243,12 +253,15 @@ func drawHelp(g, drawAll = null):
 	var helpxicons: int = helpx - 28
 	var helpyicons: int = helpy - 23
 
-	# Port change: no Cross (Select), see crossPressed; Circle takes its place.
 	g.drawCenteredImage(AbstractPage.BUTTON_ICONS[GameMode.TRIANGLE], helpxicons, helpyicons)
-	g.drawCenteredImage(AbstractPage.BUTTON_ICONS[GameMode.CIRCLE], helpxicons + step, helpyicons)
-
 	g.drawString("Exit", helpx, helpy)
-	if shortcut:
-		g.drawString("Back", helpx + step, helpy)
+	# Port change: Cross (Zoom in, Java's Select) only on the whole labyrinth,
+	# see crossPressed; on a floor Circle takes its place.
+	if drawAll:
+		g.drawCenteredImage(AbstractPage.BUTTON_ICONS[GameMode.CROSS], helpxicons + step, helpyicons)
+		g.drawCenteredImage(AbstractPage.BUTTON_ICONS[GameMode.CIRCLE], helpxicons + 2 * step, helpyicons)
+		g.drawString("Zoom in", helpx + step, helpy)
+		g.drawString("Back" if shortcut else "To main menu", helpx + 2 * step, helpy)
 	else:
-		g.drawString("To main menu" if drawAll else "Zoom out", helpx + step, helpy)
+		g.drawCenteredImage(AbstractPage.BUTTON_ICONS[GameMode.CIRCLE], helpxicons + step, helpyicons)
+		g.drawString("Zoom out", helpx + step, helpy)

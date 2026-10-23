@@ -27,7 +27,7 @@ Controls (as in the original, PlayStation-style buttons):
 | S | Cross | confirm / interact |
 | D | Circle | back / cancel; hold to sprint in villages and to run cutscenes at 3× speed |
 | W | Triangle | open the menu |
-| A | Square | the map (in labyrinths, villages and the airship; Circle or Square goes back); on the world map: board the airship |
+| A | Square | the map (in labyrinths, villages and the airship; Cross zooms in on the floor, Circle zooms out or goes back, Square goes back); on the world map: board the airship |
 | Q / E | L1 / R1 | |
 | 1 / 3 | L2 / R2 | |
 | Enter | Start | pause |
