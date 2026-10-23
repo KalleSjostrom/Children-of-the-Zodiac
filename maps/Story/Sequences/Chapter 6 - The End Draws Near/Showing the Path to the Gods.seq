@@ -11,7 +11,7 @@ info time="day" name="Dellna - Elder House - Floor 1" music="No Music" fadeValue
 load character="Borealis"
 load character="Zalzi"
 
-actor name="Gabriel" pos=490;349;0
+actor name="Gabriel"
 actor name="Kin"
 actor name="Celis"
 actor name="Borealis"
@@ -26,6 +26,10 @@ show index=kin value=false
 show index=borealis value=false
 show index=zalzi value=false
 
+# Gabriel is a villager: an actor pos would wait for a walk he never makes
+ins timea=0 index=gabriel kind=controll controll=true
+ins timea=0 index=gabriel kind=show movepos=490;349;0
+ins timea=0 index=gabriel kind=stop direction=0
 
 ins timea=0 index=borealis kind=show movepos=470;322;2
 ins timea=0 index=zalzi kind=show movepos=510;322;2

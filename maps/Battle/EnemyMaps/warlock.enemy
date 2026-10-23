@@ -24,6 +24,6 @@ height -2
 depth -6
 middle 0
 
-attackSpec type=mag name=Warlock's_Curse p=.5 anim=(a=900,se=Monster/Necromancer/attack)--(f=1,h=true)--(f=2)
-attackSpec type=mag element=wind name=Wind_Flame power=.7 onAll=true p=.5 anim=(a=900,se=Monster/Necromancer/attack)--(f=1,h=true)--(f=2)
+attackSpec type=mag name=Warlock's_Curse p=.5 anim=(a=900,se=Monster/Necromancer/attack)--(a=500,f=1,h=true)
+attackSpec type=mag element=wind name=Wind_Flame power=.7 onAll=true p=.5 anim=(a=900,se=Monster/Necromancer/attack)--(a=500,f=1,h=true)
 attackSpec type=sup name=Heal power=1 onAll=true anim=(f=3,c=s+Cure,a=1000)

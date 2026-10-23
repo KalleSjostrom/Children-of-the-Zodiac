@@ -70,4 +70,8 @@ text lines="...and my childhood...";"" pos=345;384
 ins type=fadein timea=3000 index=3 fadetime=2000 kind=text
 ins type=fadeout timea=5000 index=3 fadetime=2000 kind=text
 
+# Gabriel is back in the Elder House for Showing the Path to the Gods
+load trigger="Gabriel"
+ins index=0 timea=0 kind=trigger value=2
+
 ins timea=3000 kind=endseq

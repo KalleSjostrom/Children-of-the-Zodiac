@@ -1,0 +1,19 @@
+# --start=<floor> --start-node=<address>:<direction> --no-encounters, the
+# start node facing a closed chest: open it (its second frame and the
+# dialog of what it held), then close the dialog. Used for chests whose
+# content failed to load (Menthu's Lair--Hall of Memories, chest 165).
+wait 3000
+pos start
+shot k01_facing_chest
+log chest
+tap CROSS
+wait 300
+shot k02_opened
+wait 1000
+shot k03_dialog
+log dialog
+tap CROSS
+wait 800
+shot k04_closed
+log closed
+quit

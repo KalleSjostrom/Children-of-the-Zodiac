@@ -23,6 +23,14 @@ dev-only or cosmetic.
   (`maps/Village/Berca/villagers/Omer.char`) did not close, but Java's check
   (up - down + right - left) let it through. Fixed in his `.char`;
   `Instructions.check` now tests each axis, and all 245 `.char` files pass.
+* **Menthu's Lair--Hall of Memories, chest 165 stopped on opening**: it held
+  `cards.magic.Quake`, a card that never existed (in Java either). It holds
+  `cards.magic.Colliding 1 true` now (`.map` and `.tscn`), as the other
+  floors hold Tornado and Flare; parity case `dungeon_chest_hall_of_memories`.
+* **Tito in Pensara - The Trade District gave `cards.offense.CrushingBlow`**
+  for 400 kills, an old name of CrushingSaber (its Java comment calls it a
+  "crush blow" card). Fixed in his `.char`. `Card.createCard` asserts on an
+  unknown card now; every card name in maps/ resolves.
 
 ## Villages
 

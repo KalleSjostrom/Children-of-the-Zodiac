@@ -95,8 +95,9 @@ static func createCard(name, level = null, all = null, type = null, price = null
 	if type == null:
 		return createCard(name, level, all, getTypeStatic(name), 0)
 	var card = ClassRegistry.newInstance(name)
+	# Java printed a stack trace; null for the caller (in a release build).
+	assert(card != null, "Card.createCard: no card class " + str(name))
 	if card == null:
-		push_error("Card.createCard: could not create card " + str(name))
 		return null
 	card.init(level, all, type, price)
 	return card

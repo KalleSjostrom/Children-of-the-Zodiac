@@ -113,7 +113,8 @@ o 630 663 765 710
 door house Dellna_-_House 75 795 30 0 2
 door house Dellna_-_House 379 795 30 0 2 0 0 1
 holeDoor house Dellna_-_Elder_House_-_Floor_1 478 352 30 0 2
-door house Dellna_-_Ana's_Home 1234 561 30 0 2
+# Status 1 (Celis Wakes Up) runs the visit, 0 (Showing the Path to the Gods) is the house
+door house;story Dellna_-_Ana's_Home;A_Visit_to_the_Childhood_Home_-_Part_1 1234 561 30 0 2
 doorSignFl Too much snow...
 
 door inn Inn 140 1140 30 0

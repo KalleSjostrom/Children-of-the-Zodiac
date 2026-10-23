@@ -102,3 +102,17 @@ Uri says You must hurry and save those miners even though we've done it
 Couldn't pass by fire cave on the way back, why?
 
 Speaking to the Math guy only shows the image once!, until a restart
+
+Wrath of opiochus took too long
+
+Toggle such that the console is visible but not the history
+
+Revert noenemies 
+
+Press X in the map to zoom in on the current map
+
+Hold Circle to move three times as fast in the labyrinth
+
+Empyrian temple, funky map, Explored 10200%
+
+Beating all shadow-bosses (Empyrian Palace), got me to the Zodiac place and there two pieces of music are playing at the same time. Sounds like the prolog music, together with some upbeat music 

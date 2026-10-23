@@ -163,7 +163,7 @@ ins index=13 timea=0 kind=trigger value=2
 load trigger="Gabriel"
 ins index=14 timea=0 kind=trigger value=0
 load trigger="dellnadellna - ana's home"
-ins index=15 timea=0 kind=trigger value=0
+ins index=15 timea=0 kind=trigger value=1
 
 load trigger="dellna - elder house - floor 1"
 ins index=16 timea=0 kind=trigger value=1

@@ -102,7 +102,7 @@ inv boss 57 -1 -1 MemorySalmonman
 inv button 13 3 7 Images/lever Menthu's_Lair--Hall_of_Memories.maphinderDoor107
 inv button 25 3 7 Images/lever Menthu's_Lair--Hall_of_Memories.maphinderDoor103
 
-inv chest 165 1 2 Images/chest 2 cards.magic.Quake 1 true
+inv chest 165 1 2 Images/chest 2 cards.magic.Colliding 1 true
 inv chest 185 1 2 Images/chest 2 cards.support.Resurrect 3 true
 inv chest 205 1 2 Images/chest 2 cards.support.Cure 3 true
 inv chest 159 2 2 Images/chest 2 cards.magic.Blizzard 3 true

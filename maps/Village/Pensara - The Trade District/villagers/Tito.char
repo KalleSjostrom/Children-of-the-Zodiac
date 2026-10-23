@@ -79,7 +79,7 @@ n Tito
 fl Take this reward.
 sl From now on, you're my god.
 trigger Tito 7
-gift cards.offense.CrushingBlow 2 3 false
+gift cards.offense.CrushingSaber 2 3 false
 f true
 
 dialog 7

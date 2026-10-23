@@ -461,3 +461,8 @@ dungeon_exit_silent_ruin              dungeon_deep_forest_exit --load="Slot 1" -
 # the title screen. It leads back to the Forest Passage's door 99, which led
 # in (script dungeon_door; door 99's status 1: its story is seen).
 dungeon_door_ice_cavern_entrance      dungeon_door --load="Slot 1" --start="Ice Cavern--Pillar Room-mark0" --start-node=110:0 --status=frozen_forest--forest_passage.mapdoor99:1 --no-encounters
+# Chest 165 of Menthu's Lair--Hall of Memories held "cards.magic.Quake", a
+# card that never existed (in Java either): a script error on opening it. It
+# holds Colliding 1 (all), the powerful earth magic, as the other floors of
+# Menthu's Lair hold Tornado and Flare (script dungeon_chest).
+dungeon_chest_hall_of_memories        dungeon_chest --load=Start --start="Menthu's Lair--Hall of Memories-mark0" --start-node=149:3 --no-encounters
