@@ -175,6 +175,8 @@ load trigger="BercaSoldier 1"
 ins index=2 timea=0 kind=trigger value=1
 load trigger="BercaSoldier 2"
 ins index=3 timea=0 kind=trigger value=1
+load trigger="Mizoram"
+ins index=4 timea=0 kind=trigger value=1
 
 ins timea=200 index=0 kind=screenzoom zoomin=false zoomtime=4000 usestaticpos=true pos=512;768
 

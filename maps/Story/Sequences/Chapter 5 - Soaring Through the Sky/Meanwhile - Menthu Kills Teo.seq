@@ -25,7 +25,7 @@ dialogsingle starttimea=1500 duration=900 <= name="Teo" text="What now...";""
 ins timea=2500 index=teo kind=stop direction=0
 dialogsingle starttimea=1500 <= name="Teo" text="Where do I go from here...";""
 ins timea=1500 index=teo kind=dist distance=100 duration=2000 direction=1
-dialogsingle starttimea=50 duration=1350 <= name="Teo" text="The senate forced me out, IÕm not wanted in Zazo.";""
+dialogsingle starttimea=50 duration=1350 <= name="Teo" text="The senate forced me out, I'm not wanted in Zazo.";""
 ins timea=2800 index=teo kind=stop direction=2
 dialogsingle starttimea=50 <= name="Teo" text="And what the hell do I tell Menthu?";""
 ins timea=1500 index=teo kind=stop direction=3
