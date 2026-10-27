@@ -1375,7 +1375,8 @@ Keep the logic classes (`Battle`'s state machine, `EnemyLogic`,
   `AnimationSettingsFactory` presets become `.tres`. Each card gets an effect
   scene (`fx/<Card>.tscn`):
   * GPUParticles3D, or CPUParticles3D where the logic needs per-particle
-    counts, since damage waits on `isDestroyed()`;
+    counts, since damage waits on `isDestroyed()` (or a timer: waits may be
+    off by about 100 ms, 12);
   * a `SphereMesh` + `OmniLight3D` for the sphere systems;
   * emission points baked from the enemy frame for Shatter.
   * It exposes signals `impact` (= `isDestroyed`), `ready_for_next`
@@ -1430,6 +1431,8 @@ When no mode draws through `g` any more:
 * **Logic timed by effects.** Battle damage waits for particle packets.
   GPU particles cannot report how many particles are left, so those effects
   use CPUParticles or an explicit timer that matches the legacy timing.
+  *Relaxed (2026-10-27):* the timer may be off by up to about 100 ms; a
+  smooth, frame-rate independent effect matters more than exact waits.
 * **Battle in the hybrid period** (7.5): depth, fog and the weather front
   pass behave differently until phase 4. *Pilot:* avoided in the labyrinth
   by the 3D bridge (7.5), which only covers the frame's first 3D chunk drawn
@@ -1502,6 +1505,18 @@ When no mode draws through `g` any more:
    decision. Particles (phase 1) and Tweens do. The phase 2 pilot showed
    the labyrinth weather's frame rate depends on it: the GDScript
    simulation, not the drawing, holds the rainy floors at ≈30 FPS (7.5).
+
+   *Decided for particles (2026-10-27):* today's speeds, updated every
+   frame with the frame's delta (smooth at any frame rate, in line with the
+   rest of the game). The speeds: the village and cutscene systems and the
+   card effects as they look at the original's 30 steps/s
+   (`Values.originalFrameStep`, commit 6dad0c75, which made them feel
+   right); the dungeon weather and the save points as they look at 60 FPS
+   (one step per frame; they never had that correction). Every per-step law
+   becomes a per-second rate at its system's step rate; the 30 Hz steps stay
+   only in the `--legacy` paths. A battle may wait up to about 100 ms more
+   or less than today for an effect (12). Other motion (2.5's list without
+   the particles) is still open.
 7. **Village top layer** (from the pilot, 6.7): *decided (phase 1
    rollout):* roofs and treetops are always drawn (6.1, the pilot's
    default). The legacy rule draws a piece only where a sprite overlaps it,
@@ -1519,12 +1534,22 @@ Sizes are relative: S ≈ a focused session, XL ≈ many sessions.
 | 0 | Groundwork: bridge, parity tool, `ARCHITECTURE.md` | S | — | everything |
 | 1 | Villages + cutscenes + village particles + SpriteFrames | L | 0; decisions 1, 6 | editable villages |
 | 2 | Dungeons + weather + minimap | L | 0; decision 2 (the weather: 6) | editable dungeons; FPS fix (with decision 6) |
+| P | Village and cutscene particles on the GPU (6.4; `docs/particles_prompt.md`) | M | 1; decision 6 (decided for particles) | Dellna's snow back on; Home of the Gods and Dellna at 60 FPS |
+| P2 | Dungeon weather and save points on the GPU | M | 2, P | rainy and snowy floors at 60 FPS |
 | 3 | Theme, Dialog, signs, emotions, fades, HUD | M | 1 (or 2) | most of the remaining `draw(g)` |
 | 4.1 | World map + airship | M | 1 (converter), 3 | — |
 | 4.2 | Title, game over, mini-games, stores, menu | L | 3 | — |
 | 4.3 | Input, audio, saves, `Game` autoload | M | any time after 0; the autoload is best after 4.2 | 5 |
 | 4.4 | Battle, cards, effects | XL | 2, 3 | 5 |
 | 5 | Remove the GL emulation; per-delta time | M | all of the above | — |
+
+After phase 2, P comes before phase 3 (2026-10-27): the particle
+simulation makes Home of the Gods (6 FPS with the god systems) and Dellna's
+snow (12–18 FPS) unplayable, and P and phase 3 do not depend on each other.
+P2 can follow at any time. The card effects are part of 4.4 (the battle
+waits on them, 12); with the waits relaxed to about ±100 ms they may move
+earlier, as GPU effects or a per-frame interim: P's last deliverable
+assesses that.
 
 Phases 1 and 2 are the user-visible goal and can run in parallel after phase
 0. Within phase 1, the Zazo pilot should go all the way through steps A and
