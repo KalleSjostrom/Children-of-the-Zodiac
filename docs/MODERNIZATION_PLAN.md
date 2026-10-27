@@ -81,7 +81,8 @@ widescreen (see section 13); rewriting the cutscene language.
     (Menthu Battle, Zazo - Farl's House, Pensara - The Trade District -
     Tower Prison; `DoubleBackground.cutImage2` cuts them in memory), Home
     of the Gods and No Place have PNG tiles with alpha, No Place's
-    `as=1:1` draws one 1×1 tile, and Dorma's Tranquility has no art.
+    `as=1:1` draws one 1×1 tile, and Dorma's Tranquility had no art
+    (Menthu Battle and Dorma's Tranquility were removed in COTZ-034).
   * The "top" pieces (roofs, treetops) are in `top/`, positioned by
     `top/top.info` (`name:x:y`).
   * Night overlay: `<Place> at Night - 1.png` or `standardOvernight.png`.
@@ -608,10 +609,11 @@ Zazo.tscn (Node2D, VillageScene.gd)   @export place_name, music, land_name, insi
   (2,487 shots, logs identical). Two findings on the way: a game pad that
   connects during a deterministic run releases AutoPlay's buttons (fixed:
   `--seed` runs read no pad), and the world map mode leaked (fixed, 8).
-* **Not reachable:** Dorma's Tranquility and Menthu Battle (no place, story,
-  door or world map node names them), "Pensara - The North District -
-  Farmer House" (quits the game on entry: a villager's patrol is not
-  closed), Tutorial1 (no main.bank entry): data check and preview only.
+* **Not reachable:** "Pensara - The North District - Farmer House" (quits
+  the game on entry: a villager's patrol is not closed): data check and
+  preview only. Dorma's Tranquility and Menthu Battle (no place, story, door
+  or world map node names them) and Tutorial1 (no main.bank entry) were
+  removed in COTZ-034.
   `fadeparticlesystem` and the rain/sand particles never run (appendix).
 * **Converter:** the pilot's converter handled one-image backgrounds,
   PNG tiles with alpha, `as=1:1` and own night images already; the

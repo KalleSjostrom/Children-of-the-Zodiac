@@ -239,8 +239,8 @@ procedure in `docs/CONVERTING_DUNGEONS.md`:
   Alares - 1, Dellna - 2,
   Parasne - 2, Kin's Place, Zazo - Farl's House and several night variants
   have no obstacles (Zazonode2's timeline was commented out, restored
-  in COTZ-016); Tutorial1,
-  Dorma's Tranquility and Menthu Battle are reached by nothing. Saves:
+  in COTZ-016); Tutorial1, Dorma's Tranquility and Menthu Battle were
+  reached by nothing (removed in COTZ-034). Saves:
   "Start demon1" has Kin and Celis, "Start demon2" adds Borealis, "Start
   Menthu1" and "Start d3" add Zalzi; "Slot 2" and "Slot 3" are an older
   data version (loading them asserts for each missing labyrinth node).

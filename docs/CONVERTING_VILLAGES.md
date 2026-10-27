@@ -50,9 +50,8 @@ the legacy drawing.
 * Places only cutscenes reach (no main.bank place): Alares - Celis,
   Dellna - Ana's Home Memory, Home of Celis - Memory, No Place (day and
   night), The Senate, The Ship Cabin - Story, Zazo - Teo (day and night).
-  Dorma's Tranquility and Menthu Battle are reached by nothing (no place,
-  story, door or world map node); only the data check and a preview cover
-  them.
+  Dorma's Tranquility and Menthu Battle, reached by nothing (no place,
+  story, door or world map node), were removed in COTZ-034.
 * Content quirks are kept and noted in the case's comment, not fixed:
   "Zazo at Night - 0" asserts unless its loot is taken (Java quit the
   game); Zazo - Tent has no villager images; the night stores of Zazo name
@@ -78,7 +77,7 @@ It writes `scenes/villages/<Place>/` (base scene, one inherited scene per
   the fade mode goes, a loot line without its directions. The legacy loader
   reads them the same way.
 * `missing image` / `tile ... missing`: art the legacy code cannot draw
-  either (Dorma's Tranquility has no art at all).
+  either.
 
 The art the converter writes is what `DoubleBackground` draws: the tiles of
 `x<i>y<j>` up to the `as=` size (`as=1:1`: only `x0y0`), PNG tiles with

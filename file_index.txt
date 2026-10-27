@@ -3661,8 +3661,6 @@ res/Village/Kin's Place/Kin's Placefolder/x3y0.jpg
 res/Village/Kin's Place/Kin's Placefolder/x3y1.jpg
 res/Village/Kin's Place/Kin's Placefolder/x3y2.jpg
 res/Village/Kin's Place/top/top.info
-res/Village/Menthu Battle/Menthu Battle.jpg
-res/Village/Menthu Battle/top/top.info
 res/Village/No Place/No Place.jpg
 res/Village/No Place/No Place.png
 res/Village/No Place/No Placefolder/x0y0.png
@@ -6715,7 +6713,6 @@ maps/Story/Sequences/Chapter 1 - Running Away From Home/Someone's Calling.seq
 maps/Story/Sequences/Chapter 1 - Running Away From Home/Talking to Farmer John.seq
 maps/Story/Sequences/Chapter 1 - Running Away From Home/The Revelation of Elmer.seq
 maps/Story/Sequences/Chapter 1 - Running Away From Home/The Senate of Pensara.seq
-maps/Story/Sequences/Chapter 1 - Running Away From Home/Tutorial1.seq
 maps/Story/Sequences/Chapter 2 - Zazo, The Home of the Miners/After a Hard Days Work.seq
 maps/Story/Sequences/Chapter 2 - Zazo, The Home of the Miners/Meanwhile in Zazo.seq
 maps/Story/Sequences/Chapter 2 - Zazo, The Home of the Miners/Meeting with Farl of Zazo.seq
@@ -6898,7 +6895,6 @@ maps/Village/Dellna - House/Dellna - House - 1.vil
 maps/Village/Dellna - House/villagers/Gullie.char
 maps/Village/Dellna - House/villagers/Kilty.char
 maps/Village/Dellna - House/villagers/Smallie.char
-maps/Village/Dorma's Tranquility/Dorma's Tranquility - 0.vil
 maps/Village/Home of Celis/Home of Celis - 0.vil
 maps/Village/Home of Celis/Home of Celis at Night - 0.vil
 maps/Village/Home of Celis - Celis Home/Home of Celis - Celis Home - 0.vil
@@ -6917,7 +6913,6 @@ maps/Village/Home of the Gods/villagers/Scorpius.char
 maps/Village/Home of the Gods/villagers/Taurus.char
 maps/Village/Home of the Gods/villagers/Virgo.char
 maps/Village/Kin's Place/Kin's Place - 0.vil
-maps/Village/Menthu Battle/Menthu Battle - 0.vil
 maps/Village/No Place/No Place - 0.vil
 maps/Village/No Place/No Place at Night - 0.vil
 maps/Village/Parasne/Parasne - 0.vil
