@@ -6822,7 +6822,6 @@ maps/Village/Alares - Library/villagers/Ginis.char
 maps/Village/Alares - Library/villagers/Onrod.char
 maps/Village/Berca/Berca - 0.vil
 maps/Village/Berca/Berca - 1.vil
-maps/Village/Berca/Berca - 2.vil
 maps/Village/Berca/villagers/Alishia.char
 maps/Village/Berca/villagers/Benzer.char
 maps/Village/Berca/villagers/BercaCommander 1.char

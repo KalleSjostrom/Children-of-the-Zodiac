@@ -55,9 +55,8 @@ the legacy drawing.
   them.
 * Content quirks are kept and noted in the case's comment, not fixed:
   "Zazo at Night - 0" asserts unless its loot is taken (Java quit the
-  game); Berca - 1 names a villager without a `.char` file; Zazo - Tent has
-  no villager images; the night stores of Zazo name images that do not
-  exist. `tickets/triage.md` lists all known quirks.
+  game); Zazo - Tent has no villager images; the night stores of Zazo name
+  images that do not exist. `tickets/triage.md` lists all known quirks.
 * Record the new cases a second time (`record golden2`) and
   `compare golden golden2`: must be identical.
 

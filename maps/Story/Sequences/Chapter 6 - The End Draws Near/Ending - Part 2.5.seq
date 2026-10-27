@@ -1,6 +1,6 @@
 import file=main.var
 
-info time="day" name="Berca" music="continue" fadeValue="0" musicVolume="0" status="2" delay="2000"
+info time="day" name="Berca" music="continue" fadeValue="0" musicVolume="0" status="1" delay="2000"
 
 var ingo=0
 var tilly=1

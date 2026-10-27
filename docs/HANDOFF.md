@@ -232,10 +232,11 @@ procedure in `docs/CONVERTING_DUNGEONS.md`:
   Zazo, Pass to Zazo or Port of Zazo at night (`--start-time=night`);
   "Pensara - The North District - Farmer House" quit the game on entry
   until COTZ-023 (villager Dido's patrol was not closed; `Instructions.check`
-  now has the villager assert instead); Berca - 1
-  names a villager Herman without a `.char` file; Zazo - Tent has no
-  villager images; Podd's image path (Civil House) cannot resolve; a
-  Berca - 1 loot line lacks its directions; Alares - 1, Dellna - 2,
+  now has the villager assert instead); Berca - 1 named a villager Herman
+  without a `.char` file and had a loot line without its directions (an
+  unreachable draft, replaced by Berca - 2 in COTZ-027); Zazo - Tent has no
+  villager images; Podd's image path (Civil House) cannot resolve;
+  Alares - 1, Dellna - 2,
   Parasne - 2, Kin's Place, Zazo - Farl's House and several night variants
   have no obstacles (Zazonode2's timeline was commented out, restored
   in COTZ-016); Tutorial1,

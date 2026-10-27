@@ -604,7 +604,6 @@ func fillCardStore(n):
 	n.insertChild("Pensara - The Trade District--3")
 	n.insertChild("Berca--0")
 	n.insertChild("Berca--1")
-	n.insertChild("Berca--2")
 	n.insertChild("Dellna--0")
 	n.insertChild("Dellna--1")
 	setNormalMenuValues(n)

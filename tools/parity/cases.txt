@@ -33,12 +33,13 @@ zazo_story_gerbias zazo_story_gerbias --load="Start demon2" --start="Meeting wit
 # --start-time=night the "at Night" one (src/main/Main.gd). Which shipped
 # save reaches a status: "Slot 1" has Dellna 1, Parasne 1, Port of Alares 1,
 # The Ship Cabin 1 and Zazo 1, "Start" The Prison Cell 1, the others 0; no
-# save reaches Alares 1, Berca 1/2, Dellna 2, Parasne 2, the Dellna Elder
+# save reaches Alares 1, Berca 1, Dellna 2, Parasne 2, the Dellna Elder
 # House floors 1 or Dellna - House 1. Night variants are reached only by
 # stories (none for Pass to Zazo, Port of Zazo and Zazo). Content quirks
-# (legacy, kept): Berca - 1 names a villager Herman without a .char file
-# (errors every update); Zazo - Tent has no villager images (Shaun: an
-# error every frame).
+# (legacy, kept): Zazo - Tent has no villager images (Shaun: an error every
+# frame). Berca - 1 was an unreachable draft (a villager Herman without a
+# .char file) until COTZ-027 replaced it with Berca - 2, the town after the
+# ending (Ending - Part 2.5).
 # "Pensara - The North District - Farmer House" quit the game on entry (as
 # the original did) until COTZ-023: its villager Dido's patrol was not a
 # closed loop (Instructions.check). Its case has no golden.
@@ -53,7 +54,6 @@ tour_berca_library_floor_1_0                            village_tour --load="Slo
 tour_berca_library_floor_2_0                            village_tour --load="Slot 1" --start="Berca - Library - Floor 2"
 tour_berca_0                                            village_tour --load="Slot 1" --start="Berca" --status="Berca:0"
 tour_berca_1                                            village_tour --load="Slot 1" --start="Berca" --status="Berca:1"
-tour_berca_2                                            village_tour --load="Slot 1" --start="Berca" --status="Berca:2"
 tour_crossroad_0                                        village_tour --load="Slot 1" --start="Crossroad" --status="Crossroad:0"
 tour_crossroad_night_0                                  village_tour --load="Slot 1" --start="Crossroad" --status="Crossroad:0" --start-time=night
 tour_crystal_room_0                                     village_tour --load="Slot 1" --start="Crystal Room"
