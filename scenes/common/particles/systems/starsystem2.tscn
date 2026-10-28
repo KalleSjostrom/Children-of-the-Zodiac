@@ -1,0 +1,45 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://res/ParticleSystems/stars3.png" id="1"]
+[ext_resource type="Shader" path="res://scenes/common/particles/star_particle.gdshader" id="2"]
+[ext_resource type="Script" path="res://scenes/common/particles/VillageParticles2D.gd" id="3"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1"]
+blend_mode = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1"]
+resource_local_to_scene = true
+shader = ExtResource("2")
+shader_parameter/shape_kind = 1
+shader_parameter/emitter_origin = Vector2(0, 0)
+shader_parameter/shape_a = Vector2(1024, 0)
+shader_parameter/shape_b = Vector2(0, -768)
+shader_parameter/spread_min = 0.0
+shader_parameter/spread_max = 0.0
+shader_parameter/emission_point_count = 0
+shader_parameter/force = Vector2(0, 0)
+shader_parameter/mass_min = 0.01
+shader_parameter/mass_max = 0.05
+shader_parameter/size_min = 0.4
+shader_parameter/size_max = 1.0
+shader_parameter/color = Vector3(0, 0, 0)
+shader_parameter/intensity = 0.85
+shader_parameter/size_scale = 1.0
+
+[node name="starsystem2" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_1")
+amount = 50
+texture = ExtResource("1")
+lifetime = 1000000.0
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 0
+interpolate = false
+visibility_rect = Rect2(-4096, -4096, 12288, 12288)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ShaderMaterial_1")
+script = ExtResource("3")
+system_name = "starsystem2"
+intensity = 0.85
+default_amount = 50

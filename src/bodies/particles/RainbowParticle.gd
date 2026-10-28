@@ -11,9 +11,9 @@ func _init(settings = null) -> void:
 
 func reset():
 	super.reset()
-	rgb[0] = J.random()
-	rgb[1] = J.random()
-	rgb[2] = J.random()
+	rgb[0] = BodiesParticleSystem.rand.nextDouble()
+	rgb[1] = BodiesParticleSystem.rand.nextDouble()
+	rgb[2] = BodiesParticleSystem.rand.nextDouble()
 
 
 func getDefaultForce():

@@ -48,6 +48,13 @@
   - `ImageShape` calls `push_error` when the image is missing, and returns a zero position for a 0-size image.
   - `BodiesParticle` skips `parseArgs` when settings is null.
 - `ImageShape` reads the alpha channel with `Image.get_pixel(x, y).a8` (Java: `getAlphaRaster`).
+- Random numbers (particles phase, 2026-10-27): Java draws every random number of these classes from the shared
+  `Math.random()` (the shapes' emit positions and directions, the particles' fades and colours, the star twinkle,
+  the wind's turbulence and `SystemLoader.getValueFromInterval`). The port draws them from a generator of their own,
+  `BodiesParticleSystem.rand` (a `JRandom`), which `Main._init_deterministic` seeds like `WeatherParticle.rand`.
+  Normal play is unchanged (both are unseeded); in a seeded run the villagers, stores and battles no longer depend on
+  how many numbers the particles drew, so the GPU systems (which run no legacy simulation) leave every other draw as
+  it was.
 - `Vector3f.equals` compares with `!=` (Java `Float.compare` differs only for NaN and -0.0). `hashCode` emulates
   `floatToIntBits` with 32-bit wrap.
 
@@ -58,3 +65,17 @@
   `Vector3f`; it is shared by reference, as in Java.
 - `Settings.getString(i)` must return `null` for unset keys. `buildSystem` and `getValueFromInterval` test for `null`.
 - `Settings.getBoolean/getValue` must handle unset keys (in Java `get(i)` creates a default Setting).
+
+## Bridge to the GPU systems (particles phase, docs/ARCHITECTURE.md section 9)
+
+- `BodiesParticleSystem.gpu_path()`: the village and cutscene systems are drawn by `VillageParticles2D` (not
+  `--legacy=particles` or `--legacy=villages`). Then a system (`gpu`) builds no bodies; `update` keeps its activation
+  check and its 5 x LOGIC_INTERVAL guard and calls `gpu_run` (game time for the GPU system, the emitter's clock, the
+  wind's turbulence) instead of stepping; `warmUp` and SystemLoader's master/slave warm-up call `gpu_warm`;
+  `place_particles` returns `gpu_view()` (the state VillageParticles2D takes). Bridge members: `gpu`, `gpu_elapsed`,
+  `gpu_warm_up`, `gpu_seed` (drawn from `rand` at construction), `definition` (the settings' name), `particle_kind`.
+- `AbstractEmitter.advance(elapsedTime)`: `update` without bodies (the clock and `setFade`'s time step change as if every
+  emission found a body).
+- `WindCommand.drift(elapsedTime)`: `execute`'s turbulence as a per-second rate (the variance of 30 steps a second).
+- `drawIt` with `--hide-particles` (`Main.hide_particles`): no background image and no particles, the same GL state and
+  `modifySize` calls.

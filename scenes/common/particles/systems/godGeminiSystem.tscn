@@ -1,0 +1,47 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://res/ParticleSystems/particle.png" id="1"]
+[ext_resource type="Shader" path="res://scenes/common/particles/fire_particle.gdshader" id="2"]
+[ext_resource type="Texture2D" path="res://scenes/common/particles/systems/godGeminiSystem_points.png" id="3"]
+[ext_resource type="Script" path="res://scenes/common/particles/VillageParticles2D.gd" id="4"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1"]
+blend_mode = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1"]
+resource_local_to_scene = true
+shader = ExtResource("2")
+shader_parameter/shape_kind = 3
+shader_parameter/emitter_origin = Vector2(664, 252)
+shader_parameter/shape_a = Vector2(0, 0)
+shader_parameter/shape_b = Vector2(0, 0)
+shader_parameter/spread_min = 0.0
+shader_parameter/spread_max = 0.0
+shader_parameter/emission_points = ExtResource("3")
+shader_parameter/emission_point_count = 4364
+shader_parameter/force = Vector2(0, 3)
+shader_parameter/mass_min = 0.01
+shader_parameter/mass_max = 0.01
+shader_parameter/size_min = 2.0
+shader_parameter/size_max = 2.0
+shader_parameter/color = Vector3(0.25, 0.6, 0.15)
+shader_parameter/intensity = 0.6
+shader_parameter/size_scale = 1.0
+shader_parameter/fade = Vector3(100, 0.01, 1)
+
+[node name="godGeminiSystem" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_1")
+amount = 387
+texture = ExtResource("1")
+lifetime = 1.083
+fixed_fps = 0
+interpolate = false
+visibility_rect = Rect2(-4096, -4096, 12288, 12288)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ShaderMaterial_1")
+script = ExtResource("4")
+system_name = "godGeminiSystem"
+intensity = 0.6
+time_step = 0.0028
+default_amount = 387

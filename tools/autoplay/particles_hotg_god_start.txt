@@ -1,0 +1,39 @@
+# A god system starting while Home of the Gods is shown, for the parity case
+# particles_hotg_god_start (particles phase). "Slot 1" has no god statuses
+# (each god gets status 1: its dialog 1). Gemini (800,448, invisible) stands
+# left of the top gate; the first line of its dialog 1 sets godGeminiSystem
+# to 1 (beforeTrigger), and the villager-layer system "godGeminiSystem"
+# (start inactive, activation status 1) starts on the next update: an image
+# shape, the Gemini constellation over the gate (664..862 x 252..440), which
+# fills up while the dialog runs (two pages). Positions are village pixels.
+wait 100
+shot hg_01_fadein
+wait 1400
+shot hg_02_start
+pos start
+press LEFT
+wait 200
+release LEFT
+tap UP 60
+wait 200
+pos gemini
+shot hg_03_before
+tap CROSS
+wait 100
+shot hg_04_talk
+wait 400
+shot hg_05_half_second
+wait 500
+shot hg_06_one_second
+wait 1000
+shot hg_07_two_seconds
+tap CROSS
+wait 1000
+shot hg_08_second_page
+tap CROSS
+wait 500
+shot hg_09_after_dialog
+wait 2000
+shot hg_10_later
+log end
+quit

@@ -135,13 +135,15 @@ func _build(place: String, start: int, db: Dictionary, wind: Array, load: Callab
 	Database.status = db.duplicate(true)
 	J.setDeterministic(1)
 	Values.rand.setSeed(2)
+	BodiesParticleSystem.rand.setSeed(3)
 	_set_wind(wind)
 	var vl := Village.new()
 	vl.startPos = start
 	vl.infoMap = {"name": place, "landname": "land" + place}
 	load.call(vl)
 	return {"loader": vl, "db": Database.status.duplicate(true),
-		"random": [J.random(), Values.rand.nextInt(1000000)], "wind": _wind_state()}
+		"random": [J.random(), Values.rand.nextInt(1000000), BodiesParticleSystem.rand.nextInt(1000000)],
+		"wind": _wind_state()}
 
 
 ## The shared wind of the smoke particles (WindCommand): its force (which

@@ -18,7 +18,7 @@ func _init(settings = null) -> void:
 
 
 func modifyDirection(direction):
-	var temp: float = J.random() * interval + minAngleTan
+	var temp: float = BodiesParticleSystem.rand.nextDouble() * interval + minAngleTan
 	direction.x += temp
 	return direction
 
@@ -30,6 +30,6 @@ func getEmittancePos():
 	deltaX = point.x
 	deltaY = point.y
 	var emitPosition = Vector3f.new(
-		J.random() * deltaX + pos.x,
-		J.random() * deltaY + pos.y, 0.0)
+		BodiesParticleSystem.rand.nextDouble() * deltaX + pos.x,
+		BodiesParticleSystem.rand.nextDouble() * deltaY + pos.y, 0.0)
 	return emitPosition

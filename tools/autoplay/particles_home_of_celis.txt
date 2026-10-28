@@ -1,0 +1,27 @@
+# The chimney smoke of Home of Celis, for the parity case
+# particles_home_of_celis (particles phase): "smokesystem" (upper layer,
+# emitter 650..670 x 280, wind 10;0;0 .1; additive, max 0.4..0.7 per body)
+# over a few seconds without moving, then from closer. Positions are village
+# pixels.
+wait 100
+shot hc_01_fadein
+wait 1400
+shot hc_02_start
+pos start
+wait 1000
+shot hc_03_one_second
+wait 1000
+shot hc_04_two_seconds
+wait 1000
+shot hc_05_three_seconds
+guard 24
+press UP
+wait 1000
+release UP
+wait 100
+shot hc_06_closer
+pos closer
+wait 1500
+shot hc_07_closer_later
+log end
+quit

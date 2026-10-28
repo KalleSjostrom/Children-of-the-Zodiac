@@ -46,7 +46,7 @@ func getFadeValue():
 
 
 func getRandomFade():
-	return J.random() / fade.x
+	return BodiesParticleSystem.rand.nextDouble() / fade.x
 
 
 func getFadeOffset():

@@ -1,4 +1,4 @@
-# Handoff: state of the Godot port (2026-10-22, after steps 1–3, modernization phase 0, phase 1 steps A and B, and phase 2 steps A and B)
+# Handoff: state of the Godot port (2026-10-27, after steps 1–3, modernization phase 0, phase 1 steps A and B, phase 2 steps A and B, and the particles phase)
 
 Conventions: legacy (ported) code follows `docs/PORTING.md`; new code
 (scenes, resources, tools, bridge) follows `docs/ARCHITECTURE.md`. The
@@ -143,7 +143,7 @@ procedure in `docs/CONVERTING_DUNGEONS.md`:
 - The weather bridge (`WeatherSystem.place_particles`) is about 20 %
   cheaper (rollout): Forest Path 33 → 36 FPS, Ice Cavern--Frozen Field 41
   → 47.
-- Parity coverage: 336 cases (`tools/parity/cases.txt`, 5,690 shots): the
+- Parity coverage: 336 cases at the end of phase 2 (`tools/parity/cases.txt`, 5,690 shots; 347 cases and 5,984 shots since the particles phase): the
   205 new `dungeon_*` cases are a tour of every floor with both saves and 53
   hand-written cases (doors and floor changes, every object kind, riddles of
   every class, battles under snow and rain and with enemy colours, bosses,
@@ -153,14 +153,43 @@ procedure in `docs/CONVERTING_DUNGEONS.md`:
 - Closing the phase is prepared in plan 7.9 (what removing the legacy
   dungeon path deletes, and what keeps the exit criteria from being met).
 
+**Modernization particles phase (village and cutscene particles on the
+GPU): done** (plan 6.10, `docs/particles_prompt.md`; conventions in
+`docs/ARCHITECTURE.md` section 9 "Particles", the procedure in
+`docs/CONVERTING_PARTICLES.md`):
+- Every system of `maps/ParticleSystems/particleSystems.info` is a generated
+  `VillageParticles2D` scene (`scenes/common/particles/systems/`, 51 systems;
+  `tools/import/particles_to_scenes.sh`, deterministic), whose particle
+  shader runs its class's legacy laws as per-second rates at 30 steps a
+  second (decision 6). The additive systems start softer (intensity 0.6;
+  snow and stars 0.85); `intensity`, `size_scale` and `amount` are tunable
+  per scene.
+- Step B: the legacy `BodiesParticleSystem`s stay in charge but build no
+  bodies and run no simulation (`gpu_path()`); `LegacyParticles2D`
+  instances the scenes and hands them the legacy state every frame.
+  `--legacy=particles` keeps the legacy simulation; `--hide-particles`
+  (dev) hides the particles in both paths.
+- The particles draw from their own generator (`BodiesParticleSystem.rand`,
+  a port deviation), so seeded runs no longer shift when they change.
+- Dellna's snow and wind are back. Normal runs, legacy -> GPU: Home of the
+  Gods with all 12 god systems 8 -> 60 FPS, Dellna with snow 18 -> 60, the
+  Menthu cutscene 18 -> 60; loading Home of the Gods 1.84 -> 0.60 s, Dellna
+  1.67 -> 0.46 s (plan 6.10).
+- Parity: with the particles hidden, every case is identical to the goldens
+  recorded before the change (all 347 cases, logs too); the GPU path
+  recorded twice is identical; `--legacy=particles` equals the unconverted
+  drawing. Five new particle cases (`particles_*`).
+- Prepared, not done: the dungeon weather and save points (P2) and the card
+  effects (plan 6.11).
+
 ## Plan (what is left)
 
 0. **Modernization:** closing phase 1 (plan 6.9) needs decision 5 (delete
-   the `.vil` files) and the removal of the legacy village path; GPU
-   particle presets need decision 6 (time base). Closing phase 2 (plan
-   7.9) needs decision 5 and the 1/255 tolerance accepted; the weather and
-   the save points stay the legacy simulation until decision 6. Phase 3 can
-   start. Record goldens before each change.
+   the `.vil` files) and the removal of the legacy village path (and of
+   `--legacy=particles`). Closing phase 2 (plan 7.9) needs decision 5 and
+   the 1/255 tolerance accepted. Next: phase 3, or P2 (the dungeon weather
+   and save points on the GPU, prepared in plan 6.11). Record goldens before
+   each change.
 
 1. **Performance (top priority):** labyrinths with rain/snow run at 36–48
    FPS with the scene (Forest Path 36, Ice Cavern--Frozen Field 47; 10 000
@@ -169,10 +198,10 @@ procedure in `docs/CONVERTING_DUNGEONS.md`:
    quads ≈9 ms since the rollout, ≈11 ms before; plan 7.7, 7.8). Loading
    the largest floor takes ≈180 ms with the scene, 5 ms from its `.map`
    (plan 7.8).
-   Villages: Dellna's snow
-   runs at 12 FPS in the legacy path and 18 with the scene, Home of the Gods
-   at 6 FPS once its 12 god systems are active (the GDScript particle
-   simulation; plan 6.8). The other villages measured run at 60 FPS.
+   Villages: since the particles phase the village and cutscene
+   particles run on the GPU (plan 6.10): every village measured runs at
+   60 FPS (Home of the Gods with its 12 god systems and Dellna's snow were
+   6-18 FPS).
    Per-frame fades assume 60 FPS. Options: GPU particles for the weather
    (decision 6), or a faster simulation and view test (the per-particle
    loops of `WeatherSystem.update` and `_place_pass`). Measure with the `fps=` value
@@ -204,9 +233,10 @@ procedure in `docs/CONVERTING_DUNGEONS.md`:
   only the shipped saves.
 - Parity: `tools/parity/parity.sh record <set>` / `compare <a> <b>` /
   `ab "<args a>" "<args b>" [case…]`, see `docs/ARCHITECTURE.md` section 7.
-  Runs are windowed (screenshots need a renderer); all 336 cases take about
-  35 minutes with `--jobs=8` on 12 logical cores (`--uncapped`; the weather
-  floors are bound by the weather, `particles_hotg` by its particles at
+  Runs are windowed (screenshots need a renderer); all 347 cases take about
+  35-60 minutes with `--jobs=8` on 12 logical cores (`--uncapped`; the
+  weather floors are bound by the weather; with `--legacy=particles`,
+  `particles_hotg` and the Berca cutscene by the legacy particles at
   ~6 FPS). The `fps=` values of parity runs are meaningless;
   measure performance in normal runs. Do not type while a recording runs (a
   new run's window takes the focus).
@@ -221,7 +251,9 @@ procedure in `docs/CONVERTING_DUNGEONS.md`:
   port. The particles that fade per update but move per ms (village systems in
   `bodies/system/ParticleSystem.update`, card/enemy effects in
   `particleSystem/ParticleSystemPacket.update`) are stepped by
-  `Values.originalFrameStep` for this reason. The purely per-frame ones
+  `Values.originalFrameStep` for this reason (the village systems only with
+  `--legacy=particles` since the particles phase: the GPU systems run the
+  same laws as per-second rates every frame). The purely per-frame ones
   (labyrinth weather, save points, battle background snow) still run at 60
   updates per second.
 - Positions from `Values.createNormalPoint(x, y)` are `[y, x]`.

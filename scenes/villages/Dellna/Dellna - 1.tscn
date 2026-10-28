@@ -1,8 +1,8 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://bbxy8eyr1ob6q"]
 
 [ext_resource type="PackedScene" path="res://scenes/villages/Dellna/Dellna.tscn" id="1_base"]
-[ext_resource type="Script" path="res://scenes/villages/VillageBuilding.gd" id="2_xr7kg"]
-[ext_resource type="Texture2D" path="res://scenes/villages/Dellna/Dellna2.png" id="3_i2g30"]
+[ext_resource type="Script" uid="uid://cu37b6gnnpxis" path="res://scenes/villages/VillageBuilding.gd" id="2_xr7kg"]
+[ext_resource type="Texture2D" uid="uid://cuiimvvq1bu6h" path="res://scenes/villages/Dellna/Dellna2.png" id="3_i2g30"]
 [ext_resource type="PackedScene" path="res://scenes/common/ActorView.tscn" id="4_arx8j"]
 [ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Dellna/Diana.tres" id="5_r25y3"]
 [ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Dellna/Eno.tres" id="6_6s715"]
@@ -15,6 +15,7 @@
 [ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Dellna/Merchant Tori.tres" id="13_qqnuv"]
 [ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Dellna/Ulph.tres" id="14_aiwuv"]
 [ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Dellna/Wilko.tres" id="15_s4uw8"]
+[ext_resource type="PackedScene" path="res://scenes/common/particles/LegacyParticles2D.tscn" id="16_i2g30"]
 [ext_resource type="PackedScene" path="res://scenes/common/VillageSpawn.tscn" id="16_npiwq"]
 [ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="17_8goxw"]
 [ext_resource type="PackedScene" path="res://scenes/common/VillageLoot.tscn" id="18_jm6vb"]
@@ -233,360 +234,374 @@ size = Vector2(18, 10)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5prnh"]
 size = Vector2(135, 47)
 
-[node name="Dellna - 1" instance=ExtResource("1_base")]
+[node name="Dellna - 1" unique_id=1645042222 instance=ExtResource("1_base")]
 extra_name = "Dellna2"
 music = "Dellnasad"
+wind_force = [0.0, 0.0, 0.0]
 buildings = Array[ExtResource("2_xr7kg")]([SubResource("Resource_86o76"), SubResource("Resource_0ljc8"), SubResource("Resource_u4ik3"), SubResource("Resource_w2frj")])
 
 [node name="Background" parent="." index="1"]
 texture = ExtResource("3_i2g30")
 
-[node name="00 Diana" parent="Actors" index="0" instance=ExtResource("4_arx8j")]
+[node name="00 Diana" parent="Actors" index="0" unique_id=982366690 instance=ExtResource("4_arx8j")]
 position = Vector2(1000, 280)
 sprite_frames = ExtResource("5_r25y3")
 animation = &"down"
 role = 1
 villager_name = "Diana"
-statuses = PackedInt32Array()
 villager_folder = "Dellna"
 
-[node name="01 Eno" parent="Actors" index="1" instance=ExtResource("4_arx8j")]
+[node name="01 Eno" parent="Actors" index="1" unique_id=334071632 instance=ExtResource("4_arx8j")]
 position = Vector2(1650, 750)
 sprite_frames = ExtResource("6_6s715")
 animation = &"up"
 role = 1
 villager_name = "Eno"
-statuses = PackedInt32Array()
 villager_folder = "Dellna"
 
-[node name="02 Haness" parent="Actors" index="2" instance=ExtResource("4_arx8j")]
+[node name="02 Haness" parent="Actors" index="2" unique_id=1786066494 instance=ExtResource("4_arx8j")]
 position = Vector2(997, 923)
 sprite_frames = ExtResource("7_3g11i")
 animation = &"down"
 role = 1
 villager_name = "Haness"
-statuses = PackedInt32Array()
 villager_folder = "Dellna"
 
-[node name="03 Helen" parent="Actors" index="3" instance=ExtResource("4_arx8j")]
+[node name="03 Helen" parent="Actors" index="3" unique_id=3490810 instance=ExtResource("4_arx8j")]
 position = Vector2(220, 785)
 sprite_frames = ExtResource("8_kae1y")
 animation = &"down"
 role = 1
 villager_name = "Helen"
-statuses = PackedInt32Array()
 villager_folder = "Dellna"
 
-[node name="04 Marlo" parent="Actors" index="4" instance=ExtResource("4_arx8j")]
+[node name="04 Marlo" parent="Actors" index="4" unique_id=1234371609 instance=ExtResource("4_arx8j")]
 position = Vector2(660, 1160)
 sprite_frames = ExtResource("9_q7bxa")
 animation = &"down"
 role = 1
 villager_name = "Marlo"
-statuses = PackedInt32Array()
 villager_folder = "Dellna"
 
-[node name="05 Math" parent="Actors" index="5" instance=ExtResource("4_arx8j")]
+[node name="05 Math" parent="Actors" index="5" unique_id=452999513 instance=ExtResource("4_arx8j")]
 position = Vector2(215, 1115)
 sprite_frames = ExtResource("10_kvrty")
 animation = &"down"
 role = 1
 villager_name = "Math"
-statuses = PackedInt32Array()
 villager_folder = "Dellna"
 
-[node name="06 Melker" parent="Actors" index="6" instance=ExtResource("4_arx8j")]
+[node name="06 Melker" parent="Actors" index="6" unique_id=680518513 instance=ExtResource("4_arx8j")]
 position = Vector2(60, 430)
 sprite_frames = ExtResource("11_vg62f")
 animation = &"down"
 role = 1
 villager_name = "Melker"
-statuses = PackedInt32Array()
 villager_folder = "Dellna"
 
-[node name="07 Ribby" parent="Actors" index="7" instance=ExtResource("4_arx8j")]
+[node name="07 Ribby" parent="Actors" index="7" unique_id=1978138858 instance=ExtResource("4_arx8j")]
 position = Vector2(35, 850)
 sprite_frames = ExtResource("12_ul6ou")
 animation = &"down"
 role = 1
 villager_name = "Ribby"
-statuses = PackedInt32Array()
 villager_folder = "Dellna"
 
-[node name="08 Tori" parent="Actors" index="8" instance=ExtResource("4_arx8j")]
+[node name="08 Tori" parent="Actors" index="8" unique_id=1658673729 instance=ExtResource("4_arx8j")]
 position = Vector2(597, 623)
 sprite_frames = ExtResource("13_qqnuv")
 animation = &"down"
 role = 1
 villager_name = "Tori"
-statuses = PackedInt32Array()
 villager_folder = "Dellna"
 
-[node name="09 Ulph" parent="Actors" index="9" instance=ExtResource("4_arx8j")]
+[node name="09 Ulph" parent="Actors" index="9" unique_id=2034862954 instance=ExtResource("4_arx8j")]
 position = Vector2(1075, 975)
 sprite_frames = ExtResource("14_aiwuv")
 animation = &"right"
 role = 1
 villager_name = "Ulph"
-statuses = PackedInt32Array()
 villager_folder = "Dellna"
 
-[node name="10 Wilko" parent="Actors" index="10" instance=ExtResource("4_arx8j")]
+[node name="10 Wilko" parent="Actors" index="10" unique_id=96154688 instance=ExtResource("4_arx8j")]
 position = Vector2(1265, 620)
 sprite_frames = ExtResource("15_s4uw8")
 animation = &"down"
 role = 1
 villager_name = "Wilko"
-statuses = PackedInt32Array()
 villager_folder = "Dellna"
 
-[node name="V000" type="CollisionShape2D" parent="Obstacles" index="0"]
+[node name="00 snowsystem" parent="Effects" index="0" unique_id=523343524 instance=ExtResource("16_i2g30")]
+position = Vector2(-100, 0)
+system_name = "snowsystem"
+
+[node name="01 smokesystemWeaponDellna" parent="Effects" index="1" unique_id=2007022838 instance=ExtResource("16_i2g30")]
+position = Vector2(656, 988)
+system_name = "smokesystemWeaponDellna"
+build_order = 1
+
+[node name="02 smokesystemInnDellna" parent="Effects" index="2" unique_id=1224071672 instance=ExtResource("16_i2g30")]
+position = Vector2(184, 958)
+system_name = "smokesystemInnDellna"
+build_order = 2
+
+[node name="03 smokesystemBigDellna" parent="Effects" index="3" unique_id=1765691387 instance=ExtResource("16_i2g30")]
+position = Vector2(66, 604)
+system_name = "smokesystemBigDellna"
+build_order = 3
+
+[node name="04 smokesystemAnaDellna" parent="Effects" index="4" unique_id=880269560 instance=ExtResource("16_i2g30")]
+position = Vector2(1240, 376)
+system_name = "smokesystemAnaDellna"
+build_order = 4
+
+[node name="V000" type="CollisionShape2D" parent="Obstacles" index="0" unique_id=563158540]
 position = Vector2(82, 1109)
 shape = SubResource("RectangleShape2D_1wjln")
 
-[node name="V001" type="CollisionShape2D" parent="Obstacles" index="1"]
+[node name="V001" type="CollisionShape2D" parent="Obstacles" index="1" unique_id=1569627017]
 position = Vector2(91.5, 794.5)
 shape = SubResource("RectangleShape2D_4v8f6")
 
-[node name="V002" type="CollisionShape2D" parent="Obstacles" index="2"]
+[node name="V002" type="CollisionShape2D" parent="Obstacles" index="2" unique_id=1846092961]
 position = Vector2(389, 794.5)
 shape = SubResource("RectangleShape2D_u4f4r")
 
-[node name="V003" type="CollisionShape2D" parent="Obstacles" index="3"]
+[node name="V003" type="CollisionShape2D" parent="Obstacles" index="3" unique_id=1319689338]
 position = Vector2(240.5, 775.5)
 shape = SubResource("RectangleShape2D_rmic4")
 
-[node name="V004" type="CollisionShape2D" parent="Obstacles" index="4"]
+[node name="V004" type="CollisionShape2D" parent="Obstacles" index="4" unique_id=1248245304]
 position = Vector2(452, 228.5)
 shape = SubResource("RectangleShape2D_i1w4q")
 
-[node name="V005" type="CollisionShape2D" parent="Obstacles" index="5"]
+[node name="V005" type="CollisionShape2D" parent="Obstacles" index="5" unique_id=689073033]
 position = Vector2(1452, 228.5)
 shape = SubResource("RectangleShape2D_66fej")
 
-[node name="V006" type="CollisionShape2D" parent="Obstacles" index="6"]
+[node name="V006" type="CollisionShape2D" parent="Obstacles" index="6" unique_id=1166205209]
 position = Vector2(84.5, 359)
 shape = SubResource("RectangleShape2D_rb6xs")
 
-[node name="V007" type="CollisionShape2D" parent="Obstacles" index="7"]
+[node name="V007" type="CollisionShape2D" parent="Obstacles" index="7" unique_id=1177197603]
 position = Vector2(135, 286)
 shape = SubResource("RectangleShape2D_uu5y5")
 
-[node name="V008" type="CollisionShape2D" parent="Obstacles" index="8"]
+[node name="V008" type="CollisionShape2D" parent="Obstacles" index="8" unique_id=790027846]
 position = Vector2(154.5, 236)
 shape = SubResource("RectangleShape2D_pok4r")
 
-[node name="V009" type="CollisionShape2D" parent="Obstacles" index="9"]
+[node name="V009" type="CollisionShape2D" parent="Obstacles" index="9" unique_id=209263839]
 position = Vector2(364, 349)
 shape = SubResource("RectangleShape2D_xbep5")
 
-[node name="V010" type="CollisionShape2D" parent="Obstacles" index="10"]
+[node name="V010" type="CollisionShape2D" parent="Obstacles" index="10" unique_id=796406064]
 position = Vector2(487, 346)
 shape = SubResource("RectangleShape2D_4kd5p")
 
-[node name="V011" type="CollisionShape2D" parent="Obstacles" index="11"]
+[node name="V011" type="CollisionShape2D" parent="Obstacles" index="11" unique_id=261720580]
 position = Vector2(686, 261.5)
 shape = SubResource("RectangleShape2D_hi5xv")
 
-[node name="V012" type="CollisionShape2D" parent="Obstacles" index="12"]
+[node name="V012" type="CollisionShape2D" parent="Obstacles" index="12" unique_id=40856794]
 position = Vector2(695, 369)
 shape = SubResource("RectangleShape2D_0emv3")
 
-[node name="V013" type="CollisionShape2D" parent="Obstacles" index="13"]
+[node name="V013" type="CollisionShape2D" parent="Obstacles" index="13" unique_id=624602298]
 position = Vector2(796, 338.5)
 shape = SubResource("RectangleShape2D_c8i0n")
 
-[node name="V014" type="CollisionShape2D" parent="Obstacles" index="14"]
+[node name="V014" type="CollisionShape2D" parent="Obstacles" index="14" unique_id=1404476128]
 position = Vector2(800, 287)
 shape = SubResource("RectangleShape2D_t4bqa")
 
-[node name="V015" type="CollisionShape2D" parent="Obstacles" index="15"]
+[node name="V015" type="CollisionShape2D" parent="Obstacles" index="15" unique_id=568276983]
 position = Vector2(513.5, 237.5)
 shape = SubResource("RectangleShape2D_1r5pw")
 
-[node name="V016" type="CollisionShape2D" parent="Obstacles" index="16"]
+[node name="V016" type="CollisionShape2D" parent="Obstacles" index="16" unique_id=2017608001]
 position = Vector2(561.5, 319)
 shape = SubResource("RectangleShape2D_nfvyu")
 
-[node name="V017" type="CollisionShape2D" parent="Obstacles" index="17"]
+[node name="V017" type="CollisionShape2D" parent="Obstacles" index="17" unique_id=1327262220]
 position = Vector2(864, 336.5)
 shape = SubResource("RectangleShape2D_b8e1d")
 
-[node name="V018" type="CollisionShape2D" parent="Obstacles" index="18"]
+[node name="V018" type="CollisionShape2D" parent="Obstacles" index="18" unique_id=1327684814]
 position = Vector2(1202, 336.5)
 shape = SubResource("RectangleShape2D_egpup")
 
-[node name="V019" type="CollisionShape2D" parent="Obstacles" index="19"]
+[node name="V019" type="CollisionShape2D" parent="Obstacles" index="19" unique_id=768558897]
 position = Vector2(1247, 553.5)
 shape = SubResource("RectangleShape2D_lnu4q")
 
-[node name="V020" type="CollisionShape2D" parent="Obstacles" index="20"]
+[node name="V020" type="CollisionShape2D" parent="Obstacles" index="20" unique_id=1321500858]
 position = Vector2(1134.5, 929)
 shape = SubResource("RectangleShape2D_v323y")
 
-[node name="V021" type="CollisionShape2D" parent="Obstacles" index="21"]
+[node name="V021" type="CollisionShape2D" parent="Obstacles" index="21" unique_id=838470013]
 position = Vector2(991, 931)
 shape = SubResource("RectangleShape2D_gl8a5")
 
-[node name="V022" type="CollisionShape2D" parent="Obstacles" index="22"]
+[node name="V022" type="CollisionShape2D" parent="Obstacles" index="22" unique_id=985246941]
 position = Vector2(1532, 859)
 shape = SubResource("RectangleShape2D_kkbaf")
 
-[node name="V023" type="CollisionShape2D" parent="Obstacles" index="23"]
+[node name="V023" type="CollisionShape2D" parent="Obstacles" index="23" unique_id=82564335]
 position = Vector2(1500, 833)
 shape = SubResource("RectangleShape2D_2tikl")
 
-[node name="V024" type="CollisionShape2D" parent="Obstacles" index="24"]
+[node name="V024" type="CollisionShape2D" parent="Obstacles" index="24" unique_id=1012420640]
 position = Vector2(1512, 783)
 shape = SubResource("RectangleShape2D_imtjl")
 
-[node name="V025" type="CollisionShape2D" parent="Obstacles" index="25"]
+[node name="V025" type="CollisionShape2D" parent="Obstacles" index="25" unique_id=2066019506]
 position = Vector2(1502.5, 718)
 shape = SubResource("RectangleShape2D_w36t4")
 
-[node name="V026" type="CollisionShape2D" parent="Obstacles" index="26"]
+[node name="V026" type="CollisionShape2D" parent="Obstacles" index="26" unique_id=940147043]
 position = Vector2(1498.5, 670)
 shape = SubResource("RectangleShape2D_elk0a")
 
-[node name="V027" type="CollisionShape2D" parent="Obstacles" index="27"]
+[node name="V027" type="CollisionShape2D" parent="Obstacles" index="27" unique_id=119234057]
 position = Vector2(1475.5, 643.5)
 shape = SubResource("RectangleShape2D_qfl4a")
 
-[node name="V028" type="CollisionShape2D" parent="Obstacles" index="28"]
+[node name="V028" type="CollisionShape2D" parent="Obstacles" index="28" unique_id=1630561219]
 position = Vector2(1465, 626.5)
 shape = SubResource("RectangleShape2D_cjve8")
 
-[node name="V029" type="CollisionShape2D" parent="Obstacles" index="29"]
+[node name="V029" type="CollisionShape2D" parent="Obstacles" index="29" unique_id=1025546460]
 position = Vector2(1458, 609.5)
 shape = SubResource("RectangleShape2D_iuo5k")
 
-[node name="V030" type="CollisionShape2D" parent="Obstacles" index="30"]
+[node name="V030" type="CollisionShape2D" parent="Obstacles" index="30" unique_id=1606983697]
 position = Vector2(1452.5, 594)
 shape = SubResource("RectangleShape2D_an1h7")
 
-[node name="V031" type="CollisionShape2D" parent="Obstacles" index="31"]
+[node name="V031" type="CollisionShape2D" parent="Obstacles" index="31" unique_id=1981784001]
 position = Vector2(1456.5, 578.5)
 shape = SubResource("RectangleShape2D_vtj1m")
 
-[node name="V032" type="CollisionShape2D" parent="Obstacles" index="32"]
+[node name="V032" type="CollisionShape2D" parent="Obstacles" index="32" unique_id=599101478]
 position = Vector2(1469, 562.5)
 shape = SubResource("RectangleShape2D_fbfut")
 
-[node name="V033" type="CollisionShape2D" parent="Obstacles" index="33"]
+[node name="V033" type="CollisionShape2D" parent="Obstacles" index="33" unique_id=1744682171]
 position = Vector2(1480, 535.5)
 shape = SubResource("RectangleShape2D_la7pa")
 
-[node name="V034" type="CollisionShape2D" parent="Obstacles" index="34"]
+[node name="V034" type="CollisionShape2D" parent="Obstacles" index="34" unique_id=1349559644]
 position = Vector2(1504.5, 508.5)
 shape = SubResource("RectangleShape2D_t51fa")
 
-[node name="V035" type="CollisionShape2D" parent="Obstacles" index="35"]
+[node name="V035" type="CollisionShape2D" parent="Obstacles" index="35" unique_id=62065513]
 position = Vector2(1508, 493.5)
 shape = SubResource("RectangleShape2D_36noh")
 
-[node name="V036" type="CollisionShape2D" parent="Obstacles" index="36"]
+[node name="V036" type="CollisionShape2D" parent="Obstacles" index="36" unique_id=987758430]
 position = Vector2(384, 975)
 shape = SubResource("RectangleShape2D_wivq1")
 
-[node name="V037" type="CollisionShape2D" parent="Obstacles" index="37"]
+[node name="V037" type="CollisionShape2D" parent="Obstacles" index="37" unique_id=1138708734]
 position = Vector2(894, 1231)
 shape = SubResource("RectangleShape2D_34car")
 
-[node name="V038" type="CollisionShape2D" parent="Obstacles" index="38"]
+[node name="V038" type="CollisionShape2D" parent="Obstacles" index="38" unique_id=222428833]
 position = Vector2(1040, 1211)
 shape = SubResource("RectangleShape2D_1cjoc")
 
-[node name="V039" type="CollisionShape2D" parent="Obstacles" index="39"]
+[node name="V039" type="CollisionShape2D" parent="Obstacles" index="39" unique_id=2016371165]
 position = Vector2(1160, 1186)
 shape = SubResource("RectangleShape2D_dueba")
 
-[node name="V040" type="CollisionShape2D" parent="Obstacles" index="40"]
+[node name="V040" type="CollisionShape2D" parent="Obstacles" index="40" unique_id=2078620975]
 position = Vector2(1290, 1211)
 shape = SubResource("RectangleShape2D_ddg0r")
 
-[node name="V041" type="CollisionShape2D" parent="Obstacles" index="41"]
+[node name="V041" type="CollisionShape2D" parent="Obstacles" index="41" unique_id=1304344278]
 position = Vector2(1375, 1221)
 shape = SubResource("RectangleShape2D_11582")
 
-[node name="V042" type="CollisionShape2D" parent="Obstacles" index="42"]
+[node name="V042" type="CollisionShape2D" parent="Obstacles" index="42" unique_id=227348709]
 position = Vector2(1485, 1206)
 shape = SubResource("RectangleShape2D_rmpun")
 
-[node name="V043" type="CollisionShape2D" parent="Obstacles" index="43"]
+[node name="V043" type="CollisionShape2D" parent="Obstacles" index="43" unique_id=349810011]
 position = Vector2(1598, 968.5)
 shape = SubResource("RectangleShape2D_hufou")
 
-[node name="V044" type="CollisionShape2D" parent="Obstacles" index="44"]
+[node name="V044" type="CollisionShape2D" parent="Obstacles" index="44" unique_id=2129013398]
 position = Vector2(1601.5, 1026)
 shape = SubResource("RectangleShape2D_2thy6")
 
-[node name="V045" type="CollisionShape2D" parent="Obstacles" index="45"]
+[node name="V045" type="CollisionShape2D" parent="Obstacles" index="45" unique_id=257849061]
 position = Vector2(1456, 441.5)
 shape = SubResource("RectangleShape2D_emxgq")
 
-[node name="V046" type="CollisionShape2D" parent="Obstacles" index="46"]
+[node name="V046" type="CollisionShape2D" parent="Obstacles" index="46" unique_id=324654886]
 position = Vector2(1454, 378.5)
 shape = SubResource("RectangleShape2D_1djoh")
 
-[node name="V047" type="CollisionShape2D" parent="Obstacles" index="47"]
+[node name="V047" type="CollisionShape2D" parent="Obstacles" index="47" unique_id=907893531]
 position = Vector2(1441.5, 307.5)
 shape = SubResource("RectangleShape2D_u3efd")
 
-[node name="V048" type="CollisionShape2D" parent="Obstacles" index="48"]
+[node name="V048" type="CollisionShape2D" parent="Obstacles" index="48" unique_id=1743748693]
 position = Vector2(625, 1122)
 shape = SubResource("RectangleShape2D_klyk0")
 
-[node name="V049" type="CollisionShape2D" parent="Obstacles" index="49"]
+[node name="V049" type="CollisionShape2D" parent="Obstacles" index="49" unique_id=917265649]
 position = Vector2(931.5, 690)
 shape = SubResource("RectangleShape2D_dey6q")
 
-[node name="V050" type="CollisionShape2D" parent="Obstacles" index="50"]
+[node name="V050" type="CollisionShape2D" parent="Obstacles" index="50" unique_id=2051529038]
 position = Vector2(633, 619.5)
 shape = SubResource("RectangleShape2D_8u82v")
 
-[node name="V051" type="CollisionShape2D" parent="Obstacles" index="51"]
+[node name="V051" type="CollisionShape2D" parent="Obstacles" index="51" unique_id=307921405]
 position = Vector2(976.5, 646)
 shape = SubResource("RectangleShape2D_vkvuw")
 
-[node name="V052" type="CollisionShape2D" parent="Obstacles" index="52"]
+[node name="V052" type="CollisionShape2D" parent="Obstacles" index="52" unique_id=675557988]
 position = Vector2(970, 628)
 shape = SubResource("RectangleShape2D_d30xg")
 
-[node name="V053" type="CollisionShape2D" parent="Obstacles" index="53"]
+[node name="V053" type="CollisionShape2D" parent="Obstacles" index="53" unique_id=181855845]
 position = Vector2(685.5, 692.5)
 shape = SubResource("RectangleShape2D_x45du")
 
-[node name="V054" type="CollisionShape2D" parent="Obstacles" index="54"]
+[node name="V054" type="CollisionShape2D" parent="Obstacles" index="54" unique_id=1797869920]
 position = Vector2(1016.5, 716)
 shape = SubResource("RectangleShape2D_o6dhi")
 
-[node name="V055" type="CollisionShape2D" parent="Obstacles" index="55"]
+[node name="V055" type="CollisionShape2D" parent="Obstacles" index="55" unique_id=965489777]
 position = Vector2(829, 661)
 shape = SubResource("RectangleShape2D_yhdwt")
 
-[node name="V056" type="CollisionShape2D" parent="Obstacles" index="56"]
+[node name="V056" type="CollisionShape2D" parent="Obstacles" index="56" unique_id=395681441]
 position = Vector2(691, 705)
 shape = SubResource("RectangleShape2D_teh4x")
 
-[node name="V057" type="CollisionShape2D" parent="Obstacles" index="57"]
+[node name="V057" type="CollisionShape2D" parent="Obstacles" index="57" unique_id=2019509585]
 position = Vector2(697.5, 686.5)
 shape = SubResource("RectangleShape2D_5prnh")
 
-[node name="00 start0" parent="Spawns" index="0" instance=ExtResource("16_npiwq")]
+[node name="00 start0" parent="Spawns" index="0" unique_id=1202179286 instance=ExtResource("16_npiwq")]
 position = Vector2(400, 1200)
 number = 0
 
-[node name="01 start1" parent="Spawns" index="1" instance=ExtResource("16_npiwq")]
+[node name="01 start1" parent="Spawns" index="1" unique_id=1266315903 instance=ExtResource("16_npiwq")]
 position = Vector2(877, 679)
 number = 1
 facing = 2
 
-[node name="02 start2" parent="Spawns" index="2" instance=ExtResource("16_npiwq")]
+[node name="02 start2" parent="Spawns" index="2" unique_id=805091943 instance=ExtResource("16_npiwq")]
 position = Vector2(473, 367)
 number = 2
 facing = 2
 
-[node name="00 Dellna_-_House" parent="Doors" index="0" instance=ExtResource("17_8goxw")]
+[node name="00 Dellna_-_House" parent="Doors" index="0" unique_id=377768542 instance=ExtResource("17_8goxw")]
 position = Vector2(75, 795)
 kinds = PackedStringArray("house")
 targets = PackedStringArray("Dellna_-_House")
@@ -595,7 +610,7 @@ fade = 2
 to_pos = PackedFloat64Array()
 sign_lines = PackedStringArray()
 
-[node name="01 Dellna_-_House" parent="Doors" index="1" instance=ExtResource("17_8goxw")]
+[node name="01 Dellna_-_House" parent="Doors" index="1" unique_id=1989501577 instance=ExtResource("17_8goxw")]
 position = Vector2(379, 795)
 kinds = PackedStringArray("house")
 targets = PackedStringArray("Dellna_-_House")
@@ -604,7 +619,7 @@ fade = 2
 to_pos = PackedFloat64Array(0, 0, 1, -1)
 sign_lines = PackedStringArray()
 
-[node name="02 Dellna_-_Elder_House_-_Floor_1" parent="Doors" index="2" instance=ExtResource("17_8goxw")]
+[node name="02 Dellna_-_Elder_House_-_Floor_1" parent="Doors" index="2" unique_id=261514419 instance=ExtResource("17_8goxw")]
 position = Vector2(478, 352)
 hole = true
 kinds = PackedStringArray("house")
@@ -614,7 +629,7 @@ fade = 2
 to_pos = PackedFloat64Array()
 sign_lines = PackedStringArray()
 
-[node name="03 Dellna_-_Ana\'s_Home" parent="Doors" index="3" instance=ExtResource("17_8goxw")]
+[node name="03 Dellna_-_Ana\'s_Home" parent="Doors" index="3" unique_id=1339525346 instance=ExtResource("17_8goxw")]
 position = Vector2(1234, 561)
 kinds = PackedStringArray("house", "story")
 targets = PackedStringArray("Dellna_-_Ana\'s_Home", "A_Visit_to_the_Childhood_Home_-_Part_1")
@@ -623,7 +638,7 @@ fade = 2
 to_pos = PackedFloat64Array()
 sign_lines = PackedStringArray(" Too much snow...")
 
-[node name="04 Inn" parent="Doors" index="4" instance=ExtResource("17_8goxw")]
+[node name="04 Inn" parent="Doors" index="4" unique_id=1243531835 instance=ExtResource("17_8goxw")]
 position = Vector2(140, 1140)
 kinds = PackedStringArray("inn")
 targets = PackedStringArray("Inn")
@@ -631,7 +646,7 @@ directions = PackedInt32Array(0)
 to_pos = PackedFloat64Array()
 sign_lines = PackedStringArray()
 
-[node name="05 Church" parent="Doors" index="5" instance=ExtResource("17_8goxw")]
+[node name="05 Church" parent="Doors" index="5" unique_id=2006312779 instance=ExtResource("17_8goxw")]
 position = Vector2(808, 720)
 kinds = PackedStringArray("church")
 targets = PackedStringArray("Church")
@@ -640,7 +655,7 @@ directions = PackedInt32Array(0)
 to_pos = PackedFloat64Array()
 sign_lines = PackedStringArray()
 
-[node name="06 dellnaWeapons" parent="Doors" index="6" instance=ExtResource("17_8goxw")]
+[node name="06 dellnaWeapons" parent="Doors" index="6" unique_id=452119075 instance=ExtResource("17_8goxw")]
 position = Vector2(610, 1140)
 kinds = PackedStringArray("weapon")
 targets = PackedStringArray("dellnaWeapons")
@@ -648,7 +663,7 @@ directions = PackedInt32Array(0)
 to_pos = PackedFloat64Array()
 sign_lines = PackedStringArray()
 
-[node name="07 dellnaCardShop" parent="Doors" index="7" instance=ExtResource("17_8goxw")]
+[node name="07 dellnaCardShop" parent="Doors" index="7" unique_id=208741430 instance=ExtResource("17_8goxw")]
 position = Vector2(997, 923)
 kinds = PackedStringArray("card")
 targets = PackedStringArray("dellnaCardShop")
@@ -657,7 +672,7 @@ directions = PackedInt32Array(0, 1, 3)
 to_pos = PackedFloat64Array()
 sign_lines = PackedStringArray()
 
-[node name="00 enoCard" parent="Loot" index="0" instance=ExtResource("18_jm6vb")]
+[node name="00 enoCard" parent="Loot" index="0" unique_id=1165014426 instance=ExtResource("18_jm6vb")]
 position = Vector2(1008, 640)
 loot_name = "enoCard"
 directions = PackedInt32Array(2)
@@ -667,7 +682,7 @@ card_level = 2
 all_cards = true
 lines = PackedStringArray("You found a card in the snow!")
 
-[node name="01 snowCard" parent="Loot" index="1" instance=ExtResource("18_jm6vb")]
+[node name="01 snowCard" parent="Loot" index="1" unique_id=279520272 instance=ExtResource("18_jm6vb")]
 position = Vector2(1200, 338)
 loot_name = "snowCard"
 directions = PackedInt32Array(0)

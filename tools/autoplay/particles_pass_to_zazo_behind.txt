@@ -1,0 +1,66 @@
+# Pass to Zazo's fire with the player passing in front of it and behind it,
+# overlapping it, for the parity case particles_pass_to_zazo_behind
+# (particles phase). "firesystem" (master, emitter 660..670 x 500) and its
+# slave "firesmokesystem" are in the villager layer, sorted with the sprites
+# by their key -(emitter y + 56): like a sprite at y 444. The player (an
+# anchor at the sprite's top-left, 36 x 56) stands at x 655 in front of the
+# fire pit (y 476.7 > 444: drawn over the flames), walks round the stump to
+# its back (y 426.7 < 444: the flames and smoke over the player), and comes
+# back. Positions are village pixels.
+wait 100
+shot pb_01_fadein
+wait 1400
+shot pb_02_start
+pos start
+guard 24
+press UP
+wait 900
+release UP
+press RIGHT
+wait 715
+release RIGHT
+press UP
+wait 500
+release UP
+wait 100
+shot pb_03_front
+pos front
+wait 500
+shot pb_04_front_later
+press LEFT
+wait 400
+release LEFT
+press UP
+wait 550
+release UP
+shot pb_05_round
+press RIGHT
+wait 400
+release RIGHT
+press DOWN
+wait 400
+release DOWN
+wait 100
+shot pb_06_behind
+pos behind
+wait 500
+shot pb_07_behind_later
+wait 500
+shot pb_08_behind_last
+press UP
+wait 300
+release UP
+press LEFT
+wait 400
+release LEFT
+press DOWN
+wait 550
+release DOWN
+press RIGHT
+wait 400
+release RIGHT
+wait 100
+shot pb_09_front_again
+pos front_again
+log end
+quit

@@ -123,6 +123,17 @@ particles_hotg                                           village_tour --load="Sl
 particles_dellna                                         particles_dellna --load="Slot 1" --start=Dellna --status=Dellna:0
 particles_pensara_north                                  particles_pensara_north --load="Slot 1" --start="Pensara - The North District"
 particles_pass_to_zazo                                   particles_pass_to_zazo --load="Slot 1" --start="Pass to Zazo" --status="Pass to Zazo:0"
+# Particles phase (docs/particles_prompt.md): what the cases above do not
+# show. The player behind and in front of Pass to Zazo's fire (overlapping
+# it); a god system starting while Home of the Gods is shown (talking to
+# Gemini sets godGeminiSystem); Home of Celis's smoke over time; the Menthu
+# and Ophiuchus systems of two cutscenes (cutscene actors; the Berca one
+# moves its fire systems with their actors).
+particles_pass_to_zazo_behind                            particles_pass_to_zazo_behind --load="Slot 1" --start="Pass to Zazo" --status="Pass to Zazo:0"
+particles_hotg_god_start                                 particles_hotg_god_start --load="Slot 1" --start="Home of the Gods"
+particles_home_of_celis                                  particles_home_of_celis --load="Slot 1" --start="Home of Celis" --status="Home of Celis:0"
+particles_story_talking_to_menthu                        particles_story_slow --load="Slot 1" --start="Talking to Menthu"
+particles_story_berca_south_west_node1                   story_tour --load="Slot 1" --start="Berca Desert--South West-mark0node1"
 # Phase 1 rollout: cutscenes (group story_*, script story_tour: a shot every
 # 1.5 s, CROSS every 0.5 s, until the story mode ends or 180 s), chosen for
 # the image modes, tints, zooms, props and particle fades they use and for

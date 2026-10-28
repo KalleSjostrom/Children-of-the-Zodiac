@@ -1,0 +1,87 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://res/ParticleSystems/particle.png" id="1"]
+[ext_resource type="Shader" path="res://scenes/common/particles/smoke_particle.gdshader" id="2"]
+[ext_resource type="Script" path="res://scenes/common/particles/VillageParticles2D.gd" id="3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1"]
+resource_local_to_scene = true
+shader = ExtResource("2")
+shader_parameter/shape_kind = 0
+shader_parameter/emitter_origin = Vector2(660, 500)
+shader_parameter/shape_a = Vector2(10, 0)
+shader_parameter/shape_b = Vector2(0, 0)
+shader_parameter/spread_min = -0.17632698
+shader_parameter/spread_max = 0.17632698
+shader_parameter/emission_point_count = 0
+shader_parameter/force = Vector2(0, 15)
+shader_parameter/mass_min = 0.01
+shader_parameter/mass_max = 0.01
+shader_parameter/size_min = 1.5
+shader_parameter/size_max = 1.5
+shader_parameter/color = Vector3(0.3, 0.3, 0.3)
+shader_parameter/intensity = 1.0
+shader_parameter/size_scale = 1.0
+shader_parameter/max_min = 0.3
+shader_parameter/max_max = 0.3
+shader_parameter/wind = Vector2(0, 0)
+shader_parameter/from_master = false
+shader_parameter/master_mass = 0.01
+shader_parameter/master_fade = Vector3(1000, 0.001, 2000)
+shader_parameter/master_fade_distance = 300.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2"]
+resource_local_to_scene = true
+shader = ExtResource("2")
+shader_parameter/shape_kind = 0
+shader_parameter/emitter_origin = Vector2(660, 500)
+shader_parameter/shape_a = Vector2(10, 0)
+shader_parameter/shape_b = Vector2(0, 0)
+shader_parameter/spread_min = -0.17632698
+shader_parameter/spread_max = 0.17632698
+shader_parameter/emission_point_count = 0
+shader_parameter/force = Vector2(0, 15)
+shader_parameter/mass_min = 0.01
+shader_parameter/mass_max = 0.01
+shader_parameter/size_min = 1.5
+shader_parameter/size_max = 1.5
+shader_parameter/color = Vector3(0.3, 0.3, 0.3)
+shader_parameter/intensity = 1.0
+shader_parameter/size_scale = 1.0
+shader_parameter/max_min = 0.3
+shader_parameter/max_max = 0.3
+shader_parameter/wind = Vector2(0, 0)
+shader_parameter/from_master = true
+shader_parameter/master_mass = 0.01
+shader_parameter/master_fade = Vector3(1000, 0.001, 2000)
+shader_parameter/master_fade_distance = 300.0
+
+[node name="firesmokesystem" type="GPUParticles2D"]
+amount = 167
+texture = ExtResource("1")
+lifetime = 5.703
+fixed_fps = 0
+interpolate = false
+visibility_rect = Rect2(-4096, -4096, 12288, 12288)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ShaderMaterial_1")
+script = ExtResource("3")
+system_name = "firesmokesystem"
+time_step = 0.06
+default_amount = 167
+
+[node name="firesmokesystem" type="GPUParticles2D" parent="."]
+amount = 147
+texture = ExtResource("1")
+lifetime = 5.003
+fixed_fps = 0
+interpolate = false
+visibility_rect = Rect2(-4096, -4096, 12288, 12288)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ShaderMaterial_2")
+script = ExtResource("3")
+system_name = "firesmokesystem"
+time_step = 0.06
+default_amount = 147

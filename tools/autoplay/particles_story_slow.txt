@@ -1,0 +1,26 @@
+# A cutscene whose particle systems show while its first dialog waits, for
+# the parity case particles_story_talking_to_menthu (particles phase): a
+# shot every second for 10 s without input (the systems keep running while
+# the dialog waits for CROSS), then story_tour's loop (a shot every 1.5 s,
+# CROSS every 0.5 s) until the story mode ends or 120 s.
+wait 100
+shot s_00_start
+mark
+wait 1000
+shot w_#
+loopuntil NEVER 10000
+mark
+wait 250
+tap CROSS
+wait 500
+shot s_#
+wait 250
+tap CROSS
+wait 500
+tap CROSS
+log tick
+loopuntil !VillageStory 120000
+wait 1500
+shot s_99_after
+log end
+quit

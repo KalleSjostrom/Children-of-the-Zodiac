@@ -18,7 +18,7 @@ func modifyDirection(direction):
 
 func getEmittancePos():
 	var emitPosition = Vector3f.new()
-	var theta: float = J.random() * 2 * PI
+	var theta: float = BodiesParticleSystem.rand.nextDouble() * 2 * PI
 	emitPosition.x = radiusa * cos(theta)
 	emitPosition.y = radiusb * sin(theta)
 	emitPosition.addLocal(getPosition())

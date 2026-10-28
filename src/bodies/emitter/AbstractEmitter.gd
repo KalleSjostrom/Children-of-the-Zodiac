@@ -41,6 +41,21 @@ func update(elapsedTime, body = null):
 				emitTimeStep = J.FLOAT_MAX
 
 
+## Bridge (particles phase, docs/ARCHITECTURE.md section 9): update without
+## bodies, for a system a VillageParticles2D draws: the emission clock and
+## the fade (setFade) go on as if every emission found a body; the GPU
+## system follows emitTimeStep.
+func advance(elapsedTime):
+	time += elapsedTime
+	while emitTimeStep > 0 and time >= emitTimeStep:
+		time -= emitTimeStep
+		if fade:
+			emitTimeStep += (1 if increase else -1) * pow(emitTimeStep * speed, swiftness)
+			fade = (emitTimeStep < cutoff) if increase else (emitTimeStep > cutoff)
+			if not fade:
+				emitTimeStep = J.FLOAT_MAX
+
+
 func setFade(fade, speed, swiftness, increase, cutoff):
 	self.fade = fade
 	self.speed = speed

@@ -59,9 +59,14 @@ func buildSystem(name):
 		systems.append(slave)
 		var warmUp: int = p.getWarmUp()
 		# Java: Values.LOGIC_INTERVAL; one step each (see ParticleSystem.update).
-		for i in range(warmUp):
-			p.update(Values.ORIGINAL_FRAME_MS)
-			slave.update(Values.ORIGINAL_FRAME_MS)
+		if p.gpu:
+			# Bridge (particles phase): the GPU systems warm up instead.
+			p.gpu_warm(warmUp * Values.ORIGINAL_FRAME_MS / 1000.0)
+			slave.gpu_warm(warmUp * Values.ORIGINAL_FRAME_MS / 1000.0)
+		else:
+			for i in range(warmUp):
+				p.update(Values.ORIGINAL_FRAME_MS)
+				slave.update(Values.ORIGINAL_FRAME_MS)
 		p.setWarmUp(0)
 	return systems
 
@@ -221,7 +226,7 @@ static func getValueFromInterval(s):
 		var second: float = J.parseFloat(interval[1])
 		var max_: float = maxf(first, second)
 		var min_: float = minf(first, second)
-		val = J.random() * (max_ - min_) + min_
+		val = BodiesParticleSystem.rand.nextDouble() * (max_ - min_) + min_
 	else:
 		val = J.parseFloat(s)
 	return val

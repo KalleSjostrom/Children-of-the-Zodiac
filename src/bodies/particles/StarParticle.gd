@@ -7,17 +7,17 @@ static var force_ = Vector3f.new(0, GravityCommand.DEFAULT_GRAVITY, 0)
 
 func _init(settings = null) -> void:
 	super(settings)
-	rgb[0] = 0.5 + J.random() / 2.0
-	rgb[1] = 0.5 + J.random() / 2.0
-	rgb[2] = 0.5 + J.random() / 2.0
+	rgb[0] = 0.5 + BodiesParticleSystem.rand.nextDouble() / 2.0
+	rgb[1] = 0.5 + BodiesParticleSystem.rand.nextDouble() / 2.0
+	rgb[2] = 0.5 + BodiesParticleSystem.rand.nextDouble() / 2.0
 
 
 ## Java: update(float elapsedTime) (does not move the particle).
 func update(elapsedTime, body = null):
-	if J.random() < 0.01:
-		rgb[0] = 0.5 + J.random() / 2.0
-		rgb[1] = 0.5 + J.random() / 2.0
-		rgb[2] = 0.5 + J.random() / 2.0
+	if BodiesParticleSystem.rand.nextDouble() < 0.01:
+		rgb[0] = 0.5 + BodiesParticleSystem.rand.nextDouble() / 2.0
+		rgb[1] = 0.5 + BodiesParticleSystem.rand.nextDouble() / 2.0
+		rgb[2] = 0.5 + BodiesParticleSystem.rand.nextDouble() / 2.0
 
 
 ## Java: draw(Graphics g, GameTexture t, Vector3f pPos); draws at the

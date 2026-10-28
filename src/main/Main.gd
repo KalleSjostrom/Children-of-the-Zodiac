@@ -33,6 +33,9 @@ extends Node
 ##   --no-encounters     dev only: no random battles in labyrinths (Labyrinth.noEncounters;
 ##                       steps are still counted), for parity tours of dungeon floors;
 ##                       the console's "noenemies" switches it
+##   --hide-particles    dev only: the village and cutscene particle systems draw
+##                       nothing (they still run), for parity runs that compare
+##                       everything else
 ##
 ## In debug builds the developer console (scenes/debug/DebugConsole.gd)
 ## opens with the key under Escape or F1; it replaces the Cheater.
@@ -46,6 +49,8 @@ static var instance: Main
 static var bridge_test := false
 ## --no-encounters: labyrinths start no random battles (Labyrinth.init).
 static var no_encounters := false
+## --hide-particles: village and cutscene particle systems are not drawn.
+static var hide_particles := false
 static var _legacy: PackedStringArray = []
 
 ## The current game mode's scene goes here (see _sync_world).
@@ -93,6 +98,7 @@ func _ready() -> void:
 		_legacy = String(_args["legacy"]).split(",", false)
 	bridge_test = _args.has("bridge-test")
 	no_encounters = _args.has("no-encounters")
+	hide_particles = _args.has("hide-particles")
 
 	audio = Node.new()
 	audio.name = "Audio"
@@ -153,6 +159,7 @@ func _init_deterministic(seed_value: int) -> void:
 	WeatherParticle.rand.setSeed(J.nextSeed())
 	SaveParticle.rand.setSeed(J.nextSeed())
 	BattleParticle.rand.setSeed(J.nextSeed())
+	BodiesParticleSystem.rand.setSeed(J.nextSeed())
 	# Godot's global generator (randf() & co. in new code), seeded without
 	# drawing from J's seed sequence.
 	seed(hash("global %d" % seed_value))

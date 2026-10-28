@@ -511,6 +511,15 @@ Zazo.tscn (Node2D, VillageScene.gd)   @export place_name, music, land_name, insi
   against parity shots. Until a preset matches, an interim
   `LegacyParticles2D` node runs the legacy simulation and draws its quads in
   `_draw()`.
+
+  *As built (particles phase, 6.10):* not ParticleProcessMaterial presets
+  but one particle shader per class that runs the legacy laws as per-second
+  rates (so no hand tuning of curves); the wind is the legacy's shared
+  vector, read every frame; `warmUp` is `preprocess`; a warm-up shape is a
+  `preprocess` to the steady state (snow) or a one-shot emission (stars);
+  master/slave is a child system fed at the legacy rate, not a
+  sub-emitter (not deterministic). `LegacyParticles2D` stays as the slot that
+  instances the generated system.
 * `--legacy=villages` keeps the old path available for parity runs until
   the phase ends.
 * *As built (pilot):* the village hands the scene what its legacy drawing
@@ -713,12 +722,311 @@ What keeps the exit criteria of 6.6 from being met today:
   `--legacy=villages` exists (`drawBottom`, `drawTop`, the legacy branch of
   `VillageStoryTimeLine.draw`).
 * "Delete each `.vil`": decision 5 is open.
-* Particles are still `LegacyParticles2D` (the legacy simulation's quads):
-  a GPU preset needs decision 6 (time base). The exit criteria do not
-  require it, 6.4 does.
+* Particles: done on the GPU (6.10); `--legacy=particles` keeps the legacy
+  simulation (`BodiesParticleSystem`'s bodies, `step`, `drawIt`,
+  `place_quad` and `LegacyParticles2D`'s quads) until the phase closes.
 * The emotion bubbles, dialogs, signs, fades and the cover-all/story/
   translucent-over-actor cutscene images are legacy overlays until phase 3
   (not part of the exit criteria).
+
+### 6.10 The particles phase (P): village and cutscene particles on the GPU
+
+Done as `docs/particles_prompt.md` asked (decision 6 for particles, 13):
+every system of `particleSystems.info` is a generated `VillageParticles2D`
+scene, the legacy objects stay in charge (step B), and the legacy
+simulation runs only with `--legacy=particles`. Conventions:
+docs/ARCHITECTURE.md section 9 ("Particles"); regenerating and tuning:
+docs/CONVERTING_PARTICLES.md.
+
+* **Own random numbers first.** The village and cutscene particles drew
+  from J's shared generator (as Java's `Math.random`); they now draw from
+  `BodiesParticleSystem.rand` (port notes, particles-bodies), seeded in
+  `Main._init_deterministic`. Normal play is unchanged; seeded runs changed,
+  so the goldens (all 342 runs incl. `bridge_test`, with the new
+  `--hide-particles`) were recorded after it. `verify_villages.gd` seeds the
+  new generator per build too.
+* **Coverage.** Five new cases (`particles_*`, recorded twice: identical):
+  the player in front of and behind Pass to Zazo's fire, overlapping it
+  (`particles_pass_to_zazo_behind`); a god system starting while Home of the
+  Gods is shown (talking to Gemini sets `godGeminiSystem`;
+  `particles_hotg_god_start`); Home of Celis's smoke over time; the Menthu
+  and Ophiuchus systems of "Talking to Menthu" (a new script,
+  `particles_story_slow.txt`: the systems run while the first dialog waits;
+  `story_tour` paged through it in 3 s) and of the Berca Desert--South West
+  node1 cutscene (which moves its fire systems with their actors). The 34
+  cases that show village or cutscene particles were also recorded with the
+  particles shown, twice: 791 shots identical (the legacy simulation is
+  deterministic with its own generator).
+* **Facts found** (deliverable 1; where they differ from the prompt):
+  * Motion: confirmed. The command queue runs the emitter first, then
+    gravity (cancelling the default force), the wind (smoke only) and the
+    update, so a particle moves at F·dt/m from its first step on, plus the
+    wind's acceleration for smoke. dt is the step: 1/30 s normally, but
+    `originalFrameStep` takes all pending time once two steps are pending,
+    so below 30 FPS the particles move faster: at Home of the Gods' 6 FPS
+    (≈170 ms steps) the god particles rose about five times as high as
+    intended. The GPU systems use 1/30 s.
+  * Lives: confirmed; FireParticle's fade accumulates (the growth adds to
+    the fade every step); SmokeParticle's fade grows multiplicatively
+    (×(1 + d/10000) per step); `modifySize`'s clamp of the life to 1 never
+    binds (max ≤ 0.7), so drawing changes nothing. StarParticle's colour
+    re-roll never runs: **the legacy code never updates the bottom layer**
+    (`DoubleBackground.update` steps only the upper and weather layers, as
+    in Java), and the stars are its only systems. They stay as placed.
+  * Emission: confirmed, with two more facts. **A master/slave emitter is
+    updated by both its systems** (the slave system's emitter command is the
+    same emitter, as in Java), so Pass to Zazo's fire emits at twice its
+    time step's rate (33 a second instead of 16.7). The emitter's clock runs
+    on while the pool is empty, so a pool-limited system re-emits every dead
+    body in the next step. Warm-up: only systems active when built warm up
+    (the gods and the exit door start inactive and fill up when they start);
+    cutscene actors' systems never warm up. The rates (the generator's
+    estimates from stepping legacy particles): the snow is limited by its
+    time step, not its pool (55.6 a second, about 5,300 of 6,000 flakes
+    alive: a simulation of the legacy pool gave 5,370); the smokes with max
+    0.3 or more are pool-limited, the max 0.15 ones step-limited; the fires
+    are step-limited (the crystal fires: about 60 of 300 bodies alive; the
+    image systems about 350 of 3,000).
+  * Shapes: confirmed. ImageShape tries at least 500 random pixels per
+    emission (the cost of the god systems: about two million random numbers
+    a second with all twelve on) and gives the edge columns half the weight
+    (`round(random · (width − 1))`); 17 image systems.
+  * Master/slave: confirmed (the slave particle starts at the dead fire
+    particle's position, with half its velocity plus its own emit force).
+  * Door systems: `blackness.png` at the system offset, in the current GL
+    colour, before the particles: confirmed.
+  * Where they draw: Ground: the four star systems; Actors: the twelve
+    gods, the two doors, Pass to Zazo's fire and its smoke (each sorted on
+    its own key); Effects: the snow and the smokes; cutscene actors' systems
+    in Actors, sorted by the actor's y. A cutscene actor moves its system's
+    emitter (`setPos`); **its live particles do not move with it**, and the
+    actor's draw never sets the system position, so **its particles are
+    drawn in screen space** (they do not scroll with the village), as are
+    the stars (as in Java).
+  * State read besides the drawing: the sort key `getY` (the emitter's
+    position), `Village.getParticleSystem` (the timeline's emitter fade,
+    which no sequence runs), the activation status in `update`, and
+    `Village.SceneGLState`: an active system's draw leaves alpha test 0.1
+    and colour 1 for the sprites after it.
+* **Built** (deliverable 2): the generator (51 scenes; the rain and sand
+  systems have no particle class, as in the original, and get none), five
+  particle shaders, `VillageParticles2D`, the GPU path in
+  `BodiesParticleSystem` (`gpu_path`, `gpu_run`, `gpu_warm`, `gpu_view`),
+  `AbstractEmitter.advance`, `WindCommand.drift`, and `LegacyParticles2D`
+  instancing the scenes. Chosen over the converter writing the generated
+  scenes into the village scenes: the village scenes stay as they are (the
+  `LegacyParticles2D` slot keeps the legacy loader's data, and
+  `--legacy=particles` still needs it), the cutscene actors' systems exist
+  only at run time, and a system's look is one scene for every place that
+  uses it. Not a Godot sub-emitter for Pass to Zazo's smoke: which slot
+  takes which request varies between runs, and two GPU recordings differed
+  (up to 34/255 on 3 % of a frame); the slave emits on its own at the rate
+  the legacy feeds it, each particle where a simulated master particle dies.
+  Time: the game time the legacy system was updated for, as `speed_scale`
+  per frame (so a suspended village, the never-updated bottom layer and a
+  cutscene with Circle held behave as in the legacy); with `--fixed-fps 60`
+  in parity runs the frames are fixed too. Seeds: one per system, drawn
+  from `BodiesParticleSystem.rand` when the legacy system is built.
+  Dellna's snow and wind are back ("Dellna - 0" reconverted: identical to
+  the file before 7130b377).
+* **Parity** (deliverable 3):
+  * Golden (recorded after the own generator, before the conversion) vs.
+    after, both with `--hide-particles`: all 347 cases identical (5,984
+    shots), logs identical. The compare also lists 15 shots of
+    `tour_berca_2` "only in A": a directory left in `out/golden` by an
+    older run (no case since COTZ-027), not a difference. The runs' error
+    counts are the same except two WASAPI errors in one golden run (an
+    audio device event while recording).
+  * The GPU path recorded twice (the 34 particle cases, 791 shots):
+    identical, logs identical. Before the slave became a system of its own,
+    Pass to Zazo's smoke differed between the two (the sub-emitter).
+  * `--legacy=particles` after the conversion vs. the unconverted recording
+    with the particles shown: 791 shots identical: the legacy path is
+    unchanged. `--legacy=villages` still runs and draws them (it differs
+    from the scene path only as in 6.8: the top layer, the zooms).
+  * `verify_villages.gd --all`: 230 of 234 builds pass; the four that fail
+    are "Zazo at Night - 0"'s loot, whose `.vil` line was changed in
+    7d6f42bf without reconverting the scene (not a particles matter).
+* **Look** (legacy vs. GPU on the 34 cases; contact sheets per system in
+  `tools/parity/out/p_sheets/`, legacy left): the shapes, colours, sizes,
+  layers, positions and motion match; the differences besides the
+  intensity:
+  * All: particles at sub-pixel positions, filtered (the legacy quads have
+    whole-pixel corners), so edges are softer; emission is spread evenly
+    over time instead of in the legacy's per-step bursts (a pool-limited
+    smoke re-emits whenever a body dies); other random draws.
+  * Below 30 FPS the legacy particles moved faster (6.10, motion); the GPU
+    systems always have the 30-step speeds. Seeded parity runs do not show
+    this (their frames are 1/60 s).
+  * Snow: the GPU snow starts in its steady state (about 5,200 flakes); the
+    legacy one starts with all 6,000 spread evenly and thins to about 5,370
+    over minutes.
+  * Smokes: Pensara North's wind (turbulence 1) wanders differently in each
+    path, so its plumes lean differently at any moment.
+  * Pass to Zazo's smoke comes from simulated fire particles, not the
+    visible ones (the same stream; no 0.8 s delay when the fire starts);
+    the column is a little lighter and longer.
+  * Stars: other positions and colours (random); both never change.
+  * The god, Menthu, Ophiuchus and door systems, the cutscene systems
+    moving with their actors and the zoom: no difference besides the above.
+* **Frame rate and load time** (normal runs: no `--seed`, windowed, one at
+  a time; the median of AutoPlay's `fps=` after the fade-in; load: from
+  `VillageLoader.load` to the second frame after the scene is shown, by
+  temporary prints, removed):
+
+  | Run | Capped FPS | Uncapped FPS | Load |
+  |---|---|---|---|
+  | Home of the Gods, all 12 god systems (`particles_hotg` route) | 8 -> 60 | 7.5 -> 930 | 1.84 s -> 0.60 s |
+  | Dellna - 0 with the snow (`particles_dellna`) | 18 -> 60 | 18 -> 1,270 | 1.67 s -> 0.46 s |
+  | Zazo (`zazo_0`) | 60 -> 60 | 452 -> 980 | 1.05 s -> 0.28 s |
+  | Berca Desert--South West node1 (Menthu, Ophiuchus) | 18 -> 60 | 18 -> 1,530 | 0.53 s -> 0.23 s |
+
+  The legacy load is mostly building and warming up the bodies. On the GPU
+  path the first frame of a place still runs its systems' warm-up
+  (`preprocess`, 30 steps a second): 10 s for most systems; the snow's
+  ~200 s warm-up takes 2 steps a second (its law is linear), without which
+  Dellna's load was 0.89 s.
+
+### 6.11 The next particles (prepared, not done)
+
+Decision 6 for these: the dungeon weather and the save points keep today's
+look at 60 FPS, updated with the frame's delta (they step once per frame
+and never had the `originalFrameStep` correction: every per-step law
+becomes a per-second rate at 60 steps a second); the card effects keep
+their look at 30 steps a second, and a battle may wait up to about 100 ms
+more or less than today (12).
+
+**Dungeon weather (P2).** `WeatherSystem` (`src/weather`), drawn by
+`DungeonWeather`; 10,000 particles, rain or snow by the floor's style
+(snow wins when both are set; rain: Dorma's Forest, Forest of Reil--Forest
+Path, Pensara Forest; snow: Frozen Forest, Ice Cavern--Frozen Field and
+--Mysterious Forest).
+
+* Laws (per step, one step per frame): each particle keeps a fixed column
+  (x in [0, 52), z in (-52, 0]: 13 x 13 cells, so the outer three rows and
+  columns of a 16 x 16 floor get none) and falls by its force plus a drift
+  drawn at its respawn: rain 12.0-12.2 units/s, snow 0.18-0.38 units/s,
+  both drifting up to 0.06 units/s sideways. It respawns at y U[2, 4) in
+  its column below y -2 (rain) or -2.2 (snow), so a rain drop lives
+  0.33-0.5 s and a flake 11-34 s. No fade, size or colour law. A
+  GPUParticles3D: a slot's column from a hash of its index, `lifetime` the
+  longest fall, the drift and the fall speed per emission, `preprocess` to
+  the steady state (the legacy starts at y U[-2, 4)).
+* Drawing: axis-aligned quads, not billboards (rain 0.01 x 0.045, snow
+  0.075 x 0.075 units): in the x-y plane when the facing d is in
+  (-135, -45) or (45, 135), else in the z-y plane, with the corner and
+  texture order of the "upper" test; additive (SRC_ALPHA, ONE), snow with
+  alpha test > 0, depth tested against the walls, the floor's fog, no
+  lighting. The view test is part of the look: the back pass draws
+  7.5 < s < 20, the front pass 3 < s < 7.5 (s: the distance ahead of the
+  player), both inside a 30.7 degree half-angle cone; particles with
+  7 <= s <= 7.5 are drawn by neither pass (the front list takes s < 7).
+  The cached view values go stale while the player stands still: a legacy
+  quirk to decide on, not to copy blindly. On the GPU: a draw pass mesh
+  whose shader orients the quad by a facing uniform and discards outside
+  the band and cone; the dungeon shader's fog (`dungeon_gl.gdshaderinc`).
+* What draws it today (`Labyrinth.draw`): the walls and objects, the back
+  pass, a running battle's or riddle's 3D (`drawExtra`), then the front
+  pass: the scene's (`DungeonScene.show_weather`) unless a battle or riddle
+  runs; over a battle the legacy front pass draws into the scene's `Legacy`
+  node (the 3D bridge, after the battle's batches). A GPU version needs the
+  same two passes: two instances of one simulation (or two draw passes),
+  the back pass sorted before and the front pass after the bridge's battle
+  batches (their sorting offsets start at 1e6).
+* Every frame it needs: the legacy modelview (the scene already gets it,
+  `show_view`; the weather is in eye space today), the player's location and
+  facing (an integer angle) for the view test, `Labyrinth.runSubGameMode`
+  for the front pass, the style's rain/snow and fog. No wind (`WindCommand`
+  is village-only). `place_particles` today also rebuilds the front list,
+  the cached view values and the GL state (blend, alpha test, colour); a GPU
+  path must leave the same GL state for the next drawing.
+* Random numbers: `WeatherParticle.rand` (columns, heights, drifts; nothing
+  else draws from it), but the rain's initial height draws from `J.random()`
+  (`RainParticle`, 10,000 draws per rain floor build). Give it
+  `WeatherParticle.rand` first and record the goldens after that (as this
+  phase's deliverable 0), or the GPU version shifts every later seeded draw.
+* Cost today: ~10 ms of simulation and ~9 ms of placing the back pass per
+  frame on the rain floors (7.7, 7.8).
+
+**Save points (P2).** `SaveSystem` / `SaveParticle` (`src/particleSystem`),
+one per `InventorySave`, built in the floor's first frame.
+
+* 2,000 particles on a ring of radius 0.9 around the node, starting at
+  y -2: they rise 0.48-0.72 units/s and fade 0.15-0.75 per second (alpha =
+  life), and respawn above y 1 or at life 0 with a new random colour, speed
+  and fade; the colour cycles (R +0.6, G +1.2, B +1.8 per second, back to 0
+  above 1). Quads of 0.15 x 0.15 (half the `size` 0.3: the code uses
+  `size / 2`), oriented by the facing's quadrant (nothing at exactly +-45 or
+  +-135 degrees), additive, alpha test > 0, no culling. Each particle runs
+  400 steps in its constructor: 800,000 updates per save point at floor
+  load (a GPUParticles3D: `preprocess` 400 / 60 s).
+* Stepped once per draw (`Save.place_view` calls `SaveSystem.update`), also
+  during battles; drawn today in the objects' batches
+  (`DungeonScene.show_object`). A GPU system would be a child of
+  `DungeonSavePoint`, with the facing as a uniform.
+* `SaveParticle.rand` is its own; nothing else draws from it.
+
+**Battle background snow.** `BattleBackSnowSystem` (1,000 particles,
+`BattleParticle.rand`) is built only for a boss place with a `particles`
+info, and the only such line in `main.bank` is commented out: dead code.
+
+**Card and enemy effects (phase 4.4, `src/particleSystem`).**
+
+* How the battle waits: `Animation.update` steps the packets, applies the
+  damage when a packet `isDestroyed()`, starts the next card when it
+  `isReady()` (after 400 ms for an attack card) and drops it when it
+  `isDead()`. `isDestroyed` is set by the system's travel (path length over
+  speed: a timer in effect, quantised to 33 ms steps), by CHECK_DISTANCE
+  (the sword cards: distance squared < 0.2, also a function of time) or by
+  Flare's PARTICLES_DESTROYED (exactly 400 particles whose counter passed
+  8). `isDead` is "destroyed and at most IS_DEAD_LIMIT particles alive";
+  with the per-step fades known, a lifetime estimate after the destroy time
+  stays within the 100 ms. `isReady` is one of the two or an IS_DELAYED
+  timer. The damage text (`AttackText`, ~2.1 s) usually ends a card's
+  animation later than its last `isDead` anyway.
+* What can move to GPUParticles3D before the rest of 4.4: the battle's 3D is
+  drawn into the dungeon scene's World3D with the camera at the origin
+  (7.5), so an effect can be a GPUParticles3D in eye space under the scene's
+  `Legacy` node, sorted among the bridge's batches. Its legacy packet keeps
+  the logic (the travel and the timers that make it destroyed, ready and
+  dead; the shakes and colours it triggers) and hands the effect its state,
+  as the village systems do (6.10). That fits the plain emitters and the
+  equations, which are stateless curves of the emitter's time: Fire,
+  BlackFire, Ice, Blizzard, Earth, Colliding, Wind, BlackWind,
+  ChameleonStrike (CircularWave), Ultima, BlackUltima (UpDownSideWave),
+  Tornado (WhirlWind), SacredBeam, SmallSacredBeam, the Cure family (Line),
+  Drain and EnemyDrain (target-point gravity, a per-particle law) and the
+  sword cards. Not as particles, or not without more work: Shatter
+  (CrushingSaber: emits from the enemy's current frame, taking each pixel's
+  colour and alpha and consuming the opaque ones; bakeable per frame, but up
+  to 5,000 particles at 12,000/s with a dead limit the battle waits on), the
+  sphere systems (Demolish, SerphiaDeath: lit `gluSphere`s, i.e. meshes and
+  a light, not particles), DemolishEmitter (its destroy shrinks the enemy:
+  logic feedback; its path is analytic), Flare (its destroy condition counts
+  particles: it needs the timer) and the non-particle systems
+  (ImageParticleSystem, SlowParticleSystem: sprites with coroutines;
+  EnemySystem: the enemy's colour). The per-step laws to convert: the fades
+  and their growth, the destroy kicks (one step's force: half the kick at
+  60 steps unless scaled) and the per-step gravity jitter.
+* The cheaper interim (stepping the legacy effects every frame with
+  per-second rates) doubles their GDScript cost: the Flame pre-run gives
+  about 9.5 us per particle update, so the biggest effect (Wind level 3,
+  about 10,700 particles) costs about 100 ms per step today, every other
+  frame, and would cost it every frame. Not recommended; the GPU is the fix.
+* The Flame pre-run (`Flame.getAnimation` -> `FlameParticleSystem.create`,
+  for Menthu's `pl=true` frames): 200 iterations of 3,000 particles, each
+  stepping the particles and the emitter twice (the Java duplicates the
+  loop): 1.2 million particle updates and at least as many `J.random()`
+  draws, 11.4 s. What is kept is only the live system (no frames); its
+  motion does not depend on the enemy (the image and settings are fixed; the
+  enemy's scale, offset and height only place it). Neither the GPU version
+  nor the every-frame interim removes the loop by itself, but a GPU version
+  replaces it with `preprocess` (milliseconds). It can be fixed on its own
+  first: compute the canonical state once and place it per build (removes
+  the stall from the second attack on), or run the pre-run without the
+  duplicated particle loop (halves it). Give it its own random generator
+  first: removing its draws shifts the battle's later seeded rolls
+  (critical hits, `EnemyLogic`), so Menthu's goldens would change.
 
 ## 7. Phase 2: dungeons as scenes
 
@@ -1517,6 +1825,9 @@ When no mode draws through `g` any more:
    only in the `--legacy` paths. A battle may wait up to about 100 ms more
    or less than today for an effect (12). Other motion (2.5's list without
    the particles) is still open.
+   *Applied (particles phase, 6.10):* the village and cutscene systems run
+   their laws at 30 steps a second as per-second rates, every frame, for
+   the game time the legacy system is updated for.
 7. **Village top layer** (from the pilot, 6.7): *decided (phase 1
    rollout):* roofs and treetops are always drawn (6.1, the pilot's
    default). The legacy rule draws a piece only where a sprite overlaps it,
@@ -1534,8 +1845,8 @@ Sizes are relative: S ≈ a focused session, XL ≈ many sessions.
 | 0 | Groundwork: bridge, parity tool, `ARCHITECTURE.md` | S | — | everything |
 | 1 | Villages + cutscenes + village particles + SpriteFrames | L | 0; decisions 1, 6 | editable villages |
 | 2 | Dungeons + weather + minimap | L | 0; decision 2 (the weather: 6) | editable dungeons; FPS fix (with decision 6) |
-| P | Village and cutscene particles on the GPU (6.4; `docs/particles_prompt.md`) | M | 1; decision 6 (decided for particles) | Dellna's snow back on; Home of the Gods and Dellna at 60 FPS |
-| P2 | Dungeon weather and save points on the GPU | M | 2, P | rainy and snowy floors at 60 FPS |
+| P | Village and cutscene particles on the GPU (6.4; `docs/particles_prompt.md`). *Done (6.10).* | M | 1; decision 6 (decided for particles) | Dellna's snow back on; Home of the Gods and Dellna at 60 FPS |
+| P2 | Dungeon weather and save points on the GPU (prepared: 6.11) | M | 2, P | rainy and snowy floors at 60 FPS |
 | 3 | Theme, Dialog, signs, emotions, fades, HUD | M | 1 (or 2) | most of the remaining `draw(g)` |
 | 4.1 | World map + airship | M | 1 (converter), 3 | — |
 | 4.2 | Title, game over, mini-games, stores, menu | L | 3 | — |
@@ -1549,7 +1860,8 @@ snow (12–18 FPS) unplayable, and P and phase 3 do not depend on each other.
 P2 can follow at any time. The card effects are part of 4.4 (the battle
 waits on them, 12); with the waits relaxed to about ±100 ms they may move
 earlier, as GPU effects or a per-frame interim: P's last deliverable
-assesses that.
+assesses that. *P is done (6.10); the assessment and P2's preparation are
+in 6.11.*
 
 Phases 1 and 2 are the user-visible goal and can run in parallel after phase
 0. Within phase 1, the Zazo pilot should go all the way through steps A and

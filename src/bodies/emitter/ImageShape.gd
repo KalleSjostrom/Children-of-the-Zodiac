@@ -55,8 +55,8 @@ func getEmittancePos():
 	# Java: while (!found || i < maxit) - runs at least maxit iterations and
 	# continues until an opaque pixel is found.
 	while not found or i < maxit:
-		w = J.round(J.random() * (width - 1))
-		h = J.round(J.random() * (height - 1))
+		w = J.round(BodiesParticleSystem.rand.nextDouble() * (width - 1))
+		h = J.round(BodiesParticleSystem.rand.nextDouble() * (height - 1))
 		found = pixels[h][w] >= 100
 		i += 1
 	if found:

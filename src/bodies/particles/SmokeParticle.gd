@@ -28,7 +28,7 @@ func modifySize(size):
 
 
 func getFadeValue():
-	return J.random() / 200.0 + 0.001
+	return BodiesParticleSystem.rand.nextDouble() / 200.0 + 0.001
 
 
 ## Java: update(float elapsedTime) (seconds).

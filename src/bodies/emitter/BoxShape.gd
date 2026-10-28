@@ -18,7 +18,7 @@ func modifyDirection(direction):
 
 
 func getEmittancePos():
-	var index: int = 0 if J.random() < 0.5 else 1
+	var index: int = 0 if BodiesParticleSystem.rand.nextDouble() < 0.5 else 1
 	var temp = interpolate(vectors[index])
 	index = absi(index - 1)
 	var emitPosition = interpolate(vectors[index]).add(temp).add(getPosition())
@@ -31,5 +31,5 @@ func getEmittancePos():
 
 func interpolate(v):
 	var l: float = v.length()
-	var newL: float = J.random() * l
+	var newL: float = BodiesParticleSystem.rand.nextDouble() * l
 	return v.normalize().multLocal(newL)

@@ -26,9 +26,13 @@ style.
 main/Main.tscn            the tree in section 4
 scenes/
   common/                 VillageDoor, VillageSign, VillageLoot, VillageSpawn, ActorView,
-                          StoryImage (.tscn + .gd each), particles/LegacyParticles2D,
-                          alpha_test.gdshader; Difficulty + DifficultyLevel, SaveSlots
-                          (docs/DIFFICULTY.md)
+                          StoryImage (.tscn + .gd each), alpha_test.gdshader; Difficulty +
+                          DifficultyLevel, SaveSlots (docs/DIFFICULTY.md)
+  common/particles/       LegacyParticles2D (a system's slot in a village), VillageParticles2D
+                          (a GPU system), the particle shaders (<class>_particle.gdshader,
+                          particles.gdshaderinc, distance_fade.gdshaderinc)
+  common/particles/systems/  one generated scene per system of particleSystems.info
+                          (<system>.tscn, <system>_points.png for an image shape)
   villages/               VillageScene.tscn + .gd (the layout every village inherits),
                           VillageBuilding.gd (resource)
   villages/<Place>/       <Place>.tscn (shared base) + one inherited scene per .vil variant,
@@ -59,7 +63,7 @@ src/                      legacy code (shrinks over time)
 tools/import/             converters and their checks (headless `--script`): vil_to_scene.gd
                           (+ vil_to_scene.sh), verify_villages.gd, scene_preview.gd (windowed);
                           map_to_scene.gd (+ map_to_scene.sh), verify_dungeons.gd,
-                          dungeon_preview.gd (windowed)
+                          dungeon_preview.gd (windowed); particles_to_scenes.gd (+ .sh)
 tools/parity/             screenshot comparison (section 7), contact_sheet.gd
 tools/bridge_test/        the phase 0 bridge test scene (dev only)
 ```
@@ -229,7 +233,8 @@ not rename legacy members to suit new code.
 **Legacy → new.** Legacy code calls only small, documented entry points:
 `GameMode.create_scene()`, `scene_root`, `shown_scene()`,
 `Main.is_legacy("<subsystem>")`, `Main.bridge_test`, `Main.no_encounters`,
-`MapLoader.dungeon_scene_for`, `Graphics.use_scene_3d`, the snake_case
+`MapLoader.dungeon_scene_for`, `Graphics.use_scene_3d`, `Main.hide_particles`,
+`BodiesParticleSystem.gpu_path()`, the snake_case
 methods of the scenes it owns (`VillageScene.load_into`, `show_*`;
 `DungeonScene.load_into`, `show_floor`, `show_view`, `show_object` …) and the
 difficulty (`Difficulty.scale_experience`, `scale_enemy_damage`,
@@ -240,7 +245,7 @@ along. Bridge methods added to legacy classes so that new code can read
 their state are snake_case too (`Sprite.place_view`,
 `Graphics.alpha_threshold`, `Village.update_draw_state`,
 `Inventory.place_view`, `WeatherSystem.place_particles`,
-`Graphics.render_state_3d`); refactors of a
+`Graphics.render_state_3d`, `BodiesParticleSystem.gpu_view`); refactors of a
 legacy method's own code keep Java style (`Village.sortSprites`).
 
 **Flags in legacy code.** A subsystem being converted keeps its old path for
@@ -266,7 +271,8 @@ Game options go after `--` on the command line (see the header of
 | `--fixed-step` | The game advances exactly 1000/60 ms per frame, whatever the real frame time. |
 | `--seed=<n>` | Deterministic run (implies `--fixed-step`): every random generator (`J`, every `JRandom`, Godot's global one) is seeded from `n`; `J.currentTimeMillis()`, `Scheduler` and `GameAction` read a game clock advanced by the elapsed game time instead of the wall clock; saves are read from the shipped files and written to `user://saves_deterministic/` (emptied at start), never to the player's `user://saves/`; no game pad is read (`GameCore.init2`: an idle pad releases AutoPlay's buttons every 40 ms). Two runs of an AutoPlay script then produce the same frames. |
 | `--uncapped` | No 60 FPS cap and no vsync. With `--seed` the result is the same, only faster. |
-| `--legacy=<a,b,…>` | Keep the legacy path of the listed subsystems (`Main.is_legacy`). `all` keeps every one. `villages`: converted places are read from their `.vil` files and drawn by the legacy code (section 9). `village_top_layer`: the scene draws a roof or treetop only where a sprite overlaps it, as the legacy code does (for parity; by default it always draws them). `dungeons`: converted floors are read from their `.map` files and drawn by the legacy code (section 10). `dungeon_drawing` (dev): floors are built from their scenes (step A) and drawn by the legacy code, for checking step A on its own. |
+| `--legacy=<a,b,…>` | Keep the legacy path of the listed subsystems (`Main.is_legacy`). `all` keeps every one. `villages`: converted places are read from their `.vil` files and drawn by the legacy code (section 9). `village_top_layer`: the scene draws a roof or treetop only where a sprite overlaps it, as the legacy code does (for parity; by default it always draws them). `dungeons`: converted floors are read from their `.map` files and drawn by the legacy code (section 10). `dungeon_drawing` (dev): floors are built from their scenes (step A) and drawn by the legacy code, for checking step A on its own. `particles`: the village and cutscene particle systems run the legacy simulation and `LegacyParticles2D` draws its quads (section 9; `villages` implies it). |
+| `--hide-particles` | Dev only: the village and cutscene particle systems draw nothing, in both paths (`Main.hide_particles`; they still run), for parity runs that compare everything else. |
 | `--no-encounters` | Dev only: labyrinths start no random battles (`Labyrinth.noEncounters`, which nothing else sets; the steps are still counted), for parity tours of dungeon floors. |
 | `--start-node=<address>:<direction>` | Dev only: a labyrinth `--start` place starts at this node and facing (0-3), as a game saved there does (`Load.labyrinthPosition`, COTZ-005), not at its door: parity cases start in front of the object they use. |
 | `--bridge-test` | Dev only: the world map shows `tools/bridge_test/BridgeTest.tscn` instead of its background tiles (section 8). |
@@ -276,7 +282,10 @@ Game options go after `--` on the command line (see the header of
 Engine option: the parity tool also passes `--fixed-fps 60` (before `--`),
 which gives every node `_process` a fixed `delta` of 1/60 s and steps
 SceneTree timers, Tweens and particles by it. Scene-based code (section 3,
-"Time") is deterministic through this.
+"Time") is deterministic through this. The GPU particle systems run for the
+game time their legacy system was updated for (`speed_scale` = that time
+over the frame's delta), with a fixed seed drawn from the particles'
+generator: with `--seed` and `--fixed-fps` two runs draw the same particles.
 
 Normal play uses none of these flags and behaves exactly as before.
 
@@ -502,8 +511,58 @@ draws it; the legacy objects stay in charge.
   background, so zoomed frames differ by bilinear rounding (plan 6.7, 6.8).
   After a zoom out the scale stays 1.00007, so the rest of such a cutscene
   differs slightly too; AutoPlay's `[zoom]` lines name these shots.
-* `LegacyParticles2D` draws the quads that the legacy draw would draw, one
-  canvas item per legacy system (its blending), until a GPU preset matches.
+* Particle systems: see "Particles" below.
+
+**Particles (the particles phase, plan 6.10).** Every system of
+`maps/ParticleSystems/particleSystems.info` is a generated scene,
+`scenes/common/particles/systems/<system>.tscn` (how to regenerate and tune
+them: `docs/CONVERTING_PARTICLES.md`; the `.info` file stays the source):
+
+```
+<system> (VillageParticles2D: GPUParticles2D, local coordinates, amount, lifetime,
+│         preprocess, texture, CanvasItemMaterial ADD for additive systems; process
+│         material: the particle class's shader with the system's settings as uniforms)
+├── Background (Sprite2D)       a background= image, drawn behind the particles
+└── <slave> (VillageParticles2D) a master/slave emitter's slave system (Pass to Zazo)
+```
+
+* Shaders (`shader_type particles`), one per particle class:
+  `fire_particle`, `rainbow_particle` (both `distance_fade.gdshaderinc`),
+  `smoke_particle`, `snow_particle`, `star_particle`, with the shapes, the
+  emit force and the random numbers in `particles.gdshaderinc`. Each runs
+  its class's legacy laws, every per-step law as a per-second rate at the
+  legacy 30 steps a second (decision 6), integrated with each frame's
+  delta; `start()` also does the emission's own step. Image shapes emit
+  from baked points (the legacy alpha raster, `<system>_points.png`).
+* The generator, `tools/import/particles_to_scenes.gd`, reads the file
+  through `SystemLoader` and the legacy classes; it estimates each system's
+  lives by stepping single legacy particles and takes the rate both legacy
+  limits allow (the emitter's time step and the pool of `nrParticles`):
+  `amount = rate × lifetime`.
+* Step B. The legacy objects stay in charge: `VillageScene.load_into`, the
+  `.vil` loader and the cutscene timeline build the same
+  `BodiesParticleSystem`s (which systems, layers, start state and
+  activation status, the sort key `getY`, the emitter a cutscene actor
+  moves, the emitter fade of a timeline event). On the GPU path
+  (`BodiesParticleSystem.gpu_path()`: not `--legacy=particles` or
+  `--legacy=villages`) a system builds no bodies and runs no simulation:
+  `update` adds the game time (`gpu_run`: also the emitter's clock,
+  `AbstractEmitter.advance`, and the shared wind's turbulence,
+  `WindCommand.drift`), `warmUp` and the master/slave warm-up add warm-up
+  time (`gpu_warm`), and `place_particles`, where the legacy draw would draw,
+  returns the state (`gpu_view`). `LegacyParticles2D.show_systems` instances
+  the system's scene (by its definition's name, also for cutscene actors'
+  runtime nodes), places it so that its local coordinates are the legacy body
+  coordinates (the village's origin, or the screen's for stars and cutscene
+  actors, whose particles the legacy draws in screen space) and hands it the
+  state (`VillageParticles2D.show_state`): it runs for that game time, starts
+  with the legacy warm-up as `preprocess` (a warm-up shape: to the steady
+  state), follows the emitter's position and time step and the wind, and
+  hides while the legacy system is inactive. The village's GL state
+  (`Village.SceneGLState`) changes as before: an active system's view is
+  not empty.
+* `--legacy=particles` keeps the legacy simulation and `LegacyParticles2D`'s
+  quads; `--hide-particles` hides both paths.
 
 ## 10. Dungeons as scenes (phase 2)
 
