@@ -60,6 +60,12 @@ const _TEXTURE_FILES = [
 	"roundInverted.png", "clock.png", "clockHour.png", "clockMinute.png"]
 
 static var tex = null
+## Port deviation (docs/port_notes/particles-system.md): the random numbers of
+## the card and enemy effects (particles, emitters, equations, colours, and
+## the cards' effect positions), apart from J's shared generator, so that a
+## seeded run's other draws (critical hits, enemy logic) do not depend on how
+## much the effects draw. Main seeds it in deterministic runs.
+static var rand := JRandom.new()
 var particlePool = []
 var particles = null
 var speed: float = 0.0
@@ -96,13 +102,78 @@ var blendMode: int = 0
 ## Reused temporary force vector for the gravity of the particles.
 var _tmpForce = null
 
+## Bridge (the battle effects phase, docs/ARCHITECTURE.md section 11): a
+## system drawn as particles (this class's draw and ShatterParticleSystem's;
+## not the sphere, image, slow and enemy systems) runs on the GPU
+## (EffectParticles3D) unless --legacy=battle_effects: its draw hands the
+## node its state (gpu_state) instead of drawing quads. The legacy system
+## stays in charge: it still moves, emits, is destroyed and decides when the
+## battle goes on (isDestroyed, isReady, isDead), with a pool of at most
+## GPU_WAIT_PARTICLES particles (reduce_for_waits; not with
+## --legacy=effect_waits, which keeps the legacy pool and so the legacy
+## waits, for parity runs). gpu_amount and gpu_emit_step: the legacy pool
+## and time step, which the GPU draws; gpu_seed: the GPU particles' seed,
+## from gpu_rand (the particles' own draws stay those of rand); gpu_age,
+## gpu_stepped, gpu_elapsed: the game time since the system started, the time
+## its updates stepped and the game time since its last draw; gpu_destroys,
+## gpu_plains, gpu_kills: its destroy, plainDestroy and kill calls so far;
+## gpu_preprocess: a warm-up for the GPU (the Flame's pre-run); gpu_shown: its
+## node has its settings.
+const GPU_WAIT_PARTICLES := 64
+static var gpu_rand := JRandom.new(0)
+var gpu := false
+var gpu_amount := 0
+var gpu_emit_step := 0.0
+var gpu_seed := 0
+var gpu_age := 0.0
+var gpu_stepped := 0.0
+var gpu_elapsed := 0.0
+var gpu_destroys := 0
+var gpu_plains := 0
+var gpu_kills := 0
+var gpu_preprocess := 0.0
+var gpu_shown := false
+
 ## Java overloads: ParticleSystem(AnimSettings, BattleEnemy) and
 ## ParticleSystem(AnimSettings).
 func _init(p_settings = null, p_enemy = null) -> void:
 	ParticleSystem.load()
 	setSettings(p_settings)
 	enemy = p_enemy
+	gpu = gpu_path() and not (self is SphereParticleSystem or self is ImageParticleSystem
+			or self is SlowParticleSystem or self is EnemySystem)
+	if gpu:
+		gpu_amount = nrParticles
+		gpu_emit_step = emitTimeStep
+		gpu_seed = gpu_rand.nextInt(J.INT_MAX)
+		reduce_for_waits()
 	create(nrParticles, settings)
+
+
+## Bridge: whether the card and enemy effects run on the GPU (not with
+## --legacy=battle_effects).
+static func gpu_path() -> bool:
+	return not Main.is_legacy("battle_effects")
+
+
+## Bridge: on the GPU path the legacy particles only decide the waits, so a
+## pool of at most GPU_WAIT_PARTICLES does: the same rate per pool slot (a
+## longer time step) and the same share of the pool for isDead's limit.
+## Not with --legacy=effect_waits, nor for the flare (FlareEmitter takes 400
+## of the pool and its destroy counts them), nor for a system that waits for
+## its last particle (an isDeadLimit of 0: the last of a smaller pool dies
+## sooner; Ultima's 250 waited 0.3 s less) up to 4 x GPU_WAIT_PARTICLES.
+func reduce_for_waits() -> void:
+	if Main.is_legacy("effect_waits") or nrParticles <= GPU_WAIT_PARTICLES:
+		return
+	if int(settings.getValue(AnimSettings.EMITTER_TYPE)) == FLARE_EMITTER_TYPE:
+		return
+	if isDeadLimit == 0 and nrParticles <= 4 * GPU_WAIT_PARTICLES:
+		return
+	var k: float = float(GPU_WAIT_PARTICLES) / nrParticles
+	emitTimeStep /= k
+	isDeadLimit = roundi(isDeadLimit * k)
+	nrParticles = GPU_WAIT_PARTICLES
 
 ## Java: forces the static initializer (loads the particle textures).
 static func load():
@@ -182,6 +253,7 @@ func create(nrOfParticles, p_settings):
 ## Java: update(float elapsedTime) (seconds).
 func update(elapsedTime, body = null):
 	super.update(elapsedTime)
+	gpu_stepped += elapsedTime
 	_updateParticles(elapsedTime)
 
 	if checkShouldDestroy(getPosition(), target, particlesDestroyed):
@@ -222,7 +294,7 @@ func _updateParticles(elapsedTime) -> void:
 	for r in range(n):
 		var p = particles[r]
 		if grav != null:
-			_tmpForce.x = grav.x * (J.random() - 0.5)
+			_tmpForce.x = grav.x * (rand.nextDouble() - 0.5)
 			_tmpForce.y = grav.y
 			_tmpForce.z = grav.z
 			p.addForce(_tmpForce)
@@ -241,6 +313,7 @@ func _updateParticles(elapsedTime) -> void:
 		particles.resize(w)
 
 func plainDestroy(particleSystem = null):
+	gpu_plains += 1
 	emitter.destroy(enemy)
 	destroyed = true
 	gravity = destroyFadeGravity
@@ -314,6 +387,7 @@ func isReady():
 
 ## Destroys the system (can result in an explosion depending on the system).
 func destroy(body = null):
+	gpu_destroys += 1
 	if targetPoint != null:
 		gravity = targetPoint
 	else:
@@ -324,6 +398,7 @@ func destroy(body = null):
 
 ## Abruptly kills the system (no explosion, it just disappears).
 func kill():
+	gpu_kills += 1
 	destroyed = true
 	for p in particles:
 		p.kill()
@@ -343,16 +418,196 @@ func draw(g, t = null, pPos = null):
 	if drawable != null:
 		drawable.drawGround(
 				g, destroyed, getPosition(), particles, particlesLeft)
+	if gpu:
+		show_gpu(g)
 
 	var piece: int = particles.size() / textures.size()
 	for i in range(textures.size()):
 		tex[textures[i]].bind(gl)
 		g.beginQuads()
 		for j in range(i * piece, (i + 1) * piece):
-			particles[j].drawParticle(g, additiveColoring)
+			# Main.hide_particles (dev) and the GPU path: no quads, the same GL
+			# state (as far as the GPU path's smaller pool gives it).
+			if Main.hide_particles or gpu:
+				particles[j].place_particle(g)
+			else:
+				particles[j].drawParticle(g, additiveColoring)
 		g.end()
 	if blendMode != BLEND_MODE_NO_BLEND:
 		g.endBlend()
+
+
+## Bridge (the battle effects phase): where draw draws the particles, the
+## GPU system takes their place: its node in the frame's 3D chunk
+## (Graphics.show_node) gets the state; not with --hide-particles.
+func show_gpu(g) -> void:
+	if Main.hide_particles:
+		return
+	var node := g.show_node(get_instance_id(), EffectParticles3D.make) as EffectParticles3D
+	if node != null:
+		node.show_state(gpu_state(g))
+
+
+## Bridge: the state EffectParticles3D.show_state takes (see there), in Godot
+## types; the settings the first time (gpu_settings).
+func gpu_state(g) -> Dictionary:
+	var ahead: float = clampf(gpu_age - gpu_stepped, 0.0, 0.1)
+	var p = getPosition()
+	var v = getVelocity()
+	var grav = getGravity()
+	var textures_2d: Array = []
+	for i in textures:
+		textures_2d.append(tex[i].texture)
+	var state := {"elapsed": gpu_elapsed,
+		"body_position": Vector3(p.x, p.y, p.z) + Vector3(v.x, v.y, v.z) * ahead,
+		"body_velocity": Vector3(v.x, v.y, v.z),
+		"emitting": not emitter.isDestroyed(),
+		"gravity": Vector3(grav.x, grav.y, grav.z) if grav != null else null,
+		"destroy_events": gpu_destroys, "plain_events": gpu_plains, "kill_events": gpu_kills,
+		"flare_pull": emitter is FlareEmitter and emitter.time_ > emitter.limit_,
+		"path_time": emitter.getTimeCounter() if emitter is InterpolatingEmitter else gpu_age,
+		"render": g.render_state_3d(), "textures": textures_2d}
+	gpu_elapsed = 0.0
+	if not gpu_shown:
+		gpu_shown = true
+		state.merge(gpu_settings())
+	return state
+
+
+## Bridge: the GPU system's settings (its first state): "seed", "amount",
+## "preprocess", "settings" (effect_particle.gdshader's uniforms) and, for
+## the image emitters, "points".
+func gpu_settings() -> Dictionary:
+	var s = settings
+	var kinds := {DEFAULT_EMITTER_TYPE: 0, TEST_EMITTER_TYPE: 0, INTERPOLATING_EMITTER_TYPE: 1,
+		LINE_EMITTER_TYPE: 2, FLARE_EMITTER_TYPE: 3, FLAME_EMITTER_TYPE: 4, SHATTER_EMITTER_TYPE: 5,
+		DEMOLISH_EMITTER_TYPE: 6}
+	var c: Array = getColor()
+	var u := {
+		"emitter_kind": kinds.get(int(s.getValue(AnimSettings.EMITTER_TYPE)), 0),
+		"emit_step": gpu_emit_step, "pool_size": float(gpu_amount),
+		"particle_mass": s.getValue(AnimSettings.PARTICLE_MASS),
+		"mass_random": s.getValue(AnimSettings.MASS_RANDOM_MULT),
+		"size": s.getValue(AnimSettings.SIZE), "size_random": s.getValue(AnimSettings.SIZE_RANDOM_MULT),
+		"life_multiplier": s.getValue(AnimSettings.LIFE_MULTIPLIER),
+		"position_noise": _vec(s.getVector(AnimSettings.POSITION_NOISE)),
+		"set_velocity": s.getBoolean(AnimSettings.SET_VELOCITY_ON_PARTICLES),
+		"velocity_random_mult": s.getValue(AnimSettings.VELOCITY_RANDOM_MULT),
+		"velocity_random_add": s.getValue(AnimSettings.VELOCITY_RANDOM_ADD),
+		"fade_random_mult": s.getValue(AnimSettings.FADE_RANDOM_MULT),
+		"fade_random_add": s.getValue(AnimSettings.FADE_RANDOM_ADD),
+		"fade_distance_power": s.getValue(AnimSettings.FADE_INCREASE_DISTANCE_POWER),
+		"fade_distance_mult": s.getValue(AnimSettings.FADE_INCREASE_DISTANCE_MULTIPLIER),
+		"destroy_force": s.getValue(AnimSettings.DESTROY_FORCE_VECTOR_AMPLIFIER),
+		"destroy_fade_mult": s.getValue(AnimSettings.DESTROY_FADE_RANDOM_MULT),
+		"destroy_fade_add": s.getValue(AnimSettings.DESTROY_FADE_RANDOM_ADD),
+		"destroy_stops": destroyMode == ParticleValues.DESTROY_ONCE,
+		"has_target_point": s.getVector(AnimSettings.DESTROY_GRAVITY_TARGET_POINT) != null,
+		"target_point": _vec(s.getVector(AnimSettings.DESTROY_GRAVITY_TARGET_POINT)),
+		"target_point_mult": s.getValue(AnimSettings.DESTROY_GRAVITY_TARGET_POINT_MULT),
+		"kill_on_arrive": s.getBoolean(AnimSettings.DESTROY_GRAVITY_TARGET_POINT_KILL_ON_ARRIVE),
+		"has_collision": s.getVector(AnimSettings.COLLISION_VECTOR) != null,
+		"collision": _vec(s.getVector(AnimSettings.COLLISION_VECTOR)),
+		"color": Vector3(c[0], c[1], c[2]), "random_color": color == ParticleValues.COLOR_RANDOM,
+		"texture_count": textures.size(),
+		"source": _vec(info.source), "source_to_target": _vec(info.sourceToTarget),
+		"total_time": info.totalTime}
+	u.merge(_equation_uniforms(info.vectorEquation))
+	var out := {"seed": gpu_seed, "amount": gpu_amount, "preprocess": gpu_preprocess, "settings": u}
+	if emitter is Flame2Emitter or emitter is ShatterEmitter:
+		out["points"] = _gpu_points()
+	return out
+
+
+## The vector equation's uniforms (effect_particle.gdshader's equation_*).
+static func _equation_uniforms(e) -> Dictionary:
+	var u := {"equation_kind": 0}
+	if e == null:
+		return u
+	var b := Vector4.ZERO
+	var w := 0.0
+	if e is CircularWave:
+		u.equation_kind = 1
+		b.w = 1.0 if e.useStaticZ else 0.0
+		u.equation_z = e.z
+		w = 1.0 if e.clockWise else 0.0
+	elif e is UpDownSideWave:
+		u.equation_kind = 2
+		w = 1.0 if e.horizontal else 0.0
+	elif e is WhirlWind:
+		u.equation_kind = 3
+		b = Vector4(e.source.x, e.source.y, e.source.z, e.totalTime)
+		w = 1.0 if e.clockWise else 0.0
+	elif e is Line:
+		u.equation_kind = 4
+		b = Vector4(e.source.x, e.source.y, e.source.z, e.length)
+		u.equation_a = Vector4.ZERO
+		u.equation_b = b
+		return u
+	elif e is DemolishEquation:
+		u.equation_kind = 5
+		b = Vector4(e.source.x, e.source.y, e.source.z, 0.0)
+		w = 1.0 if e.clockWise else 0.0
+	elif e is CircularShape:
+		u.equation_kind = 6
+		b = Vector4(e.origin.x, e.origin.y, e.origin.z, 0.0)
+		w = 1.0 if e.clockWise else 0.0
+	else:
+		return u
+	u.equation_a = Vector4(e.omega, e.amplifier, e.phi, w)
+	u.equation_b = b
+	return u
+
+
+## The image emitters' points (Flame2Emitter, ShatterEmitter): the image
+## they read, scaled as they scale it, its pixels with alpha >= 0.5 (rows
+## counted from the bottom) placed as they place them, at the source's z; for
+## the shatter also the pixels' colours (alpha = the particle's life), in a
+## random order (a slot takes each pixel once).
+func _gpu_points() -> Dictionary:
+	var name: String = Values.BattleImages + "stroke3.png" if emitter is Flame2Emitter \
+			else enemy.getCurrentImageName()
+	var image: Image = ImageHandler.getImage(name)
+	var width: int = J.round(image.get_width() * 0.25)
+	var height: int = J.round(image.get_height() * 0.25)
+	image = GraphicHelp.scaleImage(image, width, height)
+	var enemy_info = enemy.getInfo()
+	var scale: float = enemy_info.get_(EnemyInfo.SCALE) * 800
+	var lift: float = enemy_info.get_(EnemyInfo.HEIGHT)
+	if emitter is Flame2Emitter:
+		lift += enemy.getTempHeight()
+	var x_offset: float = enemy_info.get_(EnemyInfo.X_OFFSET)
+	var z: float = info.getSource().z
+	var positions := PackedVector3Array()
+	var colors := PackedColorArray()
+	for row in height:
+		for x in width:
+			var c: Color = image.get_pixel(x, row)
+			if c.a8 / 255.0 < 0.5:
+				continue
+			var y: int = height - 1 - row
+			positions.append(Vector3((x - 0.5 * width) / 200.0 * scale + x_offset, y / 200.0 * scale + lift, z))
+			colors.append(Color(c.r8 / 255.0, c.g8 / 255.0, c.b8 / 255.0, c.a8 / 255.0))
+	if emitter is ShatterEmitter:
+		var order := range(positions.size())
+		var shuffle := RandomNumberGenerator.new()
+		shuffle.seed = gpu_seed
+		for i in range(order.size() - 1, 0, -1):
+			var j := shuffle.randi_range(0, i)
+			var t = order[i]
+			order[i] = order[j]
+			order[j] = t
+		var p2 := PackedVector3Array()
+		var c2 := PackedColorArray()
+		for i in order:
+			p2.append(positions[i])
+			c2.append(colors[i])
+		return {"positions": p2, "colors": c2}
+	return {"positions": positions}
+
+
+static func _vec(v) -> Vector3:
+	return Vector3(v.x, v.y, v.z) if v != null else Vector3.ZERO
 
 func start(g):
 	pass
@@ -369,26 +624,26 @@ func bindTexture(g, i):
 
 static func getRandomVector(scalar):
 	return Vector3f.new(
-			J.random() - 0.5,
-			J.random() - 0.5,
-			J.random() - 0.5).multLocal(scalar)
+			rand.nextDouble() - 0.5,
+			rand.nextDouble() - 0.5,
+			rand.nextDouble() - 0.5).multLocal(scalar)
 
 static func getRandomCircleVector(scalar):
-	var theta: float = J.random() * 2 * PI
+	var theta: float = rand.nextDouble() * 2 * PI
 	var v = Vector3f.new(
 			cos(theta),
 			sin(theta),
 			0.0)
-	v.multLocal(scalar * J.random())
+	v.multLocal(scalar * rand.nextDouble())
 	return v
 
 static func getRandomSphereVector(scalar):
-	var theta: float = J.random() * 2 * PI
+	var theta: float = rand.nextDouble() * 2 * PI
 	var v = Vector3f.new(
 			cos(theta),
 			sin(theta),
 			sin(theta))
-	v.multLocal(scalar * J.random())
+	v.multLocal(scalar * rand.nextDouble())
 	return v
 
 static func calcSourceToTarget(p_settings):

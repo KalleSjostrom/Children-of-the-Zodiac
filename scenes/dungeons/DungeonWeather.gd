@@ -1,20 +1,45 @@
 class_name DungeonWeather
 extends Node3D
-## The rain or snow of a dungeon floor (useRain, useSnow), until a GPU
-## particle preset can match it (decision 6, docs/MODERNIZATION_PLAN.md
-## section 13): the legacy simulation (WeatherSystem, 10 000 particles in
-## GDScript) stays in charge, and this node draws the quads its draw would
-## draw, one mesh per pass and frame: the back pass and the front pass (the
-## particles close to the camera, drawn again; over a battle the legacy code
-## draws it). Labyrinth hands it the quads every frame
-## (WeatherSystem.place_particles) with the GL render state they are drawn
-## in. The vertices are in eye space (transformed by the legacy modelview,
-## as GLBackend does), so the mesh needs no transform of its own.
+## The rain or snow of a dungeon floor (useRain, useSnow). The legacy
+## WeatherSystem stays in charge; Labyrinth hands this node its two passes
+## every frame: the back pass and the front pass (the particles close to the
+## camera, drawn again; over a battle or riddle after the battle's batches).
 ##
-## set_quads draws a save point's particles the same way (DungeonSavePoint).
+## On the GPU path (the dungeon particles phase, WeatherSystem.gpu_path) the
+## passes are two instances of the weather's scene (WeatherParticles3D:
+## Rain.tscn, Snow.tscn) with the same seed, which run in step (show_gpu);
+## this node carries the legacy modelview, as Objects does.
+##
+## With --legacy=dungeon_particles the legacy simulation (10 000 particles in
+## GDScript) runs, and this node draws the quads its draw would draw, one
+## mesh per pass and frame (WeatherSystem.place_particles), with the GL
+## render state they are drawn in. The vertices are in eye space
+## (transformed by the legacy modelview, as GLBackend does): the meshes are
+## top level, at the identity.
+##
+## set_quads draws an object's quads the same way (DungeonScene's batches).
+
+const SCENE_DIR := "res://scenes/common/particles/"
 
 var _meshes := {}
+var _gpu := {} # pass name -> WeatherParticles3D
 static var _indices := PackedInt32Array()
+
+
+## The GPU path: shows a pass (&"back", &"front") from the state of
+## WeatherSystem.place_gpu, drawn at sorting_offset. The first call makes the
+## pass's instance of the weather scene and starts it with the legacy seed.
+func show_gpu(pass_name: StringName, state: Dictionary, style: DungeonStyle, sorting_offset: float) -> void:
+	var p: WeatherParticles3D = _gpu.get(pass_name)
+	if p == null:
+		p = load(SCENE_DIR + String(state.scene) + ".tscn").instantiate()
+		p.name = String(pass_name).capitalize()
+		p.set_pass(pass_name)
+		add_child(p)
+		p.start(state.seed)
+		_gpu[pass_name] = p
+	p.sorting_offset = sorting_offset
+	p.show_state(state, style)
 
 
 ## Shows one pass (&"back", &"front"): quads of 4 vertices each, with their

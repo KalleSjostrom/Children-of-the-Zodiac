@@ -26,6 +26,6 @@ func modifyVector(v, elapsedTime):
 func getVectorAfterTime(v, elapsedTime):
 	var theta: float = (omega * time) + phi
 	var val: float = cos(theta) * amplifier
-	v.x = source.x + (val * J.random() * weight.x if weight.x != 0 else 0.0)
-	v.y = source.y + (val * J.random() * weight.y if weight.y != 0 else 0.0)
+	v.x = source.x + (val * ParticleSystem.rand.nextDouble() * weight.x if weight.x != 0 else 0.0)
+	v.y = source.y + (val * ParticleSystem.rand.nextDouble() * weight.y if weight.y != 0 else 0.0)
 	return v

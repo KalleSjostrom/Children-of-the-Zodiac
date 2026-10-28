@@ -35,8 +35,8 @@ func update(system, elapsedTime):
 				var tries: int = 0
 				while a < 0.5 and tries < 50:
 					tries += 1
-					x = int(J.random() * width)
-					y = int(J.random() * height)
+					x = int(ParticleSystem.rand.nextDouble() * width)
+					y = int(ParticleSystem.rand.nextDouble() * height)
 					a = getAlpha(x, y)
 				if tries >= 50:
 					continue

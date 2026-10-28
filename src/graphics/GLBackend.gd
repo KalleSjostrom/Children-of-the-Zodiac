@@ -43,6 +43,9 @@ var scene_3d: Node3D = null
 var _scene_chunk: SceneChunk = null
 var _scene_chunk_used := false
 
+var _chunk_nodes := {} # show_node key -> [node, frame it was shown in]
+var _frame := 0
+
 var _canvas_materials := {} # key -> Material (or null)
 var _shader_cache := {} # render mode key -> Shader
 var _material_cache := {} # material key -> ShaderMaterial
@@ -106,6 +109,12 @@ func free_all() -> void:
 
 
 func begin_frame() -> void:
+	_frame += 1
+	_start_drawing()
+
+
+## The frame's drawing starts (again): no chunks used yet.
+func _start_drawing() -> void:
 	for i in _ci_used:
 		RenderingServer.canvas_item_clear(_ci_pool[i])
 	_ci_used = 0
@@ -136,11 +145,13 @@ func end_frame() -> void:
 		_vp_pool[i].set_active(false)
 	for i in range(_ci_used, _ci_pool.size()):
 		RenderingServer.canvas_item_clear(_ci_pool[i])
+	_free_chunk_nodes()
 
 
-## Discards everything drawn so far this frame (glClear of the color buffer).
+## Discards everything drawn so far this frame (glClear of the color buffer);
+## the nodes of show_node shown so far stay this frame's.
 func clear_frame() -> void:
-	begin_frame()
+	_start_drawing()
 
 
 func _update_viewport_size() -> void:
@@ -290,6 +301,50 @@ func vp_3d() -> Chunk3D:
 	_cur_vp = vp
 	_cur_2d_key = ""
 	return vp
+
+
+## Bridge (the dungeon particles phase): a batch slot in the current 3D chunk
+## for a node of the scene that draws itself there (the weather's front pass
+## over a battle, a GPU particle system): the sorting offset its batch would
+## have, so that it is drawn after the batches before it and before the ones
+## after it. NAN when the current 3D chunk is not the scene's (a SubViewport
+## of its own, whose world the scene's nodes are not in).
+func reserve_scene_slot() -> float:
+	var chunk := vp_3d()
+	if chunk != _scene_chunk:
+		return NAN
+	return chunk.reserve_slot()
+
+
+## Bridge (the battle effects phase): a node of new code that draws itself in
+## the current 3D chunk where the legacy drawing would draw (a card effect's
+## EffectParticles3D): the node of key, made with make the first time, kept
+## from frame to frame (moved along when the drawing lands in another
+## chunk), in a batch slot of the chunk (reserve_slot). A node not shown in
+## a frame is freed at its end.
+func show_node(key: int, make: Callable) -> GeometryInstance3D:
+	var chunk := vp_3d()
+	var entry: Array = _chunk_nodes.get(key, [])
+	var node: GeometryInstance3D = entry[0] if not entry.is_empty() and is_instance_valid(entry[0]) else null
+	if node == null:
+		node = make.call()
+		chunk.parent.add_child(node)
+	elif node.get_parent() != chunk.parent:
+		node.get_parent().remove_child(node)
+		chunk.parent.add_child(node)
+	node.sorting_offset = chunk.reserve_slot()
+	_chunk_nodes[key] = [node, _frame]
+	return node
+
+
+## Frees the nodes of show_node that were not shown this frame.
+func _free_chunk_nodes() -> void:
+	for key: int in _chunk_nodes.keys():
+		var entry: Array = _chunk_nodes[key]
+		if entry[1] != _frame or not is_instance_valid(entry[0]):
+			if is_instance_valid(entry[0]):
+				entry[0].queue_free()
+			_chunk_nodes.erase(key)
 
 
 ## Forces the next 3D primitive to start in a fresh 3D chunk (fresh depth).
@@ -466,6 +521,12 @@ class Chunk3D extends RefCounted:
 	func add_mesh(mesh: Mesh, xform: Transform3D) -> void:
 		batches.append({"mesh": mesh, "xform": xform})
 
+	## A batch that a node outside the chunk draws (GLBackend.reserve_scene_slot):
+	## the sorting offset it gets; the chunk draws nothing for it.
+	func reserve_slot() -> float:
+		batches.append({"slot": true})
+		return base_offset + float(batches.size() - 1) * 1000.0
+
 	func _instance(i: int) -> MeshInstance3D:
 		while instances.size() <= i:
 			var mi := MeshInstance3D.new()
@@ -478,7 +539,11 @@ class Chunk3D extends RefCounted:
 
 	func end_frame() -> void:
 		var i := 0
+		var slot := 0
 		for b in batches:
+			slot += 1
+			if b.has("slot"):
+				continue
 			var mi := _instance(i)
 			if b.has("mesh"):
 				mi.mesh = b.mesh
@@ -500,8 +565,8 @@ class Chunk3D extends RefCounted:
 				mi.mesh = am
 				mi.transform = Transform3D.IDENTITY
 			# Later batches are drawn on top: Godot sorts transparent objects by
-			# depth minus sorting_offset.
-			mi.sorting_offset = base_offset + float(i) * 1000.0
+			# depth minus sorting_offset (a reserved slot counts as a batch).
+			mi.sorting_offset = base_offset + float(slot - 1) * 1000.0
 			mi.visible = true
 			i += 1
 		for j in range(i, instances.size()):

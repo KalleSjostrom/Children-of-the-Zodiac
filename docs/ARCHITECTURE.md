@@ -30,7 +30,12 @@ scenes/
                           DifficultyLevel, SaveSlots (docs/DIFFICULTY.md)
   common/particles/       LegacyParticles2D (a system's slot in a village), VillageParticles2D
                           (a GPU system), the particle shaders (<class>_particle.gdshader,
-                          particles.gdshaderinc, distance_fade.gdshaderinc)
+                          particles.gdshaderinc, distance_fade.gdshaderinc, random.gdshaderinc);
+                          the dungeon's GPU particles (section 10): QuadParticles3D (base),
+                          WeatherParticles3D with Rain.tscn and Snow.tscn, SaveParticles3D.tscn,
+                          weather_particle, save_particle and quad_particle_3d.gdshader; the
+                          battle effects (section 11): EffectParticles3D, effect_particle.gdshader,
+                          effect_draw.gdshaderinc
   common/particles/systems/  one generated scene per system of particleSystems.info
                           (<system>.tscn, <system>_points.png for an image shape)
   villages/               VillageScene.tscn + .gd (the layout every village inherits),
@@ -234,7 +239,8 @@ not rename legacy members to suit new code.
 `GameMode.create_scene()`, `scene_root`, `shown_scene()`,
 `Main.is_legacy("<subsystem>")`, `Main.bridge_test`, `Main.no_encounters`,
 `MapLoader.dungeon_scene_for`, `Graphics.use_scene_3d`, `Main.hide_particles`,
-`BodiesParticleSystem.gpu_path()`, the snake_case
+`BodiesParticleSystem.gpu_path()`, `WeatherSystem.gpu_path()`, `ParticleSystem.gpu_path()`,
+`Graphics.reserve_scene_slot`, `Graphics.show_node`, the snake_case
 methods of the scenes it owns (`VillageScene.load_into`, `show_*`;
 `DungeonScene.load_into`, `show_floor`, `show_view`, `show_object` …) and the
 difficulty (`Difficulty.scale_experience`, `scale_enemy_damage`,
@@ -245,7 +251,8 @@ along. Bridge methods added to legacy classes so that new code can read
 their state are snake_case too (`Sprite.place_view`,
 `Graphics.alpha_threshold`, `Village.update_draw_state`,
 `Inventory.place_view`, `WeatherSystem.place_particles`,
-`Graphics.render_state_3d`, `BodiesParticleSystem.gpu_view`); refactors of a
+`Graphics.render_state_3d`, `BodiesParticleSystem.gpu_view`, `WeatherSystem.place_gpu`,
+`SaveSystem.place_gpu`, `ParticleSystem.gpu_state`); refactors of a
 legacy method's own code keep Java style (`Village.sortSprites`).
 
 **Flags in legacy code.** A subsystem being converted keeps its old path for
@@ -271,8 +278,9 @@ Game options go after `--` on the command line (see the header of
 | `--fixed-step` | The game advances exactly 1000/60 ms per frame, whatever the real frame time. |
 | `--seed=<n>` | Deterministic run (implies `--fixed-step`): every random generator (`J`, every `JRandom`, Godot's global one) is seeded from `n`; `J.currentTimeMillis()`, `Scheduler` and `GameAction` read a game clock advanced by the elapsed game time instead of the wall clock; saves are read from the shipped files and written to `user://saves_deterministic/` (emptied at start), never to the player's `user://saves/`; no game pad is read (`GameCore.init2`: an idle pad releases AutoPlay's buttons every 40 ms). Two runs of an AutoPlay script then produce the same frames. |
 | `--uncapped` | No 60 FPS cap and no vsync. With `--seed` the result is the same, only faster. |
-| `--legacy=<a,b,…>` | Keep the legacy path of the listed subsystems (`Main.is_legacy`). `all` keeps every one. `villages`: converted places are read from their `.vil` files and drawn by the legacy code (section 9). `village_top_layer`: the scene draws a roof or treetop only where a sprite overlaps it, as the legacy code does (for parity; by default it always draws them). `dungeons`: converted floors are read from their `.map` files and drawn by the legacy code (section 10). `dungeon_drawing` (dev): floors are built from their scenes (step A) and drawn by the legacy code, for checking step A on its own. `particles`: the village and cutscene particle systems run the legacy simulation and `LegacyParticles2D` draws its quads (section 9; `villages` implies it). |
-| `--hide-particles` | Dev only: the village and cutscene particle systems draw nothing, in both paths (`Main.hide_particles`; they still run), for parity runs that compare everything else. |
+| `--legacy=<a,b,…>` | Keep the legacy path of the listed subsystems (`Main.is_legacy`). `all` keeps every one. `villages`: converted places are read from their `.vil` files and drawn by the legacy code (section 9). `village_top_layer`: the scene draws a roof or treetop only where a sprite overlaps it, as the legacy code does (for parity; by default it always draws them). `dungeons`: converted floors are read from their `.map` files and drawn by the legacy code (section 10). `dungeon_drawing` (dev): floors are built from their scenes (step A) and drawn by the legacy code, for checking step A on its own. `particles`: the village and cutscene particle systems run the legacy simulation and `LegacyParticles2D` draws its quads (section 9; `villages` implies it). `dungeon_particles`: the dungeon weather and the save points run the legacy simulation and the floor's scene draws its quads (section 10; `dungeons` and `dungeon_drawing` imply it). `battle_effects`: the card and enemy effects run the legacy simulation and draw its quads (section 11). `effect_waits` (dev): the GPU effects' legacy systems keep their whole pool, so the legacy particle counts decide when a battle goes on, as before (for parity runs with `--hide-particles`; section 11). |
+| `--hide-particles` | Dev only: the particles draw nothing, in both paths (`Main.hide_particles`; they still run): the village and cutscene systems, the dungeon weather and save points, the card and enemy effects drawn as particles (not the sphere, image, slow and enemy-colour systems), with the GL state their drawing leaves; for parity runs that compare everything else. |
+| `--casts=<round>/…` | Dev only: the rounds the console's `cast next` plays on the party's turns (cards `<card>[:<level>][:all]` joined by `+`; `scenes/debug/GameCommands.gd`), for the parity cases of the battle effects (`effects_*`). |
 | `--no-encounters` | Dev only: labyrinths start no random battles (`Labyrinth.noEncounters`, which nothing else sets; the steps are still counted), for parity tours of dungeon floors. |
 | `--start-node=<address>:<direction>` | Dev only: a labyrinth `--start` place starts at this node and facing (0-3), as a game saved there does (`Load.labyrinthPosition`, COTZ-005), not at its door: parity cases start in front of the object they use. |
 | `--bridge-test` | Dev only: the world map shows `tools/bridge_test/BridgeTest.tscn` instead of its background tiles (section 8). |
@@ -284,8 +292,12 @@ which gives every node `_process` a fixed `delta` of 1/60 s and steps
 SceneTree timers, Tweens and particles by it. Scene-based code (section 3,
 "Time") is deterministic through this. The GPU particle systems run for the
 game time their legacy system was updated for (`speed_scale` = that time
-over the frame's delta), with a fixed seed drawn from the particles'
-generator: with `--seed` and `--fixed-fps` two runs draw the same particles.
+over the frame's delta; the dungeon weather and save points: the frames
+the legacy system was updated in), with a fixed seed drawn from the
+particles' generators (the effects' from `ParticleSystem.gpu_rand`, which
+Main seeds from a hash of the seed, not from J's seed sequence: a seed drawn
+there shifts every later `JRandom`): with `--seed` and `--fixed-fps` two runs
+draw the same particles.
 
 Normal play uses none of these flags and behaves exactly as before.
 
@@ -581,7 +593,7 @@ inherits `scenes/dungeons/DungeonScene.tscn` (root script
 | `Layout` | `DungeonFloor` (`@tool`): builds the walls, floors and roofs from its `DungeonLayout` and the style's textures with SurfaceTool, in the editor and at run time; one instance, one surface per material in the legacy display list's order; on a floor with a sky also `Sky` (top level, in the camera's space: renderSky's gradient, drawn first) |
 | `Environment` | `WorldEnvironment`: the clear colour background, linear tonemapping, as GLBackend's chunks; no Godot fog or light (the dungeon shader does them) |
 | `Objects` | the `inv` lines in file order, one `DungeonObject` scene per line (`scenes/dungeon_objects/Dungeon<Kind>.tscn`): the order the legacy loader created them in (door indices, links, Database reads) |
-| `Weather` | `DungeonWeather`: the rain or snow, interim |
+| `Weather` | `DungeonWeather`: the rain or snow (two `WeatherParticles3D` passes on the GPU path) |
 | `Rig` / `Camera` | `Camera3D`, fov 45, near 1, far 75, keep height (GLBackend's projection); in the editor at the first door (mark 0) |
 
 The root exports `map_name` (the `.map` name the Database names start
@@ -665,11 +677,10 @@ floor's first frame (`ensure_scene`), before Main adds it to `World`. Where
   state changes; `HinderDoor` reads its status there, a save point moves its
   particles there), handed to the scene in the legacy draw order. No
   `Graph.drawInventory`.
-* the weather: `WeatherSystem.place_particles` (draw without the drawing:
-  the same GL state changes, the front list, the particles' cached view
-  values) for the back pass and, unless a battle or riddle runs, the front
-  pass; over a battle the legacy front pass draws (into the scene, after the
-  battle, as before).
+* the weather: `WeatherSystem.place_particles` for the back pass and the
+  front pass (on the GPU path its state, `place_gpu`; see "Dungeon particles"
+  below); over a battle or riddle the front pass takes its place among the
+  3D bridge's batches (`Labyrinth.show_weather_over`).
 
 Decisions that make the scene draw the legacy pixels to the bit (legacy
 vs. scene: identical at tolerance 0 on every pilot case, and on 2,962 of
@@ -706,8 +717,9 @@ plan 7.8):
   wall pixels by 1/255 (the Tunnel with the "Start" save; the mechanism in
   the renderer was not found). So at run time the Views only mirror their
   frame and stay hidden.
-* The weather and the save point's particles are eye-space meshes drawn at
-  the origin, one per pass (and per save point) and frame.
+* With `--legacy=dungeon_particles` the weather and the save point's
+  particles are the legacy simulation's eye-space quads, drawn at the
+  origin, one mesh per pass (and per save point) and frame.
 
 The look follows OpenGL 2, in both paths (fixed in the phase 2 rollout,
 plan 7.5 and 7.8; until then GLBackend multiplied lit vertices by the
@@ -761,5 +773,127 @@ game mode); what a boss leads to after the win (another boss's
 
 **Still legacy** in Labyrinth's frame: the minimap (`MapRenderer`, 3D, in
 the scene's chunk), the mission display, dialogs and card info, the top
-layer (tutorials), the fade; battles and riddles (`labDrawable`); the
-weather and save point simulations (GDScript).
+layer (tutorials), the fade; battles and riddles (`labDrawable`; their card
+and enemy effects are GPU particles, section 11).
+
+**Dungeon particles (the dungeon particles phase, plan 6.11).** The rain or
+snow and the save points' particles run on the GPU: `QuadParticles3D`
+(`scenes/common/particles/`, a GPUParticles3D) with a process shader that
+runs the legacy laws (`weather_particle.gdshader`: `WeatherParticle`;
+`save_particle.gdshader`: `SaveParticle`) and a draw pass
+(`quad_particle_3d.gdshader`) that draws each particle as the legacy quad:
+axis-aligned, in the x-y or z-y plane by the player's facing, its corner
+where the legacy draw puts it, additive, depth tested and written, alpha
+tested and in the floor's fog as the legacy GL state has it. The legacy
+particles step once per frame and never had the 30 Hz correction, so every
+per-step law is a per-second rate at 60 steps a second (decision 6: the look
+of today's 60 FPS at any frame rate). The particles never die and are
+emitted once; a particle restarts as its legacy particle does (the
+weather's at the top of its column, a save point's at y -2 with a new
+colour), so the node's lifetime is longer than any run.
+
+```
+Weather (DungeonWeather, the floor's modelview as its transform)
+├── Back (WeatherParticles3D: an instance of Rain.tscn or Snow.tscn)   7.5 to 20 units ahead
+└── Front (WeatherParticles3D, the same seed: the same particles)      3 to 7 units ahead
+Objects/<save point> (DungeonSavePoint)
+└── Particles (SaveParticles3D.tscn, at minus the node's position: floor units)
+```
+
+* Step B. The legacy objects stay in charge: `WeatherSystem` (made by the
+  floor's renderer: rain or snow) and `SaveSystem` (one per `InventorySave`)
+  are built, updated and asked for their drawing as before, but on the GPU
+  path (`WeatherSystem.gpu_path()`: not `--legacy=dungeon_particles`,
+  `dungeons` or `dungeon_drawing`) they build no particles (10,000 weather
+  particles; 2,000 per save point with a 400-step warm-up each). `update`
+  counts the legacy updates; `place_particles` makes the same GL state
+  changes and returns the state (`place_gpu`): the seed, whether the system
+  was updated since the last frame (the particles run for the frame's time,
+  else they stand still), the player's location and integer facing, the GL
+  render state. `Labyrinth.show_weather` hands the passes to the scene
+  (`DungeonScene.show_weather` → `DungeonWeather.show_gpu`); the save
+  point's `place_view` hands its particles to `DungeonSavePoint` (a slot
+  among the objects' batches, where the legacy quads were).
+* The two passes run in step (both take the back pass's "running"), so a
+  particle crossing from one band to the other stays the same particle. The
+  view test (the band ahead and the 30.7° cone) runs in the process shader:
+  a particle the pass does not draw has a collapsed transform. The legacy
+  view test used values cached while the player stood still (they lagged by
+  the flakes' drift, at most 0.06 units a second); the GPU test is fresh.
+* Over a battle or riddle the front pass draws where the legacy front pass
+  drew, after the battle's batches and before the minimap: a batch slot of
+  the 3D bridge's chunk (`Graphics.reserve_scene_slot`,
+  `Chunk3D.reserve_slot`: the sorting offset the batch would have).
+* `--hide-particles` hides the nodes (a hidden node is not processed; a
+  visible node that draws nothing would still change Godot's transparent
+  sort, 1/255 on weather floors).
+* `--legacy=dungeon_particles` keeps the legacy simulation and its quads,
+  drawn through `DungeonWeather.show_pass` and the objects' batches.
+
+## 11. Battle effects on the GPU (the battle effects phase)
+
+The card and enemy effects that the legacy code draws as particles
+(`src/particleSystem`: `ParticleSystem.draw` and
+`ShatterParticleSystem.draw`, with every emitter and vector equation) run on
+the GPU: one `EffectParticles3D` (`scenes/common/particles/`, a
+GPUParticles3D made in code) per legacy `ParticleSystem`. The sphere systems
+(Demolish's lit spheres), the image and slow systems (Death, Slow: sprites)
+and the enemy colour system (Elements) are not particles and stay legacy.
+
+* The process shader (`effect_particle.gdshader`) runs the legacy laws:
+  `Particle.update` (gravity with its per-step x jitter, a target point's
+  spring, killed on arrival or sent back, the collision bounces, the fade
+  growing with the distance to the body), `PointBody`, the emitters (at the
+  body with noise; along the interpolating emitter's path with its vector
+  equation; the Line equation; the flare's disc and reserve; the flame's and
+  the shatter's image points; the demolish path) and the destroy events
+  (`destroy`'s one-step kick and new fade and `DESTROY_ONCE`'s stop,
+  `plainDestroy`'s new fade, `kill`). The legacy effects step 30 times a
+  second (`Values.originalFrameStep`); every per-step law is a per-second
+  rate at 30 steps a second, applied with each frame's delta (decision 6).
+  The legacy pool (a slot is emitted once per time step while the pool has
+  one, and again when it dies) becomes a schedule per slot: first at index
+  × time step, then at the later of its death and its last emission + pool
+  × time step. The draw pass (`effect_draw.gdshaderinc`) draws each
+  particle as `drawCenteredCurrent2D` does (a quad of twice its size in the
+  x-y plane of eye space, its texture one of the system's), in the legacy
+  render state (blending, depth, the alpha test, GLBackend's fog uniforms),
+  without face culling (the GL state culls back faces, which the legacy
+  quads never are, but would cull the QuadMesh).
+* Step B. The legacy `ParticleSystem` stays in charge: the cards build the
+  same packets, the packets step their systems as before, and a system still
+  moves, emits, is destroyed and triggers its shakes and slices. On the GPU
+  path (`ParticleSystem.gpu_path()`: not `--legacy=battle_effects`) its pool
+  is at most `GPU_WAIT_PARTICLES` (64) particles (`reduce_for_waits`: the
+  same rate per slot and the same share of the pool for isDead's limit; not
+  for the flare, whose emitter takes 400 of the pool, nor for a system that
+  waits for its last particle and has at most 256): its particle counts
+  decide `isDestroyed` (the flare's), `isReady` and `isDead`, so the battle
+  waits within about 0.1 s of the legacy waits (measured on the `effects_*`
+  cases, plan 6.11). Where its draw drew the quads it makes the same GL
+  state changes (`Particle.place_particle`), asks GLBackend for its node in
+  the frame's 3D chunk (`Graphics.show_node`: kept from frame to frame, in a
+  batch slot among the legacy batches, freed at the end of a frame it was
+  not shown in) and hands it its state (`ParticleSystem.gpu_state`): the
+  settings at the first frame (the seed, the pool, the process shader's
+  uniforms, the image points), then every frame the game time it ran (every
+  frame, not in the 30 Hz steps), its body's position and velocity, its
+  gravity, whether its emitter emits, an interpolating emitter's path time
+  (its time counter, which lags while the pool is empty), its destroy,
+  plain destroy and kill counts, the GL render state and textures. The node
+  is in eye space: the battle draws with the identity modelview, and the
+  chunk's camera is at the origin (a labyrinth battle's effects land in a
+  SubViewport chunk, after the battle's 2D).
+* The Flame's pre-run (200 steps of 3,000 particles when Menthu's frames
+  preload it, 11 s in normal runs) is skipped; the GPU system warms up
+  instead (`preprocess`).
+* Seeds: `ParticleSystem.gpu_rand`, seeded from a hash of `--seed`; the
+  legacy particles' own draws stay `ParticleSystem.rand`'s, so
+  `--legacy=effect_waits` draws what the legacy drew.
+* `--legacy=battle_effects` keeps the legacy simulation and quads;
+  `--legacy=effect_waits` keeps the legacy pool on the GPU path (the legacy
+  waits: with `--hide-particles` a battle is identical to the legacy one);
+  `--hide-particles` shows no node.
+* Coverage: the console's `cast` plays chosen cards on a party member's turn
+  (`cast next`: the rounds of `--casts=`); parity cases `effects_*` (scripts
+  `effects_boss`, `effects_area`, `effects_enemy`).

@@ -55,7 +55,7 @@ static func getStaticAnimation(info):
 	var source
 	if info.isOnEnemy():
 		target = Vector3f.new(0.0, 0.0, -6.0)
-		source = Vector3f.new((J.random() - 0.5) * 2, -0.5, 0.0)
+		source = Vector3f.new((ParticleSystem.rand.nextDouble() - 0.5) * 2, -0.5, 0.0)
 	else:
 		source = info.getEnemy().getTempSource()
 		source = Vector3f.new(0.0, 0.0, -7.0) if source == null else source
@@ -76,7 +76,7 @@ static func getStaticAnimation(info):
 	var info1 = ParticleSystem.calcInterpolationInfo(settings)
 
 	settings.setValue(AnimSettings.COLOR, ParticleValues.COLOR_BLACK)
-	var amlifier: float = maxf(J.random() + 0.3, 1.0)
+	var amlifier: float = maxf(ParticleSystem.rand.nextDouble() + 0.3, 1.0)
 	var wave1 = UpDownSideWave.new(1.0, amlifier, 0.0, info1, false)
 	settings.setVectorEquation(AnimSettings.POSITION_VECTOR_EQUATION, wave1)
 	psp.add(ParticleSystem.new(settings), 0)

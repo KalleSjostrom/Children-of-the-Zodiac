@@ -47,6 +47,12 @@ func draw(g):
 ## but move per second, so the port steps the systems as the original's real
 ## frame rate did (Values.originalFrameStep).
 func update(elaspsedTime):
+	# Bridge (the battle effects phase): the GPU systems run for the game time
+	# of every frame (ParticleSystem.gpu_elapsed), not in the legacy steps.
+	for ps in systems:
+		if ps.gpu and delays[ps] <= 0:
+			ps.gpu_elapsed += elaspsedTime
+			ps.gpu_age += elaspsedTime
 	stepTime += elaspsedTime * 1000
 	var dt: float = Values.originalFrameStep(stepTime)
 	if dt == 0:

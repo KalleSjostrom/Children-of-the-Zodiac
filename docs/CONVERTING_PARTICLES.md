@@ -2,8 +2,9 @@
 
 The village and cutscene particle systems run on the GPU (the particles
 phase of `docs/MODERNIZATION_PLAN.md`, section 6.4; the conventions are in
-`docs/ARCHITECTURE.md` section 9). Each system of
-`maps/ParticleSystems/particleSystems.info` is a generated scene,
+`docs/ARCHITECTURE.md` section 9), as do the dungeon weather, the save
+points (section 4 below) and the card and enemy effects (section 5). Each
+system of `maps/ParticleSystems/particleSystems.info` is a generated scene,
 `scenes/common/particles/systems/<system>.tscn`. The `.info` file stays the
 source (decision 5 is open): edit it, then regenerate. Run everything from
 bash in the project root, Godot with `< /dev/null`.
@@ -91,4 +92,65 @@ changes every system of the class.
   shows the legacy and the GPU look side by side (they differ by design);
   `--hide-particles` hides the systems in both paths for comparing
   everything else (docs/ARCHITECTURE.md section 7).
+* Frame rate: normal runs (not `--seed`), AutoPlay's `fps=`.
+
+## 4. The dungeon weather and the save points
+
+The rain, the snow and the save points' particles run on the GPU too (the
+dungeon particles phase; `docs/ARCHITECTURE.md` section 10). They have no
+data file: their laws are the legacy classes' (`src/weather`,
+`SaveParticle`), in `weather_particle.gdshader` and `save_particle.gdshader`
+as per-second rates at 60 steps a second, and their values are in three
+scenes of `scenes/common/particles/`:
+
+| Scene | What |
+|---|---|
+| `Rain.tscn`, `Snow.tscn` | `WeatherParticles3D`: 10,000 particles, the texture, the quad's size, the force per legacy step (`force_y`: rain -0.2, snow -0.003) and the height below which a particle starts again (`respawn_below`) |
+| `SaveParticles3D.tscn` | 2,000 particles, the texture, the quad (0.15, its corner a whole quad from the particle: the legacy `size / 2`) |
+
+Each exports `intensity` (the drawn alpha) and `size_scale` (the drawn
+size); `amount` sets the number of particles (the save point's warm-up
+stays the legacy 400 steps). They start at 1: the look of today's 60 FPS.
+Open the scene, change, save; every floor uses it. A weather floor draws
+two instances of its weather scene (the back and the front pass, the same
+seed); a save point draws its scene as its `Particles` child.
+
+Which floors have rain or snow is the floor's style (`DungeonStyle`, the
+`.map` file's weather flags; `docs/CONVERTING_DUNGEONS.md`).
+
+## 5. The card and enemy effects
+
+The effects that the legacy code draws as particles run on the GPU (the
+battle effects phase; `docs/ARCHITECTURE.md` section 11). They have no data
+file and no scene per effect: the cards build their systems in code
+(`getStaticAnimation`, `AnimSettings`), and every system's settings go to
+`effect_particle.gdshader` as uniforms when it is first drawn
+(`ParticleSystem.gpu_settings`). So a changed or new card effect needs
+nothing else: if it uses the existing emitters, equations and settings, its
+GPU system runs its laws. A new emitter type, vector equation or particle
+law (a new `Particle` subclass, a new `AnimSettings` value that changes
+motion or life) needs the same law in `effect_particle.gdshader` (its
+emitter kind, equation kind or uniform) and in
+`ParticleSystem.gpu_settings`. A system whose class overrides `draw` with
+something that is not particles stays legacy (the sphere, image, slow and
+enemy colour systems: list it in `ParticleSystem._init`'s test).
+
+The legacy system still decides when the battle goes on, with a pool of at
+most 64 particles (`ParticleSystem.reduce_for_waits`). Check a changed
+effect's waits against the legacy ones with `--legacy=effect_waits` (the
+whole pool) or `--legacy=battle_effects` (the legacy effect).
+
+Checking:
+
+* The console's `cast <card>[:<level>][:all]` plays cards on a party
+  member's turn (README); `cast next` plays the rounds of the game argument
+  `--casts=` (parity cases `effects_*`, scripts `effects_boss`,
+  `effects_area`; an enemy's effects: `effects_enemy`). The enemies' Flame,
+  SerphiaDeath and BlackDeath cannot be cast by the party (they read the
+  attacking enemy).
+* `tools/parity/parity.sh ab "--legacy=battle_effects" "" 'effects_*'` shows
+  the legacy and the GPU effects side by side (they differ by design: other
+  random numbers, smooth emission, waits within about 0.1 s).
+* `--hide-particles --legacy=effect_waits` makes a battle identical to the
+  legacy one with `--hide-particles` (everything but the effects' pixels).
 * Frame rate: normal runs (not `--seed`), AutoPlay's `fps=`.

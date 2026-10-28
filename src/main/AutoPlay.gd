@@ -180,11 +180,16 @@ func update(elapsed: float) -> void:
 
 ## Words "loopuntil" also tests that the state lines do not print (so the
 ## logs of older runs stay comparable): " dialog" while a labyrinth shows a
-## dialog (its objects talk until CROSS has paged through it).
+## dialog (its objects talk until CROSS has paged through it); the battle's
+## " battlemode=<n>" in a battle area of its own (BossBattleArea), as the
+## state lines show it for a labyrinth's battle.
 func _hidden_state() -> String:
 	var o := Organizer.getOrganizer()
 	if o != null and o.currentGameMode is Labyrinth and o.currentGameMode.dialog != null:
 		return " dialog"
+	if o != null and o.currentGameMode is BossBattleArea and o.currentGameMode.bm != null \
+			and o.currentGameMode.bm.battle != null:
+		return " battlemode=%d" % o.currentGameMode.bm.battle.mode
 	return ""
 
 

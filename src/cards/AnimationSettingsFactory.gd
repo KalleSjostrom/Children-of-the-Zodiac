@@ -19,7 +19,7 @@ static func getDefault():
 	settings.setValue(AnimSettings.SPEED, 3.0)
 	settings.setValue(AnimSettings.NR_PARTICLES, 400.0)
 	settings.setValue(AnimSettings.COLOR, Card.FIRE_ELEMENT)
-	settings.setVector(AnimSettings.SOURCE, Vector3f.new((J.random() - 0.5) * 2, -1.0, 0.0))
+	settings.setVector(AnimSettings.SOURCE, Vector3f.new((ParticleSystem.rand.nextDouble() - 0.5) * 2, -1.0, 0.0))
 	settings.setVector(AnimSettings.TARGET, Vector3f.new(0.0, -0.5, -6.0))
 	settings.setValue(AnimSettings.DESTROY_FORCE_VECTOR_AMPLIFIER, 3.0)
 	settings.setValue(AnimSettings.DESTROY_FADE_RANDOM_MULT, 0.02)

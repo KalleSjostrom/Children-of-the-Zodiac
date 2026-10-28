@@ -887,7 +887,7 @@ docs/CONVERTING_PARTICLES.md.
   ~200 s warm-up takes 2 steps a second (its law is linear), without which
   Dellna's load was 0.89 s.
 
-### 6.11 The next particles (prepared, not done)
+### 6.11 The next particles (prepared; done in 6.12)
 
 Decision 6 for these: the dungeon weather and the save points keep today's
 look at 60 FPS, updated with the frame's delta (they step once per frame
@@ -1027,6 +1027,134 @@ info, and the only such line in `main.bank` is commented out: dead code.
   duplicated particle loop (halves it). Give it its own random generator
   first: removing its draws shifts the battle's later seeded rolls
   (critical hits, `EnemyLogic`), so Menthu's goldens would change.
+
+### 6.12 The dungeon particles and battle effects phase (P2): done
+
+Done on 6.11's preparation, for "the rest of the particles (battle/dungeon)":
+the dungeon weather and the save points (P2), and the card and enemy
+effects of 9.4 that are particles. Decision 6 as 6.11 states it.
+Conventions: docs/ARCHITECTURE.md section 10 ("Dungeon particles") and
+section 11; tuning and checking: docs/CONVERTING_PARTICLES.md sections 4
+and 5.
+
+* **Own random numbers first.** The rain's initial heights drew from J
+  (`RainParticle`, 10,000 draws per rain floor build) and the effects from
+  J's shared generator (every draw in `src/particleSystem` and the cards'
+  effect positions); they now draw from `WeatherParticle.rand` and the new
+  `ParticleSystem.rand` (port notes inventory-weather, particles-system).
+  `--hide-particles` also hides the weather, the save points and the
+  effects drawn as particles, with the GL state their drawing leaves. Then
+  the goldens: all 347 cases and `bridge_test` hidden (`p2golden`) and the
+  235 dungeon and battle cases shown (`p2shown`). Village runs did not move
+  (the old and new goldens of the village cases are identical).
+* **Coverage.** The console's `cast` (cards played on a party member's turn;
+  `cast next` plays the rounds of `--casts=`) and 13 cases `effects_*`:
+  every card effect (level 3, some at 1 and on all, a combo of three) on
+  Memory Taur (20,324 hp; Salmonman's 1,081 do not outlast some cards),
+  whose battle runs in the labyrinth's frame, and in Serphia's battle area;
+  Menthu's burning man (`effects_menthu_flame`). Two save point cases
+  (`particles_save_*`: in the rain on Forest Path, without weather in
+  Grivera). All recorded twice, hidden and shown: identical. Not castable by
+  the party: the enemies' Flame (speed 0, never destroyed), SerphiaDeath and
+  BlackDeath (they read the attacking enemy); neutral cards fail in
+  `ResultScreen.calcResult` (index 3 of 3 types, as in Java).
+* **Facts found** (where they add to 6.11):
+  * Weather: `isMoving` includes turning, so the cached view values go stale
+    only while the player stands still, by the flakes' drift (at most 0.06
+    units a second): the GPU view test is always fresh. Both passes draw
+    with the depth test and depth writes on (additive), GL back faces culled
+    (the quads always face the camera), fog on; snow's alpha test is
+    GREATER 0, rain's the one left from before (mostly GREATER 0.1).
+  * Save points: drawn without fog; the quad is not centred (its corner at
+    the particle minus 0.15, the legacy `size / 2`); a save point's particles
+    move only in the frames it is drawn.
+  * Effects: the waits, measured per system from its destroy to isDead
+    (legacy): 0.17 s for the sword cards, 1.0-1.5 s for most magic, 1.6 s
+    for Ultima (its limit is 0: the last particle), 2.3 s for Chameleon
+    Strike's second system; a packet asks its systems in order, so its
+    first system's time counts. An interpolating emitter's time counter
+    advances by a share of the elapsed time per particle emitted, so its
+    emission point lags behind the body while the pool is empty (Tornado's
+    narrow cone). A labyrinth battle's effects are drawn into a SubViewport
+    chunk (2D comes before them), not into the floor scene's. The battle's
+    GL state culls back faces (the legacy quads never are). Drain's second
+    system has masses from 0 to 0.3 (a near-zero mass throws a particle
+    out). FlareEmitter's 400 particles fade in (a negative fade) and its
+    other 1,100 wait at the source until the destroy throws them out.
+* **Built.** P2: `QuadParticles3D`, `WeatherParticles3D` (`Rain.tscn`,
+  `Snow.tscn`), `SaveParticles3D` (`.tscn`), `weather_particle`,
+  `save_particle` and `quad_particle_3d.gdshader`, `random.gdshaderinc`
+  (shared with the village shaders); the GPU paths of `WeatherSystem` and
+  `SaveSystem` (`gpu_path`, `place_gpu`), `Labyrinth.show_weather_over`, the
+  3D bridge's batch slots (`Graphics.reserve_scene_slot`). Effects:
+  `EffectParticles3D`, `effect_particle.gdshader`,
+  `effect_draw.gdshaderinc`; the GPU path of `ParticleSystem` (the smaller
+  pool for the waits, `gpu_state`), the packets' game time, the Flame
+  without its pre-run, GLBackend's nodes in a chunk (`Graphics.show_node`).
+  Not a Godot sub-emitter or collision: every law is in the process shader.
+* **Parity** (all from one snapshot of the final code):
+  * Golden vs. after, both with `--hide-particles`: 6,806 of the 6,858 shots
+    of all 362 cases (361 and `bridge_test`) identical, all logs but two
+    identical. The 52 other shots are in battles: the effects cases and one
+    shot of `dungeon_tunnel_battle`, where the waits of the smaller pool end
+    an animation a little sooner or later (an enemy's tint fading out, a
+    damage number floating, a party member's turn); the two logs show an
+    animation ending 200 ms later (one poll of the script). With
+    `--legacy=effect_waits` (the legacy pool decides the waits) all 25
+    battle cases are identical to the golden (1,134 shots, logs too): the
+    GPU effects change nothing in a battle but the waits.
+  * Before the weather passes were hidden by their visibility, a pass that
+    drew nothing (every particle collapsed) still changed Godot's
+    transparent sort: 23 shots of weather floors by 1/255 (section 12,
+    order-dependent blending).
+  * The legacy paths (`--legacy=dungeon_particles,battle_effects`) vs. the
+    unconverted drawing with the particles shown: all 250 dungeon and battle
+    cases identical (4,269 shots, logs too).
+  * The GPU path recorded twice (those 250 cases and the 34 village particle
+    cases): identical (4,957 shots, logs too). The GPU seeds of the effects
+    come from `ParticleSystem.gpu_rand`, seeded from a hash of `--seed`: a
+    first version drew it from J's seed sequence, which shifted every later
+    `JRandom` (the steps to a random battle) against the goldens.
+  * The village particle cases on the GPU vs. the particles phase's own GPU
+    recording: identical but Dellna's snow (that recording predates the
+    snow's coarse warm-up) and the shots that show this phase's rain or a
+    battle.
+  * `verify_dungeons.gd`: 160 of 160 builds; `verify_villages.gd --all`:
+    111 of 117, the "Zazo at Night - 0" loot as before and "Dellna - 1" and
+    "Dellna - 2", whose scenes the last commit re-saved with snow systems
+    their `.vil` files do not build (not this phase).
+* **Look** (legacy vs. GPU; contact sheets per floor, save point and card in
+  `tools/parity/out/p2_sheets/`, legacy left): the shapes, colours, sizes,
+  positions, layers and motion match, for every card, Menthu's burning man,
+  the rain, the snow and the save points. Besides other random draws:
+  * All: the particles move every frame (smooth emission and motion, no 30
+    or 60 Hz steps); additive systems at the legacy intensity (1; tunable in
+    the weather and save point scenes).
+  * The weather's view test is fresh while the player stands still (the
+    legacy one lagged by the flakes' drift).
+  * Effects: the waits of the smaller pool (within about 0.1 s) shift when
+    the next card, the enemy's turn and the result screen come; Tornado's
+    emission point follows the smaller pool's estimate of the legacy time
+    counter, so its cone is caught at a slightly different height; with a
+    party turn order that shifts, Drain's and Cure's targets and the sword
+    cards' random slashes differ between runs.
+  * The first effect of a battle compiles its shaders (one frame of about
+    0.1 s; Fire 3's minimum below).
+* **Frame rate and load time** (normal runs: no `--seed`, windowed, one at
+  a time; the median of AutoPlay's `fps=`; times by temporary prints,
+  removed):
+
+  | Run | Legacy | GPU |
+  |---|---|---|
+  | Forest of Reil--Forest Path (rain), capped / uncapped FPS | 35 / 36 | 60 / 926 |
+  | Ice Cavern--Frozen Field (snow), capped / uncapped FPS | 50 / 50 | 60 / 880 |
+  | Building the weather at floor load | 165 ms (rain), 150 ms (snow) | 0.6 ms |
+  | A save point at the floor's first frame (2,000 particles x 400 steps) | 379-389 ms | 0 ms |
+  | The floor's first frame with a save point (Forest Path, Grivera) | 449 ms, 440 ms | 47 ms, 64 ms |
+  | Wind 3 (about 10,700 particles), lowest FPS of its round, capped / uncapped | 7 / 6 | 59 / 166 |
+  | Tornado 3, lowest FPS, capped / uncapped | 25 / 25 | 60 / 265 |
+  | Fire 3, Ice 3, Earth 3, Blizzard 3, Colliding 3, Ultima 3, lowest capped FPS | 58-60 | 52-60 |
+  | Menthu's Flame (`Flame.getStaticAnimation`), the game stands still | 10,450 ms | 1.6 ms |
 
 ## 7. Phase 2: dungeons as scenes
 
@@ -1690,6 +1818,12 @@ Keep the logic classes (`Battle`'s state machine, `EnemyLogic`,
   * It exposes signals `impact` (= `isDestroyed`), `ready_for_next`
     (= `isReady`) and `finished` (= `isDead`), which replace the polled
     flags. About 40 effects need hand work.
+  *Done for the particles (6.12):* the effects drawn as particles are
+  GPUParticles3D (`EffectParticles3D`) while the legacy packets keep the
+  logic and, with a 64-particle pool, the waits (within about 0.1 s); the
+  settings stay in code. The spheres, the image and slow systems and the
+  enemy colour are still to do, and so are the Resource presets, the effect
+  scenes and the signals (step C).
 * **Weather front pass** goes away once the battle shares the depth buffer.
 * **Riskiest code change:** `Vector3f` is a reference type with `*Local`
   mutators, and card code relies on the aliasing (`Fire.gd:66`).
@@ -1741,6 +1875,9 @@ When no mode draws through `g` any more:
   use CPUParticles or an explicit timer that matches the legacy timing.
   *Relaxed (2026-10-27):* the timer may be off by up to about 100 ms; a
   smooth, frame-rate independent effect matters more than exact waits.
+  *Applied (6.12):* not a timer: the legacy system keeps a pool of at most
+  64 particles whose counts decide the waits (within about 0.1 s of the
+  legacy waits, measured), and the GPU draws the whole effect.
 * **Battle in the hybrid period** (7.5): depth, fog and the weather front
   pass behave differently until phase 4. *Pilot:* avoided in the labyrinth
   by the 3D bridge (7.5), which only covers the frame's first 3D chunk drawn
@@ -1828,6 +1965,10 @@ When no mode draws through `g` any more:
    *Applied (particles phase, 6.10):* the village and cutscene systems run
    their laws at 30 steps a second as per-second rates, every frame, for
    the game time the legacy system is updated for.
+   *Applied (6.12):* the dungeon weather and the save points run their laws
+   at 60 steps a second as per-second rates, every frame the legacy system
+   is updated in; the card and enemy effects at 30 steps a second, every
+   frame, for the game time their packet runs; the waits within about 0.1 s.
 7. **Village top layer** (from the pilot, 6.7): *decided (phase 1
    rollout):* roofs and treetops are always drawn (6.1, the pilot's
    default). The legacy rule draws a piece only where a sprite overlaps it,
@@ -1846,7 +1987,7 @@ Sizes are relative: S ≈ a focused session, XL ≈ many sessions.
 | 1 | Villages + cutscenes + village particles + SpriteFrames | L | 0; decisions 1, 6 | editable villages |
 | 2 | Dungeons + weather + minimap | L | 0; decision 2 (the weather: 6) | editable dungeons; FPS fix (with decision 6) |
 | P | Village and cutscene particles on the GPU (6.4; `docs/particles_prompt.md`). *Done (6.10).* | M | 1; decision 6 (decided for particles) | Dellna's snow back on; Home of the Gods and Dellna at 60 FPS |
-| P2 | Dungeon weather and save points on the GPU (prepared: 6.11) | M | 2, P | rainy and snowy floors at 60 FPS |
+| P2 | Dungeon weather, save points and the card and enemy effects that are particles, on the GPU (6.11). *Done (6.12).* | M | 2, P | rainy and snowy floors at 60 FPS; battles without the effects' stalls (Wind 3 at 7 FPS, the Flame's 10 s) |
 | 3 | Theme, Dialog, signs, emotions, fades, HUD | M | 1 (or 2) | most of the remaining `draw(g)` |
 | 4.1 | World map + airship | M | 1 (converter), 3 | — |
 | 4.2 | Title, game over, mini-games, stores, menu | L | 3 | — |
@@ -1861,7 +2002,7 @@ P2 can follow at any time. The card effects are part of 4.4 (the battle
 waits on them, 12); with the waits relaxed to about ±100 ms they may move
 earlier, as GPU effects or a per-frame interim: P's last deliverable
 assesses that. *P is done (6.10); the assessment and P2's preparation are
-in 6.11.*
+in 6.11. P2 is done, with the effects that are particles (6.12).*
 
 Phases 1 and 2 are the user-visible goal and can run in parallel after phase
 0. Within phase 1, the Zazo pilot should go all the way through steps A and

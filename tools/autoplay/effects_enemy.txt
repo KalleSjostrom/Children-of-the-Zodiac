@@ -1,0 +1,19 @@
+# An enemy's card effects (the battle effects phase, case effects_menthu_flame):
+# a battle area of its own (--load="Start Menthu1" --start=Menthuattack: Menthu's
+# Wrath of Ophiuchus, the burning man: the Flame effect his frames preload,
+# then four Fire). God mode; TRIANGLE ends each party turn with no card (it acts
+# only then), CROSS pages the boss's words, so the enemy attacks: shots every
+# 300 ms for 24 s.
+wait 4000
+console god on
+shot e00_battle
+log battle
+mark
+tap TRIANGLE
+wait 150
+tap CROSS
+wait 150
+shot w_#
+loopuntil xxnever 24000
+log end
+quit

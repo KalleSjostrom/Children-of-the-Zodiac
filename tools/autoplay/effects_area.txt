@@ -1,0 +1,173 @@
+# Card and enemy effects in a battle area of its own (parity cases
+# effects_area_*): --load="Slot 1" --start=Serphia (BossBattleArea: its 3D
+# goes into a SubViewport chunk of the GL emulation, not into a floor scene).
+# As effects_boss.txt: god mode, CROSS pages the boss's words until the
+# party's first turn, four rounds of "cast next" (--casts=), then "kill".
+# loopuntil sees the battle mode of a battle area too (AutoPlay._hidden_state;
+# its state lines do not show it).
+wait 4000
+console god on
+shot e00_battle
+log battle
+mark
+tap CROSS
+wait 500
+loopuntil battlemode=1 30000
+mark
+tap CROSS
+wait 400
+shot w_#
+loopuntil battlemode=1 40000
+console heal 100000 enemies
+console cast next
+log cast
+wait 250
+shot c_#
+wait 250
+shot c_#
+wait 250
+shot c_#
+wait 250
+shot c_#
+wait 250
+shot c_#
+wait 250
+shot c_#
+wait 250
+shot c_#
+wait 250
+shot c_#
+wait 500
+shot c_#
+wait 500
+shot c_#
+mark
+wait 200
+loopuntil !battlemode=4 30000
+shot c_#_done
+log cast_done
+mark
+tap CROSS
+wait 600
+loopuntil !battlemode=5 15000
+mark
+tap CROSS
+wait 400
+shot w_#
+loopuntil battlemode=1 40000
+console heal 100000 enemies
+console cast next
+log cast
+wait 250
+shot c_#
+wait 250
+shot c_#
+wait 250
+shot c_#
+wait 250
+shot c_#
+wait 250
+shot c_#
+wait 250
+shot c_#
+wait 250
+shot c_#
+wait 250
+shot c_#
+wait 500
+shot c_#
+wait 500
+shot c_#
+mark
+wait 200
+loopuntil !battlemode=4 30000
+shot c_#_done
+log cast_done
+mark
+tap CROSS
+wait 600
+loopuntil !battlemode=5 15000
+mark
+tap CROSS
+wait 400
+shot w_#
+loopuntil battlemode=1 40000
+console heal 100000 enemies
+console cast next
+log cast
+wait 250
+shot c_#
+wait 250
+shot c_#
+wait 250
+shot c_#
+wait 250
+shot c_#
+wait 250
+shot c_#
+wait 250
+shot c_#
+wait 250
+shot c_#
+wait 250
+shot c_#
+wait 500
+shot c_#
+wait 500
+shot c_#
+mark
+wait 200
+loopuntil !battlemode=4 30000
+shot c_#_done
+log cast_done
+mark
+tap CROSS
+wait 600
+loopuntil !battlemode=5 15000
+mark
+tap CROSS
+wait 400
+shot w_#
+loopuntil battlemode=1 40000
+console heal 100000 enemies
+console cast next
+log cast
+wait 250
+shot c_#
+wait 250
+shot c_#
+wait 250
+shot c_#
+wait 250
+shot c_#
+wait 250
+shot c_#
+wait 250
+shot c_#
+wait 250
+shot c_#
+wait 250
+shot c_#
+wait 500
+shot c_#
+wait 500
+shot c_#
+mark
+wait 200
+loopuntil !battlemode=4 30000
+shot c_#_done
+log cast_done
+mark
+tap CROSS
+wait 600
+loopuntil !battlemode=5 15000
+mark
+tap CROSS
+wait 400
+shot w_#
+loopuntil battlemode=1 40000
+console kill
+wait 1500
+shot e99_killed
+log killed
+quit

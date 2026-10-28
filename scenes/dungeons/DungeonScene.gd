@@ -82,6 +82,8 @@ var _legacy: Node3D
 var _batches: Array = []
 var _batch_meshes: Array[MeshInstance3D] = []
 var _batch_root: Node3D
+# The objects' GPU particle nodes shown so far (save points).
+var _particle_views: Array[QuadParticles3D] = []
 
 
 func _ready() -> void:
@@ -125,12 +127,19 @@ func show_view(modelview: Transform3D) -> void:
 	_set_up()
 	($Layout as Node3D).transform = modelview
 	($Objects as Node3D).transform = modelview
+	# The GPU weather is in the floor's units (the legacy quads are in eye
+	# space, top level).
+	($Weather as Node3D).transform = modelview
 
 
-## Step B, every frame, before the objects (Graph.show_inventory).
+## Step B, every frame, before the objects (Graph.show_inventory). GPU
+## particles of objects (save points) that the legacy code does not draw this
+## frame stand still, hidden, as the legacy particles do.
 func begin_objects() -> void:
 	_set_up()
 	_batches.clear()
+	for p: QuadParticles3D in _particle_views:
+		p.show_state({}, style)
 
 
 ## Step B, every frame: an object's view, as its legacy draw would draw it
@@ -146,6 +155,16 @@ func show_object(inv, view: Dictionary) -> void:
 	if o != null:
 		o.show_view(inv, view)
 	if not view.get("visible", false):
+		return
+	if view.has("particles") and view.particles.get("gpu", false):
+		# The GPU path (SaveSystem.place_gpu): the object's particle node draws
+		# in the slot of the legacy quads' batch.
+		var p: QuadParticles3D = o.show_particles(view.particles, style) if o is DungeonSavePoint else null
+		if p != null:
+			if not _particle_views.has(p):
+				_particle_views.append(p)
+			if view.particles.shown:
+				_batches.append([null, p])
 		return
 	var q: Dictionary = view.particles if view.has("particles") else view.get("quad", {})
 	var st: Dictionary = q.state if view.has("particles") else view.state
@@ -173,7 +192,11 @@ func end_objects() -> void:
 		_batch_root.add_child(mi)
 		_batch_meshes.append(mi)
 	for i in _batch_meshes.size():
-		if i < _batches.size():
+		if i < _batches.size() and _batches[i][0] == null:
+			# A particle node's slot.
+			(_batches[i][1] as QuadParticles3D).sorting_offset = (i + 1) * SORT_STEP
+			_batch_meshes[i].visible = false
+		elif i < _batches.size():
 			var b: Array = _batches[i]
 			var normals: PackedVector3Array = b[4]
 			if normals.size() != b[1].size():
@@ -184,11 +207,20 @@ func end_objects() -> void:
 
 
 ## Step B, every frame: a weather pass (&"back" or &"front"), the quads of
-## WeatherSystem.place_particles.
-func show_weather(pass_name: StringName, quads: Dictionary) -> void:
-	var after_objects: float = ($Objects.get_child_count() + (2 if pass_name == &"front" else 1)) * SORT_STEP
-	($Weather as DungeonWeather).show_pass(pass_name, quads.vertices, quads.uvs, quads.colors,
-			DungeonMaterials.material(quads.state, style), after_objects)
+## WeatherSystem.place_particles, or on the GPU path its state
+## (WeatherSystem.place_gpu). slot: the sorting offset of the front pass over
+## a battle or riddle, among the 3D bridge's batches (NAN: after the
+## objects).
+func show_weather(pass_name: StringName, quads: Dictionary, slot := NAN) -> void:
+	var offset: float = ($Objects.get_child_count() + (2 if pass_name == &"front" else 1)) * SORT_STEP
+	if not is_nan(slot):
+		offset = slot
+	var weather := $Weather as DungeonWeather
+	if quads.get("gpu", false):
+		weather.show_gpu(pass_name, quads, style, offset)
+		return
+	weather.show_pass(pass_name, quads.vertices, quads.uvs, quads.colors,
+			DungeonMaterials.material(quads.state, style), offset)
 
 
 ## Step B: hides a weather pass (the front pass during a battle: the legacy

@@ -1,4 +1,4 @@
-# Handoff: state of the Godot port (2026-10-27, after steps 1–3, modernization phase 0, phase 1 steps A and B, phase 2 steps A and B, and the particles phase)
+# Handoff: state of the Godot port (2026-10-28, after steps 1–3, modernization phase 0, phase 1 steps A and B, phase 2 steps A and B, the particles phase and P2)
 
 Conventions: legacy (ported) code follows `docs/PORTING.md`; new code
 (scenes, resources, tools, bridge) follows `docs/ARCHITECTURE.md`. The
@@ -143,7 +143,7 @@ procedure in `docs/CONVERTING_DUNGEONS.md`:
 - The weather bridge (`WeatherSystem.place_particles`) is about 20 %
   cheaper (rollout): Forest Path 33 → 36 FPS, Ice Cavern--Frozen Field 41
   → 47.
-- Parity coverage: 336 cases at the end of phase 2 (`tools/parity/cases.txt`, 5,690 shots; 347 cases and 5,984 shots since the particles phase): the
+- Parity coverage: 336 cases at the end of phase 2 (`tools/parity/cases.txt`, 5,690 shots; 347 cases and 5,984 shots since the particles phase, 362 and 6,858 since P2): the
   205 new `dungeon_*` cases are a tour of every floor with both saves and 53
   hand-written cases (doors and floor changes, every object kind, riddles of
   every class, battles under snow and rain and with enemy colours, bosses,
@@ -179,32 +179,55 @@ GPU): done** (plan 6.10, `docs/particles_prompt.md`; conventions in
   recorded before the change (all 347 cases, logs too); the GPU path
   recorded twice is identical; `--legacy=particles` equals the unconverted
   drawing. Five new particle cases (`particles_*`).
-- Prepared, not done: the dungeon weather and save points (P2) and the card
-  effects (plan 6.11).
+- Prepared and done in P2 (below): the dungeon weather, the save points and
+  the card and enemy effects.
+
+**Modernization P2 (the dungeon weather, the save points and the card and
+enemy effects on the GPU): done** (plan 6.12; conventions in
+`docs/ARCHITECTURE.md` section 10 "Dungeon particles" and section 11, tuning
+and checking in `docs/CONVERTING_PARTICLES.md` sections 4 and 5):
+- The rain and snow (`WeatherParticles3D`: `Rain.tscn`, `Snow.tscn`, two
+  passes) and the save points (`SaveParticles3D.tscn`) run the legacy laws
+  in particle shaders at 60 steps a second as per-second rates; the card and
+  enemy effects drawn as particles (`EffectParticles3D`, one per legacy
+  system, in the frame's 3D chunk: `Graphics.show_node`) at 30 steps a
+  second. The spheres, the image and slow systems and the enemy colour stay
+  legacy.
+- Step B: the legacy systems stay in charge without particles (the weather,
+  the save points) or with a pool of at most 64 particles whose counts
+  decide the battle's waits (the effects; within about 0.1 s of the legacy
+  waits). `--legacy=dungeon_particles`, `--legacy=battle_effects` keep the
+  legacy paths; `--legacy=effect_waits` (dev) the legacy waits on the GPU
+  path; `--hide-particles` hides all particles.
+- The rain's initial heights and the effects draw from their own generators
+  (`WeatherParticle.rand`, `ParticleSystem.rand`; port deviations).
+- Normal runs, legacy -> GPU: Forest Path (rain) 35 -> 60 FPS, Frozen Field
+  (snow) 50 -> 60; Wind 3 7 -> 59 FPS at its worst, Tornado 3 25 -> 60;
+  Menthu's Flame no longer stops the game for 10.5 s; a floor with a save
+  point loads about 0.4 s faster (plan 6.12).
+- Parity: with the particles hidden every case is identical to the goldens
+  recorded before the change except battle shots that the effects' waits
+  move (52 of 6,858); with `--legacy=effect_waits` the battles are identical
+  too; the legacy paths equal the unconverted drawing; the GPU path recorded
+  twice is identical. 15 new cases (`effects_*`, `particles_save_*`) and the
+  console's `cast` (cards played on a party member's turn, `--casts=`).
 
 ## Plan (what is left)
 
 0. **Modernization:** closing phase 1 (plan 6.9) needs decision 5 (delete
    the `.vil` files) and the removal of the legacy village path (and of
    `--legacy=particles`). Closing phase 2 (plan 7.9) needs decision 5 and
-   the 1/255 tolerance accepted. Next: phase 3, or P2 (the dungeon weather
-   and save points on the GPU, prepared in plan 6.11). Record goldens before
-   each change.
+   the 1/255 tolerance accepted. Next: phase 3 (P2 is done, plan 6.12).
+   Record goldens before each change.
 
-1. **Performance (top priority):** labyrinths with rain/snow run at 36–48
-   FPS with the scene (Forest Path 36, Ice Cavern--Frozen Field 47; 10 000
-   weather particles per frame through GDScript in `src/weather`: in Forest
-   Path the simulation takes ≈10 ms of a frame and placing the back pass's
-   quads ≈9 ms since the rollout, ≈11 ms before; plan 7.7, 7.8). Loading
-   the largest floor takes ≈180 ms with the scene, 5 ms from its `.map`
-   (plan 7.8).
-   Villages: since the particles phase the village and cutscene
-   particles run on the GPU (plan 6.10): every village measured runs at
-   60 FPS (Home of the Gods with its 12 god systems and Dellna's snow were
-   6-18 FPS).
-   Per-frame fades assume 60 FPS. Options: GPU particles for the weather
-   (decision 6), or a faster simulation and view test (the per-particle
-   loops of `WeatherSystem.update` and `_place_pass`). Measure with the `fps=` value
+1. **Performance:** since P2 the labyrinths with rain or snow run at 60 FPS
+   (Forest Path was 35, Ice Cavern--Frozen Field 50; plan 6.12), and since
+   the particles phase every village measured (plan 6.10). The card effects
+   no longer stall battles (Wind 3 dropped to 7 FPS, Menthu's Flame stopped
+   the game for 10.5 s); the first effect of a battle compiles its shaders
+   (one frame of about 0.1 s). Loading the largest floor takes ≈180 ms with
+   the scene, 5 ms from its `.map` (plan 7.8); a save point no longer adds
+   ≈0.4 s. Per-frame fades assume 60 FPS. Measure with the `fps=` value
    that AutoPlay prints with every `log`/`shot`, in normal runs.
 2. **More runtime coverage:** level-up screen, riddle mini-games
    (`src/miniGames`), buying/selling/merging cards, inn rest, the later
@@ -233,13 +256,17 @@ GPU): done** (plan 6.10, `docs/particles_prompt.md`; conventions in
   only the shipped saves.
 - Parity: `tools/parity/parity.sh record <set>` / `compare <a> <b>` /
   `ab "<args a>" "<args b>" [case…]`, see `docs/ARCHITECTURE.md` section 7.
-  Runs are windowed (screenshots need a renderer); all 347 cases take about
-  35-60 minutes with `--jobs=8` on 12 logical cores (`--uncapped`; the
-  weather floors are bound by the weather; with `--legacy=particles`,
-  `particles_hotg` and the Berca cutscene by the legacy particles at
-  ~6 FPS). The `fps=` values of parity runs are meaningless;
-  measure performance in normal runs. Do not type while a recording runs (a
-  new run's window takes the focus).
+  Runs are windowed (screenshots need a renderer); all 362 cases take about
+  60-70 minutes with `--jobs=8` on 12 logical cores (`--uncapped`; with
+  `--legacy=particles`, `particles_hotg` and the Berca cutscene are bound by
+  the legacy particles at ~6 FPS, with `--legacy=dungeon_particles` the
+  weather floors by the weather, with `--legacy=battle_effects` or
+  `effect_waits` Menthu's Flame takes 10 s of real time). Recording from a
+  copy of the project (without `.git` and `tools/parity/out`, about 2.4 GB)
+  keeps the tree free for edits meanwhile; move the set back into `out/`.
+  The `fps=` values of parity runs are meaningless; measure performance in
+  normal runs. Do not type while a recording runs (a new run's window takes
+  the focus).
 - The developer console (§ / ` / F1 in debug builds, README) jumps to any
   place (`goto`). It replaces the Cheater (formerly SELECT + DOWN, i.e.
   Space + Down), whose menu of places, stories and buildings its `cheater`
@@ -253,9 +280,11 @@ GPU): done** (plan 6.10, `docs/particles_prompt.md`; conventions in
   `particleSystem/ParticleSystemPacket.update`) are stepped by
   `Values.originalFrameStep` for this reason (the village systems only with
   `--legacy=particles` since the particles phase: the GPU systems run the
-  same laws as per-second rates every frame). The purely per-frame ones
-  (labyrinth weather, save points, battle background snow) still run at 60
-  updates per second.
+  same laws as per-second rates every frame, and the card effects since
+  P2: their legacy systems still step, with a smaller pool, for the waits).
+  The purely per-frame ones (labyrinth weather, save points) run their laws
+  as per-second rates at 60 steps a second since P2; the battle background
+  snow (dead code) still runs at 60 updates per second.
 - Positions from `Values.createNormalPoint(x, y)` are `[y, x]`.
 - Content quirks met in phase 1 (kept; all of them, with the dungeons', are
   in `tickets/triage.md`): "Zazo at Night - 0" asserts (Java quit the game)

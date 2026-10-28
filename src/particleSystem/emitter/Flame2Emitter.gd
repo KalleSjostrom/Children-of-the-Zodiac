@@ -38,7 +38,7 @@ func update(system, elapsedTime):
 				while a < 0.5 and tries < 10:
 					tries += 1
 					lastr = r
-					r = J.random()
+					r = ParticleSystem.rand.nextDouble()
 					var b: bool = tries % 2 == 0
 					x = int((r if b else lastr) * width)
 					y = int((lastr if b else r) * height)

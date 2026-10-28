@@ -20,5 +20,9 @@ func shouldResurrect():
 	return pos[1] < -2.0
 
 
+## Port deviation (docs/port_notes/inventory-weather.md): Java draws the
+## initial height from Math.random; the port from the weather's own
+## generator, as SnowParticle does, so that a seeded run's other draws do not
+## depend on the rain.
 func getInitialHeight():
-	return J.random() * 6 - 2.0
+	return rand.nextDouble() * 6 - 2.0

@@ -45,7 +45,7 @@ static func getStaticAnimation(info, hit = true):
 	var psp := ParticleSystemPacket.new()
 	var settings = AnimationSettingsFactory.getDefault()
 	if info.isOnEnemy():
-		settings.setVector(AnimSettings.SOURCE, Vector3f.new((J.random() - 0.5) * 2, 3.0, -5.9))
+		settings.setVector(AnimSettings.SOURCE, Vector3f.new((ParticleSystem.rand.nextDouble() - 0.5) * 2, 3.0, -5.9))
 		settings.setBoolean(AnimSettings.DESTROY_ENEMY_SHAKE, hit)
 	else:
 		var source = info.getEnemy().getTempSource()

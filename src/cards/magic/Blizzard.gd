@@ -61,7 +61,7 @@ func getAnimation(info):
 static func getStaticAnimation(info):
 	var psp := ParticleSystemPacket.new()
 	var settings = AnimationSettingsFactory.getDefault()
-	settings.setVector(AnimSettings.SOURCE, Vector3f.new(0.5 + J.random() * 2, 3.0, -5.9))
+	settings.setVector(AnimSettings.SOURCE, Vector3f.new(0.5 + ParticleSystem.rand.nextDouble() * 2, 3.0, -5.9))
 	settings.setValue(AnimSettings.SPEED, 6.0)
 	settings.setValue(AnimSettings.COLOR, ICE_ELEMENT)
 	settings.setValue(AnimSettings.CHECK_DESTROY_MODE, ParticleSystem.POS_Y_LESS_TARGET_Y)

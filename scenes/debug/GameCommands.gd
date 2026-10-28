@@ -23,6 +23,9 @@ const SAVE_SLOTS := {"1": "Slot 1", "2": "Slot 2", "3": "Slot 3", "autosave": Sa
 const LEVELS := {"easy": Difficulty.Level.EASY, "medium": Difficulty.Level.MEDIUM,
 	"original": Difficulty.Level.ORIGINAL}
 
+## The rounds "cast next" has not played yet (--casts=, see _cast).
+var _casts := PackedStringArray()
+var _casts_read := false
 ## Floor (Organizer.convert) -> {"floor", "save": bool, "boss": [address,
 ## name] or [], "ways": Array of [from, direction, to]}, from the .map files.
 var _floors := {}
@@ -52,6 +55,8 @@ func _register(c: DebugCommands) -> void:
 	c.add("kill", "Kills the enemies of the battle, bosses too: the battle is won", _kill)
 	c.add("skip", "Leaves the battle (no experience or gold, a boss lives on) or runs the cutscene to its end", _skip, [
 		DebugCommands.opt("what", func() -> PackedStringArray: return SKIPPABLE, "the battle or cutscene going on if left out")])
+	c.add("cast", "Plays cards on a party member's turn, as if they were in the weapon: support cards on the party, the others on the enemies", _cast, [
+		DebugCommands.arg("cards", _card_names, "<card>[:<level>][:all] ..., e.g. Fire:3 Cure:2:all").to_end().loose()])
 	c.group("World")
 	c.add("map", "Shows the whole map of this labyrinth floor", _map)
 	c.add("roads", "Opens the roads of the world map", _roads, [
@@ -411,6 +416,82 @@ func _kill(_args: PackedStringArray) -> DebugCommands.Result:
 		battle.glCharacters.setTarget(-1, false)
 	battle.checkIfEnemiesAreDead(mode == BattleManager.BATTLING)
 	return DebugCommands.done("Killed %s" % ", ".join(killed))
+
+
+## The cards cast can play: short name (lowercase) -> Java class name.
+static func _card_classes() -> Dictionary:
+	var classes := {}
+	for java_name: String in ClassRegistry.JAVA_TO_PATH:
+		var parts := java_name.split(".")
+		if parts.size() == 3 and parts[0] == "cards" and parts[2] not in ["Magic", "PowerMagic", "Elements"]:
+			classes[parts[2].to_lower()] = java_name
+	return classes
+
+
+func _card_names() -> PackedStringArray:
+	var names := PackedStringArray()
+	for java_name: String in _card_classes().values():
+		names.append(java_name.get_slice(".", 2))
+	return names
+
+
+## Battle.finishRound with the given cards instead of the weapon's: the
+## same animation (BattleAnimation: the card effects, the damage, the waits)
+## on the first living enemy, or on the attacker for support cards.
+## "cast next" plays the next round of the game argument --casts=<round>/
+## <round>/... (dev, parity cases: rounds of <card>[:<level>][:all] joined
+## by "+").
+func _cast(args: PackedStringArray) -> DebugCommands.Result:
+	var battle := _battle()
+	if battle == null:
+		return DebugCommands.fail("Not in a battle")
+	if battle.getMode() != BattleManager.BATTLING:
+		return DebugCommands.fail("Not now: on a party member's turn")
+	var specs := " ".join(args)
+	if specs == "next":
+		if not _casts_read:
+			_casts_read = true
+			for a in OS.get_cmdline_user_args():
+				if a.begins_with("--casts="):
+					_casts = a.trim_prefix("--casts=").split("/", false)
+		if _casts.is_empty():
+			return DebugCommands.fail("No more rounds in --casts=")
+		specs = _casts[0].replace("+", " ")
+		_casts.remove_at(0)
+	var classes := _card_classes()
+	var cards: Array = []
+	for spec in specs.split(" ", false):
+		var parts := spec.split(":")
+		var java_name: String = classes.get(parts[0].to_lower(), "")
+		if java_name == "":
+			return DebugCommands.fail("No card called %s" % parts[0])
+		var level := 1 if parts.size() < 2 else int(parts[1])
+		if level < 1 or level > 3:
+			return DebugCommands.fail("The level is 1, 2 or 3: %s" % spec)
+		var gl_card := GLCard.new()
+		gl_card.setCard(Card.createCard(java_name, level, parts.size() > 2 and parts[2] == "all"))
+		cards.append(gl_card)
+	if cards.is_empty():
+		return DebugCommands.fail("No cards")
+	var support: bool = cards[0].getCard().getType() == AbstractCard.SUPPORT
+	var team: Array = battle.hand.party if support else battle.hand.enemies
+	var target: int = maxi(team.find(battle.attacker), 0) if support else 0
+	while not support and target < team.size() - 1 and not team[target].isAlive():
+		target += 1
+	battle.hand.setPos(support, target)
+	battle.currentDeck.finish()
+	battle.calcDamage(cards)
+	battle.clock.hide()
+	battle.legend.hide()
+	battle.clock.finish()
+	battle.hand.hide()
+	battle.glCharacters.setTarget(-1, false)
+	battle.animate.init(cards, target, team, battle.monster, battle.attacker, battle.glCharacters)
+	battle.mode = BattleManager.ANIMATE
+	var names := PackedStringArray()
+	for gl_card in cards:
+		names.append("%s %d" % [gl_card.getCard().getName(), gl_card.getCard().getLevel()])
+	return DebugCommands.done("%s casts %s" % [battle.attacker.getName(), ", ".join(names)])
 
 
 func _skip(args: PackedStringArray) -> DebugCommands.Result:

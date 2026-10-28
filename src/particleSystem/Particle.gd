@@ -36,9 +36,9 @@ func _init(p_color = null, p_settings = null, body = null) -> void:
 
 func setSettings(settings):
 	setMass(settings.getValue(AnimSettings.PARTICLE_MASS)
-			+ J.random() * settings.getValue(AnimSettings.MASS_RANDOM_MULT))
+			+ ParticleSystem.rand.nextDouble() * settings.getValue(AnimSettings.MASS_RANDOM_MULT))
 	size = settings.getValue(AnimSettings.SIZE) \
-			+ J.random() * settings.getValue(AnimSettings.SIZE_RANDOM_MULT)
+			+ ParticleSystem.rand.nextDouble() * settings.getValue(AnimSettings.SIZE_RANDOM_MULT)
 
 	lifeMultiplier = settings.getValue(AnimSettings.LIFE_MULTIPLIER)
 	positionNoise = settings.getVector(AnimSettings.POSITION_NOISE)
@@ -62,13 +62,13 @@ func setSettings(settings):
 	collisionVector = settings.getVector(AnimSettings.COLLISION_VECTOR)
 
 func applyRand(pos, rand):
-	pos.x += (J.random() - 0.5) * rand.x
-	pos.y += (J.random() - 0.5) * rand.y
-	pos.z += (J.random() - 0.5) * rand.z
+	pos.x += (ParticleSystem.rand.nextDouble() - 0.5) * rand.x
+	pos.y += (ParticleSystem.rand.nextDouble() - 0.5) * rand.y
+	pos.z += (ParticleSystem.rand.nextDouble() - 0.5) * rand.z
 	return pos
 
 func getFade():
-	return J.random() * fadeRandomMult + fadeRandomAdd
+	return ParticleSystem.rand.nextDouble() * fadeRandomMult + fadeRandomAdd
 
 ## Draws the particle (inside a beginQuads/end block of the system).
 func drawParticle(g, additiveColoring):
@@ -78,6 +78,17 @@ func drawParticle(g, additiveColoring):
 	else:
 		g.setColor(rgb[0], rgb[1], rgb[2], life * lifeMultiplier)
 	g.drawCenteredCurrent2D(pos, size)
+
+## Bridge (battle effects, docs/ARCHITECTURE.md): drawParticle without the
+## drawing: the GL colour it sets and the texture coordinate its quad leaves
+## (drawCenteredCurrent2D's last corner), for a system that draws nothing
+## (--hide-particles, Main.hide_particles).
+func place_particle(g):
+	if color != null:
+		g.setColor(color.x, color.y, color.z, life * lifeMultiplier)
+	else:
+		g.setColor(rgb[0], rgb[1], rgb[2], life * lifeMultiplier)
+	g.glTexCoord2f(0, 0)
 
 func setLifeMultiplier(lm):
 	lifeMultiplier = lm
@@ -145,7 +156,7 @@ func resurrect(body, pos, startLife = null):
 		setForce(body.getForce().clone())
 	setVelocity(Vector3f.new(0.0, 0.0, 0.0))
 	if setVelocityOnParticles:
-		var velRand: float = J.random() * velocityRandMult + velocityRandAdd
+		var velRand: float = ParticleSystem.rand.nextDouble() * velocityRandMult + velocityRandAdd
 		setVelocity(body.getVelocity().clone().multLocal(velRand))
 
 func isAlive():
@@ -158,13 +169,13 @@ func kill():
 ## Called when the particle system is destroyed (explosion-like sparks).
 func destroy(body = null):
 	var f = ParticleSystem.getRandomSphereVector(1.0)
-	f.multLocal((J.random() + 0.1) * destroyForceVectorAmplifier)
+	f.multLocal((ParticleSystem.rand.nextDouble() + 0.1) * destroyForceVectorAmplifier)
 	setForce(f)
-	fade = J.random() * destroyFadeRandomMult + destroyFadeRandomAdd
+	fade = ParticleSystem.rand.nextDouble() * destroyFadeRandomMult + destroyFadeRandomAdd
 	systemDead = true
 
 func plainDestroy(particleSystem = null):
-	fade = J.random() * destroyFadeRandomMult + destroyFadeRandomAdd
+	fade = ParticleSystem.rand.nextDouble() * destroyFadeRandomMult + destroyFadeRandomAdd
 
 func isDestroyed():
 	var dist: float = getPosition().distanceSquared(source)

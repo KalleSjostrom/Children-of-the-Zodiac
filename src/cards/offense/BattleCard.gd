@@ -86,8 +86,8 @@ static func getDefaultBattleCardSettings(level):
 		_:
 			pass
 
-	source.x = (J.random() - 0.5) * size
-	source.y = J.random()
+	source.x = (ParticleSystem.rand.nextDouble() - 0.5) * size
+	source.y = ParticleSystem.rand.nextDouble()
 	source.y -= 1
 	settings.setValue(AnimSettings.FADE_RANDOM_ADD, 0.08)
 

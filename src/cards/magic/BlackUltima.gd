@@ -55,7 +55,7 @@ static func getStaticAnimation(info):
 	var source
 	if info.isOnEnemy():
 		target = Vector3f.new(0.0, 0.0, -6.0)
-		source = Vector3f.new((J.random() - 0.5) * 2, -0.5, 0.0)
+		source = Vector3f.new((ParticleSystem.rand.nextDouble() - 0.5) * 2, -0.5, 0.0)
 	else:
 		source = info.getEnemy().getTempSource()
 		source = Vector3f.new(0.0, 0.0, -7.0) if source == null else source
@@ -109,6 +109,6 @@ static func getStaticAnimation(info):
 ## call returns the target randomized by the previous call).
 static func randomTarget(t):
 	var newtarget = Vector3f.new(t)
-	t.y = J.random() - 0.5
-	t.x = J.random() - 0.5
+	t.y = ParticleSystem.rand.nextDouble() - 0.5
+	t.x = ParticleSystem.rand.nextDouble() - 0.5
 	return newtarget

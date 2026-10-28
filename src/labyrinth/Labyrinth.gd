@@ -194,6 +194,17 @@ func show_weather(g, scene, front):
 	scene.show_weather(&"front" if front else &"back", q)
 
 
+## Bridge (the dungeon particles phase): the front pass over a battle or
+## riddle on the GPU path. The legacy pass draws into the frame's 3D chunk,
+## after the battle's batches and before the minimap; the scene's pass takes
+## that place among the chunk's batches (Graphics.reserve_scene_slot), not
+## with --hide-particles (which draws nothing there).
+func show_weather_over(g, scene):
+	var slot: float = NAN if Main.hide_particles else g.reserve_scene_slot()
+	var q: Dictionary = weatherSystem.place_particles(g, player, true)
+	scene.show_weather(&"front", q, slot)
+
+
 ## Sets light, fog and draws the labyrinth into a display list.
 func init3D(g):
 	renderer.addLight(g)
@@ -502,6 +513,8 @@ func draw(g, alpha = null):
 		# scene's 3D world, after the battle), as it did over the walls.
 		if scene != null and not runSubGameMode:
 			show_weather(g, scene, true)
+		elif scene != null and weatherSystem.gpu:
+			show_weather_over(g, scene)
 		else:
 			if scene != null:
 				scene.hide_weather(&"front")

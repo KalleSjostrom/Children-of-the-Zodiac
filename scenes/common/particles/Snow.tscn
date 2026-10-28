@@ -1,0 +1,12 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/common/particles/WeatherParticles3D.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://bw54ieh7kmp52" path="res://res/ParticleSystems/snowparticle.png" id="2_tex"]
+
+[node name="Snow" type="GPUParticles3D"]
+amount = 10000
+script = ExtResource("1_script")
+force_y = -0.003
+respawn_below = -2.2
+texture = ExtResource("2_tex")
+quad_size = Vector2(0.075, 0.075)

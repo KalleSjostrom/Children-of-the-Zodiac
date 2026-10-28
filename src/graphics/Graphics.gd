@@ -1503,6 +1503,25 @@ func use_scene_3d(node: Node3D) -> void:
 		backend.scene_3d = node
 
 
+## Bridge (the dungeon particles phase): the sorting offset of a batch slot
+## in the current 3D chunk, for a node of the scene that draws itself where
+## the legacy drawing would draw (GLBackend.reserve_scene_slot); NAN when the
+## chunk is not the scene's.
+func reserve_scene_slot() -> float:
+	if backend == null or not _proj3d:
+		return NAN
+	return backend.reserve_scene_slot()
+
+
+## Bridge (the battle effects phase): the node of key that draws itself in
+## the current 3D chunk where the legacy drawing would draw
+## (GLBackend.show_node; make makes it the first time); null in 2D.
+func show_node(key: int, make: Callable) -> GeometryInstance3D:
+	if backend == null or not _proj3d:
+		return null
+	return backend.show_node(key, make)
+
+
 # --- Display lists ---
 
 func glGenLists(range_count: int) -> int:

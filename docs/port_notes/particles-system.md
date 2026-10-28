@@ -71,3 +71,43 @@ All 31 files are fully ported; `tools/check.sh src/particleSystem` reports
   `AnimSettings.getValue/getVector/getBoolean/getVectorEquation/clone`, and on
   `BattleEnemy.getInfo/getTempHeight/setScale/getCurrentImageName/shake/slice/
   cancelColorChange/setColor/getSourceColor`, plus `EnemyInfo.get_`.
+
+## Own random numbers (the battle effects phase, docs/ARCHITECTURE.md)
+
+- Port deviation: the card and enemy effects draw from `ParticleSystem.rand` (a `JRandom`), not from J's shared
+  generator (Java: `Math.random`): `Particle` (mass, size, noise, fades, the destroy kick, velocity), the gravity
+  jitter in `ParticleSystem._updateParticles`, `getRandomVector`/`getRandomCircleVector`/`getRandomSphereVector`,
+  `ParticleValues.getColor(COLOR_RANDOM)`, `Flame2Emitter`, `ShatterEmitter`, the equations `Line`, `RandomWave`,
+  `WhirlWind`, and the effect positions the cards draw while building their systems
+  (`AnimationSettingsFactory.getDefault`, `BattleCard`, `Blizzard`, `Earth`, `Ultima`, `BlackUltima`).
+  `Main._init_deterministic` seeds it. Normal play does not change; a seeded run's battle draws (critical hits,
+  `EnemyLogic`, drops) no longer depend on how many random numbers the effects use, so the GPU effects can replace
+  the simulation without shifting them. `SaveParticle.rand` was already the save points' own.
+- `--hide-particles` (`Main.hide_particles`, dev): `ParticleSystem.draw` and `ShatterParticleSystem.draw` draw no
+  particles but set the same GL state (`Particle.place_particle`: the colour and the last texture coordinate of the
+  quad). `SaveSystem.draw` / `place_particles` likewise. The sphere, image, slow and enemy systems are not hidden.
+
+## Bridge to the GPU effects (the battle effects phase, docs/ARCHITECTURE.md section 11)
+
+- `ParticleSystem.gpu_path()`: the systems drawn as particles (not `SphereParticleSystem`, `ImageParticleSystem`,
+  `SlowParticleSystem`, `EnemySystem`) are drawn by `EffectParticles3D` (not with `--legacy=battle_effects`). Such a
+  system (`gpu`) keeps its logic with a smaller pool (`reduce_for_waits`: at most `GPU_WAIT_PARTICLES` = 64, the time
+  step longer and isDead's limit smaller by the same factor; not for `FlareEmitter`, whose 400 particles its destroy
+  counts, nor for an isDeadLimit of 0 up to 256 particles; not with `--legacy=effect_waits`). Its draw makes the same
+  GL state changes without quads (`Particle.place_particle`) and hands its node the state (`show_gpu`, `gpu_state`,
+  `gpu_settings`, `_gpu_points`, `_equation_uniforms`). Bridge members: `gpu`, `gpu_amount`, `gpu_emit_step` (the
+  legacy pool and step, which the GPU draws), `gpu_seed` (from `gpu_rand`), `gpu_age`, `gpu_stepped`, `gpu_elapsed`,
+  `gpu_destroys`, `gpu_plains`, `gpu_kills`, `gpu_preprocess`, `gpu_shown`.
+- `ParticleSystemPacket.update` adds every frame's elapsed time to its started GPU systems (`gpu_elapsed`,
+  `gpu_age`) before its 30 Hz steps.
+- `destroy`, `plainDestroy` and `kill` count their calls; `update` counts the time it stepped.
+- `FlameParticleSystem.create` skips the 200-step pre-run on the GPU path (`gpu_preprocess` warms the GPU system up
+  instead), not with `--legacy=effect_waits`.
+- `ShatterParticleSystem.draw`: the same GPU branch.
+- `ParticleSystem.gpu_rand` (`JRandom.new(0)`): the GPU systems' seeds. Main seeds it from a hash of `--seed`, not
+  from `J.nextSeed()`: that would shift every later unseeded `JRandom` (encounter steps, battles) against the
+  goldens.
+- `SaveSystem`: on the GPU path (`WeatherSystem.gpu_path`) no particles and no warm-up; `update` counts, and
+  `place_particles` returns the state of `SaveParticles3D` (`place_gpu`; the GL colour stays: the last particle's is
+  not known, lit objects ignore it and the weather sets its own). Bridge members: `gpu`, `gpu_seed` (from
+  `SaveParticle.rand`), `gpu_center` (the static `pos` is shared by every save point), `gpu_updates`.

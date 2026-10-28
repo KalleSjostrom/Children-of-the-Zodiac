@@ -31,5 +31,5 @@ func getVectorAfterTime(v, p_time):
 	var s: float = sin(t) * amplifier * percent
 	v.z = source.z + s
 	v.x = source.x + c
-	v.y = v.y + (J.random() - 0.5) * 0.3
+	v.y = v.y + (ParticleSystem.rand.nextDouble() - 0.5) * 0.3
 	return v

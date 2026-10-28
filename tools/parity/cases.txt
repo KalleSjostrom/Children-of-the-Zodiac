@@ -480,3 +480,35 @@ dungeon_door_ice_cavern_entrance      dungeon_door --load="Slot 1" --start="Ice 
 # holds Colliding 1 (all), the powerful earth magic, as the other floors of
 # Menthu's Lair hold Tornado and Flare (script dungeon_chest).
 dungeon_chest_hall_of_memories        dungeon_chest --load=Start --start="Menthu's Lair--Hall of Memories-mark0" --start-node=149:3 --no-encounters
+# Battle effects phase: every card effect, played by the console's "cast
+# next" on the party's turns (scripts effects_boss and effects_area: four
+# rounds of --casts=<round>/..., cards <card>[:<level>][:all] joined by "+";
+# god mode, the enemies healed before each round, shots through each effect
+# and while the enemy acts). Memory Taur's battle (20,324 hp; Salmonman's 1,081
+# do not outlast some cards) runs in the labyrinth's frame
+# (its 3D in the floor scene's world), Serphia's in a battle area of its own
+# (SubViewport chunks). The level 3 cards build the most systems. Not cast:
+# the enemies' Flame, SerphiaDeath and BlackDeath (they need an attacking
+# enemy) and the neutral Elements (a neutral card in a round fails in
+# ResultScreen.calcResult, as in Java).
+effects_magic_1        effects_boss --load="Slot 1" --start="Empyrian Temple--Hall of Memories-mark0" --casts=Fire:3/Ice:3/Earth:3/Wind:3
+effects_magic_2        effects_boss --load="Slot 1" --start="Empyrian Temple--Hall of Memories-mark0" --casts=Blizzard:3/Colliding:3/Tornado:3/Ultima:3
+effects_magic_3        effects_boss --load="Slot 1" --start="Empyrian Temple--Hall of Memories-mark0" --casts=BlackFire:3/BlackWind:3/BlackUltima:3/SacredBeam:3
+effects_magic_4        effects_boss --load="Slot 1" --start="Empyrian Temple--Hall of Memories-mark0" --casts=SmallSacredBeam:3/Flare:3/Demolish:3/Colliding:1
+effects_magic_5        effects_boss --load="Slot 1" --start="Empyrian Temple--Hall of Memories-mark0" --casts=Death:3/Slow:3/Earth:1/Wind:1
+effects_magic_6        effects_boss --load="Slot 1" --start="Empyrian Temple--Hall of Memories-mark0" --casts=Fire:1/Ice:2:all/Tornado:1:all/Ultima:1
+effects_offense_1      effects_boss --load="Slot 1" --start="Empyrian Temple--Hall of Memories-mark0" --casts=BattleCard:3/ChameleonStrike:3/CrushingSaber:3/Destroyer:3
+effects_offense_2      effects_boss --load="Slot 1" --start="Empyrian Temple--Hall of Memories-mark0" --casts=Drain:3/EnemyDrain:3/LaceratingCut:3/MagicalBlow:3
+effects_offense_3      effects_boss --load="Slot 1" --start="Empyrian Temple--Hall of Memories-mark0" --casts=SpiritAssault:3/CriticalBlow:3/BattleCard:1+Fire:1+LaceratingCut:1/Wind:2
+effects_support        effects_boss --load="Slot 1" --start="Empyrian Temple--Hall of Memories-mark0" --casts=Cure:3/BlackCure:3/Resurrect:1/Cure:2:all
+effects_area_1         effects_area --load="Slot 1" --start=Serphia --casts=Fire:3/Tornado:3/Cure:3/CrushingSaber:3
+effects_area_2         effects_area --load="Slot 1" --start=Serphia --casts=Flare:3/Demolish:3/Drain:3/Ultima:3
+# Dungeon particles phase: save points in view (script particles_save_point:
+# from the save point forward and back, its particles two and one cells
+# ahead, turning; in the rain on Forest Path, without weather in Grivera).
+particles_save_forest_path  particles_save_point --load="Slot 1" --start="Forest of Reil--Forest Path-save" --no-encounters
+particles_save_grivera      particles_save_point --load="Slot 1" --start="Grivera--Second Floor-save" --no-encounters
+# Battle effects phase: an enemy's effects, Menthu's Flame (the burning man
+# whose preload ran a 200-step pre-run, 11 s in normal runs) and Fire, on its
+# own turns (script effects_enemy).
+effects_menthu_flame   effects_enemy --load="Start Menthu1" --start=Menthuattack

@@ -12,12 +12,28 @@ static var particleTexture = ""
 static var pos = null
 var particlesx = null
 var particlesz = null
+## Bridge (the dungeon particles phase, docs/ARCHITECTURE.md section 10): the
+## particles run on the GPU (SaveParticles3D, the save point's "Particles"
+## node) unless the legacy drawing is kept (WeatherSystem.gpu_path); then
+## the system builds no particles (nor their 400-step warm-up), and update
+## and place_particles hand the node the state (place_gpu). gpu_seed: drawn
+## from the save points' generator; gpu_center: the centre (pos is shared
+## by every save point); gpu_updates: the updates since the last placing.
+var gpu := false
+var gpu_seed := 0
+var gpu_center := Vector2.ZERO
+var gpu_updates := 0
 
 func _init(x = null, z = null) -> void:
 	if particleTexture == "":
 		particleTexture = ImageHandler.addPermanentlyLoadNow(
 				Values.ParticleSystemsImages + "particle.png")
 	pos = [float(x), float(z)]
+	gpu = WeatherSystem.gpu_path()
+	if gpu:
+		gpu_seed = SaveParticle.rand.nextInt(J.INT_MAX)
+		gpu_center = Vector2(pos[0], pos[1])
+		return
 	var Xlist: Array = J.array(NR_OF_PARTICLES)
 	var Zlist: Array = J.array(NR_OF_PARTICLES)
 	particlesx = J.array(NR_OF_PARTICLES)
@@ -38,6 +54,9 @@ func _init(x = null, z = null) -> void:
 		particlesz[i] = particles[Zlist[i].getIndex()]
 
 func update():
+	if gpu:
+		gpu_updates += 1
+		return
 	for p in particlesx:
 		p.update()
 
@@ -54,6 +73,8 @@ func loopBackwards(g, particles, dir):
 ## draw, in eye space (the modelview applied, as GLBackend does): "vertices"
 ## (4 per quad), "uvs", "colors" and the render state "state".
 func place_particles(g, dir) -> Dictionary:
+	if gpu:
+		return place_gpu(g, dir)
 	if not hasInited:
 		tex = ImageHandler.getTexture(particleTexture).getTexture()
 		hasInited = true
@@ -81,10 +102,53 @@ func place_particles(g, dir) -> Dictionary:
 	out.vertices = g.getModelView() * out.vertices
 	g.setBlendFunc(Graphics.GL_ONE_MINUS_SRC_ALPHA)
 	g.setAlphaFunc(0.1)
+	# Main.hide_particles (dev): no quads, the same GL state.
+	if Main.hide_particles:
+		out.vertices = PackedVector3Array()
+		out.uvs = PackedVector2Array()
+		out.colors = PackedColorArray()
 	return out
 
 
+## Bridge (the dungeon particles phase): place_particles on the GPU path, the
+## state the save point's SaveParticles3D takes (DungeonSavePoint): "gpu",
+## "seed", "center" (x, z), "running" (updated since the last placing),
+## "shown" (the facing is in a quadrant that draws and not
+## --hide-particles), "facing" (the player's integer angle) and the GL
+## "state" (alpha test, fog). The same GL state changes as the drawing, and
+## the texture coordinate its last quad leaves; the colour stays (the last
+## particle's colour is not known here; lit objects ignore it and the
+## weather sets its own).
+func place_gpu(g, dir) -> Dictionary:
+	if not hasInited:
+		tex = ImageHandler.getTexture(particleTexture).getTexture()
+		hasInited = true
+	g.setBlendFunc(Graphics.GL_ONE)
+	g.setAlphaTestEnabled(true)
+	g.setAlphaFunc(0)
+	tex.bind(g.getGL())
+	var st: Dictionary = g.render_state_3d()
+	var drawn := true
+	if (dir > -135 and dir < -45) or (dir > -45 and dir < 45): # 0, 1
+		g.glTexCoord2f(0, 1)
+	elif (dir > 45 and dir < 135) or dir > 135 or dir < -135: # 2, 3
+		g.glTexCoord2f(1, 0)
+	else:
+		drawn = false
+	g.setBlendFunc(Graphics.GL_ONE_MINUS_SRC_ALPHA)
+	g.setAlphaFunc(0.1)
+	var running := gpu_updates > 0
+	gpu_updates = 0
+	return {"gpu": true, "seed": gpu_seed, "center": gpu_center, "running": running,
+		"shown": drawn and not Main.hide_particles, "facing": dir, "state": st}
+
+
 func draw(g, dir):
+	# Main.hide_particles (dev): the same GL state, nothing drawn. On the GPU
+	# path the floor's scene draws the particles (DungeonSavePoint).
+	if Main.hide_particles or gpu:
+		place_particles(g, dir)
+		return
 	if not hasInited:
 		tex = ImageHandler.getTexture(particleTexture).getTexture()
 		hasInited = true

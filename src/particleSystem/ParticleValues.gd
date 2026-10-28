@@ -34,7 +34,7 @@ const COLOR_RANDOM = 10
 static func getColor(color):
 	var copy: Array
 	if color == COLOR_RANDOM:
-		copy = [J.random(), J.random(), J.random()]
+		copy = [ParticleSystem.rand.nextDouble(), ParticleSystem.rand.nextDouble(), ParticleSystem.rand.nextDouble()]
 	else:
 		var original: Array = COLORS[color]
 		copy = original.duplicate()

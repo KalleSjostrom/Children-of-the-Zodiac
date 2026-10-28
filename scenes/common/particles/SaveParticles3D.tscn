@@ -1,0 +1,11 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/common/particles/SaveParticles3D.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://cxji7rrdfm7p5" path="res://res/ParticleSystems/particle.png" id="2_tex"]
+
+[node name="SaveParticles3D" type="GPUParticles3D"]
+amount = 2000
+script = ExtResource("1_script")
+texture = ExtResource("2_tex")
+quad_size = Vector2(0.15, 0.15)
+quad_corner = Vector3(-1, -1, -1)

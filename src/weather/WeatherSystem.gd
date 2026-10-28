@@ -12,6 +12,25 @@ var tex = null
 var hasInited: bool = false
 var force = null
 var list = []
+## Bridge (the dungeon particles phase, docs/ARCHITECTURE.md section 10): the
+## particles run on the GPU (WeatherParticles3D, drawn by the floor's
+## DungeonWeather) unless the legacy drawing is kept (gpu_path); then the
+## system builds no particles, and update and place_particles hand the
+## nodes the state (place_gpu). gpu_seed: the GPU particles' seed, drawn
+## from the weather's generator; gpu_updates: the legacy updates since the
+## back pass was placed; gpu_running: the particles run in this frame.
+var gpu := false
+var gpu_seed := 0
+var gpu_updates := 0
+var gpu_running := false
+
+
+## Bridge: whether the weather and the save points run on the GPU: not with
+## --legacy=dungeon_particles, nor where the legacy code draws the floor
+## (--legacy=dungeons, --legacy=dungeon_drawing).
+static func gpu_path() -> bool:
+	return not (Main.is_legacy("dungeon_particles") or Main.is_legacy("dungeons")
+			or Main.is_legacy("dungeon_drawing"))
 
 
 func _init() -> void:
@@ -19,6 +38,10 @@ func _init() -> void:
 	particleTexture = ImageHandler.addPermanentlyLoadNow(
 			Values.ParticleSystemsImages + getTextureName())
 	force = getForce()
+	gpu = gpu_path()
+	if gpu:
+		gpu_seed = WeatherParticle.rand.nextInt(J.INT_MAX)
+		return
 	var x: Array = J.array(NR_OF_PARTICLES, null)
 	var z: Array = J.array(NR_OF_PARTICLES, null)
 	particlesx = J.array(NR_OF_PARTICLES, null)
@@ -38,11 +61,20 @@ func _init() -> void:
 
 ## Updates all the particles of the system.
 func update():
+	if gpu:
+		gpu_updates += 1
+		return
 	for p in particlesx:
 		p.update(force)
 
 
 func draw(g, player, front):
+	# Main.hide_particles (dev): the same GL state and particle state (the
+	# front list, the cached view values), nothing drawn. On the GPU path the
+	# floor's scene draws the particles (Labyrinth.show_weather).
+	if Main.hide_particles or gpu:
+		place_particles(g, player, front)
+		return
 	if not hasInited:
 		tex = ImageHandler.getTexture(particleTexture).getTexture()
 		hasInited = true
@@ -89,6 +121,8 @@ func draw(g, player, front):
 ## colours are filled in at the end. Every vertex, colour and cached value
 ## is the one drawParticle computes.
 func place_particles(g, player, front) -> Dictionary:
+	if gpu:
+		return place_gpu(g, player, front)
 	if not hasInited:
 		tex = ImageHandler.getTexture(particleTexture).getTexture()
 		hasInited = true
@@ -129,7 +163,47 @@ func place_particles(g, player, front) -> Dictionary:
 	out.vertices = g.getModelView() * v
 	g.setBlendFunc(Graphics.GL_ONE_MINUS_SRC_ALPHA)
 	g.setAlphaFunc(0.1)
+	# Main.hide_particles (dev): no quads, the same GL and particle state.
+	if Main.hide_particles:
+		out.vertices = PackedVector3Array()
+		out.uvs = PackedVector2Array()
+		out.colors = PackedColorArray()
 	return out
+
+
+## Bridge (the dungeon particles phase): place_particles on the GPU path, the
+## state a WeatherParticles3D pass takes (DungeonWeather.show_gpu): "gpu",
+## "scene" (Rain or Snow), "seed", "running" (updated since the last frame;
+## both passes take the back pass's value, so they run in step), "shown"
+## (not --hide-particles), "location" (x, z) and "facing" (the player's
+## integer angle) for the view test, and the GL "state" (alpha test, fog).
+## The same GL state changes as the drawing, with the colour and texture
+## coordinate its last quad leaves (a pass draws some of its 10 000
+## particles in every frame).
+func place_gpu(g, player, front) -> Dictionary:
+	if not hasInited:
+		tex = ImageHandler.getTexture(particleTexture).getTexture()
+		hasInited = true
+	g.setBlendFunc(Graphics.GL_ONE)
+	setup(g)
+	tex.bind(g.getGL())
+	var st: Dictionary = g.render_state_3d()
+	if not front:
+		gpu_running = gpu_updates > 0
+		gpu_updates = 0
+	var d: int = player.getDirection()
+	var color: Array = RainParticle.color_ if self is RainSystem else WeatherSnowParticle.color_
+	g.glColor4f(1, 1, 1, color[3])
+	if (d > 45 and d < 225) or d < -135:
+		g.glTexCoord2f(1, 0)
+	else:
+		g.glTexCoord2f(0, 1)
+	g.setBlendFunc(Graphics.GL_ONE_MINUS_SRC_ALPHA)
+	g.setAlphaFunc(0.1)
+	var loc = player.getLocation()
+	return {"gpu": true, "scene": "Rain" if self is RainSystem else "Snow", "seed": gpu_seed,
+		"running": gpu_running, "shown": not Main.hide_particles, "location": Vector2(loc[0], loc[1]),
+		"facing": d, "state": st}
 
 
 ## Bridge (phase 2 step B): WeatherParticle.drawParticle without the drawing,

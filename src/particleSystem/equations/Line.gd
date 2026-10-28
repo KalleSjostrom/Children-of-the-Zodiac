@@ -16,7 +16,7 @@ func modifyVector(v, elapsedTime):
 
 func getVectorAfterTime(v, time):
 	v = source.clone()
-	var test: float = J.random() * length
+	var test: float = ParticleSystem.rand.nextDouble() * length
 	if test < length / 2.0:
 		counterLeft += 1
 	else:

@@ -65,3 +65,22 @@ particle. The result is the same.
 
 * `Graph.gd` and `Labyrinth.gd` are still skeletons. Check the `InventorySave`
   draw call and the `drawDialog` dispatch described above when they are ported.
+
+## Own random numbers and hidden weather (the dungeon particles phase)
+
+* Port deviation: `RainParticle.getInitialHeight` draws from `WeatherParticle.rand` (Java: `Math.random`), as
+  `SnowParticle`'s does, so that a seeded run's other draws do not depend on the rain (10 000 draws per rain floor
+  build). Normal play does not change.
+* `--hide-particles` (`Main.hide_particles`, dev): `WeatherSystem.draw` runs `place_particles` (the same GL state,
+  front list and cached view values) and draws nothing; `place_particles` returns no quads.
+
+## Bridge to the GPU weather (the dungeon particles phase, docs/ARCHITECTURE.md section 10)
+
+* `WeatherSystem.gpu_path()`: the weather and the save points run on the GPU (`WeatherParticles3D`,
+  `SaveParticles3D`) unless `--legacy=dungeon_particles`, `--legacy=dungeons` or `--legacy=dungeon_drawing`. Then
+  the system builds no particles (`gpu`; `gpu_seed` from `WeatherParticle.rand`), `update` counts the updates
+  (`gpu_updates`), and `place_particles` returns the state of the passes (`place_gpu`: the same GL state changes,
+  the colour and texture coordinate of the last quad; `gpu_running`, taken at the back pass, runs both passes in
+  step). `draw` on the GPU path places without drawing (the scene draws).
+* `Labyrinth.show_weather_over`: the front pass over a battle or riddle on the GPU path, in a batch slot of the 3D
+  bridge's chunk (`Graphics.reserve_scene_slot`), not with `--hide-particles`.

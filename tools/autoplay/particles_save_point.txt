@@ -1,0 +1,42 @@
+# A save point in view (the dungeon particles phase, cases particles_save_*):
+# --load="Slot 1" --start="<floor>-save" --no-encounters starts on the save
+# point, facing away from the wall behind it. Two steps forward and a turn
+# around put it two cells ahead: shots while its particles rise, a step
+# closer, turning away and back (the quads' orientation follows the
+# facing's quadrant), and onto it again.
+wait 3000
+shot s01_on
+pos on
+tap UP
+wait 900
+tap UP
+wait 900
+tap LEFT
+wait 900
+tap LEFT
+wait 900
+shot s02_two_ahead
+pos two_ahead
+wait 1000
+shot s03_later
+wait 1000
+shot s04_later2
+tap UP
+wait 900
+shot s05_one_ahead
+pos one_ahead
+tap LEFT
+wait 150
+shot s06_turning
+wait 900
+shot s07_turned
+tap RIGHT
+wait 150
+shot s08_turning_back
+wait 900
+shot s09_back
+tap UP
+wait 900
+shot s10_on_again
+pos on_again
+quit

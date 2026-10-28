@@ -33,9 +33,12 @@ extends Node
 ##   --no-encounters     dev only: no random battles in labyrinths (Labyrinth.noEncounters;
 ##                       steps are still counted), for parity tours of dungeon floors;
 ##                       the console's "noenemies" switches it
-##   --hide-particles    dev only: the village and cutscene particle systems draw
-##                       nothing (they still run), for parity runs that compare
-##                       everything else
+##   --hide-particles    dev only: the particles draw nothing (they still run): the
+##                       village and cutscene systems, the dungeon weather and save
+##                       points, the card and enemy effects; for parity runs that
+##                       compare everything else
+##   --casts=<round>/... dev only: the rounds the console's "cast next" plays
+##                       (scenes/debug/GameCommands.gd; parity cases effects_*)
 ##
 ## In debug builds the developer console (scenes/debug/DebugConsole.gd)
 ## opens with the key under Escape or F1; it replaces the Cheater.
@@ -160,6 +163,10 @@ func _init_deterministic(seed_value: int) -> void:
 	SaveParticle.rand.setSeed(J.nextSeed())
 	BattleParticle.rand.setSeed(J.nextSeed())
 	BodiesParticleSystem.rand.setSeed(J.nextSeed())
+	ParticleSystem.rand.setSeed(J.nextSeed())
+	# Not from J's seed sequence: the GPU effects came after the goldens, and a
+	# seed drawn there would shift every later JRandom (encounters, battles).
+	ParticleSystem.gpu_rand.setSeed(hash("gpu effects %d" % seed_value))
 	# Godot's global generator (randf() & co. in new code), seeded without
 	# drawing from J's seed sequence.
 	seed(hash("global %d" % seed_value))
