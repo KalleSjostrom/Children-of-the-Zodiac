@@ -2,6 +2,16 @@ class_name Dialog
 extends RefCounted
 ## Port of villages.utils.Dialog: manages a dialog between player and
 ## villager. A singleton (Dialog.getDialog()).
+##
+## Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): the dialog box
+## and the message box are UI nodes (scenes/ui/Dialog.tscn, SignBox.tscn).
+## Each draw method hands its node what it would have drawn, where it would
+## have drawn it (Graphics.show_ui), with the state changes its drawing made
+## (the font size, the colours, the bound textures; the shown image's alpha
+## still steps here). --legacy=dialog keeps the drawing.
+
+const DIALOG_VIEW := "res://scenes/ui/Dialog.tscn"
+const SIGN_VIEW := "res://scenes/ui/SignBox.tscn"
 
 const FIRST = 0
 const SECOND = 1
@@ -155,7 +165,11 @@ func _drawCurrent(g) -> void:
 		drawGift(g, DS)
 	elif DS.image:
 		g.setColor(1, 1, 1, alpha)
-		g.drawImage(Graphics.fadeImage, 0, -384, 2)
+		# Drawn above the screen (y -384 to -192): nothing shows.
+		if Main.is_legacy("dialog"):
+			g.drawImage(Graphics.fadeImage, 0, -384, 2)
+		else:
+			g.skip_image(Graphics.fadeImage)
 		if speed > 0 and alpha <= 2:
 			alpha += speed
 		elif speed < 0 and alpha >= 0:
@@ -164,7 +178,10 @@ func _drawCurrent(g) -> void:
 				alpha = 0.0
 				isFinished()
 		g.setColor(1, 1, 1, alpha - 1)
-		g.drawCenteredImage(DS.getImage(), 0)
+		if Main.is_legacy("dialog"):
+			g.drawCenteredImage(DS.getImage(), 0)
+		else:
+			_show_image(g, DS.getImage())
 	else:
 		_drawDialog(g, DS.first, DS.name, DS.firstLine, DS.secondLine, DS.whisper)
 
@@ -173,6 +190,9 @@ func drawInputQuestion(g, ds):
 	input = inputNr[0] * 1000 + inputNr[1] * 100 + inputNr[2] * 10 + inputNr[3]
 	xChoice = -1
 	g.setFontSize(26)
+	if not Main.is_legacy("dialog"):
+		_show_input_question(g, ds)
+		return
 	if secondHasBeenShown:
 		g.drawImage(DIALOG_2, xs[DIALOG][SECOND], ys[DIALOG][SECOND])
 	g.drawImage(DIALOG_1, xs[DIALOG][FIRST], ys[DIALOG][FIRST])
@@ -209,7 +229,9 @@ func _drawDialog(g, first: bool, name, fl, sl, small) -> void:
 	if fontSize != 30:
 		g.setFontSize(30)
 	Graphics.setTextColor(JColor.black)
-	if first:
+	if not Main.is_legacy("dialog"):
+		_show_dialog(g, first, name, fl, sl, small)
+	elif first:
 		if secondHasBeenShown:
 			g.drawImage(DIALOG_2, xs[DIALOG][SECOND], ys[DIALOG][SECOND])
 		g.drawImage(DIALOG_1, xs[DIALOG][FIRST], ys[DIALOG][FIRST])
@@ -252,6 +274,9 @@ func drawMessages(g, fl, sl, loadIdent):
 		g.setBlendFunc(Graphics.GL_ONE_MINUS_SRC_ALPHA)
 		g.setAlphaFunc(0.1)
 	Graphics.setTextColor(JColor.black)
+	if not Main.is_legacy("dialog"):
+		_show_messages(g, fl, sl)
+		return
 	g.drawImage(DIALOG_1, xs[DIALOG][FIRST], ys[DIALOG][FIRST])
 	g.setFontSize(MenuValues.MENU_FONT_SIZE_LARGE)
 	var yValue: int = 110 if sl == "" else 85
@@ -307,6 +332,9 @@ func drawQuestion(g, first, alt, title = null):
 func _drawQuestion(g, first, alt) -> void:
 	alternatives = alt
 	g.setFontSize(26)
+	if not Main.is_legacy("dialog"):
+		_show_question(g, alt)
+		return
 	if secondHasBeenShown:
 		g.drawImage(DIALOG_2, xs[DIALOG][SECOND], ys[DIALOG][SECOND])
 	g.drawImage(DIALOG_1, xs[DIALOG][FIRST], ys[DIALOG][FIRST])
@@ -381,3 +409,129 @@ func _to_string():
 
 func getCurrentAlternative():
 	return null if alternatives == null else alternatives[xChoice + yChoice * 2]
+
+
+# Bridge (phase 3 step B): the draw methods without the drawing. Each makes
+# the state changes of the drawing it replaces in the same order (drawImage
+# binds its texture: Graphics.skip_image; drawString leaves setColor(color);
+# startText and finishText run) and hands the UI node what it would have
+# drawn: the colours (images take the current colour, text the text colour;
+# drawMultiString's alpha is startText's), the material of the 2D state and
+# the font.
+
+## _drawDialog without the drawing (with _drawLines'): a speech on the paper
+## of its side.
+func _show_dialog(g, first: bool, name, fl, sl, small) -> void:
+	var tint: Color = g.getCurrentColor()
+	var mat = g.canvas_material()
+	if first:
+		if secondHasBeenShown:
+			g.skip_image(DIALOG_2)
+		g.skip_image(DIALOG_1)
+	else:
+		g.skip_image(DIALOG_1)
+		g.skip_image(DIALOG_2)
+	var pos: int = FIRST if first else SECOND
+	var speaker := ""
+	var speakerColor: Color = Graphics.text_color(1.0)
+	if name != null and name != "":
+		speaker = str(name) + ":"
+		g.setColor(g.color)
+	var size: int = 24
+	g.setFontSize(size if small else size + 6)
+	var lines := PackedStringArray([_text(fl), _text(sl)])
+	var lineColor: Color
+	if sl == "" and (name == null or name == ""):
+		lineColor = Graphics.text_color(1.0)
+		lines[1] = ""
+		if fl != null:
+			g.setColor(g.color)
+	else:
+		g.startText()
+		lineColor = Graphics.text_color(g.text_alpha())
+		g.finishText()
+	var view = g.show_ui(DIALOG_VIEW, Graphics.UI_LAYER)
+	if view == null:
+		return
+	view.begin(mat, Graphics.font_bold())
+	view.show_papers(pos, secondHasBeenShown or not first, tint)
+	view.show_speech(pos, speaker, speakerColor, lines, lineColor, true if small else false)
+
+
+## _drawQuestion without the drawing: the alternatives on paper 1, the hand
+## at the choice.
+func _show_question(g, alt) -> void:
+	var tint: Color = g.getCurrentColor()
+	var mat = g.canvas_material()
+	if secondHasBeenShown:
+		g.skip_image(DIALOG_2)
+	g.skip_image(DIALOG_1)
+	g.startText()
+	var color: Color = Graphics.text_color(g.text_alpha())
+	g.finishText()
+	var handTint: Color = g.getCurrentColor()
+	g.skip_image(hand)
+	var view = g.show_ui(DIALOG_VIEW, Graphics.UI_LAYER)
+	if view == null:
+		return
+	view.begin(mat, Graphics.font_bold())
+	view.show_papers(FIRST, secondHasBeenShown, tint)
+	view.show_question(PackedStringArray([_text(alt[0]), _text(alt[1]), _text(alt[2]),
+			_text(alt[3])]), color, Vector2i(xChoice, yChoice), handTint)
+
+
+## drawInputQuestion without the drawing (after its state changes): the
+## title, the digits, the hand at the current digit.
+func _show_input_question(g, ds) -> void:
+	var tint: Color = g.getCurrentColor()
+	var mat = g.canvas_material()
+	if secondHasBeenShown:
+		g.skip_image(DIALOG_2)
+	g.skip_image(DIALOG_1)
+	g.startText()
+	var color: Color = Graphics.text_color(g.text_alpha())
+	g.finishText()
+	var handTint: Color = g.getCurrentColor()
+	g.skip_image(hand)
+	var view = g.show_ui(DIALOG_VIEW, Graphics.UI_LAYER)
+	if view == null:
+		return
+	view.begin(mat, Graphics.font_bold())
+	view.show_papers(FIRST, secondHasBeenShown, tint)
+	view.show_input(_text(ds.name), PackedInt32Array(inputNr), color, current, handTint)
+
+
+## drawCenteredImage(name, 0) without the drawing: the shown image.
+func _show_image(g, name) -> void:
+	var tint: Color = g.getCurrentColor()
+	var mat = g.canvas_material()
+	var t = g.skip_image(name)
+	if t == null:
+		return
+	var view = g.show_ui(DIALOG_VIEW, Graphics.UI_LAYER)
+	if view == null:
+		return
+	view.begin(mat, Graphics.font_bold())
+	view.show_image(t.getGodotTexture(), tint)
+
+
+## drawMessages without the drawing (after its state changes): the message
+## box.
+func _show_messages(g, fl, sl) -> void:
+	var tint: Color = g.getCurrentColor()
+	var mat = g.canvas_material()
+	g.skip_image(DIALOG_1)
+	g.setFontSize(MenuValues.MENU_FONT_SIZE_LARGE)
+	g.startText()
+	var color: Color = Graphics.text_color(g.text_alpha())
+	g.finishText()
+	var view = g.show_ui(SIGN_VIEW, Graphics.UI_LAYER)
+	if view == null:
+		return
+	view.show_message(_text(fl), _text(sl), sl == "", color, tint, mat, Graphics.font_bold())
+
+
+## A drawn string as the node shows it: drawString and drawMultiString draw
+## nothing for null.
+static func _text(s) -> String:
+	return "" if s == null else str(s)

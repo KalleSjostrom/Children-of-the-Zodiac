@@ -1,0 +1,56 @@
+# Phase 3 (dialog coverage): a trigger door's arrival (--load=Start
+# --start="Central Pass--West Part-mark0"; see dungeon_trigger.txt): its
+# dialog shown while the floor fades in (shots every 100 ms), then the
+# tutorial question with the hand moved right, left and right again, and
+# "Not now!" (no tutorial), then a step and the menu.
+wait 100
+shot q01_fade
+wait 100
+shot q02_fade
+wait 100
+shot q03_fade
+wait 100
+shot q04_fade
+wait 100
+shot q05_fade
+wait 100
+shot q06_fade
+wait 100
+shot q07_fade
+wait 100
+shot q08_fade
+wait 2000
+shot q09_arrived
+log arrived
+tap CROSS
+wait 600
+shot q10_question
+tap RIGHT
+wait 300
+shot q11_hand_right
+tap LEFT
+wait 300
+shot q12_hand_left
+tap RIGHT
+wait 300
+shot q13_hand_right
+tap CROSS
+wait 900
+shot q14_answered
+log answered
+mark
+tap CROSS
+wait 900
+shot q_#_dialog
+loopuntil !dialog 15000
+log talked
+tap UP
+wait 700
+shot q15_walked
+tap TRIANGLE
+wait 2500
+shot q16_menu
+tap CIRCLE
+wait 2000
+shot q17_after_menu
+quit

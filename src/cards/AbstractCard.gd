@@ -162,6 +162,18 @@ func drawCard(g, x, y, size = null, type = null, level = null):
 		g.drawImage(images[type][BALL], x + (s * 90), yy, s)
 
 
+## Bridge (phase 3 step B): drawCard(g, x, y, size) without the drawing: its
+## images bound as it binds them (Graphics.skip_image). Returns the picture's
+## texture, the ball's (null when no ball is drawn) and the level.
+func place_card(g) -> Array:
+	var base = g.skip_image(images[NORMAL][BASE])
+	var ball = null
+	if level >= 1 and level <= 3:
+		for i in range(level):
+			ball = g.skip_image(images[NORMAL][BALL])
+	return [base, ball, level]
+
+
 ## Draws the card on the given graphics in black and white.
 ## Java overloads: drawGrayCard(g, x, y) and drawGrayCard(g, x, y, size).
 ## Note: as in the original, the three argument version draws the normal

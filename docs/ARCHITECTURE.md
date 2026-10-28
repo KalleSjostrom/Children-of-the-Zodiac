@@ -51,7 +51,9 @@ scenes/
   dungeon_objects/        DungeonObject.gd (base) and one scene per object kind:
                           DungeonChest, DungeonDoor, DungeonHinderDoor, DungeonButton,
                           DungeonSavePoint, DungeonVillager … (.tscn + .gd each)
-  ui/                     Dialog.tscn, SignBox.tscn, menu pages
+  ui/                     the shared UI (section 12): Dialog, SignBox, CardInfo, Fade (.tscn +
+                          .gd each), BaselineLabel.gd (a line of text placed by its baseline);
+                          menu pages later
   debug/                  DebugConsole (built in code, added by Main in debug builds),
                           DebugCommands (registry, completion), GameCommands
 resources/
@@ -63,7 +65,7 @@ resources/
                                           weather; <Area>--<Floor>.tres for a floor whose look
                                           differs from the area's)
   difficulty/*.tres           (DifficultyLevel: the balancing of each difficulty level)
-  theme/game_theme.tres
+  theme/game_theme.tres       (the game's fonts and the papers and menu pieces of the UI, section 12)
 src/                      legacy code (shrinks over time)
 tools/import/             converters and their checks (headless `--script`): vil_to_scene.gd
                           (+ vil_to_scene.sh), verify_villages.gd, scene_preview.gd (windowed);
@@ -136,16 +138,19 @@ Main (Node, src/main/Main.gd)
 ├── LegacyLayer (CanvasLayer 1)
 │   └── Canvas (Node2D)             parent of GLBackend's canvas items (all legacy 2D drawing
 │                                   and the composited 3D chunks)
-├── UI (CanvasLayer 2)              empty in phase 0 (Dialog, SignBox, HUD, menu pages later)
-├── Transition (CanvasLayer 3)      empty in phase 0 (fades later)
+├── UI (CanvasLayer 2)              the dialog box, the message box, the card info popup
+│                                   (section 12; HUD and menu pages later)
+├── Transition (CanvasLayer 3)      the fade (section 12)
 ├── Audio (Node, created by Main)   music and sound effect players
 └── SubViewport × n (GLBackend)     the legacy 3D chunks
 ```
 
 Everything a legacy `draw(g)` draws lands on `LegacyLayer`, above `World`. A
 `Camera2D` in a scene under `World` moves only the default canvas, so it never
-moves legacy drawing, and the legacy fade quad (`GameMode.draw` →
-`fadeOldSchool`) covers the scene.
+moves legacy drawing, and the fade (`GameMode.draw`, the Transition layer's
+Fade node since phase 3) covers the scene. A node of new code on UI or
+Transition takes its place in the order of a frame's legacy drawing; the
+legacy 2D drawn after it is drawn over it (section 12).
 
 **A game mode owns a scene** (`src/organizer/GameMode.gd`):
 
@@ -190,7 +195,7 @@ moves legacy drawing, and the legacy fade quad (`GameMode.draw` →
   replaces, and keep every state change that drawing made (see section 9:
   a mode's `update` can run in a frame without `draw`).
 * `Graphics.copyFrame` (the menu thumbnail) reads the main viewport, so it
-  includes `World`.
+  includes `World` and the UI and Transition layers.
 * **A 3D scene** under `World` (a converted dungeon floor, section 10)
   renders in the main viewport with its own camera, below every
   `CanvasLayer`, so the legacy 2D overlays on `LegacyLayer` stay on top; the
@@ -240,7 +245,8 @@ not rename legacy members to suit new code.
 `Main.is_legacy("<subsystem>")`, `Main.bridge_test`, `Main.no_encounters`,
 `MapLoader.dungeon_scene_for`, `Graphics.use_scene_3d`, `Main.hide_particles`,
 `BodiesParticleSystem.gpu_path()`, `WeatherSystem.gpu_path()`, `ParticleSystem.gpu_path()`,
-`Graphics.reserve_scene_slot`, `Graphics.show_node`, the snake_case
+`Graphics.reserve_scene_slot`, `Graphics.show_node`, `Graphics.show_ui`,
+`Graphics.show_fade` (section 12), the snake_case
 methods of the scenes it owns (`VillageScene.load_into`, `show_*`;
 `DungeonScene.load_into`, `show_floor`, `show_view`, `show_object` …) and the
 difficulty (`Difficulty.scale_experience`, `scale_enemy_damage`,
@@ -252,7 +258,9 @@ their state are snake_case too (`Sprite.place_view`,
 `Graphics.alpha_threshold`, `Village.update_draw_state`,
 `Inventory.place_view`, `WeatherSystem.place_particles`,
 `Graphics.render_state_3d`, `BodiesParticleSystem.gpu_view`, `WeatherSystem.place_gpu`,
-`SaveSystem.place_gpu`, `ParticleSystem.gpu_state`); refactors of a
+`SaveSystem.place_gpu`, `ParticleSystem.gpu_state`, `Graphics.canvas_material`,
+`Graphics.skip_image`, `Graphics.text_color`, `text_alpha`, `font_bold`,
+`AbstractCard.place_card`, `DeckPage.show_card_info`); refactors of a
 legacy method's own code keep Java style (`Village.sortSprites`).
 
 **Flags in legacy code.** A subsystem being converted keeps its old path for
@@ -278,7 +286,7 @@ Game options go after `--` on the command line (see the header of
 | `--fixed-step` | The game advances exactly 1000/60 ms per frame, whatever the real frame time. |
 | `--seed=<n>` | Deterministic run (implies `--fixed-step`): every random generator (`J`, every `JRandom`, Godot's global one) is seeded from `n`; `J.currentTimeMillis()`, `Scheduler` and `GameAction` read a game clock advanced by the elapsed game time instead of the wall clock; saves are read from the shipped files and written to `user://saves_deterministic/` (emptied at start), never to the player's `user://saves/`; no game pad is read (`GameCore.init2`: an idle pad releases AutoPlay's buttons every 40 ms). Two runs of an AutoPlay script then produce the same frames. |
 | `--uncapped` | No 60 FPS cap and no vsync. With `--seed` the result is the same, only faster. |
-| `--legacy=<a,b,…>` | Keep the legacy path of the listed subsystems (`Main.is_legacy`). `all` keeps every one. `villages`: converted places are read from their `.vil` files and drawn by the legacy code (section 9). `village_top_layer`: the scene draws a roof or treetop only where a sprite overlaps it, as the legacy code does (for parity; by default it always draws them). `dungeons`: converted floors are read from their `.map` files and drawn by the legacy code (section 10). `dungeon_drawing` (dev): floors are built from their scenes (step A) and drawn by the legacy code, for checking step A on its own. `particles`: the village and cutscene particle systems run the legacy simulation and `LegacyParticles2D` draws its quads (section 9; `villages` implies it). `dungeon_particles`: the dungeon weather and the save points run the legacy simulation and the floor's scene draws its quads (section 10; `dungeons` and `dungeon_drawing` imply it). `battle_effects`: the card and enemy effects run the legacy simulation and draw its quads (section 11). `effect_waits` (dev): the GPU effects' legacy systems keep their whole pool, so the legacy particle counts decide when a battle goes on, as before (for parity runs with `--hide-particles`; section 11). |
+| `--legacy=<a,b,…>` | Keep the legacy path of the listed subsystems (`Main.is_legacy`). `all` keeps every one. `villages`: converted places are read from their `.vil` files and drawn by the legacy code (section 9). `village_top_layer`: the scene draws a roof or treetop only where a sprite overlaps it, as the legacy code does (for parity; by default it always draws them). `dungeons`: converted floors are read from their `.map` files and drawn by the legacy code (section 10). `dungeon_drawing` (dev): floors are built from their scenes (step A) and drawn by the legacy code, for checking step A on its own. `particles`: the village and cutscene particle systems run the legacy simulation and `LegacyParticles2D` draws its quads (section 9; `villages` implies it). `dungeon_particles`: the dungeon weather and the save points run the legacy simulation and the floor's scene draws its quads (section 10; `dungeons` and `dungeon_drawing` imply it). `battle_effects`: the card and enemy effects run the legacy simulation and draw its quads (section 11). `effect_waits` (dev): the GPU effects' legacy systems keep their whole pool, so the legacy particle counts decide when a battle goes on, as before (for parity runs with `--hide-particles`; section 11). `dialog`: the dialog box, the message box and the card info popup are drawn by the legacy code, not by their UI nodes (section 12). `fades`: the fade quads of `GameMode.draw` and of a cutscene are drawn by the legacy code, not by the Transition layer's Fade node (section 12). |
 | `--hide-particles` | Dev only: the particles draw nothing, in both paths (`Main.hide_particles`; they still run): the village and cutscene systems, the dungeon weather and save points, the card and enemy effects drawn as particles (not the sphere, image, slow and enemy-colour systems), with the GL state their drawing leaves; for parity runs that compare everything else. |
 | `--casts=<round>/…` | Dev only: the rounds the console's `cast next` plays on the party's turns (cards `<card>[:<level>][:all]` joined by `+`; `scenes/debug/GameCommands.gd`), for the parity cases of the battle effects (`effects_*`). |
 | `--no-encounters` | Dev only: labyrinths start no random battles (`Labyrinth.noEncounters`, which nothing else sets; the steps are still counted), for parity tours of dungeon floors. |
@@ -897,3 +905,156 @@ and the enemy colour system (Elements) are not particles and stay legacy.
 * Coverage: the console's `cast` plays chosen cards on a party member's turn
   (`cast next`: the rounds of `--casts=`); parity cases `effects_*` (scripts
   `effects_boss`, `effects_area`, `effects_enemy`).
+
+## 12. Shared UI and transitions (phase 3)
+
+The pilot of phase 3 converts, through step B, the dialog family and the
+fade (plan 8.1): the dialog box, the message box (signs, loot and gift
+lines without a speaker), the card info popup, and the fade every mode draws
+last (also a cutscene's own). Every other overlay is still legacy (plan 8.2
+lists them with their place in each frame). How to convert the next ones:
+`docs/CONVERTING_UI.md`.
+
+**Theme** (`resources/theme/game_theme.tres`). The game's two fonts
+(`res/Main/font.ttf`, `boldfont.ttf`: `font` and `bold_font` of the type
+`BaselineLabel`) with a font size per type variation: the roles of the
+converted nodes (`DialogName` 30, `DialogLine` 30, `DialogWhisper` 24,
+`DialogQuestion` 26, `SignLine` 28, `CardInfoName` 26, `CardInfoLine` 22,
+`CardInfoEffect` 20) and `Text20` … `Text50`, the even sizes
+`Graphics.setFontSize` allows, for the next overlays. StyleBoxTextures of
+the papers and the menu piece the nodes draw (`Panel` variations without
+margins, so a panel of the texture's size draws the texture as it is):
+`DialogPaper` (dialog1.png), `DialogPaperSecond` (dialog2.png),
+`CardInfoPanel` (Pieces/10.png). Nothing is restyled. The root of each UI
+scene sets the theme; the project theme stays Godot's (the debug console).
+
+**Text.** `BaselineLabel` (`scenes/ui/BaselineLabel.gd`, a Control) draws
+one line with its baseline at the node's position, with `draw_string`: the
+call the legacy text goes through (`Graphics._drawText`, `Font.draw_string`
+on a canvas item, after JOGL's TextRenderer, which placed text by its
+baseline). A node at the legacy coordinates draws the same glyphs on the same
+pixels. Its `oversampling` is 1: the glyphs are rasterized for the 1024 x
+768 screen and the window's stretch scales them, as the legacy text's (0,
+Godot's default for Controls, rasterizes them at the window's scale: sharper
+in full screen, a look change; plan 8.1). A Label places text by its top and
+the line's ascent and draws glyph by glyph, which would need a per-size
+offset and is not known to round the same (not tried).
+
+**Nodes** (`scenes/ui/`, a script beside each; positions are the legacy
+screen pixels):
+
+```
+Dialog (Control, 1024 x 768)        the dialog box (legacy Dialog)
+├── Image (TextureRect)             a shown image (a showImage line), centred at the top
+├── Paper2 (Panel DialogPaperSecond, at 30, 50)
+│   └── Name, FirstLine, SecondLine (BaselineLabel)   the answering side's speech
+├── Paper1 (Panel DialogPaper, at 0, 20)
+│   └── Name, FirstLine, SecondLine (BaselineLabel)   the speech of the side that starts
+├── Question                        Alternative1 … 4 (BaselineLabel DialogQuestion)
+├── InputQuestion                   Title, Digit1 … 4 (BaselineLabel DialogQuestion)
+└── Hand (TextureRect, hand1.png)
+SignBox (Control)                   the message box (Dialog.drawMessages)
+└── Paper (Panel DialogPaper)       FirstLine, SecondLine (BaselineLabel SignLine)
+CardInfo (Control, at the y it is given)   the card info popup (DeckPage.drawCardInfo)
+├── Panel (Panel CardInfoPanel)
+├── Picture (TextureRect)           Ball1 … 3 (TextureRect)
+└── Name, Line1 … 3, Effect (BaselineLabel CardInfoName, CardInfoLine, CardInfoEffect)
+Fade (Control, on Transition)       the fade's quad (Graphics.fadeOldSchool)
+├── Colour (ColorRect)              a fade to black or white
+└── Image (TextureRect)             a fade to the image of Graphics.setFadeImage
+```
+
+The layout the legacy `Dialog` kept in its `xs`, `ys`, `handX` and `handY`
+tables is the scene's: each paper holds its speech's places, the shifts of a
+speech without a speaker and the hand's places are exported. The speaker's
+paper is moved after the other one (the legacy draws it last). The papers,
+images and the hand take the legacy colour as `self_modulate` (children keep
+theirs); the text takes the legacy text colour.
+
+**Step B.** The legacy objects stay in charge of the text, the choices, the
+timing and the fade values; the modes' call sites are unchanged. Each
+converted draw method runs a twin without the drawing where it drew
+(`Dialog._show_dialog`, `_show_question`, `_show_input_question`,
+`_show_image`, `_show_messages`, `DeckPage.show_card_info`,
+`Graphics.show_fade`), inside the modes' draw (the Organizer's last frame of
+a mode runs its update but not its draw). A twin:
+
+* makes the drawing's state changes in the same order: the font sizes; the
+  text colour; drawImage's texture bind and texture coordinate
+  (`Graphics.skip_image`); drawString's `setColor(color)`; `startText` and
+  `finishText`; the shown image's alpha step and the `isFinished()` it calls
+  at 0; the fade's `glColor4f`;
+* hands its node what would have been drawn, with the GL state as Godot
+  values: the images' colour (`getCurrentColor` where each was drawn: the
+  papers', the hand's after the text, the image's), the text's colour and
+  alpha (`Graphics.text_color`, `text_alpha`: drawString's alpha is 1,
+  drawMultiString's is `startText`'s, the current mode's fade value), the
+  font (`Graphics.font_bold`) and the material of the 2D state
+  (`Graphics.canvas_material`: GLBackend's own canvas material for that
+  blending and alpha test, so an alpha test drops the same fragments: the
+  message box draws with `setAlphaFunc(0.1)`).
+
+The nodes keep no reference to a mode or to the legacy `Dialog`.
+
+**A UI node's place in the legacy frame** (`Graphics.show_ui(path, layer)` →
+`GLBackend.show_ui`). A node of new code on UI or Transition takes a slot in
+the frame's 2D order where the legacy drawing would have drawn, as
+`GLBackend.show_node` keeps a node among the 3D batches:
+
+* GLBackend's 2D canvas items get their draw index from one counter per
+  frame, and so does the node's canvas item when it is shown (RenderingServer
+  `canvas_item_set_draw_index`, over the index Godot gave it).
+* The frame's 2D starts at level 0, LegacyLayer's `Canvas`. Showing a node of
+  layer L raises the level to L: the legacy 2D drawn after it (in a canvas
+  item of its own: the node ends the current one) is parented to that layer's
+  canvas (`CanvasLayer.get_canvas()`), next to the node and after it by the
+  same counter. Whatever the frame draws after the dialog (a store's keeper
+  and menus, a battle's or riddle's top layer, the tutorials, a cutscene's
+  texts) is drawn over it, as before; the fade on Transition covers all of
+  it, and what GameCore draws after the mode ("Paused") is drawn over the
+  fade.
+* Nodes are pooled per scene and per occurrence in the frame (the frame's
+  first dialog box is the pool's first; the card store draws its keeper's
+  dialog under its menus and the card info over them in one frame; the Inn
+  its keeper's dialog and a prize message), instanced into their layer the
+  first time, kept, and hidden at the end of a frame they were not shown in
+  (as GLBackend's canvas items are cleared). A glClear in the middle of a
+  frame (`clear_frame`) hides the nodes shown before it.
+* The levels only rise in a frame: a node of a lower layer than one shown
+  before it would be drawn under that one (a warning, once). No converted
+  call site does that: nothing of the UI layer is drawn after a fade.
+* A 3D chunk after a node is a SubViewport composited at the current level;
+  the 3D bridge's scene chunk (`GLBackend.scene_3d`) is used only when
+  neither legacy 2D nor a node came before it in the frame.
+* A frame without a node (every `--legacy=dialog,fades` frame) orders and
+  parents its canvas items as before.
+* Not chosen: a single split point (the card store needs two UI slots with
+  legacy drawing between them in one frame); the nodes under LegacyLayer's
+  canvas (they belong on UI and Transition when the legacy drawing is gone);
+  turning what follows the dialog into nodes as well (stores and battles are
+  phase 4).
+
+**Layers and the window.** UI and Transition are CanvasLayers with the
+identity transform, as LegacyLayer, so the stretch (`canvas_items`, 1024 x
+768, aspect keep) scales and letterboxes them alike: a node at a legacy pixel
+lands where the legacy drawing did at every window size. `Graphics.copyFrame`
+(the menu's thumbnail) and AutoPlay's shots read the main viewport's texture:
+World, LegacyLayer, UI and Transition (and the debug console when it is
+open), as the frame before rendered them.
+
+**The fades.** `GameMode.draw`'s fade and a cutscene's own fade
+(`VillageStoryTimeLine.drawTop`: after the dialog, under the texts) are the
+Transition layer's Fade node: the ColorRect for `FADE_TO_BLACK` and
+`FADE_TO_WHITE` (the fade image's black or white times the colour: black, or
+`setFadeColor`'s colour), the TextureRect for `setFadeImage(path)` (the image
+tinted by the colour), at alpha 1 − fade value. The legacy `Fadeable` keeps
+the fade value and its pace (0.03 per drawn frame; no Tween or Timer).
+Still legacy: the riddle's fade (`RiddleGame.drawTopLayer`, the backdrop of
+its image: phase 4), "Paused" and "game pad lost" (`GameCore.testDraw`: HUD
+pieces of the rollout), the stores' dims behind their confirm boxes, the
+battle's (result screens, an enemy's red flash), the tutorial's
+(`fadeOldSchoolColor`) and the menu hand's dim.
+
+**Flags.** `--legacy=dialog` keeps the legacy drawing of the dialog box, the
+message box and the card info popup; `--legacy=fades` keeps the legacy fade
+quads. Both together draw exactly as before the conversion (plan 8.1).

@@ -1,0 +1,38 @@
+# Phase 3 (dialog coverage): The Prison Cell - 1 (--load=Start --start="The
+# Prison Cell", --status=prisonZalzi:4). The loot in the toilet: its two-line
+# message (the message box) with the card info (Village.drawOverlays); then
+# Zalzi's dialog 4: Zalzi on paper 1, Kin's answer on paper 2 in front, Zalzi
+# again on paper 1 with paper 2 behind it.
+wait 3000
+pos start
+press UP
+wait 430
+release UP
+pos at_loot
+tap CROSS
+wait 400
+shot p01_loot
+tap CROSS
+wait 400
+shot p02_closed
+press DOWN
+wait 320
+release DOWN
+press LEFT
+wait 1070
+release LEFT
+pos at_zalzi
+tap CROSS
+wait 400
+shot p03_zalzi
+tap CROSS
+wait 400
+shot p04_kin
+tap CROSS
+wait 400
+shot p05_zalzi_again
+tap CROSS
+wait 400
+shot p06_end
+pos end
+quit

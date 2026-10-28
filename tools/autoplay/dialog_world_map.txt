@@ -1,0 +1,15 @@
+# Phase 3 (dialog coverage): the world map's "We can't enter now!"
+# (Landscape.crossPressed on a node whose status is -2; --load="Slot 1"
+# --start=landAlares --status=Alaresnode:-2): the dialog under the node's
+# name plate, and gone after the next press.
+wait 3500
+shot w01_start
+tap CROSS
+wait 600
+shot w02_message
+wait 1500
+shot w03_message_later
+tap RIGHT
+wait 200
+shot w04_cleared
+quit

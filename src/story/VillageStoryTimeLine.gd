@@ -739,7 +739,12 @@ func drawTop(g, sprites = null):
 		dialog.draw(g)
 	if fadeValue < 1 and imageMode != TRANSLUCENT_MODE_OVER_ACTOR \
 			and imageMode != TRANSLUCENT_MODE_UNDER_ACTOR:
-		g.fadeOldSchool(fadeValue)
+		# Bridge (phase 3 step B): the Transition layer's Fade node; the
+		# texts drawn next are drawn over it (Graphics.show_fade).
+		if Main.is_legacy("fades"):
+			g.fadeOldSchool(fadeValue)
+		else:
+			g.show_fade(fadeValue)
 	if currentText != null:
 		currentText.draw(g)
 	if scrollText != null:

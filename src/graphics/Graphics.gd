@@ -23,6 +23,12 @@ const FADE_TO_BLACK := 0
 const FADE_TO_WHITE := 1
 const FADE_TO_IMAGE := 2
 
+## Bridge (phase 3 step B): the layers of new code a node of show_ui is on
+## (Main's UI and Transition), and the fade's node.
+const UI_LAYER := 1
+const TRANSITION_LAYER := 2
+const FADE_VIEW := "res://scenes/ui/Fade.tscn"
+
 # OpenGL constants (same values as in GL2).
 const GL_NO_ERROR := 0
 const GL_POINTS := 0x0000
@@ -709,6 +715,40 @@ func fadeOldSchool(fadeindex: float) -> void:
 				drawImage(fadeImage, 0, 0, 8)
 			FADE_TO_IMAGE:
 				drawImage(fadeImageName, 0, 0, 1)
+
+
+## Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): fadeOldSchool
+## without the drawing: the same state changes (the current colour, the
+## image's texture), and the Transition layer's Fade node draws the quad in
+## the frame's order (show_ui): a colour (the fade image's black or white
+## times the colour) or the image of setFadeImage, at 1 - fadeindex.
+func show_fade(fadeindex: float) -> void:
+	fadeindex = 0.0 if fadeindex <= 0 else fadeindex
+	if fadeindex >= 1:
+		return
+	glColor4f(_fadeColor[0], _fadeColor[1], _fadeColor[2], 1 - fadeindex)
+	var image = null
+	match fadeMode:
+		FADE_TO_WHITE:
+			image = whiteFadeImage
+		FADE_TO_BLACK:
+			image = fadeImage
+		FADE_TO_IMAGE:
+			image = fadeImageName
+		_:
+			return
+	var t := skip_image(image)
+	if t == null:
+		return
+	var fade = show_ui(FADE_VIEW, TRANSITION_LAYER)
+	if fade == null:
+		return
+	if fadeMode == FADE_TO_IMAGE:
+		fade.show_image(t.getGodotTexture(), _cur_color, canvas_material())
+	else:
+		var white := 1.0 if fadeMode == FADE_TO_WHITE else 0.0
+		fade.show_colour(Color(_cur_color.r * white, _cur_color.g * white, _cur_color.b * white,
+				_cur_color.a), canvas_material())
 
 
 func fadeOldSchoolColor(r: float, g: float, b: float, a: float) -> void:
@@ -1520,6 +1560,57 @@ func show_node(key: int, make: Callable) -> GeometryInstance3D:
 	if backend == null or not _proj3d:
 		return null
 	return backend.show_node(key, make)
+
+
+## Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): the node of new
+## code (the scene at path, on UI_LAYER or TRANSITION_LAYER) that draws in
+## the frame's 2D where the legacy drawing would draw now (GLBackend.show_ui:
+## what is drawn after it is drawn over it); null without a backend.
+func show_ui(path: String, layer: int) -> CanvasItem:
+	if backend == null:
+		return null
+	return backend.show_ui(path, layer)
+
+
+## Bridge (phase 3 step B): the material 2D drawing would be drawn with now
+## (the blending and the alpha test; null: the canvas default), for a node of
+## show_ui.
+func canvas_material() -> Material:
+	if backend == null:
+		return null
+	return backend.canvas_material(_blend_dst == GL_ONE, _effAlphaFunc(), _alpha_ref)
+
+
+## Bridge (phase 3 step B): drawImage's state changes without the drawing:
+## binds the image's texture and leaves the texture coordinate of the quad's
+## last vertex (GameTexture.drawPart's). Returns the texture, or null when
+## drawImage would draw nothing.
+func skip_image(image) -> GameTexture:
+	if image == null:
+		return null
+	var t := _toTexture(image)
+	if t == null:
+		return null
+	t.bind(self)
+	var tc := t.getImageTexCoords()
+	glTexCoord2f(tc.left(), tc.top())
+	return t
+
+
+## Bridge (phase 3 step B): the colour text drawn now has (setTextColor) with
+## the given alpha; text_alpha is drawMultiString's (startText's).
+static func text_color(alpha: float) -> Color:
+	return Color(textColor[0], textColor[1], textColor[2], alpha)
+
+
+func text_alpha() -> float:
+	return _textAlpha
+
+
+## Bridge (phase 3 step B): true when text is drawn in the bold font
+## (setFontSize(size, true)).
+static func font_bold() -> bool:
+	return _fontType == Values.BOLD
 
 
 # --- Display lists ---

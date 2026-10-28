@@ -1,0 +1,120 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" uid="uid://0804b63htfch" path="res://scenes/ui/CardInfo.gd" id="1_card"]
+[ext_resource type="Script" uid="uid://sko2muwq7vf3" path="res://scenes/ui/BaselineLabel.gd" id="2_label"]
+[ext_resource type="Theme" path="res://resources/theme/game_theme.tres" id="3_theme"]
+
+[node name="CardInfo" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 530.0
+offset_right = 1024.0
+offset_bottom = 762.0
+mouse_filter = 2
+theme = ExtResource("3_theme")
+script = ExtResource("1_card")
+
+[node name="Panel" type="Panel" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 4.0
+offset_top = 35.0
+offset_right = 762.0
+offset_bottom = 232.0
+mouse_filter = 2
+theme_type_variation = &"CardInfoPanel"
+
+[node name="Picture" type="TextureRect" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 10.0
+offset_top = 25.0
+offset_right = 10.0
+offset_bottom = 25.0
+mouse_filter = 2
+stretch_mode = 2
+
+[node name="Ball1" type="TextureRect" parent="Picture"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 65.0
+offset_top = 25.0
+offset_right = 65.0
+offset_bottom = 25.0
+mouse_filter = 2
+stretch_mode = 2
+
+[node name="Ball2" type="TextureRect" parent="Picture"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 80.0
+offset_top = 25.0
+offset_right = 80.0
+offset_bottom = 25.0
+mouse_filter = 2
+stretch_mode = 2
+
+[node name="Ball3" type="TextureRect" parent="Picture"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 90.0
+offset_top = 25.0
+offset_right = 90.0
+offset_bottom = 25.0
+mouse_filter = 2
+stretch_mode = 2
+
+[node name="Name" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 150.0
+offset_top = 75.0
+offset_right = 150.0
+offset_bottom = 75.0
+mouse_filter = 2
+theme_type_variation = &"CardInfoName"
+script = ExtResource("2_label")
+
+[node name="Line1" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 170.0
+offset_top = 107.0
+offset_right = 170.0
+offset_bottom = 107.0
+mouse_filter = 2
+theme_type_variation = &"CardInfoLine"
+script = ExtResource("2_label")
+
+[node name="Line2" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 170.0
+offset_top = 134.0
+offset_right = 170.0
+offset_bottom = 134.0
+mouse_filter = 2
+theme_type_variation = &"CardInfoLine"
+script = ExtResource("2_label")
+
+[node name="Line3" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 170.0
+offset_top = 161.0
+offset_right = 170.0
+offset_bottom = 161.0
+mouse_filter = 2
+theme_type_variation = &"CardInfoLine"
+script = ExtResource("2_label")
+
+[node name="Effect" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 150.0
+offset_top = 193.0
+offset_right = 150.0
+offset_bottom = 193.0
+mouse_filter = 2
+theme_type_variation = &"CardInfoEffect"
+script = ExtResource("2_label")

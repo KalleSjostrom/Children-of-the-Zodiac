@@ -1,0 +1,54 @@
+# Phase 3 (dialog coverage): a cutscene's dialog under the cutscene's own fade
+# (VillageStoryTimeLine.drawTop draws the dialog, then its fadeOldSchool):
+# "Vincent Tries to Cool Down the War" (--load="Slot 1") shows its first
+# dialog while it still fades in (about 9.5 s to 10.9 s: shots every 100 ms),
+# then CROSS pages on (a shot each) until the story ends.
+wait 9200
+shot v_#_fading
+wait 100
+shot v_#_fading
+wait 100
+shot v_#_fading
+wait 100
+shot v_#_fading
+wait 100
+shot v_#_fading
+wait 100
+shot v_#_fading
+wait 100
+shot v_#_fading
+wait 100
+shot v_#_fading
+wait 100
+shot v_#_fading
+wait 100
+shot v_#_fading
+wait 100
+shot v_#_fading
+wait 100
+shot v_#_fading
+wait 100
+shot v_#_fading
+wait 100
+shot v_#_fading
+wait 100
+shot v_#_fading
+wait 100
+shot v_#_fading
+wait 100
+shot v_#_fading
+wait 100
+shot v_#_fading
+wait 100
+shot v_#_fading
+wait 100
+shot v_#_fading
+wait 100
+mark
+tap CROSS
+wait 1500
+shot v_#_dialog
+loopuntil !VillageStory 120000
+wait 1000
+shot v99_after
+quit

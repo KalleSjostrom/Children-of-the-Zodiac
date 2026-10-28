@@ -1,0 +1,227 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" uid="uid://b3hqnudngnjdn" path="res://scenes/ui/Dialog.gd" id="1_dialog"]
+[ext_resource type="Script" uid="uid://sko2muwq7vf3" path="res://scenes/ui/BaselineLabel.gd" id="2_label"]
+[ext_resource type="Theme" path="res://resources/theme/game_theme.tres" id="3_theme"]
+[ext_resource type="Texture2D" uid="uid://dr1o1iyru0fwb" path="res://res/Menu/hand1.png" id="4_hand"]
+
+[node name="Dialog" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1024.0
+offset_bottom = 768.0
+mouse_filter = 2
+theme = ExtResource("3_theme")
+script = ExtResource("1_dialog")
+
+[node name="Image" type="TextureRect" parent="."]
+visible = false
+use_parent_material = true
+layout_mode = 0
+mouse_filter = 2
+stretch_mode = 2
+
+[node name="Paper2" type="Panel" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 30.0
+offset_top = 50.0
+offset_right = 730.0
+offset_bottom = 225.0
+mouse_filter = 2
+theme_type_variation = &"DialogPaperSecond"
+
+[node name="Name" type="Control" parent="Paper2"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 45.0
+offset_top = 55.0
+offset_right = 45.0
+offset_bottom = 55.0
+mouse_filter = 2
+theme_type_variation = &"DialogName"
+script = ExtResource("2_label")
+
+[node name="FirstLine" type="Control" parent="Paper2"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 65.0
+offset_top = 90.0
+offset_right = 65.0
+offset_bottom = 90.0
+mouse_filter = 2
+theme_type_variation = &"DialogLine"
+script = ExtResource("2_label")
+
+[node name="SecondLine" type="Control" parent="Paper2"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 60.0
+offset_top = 120.0
+offset_right = 60.0
+offset_bottom = 120.0
+mouse_filter = 2
+theme_type_variation = &"DialogLine"
+script = ExtResource("2_label")
+
+[node name="Paper1" type="Panel" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_top = 20.0
+offset_right = 700.0
+offset_bottom = 195.0
+mouse_filter = 2
+theme_type_variation = &"DialogPaper"
+
+[node name="Name" type="Control" parent="Paper1"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 45.0
+offset_top = 55.0
+offset_right = 45.0
+offset_bottom = 55.0
+mouse_filter = 2
+theme_type_variation = &"DialogName"
+script = ExtResource("2_label")
+
+[node name="FirstLine" type="Control" parent="Paper1"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 65.0
+offset_top = 90.0
+offset_right = 65.0
+offset_bottom = 90.0
+mouse_filter = 2
+theme_type_variation = &"DialogLine"
+script = ExtResource("2_label")
+
+[node name="SecondLine" type="Control" parent="Paper1"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 65.0
+offset_top = 125.0
+offset_right = 65.0
+offset_bottom = 125.0
+mouse_filter = 2
+theme_type_variation = &"DialogLine"
+script = ExtResource("2_label")
+
+[node name="Question" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+mouse_filter = 2
+
+[node name="Alternative1" type="Control" parent="Question"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 65.0
+offset_top = 75.0
+offset_right = 65.0
+offset_bottom = 75.0
+mouse_filter = 2
+theme_type_variation = &"DialogQuestion"
+script = ExtResource("2_label")
+
+[node name="Alternative2" type="Control" parent="Question"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 370.0
+offset_top = 75.0
+offset_right = 370.0
+offset_bottom = 75.0
+mouse_filter = 2
+theme_type_variation = &"DialogQuestion"
+script = ExtResource("2_label")
+
+[node name="Alternative3" type="Control" parent="Question"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 65.0
+offset_top = 135.0
+offset_right = 65.0
+offset_bottom = 135.0
+mouse_filter = 2
+theme_type_variation = &"DialogQuestion"
+script = ExtResource("2_label")
+
+[node name="Alternative4" type="Control" parent="Question"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 370.0
+offset_top = 135.0
+offset_right = 370.0
+offset_bottom = 135.0
+mouse_filter = 2
+theme_type_variation = &"DialogQuestion"
+script = ExtResource("2_label")
+
+[node name="InputQuestion" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+mouse_filter = 2
+
+[node name="Title" type="Control" parent="InputQuestion"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 45.0
+offset_top = 75.0
+offset_right = 45.0
+offset_bottom = 75.0
+mouse_filter = 2
+theme_type_variation = &"DialogQuestion"
+script = ExtResource("2_label")
+
+[node name="Digit1" type="Control" parent="InputQuestion"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 70.0
+offset_top = 130.0
+offset_right = 70.0
+offset_bottom = 130.0
+mouse_filter = 2
+theme_type_variation = &"DialogQuestion"
+script = ExtResource("2_label")
+
+[node name="Digit2" type="Control" parent="InputQuestion"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 100.0
+offset_top = 130.0
+offset_right = 100.0
+offset_bottom = 130.0
+mouse_filter = 2
+theme_type_variation = &"DialogQuestion"
+script = ExtResource("2_label")
+
+[node name="Digit3" type="Control" parent="InputQuestion"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 130.0
+offset_top = 130.0
+offset_right = 130.0
+offset_bottom = 130.0
+mouse_filter = 2
+theme_type_variation = &"DialogQuestion"
+script = ExtResource("2_label")
+
+[node name="Digit4" type="Control" parent="InputQuestion"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 160.0
+offset_top = 130.0
+offset_right = 160.0
+offset_bottom = 130.0
+mouse_filter = 2
+theme_type_variation = &"DialogQuestion"
+script = ExtResource("2_label")
+
+[node name="Hand" type="TextureRect" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 25.0
+offset_top = 50.0
+offset_right = 70.0
+offset_bottom = 90.0
+mouse_filter = 2
+texture = ExtResource("4_hand")
+stretch_mode = 2

@@ -18,6 +18,13 @@ extends RefCounted
 ## legacy 3D drawn there (a battle, the weather's front pass during it, the
 ## minimap) shares the depth buffer and the blending with the scene, as it
 ## shared one chunk with the legacy walls.
+##
+## Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): a node of new
+## code on a layer above LegacyLayer (a dialog box on UI, the fade on
+## Transition) takes a slot in the frame's 2D order where the legacy drawing
+## would have drawn (show_ui). From there on the frame's legacy 2D goes to
+## that layer's canvas, ordered after the node, so whatever the frame draws
+## later is drawn over it, as before.
 
 const VIRTUAL_SIZE := Vector2(1024, 768)
 const MAX_SURFACE_VERTS := 60000
@@ -46,6 +53,20 @@ var _scene_chunk_used := false
 var _chunk_nodes := {} # show_node key -> [node, frame it was shown in]
 var _frame := 0
 
+# The frame's 2D order (show_ui): the parent of the canvas items of each level
+# (0: LegacyLayer's Canvas, then the canvas of each layer of new code), the
+# layer node of each level (null for 0), the level the next canvas item goes
+# to and the draw index of the next canvas item or node.
+var _level_parents: Array[RID] = []
+var _level_layers: Array[CanvasLayer] = []
+var _level := 0
+var _order := 0
+var _ci_parents: Array[RID] = [] # the parent of each pooled canvas item
+var _ui_pool := {} # scene path -> Array of its nodes, in the order a frame shows them
+var _ui_count := {} # scene path -> how many of its nodes were shown since the drawing started
+var _ui_shown := {} # node -> true, the nodes shown since the drawing started
+var _ui_warned := false
+
 var _canvas_materials := {} # key -> Material (or null)
 var _shader_cache := {} # render mode key -> Shader
 var _material_cache := {} # material key -> ShaderMaterial
@@ -56,10 +77,16 @@ var vp_pixel_size := Vector2i(1024, 768)
 var stats_chunks := 0
 
 
-## canvas: the parent of the 2D canvas items (default: the host itself).
-func _init(p_host: Node, canvas: CanvasItem = null) -> void:
+## canvas: the parent of the 2D canvas items (default: the host itself);
+## layers: the layers of new code above it, bottom up (show_ui's levels 1, 2 …).
+func _init(p_host: Node, canvas: CanvasItem = null, layers: Array[CanvasLayer] = []) -> void:
 	host = p_host
 	root_ci = (canvas if canvas != null else p_host as CanvasItem).get_canvas_item()
+	_level_parents = [root_ci]
+	_level_layers = [null]
+	for layer in layers:
+		_level_parents.append(layer.get_canvas())
+		_level_layers.append(layer)
 	_premult_material = CanvasItemMaterial.new()
 	_premult_material.blend_mode = CanvasItemMaterial.BLEND_MODE_PREMULT_ALPHA
 	_register_globals()
@@ -105,6 +132,7 @@ func free_all() -> void:
 	for ci in _ci_pool:
 		RenderingServer.free_rid(ci)
 	_ci_pool.clear()
+	_ci_parents.clear()
 	_ci_used = 0
 
 
@@ -129,6 +157,10 @@ func _start_drawing() -> void:
 	_cur_ci = RID()
 	_cur_vp = null
 	_cur_2d_key = ""
+	_level = 0
+	_order = 0
+	_ui_count.clear()
+	_ui_shown.clear()
 	stats_chunks = 0
 	_update_viewport_size()
 
@@ -146,10 +178,12 @@ func end_frame() -> void:
 	for i in range(_ci_used, _ci_pool.size()):
 		RenderingServer.canvas_item_clear(_ci_pool[i])
 	_free_chunk_nodes()
+	_hide_ui_nodes()
 
 
 ## Discards everything drawn so far this frame (glClear of the color buffer);
-## the nodes of show_node shown so far stay this frame's.
+## the nodes of show_node shown so far stay this frame's, those of show_ui
+## are hidden unless shown again.
 func clear_frame() -> void:
 	_start_drawing()
 
@@ -166,15 +200,21 @@ func _update_viewport_size() -> void:
 
 func _acquire_ci(material: Material) -> RID:
 	var ci: RID
+	var parent := _level_parents[_level]
 	if _ci_used < _ci_pool.size():
 		ci = _ci_pool[_ci_used]
+		if _ci_parents[_ci_used] != parent:
+			RenderingServer.canvas_item_set_parent(ci, parent)
+			_ci_parents[_ci_used] = parent
 	else:
 		ci = RenderingServer.canvas_item_create()
-		RenderingServer.canvas_item_set_parent(ci, root_ci)
+		RenderingServer.canvas_item_set_parent(ci, parent)
 		_ci_pool.append(ci)
-	RenderingServer.canvas_item_set_draw_index(ci, _ci_used)
+		_ci_parents.append(parent)
+	RenderingServer.canvas_item_set_draw_index(ci, _order)
 	RenderingServer.canvas_item_set_material(ci, material.get_rid() if material else RID())
 	_ci_used += 1
+	_order += 1
 	stats_chunks += 1
 	return ci
 
@@ -200,6 +240,54 @@ func set_ci_transform(ci: RID, xform: Transform2D) -> void:
 	if xform != _cur_ci_xform:
 		RenderingServer.canvas_item_add_set_transform(ci, xform)
 		_cur_ci_xform = xform
+
+
+## Bridge (phase 3 step B): the material the 2D drawing with this blend and
+## alpha test is drawn with (ci_2d's), for a node of new code that draws in
+## its place (null: the canvas default, alpha blending).
+func canvas_material(additive: bool, alpha_func: int, alpha_ref: float) -> Material:
+	var key := _canvas_key(additive, alpha_func, alpha_ref)
+	return _canvas_material(key, additive, alpha_func, alpha_ref)
+
+
+## Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): the node of new
+## code that draws itself where the legacy drawing would draw in this frame's
+## 2D (a dialog box, the fade): the n-th node of the scene at path shown since
+## the frame's drawing started, instanced the first time into the given layer
+## of new code (1, 2 …: the layers given to _init) and kept from frame to
+## frame, in the next slot of the frame's order. The 2D drawn after it goes to
+## that layer's canvas, after it. A node not shown in a frame is hidden at its
+## end. The levels only go up in a frame: a node of a lower layer than one
+## shown before it would be drawn under that one (a warning, once).
+func show_ui(path: String, layer: int) -> CanvasItem:
+	if layer < _level and not _ui_warned:
+		_ui_warned = true
+		push_warning("GLBackend.show_ui: %s on layer %d after a node of layer %d is drawn under it" % [path, layer, _level])
+	_level = maxi(_level, layer)
+	# The next legacy 2D starts a canvas item of its own, after the node.
+	_cur_kind = 0
+	var count: int = _ui_count.get(path, 0)
+	_ui_count[path] = count + 1
+	var pool: Array = _ui_pool.get_or_add(path, [])
+	if count == pool.size():
+		var scene: PackedScene = ResourceLoader.load(path)
+		var made: CanvasItem = scene.instantiate()
+		_level_layers[layer].add_child(made)
+		pool.append(made)
+	var node: CanvasItem = pool[count]
+	node.visible = true
+	RenderingServer.canvas_item_set_draw_index(node.get_canvas_item(), _order)
+	_order += 1
+	_ui_shown[node] = true
+	return node
+
+
+## Hides the nodes of show_ui that were not shown this frame.
+func _hide_ui_nodes() -> void:
+	for path: String in _ui_pool:
+		for node: CanvasItem in _ui_pool[path]:
+			if not _ui_shown.has(node):
+				node.visible = false
 
 
 static func _alpha_passes_all(alpha_func: int, alpha_ref: float) -> bool:
@@ -275,8 +363,9 @@ void fragment() {
 func vp_3d() -> Chunk3D:
 	if _cur_kind == 2:
 		return _cur_vp
-	if _ci_used == 0 and not _scene_chunk_used and is_instance_valid(scene_3d):
-		# Nothing 2D before it in this frame: the chunk is the scene's.
+	if _order == 0 and not _scene_chunk_used and is_instance_valid(scene_3d):
+		# Nothing 2D (and no node of show_ui) before it in this frame: the
+		# chunk is the scene's.
 		if _scene_chunk == null:
 			_scene_chunk = SceneChunk.new()
 		_scene_chunk.attach(scene_3d)

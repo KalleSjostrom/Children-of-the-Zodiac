@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://bbjsnghmhtcg4" path="res://scenes/ui/Fade.gd" id="1_fade"]
+
+[node name="Fade" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1024.0
+offset_bottom = 768.0
+mouse_filter = 2
+script = ExtResource("1_fade")
+
+[node name="Colour" type="ColorRect" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_right = 1024.0
+offset_bottom = 768.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Image" type="TextureRect" parent="."]
+visible = false
+use_parent_material = true
+layout_mode = 0
+mouse_filter = 2
+stretch_mode = 2

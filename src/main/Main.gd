@@ -60,6 +60,10 @@ static var _legacy: PackedStringArray = []
 @onready var world: Node = $World
 ## Parent of GLBackend's canvas items (CanvasLayer 1, above World).
 @onready var legacy_canvas: Node2D = $LegacyLayer/Canvas
+## The layers of new code over it (CanvasLayer 2 and 3): the dialog boxes
+## and the fades, shown in the legacy frame's order (Graphics.show_ui).
+@onready var ui_layer: CanvasLayer = $UI
+@onready var transition_layer: CanvasLayer = $Transition
 
 var organizer: Organizer
 var graphics: Graphics
@@ -109,7 +113,8 @@ func _ready() -> void:
 	OggStreamer.audioParent = audio
 	SoundPlayer.audioParent = audio
 
-	backend = GLBackend.new(self, legacy_canvas)
+	var layers: Array[CanvasLayer] = [ui_layer, transition_layer]
+	backend = GLBackend.new(self, legacy_canvas, layers)
 	graphics = Graphics.new(backend)
 	GameEventListener.g = graphics
 	GameCore.screen = self

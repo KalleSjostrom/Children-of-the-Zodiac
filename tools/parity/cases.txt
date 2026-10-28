@@ -512,3 +512,22 @@ particles_save_grivera      particles_save_point --load="Slot 1" --start="Griver
 # whose preload ran a 200-step pre-run, 11 s in normal runs) and Fire, on its
 # own turns (script effects_enemy).
 effects_menthu_flame   effects_enemy --load="Start Menthu1" --start=Menthuattack
+# Phase 3 (shared UI and transitions): the dialog family in every mode that
+# draws it, what the cases above do not show (group dialog_*): Math's dialog
+# in Dellna (name, a question with the hand moved, the shown image fading in
+# and out, the input question, a gift line with its card), The Prison Cell's
+# loot card (the message box and card info) and Zalzi's answer by Kin on the
+# second paper, a sign in Alares, the world map's "We can't enter now!", a
+# trigger door's dialog while the floor fades in and its question with the
+# hand moved, a store's dialog during its fade-in and fade-out, the card info on
+# the menu's deck page and over the card store's menus (a second UI node after
+# legacy drawing in one frame), a cutscene's dialog under its own fade.
+dialog_dellna_math          dialog_math              --load=Start --start=Dellna
+dialog_prison_cell          dialog_prison_cell       --load=Start --start="The Prison Cell" --status=prisonZalzi:4
+dialog_sign                 dialog_sign              --load="Slot 1" --start=Alares
+dialog_world_map            dialog_world_map         --load="Slot 1" --start=landAlares --status=Alaresnode:-2
+dialog_trigger_question     dialog_trigger_question  --load=Start --start="Central Pass--West Part-mark0" --no-encounters
+dialog_store_fade           dialog_store_fade        --load="Slot 1" --start=Alares
+dialog_deck_page            dialog_deck_page         --load="Slot 1" --start=Alares
+dialog_card_store           dialog_card_store        --load="Slot 1" --start=Alares
+dialog_story_fade           dialog_story_fade        --load="Slot 1" --start="Vincent Tries to Cool Down the War"

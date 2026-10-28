@@ -3,9 +3,10 @@
 Status: **phase 0 done** (2026-10-16); **phase 1 steps A and B done** for
 all 63 places and 89 variants (pilot: Zazo and "Zazo - Miner's Home", 6.7;
 rollout: the other 61 places, 6.8; closing the phase, 6.9); **phase 2
-pilot done** (steps A and B for Forest of Reil and The Great Mine--Tunnel,
-7.7; the other 77 floors pass the converter and the data check in a dry
-run); phases 3–5 are proposals. The plan
+steps A and B done** for all 80 floors (pilot 7.7, rollout 7.8, closing
+7.9); **the particles phases P and P2 done** (6.10, 6.12); **phase 3 pilot
+done** (the dialog family and the fade through step B, 8.1; the rollout
+prepared, 8.2); phases 4–5 are proposals. The plan
 assumes the state described in `docs/HANDOFF.md` (all classes ported, main
 paths run). Conventions for new code: `docs/ARCHITECTURE.md`.
 
@@ -1557,7 +1558,11 @@ calls.
   menu, after a lever), the weather, and alpha-textured walls (Silent
   Ruin). The stage in the renderer that rounds differently was not found;
   the pilot met the same (7.7, the Tunnel's 1/255) and avoided it by
-  batching, which here is already as GLBackend's.
+  batching, which here is already as GLBackend's. *Phase 3 (8.2):* with the
+  minimap not drawn in either path, the ice button case and the Silent Ruin
+  tour are identical (24 of 24 shots; 15 differ with it): the 1/255 of those
+  shots, Silent Ruin's too, comes from the minimap's batches in the scene's
+  world, not from its walls.
 * **Other cases:** the 110 cases that never show a converted floor: 2,644
   of 2,644 shots and all logs identical to the golden (before and after the
   fix).
@@ -1704,6 +1709,10 @@ from phases 1–2.
      baseline and measures JOGL-style ink bounds (`Graphics.getStringWidth`).
    * This is also where the UI items in `TODO.md` get fixed (the papyrus
      font, text running out of the paper, a vertical Yes/No).
+   * *Pilot (8.1):* the theme has the fonts, a size per role and the papers;
+     nothing is restyled. No baseline tuning was needed: a text node drawn
+     by its baseline with the legacy call (`BaselineLabel`) is exact. The
+     `TODO.md` items are look changes, open (13, decision 8).
 2. **Dialog** (`villages/utils/Dialog.gd`, 381 lines, a singleton used by
    villages, dungeons, cutscenes and stores) → `ui/Dialog.tscn`.
    * It is a Control that draws the state of the legacy `Dialog`/
@@ -1723,6 +1732,182 @@ from phases 1–2.
 
 **Exit:** villages, dungeons and cutscenes have no `draw(g)` left except
 battles and riddles.
+
+### 8.1 Pilot results (the dialog family and the fade)
+
+Done as `docs/phase3_prompt.md` asked: the Theme, and step B for the dialog
+box (the legacy `Dialog`: speeches on both papers, questions and the hand,
+the input question, a shown image, gift lines), the message box
+(`Dialog.drawMessages`: signs, loot, gift lines without a speaker), the card
+info popup (`DeckPage.drawCardInfo`) and the fade (`GameMode.draw`'s and a
+cutscene's own). Conventions: docs/ARCHITECTURE.md section 12; the procedure
+for the next overlays: docs/CONVERTING_UI.md.
+
+* **Baseline** (on 55499bc7): `tools/check.sh` 0 failed; goldens of all 362
+  cases and `bridge_test` (`p3golden`, 12 minutes with 8 jobs: the GPU
+  particles made recording five times faster); the cases that show dialogs
+  (`story_*`, `dungeon_use_*`, `dungeon_trigger_*`, `stores`, `boss`)
+  recorded again: identical (1,793 shots, logs too).
+* **Facts found** (deliverable 1; where they add to or differ from the
+  prompt):
+  * The order around the dialog, mode by mode, is as the prompt lists it,
+    with these additions. Village: the card info drawn under a message is a
+    loot's or a sign's card (`Sign` content). Cutscenes: `draw_scene` calls
+    the village's `drawOverlays(g, null)` (no emotions, the village's dialog
+    only while it talks, which no cutscene does), the timeline then draws its
+    actors' emotions, `drawTop`'s images, the dialog (after
+    `loadIdentity`: the zoom applies to the images before it, not to the
+    dialog), its own fade (not in the two translucent image modes), the text,
+    the scroll text and the translucent-over-actor image; `VillageStory.draw`
+    then draws the mode's fade last. Labyrinth and BossBattleArea: their
+    `card` is never set (nothing calls `drawCard(c)`, in the Java either), so
+    the card info after their dialog never shows; the card a chest gives is
+    the dialog's gift (`Dialog.drawGift`). Stores: after `drawStandard`'s
+    dialog come the keeper, the menu strips and `draw3D` (menus, the confirm
+    dims and boxes, the card store's card info at y −23, the Inn's prize
+    message with its card, tutorials). World map: the dialog after the node's
+    name plate, then the fade. A riddle draws no dialog.
+  * The mode fade is the last drawing of every mode that has one (Village,
+    VillageStory, Labyrinth, Landscape, AirLandscape, the stores, the boss
+    areas, the menu, the title and game over; not BattleManager, Cheater,
+    BattleTest and the riddles, which have none): only `GameCore.testDraw`'s
+    "Paused" and "game pad lost" come after it (a fade of 0.5 and text). The
+    story texts and images are drawn after the cutscene's own fade, before
+    the mode's.
+  * Fades: `FADE_TO_WHITE` comes from cutscenes (`setfadeimage`, "Getting the
+    Crystal of Levitation", "Elder of Dellna Saves the Day"); `FADE_TO_IMAGE`
+    only from `Menthu1.kill` and `Menthu2.kill` (`res/test.png`, Menthu on his
+    knees), which no case reaches; a fade-in that completes sets black again.
+    The quad takes `setFadeColor`'s colour (a cutscene's tint) and is drawn
+    with the frame's 2D state: an alpha test drops it while it is nearly
+    transparent. `fadeOldSchoolColor(White)` (the tutorial's dim, an enemy's
+    red flash) and `dim` (the menu hand) are no mode fades.
+  * State changed while drawing: the shown image's alpha (and the
+    `isFinished()` it calls at 0, which moves the dialog on), `questionNumer`,
+    `alternatives`, `input` and `xChoice = -1` of the input question; the
+    GL and text state (drawString's `setColor(color)`, `startText`'s alpha,
+    the font sizes, drawImage's bound texture). `DialogSequence`, `MenuHand`
+    (not used by the dialog, which draws its hand image itself) and
+    `drawCardInfo` change nothing else.
+  * Text: every converted text is left aligned at a fixed baseline (no
+    `calcAlignCenter`, `getStringWidth` or `drawMultiString` of a measured
+    width); `drawString` draws at alpha 1, `drawMultiString` at `startText`'s
+    alpha, the current mode's fade value: a store's lines fade with it, the
+    speaker's name does not. The dialog sets black for speeches and messages;
+    questions, the input question and the card info take the current text
+    colour; the bold font is whatever was set last.
+  * The layers share the canvas: at 1280 x 720 and 1440 x 1080 (letterboxed)
+    the papers and images are identical legacy vs. node; text was rasterized
+    at the window's scale by the nodes (Godot's oversampling for Controls:
+    sharper, up to 107/255 on 1 % of a frame), at 1 by the legacy; with
+    `BaselineLabel.oversampling` 1 it differs by 1/255 on 3–23 pixels a shot
+    (the transform's rounding). `copyFrame` and AutoPlay's shots read the
+    main viewport: every layer, as the frame before rendered it.
+  * A dialog never shows with a visible story, cover-all or translucent image
+    in the 80 stories that ran headless with a slow CROSS (the timeline waits
+    for input at a dialog); it shows under a cutscene's own fade only while
+    "Vincent Tries to Cool Down the War" (80 frames) and "Menthu is
+    Disappointed" (5) fade in.
+* **Coverage.** Nine new cases (`dialog_*`, 141 shots), recorded twice on
+  unconverted code: identical. A probe copy with prints in the draws and in
+  AutoPlay's `shot`, run headless over every case, gave what each shot
+  shows; the new cases add what none showed: Math in Dellna (his name, a
+  question with the hand moved, the shown image fading in and out, the input
+  question, a gift line with its card), The Prison Cell (a loot's card, Kin
+  answering on the second paper, both papers), a sign, the world map's "We
+  can't enter now!", a trigger door's dialog while the floor fades in and its
+  question with the hand moved, a store's dialog through its fade-in and
+  fade-out, the card info on the menu's deck page and over the card store's
+  menus, a cutscene's dialog under its own fade. The existing cases already
+  show the dialog in every mode that draws one (boss areas, stores, the
+  labyrinth's villagers, chests, missions and riddles), whispers (cutscenes,
+  labyrinth, boss areas), both papers in cutscenes and labyrinths, the mode
+  fade in every mode, white fades and a dialog during a mode's fade.
+  Not covered: an image fade (`FADE_TO_IMAGE`; the Fade node's TextureRect
+  with a tint, as the dialog's shown image, which is covered), "game pad
+  lost" (no pad in seeded runs).
+* **Built** (deliverables 2–4): the Theme; `BaselineLabel`; `Dialog`,
+  `SignBox`, `CardInfo` (UI layer) and `Fade` (Transition) scenes; the twins
+  in `Dialog`, `DeckPage.show_card_info`, `AbstractCard.place_card`,
+  `Graphics.show_fade`; `Graphics.show_ui` / `GLBackend.show_ui` (a node's
+  slot in the frame's 2D order, the legacy 2D after it on its layer);
+  `--legacy=dialog`, `--legacy=fades`. Moved besides the mode fade: the
+  cutscene's own fade (its texts are drawn over it, on Transition). Kept
+  legacy: the riddle's fade, "Paused" and "game pad lost".
+* **Parity** (all from one snapshot of the final code, tolerance 0; the 370
+  cases and `bridge_test`, 6,999 shots, of which 432 in 70 cases show a node
+  of the dialog family and 901 in 302 cases a fade, by the probe of the
+  first 368 cases; the node run is the "" side of every pair):
+  * golden vs. the nodes (`""`): 6,999 of 6,999 shots identical, all logs
+    identical, the same script errors in every case (2,089, the content
+    quirks of 6.8 and 7.8);
+  * `ab "--legacy=dialog" ""`, on every case: 6,999 of 6,999;
+  * `ab "--legacy=fades" ""`, on every case: 6,999 of 6,999;
+  * `ab "--legacy=dialog,fades" ""`, on every case: 6,999 of 6,999; and the
+    run with both flags equals the golden (6,999 of 6,999: the legacy paths
+    and GLBackend's frame without nodes are unchanged).
+  * No tolerance was needed: the nodes draw with the legacy calls
+    (`draw_string`, textured rects of the same textures, GLBackend's own
+    canvas materials), in the legacy order. The first parity run of the
+    pilot case (Math) was already identical.
+  * The bridge test passes (identical, "BridgeTest: freed" in the log).
+* **Frame rate** (normal runs: no `--seed`, windowed, one at a time; AutoPlay's
+  `fps=` every 0.5 s for 10 s while the dialog is shown, legacy → node):
+
+  | Where | Capped | Uncapped |
+  |---|---|---|
+  | "Vincent Tries to Cool Down the War", its first dialog | 60 → 60 | 1,990–2,110 → 2,070–2,210 |
+  | Central Pass--West Part, the trigger door's dialog | 60 → 60 | 960–1,040 → 920–1,010 |
+  | Dellna, Math's first line | 60 → 60 | 1,400–1,640 → 1,420–1,790 |
+
+  The same within the noise. One uncapped node run of the cutscene fell to
+  145 FPS for its last 5 s and did not again in three repetitions.
+
+### 8.2 The rollout (prepared, not done)
+
+The legacy overlays left in villages, labyrinths and cutscenes, with their
+place in each mode's frame and what each needs (in the order of the frames):
+
+| Overlay | Where in the frame | What blocks it |
+|---|---|---|
+| Emotion bubbles (`Sprite.drawEmotions`, `Actor.drawEmotion`) | Village: first in `drawOverlays`, before the dialog; cutscene: the actors' after the scene, before `drawTop`'s images | Nothing in the order: they are the first legacy 2D after the scene, so they can be children of their `ActorView` in `World` (z above `Overhead` and `Effects`, item 2 above) or UI nodes. Keep the state their drawing changes (2.4, the bubble positions of `Village.update_draw_state`), the cutscene zoom's transform |
+| Mission display (`Mission.draw`) | Labyrinth: the first 2D, after the minimap, before the dialog | Nothing: a UI node before the dialog's slot; its `pushState`/`hide`/`popState` stay legacy |
+| Minimap (`MapRenderer`, 3D without depth test, in the scene's chunk) | Labyrinth: after the weather and a battle's 3D, before the 2D | It is 3D (a tilted disk and arrow). The plan 7.5's 3D node on the rig puts it where its batches are today; plan 7.8's 1/255 comes from those batches (below), so the node has to be checked against it. As a UI node it would need its perspective drawn in 2D |
+| A battle's and a riddle's top layer | Labyrinth, boss areas: after the dialog | Phase 4 (battles, mini-games) |
+| Tutorials' top layer (`Tutorial.drawTopLayer`, the trigger door's, the stores') | Labyrinth: after the battle's top layer, before the fade; stores: in `draw3D` | Its coloured text (`ColorTextLoader`, the `.tut` word colours: BBCode, 9.2) and its dim (`fadeOldSchoolColor`) |
+| Cover-all, story and village images (`ImageSettings.draw`, `drawTextBack`) | Cutscene: `drawTop`, before the dialog, under the zoom's modelview | The zoom (the timeline scales the modelview at the start of `draw`; the images are drawn with it); the scroll modes; then UI nodes before the dialog's slot |
+| Story texts (`Text.draw`), scroll texts (`ScrollableTexts`, the credits) | Cutscene: after the cutscene's fade (over it) | Their own fades (`Text` is a `Fadeable` stepped per draw), the bold font the credits leave on; nodes on Transition after the fade's slot |
+| Translucent-over-actor image | Cutscene: last of `drawTop`, over the dialog and the texts | As the images; on Transition after the texts |
+| "Paused", "game pad lost" (`GameCore.testDraw`) | After the mode, over its fade | The pad overlay needs a dev flag to be covered (seeded runs read no pad); its menu is a `MenuNode` (9.2) |
+| Menu pages (`MainMenu`, `AbstractPage.draw3D` per page; `LabyrinthMap.draw`) | The menu mode | Phase 4.2 (`MenuNode` lists, the help and tutorial texts, the automap) |
+| The riddle's fade | Labyrinth, inside the riddle's top layer | Phase 4 (the riddle's backdrop) |
+
+**The minimap and plan 7.8's 1/255.** Drawn without the minimap (both paths),
+`dungeon_use_ice_button` and the Silent Ruin tour are identical legacy vs.
+scene (24 of 24 shots); with it, 15 differ by 1/255, also the Silent Ruin
+shots that 7.8 attributed to the alpha-textured walls (their differing
+pixels lie on walls far from the minimap). So the 1/255 comes from the
+minimap's legacy batches in the scene's 3D world (the 3D bridge), not from
+the walls or the weather: a minimap that is a node replaces exactly the
+drawing that causes it, but where and how the node is drawn decides whether
+the 1/255 goes (a node in the same world, sorted after the walls as the
+batches are, may keep it).
+
+**What keeps the exit from being met after the rollout** ("villages,
+dungeons and cutscenes have no `draw(g)` left except battles and riddles"):
+
+* The modes still have `draw(g)`: the Organizer drives every mode through
+  it, and step B's twins run there (where the legacy state changes happened).
+  Only a `Game` autoload (9.3) and `_process` (phase 5) remove it.
+* The `--legacy=` paths (`villages`, `dungeons`, `dialog`, `fades`, …) draw
+  through `Graphics` until each phase closes (6.9, 7.9).
+* Labyrinths: `init_scene_3d`'s GL state, which battles read, and the 3D
+  bridge for a battle's drawing (battles are exempt, but the bridge is not
+  battle code); the frame's structure (`GLBackend.begin_frame`, chunks)
+  until phase 5.
+* The world map and the airship (`Landscape`, `AirLandscape`) are other
+  modes (4.1), the menu (4.2) another; they are not in the exit's list but
+  they draw the shared dialog and fade through the same twins.
 
 ## 9. Phase 4: remaining modes
 
@@ -1917,6 +2102,18 @@ When no mode draws through `g` any more:
   the editor (`detect_3d`). That changes the legacy drawing too, which uses
   the same texture. The converters set `compress_to=0`.
 * **`Vector3f` aliasing** in card effects (9.4).
+* **UI nodes in the legacy frame** (phase 3). A node on UI or Transition is
+  ordered among GLBackend's canvas items by their draw index, and the legacy
+  2D after it is moved to its layer; a node of a lower layer shown after one
+  of a higher layer in the same frame would be drawn under it (GLBackend
+  warns). Godot sets a node's draw index from its tree index when it enters
+  the tree or moves; GLBackend sets it again whenever it shows the node, so
+  other nodes added to UI or Transition must be shown through
+  `Graphics.show_ui` too while legacy drawing remains.
+* **Text at other window sizes** (phase 3). Godot rasterizes a Control's
+  text at the window's scale; the legacy text is rasterized at 1024 x 768
+  and scaled. `BaselineLabel` keeps the legacy look (`oversampling` 1);
+  sharper text in full screen is a look change (13, decision 8).
 
 ## 13. Open decisions
 
@@ -1976,6 +2173,12 @@ When no mode draws through `g` any more:
    villages look slightly different where no sprite is near a roof or
    treetop. `--legacy=village_top_layer` keeps the legacy rule for parity
    runs.
+8. **UI look** (from the phase 3 pilot, 8.1): the `TODO.md` UI items
+   (replace the papyrus font, a vertical Yes/No, the papers that look "not
+   in world", text running out of the paper) and sharper text in full screen
+   (`BaselineLabel.oversampling` 0) change the look; the pilot kept the
+   legacy look so that parity holds. Each is a theme or scene edit now.
+   Open.
 
 ## 14. Suggested order and size
 
@@ -1988,7 +2191,7 @@ Sizes are relative: S ≈ a focused session, XL ≈ many sessions.
 | 2 | Dungeons + weather + minimap | L | 0; decision 2 (the weather: 6) | editable dungeons; FPS fix (with decision 6) |
 | P | Village and cutscene particles on the GPU (6.4; `docs/particles_prompt.md`). *Done (6.10).* | M | 1; decision 6 (decided for particles) | Dellna's snow back on; Home of the Gods and Dellna at 60 FPS |
 | P2 | Dungeon weather, save points and the card and enemy effects that are particles, on the GPU (6.11). *Done (6.12).* | M | 2, P | rainy and snowy floors at 60 FPS; battles without the effects' stalls (Wind 3 at 7 FPS, the Flame's 10 s) |
-| 3 | Theme, Dialog, signs, emotions, fades, HUD | M | 1 (or 2) | most of the remaining `draw(g)` |
+| 3 | Theme, Dialog, signs, emotions, fades, HUD. *Pilot done (8.1): the Theme, the dialog family, the fade; the rollout prepared (8.2).* | M | 1 (or 2) | most of the remaining `draw(g)` |
 | 4.1 | World map + airship | M | 1 (converter), 3 | — |
 | 4.2 | Title, game over, mini-games, stores, menu | L | 3 | — |
 | 4.3 | Input, audio, saves, `Game` autoload | M | any time after 0; the autoload is best after 4.2 | 5 |

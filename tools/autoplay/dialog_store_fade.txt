@@ -1,0 +1,60 @@
+# Phase 3 (dialog coverage): a store's dialog during its fades (--load="Slot 1"
+# --start=Alares): the weapon store through the Cheater (as stores.txt),
+# shots every 100 ms while it fades in (the keeper's lines fade with the mode,
+# Graphics.startText), and while it fades out when left.
+wait 3100
+console cheater
+wait 1200
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap CROSS
+wait 400
+tap CROSS
+wait 400
+tap CROSS
+mark
+wait 100
+loopuntil WeaponStore 5000
+shot f01_fade_in
+wait 100
+shot f02_fade_in
+wait 100
+shot f03_fade_in
+wait 100
+shot f04_fade_in
+wait 100
+shot f05_fade_in
+wait 100
+shot f06_fade_in
+wait 100
+shot f07_fade_in
+wait 1500
+shot f08_in
+log in_weapon
+tap CIRCLE
+wait 100
+shot f09_fade_out
+wait 100
+shot f10_fade_out
+wait 100
+shot f11_fade_out
+wait 100
+shot f12_fade_out
+wait 100
+shot f13_fade_out
+wait 1500
+shot f14_left
+log left
+quit

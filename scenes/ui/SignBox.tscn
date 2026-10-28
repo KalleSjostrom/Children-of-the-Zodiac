@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" uid="uid://t78ag8meqk3k" path="res://scenes/ui/SignBox.gd" id="1_sign"]
+[ext_resource type="Script" uid="uid://sko2muwq7vf3" path="res://scenes/ui/BaselineLabel.gd" id="2_label"]
+[ext_resource type="Theme" path="res://resources/theme/game_theme.tres" id="3_theme"]
+
+[node name="SignBox" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1024.0
+offset_bottom = 768.0
+mouse_filter = 2
+theme = ExtResource("3_theme")
+script = ExtResource("1_sign")
+
+[node name="Paper" type="Panel" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_top = 20.0
+offset_right = 700.0
+offset_bottom = 195.0
+mouse_filter = 2
+theme_type_variation = &"DialogPaper"
+
+[node name="FirstLine" type="Control" parent="Paper"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 65.0
+offset_top = 65.0
+offset_right = 65.0
+offset_bottom = 65.0
+mouse_filter = 2
+theme_type_variation = &"SignLine"
+script = ExtResource("2_label")
+
+[node name="SecondLine" type="Control" parent="Paper"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 65.0
+offset_top = 115.0
+offset_right = 65.0
+offset_bottom = 115.0
+mouse_filter = 2
+theme_type_variation = &"SignLine"
+script = ExtResource("2_label")

@@ -1,0 +1,76 @@
+# Phase 3 (dialog coverage): the card store's buy mode (--load="Slot 1"
+# --start=Alares; the weapon store and then the card store through the
+# Cheater, as stores.txt): the card info popup at y -23 over the keeper's
+# dialog box and the store's menus, which are drawn between them (two UI
+# nodes with legacy drawing between them in one frame), the current card
+# moved; then the merge mode (no popup).
+wait 3100
+console cheater
+wait 200
+wait 1000
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap CROSS
+wait 400
+tap CROSS
+wait 400
+tap CROSS
+wait 3500
+shot c00_weapon_in
+log in_weapon
+tap DOWN
+wait 600
+tap DOWN
+wait 600
+shot c01_weapon_moved
+mark
+tap CIRCLE
+wait 900
+loopuntil Cheater 15000
+wait 1000
+tap CIRCLE
+wait 500
+tap DOWN
+wait 300
+tap CROSS
+wait 400
+tap CROSS
+wait 3500
+shot c02_card_in
+tap CROSS
+wait 700
+shot c_#_CROSS
+tap RIGHT
+wait 700
+shot c_#_RIGHT
+tap DOWN
+wait 700
+shot c_#_DOWN
+tap RIGHT
+wait 700
+shot c_#_RIGHT
+tap CIRCLE
+wait 700
+shot c_#_CIRCLE
+tap DOWN
+wait 700
+shot c_#_DOWN
+tap CROSS
+wait 700
+shot c_#_CROSS
+tap RIGHT
+wait 700
+shot c_#_RIGHT
+quit

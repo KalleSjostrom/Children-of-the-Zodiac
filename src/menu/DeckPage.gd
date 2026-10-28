@@ -7,6 +7,8 @@ extends AbstractPage
 const NO_DECK = -1
 const CHARACTER_DECK = 0
 const MAIN_DECK = 1
+## Bridge (phase 3 step B): the card info popup's UI node (show_card_info).
+const CARD_INFO_VIEW := "res://scenes/ui/CardInfo.tscn"
 static var cardHelp = Values.MenuImages + "Pieces/10.png"
 var selectedCard = null
 var charDeck = null
@@ -309,6 +311,9 @@ func drawDeckHelp(g):
 
 
 static func drawCardInfo(g, c, y):
+	if not Main.is_legacy("dialog"):
+		show_card_info(g, c, y)
+		return
 	g.drawImage(cardHelp, 4, y + 35)
 	if c != null:
 		var x: int = 150
@@ -331,6 +336,42 @@ static func drawCardInfo(g, c, y):
 
 		info = c.getVeryShortInfo()
 		g.drawStringSetSize("Effect: " + str(info[0]) + str(info[1]), x, y, 20)
+
+
+## Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): drawCardInfo
+## without the drawing: the same state changes (the images bound, the font
+## sizes, drawString's setColor(color), startText and finishText), and the
+## UI node scenes/ui/CardInfo.tscn shows the popup where it was drawn
+## (Graphics.show_ui). --legacy=dialog keeps the drawing.
+static func show_card_info(g, c, y):
+	var tint: Color = g.getCurrentColor()
+	var mat = g.canvas_material()
+	g.skip_image(cardHelp)
+	var view = g.show_ui(CARD_INFO_VIEW, Graphics.UI_LAYER)
+	if view != null:
+		view.show_info(y, tint, mat, Graphics.font_bold())
+	if c == null:
+		return
+	var card: Array = c.place_card(g)
+	var info = c.getInfo()
+	g.setFontSize(26)
+	var color: Color = Graphics.text_color(1.0)
+	g.setColor(g.color)
+	g.setFontSize(MenuValues.MENU_FONT_SIZE)
+	g.startText()
+	var linesColor: Color = Graphics.text_color(g.text_alpha())
+	g.finishText()
+	var effect = c.getVeryShortInfo()
+	g.setFontSize(20)
+	g.setColor(g.color)
+	if view == null:
+		return
+	if card[0] != null:
+		view.show_card(card[0].getGodotTexture(),
+				card[1].getGodotTexture() if card[1] != null else null, card[2])
+	view.show_texts("Name: " + str(info[0]), PackedStringArray([Dialog._text(info[1]),
+			Dialog._text(info[2]), Dialog._text(info[3])]),
+			"Effect: " + str(effect[0]) + str(effect[1]), color, linesColor)
 
 
 class Animator extends RefCounted:

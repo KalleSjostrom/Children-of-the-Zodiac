@@ -1,0 +1,40 @@
+# Phase 3 (dialog coverage): the card info popup on the menu's deck page
+# (--load="Slot 1" --start=Alares, DeckPage.drawCardInfo at y -29): Kin's deck
+# chosen, the current card moved through the deck and to the party's deck.
+wait 3000
+tap TRIANGLE
+wait 2500
+tap CROSS
+wait 1500
+shot d01_menu
+tap CROSS
+wait 1500
+shot d02_deck_page
+tap CROSS
+wait 600
+shot d_#_CROSS
+tap RIGHT
+wait 600
+shot d_#_RIGHT
+tap DOWN
+wait 600
+shot d_#_DOWN
+tap CROSS
+wait 600
+shot d_#_CROSS
+tap RIGHT
+wait 600
+shot d_#_RIGHT
+tap LEFT
+wait 600
+shot d_#_LEFT
+tap DOWN
+wait 600
+shot d_#_DOWN
+tap CROSS
+wait 600
+shot d_#_CROSS
+tap UP
+wait 600
+shot d_#_UP
+quit

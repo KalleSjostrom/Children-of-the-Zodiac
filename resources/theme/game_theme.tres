@@ -1,0 +1,78 @@
+[gd_resource type="Theme" load_steps=9 format=3]
+
+[ext_resource type="FontFile" uid="uid://c4bfhbsvued6q" path="res://res/Main/font.ttf" id="1_font"]
+[ext_resource type="FontFile" uid="uid://dnptmlo6jcx83" path="res://res/Main/boldfont.ttf" id="2_bold"]
+[ext_resource type="Texture2D" uid="uid://dnqfp74moebno" path="res://res/Menu/dialog/dialog1.png" id="3_dialog1"]
+[ext_resource type="Texture2D" uid="uid://dumbmy1ct535w" path="res://res/Menu/dialog/dialog2.png" id="4_dialog2"]
+[ext_resource type="Texture2D" uid="uid://bvh6job8v15pa" path="res://res/Menu/Pieces/10.png" id="5_piece10"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dialog1"]
+texture = ExtResource("3_dialog1")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dialog2"]
+texture = ExtResource("4_dialog2")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_piece10"]
+texture = ExtResource("5_piece10")
+
+[resource]
+default_font = ExtResource("1_font")
+default_font_size = 24
+BaselineLabel/colors/font_color = Color(0, 0, 0, 1)
+BaselineLabel/font_sizes/font_size = 24
+BaselineLabel/fonts/bold_font = ExtResource("2_bold")
+BaselineLabel/fonts/font = ExtResource("1_font")
+CardInfoEffect/base_type = &"BaselineLabel"
+CardInfoEffect/font_sizes/font_size = 20
+CardInfoLine/base_type = &"BaselineLabel"
+CardInfoLine/font_sizes/font_size = 22
+CardInfoName/base_type = &"BaselineLabel"
+CardInfoName/font_sizes/font_size = 26
+CardInfoPanel/base_type = &"Panel"
+CardInfoPanel/styles/panel = SubResource("StyleBoxTexture_piece10")
+DialogLine/base_type = &"BaselineLabel"
+DialogLine/font_sizes/font_size = 30
+DialogName/base_type = &"BaselineLabel"
+DialogName/font_sizes/font_size = 30
+DialogPaper/base_type = &"Panel"
+DialogPaper/styles/panel = SubResource("StyleBoxTexture_dialog1")
+DialogPaperSecond/base_type = &"Panel"
+DialogPaperSecond/styles/panel = SubResource("StyleBoxTexture_dialog2")
+DialogQuestion/base_type = &"BaselineLabel"
+DialogQuestion/font_sizes/font_size = 26
+DialogWhisper/base_type = &"BaselineLabel"
+DialogWhisper/font_sizes/font_size = 24
+SignLine/base_type = &"BaselineLabel"
+SignLine/font_sizes/font_size = 28
+Text20/base_type = &"BaselineLabel"
+Text20/font_sizes/font_size = 20
+Text22/base_type = &"BaselineLabel"
+Text22/font_sizes/font_size = 22
+Text24/base_type = &"BaselineLabel"
+Text24/font_sizes/font_size = 24
+Text26/base_type = &"BaselineLabel"
+Text26/font_sizes/font_size = 26
+Text28/base_type = &"BaselineLabel"
+Text28/font_sizes/font_size = 28
+Text30/base_type = &"BaselineLabel"
+Text30/font_sizes/font_size = 30
+Text32/base_type = &"BaselineLabel"
+Text32/font_sizes/font_size = 32
+Text34/base_type = &"BaselineLabel"
+Text34/font_sizes/font_size = 34
+Text36/base_type = &"BaselineLabel"
+Text36/font_sizes/font_size = 36
+Text38/base_type = &"BaselineLabel"
+Text38/font_sizes/font_size = 38
+Text40/base_type = &"BaselineLabel"
+Text40/font_sizes/font_size = 40
+Text42/base_type = &"BaselineLabel"
+Text42/font_sizes/font_size = 42
+Text44/base_type = &"BaselineLabel"
+Text44/font_sizes/font_size = 44
+Text46/base_type = &"BaselineLabel"
+Text46/font_sizes/font_size = 46
+Text48/base_type = &"BaselineLabel"
+Text48/font_sizes/font_size = 48
+Text50/base_type = &"BaselineLabel"
+Text50/font_sizes/font_size = 50

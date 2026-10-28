@@ -1,4 +1,4 @@
-# Handoff: state of the Godot port (2026-10-28, after steps 1–3, modernization phase 0, phase 1 steps A and B, phase 2 steps A and B, the particles phase and P2)
+# Handoff: state of the Godot port (2026-10-28, after steps 1–3, modernization phase 0, phase 1 steps A and B, phase 2 steps A and B, the particles phase, P2 and the phase 3 pilot)
 
 Conventions: legacy (ported) code follows `docs/PORTING.md`; new code
 (scenes, resources, tools, bridge) follows `docs/ARCHITECTURE.md`. The
@@ -212,13 +212,44 @@ and checking in `docs/CONVERTING_PARTICLES.md` sections 4 and 5):
   twice is identical. 15 new cases (`effects_*`, `particles_save_*`) and the
   console's `cast` (cards played on a party member's turn, `--casts=`).
 
+**Modernization phase 3 (shared UI and transitions): the pilot is done**
+(plan 8.1; conventions in `docs/ARCHITECTURE.md` section 12, the procedure in
+`docs/CONVERTING_UI.md`):
+- The Theme (`resources/theme/game_theme.tres`): the game's two fonts with a
+  size per role and `Text20` … `Text50`, the papers and the card info's menu
+  piece as StyleBoxTextures; nothing restyled.
+- Step B for the dialog family and the fade: `scenes/ui/Dialog.tscn` (the
+  dialog box: papers, name, lines, questions and the hand, the input
+  question, a shown image), `SignBox.tscn` (signs, loot and gift lines),
+  `CardInfo.tscn` (the card info popup, also in the card store and on the
+  menu's deck page) on the UI layer, `Fade.tscn` (the mode fade and a
+  cutscene's own) on Transition; text through `BaselineLabel` (placed by its
+  baseline, drawn with the legacy text's `draw_string`). The legacy Dialog,
+  DialogSequence and Fadeable stay in charge; their draw methods hand the
+  nodes what they drew (twins with the same state changes).
+- A UI node takes its place in the legacy frame (`Graphics.show_ui`):
+  GLBackend orders its canvas items and the nodes with one counter, and the
+  legacy 2D drawn after a node goes to that node's layer, after it.
+  `--legacy=dialog` and `--legacy=fades` keep the legacy drawing.
+- Parity: legacy vs. node identical at tolerance 0 on every case, golden vs.
+  node too (6,999 shots, logs identical; plan 8.1); nine new cases
+  (`dialog_*`): 370 cases and `bridge_test` in all.
+- Found on the way: the 1/255 of plan 7.8 comes from the minimap's batches in
+  the floor's world (without the minimap those shots are identical); the
+  labyrinth's and boss area's card info after the dialog never shows (nothing
+  sets their `card`, as in the Java); no case reaches an image fade
+  (`Menthu1/2.kill`).
+- Prepared, not done: the rollout of the other overlays (plan 8.2).
+
 ## Plan (what is left)
 
 0. **Modernization:** closing phase 1 (plan 6.9) needs decision 5 (delete
    the `.vil` files) and the removal of the legacy village path (and of
    `--legacy=particles`). Closing phase 2 (plan 7.9) needs decision 5 and
-   the 1/255 tolerance accepted. Next: phase 3 (P2 is done, plan 6.12).
-   Record goldens before each change.
+   the 1/255 tolerance accepted. Next: phase 3's rollout (plan 8.2: the
+   emotion bubbles, the mission display, the minimap, the tutorials, the
+   story texts and images, "Paused", the menu pages). Record goldens before
+   each change.
 
 1. **Performance:** since P2 the labyrinths with rain or snow run at 60 FPS
    (Forest Path was 35, Ice Cavern--Frozen Field 50; plan 6.12), and since
@@ -256,8 +287,9 @@ and checking in `docs/CONVERTING_PARTICLES.md` sections 4 and 5):
   only the shipped saves.
 - Parity: `tools/parity/parity.sh record <set>` / `compare <a> <b>` /
   `ab "<args a>" "<args b>" [case…]`, see `docs/ARCHITECTURE.md` section 7.
-  Runs are windowed (screenshots need a renderer); all 362 cases take about
-  60-70 minutes with `--jobs=8` on 12 logical cores (`--uncapped`; with
+  Runs are windowed (screenshots need a renderer); all 371 cases take about
+  12-15 minutes with `--jobs=8` on 12 logical cores since the particles run
+  on the GPU (60-70 minutes before P2; `--uncapped`; with
   `--legacy=particles`, `particles_hotg` and the Berca cutscene are bound by
   the legacy particles at ~6 FPS, with `--legacy=dungeon_particles` the
   weather floors by the weather, with `--legacy=battle_effects` or

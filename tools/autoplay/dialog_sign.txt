@@ -1,0 +1,20 @@
+# Phase 3 (dialog coverage): the sign beside Alares' start (--load="Slot 1"
+# --start=Alares), read facing up from the nearest place an obstacle lets the
+# player reach (1356, 1806: one step up, distance 34): its two lines in the message box, then
+# closed.
+wait 3000
+press RIGHT
+wait 250
+release RIGHT
+tap UP 1
+wait 300
+pos at_sign
+tap CROSS
+wait 400
+shot g01_sign
+wait 1000
+shot g02_sign_later
+tap CROSS
+wait 400
+shot g03_closed
+quit
