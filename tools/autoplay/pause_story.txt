@@ -1,0 +1,17 @@
+# Phase 3 rollout (pause coverage): "Paused" over a cutscene. A cutscene takes
+# START itself (VillageStory.checkGameInput: it ends the story), so the pause
+# starts while the cutscene loads (GameCore._preDraw reads START then) and
+# stays on over its images, texts and fades.
+tap START
+wait 1000
+shot p01_paused_loading
+wait 2500
+shot p02_paused
+wait 2500
+shot p03_paused
+wait 2500
+shot p04_paused
+wait 2500
+shot p05_paused
+log paused
+quit

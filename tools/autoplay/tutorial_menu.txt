@@ -1,0 +1,29 @@
+# Phase 3 rollout (tutorial coverage): the menu's tutorial page
+# (--load="Slot 1" --start=Alares: TRIANGLE, the start page's "Tutorial",
+# its second entry "Battle - Cards & Slots": its first chapter's two pages,
+# with coloured words and button icons, paged with CROSS until it closes).
+wait 3000
+tap TRIANGLE
+wait 2500
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap CROSS
+wait 1500
+shot m00_tutorial_page
+tap DOWN
+wait 400
+tap CROSS
+wait 1000
+shot m01_tutorial
+tap CROSS
+wait 600
+shot m02_page
+tap CROSS
+wait 600
+shot m03_after
+log after
+quit

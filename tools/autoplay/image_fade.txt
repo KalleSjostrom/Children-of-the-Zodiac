@@ -1,0 +1,58 @@
+# Phase 3 rollout (image fade coverage): Menthu's first defeat
+# (--load="Start Menthu1" --start="Ice Cavern--Throne Room-mark0"). As
+# dungeon_boss.txt: the console's "boss" and a step start the battle, "kill"
+# wins it (dev only); Menthu1.kill sets the fade image (res/test.png,
+# FADE_TO_IMAGE), so the labyrinth fades out to the image and the next mode
+# (Menthuattack) fades in from it. Shots every 100 ms through both fades.
+wait 3000
+console boss
+wait 4000
+tap UP
+wait 1500
+mark
+tap CROSS
+wait 500
+loopuntil battlemode=1 30000
+console kill
+wait 3000
+shot f01_killed
+mark
+tap CROSS
+wait 400
+loopuntil battlemode=8 20000
+mark
+wait 100
+shot f_#_fade
+loopuntil !sub= 20000
+wait 100
+shot f_#_fade
+wait 100
+shot f_#_fade
+wait 100
+shot f_#_fade
+wait 100
+shot f_#_fade
+wait 100
+shot f_#_fade
+wait 100
+shot f_#_fade
+wait 100
+shot f_#_fade
+wait 100
+shot f_#_fade
+wait 100
+shot f_#_fade
+wait 100
+shot f_#_fade
+wait 100
+shot f_#_fade
+wait 100
+shot f_#_fade
+wait 100
+shot f_#_fade
+wait 100
+shot f_#_fade
+wait 1500
+shot f99_after
+log after
+quit

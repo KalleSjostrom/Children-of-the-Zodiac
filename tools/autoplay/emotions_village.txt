@@ -1,0 +1,41 @@
+# Phase 3 rollout (emotion coverage in a village frame, which in play only a
+# cutscene's leftover bubble would show): the debug console's emotion (dev
+# only: Sprite.setEmotion, as a cutscene sets it) puts bubbles over party
+# members and the pass guards, Kin's shaking; then the party walks under the
+# treetops, where the bubbles are drawn over the trees (and, at night, over
+# the night layer). Parity cases emotions_village (Pass to Zazo at night)
+# and emotions_village_day.
+wait 3000
+pos start
+console emotion Kin exclamation shake
+console emotion Celis hihi
+console emotion Passguard_Seth question
+console emotion Passguard_Marcus zzz
+wait 300
+shot e01_bubbles
+wait 200
+shot e02_shaking
+press LEFT
+wait 1500
+release LEFT
+pos left
+shot e03_left
+press UP
+wait 1500
+release UP
+pos up
+shot e04_up
+press RIGHT
+wait 800
+release RIGHT
+pos right
+shot e05_right
+press DOWN
+wait 1500
+release DOWN
+pos down
+shot e06_down
+console emotion Kin off
+wait 300
+shot e07_kin_off
+quit

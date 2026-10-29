@@ -4,6 +4,9 @@ extends Hideable
 ##
 ## Port note: the static GLU/quadric become the active Graphics at call time.
 
+## Bridge (phase 3 step B): the show_node keys of the minimap's batches
+## (PART_KEY, PART_KEY - 1 …; the battle effects' keys are instance ids).
+const PART_KEY := -1000
 static var MAP_POSITION = [-0.59, 0.365]
 static var glu = null
 static var quad = null
@@ -51,6 +54,24 @@ func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 	var t: GameTexture = ImageHandler.getTexture(LabyrinthMap.arrows[0])
 	g.setImageColor(1, 0.85, 0, 1)
 	Utils3D.draw3D(g, t.getTexture(), 0, 0, 0, 0.09)
+
+## Bridge (phase 3, dev only: --minimap-node): draw(g, alpha, angle, origin,
+## lastOrigin) drawn by nodes. The legacy drawing runs (the same GL state
+## changes, the same geometry), its 3D primitives are kept instead of drawn
+## (Graphics.begin_capture_3d), and each batch is a MinimapPart node in the
+## frame's 3D chunk, in the batch's slot (Graphics.show_node). The floor's
+## frames are drawn to the bit, but a battle's frames after them differ by
+## 1/255 (docs/MODERNIZATION_PLAN.md 8.3), so by default the 3D bridge draws
+## the minimap.
+func show_map(g, alpha, angle, origin, lastOrigin):
+	g.begin_capture_3d()
+	draw(g, alpha, angle, origin, lastOrigin)
+	var batches: Array = g.end_capture_3d()
+	for i in batches.size():
+		var part = g.show_node(PART_KEY - i, func() -> GeometryInstance3D: return MinimapPart.new())
+		if part != null:
+			var b: Dictionary = batches[i]
+			part.show_batch(b.mat, b.v, b.uv, b.c, b.n)
 
 func drawBackground(g, size):
 	glu = g

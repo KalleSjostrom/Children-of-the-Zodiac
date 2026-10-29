@@ -522,7 +522,13 @@ func draw(g, alpha = null):
 	g.loadIdentity()
 	g.getGL().glDepthMask(false)
 	g.getGL().glDisable(Graphics.GL_DEPTH_TEST)
-	mapRenderer.draw(g, player.get_(), player.getDirection(), currentNode.getAddress(), lastAddress)
+	# Phase 3: the minimap stays the 3D bridge's batches; --minimap-node (dev)
+	# draws them with nodes (MapRenderer.show_map), which changes later
+	# battle frames by 1/255 (docs/MODERNIZATION_PLAN.md 8.3).
+	if Main.minimap_node:
+		mapRenderer.show_map(g, player.get_(), player.getDirection(), currentNode.getAddress(), lastAddress)
+	else:
+		mapRenderer.draw(g, player.get_(), player.getDirection(), currentNode.getAddress(), lastAddress)
 
 	g.loadIdentity()
 	GameEventListener.set2DNow(g)

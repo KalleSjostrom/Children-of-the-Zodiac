@@ -1,0 +1,35 @@
+# Phase 3 rollout (mission coverage): Pensara Prison's time mission runs out
+# (--load="Slot 1" --start="Pensara Prison--Floor 1-mark0" --no-encounters:
+# the save's clock shows 0:49): "Time's up!" (TimeMission.draw, which also
+# leaves the floor for Floor 5) while the floor fades out, a shot every 300 ms.
+wait 3000
+shot t01_clock
+wait 47000
+shot t_#_end
+wait 300
+shot t_#_end
+wait 300
+shot t_#_end
+wait 300
+shot t_#_end
+wait 300
+shot t_#_end
+wait 300
+shot t_#_end
+wait 300
+shot t_#_end
+wait 300
+shot t_#_end
+wait 300
+shot t_#_end
+wait 300
+shot t_#_end
+wait 300
+shot t_#_end
+wait 300
+shot t_#_end
+wait 300
+shot t_#_end
+wait 300
+log end
+quit

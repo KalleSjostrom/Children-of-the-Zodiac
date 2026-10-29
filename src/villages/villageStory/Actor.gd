@@ -276,6 +276,10 @@ func updateDialog(value):
 func drawEmotion(g):
 	actor.drawEmotions(g)
 
+## Bridge (phase 3 step B): drawEmotion without the drawing (Sprite.place_emotion).
+func place_emotion(g) -> Array:
+	return actor.place_emotion(g)
+
 func setDirection(dir):
 	actor.setDirection(dir)
 

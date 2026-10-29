@@ -4,6 +4,9 @@ extends VillageLoader
 ## for the village (the game mode for towns). When the player is in the
 ## middle of the screen, the background moves instead of the player.
 
+## Bridge (phase 3 step B): the UI node of an emotion bubble (show_emotions).
+const EMOTION_VIEW := "res://scenes/ui/EmotionBubble.tscn"
+
 var talkingVillager = null
 var storyInfo = null
 var sign = null
@@ -548,11 +551,16 @@ func drawTop(g, sprites = null):
 
 
 ## Draws what is drawn over the village: the emotion bubbles of the given
-## sprites (none if null), the dialog or the sign.
+## sprites (none if null), the dialog or the sign. Bridge (phase 3 step B):
+## the bubbles are UI nodes (show_emotions); --legacy=emotions keeps the
+## drawing.
 func drawOverlays(g, sprites = null):
 	if sprites != null:
-		for k in sprites:
-			sprites[k].drawEmotions(g)
+		if not Main.is_legacy("emotions"):
+			show_emotions(g, sprites.values())
+		else:
+			for k in sprites:
+				sprites[k].drawEmotions(g)
 
 	if talkmode:
 		dialog.draw(g)
@@ -562,6 +570,35 @@ func drawOverlays(g, sprites = null):
 		if content != null:
 			if content is Card:
 				DeckPage.drawCardInfo(g, content, 530)
+
+
+## Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): drawEmotions of
+## each of emotional (sprites or cutscene actors, in the legacy drawing's
+## order) without the drawing (place_emotion: the shake steps, the image is
+## bound), and a UI node (scenes/ui/EmotionBubble.tscn) shows each bubble
+## where it would have been drawn (Graphics.show_ui): the quad drawImage
+## draws (GameTexture.drawPart's corners) through the modelview (a cutscene's
+## zoom; Graphics.screen_points), in the colour and with the material it
+## would have been drawn with.
+static func show_emotions(g, emotional: Array) -> void:
+	for s in emotional:
+		var tint: Color = g.getCurrentColor()
+		var mat = g.canvas_material()
+		var placed: Array = s.place_emotion(g)
+		if placed.is_empty():
+			continue
+		var t = ImageHandler.getTexture(placed[0])
+		if t == null:
+			continue
+		var x: int = placed[1]
+		var y: int = placed[2]
+		var xw: int = int(x + t.getWidth() * 1.0)
+		var yh: int = int(y + t.getHeight() * 1.0)
+		var corners: PackedVector2Array = g.screen_points(PackedVector2Array([Vector2(x, yh),
+				Vector2(xw, yh), Vector2(xw, y), Vector2(x, y)]))
+		var view = g.show_ui(EMOTION_VIEW, Graphics.UI_LAYER)
+		if view != null:
+			view.show_bubble(t.getGodotTexture(), corners, tint, mat)
 
 
 ## Bridge (phase 1 step B, docs/ARCHITECTURE.md): what drawBottom and

@@ -195,6 +195,11 @@ var _compiling: DisplayList = null
 var _list_eye := false
 var _list_eye_stack: Array[bool] = []
 
+# Bridge (phase 3 step B): the 3D primitives kept instead of drawn
+# (begin_capture_3d).
+var _capturing_3d := false
+var _captured_3d: Array = []
+
 
 func _init(p_backend: GLBackend = null) -> void:
 	backend = p_backend
@@ -1449,6 +1454,9 @@ func _emitTriangles(v: PackedVector3Array, uv: PackedVector2Array, c: PackedColo
 		for i in v.size():
 			ev[i] = _mv * v[i]
 			en[i] = _mv.basis * n[i]
+		if _capturing_3d:
+			_capture_triangles(m, ev, uv, c, en)
+			return
 		backend.vp_3d().add_triangles(m, ev, uv, c, en)
 	else:
 		_emit2D(v, uv, c)
@@ -1553,6 +1561,39 @@ func reserve_scene_slot() -> float:
 	return backend.reserve_scene_slot()
 
 
+## Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): from
+## begin_capture_3d to end_capture_3d the 3D primitives are kept instead of
+## drawn, for nodes that draw them where they would have been drawn (the
+## minimap's MinimapPart, through show_node): batched as GLBackend's chunks
+## batch them (Chunk3D.add_triangles: consecutive triangles of one material
+## are one batch), in eye space as _emitTriangles transforms them.
+func begin_capture_3d() -> void:
+	_capturing_3d = true
+	_captured_3d = []
+
+
+## The batches kept since begin_capture_3d: {"mat", "v", "uv", "c", "n"} each,
+## in drawing order.
+func end_capture_3d() -> Array:
+	_capturing_3d = false
+	var batches := _captured_3d
+	_captured_3d = []
+	return batches
+
+
+func _capture_triangles(m: Material, v: PackedVector3Array, uv: PackedVector2Array,
+		c: PackedColorArray, n: PackedVector3Array) -> void:
+	if not _captured_3d.is_empty():
+		var last: Dictionary = _captured_3d.back()
+		if last.mat == m and last.v.size() + v.size() < GLBackend.MAX_SURFACE_VERTS:
+			last.v.append_array(v)
+			last.uv.append_array(uv)
+			last.c.append_array(c)
+			last.n.append_array(n)
+			return
+	_captured_3d.append({"mat": m, "v": v, "uv": uv, "c": c, "n": n})
+
+
 ## Bridge (the battle effects phase): the node of key that draws itself in
 ## the current 3D chunk where the legacy drawing would draw
 ## (GLBackend.show_node; make makes it the first time); null in 2D.
@@ -1605,6 +1646,24 @@ static func text_color(alpha: float) -> Color:
 
 func text_alpha() -> float:
 	return _textAlpha
+
+
+## Bridge (phase 3 step B): the modelview as the 2D transform it applies to
+## 2D drawing (a cutscene's zoom), for a node that draws under it.
+func modelview_2d() -> Transform2D:
+	return Transform2D(Vector2(_mv.basis.x.x, _mv.basis.x.y), Vector2(_mv.basis.y.x, _mv.basis.y.y),
+			Vector2(_mv.origin.x, _mv.origin.y))
+
+
+## Bridge (phase 3 step B): the screen positions of 2D vertices, transformed
+## by the modelview as _emit2D transforms them, for a node that draws a
+## legacy quad to the bit under a cutscene's zoom (EmotionBubble).
+func screen_points(points: PackedVector2Array) -> PackedVector2Array:
+	var screen := PackedVector2Array()
+	for p in points:
+		var a := _mv * Vector3(p.x, p.y, 0.0)
+		screen.append(Vector2(a.x, a.y))
+	return screen
 
 
 ## Bridge (phase 3 step B): true when text is drawn in the bold font

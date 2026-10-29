@@ -1,0 +1,30 @@
+# Phase 3 rollout (tutorial coverage): the battle's tutorial (--load=Start
+# --start="Forest of Reil--Forest Path-mark0": the first battle of Forest
+# Path shows "forest of reil--forest path.tut", three pages) paged with CROSS.
+wait 3000
+mark
+press UP
+wait 700
+release UP
+wait 300
+tap RIGHT
+wait 400
+loopuntil sub=battle 120000
+wait 1500
+shot b00_battle
+wait 1000
+shot b01_tutorial
+tap CROSS
+wait 800
+shot b02_page
+tap CROSS
+wait 800
+shot b03_page
+tap CROSS
+wait 800
+shot b04_page
+tap CROSS
+wait 800
+shot b05_after
+log after
+quit

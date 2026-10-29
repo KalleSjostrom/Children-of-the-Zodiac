@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/CutsceneImage.gd" id="1_image"]
+
+[node name="CutsceneImage" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1024.0
+offset_bottom = 768.0
+mouse_filter = 2
+script = ExtResource("1_image")
+
+[node name="Zoom" type="Node2D" parent="."]
+use_parent_material = true
+
+[node name="Image" type="TextureRect" parent="Zoom"]
+use_parent_material = true
+offset_right = 1024.0
+offset_bottom = 768.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+
+[node name="TextBack" type="ColorRect" parent="."]
+visible = false
+use_parent_material = true
+layout_mode = 0
+offset_top = 576.0
+offset_right = 1024.0
+offset_bottom = 768.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)

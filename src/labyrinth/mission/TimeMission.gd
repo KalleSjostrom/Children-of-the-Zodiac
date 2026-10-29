@@ -26,7 +26,7 @@ func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 		status -= 1
 		setStatus(status)
 	if isFinished(status):
-		g.drawMultiString("Time's up!", int(800 + getXtrans() * 300), 50)
+		show_line(g, "Time's up!", int(800 + getXtrans() * 300))
 		if not gameOver:
 			var m = Organizer.getOrganizer().getCurrentMode()
 			var l: Labyrinth = m as Labyrinth
@@ -39,7 +39,7 @@ func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 	else:
 		sec = status % 60
 		min = status / 60
-		g.drawMultiString(string + str(min) + ":" + ("0" if sec < 10 else "") + str(sec), int(800 + getXtrans() * 300), 50)
+		show_line(g, string + str(min) + ":" + ("0" if sec < 10 else "") + str(sec), int(800 + getXtrans() * 300))
 	g.finishText()
 
 func initDraw(g: Graphics):

@@ -111,6 +111,38 @@ func draw(g, withPrice, allChildren, withNumber, down, withEquipment):
 				scrollBar.draw(g, menuCursor, children.size())
 
 
+## Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): drawAllChildren
+## without the drawing, for a UI node that shows the menu (the game pad lost
+## overlay's, GameCore): the same state changes (the text colours, drawString's
+## setColor(color), the hand's). Returns {"items": [[name, x, y (the
+## baseline), colour] …], "hand": MenuHand.place_hand's}. Only for a menu
+## whose children are drawn as plain lines: no active child (its children
+## would be drawn too) and no scroll bar (bbMinY); menus with these are phase
+## 4.2's.
+func place_all_children(g) -> Dictionary:
+	if menuCursor >= children.size():
+		previousChild()
+	var items := []
+	var child = null
+	for i in range(children.size()):
+		child = children[i]
+		assert(not child.isActive(), "MenuNode.place_all_children: an active child's children")
+		Graphics.setTextColor(enableColor if child.enabled else disableColor)
+		if not str(child.getName()).contains("character"):
+			var y: int = (Ypos + i * distance) + bboffset
+			if bbMinY == -1 or (y >= bbMinY and y <= bbMaxY):
+				if child.getName() != null:
+					items.append([str(child.getName()), Xpos, y, Graphics.text_color(1.0)])
+					g.setColor(g.color)
+		if not child.enabled:
+			Graphics.setTextColor(enableColor)
+	var placed := {"items": items, "hand": []}
+	if child != null:
+		placed.hand = hand.place_hand(g)
+		assert(bbMinY == -1, "MenuNode.place_all_children: a menu with a scroll bar")
+	return placed
+
+
 ## Draws the given child at the given y position with the price stored in
 ## the child (right aligned, a bit further down if down is true).
 func drawWithPrice(child, g, y, down):

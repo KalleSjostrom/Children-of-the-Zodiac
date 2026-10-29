@@ -1,0 +1,16 @@
+# Phase 3 rollout (pause coverage, group pause_*): "Paused" (GameCore.testDraw,
+# START) over a mode: during the fade-in (the dim over the mode's fade), then
+# a while after it (the game goes on under the overlay), and after START again.
+wait 500
+tap START
+wait 200
+shot p01_paused_fading
+wait 2500
+shot p02_paused
+wait 1000
+shot p03_paused_later
+tap START
+wait 500
+shot p04_unpaused
+log unpaused
+quit

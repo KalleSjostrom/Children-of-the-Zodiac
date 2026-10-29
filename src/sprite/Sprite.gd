@@ -229,6 +229,24 @@ func drawEmotions(g):
 		g.drawImage(_getEmotions()[currentEmotion], emotionX + xs[currentX], emotionY - 13)
 
 
+## Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): drawEmotions
+## without the drawing, for a village scene's bubble (VillageScene.show_emotions):
+## the shake steps and the image is bound as drawImage binds it
+## (Graphics.skip_image). Returns [image path, screen x, screen y], or []
+## when drawEmotions draws nothing.
+func place_emotion(g) -> Array:
+	if currentEmotion == -1:
+		return []
+	if shakeEmotion:
+		if ((counter + emotionSpeed) > xs.size() - 1) or ((counter + emotionSpeed) < 0):
+			emotionSpeed *= -1
+		counter += emotionSpeed
+		currentX = J.round(counter)
+	var image = _getEmotions()[currentEmotion]
+	g.skip_image(image)
+	return [image, emotionX + xs[currentX], emotionY - 13]
+
+
 ## Java overloads: setImages() and setImages(int direction).
 func setImages(direction = null):
 	if direction == null:

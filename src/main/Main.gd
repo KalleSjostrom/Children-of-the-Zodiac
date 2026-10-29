@@ -37,6 +37,9 @@ extends Node
 ##                       village and cutscene systems, the dungeon weather and save
 ##                       points, the card and enemy effects; for parity runs that
 ##                       compare everything else
+##   --minimap-node      dev only: the labyrinth's minimap is drawn by nodes
+##                       (MapRenderer.show_map; it changes battle frames by 1/255,
+##                       docs/MODERNIZATION_PLAN.md 8.3), not by the 3D bridge
 ##   --casts=<round>/... dev only: the rounds the console's "cast next" plays
 ##                       (scenes/debug/GameCommands.gd; parity cases effects_*)
 ##
@@ -54,6 +57,8 @@ static var bridge_test := false
 static var no_encounters := false
 ## --hide-particles: village and cutscene particle systems are not drawn.
 static var hide_particles := false
+## --minimap-node (dev): the minimap's batches are nodes (Labyrinth.draw).
+static var minimap_node := false
 static var _legacy: PackedStringArray = []
 
 ## The current game mode's scene goes here (see _sync_world).
@@ -106,6 +111,7 @@ func _ready() -> void:
 	bridge_test = _args.has("bridge-test")
 	no_encounters = _args.has("no-encounters")
 	hide_particles = _args.has("hide-particles")
+	minimap_node = _args.has("minimap-node")
 
 	audio = Node.new()
 	audio.name = "Audio"

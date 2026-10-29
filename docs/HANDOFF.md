@@ -1,4 +1,4 @@
-# Handoff: state of the Godot port (2026-10-28, after steps 1–3, modernization phase 0, phase 1 steps A and B, phase 2 steps A and B, the particles phase, P2 and the phase 3 pilot)
+# Handoff: state of the Godot port (2026-10-28, after steps 1–3, modernization phase 0, phase 1 steps A and B, phase 2 steps A and B, the particles phase, P2 and phase 3 steps A and B)
 
 Conventions: legacy (ported) code follows `docs/PORTING.md`; new code
 (scenes, resources, tools, bridge) follows `docs/ARCHITECTURE.md`. The
@@ -212,9 +212,10 @@ and checking in `docs/CONVERTING_PARTICLES.md` sections 4 and 5):
   twice is identical. 15 new cases (`effects_*`, `particles_save_*`) and the
   console's `cast` (cards played on a party member's turn, `--casts=`).
 
-**Modernization phase 3 (shared UI and transitions): the pilot is done**
-(plan 8.1; conventions in `docs/ARCHITECTURE.md` section 12, the procedure in
-`docs/CONVERTING_UI.md`):
+**Modernization phase 3 (shared UI and transitions): steps A and B done**
+for the overlays of villages, labyrinths and cutscenes: the pilot (plan 8.1)
+and the rollout (plan 8.3); conventions in `docs/ARCHITECTURE.md` section 12,
+the procedure in `docs/CONVERTING_UI.md`:
 - The Theme (`resources/theme/game_theme.tres`): the game's two fonts with a
   size per role and `Text20` … `Text50`, the papers and the card info's menu
   piece as StyleBoxTextures; nothing restyled.
@@ -239,17 +240,53 @@ and checking in `docs/CONVERTING_PARTICLES.md` sections 4 and 5):
   labyrinth's and boss area's card info after the dialog never shows (nothing
   sets their `card`, as in the Java); no case reaches an image fade
   (`Menthu1/2.kill`).
-- Prepared, not done: the rollout of the other overlays (plan 8.2).
+- Rollout (plan 8.3), step B for the rest: the emotion bubbles (World: the
+  village scene's `Emotions` layer, `scenes/common/EmotionBubble`, zoomed by
+  the cutscene camera), the mission display (`scenes/ui/MissionDisplay`),
+  "Paused" and "game pad lost" (`Paused`, `PadLost`, their dims Fade nodes),
+  the cutscene images over the actors with the text back (`CutsceneImage`,
+  under the zoom's modelview), the story texts and the credits (`StoryText`,
+  `ScrollText`), the tutorials' top layer wherever it is drawn (`Tutorial`:
+  trigger doors, battles, stores, the menu) and the minimap
+  (`scenes/dungeons/MinimapPart`: the legacy `MapRenderer` still makes the
+  geometry, captured instead of drawn, and each batch is a node in the
+  frame's 3D chunk). Flags `--legacy=emotions`, `mission`, `pause`,
+  `story_images`, `story_texts`, `tutorials`, `minimap`.
+- Coverage: 12 new cases (382 and `bridge_test` in all, 7,225 shots): village
+  emotions at night over treetops (the console's new dev-only `emotion`),
+  "Paused" in a village, a labyrinth and a cutscene, "game pad lost" with
+  its menu moved (the console's new dev-only `padlost`), the prison's
+  "Time's up!", the tutorials of a trigger door, a battle, the stores and the
+  menu paged through, the ending's black texts, an image fade (Menthu1's
+  defeat). `tools/parity/probe.sh` and `probe_report.py` run the coverage
+  probe.
+- Parity (plan 8.3; tolerance 0, 382 cases and `bridge_test`, 7,225 shots):
+  golden vs. nodes identical (logs too); `--legacy=<overlay>` vs. nodes on
+  each overlay's cases identical; every phase 3 flag vs. nodes and vs. the
+  golden identical; the bridge test passes. On the way: the credits' lines
+  at the screen's edges were culled (`BaselineLabel` now clears its
+  Control's culling rect), and the bubbles under a cutscene zoom rounded
+  differently as nodes in `World` or under a Node2D transform (they draw the
+  legacy quad now).
+- Frame rate (normal runs): the credits 587–631 → 1,260–1,323 FPS uncapped;
+  a cutscene with images and texts, the Sewers' mission and a village with
+  bubbles within the noise; 60 capped everywhere.
+- Left: the minimap is still the 3D bridge's batches. Its node
+  (`--minimap-node`, dev: `MinimapPart`) draws every floor frame to the bit
+  but changes later battle frames by 1/255 (41 shots), so it is not the
+  default; the 1/255 of plan 7.8 stays as it was. Closing the phase is
+  prepared in plan 8.4.
 
 ## Plan (what is left)
 
 0. **Modernization:** closing phase 1 (plan 6.9) needs decision 5 (delete
    the `.vil` files) and the removal of the legacy village path (and of
    `--legacy=particles`). Closing phase 2 (plan 7.9) needs decision 5 and
-   the 1/255 tolerance accepted. Next: phase 3's rollout (plan 8.2: the
-   emotion bubbles, the mission display, the minimap, the tutorials, the
-   story texts and images, "Paused", the menu pages). Record goldens before
-   each change.
+   the 1/255 tolerance accepted. Closing phase 3 (plan 8.4) needs phases 1
+   and 2 closed (their legacy paths draw through the same overlays) and the
+   minimap's geometry made by its node. Next: phase 4 (plan 9; the menu
+   pages, the stores' menus, the world map, battles and riddles still draw
+   overlays of their own). Record goldens before each change.
 
 1. **Performance:** since P2 the labyrinths with rain or snow run at 60 FPS
    (Forest Path was 35, Ice Cavern--Frozen Field 50; plan 6.12), and since
@@ -287,7 +324,7 @@ and checking in `docs/CONVERTING_PARTICLES.md` sections 4 and 5):
   only the shipped saves.
 - Parity: `tools/parity/parity.sh record <set>` / `compare <a> <b>` /
   `ab "<args a>" "<args b>" [case…]`, see `docs/ARCHITECTURE.md` section 7.
-  Runs are windowed (screenshots need a renderer); all 371 cases take about
+  Runs are windowed (screenshots need a renderer); all 383 cases take about
   12-15 minutes with `--jobs=8` on 12 logical cores since the particles run
   on the GPU (60-70 minutes before P2; `--uncapped`; with
   `--legacy=particles`, `particles_hotg` and the Berca cutscene are bound by

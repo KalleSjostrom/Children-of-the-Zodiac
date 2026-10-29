@@ -18,9 +18,9 @@ func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 	Graphics.setTextColor(1)
 	var status: int = getStatus()
 	if isFinished(status):
-		g.drawMultiString("Mission done!", int(800 + getXtrans() * 300), 50)
+		show_line(g, "Mission done!", int(800 + getXtrans() * 300))
 	else:
-		g.drawMultiString(string + str(status) + "/" + str(DONE_CRITERION), int(700 + getXtrans() * 350), 50)
+		show_line(g, string + str(status) + "/" + str(DONE_CRITERION), int(700 + getXtrans() * 350))
 	g.finishText()
 
 func initDraw(g: Graphics):

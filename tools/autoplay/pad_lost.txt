@@ -1,0 +1,35 @@
+# Phase 3 rollout (game pad lost coverage): the debug console's padlost (dev
+# only: InputManagers.lost_simulated) shows "Connection to game pad lost"
+# (GameCore.testDraw) as an unplugged pad does (--load="Slot 1"
+# --start="Forest of Reil--Forest Path-mark0" --no-encounters). Every mode
+# reads the direction buttons before testDraw does (the overlay sees a press
+# only when the mode did not take it, as in the Java), and a labyrinth reads
+# none while the player steps: so the overlay's hand moves with DOWN and UP
+# pressed during steps, and CROSS during a step chooses "Use keyboard
+# instead", which ends it.
+wait 3000
+console padlost on
+wait 300
+shot l01_lost
+tap UP
+wait 150
+tap DOWN
+wait 600
+shot l02_down
+tap UP
+wait 150
+tap UP
+wait 600
+shot l03_up
+tap UP
+wait 150
+tap DOWN
+wait 600
+shot l04_down_again
+tap UP
+wait 150
+tap CROSS
+wait 600
+shot l05_keyboard
+log after
+quit

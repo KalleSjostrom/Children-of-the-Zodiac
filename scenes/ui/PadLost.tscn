@@ -1,0 +1,69 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/PadLost.gd" id="1_padlost"]
+[ext_resource type="Script" uid="uid://sko2muwq7vf3" path="res://scenes/ui/BaselineLabel.gd" id="2_label"]
+[ext_resource type="Theme" path="res://resources/theme/game_theme.tres" id="3_theme"]
+[ext_resource type="Script" path="res://scenes/ui/LabelList.gd" id="4_list"]
+[ext_resource type="Texture2D" uid="uid://dr1o1iyru0fwb" path="res://res/Menu/hand1.png" id="5_hand"]
+
+[node name="PadLost" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1024.0
+offset_bottom = 768.0
+mouse_filter = 2
+theme = ExtResource("3_theme")
+script = ExtResource("1_padlost")
+
+[node name="Title" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 512.0
+offset_top = 250.0
+offset_right = 512.0
+offset_bottom = 250.0
+mouse_filter = 2
+theme_type_variation = &"PadLostTitle"
+script = ExtResource("2_label")
+text = "Connection to game pad lost"
+alignment = 1
+
+[node name="Line" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 512.0
+offset_top = 320.0
+offset_right = 512.0
+offset_bottom = 320.0
+mouse_filter = 2
+theme_type_variation = &"PadLostLine"
+script = ExtResource("2_label")
+text = "Please reconnect the game pad in a USB port"
+alignment = 1
+
+[node name="Note" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 512.0
+offset_top = 350.0
+offset_right = 512.0
+offset_bottom = 350.0
+mouse_filter = 2
+theme_type_variation = &"PadLostNote"
+script = ExtResource("2_label")
+text = "(You can connect to the gamepad from the menu (Settings) later)"
+alignment = 1
+
+[node name="Menu" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+mouse_filter = 2
+script = ExtResource("4_list")
+
+[node name="Hand" type="TextureRect" parent="."]
+visible = false
+use_parent_material = true
+layout_mode = 0
+mouse_filter = 2
+texture = ExtResource("5_hand")
+stretch_mode = 2

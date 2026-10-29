@@ -3,7 +3,7 @@ extends RefCounted
 ## The game's commands for the debug console (COTZ-006, DebugConsole):
 ## places (goto, exits, teleport, savepoint, boss, cheater), the party and
 ## battles (heal, god, kill, skip), the world (map, roads, noenemies) and
-## development (status, trigger, difficulty, save). They replace the
+## development (status, trigger, difficulty, save, padlost, emotion). They replace the
 ## developer Cheater, whose menu the "cheater" command still opens.
 ##
 ## Jumps go through Organizer.jump_to, as the Cheater's did. A position on a
@@ -22,6 +22,9 @@ const SKIPPABLE: PackedStringArray = ["battle", "cutscene"]
 const SAVE_SLOTS := {"1": "Slot 1", "2": "Slot 2", "3": "Slot 3", "autosave": SaveSlots.AUTOSAVE}
 const LEVELS := {"easy": Difficulty.Level.EASY, "medium": Difficulty.Level.MEDIUM,
 	"original": Difficulty.Level.ORIGINAL}
+## The emotion bubbles, in Sprite's order (res/Emotions/<name>.png).
+const EMOTIONS: PackedStringArray = ["exclamation", "question", "questionEx", "dot", "aye", "no",
+	"zzz", "hihi", "ha1", "ha2"]
 
 ## The rounds "cast next" has not played yet (--casts=, see _cast).
 var _casts := PackedStringArray()
@@ -70,6 +73,12 @@ func _register(c: DebugCommands) -> void:
 		DebugCommands.opt("level", func() -> PackedStringArray: return PackedStringArray(LEVELS.keys()))])
 	c.add("save", "Saves the game here, wherever this is", _save, [
 		DebugCommands.arg("slot", func() -> PackedStringArray: return PackedStringArray(SAVE_SLOTS.keys()))])
+	c.add("padlost", "Shows the game pad lost overlay, as if a game pad were unplugged, until its menu is answered", _padlost, [
+		DebugCommands.switch()])
+	c.add("emotion", "Shows an emotion bubble over a party member or villager of this village, as a cutscene sets one (shake: shaking); off hides it", _emotion, [
+		DebugCommands.arg("who", _emotion_targets, "a name, _ for a space"),
+		DebugCommands.arg("emotion", func() -> PackedStringArray: return EMOTIONS + PackedStringArray(["off"])),
+		DebugCommands.opt("shake", func() -> PackedStringArray: return PackedStringArray(["shake"]))])
 
 
 # --- The game ---
@@ -567,6 +576,50 @@ func _noenemies(args: PackedStringArray) -> DebugCommands.Result:
 
 
 # --- Game ---
+
+## The game pad lost overlay (GameCore.testDraw) without a game pad: its menu
+## ("Try to reconnect", "Use keyboard instead") ends it, as with a pad.
+func _padlost(args: PackedStringArray) -> DebugCommands.Result:
+	var input := GameCore.inputManager
+	input.lost_simulated = DebugCommands.flip(args, input.lost_simulated)
+	return DebugCommands.done("Game pad lost %s" % DebugCommands.on_off(input.lost_simulated))
+
+
+## The party members and villagers of the current village, by name.
+func _village_sprites() -> Dictionary:
+	var village := _mode() as Village
+	var named := {}
+	if village != null:
+		for s in village.sprites.values():
+			if s.getName() != null and str(s.getName()) != "":
+				named[str(s.getName()).replace(" ", "_")] = s
+	return named
+
+
+func _emotion_targets() -> PackedStringArray:
+	return PackedStringArray(_village_sprites().keys())
+
+
+## An emotion bubble in a village (Sprite.setEmotion, which only cutscenes
+## call): the village draws it over the sprite until it is hidden.
+func _emotion(args: PackedStringArray) -> DebugCommands.Result:
+	if not (_mode() is Village):
+		return DebugCommands.fail("Not in a village")
+	var target = null
+	for name: String in _village_sprites():
+		if name.to_lower() == args[0].to_lower():
+			target = _village_sprites()[name]
+	if target == null:
+		return DebugCommands.fail("No one called %s here" % args[0])
+	if args[1] == "off":
+		target.setEmotion(false, -1, false)
+		return DebugCommands.done("%s: no emotion" % args[0])
+	var emotion := EMOTIONS.find(args[1])
+	if emotion == -1:
+		return DebugCommands.fail("No emotion %s" % args[1])
+	target.setEmotion(true, emotion, args.size() > 2 and args[2] == "shake")
+	return DebugCommands.done("%s: %s" % [args[0], args[1]])
+
 
 func _status(_args: PackedStringArray) -> DebugCommands.Result:
 	var gm := _mode()

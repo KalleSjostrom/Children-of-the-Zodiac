@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/Tutorial.gd" id="1_tutorial"]
+[ext_resource type="Script" uid="uid://sko2muwq7vf3" path="res://scenes/ui/BaselineLabel.gd" id="2_label"]
+[ext_resource type="Theme" path="res://resources/theme/game_theme.tres" id="3_theme"]
+[ext_resource type="Script" path="res://scenes/ui/LabelList.gd" id="4_list"]
+
+[node name="Tutorial" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1024.0
+offset_bottom = 768.0
+mouse_filter = 2
+theme = ExtResource("3_theme")
+script = ExtResource("1_tutorial")
+
+[node name="Dim" type="ColorRect" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_right = 1024.0
+offset_bottom = 768.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.5)
+
+[node name="Paper" type="TextureRect" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 205.0
+offset_top = 260.0
+offset_right = 205.0
+offset_bottom = 260.0
+mouse_filter = 2
+stretch_mode = 2
+
+[node name="Title" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 512.0
+offset_top = 310.0
+offset_right = 512.0
+offset_bottom = 310.0
+mouse_filter = 2
+theme_type_variation = &"TutorialTitle"
+script = ExtResource("2_label")
+alignment = 1
+
+[node name="Words" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+mouse_filter = 2
+script = ExtResource("4_list")
+
+[node name="Icons" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+mouse_filter = 2

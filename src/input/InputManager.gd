@@ -73,6 +73,10 @@ func poll(delta_ms: float) -> void:
 ## Port of InputManager.InputManagers: all input devices.
 class InputManagers extends RefCounted:
 	var managers: Array = []
+	## Dev only (the debug console's padlost): connectionLost reports a lost
+	## game pad, as an unplugged pad does, until the overlay's menu is
+	## answered (reset or disconnectGamePad). Nothing else sets it.
+	var lost_simulated := false
 
 	func addInputManager(man) -> void:
 		managers.append(man)
@@ -117,6 +121,7 @@ class InputManagers extends RefCounted:
 			im.resetAllGameActions()
 
 	func reset() -> void:
+		lost_simulated = false
 		for im in managers:
 			if im is InputGamePadManager:
 				im.reset()
@@ -125,9 +130,10 @@ class InputManagers extends RefCounted:
 		var active := true
 		for im in managers:
 			active = active and im.isActive()
-		return not active
+		return not active or lost_simulated
 
 	func disconnectGamePad() -> void:
+		lost_simulated = false
 		var keep: Array = []
 		for im in managers:
 			if not (im is InputGamePadManager):

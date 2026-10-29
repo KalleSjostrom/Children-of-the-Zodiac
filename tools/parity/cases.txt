@@ -531,3 +531,27 @@ dialog_store_fade           dialog_store_fade        --load="Slot 1" --start=Ala
 dialog_deck_page            dialog_deck_page         --load="Slot 1" --start=Alares
 dialog_card_store           dialog_card_store        --load="Slot 1" --start=Alares
 dialog_story_fade           dialog_story_fade        --load="Slot 1" --start="Vincent Tries to Cool Down the War"
+# Phase 3 rollout (shared UI overlays): what the cases above do not show
+# (deliverable 1 of docs/phase3_rollout_prompt.md, plan 8.3). Emotion bubbles
+# in a village frame (only cutscenes set them, and none leaves one that a
+# village draws: the console's dev-only "emotion"), over treetops and at
+# night, one shaking; "Paused" in a village, a labyrinth (both also during
+# the fade-in) and over a cutscene (paused while it loads: a cutscene takes
+# START itself); "game pad lost" (the console's dev-only "padlost") with its
+# menu's hand moved during labyrinth steps; the prison's "Time's up!"; the
+# tutorials of a trigger door, a battle, the weapon and card stores and the
+# menu's tutorial page, paged through; the black size-50 texts of the
+# ending (Ending - Part 2.1 on, through the chain); an image fade (Menthu1's
+# defeat: the console's dev-only "kill").
+emotions_village            emotions_village   --load="Slot 1" --start="Pass to Zazo" --status="Pass to Zazo:0" --start-time=night
+pause_village               pause              --load="Slot 1" --start=Alares
+pause_labyrinth             pause              --load="Slot 1" --start="Forest of Reil--Forest Path-mark0" --no-encounters
+pause_story                 pause_story        --load="Start demon2" --start="The Farl Story"
+pad_lost                    pad_lost           --load="Slot 1" --start="Forest of Reil--Forest Path-mark0" --no-encounters
+mission_time_up             mission_time_up    --load="Slot 1" --start="Pensara Prison--Floor 1-mark0" --no-encounters
+tutorial_trigger            tutorial_trigger   --load=Start --start="Central Pass--West Part-mark0" --no-encounters
+tutorial_battle             tutorial_battle    --load=Start --start="Forest of Reil--Forest Path-mark0"
+tutorial_store              tutorial_store     --load="Slot 1" --start=Alares
+tutorial_menu               tutorial_menu      --load="Slot 1" --start=Alares
+story_ending_part2          story_tour         --load="Slot 1" --start="Ending - Part 2.1"
+image_fade_menthu1          image_fade         --load="Start Menthu1" --start="Ice Cavern--Throne Room-mark0"

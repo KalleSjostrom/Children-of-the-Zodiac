@@ -62,8 +62,8 @@ var _level_layers: Array[CanvasLayer] = []
 var _level := 0
 var _order := 0
 var _ci_parents: Array[RID] = [] # the parent of each pooled canvas item
-var _ui_pool := {} # scene path -> Array of its nodes, in the order a frame shows them
-var _ui_count := {} # scene path -> how many of its nodes were shown since the drawing started
+var _ui_pool := {} # "<scene path>@<layer>" -> Array of its nodes, in the order a frame shows them
+var _ui_count := {} # "<scene path>@<layer>" -> how many of its nodes were shown since the drawing started
 var _ui_shown := {} # node -> true, the nodes shown since the drawing started
 var _ui_warned := false
 
@@ -252,11 +252,12 @@ func canvas_material(additive: bool, alpha_func: int, alpha_ref: float) -> Mater
 
 ## Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): the node of new
 ## code that draws itself where the legacy drawing would draw in this frame's
-## 2D (a dialog box, the fade): the n-th node of the scene at path shown since
-## the frame's drawing started, instanced the first time into the given layer
-## of new code (1, 2 …: the layers given to _init) and kept from frame to
-## frame, in the next slot of the frame's order. The 2D drawn after it goes to
-## that layer's canvas, after it. A node not shown in a frame is hidden at its
+## 2D (a dialog box, the fade): the n-th node of the scene at path on that
+## layer shown since the frame's drawing started, instanced the first time
+## into the given layer of new code (1, 2 …: the layers given to _init; a
+## scene shown on two layers has a pool on each) and kept from frame to frame,
+## in the next slot of the frame's order. The 2D drawn after it goes to that
+## layer's canvas, after it. A node not shown in a frame is hidden at its
 ## end. The levels only go up in a frame: a node of a lower layer than one
 ## shown before it would be drawn under that one (a warning, once).
 func show_ui(path: String, layer: int) -> CanvasItem:
@@ -266,9 +267,10 @@ func show_ui(path: String, layer: int) -> CanvasItem:
 	_level = maxi(_level, layer)
 	# The next legacy 2D starts a canvas item of its own, after the node.
 	_cur_kind = 0
-	var count: int = _ui_count.get(path, 0)
-	_ui_count[path] = count + 1
-	var pool: Array = _ui_pool.get_or_add(path, [])
+	var key := "%s@%d" % [path, layer]
+	var count: int = _ui_count.get(key, 0)
+	_ui_count[key] = count + 1
+	var pool: Array = _ui_pool.get_or_add(key, [])
 	if count == pool.size():
 		var scene: PackedScene = ResourceLoader.load(path)
 		var made: CanvasItem = scene.instantiate()
@@ -284,8 +286,8 @@ func show_ui(path: String, layer: int) -> CanvasItem:
 
 ## Hides the nodes of show_ui that were not shown this frame.
 func _hide_ui_nodes() -> void:
-	for path: String in _ui_pool:
-		for node: CanvasItem in _ui_pool[path]:
+	for key: String in _ui_pool:
+		for node: CanvasItem in _ui_pool[key]:
 			if not _ui_shown.has(node):
 				node.visible = false
 

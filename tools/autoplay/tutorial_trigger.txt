@@ -1,0 +1,35 @@
+# Phase 3 rollout (tutorial coverage, group tutorial_*): a trigger door's
+# tutorial paged through (--load=Start --start="Central Pass--West Part-mark0":
+# the door's dialogs offer "Tutorial - Elements", CROSS pages them as in
+# dungeon_trigger.txt; then CROSS on the door's cell (TriggerDoor.activate)
+# pages the tutorial's seven pages, with coloured words and button icons).
+wait 3000
+mark
+tap CROSS
+wait 900
+loopuntil !dialog 30000
+wait 1000
+shot u00_tutorial
+tap CROSS
+wait 700
+shot u01_page
+tap CROSS
+wait 700
+shot u02_page
+tap CROSS
+wait 700
+shot u03_page
+tap CROSS
+wait 700
+shot u04_page
+tap CROSS
+wait 700
+shot u05_page
+tap CROSS
+wait 700
+shot u06_page
+tap CROSS
+wait 700
+shot u07_after
+log after
+quit

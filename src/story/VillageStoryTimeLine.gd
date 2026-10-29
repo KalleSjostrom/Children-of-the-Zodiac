@@ -19,6 +19,8 @@ const STORY_MODE = 2
 const TRANSLUCENT_MODE_OVER_ACTOR = 3
 const COVERALL_MODE = 4
 const TRANSLUCENT_MODE_UNDER_ACTOR = 5
+## Bridge (phase 3 step B): the UI node of the images drawn over the actors.
+const IMAGE_VIEW := "res://scenes/ui/CutsceneImage.tscn"
 var members = []
 var dialogs = null
 var removedVillagers = []
@@ -639,8 +641,13 @@ func draw(g, alpha = null):
 
 			if imageMode != BACKFLASH_MODE:
 				village.drawTop(g, null)
-		for i in range(members.size()):
-			members[i].drawEmotion(g)
+		# Bridge (phase 3 step B): the actors' emotion bubbles are UI nodes
+		# (Village.show_emotions; --legacy=emotions keeps the drawing).
+		if not Main.is_legacy("emotions"):
+			Village.show_emotions(g, members)
+		else:
+			for i in range(members.size()):
+				members[i].drawEmotion(g)
 		drawTop(g)
 	elif village.scene_root is VillageScene:
 		# The legacy code draws nothing of the village while paused.
@@ -723,16 +730,29 @@ func image_entry(scroll: Vector2i, c: Color, a: float) -> Array:
 	var at := Vector2i(px, py) - scroll
 	return ["image", t.getGodotTexture() if t != null else null, at, image_scale, c, a]
 
+## Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): the images are
+## the UI node scenes/ui/CutsceneImage.tscn (show_image; --legacy=story_images
+## keeps the drawing), the texts Text's and ScrollableTexts' nodes.
 func drawTop(g, sprites = null):
+	var legacyImages: bool = Main.is_legacy("story_images")
 	if imageMode == COVERALL_MODE:
-		currentImage.draw(g)
+		if legacyImages:
+			currentImage.draw(g)
+		else:
+			show_image(g, Graphics.UI_LAYER, false)
 	if imageMode == STORY_MODE:
-		currentImage.draw(g)
-		currentImage.drawTextBack(g)
+		if legacyImages:
+			currentImage.draw(g)
+			currentImage.drawTextBack(g)
+		else:
+			show_image(g, Graphics.UI_LAYER, true)
 	g.setFontSize(30)
 	if imageMode == VILLAGE_MODE and currentImage != null:
 		g.setColor(1)
-		currentImage.draw(g)
+		if legacyImages:
+			currentImage.draw(g)
+		else:
+			show_image(g, Graphics.UI_LAYER, false)
 		g.setColor(1)
 	if compareMode(DIALOG) or compareMode(WAITING_FOR_INPUT):
 		g.loadIdentity()
@@ -751,8 +771,34 @@ func drawTop(g, sprites = null):
 		scrollText.draw(g)
 	if imageMode == TRANSLUCENT_MODE_OVER_ACTOR:
 		g.setColor(1, 1, 1, fadeValue)
-		currentImage.draw(g)
+		if legacyImages:
+			currentImage.draw(g)
+		else:
+			show_image(g, Graphics.TRANSITION_LAYER, false)
 		g.setColor(1)
+
+## Bridge (phase 3 step B): currentImage.draw (and drawTextBack when
+## textBack) without the drawing (ImageSettings.place_image,
+## place_text_back), and the UI node scenes/ui/CutsceneImage.tscn on layer
+## shows the image where it would have been drawn (Graphics.show_ui): in the
+## current colour, through the current modelview (the zoom of draw), with
+## the material of the 2D state.
+func show_image(g, layer: int, textBack: bool):
+	var tint: Color = g.getCurrentColor()
+	var mat = g.canvas_material()
+	var zoom: Transform2D = g.modelview_2d()
+	var quad: Array = currentImage.place_image(g)
+	if textBack:
+		currentImage.place_text_back(g)
+	var view = g.show_ui(IMAGE_VIEW, layer)
+	if view == null:
+		return
+	var texture: Texture2D = null
+	var rect := Rect2i()
+	if not quad.is_empty():
+		texture = quad[0].getGodotTexture()
+		rect = Rect2i(quad[1], quad[2], quad[3] - quad[1], quad[4] - quad[2])
+	view.show_image(texture, rect, zoom, tint, textBack, mat)
 
 func centerScreen(index):
 	var p = getPos(index)
@@ -899,6 +945,26 @@ class ImageSettings extends RefCounted:
 	func drawTextBack(g):
 		g.loadIdentity()
 		g.drawImage(Graphics.textBack, 0, 576, 1)
+
+	## Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): draw without
+	## the drawing: the image bound as drawImage binds it (Graphics.skip_image).
+	## Returns [texture, x, y, far x, far y]: the corners of the quad drawImage
+	## would draw (GameTexture.drawPart: the position rounded, the far corner
+	## truncated to whole pixels), before the modelview; [] when it draws
+	## nothing.
+	func place_image(g) -> Array:
+		var p: Array = drawPos()
+		var t = g.skip_image(name)
+		if t == null:
+			return []
+		var px: int = roundi(p[0])
+		var py: int = roundi(p[1])
+		return [t, px, py, int(px + t.getWidth() * size), int(py + t.getHeight() * size)]
+
+	## Bridge (phase 3 step B): drawTextBack without the drawing.
+	func place_text_back(g):
+		g.loadIdentity()
+		g.skip_image(Graphics.textBack)
 
 	## The scroll moved scrollSpeed per update at the original's frame rate,
 	## which the sequences are timed to, so the port moves it that much per

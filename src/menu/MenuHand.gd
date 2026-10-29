@@ -35,6 +35,22 @@ func drawHand(g):
 			g.dim(1)
 
 
+## Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): drawHand without
+## the drawing: the dim's colour changes and drawImage's bind
+## (Graphics.skip_image). Returns [image, x, y, tint (the colour it would be
+## drawn in)], or [] when the hand is hidden.
+func place_hand(g) -> Array:
+	if not show:
+		return []
+	if dimmed:
+		g.dim(.3)
+	var tint: Color = g.getCurrentColor()
+	g.skip_image(hand)
+	if dimmed:
+		g.dim(1)
+	return [hand, pos[X], pos[Y], tint]
+
+
 func drawHandWithColor(g):
 	if show:
 		g.drawImage(hand, pos[X], pos[Y])
