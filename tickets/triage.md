@@ -75,5 +75,14 @@ The world map and the airship (MODERNIZATION_PLAN.md 9.1); kept for parity.
 | W3 | A closed road (`road<map>-<address>` 0) that the save lists as visited keeps its dots (`Landscape.init` shows the visited roads without the closed check); it is not walkable. No data closes a road the save visited | yes | Low |
 | W4 | `land2.map`'s Empyrian Temple node has no `land` prefix: landing there enters the labyrinth directly instead of a world map node (likely intended: the sky temple has no world map node) | yes | Low |
 
+## Found in phase 4.2 (2026-10-30), not ticketed
+
+The survey of the stores, the menu and the mini-games (MODERNIZATION_PLAN.md
+9.2); kept.
+
+| ID | Quirk | Java too | Priority |
+|---|---|---|---|
+| R1 | Silent Ruin--The Great Ruins (line 192) pairs the magic square riddle `RubicsPuzzle19` with `puzzle44` (4 x 4 tiles): its check knows only 3 x 3 and 5 x 5 (sums 15 and 65), so the riddle counts as solved on the first move, and it is never scrambled | yes | Low |
+
 Code-side findings (dead code, latent bugs) are in MODERNIZATION_PLAN.md,
 "Appendix: side findings".

@@ -1,0 +1,62 @@
+# The title from the game's start (no --start; parity case title_intro,
+# phase 4.2): the background alone while the mode fades in (its fade-in
+# speed is 1: the first two frames), the logo fading in (TitleScreen.index,
+# .005 per update, its alpha while below .9: about 3 s), the root menu with
+# the cursor on each entry (UP and DOWN wrap), START (the title is not
+# pausable), the difficulty list (Start: the cursor on Medium) with each
+# level highlighted and its description, CIRCLE back to the root and Start
+# again (the list keeps its cursor). A shot shows the frame before it: the
+# first is of the title's first frame.
+wait 33
+shot a00_background
+wait 16
+shot a01_background
+wait 16
+shot a02_logo
+wait 300
+shot a03_logo
+wait 500
+shot a04_logo
+wait 1000
+shot a05_logo
+wait 1000
+shot a06_logo
+wait 150
+shot a07_logo
+wait 100
+shot a08_menu
+wait 400
+tap DOWN
+wait 300
+shot b01_continue
+tap DOWN
+wait 300
+shot b02_start
+tap UP
+wait 300
+shot b03_continue
+tap DOWN
+wait 300
+tap START
+wait 300
+shot b04_start_not_paused
+tap CROSS
+wait 300
+shot c01_medium
+tap UP
+wait 300
+shot c02_easy
+tap UP
+wait 300
+shot c03_original
+tap DOWN
+wait 300
+shot c04_easy
+tap CIRCLE
+wait 300
+shot c05_root
+tap CROSS
+wait 300
+shot c06_easy_again
+log done
+quit

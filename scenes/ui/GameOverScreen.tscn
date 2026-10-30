@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/GameOverScreen.gd" id="1_screen"]
+[ext_resource type="Texture2D" uid="uid://btvf4b82sk2oy" path="res://res/Title/GameOverKin.jpg" id="2_image"]
+
+[node name="GameOverScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1024.0
+offset_bottom = 768.0
+mouse_filter = 2
+script = ExtResource("1_screen")
+
+[node name="Image" type="TextureRect" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_right = 1024.0
+offset_bottom = 768.0
+mouse_filter = 2
+texture = ExtResource("2_image")
+stretch_mode = 2

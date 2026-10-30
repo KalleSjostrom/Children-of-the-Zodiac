@@ -65,6 +65,8 @@ func saveGame(saveSlot, place = null, labPos = null):
 	writer.println("end")
 	if not writer.writeTo(saveDir() + filename + ".sav"):
 		push_error("Save: could not write " + saveDir() + filename + ".sav")
+	else:
+		SaveSlots.note_saved(filename)
 
 
 ## Unused in the original (call commented out): writes an obfuscated copy

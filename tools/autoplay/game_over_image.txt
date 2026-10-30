@@ -1,0 +1,6 @@
+# The game over screen's image of a party (parity cases game_over_*, phase
+# 4.2): --load=<save> --start="Game Over Screen", once faded in.
+wait 2000
+shot a01_image
+log image
+quit

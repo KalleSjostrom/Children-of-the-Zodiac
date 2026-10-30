@@ -1,10 +1,8 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://scenes/ui/PadLost.gd" id="1_padlost"]
 [ext_resource type="Script" uid="uid://sko2muwq7vf3" path="res://scenes/ui/BaselineLabel.gd" id="2_label"]
 [ext_resource type="Theme" path="res://resources/theme/game_theme.tres" id="3_theme"]
-[ext_resource type="Script" path="res://scenes/ui/LabelList.gd" id="4_list"]
-[ext_resource type="Texture2D" uid="uid://dr1o1iyru0fwb" path="res://res/Menu/hand1.png" id="5_hand"]
 
 [node name="PadLost" type="Control"]
 layout_mode = 3
@@ -54,16 +52,3 @@ script = ExtResource("2_label")
 text = "(You can connect to the gamepad from the menu (Settings) later)"
 alignment = 1
 
-[node name="Menu" type="Control" parent="."]
-use_parent_material = true
-layout_mode = 0
-mouse_filter = 2
-script = ExtResource("4_list")
-
-[node name="Hand" type="TextureRect" parent="."]
-visible = false
-use_parent_material = true
-layout_mode = 0
-mouse_filter = 2
-texture = ExtResource("5_hand")
-stretch_mode = 2

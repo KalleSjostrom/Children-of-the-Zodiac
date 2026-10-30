@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/Title.gd" id="1_title"]
+[ext_resource type="Texture2D" uid="uid://d2d7rw82snuw7" path="res://res/Title/loggasten.png" id="2_background"]
+[ext_resource type="Texture2D" uid="uid://b1lin3mrrvom1" path="res://res/Title/loggatext.png" id="3_logo"]
+
+[node name="Title" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1024.0
+offset_bottom = 768.0
+mouse_filter = 2
+script = ExtResource("1_title")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 59.0
+offset_right = 945.0
+offset_bottom = 709.0
+mouse_filter = 2
+texture = ExtResource("2_background")
+stretch_mode = 2
+
+[node name="Logo" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 59.0
+offset_right = 945.0
+offset_bottom = 709.0
+mouse_filter = 2
+texture = ExtResource("3_logo")
+stretch_mode = 2

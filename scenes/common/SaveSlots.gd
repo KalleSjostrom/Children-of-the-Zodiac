@@ -19,6 +19,16 @@ const MONTHS: PackedStringArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
 ## under each name (draw_dates_under).
 const MENU_DISTANCE := 72
 const DATE_FONT_SIZE := 20
+## The node that shows the dates (show_dates_beside).
+const SLOT_DATES_VIEW := "res://scenes/ui/SlotDates.tscn"
+## Dev only (deterministic runs, --seed): the time a slot's date counts from,
+## 1 Jan 2000, 00:00 (UTC, no time zone).
+const DETERMINISTIC_EPOCH := 946684800
+
+## Dev only: when each slot was written in this deterministic run, in ms of
+## the game clock (note_saved), so the slot lists show the same date in every
+## run (a file's modification time is wall-clock time).
+static var _saved_game_ms := {}
 
 
 ## The file of a slot (in Save.saveDir(), like Save and Load use).
@@ -43,13 +53,26 @@ static func loadable() -> PackedStringArray:
 
 
 ## When the slot was saved, in local time ("20 Oct 2026, 15:43"), or "Empty".
+## A deterministic run (dev) shows the game clock's time of the save instead,
+## counted from DETERMINISTIC_EPOCH.
 static func saved_at(slot: String) -> String:
 	if not exists(slot):
 		return "Empty"
-	var unix: int = FileAccess.get_modified_time(path(slot))
-	var bias: int = int(Time.get_time_zone_from_system().get("bias", 0))
-	var t: Dictionary = Time.get_datetime_dict_from_unix_time(unix + bias * 60)
+	var unix: int
+	if J.deterministic:
+		unix = DETERMINISTIC_EPOCH + int(_saved_game_ms.get(slot, 0.0) / 1000.0)
+	else:
+		var bias: int = int(Time.get_time_zone_from_system().get("bias", 0))
+		unix = FileAccess.get_modified_time(path(slot)) + bias * 60
+	var t: Dictionary = Time.get_datetime_dict_from_unix_time(unix)
 	return "%d %s %d, %02d:%02d" % [t.day, MONTHS[t.month - 1], t.year, t.hour, t.minute]
+
+
+## Dev only: notes that the slot's file was just written (Save.saveGame), for
+## the dates of a deterministic run (saved_at).
+static func note_saved(slot: String) -> void:
+	if J.deterministic:
+		_saved_game_ms[slot] = J.gameClockMs
 
 
 ## Draws the date of each slot of a menu list under its name (the list's
@@ -67,9 +90,34 @@ static func draw_dates_beside(g: Graphics, node: MenuNode, x: int, font_size: in
 	g.setFontSize(font_size)
 
 
+## draw_dates_beside without the drawing (phase 4.2 step B,
+## docs/ARCHITECTURE.md section 14): the same state changes (the font sizes,
+## drawString's setColor(color)), and the frame's next SlotDates node on the
+## UI layer shows the dates where they would have been drawn (Graphics.show_ui).
+static func show_dates_beside(g: Graphics, node: MenuNode, x: int, font_size: int) -> void:
+	_show_dates(g, node, Vector2i(x - node.Xpos, 0))
+	g.setFontSize(font_size)
+
+
 static func _draw_dates(g: Graphics, node: MenuNode, offset: Vector2i) -> void:
 	g.setFontSize(DATE_FONT_SIZE)
 	for i in range(node.getSize()):
 		var slot: String = node.children[i].getName()
 		if slot == AUTOSAVE or MANUAL.has(slot):
 			g.drawString(saved_at(slot), node.Xpos + offset.x, node.Ypos + i * node.distance + offset.y)
+
+
+static func _show_dates(g: Graphics, node: MenuNode, offset: Vector2i) -> void:
+	g.setFontSize(DATE_FONT_SIZE)
+	var dates := []
+	for i in range(node.getSize()):
+		var slot: String = node.children[i].getName()
+		if slot == AUTOSAVE or MANUAL.has(slot):
+			dates.append([saved_at(slot), Vector2i(node.Xpos + offset.x,
+					node.Ypos + i * node.distance + offset.y), Graphics.text_color(1.0)])
+			g.setColor(g.color)
+	if dates.is_empty():
+		return
+	var view = g.show_ui(SLOT_DATES_VIEW, Graphics.UI_LAYER)
+	if view != null:
+		view.show_dates(dates, Graphics.font_bold(), g.canvas_material())

@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/ShadowText.gd" id="1_shadow"]
+[ext_resource type="Script" uid="uid://sko2muwq7vf3" path="res://scenes/ui/BaselineLabel.gd" id="2_label"]
+[ext_resource type="Theme" path="res://resources/theme/game_theme.tres" id="3_theme"]
+
+[node name="ShadowText" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1024.0
+offset_bottom = 768.0
+mouse_filter = 2
+theme = ExtResource("3_theme")
+script = ExtResource("1_shadow")
+
+[node name="Shadow" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 451.0
+offset_top = 729.0
+offset_right = 451.0
+offset_bottom = 729.0
+mouse_filter = 2
+theme_type_variation = &"DifficultyInfo"
+script = ExtResource("2_label")
+text = "A gentler take on the original balance."
+
+[node name="Text" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 450.0
+offset_top = 728.0
+offset_right = 450.0
+offset_bottom = 728.0
+mouse_filter = 2
+theme_type_variation = &"DifficultyInfo"
+script = ExtResource("2_label")
+text = "A gentler take on the original balance."
+color = Color(1, 1, 1, 1)

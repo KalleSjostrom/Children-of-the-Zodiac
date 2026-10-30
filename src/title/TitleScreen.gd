@@ -6,6 +6,15 @@ extends GameMode
 ## Port addition (COTZ-004): "Start" opens the difficulty choice (Easy,
 ## Medium, Original; see Difficulty), with the highlighted level's
 ## description under it. The level is stored once the new game is loaded.
+##
+## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): UI nodes show
+## the title where the drawing drew it: Title (the background and the logo),
+## MenuList (activeNode, MenuNode.show_all_children), ShadowText (the
+## difficulty's description), SlotDates (the slots' dates);
+## --legacy=title and --legacy=menu_list keep the drawing.
+
+const TITLE_VIEW := "res://scenes/ui/Title.tscn"
+const SHADOW_TEXT_VIEW := "res://scenes/ui/ShadowText.tscn"
 
 var background = ""
 var titleBackground = ""
@@ -15,6 +24,8 @@ var x: int = 78
 var y: int = 59
 ## The Difficulty.Level chosen for a new game, -1 when continuing a save.
 var newGameLevel: int = -1
+## Bridge: the frame's Title node (_show_background), for drawTitle's logo.
+var _title_view = null
 
 ## Java: init(HashMap info).
 func init(name, lab = null, hinders = null):
@@ -124,15 +135,24 @@ func finishOff():
 func draw(g, alpha = null):
 	g.setColor(1)
 	g.setFontSize(24)
-	g.drawImage(background, x, y)
+	if Main.is_legacy("title"):
+		g.drawImage(background, x, y)
+	else:
+		_show_background(g)
 	if not fadein:
 		drawTitle(g)
 		if doneFading():
-			activeNode.drawAllChildren(g)
+			if Main.is_legacy("menu_list"):
+				activeNode.drawAllChildren(g)
+			else:
+				activeNode.show_all_children(g, Graphics.UI_LAYER)
 			if activeNode.getName() == "Start":
 				drawDifficultyInfo(g)
 			elif activeNode.getName() == "Continue":
-				SaveSlots.draw_dates_beside(g, activeNode, 620, 24)
+				if Main.is_legacy("title"):
+					SaveSlots.draw_dates_beside(g, activeNode, 620, 24)
+				else:
+					SaveSlots.show_dates_beside(g, activeNode, 620, 24)
 	super.draw(g)
 
 
@@ -140,7 +160,10 @@ func draw(g, alpha = null):
 func drawDifficultyInfo(g):
 	var level = Difficulty.LEVELS[activeNode.getMenuCursor()]
 	g.setFontSize(20)
-	g.drawWithShadow(level.description, 450, 728)
+	if Main.is_legacy("title"):
+		g.drawWithShadow(level.description, 450, 728)
+	else:
+		_show_difficulty_info(g, level.description)
 	g.setFontSize(24)
 
 
@@ -151,4 +174,38 @@ func doneFading():
 func drawTitle(g):
 	if index < .9:
 		g.setColor(1, 1, 1, index)
-	g.drawImage(titleBackground, x, y, 1)
+	if Main.is_legacy("title"):
+		g.drawImage(titleBackground, x, y, 1)
+	else:
+		_show_logo(g)
+
+
+# Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): the drawing
+# without the drawing. Each makes the drawing's state changes in the same
+# order (drawImage's bind: Graphics.skip_image; drawWithShadow's text colours
+# and setColor(color): Graphics.place_with_shadow) and hands its UI node what
+# would have been drawn, in the colour and with the material of the GL state.
+
+## The background (drawImage(background, x, y)): the frame's Title node.
+func _show_background(g) -> void:
+	var t = g.skip_image(background)
+	_title_view = g.show_ui(TITLE_VIEW, Graphics.UI_LAYER)
+	if _title_view != null:
+		_title_view.show_background(t != null, g.getCurrentColor(), g.canvas_material())
+
+
+## The logo (drawImage(titleBackground, x, y, 1)), in its colour (the alpha
+## index while it fades in), on the frame's Title node.
+func _show_logo(g) -> void:
+	var t = g.skip_image(titleBackground)
+	if _title_view != null:
+		_title_view.show_logo(t != null, g.getCurrentColor(), g.canvas_material())
+
+
+## The description (drawWithShadow at 450, 728): a ShadowText node.
+func _show_difficulty_info(g, description: String) -> void:
+	var colors: Array[Color] = g.place_with_shadow()
+	var view = g.show_ui(SHADOW_TEXT_VIEW, Graphics.UI_LAYER)
+	if view != null:
+		view.show_text(description, Vector2i(450, 728), &"DifficultyInfo", colors[0], colors[1],
+				Graphics.font_bold(), g.canvas_material())

@@ -1,0 +1,43 @@
+# The title's Continue list (parity case title_continue, phase 4.2): seeded
+# runs read no player saves, so every slot shows "Empty" and there is no
+# autosave. The cursor moved and wrapped, CIRCLE back to the root, Continue
+# again (the list keeps its cursor), Slot 1: an unsaved slot loads the
+# shipped "Slot 1" (maps/Banks), through the title's fade-out, to its place.
+wait 3500
+tap DOWN
+wait 300
+tap CROSS
+wait 300
+shot a01_slot1
+tap DOWN
+wait 300
+shot a02_slot2
+tap DOWN
+wait 300
+shot a03_slot3
+tap DOWN
+wait 300
+shot a04_slot1
+tap UP
+wait 300
+shot a05_slot3
+tap CIRCLE
+wait 300
+shot a06_root
+tap CROSS
+wait 300
+shot a07_slot3_again
+tap DOWN
+wait 300
+shot a08_slot1
+tap CROSS
+wait 50
+shot b01_fade_out
+wait 200
+shot b02_fade_out
+wait 200
+shot b03_fade_out
+wait 4000
+shot c01_loaded
+log loaded
+quit

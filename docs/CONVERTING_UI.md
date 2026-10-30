@@ -9,7 +9,8 @@ bridge's batches, its node is a dev flag); the conventions
 are in `docs/ARCHITECTURE.md` section 12. This is the procedure for the next
 overlays (phase 4's: a battle's and a riddle's top layer, the menu pages,
 the stores' menus; the world map's name plate is done, docs/ARCHITECTURE.md
-section 13). Run everything from bash in the project root, Godot with
+section 13) and for whole 2D modes (section 5 below; the title and the game
+over are done, docs/ARCHITECTURE.md section 14). Run everything from bash in the project root, Godot with
 `< /dev/null`; close the Godot editor first (it imports new files and makes
 `.uid` files), and do not type while a recording runs (a new run's window
 takes the focus).
@@ -167,3 +168,44 @@ they trigger (the time mission's "Time's up!" leaves the floor), input
 * Parity per overlay on code that has them all: the node run of every case
   once (`record after`), then `--legacy=<overlay>` on the overlay's cases,
   compared with it: the same pairs as `ab`, recorded once.
+
+## 5. Whole 2D modes (phase 4.2: the title, the game over; next the stores and the menu)
+
+A mode whose whole frame is UI (no world under it) is converted the same
+way, part by part; ARCHITECTURE section 14 has the conventions and the
+reasons. What it adds to sections 1–4:
+
+* **The place.** Every converted drawing is a UI node in the frame's order
+  (`Graphics.show_ui`), not a scene of the mode under `World`: the stores
+  and the menu pages draw legacy parts and phase 3's nodes (the keeper's
+  dialog, the card info, the tutorials) between their own parts, and
+  `World` is under all of it. Parts drawn one right after the other with
+  nothing that could come between them may share a scene (the title's
+  background and logo); a drawing that other modes repeat gets a reusable
+  node (`MenuList`, `ShadowText`, `SlotDates`), shown where the legacy call
+  was.
+* **Facts.** Besides section 1: the mode's sub-states (which lists, pages,
+  confirm boxes and dims each draws), the `MenuNode.draw` variant each list
+  uses (prices, numbers, equipment, active children, the bounding box and
+  its scroll bar, a dimmed hand; ARCHITECTURE section 14's table) and the
+  game state its draws change (the cursor fix-up and its sound, the scroll
+  bar's lazy init, `StatusPage`'s static `y`, the Church's `totalCost` and
+  hand positions, `BUTTON_ICONS` loaded on first use). Check what is 3D
+  before planning chunks: the stores, the menu pages and the riddles draw
+  none (their cards are `drawImage`s).
+* **Coverage.** Probe the mode's draw with its sub-state (the page, the
+  store's mode, the riddle kind) and `MenuNode.draw` with its flags, the
+  mode and the list's name: the phase 4.2 probe found the stores' cases
+  showing only their root menus (plan 9.2). Seeded runs read no player saves
+  and empty `user://saves_deterministic/`: a slot list shows "Empty", and a
+  slot saved during the run is dated by the game clock (`SaveSlots.note_saved`,
+  dev only), so slot lists can be shot. A shot shows the frame before it: the
+  first frame of a game is shot at `wait 33`.
+* **Flags.** One `--legacy=<part>` per converted part (`title`, `game_over`,
+  `menu_list`), so that a part's legacy drawing can be checked against its
+  node on its own; with all of a mode's flags on, the frame is drawn exactly
+  as before. Parts whose pixels never overlap may change their relative
+  order between flag combinations without a pixel changing; check which do.
+* **Pooled nodes keep their textures.** A pooled node stays (hidden) after
+  its mode is left, with the textures it was last given; release large
+  ones when hidden if a mode's pages hold many.

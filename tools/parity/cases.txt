@@ -578,3 +578,22 @@ world_east_night            world_east_night     --load="Slot 1" --start="land::
 airship_land1               airship_land1        --load="Slot 1" --start=landAlares
 airship_land1_menu          airship_land1_menu   --load="Slot 1" --start=landAlares
 airship_land2               airship_land2        --load="Slot 1" --start=landAlares --status=airship:2
+# Phase 4.2 (the title and the game over screen; tools/autoplay/title_*.txt,
+# game_over*.txt): the title from the game's start (the fade-in, the logo,
+# the root menu, the difficulty list with each description), a new game
+# through the fade-out, the Continue list ("Empty" slots) and loading a slot,
+# the Continue list with an autosave and a saved slot (their dates by the
+# game clock in seeded runs: SaveSlots.note_saved, dev only); the game over
+# screen with each party a save reaches ("Start": Kin, "Start demon1": and
+# Celis, "Start demon2": and Borealis, "Slot 1": Kin, Celis and Zalzi,
+# "Start Menthu1": all four), its fade-in, "Paused", CROSS and the 22 s
+# timeout back to the title.
+title_intro              title_intro
+title_new_game           title_new_game
+title_continue           title_continue
+title_continue_autosave  title_continue_autosave --load="Slot 1" --start=landAlares --status=difficulty:1
+game_over                game_over         --load=Start --start="Game Over Screen"
+game_over_timeout        game_over_timeout --load="Start demon1" --start="Game Over Screen"
+game_over_borealis       game_over_image   --load="Start demon2" --start="Game Over Screen"
+game_over_zalzi          game_over_image   --load="Slot 1" --start="Game Over Screen"
+game_over_all            game_over_image   --load="Start Menthu1" --start="Game Over Screen"

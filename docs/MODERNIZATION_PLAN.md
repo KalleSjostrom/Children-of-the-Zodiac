@@ -8,7 +8,9 @@ steps A and B done** for all 80 floors (pilot 7.7, rollout 7.8, closing
 A and B done** (pilot: the dialog family and the fade, 8.1; rollout: the
 other overlays of villages, labyrinths and cutscenes, 8.3; closing the
 phase, 8.4); **phase 4.1 steps A and B done** (the world map and the
-airship, 9.1); the rest of phases 4–5 are proposals. The plan
+airship, 9.1); **phase 4.2's pilot done through step B** (the title, the
+game over and the menu list, 9.2; the rollout to the menu, the stores and
+the mini-games prepared there); the rest of phases 4–5 are proposals. The plan
 assumes the state described in `docs/HANDOFF.md` (all classes ported, main
 paths run). Conventions for new code: `docs/ARCHITECTURE.md`.
 
@@ -176,7 +178,7 @@ widescreen (see section 13); rewriting the cutscene language.
 | Menu | 21 / 3,024 | images + text at hard-coded 1024×768 positions | `Load`/`Database`; 10 tutorial files | Control pages + Theme; `.tut` → BBCode |
 | Stores | 7 / 2,081 | 2D, menu pieces chosen by bitmask | `building` lines, `stores.bank`, `cardStores.bank` | one store scene template |
 | Story texts, timelines | 6 / 1,219 (+ `villageStory` 5 files) | see 6.4 | 85 `.seq` (8,541 lines) | keep the parser; the runner drives nodes |
-| Title, game over | 2 / 168 | images + fades | — | Control + Tween |
+| Title, game over | 2 / 168 (209 with the port's additions) | images + fades | — | Control + Tween (*4.2:* UI nodes in step B; the Tweens are step C) |
 | Mini-games | 12 / 1,253 | 2D, started by dungeon `riddle` objects | 20 files in `maps/MiniGames` | Control scenes |
 | Input | 6 / 584 | — | — | InputMap + a wrapper for the press-once/repeat behaviours |
 | Sound | 3 / 335 | — | 179 `.wav`, 157 `.ogg` (intro + loop) | Music autoload, Music/SFX buses |
@@ -1880,7 +1882,7 @@ place in each mode's frame and what each needs (in the order of the frames):
 | A battle's and a riddle's top layer | Labyrinth, boss areas: after the dialog | Phase 4 (battles, mini-games) |
 | Tutorials' top layer (`Tutorial.drawTopLayer`, the trigger door's, the stores') | Labyrinth: after the battle's top layer, before the fade; stores: in `draw3D` | Its coloured text (`ColorTextLoader`, the `.tut` word colours: BBCode, 9.2) and its dim (`fadeOldSchoolColor`) |
 | Cover-all, story and village images (`ImageSettings.draw`, `drawTextBack`) | Cutscene: `drawTop`, before the dialog, under the zoom's modelview | The zoom (the timeline scales the modelview at the start of `draw`; the images are drawn with it); the scroll modes; then UI nodes before the dialog's slot |
-| Story texts (`Text.draw`), scroll texts (`ScrollableTexts`, the credits) | Cutscene: after the cutscene's fade (over it) | Their own fades (`Text` is a `Fadeable` stepped per draw), the bold font the credits leave on; nodes on Transition after the fade's slot |
+| Story texts (`Text.draw`), scroll texts (`ScrollableTexts`, the credits) | Cutscene: after the cutscene's fade (over it) | Their own fades (`Text` is a `Fadeable` stepped per draw), the font the credits leave set (each line's `setFontSize(size, bold)`; *4.2:* no line of the ending is bold); nodes on Transition after the fade's slot |
 | Translucent-over-actor image | Cutscene: last of `drawTop`, over the dialog and the texts | As the images; on Transition after the texts |
 | "Paused", "game pad lost" (`GameCore.testDraw`) | After the mode, over its fade | The pad overlay needs a dev flag to be covered (seeded runs read no pad); its menu is a `MenuNode` (9.2) |
 | Menu pages (`MainMenu`, `AbstractPage.draw3D` per page; `LabyrinthMap.draw`) | The menu mode | Phase 4.2 (`MenuNode` lists, the help and tutorial texts, the automap) |
@@ -2368,13 +2370,18 @@ GL state the plate leaves is observable); step C for walking and flying.
 
 ### 9.2 Title, game over, mini-games, stores, menu
 
-* **Title, game over:** trivial Control scenes with Tweens.
+* **Title, game over:** trivial Control scenes with Tweens. *Done through
+  step B in the pilot (below): UI nodes that mirror the legacy state; the
+  Tweens (and a Timer for the game over's 22 s) are step C.*
 * **Mini-games** (12 files) are self-contained. Make one Control scene per
   puzzle kind; tiles come from `res/MiniGames/TileGames/*`. They are started
   from dungeon `riddle` objects, so they plug into the dungeon scene as a
   modal UI child, not as an Organizer mode.
 * **Stores** (Building → AbstractStore → CardStore / WeaponStore / Inn;
-  Church): one `Store.tscn` template.
+  Church): one `Store.tscn` template. *Found in the pilot:* while a store
+  still draws legacy parts, its converted parts are UI nodes in the
+  frame's order (ARCHITECTURE section 14), so a store is several nodes;
+  one scene per store fits when nothing of it is legacy any more.
   * The parts: background, keeper portrait, the shared Dialog, a menu
     column, confirm boxes.
   * The input state machines stay as script. `stores.bank` and
@@ -2382,13 +2389,341 @@ GL state the plate leaves is observable); step C for walking and flying.
 * **Menu** (21 files, 3,024 lines): one Control scene per page (start,
   status, equip, deck, map, bestiary, help, tutorial) on a shared frame.
   * `MenuNode` lists → a small `MenuList` control that keeps the legacy
-    cursor and key-repeat behaviour.
+    cursor and key-repeat behaviour. *Pilot:* `scenes/ui/MenuList` shows a
+    plain list (step B); `MenuNode` keeps the cursor and `GameAction` the key
+    repeat until step C; the variants are listed below.
   * The tutorial and help files (`.tut`/`.help`, word colour maps) → BBCode
     for `RichTextLabel`, with an offline converter.
   * The automap (`LabyrinthMap.draw`) → a Control drawing from
     `LabyrinthMap` data.
   * Fix `HelpPage`'s volume options on the way: the names it compares never
     match.
+
+**Results of the pilot (phase 4.2, `docs/phase4_2_prompt.md`; conventions in
+docs/ARCHITECTURE.md section 14).** Step B for the title (`TitleScreen`),
+the game over screen (`GameOver`) and the menu list they draw (`MenuNode`
+as `MenuList`); no store, menu page or mini-game yet (the list for their
+rollout follows). The legacy objects keep the state, the input and the
+timing.
+
+* **Baseline** (on 56abbb39): `tools/check.sh` 0 failed; goldens of the 392
+  cases and `bridge_test` (`g42base`, 7,292 shots), identical to `g41gold`
+  shot for shot and log for log (with `--ignore-world`); the error lines
+  differ only where a game pad or audio device event hit a run (`WASAPI`,
+  `HIDAPI` lines in 17 logs, and the exit leak counts of the runs whose
+  audio failed to start).
+* **Facts** (deliverable 1), where they add to or differ from the prompt:
+  * Order. `TitleScreen.draw`: `setColor(1)`, `setFontSize(24)`, the
+    background (`loggasten.png`, 867 x 650 at (78, 59)); unless the mode
+    fades in, the logo (`loggatext.png`, the same rectangle, tinted
+    `(1, 1, 1, index)` while index < .9); once index > .9 the active list
+    (`drawAllChildren`), then the difficulty's description
+    (`drawWithShadow` at (450, 728), size 20) or the Continue list's dates
+    (x 620, size 20); then the mode fade. The title's fade-in speed is 1:
+    its first two frames draw the background alone at fade value 1, the
+    logo starts in the third; it takes 180 updates (3 s: its alpha goes
+    from .005 to .895, then the colour stays 1); CROSS sets index 1. The
+    lists: the root at (450, 600), the difficulty list at (450, 570), the
+    Continue list at (450, 750 − 50n): all over the picture (which ends at
+    y 709), the hand 35 px left of them; the description (baseline 728,
+    size 20) lies below it, over black; the dates
+    over the picture; nothing overlaps the description or the dates. So the
+    order shows: the logo over the background, the lists and dates over
+    both, the fade over all. Around the frame: the title is not pausable
+    (START does nothing); a lost game pad draws its overlay and menu over
+    it (Transition). `GameOver.draw`: `setColor(1)`, `setFontSize(24)`, the
+    image (1024 x 768 at 0, 0), the fade (fade-in speed .01: 100 frames);
+    "Paused" over it (the game over is pausable; its timer runs on).
+  * State changes. Besides the binds and the font sizes: `drawTitle` leaves
+    `(1, 1, 1, index)` as the current colour while the logo fades (the
+    mode fade at 1 draws nothing and does not set it; the next frame's
+    `setColor(1)` resets it), `drawString` sets `color` (1) after every line,
+    `drawWithShadow` leaves the text colour white, the dates keep the text
+    colour the list left (white: all title choices are enabled). The
+    cursor fix-up never fires on the title (its lists never shrink).
+    `place_all_children` and `place_hand` (phase 3) keep all of the plain
+    list's state changes; they assert that no child is active and that
+    there is no bounding box.
+  * Menus. Root: Start, Continue. Start: Easy, Medium, Original, the cursor
+    on Medium, the list keeping its cursor when left with CIRCLE and
+    entered again; Continue: the autosave (when there is one) and the three
+    slots, the list 50 px higher with the autosave; CIRCLE back to the root.
+    The title uses only plain lists (enable colour white, no disabled
+    child, no "character" name, no bounding box, prices, numbers or
+    equipment; the hand never dimmed). The stores' and the menu's variants
+    are listed below.
+  * The game over's image per party: `Start` Kin, `Start demon1` Kin and
+    Celis, `Start demon2` and `Start mt cesadur class3 level3` with Borealis,
+    `Slot 1` and `Start demon3` Kin, Celis and Zalzi, `Start Menthu1`,
+    `Start d3` (and the old `Slot 2`, `Slot 3`) all four: the five images of
+    `res/Title`. A seeded run reaches it by a lost battle (`boss`) or by
+    `--start="Game Over Screen"` with the save of the party (no dev command
+    needed).
+  * The credits do not leave the bold font set: no line of "Ending - Part
+    3" is bold (`bold=1`), so the title after the ending is plain (8.3
+    said the credits leave the bold font on: only a bold line would).
+  * Where the nodes live: UI nodes in the frame's order, not the mode's
+    scene under `World` (ARCHITECTURE section 14 has the reasons). The
+    prompt's premise that the stores and the menu pages draw 3D cards as
+    SubViewport chunks is wrong: their cards are 2D images
+    (`AbstractCard.drawCard`); the stores, the menu pages and the riddles
+    draw nothing in 3D (a riddle's frame is the labyrinth's).
+* **Coverage.** The probe (prints in the title's and the game over's draws,
+  `MenuNode.draw`, the menu pages, the stores and the riddles) over every
+  case: the title in 5 shots of 4 old cases (`title_start`: the logo at
+  index .74 and the root menu; `dungeon_save_load`'s root menu; the Celis
+  memories `story_ana_reaction` (the root menu) and
+  `story_someones_comming` (the difficulty list with Medium's
+  description)), the game over in 3 shots of `boss` (fading in at .67, the
+  image of Kin, Celis and Zalzi); the menu's Save list showed the dates
+  ("Empty", `draw_dates_under`, not converted). No shot of the background
+  alone, the logo at other values, the cursor moved, the other difficulty
+  levels, the Continue list, a new game's or a load's fade-out, another
+  party, "Paused" over the game over or its timeout. Nine
+  new cases (75 shots): `title_intro` (the first two frames, the logo at
+  seven values, the root's cursor and wraps, START, each difficulty with its
+  description, CIRCLE and back), `title_new_game` (CROSS skipping the logo,
+  Easy, the fade-out, the story), `title_continue` ("Empty" slots, cursor
+  and wraps, CIRCLE, loading Slot 1 through the fade-out),
+  `title_continue_autosave` (the autosave and a saved slot with their
+  dates: the dev-only game-clock dates of seeded runs,
+  `SaveSlots.note_saved`), `game_over` (Kin: the fade-in, "Paused", CROSS,
+  the fade-out to the title), `game_over_timeout` (Kin and Celis: 22 s),
+  `game_over_borealis`, `game_over_zalzi`, `game_over_all`. Goldens:
+  `g42gold` (401 cases and `bridge_test`, 7,361 shots; its old cases
+  identical to `g42base`), `g42gold2` (the new cases again: 75 of 75
+  identical, logs and error lines too). Not covered: a title in the bold
+  font (no route found that leaves it set before the title), "game pad
+  lost" over the title (the `pad_lost` case covers the overlay's menu in a
+  village).
+* **Built** (ARCHITECTURE section 14): `scenes/ui/Title`, `MenuList`,
+  `ShadowText`, `SlotDates`, `GameOverScreen`; theme roles `MenuChoice24`,
+  `MenuChoice20`, `DifficultyInfo`, `SaveSlotDate`; twins
+  `TitleScreen._show_background`, `_show_logo`, `_show_difficulty_info`,
+  `GameOver._show_image`, `MenuNode.show_all_children`,
+  `SaveSlots.show_dates_beside`, `Graphics.place_with_shadow`; flags
+  `--legacy=title`, `game_over`, `menu_list`. The game pad lost overlay's
+  menu moved onto `MenuList` (`PadLost` lost its own list and hand); its
+  parity held.
+* **Parity** (tolerance 0 everywhere; the final code, 401 cases and
+  `bridge_test`, 7,361 shots; the node run is `g42node`):
+  * golden (`g42gold`) vs. nodes, every case: 7,361 of 7,361 shots
+    identical, all 402 logs identical, the same error lines in every log
+    but three `WASAPI` lines (an audio device event during the golden's
+    runs; 3,226 vs. 3,223 lines);
+  * `--legacy=title,game_over,menu_list` vs. nodes on the cases that show
+    the title, the game over or the game pad lost menu (by the probe: the
+    `title_*` and `game_over*` cases, `dungeon_save_load`,
+    `story_ana_reaction`, `story_someones_comming`, `newgame_to_forest`,
+    `story_long`, `boss`, `pad_lost`): 250 of 250 shots identical, logs
+    identical; each flag alone vs. nodes: `title` 121 of 121 (12 cases),
+    `game_over` 140 of 140 (6), `menu_list` 126 of 126 (13), logs and error
+    lines identical;
+  * every flag on (`--legacy=title,game_over,menu_list`, every case) vs. the
+    golden: 7,361 of 7,361, all logs identical (the legacy paths and the
+    frame without nodes are unchanged);
+  * the bridge test passes (identical, "BridgeTest: freed after 748
+    frames" in its log).
+  * No tolerance was needed and no difference had to be explained: the
+    nodes draw the same textures with `draw_string` and textured rects in
+    the legacy order, with GLBackend's canvas materials; the first node
+    run of the title, game over and game pad lost cases was already
+    identical (217 of 217 shots), and a run with temporary prints showed
+    the nodes drew those frames. The game pad lost menu kept its parity on
+    `MenuList`.
+* **Frame rate** (normal runs: no `--seed`, windowed, one at a time, the
+  shipped saves (`APPDATA` a scratch folder); AutoPlay's `fps=` every 0.5 s
+  for 10 s, the first second dropped; legacy (`--legacy=title,menu_list`
+  or `--legacy=game_over`) → nodes, median and range):
+
+  | Where | Capped | Uncapped |
+  |---|---|---|
+  | The title's root menu | 60 → 60 | 2,346 (2,323–2,359) → 2,354 (2,335–2,361) |
+  | The difficulty list with its description | 60 → 60 | 2,336 (2,320–2,350) → 2,334 (2,327–2,337) |
+  | The game over screen ("Start": Kin) | 60 → 60 | 2,427 (2,415–2,449) → 2,455 (2,438–2,460) |
+
+  The same within the noise: the legacy drew one or two images and a few
+  lines per frame.
+* **Still legacy** in the two modes: the state, the input and the timing
+  (step C: a Tween for the logo and the fades, a Timer for the 22 s, the
+  input through InputMap; decisions 3 and 6, phase 4.3's wrapper); the
+  `draw(g)` methods themselves (the twins run there); the mode fade and
+  "Paused" are phase 3's nodes. Nothing of their pictures is drawn through
+  `Graphics` any more (with the flags off).
+
+**The rollout of 4.2 (prepared, not done).** The mini-games, the stores and
+the menu, as they draw today (file:line in the code at the pilot; "node" =
+already a phase 3 or 4.2 node). None of them draws in 3D: the cards of the
+stores and the menu are 2D images (`AbstractCard.drawCard`,
+`Deck.drawDeck`), so nothing waits for phase 4.4's cards; a riddle's frame
+is the labyrinth's (3D walls and weather, the riddle's 2D after them).
+
+* **Mini-games** (`src/miniGames`, 12 files, 1,253 lines; `RiddleGame` and
+  `HateRiddle`, `CesadurRiddle`, `GriveraRiddle`, `AegisRiddle`, `Puzzle`,
+  `RubicsPuzzle`, `RubicsPuzzle19`; `RotatePuzzle` is unused). A dungeon
+  `riddle` object (Cross in front of it) makes the riddle the labyrinth's
+  `labDrawable` (`Labyrinth.enterRiddle`: `push` hides the minimap and the
+  mission); it ends when its fade-out reaches 0 (`exitRiddle`).
+  * Draws: its `draw` (the 3D slot) is empty; `drawTopLayer` comes after
+    the labyrinth's dialog and before its `topLayer` items and its fade
+    (`Labyrinth.draw`): the dim (`fadeOldSchool(1 − fade × image alpha)`,
+    the fade image of the current fade mode), `setColor(1, 1, 1, fade)`,
+    the riddle's image (`RiddleLoader`: name, x, y, scale); the puzzles'
+    tiles (`Tile.draw`) and their markers (`NxNsingle.png`, `horizontal`/
+    `vertical.png`); Aegis's and Grivera's centred texts (size 28, black;
+    Aegis at alpha 1, Grivera at the riddle's fade); Hate's digits and code
+    (size 36) and its hand (`MenuHand`); Cesadur's letters and rows
+    (`drawMultiString` at the labyrinth's fade value, the size left by
+    earlier drawing), its two hands (one dimmed) and its help (button icons,
+    four labels).
+  * State changes in the draws: none of the game's (the fade, the hands'
+    positions and dims step in `update`); the GL and text state left (the
+    colour `(1, 1, 1, fade)`, sizes 28/36, black text) carries into the
+    labyrinth's next drawing. The fade is a port bug (1.1, Appendix).
+  * Shared: `MenuHand` (dimmed too), `AbstractPage.BUTTON_ICONS`, the
+    `fadeOldSchool` dim (the stores' confirm dim, a Fade node's quad).
+  * Coverage (probe): 36 shots in the 9 `dungeon_riddle_*` cases, every kind
+    in use. Cases still needed: each kind fading in and out (not only
+    shown), a puzzle solved (the door's status), Cesadur's dimmed hand and
+    its letter pool, Hate's code entered.
+* **Stores** (`src/store`, 7 files, 2,082 lines; `Building`, `AbstractStore`,
+  `CardStore`, `WeaponStore`, `Inn`, `Church`; `Door` draws nothing).
+  * Draws: `Building.draw` sets `setColor(1)`, size 22, `setAlphaFunc(.02)`,
+    black text; `drawStandard`: the background (0, 0), the keeper's dialog
+    (node), the keeper (`drawCenteredImage`, y 205; the Church 105), the menu
+    pieces (`AbstractPage.drawMenuBackgroundStatic` with the store's mask);
+    then the store's `draw3D`; the fade (node). Per store, in its
+    sub-states: the root list (800, 147) and the title (800, 54) in all;
+    the Weapon Store's equipment lists (price + `down`, bounding boxes on
+    the sell lists; two lists and two hands), the character's status and
+    item (`EquipPage.drawStatus`, `StatusPage.drawEquip`), "Equipped/Total/
+    Gold", the confirm boxes (buy; sell with Keep/Sell); the Card Store's
+    deck (`Deck.drawDeck`: 2 x 7 cards, the current one larger, the
+    unaffordable gray), the card info (node), its scroll bar, the merge page
+    (two pieces, the counts in bold 26/28 with shadows, the merge preview at
+    size 40); the Inn's price list (price), its confirm box, the prize
+    message and card (nodes), the trade list (bounding box); the Church's
+    save list with dates (`SaveSlots.draw_dates_under`) and its bless page
+    (pieces, costs, `LevelUpBar.drawStatic` per character, its hands, the
+    legacy `HelpText` rows: `Row.drawRows`, the bless list at size 26,
+    "Total cost", gold/steps/time, the help line); the tutorials (node).
+    The confirm boxes: `fadeOldSchool(.5)` (a dim like "Paused"'s),
+    `setColor(1)`, a piece (14 or 3), the texts, the Yes/No list.
+  * State changes in the draws: the Church's `totalCost` (summed in its
+    draw, read by Cross on "Done") and its hands' positions; the cursor
+    fix-up; the scroll bars' lazy init and `loadIdentity`; `drawDeck` turns
+    the bold font off and leaves black text; `Building.draw` resets the
+    colour, size, alpha test and text colour every frame, not the blending
+    or the bold font.
+  * Shared: the menu pieces with the menu pages; the menu list variants
+    (plain, price, price + down, bounding box); `MenuScrollBar`; the
+    confirm box and dim (also `WeaponStore.drawConfirmSellDialog`; the
+    menu's saving box has no dim); the keeper's dialog, the card info, the
+    tutorials and the Inn's prize message (nodes); `Deck.drawDeck` with the
+    deck page; `EquipPage`/`StatusPage`'s static helpers with the menu;
+    `SaveSlots`' dates with the title and the menu; `HelpText`/`Row` with
+    the tutorials (whose rows are nodes already: `Row.place_rows`);
+    `BUTTON_ICONS`.
+  * Coverage (probe): 50 shots in 6 cases (`stores`, `dialog_card_store`,
+    `dialog_store_fade`, `tutorial_store`, the Zazo night Inns), but every
+    list a shot shows is a store's root menu (the Inn's with its prices):
+    no shot of a buy or sell list, the equipment comparison, a confirm box,
+    the card store's deck, scroll bar or merge page, the Inn's trade list or
+    prize, the Church's save list or bless page. Cases needed: one per
+    store and sub-state (the Weapon Store's buy list scrolled, a sell list
+    with its bounding box, both confirms; the Card Store's buy page scrolled
+    past two lines, a merge with and without the preview, its confirms; the
+    Inn's rest confirm, its prize and trade list; the Church's save list
+    after a save (the game-clock dates), its bless page moved, its
+    tutorials).
+* **The menu** (`src/menu`, 15 files, 2,877 lines with `MenuNode`, plus
+  `menu/tutorial` 447; `MainMenu`, `AbstractPage` and the pages; the
+  automap is `info/LabyrinthMap.draw`). `StatusPage` and `BestiaryPage` are
+  unreachable (Appendix), `Help.gd` unused.
+  * Draws: `MainMenu.draw` sets `setColor(1)`, `setAlphaFunc(.02)`, size
+    22, then the page's `draw3D`, then the fade (node; the menu fades only
+    when it loads a game). Every page starts with `drawStandard`: black
+    text, `back.jpg`, its pieces. StartPage: the root list (numbers), Key
+    Items (numbers, bounding box, disabled in black), the Save list with
+    the dates under each slot; the character select (an active child's
+    list: only its hand shows); the title; each character's status line
+    (`StatusPage.drawTop`: image, name, HP, class, level, slots); the
+    thumbnail (`drawScreenShot`: the screenshot and `frame.png`); gold,
+    steps, time; while saving, the saving box (no dim). EquipPage: the
+    status with the comparison, the item, the slots list (`down` +
+    equipment), the equipment list (numbers, bounding box), both hands, the
+    help line. DeckPage: the decks' titles (`drawMultiString` at the fade),
+    both decks (`Deck.drawDeck`, 4 x 5 cards, the passive one at .5 while
+    editing), the Edit/Back list (hand dimmed while editing), the card info
+    (node) or a status line, two scroll bars, the flying cards (`Animator`),
+    the help line. MapPage: the list (labyrinths with a bounding box, or
+    floors), the automap: all floors under a modelview `translate(25, 80)`,
+    `scale(1/3)` and a translate per floor, or one floor; each node's
+    pieces and icons, the player's arrow tinted, the floors' names (screen
+    text at computed places; the player's floor green over a black
+    shadow); "Explored", the thumbnail, the info. HelpPage: the options or
+    the difficulty list (harder ones gray), the wrapped difficulty text
+    (measured every frame). TutorialPage: its list (bounding box), the
+    status lines, the thumbnail, the info, a tutorial (node).
+  * State changes in the draws: the cursor fix-up (with its sound; a list
+    left empty keeps the cursor at −1); the scroll bars' lazy init;
+    `StatusPage.drawTop`/`drawEquip` add their offset to a static `y` array
+    and replace it (`EquipPage.y` is `MenuValues.STATUS_Y` itself);
+    `BUTTON_ICONS` load on first use; DeckPage's `setImageColor(.5)` lasts
+    until the next `drawString`; `drawDeck` turns bold off; the automap
+    leaves size 22 and black text.
+  * Shared: the menu pieces (with the stores), `StartPage.drawInfo` (with
+    the Inn; the Church has a copy), the thumbnail, `StatusPage`/`EquipPage`
+    helpers (with the Weapon Store), `Deck.drawDeck` (with the Card Store),
+    the list variants (numbers, equipment + down, bounding box, active
+    children, dimmed hand), `MenuScrollBar`, the card info and tutorials
+    (nodes), `SaveSlots`' dates. The thumbnail is taken where the menu is
+    opened from (`MenuStarter.checkMenu` at the end of the labyrinth's,
+    village's, world map's and airship's draw: `copyFrame`, the frame
+    before); the stores open no menu.
+  * Coverage (probe): 337 shots in 279 cases. StartPage 300 (every tour
+    opens the menu once; the root list, Key Items 3, the Save list 2 with
+    "Empty", the character select 3), DeckPage 12 (`dialog_deck_page`,
+    `menu_pages`; the dimmed hand in 9), MapPage 15 (the `dungeon_map_page*`
+    cases, `airship_land1_menu`, `menu_pages`), TutorialPage 6, EquipPage 2
+    (its slot list only), HelpPage 2 (its options); scroll bars in 25
+    shots. Cases needed: the equipment list with numbers, its bounding box
+    scrolled and the comparison; the help page's difficulty list; the Save
+    list after a save (dates) and the saving box; Key Items scrolled; a
+    deck edit with cards flying; a map page scrolled (bounding box).
+* **The menu list variants** used (MenuNode call → flags `withPrice,
+  allChildren, withNumber, down, withEquipment`): plain (`drawAllChildren`
+  / `drawChildren`: the title, every store's root, the confirm boxes, the
+  Church, CardStore, DeckPage, MapPage, HelpPage, TutorialPage, the
+  Cheater's dev menu at size 26); the active child's list (StartPage's
+  character select); `allChildren` + number (StartPage's lists); number
+  (EquipPage's equipment list); `down` + equipment (EquipPage's slots);
+  price + `down` (the Weapon Store's lists); price (the Inn). Bounding boxes
+  (bar at x 978): `setStandardWithBB` (StartPage's Key Items, MapPage,
+  TutorialPage), `setStandardWeaponWithBB` (EquipPage), the Inn's trade
+  list, the Weapon Store's sell lists; scroll bars made directly: DeckPage
+  (two, always drawn), CardStore (two, over two lines). Dimmed hands:
+  DeckPage's Edit/Back, the Church's bless hands, Cesadur's.
+* **Order and size.** Three parts, four or five sessions:
+  1. The menu (two sessions): it builds what the stores reuse: the menu
+     pieces (a node per page layout), `MenuList`'s variants and its
+     `ScrollBar` (ARCHITECTURE section 14's table), the status helpers, the
+     deck (`Deck.drawDeck` as a node of card images), the thumbnail, the
+     automap (a node under the map page's modelview, as `CutsceneImage`'s
+     `Zoom`); first the cases above. Blocked by nothing.
+  2. The stores (one or two sessions): after the menu (they reuse its
+     pieces, lists, deck and status helpers); first the cases above (no
+     sub-page is covered today); the confirm dim is `show_fade(.5)`-like
+     (a Fade node, as "Paused"'s), `HelpText`'s rows are `Row.place_rows`
+     (phase 3), `LevelUpBar` is new.
+  3. The mini-games (one session): independent of both (only `MenuHand`,
+     whose node is `MenuList`'s hand, and the button icons); fix the fade's
+     port bug first, as its own change with new goldens; its top layer is a
+     UI node after the labyrinth's dialog. It can go first if a short
+     session is wanted.
+  No part needs a decision of section 13 for step B; step C of all of them
+  needs decision 3 (and 6 for the riddle's fade and the stores' and menu's
+  animations) and phase 4.3's input wrapper.
 
 ### 9.3 Infrastructure
 
@@ -2581,6 +2916,16 @@ When no mode draws through `g` any more:
   text at the window's scale; the legacy text is rasterized at 1024 x 768
   and scaled. `BaselineLabel` keeps the legacy look (`oversampling` 1);
   sharper text in full screen is a look change (13, decision 8).
+* **Pooled UI nodes outlive their modes** (phase 4.2). A whole 2D mode's
+  parts are UI nodes pooled by GLBackend (ARCHITECTURE section 14): they
+  stay, hidden, after the mode is left, with the textures last given (the
+  title and the game over: about 7.5 MB). The menu pages and the stores
+  would keep a node per page and store; release large textures when hidden
+  if that grows.
+* **Premises about what is 3D** (phase 4.2). The prompt of 4.2 expected the
+  stores' and the menu's cards as 3D chunks; they are 2D images. Check a
+  mode's drawing (`set3D`, `glVertex3f`, `drawImage`) before planning its
+  chunks.
 
 ## 13. Open decisions
 
@@ -2637,7 +2982,9 @@ When no mode draws through `g` any more:
    frame, for the game time their packet runs; the waits within about 0.1 s.
    *Not needed for 4.1 (9.1):* the world map's walk and the airship's flight
    stay legacy (per `J.currentTimeMillis()` step and per update); their
-   views mirror the positions.
+   views mirror the positions. *Not needed for 4.2's pilot (9.2):* the
+   title's logo (.005 per update) and the mode fades (per drawn frame) stay
+   legacy; the nodes mirror them. A Tween for them is step C.
 7. **Village top layer** (from the pilot, 6.7): *decided (phase 1
    rollout):* roofs and treetops are always drawn (6.1, the pilot's
    default). The legacy rule draws a piece only where a sprite overlaps it,
@@ -2650,7 +2997,8 @@ When no mode draws through `g` any more:
    in world", text running out of the paper) and sharper text in full screen
    (`BaselineLabel.oversampling` 0) change the look; the pilot kept the
    legacy look so that parity holds. Each is a theme or scene edit now.
-   Open (the rollout kept the legacy look too).
+   Open (the rollout kept the legacy look too, and so did phase 4.1 and
+   4.2's pilot).
 
 ## 14. Suggested order and size
 
@@ -2665,7 +3013,7 @@ Sizes are relative: S ≈ a focused session, XL ≈ many sessions.
 | P2 | Dungeon weather, save points and the card and enemy effects that are particles, on the GPU (6.11). *Done (6.12).* | M | 2, P | rainy and snowy floors at 60 FPS; battles without the effects' stalls (Wind 3 at 7 FPS, the Flame's 10 s) |
 | 3 | Theme, Dialog, signs, emotions, fades, HUD. *Done through step B: the pilot (8.1: the Theme, the dialog family, the fade) and the rollout (8.3: emotions, mission display, pause overlays, cutscene images and texts, tutorials; the minimap stays the 3D bridge's); closing prepared (8.4).* | M | 1 (or 2) | most of the remaining `draw(g)` |
 | 4.1 | World map + airship. *Done through step B (9.1): the scenes, the name plate, legacy vs. scene identical; closing prepared.* | M | 1 (converter), 3 | — |
-| 4.2 | Title, game over, mini-games, stores, menu | L | 3 | — |
+| 4.2 | Title, game over, mini-games, stores, menu. *Pilot done through step B (9.2): the title, the game over, the menu list; the rollout prepared: the menu (2 sessions), the stores (1–2), the mini-games (1).* | L | 3 | — |
 | 4.3 | Input, audio, saves, `Game` autoload | M | any time after 0; the autoload is best after 4.2 | 5 |
 | 4.4 | Battle, cards, effects | XL | 2, 3 | 5 |
 | 5 | Remove the GL emulation; per-delta time | M | all of the above | — |
@@ -2699,6 +3047,11 @@ fixed or deleted at any time.
   * The `Values.getClassMap()` entries `story.Story`,
     `story.StorySequence`, `store.Library`, `store.House` and
     `villages.Landscape` have no classes.
+  * *Found in phase 4.2:* `StatusPage` and `BestiaryPage` are opened only
+    from themselves (`MainMenu.initStatusPage`/`initBestiaryPage`; the
+    Java's StartPage has no entry for them either); `menu/Help.gd` is never
+    instantiated; `CardStore.drawMergedCard` is never called; no map uses
+    `RotatePuzzle`; the Church's "Resurrect" branch has no menu entry.
 * **Latent bugs:**
   * The particle kinds `rainparticle` and `sandparticle` have no class in
     `ParticleFactory`, so they create null bodies. The same bug is in the
@@ -2708,6 +3061,14 @@ fixed or deleted at any time.
     `fadeparticlesystem` or builds a rain or sand system (checked in the
     phase 1 rollout).
   * `HelpPage`'s volume options never match (9.2).
+  * *Port bug (found in phase 4.2):* `RiddleGame.fade` steps by .1 in a
+    64-bit float, so the fade-in stops at 1.1 after 11 updates; the Java's
+    32-bit float stops at 1.0000001 after 10. The riddle's dim is then
+    1.1 × its image's alpha (.33 for .3), its colour's alpha 1.1 (clamped)
+    and Grivera's text alpha 1.1, and the fade-out takes one update more.
+    Fixing it (the Java's float rounding) changes the `dungeon_riddle_*`
+    shots: do it as its own change before the riddles are converted, with
+    new goldens.
   * `VillageStoryTimeLine` calls `updateFadeValue()` in both `update` and
     `draw` (`:262-265`, `:602-604`), so its fades may step twice per frame.
     *Checked (phase 3 rollout):* the Java does the same

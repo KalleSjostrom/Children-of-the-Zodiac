@@ -54,9 +54,10 @@ scenes/
                           DungeonSavePoint, DungeonVillager … (.tscn + .gd each)
   ui/                     the shared UI (section 12): Dialog, SignBox, CardInfo, Fade,
                           EmotionBubble, MissionDisplay, Paused, PadLost, CutsceneImage, StoryText,
-                          ScrollText, Tutorial, NamePlate (section 13) (.tscn + .gd each),
-                          BaselineLabel.gd (a line of text placed by its baseline), LabelList.gd
-                          (pooled lines); menu pages later
+                          ScrollText, Tutorial, NamePlate (section 13); the title and the game over
+                          (section 14): Title, MenuList, ShadowText, SlotDates, GameOverScreen
+                          (.tscn + .gd each); BaselineLabel.gd (a line of text placed by its
+                          baseline), LabelList.gd (pooled lines); menu pages and stores later
   world_map/              WorldMapScene.tscn + .gd (the layout every world map and airship map
                           inherits), WorldMapRoad, WorldMapNode, AirshipNode (.tscn + .gd each),
                           WorldMapIndex.gd (resource); one scene per maps/Landscape file
@@ -155,9 +156,10 @@ Main (Node, src/main/Main.gd)
 ├── UI (CanvasLayer 2)              the dialog box, the message box, the card info popup, the
 │                                   emotion bubbles, the mission display, the cutscene images,
 │                                   the tutorials, the world map's and the airship's name plate
-│                                   (section 12; menu pages later)
+│                                   (section 12); the title's and the game over's nodes and the
+│                                   menu lists (section 14; menu pages and stores later)
 ├── Transition (CanvasLayer 3)      the fade, the cutscene texts and the image over the
-│                                   actors, "Paused", "game pad lost" (section 12)
+│                                   actors, "Paused", "game pad lost" and its menu (sections 12, 14)
 ├── Audio (Node, created by Main)   music and sound effect players
 └── SubViewport × n (GLBackend)     the legacy 3D chunks
 ```
@@ -283,7 +285,9 @@ of section 12, `Graphics.modelview_2d`, `screen_points`, `begin_capture_3d`,
 `end_capture_3d`; phase 4.1's `LandscapeLoader.world_scene_for`, `place_index`,
 `AirLandscapeLoader.airship_scene_for`, `WorldMapScene.load_into`, `show_*`,
 `LandPlayer.place_view`, `Landscape.draw_scene`, `scene_bottom`, `scene_player`,
-`scene_top`, `show_name_plate`: section 13); refactors of a
+`scene_top`, `show_name_plate`: section 13; phase 4.2's `MenuNode.show_all_children`,
+`Graphics.place_with_shadow`, `SaveSlots.show_dates_beside`, `note_saved`, the twins of
+`TitleScreen` and `GameOver`: section 14); refactors of a
 legacy method's own code keep Java style (`Village.sortSprites`).
 
 **Flags in legacy code.** A subsystem being converted keeps its old path for
@@ -307,9 +311,9 @@ Game options go after `--` on the command line (see the header of
 | Flag | Effect |
 |---|---|
 | `--fixed-step` | The game advances exactly 1000/60 ms per frame, whatever the real frame time. |
-| `--seed=<n>` | Deterministic run (implies `--fixed-step`): every random generator (`J`, every `JRandom`, Godot's global one) is seeded from `n`; `J.currentTimeMillis()`, `Scheduler` and `GameAction` read a game clock advanced by the elapsed game time instead of the wall clock; saves are read from the shipped files and written to `user://saves_deterministic/` (emptied at start), never to the player's `user://saves/`; no game pad is read (`GameCore.init2`: an idle pad releases AutoPlay's buttons every 40 ms). Two runs of an AutoPlay script then produce the same frames. |
+| `--seed=<n>` | Deterministic run (implies `--fixed-step`): every random generator (`J`, every `JRandom`, Godot's global one) is seeded from `n`; `J.currentTimeMillis()`, `Scheduler` and `GameAction` read a game clock advanced by the elapsed game time instead of the wall clock; saves are read from the shipped files and written to `user://saves_deterministic/` (emptied at start), never to the player's `user://saves/`; the slot lists date a slot saved in the run by the game clock from 1 Jan 2000, 00:00 (`SaveSlots.note_saved`; a file's time is wall-clock time, phase 4.2); no game pad is read (`GameCore.init2`: an idle pad releases AutoPlay's buttons every 40 ms). Two runs of an AutoPlay script then produce the same frames. |
 | `--uncapped` | No 60 FPS cap and no vsync. With `--seed` the result is the same, only faster. |
-| `--legacy=<a,b,…>` | Keep the legacy path of the listed subsystems (`Main.is_legacy`). `all` keeps every one. `villages`: converted places are read from their `.vil` files and drawn by the legacy code (section 9). `village_top_layer`: the scene draws a roof or treetop only where a sprite overlaps it, as the legacy code does (for parity; by default it always draws them). `dungeons`: converted floors are read from their `.map` files and drawn by the legacy code (section 10). `dungeon_drawing` (dev): floors are built from their scenes (step A) and drawn by the legacy code, for checking step A on its own. `particles`: the village and cutscene particle systems run the legacy simulation and `LegacyParticles2D` draws its quads (section 9; `villages` implies it). `dungeon_particles`: the dungeon weather and the save points run the legacy simulation and the floor's scene draws its quads (section 10; `dungeons` and `dungeon_drawing` imply it). `battle_effects`: the card and enemy effects run the legacy simulation and draw its quads (section 11). `effect_waits` (dev): the GPU effects' legacy systems keep their whole pool, so the legacy particle counts decide when a battle goes on, as before (for parity runs with `--hide-particles`; section 11). `dialog`: the dialog box, the message box and the card info popup are drawn by the legacy code, not by their UI nodes (section 12). `fades`: the fade quads of `GameMode.draw` and of a cutscene are drawn by the legacy code, not by the Transition layer's Fade node (section 12). The phase 3 rollout's overlays (section 12), each drawn by the legacy code instead of its nodes: `emotions` (the emotion bubbles), `mission` (the labyrinth's mission display), `pause` ("Paused" and "game pad lost" with their dims), `story_images` (a cutscene's cover-all, story, village and translucent-over-actor images and the text back), `story_texts` (a cutscene's texts and scroll texts, the credits), `tutorials` (a tutorial's top layer, wherever it is drawn). Phase 4.1 (section 13): `world_map`: the world map is read from its `.map` file (and the node index from the three files) and drawn by the legacy code, name plate included; `airship`: the airship's map likewise. |
+| `--legacy=<a,b,…>` | Keep the legacy path of the listed subsystems (`Main.is_legacy`). `all` keeps every one. `villages`: converted places are read from their `.vil` files and drawn by the legacy code (section 9). `village_top_layer`: the scene draws a roof or treetop only where a sprite overlaps it, as the legacy code does (for parity; by default it always draws them). `dungeons`: converted floors are read from their `.map` files and drawn by the legacy code (section 10). `dungeon_drawing` (dev): floors are built from their scenes (step A) and drawn by the legacy code, for checking step A on its own. `particles`: the village and cutscene particle systems run the legacy simulation and `LegacyParticles2D` draws its quads (section 9; `villages` implies it). `dungeon_particles`: the dungeon weather and the save points run the legacy simulation and the floor's scene draws its quads (section 10; `dungeons` and `dungeon_drawing` imply it). `battle_effects`: the card and enemy effects run the legacy simulation and draw its quads (section 11). `effect_waits` (dev): the GPU effects' legacy systems keep their whole pool, so the legacy particle counts decide when a battle goes on, as before (for parity runs with `--hide-particles`; section 11). `dialog`: the dialog box, the message box and the card info popup are drawn by the legacy code, not by their UI nodes (section 12). `fades`: the fade quads of `GameMode.draw` and of a cutscene are drawn by the legacy code, not by the Transition layer's Fade node (section 12). The phase 3 rollout's overlays (section 12), each drawn by the legacy code instead of its nodes: `emotions` (the emotion bubbles), `mission` (the labyrinth's mission display), `pause` ("Paused" and "game pad lost" with their dims), `story_images` (a cutscene's cover-all, story, village and translucent-over-actor images and the text back), `story_texts` (a cutscene's texts and scroll texts, the credits), `tutorials` (a tutorial's top layer, wherever it is drawn). Phase 4.1 (section 13): `world_map`: the world map is read from its `.map` file (and the node index from the three files) and drawn by the legacy code, name plate included; `airship`: the airship's map likewise. Phase 4.2 (section 14): `title`: the title's background, logo, difficulty description and slots' dates are drawn by the legacy code; `game_over`: the game over's image likewise; `menu_list`: the `MenuNode` lists that are `MenuList` nodes (the title's menus, the game pad lost overlay's) are drawn by the legacy code (`MenuNode.drawAllChildren`). |
 | `--hide-particles` | Dev only: the particles draw nothing, in both paths (`Main.hide_particles`; they still run): the village and cutscene systems, the dungeon weather and save points, the card and enemy effects drawn as particles (not the sphere, image, slow and enemy-colour systems), with the GL state their drawing leaves; for parity runs that compare everything else. |
 | `--minimap-node` | Dev only: the labyrinth's minimap is drawn by `MinimapPart` nodes (`MapRenderer.show_map`) instead of the 3D bridge's batches; the floor's frames are the same to the bit, a battle's frames after them differ by 1/255 (plan 8.3), so it is not the default. |
 | Console `padlost [on\|off]`, `emotion <who> <emotion\|off> [shake]` | Dev only (debug console, `scenes/debug/GameCommands.gd`; AutoPlay `console`): `padlost` makes `InputManagers.connectionLost` report a lost game pad (`lost_simulated`) until the overlay's menu is answered, for the "game pad lost" overlay without a pad (seeded runs read none); `emotion` sets a bubble on a party member or villager of the current village (`Sprite.setEmotion`, which only cutscenes call), for the emotions in a village frame. Parity cases `pad_lost`, `emotions_village`. |
@@ -956,7 +960,8 @@ over the actors, the story and scroll texts and the tutorials' top layer.
 The minimap stays the 3D bridge's batches (a node for it exists behind the
 dev flag `--minimap-node`; plan 8.3 tells why it is not the default). Still
 legacy as well: a battle's and a riddle's top layer and the riddle's fade
-(phase 4), the menu pages and the stores' menus (phase 4.2). The world map's
+(phase 4), the menu pages and the stores' menus (phase 4.2; the title and the game
+over are done, section 14). The world map's
 and the airship's name plate is a node since phase 4.1 (section 13). How to
 convert an overlay: `docs/CONVERTING_UI.md`.
 
@@ -967,7 +972,8 @@ converted nodes (`DialogName` 30, `DialogLine` 30, `DialogWhisper` 24,
 `DialogQuestion` 26, `SignLine` 28, `CardInfoName` 26, `CardInfoLine` 22,
 `CardInfoEffect` 20; the rollout's `MissionLine` 40, `PausedTitle` 50,
 `PadLostTitle` 50, `PadLostLine` 30, `PadLostNote` 20, `TutorialTitle` 34,
-`TutorialWord` 26; phase 4.1's `NamePlateName` 30) and `Text20` … `Text50`, the even sizes
+`TutorialWord` 26; phase 4.1's `NamePlateName` 30; phase 4.2's `MenuChoice24`,
+`MenuChoice20`, `DifficultyInfo` 20, `SaveSlotDate` 20, section 14) and `Text20` … `Text50`, the even sizes
 `Graphics.setFontSize` allows, for text whose size is data (a cutscene's
 texts: 40 or 50; the credits' lines; the menu after "game pad lost"'s lines
 at the size they leave). StyleBoxTextures of
@@ -1030,10 +1036,9 @@ MissionDisplay (Control, on UI)     the labyrinth's mission line (labyrinth.miss
 └── Line (BaselineLabel MissionLine, y 50; x moves with the slide)
 Paused (Control, on Transition)     "Paused" (GameCore.testDraw); its dim is a Fade node
 └── Title (BaselineLabel PausedTitle, centred at 512, 250)
-PadLost (Control, on Transition)    "Connection to game pad lost"; its dim is a Fade node
-├── Title, Line, Note (BaselineLabel PadLostTitle, PadLostLine, PadLostNote, centred)
-├── Menu (LabelList)                the menu's choices (GameCore's MenuNode)
-└── Hand (TextureRect, hand1.png)
+PadLost (Control, on Transition)    "Connection to game pad lost"; its dim is a Fade node, its
+│                                   menu a MenuList node after it (since phase 4.2, section 14)
+└── Title, Line, Note (BaselineLabel PadLostTitle, PadLostLine, PadLostNote, centred)
 CutsceneImage (Control, on UI; the translucent-over-actor mode's on Transition)
 ├── Zoom (Node2D)                   the cutscene's zoom: the legacy modelview as a Transform2D
 │   └── Image (TextureRect, scaled) a cover-all, story, village or translucent image
@@ -1074,8 +1079,9 @@ converted draw method runs a twin without the drawing where it drew
 `_show_image`, `_show_messages`, `DeckPage.show_card_info`,
 `Graphics.show_fade`; the rollout's `Sprite.place_emotion` with
 `Village.show_emotions`, `Mission.show_line`, `GameCore._show_paused`,
-`_show_pad_lost`, `_show_pad_lost_menu` with `MenuNode.place_all_children`
-and `MenuHand.place_hand`, `VillageStoryTimeLine.show_image` with
+`_show_pad_lost` (its menu: `MenuNode.show_all_children` with
+`place_all_children` and `MenuHand.place_hand`, section 14),
+`VillageStoryTimeLine.show_image` with
 `ImageSettings.place_image` and `place_text_back`, `Text.show_text`,
 `ScrollableTexts.show_texts` with `ScrollableText.place_text`,
 `Tutorial.show_page` with `Row.place_rows`, `place_words` and
@@ -1090,7 +1096,7 @@ twin:
   at 0; the fade's `glColor4f`; the rollout's: the emotion's shake counter,
   the mission's slide (`Hideable.update`), the time mission's clock and its
   "Time's up!" exit, `loadIdentity` before a story image's text back, the
-  bold font the credits' lines leave set, the menu's text colours and the
+  font (plain or bold) the credits' lines leave set, the menu's text colours and the
   pad-lost overlay's input, which stays between its texts and its menu;
 * hands its node what would have been drawn, with the GL state as Godot
   values: the images' colour (`getCurrentColor` where each was drawn: the
@@ -1321,7 +1327,8 @@ field, the Database and `Visited` afterwards, and the index.
   the player stands on a node that is not a crossroad (world map) or the
   airship is within 20 px of a node (`checkNode`), cut at the first "-"
   (and without "land" on the airship). The font is whatever `setFontSize`
-  left (bold after the credits). `BaselineLabel.oversampling` stays 1.
+  left (plain after the credits: no line of the ending is bold, plan 9.2).
+  `BaselineLabel.oversampling` stays 1.
 
 The scene keeps no reference to its mode. Each logs `WorldMapScene: freed
 <file>` when its mode is freed (one mode switch after it was left, as
@@ -1333,8 +1340,8 @@ name plate included; together they draw exactly as before phase 4.1.
 `--bridge-test` implies `--legacy=world_map` (section 8).
 
 **Still legacy:** the state, the input and the timing (above); the dialog
-and the fade are phase 3's nodes; the menu, its map page (SQUARE on the
-airship) and the menu's thumbnail capture (phase 4.2). `DoubleBackground`
+and the fade are phase 3's nodes; the menu and its map page (SQUARE on the
+airship; phase 4.2's rollout, plan 9.2). `DoubleBackground`
 still loads the tile textures the scene does not draw (as in villages).
 
 ### Converting a map again
@@ -1358,3 +1365,144 @@ the editor closed:
    other cases against their goldens.
 6. Commit the scenes, the stitched PNGs with their `.import` files, the
    index and the new `.uid` files.
+
+## 14. Whole 2D modes: the title and the game over (phase 4.2)
+
+The title (`TitleScreen`) and the game over screen (`GameOver`) are converted
+through step B (plan 9.2): the first modes whose whole frame is UI, with no
+world under it. With them, the `MenuNode` list they draw is a node
+(`MenuList`), which the stores, the menu pages and the church will extend
+(plan 9.2 lists the variants). The legacy objects stay in charge of the
+state, the input and the timing (step C is not done): the logo's fade-in
+steps `TitleScreen.index` by .005 per update and CROSS skips it, the mode
+fades step per drawn frame (`Fadeable`; the game over's fade-in speed .01),
+the game over's 22 s are a `Scheduler` coroutine, `MenuNode` keeps the
+cursor and `GameAction` the key repeat.
+
+**Where a whole 2D mode's nodes live: UI nodes in the frame's order.** Each
+drawing a twin replaces is a node of new code on the UI layer that
+`Graphics.show_ui` puts in the frame's 2D order where the drawing was
+(section 12), pooled per scene, layer and occurrence; not the mode's own
+scene (`GameMode.scene_root`) under `World`. Why:
+
+* `World` is under every CanvasLayer: whatever a frame draws through legacy
+  code (LegacyLayer) and every UI node of phase 3 is drawn over all of it.
+  The stores draw the keeper and their menus after the keeper's dialog (a UI
+  node), the card store and the deck page draw text and hands after the card
+  info (a UI node), and these modes will be converted part by part, with
+  legacy parts between converted ones: in `World` the converted parts would
+  fall under all of that. A UI node takes its slot, and what is drawn after
+  it, legacy or node, stays over it.
+* A scene in `World` stays shown while its mode is current and not loading;
+  its twins would have to hide every part their frame did not draw (the
+  logo while the title fades in, the menu while the logo fades). A UI node
+  is hidden at the end of a frame it was not shown in, as GLBackend's canvas
+  items are cleared.
+* For the title and the game over alone `World` would have worked (nothing
+  legacy and no other node comes between their parts and the fade); the rule
+  is for the modes that follow.
+* `Graphics.copyFrame` (the menu's thumbnail, taken in the mode the menu is
+  opened from) and AutoPlay's shots read the main viewport: `World`, UI and
+  Transition alike, as the frame before rendered them. The mode fade
+  (Transition) covers both. Neither decides between them.
+* The stores and the menu pages draw nothing in 3D: their cards are 2D
+  images (`AbstractCard.drawCard`: `drawImage`). A 3D chunk after a UI node
+  would be a SubViewport at that node's layer anyway (section 12).
+* The cost: the pooled nodes belong to GLBackend, not to the mode. They are
+  kept, hidden, after the mode is left, with the textures they were last
+  given, until the game quits (the title's two pictures and the game over's
+  image: about 7.5 MB); a mode is several scenes, not one to open in the
+  editor (the title is Title, MenuList, ShadowText, SlotDates). A page or
+  store node that holds large textures can release them when hidden
+  (`NOTIFICATION_VISIBILITY_CHANGED`); not needed for these two.
+* Plan 4 puts the menu pages on the UI layer; this is that, in the hybrid
+  frame. When no legacy drawing is left in a mode (phase 5), its nodes can
+  become one scene the mode owns.
+
+**Nodes** (`scenes/ui/`, a script beside each; positions are the legacy
+screen pixels):
+
+```
+Title (Control, on UI)              the title's picture (TitleScreen.draw, drawTitle)
+├── Background (TextureRect, 78, 59)    res/Title/loggasten.png
+└── Logo (TextureRect, 78, 59)          loggatext.png; its tint's alpha is TitleScreen.index
+                                        while it fades in
+MenuList (Control, on UI or Transition) a MenuNode list (MenuNode.drawAllChildren)
+├── Choices (LabelList)             the choices (BaselineLabel MenuChoice<size>), each at its
+│                                   baseline in the enabled or disabled colour
+└── Hand (TextureRect)              MenuHand's image at its position; a dimmed hand's tint has
+                                    alpha .3
+ShadowText (Control, on UI)         a line over its shadow (Graphics.drawWithShadow)
+├── Shadow (BaselineLabel, the line's position + (1, 1))   in black
+└── Text (BaselineLabel)            in the line's colour
+SlotDates (Control, on UI)          the slots' dates (SaveSlots.draw_dates_beside)
+└── Dates (LabelList)               BaselineLabel SaveSlotDate, "1 Jan 2000, 00:00" or "Empty"
+GameOverScreen (Control, on UI)     the game over's picture (GameOver.draw)
+└── Image (TextureRect, 0, 0)       res/Title/GameOver<the party's names>.jpg
+```
+
+A title frame is `Title`, then `MenuList` once the logo is done, then
+`ShadowText` (the difficulty list's description) or `SlotDates` (the
+Continue list's dates), all on UI; then the mode's Fade on Transition (and,
+while a game pad is lost, the PadLost overlay and its own `MenuList` on
+Transition). A game over frame is `GameOverScreen` on UI, the Fade and
+"Paused" on Transition. Theme roles: `MenuChoice24` (the title's lists),
+`MenuChoice20` (the game pad lost menu, at the size its texts leave),
+`DifficultyInfo` 20, `SaveSlotDate` 20; a list at a size without a
+`MenuChoice<size>` role uses `Text<size>`. `BaselineLabel.oversampling`
+stays 1.
+
+**Step B.** The modes' draws are unchanged but for the twins, at the point
+where each part was drawn:
+
+* `TitleScreen._show_background` (the background's bind, `skip_image`, and
+  the frame's `Title` node), `_show_logo` in `drawTitle` (after its
+  `setColor(1, 1, 1, index)`; the node is the one `_show_background` got this
+  frame), `MenuNode.show_all_children` where `drawAllChildren` was,
+  `_show_difficulty_info` in `drawDifficultyInfo` (between its font sizes 20
+  and 24; `Graphics.place_with_shadow`: black, `setColor(color)`, the line's
+  colour, `setColor(color)`), `SaveSlots.show_dates_beside` (the font sizes
+  20 and back, each date's `setColor(color)`).
+* `GameOver._show_image`: the image's bind and the frame's `GameOverScreen`.
+* `MenuNode.show_all_children(g, layer)`: `place_all_children` (the cursor's
+  fix-up when it is past the last child, which is game state changed in a
+  draw and plays the cursor sound; the text colours; each line's
+  `setColor(color)`; `MenuHand.place_hand`: the dim and the bind), then the
+  frame's next `MenuList` on that layer gets the choices, the font size and
+  font set now, the hand and the material. `GameCore.testDraw` shows the
+  game pad lost menu this way on Transition (before, `PadLost` drew it).
+* Each node takes the colour (`getCurrentColor`, the text colour) and the
+  material (`Graphics.canvas_material`) of the GL state where its part was
+  drawn; the font is `Graphics.font_bold()`.
+
+The nodes keep no reference to a mode or to the legacy objects; the title's
+twin keeps the frame's `Title` node (`TitleScreen._title_view`) from the
+background to the logo.
+
+**The menu list's variants** (`MenuNode.draw`'s flags; built when the
+stores and the menu pages are converted, plan 9.2). `place_all_children`
+asserts that a list has no active child and no bounding box; each variant
+adds entries in the legacy drawing order:
+
+| Variant | What the legacy draws | In the node |
+|---|---|---|
+| Plain (the title, game pad lost, most store menus) | each name at (Xpos, Ypos + i × distance + bboffset), then the hand | `Choices`, `Hand` (done) |
+| Disabled children | the name in `disableColor` (DARK_GRAY, or what the page sets), the text colour set back to `enableColor` after it | the entry's colour (done: `place_all_children` keeps it) |
+| Price (`withPrice`, `down`) | the name, then "<price> gp" at size 20 right-aligned to 985 (25 px lower with `down`), the size set back to 22 | a second entry per child (right-aligned BaselineLabel, `MenuChoice20`) |
+| Number (`withNumber`) | the name, then "(n)" at size 20 right-aligned to 980 when n > 1 | as the price |
+| Equipment (`withEquipment`, `down`) | the equipped item's name at size 20 right-aligned to 985, 25 px lower with `down` | as the price |
+| Active children (`allChildren`) | an active child's own list (its names and hand) before that child's name | a nested MenuList entry in the order (or `Choices` split around it) |
+| Bounding box | only the names whose y is inside [bbMinY, bbMaxY]; the scroll bar (`MenuScrollBar.draw`: `loadIdentity`, its lazy init, three images at 0.4) after the hand when the list overflows | the y test is kept; a `ScrollBar` child after `Hand` |
+| Dimmed hand | `dim(.3)`, the hand, `dim(1)` | the hand's tint (done) |
+| "character" names | not drawn (no list in the title, stores or menu has one) | kept by `place_all_children` |
+
+**Flags.** `--legacy=title` keeps the legacy drawing of the title's
+background, logo, description and dates; `--legacy=game_over` the game
+over's image; `--legacy=menu_list` the lists that are `MenuList` nodes (the
+title's, the game pad lost overlay's; `--legacy=pause` keeps the latter
+too). All three together draw exactly as before phase 4.2.
+
+**Dev only:** a deterministic run (`--seed`) dates a slot it saved by the
+game clock from 1 Jan 2000 (`SaveSlots.note_saved`, called by
+`Save.saveGame`), so a slot list with a saved slot or the autosave shows the
+same dates in every run; normal runs show the file's local time as before.

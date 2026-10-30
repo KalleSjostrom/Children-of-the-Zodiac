@@ -1672,6 +1672,22 @@ static func font_bold() -> bool:
 	return _fontType == Values.BOLD
 
 
+## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): drawWithShadow
+## without the drawing: the same text colours and drawString's
+## setColor(color) after each line. Returns the colours of its two lines,
+## [the shadow's, the line's] (the ShadowText node).
+func place_with_shadow(c = null) -> Array[Color]:
+	if c == null:
+		c = JColor.white
+	setTextColor(JColor.black)
+	var shadow := text_color(1.0)
+	setColor(color)
+	setTextColor(c)
+	var line := text_color(1.0)
+	setColor(color)
+	return [shadow, line]
+
+
 # --- Display lists ---
 
 func glGenLists(range_count: int) -> int:

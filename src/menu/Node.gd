@@ -5,6 +5,9 @@ extends RefCounted
 ## a menu hand pointing at the current child. Used by the menu, the stores,
 ## the title screen, dialogs, battles etc.
 
+## Bridge (phase 4.2 step B): the node that shows a list (show_all_children).
+const MENU_LIST_VIEW := "res://scenes/ui/MenuList.tscn"
+
 var parent = null
 var children: Array = []
 var hand = null
@@ -112,13 +115,14 @@ func draw(g, withPrice, allChildren, withNumber, down, withEquipment):
 
 
 ## Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): drawAllChildren
-## without the drawing, for a UI node that shows the menu (the game pad lost
-## overlay's, GameCore): the same state changes (the text colours, drawString's
-## setColor(color), the hand's). Returns {"items": [[name, x, y (the
-## baseline), colour] …], "hand": MenuHand.place_hand's}. Only for a menu
-## whose children are drawn as plain lines: no active child (its children
-## would be drawn too) and no scroll bar (bbMinY); menus with these are phase
-## 4.2's.
+## without the drawing, for a UI node that shows the menu (MenuList, through
+## show_all_children): the same state changes (the cursor's fix-up, the text
+## colours, drawString's setColor(color), the hand's). Returns {"items":
+## [[name, x, y (the baseline), colour] …], "hand": MenuHand.place_hand's}.
+## Only for a menu whose children are drawn as plain lines: no active child
+## (its children would be drawn too) and no scroll bar (bbMinY); the variants
+## of draw (prices, numbers, equipment, active children, the bounding box)
+## come with the stores and the menu pages (docs/MODERNIZATION_PLAN.md 9.2).
 func place_all_children(g) -> Dictionary:
 	if menuCursor >= children.size():
 		previousChild()
@@ -141,6 +145,31 @@ func place_all_children(g) -> Dictionary:
 		placed.hand = hand.place_hand(g)
 		assert(bbMinY == -1, "MenuNode.place_all_children: a menu with a scroll bar")
 	return placed
+
+
+## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): drawAllChildren
+## without the drawing (place_all_children), and the frame's next MenuList
+## node on the given layer (Graphics.UI_LAYER or TRANSITION_LAYER) shows the
+## list where it would have been drawn (Graphics.show_ui): its choices in the
+## font size and font set now, its hand, the material of the 2D state.
+func show_all_children(g, layer: int) -> void:
+	var placed := place_all_children(g)
+	var view = g.show_ui(MENU_LIST_VIEW, layer)
+	if view == null:
+		return
+	var hand_image: Texture2D = null
+	var hand_at := Vector2i.ZERO
+	var hand_tint := Color.WHITE
+	if not placed.hand.is_empty():
+		var t = ImageHandler.getTexture(placed.hand[0])
+		hand_image = t.getGodotTexture() if t != null else null
+		hand_at = Vector2i(placed.hand[1], placed.hand[2])
+		hand_tint = placed.hand[3]
+	var choices := []
+	for item: Array in placed.items:
+		choices.append([item[0], Vector2i(item[1], item[2]), item[3]])
+	view.show_menu(choices, g.getFontSize(), Graphics.font_bold(), hand_image, hand_at, hand_tint,
+			g.canvas_material())
 
 
 ## Draws the given child at the given y position with the price stored in

@@ -1,0 +1,41 @@
+# The title's Continue list with an autosave and a saved slot (parity case
+# title_continue_autosave, phase 4.2): --load="Slot 1" --start=landAlares
+# --status=difficulty:1 (Medium autosaves). The console's "goto Alares"
+# enters a village from the world map (Save.autosave_at writes Autosave),
+# "save 2" writes Slot 2, "goto Title Screen". Continue lists Autosave
+# first, then the three slots (the list starts 50 px higher), each with its
+# date: a seeded run dates a save by the game clock from 1 Jan 2000
+# (SaveSlots.note_saved, dev only), so the dates are the same in every run.
+# Autosave loads Alares through the title's fade-out.
+wait 3000
+console goto Alares
+wait 3000
+console save 2
+wait 500
+console goto Title Screen
+wait 4500
+shot a01_title
+tap DOWN
+wait 300
+tap CROSS
+wait 300
+shot a02_autosave
+tap DOWN
+wait 300
+shot a03_slot1
+tap DOWN
+wait 300
+shot a04_slot2
+tap DOWN
+wait 300
+shot a05_slot3
+tap DOWN
+wait 300
+shot a06_autosave
+tap CROSS
+wait 300
+shot b01_fade_out
+wait 4000
+shot c01_loaded
+log loaded
+quit

@@ -1,0 +1,34 @@
+# The title (parity case title_new_game, phase 4.2): CROSS while the logo
+# fades in skips it (TitleScreen.index 1: the menu at once); Start, UP to
+# Easy, CROSS: a new game; the title fades out (0.03 per frame) with the
+# difficulty list and its description under the fade, then the opening
+# story loads and fades in.
+wait 1000
+shot a01_logo
+tap CROSS
+wait 34
+shot a02_skipped
+wait 300
+shot a03_menu
+tap CROSS
+wait 300
+tap UP
+wait 300
+shot a04_easy
+tap CROSS
+wait 34
+shot b01_fade_out
+wait 100
+shot b02_fade_out
+wait 100
+shot b03_fade_out
+wait 100
+shot b04_fade_out
+wait 100
+shot b05_fade_out
+wait 100
+shot b06_fade_out
+wait 3000
+shot c01_story
+log story
+quit

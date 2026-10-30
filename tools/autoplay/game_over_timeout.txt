@@ -1,0 +1,17 @@
+# The game over screen left alone (parity case game_over_timeout, phase
+# 4.2): after 22 s (GameOver's timer, a Scheduler coroutine on the game
+# clock) it fades out to the title by itself. --load="Start demon1"
+# --start="Game Over Screen".
+wait 2000
+shot a01_image
+wait 19500
+shot a02_before_timeout
+log before_timeout
+wait 850
+shot b01_fade_out
+wait 300
+shot b02_fade_out
+wait 1500
+shot c01_title
+log title
+quit

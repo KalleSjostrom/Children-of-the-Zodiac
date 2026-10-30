@@ -1,4 +1,4 @@
-# Handoff: state of the Godot port (2026-10-29, after steps 1–3, modernization phase 0, phase 1 steps A and B, phase 2 steps A and B, the particles phase, P2, phase 3 steps A and B and phase 4.1 steps A and B)
+# Handoff: state of the Godot port (2026-10-30, after steps 1–3, modernization phase 0, phase 1 steps A and B, phase 2 steps A and B, the particles phase, P2, phase 3 steps A and B, phase 4.1 steps A and B and phase 4.2's pilot through step B)
 
 Conventions: legacy (ported) code follows `docs/PORTING.md`; new code
 (scenes, resources, tools, bridge) follows `docs/ARCHITECTURE.md`. The
@@ -315,6 +315,43 @@ done** (plan 9.1; conventions and how to convert a map again in
   keeps its dots; Empyrian Temple's airship node leads into the labyrinth.
 - Closing the phase is prepared in plan 9.1 ("Closing phase 4.1").
 
+**Modernization phase 4.2's pilot (the title, the game over, the menu
+list): step B done** (plan 9.2; conventions in `docs/ARCHITECTURE.md`
+section 14, the procedure for whole 2D modes in `docs/CONVERTING_UI.md`
+section 5):
+- Where a mode's nodes live when its whole frame is 2D: UI nodes in the
+  frame's order (`Graphics.show_ui`), not the mode's scene under `World`
+  (the stores and the menu pages draw legacy parts and phase 3's nodes
+  between their own parts; `World` is under all of it).
+- Nodes (`scenes/ui/`): `Title` (the background and the logo, its alpha the
+  legacy fade-in's index), `MenuList` (a `MenuNode` list: choices and hand),
+  `ShadowText` (`drawWithShadow`: the difficulty's description),
+  `SlotDates` (the Continue list's dates), `GameOverScreen` (the party's
+  image); theme roles `MenuChoice24`, `MenuChoice20`, `DifficultyInfo`,
+  `SaveSlotDate`. The legacy `TitleScreen`, `GameOver` and `MenuNode` keep
+  the state, the input and the timing; their draws run twins. The game pad
+  lost overlay's menu is a `MenuList` too.
+- Flags `--legacy=title`, `game_over`, `menu_list`; all three draw exactly
+  as before.
+- Dev only: seeded runs date a slot saved in the run by the game clock
+  (`SaveSlots.note_saved`), so the Continue list with an autosave can be
+  shot.
+- Coverage: nine new cases (`title_*`, `game_over*`: 401 cases and
+  `bridge_test` in all, 7,361 shots): the title's fade-in, logo, menus,
+  description and dates, a new game and a load through the fade-out; the
+  game over with each party's image, its fade-in, "Paused", CROSS and the
+  22 s timeout.
+- Parity (tolerance 0, 401 cases and `bridge_test`, 7,361 shots): golden
+  vs. nodes identical (logs too); the legacy flags vs. nodes on the cases
+  that show the title, the game over or the game pad lost menu identical,
+  together and one by one; every flag on vs. the golden identical; the
+  bridge test passes. Frame rate the same (60 capped; about 2,350 FPS
+  uncapped on the title, 2,450 on the game over, either way).
+- Prepared (plan 9.2): the rollout to the menu (two sessions), the stores
+  (one or two; none of their sub-pages is covered by a case yet) and the
+  mini-games (one; fix the riddle fade's port bug first, plan Appendix).
+  None of them draws in 3D.
+
 ## Plan (what is left)
 
 0. **Modernization:** closing phase 1 (plan 6.9) needs decision 5 (delete
@@ -323,9 +360,9 @@ done** (plan 9.1; conventions and how to convert a map again in
    the 1/255 tolerance accepted. Closing phase 3 (plan 8.4) needs phases 1
    and 2 closed (their legacy paths draw through the same overlays) and the
    minimap's geometry made by its node. Closing phase 4.1 (plan 9.1) needs
-   decision 5 and another home for the bridge test. Next: phase 4.2 (plan
-   9.2; the menu pages, the stores' menus, battles and riddles still draw
-   overlays of their own). Record goldens before each change.
+   decision 5 and another home for the bridge test. Next: phase 4.2's
+   rollout (plan 9.2: the menu, the stores, the mini-games; battles still
+   draw overlays of their own). Record goldens before each change.
 
 1. **Performance:** since P2 the labyrinths with rain or snow run at 60 FPS
    (Forest Path was 35, Ice Cavern--Frozen Field 50; plan 6.12), and since
@@ -363,8 +400,8 @@ done** (plan 9.1; conventions and how to convert a map again in
   only the shipped saves.
 - Parity: `tools/parity/parity.sh record <set>` / `compare <a> <b>` /
   `ab "<args a>" "<args b>" [case…]`, see `docs/ARCHITECTURE.md` section 7.
-  Runs are windowed (screenshots need a renderer); all 392 cases and
-  `bridge_test` take about 12-15 minutes with `--jobs=8` on 12 logical
+  Runs are windowed (screenshots need a renderer); all 401 cases and
+  `bridge_test` take about 13-15 minutes with `--jobs=8` on 12 logical
   cores (run nothing windowed beside them: 16 GB run out, plan 12) since the particles run
   on the GPU (60-70 minutes before P2; `--uncapped`; with
   `--legacy=particles`, `particles_hotg` and the Berca cutscene are bound by

@@ -1,0 +1,32 @@
+# The game over screen (parity cases game_over_*, phase 4.2): --load=<save>
+# --start="Game Over Screen" (its image shows the save's party; a lost
+# battle reaches it in the case boss). Its fade-in (fadeInSpeed .01: 100
+# frames), the party's image, "Paused" over it (START: the game over is
+# pausable), CROSS: it fades out to the title, which fades in.
+wait 16
+shot a00_fade_in
+wait 300
+shot a01_fade_in
+wait 400
+shot a02_fade_in
+wait 600
+shot a03_fade_in
+wait 1000
+shot a04_image
+tap START
+wait 300
+shot b01_paused
+tap START
+wait 300
+shot b02_unpaused
+tap CROSS
+wait 50
+shot c01_fade_out
+wait 200
+shot c02_fade_out
+wait 200
+shot c03_fade_out
+wait 1500
+shot d01_title
+log title
+quit

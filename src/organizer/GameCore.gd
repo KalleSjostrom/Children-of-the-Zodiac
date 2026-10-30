@@ -75,7 +75,6 @@ func testDraw(g: Graphics) -> void:
 		firstTimeIn = false
 		# Bridge (phase 3 step B): the Transition layer's PadLost node shows
 		# the overlay (_show_pad_lost); --legacy=pause keeps the drawing.
-		var view = null
 		if Main.is_legacy("pause"):
 			g.fadeOldSchool(0.5)
 			var cx: int = Values.ORIGINAL_RESOLUTION[Values.X] / 2
@@ -83,7 +82,7 @@ func testDraw(g: Graphics) -> void:
 			g.drawSingleCenteredText("Please reconnect the game pad in a USB port", 320, 1, 1, 30, cx)
 			g.drawSingleCenteredText("(You can connect to the gamepad from the menu (Settings) later)", 350, 1, 1, 20, cx)
 		else:
-			view = _show_pad_lost(g)
+			_show_pad_lost(g)
 		if gameActions[GameMode.UP].isPressed():
 			activeNode.previousChild()
 		elif gameActions[GameMode.DOWN].isPressed():
@@ -97,10 +96,13 @@ func testDraw(g: Graphics) -> void:
 			for i in range(GameMode.UP, GameMode.LEFT + 1):
 				gameActions[i].changeBehaviorBack()
 			firstTimeIn = true
-		if Main.is_legacy("pause"):
+		# Bridge (phase 4.2 step B): the menu is a MenuList node after the
+		# overlay's (MenuNode.show_all_children); --legacy=menu_list keeps its
+		# drawing.
+		if Main.is_legacy("pause") or Main.is_legacy("menu_list"):
 			activeNode.drawAllChildren(g)
 		else:
-			_show_pad_lost_menu(g, view)
+			activeNode.show_all_children(g, Graphics.TRANSITION_LAYER)
 	elif paused:
 		# Bridge (phase 3 step B): the Transition layer's Paused node
 		# (_show_paused); --legacy=pause keeps the drawing.
@@ -135,8 +137,8 @@ func _show_paused(g: Graphics) -> void:
 
 
 ## "Connection to game pad lost": the dim, the title and the two lines; the
-## menu follows after the input (_show_pad_lost_menu). Returns the node.
-func _show_pad_lost(g: Graphics):
+## menu follows after the input (a MenuList node).
+func _show_pad_lost(g: Graphics) -> void:
 	g.show_fade(0.5)
 	var colors: Array[Color] = []
 	for size in [50, 30, 20]:
@@ -147,26 +149,6 @@ func _show_pad_lost(g: Graphics):
 	var view = g.show_ui(PAD_LOST_VIEW, Graphics.TRANSITION_LAYER)
 	if view != null:
 		view.show_texts(colors, g.canvas_material(), Graphics.font_bold())
-	return view
-
-
-## The game pad lost menu (activeNode.drawAllChildren): its choices and hand.
-func _show_pad_lost_menu(g: Graphics, view) -> void:
-	var menu: Dictionary = activeNode.place_all_children(g)
-	if view == null:
-		return
-	var hand: Texture2D = null
-	var at := Vector2i.ZERO
-	var tint := Color.WHITE
-	if not menu.hand.is_empty():
-		var t = ImageHandler.getTexture(menu.hand[0])
-		hand = t.getGodotTexture() if t != null else null
-		at = Vector2i(menu.hand[1], menu.hand[2])
-		tint = menu.hand[3]
-	var choices := []
-	for item: Array in menu.items:
-		choices.append([item[0], Vector2i(item[1], item[2]), item[3]])
-	view.show_menu(choices, g.getFontSize(), Graphics.font_bold(), hand, at, tint)
 
 
 func _preDraw(g: Graphics) -> void:

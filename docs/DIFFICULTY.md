@@ -36,7 +36,9 @@ How the game can be saved depends on the level (COTZ-005):
   autosave, so an older slot never overwrites a newer autosave. The title's
   Continue lists Autosave when it exists; the manual slot lists do not.
 * Every slot list (title, menu, church) shows when each slot was saved, in
-  local time, or "Empty".
+  local time, or "Empty". (Seeded test runs, `--seed`, date a slot saved in
+  the run by their game clock from 1 Jan 2000 instead: `SaveSlots.note_saved`,
+  dev only.)
 * The emergency keys 6/7/8 (slots E1–E3) now write the same place and
   position as the menu.
 
