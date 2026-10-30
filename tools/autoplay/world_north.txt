@@ -1,0 +1,18 @@
+# Phase 4.1 (world map coverage): North by day (--load="Slot 1"
+# --start=landDellna): its one road, right to the Frozen Forest and back.
+wait 3500
+shot wn01_dellna
+pos dellna
+tap RIGHT
+wait 800
+shot wn02_walking_right
+wait 3000
+shot wn03_frozen_forest
+pos frozen_forest
+tap LEFT
+wait 800
+shot wn04_walking_left
+wait 3000
+shot wn05_back_dellna
+pos back_dellna
+quit

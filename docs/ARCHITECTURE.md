@@ -54,8 +54,15 @@ scenes/
                           DungeonSavePoint, DungeonVillager … (.tscn + .gd each)
   ui/                     the shared UI (section 12): Dialog, SignBox, CardInfo, Fade,
                           EmotionBubble, MissionDisplay, Paused, PadLost, CutsceneImage, StoryText,
-                          ScrollText, Tutorial (.tscn + .gd each), BaselineLabel.gd (a line of text placed by
-                          its baseline), LabelList.gd (pooled lines); menu pages later
+                          ScrollText, Tutorial, NamePlate (section 13) (.tscn + .gd each),
+                          BaselineLabel.gd (a line of text placed by its baseline), LabelList.gd
+                          (pooled lines); menu pages later
+  world_map/              WorldMapScene.tscn + .gd (the layout every world map and airship map
+                          inherits), WorldMapRoad, WorldMapNode, AirshipNode (.tscn + .gd each),
+                          WorldMapIndex.gd (resource); one scene per maps/Landscape file
+                          (world0.tscn West, world1.tscn East, world2.tscn North, land1.tscn,
+                          land2.tscn) and the stitched backgrounds (West.png, East.png, North.png,
+                          World1.png, World2.png); section 13
   debug/                  DebugConsole (built in code, added by Main in debug builds),
                           DebugCommands (registry, completion), GameCommands
 resources/
@@ -68,9 +75,14 @@ resources/
                                           differs from the area's)
   difficulty/*.tres           (DifficultyLevel: the balancing of each difficulty level)
   theme/game_theme.tres       (the game's fonts and the papers and menu pieces of the UI, section 12)
+  world_map/place_index.tres  (WorldMapIndex: the world map of every world map node, generated;
+                               section 13)
 src/                      legacy code (shrinks over time)
 tools/import/             converters and their checks (headless `--script`): vil_to_scene.gd
                           (+ vil_to_scene.sh), verify_villages.gd, scene_preview.gd (windowed);
+                          world_to_scene.gd (+ world_to_scene.sh), verify_world_map.gd;
+                          tile_art.gd (the stitched backgrounds and top layers, shared by
+                          vil_to_scene.gd and world_to_scene.gd);
                           map_to_scene.gd (+ map_to_scene.sh), verify_dungeons.gd,
                           dungeon_preview.gd (windowed); particles_to_scenes.gd (+ .sh)
 tools/parity/             screenshot comparison (section 7), contact_sheet.gd
@@ -142,7 +154,7 @@ Main (Node, src/main/Main.gd)
 │                                   and the composited 3D chunks)
 ├── UI (CanvasLayer 2)              the dialog box, the message box, the card info popup, the
 │                                   emotion bubbles, the mission display, the cutscene images,
-│                                   the tutorials
+│                                   the tutorials, the world map's and the airship's name plate
 │                                   (section 12; menu pages later)
 ├── Transition (CanvasLayer 3)      the fade, the cutscene texts and the image over the
 │                                   actors, "Paused", "game pad lost" (section 12)
@@ -268,7 +280,10 @@ their state are snake_case too (`Sprite.place_view`,
 `Graphics.skip_image`, `Graphics.text_color`, `text_alpha`, `font_bold`,
 `AbstractCard.place_card`, `DeckPage.show_card_info`, the rollout's twins
 of section 12, `Graphics.modelview_2d`, `screen_points`, `begin_capture_3d`,
-`end_capture_3d`); refactors of a
+`end_capture_3d`; phase 4.1's `LandscapeLoader.world_scene_for`, `place_index`,
+`AirLandscapeLoader.airship_scene_for`, `WorldMapScene.load_into`, `show_*`,
+`LandPlayer.place_view`, `Landscape.draw_scene`, `scene_bottom`, `scene_player`,
+`scene_top`, `show_name_plate`: section 13); refactors of a
 legacy method's own code keep Java style (`Village.sortSprites`).
 
 **Flags in legacy code.** A subsystem being converted keeps its old path for
@@ -294,14 +309,14 @@ Game options go after `--` on the command line (see the header of
 | `--fixed-step` | The game advances exactly 1000/60 ms per frame, whatever the real frame time. |
 | `--seed=<n>` | Deterministic run (implies `--fixed-step`): every random generator (`J`, every `JRandom`, Godot's global one) is seeded from `n`; `J.currentTimeMillis()`, `Scheduler` and `GameAction` read a game clock advanced by the elapsed game time instead of the wall clock; saves are read from the shipped files and written to `user://saves_deterministic/` (emptied at start), never to the player's `user://saves/`; no game pad is read (`GameCore.init2`: an idle pad releases AutoPlay's buttons every 40 ms). Two runs of an AutoPlay script then produce the same frames. |
 | `--uncapped` | No 60 FPS cap and no vsync. With `--seed` the result is the same, only faster. |
-| `--legacy=<a,b,…>` | Keep the legacy path of the listed subsystems (`Main.is_legacy`). `all` keeps every one. `villages`: converted places are read from their `.vil` files and drawn by the legacy code (section 9). `village_top_layer`: the scene draws a roof or treetop only where a sprite overlaps it, as the legacy code does (for parity; by default it always draws them). `dungeons`: converted floors are read from their `.map` files and drawn by the legacy code (section 10). `dungeon_drawing` (dev): floors are built from their scenes (step A) and drawn by the legacy code, for checking step A on its own. `particles`: the village and cutscene particle systems run the legacy simulation and `LegacyParticles2D` draws its quads (section 9; `villages` implies it). `dungeon_particles`: the dungeon weather and the save points run the legacy simulation and the floor's scene draws its quads (section 10; `dungeons` and `dungeon_drawing` imply it). `battle_effects`: the card and enemy effects run the legacy simulation and draw its quads (section 11). `effect_waits` (dev): the GPU effects' legacy systems keep their whole pool, so the legacy particle counts decide when a battle goes on, as before (for parity runs with `--hide-particles`; section 11). `dialog`: the dialog box, the message box and the card info popup are drawn by the legacy code, not by their UI nodes (section 12). `fades`: the fade quads of `GameMode.draw` and of a cutscene are drawn by the legacy code, not by the Transition layer's Fade node (section 12). The phase 3 rollout's overlays (section 12), each drawn by the legacy code instead of its nodes: `emotions` (the emotion bubbles), `mission` (the labyrinth's mission display), `pause` ("Paused" and "game pad lost" with their dims), `story_images` (a cutscene's cover-all, story, village and translucent-over-actor images and the text back), `story_texts` (a cutscene's texts and scroll texts, the credits), `tutorials` (a tutorial's top layer, wherever it is drawn). |
+| `--legacy=<a,b,…>` | Keep the legacy path of the listed subsystems (`Main.is_legacy`). `all` keeps every one. `villages`: converted places are read from their `.vil` files and drawn by the legacy code (section 9). `village_top_layer`: the scene draws a roof or treetop only where a sprite overlaps it, as the legacy code does (for parity; by default it always draws them). `dungeons`: converted floors are read from their `.map` files and drawn by the legacy code (section 10). `dungeon_drawing` (dev): floors are built from their scenes (step A) and drawn by the legacy code, for checking step A on its own. `particles`: the village and cutscene particle systems run the legacy simulation and `LegacyParticles2D` draws its quads (section 9; `villages` implies it). `dungeon_particles`: the dungeon weather and the save points run the legacy simulation and the floor's scene draws its quads (section 10; `dungeons` and `dungeon_drawing` imply it). `battle_effects`: the card and enemy effects run the legacy simulation and draw its quads (section 11). `effect_waits` (dev): the GPU effects' legacy systems keep their whole pool, so the legacy particle counts decide when a battle goes on, as before (for parity runs with `--hide-particles`; section 11). `dialog`: the dialog box, the message box and the card info popup are drawn by the legacy code, not by their UI nodes (section 12). `fades`: the fade quads of `GameMode.draw` and of a cutscene are drawn by the legacy code, not by the Transition layer's Fade node (section 12). The phase 3 rollout's overlays (section 12), each drawn by the legacy code instead of its nodes: `emotions` (the emotion bubbles), `mission` (the labyrinth's mission display), `pause` ("Paused" and "game pad lost" with their dims), `story_images` (a cutscene's cover-all, story, village and translucent-over-actor images and the text back), `story_texts` (a cutscene's texts and scroll texts, the credits), `tutorials` (a tutorial's top layer, wherever it is drawn). Phase 4.1 (section 13): `world_map`: the world map is read from its `.map` file (and the node index from the three files) and drawn by the legacy code, name plate included; `airship`: the airship's map likewise. |
 | `--hide-particles` | Dev only: the particles draw nothing, in both paths (`Main.hide_particles`; they still run): the village and cutscene systems, the dungeon weather and save points, the card and enemy effects drawn as particles (not the sphere, image, slow and enemy-colour systems), with the GL state their drawing leaves; for parity runs that compare everything else. |
 | `--minimap-node` | Dev only: the labyrinth's minimap is drawn by `MinimapPart` nodes (`MapRenderer.show_map`) instead of the 3D bridge's batches; the floor's frames are the same to the bit, a battle's frames after them differ by 1/255 (plan 8.3), so it is not the default. |
 | Console `padlost [on\|off]`, `emotion <who> <emotion\|off> [shake]` | Dev only (debug console, `scenes/debug/GameCommands.gd`; AutoPlay `console`): `padlost` makes `InputManagers.connectionLost` report a lost game pad (`lost_simulated`) until the overlay's menu is answered, for the "game pad lost" overlay without a pad (seeded runs read none); `emotion` sets a bubble on a party member or villager of the current village (`Sprite.setEmotion`, which only cutscenes call), for the emotions in a village frame. Parity cases `pad_lost`, `emotions_village`. |
 | `--casts=<round>/…` | Dev only: the rounds the console's `cast next` plays on the party's turns (cards `<card>[:<level>][:all]` joined by `+`; `scenes/debug/GameCommands.gd`), for the parity cases of the battle effects (`effects_*`). |
 | `--no-encounters` | Dev only: labyrinths start no random battles (`Labyrinth.noEncounters`, which nothing else sets; the steps are still counted), for parity tours of dungeon floors. |
 | `--start-node=<address>:<direction>` | Dev only: a labyrinth `--start` place starts at this node and facing (0-3), as a game saved there does (`Load.labyrinthPosition`, COTZ-005), not at its door: parity cases start in front of the object they use. |
-| `--bridge-test` | Dev only: the world map shows `tools/bridge_test/BridgeTest.tscn` instead of its background tiles (section 8). |
+| `--bridge-test` | Dev only: the world map shows `tools/bridge_test/BridgeTest.tscn` instead of its background tiles (section 8); implies `--legacy=world_map`. |
 | `--start-time=<day\|night>` | Dev only: the first place starts at this time of day (its info `time`): villages load their "at Night" variant, which no story reaches for most places. |
 | `--status=<name>:<value>,…` | Dev only: Database statuses set after the save is loaded, before the first mode (`_` stands for a space), e.g. a village status for a story the shipped saves cannot reach. |
 
@@ -355,7 +370,11 @@ tools/parity/parity.sh ab "--legacy=villages" "" village village_walk
 * AutoPlay's `pos [text]` prints the player's village position, facing and
   the background scroll (village pixels), for planning routes; in a
   labyrinth the node address, the facing and the camera's location and
-  angle (`node=<a> dir=<d> cam=<x>,<z> angle=<a>`); it adds its own log
+  angle (`node=<a> dir=<d> cam=<x>,<z> angle=<a>`); on the world map the
+  current node, the position, the last walked direction and the road
+  walked (`node=<name> x=<x> y=<y> dir=<d> road=<address|->`), on the
+  airship the position, facing, velocity and the node in range
+  (`x=<x> y=<y> dir=<d> v=<v> node=<name|->`, screen pixels); it adds its own log
   lines and leaves the others unchanged. `loopuntil` also matches `dialog`
   while a labyrinth shows a dialog (not printed: the state lines stay
   comparable with older runs). `heading` remembers the
@@ -388,8 +407,9 @@ were recorded with; record both sides of a comparison on the same machine.
 ## 8. The bridge test
 
 `--bridge-test` (with `--load="Slot 1" --start=landAlares`, script
-`tools/autoplay/bridge_test.txt`, parity case `bridge_test`) makes
-`Landscape.create_scene()` return `tools/bridge_test/BridgeTest.tscn`: a
+`tools/autoplay/bridge_test.txt`, parity case `bridge_test`) implies
+`--legacy=world_map` and makes `Landscape.create_scene()` return
+`tools/bridge_test/BridgeTest.tscn`: a
 full-screen panel with a grid, a label counting the frames the node has
 processed, and a current `Camera2D` with offset (48, 32). The world map
 then skips only its background tiles; the roads, nodes, player, top layer,
@@ -402,11 +422,18 @@ log). It is the regression test for the bridge: run it after changing
 Main, GameMode, GLBackend or the Organizer.
 
 The test used Alares until phase 1; since every village has its own scene,
-it uses the world map, which stays legacy until phase 4.1. Freeing needed a
-port fix: `LandscapeLoader` kept its map loader, which refers back to it,
-and that reference cycle kept every world map mode alive after it was left
-(`AirLandscapeLoader` has the same cycle; not fixed, the airship has no
-scene). Phase 2 found the same for the labyrinth (its graph, player and
+it uses the world map. Since phase 4.1 the world map has a scene too
+(section 13); the test keeps the legacy world map (`--bridge-test` implies
+`--legacy=world_map`: the `.map` file, the legacy drawing, BridgeTest in
+place of the tiles), so it runs exactly as before and stays comparable with
+its golden. Why this and not BridgeTest inside the map's scene: the test
+checks the bridge (a scene a mode owns under `World` with legacy drawing
+over it, kept while suspended, freed with the mode), not the world map, and
+a legacy world map over it is what makes the scene's frames visible under
+legacy drawing; the world map's scene has its own parity cases. Freeing
+needed a port fix: `LandscapeLoader` kept its map loader, which refers back
+to it, and that reference cycle kept every world map mode alive after it
+was left; `AirLandscapeLoader` had the same cycle, fixed in phase 4.1. Phase 2 found the same for the labyrinth (its graph, player and
 battle refer back to it: every floor visited stayed in memory, and a
 converted floor's scene with it); `Labyrinth.finishOff` (not when it is
 only suspended for the menu) and the debug console's jump drop those
@@ -929,8 +956,9 @@ over the actors, the story and scroll texts and the tutorials' top layer.
 The minimap stays the 3D bridge's batches (a node for it exists behind the
 dev flag `--minimap-node`; plan 8.3 tells why it is not the default). Still
 legacy as well: a battle's and a riddle's top layer and the riddle's fade
-(phase 4), the menu pages, the stores' menus and the world map (phase 4.1,
-4.2). How to convert an overlay: `docs/CONVERTING_UI.md`.
+(phase 4), the menu pages and the stores' menus (phase 4.2). The world map's
+and the airship's name plate is a node since phase 4.1 (section 13). How to
+convert an overlay: `docs/CONVERTING_UI.md`.
 
 **Theme** (`resources/theme/game_theme.tres`). The game's two fonts
 (`res/Main/font.ttf`, `boldfont.ttf`: `font` and `bold_font` of the type
@@ -939,14 +967,15 @@ converted nodes (`DialogName` 30, `DialogLine` 30, `DialogWhisper` 24,
 `DialogQuestion` 26, `SignLine` 28, `CardInfoName` 26, `CardInfoLine` 22,
 `CardInfoEffect` 20; the rollout's `MissionLine` 40, `PausedTitle` 50,
 `PadLostTitle` 50, `PadLostLine` 30, `PadLostNote` 20, `TutorialTitle` 34,
-`TutorialWord` 26) and `Text20` … `Text50`, the even sizes
+`TutorialWord` 26; phase 4.1's `NamePlateName` 30) and `Text20` … `Text50`, the even sizes
 `Graphics.setFontSize` allows, for text whose size is data (a cutscene's
 texts: 40 or 50; the credits' lines; the menu after "game pad lost"'s lines
 at the size they leave). StyleBoxTextures of
 the papers and the menu piece the nodes draw (`Panel` variations without
 margins, so a panel of the texture's size draws the texture as it is):
 `DialogPaper` (dialog1.png), `DialogPaperSecond` (dialog2.png),
-`CardInfoPanel` (Pieces/10.png). Nothing is restyled. The root of each UI
+`CardInfoPanel` (Pieces/10.png), phase 4.1's `NamePlate` (Pieces/1.png). Nothing is
+restyled. The root of each UI
 scene sets the theme; the project theme stays Godot's (the debug console).
 
 **Text.** `BaselineLabel` (`scenes/ui/BaselineLabel.gd`, a Control) draws
@@ -1013,6 +1042,9 @@ StoryText (Control, on Transition)  a cutscene's text (story.Text)
 └── FirstLine, SecondLine (BaselineLabel Text<size>, centred at 512; 70 apart)
 ScrollText (Control, on Transition) a scroll text, the credits (story.ScrollableTexts)
 └── Lines (LabelList)
+NamePlate (Control, on UI)          the world map's and the airship's name plate (section 13)
+├── Plate (Panel NamePlate, at 379, 10)
+└── Name (BaselineLabel NamePlateName, centred at 512, 60)
 Tutorial (Control, on UI)           a tutorial's top layer (menu.tutorial.Tutorial)
 ├── Dim (ColorRect, black at 0.5)   fadeOldSchoolColor(1, 1, 1, .5)
 ├── Paper (TextureRect)             AbstractPage.images[15]
@@ -1179,3 +1211,150 @@ quads. Both together draw exactly as before the conversion (plan 8.1). The
 rollout's: `emotions`, `mission`, `pause`, `story_images`, `story_texts`,
 `tutorials` (section 7). With all eight the frame is drawn exactly as before
 phase 3 (plan 8.3).
+
+## 13. The world map and the airship (phase 4.1)
+
+The world map (`Landscape`: `world0.map` West, `world1.map` East,
+`world2.map` North) and the airship (`AirLandscape`: `land1.map`,
+`land2.map`, the map of the Database status `airship`) are converted
+through steps A and B (plan 9.1). The `.map` files stay (decision 5): the
+converter, the data check and `--legacy=world_map` / `--legacy=airship` read
+them. Coordinates are screen pixels (the 1024 x 768 virtual screen): the
+maps neither scroll nor zoom, and the legacy nodes, roads and sprites use
+them. The legacy objects stay in charge of the state, the input and the
+timing (step C is not done): `Road.movePlayer` walks its line of 7 steps
+per segment, one per 40 ms of `J.currentTimeMillis()`; `AirShip` keeps its
+velocity per update and its wrap 55 px past the screen edges; nothing moves
+along the roads' curves.
+
+**Layout.** Every map scene, `scenes/world_map/<file>.tscn` (`world0.tscn`
+… `land2.tscn`), inherits `scenes/world_map/WorldMapScene.tscn` (root
+script `WorldMapScene.gd`, exporting `map_file`, `background_name` and
+`airship`). Its children, in draw order:
+
+| Node | Content |
+|---|---|
+| `Background` | `Sprite2D`, the stitched 256 px tiles of `res/Landscape/<W>/<W>folder` (`<W>.png`: `West.png`, `East.png`, `North.png`; an airship map `World1.png`, `World2.png`) |
+| `Roads` | one `WorldMapRoad` (`Path2D`) per `road` line, in file order: `address`, `source`, `direction_to_destination`, `destination`, `direction_to_source`, `has_oc` (the `oc` line); the curve's points are the `co` points exactly; it draws the move dots (`movedot.png`) at every point but the first and the last, as `Road.done` leaves the `MoveDot`s |
+| `Nodes` | one `WorldMapNode` (`Marker2D`: `kind`, `node_name`; its `Marker` child is `crossroad.png` at (−2, −4), as `LandscapeNode.draw` draws every visited node) per `node` line, in file order (`getNode` finds the first of a name); on an airship map one `AirshipNode` (`Marker2D`: `kind`, `node_name` with its `land` prefix, `zone`: the `start west/east/north` line before it) per line, which draws nothing at run time |
+| `Player` | `ActorView`: Kin on a world map, the airship on an airship map; no SpriteFrames (`show_frame` adds the images it is given) |
+| `Overhead` | one `Sprite2D` per `top/top.info` line, in file order (West 2, East 1; North and the airship maps none) |
+| `Night` | the night layer (`Sprite2D`, scale 2, hidden): `West at Night - 1.png` on `world0`; no texture on `world1` and `world2` (their legacy night layer, `res/Landscape/standardOvernight.png`, does not exist) and on the airship maps |
+
+The night is a choice made at run time: one scene per map file, whose
+`Night` layer shows when the mode loaded the map at night (the legacy
+`DoubleBackground.nightTop`, set from `Landscape.isNight()` when the map
+loads: any music mode but "normal", which only a `land::continue::` place
+sets: Forest Path's door to Deep Forest, plan 9.1). Not a night variant per
+file (decision 1's villages): no landscape has a night background (`<W> at
+Night.jpg` or a night tile folder), so a variant would repeat the whole map
+for one overlay, and the legacy decides it per load, not per file.
+
+`resources/world_map/place_index.tres` (`WorldMapIndex`) is
+`LandscapeLoader.PlaceMapLoader`'s index: the map file of every world map
+node (`Organizer.convert` of each `node` line's last token, `world0.map`,
+`world1.map` then `world2.map`). Godot's text format writes its keys
+sorted; the index is only looked up (`checkPlace`).
+
+**Converter** (`tools/import/world_to_scene.gd`, through
+`tools/import/world_to_scene.sh`): reads each file with the legacy tokenizer
+and parsers as `LandscapeLoaderMapLoader` (`background`, `node`, `road`,
+`co`, `oc`) or `AirLandscapeLoaderMapLoader` (`start`, `node`) read it, and
+PlaceMapLoader's name of each node line. It stops on what the scene cannot
+hold as the legacy loader reads it (a road before its nodes, a node after
+the roads, a second background, a `co` before any road or after its road's
+`oc`) and warns about what the legacy loader reads in its own way (a second
+road of an address, a second node of a name, a token that is no integer,
+ignored commands). The art stage stitches the tiles
+`DoubleBackground.setLandscapeImages` draws (`tools/import/tile_art.gd`,
+shared with the village converter: lossless, no mipmaps, the tiles' import)
+and reads the top layer the same way; the scene stage writes the inherited
+scenes (bootstrap file, edit state, `unique_id`s removed: section 9) and the
+index. Converting twice writes the same files.
+
+**Step A.** `LandscapeLoader.init` asks `world_scene_for(file)` (null with
+`--legacy=world_map` or for a file without a scene) and lets the scene fill
+the loader (`WorldMapScene.load_into`): `Parser.reset()` as the parse
+begins, `loadImages(background_name)` (the
+player, the `DoubleBackground` with its tiles, top layer and night layer,
+the name plate's image), the nodes, then the roads (the same `Road`
+constructor with the Database read `road<address>`, `setRoad` on both ends,
+`addCoordinates` per point, `done`), in the order the `.map` files have
+them. `AirLandscapeLoader.init` asks
+`airship_scene_for("land<status>.map")`: `loadImages(background_name)` (its
+image `World/<name>`), then the nodes with their zones.
+`LandscapeLoader.createMap` reads the index (`place_index`) unless
+`--legacy=world_map`. `Landscape.init` then builds the state as before: the
+Database's opened roads (`road<map>-<address>`), the save's visited nodes and
+roads (`Visited`), the current node. `tools/import/verify_world_map.gd`
+builds every map both ways from each of its nodes (a world map also at
+night) with the saves "Slot 1" and "Start" and compares the modes field by
+field, the Database and `Visited` afterwards, and the index.
+
+**Step B.** The scene the map was built from stays the mode's `scene_root`
+(`create_scene()` returns it) and draws it; `Landscape.draw` and
+`AirLandscape.draw` hand it, where they drew, what they would have drawn:
+
+* `draw_scene` (the world map; the airship calls the same static parts):
+  `scene_bottom` (the tiles' binds, `show_background`), the visited roads'
+  addresses in `visitedRoads`' order with their dots' binds (`show_roads`),
+  each node's visited flag with the visited markers' binds (`show_nodes`),
+  `scene_player` (`LandPlayer.place_view`: the image and `J.round(x − w/2)`,
+  `J.round(y − 9h/10)` as `draw` places it, `show_player`), `scene_top`
+  (the top pieces' binds, the alpha test 0 that `drawTop` sets, the night
+  layer when `nightTop` is set and its image exists: `Graphics.skip_image`
+  returns null, and prints the same error, for East's and North's missing
+  image; `show_top`).
+* Each part gets the colour and the material of the GL state where it was
+  drawn (`Graphics.getCurrentColor`, `Graphics.canvas_material`: GLBackend's
+  material for the blending and the alpha test), as `modulate` and
+  `material` of its layer node; the children use their parent's material.
+  The first frame after another mode keeps that mode's blending and alpha
+  test, as the legacy drawing did.
+* The name plate (`show_name_plate`, both modes): `scenes/ui/NamePlate.tscn`
+  on UI (`Graphics.show_ui`), after the map's drawing and before the dialog
+  ("We can't enter now!") and the fade: the plate (`Pieces/1.png`, a Panel
+  with the theme's `NamePlate`, at 512 − half its width, y 10; its bind) is
+  always drawn; the name (`BaselineLabel` `NamePlateName` 30, centred at
+  512 on the baseline 60; `startText(1, 0)` and `finishText`, so the text
+  colour, alpha and current colour the legacy name left behind) only when
+  the player stands on a node that is not a crossroad (world map) or the
+  airship is within 20 px of a node (`checkNode`), cut at the first "-"
+  (and without "land" on the airship). The font is whatever `setFontSize`
+  left (bold after the credits). `BaselineLabel.oversampling` stays 1.
+
+The scene keeps no reference to its mode. Each logs `WorldMapScene: freed
+<file>` when its mode is freed (one mode switch after it was left, as
+section 4 says); the airship needed the port fix of section 8.
+
+**Flags.** `--legacy=world_map` (the world map and the node index) and
+`--legacy=airship` read the `.map` files and draw through the legacy code,
+name plate included; together they draw exactly as before phase 4.1.
+`--bridge-test` implies `--legacy=world_map` (section 8).
+
+**Still legacy:** the state, the input and the timing (above); the dialog
+and the fade are phase 3's nodes; the menu, its map page (SQUARE on the
+airship) and the menu's thumbnail capture (phase 4.2). `DoubleBackground`
+still loads the tile textures the scene does not draw (as in villages).
+
+### Converting a map again
+
+For a changed `.map` file, a changed background or top layer, or a
+converter change; from bash in the project root, Godot with `< /dev/null`,
+the editor closed:
+
+1. Before the change: goldens of the cases that show the map (`world_*`,
+   `airship_*`, `landscape`, `dialog_world_map`, `dungeon_world_map_entry`;
+   the coverage probe of `docs/CONVERTING_UI.md` finds others).
+2. `tools/import/world_to_scene.sh --all` (or the files). Read its
+   warnings; a file it does not convert names the line. Run it twice: the
+   second run changes no file.
+3. `Godot --headless --path . --script res://tools/import/verify_world_map.gd -- --save="Slot 1" --save=Start`:
+   every build must PASS. `tools/check.sh` must report 0 failed.
+4. Open the scenes in the editor (`scenes/world_map/<file>.tscn`): the
+   background, the roads' curves and dots, the node markers, the top layer.
+5. `tools/parity/parity.sh ab "--legacy=world_map,airship" "" --ignore-world <cases>`
+   must be identical at tolerance 0; `record after` and `compare` the
+   other cases against their goldens.
+6. Commit the scenes, the stitched PNGs with their `.import` files, the
+   index and the new `.uid` files.

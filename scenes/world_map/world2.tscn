@@ -1,0 +1,38 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/world_map/WorldMapScene.tscn" id="1_base"]
+[ext_resource type="Texture2D" path="res://scenes/world_map/North.png" id="2_cfsom"]
+[ext_resource type="PackedScene" path="res://scenes/world_map/WorldMapRoad.tscn" id="3_750u4"]
+[ext_resource type="PackedScene" path="res://scenes/world_map/WorldMapNode.tscn" id="4_hudd8"]
+
+[sub_resource type="Curve2D" id="Curve2D_riick"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 526, 319, 0, 0, 0, 0, 541, 327, 0, 0, 0, 0, 559, 328, 0, 0, 0, 0, 576, 323, 0, 0, 0, 0, 593, 320, 0, 0, 0, 0, 610, 322, 0, 0, 0, 0, 625, 327, 0, 0, 0, 0, 644, 329, 0, 0, 0, 0, 659, 326, 0, 0, 0, 0, 674, 321)
+}
+point_count = 10
+
+[node name="world2" instance=ExtResource("1_base")]
+map_file = "world2.map"
+background_name = "North"
+
+[node name="Background" parent="." index="0"]
+texture = ExtResource("2_cfsom")
+
+[node name="00 road 0 Dellna - Frozen Forest--Forest Passage-mark0" parent="Roads" index="0" instance=ExtResource("3_750u4")]
+curve = SubResource("Curve2D_riick")
+source = "Dellna"
+direction_to_destination = 1
+destination = "Frozen Forest--Forest Passage-mark0"
+direction_to_source = 3
+
+[node name="00 Dellna" parent="Nodes" index="0" instance=ExtResource("4_hudd8")]
+position = Vector2(526, 319)
+node_name = "Dellna"
+
+[node name="01 Frozen Forest--Forest Passage-mark0" parent="Nodes" index="1" instance=ExtResource("4_hudd8")]
+position = Vector2(674, 321)
+kind = "labyrinth"
+node_name = "Frozen Forest--Forest Passage-mark0"
+
+[node name="Player" parent="." index="3"]
+statuses = PackedInt32Array()

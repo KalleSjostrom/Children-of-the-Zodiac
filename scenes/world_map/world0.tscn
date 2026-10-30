@@ -1,0 +1,388 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/world_map/WorldMapScene.tscn" id="1_base"]
+[ext_resource type="Texture2D" path="res://scenes/world_map/West.png" id="2_knbyn"]
+[ext_resource type="PackedScene" path="res://scenes/world_map/WorldMapRoad.tscn" id="3_ne03d"]
+[ext_resource type="PackedScene" path="res://scenes/world_map/WorldMapNode.tscn" id="4_e7v7t"]
+[ext_resource type="Texture2D" path="res://res/Landscape/West/top/0.png" id="5_3xmed"]
+[ext_resource type="Texture2D" path="res://res/Landscape/West/top/1.png" id="6_llf53"]
+[ext_resource type="Texture2D" path="res://res/Landscape/West/West at Night - 1.png" id="7_e37ih"]
+
+[sub_resource type="Curve2D" id="Curve2D_q4dfm"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 204, 440, 0, 0, 0, 0, 219, 438, 0, 0, 0, 0, 234, 432, 0, 0, 0, 0, 244, 426)
+}
+point_count = 4
+
+[sub_resource type="Curve2D" id="Curve2D_7eysc"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 244, 426, 0, 0, 0, 0, 258, 430, 0, 0, 0, 0, 273, 440, 0, 0, 0, 0, 290, 454)
+}
+point_count = 4
+
+[sub_resource type="Curve2D" id="Curve2D_uh3ia"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 290, 454, 0, 0, 0, 0, 305, 456, 0, 0, 0, 0, 320, 458, 0, 0, 0, 0, 335, 462, 0, 0, 0, 0, 350, 468, 0, 0, 0, 0, 365, 475, 0, 0, 0, 0, 380, 485)
+}
+point_count = 7
+
+[sub_resource type="Curve2D" id="Curve2D_c2xue"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 380, 485, 0, 0, 0, 0, 393, 497, 0, 0, 0, 0, 407, 510, 0, 0, 0, 0, 422, 519, 0, 0, 0, 0, 436, 526, 0, 0, 0, 0, 452, 530, 0, 0, 0, 0, 471, 534)
+}
+point_count = 7
+
+[sub_resource type="Curve2D" id="Curve2D_58aig"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 471, 534, 0, 0, 0, 0, 488, 545, 0, 0, 0, 0, 505, 555, 0, 0, 0, 0, 522, 563, 0, 0, 0, 0, 539, 565, 0, 0, 0, 0, 556, 566, 0, 0, 0, 0, 573, 564)
+}
+point_count = 7
+
+[sub_resource type="Curve2D" id="Curve2D_ohrpk"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 471, 534, 0, 0, 0, 0, 474, 517, 0, 0, 0, 0, 475, 500, 0, 0, 0, 0, 475, 483, 0, 0, 0, 0, 474, 466, 0, 0, 0, 0, 474, 449, 0, 0, 0, 0, 475, 435, 0, 0, 0, 0, 476, 422)
+}
+point_count = 8
+
+[sub_resource type="Curve2D" id="Curve2D_n57gh"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 573, 564, 0, 0, 0, 0, 578, 550, 0, 0, 0, 0, 583, 533, 0, 0, 0, 0, 583, 516)
+}
+point_count = 4
+
+[sub_resource type="Curve2D" id="Curve2D_qy0kl"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 573, 564, 0, 0, 0, 0, 590, 558, 0, 0, 0, 0, 606, 545, 0, 0, 0, 0, 616, 535)
+}
+point_count = 4
+
+[sub_resource type="Curve2D" id="Curve2D_jo7a6"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 573, 564, 0, 0, 0, 0, 571, 578, 0, 0, 0, 0, 572, 590, 0, 0, 0, 0, 580, 600)
+}
+point_count = 4
+
+[sub_resource type="Curve2D" id="Curve2D_l0m04"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 476, 422, 0, 0, 0, 0, 496, 416, 0, 0, 0, 0, 516, 410, 0, 0, 0, 0, 536, 404, 0, 0, 0, 0, 556, 397, 0, 0, 0, 0, 576, 390)
+}
+point_count = 6
+
+[sub_resource type="Curve2D" id="Curve2D_j7vac"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 576, 390, 0, 0, 0, 0, 601, 380, 0, 0, 0, 0, 621, 370)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_53jqt"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 621, 370, 0, 0, 0, 0, 637, 361, 0, 0, 0, 0, 649, 349, 0, 0, 0, 0, 655, 332, 0, 0, 0, 0, 660, 313, 0, 0, 0, 0, 663, 298)
+}
+point_count = 6
+
+[sub_resource type="Curve2D" id="Curve2D_rolol"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 663, 298, 0, 0, 0, 0, 683, 293, 0, 0, 0, 0, 703, 293, 0, 0, 0, 0, 723, 290, 0, 0, 0, 0, 743, 284, 0, 0, 0, 0, 763, 274, 0, 0, 0, 0, 783, 264)
+}
+point_count = 7
+
+[sub_resource type="Curve2D" id="Curve2D_2yrxe"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 663, 298, 0, 0, 0, 0, 662, 277, 0, 0, 0, 0, 658, 259, 0, 0, 0, 0, 650, 250)
+}
+point_count = 4
+
+[sub_resource type="Curve2D" id="Curve2D_mc66q"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 663, 298, 0, 0, 0, 0, 643, 302, 0, 0, 0, 0, 623, 304, 0, 0, 0, 0, 603, 305, 0, 0, 0, 0, 583, 302, 0, 0, 0, 0, 564, 298, 0, 0, 0, 0, 548, 289, 0, 0, 0, 0, 533, 277, 0, 0, 0, 0, 522, 260)
+}
+point_count = 9
+
+[sub_resource type="Curve2D" id="Curve2D_dkojj"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 522, 260, 0, 0, 0, 0, 502, 252, 0, 0, 0, 0, 482, 248, 0, 0, 0, 0, 462, 253, 0, 0, 0, 0, 442, 258, 0, 0, 0, 0, 421, 253)
+}
+point_count = 6
+
+[sub_resource type="Curve2D" id="Curve2D_0wwm1"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 621, 370, 0, 0, 0, 0, 626, 388, 0, 0, 0, 0, 631, 406)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_ii2jh"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 631, 406, 0, 0, 0, 0, 643, 414, 0, 0, 0, 0, 656, 420, 0, 0, 0, 0, 668, 429, 0, 0, 0, 0, 679, 436, 0, 0, 0, 0, 692, 441, 0, 0, 0, 0, 703, 443, 0, 0, 0, 0, 714, 448)
+}
+point_count = 8
+
+[sub_resource type="Curve2D" id="Curve2D_383gj"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 714, 448, 0, 0, 0, 0, 728, 451, 0, 0, 0, 0, 742, 455, 0, 0, 0, 0, 757, 455, 0, 0, 0, 0, 771, 449)
+}
+point_count = 5
+
+[node name="world0" instance=ExtResource("1_base")]
+map_file = "world0.map"
+background_name = "West"
+
+[node name="Background" parent="." index="0"]
+texture = ExtResource("2_knbyn")
+
+[node name="00 road 0 Home of Celis - Celis Cross" parent="Roads" index="0" instance=ExtResource("3_ne03d")]
+curve = SubResource("Curve2D_q4dfm")
+source = "Home of Celis"
+direction_to_destination = 1
+destination = "Celis Cross"
+direction_to_source = 3
+
+[node name="01 road 2 Celis Cross - Forest of Reil--Deep Forest-mark0" parent="Roads" index="1" instance=ExtResource("3_ne03d")]
+curve = SubResource("Curve2D_7eysc")
+address = 2
+source = "Celis Cross"
+direction_to_destination = 1
+destination = "Forest of Reil--Deep Forest-mark0"
+direction_to_source = 3
+
+[node name="02 road 3 Forest of Reil--Deep Forest-mark0 - Forest of Reil--Deep Forest-mark1" parent="Roads" index="2" instance=ExtResource("3_ne03d")]
+curve = SubResource("Curve2D_uh3ia")
+address = 3
+source = "Forest of Reil--Deep Forest-mark0"
+direction_to_destination = 1
+destination = "Forest of Reil--Deep Forest-mark1"
+direction_to_source = 3
+
+[node name="03 road 4 Forest of Reil--Deep Forest-mark1 - Main Cross" parent="Roads" index="3" instance=ExtResource("3_ne03d")]
+curve = SubResource("Curve2D_c2xue")
+address = 4
+source = "Forest of Reil--Deep Forest-mark1"
+direction_to_destination = 1
+destination = "Main Cross"
+direction_to_source = 3
+
+[node name="04 road 5 Main Cross - East Cross" parent="Roads" index="4" instance=ExtResource("3_ne03d")]
+curve = SubResource("Curve2D_58aig")
+address = 5
+source = "Main Cross"
+direction_to_destination = 1
+destination = "East Cross"
+direction_to_source = 3
+
+[node name="05 road 6 Main Cross - Pass to Zazo" parent="Roads" index="5" instance=ExtResource("3_ne03d")]
+curve = SubResource("Curve2D_ohrpk")
+address = 6
+source = "Main Cross"
+destination = "Pass to Zazo"
+direction_to_source = 2
+
+[node name="06 road 7 East Cross - Alares" parent="Roads" index="6" instance=ExtResource("3_ne03d")]
+curve = SubResource("Curve2D_n57gh")
+address = 7
+source = "East Cross"
+destination = "Alares"
+direction_to_source = 2
+
+[node name="07 road 8 East Cross - Grivera--First Floor-mark0" parent="Roads" index="7" instance=ExtResource("3_ne03d")]
+curve = SubResource("Curve2D_qy0kl")
+address = 8
+source = "East Cross"
+direction_to_destination = 1
+destination = "Grivera--First Floor-mark0"
+direction_to_source = 2
+
+[node name="08 road 9 East Cross - Port of Alares" parent="Roads" index="8" instance=ExtResource("3_ne03d")]
+curve = SubResource("Curve2D_jo7a6")
+address = 9
+source = "East Cross"
+direction_to_destination = 2
+destination = "Port of Alares"
+
+[node name="09 road 10 Pass to Zazo - Central Pass--North East Part-mark0" parent="Roads" index="9" instance=ExtResource("3_ne03d")]
+curve = SubResource("Curve2D_l0m04")
+address = 10
+source = "Pass to Zazo"
+direction_to_destination = 1
+destination = "Central Pass--North East Part-mark0"
+direction_to_source = 3
+
+[node name="10 road 11 Central Pass--North East Part-mark0 - Zazo South Cross" parent="Roads" index="10" instance=ExtResource("3_ne03d")]
+curve = SubResource("Curve2D_j7vac")
+address = 11
+source = "Central Pass--North East Part-mark0"
+direction_to_destination = 1
+destination = "Zazo South Cross"
+direction_to_source = 3
+
+[node name="11 road 12 Zazo South Cross - Zazo Cross" parent="Roads" index="11" instance=ExtResource("3_ne03d")]
+curve = SubResource("Curve2D_53jqt")
+address = 12
+source = "Zazo South Cross"
+direction_to_destination = 1
+destination = "Zazo Cross"
+direction_to_source = 2
+
+[node name="12 road 13 Zazo Cross - Port of Zazo" parent="Roads" index="12" instance=ExtResource("3_ne03d")]
+curve = SubResource("Curve2D_rolol")
+address = 13
+source = "Zazo Cross"
+direction_to_destination = 1
+destination = "Port of Zazo"
+direction_to_source = 3
+
+[node name="13 road 14 Zazo Cross - Zazo" parent="Roads" index="13" instance=ExtResource("3_ne03d")]
+curve = SubResource("Curve2D_2yrxe")
+address = 14
+source = "Zazo Cross"
+destination = "Zazo"
+direction_to_source = 2
+
+[node name="14 road 15 Zazo Cross - West Cross" parent="Roads" index="14" instance=ExtResource("3_ne03d")]
+curve = SubResource("Curve2D_mc66q")
+address = 15
+source = "Zazo Cross"
+direction_to_destination = 3
+destination = "West Cross"
+direction_to_source = 1
+
+[node name="15 road 16 West Cross - The Great Mine--The Hall-mark0" parent="Roads" index="15" instance=ExtResource("3_ne03d")]
+curve = SubResource("Curve2D_dkojj")
+address = 16
+source = "West Cross"
+direction_to_destination = 3
+destination = "The Great Mine--The Hall-mark0"
+direction_to_source = 1
+
+[node name="16 road 18 Zazo South Cross - East Passage--West Mountain-mark0" parent="Roads" index="16" instance=ExtResource("3_ne03d")]
+curve = SubResource("Curve2D_0wwm1")
+address = 18
+source = "Zazo South Cross"
+direction_to_destination = 2
+destination = "East Passage--West Mountain-mark0"
+
+[node name="17 road 19 East Passage--West Mountain-mark0 - Forest of Bri--East Forest-mark0" parent="Roads" index="17" instance=ExtResource("3_ne03d")]
+curve = SubResource("Curve2D_ii2jh")
+address = 19
+source = "East Passage--West Mountain-mark0"
+direction_to_destination = 1
+destination = "Forest of Bri--East Forest-mark0"
+direction_to_source = 3
+
+[node name="18 road 20 Forest of Bri--East Forest-mark0 - Mt_ Cesadur--Entrance-mark0" parent="Roads" index="18" instance=ExtResource("3_ne03d")]
+curve = SubResource("Curve2D_383gj")
+address = 20
+source = "Forest of Bri--East Forest-mark0"
+direction_to_destination = 1
+destination = "Mt. Cesadur--Entrance-mark0"
+direction_to_source = 3
+
+[node name="00 Home of Celis" parent="Nodes" index="0" instance=ExtResource("4_e7v7t")]
+position = Vector2(204, 440)
+node_name = "Home of Celis"
+
+[node name="01 Celis Cross" parent="Nodes" index="1" instance=ExtResource("4_e7v7t")]
+position = Vector2(244, 426)
+kind = "crossroad"
+node_name = "Celis Cross"
+
+[node name="02 Forest of Reil--Deep Forest-mark0" parent="Nodes" index="2" instance=ExtResource("4_e7v7t")]
+position = Vector2(290, 454)
+kind = "labyrinth"
+node_name = "Forest of Reil--Deep Forest-mark0"
+
+[node name="03 Forest of Reil--Deep Forest-mark1" parent="Nodes" index="3" instance=ExtResource("4_e7v7t")]
+position = Vector2(380, 485)
+kind = "labyrinth"
+node_name = "Forest of Reil--Deep Forest-mark1"
+
+[node name="04 Main Cross" parent="Nodes" index="4" instance=ExtResource("4_e7v7t")]
+position = Vector2(471, 534)
+kind = "crossroad"
+node_name = "Main Cross"
+
+[node name="05 Alares" parent="Nodes" index="5" instance=ExtResource("4_e7v7t")]
+position = Vector2(583, 516)
+node_name = "Alares"
+
+[node name="06 East Cross" parent="Nodes" index="6" instance=ExtResource("4_e7v7t")]
+position = Vector2(573, 564)
+kind = "crossroad"
+node_name = "East Cross"
+
+[node name="07 Grivera--First Floor-mark0" parent="Nodes" index="7" instance=ExtResource("4_e7v7t")]
+position = Vector2(616, 535)
+kind = "labyrinth"
+node_name = "Grivera--First Floor-mark0"
+
+[node name="08 Port of Alares" parent="Nodes" index="8" instance=ExtResource("4_e7v7t")]
+position = Vector2(580, 600)
+node_name = "Port of Alares"
+
+[node name="09 Pass to Zazo" parent="Nodes" index="9" instance=ExtResource("4_e7v7t")]
+position = Vector2(476, 422)
+node_name = "Pass to Zazo"
+
+[node name="10 Central Pass--North East Part-mark0" parent="Nodes" index="10" instance=ExtResource("4_e7v7t")]
+position = Vector2(576, 390)
+kind = "labyrinth"
+node_name = "Central Pass--North East Part-mark0"
+
+[node name="11 Zazo South Cross" parent="Nodes" index="11" instance=ExtResource("4_e7v7t")]
+position = Vector2(621, 370)
+kind = "crossroad"
+node_name = "Zazo South Cross"
+
+[node name="12 Zazo Cross" parent="Nodes" index="12" instance=ExtResource("4_e7v7t")]
+position = Vector2(663, 296)
+kind = "crossroad"
+node_name = "Zazo Cross"
+
+[node name="13 Port of Zazo" parent="Nodes" index="13" instance=ExtResource("4_e7v7t")]
+position = Vector2(783, 264)
+node_name = "Port of Zazo"
+
+[node name="14 Zazo" parent="Nodes" index="14" instance=ExtResource("4_e7v7t")]
+position = Vector2(645, 250)
+node_name = "Zazo"
+
+[node name="15 West Cross" parent="Nodes" index="15" instance=ExtResource("4_e7v7t")]
+position = Vector2(522, 260)
+kind = "crossroad"
+node_name = "West Cross"
+
+[node name="16 The Great Mine--The Hall-mark0" parent="Nodes" index="16" instance=ExtResource("4_e7v7t")]
+position = Vector2(421, 253)
+kind = "labyrinth"
+node_name = "The Great Mine--The Hall-mark0"
+
+[node name="17 East Passage--West Mountain-mark0" parent="Nodes" index="17" instance=ExtResource("4_e7v7t")]
+position = Vector2(631, 406)
+kind = "labyrinth"
+node_name = "East Passage--West Mountain-mark0"
+
+[node name="18 Forest of Bri--East Forest-mark0" parent="Nodes" index="18" instance=ExtResource("4_e7v7t")]
+position = Vector2(714, 448)
+kind = "labyrinth"
+node_name = "Forest of Bri--East Forest-mark0"
+
+[node name="19 Mt_ Cesadur--Entrance-mark0" parent="Nodes" index="19" instance=ExtResource("4_e7v7t")]
+position = Vector2(771, 449)
+kind = "labyrinth"
+node_name = "Mt. Cesadur--Entrance-mark0"
+
+[node name="Player" parent="." index="3"]
+statuses = PackedInt32Array()
+
+[node name="00 0" type="Sprite2D" parent="Overhead" index="0"]
+use_parent_material = true
+position = Vector2(482, 380)
+texture = ExtResource("5_3xmed")
+centered = false
+
+[node name="01 1" type="Sprite2D" parent="Overhead" index="1"]
+use_parent_material = true
+position = Vector2(245, 430)
+texture = ExtResource("6_llf53")
+centered = false
+
+[node name="Night" parent="." index="5"]
+texture = ExtResource("7_e37ih")

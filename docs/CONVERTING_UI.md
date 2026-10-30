@@ -8,7 +8,8 @@ texts and the tutorials' top layer (plan 8.3; the minimap stays the 3D
 bridge's batches, its node is a dev flag); the conventions
 are in `docs/ARCHITECTURE.md` section 12. This is the procedure for the next
 overlays (phase 4's: a battle's and a riddle's top layer, the menu pages,
-the stores' menus, the world map's). Run everything from bash in the project root, Godot with
+the stores' menus; the world map's name plate is done, docs/ARCHITECTURE.md
+section 13). Run everything from bash in the project root, Godot with
 `< /dev/null`; close the Godot editor first (it imports new files and makes
 `.uid` files), and do not type while a recording runs (a new run's window
 takes the focus).

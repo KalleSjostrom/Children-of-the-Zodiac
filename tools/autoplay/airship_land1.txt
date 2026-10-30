@@ -1,0 +1,87 @@
+# Phase 4.1 (airship coverage): the airship on land1.map (--load="Slot 1"
+# --start=landAlares; SQUARE boards it at airship status 1). The name plate
+# over a node (Alares at the start, Forest of Reil while passing it, none
+# away from nodes); flying in each direction; the wrap 55 px past each edge
+# (AirShip.checkLeftUp, checkRightDown): at the left edge the airship leaves
+# the screen, wraps to x 1079 and is out of sight until x 1042; at the top it
+# wraps to y 823 and shows at the bottom at once; at the right edge it
+# leaves, is out of sight from x 1042 and wraps to the left edge; at the
+# bottom it is out of sight only from y 818 to 823 and wraps to the top. The
+# airship under the name plate.
+wait 3500
+tap SQUARE
+mark
+wait 200
+loopuntil mode=landscape.airship 15000
+wait 2500
+shot a101_alares
+pos alares
+press LEFT
+wait 500
+shot a102_flying_left_forest_of_reil
+pos forest_of_reil
+wait 700
+shot a103_flying_left
+wait 400
+shot a104_left_edge
+pos left_edge
+wait 150
+shot a105_wrapped_band
+pos wrapped
+wait 250
+shot a106_coming_in_right
+pos coming_in
+release LEFT
+wait 1000
+pos stopped_right
+press UP
+wait 3050
+shot a107_top_edge
+pos top_edge
+wait 200
+shot a108_wrapped_bottom
+pos wrapped_bottom
+wait 400
+shot a109_coming_in_bottom
+pos coming_in_bottom
+release UP
+wait 1000
+pos stopped_bottom
+press LEFT
+wait 2200
+release LEFT
+wait 800
+pos above_plate_x
+press UP
+wait 3000
+release UP
+wait 800
+shot a110_under_plate
+pos under_plate
+press RIGHT
+wait 2350
+shot a111_right_edge
+pos right_edge
+wait 150
+shot a112_right_band
+pos right_band
+wait 220
+shot a113_wrapped_left
+pos wrapped_left
+release RIGHT
+wait 1000
+pos stopped_left
+press DOWN
+wait 3500
+shot a114_bottom_edge
+pos bottom_edge
+wait 220
+shot a115_wrapped_top
+pos wrapped_top
+wait 300
+shot a116_coming_in_top
+pos coming_in_top
+release DOWN
+wait 1000
+pos stopped_top
+quit

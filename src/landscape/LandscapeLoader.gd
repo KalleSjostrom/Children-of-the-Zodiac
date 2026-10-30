@@ -2,6 +2,13 @@ class_name LandscapeLoader
 extends MenuStarter
 ## Port of landscape.LandscapeLoader: loads the landscape from a world*.map
 ## file.
+##
+## Bridge (phase 4.1, docs/ARCHITECTURE.md section 13): a map with a scene
+## (scenes/world_map/<file>.tscn) is built from it (WorldMapScene.load_into,
+## step A) instead of parsing the file, and the scene stays the mode's
+## scene_root and draws the map (step B, Landscape.draw_scene); the index of
+## the node names (PlaceMapLoader's) is resources/world_map/place_index.tres.
+## --legacy=world_map keeps the .map files and the legacy drawing.
 
 var roads = []
 var nameBackGround = ""
@@ -26,7 +33,12 @@ func init(name, lab = null, hinders = null):
 	if landscape == null:
 		push_error("LandscapeLoader: no landscape map for start node " + str(sn))
 	else:
-		mapLoader.parseFile(landscape)
+		var scene = world_scene_for(landscape)
+		if scene != null:
+			scene.load_into(self)
+			scene_root = scene
+		else:
+			mapLoader.parseFile(landscape)
 	# Port fix: the map loader refers back to this loader (Java's inner class
 	# reference), and the RefCounted cycle would keep the mode, and its scene,
 	# alive after it is left. It is not used after parsing.
@@ -85,8 +97,34 @@ static func _getPlaceMap():
 
 static func createMap():
 	var map := {}
-	PlaceMapLoader.new(map)
+	var index = place_index()
+	if index != null:
+		Parser.reset()
+		map.merge(index.maps)
+	else:
+		PlaceMapLoader.new(map)
 	return map
+
+
+## Bridge (phase 4.1 step A): a new instance of the scene of the world map
+## file map_file (WorldMapScene), or null when it has none or with
+## --legacy=world_map (the file is parsed).
+func world_scene_for(map_file):
+	if Main.is_legacy("world_map"):
+		return null
+	var path := WorldMapScene.path_for(str(map_file))
+	if path == "":
+		return null
+	return (ResourceLoader.load(path) as PackedScene).instantiate()
+
+
+## Bridge (phase 4.1 step A): PlaceMapLoader's index as the converter wrote
+## it (WorldMapIndex), or null with --legacy=world_map (the files are
+## parsed).
+static func place_index():
+	if Main.is_legacy("world_map") or not ResourceLoader.exists(WorldMapIndex.PATH):
+		return null
+	return ResourceLoader.load(WorldMapIndex.PATH)
 
 
 static func checkPlace(startNode):

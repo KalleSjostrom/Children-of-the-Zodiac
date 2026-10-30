@@ -1,10 +1,11 @@
-[gd_resource type="Theme" load_steps=9 format=3]
+[gd_resource type="Theme" load_steps=11 format=3]
 
 [ext_resource type="FontFile" uid="uid://c4bfhbsvued6q" path="res://res/Main/font.ttf" id="1_font"]
 [ext_resource type="FontFile" uid="uid://dnptmlo6jcx83" path="res://res/Main/boldfont.ttf" id="2_bold"]
 [ext_resource type="Texture2D" uid="uid://dnqfp74moebno" path="res://res/Menu/dialog/dialog1.png" id="3_dialog1"]
 [ext_resource type="Texture2D" uid="uid://dumbmy1ct535w" path="res://res/Menu/dialog/dialog2.png" id="4_dialog2"]
 [ext_resource type="Texture2D" uid="uid://bvh6job8v15pa" path="res://res/Menu/Pieces/10.png" id="5_piece10"]
+[ext_resource type="Texture2D" uid="uid://bd6fuwn11qare" path="res://res/Menu/Pieces/1.png" id="6_piece1"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dialog1"]
 texture = ExtResource("3_dialog1")
@@ -14,6 +15,9 @@ texture = ExtResource("4_dialog2")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_piece10"]
 texture = ExtResource("5_piece10")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_piece1"]
+texture = ExtResource("6_piece1")
 
 [resource]
 default_font = ExtResource("1_font")
@@ -44,6 +48,10 @@ DialogWhisper/base_type = &"BaselineLabel"
 DialogWhisper/font_sizes/font_size = 24
 MissionLine/base_type = &"BaselineLabel"
 MissionLine/font_sizes/font_size = 40
+NamePlate/base_type = &"Panel"
+NamePlate/styles/panel = SubResource("StyleBoxTexture_piece1")
+NamePlateName/base_type = &"BaselineLabel"
+NamePlateName/font_sizes/font_size = 30
 PadLostLine/base_type = &"BaselineLabel"
 PadLostLine/font_sizes/font_size = 30
 PadLostNote/base_type = &"BaselineLabel"

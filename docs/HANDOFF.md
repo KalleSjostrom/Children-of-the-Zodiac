@@ -1,4 +1,4 @@
-# Handoff: state of the Godot port (2026-10-28, after steps 1–3, modernization phase 0, phase 1 steps A and B, phase 2 steps A and B, the particles phase, P2 and phase 3 steps A and B)
+# Handoff: state of the Godot port (2026-10-29, after steps 1–3, modernization phase 0, phase 1 steps A and B, phase 2 steps A and B, the particles phase, P2, phase 3 steps A and B and phase 4.1 steps A and B)
 
 Conventions: legacy (ported) code follows `docs/PORTING.md`; new code
 (scenes, resources, tools, bridge) follows `docs/ARCHITECTURE.md`. The
@@ -277,6 +277,44 @@ the procedure in `docs/CONVERTING_UI.md`:
   default; the 1/255 of plan 7.8 stays as it was. Closing the phase is
   prepared in plan 8.4.
 
+**Modernization phase 4.1 (the world map and the airship): steps A and B
+done** (plan 9.1; conventions and how to convert a map again in
+`docs/ARCHITECTURE.md` section 13):
+- Scenes: `scenes/world_map/WorldMapScene.tscn` (layout: `Background`,
+  `Roads` (`WorldMapRoad`, a Path2D per road with its `co` points and its
+  move dots), `Nodes` (`WorldMapNode` / `AirshipNode`, Marker2D),
+  `Player` (ActorView), `Overhead`, `Night`), one scene per `.map` file
+  (`world0`–`world2`, `land1`, `land2`), the stitched backgrounds, and the
+  node index `resources/world_map/place_index.tres`. Made by
+  `tools/import/world_to_scene.sh --all` (deterministic); the stitching is
+  `tools/import/tile_art.gd`, shared with the village converter.
+- Step A: `LandscapeLoader` and `AirLandscapeLoader` build the maps from the
+  scenes, `createMap` reads the index; `verify_world_map.gd` with "Slot 1"
+  and "Start": 196 builds pass.
+- Step B: the scene draws the map (tiles, visited roads' dots and nodes,
+  Kin or the airship, top layer, the night layer when the map loaded at
+  night); the name plate is the UI node `scenes/ui/NamePlate` (theme roles
+  `NamePlate`, `NamePlateName`). The legacy objects keep the state, the
+  input and the timing. `--legacy=world_map` and `--legacy=airship` keep
+  the old path; `--bridge-test` implies `--legacy=world_map`.
+- Port fix: the airship's map loader kept every airship mode alive (a
+  reference cycle, as `LandscapeLoader`'s was); each map scene now logs
+  `WorldMapScene: freed`.
+- Parity (tolerance 0, 392 cases and `bridge_test`, 7,292 shots): golden vs.
+  step A and vs. step B identical (logs too, with `--ignore-world` for the
+  21 cases that show a map); legacy vs. scene on those 21 cases identical;
+  the bridge test passes. Ten new cases (`world_*`, `airship_*`: each map
+  by day, the first visit and closed roads, West at night, East at night
+  (dev only), the airship's wraps, plate, menu, map page and landing);
+  AutoPlay's `pos` covers the world map and the airship.
+- Frame rate (normal runs, uncapped, legacy → scene): walking on West 424 →
+  1,926 FPS, flying the airship 1,713 → 2,280; 60 capped either way.
+- Quirks found (kept, `tickets/triage.md` W1–W4): SQUARE on a crossroad
+  boards an airship with no node (script errors); East and North at night
+  would need a missing image (no data goes there); a visited closed road
+  keeps its dots; Empyrian Temple's airship node leads into the labyrinth.
+- Closing the phase is prepared in plan 9.1 ("Closing phase 4.1").
+
 ## Plan (what is left)
 
 0. **Modernization:** closing phase 1 (plan 6.9) needs decision 5 (delete
@@ -284,8 +322,9 @@ the procedure in `docs/CONVERTING_UI.md`:
    `--legacy=particles`). Closing phase 2 (plan 7.9) needs decision 5 and
    the 1/255 tolerance accepted. Closing phase 3 (plan 8.4) needs phases 1
    and 2 closed (their legacy paths draw through the same overlays) and the
-   minimap's geometry made by its node. Next: phase 4 (plan 9; the menu
-   pages, the stores' menus, the world map, battles and riddles still draw
+   minimap's geometry made by its node. Closing phase 4.1 (plan 9.1) needs
+   decision 5 and another home for the bridge test. Next: phase 4.2 (plan
+   9.2; the menu pages, the stores' menus, battles and riddles still draw
    overlays of their own). Record goldens before each change.
 
 1. **Performance:** since P2 the labyrinths with rain or snow run at 60 FPS
@@ -324,8 +363,9 @@ the procedure in `docs/CONVERTING_UI.md`:
   only the shipped saves.
 - Parity: `tools/parity/parity.sh record <set>` / `compare <a> <b>` /
   `ab "<args a>" "<args b>" [case…]`, see `docs/ARCHITECTURE.md` section 7.
-  Runs are windowed (screenshots need a renderer); all 383 cases take about
-  12-15 minutes with `--jobs=8` on 12 logical cores since the particles run
+  Runs are windowed (screenshots need a renderer); all 392 cases and
+  `bridge_test` take about 12-15 minutes with `--jobs=8` on 12 logical
+  cores (run nothing windowed beside them: 16 GB run out, plan 12) since the particles run
   on the GPU (60-70 minutes before P2; `--uncapped`; with
   `--legacy=particles`, `particles_hotg` and the Berca cutscene are bound by
   the legacy particles at ~6 FPS, with `--legacy=dungeon_particles` the

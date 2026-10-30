@@ -1,0 +1,44 @@
+# Phase 4.1 (world map coverage): West by day (--load="Slot 1"
+# --start=landHome_of_Celis), walking a road in each direction: the name
+# plate on a village (Home of Celis, Pass to Zazo) and a labyrinth node
+# (Forest of Reil), none on a crossroad (Celis Cross, Main Cross) or while
+# walking; the player under the top layer (Forest of Reil--Deep Forest-mark0
+# under top/1.png, Pass to Zazo under top/0.png).
+wait 3500
+shot ww01_home_of_celis
+pos home_of_celis
+tap RIGHT
+wait 300
+shot ww02_walking_right
+wait 1700
+shot ww03_celis_cross
+pos celis_cross
+tap RIGHT
+wait 2000
+shot ww04_forest_of_reil
+pos forest_of_reil
+tap RIGHT
+wait 600
+shot ww05_walking_under_top
+wait 2900
+pos mark1
+tap RIGHT
+wait 3500
+shot ww06_main_cross
+pos main_cross
+tap UP
+wait 1500
+shot ww07_walking_up
+wait 2500
+shot ww08_pass_to_zazo
+pos pass_to_zazo
+tap DOWN
+wait 4000
+pos back_main_cross
+tap LEFT
+wait 1200
+shot ww09_walking_left
+wait 2800
+shot ww10_mark1
+pos back_mark1
+quit

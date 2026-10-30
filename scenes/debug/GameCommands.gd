@@ -555,16 +555,31 @@ func _roads(args: PackedStringArray) -> DebugCommands.Result:
 	var zones: Array = ROAD_ZONES.values() if args.is_empty() else [ROAD_ZONES[args[0]]]
 	var opened := 0
 	for land in zones:
-		var text := GameResourceLoader.readText(Values.LandscapeMaps + "world%d.map" % land)
-		for raw in text.split("\n"):
-			var words := raw.strip_edges().split(" ", false)
-			if words.size() >= 2 and words[0] == "road" and words[1].is_valid_int():
-				Database.addStatus("road%d-%s" % [land, words[1]], 1)
-				opened += 1
+		for address in _road_addresses("world%d.map" % land):
+			Database.addStatus("road%d-%d" % [land, address], 1)
+			opened += 1
 	var gm := _mode()
 	if gm is Landscape:
 		gm.openRoads(LandscapeLoader.checkPlace(gm.getName()))
 	return DebugCommands.done("Opened %d roads" % opened)
+
+
+## The addresses of the roads of a world map file, in file order: its
+## scene's roads (WorldMapRoad), or its road lines with --legacy=world_map.
+static func _road_addresses(file: String) -> Array[int]:
+	var out: Array[int] = []
+	var path := WorldMapScene.path_for(file)
+	if path != "" and not Main.is_legacy("world_map"):
+		var scene: WorldMapScene = (load(path) as PackedScene).instantiate()
+		for road: WorldMapRoad in scene.get_node("Roads").get_children():
+			out.append(road.address)
+		scene.free()
+		return out
+	for raw in GameResourceLoader.readText(Values.LandscapeMaps + file).split("\n"):
+		var words := raw.strip_edges().split(" ", false)
+		if words.size() >= 2 and words[0] == "road" and words[1].is_valid_int():
+			out.append(words[1].to_int())
+	return out
 
 
 func _noenemies(args: PackedStringArray) -> DebugCommands.Result:

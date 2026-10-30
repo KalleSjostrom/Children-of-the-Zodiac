@@ -1,0 +1,159 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/world_map/WorldMapScene.tscn" id="1_base"]
+[ext_resource type="Texture2D" path="res://scenes/world_map/World1.png" id="2_k304d"]
+[ext_resource type="PackedScene" path="res://scenes/world_map/AirshipNode.tscn" id="3_ped3e"]
+
+[node name="land1" instance=ExtResource("1_base")]
+map_file = "land1.map"
+background_name = "World1"
+airship = true
+
+[node name="Background" parent="." index="0"]
+texture = ExtResource("2_k304d")
+
+[node name="00 landHome of Celis" parent="Nodes" index="0" instance=ExtResource("3_ped3e")]
+position = Vector2(110, 575)
+node_name = "landHome of Celis"
+
+[node name="01 landAlares" parent="Nodes" index="1" instance=ExtResource("3_ped3e")]
+position = Vector2(313, 611)
+node_name = "landAlares"
+
+[node name="02 landPort of Alares" parent="Nodes" index="2" instance=ExtResource("3_ped3e")]
+position = Vector2(349, 672)
+node_name = "landPort of Alares"
+
+[node name="03 landPass to Zazo" parent="Nodes" index="3" instance=ExtResource("3_ped3e")]
+position = Vector2(273, 568)
+node_name = "landPass to Zazo"
+
+[node name="04 landPort of Zazo" parent="Nodes" index="4" instance=ExtResource("3_ped3e")]
+position = Vector2(461, 469)
+node_name = "landPort of Zazo"
+
+[node name="05 landZazo" parent="Nodes" index="5" instance=ExtResource("3_ped3e")]
+position = Vector2(346, 470)
+node_name = "landZazo"
+
+[node name="06 landForest of Reil--Deep Forest-mark0" parent="Nodes" index="6" instance=ExtResource("3_ped3e")]
+position = Vector2(163, 577)
+kind = "labyrinth"
+node_name = "landForest of Reil--Deep Forest-mark0"
+
+[node name="07 landForest of Reil--Deep Forest-mark1" parent="Nodes" index="7" instance=ExtResource("3_ped3e")]
+position = Vector2(219, 602)
+kind = "labyrinth"
+node_name = "landForest of Reil--Deep Forest-mark1"
+
+[node name="08 landCentral Pass--North East Part-mark0" parent="Nodes" index="8" instance=ExtResource("3_ped3e")]
+position = Vector2(325, 546)
+kind = "labyrinth"
+node_name = "landCentral Pass--North East Part-mark0"
+
+[node name="09 landGrivera--First Floor-mark0" parent="Nodes" index="9" instance=ExtResource("3_ped3e")]
+position = Vector2(354, 622)
+kind = "labyrinth"
+node_name = "landGrivera--First Floor-mark0"
+
+[node name="10 landThe Great Mine--The Hall-mark0" parent="Nodes" index="10" instance=ExtResource("3_ped3e")]
+position = Vector2(240, 472)
+kind = "labyrinth"
+node_name = "landThe Great Mine--The Hall-mark0"
+
+[node name="11 landEast Passage--West Mountain-mark0" parent="Nodes" index="11" instance=ExtResource("3_ped3e")]
+position = Vector2(365, 554)
+kind = "labyrinth"
+node_name = "landEast Passage--West Mountain-mark0"
+
+[node name="12 landForest of Bri--East Forest-mark0" parent="Nodes" index="12" instance=ExtResource("3_ped3e")]
+position = Vector2(407, 588)
+kind = "labyrinth"
+node_name = "landForest of Bri--East Forest-mark0"
+
+[node name="13 landMt_ Cesadur--Entrance-mark0" parent="Nodes" index="13" instance=ExtResource("3_ped3e")]
+position = Vector2(440, 579)
+kind = "labyrinth"
+node_name = "landMt. Cesadur--Entrance-mark0"
+
+[node name="14 landParasne" parent="Nodes" index="14" instance=ExtResource("3_ped3e")]
+position = Vector2(636, 654)
+node_name = "landParasne"
+zone = 1
+
+[node name="15 landPensara - The Trade District" parent="Nodes" index="15" instance=ExtResource("3_ped3e")]
+position = Vector2(678, 585)
+node_name = "landPensara - The Trade District"
+zone = 1
+
+[node name="16 landBerca" parent="Nodes" index="16" instance=ExtResource("3_ped3e")]
+position = Vector2(791, 419)
+node_name = "landBerca"
+zone = 1
+
+[node name="17 landCrossroad" parent="Nodes" index="17" instance=ExtResource("3_ped3e")]
+position = Vector2(768, 456)
+node_name = "landCrossroad"
+zone = 1
+
+[node name="18 landPensara Forest--Forest-mark0" parent="Nodes" index="18" instance=ExtResource("3_ped3e")]
+position = Vector2(663, 640)
+kind = "labyrinth"
+node_name = "landPensara Forest--Forest-mark0"
+zone = 1
+
+[node name="19 landPensara Forest--Forest-mark1" parent="Nodes" index="19" instance=ExtResource("3_ped3e")]
+position = Vector2(670, 609)
+kind = "labyrinth"
+node_name = "landPensara Forest--Forest-mark1"
+zone = 1
+
+[node name="20 landFire Cavern--Hall of Fire-mark0" parent="Nodes" index="20" instance=ExtResource("3_ped3e")]
+position = Vector2(726, 598)
+kind = "labyrinth"
+node_name = "landFire Cavern--Hall of Fire-mark0"
+zone = 1
+
+[node name="21 landPensara Prison--Floor 1-mark0" parent="Nodes" index="21" instance=ExtResource("3_ped3e")]
+position = Vector2(678, 508)
+kind = "labyrinth"
+node_name = "landPensara Prison--Floor 1-mark0"
+zone = 1
+
+[node name="22 landBerca Desert--South West-mark0" parent="Nodes" index="22" instance=ExtResource("3_ped3e")]
+position = Vector2(699, 514)
+kind = "labyrinth"
+node_name = "landBerca Desert--South West-mark0"
+zone = 1
+
+[node name="23 landBerca Desert--North East-mark0" parent="Nodes" index="23" instance=ExtResource("3_ped3e")]
+position = Vector2(732, 520)
+kind = "labyrinth"
+node_name = "landBerca Desert--North East-mark0"
+zone = 1
+
+[node name="24 landTemple of Aegis--First Floor-mark0" parent="Nodes" index="24" instance=ExtResource("3_ped3e")]
+position = Vector2(863, 381)
+kind = "labyrinth"
+node_name = "landTemple of Aegis--First Floor-mark0"
+zone = 1
+
+[node name="25 landDorma\'s Forest--Forest of Hate-mark0" parent="Nodes" index="25" instance=ExtResource("3_ped3e")]
+position = Vector2(726, 664)
+kind = "labyrinth"
+node_name = "landDorma's Forest--Forest of Hate-mark0"
+zone = 1
+
+[node name="26 landDellna" parent="Nodes" index="26" instance=ExtResource("3_ped3e")]
+position = Vector2(481, 180)
+node_name = "landDellna"
+zone = 2
+
+[node name="27 landFrozen Forest--Forest Passage-mark0" parent="Nodes" index="27" instance=ExtResource("3_ped3e")]
+position = Vector2(574, 186)
+kind = "labyrinth"
+node_name = "landFrozen Forest--Forest Passage-mark0"
+zone = 2
+
+[node name="Player" parent="." index="3"]
+statuses = PackedInt32Array()

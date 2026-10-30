@@ -1,0 +1,12 @@
+# Phase 4.1 (world map coverage, dev only): East at night, which no data
+# reaches (only Forest Path's door names a land::continue:: place, on
+# West): --load="Slot 1" --start="land::continue::parasne". The legacy
+# night layer is res/Landscape/standardOvernight.png, which does not exist:
+# nothing is drawn over the map (an error is printed at load).
+wait 3500
+shot wen01_parasne
+pos parasne
+tap RIGHT
+wait 2500
+shot wen02_pensara_forest
+quit

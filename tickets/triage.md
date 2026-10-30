@@ -64,5 +64,16 @@ details; this list only maps the old IDs.
 | G1 | COTZ-045 Slot 2 and Slot 3 are an older save version | Low |
 | — | COTZ-046 Farmer House chimney smoke glows white (seen in COTZ-023) | Low |
 
+## Found in phase 4.1 (2026-10-29), not ticketed
+
+The world map and the airship (MODERNIZATION_PLAN.md 9.1); kept for parity.
+
+| ID | Quirk | Java too | Priority |
+|---|---|---|---|
+| W1 | SQUARE boards the airship on any world map node once the Database status `airship` is 1 or more, but nine nodes have no node on the airship maps (the seven crossroads, Fire Cavern--Inferno-mark2, Silent Ruin--The Great Ruins-mark0): `AirLandscape.init` gets no node, raises script errors and leaves the airship at (0, 0) without a current node | yes (NullPointerException) | Medium |
+| W2 | East and North at night would draw `res/Landscape/standardOvernight.png`, which does not exist (an error every frame, no night layer); no data reaches them at night (only Forest Path's door names a `land::continue::` place, on West) | yes | Low |
+| W3 | A closed road (`road<map>-<address>` 0) that the save lists as visited keeps its dots (`Landscape.init` shows the visited roads without the closed check); it is not walkable. No data closes a road the save visited | yes | Low |
+| W4 | `land2.map`'s Empyrian Temple node has no `land` prefix: landing there enters the labyrinth directly instead of a world map node (likely intended: the sky temple has no world map node) | yes | Low |
+
 Code-side findings (dead code, latent bugs) are in MODERNIZATION_PLAN.md,
 "Appendix: side findings".

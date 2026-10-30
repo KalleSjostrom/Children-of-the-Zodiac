@@ -7,7 +7,8 @@ steps A and B done** for all 80 floors (pilot 7.7, rollout 7.8, closing
 7.9); **the particles phases P and P2 done** (6.10, 6.12); **phase 3 steps
 A and B done** (pilot: the dialog family and the fade, 8.1; rollout: the
 other overlays of villages, labyrinths and cutscenes, 8.3; closing the
-phase, 8.4); phases 4–5 are proposals. The plan
+phase, 8.4); **phase 4.1 steps A and B done** (the world map and the
+airship, 9.1); the rest of phases 4–5 are proposals. The plan
 assumes the state described in `docs/HANDOFF.md` (all classes ported, main
 paths run). Conventions for new code: `docs/ARCHITECTURE.md`.
 
@@ -705,9 +706,9 @@ rollout, including doc comments):
 | `Village.drawBottom`, `drawTop` and the legacy branch of `draw` | 18 + 5 + 3 | `--legacy=villages`; `sortSprites` (15) and `drawOverlays` (15) stay (the scene path and the overlays use them) |
 | `VillageStoryTimeLine.draw`'s legacy branch | ~25 of 47 | `--legacy=villages`; `draw_scene`, `sortActors`, `drawTop` (overlays) stay |
 | `DoubleBackground`: `loadImages` (village tiles), `init`, `putextra` (dead while `USE_CUT`) | 24 + 19 + 2 | the scene path still builds a `DoubleBackground` per village (`load_into` → `loadImages`), for its scroll logic, particle system lists and top-layer list: it also loads the tile textures the scene does not draw (wasted texture memory until the scroll moves to the camera, step C) |
-| `DoubleBackground`: `doit`, `cutImage`, `cutImage2`, `generateNames`, `doTopLayer`, `drawBottom`, `drawBottomLayer`, `drawTop`, `drawSystem` | 29+14+40+14+19+5+22+42+4 | stay: the world map and the airship (`setLandscapeImages`, `drawBottom`, `drawTop(g, false, null)`) until phase 4.1 |
+| `DoubleBackground`: `doit`, `cutImage`, `cutImage2`, `generateNames`, `doTopLayer`, `drawBottom`, `drawBottomLayer`, `drawTop`, `drawSystem` | 29+14+40+14+19+5+22+42+4 | stay: the world map and the airship (`setLandscapeImages`, `drawBottom`, `drawTop(g, false, null)`) until phase 4.1. *After 4.1 (9.1):* the map scenes' path still builds a `DoubleBackground` per map (`setLandscapeImages` → `doit`, `cutImage` → `generateNames`, `doTopLayer`) for the state its twins read (the tiles' names, the top layer, `nightTop`); `drawBottom`, `drawBottomLayer`, `drawTop` and `drawSystem` are then only `--legacy=villages`, `--legacy=world_map` and `--legacy=airship`; `cutImage2` stays (three villages' one-image backgrounds, scene path) |
 | `DoubleBackground.overlapped_pieces` | 33 | stays while `PartyMember.getMemberPos` is updated there (a state change of the legacy `drawTop`) and for `--legacy=village_top_layer` |
-| Sprite draws: `Villager.draw` 10, `PartyMember.draw` 6, `AnimatedObjects.draw` 6, `DefaultSprite.draw` 6, `Actor.draw` 5, `bodies.system.ParticleSystem.draw`/`drawIt` 31, `BodySystem.draw` 5, `Body.draw` 8 | 77 | `--legacy=villages` only; `Sprite.draw`/`drawSprite`/`drawAtPosition` stay (the world map's `LandPlayer`); the `place_*` twins stay (the scene path) |
+| Sprite draws: `Villager.draw` 10, `PartyMember.draw` 6, `AnimatedObjects.draw` 6, `DefaultSprite.draw` 6, `Actor.draw` 5, `bodies.system.ParticleSystem.draw`/`drawIt` 31, `BodySystem.draw` 5, `Body.draw` 8 | 77 | `--legacy=villages` only; `Sprite.draw`/`drawSprite`/`drawAtPosition` stay (the world map's `LandPlayer`; *after 4.1, 9.1:* only its `--legacy=world_map` and `--legacy=airship` drawing); the `place_*` twins stay (the scene path; `LandPlayer.place_view` uses `place_sprite`) |
 | `--legacy=villages` and `--legacy=village_top_layer` (`Main.is_legacy` calls in `VillageLoader`, `Village.scene_top`) and the parity cases' legacy runs | ~10 | `Main.is_legacy` stays for later phases |
 | `tools/import/verify_villages.gd` | 242 | needs `VillageLoaderMapLoader` and the `.vil` files |
 | the 89 `.vil` files (decision 5) | 6,865 (132 KB) | the converter (`vil_to_scene.gd`, 911 lines), the data check, `--legacy=villages` |
@@ -2161,7 +2162,8 @@ the stores (`drawString` 27, `drawStringSetSize` 2, `calcAlignRight`,
 `startText` 5, `drawMultiCenteredText` 3, `setTextColor` 2), the equipment
 pages (`drawStringRightAligned` 4, `setTextColor` 5), the menu's map page
 (`LabyrinthMap`: `drawSingleCenteredText` 4, `setTextColor` 3), the world map
-(`drawSingleCenteredText` 2), the title (`drawWithShadow`); `MenuNode` (every
+(`drawSingleCenteredText` 2; since 4.1 only its `--legacy` drawing, the name
+plate's twin calls `startText`/`finishText`), the title (`drawWithShadow`); `MenuNode` (every
 menu: `drawString`), the Church's `HelpText` (`Row`). With the legacy paths
 gone, villages, labyrinths and cutscenes call none of it (the twins read the
 text state: `startText`, `finishText`, `setFontSize`, `setTextColor`,
@@ -2206,7 +2208,163 @@ most entangled.
 * Keep the 7-points-per-segment walking (`Road.gd:61-86`) and the
   visited/closed state from `Visited`/`Database`.
 * The airship (`AirShip.gd`: velocity per update, wraps at the screen
-  edges) needs the time-base decision.
+  edges) needs the time-base decision. *Found in 4.1:* only for step C;
+  views that mirror its position (step B) do not.
+
+**Results (phase 4.1, `docs/phase4_1_prompt.md`; conventions in
+docs/ARCHITECTURE.md section 13).** Steps A and B for the world map (West,
+East, North) and the airship (land1, land2); the legacy objects keep the
+state, the input and the timing.
+
+* **Baseline** (on 8e1bc65c): `tools/check.sh` 0 failed; goldens of the 382
+  cases and `bridge_test` (`g41base`, 7,225 shots, 2,091 error lines),
+  identical to `r3gold1` shot for shot and log for log.
+* **Facts** (deliverable 1), where they add to or differ from the prompt
+  and this section:
+  * Draw order (`Landscape.draw`, `AirLandscape.draw`) as listed, but the
+    name plate's image (`Pieces/1.png`) is drawn every frame, also while
+    walking, on a crossroad and on the airship away from a node; only the
+    name depends on them. Where the order shows: the top layer over the
+    player (West's `top/0.png` over Kin at Alares and Pass to Zazo,
+    `top/1.png` at Forest of Reil--Deep Forest-mark0; East's `top/0.png` at
+    Dorma's Forest) and over the dots and markers under it (roads 2 and 3
+    and the Forest of Reil's marker on West); the player over its node's
+    marker; the night layer over the whole map, top layer included, under
+    the name plate; the plate over the airship near the top edge (the
+    airship's y < 155 within x 361–662); the dialog over the plate; the fade
+    over everything. No two roads have overlapping dots (checked on all
+    three maps), so the order of `visitedRoads` (insertion order in the
+    port, `HashMap` order in the Java) never shows.
+  * State changes: `setColor(1)`, `setFontSize(30)`, every `drawImage`'s
+    bind, `drawTop`'s `setAlphaFunc(0)` in every frame (the next frame and
+    the next mode inherit it; the first frame after another mode keeps that
+    mode's blending and alpha test), the name's `startText(1, 0)` and
+    `finishText` (text colour black, alpha 1, the current colour back to
+    white), `checkMenu`'s thumbnail (the frame before, with the scene).
+  * Night: only `land::continue::forest_of_reil--deep_forest-mark0`
+    (Forest Path's door 10) makes a world map night: West. Nothing reaches
+    East or North at night; started there (`--start=land::continue::
+    parasne`, dev) they draw no night layer and print an error every frame
+    (`standardOvernight.png` does not exist). No landscape has a night
+    background: night is the overlay only.
+  * Data: the parser's `road<address>` statuses are never written (every
+    road starts open); `road<map>-<address>` come from story triggers
+    (`load trigger="road0-8"`), doors (`Door`, `IfDoor`) and saves: "Start"
+    closes 13 roads, "Slot 1" none (its `road0-17 0` names a road that is
+    commented out of `world0.map`). A closed road that the save lists as
+    visited keeps its dots (`Landscape.init` adds `Visited`'s roads without
+    the closed check; the Java too) and is not walked. A visited road
+    visits both its nodes, so markers show for nodes the save's
+    `visitedNodes` does not list ("Slot 1" lists 4 of West's 20, all 20
+    show). East's road 12 joins two nodes no other road reaches
+    (Fire Cavern--Inferno-mark2, Silent Ruin--The Great Ruins-mark0),
+    reached only by leaving those labyrinths. The index: 37 names, none on
+    two maps.
+  * Airship: `land1.map` 28 nodes (zones west 14, east 12, north 2),
+    `land2.map` 29 (Empyrian Temple--Hall of Wind, without the `land`
+    prefix: landing there enters the labyrinth, not a world map node).
+    "Slot 1" has the status `airship` 1, "Start" 0; nothing in the cases
+    reaches 2 (`--status=airship:2`). The wrap: past the left or top edge the
+    airship jumps to x 1079 or y 823; on the right it is out of sight until
+    x 1042, at the bottom it shows at once (drawn at y − 50, 55 high); past
+    the right edge it is out of sight from x 1042 until it wraps to x 0;
+    past the bottom only from y 818 to 823. No crossroad nodes on the
+    airship maps. SQUARE on a world map node that the airship map lacks (the
+    seven crossroads, Inferno mark2, Silent Ruin) raises script errors and
+    leaves the airship at (0, 0) (the Java: a NullPointerException;
+    `tickets/triage.md` W1). Airship1..16 needed no SpriteFrames (the view
+    adds the images it is shown).
+  * The bridge as the prompt says; the airship's reference cycle kept every
+    airship mode alive (fixed, below).
+* **Coverage:** the probe over every case showed the world map in 36 shots
+  of 12 cases (West and East by day, all of West visited but in two story
+  exits), the airship in none (drawn only in `story_crystal_of_levitation`,
+  between shots), no night, no North, no closed road but two hidden ones.
+  Ten new cases (67 shots): `world_west`, `world_east`, `world_north` (each
+  road direction, the plate on villages and labyrinths, none on crossroads
+  or while walking, the player under the top layer), `world_first_visit`
+  ("Start": nodes and roads appearing, Start's closed road0-3 not drawn and
+  not walked), `world_closed_visited` (`--status=road0-5:0`: dots kept, not
+  walked), `world_night`, `world_east_night` (dev only), `airship_land1`
+  (each direction, every edge's wrap, the plate over a node, under the
+  plate), `airship_land1_menu` (the menu's thumbnail, the map page,
+  landing with its fade), `airship_land2`. AutoPlay's `pos` prints the
+  world map's and the airship's position (no existing case printed `pos`
+  there). Goldens: `g41gold` (all 392 cases and `bridge_test`, 7,292
+  shots; its old cases identical to `g41base`), `g41gold2` (the new cases
+  again: identical).
+* **Built** (ARCHITECTURE section 13): `scenes/world_map/` (the template,
+  `WorldMapRoad` (Path2D), `WorldMapNode`, `AirshipNode` (Marker2D), five
+  map scenes, five stitched backgrounds), `resources/world_map/place_index.tres`,
+  `scenes/ui/NamePlate`, the converter `tools/import/world_to_scene.gd`
+  (the village converter's stitching moved to `tools/import/tile_art.gd`
+  and shared: the village converter writes the same files as before), the
+  data check `tools/import/verify_world_map.gd`, the flags
+  `--legacy=world_map` and `--legacy=airship`; `--bridge-test` implies
+  `--legacy=world_map`. Port fix: `AirLandscapeLoader` kept its map loader,
+  which refers back to it (Java's inner class), and the cycle kept every
+  airship mode alive; now each map scene logs `WorldMapScene: freed` with
+  its mode.
+* **Data check:** `verify_world_map.gd` with "Slot 1" and "Start": 196
+  builds (the index; each world map from each of its nodes by day and from
+  its first at night; each airship map from each node), all pass; a road
+  point moved by 1 px fails with the field path.
+* **Parity** (tolerance 0): golden vs. after step A, all cases: 7,292 of
+  7,292 shots, all 393 logs and every case's error lines identical; legacy
+  (`--legacy=world_map,airship`) vs. scene on the 21 cases that show the
+  world map or the airship: 301 of 301 shots, logs identical (without
+  `world=`); golden vs. after step B, all cases: 7,292 of 7,292, logs
+  identical with `--ignore-world` (those 21 cases log `world=<map>`), the
+  same error lines; golden vs. the legacy run: 301 of 301. The bridge test
+  passes ("BridgeTest: freed"). West went first (its cases identical before
+  the others ran); no difference had to be explained.
+* **Frame rate** (normal runs: no `--seed`, windowed, one at a time, the
+  shipped saves; AutoPlay's `fps=` every 0.5 s, the first second dropped;
+  legacy → scene, median and range):
+
+  | Where | Capped | Uncapped |
+  |---|---|---|
+  | West, walking Home of Celis to Main Cross and back | 60 (58–60) → 60 | 424 (390–432) → 1,926 (1,879–1,943) |
+  | The airship on land1, flying in each direction | 60 → 60 | 1,713 (1,568–1,741) → 2,280 (2,257–2,295) |
+
+  The legacy world map drew ~120 road dots and 20 markers as quads every
+  frame; the nodes keep them.
+* **Still legacy:** the state, the input and the timing (step C: walking
+  along a `Path2D`, the airship as per-second rates, decision 6); the menu
+  and its map page (4.2); `DoubleBackground` is still built per map for the
+  state the twins read (the tiles' names, the top layer, `nightTop`) and
+  loads the tile textures the scene does not draw.
+* **Found on the way:** running extra windowed games beside an 8-job
+  recording exhausted the 16 GB of memory: one run crashed in AutoPlay's
+  `get_image`, three failed to decode floor textures (re-recorded:
+  identical; risks, 12). The village converter does not reproduce three
+  scenes the editor saved in 4b74ade3 (`Dellna - 1`, `Dellna - 2`, `Zazo at
+  Night - 0`: `vil_to_scene.sh --all` rewrites them; kept as committed).
+  The debug console's `roads` reads the road addresses from the scenes now
+  (the `.map` text with `--legacy=world_map`).
+
+**Closing phase 4.1 (prepared, not done).** Removing the legacy world map and
+airship paths deletes or changes (line counts with doc comments):
+
+| Part | Lines | Still used by |
+|---|---|---|
+| `LandscapeLoader.LandscapeLoaderMapLoader` (inner class) | 47 | `--legacy=world_map`; `verify_world_map.gd` (its legacy builds) |
+| `LandscapeLoader.PlaceMapLoader` | 28 | `--legacy=world_map` (`createMap`); `verify_world_map.gd` |
+| `AirLandscapeLoader.AirLandscapeLoaderMapLoader` | 34 | `--legacy=airship`; `verify_world_map.gd` |
+| `init`'s parse branches, `world_scene_for`'s and `airship_scene_for`'s flag checks, `place_index`'s | ~15 | — (a map without a scene would have nothing to load) |
+| `Landscape.draw`'s legacy branch | 14 | `--legacy=world_map`, `--bridge-test` |
+| `AirLandscape.draw`'s legacy branch | 7 | `--legacy=airship` |
+| `Road.drawRoad` 4, `MoveDot.draw` 2, `LandscapeNode.draw` 3, `LandPlayer.draw` 7 | 16 | the legacy branches only; `MoveDot` (its image) and `LandscapeNode.im` stay while the twins bind the images (`skip_image`); `Sprite.draw`, `drawSprite`, `drawAtPosition` stay for `--legacy=villages` (6.9) |
+| The flags (`Main.is_legacy`: `world_map` 3, `airship` 1, `--bridge-test`'s implication 2) and the cases' legacy runs | ~6 | `Main.is_legacy` stays for later phases |
+| The five `.map` files (decision 5) | 488 (11.9 KB) | the converter (`world_to_scene.gd`, 380 lines), `verify_world_map.gd` (291), the legacy paths, the console's `roads` with `--legacy=world_map` |
+| `DoubleBackground`'s landscape path: `setLandscapeImages` 8 (+ `doit` 29, `cutImage` 14, `generateNames` 14, `doTopLayer` 19, shared with villages) | 8 | the scene path builds a `DoubleBackground` per map for the state the twins read (the tiles for their binds, the top layer, `nightTop`); stays until the twins read the scene or step C. `drawBottom` 5, `drawBottomLayer` 22, `drawTop` 42, `drawSystem` 4: then only `--legacy=villages` (6.9) |
+
+What keeps the phase from closing: decision 5 (the `.map` files); the
+bridge test, which needs a legacy world map under its scene (moving it to a
+mode of its own, or BridgeTest inside the map's scene, is a choice); the
+twins' binds and the `DoubleBackground` state, which matter while legacy 2D
+follows the map in the frame (the name plate's twin binds last, so only the
+GL state the plate leaves is observable); step C for walking and flying.
 
 ### 9.2 Title, game over, mini-games, stores, menu
 
@@ -2404,6 +2562,21 @@ When no mode draws through `g` any more:
   its size from its position; text drawn outside that rect (a
   `BaselineLabel` at a baseline off the screen) vanished: check new nodes at
   the screen's edges.
+* **Memory during recordings** (phase 4.1). An 8-job recording leaves
+  about 3 GB of the 16 GB free; four more windowed runs beside it made
+  runs fail at random (a crash in AutoPlay's `get_image`, WebP textures
+  that did not decode, both with identical shots once re-recorded). Run
+  nothing windowed beside a recording, and check the error lines of every
+  log, not only the shots.
+* **Generated scenes edited by hand** (phase 4.1). The editor saved three
+  village scenes in 4b74ade3; the converter no longer reproduces them and
+  `vil_to_scene.sh --all` overwrites them. Re-convert one place at a time
+  and keep hand edits out of generated scenes (or in the data they come
+  from).
+* **Curves that only look like paths** (phase 4.1). A road's `Path2D` curve
+  is the road's data: editing it in the editor changes where the player
+  walks (`Road.addCoordinates` builds the line from its points), but
+  nothing moves along the curve, and bezier handles are ignored until step C.
 * **Text at other window sizes** (phase 3). Godot rasterizes a Control's
   text at the window's scale; the legacy text is rasterized at 1024 x 768
   and scaled. `BaselineLabel` keeps the legacy look (`oversampling` 1);
@@ -2415,7 +2588,9 @@ When no mode draws through `g` any more:
    today's file choice) vs. one scene per place with per-node status filters
    (fewer files, harder to see a single variant). *Decided (phase 1
    rollout):* one inherited scene per `.vil` variant on a shared base
-   scene, as in the pilot.
+   scene, as in the pilot. *Not applied to the world map (4.1):* one scene
+   per `.map` file; its night is a layer shown when the map loads at night
+   (9.1).
 2. **Dungeon lighting:** exact fixed-function look (shader) vs. Godot lights
    (more modern, slightly different). *Applied for the pilot (phase 2):*
    the exact look: GLBackend's spatial shader as a ShaderMaterial with the
@@ -2460,6 +2635,9 @@ When no mode draws through `g` any more:
    at 60 steps a second as per-second rates, every frame the legacy system
    is updated in; the card and enemy effects at 30 steps a second, every
    frame, for the game time their packet runs; the waits within about 0.1 s.
+   *Not needed for 4.1 (9.1):* the world map's walk and the airship's flight
+   stay legacy (per `J.currentTimeMillis()` step and per update); their
+   views mirror the positions.
 7. **Village top layer** (from the pilot, 6.7): *decided (phase 1
    rollout):* roofs and treetops are always drawn (6.1, the pilot's
    default). The legacy rule draws a piece only where a sprite overlaps it,
@@ -2486,7 +2664,7 @@ Sizes are relative: S ≈ a focused session, XL ≈ many sessions.
 | P | Village and cutscene particles on the GPU (6.4; `docs/particles_prompt.md`). *Done (6.10).* | M | 1; decision 6 (decided for particles) | Dellna's snow back on; Home of the Gods and Dellna at 60 FPS |
 | P2 | Dungeon weather, save points and the card and enemy effects that are particles, on the GPU (6.11). *Done (6.12).* | M | 2, P | rainy and snowy floors at 60 FPS; battles without the effects' stalls (Wind 3 at 7 FPS, the Flame's 10 s) |
 | 3 | Theme, Dialog, signs, emotions, fades, HUD. *Done through step B: the pilot (8.1: the Theme, the dialog family, the fade) and the rollout (8.3: emotions, mission display, pause overlays, cutscene images and texts, tutorials; the minimap stays the 3D bridge's); closing prepared (8.4).* | M | 1 (or 2) | most of the remaining `draw(g)` |
-| 4.1 | World map + airship | M | 1 (converter), 3 | — |
+| 4.1 | World map + airship. *Done through step B (9.1): the scenes, the name plate, legacy vs. scene identical; closing prepared.* | M | 1 (converter), 3 | — |
 | 4.2 | Title, game over, mini-games, stores, menu | L | 3 | — |
 | 4.3 | Input, audio, saves, `Game` autoload | M | any time after 0; the autoload is best after 4.2 | 5 |
 | 4.4 | Battle, cards, effects | XL | 2, 3 | 5 |

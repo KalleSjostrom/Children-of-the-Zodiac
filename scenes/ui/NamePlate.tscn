@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/NamePlate.gd" id="1_plate"]
+[ext_resource type="Script" uid="uid://sko2muwq7vf3" path="res://scenes/ui/BaselineLabel.gd" id="2_label"]
+[ext_resource type="Theme" path="res://resources/theme/game_theme.tres" id="3_theme"]
+
+[node name="NamePlate" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1024.0
+offset_bottom = 768.0
+mouse_filter = 2
+theme = ExtResource("3_theme")
+script = ExtResource("1_plate")
+
+[node name="Plate" type="Panel" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 379.0
+offset_top = 10.0
+offset_right = 644.0
+offset_bottom = 105.0
+mouse_filter = 2
+theme_type_variation = &"NamePlate"
+
+[node name="Name" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 512.0
+offset_top = 60.0
+offset_right = 512.0
+offset_bottom = 60.0
+mouse_filter = 2
+theme_type_variation = &"NamePlateName"
+script = ExtResource("2_label")
+text = "Alares"
+alignment = 1

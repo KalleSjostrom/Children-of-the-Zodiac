@@ -1,0 +1,47 @@
+# Phase 4.1 (airship coverage): from the airship on land1.map
+# (--load="Slot 1" --start=landAlares, SQUARE boards it): the menu
+# (TRIANGLE, the airship's thumbnail), the map page (SQUARE, COTZ-012), then
+# landing at Alares with CROSS: the fade to black and the world map at
+# Alares.
+wait 3500
+tap SQUARE
+mark
+wait 200
+loopuntil mode=landscape.airship 15000
+wait 2500
+shot am01_alares
+tap TRIANGLE
+wait 2500
+shot am02_menu
+log menu
+mark
+tap CIRCLE
+wait 900
+loopuntil mode=landscape.airship 15000
+wait 1500
+shot am03_back
+tap SQUARE
+wait 2500
+shot am04_map_page
+log map_page
+mark
+tap CIRCLE
+wait 900
+loopuntil mode=landscape.airship 15000
+wait 1500
+shot am05_back_again
+tap CROSS
+wait 200
+shot am06_landing
+wait 300
+shot am07_landing_later
+mark
+wait 200
+loopuntil mode=landscape.Landscape 15000
+log landed
+wait 300
+shot am08_world_map_fade_in
+wait 2500
+shot am09_world_map
+pos world_map
+quit

@@ -1,0 +1,23 @@
+# Phase 4.1 (airship coverage): the airship on land2.map (--load="Slot 1"
+# --start=landAlares --status=airship:2): World2's background, and the
+# name plate over Empyrian Temple, the one node without the "land" prefix.
+wait 3500
+tap SQUARE
+mark
+wait 200
+loopuntil mode=landscape.airship 15000
+wait 2500
+shot a201_alares
+pos alares
+press RIGHT
+wait 1100
+release RIGHT
+wait 1000
+pos after_right
+press UP
+wait 1100
+release UP
+wait 1000
+shot a202_empyrian_temple
+pos empyrian_temple
+quit

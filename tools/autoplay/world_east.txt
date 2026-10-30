@@ -1,0 +1,39 @@
+# Phase 4.1 (world map coverage): East by day (--load="Slot 1"
+# --start=landParasne), walking a road in each direction: Parasne,
+# Pensara Forest, Dorma's Forest under the top layer (top/0.png), the
+# Trade District ("Pensara " with its trailing space on the plate) and
+# Crossroad (a village named Crossroad: its name shows).
+wait 3500
+shot we01_parasne
+pos parasne
+tap RIGHT
+wait 2500
+shot we02_pensara_forest
+pos pensara_forest
+tap RIGHT
+wait 500
+shot we03_walking_right
+wait 3000
+shot we04_dormas_forest
+pos dormas_forest
+tap LEFT
+wait 3500
+pos back_pensara_forest
+tap UP
+wait 3500
+shot we05_pensara_forest_mark1
+pos mark1
+tap UP
+wait 3500
+shot we06_trade_district
+pos trade_district
+tap RIGHT
+wait 4500
+shot we07_crossroad
+pos crossroad
+tap DOWN
+wait 600
+shot we08_walking_down
+wait 4000
+pos back_trade_district
+quit

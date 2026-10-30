@@ -555,3 +555,26 @@ tutorial_store              tutorial_store     --load="Slot 1" --start=Alares
 tutorial_menu               tutorial_menu      --load="Slot 1" --start=Alares
 story_ending_part2          story_tour         --load="Slot 1" --start="Ending - Part 2.1"
 image_fade_menthu1          image_fade         --load="Start Menthu1" --start="Ice Cavern--Throne Room-mark0"
+# Phase 4.1 (the world map and the airship): what the cases above do not show
+# (deliverable 1 of docs/phase4_1_prompt.md, plan 9.1). Each world map by
+# day, walking a road in each direction: the name plate on villages and
+# labyrinths, none on a crossroad or while walking, the player under the top
+# layer; North only through these. Nodes and roads reached for the first time
+# and a closed road (the "Start" save's statuses close road0-3: not drawn, not
+# walked); a closed road that the save visited (its dots stay, it is not
+# walked). The night West map (the Forest Path door's land::continue:: place,
+# the only data that makes a world map night); East at night, which no data
+# reaches (dev only: its night layer, standardOvernight.png, does not exist).
+# The airship on land1 (flying in each direction, the wrap at every edge, the
+# name plate over a node, under the name plate; the menu, the map page,
+# landing) and on land2 (--status=airship:2).
+world_west                  world_west           --load="Slot 1" --start=landHome_of_Celis
+world_east                  world_east           --load="Slot 1" --start=landParasne
+world_north                 world_north          --load="Slot 1" --start=landDellna
+world_first_visit           world_first_visit    --load=Start --start=landHome_of_Celis
+world_closed_visited        world_closed_visited --load="Slot 1" --start=landAlares --status=road0-5:0
+world_night                 world_night          --load="Slot 1" --start="land::continue::forest_of_reil--deep_forest-mark0"
+world_east_night            world_east_night     --load="Slot 1" --start="land::continue::parasne"
+airship_land1               airship_land1        --load="Slot 1" --start=landAlares
+airship_land1_menu          airship_land1_menu   --load="Slot 1" --start=landAlares
+airship_land2               airship_land2        --load="Slot 1" --start=landAlares --status=airship:2

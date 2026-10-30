@@ -45,12 +45,12 @@ extends SceneTree
 ## (random in Godot 4.7) are left out, so that converting twice writes the
 ## same files. tools/import/verify_villages.gd checks the result.
 
+const TileArt := preload("res://tools/import/tile_art.gd")
 const TEMPLATE := "res://scenes/villages/VillageScene.tscn"
 const SCENE_DIR := "res://scenes/villages"
 const FRAMES_DIR := "res://resources/sprite_frames"
 const VIL_DIR := "maps/Village/"
 const IMAGES := "res/Village/"
-const TILE := 256
 ## Legacy Sprite frame time (ms) of villagers and animated objects.
 const FRAME_MS := 150.0
 const DIRECTION_ANIMS: Array[StringName] = [&"up", &"right", &"down", &"left"]
@@ -424,21 +424,7 @@ func _resolve_art(v: Dictionary) -> void:
 
 ## DoubleBackground.doTopLayer: [position, image] per top.info line, in order.
 func _top_layer(folder: String) -> Array:
-	var out: Array = []
-	var path := IMAGES + folder + "/top/top.info"
-	if not GameResourceLoader.fileExists(path):
-		return out
-	for line in GameResourceLoader.readText(path).replace("\r", "").split("\n"):
-		if line == "":
-			continue
-		var args: Array = J.split(line, ":")
-		var n: String = args[0]
-		var p := Vector2i(J.parseInt(args[1]), J.parseInt(args[2]))
-		if n.begins_with("i"):
-			out.append([p, IMAGES + "/top/" + n.replace("i/", "")])
-		else:
-			out.append([p, IMAGES + folder + "/top/" + n])
-	return out
+	return TileArt.top_layer(IMAGES, folder)
 
 
 func _write_art(v: Dictionary) -> void:
@@ -463,52 +449,10 @@ func _background_path(v: Dictionary) -> String:
 	return SCENE_DIR + "/" + place + "/" + v["background_png"]
 
 
-## Stitches the tiles DoubleBackground.generateNames draws (x<i>y<j> for
-## i < ceil(actual width / 256), j < ceil(actual height / 256)) into one
-## image, pixel for pixel as imported.
+## Stitches the tiles DoubleBackground.generateNames draws into one image
+## (TileArt.stitch).
 func _stitch(v: Dictionary) -> void:
-	var path := _background_path(v)
-	var columns := ceili(v["actual_size"].x / float(TILE))
-	var rows := ceili(v["actual_size"].y / float(TILE))
-	var images := {}
-	var image_size := Vector2i.ZERO
-	var format := -1
-	for i in columns:
-		for j in rows:
-			var tile := GameResourceLoader.resolve("%s/x%dy%d%s" % [v["tiles"], i, j, v["tile_ext"]])
-			if tile == "":
-				print("  %s: tile x%dy%d missing" % [v["file"], i, j])
-				continue
-			var img := (load(tile) as Texture2D).get_image()
-			if img.is_compressed():
-				img.decompress()
-			if format == -1:
-				format = img.get_format()
-			images[Vector2i(i, j)] = img
-			image_size = image_size.max(Vector2i(i, j) * TILE + img.get_size())
-	if images.is_empty():
-		return
-	var out := Image.create_empty(image_size.x, image_size.y, false, format)
-	for k: Vector2i in images:
-		var img: Image = images[k]
-		if img.get_format() != format:
-			img.convert(format)
-		out.blit_rect(img, Rect2i(Vector2i.ZERO, img.get_size()), k * TILE)
-	DirAccess.make_dir_recursive_absolute(path.get_base_dir())
-	out.save_png(path)
-	# Same import as the tiles: lossless, no mipmaps; the alpha border was
-	# already fixed when the tiles were imported. An .import file that already
-	# has these settings is kept, with its uid.
-	var params: Array[String] = ["compress/mode=0", "compress/high_quality=false",
-		"mipmaps/generate=false", "mipmaps/limit=-1", "process/fix_alpha_border=false",
-		"process/premult_alpha=false", "process/size_limit=0", "detect_3d/compress_to=0"]
-	var current := FileAccess.get_file_as_string(path + ".import")
-	if params.all(func(line: String) -> bool: return current.contains(line + "\n")):
-		return
-	var f := FileAccess.open(path + ".import", FileAccess.WRITE)
-	f.store_string("[remap]\n\nimporter=\"texture\"\ntype=\"CompressedTexture2D\"\n\n[params]\n\n"
-		+ "\n".join(params) + "\n")
-	f.close()
+	TileArt.stitch(v["tiles"], v["tile_ext"], v["actual_size"], _background_path(v), v["file"])
 
 
 ## The image sets of a villager's .char file ("image <name> [count [h w]]"

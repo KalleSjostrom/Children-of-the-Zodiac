@@ -101,19 +101,43 @@ func crossPressed():
 		exit(mode)
 
 
+## The scene of the airship (docs/ARCHITECTURE.md section 13): the map's
+## scene the loader built it from (WorldMapScene, scene_root), or none with
+## --legacy=airship (drawn by legacy code).
+func create_scene() -> Node:
+	return scene_root
+
+
+## The drawing method of the airship. A map scene draws the map, the
+## airship and the name plate (Landscape.scene_bottom, scene_player,
+## scene_top and show_name_plate: the drawing's state changes, each part in
+## the legacy GL state).
 func draw(g, alpha = null):
 	g.setColor(1)
 	g.setFontSize(30)
-	background.drawBottom(g)
-	airShip.draw(g)
-	background.drawTop(g, false, null)
-	g.drawCenteredImage(nameBackGround, 10)
-	if currentNode != null:
-		var name: String = currentPlace
-		if name.contains("-"):
-			name = J.split(name, "-")[0]
-		if name.begins_with("land"):
-			name = name.replace("land", "")
-		g.drawSingleCenteredText(name, 60, 1, 0)
+	if scene_root is WorldMapScene:
+		Landscape.scene_bottom(g, scene_root, background)
+		Landscape.scene_player(g, scene_root, airShip)
+		Landscape.scene_top(g, scene_root, background)
+		Landscape.show_name_plate(g, nameBackGround, plateName() if currentNode != null else "",
+				currentNode != null)
+	else:
+		background.drawBottom(g)
+		airShip.draw(g)
+		background.drawTop(g, false, null)
+		g.drawCenteredImage(nameBackGround, 10)
+		if currentNode != null:
+			g.drawSingleCenteredText(plateName(), 60, 1, 0)
 	super.checkMenu()
 	super.draw(g)
+
+
+## The name the plate shows for the current place: up to its first "-",
+## without "land".
+func plateName() -> String:
+	var name: String = currentPlace
+	if name.contains("-"):
+		name = J.split(name, "-")[0]
+	if name.begins_with("land"):
+		name = name.replace("land", "")
+	return name

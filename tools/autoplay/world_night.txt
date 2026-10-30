@@ -1,0 +1,26 @@
+# Phase 4.1 (world map coverage): West at night: the Forest Path door's
+# land::continue:: place (--load="Slot 1"
+# --start="land::continue::forest_of_reil--deep_forest-mark0"), the only
+# data that makes a world map night (Landscape.isNight: the music is not
+# "normal"). The night layer over the roads, nodes, player and top layer,
+# under the name plate.
+wait 3500
+shot wnt01_forest_of_reil
+pos forest_of_reil
+tap RIGHT
+wait 800
+shot wnt02_walking
+wait 2700
+shot wnt03_mark1
+pos mark1
+tap RIGHT
+wait 3500
+pos main_cross
+tap UP
+wait 4000
+shot wnt04_pass_to_zazo
+pos pass_to_zazo
+tap TRIANGLE
+wait 2500
+shot wnt05_menu
+quit

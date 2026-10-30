@@ -1,0 +1,31 @@
+# Phase 4.1 (world map coverage): West with the "Start" save (--load=Start
+# --start=landHome_of_Celis): nothing visited yet. At the start the node, its
+# road and the road's other end (Celis Cross) show; reaching Celis Cross for
+# the first time shows its other road and the Forest of Reil's marker.
+# Start's own statuses close road0-3 (Forest of Reil mark0 to mark1): a
+# closed road is not drawn and not walked (RIGHT does nothing).
+wait 3500
+shot wf01_home_of_celis
+pos home_of_celis
+tap RIGHT
+wait 500
+shot wf02_walking
+wait 1500
+shot wf03_celis_cross_first_time
+pos celis_cross
+tap RIGHT
+wait 2500
+shot wf04_forest_of_reil
+pos forest_of_reil
+tap RIGHT
+wait 1500
+shot wf05_closed_road_right
+pos still_forest_of_reil
+tap UP
+wait 1000
+pos no_road_up
+tap LEFT
+wait 2500
+shot wf06_back_celis_cross
+pos back_celis_cross
+quit

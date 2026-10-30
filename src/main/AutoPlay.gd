@@ -17,7 +17,10 @@ extends RefCounted
 ##                        labyrinth "pos <text> node=<address> dir=<d>
 ##                        cam=<x>,<z> angle=<a>" (the node, the facing 0-3 and
 ##                        the camera's location and angle in dungeon units and
-##                        degrees); "pos <text> -" elsewhere
+##                        degrees); on the world map "pos <text> node=<name>
+##                        x=<x> y=<y> dir=<d> road=<address|->", on the airship
+##                        "pos <text> x=<x> y=<y> dir=<d> v=<velocity>
+##                        node=<name|->" (screen pixels); "pos <text> -" elsewhere
 ##   mark                 remember this line as the start of a loop (marks nest)
 ##   loopuntil <text> <ms> jump back to the last mark unless the state string
 ##                        ("mode=... sub=... place=...") contains <text>, or
@@ -283,12 +286,14 @@ func _state() -> String:
 
 
 ## "x=<x> y=<y> dir=<d> back=<x>,<y>" of the village player (also during a
-## village story), the labyrinth position (_labyrinth_pos), "-" elsewhere.
-## Village positions are Values [y, x] arrays.
+## village story), the labyrinth position (_labyrinth_pos), the world map's
+## or the airship's (_world_map_pos), "-" elsewhere. Village positions are
+## Values [y, x] arrays.
 func _player_pos() -> String:
 	var village = _village()
 	if village == null:
-		return _labyrinth_pos()
+		var world := _world_map_pos()
+		return world if world != "-" else _labyrinth_pos()
 	var p: Array = village.player.getPos()
 	var b: Array = village.background.getPos()
 	return "x=%.1f y=%.1f dir=%d back=%d,%d" % [p[Values.X], p[Values.Y],
@@ -309,6 +314,28 @@ func _labyrinth_pos() -> String:
 	var cam = lab.player.camera
 	return "node=%d dir=%d cam=%.3f,%.3f angle=%.2f" % [lab.currentNode.getAddress(),
 		lab.dir, cam.location[LabyrinthPosition.X], cam.location[LabyrinthPosition.Z], cam.angle]
+
+
+## On the world map "node=<current node> x=<x> y=<y> dir=<the last walked
+## direction> road=<address walked, or ->"; on the airship "x=<x> y=<y> dir=<d> v=<velocity>
+## node=<the node in range, or ->" (screen pixels; the facing 0-3); "-"
+## elsewhere.
+func _world_map_pos() -> String:
+	var o := Organizer.getOrganizer()
+	if o == null or o.currentGameMode == null or o.currentGameMode.isLoading():
+		return "-"
+	var gm = o.currentGameMode
+	if gm is Landscape and gm.player != null and gm.currentNode != null:
+		var p: Array = gm.player.getPos()
+		return "node=%s x=%.1f y=%.1f dir=%d road=%s" % [str(gm.currentNode.getName()).replace(" ", "_"),
+			p[Values.X], p[Values.Y], gm.playerAngle,
+			str(gm.currentRoad.getAddress()) if gm.currentRoad != null else "-"]
+	if gm is AirLandscape and gm.airShip != null:
+		var p: Array = gm.airShip.getPos()
+		return "x=%.1f y=%.1f dir=%d v=%.2f node=%s" % [p[Values.X], p[Values.Y],
+			gm.airShip.getDirection(), gm.airShip.velocity,
+			str(gm.currentNode.getName()).replace(" ", "_") if gm.currentNode != null else "-"]
+	return "-"
 
 
 func after_draw(node: Node) -> void:

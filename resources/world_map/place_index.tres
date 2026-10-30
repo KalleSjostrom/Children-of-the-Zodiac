@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="WorldMapIndex" format=3]
+
+[ext_resource type="Script" path="res://scenes/world_map/WorldMapIndex.gd" id="1_kl8sr"]
+
+[resource]
+script = ExtResource("1_kl8sr")
+maps = Dictionary[String, String]({
+"alares": "world0.map",
+"berca": "world1.map",
+"berca cross": "world1.map",
+"berca desert--north east-mark0": "world1.map",
+"berca desert--south west-mark0": "world1.map",
+"celis cross": "world0.map",
+"central pass--north east part-mark0": "world0.map",
+"crossroad": "world1.map",
+"dellna": "world2.map",
+"dorma's forest--forest of hate-mark0": "world1.map",
+"east cross": "world0.map",
+"east passage--west mountain-mark0": "world0.map",
+"fire cavern--hall of fire-mark0": "world1.map",
+"fire cavern--inferno-mark2": "world1.map",
+"forest of bri--east forest-mark0": "world0.map",
+"forest of reil--deep forest-mark0": "world0.map",
+"forest of reil--deep forest-mark1": "world0.map",
+"frozen forest--forest passage-mark0": "world2.map",
+"grivera--first floor-mark0": "world0.map",
+"home of celis": "world0.map",
+"main cross": "world0.map",
+"mt. cesadur--entrance-mark0": "world0.map",
+"parasne": "world1.map",
+"pass to zazo": "world0.map",
+"pensara - the trade district": "world1.map",
+"pensara forest--forest-mark0": "world1.map",
+"pensara forest--forest-mark1": "world1.map",
+"pensara prison--floor 1-mark0": "world1.map",
+"port of alares": "world0.map",
+"port of zazo": "world0.map",
+"silent ruin--the great ruins-mark0": "world1.map",
+"temple of aegis--first floor-mark0": "world1.map",
+"the great mine--the hall-mark0": "world0.map",
+"west cross": "world0.map",
+"zazo": "world0.map",
+"zazo cross": "world0.map",
+"zazo south cross": "world0.map"
+})

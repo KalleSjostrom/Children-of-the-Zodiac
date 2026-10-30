@@ -29,7 +29,8 @@ extends Node
 ##   --uncapped          no frame rate cap or vsync (fast parity runs; with --seed)
 ##   --legacy=<a,b,...>  keep the legacy path of these subsystems (is_legacy;
 ##                       docs/ARCHITECTURE.md section 7 lists them)
-##   --bridge-test       the world map shows tools/bridge_test/BridgeTest.tscn (dev only)
+##   --bridge-test       the world map shows tools/bridge_test/BridgeTest.tscn (dev only;
+##                       implies --legacy=world_map)
 ##   --no-encounters     dev only: no random battles in labyrinths (Labyrinth.noEncounters;
 ##                       steps are still counted), for parity tours of dungeon floors;
 ##                       the console's "noenemies" switches it
@@ -109,6 +110,10 @@ func _ready() -> void:
 	if _args.has("legacy"):
 		_legacy = String(_args["legacy"]).split(",", false)
 	bridge_test = _args.has("bridge-test")
+	# The bridge test shows its scene in place of the world map's background
+	# tiles, so the world map stays legacy (docs/ARCHITECTURE.md section 8).
+	if bridge_test and not is_legacy("world_map"):
+		_legacy.append("world_map")
 	no_encounters = _args.has("no-encounters")
 	hide_particles = _args.has("hide-particles")
 	minimap_node = _args.has("minimap-node")

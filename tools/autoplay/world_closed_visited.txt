@@ -1,0 +1,21 @@
+# Phase 4.1 (world map coverage): a closed road that was visited
+# (--load="Slot 1" --start=landAlares --status=road0-5:0): Landscape.init
+# shows the save's visited roads whether closed or not, so road 5 (Main
+# Cross to East Cross) keeps its dots, but LEFT at East Cross does not walk
+# it.
+wait 3500
+shot wc01_alares
+pos alares
+tap DOWN
+wait 2000
+shot wc02_east_cross
+pos east_cross
+tap LEFT
+wait 1500
+shot wc03_closed_road_left
+pos still_east_cross
+tap RIGHT
+wait 2500
+shot wc04_grivera
+pos grivera
+quit
