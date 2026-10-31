@@ -1,0 +1,117 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/StatusLine.gd" id="1_line"]
+[ext_resource type="Theme" path="res://resources/theme/game_theme.tres" id="2_theme"]
+[ext_resource type="Script" path="res://scenes/ui/BaselineLabel.gd" id="3_label"]
+[ext_resource type="Script" path="res://scenes/ui/ImageList.gd" id="4_images"]
+
+[node name="StatusLine" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1024.0
+offset_bottom = 768.0
+mouse_filter = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_line")
+
+[node name="Portrait" type="TextureRect" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 54.0
+offset_top = 28.0
+offset_right = 54.0
+offset_bottom = 28.0
+mouse_filter = 2
+expand_mode = 1
+
+[node name="Name" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 205.0
+offset_top = 47.0
+offset_right = 205.0
+offset_bottom = 47.0
+mouse_filter = 2
+theme_type_variation = &"MenuText22"
+script = ExtResource("3_label")
+text = "Kin"
+
+[node name="Class" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 550.0
+offset_top = 47.0
+offset_right = 550.0
+offset_bottom = 47.0
+mouse_filter = 2
+theme_type_variation = &"MenuText22"
+script = ExtResource("3_label")
+text = "Class: Warrior"
+
+[node name="Level" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 670.0
+offset_top = 47.0
+offset_right = 670.0
+offset_bottom = 47.0
+mouse_filter = 2
+theme_type_variation = &"MenuText22"
+script = ExtResource("3_label")
+text = "Level: 1"
+
+[node name="Hp" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 378.0
+offset_top = 47.0
+offset_right = 378.0
+offset_bottom = 47.0
+mouse_filter = 2
+theme_type_variation = &"MenuText22"
+script = ExtResource("3_label")
+text = "Hp: 100"
+
+[node name="OffLabel" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 205.0
+offset_top = 87.0
+offset_right = 205.0
+offset_bottom = 87.0
+mouse_filter = 2
+theme_type_variation = &"MenuText22"
+script = ExtResource("3_label")
+text = "Off. Slots: "
+
+[node name="DefLabel" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 205.0
+offset_top = 127.0
+offset_right = 205.0
+offset_bottom = 127.0
+mouse_filter = 2
+theme_type_variation = &"MenuText22"
+script = ExtResource("3_label")
+text = "Def. Slots: "
+
+[node name="OffSlots" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 307.0
+offset_top = 53.0
+offset_right = 307.0
+offset_bottom = 53.0
+mouse_filter = 2
+script = ExtResource("4_images")
+
+[node name="DefSlots" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 307.0
+offset_top = 93.0
+offset_right = 307.0
+offset_bottom = 93.0
+mouse_filter = 2
+script = ExtResource("4_images")

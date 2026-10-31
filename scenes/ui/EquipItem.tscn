@@ -1,0 +1,172 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/EquipItem.gd" id="1_script"]
+[ext_resource type="Theme" path="res://resources/theme/game_theme.tres" id="2_theme"]
+[ext_resource type="Script" path="res://scenes/ui/BaselineLabel.gd" id="3_label"]
+[ext_resource type="Script" path="res://scenes/ui/ImageList.gd" id="4_images"]
+
+[node name="EquipItem" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1024.0
+offset_bottom = 768.0
+mouse_filter = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_script")
+
+[node name="Picture" type="TextureRect" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 79.0
+offset_top = 28.0
+offset_right = 79.0
+offset_bottom = 28.0
+mouse_filter = 2
+expand_mode = 1
+
+[node name="Name" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 205.0
+offset_top = 47.0
+offset_right = 205.0
+offset_bottom = 47.0
+mouse_filter = 2
+theme_type_variation = &"MenuText22"
+script = ExtResource("3_label")
+text = "Sword"
+
+[node name="OffLabel" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 205.0
+offset_top = 87.0
+offset_right = 205.0
+offset_bottom = 87.0
+mouse_filter = 2
+theme_type_variation = &"MenuText22"
+script = ExtResource("3_label")
+text = "Off. Slots:"
+
+[node name="DefLabel" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 205.0
+offset_top = 127.0
+offset_right = 205.0
+offset_bottom = 127.0
+mouse_filter = 2
+theme_type_variation = &"MenuText22"
+script = ExtResource("3_label")
+text = "Def. Slots:"
+
+[node name="Slots" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 307.0
+offset_top = 53.0
+offset_right = 307.0
+offset_bottom = 53.0
+mouse_filter = 2
+script = ExtResource("4_images")
+
+[node name="Lines" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+mouse_filter = 2
+
+[node name="Attack" type="Control" parent="Lines"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 54.0
+offset_top = 247.0
+offset_right = 54.0
+offset_bottom = 247.0
+mouse_filter = 2
+theme_type_variation = &"MenuText22"
+script = ExtResource("3_label")
+text = "Attack: 0 %"
+
+[node name="Magic" type="Control" parent="Lines"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 205.0
+offset_top = 247.0
+offset_right = 205.0
+offset_bottom = 247.0
+mouse_filter = 2
+theme_type_variation = &"MenuText22"
+script = ExtResource("3_label")
+text = "Magic Off: 0 %"
+
+[node name="Support" type="Control" parent="Lines"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 378.0
+offset_top = 247.0
+offset_right = 378.0
+offset_bottom = 247.0
+mouse_filter = 2
+theme_type_variation = &"MenuText22"
+script = ExtResource("3_label")
+text = "Support: 0 %"
+
+[node name="Agility" type="Control" parent="Lines"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 550.0
+offset_top = 247.0
+offset_right = 550.0
+offset_bottom = 247.0
+mouse_filter = 2
+theme_type_variation = &"MenuText22"
+script = ExtResource("3_label")
+text = "Agility: 0 %"
+
+[node name="Defence" type="Control" parent="Lines"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 54.0
+offset_top = 287.0
+offset_right = 54.0
+offset_bottom = 287.0
+mouse_filter = 2
+theme_type_variation = &"MenuText22"
+script = ExtResource("3_label")
+text = "Defence: 0 %"
+
+[node name="MagicDefence" type="Control" parent="Lines"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 205.0
+offset_top = 287.0
+offset_right = 205.0
+offset_bottom = 287.0
+mouse_filter = 2
+theme_type_variation = &"MenuText22"
+script = ExtResource("3_label")
+text = "Magic Def: 0 %"
+
+[node name="Hit" type="Control" parent="Lines"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 378.0
+offset_top = 287.0
+offset_right = 378.0
+offset_bottom = 287.0
+mouse_filter = 2
+theme_type_variation = &"MenuText22"
+script = ExtResource("3_label")
+text = "Hit: 0 %"
+
+[node name="Evade" type="Control" parent="Lines"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 550.0
+offset_top = 287.0
+offset_right = 550.0
+offset_bottom = 287.0
+mouse_filter = 2
+theme_type_variation = &"MenuText22"
+script = ExtResource("3_label")
+text = "Evade: 0 %"

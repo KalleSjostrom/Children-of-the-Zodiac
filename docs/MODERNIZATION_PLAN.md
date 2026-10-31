@@ -2551,9 +2551,10 @@ timing.
   "Paused" are phase 3's nodes. Nothing of their pictures is drawn through
   `Graphics` any more (with the flags off).
 
-**The rollout of 4.2 (prepared, not done).** The mini-games, the stores and
-the menu, as they draw today (file:line in the code at the pilot; "node" =
-already a phase 3 or 4.2 node). None of them draws in 3D: the cards of the
+**The rollout of 4.2 (the menu done; the stores and the mini-games
+prepared).** The mini-games, the stores and the menu, as they drew at the
+pilot ("node" = already a phase 3 or 4.2 node; the menu's results follow
+this list). None of them draws in 3D: the cards of the
 stores and the menu are 2D images (`AbstractCard.drawCard`,
 `Deck.drawDeck`), so nothing waits for phase 4.4's cards; a riddle's frame
 is the labyrinth's (3D walls and weather, the riddle's 2D after them).
@@ -2636,7 +2637,68 @@ is the labyrinth's (3D walls and weather, the riddle's 2D after them).
     Inn's rest confirm, its prize and trade list; the Church's save list
     after a save (the game-clock dates), its bless page moved, its
     tutorials).
-* **The menu** (`src/menu`, 15 files, 2,877 lines with `MenuNode`, plus
+  * *Prepared by the menu (phase 4.2's rollout, part 1; ARCHITECTURE
+    section 14, "The menu", has the nodes).* Built and shown by the menu,
+    for the stores to show with their own state at their call sites (the
+    shared helpers stay legacy until then; each call site switches on the
+    flag of its kind of part):
+    * `MenuBackground.show_background(back, pieces, mat)`: `back` the
+      store's background (`Graphics.place_image(background, 0, 0)`) in one
+      node, then, after the keeper's dialog (a node: its own slot), a second
+      `MenuBackground` with no back and the keeper (`place_centered_image`,
+      y 205 or 105) followed by the pieces of
+      `AbstractPage.place_menu_background_static(g, store, menusUsed)` (the
+      mask); `menu_frame`.
+    * `MenuTitle` (the title at 800, 54: `AbstractPage.draw_title`),
+      `MenuInfo.show_info(lines, …)` with the store's three lines
+      (`WeaponStore.drawInfo`, `CardStore.drawInfo`, the Inn's
+      `StartPage.drawInfo`: call `StartPage.draw_info`, the Church's copy),
+      `HelpLine` (`AbstractPage.draw_help(g, drawHelp)`: the Church);
+      `menu_frame`.
+    * `MenuList` through `MenuNode.show_children_freely` (`AbstractPage.draw_list`):
+      the price variant (`withPrice`, `down`: the Weapon Store's lists, the
+      Inn's), the bounding boxes of the sell lists and the Inn's trade list
+      (their `PageScrollBar`), the confirm boxes' Yes/No lists, the two lists
+      and two hands of the Weapon Store (two nodes); the price variant is
+      built from the legacy code but no case shows it yet; `menu_list`.
+    * `EquipStatus` and `EquipItem` (`EquipPage.show_status`, `show_equip`)
+      in the Weapon Store; `status`.
+    * `DeckView` (`Deck.show_deck(g, gold, true, current, null)` for the
+      buy page, `show_deck(g, current, map)` for the merge page: the
+      numbers over their shadows in bold 26 and 28, the grey cards; both
+      branches are built in `place_deck` and shown by no case yet),
+      `PageScrollBar` (`MenuScrollBar.show_bar`), `CardView` for the merge
+      preview (`AbstractCard.place_at` at size 1.0, the next level's balls);
+      `deck`.
+    * `MenuBox.show_box(piece, lines, mat)` for the confirm boxes (piece 14
+      at 400, 300 or 3 at 400, 315; the texts at 430, 360 and the price
+      right-aligned to 630: a line's sixth element); `SlotDates`
+      (`SaveSlots.show_dates_under`) for the Church's save list; `menu_text`.
+  * Left for the stores: the confirm dim (`fadeOldSchool(.5)` → a
+    `Graphics.show_fade(.5)`-like Fade node on UI, before the box: a Fade
+    node is on Transition today, and a UI node after it would be drawn
+    under it, so the dim needs a UI Fade or the box and list on Transition);
+    the card store's merge page (pieces 13 and 12, its counts in bold 26/28
+    with shadows: `ShadowText`, "x 5 merges to" at size 40: `MenuText`);
+    the Church's bless page (`HelpText`'s rows: `Row.place_rows` as the
+    tutorials' (phase 3), `LevelUpBar.drawStatic` per character: a new node,
+    the costs at sizes 26 and 30, its blue and green hands drawn twice
+    (`drawHandWithColor` at white, then the colour at .3: two images), the
+    bless list at size 26: `MenuChoice26` or `Text26`, `totalCost` summed in
+    the draw: keep it in the twin); the Inn's prize message and card
+    (nodes already); the Weapon Store's sell confirm.
+  * Cases needed first (none of a store's sub-pages is covered; the dev
+    console's `give` adds equipment for sell lists that scroll): the Weapon
+    Store's buy list scrolled with its comparison, a sell list with its
+    bounding box scrolled, both confirms and "You can't afford that!"; the
+    card store's buy page past two lines (its scroll bar), a merge with and
+    without the preview, its confirms; the Inn's rest confirm, its prize and
+    trade list; the Church's save list after a save (the game-clock dates),
+    its bless page with the hands moved, its tutorials.
+  * Size: one session for the cases and the Weapon Store, the card store
+    and the Inn (their parts are the menu's nodes); the Church's bless page
+    (HelpText rows, LevelUpBar, the coloured hands) may need a second.
+* **The menu** (*done through step B: results below*; `src/menu`, 15 files, 2,877 lines with `MenuNode`, plus
   `menu/tutorial` 447; `MainMenu`, `AbstractPage` and the pages; the
   automap is `info/LabyrinthMap.draw`). `StatusPage` and `BestiaryPage` are
   unreachable (Appendix), `Help.gd` unused.
@@ -2691,7 +2753,8 @@ is the labyrinth's (3D walls and weather, the riddle's 2D after them).
     scrolled and the comparison; the help page's difficulty list; the Save
     list after a save (dates) and the saving box; Key Items scrolled; a
     deck edit with cards flying; a map page scrolled (bounding box).
-* **The menu list variants** used (MenuNode call → flags `withPrice,
+* **The menu list variants** used (*built in the menu: ARCHITECTURE
+  section 14's table*; MenuNode call → flags `withPrice,
   allChildren, withNumber, down, withEquipment`): plain (`drawAllChildren`
   / `drawChildren`: the title, every store's root, the confirm boxes, the
   Church, CardStore, DeckPage, MapPage, HelpPage, TutorialPage, the
@@ -2705,17 +2768,18 @@ is the labyrinth's (3D walls and weather, the riddle's 2D after them).
   (two, always drawn), CardStore (two, over two lines). Dimmed hands:
   DeckPage's Edit/Back, the Church's bless hands, Cesadur's.
 * **Order and size.** Three parts, four or five sessions:
-  1. The menu (two sessions): it builds what the stores reuse: the menu
-     pieces (a node per page layout), `MenuList`'s variants and its
-     `ScrollBar` (ARCHITECTURE section 14's table), the status helpers, the
-     deck (`Deck.drawDeck` as a node of card images), the thumbnail, the
-     automap (a node under the map page's modelview, as `CutsceneImage`'s
-     `Zoom`); first the cases above. Blocked by nothing.
+  1. The menu: *done in one session (results below)*. It built what the
+     stores reuse: the menu pieces, `MenuList`'s variants and its scroll bar
+     (`PageScrollBar`), the status helpers, the deck (`DeckView`, `CardView`:
+     card images), the thumbnail, the info, the help line, the confirm box;
+     the automap is TextureRects under a `Zoom` with the page's modelview,
+     as planned (exact: results).
   2. The stores (one or two sessions): after the menu (they reuse its
-     pieces, lists, deck and status helpers); first the cases above (no
-     sub-page is covered today); the confirm dim is `show_fade(.5)`-like
-     (a Fade node, as "Paused"'s), `HelpText`'s rows are `Row.place_rows`
-     (phase 3), `LevelUpBar` is new.
+     pieces, lists, deck and status helpers: the stores entry above says
+     how); first the cases above (no sub-page is covered today); the
+     confirm dim is `show_fade(.5)`-like but on UI (a Fade node on UI: the
+     box and its list come after it), `HelpText`'s rows are
+     `Row.place_rows` (phase 3), `LevelUpBar` is new.
   3. The mini-games (one session): independent of both (only `MenuHand`,
      whose node is `MenuList`'s hand, and the button icons); fix the fade's
      port bug first, as its own change with new goldens; its top layer is a
@@ -2724,6 +2788,184 @@ is the labyrinth's (3D walls and weather, the riddle's 2D after them).
   No part needs a decision of section 13 for step B; step C of all of them
   needs decision 3 (and 6 for the riddle's fade and the stores' and menu's
   animations) and phase 4.3's input wrapper.
+
+**Results of the menu (phase 4.2's rollout, part 1,
+`docs/phase4_2_menu_prompt.md`; conventions in docs/ARCHITECTURE.md
+section 14, "The menu").** Step B for `MainMenu` and its pages (start,
+equip, deck, map with the automap, help, tutorial) and the parts the stores
+reuse; the legacy objects keep the state, the input and the timing.
+
+* **Baseline** (on 2930993c): `tools/check.sh` 0 failed (465 scripts);
+  goldens of the 401 cases and `bridge_test` (`m0gold`, 7,361 shots),
+  identical to the pilot's node run `g42node` shot for shot, log for log
+  and error line for error line (3,223); the pilot's check
+  (`--legacy=title,game_over,menu_list`, every case) vs. `m0gold`: 7,361
+  of 7,361, all 402 logs and the error lines identical.
+* **Facts** (deliverable 1), where they add to or differ from the prompt and
+  the list above:
+  * The frame. `MainMenu.draw` as listed; the alpha test (`GREATER .02`) is
+    every node's material. The menu never fades: `init` sets the fade
+    value 1 and no fade-in, `exit()` leaves without fading, and the only
+    fading exit (`exitTo`, a slot loaded from the start page) needs a Load
+    entry the root does not have (Deck, Equip, Key Items, Tutorial,
+    Options, Map, Save; the Java's Load is in a dead `else`, Appendix):
+    every probed menu frame has fade 1, so the Fade node never shows in
+    the menu. The menu is pausable (only the title sets
+    `pausable` false): "Paused" over it is now a case. "Game pad lost" is
+    drawn after it as after every mode. No menu frame ends in the bold
+    font.
+  * Overlaps where the order shows: the lists' hands over the pieces (the
+    root's hand1 at x 765 over piece 2); the character select's hand (x 15
+    to 60) under each portrait (117 x 143 at x 54: 6 px); pieces 0 and 10
+    overlap by one row, pieces 7 and 3 by 20 rows on the equip page (7
+    first); the status lines over pieces 0, 10, 11, 12; frame.png over the
+    screenshot; a help icon (64 x 32, centred) and its label (icon 30 to
+    94, "Exit" from 90); drawChange's lines over the attribute values; a
+    floor's name and its top row of cells in the overview. The card info
+    (y 6 to 203 at the deck page's −29) does not reach the decks (cards
+    from y 250).
+  * State changes in the draws, all kept by the twins in order: as listed
+    above, and: `Creature.isAlive()` (drawTop) sets `alive`; a chest's map
+    image writes its Database status 0 the first time it is drawn
+    (`Chest.getMapImage`); drawString's `setColor(color)` also for an empty
+    string (the "(1)" a number 1 does not draw, the character select's ""
+    names); the numbers, prices and equipment set size 22 after them
+    whatever the size before; `startText(alpha, -1)` keeps the text colour
+    (the automap's green). No probed frame fires the cursor fix-up.
+  * Transforms: the overview's images go through the modelview on the CPU
+    (`_emit2D`), its text not. The cells are small textures (27 px at 1.4,
+    at a third), the kind that rounded differently under a cutscene zoom
+    (the emotion bubbles), but here TextureRects in the floor's space under
+    a `Node2D` with the modelview as its transform draw the legacy pixels:
+    every automap shot (47; all six places of a floor in the overview, and
+    single floors) identical, and so was a version that drew the legacy
+    quads (`screen_points`, as `EmotionBubble`). The automap uses the
+    `Node2D` (`AutomapFloor`'s `Zoom`), as this section planned.
+  * The thumbnail: taken at the end of the labyrinth's, village's, world
+    map's and airship's draw, after the fade (`MenuStarter.checkMenu` →
+    `enterMenu` unless fading → `Values.getMenuScreenShot`: `copyFrame`,
+    the main viewport's texture, i.e. the frame before with every layer,
+    scaled to 183 x 137, cubic); drawn as an `Image` through
+    `ImageHandler.getGameTexture` (one texture per Image); a TextureRect of
+    that texture draws the same pixels. Headless runs have none.
+  * Text: right-aligned numbers (980) and prices and equipment (985) at 20
+    through `calcAlignRight` in the current font; the floors' names centred
+    (`calcAlignCenter`, 24; a single floor 34); the help page measures its
+    difficulty text every frame (`wrapText`, size 22); the deck titles at
+    `startText`'s alpha; bold only in `drawDeck` (26/28, the card store's
+    numbers), turned off after it.
+  * Variants by call site: as in ARCHITECTURE section 14's table (the
+    StartPage root drawn plain while a character select is open:
+    `drawAllChildren` without numbers; Key Items' disable colour black; the
+    difficulty list grey for the current level and the harder ones).
+  * The stores share the pieces (with their mask), the info lines, the
+    title line, the help line (Church), the price variant and bounding
+    boxes, the scroll bars, the status helpers (Weapon Store), the deck
+    (card store), the confirm boxes (a piece and texts, after a dim) and
+    the save list's dates (Church): entry above.
+* **Coverage.** The probe (prints in `MainMenu.draw`, each page's draw with
+  its sub-state, `MenuNode.draw` with its flags, cursor, bounding box
+  offset and whether the fix-up fires, `MenuScrollBar.draw`,
+  `Deck.drawDeck`, the flying cards, `LabyrinthMap.draw`, the status
+  helpers, the saving box, the dates, `MenuStarter.checkMenu` and
+  AutoPlay's shot) over every case: the menu in 337 shots of 279 cases
+  (StartPage 300, MapPage 15, DeckPage 12, TutorialPage 6, EquipPage 2,
+  HelpPage 2), opened from a village (87 cases), a labyrinth (208), the
+  world map (3: `landscape`, `world_night`, `bridge_test`) and the airship
+  (2). Already covered, where 9.2 said not: the map page's labyrinth list
+  scrolled in its bounding box (offset −328 and −369 in 6 shots, with its
+  scroll bar) and the character select for Deck and Equip
+  (`dialog_deck_page`, `menu_pages`); the overview of a labyrinth with two
+  and five floors, one floor, the player's floor green, the card info and
+  the status line instead of a missing card, Kin's deck scrolled. Not shown
+  by any case: the equipment list, Key Items scrolled, the party deck
+  edited (Kin's at .5), cards flying (drawn between shots), the Save list
+  after a save and the saving box, the difficulty list, the tutorial list
+  scrolled, "Paused" over the menu. Six new cases (86 shots):
+  `menu_start_save`, `menu_key_items` (the console's `give`: nine items,
+  four with numbers), `menu_equip_list` (`give`: a seven-entry weapon list
+  scrolled, "(2)", red and green changes and slots, shields and armours
+  compared, equipping, R1/L1), `menu_deck_edit`, `menu_options_difficulty`
+  (the console's `difficulty`: Easy and Medium), `menu_tutorial_scroll`.
+  Not covered: the cursor fix-up (no list shrinks under its cursor; an
+  empty Key Items list would: "Start" has no items), the menu's fade
+  (unreachable), the card store's deck branches and the price variant
+  (the stores' part).
+* **Built** (ARCHITECTURE section 14, "The menu"): the nodes
+  `MenuBackground`, `MenuTitle`, `MenuInfo`, `MenuThumbnail`, `HelpLine`,
+  `MenuText`, `MenuBox`, `PageScrollBar`, `StatusLine`, `EquipStatus`,
+  `EquipItem`, `DeckView`, `CardView`, `Automap`, `AutomapFloor`, the helpers
+  `ImageList` and `HelpLineCapture`; `MenuList` with every
+  variant (`MenuNode.place_children` replaces the pilot's
+  `place_all_children`); theme roles `MenuChoice22`, `MenuText22`,
+  `AutomapFloorName`, `AutomapFloorTitle`, `CardIndex`, `CardIndexCurrent`;
+  bridge members `Graphics.place_image`, `place_centered_image` and the
+  twins listed there; flags `--legacy=menu_frame`,
+  `menu_text`, `status`, `deck`, `automap` (and `menu_list` for the menu's
+  lists); the dev console's `give`.
+* **Parity** (tolerance 0 everywhere; the final code, 407 cases and
+  `bridge_test`, 7,447 shots; the node run is `m2node`; "the menu cases":
+  the 285 cases that draw the menu, by the probe, 3,921 shots):
+  * golden (`m1gold`) vs. nodes, every case: 7,447 of 7,447 shots
+    identical, all 408 logs identical, the same error lines in every log
+    (3,229);
+  * this task's flags (`--legacy=menu_frame,menu_text,status,deck,automap,
+    menu_list`) vs. nodes on the menu cases: 3,921 of 3,921, logs and error
+    lines identical (and vs. the golden);
+  * each flag alone vs. nodes and vs. the golden, on its parts' cases:
+    `menu_frame` 3,921 of 3,921 (285 cases), `status` 3,921 of 3,921 (285),
+    `menu_list` 4,130 of 4,130 (294: the menu cases, the title's and the
+    game pad lost's), `deck` 47 of 47 (3), `automap` 47 of 47 (6),
+    `menu_text` 108 of 108 (10); logs and error lines identical;
+  * every flag on (`--legacy=title,game_over,menu_list,menu_frame,menu_text,
+    status,deck,automap`, every case) vs. the golden: 7,447 of 7,447, all
+    logs and error lines identical (the legacy paths and the frame without
+    nodes are unchanged);
+  * the new cases recorded twice: 104 of 104 (with `menu_pages`), logs and
+    error lines identical; the old cases with the `give` hook vs. the
+    baseline: 7,361 of 7,361, the same 3,223 error lines;
+  * the bridge test passes (identical, "BridgeTest: freed after 748
+    frames").
+  * No tolerance was needed. The one difference on the way was a bug in the
+    nodes (the help line's size, Found below); the first node run was
+    identical on every other shot.
+* **Frame rate** (normal runs: no `--seed`, windowed, one at a time, the
+  shipped saves (`APPDATA` a scratch folder); AutoPlay's `fps=` every 0.5 s
+  for 11 s, the first second dropped; legacy (this task's flags) → nodes,
+  median and range):
+
+  | Where | Capped | Uncapped |
+  |---|---|---|
+  | The start page from Alares (three status lines, the thumbnail) | 60 → 60 | 759 (750–766) → 1,608 (1,548–1,619) |
+  | The deck page editing the party deck (Kin's at .5, the card info) | 60 → 60 | 345 (340–347) → 839 (823–844) |
+  | The map page's overview of the Empyrian Temple (five floors) | 60 → 60 | 1,123 (1,061–1,139) → 1,755 (1,746–1,772) |
+
+  The legacy drew every line glyph by glyph and every image as a quad each
+  frame (the deck page: 40 cards with their balls); the nodes keep their
+  glyphs and rects and only change what changed.
+* **Still legacy** in the menu: the state, the input and the timing (step
+  C: decision 3, phase 4.3's input wrapper); the `draw(g)` methods (the
+  twins run there); the unreachable `StatusPage.draw3D` and
+  `BestiaryPage.draw3D`; the mode fade, "Paused", "game pad lost", the card
+  info and the tutorials are phase 3's nodes. With the flags off nothing of
+  a menu frame is drawn through `Graphics` (a run with a print in
+  `GLBackend.ci_2d`: no legacy 2D canvas item in any menu frame of
+  `menu_pages`, the six `menu_*` cases, `dialog_deck_page`,
+  `dungeon_map_page_floors` and `airship_land1_menu`). The shared helpers
+  keep their
+  legacy drawing for the stores (`MenuNode.draw`, `StatusPage.drawTop`,
+  `EquipPage.drawStatus`, `Deck.drawDeck`, `StartPage.drawInfo`,
+  `drawMenuBackgroundStatic`).
+* **Found on the way:** the theme's role lookup could not fail (12): the
+  deck page's help line while editing (size 20, which the card info
+  leaves) came out at 24 in the first node run (23 shots, box 91,722 to
+  991,746, up to 110/255): `MenuText.role` now reads the type's own entries
+  (`Theme.get_font_size_list`; `has_font_size_nocheck` is not exposed to
+  scripts), `MenuList` uses it too. The automap under a `Zoom`, as planned:
+  exact (Facts). The menu never fades (Appendix). A headless shot compare
+  beside an 8-job recording ran the 16 GB out (12): four `--legacy=status`
+  runs crashed in AutoPlay's `get_image`, four logged WebP decode errors
+  with identical shots; the eight were recorded again, alone: identical.
 
 ### 9.3 Infrastructure
 
@@ -2902,7 +3144,8 @@ When no mode draws through `g` any more:
   runs fail at random (a crash in AutoPlay's `get_image`, WebP textures
   that did not decode, both with identical shots once re-recorded). Run
   nothing windowed beside a recording, and check the error lines of every
-  log, not only the shots.
+  log, not only the shots. *4.2's menu:* not even a headless shot compare
+  (`diff_shots.gd` over 4,000 shots): it did the same to eight runs.
 * **Generated scenes edited by hand** (phase 4.1). The editor saved three
   village scenes in 4b74ade3; the converter no longer reproduces them and
   `vil_to_scene.sh --all` overwrites them. Re-convert one place at a time
@@ -2926,6 +3169,19 @@ When no mode draws through `g` any more:
   stores' and the menu's cards as 3D chunks; they are 2D images. Check a
   mode's drawing (`set3D`, `glVertex3f`, `drawImage`) before planning its
   chunks.
+* **Theme lookups that cannot fail** (phase 4.2's menu). `Theme.has_font_size`
+  and a Control's `has_theme_font_size` are true for any type while the
+  theme has a default font size, and a label whose type variation the
+  theme lacks is drawn at that default (24): the deck page's help line, at
+  the size 20 the card info leaves, came out at 24. Look up a type's own
+  entries (`Theme.get_font_size_list`, `MenuText.role`); the pilot's
+  `MenuList` had the same check (never hit: its sizes had roles).
+* **Shared legacy helpers** (phase 4.2's menu). The menu and the stores call
+  the same static helpers (`MenuNode.draw`, `StatusPage.drawTop`,
+  `Deck.drawDeck`, `StartPage.drawInfo`, `drawMenuBackgroundStatic`):
+  switching inside them would convert the stores' drawing with the menu's,
+  untested. Twins go beside them, and the converted mode's call sites
+  switch.
 
 ## 13. Open decisions
 
@@ -2984,7 +3240,10 @@ When no mode draws through `g` any more:
    stay legacy (per `J.currentTimeMillis()` step and per update); their
    views mirror the positions. *Not needed for 4.2's pilot (9.2):* the
    title's logo (.005 per update) and the mode fades (per drawn frame) stay
-   legacy; the nodes mirror them. A Tween for them is step C.
+   legacy; the nodes mirror them. A Tween for them is step C. *Not needed
+   for the menu (9.2):* the flying cards (`DeckPage.Animator`, 2 px per ms)
+   and the saving box's dots (`Scheduler` timers) stay legacy; the nodes
+   mirror them.
 7. **Village top layer** (from the pilot, 6.7): *decided (phase 1
    rollout):* roofs and treetops are always drawn (6.1, the pilot's
    default). The legacy rule draws a piece only where a sprite overlaps it,
@@ -2997,8 +3256,8 @@ When no mode draws through `g` any more:
    in world", text running out of the paper) and sharper text in full screen
    (`BaselineLabel.oversampling` 0) change the look; the pilot kept the
    legacy look so that parity holds. Each is a theme or scene edit now.
-   Open (the rollout kept the legacy look too, and so did phase 4.1 and
-   4.2's pilot).
+   Open (the rollout kept the legacy look too, and so did phase 4.1, 4.2's
+   pilot and the menu).
 
 ## 14. Suggested order and size
 
@@ -3013,7 +3272,7 @@ Sizes are relative: S ≈ a focused session, XL ≈ many sessions.
 | P2 | Dungeon weather, save points and the card and enemy effects that are particles, on the GPU (6.11). *Done (6.12).* | M | 2, P | rainy and snowy floors at 60 FPS; battles without the effects' stalls (Wind 3 at 7 FPS, the Flame's 10 s) |
 | 3 | Theme, Dialog, signs, emotions, fades, HUD. *Done through step B: the pilot (8.1: the Theme, the dialog family, the fade) and the rollout (8.3: emotions, mission display, pause overlays, cutscene images and texts, tutorials; the minimap stays the 3D bridge's); closing prepared (8.4).* | M | 1 (or 2) | most of the remaining `draw(g)` |
 | 4.1 | World map + airship. *Done through step B (9.1): the scenes, the name plate, legacy vs. scene identical; closing prepared.* | M | 1 (converter), 3 | — |
-| 4.2 | Title, game over, mini-games, stores, menu. *Pilot done through step B (9.2): the title, the game over, the menu list; the rollout prepared: the menu (2 sessions), the stores (1–2), the mini-games (1).* | L | 3 | — |
+| 4.2 | Title, game over, mini-games, stores, menu. *Pilot done through step B (9.2): the title, the game over, the menu list; the menu done through step B (9.2, one session); prepared: the stores (1–2), the mini-games (1).* | L | 3 | — |
 | 4.3 | Input, audio, saves, `Game` autoload | M | any time after 0; the autoload is best after 4.2 | 5 |
 | 4.4 | Battle, cards, effects | XL | 2, 3 | 5 |
 | 5 | Remove the GL emulation; per-delta time | M | all of the above | — |
@@ -3052,6 +3311,13 @@ fixed or deleted at any time.
     Java's StartPage has no entry for them either); `menu/Help.gd` is never
     instantiated; `CardStore.drawMergedCard` is never called; no map uses
     `RotatePuzzle`; the Church's "Resurrect" branch has no menu entry.
+  * *Found in phase 4.2's menu:* the start page's Load path (`executeNode`'s
+    "Load" and a slot under another list than Save: `Load.loadGame`,
+    `exitTo`) has no entry: the Java's `fillRoot` inserts Save under
+    `if (true)` and Load only in its dead `else` (the port inserts Save), so
+    the menu never fades; `TutorialPage.drawHelp` is never called (its call
+    is commented out in the Java); `MapPage.drawAll`'s `g.scale(3)` before
+    its `pop` does nothing (as in the Java).
 * **Latent bugs:**
   * The particle kinds `rainparticle` and `sandparticle` have no class in
     `ParticleFactory`, so they create null bodies. The same bug is in the

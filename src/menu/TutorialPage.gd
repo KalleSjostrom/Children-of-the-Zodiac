@@ -95,18 +95,21 @@ func selectPressed():
 	pass
 
 
+## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): each part is
+## shown by its node where it was drawn, or drawn with its --legacy flag
+## (AbstractPage.draw_title, draw_list, StatusPage.draw_top,
+## StartPage.draw_screen_shot, draw_info); the tutorial is phase 3's node.
 func draw3D(g):
 	drawStandard(g)
-	var x: int = MenuValues.MENU_TEXT_X
-	g.drawString(activeNode.getName(), x, 54)
-	activeNode.drawChildren(g)
+	AbstractPage.draw_title(g, activeNode.getName())
+	AbstractPage.draw_list(g, activeNode, false, false, false, false, false)
 
 	for i in range(Load.getCharacters().size()):
 		var d: int = MenuValues.CHARACTER_DISTANCE * i
 		var c = Load.getCharacters()[i]
-		StatusPage.drawTop(g, c, d)
-	StartPage.drawScreenShot(g)
-	StartPage.drawInfo(g)
+		StatusPage.draw_top(g, c, d)
+	StartPage.draw_screen_shot(g)
+	StartPage.draw_info(g)
 
 	if mode == TUTORIAL:
 		tutorial.drawTopLayer(g)

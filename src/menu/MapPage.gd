@@ -7,6 +7,9 @@ extends AbstractPage
 ## update() with no argument is the Java private method; with an argument it
 ## is the per-frame AbstractPage.update, which does nothing.
 
+## Bridge (phase 4.2 step B): the node of _show_all and _show_single.
+const AUTOMAP_VIEW := "res://scenes/ui/Automap.tscn"
+
 var map = null
 var lab = null
 var currentFloors = null
@@ -196,20 +199,38 @@ func zoomOut():
 		MainMenu.getMainMenu().initStartPage(5)
 
 
+## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): each part is
+## shown by its node where it was drawn, or drawn with its --legacy flag
+## (AbstractPage.draw_title, draw_list, _show_all and _show_single (the
+## Automap node), AbstractPage.draw_help, _show_explored,
+## StartPage.draw_screen_shot, draw_info).
 func draw3D(g):
 	super.drawStandard(g)
-	g.drawString(activeNode.getName(), MenuValues.MENU_TEXT_X, MenuValues.MENU_TITLE_Y)
-	activeNode.drawAllChildren(g)
+	AbstractPage.draw_title(g, activeNode.getName())
+	AbstractPage.draw_list(g, activeNode, false, true, false, false, false)
 	var percent: int = 0
+	var automap: bool = not Main.is_legacy("automap")
 	if isZoomedOut():
-		percent = drawAll(g)
-		drawHelp(g, true)
+		percent = _show_all(g) if automap else drawAll(g)
+		AbstractPage.draw_help(g, drawHelp.bind(true))
 	else:
-		percent = drawSingle(g)
-		drawHelp(g, false)
-	g.drawString("Explored: " + str(percent) + " %", 40, 50)
-	StartPage.drawScreenShot(g)
-	StartPage.drawInfo(g)
+		percent = _show_single(g) if automap else drawSingle(g)
+		AbstractPage.draw_help(g, drawHelp.bind(false))
+	if Main.is_legacy("menu_text"):
+		g.drawString("Explored: " + str(percent) + " %", 40, 50)
+	else:
+		_show_explored(g, percent)
+	StartPage.draw_screen_shot(g)
+	StartPage.draw_info(g)
+
+
+## Bridge (phase 4.2 step B): "Explored: n %" without the drawing
+## (drawString's setColor(color)); a MenuText node shows it.
+func _show_explored(g, percent: int) -> void:
+	var line := ["Explored: " + str(percent) + " %", Vector2i(40, 50), g.getFontSize(),
+			Graphics.text_color(1.0), Graphics.font_bold(), HORIZONTAL_ALIGNMENT_LEFT]
+	g.setColor(g.color)
+	AbstractPage.show_lines(g, [line])
 
 
 func isZoomedOut():
@@ -244,6 +265,57 @@ func drawAll(g):
 	g.pop()
 	percent = J.round((percent / float(size)) * 100)
 	return percent
+
+
+## Bridge (phase 4.2 step B): drawSingle without the drawing
+## (LabyrinthMap.place_map), and the frame's next Automap node on the UI
+## layer shows the floor (Graphics.show_ui).
+func _show_single(g) -> int:
+	var currentDir: int = -1
+	if lab != null:
+		currentDir = lab.getPlayerDirection()
+	var mat = g.canvas_material()
+	var floor: Dictionary = map.place_map(g, currentNode, currentDir, null, false, true)
+	_show_automap(g, [floor], mat)
+	return floor.percent
+
+
+## Bridge (phase 4.2 step B): drawAll without the drawing: the same matrix
+## calls (each floor's pieces placed through the modelview:
+## LabyrinthMap.place_map), and the frame's next Automap node on the UI
+## layer shows every floor (Graphics.show_ui).
+func _show_all(g) -> int:
+	var mat = g.canvas_material()
+	var floors := []
+	g.push()
+	g.translate(25, 80, 0)
+	g.scale(1.0 / 3)
+	var percent: int = 0
+	var size: int = 0
+	for i in range(currentFloors.size()):
+		var m = currentFloors[i]
+		size = m.getSize()
+		var pos = m.getMapPos()
+		var currentDir: int = -1
+		if lab != null:
+			currentDir = lab.getPlayerDirection()
+		g.push()
+		g.translate(pos[0] * 700, pos[1] * 1000, 0)
+		var floor: Dictionary = m.place_map(g, currentNode, currentDir, pos, true, false)
+		percent += floor.percent
+		floors.append(floor)
+		g.pop()
+	g.scale(3)
+	g.pop()
+	percent = J.round((percent / float(size)) * 100)
+	_show_automap(g, floors, mat)
+	return percent
+
+
+static func _show_automap(g, floors: Array, mat) -> void:
+	var view = g.show_ui(AUTOMAP_VIEW, Graphics.UI_LAYER)
+	if view != null:
+		view.show_map(floors, mat)
 
 
 func drawHelp(g, drawAll = null):

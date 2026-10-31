@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/PageScrollBar.gd" id="1_bar"]
+[ext_resource type="Theme" path="res://resources/theme/game_theme.tres" id="2_theme"]
+
+[node name="PageScrollBar" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1024.0
+offset_bottom = 768.0
+mouse_filter = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_bar")
+
+[node name="Top" type="TextureRect" parent="."]
+visible = false
+use_parent_material = true
+layout_mode = 0
+mouse_filter = 2
+expand_mode = 1
+
+[node name="Ball" type="TextureRect" parent="."]
+visible = false
+use_parent_material = true
+layout_mode = 0
+mouse_filter = 2
+expand_mode = 1
+
+[node name="Bottom" type="TextureRect" parent="."]
+visible = false
+use_parent_material = true
+layout_mode = 0
+mouse_filter = 2
+expand_mode = 1

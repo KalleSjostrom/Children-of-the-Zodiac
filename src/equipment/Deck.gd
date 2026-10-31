@@ -9,6 +9,8 @@ const Y_DISTANCE = 113
 const UP = 0
 const DOWN = 1
 const DEFAULT_DECK_SIZE = 500
+## Bridge (phase 4.2 step B): the node of show_deck.
+const VIEW := "res://scenes/ui/DeckView.tscn"
 
 var hand = null # MenuHand
 
@@ -264,6 +266,110 @@ func drawCard(g, large, x, y, c, enabled):
 		c.drawCard(g, x, y, 1.0 if large else 0.7)
 	else:
 		c.drawGrayCard(g, x, y, 1.0 if large else 0.7)
+
+
+## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): drawDeck
+## (every overload) without the drawing: the same state changes in the same
+## order (the font sizes, the bold font set and turned off again, the
+## cards' binds, the text colours and drawString's setColor(color) of the
+## card store's numbers, the hand's bind). Returns {"cards": [{"images":
+## AbstractCard.place_at's, "index": the card store's number and its shadow
+## as [text, position (its end), font size, colour, bold] each}, …] in drawing
+## order (the current card last, larger), "hand": MenuHand.place_hand's}.
+func place_deck(g, gold = null, large = null, currentCard = null, map = null) -> Dictionary:
+	if not (gold is int):
+		currentCard = gold
+		map = large
+		large = map != null
+		gold = J.INT_MAX
+	var offset: int = currentLine - handLine
+	if offset < 0:
+		offset = 0
+	var ci: int = 0
+	var cj: int = 0
+	var fs: int = g.getFontSize()
+	var cards := []
+	g.setFontSize(26, true)
+	for i in shownLines:
+		for j in lineLength:
+			var index: int = lineLength * (i + offset) + j
+			if index < deck.size():
+				var x: int = pos[Values.X] + j * xDistance
+				var y: int = pos[Values.Y] + i * yDistance
+				var c = deck[index]
+				if currentCard != c:
+					var enabled := true
+					if map != null:
+						var info = map.get(c.getSortingValue())
+						enabled = info.isEnabled()
+						var card := {"images": _place_card(g, large, x, y, c, enabled), "index": []}
+						Graphics.setTextColor(0)
+						_place_index(g, str(info.getIndex()), Vector2i(x + 118, y + 171), card.index)
+						Graphics.setTextColor(1)
+						_place_index(g, str(info.getIndex()), Vector2i(x + 116, y + 169), card.index)
+						cards.append(card)
+					else:
+						enabled = c.getPrice() <= gold
+						cards.append({"images": _place_card(g, large, x, y, c, enabled), "index": []})
+				else:
+					ci = i
+					cj = j
+	if currentCard != null:
+		var x: int = pos[Values.X] + cj * xDistance
+		var y: int = pos[Values.Y] + ci * yDistance
+		var enabled := true
+		g.setFontSize(28, true)
+		var size: float = 1.2 if large else 0.9
+		var card := {"images": [], "index": []}
+		if map != null:
+			var info = map.get(currentCard.getSortingValue())
+			enabled = info.isEnabled()
+			card.images = currentCard.place_at(g, x - 15, y - 20, size,
+					AbstractCard.NORMAL if enabled else AbstractCard.GRAY)
+			Graphics.setTextColor(0)
+			_place_index(g, str(info.getIndex()), Vector2i(x + 128, y + 186), card.index)
+			Graphics.setTextColor(1)
+			_place_index(g, str(info.getIndex()), Vector2i(x + 126, y + 184), card.index)
+		else:
+			card.images = currentCard.place_at(g, x - 15, y - 20, size,
+					AbstractCard.NORMAL if currentCard.getPrice() <= gold else AbstractCard.GRAY)
+		cards.append(card)
+	var placed := {"cards": cards, "hand": []}
+	if active:
+		placed.hand = hand.place_hand(g)
+	Graphics.setTextColor(0)
+	g.setFontSize(fs, false)
+	return placed
+
+
+## drawCard (the deck's) without the drawing (AbstractCard.place_at).
+func _place_card(g, large, x, y, c, enabled) -> Array:
+	return c.place_at(g, x, y, 1.0 if large else 0.7,
+			AbstractCard.NORMAL if enabled else AbstractCard.GRAY)
+
+
+## drawStringRightAligned of a card's number without the drawing: the line
+## and drawString's setColor(color).
+static func _place_index(g, text: String, end: Vector2i, into: Array) -> void:
+	into.append([text, end, g.getFontSize(), Graphics.text_color(1.0), Graphics.font_bold()])
+	g.setColor(g.color)
+
+
+## Bridge (phase 4.2 step B): drawDeck without the drawing (place_deck), and
+## the frame's next DeckView node on the UI layer shows the deck where it
+## would have been drawn (Graphics.show_ui).
+func show_deck(g, gold = null, large = null, currentCard = null, map = null) -> void:
+	var mat = g.canvas_material()
+	var placed := place_deck(g, gold, large, currentCard, map)
+	var view = g.show_ui(VIEW, Graphics.UI_LAYER)
+	if view == null:
+		return
+	var hand_view := []
+	if not placed.hand.is_empty():
+		var t = ImageHandler.getTexture(placed.hand[0])
+		hand_view = [t.getGodotTexture() if t != null else null,
+				Vector2i(placed.hand[1], placed.hand[2]), placed.hand[3]]
+	view.show_deck(placed.cards, hand_view, mat)
 
 
 func getSeenCard(cardIndex):

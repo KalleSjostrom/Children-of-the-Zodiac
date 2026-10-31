@@ -1,0 +1,76 @@
+# --load="Slot 1" --start=Alares (parity case menu_deck_edit, phase 4.2's
+# menu): the deck page editing Kin's deck and the party's: a card flying to
+# the party deck (shots while it flies), the party deck active (Kin's at
+# alpha .5, the dimmed hand of Edit/Back), the party deck scrolled, a card
+# flying back to Kin's deck, the card help off and on (SELECT: no card
+# info, no status line), the party deck sorted (SQUARE), editing ended
+# (CIRCLE), R1 to Celis's deck page while editing, CIRCLE back.
+wait 3000
+tap TRIANGLE
+wait 2500
+tap CROSS
+wait 600
+tap CROSS
+wait 800
+shot md01_deck_page
+tap CROSS
+wait 500
+shot md02_edit_kin
+tap RIGHT
+wait 400
+tap CROSS
+wait 33
+shot md03_flying_1
+wait 100
+shot md04_flying_2
+wait 100
+shot md05_flying_3
+wait 600
+shot md06_landed
+tap R2
+wait 500
+shot md07_edit_party
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+shot md08_party_scrolled
+tap RIGHT
+wait 400
+tap CROSS
+wait 33
+shot md09_flying_back_1
+wait 100
+shot md10_flying_back_2
+wait 100
+shot md11_flying_back_3
+wait 600
+shot md12_landed_back
+tap SELECT
+wait 400
+shot md13_no_help
+tap SELECT
+wait 400
+tap SQUARE
+wait 400
+shot md14_sorted
+tap R2
+wait 500
+shot md15_edit_kin_again
+tap R1
+wait 800
+shot md16_celis_editing
+tap CIRCLE
+wait 500
+shot md17_celis_not_editing
+tap CIRCLE
+wait 800
+shot md18_start_page
+tap TRIANGLE
+wait 1500
+log back_in_village
+quit

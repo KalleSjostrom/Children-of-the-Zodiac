@@ -1,0 +1,63 @@
+# --load="Slot 1" --start=Alares (parity case menu_key_items, phase 4.2's
+# menu): Key Items with more items than its bounding box shows (the dev-only
+# console's give: test items, and more of Slot 1's own), their "(n)"
+# numbers, the list scrolled down to its end, wrapped to the top and back up
+# to the bottom (its scroll bar), CROSS on a disabled item (the error sound).
+wait 3000
+console give item Bananas 2
+console give item Test_Item_1
+console give item Test_Item_2 3
+console give item Test_Item_3
+console give item Test_Item_4
+console give item Test_Item_5 12
+wait 300
+tap TRIANGLE
+wait 2500
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap CROSS
+wait 600
+shot mk01_key_items
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+shot mk02_last_shown
+tap DOWN
+wait 400
+shot mk03_scrolled
+tap DOWN
+wait 400
+shot mk04_scrolled_end
+tap CROSS
+wait 400
+tap DOWN
+wait 400
+shot mk05_wrapped_top
+tap UP
+wait 400
+shot mk06_wrapped_bottom
+tap UP
+wait 400
+tap UP
+wait 400
+tap UP
+wait 400
+shot mk07_up
+tap CIRCLE
+wait 600
+shot mk08_root
+tap TRIANGLE
+wait 1500
+log back_in_village
+quit

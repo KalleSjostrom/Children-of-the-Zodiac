@@ -174,6 +174,26 @@ func place_card(g) -> Array:
 	return [base, ball, level]
 
 
+## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): drawCard(g, x,
+## y, size, type, level) without the drawing: the same binds, and the images
+## as Graphics.place_image places them (the picture, then the level's balls),
+## for a CardView node (a deck's cards, a flying card).
+func place_at(g, x, y, size, type = NORMAL) -> Array:
+	var s: float = float(size)
+	var yy: int = int(y + s * 25)
+	var placed := [g.place_image(images[type][BASE], x, y, s)]
+	if level == 1:
+		placed.append(g.place_image(images[type][BALL], x + (s * 65), yy, s))
+	elif level == 2:
+		placed.append(g.place_image(images[type][BALL], x + (s * 50), yy, s))
+		placed.append(g.place_image(images[type][BALL], x + (s * 80), yy, s))
+	elif level == 3:
+		placed.append(g.place_image(images[type][BALL], x + (s * 40), yy, s))
+		placed.append(g.place_image(images[type][BALL], x + (s * 65), yy, s))
+		placed.append(g.place_image(images[type][BALL], x + (s * 90), yy, s))
+	return placed
+
+
 ## Draws the card on the given graphics in black and white.
 ## Java overloads: drawGrayCard(g, x, y) and drawGrayCard(g, x, y, size).
 ## Note: as in the original, the three argument version draws the normal

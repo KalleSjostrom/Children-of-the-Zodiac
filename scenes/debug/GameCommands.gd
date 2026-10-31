@@ -71,6 +71,10 @@ func _register(c: DebugCommands) -> void:
 		DebugCommands.arg("name", Callable()), DebugCommands.opt("value", Callable())])
 	c.add("difficulty", "Shows or sets the difficulty (either way, unlike the menu)", _difficulty, [
 		DebugCommands.opt("level", func() -> PackedStringArray: return PackedStringArray(LEVELS.keys()))])
+	c.add("give", "Gives the party a key item or a piece of equipment (weapon, shield, armour), as a chest gives one, number times", _give, [
+		DebugCommands.arg("what", func() -> PackedStringArray: return PackedStringArray(["item", "equipment"])),
+		DebugCommands.arg("name", _equipment_names, "_ for a space; any name for an item").loose(),
+		DebugCommands.opt("number", Callable(), "1 if left out")])
 	c.add("save", "Saves the game here, wherever this is", _save, [
 		DebugCommands.arg("slot", func() -> PackedStringArray: return PackedStringArray(SAVE_SLOTS.keys()))])
 	c.add("padlost", "Shows the game pad lost overlay, as if a game pad were unplugged, until its menu is answered", _padlost, [
@@ -665,6 +669,38 @@ func _difficulty(args: PackedStringArray) -> DebugCommands.Result:
 	if not args.is_empty():
 		Database.addStatus(Difficulty.STATUS, LEVELS[args[0]])
 	return DebugCommands.done("Difficulty: %s" % Difficulty.name_of(Difficulty.current()))
+
+
+## Dev only (phase 4.2's menu cases): more key items and equipment than the
+## shipped saves have, for the menu's lists that scroll in their bounding
+## box ("Key Items", the equip page's lists) and their "(n)" numbers.
+func _give(args: PackedStringArray) -> DebugCommands.Result:
+	if not Load.hasLoaded():
+		return DebugCommands.fail("No game loaded")
+	var name := args[1].replace("_", " ")
+	var number := 1
+	if args.size() > 2:
+		if not args[2].is_valid_int() or int(args[2]) < 1:
+			return DebugCommands.fail("The number is a whole number from 1: %s" % args[2])
+		number = int(args[2])
+	if args[0] == "item":
+		Load.getPartyItems().addItem(name, number)
+		return DebugCommands.done("%s: %d more" % [name, number])
+	if not EquipmentFactory._getFactory().bank.has(name):
+		return DebugCommands.fail("No equipment called %s" % name)
+	var ae = EquipmentFactory.getEquipment(name)
+	for i in number:
+		Load.addEquipment(ae)
+	return DebugCommands.done("%s: %d owned" % [name, ae.getNumber()])
+
+
+## The names of the equipment.bank, with _ for a space (give's completion).
+static func _equipment_names() -> PackedStringArray:
+	var names := PackedStringArray()
+	for key in EquipmentFactory._getFactory().bank:
+		names.append(str(key).replace(" ", "_"))
+	names.sort()
+	return names
 
 
 func _save(args: PackedStringArray) -> DebugCommands.Result:

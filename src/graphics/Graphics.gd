@@ -1638,6 +1638,33 @@ func skip_image(image) -> GameTexture:
 	return t
 
 
+## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): drawImage(image,
+## x, y[, scale]) without the drawing (skip_image's bind and texture
+## coordinate), for a node that draws the image where it would have been
+## drawn under the identity modelview. Returns [texture, rect (the quad
+## drawImage draws: its position rounded, its far corner truncated to whole
+## pixels, GameTexture.drawPart), tint (the current colour)], or [] when
+## drawImage would draw nothing.
+func place_image(image, x, y, scale: float = 1.0) -> Array:
+	var tint := _cur_color
+	var t := skip_image(image)
+	if t == null:
+		return []
+	var px := roundi(x)
+	var py := roundi(y)
+	return [t.getGodotTexture(), Rect2i(px, py, int(px + t.getWidth() * scale) - px,
+			int(py + t.getHeight() * scale) - py), tint]
+
+
+## Bridge (phase 4.2 step B): drawCenteredImage(name, x, y) without the
+## drawing (place_image of the image centred on x).
+func place_centered_image(name: String, x: int, y: int) -> Array:
+	var t := ImageHandler.getTexture(name)
+	if t == null:
+		return []
+	return place_image(name, x - J.round(t.getWidth() / 2.0), y)
+
+
 ## Bridge (phase 3 step B): the colour text drawn now has (setTextColor) with
 ## the given alpha; text_alpha is drawMultiString's (startText's).
 static func text_color(alpha: float) -> Color:

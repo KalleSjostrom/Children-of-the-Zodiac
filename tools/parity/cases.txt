@@ -597,3 +597,18 @@ game_over_timeout        game_over_timeout --load="Start demon1" --start="Game O
 game_over_borealis       game_over_image   --load="Start demon2" --start="Game Over Screen"
 game_over_zalzi          game_over_image   --load="Slot 1" --start="Game Over Screen"
 game_over_all            game_over_image   --load="Start Menthu1" --start="Game Over Screen"
+# Phase 4.2's menu (tools/autoplay/menu_*.txt; docs/MODERNIZATION_PLAN.md
+# 9.2, "The menu"): the start page's Save list before and after a save (the
+# saving box; the slot's date by the game clock in seeded runs), the
+# character select for Deck and Equip moved, "Paused" over the menu; Key
+# Items scrolled with "(n)" numbers and the equip page's lists scrolled, with
+# their comparisons (more items and equipment than the shipped saves have:
+# the dev-only console's give); the deck page editing both decks with cards
+# flying both ways; the options' difficulty list with harder levels grey;
+# the tutorial page's list scrolled.
+menu_start_save          menu_start_save          --load="Slot 1" --start=Alares
+menu_key_items           menu_key_items           --load="Slot 1" --start=Alares
+menu_equip_list          menu_equip_list          --load="Slot 1" --start=Alares
+menu_deck_edit           menu_deck_edit           --load="Slot 1" --start=Alares
+menu_options_difficulty  menu_options_difficulty  --load="Slot 1" --start=Alares
+menu_tutorial_scroll     menu_tutorial_scroll     --load="Slot 1" --start=Alares

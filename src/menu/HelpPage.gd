@@ -87,14 +87,20 @@ func selectPressed():
 	pass
 
 
+## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): each part is
+## shown by its node where it was drawn, or drawn with its --legacy flag
+## (AbstractPage.draw_title, draw_list, _show_difficulty, StartPage.draw_info,
+## AbstractPage.draw_help).
 func draw3D(g):
 	drawStandard(g)
-	var x: int = MenuValues.MENU_TEXT_X
-	g.drawString(activeNode.getName(), x, 54)
-	activeNode.drawChildren(g)
-	drawDifficulty(g)
-	StartPage.drawInfo(g)
-	drawHelp(g)
+	AbstractPage.draw_title(g, activeNode.getName())
+	AbstractPage.draw_list(g, activeNode, false, false, false, false, false)
+	if Main.is_legacy("menu_text"):
+		drawDifficulty(g)
+	else:
+		_show_difficulty(g)
+	StartPage.draw_info(g)
+	AbstractPage.draw_help(g, drawHelp)
 
 
 ## The current difficulty and its multipliers, in the left panel.
@@ -113,6 +119,31 @@ func drawDifficulty(g):
 	for line in lines:
 		g.drawString(line, x, y)
 		y += 40
+
+
+## Bridge (phase 4.2 step B): drawDifficulty without the drawing (the same
+## lines, measured as it measures them; drawString's setColor(color) after
+## each), and the frame's next MenuText node shows them (AbstractPage.show_lines).
+func _show_difficulty(g) -> void:
+	var settings: DifficultyLevel = Difficulty.settings()
+	var x: int = 60
+	var y: int = 100
+	var lines: PackedStringArray = ["Difficulty: " + settings.display_name, ""]
+	lines.append_array(wrapText(settings.description, 620))
+	lines.append_array(["",
+		"Experience: %d %%" % roundi(settings.experience_multiplier * 100),
+		"Damage taken: %d %%" % roundi(settings.enemy_damage_multiplier * 100),
+		"Damage dealt: %d %%" % roundi(settings.ally_damage_multiplier * 100),
+		""])
+	lines.append_array(wrapText("The difficulty can be lowered, but never raised again.", 620))
+	var shown := []
+	for line in lines:
+		if line != "":
+			shown.append([line, Vector2i(x, y), g.getFontSize(), Graphics.text_color(1.0),
+					Graphics.font_bold(), HORIZONTAL_ALIGNMENT_LEFT])
+		g.setColor(g.color)
+		y += 40
+	AbstractPage.show_lines(g, shown)
 
 
 ## The text in lines no wider than width (at the current font size).

@@ -1,0 +1,88 @@
+# --load="Slot 1" --start=Alares (parity case menu_start_save, phase 4.2's
+# menu): the start page's Save list ("Empty" under each slot), saving to
+# Slot 1 (the saving box's three texts over the Save list), the Save list
+# with Slot 1's date (the game clock's: a deterministic run, dev only),
+# the character select for Deck and for Equip with the hand moved and
+# wrapped, then "Paused" over the menu (START) and back. A seeded run saves
+# only to user://saves_deterministic/.
+wait 3000
+tap TRIANGLE
+wait 2500
+shot ms01_menu
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+shot ms02_on_save
+tap CROSS
+wait 600
+shot ms03_save_list
+tap DOWN
+wait 400
+shot ms04_save_list_moved
+tap UP
+wait 400
+tap CROSS
+wait 250
+shot ms05_saving_1
+wait 500
+shot ms06_saving_2
+wait 500
+shot ms07_saving_3
+wait 800
+shot ms08_saved_dated
+tap DOWN
+wait 400
+shot ms09_dated_slot2
+tap DOWN
+wait 400
+shot ms10_dated_slot3
+tap CIRCLE
+wait 600
+shot ms11_root_on_save
+tap DOWN
+wait 400
+shot ms12_on_deck
+tap CROSS
+wait 600
+shot ms13_deck_select
+tap DOWN
+wait 400
+shot ms14_deck_select_2
+tap DOWN
+wait 400
+shot ms15_deck_select_3
+tap DOWN
+wait 400
+shot ms16_deck_select_wrapped
+tap CIRCLE
+wait 600
+shot ms17_back_from_select
+tap DOWN
+wait 400
+tap CROSS
+wait 600
+shot ms18_equip_select
+tap UP
+wait 400
+shot ms19_equip_select_last
+tap CIRCLE
+wait 600
+tap START
+wait 500
+shot ms20_paused
+tap START
+wait 500
+shot ms21_unpaused
+tap TRIANGLE
+wait 1500
+log back_in_village
+quit

@@ -1,4 +1,4 @@
-# Handoff: state of the Godot port (2026-10-30, after steps 1–3, modernization phase 0, phase 1 steps A and B, phase 2 steps A and B, the particles phase, P2, phase 3 steps A and B, phase 4.1 steps A and B and phase 4.2's pilot through step B)
+# Handoff: state of the Godot port (2026-10-30, after steps 1–3, modernization phase 0, phase 1 steps A and B, phase 2 steps A and B, the particles phase, P2, phase 3 steps A and B, phase 4.1 steps A and B, phase 4.2's pilot and its menu through step B)
 
 Conventions: legacy (ported) code follows `docs/PORTING.md`; new code
 (scenes, resources, tools, bridge) follows `docs/ARCHITECTURE.md`. The
@@ -352,6 +352,52 @@ section 5):
   mini-games (one; fix the riddle fade's port bug first, plan Appendix).
   None of them draws in 3D.
 
+**Modernization phase 4.2's rollout, part 1 (the menu): step B done** (plan
+9.2, "Results of the menu"; conventions in `docs/ARCHITECTURE.md` section
+14, "The menu"; the procedure in `docs/CONVERTING_UI.md` section 5):
+- `MainMenu` and its pages (start, equip, deck, map with the automap, help,
+  tutorial) draw through UI nodes in the frame's order (`Graphics.show_ui`):
+  `MenuBackground` (back.jpg and the layout's pieces), `MenuTitle`,
+  `MenuInfo` (gold, steps, time), `MenuThumbnail`, `HelpLine` (the button
+  icons and labels; the pages' `drawHelp` run against a `HelpLineCapture`),
+  `MenuText`, `MenuBox` (the saving box), `MenuList` with its variants
+  (numbers, equipment with `down`, price, the bounding box with its
+  `PageScrollBar`, an active child's list as several nodes, the dimmed
+  hand), `StatusLine`, `EquipStatus`, `EquipItem`, `DeckView` and
+  `CardView` (also a flying card), `Automap` (`AutomapFloor`: the floor's
+  names, its cells as TextureRects under a `Zoom` with the overview's
+  modelview: exact). The legacy pages, `MenuNode`, `GameAction`, the
+  deck page's `Animator` and the saving box's timers keep the state, the
+  input and the timing; the twins keep every state change of the drawing.
+- Built for the stores, not yet used by them: the pieces with a store's
+  mask, the info lines, the price variant, the confirm box, the deck's card
+  store branches (numbers, grey cards), `CardView` for the merge preview
+  (plan 9.2's stores entry tells how each store shows them).
+- Flags `--legacy=menu_frame`, `menu_list` (now also the menu's lists),
+  `menu_text`, `status`, `deck`, `automap`; with the pilot's `title` and
+  `game_over` the frame is drawn exactly as before phase 4.2.
+- Dev only: the console's `give <item|equipment> <name> [number]` (more
+  key items and equipment than the shipped saves have, for the lists that
+  scroll).
+- Coverage: six new cases (`menu_*`: the Save list before and after a save
+  with the saving box, the character select moved, "Paused" over the menu,
+  Key Items scrolled with numbers, the equip page's lists scrolled with the
+  comparisons, both decks edited with cards flying both ways, the
+  difficulty list with grey levels, the tutorial list scrolled): 407 cases
+  and `bridge_test` in all, 7,447 shots.
+- Parity (tolerance 0, 407 cases and `bridge_test`, 7,447 shots): golden
+  vs. nodes identical (logs and error lines too); this task's flags vs.
+  nodes on the 285 cases that draw the menu identical, each flag alone on
+  its cases too; every phase 4.2 flag vs. the golden identical; the bridge
+  test passes. Fixed on the way: a theme role lookup that cannot fail
+  (`has_theme_font_size` is true for any type while the theme has a default
+  size: the deck page's help line came out at 24; `MenuText.role`).
+- Frame rate (normal runs): 60 capped either way; uncapped, legacy → nodes,
+  the start page 759 → 1,608 FPS, the deck page while editing 345 → 839,
+  the map page's five-floor overview 1,123 → 1,755.
+- Prepared (plan 9.2): the stores (one or two sessions; their cases first),
+  then the mini-games.
+
 ## Plan (what is left)
 
 0. **Modernization:** closing phase 1 (plan 6.9) needs decision 5 (delete
@@ -360,9 +406,10 @@ section 5):
    the 1/255 tolerance accepted. Closing phase 3 (plan 8.4) needs phases 1
    and 2 closed (their legacy paths draw through the same overlays) and the
    minimap's geometry made by its node. Closing phase 4.1 (plan 9.1) needs
-   decision 5 and another home for the bridge test. Next: phase 4.2's
-   rollout (plan 9.2: the menu, the stores, the mini-games; battles still
-   draw overlays of their own). Record goldens before each change.
+   decision 5 and another home for the bridge test. Next: the rest of
+   phase 4.2's rollout (plan 9.2: the stores, which reuse the menu's nodes,
+   then the mini-games; battles still draw overlays of their own). Record
+   goldens before each change.
 
 1. **Performance:** since P2 the labyrinths with rain or snow run at 60 FPS
    (Forest Path was 35, Ice Cavern--Frozen Field 50; plan 6.12), and since
@@ -400,9 +447,9 @@ section 5):
   only the shipped saves.
 - Parity: `tools/parity/parity.sh record <set>` / `compare <a> <b>` /
   `ab "<args a>" "<args b>" [case…]`, see `docs/ARCHITECTURE.md` section 7.
-  Runs are windowed (screenshots need a renderer); all 401 cases and
+  Runs are windowed (screenshots need a renderer); all 407 cases and
   `bridge_test` take about 13-15 minutes with `--jobs=8` on 12 logical
-  cores (run nothing windowed beside them: 16 GB run out, plan 12) since the particles run
+  cores (run nothing beside them, not even a headless compare: 16 GB run out, plan 12) since the particles run
   on the GPU (60-70 minutes before P2; `--uncapped`; with
   `--legacy=particles`, `particles_hotg` and the Berca cutscene are bound by
   the legacy particles at ~6 FPS, with `--legacy=dungeon_particles` the

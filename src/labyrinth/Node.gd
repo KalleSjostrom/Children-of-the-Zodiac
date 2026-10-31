@@ -271,6 +271,39 @@ func drawInMap(g, x, y, onThis, dir, isOnFloor, drawAll) -> void:
 		g.drawImage(MapPage.mappiece, x, y, scale)
 
 
+## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): drawInMap
+## without the drawing (the menu's automap, LabyrinthMap.place_map): the
+## same reads (the inventory's map image, which a chest's sets in the
+## Database the first time) and colour changes, each image as
+## Graphics.place_image places it in the floor's space (under the
+## modelview), appended to images.
+func place_in_map(g, x, y, onThis, dir, isOnFloor, drawAll, images: Array) -> void:
+	var drawAnyway: bool = false
+	if isSeen():
+		if hasInventory():
+			var inv = getInventory()
+			drawAnyway = inv.shouldDrawWhenOnlySeen()
+	if isVisited() or drawAnyway:
+		g.setColor(1)
+		images.append(g.place_image(MapPage.mappiece2, x, y, scale))
+		if hasInventory():
+			var s = getInventory().getMapImage()
+			if s != null:
+				if getInventory().hasBeenIn():
+					images.append(g.place_image(LabyrinthMap.entrance[0], x, y, scale))
+				images.append(g.place_image(s, x, y, scale))
+		if onThis:
+			g.setImageColor(1, 0.85, 0, 1)
+			if drawAll:
+				images.append(g.place_image(LabyrinthMap.arrows[(dir + 2) % 4], x - 24, y - 24,
+						scale * 2.2))
+			else:
+				images.append(g.place_image(LabyrinthMap.arrows[(dir + 2) % 4], x, y, scale * 1))
+			g.setImageColor(1, 1, 1, 1)
+	elif isSeen():
+		images.append(g.place_image(MapPage.mappiece, x, y, scale))
+
+
 func drawInSmallMap(g, x, y, angle) -> void:
 	var drawAnyway: bool = false
 	if isSeen():

@@ -99,6 +99,14 @@ static func show_dates_beside(g: Graphics, node: MenuNode, x: int, font_size: in
 	g.setFontSize(font_size)
 
 
+## draw_dates_under without the drawing (phase 4.2 step B,
+## docs/ARCHITECTURE.md section 14): the same state changes, and the frame's
+## next SlotDates node on the UI layer shows the dates (the menu's Save list).
+static func show_dates_under(g: Graphics, node: MenuNode, font_size: int) -> void:
+	_show_dates(g, node, Vector2i(14, 30))
+	g.setFontSize(font_size)
+
+
 static func _draw_dates(g: Graphics, node: MenuNode, offset: Vector2i) -> void:
 	g.setFontSize(DATE_FONT_SIZE)
 	for i in range(node.getSize()):

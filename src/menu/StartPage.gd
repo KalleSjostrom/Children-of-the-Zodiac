@@ -15,6 +15,11 @@ static var frame = ""
 static var miniScreenShot = null
 const EQUIP_PAGE_ = 0
 const DECK_PAGE_ = 1
+## Bridge (phase 4.2 step B): the nodes of draw_screen_shot, draw_info and
+## the saving box.
+const THUMBNAIL_VIEW := "res://scenes/ui/MenuThumbnail.tscn"
+const INFO_VIEW := "res://scenes/ui/MenuInfo.tscn"
+const MENU_BOX_VIEW := "res://scenes/ui/MenuBox.tscn"
 
 var parentNode = null
 var displayParent: bool = false
@@ -204,26 +209,35 @@ func fillMenu(list, dist = null, x = null, y = null):
 
 
 ## Draws the start page on the given graphics.
+## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): each part is
+## shown by its node where it was drawn (the wrappers draw_list, draw_title,
+## SaveSlots.show_dates_under, StatusPage.draw_top, draw_screen_shot,
+## draw_info, _show_saving_box), or drawn with its --legacy flag.
 func draw3D(g):
 	drawStandard(g)
 	if displayParent:
-		parentNode.drawAllChildren(g)
+		AbstractPage.draw_list(g, parentNode, false, true, false, false, false)
 	else:
-		activeNode.drawChildrenFreely(g, false, true, true, false, false)
+		AbstractPage.draw_list(g, activeNode, false, true, true, false, false)
 	var title = activeNode.getName()
-	var x: int = MenuValues.MENU_TEXT_X
-	g.drawString(title, x, MenuValues.MENU_TITLE_Y)
+	AbstractPage.draw_title(g, title)
 	if not displayParent and activeNode.getName() == "Save":
-		SaveSlots.draw_dates_under(g, activeNode, MenuValues.MENU_FONT_SIZE)
+		if Main.is_legacy("menu_text"):
+			SaveSlots.draw_dates_under(g, activeNode, MenuValues.MENU_FONT_SIZE)
+		else:
+			SaveSlots.show_dates_under(g, activeNode, MenuValues.MENU_FONT_SIZE)
 
 	for i in range(Load.getCharacters().size()):
 		var d: int = MenuValues.CHARACTER_DISTANCE * i
 		var c = Load.getCharacters()[i]
-		StatusPage.drawTop(g, c, d)
-	drawScreenShot(g)
-	drawInfo(g)
+		StatusPage.draw_top(g, c, d)
+	draw_screen_shot(g)
+	draw_info(g)
 	if saving:
-		drawConfirmBuyDialog(g)
+		if Main.is_legacy("menu_text"):
+			drawConfirmBuyDialog(g)
+		else:
+			_show_saving_box(g)
 
 
 func drawConfirmBuyDialog(g):
@@ -231,10 +245,43 @@ func drawConfirmBuyDialog(g):
 	g.drawString(savingString, 470, 347)
 
 
+## Bridge (phase 4.2 step B): drawConfirmBuyDialog without the drawing (the
+## piece's bind, drawString's setColor(color)), and the frame's next MenuBox
+## node on the UI layer shows the saving box (Graphics.show_ui).
+func _show_saving_box(g) -> void:
+	var mat = g.canvas_material()
+	var piece: Array = g.place_centered_image(Values.MenuImages + "Pieces/1.png",
+			Values.ORIGINAL_RESOLUTION[Values.X] / 2, 300)
+	var lines := []
+	if savingString != "":
+		lines.append([savingString, Vector2i(470, 347), g.getFontSize(), Graphics.text_color(1.0),
+				Graphics.font_bold()])
+	g.setColor(g.color)
+	var view = g.show_ui(MENU_BOX_VIEW, Graphics.UI_LAYER)
+	if view != null:
+		view.show_box(piece, lines, mat)
+
+
 ## Draws the screen shot miniature on the given graphics.
 static func drawScreenShot(g):
 	g.drawImage(miniScreenShot, MenuValues.MENU_TEXT_X, 428)
 	g.drawImage(frame, MenuValues.MENU_TEXT_X, 428)
+
+
+## Bridge (phase 4.2 step B): drawScreenShot, or with --legacy=menu_frame
+## off its twin: the binds, and the frame's next MenuThumbnail node on the UI
+## layer shows the thumbnail and its frame (Graphics.show_ui). The menu's
+## pages call this; the stores keep drawScreenShot until their part.
+static func draw_screen_shot(g) -> void:
+	if Main.is_legacy("menu_frame"):
+		drawScreenShot(g)
+		return
+	var mat = g.canvas_material()
+	var shot: Array = g.place_image(miniScreenShot, MenuValues.MENU_TEXT_X, 428)
+	var framed: Array = g.place_image(frame, MenuValues.MENU_TEXT_X, 428)
+	var view = g.show_ui(THUMBNAIL_VIEW, Graphics.UI_LAYER)
+	if view != null:
+		view.show_thumbnail(shot, framed, mat)
 
 
 ## Draws the amount of gold, the number of steps taken and the time that the
@@ -244,3 +291,24 @@ static func drawInfo(g):
 	g.drawString("Gold: " + str(Load.getPartyItems().getGold()) + " gp", x, 648)
 	g.drawString("Steps: " + str(Load.getPartyItems().getSteps()), x, 689)
 	g.drawString("Time: " + str(Load.getTime().getHours()) + ":" + str(Load.getTime().getMin()), x, 730)
+
+
+## Bridge (phase 4.2 step B): drawInfo, or with --legacy=menu_frame off its
+## twin: drawString's setColor(color) after each line, and the frame's next
+## MenuInfo node on the UI layer shows the three lines (Graphics.show_ui). The
+## menu's pages call this; the Inn keeps drawInfo until the stores' part.
+static func draw_info(g) -> void:
+	if Main.is_legacy("menu_frame"):
+		drawInfo(g)
+		return
+	var lines := PackedStringArray([
+		"Gold: " + str(Load.getPartyItems().getGold()) + " gp",
+		"Steps: " + str(Load.getPartyItems().getSteps()),
+		"Time: " + str(Load.getTime().getHours()) + ":" + str(Load.getTime().getMin())])
+	var colors: Array[Color] = []
+	for i in lines.size():
+		colors.append(Graphics.text_color(1.0))
+		g.setColor(g.color)
+	var view = g.show_ui(INFO_VIEW, Graphics.UI_LAYER)
+	if view != null:
+		view.show_info(lines, colors, g.getFontSize(), Graphics.font_bold(), g.canvas_material())

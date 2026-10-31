@@ -1,36 +1,48 @@
 extends Control
 ## A menu list (phase 4.2 step B, docs/ARCHITECTURE.md section 14): the
-## choices of a legacy MenuNode and its hand, as MenuNode.drawAllChildren
-## draws them: each choice a line of text at its baseline in the colour of its
-## state (enabled or disabled), then the hand pointing at the current choice.
-## The legacy MenuNode stays in charge of the choices, the cursor and the
-## key repeat; each frame its twin (MenuNode.show_all_children) hands this
-## node what it would have drawn (Graphics.show_ui), on the title, the game
-## pad lost overlay and, later, the stores and the menu pages.
+## lines of a legacy MenuNode list and its hand, as MenuNode.draw draws them:
+## each choice a line of text at its baseline in the colour of its state
+## (enabled or disabled), with its price, number or equipment right-aligned
+## at a smaller size where the list's variant draws one, then the hand
+## pointing at the current choice and, for a list that overflows its
+## bounding box, the scroll bar. The legacy MenuNode stays in charge of the
+## choices, the cursor, the scroll and the key repeat; each frame its twin
+## (MenuNode.show_children_freely) hands this node what it would have drawn
+## (Graphics.show_ui), on the title, the game pad lost overlay and the menu
+## pages; the stores later. A list with an active child whose own list is
+## drawn too (the start page's character select) is shown by several of
+## these nodes, in the legacy order.
 ##
-## The choices take the theme role of their font size (MenuChoice<size>;
+## Each line takes the theme role of its font size (MenuChoice<size>;
 ## Text<size> for a size without one): the legacy list is drawn at whatever
-## size its mode set.
+## size its mode set, its prices, numbers and equipment at 20.
 
 @onready var _choices: Control = $Choices
 @onready var _hand: TextureRect = $Hand
+@onready var _bar: Control = $ScrollBar
 
 
-## The choices, [text, position (the baseline's start), colour] each, in
-## drawing order, at font_size in the bold font or not; the hand's image
-## (null: none) at hand_at in hand_tint (a dimmed hand's alpha is .3). mat is
-## the material of the legacy drawing (Graphics.canvas_material).
-func show_menu(choices: Array, font_size: int, bold: bool, hand: Texture2D, hand_at: Vector2i,
-		hand_tint: Color, mat: Material) -> void:
+## lines: [text, position (the baseline's start, or its end for a
+## right-aligned line), font size, colour, bold, alignment] each, in drawing
+## order; hand: [texture, position, tint] ([]: none; a dimmed hand's tint has
+## alpha .3); bar: the scroll bar's images (PageScrollBar.show_bar; []:
+## none). mat is the material of the legacy drawing
+## (Graphics.canvas_material).
+func show_list(lines: Array, hand: Array, bar: Array, mat: Material) -> void:
 	material = mat
-	var role := StringName("MenuChoice%d" % font_size)
-	if not has_theme_font_size(&"font_size", role):
-		role = StringName("Text%d" % font_size)
 	var entries := []
-	for c: Array in choices:
-		entries.append([c[0], c[1], role, c[2], bold, HORIZONTAL_ALIGNMENT_LEFT])
+	for line: Array in lines:
+		entries.append([line[0], line[1], _role(line[2]), line[3], line[4], line[5]])
 	_choices.show_labels(entries)
-	_hand.texture = hand
-	_hand.position = Vector2(hand_at)
-	_hand.self_modulate = hand_tint
-	_hand.visible = hand != null
+	_hand.visible = not hand.is_empty() and hand[0] != null
+	if _hand.visible:
+		_hand.texture = hand[0]
+		_hand.position = Vector2(hand[1])
+		_hand.self_modulate = hand[2]
+	_bar.visible = not bar.is_empty()
+	if _bar.visible:
+		_bar.show_bar(bar, mat)
+
+
+func _role(font_size: int) -> StringName:
+	return MenuText.role(font_size, "MenuChoice")

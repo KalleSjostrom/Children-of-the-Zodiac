@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/MenuBackground.gd" id="1_back"]
+[ext_resource type="Theme" path="res://resources/theme/game_theme.tres" id="2_theme"]
+[ext_resource type="Texture2D" path="res://res/Menu/back.jpg" id="3_back"]
+[ext_resource type="Script" path="res://scenes/ui/ImageList.gd" id="4_images"]
+
+[node name="MenuBackground" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1024.0
+offset_bottom = 768.0
+mouse_filter = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_back")
+
+[node name="Back" type="TextureRect" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_right = 1024.0
+offset_bottom = 768.0
+mouse_filter = 2
+texture = ExtResource("3_back")
+expand_mode = 1
+
+[node name="Pieces" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+mouse_filter = 2
+script = ExtResource("4_images")

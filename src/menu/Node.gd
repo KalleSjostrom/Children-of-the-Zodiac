@@ -114,62 +114,136 @@ func draw(g, withPrice, allChildren, withNumber, down, withEquipment):
 				scrollBar.draw(g, menuCursor, children.size())
 
 
-## Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): drawAllChildren
-## without the drawing, for a UI node that shows the menu (MenuList, through
-## show_all_children): the same state changes (the cursor's fix-up, the text
-## colours, drawString's setColor(color), the hand's). Returns {"items":
-## [[name, x, y (the baseline), colour] …], "hand": MenuHand.place_hand's}.
-## Only for a menu whose children are drawn as plain lines: no active child
-## (its children would be drawn too) and no scroll bar (bbMinY); the variants
-## of draw (prices, numbers, equipment, active children, the bounding box)
-## come with the stores and the menu pages (docs/MODERNIZATION_PLAN.md 9.2).
-func place_all_children(g) -> Dictionary:
+## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): draw without
+## the drawing, for the MenuList nodes that show the list (show_children_freely):
+## the same state changes in the same order (the cursor's fix-up, which is
+## game state and plays the cursor sound; the text colours; the font sizes of
+## the prices, numbers and equipment; drawString's setColor(color) after each
+## line; the hand's dim and bind; the scroll bar's lazy init and
+## loadIdentity). Returns the list's parts in drawing order, each
+## {"lines": [[text, position, font size, colour, bold, alignment] …],
+## "hand": MenuHand.place_hand's, "bar": MenuScrollBar.place_bar's}: a line's
+## position is its baseline's start, or its end for a right-aligned price,
+## number or equipment. With allChildren an active child's own list is drawn
+## before that child's name: its parts come between the lines before it and
+## those after it.
+func place_children(g, withPrice, allChildren, withNumber, down, withEquipment) -> Array:
+	var parts := []
+	_place_children(g, withPrice, allChildren, withNumber, down, withEquipment, parts)
+	return parts
+
+
+func _place_children(g, withPrice, allChildren, withNumber, down, withEquipment, parts: Array) -> void:
 	if menuCursor >= children.size():
 		previousChild()
-	var items := []
+	var part := {"lines": [], "hand": [], "bar": []}
 	var child = null
 	for i in range(children.size()):
 		child = children[i]
-		assert(not child.isActive(), "MenuNode.place_all_children: an active child's children")
+		if allChildren and child.isActive():
+			parts.append(part)
+			child._place_children(g, false, true, false, false, false, parts)
+			part = {"lines": [], "hand": [], "bar": []}
 		Graphics.setTextColor(enableColor if child.enabled else disableColor)
 		if not str(child.getName()).contains("character"):
 			var y: int = (Ypos + i * distance) + bboffset
 			if bbMinY == -1 or (y >= bbMinY and y <= bbMaxY):
-				if child.getName() != null:
-					items.append([str(child.getName()), Xpos, y, Graphics.text_color(1.0)])
-					g.setColor(g.color)
+				if withPrice:
+					_place_with_price(child, g, y, down, part.lines)
+				if withNumber:
+					_place_with_number(child, g, y, part.lines)
+				if not withPrice and not withNumber:
+					_place_line(g, child.getName(), Vector2i(Xpos, y), HORIZONTAL_ALIGNMENT_LEFT, part.lines)
+				if withEquipment:
+					_place_with_equipment(child, g, y, down, part.lines)
 		if not child.enabled:
 			Graphics.setTextColor(enableColor)
-	var placed := {"items": items, "hand": []}
 	if child != null:
-		placed.hand = hand.place_hand(g)
-		assert(bbMinY == -1, "MenuNode.place_all_children: a menu with a scroll bar")
-	return placed
+		part.hand = hand.place_hand(g)
+		if bbMinY != -1:
+			var h: int = bbMaxY - bbMinY
+			if (children.size() - 1) * distance > h:
+				part.bar = scrollBar.place_bar(g, menuCursor, children.size())
+	parts.append(part)
 
 
-## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): drawAllChildren
-## without the drawing (place_all_children), and the frame's next MenuList
-## node on the given layer (Graphics.UI_LAYER or TRANSITION_LAYER) shows the
-## list where it would have been drawn (Graphics.show_ui): its choices in the
-## font size and font set now, its hand, the material of the 2D state.
-func show_all_children(g, layer: int) -> void:
-	var placed := place_all_children(g)
-	var view = g.show_ui(MENU_LIST_VIEW, layer)
-	if view == null:
+## drawString without the drawing: the line (none for "", which draws
+## nothing) and drawString's setColor(color); nothing for null, as drawString.
+static func _place_line(g, text, at: Vector2i, alignment: int, lines: Array) -> void:
+	if text == null:
 		return
-	var hand_image: Texture2D = null
-	var hand_at := Vector2i.ZERO
-	var hand_tint := Color.WHITE
-	if not placed.hand.is_empty():
-		var t = ImageHandler.getTexture(placed.hand[0])
-		hand_image = t.getGodotTexture() if t != null else null
-		hand_at = Vector2i(placed.hand[1], placed.hand[2])
-		hand_tint = placed.hand[3]
-	var choices := []
-	for item: Array in placed.items:
-		choices.append([item[0], Vector2i(item[1], item[2]), item[3]])
-	view.show_menu(choices, g.getFontSize(), Graphics.font_bold(), hand_image, hand_at, hand_tint,
-			g.canvas_material())
+	if str(text) != "":
+		lines.append([str(text), at, g.getFontSize(), Graphics.text_color(1.0), Graphics.font_bold(),
+				alignment])
+	g.setColor(g.color)
+
+
+## drawWithPrice without the drawing.
+func _place_with_price(child, g, y, down, lines: Array) -> void:
+	_place_line(g, child.getName(), Vector2i(Xpos, y), HORIZONTAL_ALIGNMENT_LEFT, lines)
+	if child.getPrice() > 0:
+		g.setFontSize(20)
+		var p: String = str(child.getPrice()) + " gp"
+		_place_line(g, p, Vector2i(985, y + (25 if down else 0)), HORIZONTAL_ALIGNMENT_RIGHT, lines)
+		g.setFontSize(MenuValues.MENU_FONT_SIZE)
+
+
+## drawWithEquipment without the drawing.
+func _place_with_equipment(child, g, y, down, lines: Array) -> void:
+	var ae = child.getEquipment()
+	if ae != null:
+		var n: String = ae.getName()
+		g.setFontSize(20)
+		_place_line(g, n, Vector2i(985, y + (25 if down else 0)), HORIZONTAL_ALIGNMENT_RIGHT, lines)
+		g.setFontSize(MenuValues.MENU_FONT_SIZE)
+
+
+## drawWithNumber without the drawing.
+func _place_with_number(child, g, y, lines: Array) -> void:
+	_place_line(g, child.getName(), Vector2i(Xpos, y), HORIZONTAL_ALIGNMENT_LEFT, lines)
+	if child.number > 0:
+		var nr: String = ""
+		if child.number > 1:
+			nr = "(" + str(child.number) + ")"
+		g.setFontSize(20)
+		_place_line(g, nr, Vector2i(980, y), HORIZONTAL_ALIGNMENT_RIGHT, lines)
+		g.setFontSize(MenuValues.MENU_FONT_SIZE)
+
+
+## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): draw without
+## the drawing (place_children), and the frame's next MenuList nodes on the
+## given layer (Graphics.UI_LAYER or TRANSITION_LAYER) show the list where it
+## would have been drawn (Graphics.show_ui), one per part that shows
+## something: its lines, its hand, its scroll bar, the material of the 2D
+## state. Called where drawChildrenFreely was (show_children for
+## drawChildren, show_all_children for drawAllChildren).
+func show_children_freely(g, withPrice, allChildren, withNumber, down, withEquipment,
+		layer: int) -> void:
+	var parts := place_children(g, withPrice, allChildren, withNumber, down, withEquipment)
+	var mat = g.canvas_material()
+	for part: Dictionary in parts:
+		if part.lines.is_empty() and part.hand.is_empty() and part.bar.is_empty():
+			continue
+		var view = g.show_ui(MENU_LIST_VIEW, layer)
+		if view == null:
+			return
+		var hand_view := []
+		if not part.hand.is_empty():
+			var t = ImageHandler.getTexture(part.hand[0])
+			hand_view = [t.getGodotTexture() if t != null else null,
+					Vector2i(part.hand[1], part.hand[2]), part.hand[3]]
+		view.show_list(part.lines, hand_view, part.bar, mat)
+
+
+## drawChildren without the drawing (show_children_freely).
+func show_children(g, layer: int) -> void:
+	show_children_freely(g, false, false, false, false, false, layer)
+
+
+## drawAllChildren without the drawing (show_children_freely): the title's
+## lists and the game pad lost overlay's (on Transition), the menu pages'.
+func show_all_children(g, layer: int) -> void:
+	show_children_freely(g, false, true, false, false, false, layer)
 
 
 ## Draws the given child at the given y position with the price stored in

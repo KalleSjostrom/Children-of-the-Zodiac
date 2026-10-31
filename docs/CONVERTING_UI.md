@@ -7,10 +7,10 @@ mission display, "Paused" and "game pad lost", the cutscene images and
 texts and the tutorials' top layer (plan 8.3; the minimap stays the 3D
 bridge's batches, its node is a dev flag); the conventions
 are in `docs/ARCHITECTURE.md` section 12. This is the procedure for the next
-overlays (phase 4's: a battle's and a riddle's top layer, the menu pages,
-the stores' menus; the world map's name plate is done, docs/ARCHITECTURE.md
-section 13) and for whole 2D modes (section 5 below; the title and the game
-over are done, docs/ARCHITECTURE.md section 14). Run everything from bash in the project root, Godot with
+overlays (phase 4's: a battle's and a riddle's top layer, the stores'
+menus; the world map's name plate is done, docs/ARCHITECTURE.md
+section 13) and for whole 2D modes (section 5 below; the title, the game
+over and the menu are done, docs/ARCHITECTURE.md section 14). Run everything from bash in the project root, Godot with
 `< /dev/null`; close the Godot editor first (it imports new files and makes
 `.uid` files), and do not type while a recording runs (a new run's window
 takes the focus).
@@ -169,7 +169,7 @@ they trigger (the time mission's "Time's up!" leaves the floor), input
   once (`record after`), then `--legacy=<overlay>` on the overlay's cases,
   compared with it: the same pairs as `ab`, recorded once.
 
-## 5. Whole 2D modes (phase 4.2: the title, the game over; next the stores and the menu)
+## 5. Whole 2D modes (phase 4.2: the title, the game over, the menu; next the stores)
 
 A mode whose whole frame is UI (no world under it) is converted the same
 way, part by part; ARCHITECTURE section 14 has the conventions and the
@@ -209,3 +209,50 @@ reasons. What it adds to sections 1–4:
 * **Pooled nodes keep their textures.** A pooled node stays (hidden) after
   its mode is left, with the textures it was last given; release large
   ones when hidden if a mode's pages hold many.
+
+What the menu added (phase 4.2's rollout; docs/ARCHITECTURE.md section 14,
+"The menu"):
+
+* **Switch at the call sites, not in shared code.** A helper that the next
+  modes also call (`MenuNode.draw`, `StatusPage.drawTop`, `Deck.drawDeck`,
+  `StartPage.drawInfo`, `drawMenuBackgroundStatic`) stays as it is; its twin
+  is a new method beside it (`show_*`, `place_*`), and the converted mode's
+  call sites choose with the flag, through small wrappers where many sites do
+  the same (`AbstractPage.draw_list`, `draw_title`, `draw_help`,
+  `StartPage.draw_screen_shot`, `draw_info`, `StatusPage.draw_top`). The
+  stores keep the legacy calls until their part.
+* **Images.** `Graphics.place_image(image, x, y[, scale])` is drawImage
+  without the drawing: the bind and the quad's rect as `GameTexture.drawPart`
+  rounds it (position rounded, far corner truncated), with the current
+  colour; a TextureRect (`expand_mode` ignore size, `stretch_mode` scale) on
+  that rect draws the same pixels, scaled too (the cards at 0.7 and 0.9, the
+  scroll bars at 0.4). `ImageList` pools such rects; `place_centered_image`
+  is drawCenteredImage's.
+* **Under a modelview** (the automap's overview at a third): try the
+  images' rects in their own space under a `Node2D` with the modelview as
+  its transform (`Graphics.modelview_2d`, as `CutsceneImage`'s `Zoom`); the
+  automap's small cells were exact that way. Where it is not (the emotion
+  bubbles under a cutscene zoom: up to 2/255), draw the legacy quad
+  (`Graphics.screen_points`, `canvas_item_add_triangle_array`). Text ignores
+  the modelview.
+* **A sequence of images and labels at computed places** (a help line) can
+  run the legacy drawing itself against a stand-in for Graphics that passes
+  the state calls on and records what would have been drawn
+  (`HelpLineCapture`, as `DungeonQuads` for the dungeon's quads): no
+  duplicated arithmetic, the state changes are the legacy code's. Use it for
+  drawings that only place images and text; a part with a layout of its own
+  (a status line, an item) is a scene with that layout, fed by a twin.
+* **Order inside a node.** Keep the children in the legacy drawing order
+  wherever two parts can overlap (an icon and its label, a change over its
+  value, a floor's name under its cells): a node whose children's kinds vary
+  keeps a child per entry (`HelpLine`); a list split by a nested list is
+  several nodes (`MenuList` per part).
+* **Coverage.** Lists that scroll need more entries than the shipped saves
+  have: the dev console's `give` (key items, equipment). Headless probe runs
+  have no thumbnail (`copyFrame` reads no viewport): the probe tells which
+  mode the menu was opened from (`MenuStarter.checkMenu`), the windowed shots
+  show the picture. Print the list's `bboffset`, the deck's lines and the
+  flying cards' progress, not only that they were drawn.
+* **Flags per kind of part** (`menu_frame`, `menu_list`, `menu_text`,
+  `status`, `deck`, `automap`), not per page: the stores' parts are the same
+  kinds and use the same flags.

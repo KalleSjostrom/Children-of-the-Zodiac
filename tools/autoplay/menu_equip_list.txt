@@ -1,0 +1,100 @@
+# --load="Slot 1" --start=Alares (parity case menu_equip_list, phase 4.2's
+# menu): the equip page with more swords and shields for Kin than its list's
+# bounding box shows (the dev-only console's give; Broadsword and Iron
+# Buckler twice: "(2)"). Kin's slot list with the equipped names, the right
+# hand's list (each sword compared with the Ivory Sword: the red and green
+# changes and slots), scrolled to its end, wrapped and back; equipping the
+# Broadsword (the slot list and status after it), the left hand's list
+# (shields), the body's (two armours given), R1 and L1 to Celis and back.
+wait 3000
+console give equipment Worn-out_Sword
+console give equipment Broadsword 2
+console give equipment Iron_Sword
+console give equipment Silver_Sword
+console give equipment Diamond_Blade
+console give equipment Iron_Buckler 2
+console give equipment Wooden_Shield
+console give equipment Iron_Armor
+console give equipment Diamond_Mail
+wait 300
+tap TRIANGLE
+wait 2500
+tap DOWN
+wait 400
+tap CROSS
+wait 600
+tap CROSS
+wait 800
+shot me01_slots
+tap CROSS
+wait 600
+shot me02_right_hand
+tap DOWN
+wait 400
+shot me03_compare_2
+tap DOWN
+wait 400
+shot me04_compare_3
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+shot me05_last_shown
+tap DOWN
+wait 400
+shot me06_scrolled
+tap DOWN
+wait 400
+shot me07_wrapped_top
+tap UP
+wait 400
+shot me08_wrapped_bottom
+tap UP
+wait 400
+shot me09_up
+tap UP
+wait 400
+tap UP
+wait 400
+tap UP
+wait 400
+shot me10_on_broadsword
+tap CROSS
+wait 600
+shot me11_equipped
+tap DOWN
+wait 400
+shot me12_left_hand_slot
+tap CROSS
+wait 600
+shot me13_left_hand
+tap DOWN
+wait 400
+shot me14_left_hand_2
+tap CIRCLE
+wait 600
+tap DOWN
+wait 400
+tap CROSS
+wait 600
+shot me15_body
+tap DOWN
+wait 400
+shot me16_body_2
+tap CIRCLE
+wait 600
+tap R1
+wait 600
+shot me17_celis
+tap L1
+wait 600
+shot me18_kin_again
+tap CIRCLE
+wait 600
+shot me19_start_page
+tap TRIANGLE
+wait 1500
+log back_in_village
+quit

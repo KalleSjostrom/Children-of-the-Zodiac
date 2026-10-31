@@ -1,0 +1,175 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/EquipStatus.gd" id="1_script"]
+[ext_resource type="Theme" path="res://resources/theme/game_theme.tres" id="2_theme"]
+[ext_resource type="Script" path="res://scenes/ui/BaselineLabel.gd" id="3_label"]
+[ext_resource type="PackedScene" path="res://scenes/ui/StatusLine.tscn" id="4_line"]
+[ext_resource type="Script" path="res://scenes/ui/LabelList.gd" id="5_labels"]
+
+[node name="EquipStatus" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1024.0
+offset_bottom = 768.0
+mouse_filter = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_script")
+
+[node name="Top" parent="." instance=ExtResource("4_line")]
+use_parent_material = true
+layout_mode = 0
+
+[node name="Attributes" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+mouse_filter = 2
+
+[node name="Attack" type="Control" parent="Attributes"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 54.0
+offset_top = 207.0
+offset_right = 54.0
+offset_bottom = 207.0
+mouse_filter = 2
+theme_type_variation = &"MenuText22"
+script = ExtResource("3_label")
+text = "0"
+
+[node name="MagicAttack" type="Control" parent="Attributes"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 205.0
+offset_top = 207.0
+offset_right = 205.0
+offset_bottom = 207.0
+mouse_filter = 2
+theme_type_variation = &"MenuText22"
+script = ExtResource("3_label")
+text = "0"
+
+[node name="SupportAttack" type="Control" parent="Attributes"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 378.0
+offset_top = 207.0
+offset_right = 378.0
+offset_bottom = 207.0
+mouse_filter = 2
+theme_type_variation = &"MenuText22"
+script = ExtResource("3_label")
+text = "0"
+
+[node name="Agility" type="Control" parent="Attributes"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 550.0
+offset_top = 207.0
+offset_right = 550.0
+offset_bottom = 207.0
+mouse_filter = 2
+theme_type_variation = &"MenuText22"
+script = ExtResource("3_label")
+text = "0"
+
+[node name="Defense" type="Control" parent="Attributes"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 54.0
+offset_top = 247.0
+offset_right = 54.0
+offset_bottom = 247.0
+mouse_filter = 2
+theme_type_variation = &"MenuText22"
+script = ExtResource("3_label")
+text = "0"
+
+[node name="MagicDefense" type="Control" parent="Attributes"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 205.0
+offset_top = 247.0
+offset_right = 205.0
+offset_bottom = 247.0
+mouse_filter = 2
+theme_type_variation = &"MenuText22"
+script = ExtResource("3_label")
+text = "0"
+
+[node name="Hit" type="Control" parent="Attributes"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 378.0
+offset_top = 247.0
+offset_right = 378.0
+offset_bottom = 247.0
+mouse_filter = 2
+theme_type_variation = &"MenuText22"
+script = ExtResource("3_label")
+text = "0"
+
+[node name="Evade" type="Control" parent="Attributes"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 550.0
+offset_top = 247.0
+offset_right = 550.0
+offset_bottom = 247.0
+mouse_filter = 2
+theme_type_variation = &"MenuText22"
+script = ExtResource("3_label")
+text = "0"
+
+[node name="Experience" type="Control" parent="Attributes"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 54.0
+offset_top = 287.0
+offset_right = 54.0
+offset_bottom = 287.0
+mouse_filter = 2
+theme_type_variation = &"MenuText22"
+script = ExtResource("3_label")
+text = "0"
+
+[node name="ExperienceLeft" type="Control" parent="Attributes"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 205.0
+offset_top = 287.0
+offset_right = 205.0
+offset_bottom = 287.0
+mouse_filter = 2
+theme_type_variation = &"MenuText22"
+script = ExtResource("3_label")
+text = "0"
+
+[node name="Level" type="Control" parent="Attributes"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 378.0
+offset_top = 287.0
+offset_right = 378.0
+offset_bottom = 287.0
+mouse_filter = 2
+theme_type_variation = &"MenuText22"
+script = ExtResource("3_label")
+text = "0"
+
+[node name="DeckSize" type="Control" parent="Attributes"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 550.0
+offset_top = 287.0
+offset_right = 550.0
+offset_bottom = 287.0
+mouse_filter = 2
+theme_type_variation = &"MenuText22"
+script = ExtResource("3_label")
+text = "0"
+
+[node name="Changes" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+mouse_filter = 2
+script = ExtResource("5_labels")

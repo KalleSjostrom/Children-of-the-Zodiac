@@ -1,0 +1,82 @@
+# --load="Slot 1" --start=Alares (parity case menu_options_difficulty, phase
+# 4.2's menu): the options page at Easy (the console's difficulty: Slot 1
+# plays Original) with Easy's wrapped description, its difficulty list (the
+# harder Medium and Original grey), the hand on a grey level and CROSS on it
+# (the error sound), back; then at Medium: Original grey, Easy chosen
+# (lowered: the panel's text changes), back to the options.
+wait 3000
+console difficulty easy
+wait 300
+tap TRIANGLE
+wait 2500
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap CROSS
+wait 600
+shot mo01_options_easy
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+shot mo02_on_difficulty
+tap CROSS
+wait 600
+shot mo03_difficulty_easy
+tap DOWN
+wait 400
+shot mo04_on_medium
+tap CROSS
+wait 400
+tap DOWN
+wait 400
+shot mo05_on_original
+tap CIRCLE
+wait 600
+shot mo06_back
+tap TRIANGLE
+wait 1500
+console difficulty medium
+wait 300
+tap TRIANGLE
+wait 2500
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap CROSS
+wait 600
+shot mo07_options_medium
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap DOWN
+wait 400
+tap CROSS
+wait 600
+shot mo08_difficulty_medium
+tap UP
+wait 400
+shot mo09_on_easy
+tap CROSS
+wait 600
+shot mo10_lowered
+tap CIRCLE
+wait 600
+shot mo11_start_page
+tap TRIANGLE
+wait 1500
+log back_in_village
+quit

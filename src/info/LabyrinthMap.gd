@@ -109,6 +109,64 @@ func draw(g, currentNode, currentDir, pos, drawAll, calcPercent):
 		percent = counter
 	return percent
 
+## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): draw without
+## the drawing, for the menu's Automap node: the same state changes in the
+## same order (the text colours, the font sizes 24 or 34 and 22, startText
+## and finishText of the floor's name, each node's colours and binds and the
+## Database reads and writes of its map image: LabyrinthNode.place_in_map).
+## Returns {"percent": draw's, "names": the floor's name (and its shadow on
+## the player's floor) as [text, position (its centre), font size, colour,
+## bold, alignment] each, "images": the pieces, icons and arrow as
+## Graphics.place_image places them in the floor's space, in drawing order,
+## "modelview": the modelview they are drawn under (Graphics.modelview_2d:
+## the identity for one floor, the overview's scale and translates)}.
+func place_map(g, currentNode, currentDir, pos, drawAll, calcPercent) -> Dictionary:
+	var y: int
+	var x: int
+	var counter: int = 0
+	var isOnFloor: bool = false
+	for address in nodes:
+		var n = nodes[address]
+		if n.isVisited() or (n.isSeen() and n.hasInventory()):
+			counter += 1
+			if n == currentNode:
+				isOnFloor = true
+	var floor := {"names": [], "images": [], "modelview": g.modelview_2d()}
+	if pos != null:
+		if isOnFloor:
+			Graphics.setTextColor(0, 0, 0)
+			_place_centered(g, self.getName(), pos[1] * 330 + 86, 1, 0, 24, pos[0] * 215 + 171, floor.names)
+			Graphics.setTextColor(0.2, 0.8, 0.2)
+			_place_centered(g, self.getName(), pos[1] * 330 + 85, 1, -1, 24, pos[0] * 215 + 170, floor.names)
+			Graphics.setTextColor(0, 0, 0)
+		else:
+			_place_centered(g, self.getName(), pos[1] * 330 + 85, 1, -1, 24, pos[0] * 215 + 170, floor.names)
+	else:
+		_place_centered(g, self.getName(), 60, 1, 0, 34, 380, floor.names)
+	g.setFontSize(MenuValues.MENU_FONT_SIZE)
+	for address in nodes:
+		var n = nodes[address]
+		y = (address % 16) * SIZE + OFFSET_Y
+		x = (address / 16) * SIZE + OFFSET_X
+		n.place_in_map(g, x, y, currentNode == n, currentDir, isOnFloor, drawAll, floor.images)
+	if calcPercent:
+		floor.percent = J.round((counter / float(nodes.size())) * 100)
+	else:
+		floor.percent = counter
+	return floor
+
+
+## Graphics.drawSingleCenteredText(string, y, alpha, c, fontSize, center)
+## without the drawing: its font size, startText and finishText, and the line
+## centred on center in the text colour and alpha startText leaves.
+static func _place_centered(g, string, y, alpha, c, fontSize, center, into: Array) -> void:
+	g.setFontSize(fontSize)
+	g.startText(alpha, c)
+	into.append([str(string), Vector2i(center, y), g.getFontSize(), Graphics.text_color(g.text_alpha()),
+			Graphics.font_bold(), HORIZONTAL_ALIGNMENT_CENTER])
+	g.finishText()
+
+
 func draw2(g, f, orig, lastOrig, angle):
 	var address: int
 	var x: float

@@ -6,6 +6,8 @@ extends AbstractPage
 const RIGHT_HAND = 0
 const LEFT_HAND = 1
 const ARMORS = 2
+## Bridge (phase 4.2 step B): the node of show_status.
+const EQUIP_STATUS_VIEW := "res://scenes/ui/EquipStatus.tscn"
 static var x = MenuValues.STATUS_X
 static var y = MenuValues.STATUS_Y
 var c = null
@@ -110,24 +112,31 @@ func initEquipPage(charIndex):
 	MainMenu.getMainMenu().initEquipPage(charIndex, menuIndex, inSub)
 
 
+## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): each part is
+## shown by its node where it was drawn, or drawn with its --legacy flag
+## (show_status, show_equip, AbstractPage.draw_list, draw_title,
+## StartPage.draw_info, AbstractPage.draw_help).
 func draw3D(g):
 	super.drawStandard(g)
 	var ae = activeNode.getCurrentChild().getEquipment()
 	var n = activeNode.getParent()
 	var index: int = -1 if n == null else n.getMenuCursor()
 
-	drawStatus(g, c, ae, index)
-	drawEquip(g, ae)
+	if Main.is_legacy("status"):
+		drawStatus(g, c, ae, index)
+		drawEquip(g, ae)
+	else:
+		show_status(g, c, ae, index)
+		show_equip(g, ae)
 	var p = activeNode.getParent()
 	if p != null:
-		p.drawChildrenFreely(g, false, false, false, true, true)
-		activeNode.drawChildrenFreely(g, false, false, true, false, false)
+		AbstractPage.draw_list(g, p, false, false, false, true, true)
+		AbstractPage.draw_list(g, activeNode, false, false, true, false, false)
 	else:
-		activeNode.drawChildrenFreely(g, false, false, false, true, true)
-	var tx: int = MenuValues.MENU_TEXT_X
-	g.drawString(activeNode.getName().replace(":", ""), tx, MenuValues.MENU_TITLE_Y)
-	StartPage.drawInfo(g)
-	drawHelp(g)
+		AbstractPage.draw_list(g, activeNode, false, false, false, true, true)
+	AbstractPage.draw_title(g, activeNode.getName().replace(":", ""))
+	StartPage.draw_info(g)
+	AbstractPage.draw_help(g, drawHelp)
 
 
 static func drawStatus(g, p_c, ae, p_mode):
@@ -169,9 +178,76 @@ static func drawChange(line, px, py, change, g):
 	Graphics.setTextColor(JColor.BLACK)
 
 
+## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): drawStatus
+## without the drawing: the same state changes in the same order (the text
+## colours, StatusPage.place_top's and place_attributes', drawChange's
+## setColor(color) after each line), and the frame's next EquipStatus node on
+## the UI layer shows the status where it would have been drawn
+## (Graphics.show_ui).
+static func show_status(g, p_c, ae, p_mode):
+	if p_c == null:
+		return
+	var mat = g.canvas_material()
+	var equipped = null
+	if p_mode == RIGHT_HAND:
+		equipped = p_c.getWeapon()
+	elif p_mode == LEFT_HAND:
+		equipped = p_c.getLeftHand()
+	elif p_mode == ARMORS:
+		equipped = p_c.getArmor()
+	var change = AbstractEquipment.getChange(p_c, ae, equipped)
+
+	Graphics.setTextColor(JColor.BLACK)
+	if ae == equipped:
+		ae = null
+	var size: int = g.getFontSize()
+	var bold: bool = Graphics.font_bold()
+	var top: Dictionary = StatusPage.place_top(g, p_c, 0, ae)
+	var attributes: Array = StatusPage.place_attributes(g, p_c)
+	var changes := []
+	if p_mode != -1:
+		for i in range(2):
+			for j in range(4):
+				var nr: int = i * 4 + j
+				var index: int = Values.ATTRIBUTE_MAP[nr]
+				_place_change(p_c.get_(index), nr, change[index], g, changes)
+	var view = g.show_ui(EQUIP_STATUS_VIEW, Graphics.UI_LAYER)
+	if view != null:
+		view.show_status(top, attributes, changes, size, bold, mat)
+
+
+## drawChange without the drawing: the change's two lines, [attribute, text,
+## shift, colour] each (the black one where the value is, the red or green one
+## 1 px up and left), with drawString's setColor(color) and the text colours.
+static func _place_change(line, attribute: int, change, g, changes: Array) -> void:
+	if change == 0:
+		return
+	var text: String
+	var color = JColor.RED
+	if change < 0:
+		var cc: int = change * -1
+		text = str(line) + " -" + str(cc)
+	else:
+		text = str(line) + " +" + str(change)
+		color = JColor.GREEN
+	changes.append([attribute, text, 0, Graphics.text_color(1.0)])
+	g.setColor(g.color)
+	Graphics.setTextColor(color)
+	changes.append([attribute, text, -1, Graphics.text_color(1.0)])
+	g.setColor(g.color)
+	Graphics.setTextColor(JColor.BLACK)
+
+
 static func drawEquip(g, ae):
 	if ae != null:
 		StatusPage.drawEquip(g, ae, 324)
+
+
+## Bridge (phase 4.2 step B): drawEquip without the drawing
+## (StatusPage.show_equip).
+static func show_equip(g, ae):
+	if ae != null:
+		StatusPage.show_equip(g, ae, 324)
 
 
 static func drawInformation(g, ae, py):
