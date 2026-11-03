@@ -1,36 +1,85 @@
 [gd_resource type="SpriteFrames" format=3]
 
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin9.png" id="1_vgwqb"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin10.png" id="2_8q4s4"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin11.png" id="3_pytna"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin12.png" id="4_46bxs"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin13.png" id="5_k27kb"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin14.png" id="6_vq5wr"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin15.png" id="7_8p4dk"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin16.png" id="8_jpmtt"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin5.png" id="9_wgfy5"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin6.png" id="10_ylscs"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin7.png" id="11_wfwjx"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin8.png" id="12_ow878"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin1.png" id="13_okww0"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin2.png" id="14_nsa8q"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin3.png" id="15_wwyxg"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin4.png" id="16_07mqw"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin_sheet.png" id="1_pq1qf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_em11e"]
+atlas = ExtResource("1_pq1qf")
+region = Rect2(2, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o7kdr"]
+atlas = ExtResource("1_pq1qf")
+region = Rect2(42, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_820hy"]
+atlas = ExtResource("1_pq1qf")
+region = Rect2(82, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uqi0e"]
+atlas = ExtResource("1_pq1qf")
+region = Rect2(122, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fmmqn"]
+atlas = ExtResource("1_pq1qf")
+region = Rect2(2, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2yais"]
+atlas = ExtResource("1_pq1qf")
+region = Rect2(42, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rk1gr"]
+atlas = ExtResource("1_pq1qf")
+region = Rect2(82, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ocdda"]
+atlas = ExtResource("1_pq1qf")
+region = Rect2(122, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uqkyj"]
+atlas = ExtResource("1_pq1qf")
+region = Rect2(2, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1m6p"]
+atlas = ExtResource("1_pq1qf")
+region = Rect2(42, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1nkei"]
+atlas = ExtResource("1_pq1qf")
+region = Rect2(82, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hi5sh"]
+atlas = ExtResource("1_pq1qf")
+region = Rect2(122, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w3u4a"]
+atlas = ExtResource("1_pq1qf")
+region = Rect2(2, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h362e"]
+atlas = ExtResource("1_pq1qf")
+region = Rect2(42, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vgwqb"]
+atlas = ExtResource("1_pq1qf")
+region = Rect2(82, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8q4s4"]
+atlas = ExtResource("1_pq1qf")
+region = Rect2(122, 2, 36, 56)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_vgwqb")
+"texture": SubResource("AtlasTexture_em11e")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_8q4s4")
+"texture": SubResource("AtlasTexture_o7kdr")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_pytna")
+"texture": SubResource("AtlasTexture_820hy")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_46bxs")
+"texture": SubResource("AtlasTexture_uqi0e")
 }],
 "loop": 1,
 "name": &"down",
@@ -38,16 +87,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_k27kb")
+"texture": SubResource("AtlasTexture_fmmqn")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_vq5wr")
+"texture": SubResource("AtlasTexture_2yais")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_8p4dk")
+"texture": SubResource("AtlasTexture_rk1gr")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_jpmtt")
+"texture": SubResource("AtlasTexture_ocdda")
 }],
 "loop": 1,
 "name": &"left",
@@ -55,16 +104,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("9_wgfy5")
+"texture": SubResource("AtlasTexture_uqkyj")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_ylscs")
+"texture": SubResource("AtlasTexture_d1m6p")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_wfwjx")
+"texture": SubResource("AtlasTexture_1nkei")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_ow878")
+"texture": SubResource("AtlasTexture_hi5sh")
 }],
 "loop": 1,
 "name": &"right",
@@ -72,16 +121,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_okww0")
+"texture": SubResource("AtlasTexture_w3u4a")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_nsa8q")
+"texture": SubResource("AtlasTexture_h362e")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_wwyxg")
+"texture": SubResource("AtlasTexture_vgwqb")
 }, {
 "duration": 1.0,
-"texture": ExtResource("16_07mqw")
+"texture": SubResource("AtlasTexture_8q4s4")
 }],
 "loop": 1,
 "name": &"up",

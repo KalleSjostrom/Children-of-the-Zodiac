@@ -1,36 +1,85 @@
 [gd_resource type="SpriteFrames" format=3]
 
-[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Fortuneteller/Fortuneteller9.png" id="1_hexax"]
-[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Fortuneteller/Fortuneteller10.png" id="2_wr4od"]
-[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Fortuneteller/Fortuneteller11.png" id="3_q1nn0"]
-[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Fortuneteller/Fortuneteller12.png" id="4_qcj4q"]
-[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Fortuneteller/Fortuneteller13.png" id="5_resjx"]
-[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Fortuneteller/Fortuneteller14.png" id="6_djyw3"]
-[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Fortuneteller/Fortuneteller15.png" id="7_esbie"]
-[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Fortuneteller/Fortuneteller16.png" id="8_qh00k"]
-[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Fortuneteller/Fortuneteller5.png" id="9_a1dlw"]
-[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Fortuneteller/Fortuneteller6.png" id="10_mpoe8"]
-[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Fortuneteller/Fortuneteller7.png" id="11_dsvuk"]
-[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Fortuneteller/Fortuneteller8.png" id="12_fdfb1"]
-[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Fortuneteller/Fortuneteller1.png" id="13_u5ych"]
-[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Fortuneteller/Fortuneteller2.png" id="14_h5wwe"]
-[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Fortuneteller/Fortuneteller3.png" id="15_aefb5"]
-[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Fortuneteller/Fortuneteller4.png" id="16_vupvh"]
+[ext_resource type="Texture2D" path="res://res/Village/Parasne/villagers/Fortuneteller/Fortuneteller_sheet.png" id="1_rq1m0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2y852"]
+atlas = ExtResource("1_rq1m0")
+region = Rect2(2, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rcknw"]
+atlas = ExtResource("1_rq1m0")
+region = Rect2(42, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_td2yk"]
+atlas = ExtResource("1_rq1m0")
+region = Rect2(82, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pxokp"]
+atlas = ExtResource("1_rq1m0")
+region = Rect2(122, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_htdhn"]
+atlas = ExtResource("1_rq1m0")
+region = Rect2(2, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aiy8t"]
+atlas = ExtResource("1_rq1m0")
+region = Rect2(42, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yvpk2"]
+atlas = ExtResource("1_rq1m0")
+region = Rect2(82, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dtns7"]
+atlas = ExtResource("1_rq1m0")
+region = Rect2(122, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cqdhr"]
+atlas = ExtResource("1_rq1m0")
+region = Rect2(2, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4o1rk"]
+atlas = ExtResource("1_rq1m0")
+region = Rect2(42, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yxr33"]
+atlas = ExtResource("1_rq1m0")
+region = Rect2(82, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0dpay"]
+atlas = ExtResource("1_rq1m0")
+region = Rect2(122, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jbpdv"]
+atlas = ExtResource("1_rq1m0")
+region = Rect2(2, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8cip7"]
+atlas = ExtResource("1_rq1m0")
+region = Rect2(42, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hexax"]
+atlas = ExtResource("1_rq1m0")
+region = Rect2(82, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wr4od"]
+atlas = ExtResource("1_rq1m0")
+region = Rect2(122, 2, 36, 56)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_hexax")
+"texture": SubResource("AtlasTexture_2y852")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_wr4od")
+"texture": SubResource("AtlasTexture_rcknw")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_q1nn0")
+"texture": SubResource("AtlasTexture_td2yk")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_qcj4q")
+"texture": SubResource("AtlasTexture_pxokp")
 }],
 "loop": 1,
 "name": &"down",
@@ -38,16 +87,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_resjx")
+"texture": SubResource("AtlasTexture_htdhn")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_djyw3")
+"texture": SubResource("AtlasTexture_aiy8t")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_esbie")
+"texture": SubResource("AtlasTexture_yvpk2")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_qh00k")
+"texture": SubResource("AtlasTexture_dtns7")
 }],
 "loop": 1,
 "name": &"left",
@@ -55,16 +104,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("9_a1dlw")
+"texture": SubResource("AtlasTexture_cqdhr")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_mpoe8")
+"texture": SubResource("AtlasTexture_4o1rk")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_dsvuk")
+"texture": SubResource("AtlasTexture_yxr33")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_fdfb1")
+"texture": SubResource("AtlasTexture_0dpay")
 }],
 "loop": 1,
 "name": &"right",
@@ -72,16 +121,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_u5ych")
+"texture": SubResource("AtlasTexture_jbpdv")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_h5wwe")
+"texture": SubResource("AtlasTexture_8cip7")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_aefb5")
+"texture": SubResource("AtlasTexture_hexax")
 }, {
 "duration": 1.0,
-"texture": ExtResource("16_vupvh")
+"texture": SubResource("AtlasTexture_wr4od")
 }],
 "loop": 1,
 "name": &"up",

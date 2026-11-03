@@ -1,36 +1,85 @@
 [gd_resource type="SpriteFrames" format=3]
 
-[ext_resource type="Texture2D" path="res://res/Village/Characters/Pensaracommander/Pensaracommander9.png" id="1_ktr2a"]
-[ext_resource type="Texture2D" path="res://res/Village/Characters/Pensaracommander/Pensaracommander10.png" id="2_ql4do"]
-[ext_resource type="Texture2D" path="res://res/Village/Characters/Pensaracommander/Pensaracommander11.png" id="3_nqgef"]
-[ext_resource type="Texture2D" path="res://res/Village/Characters/Pensaracommander/Pensaracommander12.png" id="4_a1tgo"]
-[ext_resource type="Texture2D" path="res://res/Village/Characters/Pensaracommander/Pensaracommander13.png" id="5_y8s5v"]
-[ext_resource type="Texture2D" path="res://res/Village/Characters/Pensaracommander/Pensaracommander14.png" id="6_ugxhf"]
-[ext_resource type="Texture2D" path="res://res/Village/Characters/Pensaracommander/Pensaracommander15.png" id="7_y1tog"]
-[ext_resource type="Texture2D" path="res://res/Village/Characters/Pensaracommander/Pensaracommander16.png" id="8_tigck"]
-[ext_resource type="Texture2D" path="res://res/Village/Characters/Pensaracommander/Pensaracommander5.png" id="9_o1r0h"]
-[ext_resource type="Texture2D" path="res://res/Village/Characters/Pensaracommander/Pensaracommander6.png" id="10_jhkak"]
-[ext_resource type="Texture2D" path="res://res/Village/Characters/Pensaracommander/Pensaracommander7.png" id="11_wj140"]
-[ext_resource type="Texture2D" path="res://res/Village/Characters/Pensaracommander/Pensaracommander8.png" id="12_yj4kx"]
-[ext_resource type="Texture2D" path="res://res/Village/Characters/Pensaracommander/Pensaracommander1.png" id="13_u6mji"]
-[ext_resource type="Texture2D" path="res://res/Village/Characters/Pensaracommander/Pensaracommander2.png" id="14_pbrlg"]
-[ext_resource type="Texture2D" path="res://res/Village/Characters/Pensaracommander/Pensaracommander3.png" id="15_dnaux"]
-[ext_resource type="Texture2D" path="res://res/Village/Characters/Pensaracommander/Pensaracommander4.png" id="16_rpvpq"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Pensaracommander/Pensaracommander_sheet.png" id="1_5f8eh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xlcrc"]
+atlas = ExtResource("1_5f8eh")
+region = Rect2(2, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5k45o"]
+atlas = ExtResource("1_5f8eh")
+region = Rect2(42, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_10c8v"]
+atlas = ExtResource("1_5f8eh")
+region = Rect2(82, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shaq0"]
+atlas = ExtResource("1_5f8eh")
+region = Rect2(122, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tjbb2"]
+atlas = ExtResource("1_5f8eh")
+region = Rect2(2, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ctva3"]
+atlas = ExtResource("1_5f8eh")
+region = Rect2(42, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_flvlt"]
+atlas = ExtResource("1_5f8eh")
+region = Rect2(82, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p50xx"]
+atlas = ExtResource("1_5f8eh")
+region = Rect2(122, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_likx5"]
+atlas = ExtResource("1_5f8eh")
+region = Rect2(2, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sdrin"]
+atlas = ExtResource("1_5f8eh")
+region = Rect2(42, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mp7fl"]
+atlas = ExtResource("1_5f8eh")
+region = Rect2(82, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jf6ay"]
+atlas = ExtResource("1_5f8eh")
+region = Rect2(122, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l5lwi"]
+atlas = ExtResource("1_5f8eh")
+region = Rect2(2, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g7lif"]
+atlas = ExtResource("1_5f8eh")
+region = Rect2(42, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ktr2a"]
+atlas = ExtResource("1_5f8eh")
+region = Rect2(82, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ql4do"]
+atlas = ExtResource("1_5f8eh")
+region = Rect2(122, 2, 36, 56)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_ktr2a")
+"texture": SubResource("AtlasTexture_xlcrc")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_ql4do")
+"texture": SubResource("AtlasTexture_5k45o")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_nqgef")
+"texture": SubResource("AtlasTexture_10c8v")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_a1tgo")
+"texture": SubResource("AtlasTexture_shaq0")
 }],
 "loop": 1,
 "name": &"down",
@@ -38,16 +87,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_y8s5v")
+"texture": SubResource("AtlasTexture_tjbb2")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_ugxhf")
+"texture": SubResource("AtlasTexture_ctva3")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_y1tog")
+"texture": SubResource("AtlasTexture_flvlt")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_tigck")
+"texture": SubResource("AtlasTexture_p50xx")
 }],
 "loop": 1,
 "name": &"left",
@@ -55,16 +104,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("9_o1r0h")
+"texture": SubResource("AtlasTexture_likx5")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_jhkak")
+"texture": SubResource("AtlasTexture_sdrin")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_wj140")
+"texture": SubResource("AtlasTexture_mp7fl")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_yj4kx")
+"texture": SubResource("AtlasTexture_jf6ay")
 }],
 "loop": 1,
 "name": &"right",
@@ -72,16 +121,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_u6mji")
+"texture": SubResource("AtlasTexture_l5lwi")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_pbrlg")
+"texture": SubResource("AtlasTexture_g7lif")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_dnaux")
+"texture": SubResource("AtlasTexture_ktr2a")
 }, {
 "duration": 1.0,
-"texture": ExtResource("16_rpvpq")
+"texture": SubResource("AtlasTexture_ql4do")
 }],
 "loop": 1,
 "name": &"up",

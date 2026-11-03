@@ -1,4 +1,4 @@
-# Handoff: state of the Godot port (2026-10-30, after steps 1–3, modernization phase 0, phase 1 steps A and B, phase 2 steps A and B, the particles phase, P2, phase 3 steps A and B, phase 4.1 steps A and B, phase 4.2's pilot and its menu through step B)
+# Handoff: state of the Godot port (2026-11-03, after steps 1–3, modernization phase 0, phase 1 steps A and B, phase 2 steps A and B, the particles phase, P2, phase 3 steps A and B, phase 4.1 steps A and B, phase 4.2's pilot and its menu through step B, the character sprite sheets)
 
 Conventions: legacy (ported) code follows `docs/PORTING.md`; new code
 (scenes, resources, tools, bridge) follows `docs/ARCHITECTURE.md`. The
@@ -399,6 +399,48 @@ section 5):
 - Prepared (plan 9.2): the stores (one or two sessions; their cases first),
   then the mini-games.
 
+**Character sprite sheets (2026-11-03): plans A and B done**
+(`docs/VILLAGER_SPRITES_PLAN.md`, "As built"; conventions in
+`docs/ARCHITECTURE.md` section 9, "Character frames and sheets"):
+- A: every frame of a walking character is 36×56 (106 sets of 36×55 padded
+  at the bottom, the five sitting villagers at the right and bottom;
+  `tools/art/pad_character_frames.gd`). The two unreferenced 128×192 sheets
+  `Characters/Kin.png` and `Celis.png` are deleted.
+- B: each of the 198 walking sets is one sheet `<Name>_sheet.png` (4×4
+  cells of 36×56 at a 40×60 pitch, the gutter filled with the cells'
+  extruded edges; `CharacterSheet`, `tools/art/pack_character_sheets.gd`);
+  its 16 frame files and `.import` files are deleted (3,168 of each). The
+  legacy code keeps its frame paths: `ImageHandler._loadTexture` turns a
+  frame path without a file into an AtlasTexture of its sheet's cell
+  (`CharacterSheet.frame_texture`), `ActorView` looks frames up by atlas
+  and region, `GameTexture.getImageTexCoords` gives the legacy drawing the
+  cell's coordinates. The 152 village SpriteFrames with such frames hold
+  AtlasTexture sub-resources (`tools/art/rewrite_sprite_frames.gd`).
+  Single frames (36×56 villagers, sitting villagers, zodiac images, `ball`,
+  `Characters/Animation`, props) stay single images.
+- Not `filter_clip` (as the plan had it): with it a cell's last row and
+  column differ by up to 3/255 even unzoomed; the extruded gutter keeps a
+  1:1 frame identical (plan B, "Layout").
+- Coverage: two new cases, `sprites_villager_walk` (all 16 frames and two
+  standing poses of Flog, 36×56, in Alares) and `sprites_party_walk` (all
+  16 frames of Kin, Celis and Zalzi in Berca): 409 cases and `bridge_test`,
+  7,685 shots. The other frames the change touches were already in cases
+  (`tools/parity/cases.txt` says which).
+- Parity (tolerance 0; sets `sbase` before, `spadA` after A, `spB`/`spB2`
+  after B; machine-specific, in `tools/parity/out/`): same exit codes,
+  shot counts and error lines throughout (apart from WASAPI audio device
+  lines); B's self-diff identical. Only zoomed cutscene shots differ: A in
+  106 shots (the padded edge of the 36×55 frames with pixels in their last
+  row and of the sitting villagers, up to 65/255, and 1/255 rounding),
+  B in 300 more (1–2/255 rounding with the sheet's size, 5 alpha-test
+  flips). Every differing pixel is on a changed sprite (plan, "As built").
+- Checks beyond parity: an export (a village and a cutscene run without
+  errors), full screen (no frame edge shows), the editor's previews
+  (identical), Parasne's first load about halved (512–632 → 254–397 ms).
+- Content quirks found on the way: `tickets/triage.md` C1–C7 (two more
+  invisible villagers, Storygroup's empty frames, KinSmall, the
+  unreferenced and duplicate sets).
+
 ## Plan (what is left)
 
 0. **Modernization:** closing phase 1 (plan 6.9) needs decision 5 (delete
@@ -448,8 +490,8 @@ section 5):
   only the shipped saves.
 - Parity: `tools/parity/parity.sh record <set>` / `compare <a> <b>` /
   `ab "<args a>" "<args b>" [case…]`, see `docs/ARCHITECTURE.md` section 7.
-  Runs are windowed (screenshots need a renderer); all 407 cases and
-  `bridge_test` take about 13-15 minutes with `--jobs=8` on 12 logical
+  Runs are windowed (screenshots need a renderer); all 409 cases and
+  `bridge_test` take about 14-15 minutes with `--jobs=8` on 12 logical
   cores (run nothing beside them, not even a headless compare: 16 GB run out, plan 12) since the particles run
   on the GPU (60-70 minutes before P2; `--uncapped`; with
   `--legacy=particles`, `particles_hotg` and the Berca cutscene are bound by

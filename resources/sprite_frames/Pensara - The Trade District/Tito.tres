@@ -1,36 +1,85 @@
 [gd_resource type="SpriteFrames" format=3]
 
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Tito/Tito9.png" id="1_7itee"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Tito/Tito10.png" id="2_s44mh"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Tito/Tito11.png" id="3_igra2"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Tito/Tito12.png" id="4_46qdv"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Tito/Tito13.png" id="5_oy26o"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Tito/Tito14.png" id="6_thtae"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Tito/Tito15.png" id="7_bo1uy"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Tito/Tito16.png" id="8_bcie4"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Tito/Tito5.png" id="9_omrik"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Tito/Tito6.png" id="10_80bm0"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Tito/Tito7.png" id="11_4mt1v"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Tito/Tito8.png" id="12_g2wo3"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Tito/Tito1.png" id="13_5ohas"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Tito/Tito2.png" id="14_qhu75"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Tito/Tito3.png" id="15_1hqiq"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Tito/Tito4.png" id="16_kyin5"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Tito/Tito_sheet.png" id="1_jhy57"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nb5rh"]
+atlas = ExtResource("1_jhy57")
+region = Rect2(2, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmsft"]
+atlas = ExtResource("1_jhy57")
+region = Rect2(42, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mwalk"]
+atlas = ExtResource("1_jhy57")
+region = Rect2(82, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27dh5"]
+atlas = ExtResource("1_jhy57")
+region = Rect2(122, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cx2u0"]
+atlas = ExtResource("1_jhy57")
+region = Rect2(2, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5cx3t"]
+atlas = ExtResource("1_jhy57")
+region = Rect2(42, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_btmub"]
+atlas = ExtResource("1_jhy57")
+region = Rect2(82, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m5psm"]
+atlas = ExtResource("1_jhy57")
+region = Rect2(122, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p3h27"]
+atlas = ExtResource("1_jhy57")
+region = Rect2(2, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d751i"]
+atlas = ExtResource("1_jhy57")
+region = Rect2(42, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0ewy"]
+atlas = ExtResource("1_jhy57")
+region = Rect2(82, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rsifq"]
+atlas = ExtResource("1_jhy57")
+region = Rect2(122, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_00dm5"]
+atlas = ExtResource("1_jhy57")
+region = Rect2(2, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b08bq"]
+atlas = ExtResource("1_jhy57")
+region = Rect2(42, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7itee"]
+atlas = ExtResource("1_jhy57")
+region = Rect2(82, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s44mh"]
+atlas = ExtResource("1_jhy57")
+region = Rect2(122, 2, 36, 56)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_7itee")
+"texture": SubResource("AtlasTexture_nb5rh")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_s44mh")
+"texture": SubResource("AtlasTexture_lmsft")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_igra2")
+"texture": SubResource("AtlasTexture_mwalk")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_46qdv")
+"texture": SubResource("AtlasTexture_27dh5")
 }],
 "loop": 1,
 "name": &"down",
@@ -38,16 +87,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_oy26o")
+"texture": SubResource("AtlasTexture_cx2u0")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_thtae")
+"texture": SubResource("AtlasTexture_5cx3t")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_bo1uy")
+"texture": SubResource("AtlasTexture_btmub")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_bcie4")
+"texture": SubResource("AtlasTexture_m5psm")
 }],
 "loop": 1,
 "name": &"left",
@@ -55,16 +104,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("9_omrik")
+"texture": SubResource("AtlasTexture_p3h27")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_80bm0")
+"texture": SubResource("AtlasTexture_d751i")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_4mt1v")
+"texture": SubResource("AtlasTexture_w0ewy")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_g2wo3")
+"texture": SubResource("AtlasTexture_rsifq")
 }],
 "loop": 1,
 "name": &"right",
@@ -72,16 +121,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_5ohas")
+"texture": SubResource("AtlasTexture_00dm5")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_qhu75")
+"texture": SubResource("AtlasTexture_b08bq")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_1hqiq")
+"texture": SubResource("AtlasTexture_7itee")
 }, {
 "duration": 1.0,
-"texture": ExtResource("16_kyin5")
+"texture": SubResource("AtlasTexture_s44mh")
 }],
 "loop": 1,
 "name": &"up",

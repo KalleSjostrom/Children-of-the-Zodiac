@@ -1,36 +1,85 @@
 [gd_resource type="SpriteFrames" format=3]
 
-[ext_resource type="Texture2D" path="res://res/Village/Berca - Dolly's House/villagers/Dolly/Dolly9.png" id="1_flev4"]
-[ext_resource type="Texture2D" path="res://res/Village/Berca - Dolly's House/villagers/Dolly/Dolly10.png" id="2_at26t"]
-[ext_resource type="Texture2D" path="res://res/Village/Berca - Dolly's House/villagers/Dolly/Dolly11.png" id="3_5lgvn"]
-[ext_resource type="Texture2D" path="res://res/Village/Berca - Dolly's House/villagers/Dolly/Dolly12.png" id="4_cxqxg"]
-[ext_resource type="Texture2D" path="res://res/Village/Berca - Dolly's House/villagers/Dolly/Dolly13.png" id="5_uomse"]
-[ext_resource type="Texture2D" path="res://res/Village/Berca - Dolly's House/villagers/Dolly/Dolly14.png" id="6_wjdbh"]
-[ext_resource type="Texture2D" path="res://res/Village/Berca - Dolly's House/villagers/Dolly/Dolly15.png" id="7_dmeu5"]
-[ext_resource type="Texture2D" path="res://res/Village/Berca - Dolly's House/villagers/Dolly/Dolly16.png" id="8_nuwmq"]
-[ext_resource type="Texture2D" path="res://res/Village/Berca - Dolly's House/villagers/Dolly/Dolly5.png" id="9_63im1"]
-[ext_resource type="Texture2D" path="res://res/Village/Berca - Dolly's House/villagers/Dolly/Dolly6.png" id="10_r1wdx"]
-[ext_resource type="Texture2D" path="res://res/Village/Berca - Dolly's House/villagers/Dolly/Dolly7.png" id="11_2cn0x"]
-[ext_resource type="Texture2D" path="res://res/Village/Berca - Dolly's House/villagers/Dolly/Dolly8.png" id="12_svoq4"]
-[ext_resource type="Texture2D" path="res://res/Village/Berca - Dolly's House/villagers/Dolly/Dolly1.png" id="13_buvs5"]
-[ext_resource type="Texture2D" path="res://res/Village/Berca - Dolly's House/villagers/Dolly/Dolly2.png" id="14_rrsep"]
-[ext_resource type="Texture2D" path="res://res/Village/Berca - Dolly's House/villagers/Dolly/Dolly3.png" id="15_bk3l0"]
-[ext_resource type="Texture2D" path="res://res/Village/Berca - Dolly's House/villagers/Dolly/Dolly4.png" id="16_p2s64"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Dolly's House/villagers/Dolly/Dolly_sheet.png" id="1_km4r7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_boo34"]
+atlas = ExtResource("1_km4r7")
+region = Rect2(2, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mjp1e"]
+atlas = ExtResource("1_km4r7")
+region = Rect2(42, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_654el"]
+atlas = ExtResource("1_km4r7")
+region = Rect2(82, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_twx4r"]
+atlas = ExtResource("1_km4r7")
+region = Rect2(122, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ye0tl"]
+atlas = ExtResource("1_km4r7")
+region = Rect2(2, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ssjb"]
+atlas = ExtResource("1_km4r7")
+region = Rect2(42, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tpqa3"]
+atlas = ExtResource("1_km4r7")
+region = Rect2(82, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_co467"]
+atlas = ExtResource("1_km4r7")
+region = Rect2(122, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oyuks"]
+atlas = ExtResource("1_km4r7")
+region = Rect2(2, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_do6lm"]
+atlas = ExtResource("1_km4r7")
+region = Rect2(42, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u27sr"]
+atlas = ExtResource("1_km4r7")
+region = Rect2(82, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ml1rs"]
+atlas = ExtResource("1_km4r7")
+region = Rect2(122, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_klkty"]
+atlas = ExtResource("1_km4r7")
+region = Rect2(2, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_msmoq"]
+atlas = ExtResource("1_km4r7")
+region = Rect2(42, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_flev4"]
+atlas = ExtResource("1_km4r7")
+region = Rect2(82, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_at26t"]
+atlas = ExtResource("1_km4r7")
+region = Rect2(122, 2, 36, 56)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_flev4")
+"texture": SubResource("AtlasTexture_boo34")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_at26t")
+"texture": SubResource("AtlasTexture_mjp1e")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_5lgvn")
+"texture": SubResource("AtlasTexture_654el")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_cxqxg")
+"texture": SubResource("AtlasTexture_twx4r")
 }],
 "loop": 1,
 "name": &"down",
@@ -38,16 +87,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_uomse")
+"texture": SubResource("AtlasTexture_ye0tl")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_wjdbh")
+"texture": SubResource("AtlasTexture_5ssjb")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_dmeu5")
+"texture": SubResource("AtlasTexture_tpqa3")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_nuwmq")
+"texture": SubResource("AtlasTexture_co467")
 }],
 "loop": 1,
 "name": &"left",
@@ -55,16 +104,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("9_63im1")
+"texture": SubResource("AtlasTexture_oyuks")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_r1wdx")
+"texture": SubResource("AtlasTexture_do6lm")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_2cn0x")
+"texture": SubResource("AtlasTexture_u27sr")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_svoq4")
+"texture": SubResource("AtlasTexture_ml1rs")
 }],
 "loop": 1,
 "name": &"right",
@@ -72,16 +121,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_buvs5")
+"texture": SubResource("AtlasTexture_klkty")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_rrsep")
+"texture": SubResource("AtlasTexture_msmoq")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_bk3l0")
+"texture": SubResource("AtlasTexture_flev4")
 }, {
 "duration": 1.0,
-"texture": ExtResource("16_p2s64")
+"texture": SubResource("AtlasTexture_at26t")
 }],
 "loop": 1,
 "name": &"up",

@@ -1,36 +1,85 @@
 [gd_resource type="SpriteFrames" format=3]
 
-[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Merchant Tori/Merchant Tori9.png" id="1_r20en"]
-[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Merchant Tori/Merchant Tori10.png" id="2_kambj"]
-[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Merchant Tori/Merchant Tori11.png" id="3_64t4u"]
-[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Merchant Tori/Merchant Tori12.png" id="4_3idco"]
-[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Merchant Tori/Merchant Tori13.png" id="5_tpvdf"]
-[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Merchant Tori/Merchant Tori14.png" id="6_n1378"]
-[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Merchant Tori/Merchant Tori15.png" id="7_ogfjj"]
-[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Merchant Tori/Merchant Tori16.png" id="8_wikfj"]
-[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Merchant Tori/Merchant Tori5.png" id="9_o70vd"]
-[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Merchant Tori/Merchant Tori6.png" id="10_e6yy3"]
-[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Merchant Tori/Merchant Tori7.png" id="11_nxpt3"]
-[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Merchant Tori/Merchant Tori8.png" id="12_nud6i"]
-[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Merchant Tori/Merchant Tori1.png" id="13_qk2lf"]
-[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Merchant Tori/Merchant Tori2.png" id="14_3rxsg"]
-[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Merchant Tori/Merchant Tori3.png" id="15_ixhbg"]
-[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Merchant Tori/Merchant Tori4.png" id="16_6vuqs"]
+[ext_resource type="Texture2D" path="res://res/Village/Dellna/villagers/Merchant Tori/Merchant Tori_sheet.png" id="1_mfuco"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2aqa1"]
+atlas = ExtResource("1_mfuco")
+region = Rect2(2, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ny6x5"]
+atlas = ExtResource("1_mfuco")
+region = Rect2(42, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vlud4"]
+atlas = ExtResource("1_mfuco")
+region = Rect2(82, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iv2vu"]
+atlas = ExtResource("1_mfuco")
+region = Rect2(122, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jpqjm"]
+atlas = ExtResource("1_mfuco")
+region = Rect2(2, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4rtat"]
+atlas = ExtResource("1_mfuco")
+region = Rect2(42, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wj8a3"]
+atlas = ExtResource("1_mfuco")
+region = Rect2(82, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rk08a"]
+atlas = ExtResource("1_mfuco")
+region = Rect2(122, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_62ou3"]
+atlas = ExtResource("1_mfuco")
+region = Rect2(2, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ep70"]
+atlas = ExtResource("1_mfuco")
+region = Rect2(42, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oluwd"]
+atlas = ExtResource("1_mfuco")
+region = Rect2(82, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_elcbb"]
+atlas = ExtResource("1_mfuco")
+region = Rect2(122, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2fwju"]
+atlas = ExtResource("1_mfuco")
+region = Rect2(2, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4njc"]
+atlas = ExtResource("1_mfuco")
+region = Rect2(42, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r20en"]
+atlas = ExtResource("1_mfuco")
+region = Rect2(82, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kambj"]
+atlas = ExtResource("1_mfuco")
+region = Rect2(122, 2, 36, 56)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_r20en")
+"texture": SubResource("AtlasTexture_2aqa1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_kambj")
+"texture": SubResource("AtlasTexture_ny6x5")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_64t4u")
+"texture": SubResource("AtlasTexture_vlud4")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_3idco")
+"texture": SubResource("AtlasTexture_iv2vu")
 }],
 "loop": 1,
 "name": &"down",
@@ -38,16 +87,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_tpvdf")
+"texture": SubResource("AtlasTexture_jpqjm")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_n1378")
+"texture": SubResource("AtlasTexture_4rtat")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_ogfjj")
+"texture": SubResource("AtlasTexture_wj8a3")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_wikfj")
+"texture": SubResource("AtlasTexture_rk08a")
 }],
 "loop": 1,
 "name": &"left",
@@ -55,16 +104,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("9_o70vd")
+"texture": SubResource("AtlasTexture_62ou3")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_e6yy3")
+"texture": SubResource("AtlasTexture_0ep70")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_nxpt3")
+"texture": SubResource("AtlasTexture_oluwd")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_nud6i")
+"texture": SubResource("AtlasTexture_elcbb")
 }],
 "loop": 1,
 "name": &"right",
@@ -72,16 +121,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_qk2lf")
+"texture": SubResource("AtlasTexture_2fwju")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_3rxsg")
+"texture": SubResource("AtlasTexture_c4njc")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_ixhbg")
+"texture": SubResource("AtlasTexture_r20en")
 }, {
 "duration": 1.0,
-"texture": ExtResource("16_6vuqs")
+"texture": SubResource("AtlasTexture_kambj")
 }],
 "loop": 1,
 "name": &"up",

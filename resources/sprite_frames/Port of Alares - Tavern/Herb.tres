@@ -1,36 +1,85 @@
 [gd_resource type="SpriteFrames" format=3]
 
-[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Herb/Herb9.png" id="1_ei55x"]
-[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Herb/Herb10.png" id="2_ac0tg"]
-[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Herb/Herb11.png" id="3_dypmk"]
-[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Herb/Herb12.png" id="4_vum8i"]
-[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Herb/Herb13.png" id="5_cxa76"]
-[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Herb/Herb14.png" id="6_uf3j6"]
-[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Herb/Herb15.png" id="7_h4d3m"]
-[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Herb/Herb16.png" id="8_47jlh"]
-[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Herb/Herb5.png" id="9_14snk"]
-[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Herb/Herb6.png" id="10_6k2f0"]
-[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Herb/Herb7.png" id="11_88iwm"]
-[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Herb/Herb8.png" id="12_t6hnc"]
-[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Herb/Herb1.png" id="13_mhkw7"]
-[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Herb/Herb2.png" id="14_muijm"]
-[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Herb/Herb3.png" id="15_318af"]
-[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Herb/Herb4.png" id="16_k5mdr"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Herb/Herb_sheet.png" id="1_lfw84"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7gyb3"]
+atlas = ExtResource("1_lfw84")
+region = Rect2(2, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_82fbe"]
+atlas = ExtResource("1_lfw84")
+region = Rect2(42, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_twhsg"]
+atlas = ExtResource("1_lfw84")
+region = Rect2(82, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l7yaq"]
+atlas = ExtResource("1_lfw84")
+region = Rect2(122, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i5888"]
+atlas = ExtResource("1_lfw84")
+region = Rect2(2, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8uoc0"]
+atlas = ExtResource("1_lfw84")
+region = Rect2(42, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wrufw"]
+atlas = ExtResource("1_lfw84")
+region = Rect2(82, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o5vo2"]
+atlas = ExtResource("1_lfw84")
+region = Rect2(122, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4io5"]
+atlas = ExtResource("1_lfw84")
+region = Rect2(2, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_380fn"]
+atlas = ExtResource("1_lfw84")
+region = Rect2(42, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ve1t"]
+atlas = ExtResource("1_lfw84")
+region = Rect2(82, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_682o6"]
+atlas = ExtResource("1_lfw84")
+region = Rect2(122, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6hrkb"]
+atlas = ExtResource("1_lfw84")
+region = Rect2(2, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vka00"]
+atlas = ExtResource("1_lfw84")
+region = Rect2(42, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ei55x"]
+atlas = ExtResource("1_lfw84")
+region = Rect2(82, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ac0tg"]
+atlas = ExtResource("1_lfw84")
+region = Rect2(122, 2, 36, 56)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_ei55x")
+"texture": SubResource("AtlasTexture_7gyb3")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_ac0tg")
+"texture": SubResource("AtlasTexture_82fbe")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_dypmk")
+"texture": SubResource("AtlasTexture_twhsg")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_vum8i")
+"texture": SubResource("AtlasTexture_l7yaq")
 }],
 "loop": 1,
 "name": &"down",
@@ -38,16 +87,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_cxa76")
+"texture": SubResource("AtlasTexture_i5888")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_uf3j6")
+"texture": SubResource("AtlasTexture_8uoc0")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_h4d3m")
+"texture": SubResource("AtlasTexture_wrufw")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_47jlh")
+"texture": SubResource("AtlasTexture_o5vo2")
 }],
 "loop": 1,
 "name": &"left",
@@ -55,16 +104,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("9_14snk")
+"texture": SubResource("AtlasTexture_y4io5")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_6k2f0")
+"texture": SubResource("AtlasTexture_380fn")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_88iwm")
+"texture": SubResource("AtlasTexture_0ve1t")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_t6hnc")
+"texture": SubResource("AtlasTexture_682o6")
 }],
 "loop": 1,
 "name": &"right",
@@ -72,16 +121,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_mhkw7")
+"texture": SubResource("AtlasTexture_6hrkb")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_muijm")
+"texture": SubResource("AtlasTexture_vka00")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_318af")
+"texture": SubResource("AtlasTexture_ei55x")
 }, {
 "duration": 1.0,
-"texture": ExtResource("16_k5mdr")
+"texture": SubResource("AtlasTexture_ac0tg")
 }],
 "loop": 1,
 "name": &"up",

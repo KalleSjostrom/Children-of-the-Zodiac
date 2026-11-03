@@ -1,0 +1,38 @@
+# Every walking frame of the party, for the character sprite sheets
+# (docs/VILLAGER_SPRITES_PLAN.md; case sprites_party_walk, --load="Slot 1"
+# --start=Berca): Kin and Celis (36x56) and Zalzi (36x55) walk up, right,
+# left and down, 1.5 s each (down until the guard, before the town's edge),
+# with a shot every 100 ms; the followers turn where the leader turned, so
+# each one shows every direction's four frames. Then they stand.
+wait 1500
+guard 40
+press UP
+mark
+shot u#
+wait 100
+loopuntil nomatch 1500
+release UP
+press RIGHT
+mark
+shot r#
+wait 100
+loopuntil nomatch 1500
+release RIGHT
+press LEFT
+mark
+shot l#
+wait 100
+loopuntil nomatch 1500
+release LEFT
+press DOWN
+mark
+shot d#
+wait 100
+loopuntil nomatch 1500
+release DOWN
+mark
+shot s#
+wait 100
+loopuntil nomatch 1000
+pos end
+quit

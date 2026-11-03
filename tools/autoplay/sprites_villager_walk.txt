@@ -1,0 +1,16 @@
+# Every walking frame and two standing poses of a 56-high villager, for the
+# character sprite sheets (docs/VILLAGER_SPRITES_PLAN.md; case
+# sprites_villager_walk, --load="Slot 1" --start=Alares). A shot every 100 ms
+# catches each 150 ms walk frame.
+#
+# Flog (Alares, image GTboygreen, 36x56) is on screen at the start: in the
+# first 16.5 s of his patrol he walks down, right, up, stands facing right,
+# walks down, left, up, right, stands facing up and walks left, so the shots
+# show all 16 frames. The party (Kin, Celis, Zalzi) stands meanwhile.
+wait 1500
+mark
+shot f#
+wait 100
+loopuntil nomatch 16500
+pos end
+quit

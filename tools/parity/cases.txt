@@ -612,3 +612,18 @@ menu_equip_list          menu_equip_list          --load="Slot 1" --start=Alares
 menu_deck_edit           menu_deck_edit           --load="Slot 1" --start=Alares
 menu_options_difficulty  menu_options_difficulty  --load="Slot 1" --start=Alares
 menu_tutorial_scroll     menu_tutorial_scroll     --load="Slot 1" --start=Alares
+# Character sprite sheets (docs/VILLAGER_SPRITES_PLAN.md; tools/autoplay/
+# sprites_*.txt): a shot every 100 ms, so every 150 ms walk frame shows. Flog
+# in Alares (GTboygreen, 36x56) walks all four directions and stands twice;
+# the party (Kin and Celis 36x56, Zalzi 36x55) walks all four directions in
+# Berca. The other frames the sheets change are in older cases: 36x55
+# villagers walking and standing (Sellie and Samborg in story_arrival_parasne,
+# story_boat_to_pensara, story_call_from_the_gods), the sitting villagers
+# (zazo_0, zazo_story_node1), the Characters/ sets shared between villages
+# (Pensarasoldier in Berca, Parasne and Pensara), Sailor1/Sailor2
+# (tour_port_of_alares_1), cutscene Extras actors and animation=17 poses
+# (story_*), zoomed cutscenes (story_meeting_vincent, ...), Kin on the world
+# map (world_*; legacy drawing: bridge_test), a store entered from a village
+# (zazo_night_*).
+sprites_villager_walk    sprites_villager_walk    --load="Slot 1" --start=Alares
+sprites_party_walk       sprites_party_walk       --load="Slot 1" --start=Berca

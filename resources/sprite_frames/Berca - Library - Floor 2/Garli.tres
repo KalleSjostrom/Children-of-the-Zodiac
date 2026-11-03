@@ -1,36 +1,85 @@
 [gd_resource type="SpriteFrames" format=3]
 
-[ext_resource type="Texture2D" path="res://res/Village/Berca - Library - Floor 2/villagers/Garli/Garli9.png" id="1_5h03i"]
-[ext_resource type="Texture2D" path="res://res/Village/Berca - Library - Floor 2/villagers/Garli/Garli10.png" id="2_keptr"]
-[ext_resource type="Texture2D" path="res://res/Village/Berca - Library - Floor 2/villagers/Garli/Garli11.png" id="3_ua875"]
-[ext_resource type="Texture2D" path="res://res/Village/Berca - Library - Floor 2/villagers/Garli/Garli12.png" id="4_qhqqv"]
-[ext_resource type="Texture2D" path="res://res/Village/Berca - Library - Floor 2/villagers/Garli/Garli13.png" id="5_stntj"]
-[ext_resource type="Texture2D" path="res://res/Village/Berca - Library - Floor 2/villagers/Garli/Garli14.png" id="6_ts0ie"]
-[ext_resource type="Texture2D" path="res://res/Village/Berca - Library - Floor 2/villagers/Garli/Garli15.png" id="7_40d2c"]
-[ext_resource type="Texture2D" path="res://res/Village/Berca - Library - Floor 2/villagers/Garli/Garli16.png" id="8_4lkyl"]
-[ext_resource type="Texture2D" path="res://res/Village/Berca - Library - Floor 2/villagers/Garli/Garli5.png" id="9_k5djy"]
-[ext_resource type="Texture2D" path="res://res/Village/Berca - Library - Floor 2/villagers/Garli/Garli6.png" id="10_uv1fe"]
-[ext_resource type="Texture2D" path="res://res/Village/Berca - Library - Floor 2/villagers/Garli/Garli7.png" id="11_6o7n3"]
-[ext_resource type="Texture2D" path="res://res/Village/Berca - Library - Floor 2/villagers/Garli/Garli8.png" id="12_psyww"]
-[ext_resource type="Texture2D" path="res://res/Village/Berca - Library - Floor 2/villagers/Garli/Garli1.png" id="13_kvr4t"]
-[ext_resource type="Texture2D" path="res://res/Village/Berca - Library - Floor 2/villagers/Garli/Garli2.png" id="14_wctfu"]
-[ext_resource type="Texture2D" path="res://res/Village/Berca - Library - Floor 2/villagers/Garli/Garli3.png" id="15_1m8tt"]
-[ext_resource type="Texture2D" path="res://res/Village/Berca - Library - Floor 2/villagers/Garli/Garli4.png" id="16_1qtio"]
+[ext_resource type="Texture2D" path="res://res/Village/Berca - Library - Floor 2/villagers/Garli/Garli_sheet.png" id="1_08e6h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k563u"]
+atlas = ExtResource("1_08e6h")
+region = Rect2(2, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_esc0w"]
+atlas = ExtResource("1_08e6h")
+region = Rect2(42, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2jhbd"]
+atlas = ExtResource("1_08e6h")
+region = Rect2(82, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vbgr0"]
+atlas = ExtResource("1_08e6h")
+region = Rect2(122, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bm2rk"]
+atlas = ExtResource("1_08e6h")
+region = Rect2(2, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ownn"]
+atlas = ExtResource("1_08e6h")
+region = Rect2(42, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vy5x0"]
+atlas = ExtResource("1_08e6h")
+region = Rect2(82, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_es1re"]
+atlas = ExtResource("1_08e6h")
+region = Rect2(122, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3lgt4"]
+atlas = ExtResource("1_08e6h")
+region = Rect2(2, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_chhqn"]
+atlas = ExtResource("1_08e6h")
+region = Rect2(42, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atrx5"]
+atlas = ExtResource("1_08e6h")
+region = Rect2(82, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yl04p"]
+atlas = ExtResource("1_08e6h")
+region = Rect2(122, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vyms0"]
+atlas = ExtResource("1_08e6h")
+region = Rect2(2, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6n78"]
+atlas = ExtResource("1_08e6h")
+region = Rect2(42, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5h03i"]
+atlas = ExtResource("1_08e6h")
+region = Rect2(82, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_keptr"]
+atlas = ExtResource("1_08e6h")
+region = Rect2(122, 2, 36, 56)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_5h03i")
+"texture": SubResource("AtlasTexture_k563u")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_keptr")
+"texture": SubResource("AtlasTexture_esc0w")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_ua875")
+"texture": SubResource("AtlasTexture_2jhbd")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_qhqqv")
+"texture": SubResource("AtlasTexture_vbgr0")
 }],
 "loop": 1,
 "name": &"down",
@@ -38,16 +87,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_stntj")
+"texture": SubResource("AtlasTexture_bm2rk")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_ts0ie")
+"texture": SubResource("AtlasTexture_8ownn")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_40d2c")
+"texture": SubResource("AtlasTexture_vy5x0")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_4lkyl")
+"texture": SubResource("AtlasTexture_es1re")
 }],
 "loop": 1,
 "name": &"left",
@@ -55,16 +104,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("9_k5djy")
+"texture": SubResource("AtlasTexture_3lgt4")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_uv1fe")
+"texture": SubResource("AtlasTexture_chhqn")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_6o7n3")
+"texture": SubResource("AtlasTexture_atrx5")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_psyww")
+"texture": SubResource("AtlasTexture_yl04p")
 }],
 "loop": 1,
 "name": &"right",
@@ -72,16 +121,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_kvr4t")
+"texture": SubResource("AtlasTexture_vyms0")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_wctfu")
+"texture": SubResource("AtlasTexture_m6n78")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_1m8tt")
+"texture": SubResource("AtlasTexture_5h03i")
 }, {
 "duration": 1.0,
-"texture": ExtResource("16_1qtio")
+"texture": SubResource("AtlasTexture_keptr")
 }],
 "loop": 1,
 "name": &"up",

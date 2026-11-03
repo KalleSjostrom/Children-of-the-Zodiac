@@ -1,36 +1,85 @@
 [gd_resource type="SpriteFrames" format=3]
 
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Nodd/Nodd9.png" id="1_lm1pr"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Nodd/Nodd10.png" id="2_ktn86"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Nodd/Nodd11.png" id="3_epkvs"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Nodd/Nodd12.png" id="4_2jnnu"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Nodd/Nodd13.png" id="5_hak6f"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Nodd/Nodd14.png" id="6_wlgvg"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Nodd/Nodd15.png" id="7_xppxr"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Nodd/Nodd16.png" id="8_fdyaw"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Nodd/Nodd5.png" id="9_0vurg"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Nodd/Nodd6.png" id="10_que8f"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Nodd/Nodd7.png" id="11_8e34i"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Nodd/Nodd8.png" id="12_meald"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Nodd/Nodd1.png" id="13_7c58a"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Nodd/Nodd2.png" id="14_c8njy"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Nodd/Nodd3.png" id="15_cn3ku"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Nodd/Nodd4.png" id="16_0m473"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District/villagers/Nodd/Nodd_sheet.png" id="1_4xhfa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k5jf7"]
+atlas = ExtResource("1_4xhfa")
+region = Rect2(2, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e6pbo"]
+atlas = ExtResource("1_4xhfa")
+region = Rect2(42, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sc3b8"]
+atlas = ExtResource("1_4xhfa")
+region = Rect2(82, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x5ba8"]
+atlas = ExtResource("1_4xhfa")
+region = Rect2(122, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_77g1w"]
+atlas = ExtResource("1_4xhfa")
+region = Rect2(2, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r8d42"]
+atlas = ExtResource("1_4xhfa")
+region = Rect2(42, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v2uo5"]
+atlas = ExtResource("1_4xhfa")
+region = Rect2(82, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_txj5l"]
+atlas = ExtResource("1_4xhfa")
+region = Rect2(122, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e2wfi"]
+atlas = ExtResource("1_4xhfa")
+region = Rect2(2, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ydaie"]
+atlas = ExtResource("1_4xhfa")
+region = Rect2(42, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6nju"]
+atlas = ExtResource("1_4xhfa")
+region = Rect2(82, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t5phe"]
+atlas = ExtResource("1_4xhfa")
+region = Rect2(122, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5wil8"]
+atlas = ExtResource("1_4xhfa")
+region = Rect2(2, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwrf4"]
+atlas = ExtResource("1_4xhfa")
+region = Rect2(42, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lm1pr"]
+atlas = ExtResource("1_4xhfa")
+region = Rect2(82, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ktn86"]
+atlas = ExtResource("1_4xhfa")
+region = Rect2(122, 2, 36, 56)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_lm1pr")
+"texture": SubResource("AtlasTexture_k5jf7")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_ktn86")
+"texture": SubResource("AtlasTexture_e6pbo")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_epkvs")
+"texture": SubResource("AtlasTexture_sc3b8")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_2jnnu")
+"texture": SubResource("AtlasTexture_x5ba8")
 }],
 "loop": 1,
 "name": &"down",
@@ -38,16 +87,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_hak6f")
+"texture": SubResource("AtlasTexture_77g1w")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_wlgvg")
+"texture": SubResource("AtlasTexture_r8d42")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_xppxr")
+"texture": SubResource("AtlasTexture_v2uo5")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_fdyaw")
+"texture": SubResource("AtlasTexture_txj5l")
 }],
 "loop": 1,
 "name": &"left",
@@ -55,16 +104,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("9_0vurg")
+"texture": SubResource("AtlasTexture_e2wfi")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_que8f")
+"texture": SubResource("AtlasTexture_ydaie")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_8e34i")
+"texture": SubResource("AtlasTexture_b6nju")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_meald")
+"texture": SubResource("AtlasTexture_t5phe")
 }],
 "loop": 1,
 "name": &"right",
@@ -72,16 +121,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_7c58a")
+"texture": SubResource("AtlasTexture_5wil8")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_c8njy")
+"texture": SubResource("AtlasTexture_vwrf4")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_cn3ku")
+"texture": SubResource("AtlasTexture_lm1pr")
 }, {
 "duration": 1.0,
-"texture": ExtResource("16_0m473")
+"texture": SubResource("AtlasTexture_ktn86")
 }],
 "loop": 1,
 "name": &"up",

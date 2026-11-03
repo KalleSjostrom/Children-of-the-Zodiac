@@ -85,5 +85,21 @@ The survey of the stores, the menu and the mini-games (MODERNIZATION_PLAN.md
 |---|---|---|---|
 | R1 | Silent Ruin--The Great Ruins (line 192) pairs the magic square riddle `RubicsPuzzle19` with `puzzle44` (4 x 4 tiles): its check knows only 3 x 3 and 5 x 5 (sums 15 and 65), so the riddle counts as solved on the first move, and it is never scrambled | yes | Low |
 
+## Found with the character sprite sheets (2026-11-03), not ticketed
+
+The villagers' and cutscene characters' images (docs/VILLAGER_SPRITES_PLAN.md,
+"The data"); kept, none fixed or deleted. Shaun in Zazo - Tent (COTZ-028) and
+Podd in the Civil House (COTZ-029) are the other two invisible villagers.
+
+| ID | Quirk | Java too | Priority |
+|---|---|---|---|
+| C1 | Alares' Hilda1 (`maps/Village/Alares/villagers/Hilda1.char`, `image Hilda`) is invisible: the image path names `res/Village/Alares/villagers/Hilda/`, which does not exist (Hilda's images are Zazo's). She is there at her status 4 (no parity case reaches it): nothing is drawn, ImageHandler logs "image not found" for each of the 16 frames; her SpriteFrames is empty | yes (same data) | Medium |
+| C2 | Pensara - The North District's "Thieving looking guy" (`image GTthief`) is invisible: the image path names the district's `villagers/GTthief/`, but the set is Alares' (`res/Village/Alares/villagers/GTthief/`). He is there at his status 6 or 8 (no parity case reaches it); as C1 | yes | Medium |
+| C3 | `res/Village/Zazo/villagers/Storygroup` has two empty frames (10 and 11: facing down); nothing references the set | yes | Low |
+| C4 | `res/Village/Characters/KinSmall`: 16 frames of 18x27 named `Kin1..16`, which no legacy path can name (a set's files are named after its folder); nothing references it | yes | Low |
+| C5 | 31 sets are referenced by nothing (no `.char` image line, no cutscene actor, not the party): Alares' GTstorekeeper, GTwagon, GTyellowhair; Berca's Civilian; Characters' Alarescommander, Althair with helm, KinSmall, rebelpurplebald, rebelredbald, Seacaptain; the 12 zodiac images of Home of the Gods (their `.char` lines are `image _ 0`); Parasne's Merchant Amy, Merchant Dave, Merchant Pert, Merchant Willy; The Prison Cell's Celis; Zazo - Miner's Home's Marcus; Zazo - Miner's Home2's Berulf, Greghild; Zazo's Storygroup. Four more are referenced only by `.char` files that no village places: Berca's Benzer and Pensara - The North District - Library's Hanrry, Luna and Philiph (the Library's `.vil` has no villagers; `Zazo - Farl's House/villagers/Farl.char` is unplaced too) | yes | Low |
+| C6 | Byte-identical sets under other names or places: Borealis, Celis and Zalzi in The Prison Cell and in `Characters/`; GTyellowhair = Shaun; Petir = Ulph = Tito; Tilly = Smallie = Ludna; Gilo = Milo; Gregory = Podd; Amy = Merchant Amy, Dave = Merchant Dave, Pert = Merchant Pert, Willy = Merchant Willy; Farmer Bob = Felix; Juha = Earl. Pointing their `.char` lines at one set is a data change (check it with the `tour_*` cases) | yes | Low |
+| C7 | Emma (Zazo, Pensara - The School District), Farl (Zazo, `Characters/`) and Marcus (Zazo - Miner's Home, `Characters/`) exist twice with different art | yes | Low |
+
 Code-side findings (dead code, latent bugs) are in MODERNIZATION_PLAN.md,
 "Appendix: side findings".

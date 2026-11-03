@@ -16,6 +16,7 @@ var destroyed := false
 var loaded := false
 var x := 0.0
 var y := 0.0
+var _region_coords: TextureCoords # getImageTexCoords of an AtlasTexture
 
 
 func _init(p_name: String = "", p_texture: Texture2D = null, p_data: Image = null) -> void:
@@ -72,7 +73,20 @@ func getGodotTexture() -> Texture2D:
 
 
 ## JOGL Texture.getImageTexCoords(): in this port v = 0 is the image top.
+## For an AtlasTexture (a frame of a character sheet, ImageHandler) the
+## coordinates of its region in the atlas, as JOGL's are of the image in a
+## padded texture: the legacy drawing binds the atlas (its RID). Like JOGL's
+## its left and top are not 0, so drawPart's percent of the width is only
+## right for whole images (frames are drawn whole).
 func getImageTexCoords() -> TextureCoords:
+	if texture is AtlasTexture:
+		if _region_coords == null:
+			var atlas := texture as AtlasTexture
+			var size := Vector2(atlas.atlas.get_size())
+			var r := atlas.region
+			_region_coords = TextureCoords.new(r.position.x / size.x, r.end.y / size.y,
+					r.end.x / size.x, r.position.y / size.y)
+		return _region_coords
 	return TextureCoords.DEFAULT
 
 

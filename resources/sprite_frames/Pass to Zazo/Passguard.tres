@@ -1,36 +1,85 @@
 [gd_resource type="SpriteFrames" format=3]
 
-[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Passguard/Passguard9.png" id="1_cmvg8"]
-[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Passguard/Passguard10.png" id="2_qojxp"]
-[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Passguard/Passguard11.png" id="3_w1wqk"]
-[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Passguard/Passguard12.png" id="4_hxjjt"]
-[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Passguard/Passguard13.png" id="5_yfk4l"]
-[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Passguard/Passguard14.png" id="6_q2e2r"]
-[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Passguard/Passguard15.png" id="7_xyjss"]
-[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Passguard/Passguard16.png" id="8_0xnwu"]
-[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Passguard/Passguard5.png" id="9_u1x2i"]
-[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Passguard/Passguard6.png" id="10_pp1b2"]
-[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Passguard/Passguard7.png" id="11_neb7o"]
-[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Passguard/Passguard8.png" id="12_hcrpt"]
-[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Passguard/Passguard1.png" id="13_6ljky"]
-[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Passguard/Passguard2.png" id="14_ouidk"]
-[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Passguard/Passguard3.png" id="15_o0xaq"]
-[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Passguard/Passguard4.png" id="16_473mt"]
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Passguard/Passguard_sheet.png" id="1_47jjh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kgg3i"]
+atlas = ExtResource("1_47jjh")
+region = Rect2(2, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ocu4n"]
+atlas = ExtResource("1_47jjh")
+region = Rect2(42, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t08t2"]
+atlas = ExtResource("1_47jjh")
+region = Rect2(82, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46a6f"]
+atlas = ExtResource("1_47jjh")
+region = Rect2(122, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jiagm"]
+atlas = ExtResource("1_47jjh")
+region = Rect2(2, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2360p"]
+atlas = ExtResource("1_47jjh")
+region = Rect2(42, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3f1m8"]
+atlas = ExtResource("1_47jjh")
+region = Rect2(82, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o0nm0"]
+atlas = ExtResource("1_47jjh")
+region = Rect2(122, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_068pb"]
+atlas = ExtResource("1_47jjh")
+region = Rect2(2, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f7n23"]
+atlas = ExtResource("1_47jjh")
+region = Rect2(42, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ius3h"]
+atlas = ExtResource("1_47jjh")
+region = Rect2(82, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qk2wh"]
+atlas = ExtResource("1_47jjh")
+region = Rect2(122, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iv7pp"]
+atlas = ExtResource("1_47jjh")
+region = Rect2(2, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sxayg"]
+atlas = ExtResource("1_47jjh")
+region = Rect2(42, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cmvg8"]
+atlas = ExtResource("1_47jjh")
+region = Rect2(82, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qojxp"]
+atlas = ExtResource("1_47jjh")
+region = Rect2(122, 2, 36, 56)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_cmvg8")
+"texture": SubResource("AtlasTexture_kgg3i")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_qojxp")
+"texture": SubResource("AtlasTexture_ocu4n")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_w1wqk")
+"texture": SubResource("AtlasTexture_t08t2")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_hxjjt")
+"texture": SubResource("AtlasTexture_46a6f")
 }],
 "loop": 1,
 "name": &"down",
@@ -38,16 +87,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_yfk4l")
+"texture": SubResource("AtlasTexture_jiagm")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_q2e2r")
+"texture": SubResource("AtlasTexture_2360p")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_xyjss")
+"texture": SubResource("AtlasTexture_3f1m8")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_0xnwu")
+"texture": SubResource("AtlasTexture_o0nm0")
 }],
 "loop": 1,
 "name": &"left",
@@ -55,16 +104,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("9_u1x2i")
+"texture": SubResource("AtlasTexture_068pb")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_pp1b2")
+"texture": SubResource("AtlasTexture_f7n23")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_neb7o")
+"texture": SubResource("AtlasTexture_ius3h")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_hcrpt")
+"texture": SubResource("AtlasTexture_qk2wh")
 }],
 "loop": 1,
 "name": &"right",
@@ -72,16 +121,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_6ljky")
+"texture": SubResource("AtlasTexture_iv7pp")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_ouidk")
+"texture": SubResource("AtlasTexture_sxayg")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_o0xaq")
+"texture": SubResource("AtlasTexture_cmvg8")
 }, {
 "duration": 1.0,
-"texture": ExtResource("16_473mt")
+"texture": SubResource("AtlasTexture_qojxp")
 }],
 "loop": 1,
 "name": &"up",

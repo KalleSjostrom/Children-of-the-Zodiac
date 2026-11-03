@@ -93,9 +93,16 @@ static func getLoadQueueSize() -> int:
 	return 0
 
 
+## A frame of a character set whose frame files were packed into a sheet
+## (docs/VILLAGER_SPRITES_PLAN.md, plan B) keeps its path as its name and is
+## the frame's cell of the sheet (CharacterSheet.frame_texture); a set
+## without a sheet still loads its frame files.
 static func _loadTexture(name: String) -> GameTexture:
 	var path := GameResourceLoader.resolve(name)
 	if path == "":
+		var frame := CharacterSheet.frame_texture(name)
+		if frame != null:
+			return GameTexture.new(name, frame)
 		push_error("ImageHandler: image not found: " + name)
 		return null
 	var tex = ResourceLoader.load(path)

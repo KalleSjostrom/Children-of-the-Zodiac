@@ -1,36 +1,85 @@
 [gd_resource type="SpriteFrames" format=3]
 
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Lecca/Lecca9.png" id="1_pqhfb"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Lecca/Lecca10.png" id="2_y1fsq"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Lecca/Lecca11.png" id="3_dfu2q"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Lecca/Lecca12.png" id="4_jvs5n"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Lecca/Lecca13.png" id="5_qhxyo"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Lecca/Lecca14.png" id="6_teh3v"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Lecca/Lecca15.png" id="7_qius5"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Lecca/Lecca16.png" id="8_1cguk"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Lecca/Lecca5.png" id="9_18o68"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Lecca/Lecca6.png" id="10_75uwk"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Lecca/Lecca7.png" id="11_1f7oo"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Lecca/Lecca8.png" id="12_i5ovl"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Lecca/Lecca1.png" id="13_60d6u"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Lecca/Lecca2.png" id="14_kqg8h"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Lecca/Lecca3.png" id="15_qnku3"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Lecca/Lecca4.png" id="16_fq2ol"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Lecca/Lecca_sheet.png" id="1_2r6l1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k2jd8"]
+atlas = ExtResource("1_2r6l1")
+region = Rect2(2, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3gfre"]
+atlas = ExtResource("1_2r6l1")
+region = Rect2(42, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q2787"]
+atlas = ExtResource("1_2r6l1")
+region = Rect2(82, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_75bv8"]
+atlas = ExtResource("1_2r6l1")
+region = Rect2(122, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6fn2n"]
+atlas = ExtResource("1_2r6l1")
+region = Rect2(2, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xwxdk"]
+atlas = ExtResource("1_2r6l1")
+region = Rect2(42, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6om1i"]
+atlas = ExtResource("1_2r6l1")
+region = Rect2(82, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6fnr2"]
+atlas = ExtResource("1_2r6l1")
+region = Rect2(122, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ojyte"]
+atlas = ExtResource("1_2r6l1")
+region = Rect2(2, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ojyvh"]
+atlas = ExtResource("1_2r6l1")
+region = Rect2(42, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mlrvh"]
+atlas = ExtResource("1_2r6l1")
+region = Rect2(82, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5y6u"]
+atlas = ExtResource("1_2r6l1")
+region = Rect2(122, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7h40b"]
+atlas = ExtResource("1_2r6l1")
+region = Rect2(2, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ro2op"]
+atlas = ExtResource("1_2r6l1")
+region = Rect2(42, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pqhfb"]
+atlas = ExtResource("1_2r6l1")
+region = Rect2(82, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y1fsq"]
+atlas = ExtResource("1_2r6l1")
+region = Rect2(122, 2, 36, 56)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_pqhfb")
+"texture": SubResource("AtlasTexture_k2jd8")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_y1fsq")
+"texture": SubResource("AtlasTexture_3gfre")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_dfu2q")
+"texture": SubResource("AtlasTexture_q2787")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_jvs5n")
+"texture": SubResource("AtlasTexture_75bv8")
 }],
 "loop": 1,
 "name": &"down",
@@ -38,16 +87,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_qhxyo")
+"texture": SubResource("AtlasTexture_6fn2n")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_teh3v")
+"texture": SubResource("AtlasTexture_xwxdk")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_qius5")
+"texture": SubResource("AtlasTexture_6om1i")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_1cguk")
+"texture": SubResource("AtlasTexture_6fnr2")
 }],
 "loop": 1,
 "name": &"left",
@@ -55,16 +104,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("9_18o68")
+"texture": SubResource("AtlasTexture_ojyte")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_75uwk")
+"texture": SubResource("AtlasTexture_ojyvh")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_1f7oo")
+"texture": SubResource("AtlasTexture_mlrvh")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_i5ovl")
+"texture": SubResource("AtlasTexture_f5y6u")
 }],
 "loop": 1,
 "name": &"right",
@@ -72,16 +121,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_60d6u")
+"texture": SubResource("AtlasTexture_7h40b")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_kqg8h")
+"texture": SubResource("AtlasTexture_ro2op")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_qnku3")
+"texture": SubResource("AtlasTexture_pqhfb")
 }, {
 "duration": 1.0,
-"texture": ExtResource("16_fq2ol")
+"texture": SubResource("AtlasTexture_y1fsq")
 }],
 "loop": 1,
 "name": &"up",

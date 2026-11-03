@@ -1,36 +1,85 @@
 [gd_resource type="SpriteFrames" format=3]
 
-[ext_resource type="Texture2D" path="res://res/Village/Characters/Billy the rascal/Billy the rascal9.png" id="1_0l7pq"]
-[ext_resource type="Texture2D" path="res://res/Village/Characters/Billy the rascal/Billy the rascal10.png" id="2_122ks"]
-[ext_resource type="Texture2D" path="res://res/Village/Characters/Billy the rascal/Billy the rascal11.png" id="3_kcdxk"]
-[ext_resource type="Texture2D" path="res://res/Village/Characters/Billy the rascal/Billy the rascal12.png" id="4_oromc"]
-[ext_resource type="Texture2D" path="res://res/Village/Characters/Billy the rascal/Billy the rascal13.png" id="5_byx8m"]
-[ext_resource type="Texture2D" path="res://res/Village/Characters/Billy the rascal/Billy the rascal14.png" id="6_q5mcg"]
-[ext_resource type="Texture2D" path="res://res/Village/Characters/Billy the rascal/Billy the rascal15.png" id="7_3xuv0"]
-[ext_resource type="Texture2D" path="res://res/Village/Characters/Billy the rascal/Billy the rascal16.png" id="8_jij7t"]
-[ext_resource type="Texture2D" path="res://res/Village/Characters/Billy the rascal/Billy the rascal5.png" id="9_irvjl"]
-[ext_resource type="Texture2D" path="res://res/Village/Characters/Billy the rascal/Billy the rascal6.png" id="10_6e68m"]
-[ext_resource type="Texture2D" path="res://res/Village/Characters/Billy the rascal/Billy the rascal7.png" id="11_dk7x8"]
-[ext_resource type="Texture2D" path="res://res/Village/Characters/Billy the rascal/Billy the rascal8.png" id="12_oevfd"]
-[ext_resource type="Texture2D" path="res://res/Village/Characters/Billy the rascal/Billy the rascal1.png" id="13_2dtjr"]
-[ext_resource type="Texture2D" path="res://res/Village/Characters/Billy the rascal/Billy the rascal2.png" id="14_ot80k"]
-[ext_resource type="Texture2D" path="res://res/Village/Characters/Billy the rascal/Billy the rascal3.png" id="15_x71u2"]
-[ext_resource type="Texture2D" path="res://res/Village/Characters/Billy the rascal/Billy the rascal4.png" id="16_qmcgl"]
+[ext_resource type="Texture2D" path="res://res/Village/Characters/Billy the rascal/Billy the rascal_sheet.png" id="1_2xw4p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gf001"]
+atlas = ExtResource("1_2xw4p")
+region = Rect2(2, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gksuj"]
+atlas = ExtResource("1_2xw4p")
+region = Rect2(42, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84mfp"]
+atlas = ExtResource("1_2xw4p")
+region = Rect2(82, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tq41l"]
+atlas = ExtResource("1_2xw4p")
+region = Rect2(122, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_arnx6"]
+atlas = ExtResource("1_2xw4p")
+region = Rect2(2, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ksx5q"]
+atlas = ExtResource("1_2xw4p")
+region = Rect2(42, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ounp1"]
+atlas = ExtResource("1_2xw4p")
+region = Rect2(82, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_864k3"]
+atlas = ExtResource("1_2xw4p")
+region = Rect2(122, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ykhj"]
+atlas = ExtResource("1_2xw4p")
+region = Rect2(2, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tl7a5"]
+atlas = ExtResource("1_2xw4p")
+region = Rect2(42, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_425k0"]
+atlas = ExtResource("1_2xw4p")
+region = Rect2(82, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e12w8"]
+atlas = ExtResource("1_2xw4p")
+region = Rect2(122, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nrb4d"]
+atlas = ExtResource("1_2xw4p")
+region = Rect2(2, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xeujx"]
+atlas = ExtResource("1_2xw4p")
+region = Rect2(42, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0l7pq"]
+atlas = ExtResource("1_2xw4p")
+region = Rect2(82, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_122ks"]
+atlas = ExtResource("1_2xw4p")
+region = Rect2(122, 2, 36, 56)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_0l7pq")
+"texture": SubResource("AtlasTexture_gf001")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_122ks")
+"texture": SubResource("AtlasTexture_gksuj")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_kcdxk")
+"texture": SubResource("AtlasTexture_84mfp")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_oromc")
+"texture": SubResource("AtlasTexture_tq41l")
 }],
 "loop": 1,
 "name": &"down",
@@ -38,16 +87,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_byx8m")
+"texture": SubResource("AtlasTexture_arnx6")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_q5mcg")
+"texture": SubResource("AtlasTexture_ksx5q")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_3xuv0")
+"texture": SubResource("AtlasTexture_ounp1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_jij7t")
+"texture": SubResource("AtlasTexture_864k3")
 }],
 "loop": 1,
 "name": &"left",
@@ -55,16 +104,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("9_irvjl")
+"texture": SubResource("AtlasTexture_7ykhj")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_6e68m")
+"texture": SubResource("AtlasTexture_tl7a5")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_dk7x8")
+"texture": SubResource("AtlasTexture_425k0")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_oevfd")
+"texture": SubResource("AtlasTexture_e12w8")
 }],
 "loop": 1,
 "name": &"right",
@@ -72,16 +121,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_2dtjr")
+"texture": SubResource("AtlasTexture_nrb4d")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_ot80k")
+"texture": SubResource("AtlasTexture_xeujx")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_x71u2")
+"texture": SubResource("AtlasTexture_0l7pq")
 }, {
 "duration": 1.0,
-"texture": ExtResource("16_qmcgl")
+"texture": SubResource("AtlasTexture_122ks")
 }],
 "loop": 1,
 "name": &"up",

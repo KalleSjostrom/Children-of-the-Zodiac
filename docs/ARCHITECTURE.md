@@ -27,7 +27,8 @@ main/Main.tscn            the tree in section 4
 scenes/
   common/                 VillageDoor, VillageSign, VillageLoot, VillageSpawn, ActorView,
                           StoryImage (.tscn + .gd each), alpha_test.gdshader; Difficulty +
-                          DifficultyLevel, SaveSlots (docs/DIFFICULTY.md)
+                          DifficultyLevel, SaveSlots (docs/DIFFICULTY.md); CharacterSheet (the
+                          layout of a character's sprite sheet, section 9)
   common/particles/       LegacyParticles2D (a system's slot in a village), VillageParticles2D
                           (a GPU system), the particle shaders (<class>_particle.gdshader,
                           particles.gdshaderinc, distance_fade.gdshaderinc, random.gdshaderinc);
@@ -71,7 +72,8 @@ scenes/
   debug/                  DebugConsole (built in code, added by Main in debug builds),
                           DebugCommands (registry, completion), GameCommands
 resources/
-  sprite_frames/<folder>/<image>.tres          (SpriteFrames per villager image set, generated)
+  sprite_frames/<folder>/<image>.tres          (SpriteFrames per villager image set: the cells of
+                                                its sheet, section 9; edited by hand)
   sprite_frames/<folder>/animobj/<name>.tres   (per animObj series, generated)
   sprite_frames/labyrinth/<folder>/<image>.tres (per dungeon object image series, generated)
   dungeon_layouts/<Area>--<Floor>.tres   (DungeonLayout, generated)
@@ -90,6 +92,9 @@ tools/import/             converters and their checks (headless `--script`): sce
                           world_to_scene.gd);
                           map_to_scene.gd (+ map_to_scene.sh), verify_dungeons.gd,
                           dungeon_preview.gd (windowed); particles_to_scenes.gd (+ .sh)
+tools/art/                the character images (section 9, "Character frames and sheets", headless
+                          `--script`): pad_character_frames.gd, pack_character_sheets.gd,
+                          rewrite_sprite_frames.gd, character_sets.gd (the sets they work on)
 tools/parity/             screenshot comparison (section 7), contact_sheet.gd
 tools/bridge_test/        the phase 0 bridge test scene (dev only)
 ```
@@ -635,6 +640,96 @@ them: `docs/CONVERTING_PARTICLES.md`; the `.info` file stays the source):
   not empty.
 * `--legacy=particles` keeps the legacy simulation and `LegacyParticles2D`'s
   quads; `--hide-particles` hides both paths.
+
+**Character frames and sheets** (`docs/VILLAGER_SPRITES_PLAN.md`, plans A
+and B). A character set is a folder `res/Village/<place>/villagers/<Name>/`
+or `res/Village/Characters/<Name>/` (`char/<Name>` in a `.char` file).
+
+* **The legacy frame paths stay.** `Sprite.animImages` holds 16 paths
+  `<folder>/<Name><n>.png` (the name is the folder's: Man1's are
+  `Man11..Man116`). Files 1–4 face up, 5–8 right, 9–12 down, 13–16 left
+  (`Values.UP..LEFT`); walking shows `ia[i + dir * 4]` 150 ms each, standing
+  the direction's first. The callers: `Villager` (the `.char` image line),
+  `PartyMember` (permanent), `LandPlayer` (Kin on the world map), `Actor`
+  (`…/<Name>Extras[N]`); the story's `kind=animation` puts a single
+  `Characters/Animation/<name>.png` into `animImages[17]`.
+* **A walking character is one sheet**, `<folder>/<Name>_sheet.png`
+  (`CharacterSheet`, `scenes/common/CharacterSheet.gd`): 4 columns (the walk
+  frames) × 4 rows (up, right, down, left: files 1–4, 5–8, 9–12, 13–16),
+  36×56 cells at a 40×60 pitch, 160×240 in all. The 2 px gutter around a
+  cell holds copies of the cell's edge pixels (extruded), so linear
+  filtering past the cell's edge (a cutscene zoom, full screen) samples the
+  edge, as clamp-to-edge did for a frame file. The AtlasTextures do not set
+  `filter_clip`: here its clamp lands a hair inside the edge texels and
+  changes the cell's last row and column by up to 3/255 even unzoomed
+  (`docs/VILLAGER_SPRITES_PLAN.md`, plan B). Imported like the frames were:
+  lossless, no mipmaps, `fix_alpha_border`. Every cell is 36×56 (plan A
+  padded the 36×55 frames with an empty bottom row; the logic never read a
+  frame's size, it uses
+  `Sprite.STANDARD_WIDTH/HEIGHT`, `Player.getHeight/getWidth`, the 36/55
+  overlap test of `DoubleBackground.overlapped_pieces`, the `.char` size).
+  Single images stay single images: the four 36×56 villagers (Temeth,
+  Haness, Kurt, Deel) and the five sitting ones (36×56 too since plan A,
+  their picture in the top-left 26×40; their `.char` size `40 26` stays),
+  the zodiac images, `ball`, the `Characters/Animation` poses, the props.
+* **A frame path becomes a region.** `ImageHandler._loadTexture(path)`: when
+  the frame file is not in `file_index.txt`, `CharacterSheet.frame_texture`
+  parses `<folder>/<Name><n>.png` (case-insensitive, n 1–16) and, when
+  `<folder>/<Name>_sheet.png` is indexed, returns an `AtlasTexture` of cell n
+  (`CharacterSheet.cell`); the `GameTexture` over it is cached by the
+  frame path in the game mode's list like any texture. A set without a sheet
+  still loads its frame files. Through `GameTexture`: `getGodotTexture()` is
+  the AtlasTexture, `getWidth/getHeight` the cell's 36×56, `getData()` the
+  cell's image (`AtlasTexture.get_image`), `getImageTexCoords()` the cell's
+  coordinates in the sheet, for the legacy drawing (the world map's
+  `--legacy=world_map` and the bridge test draw Kin with `Graphics`, which
+  binds the AtlasTexture's RID, the sheet's).
+* **ActorView looks frames up by a key** (`_frame_key`): an AtlasTexture's
+  atlas (the sheet, one object: `ResourceLoader`'s cache) and region, any
+  other texture itself. The village's `SpriteFrames` hold AtlasTexture
+  sub-resources of the sheet, ImageHandler makes its own; they match by key,
+  also after ImageHandler drops a game mode's list. Party members, cutscene
+  actors and the world map's player are not in a `SpriteFrames` and go to
+  the view's `extra` animation, as before.
+* **SpriteFrames** (`resources/sprite_frames/<folder>/<Name>.tres`): `up`,
+  `right`, `down`, `left`, 4 frames each, 150 ms, looped; a frame is an
+  `AtlasTexture` sub-resource (the sheet, the cell). They give
+  the editor's preview and the lookup; `ActorView` never plays them. The four
+  villagers whose `.char` image path does not resolve have empty ones
+  (`tickets/triage.md` C1, C2, COTZ-028, COTZ-029).
+
+The tools (`tools/art/`, headless, from the project root; each prints what it
+changes, has `--dry-run`, leaves `_pixel` test images alone and changes
+nothing when run twice):
+
+```
+godot --headless --path . --script res://tools/art/pad_character_frames.gd    # plan A
+godot --headless --path . --script res://tools/art/pack_character_sheets.gd   # the sheets
+godot --headless --path . --import
+godot --headless --path . --script res://tools/art/rewrite_sprite_frames.gd   # the .tres
+godot --headless --path . --script res://tools/art/pack_character_sheets.gd -- --delete-frames
+godot --headless --path . --import
+python tools/gen_file_index.py      # then drop the _pixel lines it adds
+```
+
+`pack_character_sheets.gd` checks that every cell of a written sheet is its
+frame file, pixel for pixel, and the gutter the cells' extruded edges,
+before `--delete-frames` deletes the frames.
+
+**Adding or editing a character.** The sheet is the source: edit
+`<Name>_sheet.png` in place, keeping the grid (cells at x = 2, 42, 82, 122
+and y = 2, 62, 122, 182, 36×56 each) and the row order, then run
+`pack_character_sheets.gd`: for a sheet without frame files it extrudes the
+cells' edges into the gutter again (a stale gutter shows only under a zoom,
+as a fringe at the cell's edge). A cell is drawn from its top-left corner
+(the sprite's position), and the logic assumes a 36×56 sprite there (the
+obstacles, the sort by the top edge), so the feet stay at the bottom of the
+cell (the 36×55 characters keep row 55 empty). A new character: a folder `<Name>/` with `<Name>_sheet.png` (copy an `.import` of
+another sheet, or let the editor import it with the defaults: lossless, no
+mipmaps, `fix_alpha_border`), a `.char` image line naming it, and for a
+villager placed in a scene a `SpriteFrames` like the others (duplicate one and
+point its sheet at the new one). Or draw 16 frames `<Name>1..16.png` (36×56)
+and run the pack tool. Then regenerate `file_index.txt`.
 
 ## 10. Dungeons as scenes (phase 2)
 

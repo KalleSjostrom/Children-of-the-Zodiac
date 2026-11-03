@@ -1,36 +1,85 @@
 [gd_resource type="SpriteFrames" format=3]
 
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Aldrin/Aldrin9.png" id="1_3kvji"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Aldrin/Aldrin10.png" id="2_1g3fp"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Aldrin/Aldrin11.png" id="3_y45di"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Aldrin/Aldrin12.png" id="4_vk4e1"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Aldrin/Aldrin13.png" id="5_2o7ei"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Aldrin/Aldrin14.png" id="6_fwdya"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Aldrin/Aldrin15.png" id="7_2272w"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Aldrin/Aldrin16.png" id="8_6iny0"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Aldrin/Aldrin5.png" id="9_d73k1"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Aldrin/Aldrin6.png" id="10_mgx2m"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Aldrin/Aldrin7.png" id="11_h006f"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Aldrin/Aldrin8.png" id="12_0m02q"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Aldrin/Aldrin1.png" id="13_vqalw"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Aldrin/Aldrin2.png" id="14_j5wi5"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Aldrin/Aldrin3.png" id="15_hcvrw"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Aldrin/Aldrin4.png" id="16_oavgd"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Aldrin/Aldrin_sheet.png" id="1_v5tt2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v1d23"]
+atlas = ExtResource("1_v5tt2")
+region = Rect2(2, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hlkkq"]
+atlas = ExtResource("1_v5tt2")
+region = Rect2(42, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mpuhy"]
+atlas = ExtResource("1_v5tt2")
+region = Rect2(82, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84gkh"]
+atlas = ExtResource("1_v5tt2")
+region = Rect2(122, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_60r3s"]
+atlas = ExtResource("1_v5tt2")
+region = Rect2(2, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_paeh0"]
+atlas = ExtResource("1_v5tt2")
+region = Rect2(42, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cogw"]
+atlas = ExtResource("1_v5tt2")
+region = Rect2(82, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6n1g"]
+atlas = ExtResource("1_v5tt2")
+region = Rect2(122, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4dw6s"]
+atlas = ExtResource("1_v5tt2")
+region = Rect2(2, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w4xq7"]
+atlas = ExtResource("1_v5tt2")
+region = Rect2(42, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_slacn"]
+atlas = ExtResource("1_v5tt2")
+region = Rect2(82, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2qbgd"]
+atlas = ExtResource("1_v5tt2")
+region = Rect2(122, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7f1vj"]
+atlas = ExtResource("1_v5tt2")
+region = Rect2(2, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0mpab"]
+atlas = ExtResource("1_v5tt2")
+region = Rect2(42, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3kvji"]
+atlas = ExtResource("1_v5tt2")
+region = Rect2(82, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1g3fp"]
+atlas = ExtResource("1_v5tt2")
+region = Rect2(122, 2, 36, 56)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_3kvji")
+"texture": SubResource("AtlasTexture_v1d23")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_1g3fp")
+"texture": SubResource("AtlasTexture_hlkkq")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_y45di")
+"texture": SubResource("AtlasTexture_mpuhy")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_vk4e1")
+"texture": SubResource("AtlasTexture_84gkh")
 }],
 "loop": 1,
 "name": &"down",
@@ -38,16 +87,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_2o7ei")
+"texture": SubResource("AtlasTexture_60r3s")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_fwdya")
+"texture": SubResource("AtlasTexture_paeh0")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_2272w")
+"texture": SubResource("AtlasTexture_2cogw")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_6iny0")
+"texture": SubResource("AtlasTexture_m6n1g")
 }],
 "loop": 1,
 "name": &"left",
@@ -55,16 +104,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("9_d73k1")
+"texture": SubResource("AtlasTexture_4dw6s")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_mgx2m")
+"texture": SubResource("AtlasTexture_w4xq7")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_h006f")
+"texture": SubResource("AtlasTexture_slacn")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_0m02q")
+"texture": SubResource("AtlasTexture_2qbgd")
 }],
 "loop": 1,
 "name": &"right",
@@ -72,16 +121,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_vqalw")
+"texture": SubResource("AtlasTexture_7f1vj")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_j5wi5")
+"texture": SubResource("AtlasTexture_0mpab")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_hcvrw")
+"texture": SubResource("AtlasTexture_3kvji")
 }, {
 "duration": 1.0,
-"texture": ExtResource("16_oavgd")
+"texture": SubResource("AtlasTexture_1g3fp")
 }],
 "loop": 1,
 "name": &"up",

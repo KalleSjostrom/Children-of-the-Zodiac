@@ -1,36 +1,85 @@
 [gd_resource type="SpriteFrames" format=3]
 
-[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/Recruitingsoldier/Recruitingsoldier9.png" id="1_srlux"]
-[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/Recruitingsoldier/Recruitingsoldier10.png" id="2_t73ko"]
-[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/Recruitingsoldier/Recruitingsoldier11.png" id="3_trqm2"]
-[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/Recruitingsoldier/Recruitingsoldier12.png" id="4_wjwpf"]
-[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/Recruitingsoldier/Recruitingsoldier13.png" id="5_suaf4"]
-[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/Recruitingsoldier/Recruitingsoldier14.png" id="6_bs2tq"]
-[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/Recruitingsoldier/Recruitingsoldier15.png" id="7_3l1kh"]
-[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/Recruitingsoldier/Recruitingsoldier16.png" id="8_eqmym"]
-[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/Recruitingsoldier/Recruitingsoldier5.png" id="9_oamag"]
-[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/Recruitingsoldier/Recruitingsoldier6.png" id="10_g6goi"]
-[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/Recruitingsoldier/Recruitingsoldier7.png" id="11_m37ul"]
-[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/Recruitingsoldier/Recruitingsoldier8.png" id="12_2kcan"]
-[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/Recruitingsoldier/Recruitingsoldier1.png" id="13_d28ii"]
-[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/Recruitingsoldier/Recruitingsoldier2.png" id="14_04681"]
-[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/Recruitingsoldier/Recruitingsoldier3.png" id="15_xeyc5"]
-[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/Recruitingsoldier/Recruitingsoldier4.png" id="16_adqmr"]
+[ext_resource type="Texture2D" path="res://res/Village/Alares/villagers/Recruitingsoldier/Recruitingsoldier_sheet.png" id="1_7yxwg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1e1wl"]
+atlas = ExtResource("1_7yxwg")
+region = Rect2(2, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rnhb3"]
+atlas = ExtResource("1_7yxwg")
+region = Rect2(42, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kohbq"]
+atlas = ExtResource("1_7yxwg")
+region = Rect2(82, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_85i3d"]
+atlas = ExtResource("1_7yxwg")
+region = Rect2(122, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_753pu"]
+atlas = ExtResource("1_7yxwg")
+region = Rect2(2, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l1w53"]
+atlas = ExtResource("1_7yxwg")
+region = Rect2(42, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6flm"]
+atlas = ExtResource("1_7yxwg")
+region = Rect2(82, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kfo1n"]
+atlas = ExtResource("1_7yxwg")
+region = Rect2(122, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_twpjo"]
+atlas = ExtResource("1_7yxwg")
+region = Rect2(2, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_npcy2"]
+atlas = ExtResource("1_7yxwg")
+region = Rect2(42, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j1mrq"]
+atlas = ExtResource("1_7yxwg")
+region = Rect2(82, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hk1g"]
+atlas = ExtResource("1_7yxwg")
+region = Rect2(122, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ibi0n"]
+atlas = ExtResource("1_7yxwg")
+region = Rect2(2, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r3xrb"]
+atlas = ExtResource("1_7yxwg")
+region = Rect2(42, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_srlux"]
+atlas = ExtResource("1_7yxwg")
+region = Rect2(82, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t73ko"]
+atlas = ExtResource("1_7yxwg")
+region = Rect2(122, 2, 36, 56)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_srlux")
+"texture": SubResource("AtlasTexture_1e1wl")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_t73ko")
+"texture": SubResource("AtlasTexture_rnhb3")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_trqm2")
+"texture": SubResource("AtlasTexture_kohbq")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_wjwpf")
+"texture": SubResource("AtlasTexture_85i3d")
 }],
 "loop": 1,
 "name": &"down",
@@ -38,16 +87,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_suaf4")
+"texture": SubResource("AtlasTexture_753pu")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_bs2tq")
+"texture": SubResource("AtlasTexture_l1w53")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_3l1kh")
+"texture": SubResource("AtlasTexture_u6flm")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_eqmym")
+"texture": SubResource("AtlasTexture_kfo1n")
 }],
 "loop": 1,
 "name": &"left",
@@ -55,16 +104,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("9_oamag")
+"texture": SubResource("AtlasTexture_twpjo")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_g6goi")
+"texture": SubResource("AtlasTexture_npcy2")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_m37ul")
+"texture": SubResource("AtlasTexture_j1mrq")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_2kcan")
+"texture": SubResource("AtlasTexture_0hk1g")
 }],
 "loop": 1,
 "name": &"right",
@@ -72,16 +121,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_d28ii")
+"texture": SubResource("AtlasTexture_ibi0n")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_04681")
+"texture": SubResource("AtlasTexture_r3xrb")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_xeyc5")
+"texture": SubResource("AtlasTexture_srlux")
 }, {
 "duration": 1.0,
-"texture": ExtResource("16_adqmr")
+"texture": SubResource("AtlasTexture_t73ko")
 }],
 "loop": 1,
 "name": &"up",

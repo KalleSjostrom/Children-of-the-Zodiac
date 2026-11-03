@@ -1,36 +1,85 @@
 [gd_resource type="SpriteFrames" format=3]
 
-[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Dedric&Fredric/Dedric&Fredric9.png" id="1_w26sl"]
-[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Dedric&Fredric/Dedric&Fredric10.png" id="2_2vctg"]
-[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Dedric&Fredric/Dedric&Fredric11.png" id="3_3gehy"]
-[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Dedric&Fredric/Dedric&Fredric12.png" id="4_172st"]
-[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Dedric&Fredric/Dedric&Fredric13.png" id="5_tauo0"]
-[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Dedric&Fredric/Dedric&Fredric14.png" id="6_t0adt"]
-[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Dedric&Fredric/Dedric&Fredric15.png" id="7_55jc2"]
-[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Dedric&Fredric/Dedric&Fredric16.png" id="8_14rnb"]
-[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Dedric&Fredric/Dedric&Fredric5.png" id="9_0j0p4"]
-[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Dedric&Fredric/Dedric&Fredric6.png" id="10_ptmki"]
-[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Dedric&Fredric/Dedric&Fredric7.png" id="11_pnfme"]
-[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Dedric&Fredric/Dedric&Fredric8.png" id="12_535dt"]
-[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Dedric&Fredric/Dedric&Fredric1.png" id="13_tj4jo"]
-[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Dedric&Fredric/Dedric&Fredric2.png" id="14_si7vr"]
-[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Dedric&Fredric/Dedric&Fredric3.png" id="15_7gvug"]
-[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Dedric&Fredric/Dedric&Fredric4.png" id="16_yfjpp"]
+[ext_resource type="Texture2D" path="res://res/Village/Zazo/villagers/Dedric&Fredric/Dedric&Fredric_sheet.png" id="1_jh855"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jcvi5"]
+atlas = ExtResource("1_jh855")
+region = Rect2(2, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_63sg6"]
+atlas = ExtResource("1_jh855")
+region = Rect2(42, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cecww"]
+atlas = ExtResource("1_jh855")
+region = Rect2(82, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fr1dw"]
+atlas = ExtResource("1_jh855")
+region = Rect2(122, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_waycx"]
+atlas = ExtResource("1_jh855")
+region = Rect2(2, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_grr3b"]
+atlas = ExtResource("1_jh855")
+region = Rect2(42, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0tkw"]
+atlas = ExtResource("1_jh855")
+region = Rect2(82, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nannj"]
+atlas = ExtResource("1_jh855")
+region = Rect2(122, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3mjyp"]
+atlas = ExtResource("1_jh855")
+region = Rect2(2, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qytjm"]
+atlas = ExtResource("1_jh855")
+region = Rect2(42, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_reg5j"]
+atlas = ExtResource("1_jh855")
+region = Rect2(82, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eo466"]
+atlas = ExtResource("1_jh855")
+region = Rect2(122, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e23lk"]
+atlas = ExtResource("1_jh855")
+region = Rect2(2, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mc21y"]
+atlas = ExtResource("1_jh855")
+region = Rect2(42, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w26sl"]
+atlas = ExtResource("1_jh855")
+region = Rect2(82, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2vctg"]
+atlas = ExtResource("1_jh855")
+region = Rect2(122, 2, 36, 56)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_w26sl")
+"texture": SubResource("AtlasTexture_jcvi5")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_2vctg")
+"texture": SubResource("AtlasTexture_63sg6")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_3gehy")
+"texture": SubResource("AtlasTexture_cecww")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_172st")
+"texture": SubResource("AtlasTexture_fr1dw")
 }],
 "loop": 1,
 "name": &"down",
@@ -38,16 +87,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_tauo0")
+"texture": SubResource("AtlasTexture_waycx")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_t0adt")
+"texture": SubResource("AtlasTexture_grr3b")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_55jc2")
+"texture": SubResource("AtlasTexture_k0tkw")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_14rnb")
+"texture": SubResource("AtlasTexture_nannj")
 }],
 "loop": 1,
 "name": &"left",
@@ -55,16 +104,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("9_0j0p4")
+"texture": SubResource("AtlasTexture_3mjyp")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_ptmki")
+"texture": SubResource("AtlasTexture_qytjm")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_pnfme")
+"texture": SubResource("AtlasTexture_reg5j")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_535dt")
+"texture": SubResource("AtlasTexture_eo466")
 }],
 "loop": 1,
 "name": &"right",
@@ -72,16 +121,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_tj4jo")
+"texture": SubResource("AtlasTexture_e23lk")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_si7vr")
+"texture": SubResource("AtlasTexture_mc21y")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_7gvug")
+"texture": SubResource("AtlasTexture_w26sl")
 }, {
 "duration": 1.0,
-"texture": ExtResource("16_yfjpp")
+"texture": SubResource("AtlasTexture_2vctg")
 }],
 "loop": 1,
 "name": &"up",

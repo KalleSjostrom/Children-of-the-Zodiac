@@ -13,6 +13,12 @@ extends AnimatedSprite2D
 ## not know (party members, story animations) to an "extra" animation. The
 ## origin is the sprite's top-left corner (centered = false), the legacy
 ## position.
+##
+## Frames are looked up by a key, not by object (_frame_key): a frame of a
+## character sheet (docs/VILLAGER_SPRITES_PLAN.md) is an AtlasTexture, and
+## the SpriteFrames' AtlasTextures and ImageHandler's are different objects
+## of the same sheet and cell; they still match after ImageHandler drops a
+## game mode's list and makes new ones.
 
 enum Role { RUNTIME, VILLAGER, ANIMATED_OBJECT }
 
@@ -35,7 +41,7 @@ enum Role { RUNTIME, VILLAGER, ANIMATED_OBJECT }
 ## Key of the mirrored legacy sprite in its sprite map (get_instance_id());
 ## 0 when the actor is not loaded (a villager of another status).
 var sprite_key := 0
-var _frame_of := {} # Texture2D -> [animation, frame index]
+var _frame_of := {} # _frame_key(texture) -> [animation, frame index]
 var _owns_frames := false
 
 
@@ -51,7 +57,7 @@ func show_frame(texture: Texture2D, at: Vector2i) -> void:
 		return
 	visible = true
 	position = Vector2(at)
-	var found: Array = _frame_of.get(texture, [])
+	var found: Array = _frame_of.get(_frame_key(texture), [])
 	if found.is_empty():
 		found = _add_extra_frame(texture)
 	if animation != found[0]:
@@ -67,8 +73,11 @@ func _index_frames() -> void:
 	for anim in sprite_frames.get_animation_names():
 		for i in sprite_frames.get_frame_count(anim):
 			var t := sprite_frames.get_frame_texture(anim, i)
-			if t != null and not _frame_of.has(t):
-				_frame_of[t] = [anim, i]
+			if t == null:
+				continue
+			var key: Variant = _frame_key(t)
+			if not _frame_of.has(key):
+				_frame_of[key] = [anim, i]
 
 
 func _add_extra_frame(texture: Texture2D) -> Array:
@@ -82,5 +91,14 @@ func _add_extra_frame(texture: Texture2D) -> Array:
 	var index := sprite_frames.get_frame_count(&"extra")
 	sprite_frames.add_frame(&"extra", texture)
 	var found := [&"extra", index]
-	_frame_of[texture] = found
+	_frame_of[_frame_key(texture)] = found
 	return found
+
+
+## The key of a frame: an AtlasTexture's atlas and region (the sheet is one
+## object, ResourceLoader's), any other texture itself.
+static func _frame_key(texture: Texture2D) -> Variant:
+	if texture is AtlasTexture:
+		var atlas := texture as AtlasTexture
+		return [atlas.atlas, atlas.region]
+	return texture

@@ -1,36 +1,85 @@
 [gd_resource type="SpriteFrames" format=3]
 
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Valie/Valie9.png" id="1_g44tb"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Valie/Valie10.png" id="2_k1h62"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Valie/Valie11.png" id="3_2545q"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Valie/Valie12.png" id="4_qqib8"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Valie/Valie13.png" id="5_24k25"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Valie/Valie14.png" id="6_kqjbc"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Valie/Valie15.png" id="7_yxcsr"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Valie/Valie16.png" id="8_j6snp"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Valie/Valie5.png" id="9_0unja"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Valie/Valie6.png" id="10_2p1xg"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Valie/Valie7.png" id="11_w8etr"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Valie/Valie8.png" id="12_u2cba"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Valie/Valie1.png" id="13_q45ul"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Valie/Valie2.png" id="14_h4rrb"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Valie/Valie3.png" id="15_ldjnb"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Valie/Valie4.png" id="16_sjdte"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District/villagers/Valie/Valie_sheet.png" id="1_loc3s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_as6k3"]
+atlas = ExtResource("1_loc3s")
+region = Rect2(2, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hkkwu"]
+atlas = ExtResource("1_loc3s")
+region = Rect2(42, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b8yid"]
+atlas = ExtResource("1_loc3s")
+region = Rect2(82, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_58bw4"]
+atlas = ExtResource("1_loc3s")
+region = Rect2(122, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3iwqx"]
+atlas = ExtResource("1_loc3s")
+region = Rect2(2, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45npe"]
+atlas = ExtResource("1_loc3s")
+region = Rect2(42, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5fpsk"]
+atlas = ExtResource("1_loc3s")
+region = Rect2(82, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tbo43"]
+atlas = ExtResource("1_loc3s")
+region = Rect2(122, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7inhb"]
+atlas = ExtResource("1_loc3s")
+region = Rect2(2, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u88sb"]
+atlas = ExtResource("1_loc3s")
+region = Rect2(42, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tew5a"]
+atlas = ExtResource("1_loc3s")
+region = Rect2(82, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5fka"]
+atlas = ExtResource("1_loc3s")
+region = Rect2(122, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tdtc8"]
+atlas = ExtResource("1_loc3s")
+region = Rect2(2, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xv82q"]
+atlas = ExtResource("1_loc3s")
+region = Rect2(42, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g44tb"]
+atlas = ExtResource("1_loc3s")
+region = Rect2(82, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k1h62"]
+atlas = ExtResource("1_loc3s")
+region = Rect2(122, 2, 36, 56)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_g44tb")
+"texture": SubResource("AtlasTexture_as6k3")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_k1h62")
+"texture": SubResource("AtlasTexture_hkkwu")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_2545q")
+"texture": SubResource("AtlasTexture_b8yid")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_qqib8")
+"texture": SubResource("AtlasTexture_58bw4")
 }],
 "loop": 1,
 "name": &"down",
@@ -38,16 +87,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_24k25")
+"texture": SubResource("AtlasTexture_3iwqx")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_kqjbc")
+"texture": SubResource("AtlasTexture_45npe")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_yxcsr")
+"texture": SubResource("AtlasTexture_5fpsk")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_j6snp")
+"texture": SubResource("AtlasTexture_tbo43")
 }],
 "loop": 1,
 "name": &"left",
@@ -55,16 +104,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("9_0unja")
+"texture": SubResource("AtlasTexture_7inhb")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_2p1xg")
+"texture": SubResource("AtlasTexture_u88sb")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_w8etr")
+"texture": SubResource("AtlasTexture_tew5a")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_u2cba")
+"texture": SubResource("AtlasTexture_u5fka")
 }],
 "loop": 1,
 "name": &"right",
@@ -72,16 +121,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_q45ul")
+"texture": SubResource("AtlasTexture_tdtc8")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_h4rrb")
+"texture": SubResource("AtlasTexture_xv82q")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_ldjnb")
+"texture": SubResource("AtlasTexture_g44tb")
 }, {
 "duration": 1.0,
-"texture": ExtResource("16_sjdte")
+"texture": SubResource("AtlasTexture_k1h62")
 }],
 "loop": 1,
 "name": &"up",

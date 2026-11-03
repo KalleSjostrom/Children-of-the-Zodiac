@@ -1,36 +1,85 @@
 [gd_resource type="SpriteFrames" format=3]
 
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod9.png" id="1_4ymex"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod10.png" id="2_ngvkf"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod11.png" id="3_ggpx0"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod12.png" id="4_g33bh"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod13.png" id="5_trupd"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod14.png" id="6_s1x34"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod15.png" id="7_7beaf"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod16.png" id="8_e72nq"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod5.png" id="9_jdbdv"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod6.png" id="10_710a0"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod7.png" id="11_vdtk8"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod8.png" id="12_n1ilu"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod1.png" id="13_o8pqi"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod2.png" id="14_h2y1y"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod3.png" id="15_ektld"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod4.png" id="16_1jnmu"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod_sheet.png" id="1_4nqno"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_htrmr"]
+atlas = ExtResource("1_4nqno")
+region = Rect2(2, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_slubs"]
+atlas = ExtResource("1_4nqno")
+region = Rect2(42, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0272"]
+atlas = ExtResource("1_4nqno")
+region = Rect2(82, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8svu"]
+atlas = ExtResource("1_4nqno")
+region = Rect2(122, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_15ced"]
+atlas = ExtResource("1_4nqno")
+region = Rect2(2, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e70qr"]
+atlas = ExtResource("1_4nqno")
+region = Rect2(42, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tjxkp"]
+atlas = ExtResource("1_4nqno")
+region = Rect2(82, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vv0dd"]
+atlas = ExtResource("1_4nqno")
+region = Rect2(122, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uit2p"]
+atlas = ExtResource("1_4nqno")
+region = Rect2(2, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4fq1x"]
+atlas = ExtResource("1_4nqno")
+region = Rect2(42, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xm5wa"]
+atlas = ExtResource("1_4nqno")
+region = Rect2(82, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u38ag"]
+atlas = ExtResource("1_4nqno")
+region = Rect2(122, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ngl1q"]
+atlas = ExtResource("1_4nqno")
+region = Rect2(2, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fpsux"]
+atlas = ExtResource("1_4nqno")
+region = Rect2(42, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ymex"]
+atlas = ExtResource("1_4nqno")
+region = Rect2(82, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ngvkf"]
+atlas = ExtResource("1_4nqno")
+region = Rect2(122, 2, 36, 56)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_4ymex")
+"texture": SubResource("AtlasTexture_htrmr")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_ngvkf")
+"texture": SubResource("AtlasTexture_slubs")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_ggpx0")
+"texture": SubResource("AtlasTexture_w0272")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_g33bh")
+"texture": SubResource("AtlasTexture_l8svu")
 }],
 "loop": 1,
 "name": &"down",
@@ -38,16 +87,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_trupd")
+"texture": SubResource("AtlasTexture_15ced")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_s1x34")
+"texture": SubResource("AtlasTexture_e70qr")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_7beaf")
+"texture": SubResource("AtlasTexture_tjxkp")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_e72nq")
+"texture": SubResource("AtlasTexture_vv0dd")
 }],
 "loop": 1,
 "name": &"left",
@@ -55,16 +104,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("9_jdbdv")
+"texture": SubResource("AtlasTexture_uit2p")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_710a0")
+"texture": SubResource("AtlasTexture_4fq1x")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_vdtk8")
+"texture": SubResource("AtlasTexture_xm5wa")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_n1ilu")
+"texture": SubResource("AtlasTexture_u38ag")
 }],
 "loop": 1,
 "name": &"right",
@@ -72,16 +121,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_o8pqi")
+"texture": SubResource("AtlasTexture_ngl1q")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_h2y1y")
+"texture": SubResource("AtlasTexture_fpsux")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_ektld")
+"texture": SubResource("AtlasTexture_4ymex")
 }, {
 "duration": 1.0,
-"texture": ExtResource("16_1jnmu")
+"texture": SubResource("AtlasTexture_ngvkf")
 }],
 "loop": 1,
 "name": &"up",

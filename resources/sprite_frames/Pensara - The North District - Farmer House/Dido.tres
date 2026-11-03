@@ -1,36 +1,85 @@
 [gd_resource type="SpriteFrames" format=3]
 
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Dido/Dido9.png" id="1_c6pj1"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Dido/Dido10.png" id="2_qqhfd"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Dido/Dido11.png" id="3_1fcus"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Dido/Dido12.png" id="4_eeb3o"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Dido/Dido13.png" id="5_di618"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Dido/Dido14.png" id="6_bf5ku"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Dido/Dido15.png" id="7_e0y1f"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Dido/Dido16.png" id="8_h6rs5"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Dido/Dido5.png" id="9_isgll"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Dido/Dido6.png" id="10_cpb70"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Dido/Dido7.png" id="11_n6d7l"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Dido/Dido8.png" id="12_xgluq"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Dido/Dido1.png" id="13_11by5"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Dido/Dido2.png" id="14_h3th6"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Dido/Dido3.png" id="15_c1rp3"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Dido/Dido4.png" id="16_sfiuc"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The North District - Farmer House/villagers/Dido/Dido_sheet.png" id="1_ihu5g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uaoqs"]
+atlas = ExtResource("1_ihu5g")
+region = Rect2(2, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kg7ev"]
+atlas = ExtResource("1_ihu5g")
+region = Rect2(42, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bwhu8"]
+atlas = ExtResource("1_ihu5g")
+region = Rect2(82, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wansy"]
+atlas = ExtResource("1_ihu5g")
+region = Rect2(122, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xhr5h"]
+atlas = ExtResource("1_ihu5g")
+region = Rect2(2, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qapds"]
+atlas = ExtResource("1_ihu5g")
+region = Rect2(42, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8b78d"]
+atlas = ExtResource("1_ihu5g")
+region = Rect2(82, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gu2ho"]
+atlas = ExtResource("1_ihu5g")
+region = Rect2(122, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ihomb"]
+atlas = ExtResource("1_ihu5g")
+region = Rect2(2, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ax4m"]
+atlas = ExtResource("1_ihu5g")
+region = Rect2(42, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bic3k"]
+atlas = ExtResource("1_ihu5g")
+region = Rect2(82, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cw4ct"]
+atlas = ExtResource("1_ihu5g")
+region = Rect2(122, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p5fu7"]
+atlas = ExtResource("1_ihu5g")
+region = Rect2(2, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4v8o0"]
+atlas = ExtResource("1_ihu5g")
+region = Rect2(42, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c6pj1"]
+atlas = ExtResource("1_ihu5g")
+region = Rect2(82, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqhfd"]
+atlas = ExtResource("1_ihu5g")
+region = Rect2(122, 2, 36, 56)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_c6pj1")
+"texture": SubResource("AtlasTexture_uaoqs")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_qqhfd")
+"texture": SubResource("AtlasTexture_kg7ev")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_1fcus")
+"texture": SubResource("AtlasTexture_bwhu8")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_eeb3o")
+"texture": SubResource("AtlasTexture_wansy")
 }],
 "loop": 1,
 "name": &"down",
@@ -38,16 +87,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_di618")
+"texture": SubResource("AtlasTexture_xhr5h")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_bf5ku")
+"texture": SubResource("AtlasTexture_qapds")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_e0y1f")
+"texture": SubResource("AtlasTexture_8b78d")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_h6rs5")
+"texture": SubResource("AtlasTexture_gu2ho")
 }],
 "loop": 1,
 "name": &"left",
@@ -55,16 +104,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("9_isgll")
+"texture": SubResource("AtlasTexture_ihomb")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_cpb70")
+"texture": SubResource("AtlasTexture_8ax4m")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_n6d7l")
+"texture": SubResource("AtlasTexture_bic3k")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_xgluq")
+"texture": SubResource("AtlasTexture_cw4ct")
 }],
 "loop": 1,
 "name": &"right",
@@ -72,16 +121,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_11by5")
+"texture": SubResource("AtlasTexture_p5fu7")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_h3th6")
+"texture": SubResource("AtlasTexture_4v8o0")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_c1rp3")
+"texture": SubResource("AtlasTexture_c6pj1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("16_sfiuc")
+"texture": SubResource("AtlasTexture_qqhfd")
 }],
 "loop": 1,
 "name": &"up",

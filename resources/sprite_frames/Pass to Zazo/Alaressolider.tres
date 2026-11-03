@@ -1,36 +1,85 @@
 [gd_resource type="SpriteFrames" format=3]
 
-[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Alaressolider/Alaressolider9.png" id="1_jm2p1"]
-[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Alaressolider/Alaressolider10.png" id="2_tstaw"]
-[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Alaressolider/Alaressolider11.png" id="3_okdw7"]
-[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Alaressolider/Alaressolider12.png" id="4_5ubk7"]
-[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Alaressolider/Alaressolider13.png" id="5_oukcc"]
-[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Alaressolider/Alaressolider14.png" id="6_ofhmd"]
-[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Alaressolider/Alaressolider15.png" id="7_wvdwl"]
-[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Alaressolider/Alaressolider16.png" id="8_atpy7"]
-[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Alaressolider/Alaressolider5.png" id="9_45xw6"]
-[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Alaressolider/Alaressolider6.png" id="10_tmv5n"]
-[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Alaressolider/Alaressolider7.png" id="11_vh3qj"]
-[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Alaressolider/Alaressolider8.png" id="12_rt4wk"]
-[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Alaressolider/Alaressolider1.png" id="13_m4hsc"]
-[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Alaressolider/Alaressolider2.png" id="14_31gnr"]
-[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Alaressolider/Alaressolider3.png" id="15_jvg2c"]
-[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Alaressolider/Alaressolider4.png" id="16_t32oo"]
+[ext_resource type="Texture2D" path="res://res/Village/Pass to Zazo/villagers/Alaressolider/Alaressolider_sheet.png" id="1_g5a2w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rxe77"]
+atlas = ExtResource("1_g5a2w")
+region = Rect2(2, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gen3q"]
+atlas = ExtResource("1_g5a2w")
+region = Rect2(42, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o4hqn"]
+atlas = ExtResource("1_g5a2w")
+region = Rect2(82, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4385k"]
+atlas = ExtResource("1_g5a2w")
+region = Rect2(122, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jixr3"]
+atlas = ExtResource("1_g5a2w")
+region = Rect2(2, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ngqhv"]
+atlas = ExtResource("1_g5a2w")
+region = Rect2(42, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k4rk4"]
+atlas = ExtResource("1_g5a2w")
+region = Rect2(82, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_akfw7"]
+atlas = ExtResource("1_g5a2w")
+region = Rect2(122, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wk3p0"]
+atlas = ExtResource("1_g5a2w")
+region = Rect2(2, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ntow4"]
+atlas = ExtResource("1_g5a2w")
+region = Rect2(42, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45xb7"]
+atlas = ExtResource("1_g5a2w")
+region = Rect2(82, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qg5xh"]
+atlas = ExtResource("1_g5a2w")
+region = Rect2(122, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sykrq"]
+atlas = ExtResource("1_g5a2w")
+region = Rect2(2, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rjxix"]
+atlas = ExtResource("1_g5a2w")
+region = Rect2(42, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jm2p1"]
+atlas = ExtResource("1_g5a2w")
+region = Rect2(82, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tstaw"]
+atlas = ExtResource("1_g5a2w")
+region = Rect2(122, 2, 36, 56)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_jm2p1")
+"texture": SubResource("AtlasTexture_rxe77")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_tstaw")
+"texture": SubResource("AtlasTexture_gen3q")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_okdw7")
+"texture": SubResource("AtlasTexture_o4hqn")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_5ubk7")
+"texture": SubResource("AtlasTexture_4385k")
 }],
 "loop": 1,
 "name": &"down",
@@ -38,16 +87,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_oukcc")
+"texture": SubResource("AtlasTexture_jixr3")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_ofhmd")
+"texture": SubResource("AtlasTexture_ngqhv")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_wvdwl")
+"texture": SubResource("AtlasTexture_k4rk4")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_atpy7")
+"texture": SubResource("AtlasTexture_akfw7")
 }],
 "loop": 1,
 "name": &"left",
@@ -55,16 +104,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("9_45xw6")
+"texture": SubResource("AtlasTexture_wk3p0")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_tmv5n")
+"texture": SubResource("AtlasTexture_ntow4")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_vh3qj")
+"texture": SubResource("AtlasTexture_45xb7")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_rt4wk")
+"texture": SubResource("AtlasTexture_qg5xh")
 }],
 "loop": 1,
 "name": &"right",
@@ -72,16 +121,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_m4hsc")
+"texture": SubResource("AtlasTexture_sykrq")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_31gnr")
+"texture": SubResource("AtlasTexture_rjxix")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_jvg2c")
+"texture": SubResource("AtlasTexture_jm2p1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("16_t32oo")
+"texture": SubResource("AtlasTexture_tstaw")
 }],
 "loop": 1,
 "name": &"up",

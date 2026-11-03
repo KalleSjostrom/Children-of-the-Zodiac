@@ -1,36 +1,85 @@
 [gd_resource type="SpriteFrames" format=3]
 
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Boby/Merchant Boby9.png" id="1_a2s5c"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Boby/Merchant Boby10.png" id="2_kkxof"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Boby/Merchant Boby11.png" id="3_l6pb8"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Boby/Merchant Boby12.png" id="4_kh81d"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Boby/Merchant Boby13.png" id="5_gex7p"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Boby/Merchant Boby14.png" id="6_3j7hw"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Boby/Merchant Boby15.png" id="7_agkdx"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Boby/Merchant Boby16.png" id="8_5coey"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Boby/Merchant Boby5.png" id="9_o83b8"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Boby/Merchant Boby6.png" id="10_fneh1"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Boby/Merchant Boby7.png" id="11_73fud"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Boby/Merchant Boby8.png" id="12_v4e3k"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Boby/Merchant Boby1.png" id="13_v45ru"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Boby/Merchant Boby2.png" id="14_u2y1d"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Boby/Merchant Boby3.png" id="15_bim85"]
-[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Boby/Merchant Boby4.png" id="16_lrfwv"]
+[ext_resource type="Texture2D" path="res://res/Village/Pensara - The Trade District/villagers/Merchant Boby/Merchant Boby_sheet.png" id="1_d4kli"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8gvxc"]
+atlas = ExtResource("1_d4kli")
+region = Rect2(2, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qms0b"]
+atlas = ExtResource("1_d4kli")
+region = Rect2(42, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4sbrj"]
+atlas = ExtResource("1_d4kli")
+region = Rect2(82, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sdr6r"]
+atlas = ExtResource("1_d4kli")
+region = Rect2(122, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_68wyn"]
+atlas = ExtResource("1_d4kli")
+region = Rect2(2, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l7sh0"]
+atlas = ExtResource("1_d4kli")
+region = Rect2(42, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uh37b"]
+atlas = ExtResource("1_d4kli")
+region = Rect2(82, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1n4oi"]
+atlas = ExtResource("1_d4kli")
+region = Rect2(122, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f3uh7"]
+atlas = ExtResource("1_d4kli")
+region = Rect2(2, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqoc4"]
+atlas = ExtResource("1_d4kli")
+region = Rect2(42, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yd83w"]
+atlas = ExtResource("1_d4kli")
+region = Rect2(82, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tyxrd"]
+atlas = ExtResource("1_d4kli")
+region = Rect2(122, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aebog"]
+atlas = ExtResource("1_d4kli")
+region = Rect2(2, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m7h2r"]
+atlas = ExtResource("1_d4kli")
+region = Rect2(42, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a2s5c"]
+atlas = ExtResource("1_d4kli")
+region = Rect2(82, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kkxof"]
+atlas = ExtResource("1_d4kli")
+region = Rect2(122, 2, 36, 56)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_a2s5c")
+"texture": SubResource("AtlasTexture_8gvxc")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_kkxof")
+"texture": SubResource("AtlasTexture_qms0b")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_l6pb8")
+"texture": SubResource("AtlasTexture_4sbrj")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_kh81d")
+"texture": SubResource("AtlasTexture_sdr6r")
 }],
 "loop": 1,
 "name": &"down",
@@ -38,16 +87,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_gex7p")
+"texture": SubResource("AtlasTexture_68wyn")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_3j7hw")
+"texture": SubResource("AtlasTexture_l7sh0")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_agkdx")
+"texture": SubResource("AtlasTexture_uh37b")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_5coey")
+"texture": SubResource("AtlasTexture_1n4oi")
 }],
 "loop": 1,
 "name": &"left",
@@ -55,16 +104,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("9_o83b8")
+"texture": SubResource("AtlasTexture_f3uh7")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_fneh1")
+"texture": SubResource("AtlasTexture_xqoc4")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_73fud")
+"texture": SubResource("AtlasTexture_yd83w")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_v4e3k")
+"texture": SubResource("AtlasTexture_tyxrd")
 }],
 "loop": 1,
 "name": &"right",
@@ -72,16 +121,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_v45ru")
+"texture": SubResource("AtlasTexture_aebog")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_u2y1d")
+"texture": SubResource("AtlasTexture_m7h2r")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_bim85")
+"texture": SubResource("AtlasTexture_a2s5c")
 }, {
 "duration": 1.0,
-"texture": ExtResource("16_lrfwv")
+"texture": SubResource("AtlasTexture_kkxof")
 }],
 "loop": 1,
 "name": &"up",

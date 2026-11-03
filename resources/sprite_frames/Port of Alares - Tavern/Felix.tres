@@ -1,36 +1,85 @@
 [gd_resource type="SpriteFrames" format=3]
 
-[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Felix/Felix9.png" id="1_q3xoq"]
-[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Felix/Felix10.png" id="2_1adw8"]
-[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Felix/Felix11.png" id="3_m0wy8"]
-[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Felix/Felix12.png" id="4_ofw0q"]
-[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Felix/Felix13.png" id="5_kd2ih"]
-[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Felix/Felix14.png" id="6_lwiys"]
-[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Felix/Felix15.png" id="7_8xbim"]
-[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Felix/Felix16.png" id="8_vvsfm"]
-[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Felix/Felix5.png" id="9_pu70d"]
-[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Felix/Felix6.png" id="10_xmepo"]
-[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Felix/Felix7.png" id="11_52uny"]
-[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Felix/Felix8.png" id="12_c7fsn"]
-[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Felix/Felix1.png" id="13_ftha5"]
-[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Felix/Felix2.png" id="14_56s7m"]
-[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Felix/Felix3.png" id="15_tdbt8"]
-[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Felix/Felix4.png" id="16_fhaor"]
+[ext_resource type="Texture2D" path="res://res/Village/Port of Alares - Tavern/villagers/Felix/Felix_sheet.png" id="1_4tbjv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0trfa"]
+atlas = ExtResource("1_4tbjv")
+region = Rect2(2, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h0glu"]
+atlas = ExtResource("1_4tbjv")
+region = Rect2(42, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dutd1"]
+atlas = ExtResource("1_4tbjv")
+region = Rect2(82, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjco5"]
+atlas = ExtResource("1_4tbjv")
+region = Rect2(122, 122, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtoh3"]
+atlas = ExtResource("1_4tbjv")
+region = Rect2(2, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yi0n4"]
+atlas = ExtResource("1_4tbjv")
+region = Rect2(42, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kgm3e"]
+atlas = ExtResource("1_4tbjv")
+region = Rect2(82, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yeq5o"]
+atlas = ExtResource("1_4tbjv")
+region = Rect2(122, 182, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6i03r"]
+atlas = ExtResource("1_4tbjv")
+region = Rect2(2, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1l3jf"]
+atlas = ExtResource("1_4tbjv")
+region = Rect2(42, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xpxxw"]
+atlas = ExtResource("1_4tbjv")
+region = Rect2(82, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f71it"]
+atlas = ExtResource("1_4tbjv")
+region = Rect2(122, 62, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8uxvk"]
+atlas = ExtResource("1_4tbjv")
+region = Rect2(2, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6dsae"]
+atlas = ExtResource("1_4tbjv")
+region = Rect2(42, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q3xoq"]
+atlas = ExtResource("1_4tbjv")
+region = Rect2(82, 2, 36, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1adw8"]
+atlas = ExtResource("1_4tbjv")
+region = Rect2(122, 2, 36, 56)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_q3xoq")
+"texture": SubResource("AtlasTexture_0trfa")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_1adw8")
+"texture": SubResource("AtlasTexture_h0glu")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_m0wy8")
+"texture": SubResource("AtlasTexture_dutd1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_ofw0q")
+"texture": SubResource("AtlasTexture_fjco5")
 }],
 "loop": 1,
 "name": &"down",
@@ -38,16 +87,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_kd2ih")
+"texture": SubResource("AtlasTexture_rtoh3")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_lwiys")
+"texture": SubResource("AtlasTexture_yi0n4")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_8xbim")
+"texture": SubResource("AtlasTexture_kgm3e")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_vvsfm")
+"texture": SubResource("AtlasTexture_yeq5o")
 }],
 "loop": 1,
 "name": &"left",
@@ -55,16 +104,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("9_pu70d")
+"texture": SubResource("AtlasTexture_6i03r")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_xmepo")
+"texture": SubResource("AtlasTexture_1l3jf")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_52uny")
+"texture": SubResource("AtlasTexture_xpxxw")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_c7fsn")
+"texture": SubResource("AtlasTexture_f71it")
 }],
 "loop": 1,
 "name": &"right",
@@ -72,16 +121,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_ftha5")
+"texture": SubResource("AtlasTexture_8uxvk")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_56s7m")
+"texture": SubResource("AtlasTexture_6dsae")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_tdbt8")
+"texture": SubResource("AtlasTexture_q3xoq")
 }, {
 "duration": 1.0,
-"texture": ExtResource("16_fhaor")
+"texture": SubResource("AtlasTexture_1adw8")
 }],
 "loop": 1,
 "name": &"up",
