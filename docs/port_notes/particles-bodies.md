@@ -69,7 +69,7 @@
 ## Bridge to the GPU systems (particles phase, docs/ARCHITECTURE.md section 9)
 
 - `BodiesParticleSystem.gpu_path()`: the village and cutscene systems are drawn by `VillageParticles2D` (not
-  `--legacy=particles` or `--legacy=villages`). Then a system (`gpu`) builds no bodies; `update` keeps its activation
+  `--legacy=particles`). Then a system (`gpu`) builds no bodies; `update` keeps its activation
   check and its 5 x LOGIC_INTERVAL guard and calls `gpu_run` (game time for the GPU system, the emitter's clock, the
   wind's turbulence) instead of stepping; `warmUp` and SystemLoader's master/slave warm-up call `gpu_warm`;
   `place_particles` returns `gpu_view()` (the state VillageParticles2D takes). Bridge members: `gpu`, `gpu_elapsed`,

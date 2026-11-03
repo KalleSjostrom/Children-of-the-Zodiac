@@ -2,7 +2,7 @@ class_name DoubleBackground
 extends GameSprite2D
 ## Port of graphics.DoubleBackground: manages the backgrounds of a village or
 ## the landscape (bottom layer tiles, top layer images, night layer and
-## particle systems).
+## particle systems). A village has no tiles: its scene draws the background.
 
 const BOTTOM_LAYER = -1
 const VILLAGER_LAYER = 0
@@ -62,25 +62,13 @@ func _init(backgroundWidth = null, backgroundHeight = null, actualWidth = null, 
 	target = J.array2d(2, 5, 0.0)
 
 
-## Java overloads: init(String name, boolean nightLayer),
-## init(String path, String name, boolean nightLayer),
-## init(String name, boolean nightLayer, int extra),
-## init(String path, String name, boolean nightLayer, int extra).
-func init(path, name, nightLayer = null, extra = null):
-	if name is bool:
-		# init(name, nightLayer[, extra])
-		var n = path
-		var night: bool = name
-		var ex = nightLayer
-		if ex == null:
-			loadImages(n, n, night)
-		else:
-			loadImages(n, n, night, ex)
-	else:
-		if extra == null:
-			loadImages(path, name, nightLayer)
-		else:
-			loadImages(path, name, nightLayer, extra)
+## Java init(path, name, nightLayer) for a village (VillageScene.load_into):
+## the village's scene draws the background image (scenes/villages), so only
+## the night layer (doit) and the top layer of res/Village/<path> are loaded,
+## not the tiles. name is the background image's name.
+func init_village(path, name, nightLayer):
+	doit(path, name, nightLayer)
+	doTopLayer(Values.VillageImages, path)
 
 
 func setLandscapeImages(names, night):
@@ -91,32 +79,6 @@ func setLandscapeImages(names, night):
 	else:
 		bottom.append([[0, 0], doit(Values.LandscapeImages, "", names[0], night)])
 		doTopLayer(Values.LandscapeImages, names[1])
-
-
-## Java overloads: loadImages(path, name, nightLayer) and
-## loadImages(path, name, nightLayer, int extra).
-func loadImages(path, name, nightLayer, extra = null):
-	if extra == null:
-		var n: String = doit(path, name, nightLayer)
-		bg = cutImage(n, 0, TYPE_INT_RGB if n.ends_with(".jpg") else TYPE_INT_ARGB)
-		doTopLayer(Values.VillageImages, path)
-		return
-	var temp: String = name + "0"
-	var fullTemp: String = Values.VillageImages + path + "/" + temp + ".jpg"
-	if not GameResourceLoader.getResourceLoader().exists(fullTemp):
-		temp = name
-	putextra(path, temp, nightLayer, [0, 0])
-	if extra == 1:
-		var w: int = J.round((getWidth() + 0.1) / 2.0)
-		var p := [0, 0]
-		p[Values.X] = w
-		putextra(path, name + "1", nightLayer, p)
-	elif extra == 2:
-		var h: int = J.round((getHeight() + 0.1) / 2.0)
-		var p := [0, 0]
-		p[Values.Y] = h
-		putextra(path, name + "1", nightLayer, p)
-	doTopLayer(Values.VillageImages, path)
 
 
 ## Java overloads: doit(folder, path, name, nightLayer) and
@@ -243,10 +205,6 @@ func generateNames(path, jpg):
 			bgl[i][j] = ImageHandler.addToCurrentLoadNow(
 					path + "/" + "x" + str(i) + "y" + str(j) + (".jpg" if jpg else ".png"))
 	return bgl
-
-
-func putextra(path, name, nightLayer, pos):
-	bottom.append([pos, doit(path, name, nightLayer)])
 
 
 ## Sets either the x or y position depending on the first argument.

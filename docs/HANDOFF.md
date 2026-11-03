@@ -74,30 +74,31 @@ section 5; conventions and workflow in `docs/ARCHITECTURE.md`):
 **Modernization phase 1 (villages as scenes): steps A and B done** for all
 63 places and 89 `.vil` variants: the pilot (Zazo, "Zazo - Miner's Home",
 plan 6.7) and the rollout (the other 61 places, plan 6.8); conventions in
-`docs/ARCHITECTURE.md` section 9, the procedure in
-`docs/CONVERTING_VILLAGES.md`:
+`docs/ARCHITECTURE.md` section 9. The legacy path is removed (plan 6.9):
+the scenes are the village data, edited in Godot.
 - Scenes: `scenes/villages/VillageScene.tscn` (layout), one folder per place
   in `scenes/villages/` (base + one inherited scene per `.vil`, stitched
   background PNGs), shared types in `scenes/common/`, SpriteFrames in
-  `resources/sprite_frames/`. Made by `tools/import/vil_to_scene.sh --all`
-  (deterministic: converting twice changes no file).
+  `resources/sprite_frames/`. The converter that made them
+  (`tools/import/vil_to_scene.sh`), the data check (`verify_villages.gd`),
+  `docs/CONVERTING_VILLAGES.md` and the background tiles are removed (git
+  history up to 1e0229df).
 - Step A: `VillageLoader.load` builds every place from its scene
-  (`VillageScene.load_into`); `tools/import/verify_villages.gd --all` with
-  the saves "Slot 1" and "Start": 240 builds, all pass.
+  (`VillageScene.load_into`); no `.vil` file is read.
 - Step B: the scene draws the world (background, actors, top layer, night,
   particles via `LegacyParticles2D`), also in cutscenes (camera zoom, tint,
   under-actor images); emotions, dialogs, signs, fades and the over-actor
-  cutscene images stay legacy overlays. `--legacy=villages` keeps the old
-  path; `--legacy=village_top_layer` the legacy top-layer rule. Parity:
-  identical except cutscene zooms (tile seams, rounding) and, by default,
-  the always-drawn top layer (decision 7); plan 6.8.
+  cutscene images are phase 3's UI nodes. There is no legacy village
+  drawing any more (`--legacy=villages` and `--legacy=village_top_layer`
+  are gone). Parity against the legacy drawing was identical except
+  cutscene zooms (tile seams, rounding) and the always-drawn top layer
+  (decision 7); plan 6.8.
 - Parity coverage: 117 cases (`tools/parity/cases.txt`): the 17 older ones,
   a tour of every variant a main.bank place reaches (`tour_*`), four
   particle cases and 24 cutscenes (`story_*`). `parity.sh --jobs=<n>` and
   case patterns make a full run about 40 minutes.
-- The `.vil` files stay (decision 5); closing the phase is prepared in plan
-  6.9 (what removing the legacy village path deletes, and what keeps the
-  exit criteria from being met).
+- The `.vil` files stay (decision 5) but are not read; their paths name
+  the variants. Plan 6.9 has what closing the phase removed.
 - Dev options: `--start-time=night`, `--status=<name>:<value>`, AutoPlay
   `pos`, `heading`, `guard`, the relative buttons `AHEAD`/`BEHIND`/`ALEFT`/
   `ARIGHT`, `[zoom]` lines; parity `--ignore-world`, `--jobs`; `--seed` runs

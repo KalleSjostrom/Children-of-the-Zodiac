@@ -22,7 +22,7 @@ var directions = null
 var activateStatus: int = -1
 var active: bool = true
 
-## Creates a new door (Java: private constructor, use getDoor).
+## Creates a new door (Java: private constructor; VillageScene.load_into builds them).
 func _init(type = null, name = null, x = null, y = null, w = null, directionList = null, f = null, villageName = null) -> void:
 	if type == null:
 		return
@@ -94,47 +94,6 @@ func getMode():
 func isLocked():
 	var status: int = Database.getStatusFor(dbName)
 	return status == StoreDoor.LOCKED
-
-## Creates a new door with the information in the given StringTokenizer.
-static func getDoor(tok, villageName):
-	var type: Array = J.split(tok.nextToken(), ";")
-	var name: Array = J.split(tok.nextToken(), ";")
-	var x: int = J.parseInt(tok.nextToken())
-	var y: int = J.parseInt(tok.nextToken())
-	var w: int = J.parseInt(tok.nextToken())
-	var directions: String = tok.nextToken()
-	var directionList: Array = []
-	var activationStatus: int = -1
-	if directions.contains(";"):
-		var dirs: Array = J.split(directions, ";")
-		for d in dirs:
-			if d.contains("s"):
-				activationStatus = J.parseInt(d.replace("s", ""))
-			else:
-				directionList.append(J.parseInt(d))
-	else:
-		directionList.append(J.parseInt(directions))
-
-	var f: int = FADE_DOWN
-	if tok.hasMoreTokens():
-		f = J.parseInt(tok.nextToken())
-
-	var startPos = null
-	if tok.hasMoreTokens():
-		startPos = [-1.0, -1.0, -1.0, -1.0]
-		startPos[0] = J.parseFloat(tok.nextToken())
-		if tok.hasMoreTokens():
-			startPos[1] = J.parseFloat(tok.nextToken())
-			startPos[2] = J.parseFloat(tok.nextToken())
-			var temp: float = startPos[0]
-			startPos[0] = startPos[1]
-			startPos[1] = temp
-		if tok.hasMoreTokens():
-			startPos[3] = J.parseFloat(tok.nextToken())
-	var door = StoreDoor.new(type, name, x, y, w, directionList, f, villageName)
-	door.setToPos(startPos)
-	door.setActivateStatus(activationStatus)
-	return door
 
 func setActivateStatus(i):
 	if i != -1:

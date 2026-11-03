@@ -202,19 +202,8 @@ func updateVillager(elapsedTime):
 	move(true, elapsedTime)
 
 
-## Java overloads: draw(Graphics g) (inherited) and draw(Graphics g, int bx, int by):
-## the background position is used to draw the villager relative to it.
-func draw(g, x = null, y = null):
-	if x == null:
-		super.draw(g)
-		return
-	drawX = J.round(pos[Values.X] + x)
-	drawY = J.round(pos[Values.Y] + y)
-	if isVisible():
-		super.draw(g)
-
-
-## Bridge (phase 1 step B): draw(g, x, y) without drawing (see Sprite.place_view).
+## Bridge (phase 1 step B): Java's draw(g, bx, by) without drawing (see
+## Sprite.place_view): the villager at its position on the background.
 func place_view(x, y):
 	drawX = J.round(pos[Values.X] + x)
 	drawY = J.round(pos[Values.Y] + y)

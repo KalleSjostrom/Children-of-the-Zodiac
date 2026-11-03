@@ -15,7 +15,7 @@ extends Node2D
 ##   system's state; the node instances the system's generated scene
 ##   (VillageParticles2D, scenes/common/particles/systems/<system>.tscn) as a
 ##   child and hands the state on;
-## * --legacy=particles (and --legacy=villages): the legacy simulation runs
+## * --legacy=particles: the legacy simulation runs
 ##   and the node draws the quads its draw would draw, on its own canvas items
 ##   with the system's texture and blending.
 

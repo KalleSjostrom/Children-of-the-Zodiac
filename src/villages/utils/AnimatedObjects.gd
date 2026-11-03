@@ -12,15 +12,7 @@ func _init(path = null, name = null, pos = null, size = null) -> void:
 	move()
 
 
-## Java overloads: draw(Graphics) (inherited) and draw(Graphics, int x, int y).
-func draw(g, x = null, y = null):
-	if x == null:
-		super.draw(g)
-		return
-	super.drawAtPosition(g, int(pos[Values.X]) + x, int(pos[Values.Y]) + y)
-
-
-## Bridge (phase 1 step B): draw(g, x, y) without drawing (see Sprite.place_view).
+## Bridge (phase 1 step B): Java's draw(g, x, y) without drawing (see Sprite.place_view).
 func place_view(x, y):
 	var sx: int = int(pos[Values.X]) + x
 	var sy: int = int(pos[Values.Y]) + y

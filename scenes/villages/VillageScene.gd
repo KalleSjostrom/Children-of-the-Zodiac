@@ -7,15 +7,16 @@ extends Node2D
 ## one inherited scene per variant ("<Place> - 0.tscn",
 ## "<Place> at Night - 1.tscn", named after the .vil file) adds that
 ## variant's doors, signs, loot, villagers, particle systems and buildings.
-## tools/import/vil_to_scene.gd makes them from the .vil files.
+## The scenes are the village data: phase 1 converted the .vil files into
+## them, and the .vil files are no longer read (they still name the variants
+## for VillageLoader.village_scene_for).
 ##
 ## Coordinates are village pixels: 1 unit = 1 pixel, origin at the
 ## background's top-left, y down, as in the legacy code (cutscenes, saves and
 ## Cheater jumps use them).
 ##
 ## Step A (data, docs/MODERNIZATION_PLAN.md 6.3): VillageLoader.load builds
-## the legacy village from the variant scene (load_into) instead of parsing
-## the .vil file.
+## the legacy village from the variant scene (load_into).
 ##
 ## Step B (presentation, 6.4): the same scene then draws the village while
 ## the legacy objects stay in charge. Every frame, where the legacy code drew
@@ -51,8 +52,8 @@ const STORY_IMAGE := preload("res://scenes/common/StoryImage.tscn")
 @export var size := Vector2i.ZERO
 ## The size the background tiles cover (back as=w:h, else size).
 @export var actual_size := Vector2i.ZERO
-## The back line's optional number (DoubleBackground ignores it while
-## USE_CUT is set).
+## The back line's optional number (unused: the legacy DoubleBackground
+## ignored it while USE_CUT was set).
 @export var back_extra := 0
 ## Shift of the background tiles (an offset line), if has_tile_offset.
 @export var has_tile_offset := false
@@ -94,7 +95,7 @@ var _story_image: StoryImage
 
 
 ## The scene for the .vil file at vil_path (res://maps/Village/<Place>/<file>.vil,
-## as GameResourceLoader resolves it), or "" when the place is not converted.
+## as GameResourceLoader resolves it), or "" when there is none.
 static func path_for(vil_path: String) -> String:
 	if not vil_path.begins_with(VILLAGE_MAPS):
 		return ""
@@ -103,12 +104,11 @@ static func path_for(vil_path: String) -> String:
 
 
 ## Fills the legacy village loader vl (a VillageLoader that has its infoMap
-## and startPos) as VillageLoaderMapLoader does for the .vil file. The
-## commands of a .vil file always come in this order (background, back,
-## offset, start, o, wind, particlesystem, then the rest), which the loader
-## depends on: the player needs the background, the obstacles the player,
-## the particles the wind. tools/import/verify_villages.gd checks that both
-## ways build the same objects.
+## and startPos) as the legacy loader did from the .vil file. It goes in the
+## order the commands of every .vil file had (background, back, offset,
+## start, o, wind, particlesystem, then the rest), which the legacy objects
+## depend on: the player needs the background, the obstacles the player, the
+## particles the wind.
 func load_into(vl) -> void:
 	vl.folderName = folder_name
 	vl.villageName = village_name
@@ -117,14 +117,9 @@ func load_into(vl) -> void:
 	vl.backgroundHeight = size.y
 	vl.actualWidth = actual_size.x
 	vl.actualHeight = actual_size.y
-	if extra_name != "":
-		vl.background = DoubleBackground.new(size.x, size.y, actual_size.x, actual_size.y)
-		if DoubleBackground.USE_CUT:
-			vl.background.init(background_folder, extra_name, night_layer)
-		else:
-			vl.background.init(background_folder, extra_name, night_layer, back_extra)
-	else:
-		vl.loadImages(background_folder, night_layer, back_extra)
+	vl.background = DoubleBackground.new(size.x, size.y, actual_size.x, actual_size.y)
+	vl.background.init_village(background_folder,
+			extra_name if extra_name != "" else background_folder, night_layer)
 	if has_tile_offset:
 		vl.background.setOffset(tile_offset.x, tile_offset.y)
 	if inside:
@@ -235,7 +230,7 @@ static func obstacle_rect(shape: CollisionShape2D) -> Rect2i:
 	return Rect2i(Vector2i(roundi(top_left.x), roundi(top_left.y)), Vector2i(roundi(s.x), roundi(s.y)))
 
 
-## VillageLoaderMapLoader.initPlayerPos for the spawn.
+## The legacy loader's initPlayerPos for the spawn.
 func _init_player_pos(vl, spawn: VillageSpawn) -> void:
 	var x := int(spawn.position.x)
 	var y := int(spawn.position.y)
@@ -332,7 +327,7 @@ func show_nothing() -> void:
 
 
 ## DoubleBackground.drawBottom: the bottom layer particle systems ([key,
-## view] entries, see LegacyParticles2D.show_systems), then the tiles, tinted
+## view] entries, see LegacyParticles2D.show_systems), then the background, tinted
 ## color and alpha tested with alpha_ref; or instead the image extra at the
 ## origin (a cutscene's village background), without the bottom systems.
 func show_bottom(extra: Texture2D, systems: Array, color: Color, alpha_ref: float) -> void:
@@ -345,7 +340,7 @@ func show_bottom(extra: Texture2D, systems: Array, color: Color, alpha_ref: floa
 	_background.material = alpha_material(alpha_ref)
 
 
-## The sprites of Village.drawBottom and a cutscene's images and actors, in
+## The sprites of the legacy drawBottom and a cutscene's images and actors, in
 ## draw order: ["sprite", key, texture, position, color, alpha_ref],
 ## ["particles", key, view] or ["image", texture, position, scale (a
 ## Vector2), color, alpha_ref] (positions in village pixels, keys as in the
@@ -398,17 +393,13 @@ func show_actors(entries: Array) -> void:
 
 ## DoubleBackground.drawTop: the roofs and treetops (if top; alpha tested
 ## with 0.9 by the Overhead material) and the night layer (if night_shown;
-## alpha test 0), tinted, then the upper and weather particle systems.
-## pieces says for each top layer piece whether to draw it; empty: all.
-func show_top(top: bool, pieces: Array, overhead_color: Color, night_shown: bool,
+## alpha test 0), tinted, then the upper and weather particle systems. Every
+## piece is drawn (plan 6.1), not only where a sprite overlaps it.
+func show_top(top: bool, overhead_color: Color, night_shown: bool,
 		night_color: Color, systems: Array) -> void:
 	_bind()
 	_overhead.visible = top
 	_overhead.modulate = overhead_color
-	var i := 0
-	for piece in _overhead.get_children():
-		piece.visible = pieces.is_empty() or (i < pieces.size() and pieces[i])
-		i += 1
 	_night.visible = night_shown and _night.texture != null
 	_night.modulate = night_color
 	_show_systems(_effects, systems)

@@ -1,6 +1,7 @@
 # Content quirks: triage
 
-Every content quirk the docs list (HANDOFF.md, CONVERTING_VILLAGES.md,
+Every content quirk the docs list (HANDOFF.md, CONVERTING_VILLAGES.md
+(removed with the village converter; git history up to 1e0229df),
 CONVERTING_DUNGEONS.md, MODERNIZATION_PLAN.md 6.3, 6.8 and 7.8,
 tools/parity/cases.txt), gathered on 2026-10-22 so each can become a ticket
 or be closed as intended. They were kept during the phases for parity; none

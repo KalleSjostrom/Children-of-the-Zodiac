@@ -83,11 +83,11 @@ resources/
   world_map/place_index.tres  (WorldMapIndex: the world map of every world map node, generated;
                                section 13)
 src/                      legacy code (shrinks over time)
-tools/import/             converters and their checks (headless `--script`): vil_to_scene.gd
-                          (+ vil_to_scene.sh), verify_villages.gd, scene_preview.gd (windowed);
+tools/import/             converters and their checks (headless `--script`): scene_preview.gd
+                          (windowed; any 2D scene, e.g. a village);
                           world_to_scene.gd (+ world_to_scene.sh), verify_world_map.gd;
-                          tile_art.gd (the stitched backgrounds and top layers, shared by
-                          vil_to_scene.gd and world_to_scene.gd);
+                          tile_art.gd (the stitched backgrounds and top layers of
+                          world_to_scene.gd);
                           map_to_scene.gd (+ map_to_scene.sh), verify_dungeons.gd,
                           dungeon_preview.gd (windowed); particles_to_scenes.gd (+ .sh)
 tools/parity/             screenshot comparison (section 7), contact_sheet.gd
@@ -105,8 +105,9 @@ A scene's script lives next to the scene and has the same PascalCase name
 (`scenes/common/Door.tscn` + `scenes/common/Door.gd`, as in the plan and in
 `src/`). Scripts that are not attached to a scene (headless tools,
 converters) are snake_case (`tools/parity/diff_shots.gd`,
-`tools/import/vil_to_scene.gd`). Generated files (`.tres` from converters) are committed like hand-made
-ones; the converter that made them is the documentation of their format.
+`tools/import/map_to_scene.gd`). Generated files (`.tres` from converters) are committed like hand-made
+ones; the converter that made them is the documentation of their format. The village scenes and their
+`SpriteFrames` have no converter any more: they are edited like hand-made files (section 9).
 
 ## 3. GDScript style for new code
 
@@ -307,7 +308,7 @@ parity runs:
 
 ```gdscript
 func create_scene() -> Node:
-	if Main.is_legacy("villages"):
+	if Main.is_legacy("dungeons"):
 		return null
 	return load(scene_path).instantiate()
 ```
@@ -325,7 +326,7 @@ Game options go after `--` on the command line (see the header of
 | `--fixed-step` | The game advances exactly 1000/60 ms per frame, whatever the real frame time. |
 | `--seed=<n>` | Deterministic run (implies `--fixed-step`): every random generator (`J`, every `JRandom`, Godot's global one) is seeded from `n`; `J.currentTimeMillis()`, `Scheduler` and `GameAction` read a game clock advanced by the elapsed game time instead of the wall clock; saves are read from the shipped files and written to `user://saves_deterministic/` (emptied at start), never to the player's `user://saves/`; the slot lists date a slot saved in the run by the game clock from 1 Jan 2000, 00:00 (`SaveSlots.note_saved`; a file's time is wall-clock time, phase 4.2); no game pad is read (`GameCore.init2`: an idle pad releases AutoPlay's buttons every 40 ms). Two runs of an AutoPlay script then produce the same frames. |
 | `--uncapped` | No 60 FPS cap and no vsync. With `--seed` the result is the same, only faster. |
-| `--legacy=<a,b,…>` | Keep the legacy path of the listed subsystems (`Main.is_legacy`). `all` keeps every one. `villages`: converted places are read from their `.vil` files and drawn by the legacy code (section 9). `village_top_layer`: the scene draws a roof or treetop only where a sprite overlaps it, as the legacy code does (for parity; by default it always draws them). `dungeons`: converted floors are read from their `.map` files and drawn by the legacy code (section 10). `dungeon_drawing` (dev): floors are built from their scenes (step A) and drawn by the legacy code, for checking step A on its own. `particles`: the village and cutscene particle systems run the legacy simulation and `LegacyParticles2D` draws its quads (section 9; `villages` implies it). `dungeon_particles`: the dungeon weather and the save points run the legacy simulation and the floor's scene draws its quads (section 10; `dungeons` and `dungeon_drawing` imply it). `battle_effects`: the card and enemy effects run the legacy simulation and draw its quads (section 11). `effect_waits` (dev): the GPU effects' legacy systems keep their whole pool, so the legacy particle counts decide when a battle goes on, as before (for parity runs with `--hide-particles`; section 11). `dialog`: the dialog box, the message box and the card info popup are drawn by the legacy code, not by their UI nodes (section 12). `fades`: the fade quads of `GameMode.draw` and of a cutscene are drawn by the legacy code, not by the Transition layer's Fade node (section 12). The phase 3 rollout's overlays (section 12), each drawn by the legacy code instead of its nodes: `emotions` (the emotion bubbles), `mission` (the labyrinth's mission display), `pause` ("Paused" and "game pad lost" with their dims), `story_images` (a cutscene's cover-all, story, village and translucent-over-actor images and the text back), `story_texts` (a cutscene's texts and scroll texts, the credits), `tutorials` (a tutorial's top layer, wherever it is drawn). Phase 4.1 (section 13): `world_map`: the world map is read from its `.map` file (and the node index from the three files) and drawn by the legacy code, name plate included; `airship`: the airship's map likewise. Phase 4.2 (section 14): `title`: the title's background, logo, difficulty description and slots' dates are drawn by the legacy code; `game_over`: the game over's image likewise; `menu_list`: the `MenuNode` lists that are `MenuList` nodes (the title's menus, the game pad lost overlay's, the menu pages' with their variants and their scroll bars) are drawn by the legacy code (`MenuNode.drawChildrenFreely`). Phase 4.2's menu (section 14), each the legacy drawing of its parts on the menu pages (the stores keep their legacy drawing until their part): `menu_frame`: the background and the layout's pieces (`drawStandard`), the title line, the info (gold, steps, time), the thumbnail and the help lines; `menu_text`: a page's own text and boxes (the Save list's dates, the saving box, the help page's difficulty text, the map page's "Explored"); `status`: the status line (`StatusPage.drawTop`), the equip page's status with the comparison (`EquipPage.drawStatus`) and its item (`StatusPage.drawEquip`); `deck`: the deck page's decks (`Deck.drawDeck`), their titles and scroll bars and the flying cards; `automap`: the map page's map (`LabyrinthMap.draw`). With all of them and the pilot's three the frame is drawn exactly as before phase 4.2. |
+| `--legacy=<a,b,…>` | Keep the legacy path of the listed subsystems (`Main.is_legacy`). `all` keeps every one. (Phase 1's `villages` and `village_top_layer` are gone: villages have no legacy path, section 9.) `dungeons`: converted floors are read from their `.map` files and drawn by the legacy code (section 10). `dungeon_drawing` (dev): floors are built from their scenes (step A) and drawn by the legacy code, for checking step A on its own. `particles`: the village and cutscene particle systems run the legacy simulation and `LegacyParticles2D` draws its quads (section 9). `dungeon_particles`: the dungeon weather and the save points run the legacy simulation and the floor's scene draws its quads (section 10; `dungeons` and `dungeon_drawing` imply it). `battle_effects`: the card and enemy effects run the legacy simulation and draw its quads (section 11). `effect_waits` (dev): the GPU effects' legacy systems keep their whole pool, so the legacy particle counts decide when a battle goes on, as before (for parity runs with `--hide-particles`; section 11). `dialog`: the dialog box, the message box and the card info popup are drawn by the legacy code, not by their UI nodes (section 12). `fades`: the fade quads of `GameMode.draw` and of a cutscene are drawn by the legacy code, not by the Transition layer's Fade node (section 12). The phase 3 rollout's overlays (section 12), each drawn by the legacy code instead of its nodes: `emotions` (the emotion bubbles), `mission` (the labyrinth's mission display), `pause` ("Paused" and "game pad lost" with their dims), `story_images` (a cutscene's cover-all, story, village and translucent-over-actor images and the text back), `story_texts` (a cutscene's texts and scroll texts, the credits), `tutorials` (a tutorial's top layer, wherever it is drawn). Phase 4.1 (section 13): `world_map`: the world map is read from its `.map` file (and the node index from the three files) and drawn by the legacy code, name plate included; `airship`: the airship's map likewise. Phase 4.2 (section 14): `title`: the title's background, logo, difficulty description and slots' dates are drawn by the legacy code; `game_over`: the game over's image likewise; `menu_list`: the `MenuNode` lists that are `MenuList` nodes (the title's menus, the game pad lost overlay's, the menu pages' with their variants and their scroll bars) are drawn by the legacy code (`MenuNode.drawChildrenFreely`). Phase 4.2's menu (section 14), each the legacy drawing of its parts on the menu pages (the stores keep their legacy drawing until their part): `menu_frame`: the background and the layout's pieces (`drawStandard`), the title line, the info (gold, steps, time), the thumbnail and the help lines; `menu_text`: a page's own text and boxes (the Save list's dates, the saving box, the help page's difficulty text, the map page's "Explored"); `status`: the status line (`StatusPage.drawTop`), the equip page's status with the comparison (`EquipPage.drawStatus`) and its item (`StatusPage.drawEquip`); `deck`: the deck page's decks (`Deck.drawDeck`), their titles and scroll bars and the flying cards; `automap`: the map page's map (`LabyrinthMap.draw`). With all of them and the pilot's three the frame is drawn exactly as before phase 4.2. |
 | `--hide-particles` | Dev only: the particles draw nothing, in both paths (`Main.hide_particles`; they still run): the village and cutscene systems, the dungeon weather and save points, the card and enemy effects drawn as particles (not the sphere, image, slow and enemy-colour systems), with the GL state their drawing leaves; for parity runs that compare everything else. |
 | `--minimap-node` | Dev only: the labyrinth's minimap is drawn by `MinimapPart` nodes (`MapRenderer.show_map`) instead of the 3D bridge's batches; the floor's frames are the same to the bit, a battle's frames after them differ by 1/255 (plan 8.3), so it is not the default. |
 | Console `padlost [on\|off]`, `emotion <who> <emotion\|off> [shake]` | Dev only (debug console, `scenes/debug/GameCommands.gd`; AutoPlay `console`): `padlost` makes `InputManagers.connectionLost` report a lost game pad (`lost_simulated`) until the overlay's menu is answered, for the "game pad lost" overlay without a pad (seeded runs read none); `emotion` sets a bubble on a party member or villager of the current village (`Sprite.setEmotion`, which only cutscenes call), for the emotions in a village frame. Parity cases `pad_lost`, `emotions_village`. |
@@ -360,7 +361,7 @@ and by Godot's importer).
 tools/parity/parity.sh record golden --jobs=5       # all cases, current code
 tools/parity/parity.sh record after 'tour_*'        # a group, after a change
 tools/parity/parity.sh compare golden after         # diff images + summary
-tools/parity/parity.sh ab "--legacy=villages" "" village village_walk
+tools/parity/parity.sh ab "--legacy=world_map" "" 'world_*'
 ```
 
 * `record <set> [case…]` runs each case windowed (screenshots need a
@@ -461,19 +462,25 @@ rollout; the test passes legacy vs. scene (plan 7.8).
 
 ## 9. Villages as scenes (phase 1)
 
-Every place of `maps/Village` (63 places, 89 `.vil` variants) is converted
-through steps A and B: the pilot (Zazo, "Zazo - Miner's Home") and the
-rollout. The `.vil` files stay (decision 5): the converter, the data check
-and `--legacy=villages` read them. How to convert a place again:
-`docs/CONVERTING_VILLAGES.md`.
+Every place of `maps/Village` (63 places, 89 `.vil` variants; 86 since
+COTZ-034) is converted through steps A and B: the pilot (Zazo, "Zazo -
+Miner's Home") and the rollout. Closing phase 1 (plan 6.9) removed the
+legacy path: the converter (`vil_to_scene.gd`), the data check
+(`verify_villages.gd`), `docs/CONVERTING_VILLAGES.md`, `--legacy=villages`,
+`--legacy=village_top_layer`, the `.vil` loader and the background tiles
+(`res/Village/<Place>/<image>folder/`) are gone; they are in the git
+history up to 1e0229df. The scenes are the village data: a village is
+changed in its scene. The `.vil` files stay (decision 5), but nothing reads
+them any more; their paths still name the variants
+(`VillageScene.path_for`).
 
 **Layout.** Every village scene inherits `scenes/villages/VillageScene.tscn`
 (root script `VillageScene.gd`). Its children, in draw order:
 
 | Node | Content |
 |---|---|
-| `Ground` | bottom-layer particle systems (`LegacyParticles2D`); the legacy code draws them before the tiles, so they only show through transparent parts of the background |
-| `Background` | `Sprite2D`, the stitched background (`<Place>/<image>.png`, at the `offset` line's shift), or the image itself when it has no tile folder |
+| `Ground` | bottom-layer particle systems (`LegacyParticles2D`); the legacy code drew them before the tiles, so they only show through transparent parts of the background |
+| `Background` | `Sprite2D`, the background (`<Place>/<image>.png`, stitched from the legacy 256 px tiles; at the `offset` line's shift), or the original image for the two places that had no tiles (Tower Prison, Zazo - Farl's House) |
 | `Actors` | `ActorView`s (villagers, animated objects; party members and cutscene actors are added at run time), villager-layer `LegacyParticles2D`, the cutscene `StoryImage` |
 | `Overhead` | one `Sprite2D` per `top/top.info` line, in file order; the node's material is the 0.9 alpha test |
 | `Night` | the night layer (`Sprite2D`, scale 2, alpha test 0); `night_screen_fixed` for `standardOvernight.png` |
@@ -493,51 +500,43 @@ of Alares - With Boat, a night image of its own) overrides the inherited
 Markers (doors, signs, loot, spawns, particle emitters) draw in the editor
 and with `--debug-collisions`.
 
-**Converter** (`tools/import/vil_to_scene.gd`, run through
-`tools/import/vil_to_scene.sh`): reads each `.vil` with the legacy
-tokenizer and parsers, records every command into typed node properties
-(text lines exactly as the legacy loader cuts them, floats as 64-bit
-values), and writes:
-
-* the art stage: the stitched backgrounds (the tiles `DoubleBackground`
-  draws: `x<i>y<j>` up to the `back … as=` size, PNG tiles with their alpha;
-  tile pixels as imported, saved as PNG with an `.import` file: lossless,
-  no mipmaps, no alpha-border fix, kept when it already has these settings;
-  a background from another place's art folder goes into that place's
-  folder, so it is stitched once; a background without a tile folder is
-  not copied: the scene uses the image, which `DoubleBackground.cutImage2`
-  cuts in memory) and one `SpriteFrames` per villager image set (`up`,
-  `right`, `down`, `left`, 4 images each, 150 ms) and per `animObj` series
-  (`default`);
-* Godot's import of the new images (`--import`);
-* the scene stage: inherited scenes are built from a bootstrap file that
-  names the base (`[node … instance=ExtResource(base)]`), instanced with an
-  edit state (`PackedScene.GEN_EDIT_STATE_MAIN`) so that `pack()` keeps the
-  inheritance; every node gets `owner = root`; `PackedScene.pack()` +
-  `ResourceSaver.save()`. Godot 4.7 writes a random `unique_id` per node
-  (and `parent_id_path`s made of them); the converter removes them, the
-  node paths link the scenes as in older files. Converting twice writes the
-  same files.
+**What the converter wrote** (`tools/import/vil_to_scene.gd`, removed;
+see the git history): every command of a `.vil` file as typed node
+properties (text lines exactly as the legacy loader cut them, floats as
+64-bit values); the stitched backgrounds (the tiles `DoubleBackground`
+drew, up to the `back … as=` size, pixels as imported, saved as PNG with an
+`.import` file: lossless, no mipmaps, no alpha-border fix; a background
+from another place's art folder is in that place's folder); one
+`SpriteFrames` per villager image set
+(`resources/sprite_frames/<folder>/<Name>.tres`: `up`, `right`, `down`,
+`left`, 4 images each, 150 ms) and per `animObj` series (`default`).
+Inherited scenes were built from a bootstrap file that names the base,
+instanced with `PackedScene.GEN_EDIT_STATE_MAIN` so that `pack()` keeps the
+inheritance, every node with `owner = root`; Godot 4.7's random per-node
+`unique_id`s were removed. A tool that writes village scenes again needs
+the same.
 
 **Step A.** `VillageLoader.load` instantiates the variant's scene
-(`VillageLoader.village_scene_for`) and `VillageScene.load_into(loader)`
-builds the legacy objects from the nodes, replaying each command's legacy
-semantics in the order every `.vil` file has (background, back, offset,
+(`VillageLoader.village_scene_for`; a variant without one asserts) and
+`VillageScene.load_into(loader)` builds the legacy objects from the nodes,
+replaying each command's legacy semantics in the order every `.vil` file
+had (background, back, offset,
 start, o, wind, particlesystem, then the rest): the same constructors, the
 same Database reads and writes, the same random numbers. Two orders are
 data in the scene: `Actors` children are the order of the legacy sprite map
 (villagers, animated objects, villager-layer systems), and
 `LegacyParticles2D.build_order` / `line` are the order the systems are
 built in and the `particlesystem` line (one `SystemLoader` per line: the
-systems of a line share its settings objects). `tools/import/verify_villages.gd`
-builds each variant both ways and compares everything field by field.
-`--legacy=villages` reads the `.vil` file.
+systems of a line share its settings objects). The village's
+`DoubleBackground` (`init_village`) keeps the scroll, the particle system
+lists, the night layer and the top-layer list for the legacy objects; it
+loads no background image (the scene draws it).
 
 **Step B.** The scene the village was built from stays its `scene_root` and
 draws it; the legacy objects stay in charge.
 
 * Where `Village.draw` drew the world, it now calls
-  `update_draw_state()` (the state changes of `drawBottom` and `drawTop`:
+  `update_draw_state()` (the state changes of the legacy `drawBottom` and `drawTop`:
   the sort, the villagers' `drawX`/`drawY`, the emotion bubble positions,
   the particle systems' positions, textures and particle lives, the party
   members' positions in the top-layer overlap test) and `draw_scene(g)`,
@@ -567,10 +566,10 @@ draws it; the legacy objects stay in charge.
   static position is the camera zoom with position
   `-scroll + center * (1 - 1 / zoom)`. Screen-space legacy images (the
   standard night layer, cutscene images) are placed at `screen - scroll`.
-* The top layer is always drawn (plan 6.1). The legacy code draws a piece
-  only where a sprite overlaps it, and the pieces are not identical to the
-  JPEG background under them; `--legacy=village_top_layer` keeps the
-  legacy rule, so a parity run can show that everything else is identical.
+* The top layer is always drawn (plan 6.1). The legacy code drew a piece
+  only where a sprite overlapped it, and the pieces are not identical to
+  the JPEG background under them, so a roof or treetop changed where a
+  sprite walked under it.
 * Cutscenes: `VillageStory.shown_scene()` shows the village's scene;
   `VillageStoryTimeLine.draw_scene` adds the image modes drawn under the
   actors (`StoryImage`: backflash, translucent under actor), the actors,
@@ -580,11 +579,11 @@ draws it; the legacy objects stay in charge.
   nodes (section 12). A scaled image covers the rectangle the legacy drawing covers
   (`GameTexture.drawPart` truncates its far corner to whole pixels), so its
   scale is per axis (`VillageStoryTimeLine.image_entry`).
-* A cutscene zoom resamples the frame: the legacy drawing magnifies each
-  256 px tile on its own (seams show), the scene magnifies the stitched
-  background, so zoomed frames differ by bilinear rounding (plan 6.7, 6.8).
-  After a zoom out the scale stays 1.00007, so the rest of such a cutscene
-  differs slightly too; AutoPlay's `[zoom]` lines name these shots.
+* A cutscene zoom resamples the frame: the legacy drawing magnified each
+  256 px tile on its own (seams showed), the scene magnifies the stitched
+  background, so zoomed frames differed from it by bilinear rounding (plan
+  6.7, 6.8). After a zoom out the scale stays 1.00007; AutoPlay's `[zoom]`
+  lines name these shots.
 * Particle systems: see "Particles" below.
 
 **Particles (the particles phase, plan 6.10).** Every system of
@@ -613,13 +612,12 @@ them: `docs/CONVERTING_PARTICLES.md`; the `.info` file stays the source):
   lives by stepping single legacy particles and takes the rate both legacy
   limits allow (the emitter's time step and the pool of `nrParticles`):
   `amount = rate × lifetime`.
-* Step B. The legacy objects stay in charge: `VillageScene.load_into`, the
-  `.vil` loader and the cutscene timeline build the same
+* Step B. The legacy objects stay in charge: `VillageScene.load_into` and
+  the cutscene timeline build the same
   `BodiesParticleSystem`s (which systems, layers, start state and
   activation status, the sort key `getY`, the emitter a cutscene actor
   moves, the emitter fade of a timeline event). On the GPU path
-  (`BodiesParticleSystem.gpu_path()`: not `--legacy=particles` or
-  `--legacy=villages`) a system builds no bodies and runs no simulation:
+  (`BodiesParticleSystem.gpu_path()`: not `--legacy=particles`) a system builds no bodies and runs no simulation:
   `update` adds the game time (`gpu_run`: also the emitter's clock,
   `AbstractEmitter.advance`, and the shared wind's turbulence,
   `WindCommand.drift`), `warmUp` and the master/slave warm-up add warm-up

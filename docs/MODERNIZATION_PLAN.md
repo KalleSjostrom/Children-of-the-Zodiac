@@ -70,7 +70,7 @@ widescreen (see section 13); rewriting the cutscene language.
   * `Zazo - 0` vs `Zazo - 1` differ in villagers and door signs.
   * Zazo day vs night differ in doors, buildings, shopkeepers and villagers,
     while their obstacles differ by only 8 lines.
-* **Commands** (`VillageLoaderMapLoader.executeCommand`):
+* **Commands** (`VillageLoaderMapLoader.executeCommand`, removed in 6.9):
   * `background`, `back w h [as=w:h | extra]`, `offset`, `inside`, `music`,
     `landname`, `villagerFolder`.
   * `start<N> x y dir`.
@@ -426,6 +426,9 @@ Zazo.tscn (Node2D, VillageScene.gd)   @export place_name, music, land_name, insi
 
 ### 6.2 Converter `tools/import/vil_to_scene.gd`
 
+*Removed when phase 1 closed (6.9), with its workflow document; see the git
+history up to 1e0229df. The scenes are now edited by hand.*
+
 * Runs headless (`Godot --headless --script …`). It reads the `.vil` with
   the same `AbstractMapLoader` tokenizer and maps each command's tokens to
   typed, exported node properties.
@@ -446,7 +449,7 @@ Zazo.tscn (Node2D, VillageScene.gd)   @export place_name, music, land_name, insi
   the stitched PNGs imported). Each `particlesystem` line gets one
   `SystemLoader` (the legacy loader shares its settings objects between the
   systems of a line; Home of the Gods depends on it). Workflow:
-  `docs/CONVERTING_VILLAGES.md`.
+  `docs/CONVERTING_VILLAGES.md` (removed in 6.9).
 
 ### 6.3 Step A: data from scenes, logic unchanged
 
@@ -695,10 +698,10 @@ Zazo.tscn (Node2D, VillageScene.gd)   @export place_name, music, land_name, insi
   at 60 FPS": Dellna's snow runs at 12 FPS in normal play. A GPU preset
   (6.4, after decision 6) is the way to remove it.
 
-### 6.9 Closing phase 1 (prepared, not done)
+### 6.9 Closing phase 1 (done on 2026-11-03, except decision 5)
 
 Removing the legacy village path deletes or changes (line counts as of the
-rollout, including doc comments):
+rollout, including doc comments; as built below the table):
 
 | Part | Lines | Still used by |
 |---|---|---|
@@ -715,7 +718,37 @@ rollout, including doc comments):
 | `tools/import/verify_villages.gd` | 242 | needs `VillageLoaderMapLoader` and the `.vil` files |
 | the 89 `.vil` files (decision 5) | 6,865 (132 KB) | the converter (`vil_to_scene.gd`, 911 lines), the data check, `--legacy=villages` |
 
-What keeps the exit criteria of 6.6 from being met today:
+*As built (2026-11-03):* everything in the table is removed except the
+`.vil` files (decision 5) and what the table says stays.
+
+* `VillageLoader` has no `.vil` loader: `load` asserts (with a release
+  guard) when a variant has no scene. `Door.getDoor`, `Loot.getLoot` and
+  `Loot.convert` went with it. The `.vil` files are no longer read; their
+  paths still name the variants (`VillageScene.path_for`).
+* `Village.draw` and `VillageStoryTimeLine.draw` have only the scene path.
+  `Village.drawBottom`/`drawTop` and the table's sprite draws (`Villager`,
+  `PartyMember`, `AnimatedObjects`, `DefaultSprite`, `Actor`) are removed.
+  The bodies' draws (`bodies.system.ParticleSystem.draw`/`drawIt`,
+  `BodySystem.draw`, `Body.draw`) stay: `DoubleBackground.drawSystem` (the
+  world map's and airship's legacy drawing) and `--legacy=particles` call
+  them.
+* `DoubleBackground.init`, `loadImages` and `putextra` are replaced by
+  `init_village`: the night layer (`doit`) and the top layer, no tiles. The
+  double load is gone: the scene path no longer loads every 256 px tile
+  texture of the background next to the stitched image the scene draws.
+  `overlapped_pieces` stays for `PartyMember.getMemberPos`; its result is
+  unused, and `VillageScene.show_top` lost its `pieces` argument.
+* The 65 tile folders (`res/Village/<Place>/<image>folder/`, 1,192 images,
+  20 MB) are deleted, and `file_index.txt` lost their paths. The whole
+  background JPEGs next to them stay: the scenes draw two of them (Tower
+  Prison, Zazo - Farl's House, which had no tiles); the others are not read.
+* `--legacy=villages`, `--legacy=village_top_layer`,
+  `tools/import/vil_to_scene.gd` (+ `.sh`), `verify_villages.gd` and
+  `docs/CONVERTING_VILLAGES.md` are deleted (git history up to 1e0229df).
+  The village scenes and their `SpriteFrames` are edited by hand now.
+* Parity: every case (407, 7,436 shots), recorded before (set `vbase`, on 1e0229df) and after (`vafter`), is identical at tolerance 0, with the same exit codes, shot counts and error counts per case. The one exception was one pixel of Dellna's snow by 1/255 (`tour_dellna_2`), which a re-record of that case does not show: run-to-run noise.
+
+What kept the exit criteria of 6.6 from being met before this:
 
 * "All 89 variants load from scenes": met.
 * "`village*.txt` and the story scripts pass parity": met except the frames
@@ -723,10 +756,9 @@ What keeps the exit criteria of 6.6 from being met today:
   its own (seams) and rounds differently (6.7, 6.8); and by default the
   top layer is always drawn (decision 7). Closing needs these accepted as
   the expected differences (a tolerance or a list), not fixed.
-* "`Village`/`VillageLoader` contain no world drawing": not met while
-  `--legacy=villages` exists (`drawBottom`, `drawTop`, the legacy branch of
-  `VillageStoryTimeLine.draw`).
-* "Delete each `.vil`": decision 5 is open.
+* "`Village`/`VillageLoader` contain no world drawing": met (as built
+  above).
+* "Delete each `.vil`": decision 5 is open; nothing reads them any more.
 * Particles: done on the GPU (6.10); `--legacy=particles` keeps the legacy
   simulation (`BodiesParticleSystem`'s bodies, `step`, `drawIt`,
   `place_quad` and `LegacyParticles2D`'s quads) until the phase closes.
@@ -2137,10 +2169,10 @@ rollout, including doc comments):
 | `Dialog`'s drawing: the legacy branches of `_drawCurrent` (the shown image) 4, `drawInputQuestion` 21, `_drawDialog` 8, `drawMessages` 7, `_drawQuestion` 11; `_drawLines` 20; the `xs`/`ys`/`handX`/`handY` tables and their index constants 8 | 79 | `--legacy=dialog` only (the nodes hold the layout). `drawQuestion` with a title (20) has no caller at all (dead in the port) |
 | `DeckPage.drawCardInfo`'s drawing | 23 of 26 | `--legacy=dialog` |
 | The fades' legacy branches (`GameMode.draw`, `VillageStoryTimeLine.drawTop`) | 4 | `--legacy=fades`; `Graphics.fadeOldSchool` (11) stays: the stores' confirm dims, the battle's result screens, the riddle's fade |
-| Emotions: `Sprite.drawEmotions` 8, `Actor.drawEmotion` 2, the legacy loops of `Village.drawOverlays` and the timeline's `draw` 6 | 16 | `--legacy=emotions`, and the legacy village path (`--legacy=villages`, no scene: plan 6.9) |
+| Emotions: `Sprite.drawEmotions` 8, `Actor.drawEmotion` 2, the legacy loops of `Village.drawOverlays` and the timeline's `draw` 6 | 16 | `--legacy=emotions` (the legacy village path that also drew them is removed: 6.9) |
 | `Mission.show_line`'s legacy branch | 3 | `--legacy=mission` |
 | `GameCore.testDraw`'s legacy branches ("Paused", "game pad lost", its menu) | 14 | `--legacy=pause`; `MenuNode.drawAllChildren` stays (every menu) |
-| Cutscene images: `drawTop`'s legacy branches 12; `ImageSettings.draw` 3, `drawTextBack` 3 | 18 | `--legacy=story_images`; `ImageSettings.draw` also by the legacy village path (the backflash and under-actor images: `--legacy=villages`) |
+| Cutscene images: `drawTop`'s legacy branches 12; `ImageSettings.draw` 3, `drawTextBack` 3 | 18 | `--legacy=story_images` (`ImageSettings.draw` was also called by the legacy village path, removed in 6.9) |
 | Texts: `Text.draw`'s drawing 6, `ScrollableTexts.draw`'s 9, `ScrollableText.draw` 13 | 28 | `--legacy=story_texts` |
 | `Tutorial.drawTopLayer`'s drawing | 13 | `--legacy=tutorials`; `Row.draw`, `drawIcon`, `drawRows` (26) and `Icon.draw` (2) stay: the Church's `HelpText` (phase 4.2) |
 | The flags (`Main.is_legacy` checks: dialog 7, fades 2, emotions 2, mission 1, pause 3, story_images 1, story_texts 2, tutorials 1) and the parity cases' legacy runs | ~19 | `Main.is_legacy` stays for later phases |
@@ -3045,7 +3077,8 @@ When no mode draws through `g` any more:
 * `tools/check.sh` stays the compile gate.
 * Parity: AutoPlay screenshot runs per converted place or mode, legacy vs.
   new (`tools/parity/`).
-* Data equivalence: `verify_villages.gd`, `verify_dungeons.gd`.
+* Data equivalence: `verify_dungeons.gd`, `verify_world_map.gd`
+  (`verify_villages.gd` was removed with the village converter, 6.9).
 * Performance: AutoPlay already prints `fps=` with every `log`/`shot`. Track
   it per phase, from normal runs: parity runs are uncapped and fixed-step,
   so their `fps=` values do not measure anything.
@@ -3150,7 +3183,9 @@ When no mode draws through `g` any more:
   village scenes in 4b74ade3; the converter no longer reproduces them and
   `vil_to_scene.sh --all` overwrites them. Re-convert one place at a time
   and keep hand edits out of generated scenes (or in the data they come
-  from).
+  from). *Since 6.9 the village converter is gone: the village scenes are
+  edited by hand, and the world map's and dungeons' converters keep this
+  risk.*
 * **Curves that only look like paths** (phase 4.1). A road's `Path2D` curve
   is the road's data: editing it in the editor changes where the player
   walks (`Road.addCoordinates` builds the line from its points), but
@@ -3249,8 +3284,8 @@ When no mode draws through `g` any more:
    default). The legacy rule draws a piece only where a sprite overlaps it,
    and the PNG pieces differ from the JPEG background under them, so the
    villages look slightly different where no sprite is near a roof or
-   treetop. `--legacy=village_top_layer` keeps the legacy rule for parity
-   runs.
+   treetop. `--legacy=village_top_layer` kept the legacy rule for parity
+   runs until phase 1 closed (6.9).
 8. **UI look** (from the phase 3 pilot, 8.1): the `TODO.md` UI items
    (replace the papyrus font, a vertical Yes/No, the papers that look "not
    in world", text running out of the paper) and sharper text in full screen

@@ -50,15 +50,7 @@ func getX():
 	return currentPos.getX()
 
 
-## Java overloads: draw(Graphics) (inherited) and draw(Graphics, int, int).
-func draw(g, x = null, y = null):
-	if x == null:
-		super.draw(g)
-		return
-	super.drawAtPosition(g, x, y)
-
-
-## Bridge (phase 1 step B): draw(g, x, y) without drawing (see
+## Bridge (phase 1 step B): Java's draw(g, x, y) without drawing (see
 ## Sprite.place_view); x and y are already the screen position.
 func place_view(x, y):
 	return [place_sprite(x, y), x, y]

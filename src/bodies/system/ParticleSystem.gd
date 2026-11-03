@@ -88,10 +88,10 @@ func _init(settings = null, pSettings = null, emitter = null, warmer = null) -> 
 
 
 ## Bridge (particles phase): whether the village and cutscene systems are
-## drawn by VillageParticles2D (the village scenes draw, and
-## --legacy=particles is not given) instead of the legacy simulation.
+## drawn by VillageParticles2D (--legacy=particles is not given) instead of
+## the legacy simulation.
 static func gpu_path() -> bool:
-	return not Main.is_legacy("particles") and not Main.is_legacy("villages")
+	return not Main.is_legacy("particles")
 
 
 func setTexture(tex):

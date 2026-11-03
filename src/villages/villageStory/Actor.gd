@@ -191,13 +191,7 @@ func getName():
 func setEmotion(show, emotion, shake):
 	actor.setEmotion(show, emotion, shake)
 
-func draw(g, bx, by):
-	var pos = actor.getPos()
-	var x: int = J.round(pos[Values.X] + bx)
-	var y: int = J.round(pos[Values.Y] + by)
-	actor.drawAtPosition(g, x, y)
-
-## Bridge (phase 1 step B, docs/ARCHITECTURE.md): draw(g, bx, by) without
+## Bridge (phase 1 step B, docs/ARCHITECTURE.md): Java's draw(g, bx, by) without
 ## drawing: [what the sprite's drawSprite would draw (an image path, or a
 ## particle view of a system), screen x, screen y].
 func place_view(bx, by) -> Array:

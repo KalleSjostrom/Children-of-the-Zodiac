@@ -1,6 +1,6 @@
 extends RefCounted
-## The art of DoubleBackground backgrounds for the converters
-## (tools/import/vil_to_scene.gd, world_to_scene.gd; docs/ARCHITECTURE.md
+## The art of DoubleBackground backgrounds for the world map converter
+## (tools/import/world_to_scene.gd; docs/ARCHITECTURE.md
 ## sections 9 and 13): the 256 px tiles stitched into one image, and the top
 ## layer of top/top.info. Preload it:
 ##

@@ -96,41 +96,6 @@ func getLine(i):
 	return text[i]
 
 
-## Creates a loot from the information in the given tokenizer.
-static func getLoot(tok, villageName):
-	var l = null
-	var lootName: String = str(villageName) + tok.nextToken()
-	var status: int = Database.getStatusFor(lootName)
-	if status != TAKEN:
-		var x := J.parseInt(tok.nextToken())
-		var y := J.parseInt(tok.nextToken())
-		var pos := Values.createNormalPoint(x, y)
-		var pDir = Loot.convert(tok.nextToken())
-		var cName: String = tok.nextToken()
-		var trigs := {}
-		if cName.begins_with("trigger="):
-			cName = cName.replace("trigger=", "")
-			var triggerStrings := J.split(cName, "--")
-			for s in triggerStrings:
-				var temp := J.split(s, ":")
-				trigs[temp[0]] = J.parseInt(temp[1])
-			cName = tok.nextToken()
-
-		var t := J.parseInt(tok.nextToken())
-		var c = Loot.createContent(cName, t, tok)
-		l = Loot.new(lootName, pDir, pos, t, c, trigs)
-		l.contentName = cName
-	return l
-
-
-static func convert(dir):
-	var dirs := J.split(dir, ";")
-	var pDirs := J.array(dirs.size(), 0)
-	for i in pDirs.size():
-		pDirs[i] = J.parseInt(dirs[i])
-	return pDirs
-
-
 ## Creates the content (the actual object) of a loot.
 static func createContent(p_contentName, p_type, tok):
 	var c = null

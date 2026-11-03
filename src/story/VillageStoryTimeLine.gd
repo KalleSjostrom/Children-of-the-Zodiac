@@ -616,31 +616,7 @@ func draw(g, alpha = null):
 				color[i] += colorSpeed[i]
 
 		g.setFadeColor(color[0], color[1], color[2], color[3])
-		if village.scene_root is VillageScene:
-			draw_scene(g)
-		else:
-			village.drawBottom(g)
-			if imageMode == BACKFLASH_MODE:
-				# Java: currentImage.equals("black") compares an ImageSettings
-				# with a String and is therefore always false.
-				if currentImage != null:
-					currentImage.draw(g)
-			var bx: int = int(background.getPos()[Values.X])
-			var by: int = int(background.getPos()[Values.Y])
-
-			if imageMode == TRANSLUCENT_MODE_UNDER_ACTOR:
-				g.setColor(1, 1, 1, fadeValue)
-				currentImage.draw(g)
-				g.setColor(1)
-			sortActors()
-			for i in range(elements.size()):
-				var index: int = elements[i].getIndex()
-				if showing[index]:
-					var actor = members[index]
-					actor.draw(g, bx, by)
-
-			if imageMode != BACKFLASH_MODE:
-				village.drawTop(g, null)
+		draw_scene(g)
 		# Bridge (phase 3 step B): the actors' emotion bubbles are UI nodes
 		# (Village.show_emotions; --legacy=emotions keeps the drawing).
 		if not Main.is_legacy("emotions"):
@@ -649,7 +625,7 @@ func draw(g, alpha = null):
 			for i in range(members.size()):
 				members[i].drawEmotion(g)
 		drawTop(g)
-	elif village.scene_root is VillageScene:
+	else:
 		# The legacy code draws nothing of the village while paused.
 		village.scene_root.show_nothing()
 
@@ -705,7 +681,7 @@ func draw_scene(g):
 	if imageMode != BACKFLASH_MODE:
 		village.scene_top(scene, state)
 	else:
-		scene.show_top(false, [], state.color, false, state.color, [])
+		scene.show_top(false, state.color, false, state.color, [])
 	state.apply(g)
 	if imageMode != BACKFLASH_MODE:
 		village.drawOverlays(g, null)

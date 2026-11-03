@@ -1388,70 +1388,6 @@ res/Title/loggastenreal.png
 res/Title/loggatext.png
 res/Village/math.jpg
 res/Village/standardOvernight.png
-res/Village/Alares/Alaresfolder/x0y0.jpg
-res/Village/Alares/Alaresfolder/x0y1.jpg
-res/Village/Alares/Alaresfolder/x0y2.jpg
-res/Village/Alares/Alaresfolder/x0y3.jpg
-res/Village/Alares/Alaresfolder/x0y4.jpg
-res/Village/Alares/Alaresfolder/x0y5.jpg
-res/Village/Alares/Alaresfolder/x0y6.jpg
-res/Village/Alares/Alaresfolder/x0y7.jpg
-res/Village/Alares/Alaresfolder/x1y0.jpg
-res/Village/Alares/Alaresfolder/x1y1.jpg
-res/Village/Alares/Alaresfolder/x1y2.jpg
-res/Village/Alares/Alaresfolder/x1y3.jpg
-res/Village/Alares/Alaresfolder/x1y4.jpg
-res/Village/Alares/Alaresfolder/x1y5.jpg
-res/Village/Alares/Alaresfolder/x1y6.jpg
-res/Village/Alares/Alaresfolder/x1y7.jpg
-res/Village/Alares/Alaresfolder/x2y0.jpg
-res/Village/Alares/Alaresfolder/x2y1.jpg
-res/Village/Alares/Alaresfolder/x2y2.jpg
-res/Village/Alares/Alaresfolder/x2y3.jpg
-res/Village/Alares/Alaresfolder/x2y4.jpg
-res/Village/Alares/Alaresfolder/x2y5.jpg
-res/Village/Alares/Alaresfolder/x2y6.jpg
-res/Village/Alares/Alaresfolder/x2y7.jpg
-res/Village/Alares/Alaresfolder/x3y0.jpg
-res/Village/Alares/Alaresfolder/x3y1.jpg
-res/Village/Alares/Alaresfolder/x3y2.jpg
-res/Village/Alares/Alaresfolder/x3y3.jpg
-res/Village/Alares/Alaresfolder/x3y4.jpg
-res/Village/Alares/Alaresfolder/x3y5.jpg
-res/Village/Alares/Alaresfolder/x3y6.jpg
-res/Village/Alares/Alaresfolder/x3y7.jpg
-res/Village/Alares/Alaresfolder/x4y0.jpg
-res/Village/Alares/Alaresfolder/x4y1.jpg
-res/Village/Alares/Alaresfolder/x4y2.jpg
-res/Village/Alares/Alaresfolder/x4y3.jpg
-res/Village/Alares/Alaresfolder/x4y4.jpg
-res/Village/Alares/Alaresfolder/x4y5.jpg
-res/Village/Alares/Alaresfolder/x4y6.jpg
-res/Village/Alares/Alaresfolder/x4y7.jpg
-res/Village/Alares/Alaresfolder/x5y0.jpg
-res/Village/Alares/Alaresfolder/x5y1.jpg
-res/Village/Alares/Alaresfolder/x5y2.jpg
-res/Village/Alares/Alaresfolder/x5y3.jpg
-res/Village/Alares/Alaresfolder/x5y4.jpg
-res/Village/Alares/Alaresfolder/x5y5.jpg
-res/Village/Alares/Alaresfolder/x5y6.jpg
-res/Village/Alares/Alaresfolder/x5y7.jpg
-res/Village/Alares/Alaresfolder/x6y0.jpg
-res/Village/Alares/Alaresfolder/x6y1.jpg
-res/Village/Alares/Alaresfolder/x6y2.jpg
-res/Village/Alares/Alaresfolder/x6y3.jpg
-res/Village/Alares/Alaresfolder/x6y4.jpg
-res/Village/Alares/Alaresfolder/x6y5.jpg
-res/Village/Alares/Alaresfolder/x6y6.jpg
-res/Village/Alares/Alaresfolder/x6y7.jpg
-res/Village/Alares/Alaresfolder/x7y0.jpg
-res/Village/Alares/Alaresfolder/x7y1.jpg
-res/Village/Alares/Alaresfolder/x7y2.jpg
-res/Village/Alares/Alaresfolder/x7y3.jpg
-res/Village/Alares/Alaresfolder/x7y4.jpg
-res/Village/Alares/Alaresfolder/x7y5.jpg
-res/Village/Alares/Alaresfolder/x7y6.jpg
-res/Village/Alares/Alaresfolder/x7y7.jpg
 res/Village/Alares/animobj/fountain/fountain1.png
 res/Village/Alares/animobj/fountain/fountain2.png
 res/Village/Alares/animobj/fountain/fountain3.png
@@ -1731,18 +1667,6 @@ res/Village/Alares/villagers/Recruitingsoldier/Recruitingsoldier6.png
 res/Village/Alares/villagers/Recruitingsoldier/Recruitingsoldier7.png
 res/Village/Alares/villagers/Recruitingsoldier/Recruitingsoldier8.png
 res/Village/Alares/villagers/Recruitingsoldier/Recruitingsoldier9.png
-res/Village/Alares - Belmet's House/Alares - Belmet's Housefolder/x0y0.jpg
-res/Village/Alares - Belmet's House/Alares - Belmet's Housefolder/x0y1.jpg
-res/Village/Alares - Belmet's House/Alares - Belmet's Housefolder/x0y2.jpg
-res/Village/Alares - Belmet's House/Alares - Belmet's Housefolder/x1y0.jpg
-res/Village/Alares - Belmet's House/Alares - Belmet's Housefolder/x1y1.jpg
-res/Village/Alares - Belmet's House/Alares - Belmet's Housefolder/x1y2.jpg
-res/Village/Alares - Belmet's House/Alares - Belmet's Housefolder/x2y0.jpg
-res/Village/Alares - Belmet's House/Alares - Belmet's Housefolder/x2y1.jpg
-res/Village/Alares - Belmet's House/Alares - Belmet's Housefolder/x2y2.jpg
-res/Village/Alares - Belmet's House/Alares - Belmet's Housefolder/x3y0.jpg
-res/Village/Alares - Belmet's House/Alares - Belmet's Housefolder/x3y1.jpg
-res/Village/Alares - Belmet's House/Alares - Belmet's Housefolder/x3y2.jpg
 res/Village/Alares - Belmet's House/top/0.png
 res/Village/Alares - Belmet's House/top/1.png
 res/Village/Alares - Belmet's House/top/2.png
@@ -1768,18 +1692,6 @@ res/Village/Alares - Belmet's House/villagers/BTScientist/BTScientist7.png
 res/Village/Alares - Belmet's House/villagers/BTScientist/BTScientist8.png
 res/Village/Alares - Belmet's House/villagers/BTScientist/BTScientist9.png
 res/Village/Alares - Celis/Alares - Celis at Night - 1.png
-res/Village/Alares - Celis/Alares - Celis at Nightfolder/x0y0.jpg
-res/Village/Alares - Celis/Alares - Celis at Nightfolder/x0y1.jpg
-res/Village/Alares - Celis/Alares - Celis at Nightfolder/x0y2.jpg
-res/Village/Alares - Celis/Alares - Celis at Nightfolder/x1y0.jpg
-res/Village/Alares - Celis/Alares - Celis at Nightfolder/x1y1.jpg
-res/Village/Alares - Celis/Alares - Celis at Nightfolder/x1y2.jpg
-res/Village/Alares - Celis/Alares - Celis at Nightfolder/x2y0.jpg
-res/Village/Alares - Celis/Alares - Celis at Nightfolder/x2y1.jpg
-res/Village/Alares - Celis/Alares - Celis at Nightfolder/x2y2.jpg
-res/Village/Alares - Celis/Alares - Celis at Nightfolder/x3y0.jpg
-res/Village/Alares - Celis/Alares - Celis at Nightfolder/x3y1.jpg
-res/Village/Alares - Celis/Alares - Celis at Nightfolder/x3y2.jpg
 res/Village/Alares - Celis/top/0.png
 res/Village/Alares - Celis/top/1.png
 res/Village/Alares - Celis/top/10.png
@@ -1795,18 +1707,6 @@ res/Village/Alares - Celis/top/7.png
 res/Village/Alares - Celis/top/8.png
 res/Village/Alares - Celis/top/9.png
 res/Village/Alares - Celis/top/top.info
-res/Village/Alares - Library/Alares - Libraryfolder/x0y0.jpg
-res/Village/Alares - Library/Alares - Libraryfolder/x0y1.jpg
-res/Village/Alares - Library/Alares - Libraryfolder/x0y2.jpg
-res/Village/Alares - Library/Alares - Libraryfolder/x1y0.jpg
-res/Village/Alares - Library/Alares - Libraryfolder/x1y1.jpg
-res/Village/Alares - Library/Alares - Libraryfolder/x1y2.jpg
-res/Village/Alares - Library/Alares - Libraryfolder/x2y0.jpg
-res/Village/Alares - Library/Alares - Libraryfolder/x2y1.jpg
-res/Village/Alares - Library/Alares - Libraryfolder/x2y2.jpg
-res/Village/Alares - Library/Alares - Libraryfolder/x3y0.jpg
-res/Village/Alares - Library/Alares - Libraryfolder/x3y1.jpg
-res/Village/Alares - Library/Alares - Libraryfolder/x3y2.jpg
 res/Village/Alares - Library/top/10.png
 res/Village/Alares - Library/top/11.png
 res/Village/Alares - Library/top/12.png
@@ -1863,56 +1763,6 @@ res/Village/Alares - Library/villagers/Onrod/Onrod6.png
 res/Village/Alares - Library/villagers/Onrod/Onrod7.png
 res/Village/Alares - Library/villagers/Onrod/Onrod8.png
 res/Village/Alares - Library/villagers/Onrod/Onrod9.png
-res/Village/Berca/Bercafolder/x0y0.jpg
-res/Village/Berca/Bercafolder/x0y1.jpg
-res/Village/Berca/Bercafolder/x0y2.jpg
-res/Village/Berca/Bercafolder/x0y3.jpg
-res/Village/Berca/Bercafolder/x0y4.jpg
-res/Village/Berca/Bercafolder/x1y0.jpg
-res/Village/Berca/Bercafolder/x1y1.jpg
-res/Village/Berca/Bercafolder/x1y2.jpg
-res/Village/Berca/Bercafolder/x1y3.jpg
-res/Village/Berca/Bercafolder/x1y4.jpg
-res/Village/Berca/Bercafolder/x2y0.jpg
-res/Village/Berca/Bercafolder/x2y1.jpg
-res/Village/Berca/Bercafolder/x2y2.jpg
-res/Village/Berca/Bercafolder/x2y3.jpg
-res/Village/Berca/Bercafolder/x2y4.jpg
-res/Village/Berca/Bercafolder/x3y0.jpg
-res/Village/Berca/Bercafolder/x3y1.jpg
-res/Village/Berca/Bercafolder/x3y2.jpg
-res/Village/Berca/Bercafolder/x3y3.jpg
-res/Village/Berca/Bercafolder/x3y4.jpg
-res/Village/Berca/Bercafolder/x4y0.jpg
-res/Village/Berca/Bercafolder/x4y1.jpg
-res/Village/Berca/Bercafolder/x4y2.jpg
-res/Village/Berca/Bercafolder/x4y3.jpg
-res/Village/Berca/Bercafolder/x4y4.jpg
-res/Village/Berca/Bercafolder/x5y0.jpg
-res/Village/Berca/Bercafolder/x5y1.jpg
-res/Village/Berca/Bercafolder/x5y2.jpg
-res/Village/Berca/Bercafolder/x5y3.jpg
-res/Village/Berca/Bercafolder/x5y4.jpg
-res/Village/Berca/Bercafolder/x6y0.jpg
-res/Village/Berca/Bercafolder/x6y1.jpg
-res/Village/Berca/Bercafolder/x6y2.jpg
-res/Village/Berca/Bercafolder/x6y3.jpg
-res/Village/Berca/Bercafolder/x6y4.jpg
-res/Village/Berca/Bercafolder/x7y0.jpg
-res/Village/Berca/Bercafolder/x7y1.jpg
-res/Village/Berca/Bercafolder/x7y2.jpg
-res/Village/Berca/Bercafolder/x7y3.jpg
-res/Village/Berca/Bercafolder/x7y4.jpg
-res/Village/Berca/Bercafolder/x8y0.jpg
-res/Village/Berca/Bercafolder/x8y1.jpg
-res/Village/Berca/Bercafolder/x8y2.jpg
-res/Village/Berca/Bercafolder/x8y3.jpg
-res/Village/Berca/Bercafolder/x8y4.jpg
-res/Village/Berca/Bercafolder/x9y0.jpg
-res/Village/Berca/Bercafolder/x9y1.jpg
-res/Village/Berca/Bercafolder/x9y2.jpg
-res/Village/Berca/Bercafolder/x9y3.jpg
-res/Village/Berca/Bercafolder/x9y4.jpg
 res/Village/Berca/top/0.png
 res/Village/Berca/top/14.png
 res/Village/Berca/top/18.png
@@ -2156,18 +2006,6 @@ res/Village/Berca/villagers/Tilly/Tilly6.png
 res/Village/Berca/villagers/Tilly/Tilly7.png
 res/Village/Berca/villagers/Tilly/Tilly8.png
 res/Village/Berca/villagers/Tilly/Tilly9.png
-res/Village/Berca - Bar/Berca - Barfolder/x0y0.jpg
-res/Village/Berca - Bar/Berca - Barfolder/x0y1.jpg
-res/Village/Berca - Bar/Berca - Barfolder/x0y2.jpg
-res/Village/Berca - Bar/Berca - Barfolder/x1y0.jpg
-res/Village/Berca - Bar/Berca - Barfolder/x1y1.jpg
-res/Village/Berca - Bar/Berca - Barfolder/x1y2.jpg
-res/Village/Berca - Bar/Berca - Barfolder/x2y0.jpg
-res/Village/Berca - Bar/Berca - Barfolder/x2y1.jpg
-res/Village/Berca - Bar/Berca - Barfolder/x2y2.jpg
-res/Village/Berca - Bar/Berca - Barfolder/x3y0.jpg
-res/Village/Berca - Bar/Berca - Barfolder/x3y1.jpg
-res/Village/Berca - Bar/Berca - Barfolder/x3y2.jpg
 res/Village/Berca - Bar/top/0.png
 res/Village/Berca - Bar/top/1.png
 res/Village/Berca - Bar/top/2.png
@@ -2241,18 +2079,6 @@ res/Village/Berca - Bar/villagers/Quintis/Quintis6.png
 res/Village/Berca - Bar/villagers/Quintis/Quintis7.png
 res/Village/Berca - Bar/villagers/Quintis/Quintis8.png
 res/Village/Berca - Bar/villagers/Quintis/Quintis9.png
-res/Village/Berca - Dolly's House/Berca - Dolly's Housefolder/x0y0.jpg
-res/Village/Berca - Dolly's House/Berca - Dolly's Housefolder/x0y1.jpg
-res/Village/Berca - Dolly's House/Berca - Dolly's Housefolder/x0y2.jpg
-res/Village/Berca - Dolly's House/Berca - Dolly's Housefolder/x1y0.jpg
-res/Village/Berca - Dolly's House/Berca - Dolly's Housefolder/x1y1.jpg
-res/Village/Berca - Dolly's House/Berca - Dolly's Housefolder/x1y2.jpg
-res/Village/Berca - Dolly's House/Berca - Dolly's Housefolder/x2y0.jpg
-res/Village/Berca - Dolly's House/Berca - Dolly's Housefolder/x2y1.jpg
-res/Village/Berca - Dolly's House/Berca - Dolly's Housefolder/x2y2.jpg
-res/Village/Berca - Dolly's House/Berca - Dolly's Housefolder/x3y0.jpg
-res/Village/Berca - Dolly's House/Berca - Dolly's Housefolder/x3y1.jpg
-res/Village/Berca - Dolly's House/Berca - Dolly's Housefolder/x3y2.jpg
 res/Village/Berca - Dolly's House/top/0.png
 res/Village/Berca - Dolly's House/top/top.info
 res/Village/Berca - Dolly's House/villagers/Dolly/Dolly1.png
@@ -2271,18 +2097,6 @@ res/Village/Berca - Dolly's House/villagers/Dolly/Dolly6.png
 res/Village/Berca - Dolly's House/villagers/Dolly/Dolly7.png
 res/Village/Berca - Dolly's House/villagers/Dolly/Dolly8.png
 res/Village/Berca - Dolly's House/villagers/Dolly/Dolly9.png
-res/Village/Berca - House/Berca - Housefolder/x0y0.jpg
-res/Village/Berca - House/Berca - Housefolder/x0y1.jpg
-res/Village/Berca - House/Berca - Housefolder/x0y2.jpg
-res/Village/Berca - House/Berca - Housefolder/x1y0.jpg
-res/Village/Berca - House/Berca - Housefolder/x1y1.jpg
-res/Village/Berca - House/Berca - Housefolder/x1y2.jpg
-res/Village/Berca - House/Berca - Housefolder/x2y0.jpg
-res/Village/Berca - House/Berca - Housefolder/x2y1.jpg
-res/Village/Berca - House/Berca - Housefolder/x2y2.jpg
-res/Village/Berca - House/Berca - Housefolder/x3y0.jpg
-res/Village/Berca - House/Berca - Housefolder/x3y1.jpg
-res/Village/Berca - House/Berca - Housefolder/x3y2.jpg
 res/Village/Berca - House/top/0.png
 res/Village/Berca - House/top/1.png
 res/Village/Berca - House/top/2.png
@@ -2321,18 +2135,6 @@ res/Village/Berca - House/villagers/Yolly/Yolly6.png
 res/Village/Berca - House/villagers/Yolly/Yolly7.png
 res/Village/Berca - House/villagers/Yolly/Yolly8.png
 res/Village/Berca - House/villagers/Yolly/Yolly9.png
-res/Village/Berca - Library - Floor 1/Berca - Library - Floor 1folder/x0y0.jpg
-res/Village/Berca - Library - Floor 1/Berca - Library - Floor 1folder/x0y1.jpg
-res/Village/Berca - Library - Floor 1/Berca - Library - Floor 1folder/x0y2.jpg
-res/Village/Berca - Library - Floor 1/Berca - Library - Floor 1folder/x1y0.jpg
-res/Village/Berca - Library - Floor 1/Berca - Library - Floor 1folder/x1y1.jpg
-res/Village/Berca - Library - Floor 1/Berca - Library - Floor 1folder/x1y2.jpg
-res/Village/Berca - Library - Floor 1/Berca - Library - Floor 1folder/x2y0.jpg
-res/Village/Berca - Library - Floor 1/Berca - Library - Floor 1folder/x2y1.jpg
-res/Village/Berca - Library - Floor 1/Berca - Library - Floor 1folder/x2y2.jpg
-res/Village/Berca - Library - Floor 1/Berca - Library - Floor 1folder/x3y0.jpg
-res/Village/Berca - Library - Floor 1/Berca - Library - Floor 1folder/x3y1.jpg
-res/Village/Berca - Library - Floor 1/Berca - Library - Floor 1folder/x3y2.jpg
 res/Village/Berca - Library - Floor 1/top/0.png
 res/Village/Berca - Library - Floor 1/top/1.png
 res/Village/Berca - Library - Floor 1/top/2.png
@@ -2341,18 +2143,6 @@ res/Village/Berca - Library - Floor 1/top/4.png
 res/Village/Berca - Library - Floor 1/top/5.png
 res/Village/Berca - Library - Floor 1/top/6.png
 res/Village/Berca - Library - Floor 1/top/top.info
-res/Village/Berca - Library - Floor 2/Berca - Library - Floor 2folder/x0y0.jpg
-res/Village/Berca - Library - Floor 2/Berca - Library - Floor 2folder/x0y1.jpg
-res/Village/Berca - Library - Floor 2/Berca - Library - Floor 2folder/x0y2.jpg
-res/Village/Berca - Library - Floor 2/Berca - Library - Floor 2folder/x1y0.jpg
-res/Village/Berca - Library - Floor 2/Berca - Library - Floor 2folder/x1y1.jpg
-res/Village/Berca - Library - Floor 2/Berca - Library - Floor 2folder/x1y2.jpg
-res/Village/Berca - Library - Floor 2/Berca - Library - Floor 2folder/x2y0.jpg
-res/Village/Berca - Library - Floor 2/Berca - Library - Floor 2folder/x2y1.jpg
-res/Village/Berca - Library - Floor 2/Berca - Library - Floor 2folder/x2y2.jpg
-res/Village/Berca - Library - Floor 2/Berca - Library - Floor 2folder/x3y0.jpg
-res/Village/Berca - Library - Floor 2/Berca - Library - Floor 2folder/x3y1.jpg
-res/Village/Berca - Library - Floor 2/Berca - Library - Floor 2folder/x3y2.jpg
 res/Village/Berca - Library - Floor 2/top/0.png
 res/Village/Berca - Library - Floor 2/top/1.png
 res/Village/Berca - Library - Floor 2/top/2.png
@@ -3121,109 +2911,15 @@ res/Village/Characters/rebelredbald/rebelredbald6.png
 res/Village/Characters/rebelredbald/rebelredbald7.png
 res/Village/Characters/rebelredbald/rebelredbald8.png
 res/Village/Characters/rebelredbald/rebelredbald9.png
-res/Village/Crossroad/Crossroadfolder/x0y0.jpg
-res/Village/Crossroad/Crossroadfolder/x0y1.jpg
-res/Village/Crossroad/Crossroadfolder/x0y2.jpg
-res/Village/Crossroad/Crossroadfolder/x1y0.jpg
-res/Village/Crossroad/Crossroadfolder/x1y1.jpg
-res/Village/Crossroad/Crossroadfolder/x1y2.jpg
-res/Village/Crossroad/Crossroadfolder/x2y0.jpg
-res/Village/Crossroad/Crossroadfolder/x2y1.jpg
-res/Village/Crossroad/Crossroadfolder/x2y2.jpg
-res/Village/Crossroad/Crossroadfolder/x3y0.jpg
-res/Village/Crossroad/Crossroadfolder/x3y1.jpg
-res/Village/Crossroad/Crossroadfolder/x3y2.jpg
 res/Village/Crossroad/top/0.png
 res/Village/Crossroad/top/1.png
 res/Village/Crossroad/top/2.png
 res/Village/Crossroad/top/3.png
 res/Village/Crossroad/top/4.png
 res/Village/Crossroad/top/top.info
-res/Village/Crystal Room/Crystal Roomfolder/x0y0.jpg
-res/Village/Crystal Room/Crystal Roomfolder/x0y1.jpg
-res/Village/Crystal Room/Crystal Roomfolder/x0y2.jpg
-res/Village/Crystal Room/Crystal Roomfolder/x1y0.jpg
-res/Village/Crystal Room/Crystal Roomfolder/x1y1.jpg
-res/Village/Crystal Room/Crystal Roomfolder/x1y2.jpg
-res/Village/Crystal Room/Crystal Roomfolder/x2y0.jpg
-res/Village/Crystal Room/Crystal Roomfolder/x2y1.jpg
-res/Village/Crystal Room/Crystal Roomfolder/x2y2.jpg
-res/Village/Crystal Room/Crystal Roomfolder/x3y0.jpg
-res/Village/Crystal Room/Crystal Roomfolder/x3y1.jpg
-res/Village/Crystal Room/Crystal Roomfolder/x3y2.jpg
 res/Village/Crystal Room/animobj/crystal.png
 res/Village/Crystal Room/top/top.info
 res/Village/Dellna/Dellna2.jpg
-res/Village/Dellna/Dellna2folder/x0y0.jpg
-res/Village/Dellna/Dellna2folder/x0y1.jpg
-res/Village/Dellna/Dellna2folder/x0y2.jpg
-res/Village/Dellna/Dellna2folder/x0y3.jpg
-res/Village/Dellna/Dellna2folder/x0y4.jpg
-res/Village/Dellna/Dellna2folder/x1y0.jpg
-res/Village/Dellna/Dellna2folder/x1y1.jpg
-res/Village/Dellna/Dellna2folder/x1y2.jpg
-res/Village/Dellna/Dellna2folder/x1y3.jpg
-res/Village/Dellna/Dellna2folder/x1y4.jpg
-res/Village/Dellna/Dellna2folder/x2y0.jpg
-res/Village/Dellna/Dellna2folder/x2y1.jpg
-res/Village/Dellna/Dellna2folder/x2y2.jpg
-res/Village/Dellna/Dellna2folder/x2y3.jpg
-res/Village/Dellna/Dellna2folder/x2y4.jpg
-res/Village/Dellna/Dellna2folder/x3y0.jpg
-res/Village/Dellna/Dellna2folder/x3y1.jpg
-res/Village/Dellna/Dellna2folder/x3y2.jpg
-res/Village/Dellna/Dellna2folder/x3y3.jpg
-res/Village/Dellna/Dellna2folder/x3y4.jpg
-res/Village/Dellna/Dellna2folder/x4y0.jpg
-res/Village/Dellna/Dellna2folder/x4y1.jpg
-res/Village/Dellna/Dellna2folder/x4y2.jpg
-res/Village/Dellna/Dellna2folder/x4y3.jpg
-res/Village/Dellna/Dellna2folder/x4y4.jpg
-res/Village/Dellna/Dellna2folder/x5y0.jpg
-res/Village/Dellna/Dellna2folder/x5y1.jpg
-res/Village/Dellna/Dellna2folder/x5y2.jpg
-res/Village/Dellna/Dellna2folder/x5y3.jpg
-res/Village/Dellna/Dellna2folder/x5y4.jpg
-res/Village/Dellna/Dellna2folder/x6y0.jpg
-res/Village/Dellna/Dellna2folder/x6y1.jpg
-res/Village/Dellna/Dellna2folder/x6y2.jpg
-res/Village/Dellna/Dellna2folder/x6y3.jpg
-res/Village/Dellna/Dellna2folder/x6y4.jpg
-res/Village/Dellna/Dellnafolder/x0y0.jpg
-res/Village/Dellna/Dellnafolder/x0y1.jpg
-res/Village/Dellna/Dellnafolder/x0y2.jpg
-res/Village/Dellna/Dellnafolder/x0y3.jpg
-res/Village/Dellna/Dellnafolder/x0y4.jpg
-res/Village/Dellna/Dellnafolder/x1y0.jpg
-res/Village/Dellna/Dellnafolder/x1y1.jpg
-res/Village/Dellna/Dellnafolder/x1y2.jpg
-res/Village/Dellna/Dellnafolder/x1y3.jpg
-res/Village/Dellna/Dellnafolder/x1y4.jpg
-res/Village/Dellna/Dellnafolder/x2y0.jpg
-res/Village/Dellna/Dellnafolder/x2y1.jpg
-res/Village/Dellna/Dellnafolder/x2y2.jpg
-res/Village/Dellna/Dellnafolder/x2y3.jpg
-res/Village/Dellna/Dellnafolder/x2y4.jpg
-res/Village/Dellna/Dellnafolder/x3y0.jpg
-res/Village/Dellna/Dellnafolder/x3y1.jpg
-res/Village/Dellna/Dellnafolder/x3y2.jpg
-res/Village/Dellna/Dellnafolder/x3y3.jpg
-res/Village/Dellna/Dellnafolder/x3y4.jpg
-res/Village/Dellna/Dellnafolder/x4y0.jpg
-res/Village/Dellna/Dellnafolder/x4y1.jpg
-res/Village/Dellna/Dellnafolder/x4y2.jpg
-res/Village/Dellna/Dellnafolder/x4y3.jpg
-res/Village/Dellna/Dellnafolder/x4y4.jpg
-res/Village/Dellna/Dellnafolder/x5y0.jpg
-res/Village/Dellna/Dellnafolder/x5y1.jpg
-res/Village/Dellna/Dellnafolder/x5y2.jpg
-res/Village/Dellna/Dellnafolder/x5y3.jpg
-res/Village/Dellna/Dellnafolder/x5y4.jpg
-res/Village/Dellna/Dellnafolder/x6y0.jpg
-res/Village/Dellna/Dellnafolder/x6y1.jpg
-res/Village/Dellna/Dellnafolder/x6y2.jpg
-res/Village/Dellna/Dellnafolder/x6y3.jpg
-res/Village/Dellna/Dellnafolder/x6y4.jpg
 res/Village/Dellna/top/0.png
 res/Village/Dellna/top/10.png
 res/Village/Dellna/top/11.png
@@ -3399,36 +3095,12 @@ res/Village/Dellna/villagers/Wilko/Wilko6.png
 res/Village/Dellna/villagers/Wilko/Wilko7.png
 res/Village/Dellna/villagers/Wilko/Wilko8.png
 res/Village/Dellna/villagers/Wilko/Wilko9.png
-res/Village/Dellna - Ana's Home/Dellna - Ana's Homefolder/x0y0.jpg
-res/Village/Dellna - Ana's Home/Dellna - Ana's Homefolder/x0y1.jpg
-res/Village/Dellna - Ana's Home/Dellna - Ana's Homefolder/x0y2.jpg
-res/Village/Dellna - Ana's Home/Dellna - Ana's Homefolder/x1y0.jpg
-res/Village/Dellna - Ana's Home/Dellna - Ana's Homefolder/x1y1.jpg
-res/Village/Dellna - Ana's Home/Dellna - Ana's Homefolder/x1y2.jpg
-res/Village/Dellna - Ana's Home/Dellna - Ana's Homefolder/x2y0.jpg
-res/Village/Dellna - Ana's Home/Dellna - Ana's Homefolder/x2y1.jpg
-res/Village/Dellna - Ana's Home/Dellna - Ana's Homefolder/x2y2.jpg
-res/Village/Dellna - Ana's Home/Dellna - Ana's Homefolder/x3y0.jpg
-res/Village/Dellna - Ana's Home/Dellna - Ana's Homefolder/x3y1.jpg
-res/Village/Dellna - Ana's Home/Dellna - Ana's Homefolder/x3y2.jpg
 res/Village/Dellna - Ana's Home/top/0.png
 res/Village/Dellna - Ana's Home/top/1.png
 res/Village/Dellna - Ana's Home/top/2.png
 res/Village/Dellna - Ana's Home/top/3.png
 res/Village/Dellna - Ana's Home/top/4.png
 res/Village/Dellna - Ana's Home/top/top.info
-res/Village/Dellna - Ana's Home Memory/Dellna - Ana's Home Memoryfolder/x0y0.jpg
-res/Village/Dellna - Ana's Home Memory/Dellna - Ana's Home Memoryfolder/x0y1.jpg
-res/Village/Dellna - Ana's Home Memory/Dellna - Ana's Home Memoryfolder/x0y2.jpg
-res/Village/Dellna - Ana's Home Memory/Dellna - Ana's Home Memoryfolder/x1y0.jpg
-res/Village/Dellna - Ana's Home Memory/Dellna - Ana's Home Memoryfolder/x1y1.jpg
-res/Village/Dellna - Ana's Home Memory/Dellna - Ana's Home Memoryfolder/x1y2.jpg
-res/Village/Dellna - Ana's Home Memory/Dellna - Ana's Home Memoryfolder/x2y0.jpg
-res/Village/Dellna - Ana's Home Memory/Dellna - Ana's Home Memoryfolder/x2y1.jpg
-res/Village/Dellna - Ana's Home Memory/Dellna - Ana's Home Memoryfolder/x2y2.jpg
-res/Village/Dellna - Ana's Home Memory/Dellna - Ana's Home Memoryfolder/x3y0.jpg
-res/Village/Dellna - Ana's Home Memory/Dellna - Ana's Home Memoryfolder/x3y1.jpg
-res/Village/Dellna - Ana's Home Memory/Dellna - Ana's Home Memoryfolder/x3y2.jpg
 res/Village/Dellna - Ana's Home Memory/animobj/chairs/chairs1.png
 res/Village/Dellna - Ana's Home Memory/top/0.png
 res/Village/Dellna - Ana's Home Memory/top/1.png
@@ -3436,61 +3108,13 @@ res/Village/Dellna - Ana's Home Memory/top/2.png
 res/Village/Dellna - Ana's Home Memory/top/3.png
 res/Village/Dellna - Ana's Home Memory/top/4.png
 res/Village/Dellna - Ana's Home Memory/top/top.info
-res/Village/Dellna - Elder House - Floor 1/Dellna - Elder House - Floor 1folder/x0y0.jpg
-res/Village/Dellna - Elder House - Floor 1/Dellna - Elder House - Floor 1folder/x0y1.jpg
-res/Village/Dellna - Elder House - Floor 1/Dellna - Elder House - Floor 1folder/x0y2.jpg
-res/Village/Dellna - Elder House - Floor 1/Dellna - Elder House - Floor 1folder/x1y0.jpg
-res/Village/Dellna - Elder House - Floor 1/Dellna - Elder House - Floor 1folder/x1y1.jpg
-res/Village/Dellna - Elder House - Floor 1/Dellna - Elder House - Floor 1folder/x1y2.jpg
-res/Village/Dellna - Elder House - Floor 1/Dellna - Elder House - Floor 1folder/x2y0.jpg
-res/Village/Dellna - Elder House - Floor 1/Dellna - Elder House - Floor 1folder/x2y1.jpg
-res/Village/Dellna - Elder House - Floor 1/Dellna - Elder House - Floor 1folder/x2y2.jpg
-res/Village/Dellna - Elder House - Floor 1/Dellna - Elder House - Floor 1folder/x3y0.jpg
-res/Village/Dellna - Elder House - Floor 1/Dellna - Elder House - Floor 1folder/x3y1.jpg
-res/Village/Dellna - Elder House - Floor 1/Dellna - Elder House - Floor 1folder/x3y2.jpg
 res/Village/Dellna - Elder House - Floor 1/top/0.png
 res/Village/Dellna - Elder House - Floor 1/top/1.png
 res/Village/Dellna - Elder House - Floor 1/top/top.info
-res/Village/Dellna - Elder House - Floor 2/Dellna - Elder House - Floor 2folder/x0y0.jpg
-res/Village/Dellna - Elder House - Floor 2/Dellna - Elder House - Floor 2folder/x0y1.jpg
-res/Village/Dellna - Elder House - Floor 2/Dellna - Elder House - Floor 2folder/x0y2.jpg
-res/Village/Dellna - Elder House - Floor 2/Dellna - Elder House - Floor 2folder/x1y0.jpg
-res/Village/Dellna - Elder House - Floor 2/Dellna - Elder House - Floor 2folder/x1y1.jpg
-res/Village/Dellna - Elder House - Floor 2/Dellna - Elder House - Floor 2folder/x1y2.jpg
-res/Village/Dellna - Elder House - Floor 2/Dellna - Elder House - Floor 2folder/x2y0.jpg
-res/Village/Dellna - Elder House - Floor 2/Dellna - Elder House - Floor 2folder/x2y1.jpg
-res/Village/Dellna - Elder House - Floor 2/Dellna - Elder House - Floor 2folder/x2y2.jpg
-res/Village/Dellna - Elder House - Floor 2/Dellna - Elder House - Floor 2folder/x3y0.jpg
-res/Village/Dellna - Elder House - Floor 2/Dellna - Elder House - Floor 2folder/x3y1.jpg
-res/Village/Dellna - Elder House - Floor 2/Dellna - Elder House - Floor 2folder/x3y2.jpg
 res/Village/Dellna - Elder House - Floor 2/top/0.png
 res/Village/Dellna - Elder House - Floor 2/top/top.info
-res/Village/Dellna - Elder House - Floor 3/Dellna - Elder House - Floor 3folder/x0y0.jpg
-res/Village/Dellna - Elder House - Floor 3/Dellna - Elder House - Floor 3folder/x0y1.jpg
-res/Village/Dellna - Elder House - Floor 3/Dellna - Elder House - Floor 3folder/x0y2.jpg
-res/Village/Dellna - Elder House - Floor 3/Dellna - Elder House - Floor 3folder/x1y0.jpg
-res/Village/Dellna - Elder House - Floor 3/Dellna - Elder House - Floor 3folder/x1y1.jpg
-res/Village/Dellna - Elder House - Floor 3/Dellna - Elder House - Floor 3folder/x1y2.jpg
-res/Village/Dellna - Elder House - Floor 3/Dellna - Elder House - Floor 3folder/x2y0.jpg
-res/Village/Dellna - Elder House - Floor 3/Dellna - Elder House - Floor 3folder/x2y1.jpg
-res/Village/Dellna - Elder House - Floor 3/Dellna - Elder House - Floor 3folder/x2y2.jpg
-res/Village/Dellna - Elder House - Floor 3/Dellna - Elder House - Floor 3folder/x3y0.jpg
-res/Village/Dellna - Elder House - Floor 3/Dellna - Elder House - Floor 3folder/x3y1.jpg
-res/Village/Dellna - Elder House - Floor 3/Dellna - Elder House - Floor 3folder/x3y2.jpg
 res/Village/Dellna - Elder House - Floor 3/top/0.png
 res/Village/Dellna - Elder House - Floor 3/top/top.info
-res/Village/Dellna - House/Dellna - Housefolder/x0y0.jpg
-res/Village/Dellna - House/Dellna - Housefolder/x0y1.jpg
-res/Village/Dellna - House/Dellna - Housefolder/x0y2.jpg
-res/Village/Dellna - House/Dellna - Housefolder/x1y0.jpg
-res/Village/Dellna - House/Dellna - Housefolder/x1y1.jpg
-res/Village/Dellna - House/Dellna - Housefolder/x1y2.jpg
-res/Village/Dellna - House/Dellna - Housefolder/x2y0.jpg
-res/Village/Dellna - House/Dellna - Housefolder/x2y1.jpg
-res/Village/Dellna - House/Dellna - Housefolder/x2y2.jpg
-res/Village/Dellna - House/Dellna - Housefolder/x3y0.jpg
-res/Village/Dellna - House/Dellna - Housefolder/x3y1.jpg
-res/Village/Dellna - House/Dellna - Housefolder/x3y2.jpg
 res/Village/Dellna - House/top/0.png
 res/Village/Dellna - House/top/1.png
 res/Village/Dellna - House/top/2.png
@@ -3550,45 +3174,9 @@ res/Village/Dellna - House/villagers/Smallie/Smallie7.png
 res/Village/Dellna - House/villagers/Smallie/Smallie8.png
 res/Village/Dellna - House/villagers/Smallie/Smallie9.png
 res/Village/Home of Celis/Home of Celis at Night - 1.png
-res/Village/Home of Celis/Home of Celis at Nightfolder/x0y0.jpg
-res/Village/Home of Celis/Home of Celis at Nightfolder/x0y1.jpg
-res/Village/Home of Celis/Home of Celis at Nightfolder/x0y2.jpg
-res/Village/Home of Celis/Home of Celis at Nightfolder/x1y0.jpg
-res/Village/Home of Celis/Home of Celis at Nightfolder/x1y1.jpg
-res/Village/Home of Celis/Home of Celis at Nightfolder/x1y2.jpg
-res/Village/Home of Celis/Home of Celis at Nightfolder/x2y0.jpg
-res/Village/Home of Celis/Home of Celis at Nightfolder/x2y1.jpg
-res/Village/Home of Celis/Home of Celis at Nightfolder/x2y2.jpg
-res/Village/Home of Celis/Home of Celis at Nightfolder/x3y0.jpg
-res/Village/Home of Celis/Home of Celis at Nightfolder/x3y1.jpg
-res/Village/Home of Celis/Home of Celis at Nightfolder/x3y2.jpg
-res/Village/Home of Celis/Home of Celisfolder/x0y0.jpg
-res/Village/Home of Celis/Home of Celisfolder/x0y1.jpg
-res/Village/Home of Celis/Home of Celisfolder/x0y2.jpg
-res/Village/Home of Celis/Home of Celisfolder/x1y0.jpg
-res/Village/Home of Celis/Home of Celisfolder/x1y1.jpg
-res/Village/Home of Celis/Home of Celisfolder/x1y2.jpg
-res/Village/Home of Celis/Home of Celisfolder/x2y0.jpg
-res/Village/Home of Celis/Home of Celisfolder/x2y1.jpg
-res/Village/Home of Celis/Home of Celisfolder/x2y2.jpg
-res/Village/Home of Celis/Home of Celisfolder/x3y0.jpg
-res/Village/Home of Celis/Home of Celisfolder/x3y1.jpg
-res/Village/Home of Celis/Home of Celisfolder/x3y2.jpg
 res/Village/Home of Celis/top/0.png
 res/Village/Home of Celis/top/1.png
 res/Village/Home of Celis/top/top.info
-res/Village/Home of Celis - Celis Home/Home of Celis - Celis Homefolder/x0y0.jpg
-res/Village/Home of Celis - Celis Home/Home of Celis - Celis Homefolder/x0y1.jpg
-res/Village/Home of Celis - Celis Home/Home of Celis - Celis Homefolder/x0y2.jpg
-res/Village/Home of Celis - Celis Home/Home of Celis - Celis Homefolder/x1y0.jpg
-res/Village/Home of Celis - Celis Home/Home of Celis - Celis Homefolder/x1y1.jpg
-res/Village/Home of Celis - Celis Home/Home of Celis - Celis Homefolder/x1y2.jpg
-res/Village/Home of Celis - Celis Home/Home of Celis - Celis Homefolder/x2y0.jpg
-res/Village/Home of Celis - Celis Home/Home of Celis - Celis Homefolder/x2y1.jpg
-res/Village/Home of Celis - Celis Home/Home of Celis - Celis Homefolder/x2y2.jpg
-res/Village/Home of Celis - Celis Home/Home of Celis - Celis Homefolder/x3y0.jpg
-res/Village/Home of Celis - Celis Home/Home of Celis - Celis Homefolder/x3y1.jpg
-res/Village/Home of Celis - Celis Home/Home of Celis - Celis Homefolder/x3y2.jpg
 res/Village/Home of Celis - Celis Home/top/0.png
 res/Village/Home of Celis - Celis Home/top/1.png
 res/Village/Home of Celis - Celis Home/top/2.png
@@ -3596,31 +3184,7 @@ res/Village/Home of Celis - Celis Home/top/3.png
 res/Village/Home of Celis - Celis Home/top/4.png
 res/Village/Home of Celis - Celis Home/top/5.png
 res/Village/Home of Celis - Celis Home/top/top.info
-res/Village/Home of Celis - Memory/Home of Celis - Memoryfolder/x0y0.jpg
-res/Village/Home of Celis - Memory/Home of Celis - Memoryfolder/x0y1.jpg
-res/Village/Home of Celis - Memory/Home of Celis - Memoryfolder/x0y2.jpg
-res/Village/Home of Celis - Memory/Home of Celis - Memoryfolder/x1y0.jpg
-res/Village/Home of Celis - Memory/Home of Celis - Memoryfolder/x1y1.jpg
-res/Village/Home of Celis - Memory/Home of Celis - Memoryfolder/x1y2.jpg
-res/Village/Home of Celis - Memory/Home of Celis - Memoryfolder/x2y0.jpg
-res/Village/Home of Celis - Memory/Home of Celis - Memoryfolder/x2y1.jpg
-res/Village/Home of Celis - Memory/Home of Celis - Memoryfolder/x2y2.jpg
-res/Village/Home of Celis - Memory/Home of Celis - Memoryfolder/x3y0.jpg
-res/Village/Home of Celis - Memory/Home of Celis - Memoryfolder/x3y1.jpg
-res/Village/Home of Celis - Memory/Home of Celis - Memoryfolder/x3y2.jpg
 res/Village/Home of Celis - Memory/top/top.info
-res/Village/Home of the Gods/Home of the Godsfolder/x0y0.png
-res/Village/Home of the Gods/Home of the Godsfolder/x0y1.png
-res/Village/Home of the Gods/Home of the Godsfolder/x0y2.png
-res/Village/Home of the Gods/Home of the Godsfolder/x0y3.png
-res/Village/Home of the Gods/Home of the Godsfolder/x1y0.png
-res/Village/Home of the Gods/Home of the Godsfolder/x1y1.png
-res/Village/Home of the Gods/Home of the Godsfolder/x1y2.png
-res/Village/Home of the Gods/Home of the Godsfolder/x1y3.png
-res/Village/Home of the Gods/Home of the Godsfolder/x2y0.png
-res/Village/Home of the Gods/Home of the Godsfolder/x2y1.png
-res/Village/Home of the Gods/Home of the Godsfolder/x2y2.png
-res/Village/Home of the Gods/Home of the Godsfolder/x2y3.png
 res/Village/Home of the Gods/top/1.png
 res/Village/Home of the Gods/top/pillar1.png
 res/Village/Home of the Gods/top/pillar10.png
@@ -3648,88 +3212,11 @@ res/Village/Home of the Gods/villagers/Scorpius/Scorpius1.png
 res/Village/Home of the Gods/villagers/Taurus/Taurus1.png
 res/Village/Home of the Gods/villagers/Virgo/Virgo1.png
 res/Village/Kin's Place/Kin's Place.jpg
-res/Village/Kin's Place/Kin's Placefolder/x0y0.jpg
-res/Village/Kin's Place/Kin's Placefolder/x0y1.jpg
-res/Village/Kin's Place/Kin's Placefolder/x0y2.jpg
-res/Village/Kin's Place/Kin's Placefolder/x1y0.jpg
-res/Village/Kin's Place/Kin's Placefolder/x1y1.jpg
-res/Village/Kin's Place/Kin's Placefolder/x1y2.jpg
-res/Village/Kin's Place/Kin's Placefolder/x2y0.jpg
-res/Village/Kin's Place/Kin's Placefolder/x2y1.jpg
-res/Village/Kin's Place/Kin's Placefolder/x2y2.jpg
-res/Village/Kin's Place/Kin's Placefolder/x3y0.jpg
-res/Village/Kin's Place/Kin's Placefolder/x3y1.jpg
-res/Village/Kin's Place/Kin's Placefolder/x3y2.jpg
 res/Village/Kin's Place/top/top.info
 res/Village/No Place/No Place.jpg
 res/Village/No Place/No Place.png
-res/Village/No Place/No Placefolder/x0y0.png
 res/Village/No Place/top/top.info
 res/Village/Parasne/Parasne.jpg
-res/Village/Parasne/Parasnefolder/x0y0.jpg
-res/Village/Parasne/Parasnefolder/x0y1.jpg
-res/Village/Parasne/Parasnefolder/x0y2.jpg
-res/Village/Parasne/Parasnefolder/x0y3.jpg
-res/Village/Parasne/Parasnefolder/x0y4.jpg
-res/Village/Parasne/Parasnefolder/x0y5.jpg
-res/Village/Parasne/Parasnefolder/x0y6.jpg
-res/Village/Parasne/Parasnefolder/x0y7.jpg
-res/Village/Parasne/Parasnefolder/x1y0.jpg
-res/Village/Parasne/Parasnefolder/x1y1.jpg
-res/Village/Parasne/Parasnefolder/x1y2.jpg
-res/Village/Parasne/Parasnefolder/x1y3.jpg
-res/Village/Parasne/Parasnefolder/x1y4.jpg
-res/Village/Parasne/Parasnefolder/x1y5.jpg
-res/Village/Parasne/Parasnefolder/x1y6.jpg
-res/Village/Parasne/Parasnefolder/x1y7.jpg
-res/Village/Parasne/Parasnefolder/x2y0.jpg
-res/Village/Parasne/Parasnefolder/x2y1.jpg
-res/Village/Parasne/Parasnefolder/x2y2.jpg
-res/Village/Parasne/Parasnefolder/x2y3.jpg
-res/Village/Parasne/Parasnefolder/x2y4.jpg
-res/Village/Parasne/Parasnefolder/x2y5.jpg
-res/Village/Parasne/Parasnefolder/x2y6.jpg
-res/Village/Parasne/Parasnefolder/x2y7.jpg
-res/Village/Parasne/Parasnefolder/x3y0.jpg
-res/Village/Parasne/Parasnefolder/x3y1.jpg
-res/Village/Parasne/Parasnefolder/x3y2.jpg
-res/Village/Parasne/Parasnefolder/x3y3.jpg
-res/Village/Parasne/Parasnefolder/x3y4.jpg
-res/Village/Parasne/Parasnefolder/x3y5.jpg
-res/Village/Parasne/Parasnefolder/x3y6.jpg
-res/Village/Parasne/Parasnefolder/x3y7.jpg
-res/Village/Parasne/Parasnefolder/x4y0.jpg
-res/Village/Parasne/Parasnefolder/x4y1.jpg
-res/Village/Parasne/Parasnefolder/x4y2.jpg
-res/Village/Parasne/Parasnefolder/x4y3.jpg
-res/Village/Parasne/Parasnefolder/x4y4.jpg
-res/Village/Parasne/Parasnefolder/x4y5.jpg
-res/Village/Parasne/Parasnefolder/x4y6.jpg
-res/Village/Parasne/Parasnefolder/x4y7.jpg
-res/Village/Parasne/Parasnefolder/x5y0.jpg
-res/Village/Parasne/Parasnefolder/x5y1.jpg
-res/Village/Parasne/Parasnefolder/x5y2.jpg
-res/Village/Parasne/Parasnefolder/x5y3.jpg
-res/Village/Parasne/Parasnefolder/x5y4.jpg
-res/Village/Parasne/Parasnefolder/x5y5.jpg
-res/Village/Parasne/Parasnefolder/x5y6.jpg
-res/Village/Parasne/Parasnefolder/x5y7.jpg
-res/Village/Parasne/Parasnefolder/x6y0.jpg
-res/Village/Parasne/Parasnefolder/x6y1.jpg
-res/Village/Parasne/Parasnefolder/x6y2.jpg
-res/Village/Parasne/Parasnefolder/x6y3.jpg
-res/Village/Parasne/Parasnefolder/x6y4.jpg
-res/Village/Parasne/Parasnefolder/x6y5.jpg
-res/Village/Parasne/Parasnefolder/x6y6.jpg
-res/Village/Parasne/Parasnefolder/x6y7.jpg
-res/Village/Parasne/Parasnefolder/x7y0.jpg
-res/Village/Parasne/Parasnefolder/x7y1.jpg
-res/Village/Parasne/Parasnefolder/x7y2.jpg
-res/Village/Parasne/Parasnefolder/x7y3.jpg
-res/Village/Parasne/Parasnefolder/x7y4.jpg
-res/Village/Parasne/Parasnefolder/x7y5.jpg
-res/Village/Parasne/Parasnefolder/x7y6.jpg
-res/Village/Parasne/Parasnefolder/x7y7.jpg
 res/Village/Parasne/top/0.png
 res/Village/Parasne/top/1.png
 res/Village/Parasne/top/18.png
@@ -4195,18 +3682,6 @@ res/Village/Parasne/villagers/Woldou/Woldou7.png
 res/Village/Parasne/villagers/Woldou/Woldou8.png
 res/Village/Parasne/villagers/Woldou/Woldou9.png
 res/Village/Parasne - Tavern/Parasne - Tavern.jpg
-res/Village/Parasne - Tavern/Parasne - Tavernfolder/x0y0.jpg
-res/Village/Parasne - Tavern/Parasne - Tavernfolder/x0y1.jpg
-res/Village/Parasne - Tavern/Parasne - Tavernfolder/x0y2.jpg
-res/Village/Parasne - Tavern/Parasne - Tavernfolder/x1y0.jpg
-res/Village/Parasne - Tavern/Parasne - Tavernfolder/x1y1.jpg
-res/Village/Parasne - Tavern/Parasne - Tavernfolder/x1y2.jpg
-res/Village/Parasne - Tavern/Parasne - Tavernfolder/x2y0.jpg
-res/Village/Parasne - Tavern/Parasne - Tavernfolder/x2y1.jpg
-res/Village/Parasne - Tavern/Parasne - Tavernfolder/x2y2.jpg
-res/Village/Parasne - Tavern/Parasne - Tavernfolder/x3y0.jpg
-res/Village/Parasne - Tavern/Parasne - Tavernfolder/x3y1.jpg
-res/Village/Parasne - Tavern/Parasne - Tavernfolder/x3y2.jpg
 res/Village/Parasne - Tavern/top/0.png
 res/Village/Parasne - Tavern/top/1.png
 res/Village/Parasne - Tavern/top/2.png
@@ -4263,70 +3738,6 @@ res/Village/Parasne - Tavern/villagers/Forah/Forah7.png
 res/Village/Parasne - Tavern/villagers/Forah/Forah8.png
 res/Village/Parasne - Tavern/villagers/Forah/Forah9.png
 res/Village/Parasne1/Parasne1.jpg
-res/Village/Parasne1/Parasne1folder/x0y0.jpg
-res/Village/Parasne1/Parasne1folder/x0y1.jpg
-res/Village/Parasne1/Parasne1folder/x0y2.jpg
-res/Village/Parasne1/Parasne1folder/x0y3.jpg
-res/Village/Parasne1/Parasne1folder/x0y4.jpg
-res/Village/Parasne1/Parasne1folder/x0y5.jpg
-res/Village/Parasne1/Parasne1folder/x0y6.jpg
-res/Village/Parasne1/Parasne1folder/x0y7.jpg
-res/Village/Parasne1/Parasne1folder/x1y0.jpg
-res/Village/Parasne1/Parasne1folder/x1y1.jpg
-res/Village/Parasne1/Parasne1folder/x1y2.jpg
-res/Village/Parasne1/Parasne1folder/x1y3.jpg
-res/Village/Parasne1/Parasne1folder/x1y4.jpg
-res/Village/Parasne1/Parasne1folder/x1y5.jpg
-res/Village/Parasne1/Parasne1folder/x1y6.jpg
-res/Village/Parasne1/Parasne1folder/x1y7.jpg
-res/Village/Parasne1/Parasne1folder/x2y0.jpg
-res/Village/Parasne1/Parasne1folder/x2y1.jpg
-res/Village/Parasne1/Parasne1folder/x2y2.jpg
-res/Village/Parasne1/Parasne1folder/x2y3.jpg
-res/Village/Parasne1/Parasne1folder/x2y4.jpg
-res/Village/Parasne1/Parasne1folder/x2y5.jpg
-res/Village/Parasne1/Parasne1folder/x2y6.jpg
-res/Village/Parasne1/Parasne1folder/x2y7.jpg
-res/Village/Parasne1/Parasne1folder/x3y0.jpg
-res/Village/Parasne1/Parasne1folder/x3y1.jpg
-res/Village/Parasne1/Parasne1folder/x3y2.jpg
-res/Village/Parasne1/Parasne1folder/x3y3.jpg
-res/Village/Parasne1/Parasne1folder/x3y4.jpg
-res/Village/Parasne1/Parasne1folder/x3y5.jpg
-res/Village/Parasne1/Parasne1folder/x3y6.jpg
-res/Village/Parasne1/Parasne1folder/x3y7.jpg
-res/Village/Parasne1/Parasne1folder/x4y0.jpg
-res/Village/Parasne1/Parasne1folder/x4y1.jpg
-res/Village/Parasne1/Parasne1folder/x4y2.jpg
-res/Village/Parasne1/Parasne1folder/x4y3.jpg
-res/Village/Parasne1/Parasne1folder/x4y4.jpg
-res/Village/Parasne1/Parasne1folder/x4y5.jpg
-res/Village/Parasne1/Parasne1folder/x4y6.jpg
-res/Village/Parasne1/Parasne1folder/x4y7.jpg
-res/Village/Parasne1/Parasne1folder/x5y0.jpg
-res/Village/Parasne1/Parasne1folder/x5y1.jpg
-res/Village/Parasne1/Parasne1folder/x5y2.jpg
-res/Village/Parasne1/Parasne1folder/x5y3.jpg
-res/Village/Parasne1/Parasne1folder/x5y4.jpg
-res/Village/Parasne1/Parasne1folder/x5y5.jpg
-res/Village/Parasne1/Parasne1folder/x5y6.jpg
-res/Village/Parasne1/Parasne1folder/x5y7.jpg
-res/Village/Parasne1/Parasne1folder/x6y0.jpg
-res/Village/Parasne1/Parasne1folder/x6y1.jpg
-res/Village/Parasne1/Parasne1folder/x6y2.jpg
-res/Village/Parasne1/Parasne1folder/x6y3.jpg
-res/Village/Parasne1/Parasne1folder/x6y4.jpg
-res/Village/Parasne1/Parasne1folder/x6y5.jpg
-res/Village/Parasne1/Parasne1folder/x6y6.jpg
-res/Village/Parasne1/Parasne1folder/x6y7.jpg
-res/Village/Parasne1/Parasne1folder/x7y0.jpg
-res/Village/Parasne1/Parasne1folder/x7y1.jpg
-res/Village/Parasne1/Parasne1folder/x7y2.jpg
-res/Village/Parasne1/Parasne1folder/x7y3.jpg
-res/Village/Parasne1/Parasne1folder/x7y4.jpg
-res/Village/Parasne1/Parasne1folder/x7y5.jpg
-res/Village/Parasne1/Parasne1folder/x7y6.jpg
-res/Village/Parasne1/Parasne1folder/x7y7.jpg
 res/Village/Parasne1/top/0.png
 res/Village/Parasne1/top/1.png
 res/Village/Parasne1/top/18.png
@@ -4381,18 +3792,6 @@ res/Village/Parasne1/top/8.png
 res/Village/Parasne1/top/9.png
 res/Village/Parasne1/top/top.info
 res/Village/Pass to Zazo/Pass to Zazo.jpg
-res/Village/Pass to Zazo/Pass to Zazofolder/x0y0.jpg
-res/Village/Pass to Zazo/Pass to Zazofolder/x0y1.jpg
-res/Village/Pass to Zazo/Pass to Zazofolder/x0y2.jpg
-res/Village/Pass to Zazo/Pass to Zazofolder/x1y0.jpg
-res/Village/Pass to Zazo/Pass to Zazofolder/x1y1.jpg
-res/Village/Pass to Zazo/Pass to Zazofolder/x1y2.jpg
-res/Village/Pass to Zazo/Pass to Zazofolder/x2y0.jpg
-res/Village/Pass to Zazo/Pass to Zazofolder/x2y1.jpg
-res/Village/Pass to Zazo/Pass to Zazofolder/x2y2.jpg
-res/Village/Pass to Zazo/Pass to Zazofolder/x3y0.jpg
-res/Village/Pass to Zazo/Pass to Zazofolder/x3y1.jpg
-res/Village/Pass to Zazo/Pass to Zazofolder/x3y2.jpg
 res/Village/Pass to Zazo/top/0.png
 res/Village/Pass to Zazo/top/1.png
 res/Village/Pass to Zazo/top/2.png
@@ -4433,78 +3832,6 @@ res/Village/Pass to Zazo/villagers/Passguard/Passguard7.png
 res/Village/Pass to Zazo/villagers/Passguard/Passguard8.png
 res/Village/Pass to Zazo/villagers/Passguard/Passguard9.png
 res/Village/Pensara - The North District/Pensara - The North District.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x0y0.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x0y1.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x0y2.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x0y3.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x0y4.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x0y5.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x10y0.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x10y1.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x10y2.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x10y3.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x10y4.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x10y5.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x11y0.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x11y1.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x11y2.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x11y3.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x11y4.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x11y5.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x1y0.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x1y1.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x1y2.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x1y3.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x1y4.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x1y5.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x2y0.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x2y1.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x2y2.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x2y3.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x2y4.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x2y5.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x3y0.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x3y1.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x3y2.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x3y3.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x3y4.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x3y5.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x4y0.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x4y1.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x4y2.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x4y3.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x4y4.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x4y5.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x5y0.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x5y1.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x5y2.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x5y3.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x5y4.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x5y5.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x6y0.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x6y1.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x6y2.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x6y3.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x6y4.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x6y5.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x7y0.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x7y1.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x7y2.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x7y3.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x7y4.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x7y5.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x8y0.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x8y1.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x8y2.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x8y3.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x8y4.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x8y5.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x9y0.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x9y1.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x9y2.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x9y3.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x9y4.jpg
-res/Village/Pensara - The North District/Pensara - The North Districtfolder/x9y5.jpg
 res/Village/Pensara - The North District/top/0.png
 res/Village/Pensara - The North District/top/1.png
 res/Village/Pensara - The North District/top/10.png
@@ -4615,18 +3942,6 @@ res/Village/Pensara - The North District/villagers/Uli/Uli7.png
 res/Village/Pensara - The North District/villagers/Uli/Uli8.png
 res/Village/Pensara - The North District/villagers/Uli/Uli9.png
 res/Village/Pensara - The North District - Civil House/Pensara - The North District - Civil House.jpg
-res/Village/Pensara - The North District - Civil House/Pensara - The North District - Civil Housefolder/x0y0.jpg
-res/Village/Pensara - The North District - Civil House/Pensara - The North District - Civil Housefolder/x0y1.jpg
-res/Village/Pensara - The North District - Civil House/Pensara - The North District - Civil Housefolder/x0y2.jpg
-res/Village/Pensara - The North District - Civil House/Pensara - The North District - Civil Housefolder/x1y0.jpg
-res/Village/Pensara - The North District - Civil House/Pensara - The North District - Civil Housefolder/x1y1.jpg
-res/Village/Pensara - The North District - Civil House/Pensara - The North District - Civil Housefolder/x1y2.jpg
-res/Village/Pensara - The North District - Civil House/Pensara - The North District - Civil Housefolder/x2y0.jpg
-res/Village/Pensara - The North District - Civil House/Pensara - The North District - Civil Housefolder/x2y1.jpg
-res/Village/Pensara - The North District - Civil House/Pensara - The North District - Civil Housefolder/x2y2.jpg
-res/Village/Pensara - The North District - Civil House/Pensara - The North District - Civil Housefolder/x3y0.jpg
-res/Village/Pensara - The North District - Civil House/Pensara - The North District - Civil Housefolder/x3y1.jpg
-res/Village/Pensara - The North District - Civil House/Pensara - The North District - Civil Housefolder/x3y2.jpg
 res/Village/Pensara - The North District - Civil House/top/0.png
 res/Village/Pensara - The North District - Civil House/top/1.png
 res/Village/Pensara - The North District - Civil House/top/10.png
@@ -4640,18 +3955,6 @@ res/Village/Pensara - The North District - Civil House/top/8.png
 res/Village/Pensara - The North District - Civil House/top/9.png
 res/Village/Pensara - The North District - Civil House/top/top.info
 res/Village/Pensara - The North District - Farmer House/Pensara - The North District - Farmer House.jpg
-res/Village/Pensara - The North District - Farmer House/Pensara - The North District - Farmer Housefolder/x0y0.jpg
-res/Village/Pensara - The North District - Farmer House/Pensara - The North District - Farmer Housefolder/x0y1.jpg
-res/Village/Pensara - The North District - Farmer House/Pensara - The North District - Farmer Housefolder/x0y2.jpg
-res/Village/Pensara - The North District - Farmer House/Pensara - The North District - Farmer Housefolder/x1y0.jpg
-res/Village/Pensara - The North District - Farmer House/Pensara - The North District - Farmer Housefolder/x1y1.jpg
-res/Village/Pensara - The North District - Farmer House/Pensara - The North District - Farmer Housefolder/x1y2.jpg
-res/Village/Pensara - The North District - Farmer House/Pensara - The North District - Farmer Housefolder/x2y0.jpg
-res/Village/Pensara - The North District - Farmer House/Pensara - The North District - Farmer Housefolder/x2y1.jpg
-res/Village/Pensara - The North District - Farmer House/Pensara - The North District - Farmer Housefolder/x2y2.jpg
-res/Village/Pensara - The North District - Farmer House/Pensara - The North District - Farmer Housefolder/x3y0.jpg
-res/Village/Pensara - The North District - Farmer House/Pensara - The North District - Farmer Housefolder/x3y1.jpg
-res/Village/Pensara - The North District - Farmer House/Pensara - The North District - Farmer Housefolder/x3y2.jpg
 res/Village/Pensara - The North District - Farmer House/top/0.png
 res/Village/Pensara - The North District - Farmer House/top/1.png
 res/Village/Pensara - The North District - Farmer House/top/2.png
@@ -4689,18 +3992,6 @@ res/Village/Pensara - The North District - Farmer House/villagers/Ella/Ella7.png
 res/Village/Pensara - The North District - Farmer House/villagers/Ella/Ella8.png
 res/Village/Pensara - The North District - Farmer House/villagers/Ella/Ella9.png
 res/Village/Pensara - The North District - Library/Pensara - The North District - Library.jpg
-res/Village/Pensara - The North District - Library/Pensara - The North District - Libraryfolder/x0y0.jpg
-res/Village/Pensara - The North District - Library/Pensara - The North District - Libraryfolder/x0y1.jpg
-res/Village/Pensara - The North District - Library/Pensara - The North District - Libraryfolder/x0y2.jpg
-res/Village/Pensara - The North District - Library/Pensara - The North District - Libraryfolder/x1y0.jpg
-res/Village/Pensara - The North District - Library/Pensara - The North District - Libraryfolder/x1y1.jpg
-res/Village/Pensara - The North District - Library/Pensara - The North District - Libraryfolder/x1y2.jpg
-res/Village/Pensara - The North District - Library/Pensara - The North District - Libraryfolder/x2y0.jpg
-res/Village/Pensara - The North District - Library/Pensara - The North District - Libraryfolder/x2y1.jpg
-res/Village/Pensara - The North District - Library/Pensara - The North District - Libraryfolder/x2y2.jpg
-res/Village/Pensara - The North District - Library/Pensara - The North District - Libraryfolder/x3y0.jpg
-res/Village/Pensara - The North District - Library/Pensara - The North District - Libraryfolder/x3y1.jpg
-res/Village/Pensara - The North District - Library/Pensara - The North District - Libraryfolder/x3y2.jpg
 res/Village/Pensara - The North District - Library/top/0.png
 res/Village/Pensara - The North District - Library/top/1.png
 res/Village/Pensara - The North District - Library/top/2.png
@@ -4759,61 +4050,6 @@ res/Village/Pensara - The North District - Library/villagers/Philiph/Philiph9.pn
 res/Village/Pensara - The School District/Pensara - The School District0.jpg
 res/Village/Pensara - The School District/Pensara - The School District1.jpg
 res/Village/Pensara - The School District/sasPensara - The School District.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x0y0.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x0y1.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x0y10.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x0y2.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x0y3.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x0y4.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x0y5.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x0y6.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x0y7.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x0y8.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x0y9.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x1y0.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x1y1.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x1y10.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x1y2.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x1y3.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x1y4.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x1y5.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x1y6.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x1y7.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x1y8.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x1y9.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x2y0.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x2y1.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x2y10.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x2y2.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x2y3.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x2y4.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x2y5.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x2y6.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x2y7.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x2y8.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x2y9.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x3y0.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x3y1.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x3y10.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x3y2.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x3y3.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x3y4.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x3y5.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x3y6.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x3y7.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x3y8.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x3y9.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x4y0.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x4y1.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x4y10.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x4y2.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x4y3.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x4y4.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x4y5.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x4y6.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x4y7.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x4y8.jpg
-res/Village/Pensara - The School District/Pensara - The School Districtfolder/x4y9.jpg
 res/Village/Pensara - The School District/top/0.png
 res/Village/Pensara - The School District/top/1.png
 res/Village/Pensara - The School District/top/10.png
@@ -4936,34 +4172,10 @@ res/Village/Pensara - The School District/villagers/Valie/Valie7.png
 res/Village/Pensara - The School District/villagers/Valie/Valie8.png
 res/Village/Pensara - The School District/villagers/Valie/Valie9.png
 res/Village/Pensara - The School District - The Clock Tower - Floor 1/Pensara - The School District - The Clock Tower - Floor 1.jpg
-res/Village/Pensara - The School District - The Clock Tower - Floor 1/Pensara - The School District - The Clock Tower - Floor 1folder/x0y0.jpg
-res/Village/Pensara - The School District - The Clock Tower - Floor 1/Pensara - The School District - The Clock Tower - Floor 1folder/x0y1.jpg
-res/Village/Pensara - The School District - The Clock Tower - Floor 1/Pensara - The School District - The Clock Tower - Floor 1folder/x0y2.jpg
-res/Village/Pensara - The School District - The Clock Tower - Floor 1/Pensara - The School District - The Clock Tower - Floor 1folder/x1y0.jpg
-res/Village/Pensara - The School District - The Clock Tower - Floor 1/Pensara - The School District - The Clock Tower - Floor 1folder/x1y1.jpg
-res/Village/Pensara - The School District - The Clock Tower - Floor 1/Pensara - The School District - The Clock Tower - Floor 1folder/x1y2.jpg
-res/Village/Pensara - The School District - The Clock Tower - Floor 1/Pensara - The School District - The Clock Tower - Floor 1folder/x2y0.jpg
-res/Village/Pensara - The School District - The Clock Tower - Floor 1/Pensara - The School District - The Clock Tower - Floor 1folder/x2y1.jpg
-res/Village/Pensara - The School District - The Clock Tower - Floor 1/Pensara - The School District - The Clock Tower - Floor 1folder/x2y2.jpg
-res/Village/Pensara - The School District - The Clock Tower - Floor 1/Pensara - The School District - The Clock Tower - Floor 1folder/x3y0.jpg
-res/Village/Pensara - The School District - The Clock Tower - Floor 1/Pensara - The School District - The Clock Tower - Floor 1folder/x3y1.jpg
-res/Village/Pensara - The School District - The Clock Tower - Floor 1/Pensara - The School District - The Clock Tower - Floor 1folder/x3y2.jpg
 res/Village/Pensara - The School District - The Clock Tower - Floor 1/top/0.png
 res/Village/Pensara - The School District - The Clock Tower - Floor 1/top/1.png
 res/Village/Pensara - The School District - The Clock Tower - Floor 1/top/top.info
 res/Village/Pensara - The School District - The Clock Tower - Floor 2/Pensara - The School District - The Clock Tower - Floor 2.jpg
-res/Village/Pensara - The School District - The Clock Tower - Floor 2/Pensara - The School District - The Clock Tower - Floor 2folder/x0y0.jpg
-res/Village/Pensara - The School District - The Clock Tower - Floor 2/Pensara - The School District - The Clock Tower - Floor 2folder/x0y1.jpg
-res/Village/Pensara - The School District - The Clock Tower - Floor 2/Pensara - The School District - The Clock Tower - Floor 2folder/x0y2.jpg
-res/Village/Pensara - The School District - The Clock Tower - Floor 2/Pensara - The School District - The Clock Tower - Floor 2folder/x1y0.jpg
-res/Village/Pensara - The School District - The Clock Tower - Floor 2/Pensara - The School District - The Clock Tower - Floor 2folder/x1y1.jpg
-res/Village/Pensara - The School District - The Clock Tower - Floor 2/Pensara - The School District - The Clock Tower - Floor 2folder/x1y2.jpg
-res/Village/Pensara - The School District - The Clock Tower - Floor 2/Pensara - The School District - The Clock Tower - Floor 2folder/x2y0.jpg
-res/Village/Pensara - The School District - The Clock Tower - Floor 2/Pensara - The School District - The Clock Tower - Floor 2folder/x2y1.jpg
-res/Village/Pensara - The School District - The Clock Tower - Floor 2/Pensara - The School District - The Clock Tower - Floor 2folder/x2y2.jpg
-res/Village/Pensara - The School District - The Clock Tower - Floor 2/Pensara - The School District - The Clock Tower - Floor 2folder/x3y0.jpg
-res/Village/Pensara - The School District - The Clock Tower - Floor 2/Pensara - The School District - The Clock Tower - Floor 2folder/x3y1.jpg
-res/Village/Pensara - The School District - The Clock Tower - Floor 2/Pensara - The School District - The Clock Tower - Floor 2folder/x3y2.jpg
 res/Village/Pensara - The School District - The Clock Tower - Floor 2/top/0.png
 res/Village/Pensara - The School District - The Clock Tower - Floor 2/top/top.info
 res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod1.png
@@ -4983,18 +4195,6 @@ res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/
 res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod8.png
 res/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod/Howorod9.png
 res/Village/Pensara - The School District - The School/Pensara - The School District - The School.jpg
-res/Village/Pensara - The School District - The School/Pensara - The School District - The Schoolfolder/x0y0.jpg
-res/Village/Pensara - The School District - The School/Pensara - The School District - The Schoolfolder/x0y1.jpg
-res/Village/Pensara - The School District - The School/Pensara - The School District - The Schoolfolder/x0y2.jpg
-res/Village/Pensara - The School District - The School/Pensara - The School District - The Schoolfolder/x1y0.jpg
-res/Village/Pensara - The School District - The School/Pensara - The School District - The Schoolfolder/x1y1.jpg
-res/Village/Pensara - The School District - The School/Pensara - The School District - The Schoolfolder/x1y2.jpg
-res/Village/Pensara - The School District - The School/Pensara - The School District - The Schoolfolder/x2y0.jpg
-res/Village/Pensara - The School District - The School/Pensara - The School District - The Schoolfolder/x2y1.jpg
-res/Village/Pensara - The School District - The School/Pensara - The School District - The Schoolfolder/x2y2.jpg
-res/Village/Pensara - The School District - The School/Pensara - The School District - The Schoolfolder/x3y0.jpg
-res/Village/Pensara - The School District - The School/Pensara - The School District - The Schoolfolder/x3y1.jpg
-res/Village/Pensara - The School District - The School/Pensara - The School District - The Schoolfolder/x3y2.jpg
 res/Village/Pensara - The School District - The School/top/0.png
 res/Village/Pensara - The School District - The School/top/1.png
 res/Village/Pensara - The School District - The School/top/10.png
@@ -5030,78 +4230,6 @@ res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/
 res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin8.png
 res/Village/Pensara - The School District - The School/villagers/Teacher Eufrin/Teacher Eufrin9.png
 res/Village/Pensara - The Trade District/Pensara - The Trade District.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x0y0.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x0y1.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x0y2.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x0y3.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x0y4.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x0y5.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x10y0.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x10y1.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x10y2.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x10y3.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x10y4.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x10y5.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x11y0.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x11y1.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x11y2.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x11y3.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x11y4.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x11y5.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x1y0.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x1y1.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x1y2.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x1y3.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x1y4.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x1y5.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x2y0.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x2y1.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x2y2.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x2y3.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x2y4.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x2y5.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x3y0.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x3y1.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x3y2.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x3y3.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x3y4.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x3y5.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x4y0.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x4y1.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x4y2.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x4y3.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x4y4.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x4y5.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x5y0.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x5y1.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x5y2.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x5y3.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x5y4.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x5y5.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x6y0.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x6y1.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x6y2.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x6y3.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x6y4.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x6y5.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x7y0.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x7y1.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x7y2.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x7y3.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x7y4.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x7y5.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x8y0.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x8y1.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x8y2.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x8y3.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x8y4.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x8y5.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x9y0.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x9y1.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x9y2.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x9y3.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x9y4.jpg
-res/Village/Pensara - The Trade District/Pensara - The Trade Districtfolder/x9y5.jpg
 res/Village/Pensara - The Trade District/top/0.png
 res/Village/Pensara - The Trade District/top/1.png
 res/Village/Pensara - The Trade District/top/10.png
@@ -5429,18 +4557,6 @@ res/Village/Pensara - The Trade District/villagers/Ylwaa/Ylwaa7.png
 res/Village/Pensara - The Trade District/villagers/Ylwaa/Ylwaa8.png
 res/Village/Pensara - The Trade District/villagers/Ylwaa/Ylwaa9.png
 res/Village/Pensara - The Trade District - House 1 - Floor 1/Pensara - The Trade District - House 1 - Floor 1.jpg
-res/Village/Pensara - The Trade District - House 1 - Floor 1/Pensara - The Trade District - House 1 - Floor 1folder/x0y0.jpg
-res/Village/Pensara - The Trade District - House 1 - Floor 1/Pensara - The Trade District - House 1 - Floor 1folder/x0y1.jpg
-res/Village/Pensara - The Trade District - House 1 - Floor 1/Pensara - The Trade District - House 1 - Floor 1folder/x0y2.jpg
-res/Village/Pensara - The Trade District - House 1 - Floor 1/Pensara - The Trade District - House 1 - Floor 1folder/x1y0.jpg
-res/Village/Pensara - The Trade District - House 1 - Floor 1/Pensara - The Trade District - House 1 - Floor 1folder/x1y1.jpg
-res/Village/Pensara - The Trade District - House 1 - Floor 1/Pensara - The Trade District - House 1 - Floor 1folder/x1y2.jpg
-res/Village/Pensara - The Trade District - House 1 - Floor 1/Pensara - The Trade District - House 1 - Floor 1folder/x2y0.jpg
-res/Village/Pensara - The Trade District - House 1 - Floor 1/Pensara - The Trade District - House 1 - Floor 1folder/x2y1.jpg
-res/Village/Pensara - The Trade District - House 1 - Floor 1/Pensara - The Trade District - House 1 - Floor 1folder/x2y2.jpg
-res/Village/Pensara - The Trade District - House 1 - Floor 1/Pensara - The Trade District - House 1 - Floor 1folder/x3y0.jpg
-res/Village/Pensara - The Trade District - House 1 - Floor 1/Pensara - The Trade District - House 1 - Floor 1folder/x3y1.jpg
-res/Village/Pensara - The Trade District - House 1 - Floor 1/Pensara - The Trade District - House 1 - Floor 1folder/x3y2.jpg
 res/Village/Pensara - The Trade District - House 1 - Floor 1/top/0.png
 res/Village/Pensara - The Trade District - House 1 - Floor 1/top/1.png
 res/Village/Pensara - The Trade District - House 1 - Floor 1/top/2.png
@@ -5479,34 +4595,10 @@ res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Ylwa/Ylwa
 res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Ylwa/Ylwa8.png
 res/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Ylwa/Ylwa9.png
 res/Village/Pensara - The Trade District - House 1 - Floor 2/Pensara - The Trade District - House 1 - Floor 2.jpg
-res/Village/Pensara - The Trade District - House 1 - Floor 2/Pensara - The Trade District - House 1 - Floor 2folder/x0y0.jpg
-res/Village/Pensara - The Trade District - House 1 - Floor 2/Pensara - The Trade District - House 1 - Floor 2folder/x0y1.jpg
-res/Village/Pensara - The Trade District - House 1 - Floor 2/Pensara - The Trade District - House 1 - Floor 2folder/x0y2.jpg
-res/Village/Pensara - The Trade District - House 1 - Floor 2/Pensara - The Trade District - House 1 - Floor 2folder/x1y0.jpg
-res/Village/Pensara - The Trade District - House 1 - Floor 2/Pensara - The Trade District - House 1 - Floor 2folder/x1y1.jpg
-res/Village/Pensara - The Trade District - House 1 - Floor 2/Pensara - The Trade District - House 1 - Floor 2folder/x1y2.jpg
-res/Village/Pensara - The Trade District - House 1 - Floor 2/Pensara - The Trade District - House 1 - Floor 2folder/x2y0.jpg
-res/Village/Pensara - The Trade District - House 1 - Floor 2/Pensara - The Trade District - House 1 - Floor 2folder/x2y1.jpg
-res/Village/Pensara - The Trade District - House 1 - Floor 2/Pensara - The Trade District - House 1 - Floor 2folder/x2y2.jpg
-res/Village/Pensara - The Trade District - House 1 - Floor 2/Pensara - The Trade District - House 1 - Floor 2folder/x3y0.jpg
-res/Village/Pensara - The Trade District - House 1 - Floor 2/Pensara - The Trade District - House 1 - Floor 2folder/x3y1.jpg
-res/Village/Pensara - The Trade District - House 1 - Floor 2/Pensara - The Trade District - House 1 - Floor 2folder/x3y2.jpg
 res/Village/Pensara - The Trade District - House 1 - Floor 2/top/0.png
 res/Village/Pensara - The Trade District - House 1 - Floor 2/top/1.png
 res/Village/Pensara - The Trade District - House 1 - Floor 2/top/top.info
 res/Village/Pensara - The Trade District - House 2 - Floor 1/Pensara - The Trade District - House 2 - Floor 1.jpg
-res/Village/Pensara - The Trade District - House 2 - Floor 1/Pensara - The Trade District - House 2 - Floor 1folder/x0y0.jpg
-res/Village/Pensara - The Trade District - House 2 - Floor 1/Pensara - The Trade District - House 2 - Floor 1folder/x0y1.jpg
-res/Village/Pensara - The Trade District - House 2 - Floor 1/Pensara - The Trade District - House 2 - Floor 1folder/x0y2.jpg
-res/Village/Pensara - The Trade District - House 2 - Floor 1/Pensara - The Trade District - House 2 - Floor 1folder/x1y0.jpg
-res/Village/Pensara - The Trade District - House 2 - Floor 1/Pensara - The Trade District - House 2 - Floor 1folder/x1y1.jpg
-res/Village/Pensara - The Trade District - House 2 - Floor 1/Pensara - The Trade District - House 2 - Floor 1folder/x1y2.jpg
-res/Village/Pensara - The Trade District - House 2 - Floor 1/Pensara - The Trade District - House 2 - Floor 1folder/x2y0.jpg
-res/Village/Pensara - The Trade District - House 2 - Floor 1/Pensara - The Trade District - House 2 - Floor 1folder/x2y1.jpg
-res/Village/Pensara - The Trade District - House 2 - Floor 1/Pensara - The Trade District - House 2 - Floor 1folder/x2y2.jpg
-res/Village/Pensara - The Trade District - House 2 - Floor 1/Pensara - The Trade District - House 2 - Floor 1folder/x3y0.jpg
-res/Village/Pensara - The Trade District - House 2 - Floor 1/Pensara - The Trade District - House 2 - Floor 1folder/x3y1.jpg
-res/Village/Pensara - The Trade District - House 2 - Floor 1/Pensara - The Trade District - House 2 - Floor 1folder/x3y2.jpg
 res/Village/Pensara - The Trade District - House 2 - Floor 1/top/0.png
 res/Village/Pensara - The Trade District - House 2 - Floor 1/top/1.png
 res/Village/Pensara - The Trade District - House 2 - Floor 1/top/2.png
@@ -5529,34 +4621,10 @@ res/Village/Pensara - The Trade District - House 2 - Floor 1/villagers/Elviri/El
 res/Village/Pensara - The Trade District - House 2 - Floor 1/villagers/Elviri/Elviri8.png
 res/Village/Pensara - The Trade District - House 2 - Floor 1/villagers/Elviri/Elviri9.png
 res/Village/Pensara - The Trade District - House 2 - Floor 2/Pensara - The Trade District - House 2 - Floor 2.jpg
-res/Village/Pensara - The Trade District - House 2 - Floor 2/Pensara - The Trade District - House 2 - Floor 2folder/x0y0.jpg
-res/Village/Pensara - The Trade District - House 2 - Floor 2/Pensara - The Trade District - House 2 - Floor 2folder/x0y1.jpg
-res/Village/Pensara - The Trade District - House 2 - Floor 2/Pensara - The Trade District - House 2 - Floor 2folder/x0y2.jpg
-res/Village/Pensara - The Trade District - House 2 - Floor 2/Pensara - The Trade District - House 2 - Floor 2folder/x1y0.jpg
-res/Village/Pensara - The Trade District - House 2 - Floor 2/Pensara - The Trade District - House 2 - Floor 2folder/x1y1.jpg
-res/Village/Pensara - The Trade District - House 2 - Floor 2/Pensara - The Trade District - House 2 - Floor 2folder/x1y2.jpg
-res/Village/Pensara - The Trade District - House 2 - Floor 2/Pensara - The Trade District - House 2 - Floor 2folder/x2y0.jpg
-res/Village/Pensara - The Trade District - House 2 - Floor 2/Pensara - The Trade District - House 2 - Floor 2folder/x2y1.jpg
-res/Village/Pensara - The Trade District - House 2 - Floor 2/Pensara - The Trade District - House 2 - Floor 2folder/x2y2.jpg
-res/Village/Pensara - The Trade District - House 2 - Floor 2/Pensara - The Trade District - House 2 - Floor 2folder/x3y0.jpg
-res/Village/Pensara - The Trade District - House 2 - Floor 2/Pensara - The Trade District - House 2 - Floor 2folder/x3y1.jpg
-res/Village/Pensara - The Trade District - House 2 - Floor 2/Pensara - The Trade District - House 2 - Floor 2folder/x3y2.jpg
 res/Village/Pensara - The Trade District - House 2 - Floor 2/top/0.png
 res/Village/Pensara - The Trade District - House 2 - Floor 2/top/1.png
 res/Village/Pensara - The Trade District - House 2 - Floor 2/top/top.info
 res/Village/Pensara - The Trade District - Mezza's House/Pensara - The Trade District - Mezza's House.jpg
-res/Village/Pensara - The Trade District - Mezza's House/Pensara - The Trade District - Mezza's Housefolder/x0y0.jpg
-res/Village/Pensara - The Trade District - Mezza's House/Pensara - The Trade District - Mezza's Housefolder/x0y1.jpg
-res/Village/Pensara - The Trade District - Mezza's House/Pensara - The Trade District - Mezza's Housefolder/x0y2.jpg
-res/Village/Pensara - The Trade District - Mezza's House/Pensara - The Trade District - Mezza's Housefolder/x1y0.jpg
-res/Village/Pensara - The Trade District - Mezza's House/Pensara - The Trade District - Mezza's Housefolder/x1y1.jpg
-res/Village/Pensara - The Trade District - Mezza's House/Pensara - The Trade District - Mezza's Housefolder/x1y2.jpg
-res/Village/Pensara - The Trade District - Mezza's House/Pensara - The Trade District - Mezza's Housefolder/x2y0.jpg
-res/Village/Pensara - The Trade District - Mezza's House/Pensara - The Trade District - Mezza's Housefolder/x2y1.jpg
-res/Village/Pensara - The Trade District - Mezza's House/Pensara - The Trade District - Mezza's Housefolder/x2y2.jpg
-res/Village/Pensara - The Trade District - Mezza's House/Pensara - The Trade District - Mezza's Housefolder/x3y0.jpg
-res/Village/Pensara - The Trade District - Mezza's House/Pensara - The Trade District - Mezza's Housefolder/x3y1.jpg
-res/Village/Pensara - The Trade District - Mezza's House/Pensara - The Trade District - Mezza's Housefolder/x3y2.jpg
 res/Village/Pensara - The Trade District - Mezza's House/top/0.png
 res/Village/Pensara - The Trade District - Mezza's House/top/1.png
 res/Village/Pensara - The Trade District - Mezza's House/top/2.png
@@ -5580,18 +4648,6 @@ res/Village/Pensara - The Trade District - Mezza's House/villagers/Mezza/Mezza7.
 res/Village/Pensara - The Trade District - Mezza's House/villagers/Mezza/Mezza8.png
 res/Village/Pensara - The Trade District - Mezza's House/villagers/Mezza/Mezza9.png
 res/Village/Pensara - The Trade District - Tent/Pensara - The Trade District - Tent.jpg
-res/Village/Pensara - The Trade District - Tent/Pensara - The Trade District - Tentfolder/x0y0.jpg
-res/Village/Pensara - The Trade District - Tent/Pensara - The Trade District - Tentfolder/x0y1.jpg
-res/Village/Pensara - The Trade District - Tent/Pensara - The Trade District - Tentfolder/x0y2.jpg
-res/Village/Pensara - The Trade District - Tent/Pensara - The Trade District - Tentfolder/x1y0.jpg
-res/Village/Pensara - The Trade District - Tent/Pensara - The Trade District - Tentfolder/x1y1.jpg
-res/Village/Pensara - The Trade District - Tent/Pensara - The Trade District - Tentfolder/x1y2.jpg
-res/Village/Pensara - The Trade District - Tent/Pensara - The Trade District - Tentfolder/x2y0.jpg
-res/Village/Pensara - The Trade District - Tent/Pensara - The Trade District - Tentfolder/x2y1.jpg
-res/Village/Pensara - The Trade District - Tent/Pensara - The Trade District - Tentfolder/x2y2.jpg
-res/Village/Pensara - The Trade District - Tent/Pensara - The Trade District - Tentfolder/x3y0.jpg
-res/Village/Pensara - The Trade District - Tent/Pensara - The Trade District - Tentfolder/x3y1.jpg
-res/Village/Pensara - The Trade District - Tent/Pensara - The Trade District - Tentfolder/x3y2.jpg
 res/Village/Pensara - The Trade District - Tent/top/0.png
 res/Village/Pensara - The Trade District - Tent/top/top.info
 res/Village/Pensara - The Trade District - Tent/villagers/Merchant Tord/Merchant Tord1.png
@@ -5616,30 +4672,6 @@ res/Village/Pensara - The Trade District - Tower Prison/top/top.info
 res/Village/Port of Alares/Port of Alares at Night - 1.png
 res/Village/Port of Alares/Port of Alares at Night.jpg
 res/Village/Port of Alares/Port of Alares.jpg
-res/Village/Port of Alares/Port of Alares at Nightfolder/x0y0.jpg
-res/Village/Port of Alares/Port of Alares at Nightfolder/x0y1.jpg
-res/Village/Port of Alares/Port of Alares at Nightfolder/x0y2.jpg
-res/Village/Port of Alares/Port of Alares at Nightfolder/x1y0.jpg
-res/Village/Port of Alares/Port of Alares at Nightfolder/x1y1.jpg
-res/Village/Port of Alares/Port of Alares at Nightfolder/x1y2.jpg
-res/Village/Port of Alares/Port of Alares at Nightfolder/x2y0.jpg
-res/Village/Port of Alares/Port of Alares at Nightfolder/x2y1.jpg
-res/Village/Port of Alares/Port of Alares at Nightfolder/x2y2.jpg
-res/Village/Port of Alares/Port of Alares at Nightfolder/x3y0.jpg
-res/Village/Port of Alares/Port of Alares at Nightfolder/x3y1.jpg
-res/Village/Port of Alares/Port of Alares at Nightfolder/x3y2.jpg
-res/Village/Port of Alares/Port of Alaresfolder/x0y0.jpg
-res/Village/Port of Alares/Port of Alaresfolder/x0y1.jpg
-res/Village/Port of Alares/Port of Alaresfolder/x0y2.jpg
-res/Village/Port of Alares/Port of Alaresfolder/x1y0.jpg
-res/Village/Port of Alares/Port of Alaresfolder/x1y1.jpg
-res/Village/Port of Alares/Port of Alaresfolder/x1y2.jpg
-res/Village/Port of Alares/Port of Alaresfolder/x2y0.jpg
-res/Village/Port of Alares/Port of Alaresfolder/x2y1.jpg
-res/Village/Port of Alares/Port of Alaresfolder/x2y2.jpg
-res/Village/Port of Alares/Port of Alaresfolder/x3y0.jpg
-res/Village/Port of Alares/Port of Alaresfolder/x3y1.jpg
-res/Village/Port of Alares/Port of Alaresfolder/x3y2.jpg
 res/Village/Port of Alares/top/0.png
 res/Village/Port of Alares/top/1.png
 res/Village/Port of Alares/top/2.png
@@ -5678,18 +4710,6 @@ res/Village/Port of Alares/villagers/Sigge/Sigge7.png
 res/Village/Port of Alares/villagers/Sigge/Sigge8.png
 res/Village/Port of Alares/villagers/Sigge/Sigge9.png
 res/Village/Port of Alares - Tavern/Port of Alares - Tavern.jpg
-res/Village/Port of Alares - Tavern/Port of Alares - Tavernfolder/x0y0.jpg
-res/Village/Port of Alares - Tavern/Port of Alares - Tavernfolder/x0y1.jpg
-res/Village/Port of Alares - Tavern/Port of Alares - Tavernfolder/x0y2.jpg
-res/Village/Port of Alares - Tavern/Port of Alares - Tavernfolder/x1y0.jpg
-res/Village/Port of Alares - Tavern/Port of Alares - Tavernfolder/x1y1.jpg
-res/Village/Port of Alares - Tavern/Port of Alares - Tavernfolder/x1y2.jpg
-res/Village/Port of Alares - Tavern/Port of Alares - Tavernfolder/x2y0.jpg
-res/Village/Port of Alares - Tavern/Port of Alares - Tavernfolder/x2y1.jpg
-res/Village/Port of Alares - Tavern/Port of Alares - Tavernfolder/x2y2.jpg
-res/Village/Port of Alares - Tavern/Port of Alares - Tavernfolder/x3y0.jpg
-res/Village/Port of Alares - Tavern/Port of Alares - Tavernfolder/x3y1.jpg
-res/Village/Port of Alares - Tavern/Port of Alares - Tavernfolder/x3y2.jpg
 res/Village/Port of Alares - Tavern/top/0.png
 res/Village/Port of Alares - Tavern/top/1.png
 res/Village/Port of Alares - Tavern/top/2.png
@@ -5747,66 +4767,18 @@ res/Village/Port of Alares - Tavern/villagers/Herb/Herb7.png
 res/Village/Port of Alares - Tavern/villagers/Herb/Herb8.png
 res/Village/Port of Alares - Tavern/villagers/Herb/Herb9.png
 res/Village/Port of Alares - With Boat/Port of Alares - With Boat.jpg
-res/Village/Port of Alares - With Boat/Port of Alares - With Boatfolder/x0y0.jpg
-res/Village/Port of Alares - With Boat/Port of Alares - With Boatfolder/x0y1.jpg
-res/Village/Port of Alares - With Boat/Port of Alares - With Boatfolder/x0y2.jpg
-res/Village/Port of Alares - With Boat/Port of Alares - With Boatfolder/x1y0.jpg
-res/Village/Port of Alares - With Boat/Port of Alares - With Boatfolder/x1y1.jpg
-res/Village/Port of Alares - With Boat/Port of Alares - With Boatfolder/x1y2.jpg
-res/Village/Port of Alares - With Boat/Port of Alares - With Boatfolder/x2y0.jpg
-res/Village/Port of Alares - With Boat/Port of Alares - With Boatfolder/x2y1.jpg
-res/Village/Port of Alares - With Boat/Port of Alares - With Boatfolder/x2y2.jpg
-res/Village/Port of Alares - With Boat/Port of Alares - With Boatfolder/x3y0.jpg
-res/Village/Port of Alares - With Boat/Port of Alares - With Boatfolder/x3y1.jpg
-res/Village/Port of Alares - With Boat/Port of Alares - With Boatfolder/x3y2.jpg
 res/Village/Port of Alares - With Boat/top/0.png
 res/Village/Port of Alares - With Boat/top/1.png
 res/Village/Port of Alares - With Boat/top/3.png
 res/Village/Port of Alares - With Boat/top/9.png
 res/Village/Port of Alares - With Boat/top/top.info
 res/Village/Port of Zazo/Port of Zazo.jpg
-res/Village/Port of Zazo/Port of Zazofolder/x0y0.jpg
-res/Village/Port of Zazo/Port of Zazofolder/x0y1.jpg
-res/Village/Port of Zazo/Port of Zazofolder/x0y2.jpg
-res/Village/Port of Zazo/Port of Zazofolder/x1y0.jpg
-res/Village/Port of Zazo/Port of Zazofolder/x1y1.jpg
-res/Village/Port of Zazo/Port of Zazofolder/x1y2.jpg
-res/Village/Port of Zazo/Port of Zazofolder/x2y0.jpg
-res/Village/Port of Zazo/Port of Zazofolder/x2y1.jpg
-res/Village/Port of Zazo/Port of Zazofolder/x2y2.jpg
-res/Village/Port of Zazo/Port of Zazofolder/x3y0.jpg
-res/Village/Port of Zazo/Port of Zazofolder/x3y1.jpg
-res/Village/Port of Zazo/Port of Zazofolder/x3y2.jpg
 res/Village/Port of Zazo/top/0.png
 res/Village/Port of Zazo/top/top.info
 res/Village/Rebel Hideout/Rebel Hideout.jpg
-res/Village/Rebel Hideout/Rebel Hideoutfolder/x0y0.jpg
-res/Village/Rebel Hideout/Rebel Hideoutfolder/x0y1.jpg
-res/Village/Rebel Hideout/Rebel Hideoutfolder/x0y2.jpg
-res/Village/Rebel Hideout/Rebel Hideoutfolder/x1y0.jpg
-res/Village/Rebel Hideout/Rebel Hideoutfolder/x1y1.jpg
-res/Village/Rebel Hideout/Rebel Hideoutfolder/x1y2.jpg
-res/Village/Rebel Hideout/Rebel Hideoutfolder/x2y0.jpg
-res/Village/Rebel Hideout/Rebel Hideoutfolder/x2y1.jpg
-res/Village/Rebel Hideout/Rebel Hideoutfolder/x2y2.jpg
-res/Village/Rebel Hideout/Rebel Hideoutfolder/x3y0.jpg
-res/Village/Rebel Hideout/Rebel Hideoutfolder/x3y1.jpg
-res/Village/Rebel Hideout/Rebel Hideoutfolder/x3y2.jpg
 res/Village/Rebel Hideout/top/0.png
 res/Village/Rebel Hideout/top/1.png
 res/Village/Rebel Hideout/top/top.info
-res/Village/Serphia Hall/Serphia Hallfolder/x0y0.jpg
-res/Village/Serphia Hall/Serphia Hallfolder/x0y1.jpg
-res/Village/Serphia Hall/Serphia Hallfolder/x0y2.jpg
-res/Village/Serphia Hall/Serphia Hallfolder/x1y0.jpg
-res/Village/Serphia Hall/Serphia Hallfolder/x1y1.jpg
-res/Village/Serphia Hall/Serphia Hallfolder/x1y2.jpg
-res/Village/Serphia Hall/Serphia Hallfolder/x2y0.jpg
-res/Village/Serphia Hall/Serphia Hallfolder/x2y1.jpg
-res/Village/Serphia Hall/Serphia Hallfolder/x2y2.jpg
-res/Village/Serphia Hall/Serphia Hallfolder/x3y0.jpg
-res/Village/Serphia Hall/Serphia Hallfolder/x3y1.jpg
-res/Village/Serphia Hall/Serphia Hallfolder/x3y2.jpg
 res/Village/Serphia Hall/top/0.png
 res/Village/Serphia Hall/top/1.png
 res/Village/Serphia Hall/top/top.info
@@ -5837,18 +4809,6 @@ res/Village/Stuff/ring1.png
 res/Village/Stuff/ship1.png
 res/Village/Stuff/throne1.png
 res/Village/The Prison Cell/The Prison Cell.jpg
-res/Village/The Prison Cell/The Prison Cellfolder/x0y0.jpg
-res/Village/The Prison Cell/The Prison Cellfolder/x0y1.jpg
-res/Village/The Prison Cell/The Prison Cellfolder/x0y2.jpg
-res/Village/The Prison Cell/The Prison Cellfolder/x1y0.jpg
-res/Village/The Prison Cell/The Prison Cellfolder/x1y1.jpg
-res/Village/The Prison Cell/The Prison Cellfolder/x1y2.jpg
-res/Village/The Prison Cell/The Prison Cellfolder/x2y0.jpg
-res/Village/The Prison Cell/The Prison Cellfolder/x2y1.jpg
-res/Village/The Prison Cell/The Prison Cellfolder/x2y2.jpg
-res/Village/The Prison Cell/The Prison Cellfolder/x3y0.jpg
-res/Village/The Prison Cell/The Prison Cellfolder/x3y1.jpg
-res/Village/The Prison Cell/The Prison Cellfolder/x3y2.jpg
 res/Village/The Prison Cell/top/0.png
 res/Village/The Prison Cell/top/top.info
 res/Village/The Prison Cell/villagers/Borealis/Borealis1.png
@@ -5900,63 +4860,15 @@ res/Village/The Prison Cell/villagers/Zalzi/Zalzi7.png
 res/Village/The Prison Cell/villagers/Zalzi/Zalzi8.png
 res/Village/The Prison Cell/villagers/Zalzi/Zalzi9.png
 res/Village/The Senate/The Senate.jpg
-res/Village/The Senate/The Senatefolder/x0y0.jpg
-res/Village/The Senate/The Senatefolder/x0y1.jpg
-res/Village/The Senate/The Senatefolder/x0y2.jpg
-res/Village/The Senate/The Senatefolder/x1y0.jpg
-res/Village/The Senate/The Senatefolder/x1y1.jpg
-res/Village/The Senate/The Senatefolder/x1y2.jpg
-res/Village/The Senate/The Senatefolder/x2y0.jpg
-res/Village/The Senate/The Senatefolder/x2y1.jpg
-res/Village/The Senate/The Senatefolder/x2y2.jpg
-res/Village/The Senate/The Senatefolder/x3y0.jpg
-res/Village/The Senate/The Senatefolder/x3y1.jpg
-res/Village/The Senate/The Senatefolder/x3y2.jpg
 res/Village/The Senate/top/0.png
 res/Village/The Senate/top/top.info
 res/Village/The Ship Cabin/The Ship Cabin.jpg
-res/Village/The Ship Cabin/The Ship Cabinfolder/x0y0.jpg
-res/Village/The Ship Cabin/The Ship Cabinfolder/x0y1.jpg
-res/Village/The Ship Cabin/The Ship Cabinfolder/x0y2.jpg
-res/Village/The Ship Cabin/The Ship Cabinfolder/x1y0.jpg
-res/Village/The Ship Cabin/The Ship Cabinfolder/x1y1.jpg
-res/Village/The Ship Cabin/The Ship Cabinfolder/x1y2.jpg
-res/Village/The Ship Cabin/The Ship Cabinfolder/x2y0.jpg
-res/Village/The Ship Cabin/The Ship Cabinfolder/x2y1.jpg
-res/Village/The Ship Cabin/The Ship Cabinfolder/x2y2.jpg
-res/Village/The Ship Cabin/The Ship Cabinfolder/x3y0.jpg
-res/Village/The Ship Cabin/The Ship Cabinfolder/x3y1.jpg
-res/Village/The Ship Cabin/The Ship Cabinfolder/x3y2.jpg
 res/Village/The Ship Cabin/top/0.png
 res/Village/The Ship Cabin/top/top.info
 res/Village/The Ship Cabin - Story/The Ship Cabin - Story.jpg
-res/Village/The Ship Cabin - Story/The Ship Cabin - Storyfolder/x0y0.jpg
-res/Village/The Ship Cabin - Story/The Ship Cabin - Storyfolder/x0y1.jpg
-res/Village/The Ship Cabin - Story/The Ship Cabin - Storyfolder/x0y2.jpg
-res/Village/The Ship Cabin - Story/The Ship Cabin - Storyfolder/x1y0.jpg
-res/Village/The Ship Cabin - Story/The Ship Cabin - Storyfolder/x1y1.jpg
-res/Village/The Ship Cabin - Story/The Ship Cabin - Storyfolder/x1y2.jpg
-res/Village/The Ship Cabin - Story/The Ship Cabin - Storyfolder/x2y0.jpg
-res/Village/The Ship Cabin - Story/The Ship Cabin - Storyfolder/x2y1.jpg
-res/Village/The Ship Cabin - Story/The Ship Cabin - Storyfolder/x2y2.jpg
-res/Village/The Ship Cabin - Story/The Ship Cabin - Storyfolder/x3y0.jpg
-res/Village/The Ship Cabin - Story/The Ship Cabin - Storyfolder/x3y1.jpg
-res/Village/The Ship Cabin - Story/The Ship Cabin - Storyfolder/x3y2.jpg
 res/Village/The Ship Cabin - Story/top/0.png
 res/Village/The Ship Cabin - Story/top/top.info
 res/Village/Vincents Office/Vincents Office.jpg
-res/Village/Vincents Office/Vincents Officefolder/x0y0.jpg
-res/Village/Vincents Office/Vincents Officefolder/x0y1.jpg
-res/Village/Vincents Office/Vincents Officefolder/x0y2.jpg
-res/Village/Vincents Office/Vincents Officefolder/x1y0.jpg
-res/Village/Vincents Office/Vincents Officefolder/x1y1.jpg
-res/Village/Vincents Office/Vincents Officefolder/x1y2.jpg
-res/Village/Vincents Office/Vincents Officefolder/x2y0.jpg
-res/Village/Vincents Office/Vincents Officefolder/x2y1.jpg
-res/Village/Vincents Office/Vincents Officefolder/x2y2.jpg
-res/Village/Vincents Office/Vincents Officefolder/x3y0.jpg
-res/Village/Vincents Office/Vincents Officefolder/x3y1.jpg
-res/Village/Vincents Office/Vincents Officefolder/x3y2.jpg
 res/Village/Vincents Office/animobj/desk/desk1.png
 res/Village/Vincents Office/top/0.png
 res/Village/Vincents Office/top/1.png
@@ -5966,38 +4878,6 @@ res/Village/Vincents Office/top/4.png
 res/Village/Vincents Office/top/5.png
 res/Village/Vincents Office/top/6.png
 res/Village/Vincents Office/top/top.info
-res/Village/Zazo/Zazofolder/x0y0.jpg
-res/Village/Zazo/Zazofolder/x0y1.jpg
-res/Village/Zazo/Zazofolder/x0y2.jpg
-res/Village/Zazo/Zazofolder/x0y3.jpg
-res/Village/Zazo/Zazofolder/x1y0.jpg
-res/Village/Zazo/Zazofolder/x1y1.jpg
-res/Village/Zazo/Zazofolder/x1y2.jpg
-res/Village/Zazo/Zazofolder/x1y3.jpg
-res/Village/Zazo/Zazofolder/x2y0.jpg
-res/Village/Zazo/Zazofolder/x2y1.jpg
-res/Village/Zazo/Zazofolder/x2y2.jpg
-res/Village/Zazo/Zazofolder/x2y3.jpg
-res/Village/Zazo/Zazofolder/x3y0.jpg
-res/Village/Zazo/Zazofolder/x3y1.jpg
-res/Village/Zazo/Zazofolder/x3y2.jpg
-res/Village/Zazo/Zazofolder/x3y3.jpg
-res/Village/Zazo/Zazofolder/x4y0.jpg
-res/Village/Zazo/Zazofolder/x4y1.jpg
-res/Village/Zazo/Zazofolder/x4y2.jpg
-res/Village/Zazo/Zazofolder/x4y3.jpg
-res/Village/Zazo/Zazofolder/x5y0.jpg
-res/Village/Zazo/Zazofolder/x5y1.jpg
-res/Village/Zazo/Zazofolder/x5y2.jpg
-res/Village/Zazo/Zazofolder/x5y3.jpg
-res/Village/Zazo/Zazofolder/x6y0.jpg
-res/Village/Zazo/Zazofolder/x6y1.jpg
-res/Village/Zazo/Zazofolder/x6y2.jpg
-res/Village/Zazo/Zazofolder/x6y3.jpg
-res/Village/Zazo/Zazofolder/x7y0.jpg
-res/Village/Zazo/Zazofolder/x7y1.jpg
-res/Village/Zazo/Zazofolder/x7y2.jpg
-res/Village/Zazo/Zazofolder/x7y3.jpg
 res/Village/Zazo/top/0.png
 res/Village/Zazo/top/1.png
 res/Village/Zazo/top/15.png
@@ -6285,18 +5165,6 @@ res/Village/Zazo - Farl's House/top/0.png
 res/Village/Zazo - Farl's House/top/1.png
 res/Village/Zazo - Farl's House/top/2.png
 res/Village/Zazo - Farl's House/top/top.info
-res/Village/Zazo - Miner's Home/Zazo - Miner's Homefolder/x0y0.jpg
-res/Village/Zazo - Miner's Home/Zazo - Miner's Homefolder/x0y1.jpg
-res/Village/Zazo - Miner's Home/Zazo - Miner's Homefolder/x0y2.jpg
-res/Village/Zazo - Miner's Home/Zazo - Miner's Homefolder/x1y0.jpg
-res/Village/Zazo - Miner's Home/Zazo - Miner's Homefolder/x1y1.jpg
-res/Village/Zazo - Miner's Home/Zazo - Miner's Homefolder/x1y2.jpg
-res/Village/Zazo - Miner's Home/Zazo - Miner's Homefolder/x2y0.jpg
-res/Village/Zazo - Miner's Home/Zazo - Miner's Homefolder/x2y1.jpg
-res/Village/Zazo - Miner's Home/Zazo - Miner's Homefolder/x2y2.jpg
-res/Village/Zazo - Miner's Home/Zazo - Miner's Homefolder/x3y0.jpg
-res/Village/Zazo - Miner's Home/Zazo - Miner's Homefolder/x3y1.jpg
-res/Village/Zazo - Miner's Home/Zazo - Miner's Homefolder/x3y2.jpg
 res/Village/Zazo - Miner's Home/top/0.png
 res/Village/Zazo - Miner's Home/top/1.png
 res/Village/Zazo - Miner's Home/top/2.png
@@ -6356,18 +5224,6 @@ res/Village/Zazo - Miner's Home/villagers/Marcus/Marcus6.png
 res/Village/Zazo - Miner's Home/villagers/Marcus/Marcus7.png
 res/Village/Zazo - Miner's Home/villagers/Marcus/Marcus8.png
 res/Village/Zazo - Miner's Home/villagers/Marcus/Marcus9.png
-res/Village/Zazo - Miner's Home2/Zazo - Miner's Home2folder/x0y0.jpg
-res/Village/Zazo - Miner's Home2/Zazo - Miner's Home2folder/x0y1.jpg
-res/Village/Zazo - Miner's Home2/Zazo - Miner's Home2folder/x0y2.jpg
-res/Village/Zazo - Miner's Home2/Zazo - Miner's Home2folder/x1y0.jpg
-res/Village/Zazo - Miner's Home2/Zazo - Miner's Home2folder/x1y1.jpg
-res/Village/Zazo - Miner's Home2/Zazo - Miner's Home2folder/x1y2.jpg
-res/Village/Zazo - Miner's Home2/Zazo - Miner's Home2folder/x2y0.jpg
-res/Village/Zazo - Miner's Home2/Zazo - Miner's Home2folder/x2y1.jpg
-res/Village/Zazo - Miner's Home2/Zazo - Miner's Home2folder/x2y2.jpg
-res/Village/Zazo - Miner's Home2/Zazo - Miner's Home2folder/x3y0.jpg
-res/Village/Zazo - Miner's Home2/Zazo - Miner's Home2folder/x3y1.jpg
-res/Village/Zazo - Miner's Home2/Zazo - Miner's Home2folder/x3y2.jpg
 res/Village/Zazo - Miner's Home2/top/0.png
 res/Village/Zazo - Miner's Home2/top/1.png
 res/Village/Zazo - Miner's Home2/top/2.png
@@ -6411,61 +5267,13 @@ res/Village/Zazo - Miner's Home2/villagers/Greghild/Greghild6.png
 res/Village/Zazo - Miner's Home2/villagers/Greghild/Greghild7.png
 res/Village/Zazo - Miner's Home2/villagers/Greghild/Greghild8.png
 res/Village/Zazo - Miner's Home2/villagers/Greghild/Greghild9.png
-res/Village/Zazo - Tent/Zazo - Tentfolder/x0y0.jpg
-res/Village/Zazo - Tent/Zazo - Tentfolder/x0y1.jpg
-res/Village/Zazo - Tent/Zazo - Tentfolder/x0y2.jpg
-res/Village/Zazo - Tent/Zazo - Tentfolder/x1y0.jpg
-res/Village/Zazo - Tent/Zazo - Tentfolder/x1y1.jpg
-res/Village/Zazo - Tent/Zazo - Tentfolder/x1y2.jpg
-res/Village/Zazo - Tent/Zazo - Tentfolder/x2y0.jpg
-res/Village/Zazo - Tent/Zazo - Tentfolder/x2y1.jpg
-res/Village/Zazo - Tent/Zazo - Tentfolder/x2y2.jpg
-res/Village/Zazo - Tent/Zazo - Tentfolder/x3y0.jpg
-res/Village/Zazo - Tent/Zazo - Tentfolder/x3y1.jpg
-res/Village/Zazo - Tent/Zazo - Tentfolder/x3y2.jpg
 res/Village/Zazo - Tent/top/0.png
 res/Village/Zazo - Tent/top/top.info
 res/Village/Zazo - Teo/Zazo - Teo at Night - 1.png
 res/Village/Zazo - Teo/Zazo - Teo.jpg
-res/Village/Zazo - Teo/Zazo - Teo at Nightfolder/x0y0.jpg
-res/Village/Zazo - Teo/Zazo - Teo at Nightfolder/x0y1.jpg
-res/Village/Zazo - Teo/Zazo - Teo at Nightfolder/x0y2.jpg
-res/Village/Zazo - Teo/Zazo - Teo at Nightfolder/x1y0.jpg
-res/Village/Zazo - Teo/Zazo - Teo at Nightfolder/x1y1.jpg
-res/Village/Zazo - Teo/Zazo - Teo at Nightfolder/x1y2.jpg
-res/Village/Zazo - Teo/Zazo - Teo at Nightfolder/x2y0.jpg
-res/Village/Zazo - Teo/Zazo - Teo at Nightfolder/x2y1.jpg
-res/Village/Zazo - Teo/Zazo - Teo at Nightfolder/x2y2.jpg
-res/Village/Zazo - Teo/Zazo - Teo at Nightfolder/x3y0.jpg
-res/Village/Zazo - Teo/Zazo - Teo at Nightfolder/x3y1.jpg
-res/Village/Zazo - Teo/Zazo - Teo at Nightfolder/x3y2.jpg
-res/Village/Zazo - Teo/Zazo - Teofolder/x0y0.jpg
-res/Village/Zazo - Teo/Zazo - Teofolder/x0y1.jpg
-res/Village/Zazo - Teo/Zazo - Teofolder/x0y2.jpg
-res/Village/Zazo - Teo/Zazo - Teofolder/x1y0.jpg
-res/Village/Zazo - Teo/Zazo - Teofolder/x1y1.jpg
-res/Village/Zazo - Teo/Zazo - Teofolder/x1y2.jpg
-res/Village/Zazo - Teo/Zazo - Teofolder/x2y0.jpg
-res/Village/Zazo - Teo/Zazo - Teofolder/x2y1.jpg
-res/Village/Zazo - Teo/Zazo - Teofolder/x2y2.jpg
-res/Village/Zazo - Teo/Zazo - Teofolder/x3y0.jpg
-res/Village/Zazo - Teo/Zazo - Teofolder/x3y1.jpg
-res/Village/Zazo - Teo/Zazo - Teofolder/x3y2.jpg
 res/Village/Zazo - Teo/top/18.png
 res/Village/Zazo - Teo/top/top.info
 res/Village/Zazo - Teo's House/Zazo - Teo's House.jpg
-res/Village/Zazo - Teo's House/Zazo - Teo's Housefolder/x0y0.jpg
-res/Village/Zazo - Teo's House/Zazo - Teo's Housefolder/x0y1.jpg
-res/Village/Zazo - Teo's House/Zazo - Teo's Housefolder/x0y2.jpg
-res/Village/Zazo - Teo's House/Zazo - Teo's Housefolder/x1y0.jpg
-res/Village/Zazo - Teo's House/Zazo - Teo's Housefolder/x1y1.jpg
-res/Village/Zazo - Teo's House/Zazo - Teo's Housefolder/x1y2.jpg
-res/Village/Zazo - Teo's House/Zazo - Teo's Housefolder/x2y0.jpg
-res/Village/Zazo - Teo's House/Zazo - Teo's Housefolder/x2y1.jpg
-res/Village/Zazo - Teo's House/Zazo - Teo's Housefolder/x2y2.jpg
-res/Village/Zazo - Teo's House/Zazo - Teo's Housefolder/x3y0.jpg
-res/Village/Zazo - Teo's House/Zazo - Teo's Housefolder/x3y1.jpg
-res/Village/Zazo - Teo's House/Zazo - Teo's Housefolder/x3y2.jpg
 res/Village/Zazo - Teo's House/top/0.png
 res/Village/Zazo - Teo's House/top/1.png
 res/Village/Zazo - Teo's House/top/2.png

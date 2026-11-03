@@ -484,46 +484,20 @@ func checkVillagerCollision(direction):
 
 
 ## The scene of the village (docs/ARCHITECTURE.md): the VillageScene it was
-## loaded from (VillageLoader.load), which draws the world (phase 1 step B);
-## null with --legacy=villages.
+## loaded from (VillageLoader.load), which draws the world (phase 1 step B).
 func create_scene() -> Node:
 	return scene_root
 
 
-## Draws the village. GameMode.draw is used to fade in and out. A converted
-## place's scene draws the world (draw_scene); the emotions, dialogs and signs
-## stay legacy overlays until phase 3.
+## Draws the village. GameMode.draw is used to fade in and out. The scene
+## draws the world (draw_scene); the emotions, dialogs and signs are overlays.
 func draw(g, alpha = null):
 	g.setColor(1)
-	if scene_root is VillageScene:
-		update_draw_state()
-		draw_scene(g)
-		drawOverlays(g, sprites)
-	else:
-		drawBottom(g)
-		drawTop(g, sprites)
+	update_draw_state()
+	draw_scene(g)
+	drawOverlays(g, sprites)
 	super.checkMenu()
 	super.draw(g)
-
-
-## Draws the bottom layer of the village: background, animated objects and
-## villagers (sorted on their y position).
-func drawBottom(g):
-	background.drawBottom(g)
-	var bpos = background.getPos()
-	var x: int = int(bpos[Values.X])
-	var y: int = int(bpos[Values.Y])
-	var n: int = sortSprites()
-	for i in range(n):
-		var s = sprites.get(elements[i].getIndex())
-		if s == null:
-			continue
-		if s is PartyMember:
-			var asx: int = J.round(s.getX() + x)
-			var asy: int = J.round(s.getY() + y)
-			s.draw(g, asx, asy)
-		else:
-			s.draw(g, x, y)
 
 
 ## Sorts the sprites on their y position for drawing (elements); returns how
@@ -541,13 +515,6 @@ func sortSprites() -> int:
 	if sprites.size() != n:
 		push_warning("Village: the sprite list and elements are not of equal length")
 	return mini(index, n)
-
-
-## Draws the top layer of the village: roofs and treetops, emotions and
-## dialogs.
-func drawTop(g, sprites = null):
-	background.drawTop(g, true, sprites)
-	drawOverlays(g, sprites)
 
 
 ## Draws what is drawn over the village: the emotion bubbles of the given
@@ -601,9 +568,9 @@ static func show_emotions(g, emotional: Array) -> void:
 			view.show_bubble(t.getGodotTexture(), corners, tint, mat)
 
 
-## Bridge (phase 1 step B, docs/ARCHITECTURE.md): what drawBottom and
-## drawTop would draw this frame, without drawing it. Prepared where they
-## would run (in draw, so the state they change changes at the same moment):
+## Bridge (phase 1 step B, docs/ARCHITECTURE.md): what the legacy drawBottom
+## and drawTop drew this frame, without drawing it. Prepared where they ran
+## (in draw, so the state they change changes at the same moment):
 ## the sprites sorted (sortSprites) and placed (Sprite.place_view: the
 ## villagers' drawX/drawY, the emotion bubbles' positions, the particle
 ## systems' positions, textures and particle lives). draw_list holds the
@@ -646,10 +613,10 @@ func update_draw_state():
 			draw_list.append([key, placed[0], placed[1], placed[2]])
 
 
-## Bridge (phase 1 step B): the scene draws the world that drawBottom and
-## drawTop would draw (prepared by update_draw_state), with the colour and
-## alpha test each part would get, and the GL state is left as that drawing
-## would leave it for the overlays and the next frame.
+## Bridge (phase 1 step B): the scene draws the world that the legacy
+## drawBottom and drawTop drew (prepared by update_draw_state), with the
+## colour and alpha test each part got, and the GL state is left as that
+## drawing left it for the overlays and the next frame.
 func draw_scene(g):
 	var scene: VillageScene = scene_root
 	var state := SceneGLState.new(g)
@@ -663,8 +630,8 @@ func draw_scene(g):
 
 
 ## Bridge (phase 1 step B): DoubleBackground.drawBottom for the scene: the
-## bottom layer particle systems, then the tiles (or the extra background a
-## story sets).
+## bottom layer particle systems, then the background (or the extra
+## background a story sets).
 func scene_bottom(scene, state):
 	var extra: Texture2D = null
 	var systems := []
@@ -676,7 +643,7 @@ func scene_bottom(scene, state):
 	scene.show_bottom(extra, systems, state.color, state.alpha)
 
 
-## Bridge (phase 1 step B): the sprites of drawBottom as entries for
+## Bridge (phase 1 step B): the sprites of the legacy drawBottom as entries for
 ## VillageScene.show_actors, in draw order.
 func scene_sprites(state, scroll: Vector2i) -> Array:
 	var entries := []
@@ -696,24 +663,21 @@ func scene_sprites(state, scroll: Vector2i) -> Array:
 ## Bridge (phase 1 step B): DoubleBackground.drawTop for the scene: the roofs
 ## and treetops (alpha test 0.9), the night layer (alpha test 0), the upper
 ## and weather particle systems. The scene always draws the roofs and
-## treetops (plan 6.1); the legacy code draws a piece only where a sprite
-## overlaps it (sprites given), which --legacy=village_top_layer keeps.
-## The overlap test runs either way: it is where drawTop brings the party
-## members' positions up to date (PartyMember.getMemberPos).
+## treetops (plan 6.1); the legacy code drew a piece only where a sprite
+## overlapped it (sprites given). The overlap test still runs: it is where
+## drawTop brings the party members' positions up to date
+## (PartyMember.getMemberPos).
 func scene_top(scene, state, sprites = null):
 	var top: bool = background.extraBackground == null
 	var color: Color = state.color
-	var pieces := []
 	if top:
-		pieces = background.overlapped_pieces(sprites)
+		background.overlapped_pieces(sprites)
 		state.set_alpha(0)
-	if not Main.is_legacy("village_top_layer"):
-		pieces = []
 	var systems := []
 	for layer in [DoubleBackground.UPPER_LAYER, DoubleBackground.WEATHER_LAYER]:
 		for entry in draw_systems.get(layer, []):
 			systems.append(state.particles(entry))
-	scene.show_top(top, pieces, color, top and background.nightTop != null, color, systems)
+	scene.show_top(top, color, top and background.nightTop != null, color, systems)
 
 
 ## Bridge (phase 1 step B): the GL state that the legacy world drawing passes
