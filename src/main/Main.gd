@@ -43,6 +43,15 @@ extends Node
 ##                       docs/MODERNIZATION_PLAN.md 8.3), not by the 3D bridge
 ##   --casts=<round>/... dev only: the rounds the console's "cast next" plays
 ##                       (scenes/debug/GameCommands.gd; parity cases effects_*)
+##   --look=<name>       dev only: a prototype look of the labyrinths, legacy
+##                       (the default), hd-painted, hd-photo or pixel
+##                       (DungeonLook, docs/LOOK_PROTOTYPES_PLAN.md); the
+##                       console's "look" switches it
+##   --look-settings=<key=value,...>  dev only: the look's settings (the
+##                       console's "look <name>" lists them)
+##   --village=<remake>[,<remake>...]  dev only: village places load a remake's
+##                       scenes and cutscenes (VillageRemake, res://proto/villages/;
+##                       the village-remake skill); the console's "village" switches it
 ##
 ## In debug builds the developer console (scenes/debug/DebugConsole.gd)
 ## opens with the key under Escape or F1; it replaces the Cheater.
@@ -60,6 +69,8 @@ static var no_encounters := false
 static var hide_particles := false
 ## --minimap-node (dev): the minimap's batches are nodes (Labyrinth.draw).
 static var minimap_node := false
+## --look (dev): the prototype look of the labyrinths (DungeonLook).
+static var look: StringName = &"legacy"
 static var _legacy: PackedStringArray = []
 
 ## The current game mode's scene goes here (see _sync_world).
@@ -117,6 +128,10 @@ func _ready() -> void:
 	no_encounters = _args.has("no-encounters")
 	hide_particles = _args.has("hide-particles")
 	minimap_node = _args.has("minimap-node")
+	if _args.has("village"):
+		var bad_remake := VillageRemake.set_active(String(_args["village"]).split(",", false))
+		if bad_remake != "":
+			push_error("Main: --village: %s" % bad_remake)
 
 	audio = Node.new()
 	audio.name = "Audio"
@@ -156,6 +171,11 @@ func _ready() -> void:
 		var nd := String(_args["start-node"]).split(":")
 		organizer.startNode = [int(nd[0]), int(nd[1])]
 	organizer.init_(obs)
+	if _args.has("look"):
+		var settings := DungeonLook.parse_settings(String(_args.get("look-settings", "")))
+		var bad := DungeonLook.set_current(StringName(_args["look"]), settings)
+		if bad != "":
+			push_error("Main: --look: %s" % bad)
 	_zero_time = Time.get_ticks_msec()
 	if OS.is_debug_build():
 		debug_console = DebugConsole.new()
@@ -215,8 +235,11 @@ func _input(event: InputEvent) -> void:
 			GameCore.setFullScreen()
 		get_viewport().set_input_as_handled()
 		return
-	# While the console is open the keys are its (DebugConsole).
+	# While the console is open the keys are its (DebugConsole), and while a
+	# text box has the focus (a prototype look's tuning panel) the box's.
 	if debug_console != null and debug_console.is_open:
+		return
+	if event is InputEventKey and get_viewport().gui_get_focus_owner() is LineEdit:
 		return
 	GameCore.inputManager.handleEvent(event)
 
@@ -351,3 +374,6 @@ func _exit_tree() -> void:
 			if m != null and is_instance_valid(m.scene_root) and not m.scene_root.is_inside_tree():
 				m.scene_root.free()
 	DungeonMaterials.clear_cache()
+	# The script objects that refer to each other, and the textures they keep
+	# (ExitCleanup).
+	ExitCleanup.release(get_tree().root)

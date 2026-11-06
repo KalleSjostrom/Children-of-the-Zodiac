@@ -142,6 +142,16 @@ func walls_mesh() -> ArrayMesh:
 	return _mesh.mesh as ArrayMesh if _mesh != null else null
 
 
+## The instances that draw the walls' mesh and the sky's (a prototype look,
+## DungeonLook, swaps their meshes or hides the sky); null before build.
+func walls_instance() -> MeshInstance3D:
+	return _mesh
+
+
+func sky_instance() -> MeshInstance3D:
+	return _sky_mesh
+
+
 ## The materials of the mesh's surfaces, in order.
 func surface_materials() -> Array[Material]:
 	var out: Array[Material] = []

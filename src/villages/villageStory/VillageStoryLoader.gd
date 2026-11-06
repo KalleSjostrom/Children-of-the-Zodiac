@@ -21,6 +21,11 @@ var passVillage: bool = false
 
 func parseFile(path: String, filename: String = ""):
 	if filename == "":
+		# Bridge: an active village remake's copy of the cutscene (VillageRemake).
+		var remade := VillageRemake.sequence_path(path)
+		if remade != "":
+			super.parseFile(remade.get_base_dir() + "/", remade.get_file())
+			return
 		super.parseFile(Values.StorySequences, path + ".seq")
 	else:
 		super.parseFile(path, filename)

@@ -16,6 +16,12 @@ func initStore():
 	confirmNode = MenuNode.new(null, "")
 
 
+## The confirm menu too (Building).
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_PREDELETE:
+		MenuNode.releaseTree(confirmNode)
+
+
 ## Abstract: fills the positive confirm menu.
 func fillPositiveConfirm(n):
 	pass

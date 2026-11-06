@@ -56,11 +56,29 @@ func setDisableColor(c):
 
 ## Removes all the children of this node. resetCursor: true if this method
 ## should also reset the menu cursor.
+##
+## Port fix: a child refers back to its parent, so a removed child with
+## children of its own was a RefCounted cycle that kept the whole removed
+## part of the menu alive. The removed children lose their children too (and
+## keep their parent).
 func removeChildren(resetCursor):
 	if resetCursor:
 		menuCursor = 0
 		bboffset = 0
+	for c in children:
+		c.removeChildren(false)
 	children.clear()
+
+
+## Takes apart the menu that node is in (see removeChildren): node and each
+## of its parents up to the root lose their children (a node is not always
+## one of its parent's children: MapPage.setCurrent). For the owner of a
+## menu (a page, a store, the title screen) when the owner is freed.
+static func releaseTree(node) -> void:
+	while node != null:
+		var parent = node.getParent()
+		node.removeChildren(false)
+		node = parent
 
 
 ## Draws just the children of this node with default configuration, not this

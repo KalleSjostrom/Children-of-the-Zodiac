@@ -96,6 +96,9 @@ tools/art/                the character images (section 9, "Character frames and
                           `--script`): pad_character_frames.gd, pack_character_sheets.gd,
                           rewrite_sprite_frames.gd, character_sets.gd (the sets they work on)
 tools/parity/             screenshot comparison (section 7), contact_sheet.gd
+tools/village_remake/     village remakes from new art (section 9, "Village remakes"; headless
+                          `--script`): remake_inventory.gd, remake_view.gd, remake_build.gd,
+                          remake_check.gd, remake_lib.gd, remake_draw.gd
 tools/bridge_test/        the phase 0 bridge test scene (dev only)
 ```
 
@@ -465,6 +468,30 @@ not in the tree (suspended or previous), so the renderer reports no leaks.
 Grivera--First Floor, which the test enters, is a scene since the phase 2
 rollout; the test passes legacy vs. scene (plan 7.8).
 
+More reference cycles of the port (Java's garbage collector freed them;
+until November 2026 every run reported thousands of leaked objects at
+exit): a floor's graph (its nodes refer to their neighbours both ways and
+to their inventories, which refer back; `LabyrinthMap.release`) is
+released when its `LabyrinthInfo` is freed (a game loaded over this one)
+and, for the map loader's own copy of a floor visited before (the
+renderer's), when its `Labyrinth` is freed; a character's deck refers to
+it weakly (`Deck.owner`); a cutscene drops its time line's reference back
+when it ends (`VillageStory.finishOff`), which also frees its village and
+that village's scene; the world map's nodes drop their roads when the mode
+is freed (`LandscapeLoader`); a menu node refers to its parent, so removed
+menu nodes lose their children (`MenuNode.removeChildren`, also the map
+page's floor list when it is left) and a menu is taken apart when its owner
+is freed (`MenuNode.releaseTree`: the pages, the stores, the title screen).
+When the game quits, `ExitCleanup.release` (from `Main._exit_tree`, after
+the scenes are freed) drops every reference between the script objects
+that the scripts' static variables and the nodes reach, so the rest is
+freed before the renderer shuts down. An exit-time leak report ("ObjectDB
+instances were leaked", "resources still in use", texture RIDs) therefore
+points at a cycle that the game dropped while it ran. The one known: a
+card that the debug console's `cast` makes keeps its precalculated hit
+element, which refers back to it (`CrushingSaber`, `LaceratingCut`,
+`Demolish`; 7 objects in the `effects_*` cases).
+
 ## 9. Villages as scenes (phase 1)
 
 Every place of `maps/Village` (63 places, 89 `.vil` variants; 86 since
@@ -730,6 +757,22 @@ mipmaps, `fix_alpha_border`), a `.char` image line naming it, and for a
 villager placed in a scene a `SpriteFrames` like the others (duplicate one and
 point its sheet at the new one). Or draw 16 frames `<Name>1..16.png` (36×56)
 and run the pack tool. Then regenerate `file_index.txt`.
+
+**Village remakes** (dev only; the village-remake skill,
+`.claude/skills/village-remake/SKILL.md`). A remake is another set of scenes
+for village places, built from new art: `res://proto/villages/<remake>/`
+(`<Place>/<file>.tscn` named like the default scenes, the background and
+overhead pieces, `sequences/<chapter>/<name>.seq` copies of the cutscenes
+with moved positions, and the skill's `layout.json` and reports). It is
+loaded only with `--village=<remake>` or the console's `village <remake>`
+(`VillageRemake`): `VillageScene.path_for` and `VillageStoryLoader.parseFile`
+prefer an active remake's file. A remake scene's villagers start at their
+node and walk its `walk` lines (`ActorView.walk_override`), and the points
+other places' doors return to are moved (`VillageScene.entries_from` /
+`entries_to`, applied in `Village.resume`). `proto/` is not exported. The
+scenes are generated from the default scenes' text by
+`tools/village_remake/remake_build.gd`; edit the layout and build again
+rather than editing them.
 
 ## 10. Dungeons as scenes (phase 2)
 

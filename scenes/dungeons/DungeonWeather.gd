@@ -21,8 +21,17 @@ extends Node3D
 
 const SCENE_DIR := "res://scenes/common/particles/"
 
+## Where the legacy path's eye-space quads go: the camera's transform when a
+## prototype look moves the camera (DungeonScene.show_view, DungeonLook);
+## else they stay at the identity.
+var eye := Transform3D.IDENTITY:
+	set(value):
+		eye = value
+		_eye_moves = true
+
 var _meshes := {}
 var _gpu := {} # pass name -> WeatherParticles3D
+var _eye_moves := false
 static var _indices := PackedInt32Array()
 
 
@@ -46,7 +55,10 @@ func show_gpu(pass_name: StringName, state: Dictionary, style: DungeonStyle, sor
 ## texture coordinates and colours.
 func show_pass(pass_name: StringName, vertices: PackedVector3Array, uvs: PackedVector2Array,
 		colors: PackedColorArray, material: Material, sorting_offset: float) -> void:
-	set_quads(_mesh(pass_name), vertices, uvs, colors, PackedVector3Array(), material, sorting_offset)
+	var mi := _mesh(pass_name)
+	set_quads(mi, vertices, uvs, colors, PackedVector3Array(), material, sorting_offset)
+	if _eye_moves:
+		mi.transform = eye
 
 
 ## Hides a pass (the front pass during a battle).

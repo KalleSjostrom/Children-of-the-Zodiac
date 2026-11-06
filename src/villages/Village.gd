@@ -81,6 +81,10 @@ func resume(detectionMode = null, fadeMusic = null, fadein = null):
 		var dir: int = Values.DOWN
 		if fromHouse != null:
 			dir = int(fromHouse[2] if fromHouse[2] != -1 else Values.DOWN)
+			# Bridge: a remake's scene (VillageRemake) moves the points that
+			# other places' doors return to.
+			if scene_root is VillageScene:
+				fromHouse = scene_root.entry_point(fromHouse)
 		else:
 			fromHouse = [0.0, 0.0, 0.0]
 			fromHouse[0] = player.getPos()[0]

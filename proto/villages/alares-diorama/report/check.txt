@@ -1,0 +1,63 @@
+== Alares: (1408, 768), 437 obstacles
+Reachable from Alares - 0.tscn: 48847 positions
+Exit: bottom edge, positions 432..868 along it
+Exit: right edge, positions 358..454 along it
+-- Alares - 0.tscn
+  1 ok   spawn 0 at (482, 700)
+  2 ok   spawn 1 at (474, 300)
+  3 ok   return point (1069.0, 270.0) (was (1569.0, 1530.0)) at (1069, 270)
+  4 ok   return point (685.0, 606.0) (was (1317.0, 533.0)) at (685, 606)
+  5 ok   door Church at (224, 307) (reached 1 px away, range 50)
+  6 ok   door grasstownWeapons at (179, 564) (reached 1 px away, range 30)
+  7 ok   door Inn at (479, 287) (reached 1 px away, range 30)
+  8 ok   door alaresCardShop at (964, 510) (reached 0 px away, range 30)
+  9 ok   door Alares_-_Belmet's_House at (1069, 255) (reached 1 px away, range 30)
+  10 ok   door Alares_-_Library at (687, 591) (reached 1 px away, range 30)
+  11 ok   sign "North west: Weapon Shop." at (630, 625) (reached 1 px away, range 35)
+  12 ok   sign "Weapon Shop." at (395, 590) (reached 21 px away, range 50)
+  13 ok   sign "Item shop." at (884, 515) (reached 1 px away, range 30)
+  14 ok   sign "The uri mansion." at (875, 275) (reached 29 px away, range 30)
+  15 ok   sign "Hot hot hot!!!" at (304, 562) (reached 0 px away, range 52)
+  16 ok   sign "Maybe we shouldn't read someone elses mail..." at (214, 580) (reached 24 px away, range 30)
+  17 ok   sign "Left: Church and item store." at (1334, 362) (reached 0 px away, range 30)
+  18 ok   loot barrelLoot at (345, 562) (reached 25 px away, range 35)
+  19 ok   loot stoneLoot at (1126, 318) (reached 2 px away, range 35)
+  20 ok   loot treeLoot at (430, 510) (reached 0 px away, range 35)
+  21 ok   villager Bella at (730, 440), walking 4 legs
+  22 ok   villager Elmer at (420, 354), standing
+  23 ok   villager Elthea at (220, 380), walking 4 legs
+  24 ok   villager Eve at (520, 430), walking 4 legs
+  25 ok   villager Farmer Jane at (943, 310), standing
+  26 ok   villager Farmer John at (905, 310), standing
+  27 ok   villager Flog at (850, 520), walking 4 legs
+  28 ok   villager Ghertrudd at (1290, 371), walking 4 legs
+  29 ok   villager Marge at (540, 610), standing
+  30 ok   villager Pavier at (350, 250), standing
+  31 ok   villager Recruiter at (430, 600), standing
+  32 ok   villager Thieving looking guy at (640, 205), standing
+  33 ok   villager Uri at (836, 292), standing
+  34 ok   villager Marcus at (170, 398), standing
+  35 ok   villager Hilda1 at (1365, 416), standing
+-- Alares - 1.tscn
+  36 ok   spawn -1 at (482, 700)
+  37 ok   return point (1069.0, 270.0) (was (1569.0, 1530.0)) at (1069, 270)
+  38 ok   return point (685.0, 606.0) (was (1317.0, 533.0)) at (685, 606)
+  39 ok   villager Bella at (730, 440), walking 4 legs
+  40 ok   villager Eve at (520, 430), walking 4 legs
+  41 ok   villager Farmer Jane at (943, 310), standing
+  42 ok   villager Farmer John at (905, 310), standing
+  43 ok   villager Flog at (850, 520), walking 4 legs
+  44 ok   villager Marge at (540, 610), standing
+  45 ok   villager Uri at (836, 292), standing
+  WARN 46 cutscene Chapter 1 - Running Away From Home/A Permission From Uri (remake copy): Farmer Jane runs into an obstacle at (943, 308); Kin runs into an obstacle at (836, 392)
+  47 ok   cutscene Chapter 1 - Running Away From Home/Alaresnode1 (remake copy)
+  48 ok   cutscene Chapter 1 - Running Away From Home/Meeting a Crazy Man (remake copy)
+  49 ok   cutscene Chapter 1 - Running Away From Home/Talking to Farmer John (remake copy)
+  WARN 50 cutscene Chapter 1 - Running Away From Home/The Revelation of Elmer (remake copy): barncelisExtras runs into an obstacle at (438, 309)
+  51 ok   cutscene Chapter 6 - The End Draws Near/Ending - Part 2.2 (remake copy)
+== Alares - Celis: (1024, 768), 0 obstacles
+-- Alares - Celis at Night - 0.tscn
+  1 spawn -1 at (474, 290)
+  2 ok   cutscene Chapter 1 - Running Away From Home/Someone's Calling (remake copy)
+
+0 failed, 2 warnings

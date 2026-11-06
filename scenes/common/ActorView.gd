@@ -25,7 +25,8 @@ enum Role { RUNTIME, VILLAGER, ANIMATED_OBJECT }
 @export var role: Role = Role.RUNTIME
 ## VILLAGER: the name of the villager line ("_" read as a space): its file is
 ## maps/Village/<villager_folder>/villagers/<villager_name>.char. The node's
-## position is only a preview: the start position is in the .char file.
+## position is only a preview: the start position is in the .char file
+## (unless walk_override).
 @export var villager_name := ""
 ## VILLAGER: the villager is there only when the Database status of its name
 ## is one of these; empty: always.
@@ -37,6 +38,14 @@ enum Role { RUNTIME, VILLAGER, ANIMATED_OBJECT }
 @export var object_name := ""
 ## ANIMATED_OBJECT: the number of images (the first four are animated).
 @export var image_count := 4
+## VILLAGER in a remake's scene (VillageRemake): the villager starts at the
+## node's position and walks walk instead of its .char file's start and in
+## lines (VillageScene._override_walk).
+@export var walk_override := false
+## The walk: one .char "in" line each without the "in" ("<direction>
+## <distance> <stopped>[ <speed>]", direction 0-3 up, right, down, left;
+## stopped: stand still that long). It must end where it starts.
+@export var walk: PackedStringArray = []
 
 ## Key of the mirrored legacy sprite in its sprite map (get_instance_id());
 ## 0 when the actor is not loaded (a villager of another status).

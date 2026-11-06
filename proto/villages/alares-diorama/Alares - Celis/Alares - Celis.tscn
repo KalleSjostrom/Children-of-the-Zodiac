@@ -1,0 +1,183 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/villages/VillageScene.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageSpawn.tscn" id="17_aqxwo"]
+[ext_resource type="Texture2D" path="res://proto/villages/alares-diorama/Alares - Celis/Alares - Celis.png" id="rn_bg"]
+[ext_resource type="Texture2D" path="res://proto/villages/alares-diorama/Alares/top/forest_top.png" id="rn_top0"]
+[ext_resource type="Texture2D" path="res://proto/villages/alares-diorama/Alares/top/mayor_bushes.png" id="rn_top1"]
+[ext_resource type="Texture2D" path="res://proto/villages/alares-diorama/Alares - Celis/top/mayor.png" id="rn_top2"]
+[ext_resource type="Texture2D" path="res://proto/villages/alares-diorama/Alares/top/mayor_fence.png" id="rn_top3"]
+[ext_resource type="Texture2D" path="res://proto/villages/alares-diorama/Alares/top/inn_sign.png" id="rn_top4"]
+[ext_resource type="Texture2D" path="res://proto/villages/alares-diorama/Alares - Celis/top/inn.png" id="rn_top5"]
+[ext_resource type="Texture2D" path="res://proto/villages/alares-diorama/Alares - Celis/top/tree_inn.png" id="rn_top6"]
+[ext_resource type="Texture2D" path="res://proto/villages/alares-diorama/Alares/top/church.png" id="rn_top7"]
+[ext_resource type="Texture2D" path="res://proto/villages/alares-diorama/Alares - Celis/top/fountain.png" id="rn_top8"]
+[ext_resource type="Texture2D" path="res://proto/villages/alares-diorama/Alares - Celis/top/tree_fountain_right.png" id="rn_top9"]
+[ext_resource type="Texture2D" path="res://proto/villages/alares-diorama/Alares - Celis/top/tree_fountain_left.png" id="rn_top10"]
+[ext_resource type="Texture2D" path="res://proto/villages/alares-diorama/Alares - Celis/top/smithy_bush.png" id="rn_top11"]
+[ext_resource type="Texture2D" path="res://proto/villages/alares-diorama/Alares - Celis/top/stall_yard_left.png" id="rn_top12"]
+[ext_resource type="Texture2D" path="res://proto/villages/alares-diorama/Alares - Celis/top/stall.png" id="rn_top13"]
+[ext_resource type="Texture2D" path="res://proto/villages/alares-diorama/Alares - Celis/top/tree_library_left.png" id="rn_top14"]
+[ext_resource type="Texture2D" path="res://proto/villages/alares-diorama/Alares/top/smithy.png" id="rn_top15"]
+[ext_resource type="Texture2D" path="res://proto/villages/alares-diorama/Alares - Celis/top/library.png" id="rn_top16"]
+[ext_resource type="Texture2D" path="res://proto/villages/alares-diorama/Alares - Celis/top/tree_library_right.png" id="rn_top17"]
+[ext_resource type="Texture2D" path="res://proto/villages/alares-diorama/Alares - Celis/top/bookshelf.png" id="rn_top18"]
+[ext_resource type="Texture2D" path="res://proto/villages/alares-diorama/Alares/top/smithy_rail.png" id="rn_top19"]
+[ext_resource type="Texture2D" path="res://proto/villages/alares-diorama/Alares/top/forest_se.png" id="rn_top20"]
+[ext_resource type="Texture2D" path="res://proto/villages/alares-diorama/Alares/top/forest_s.png" id="rn_top21"]
+[ext_resource type="Texture2D" path="res://proto/villages/alares-diorama/Alares/top/forest_sw.png" id="rn_top22"]
+
+[node name="Alares - Celis" instance=ExtResource("1_base")]
+place_name = "Alares - Celis"
+folder_name = "Alares - Celis"
+village_name = "Alares - Celis"
+background_folder = "Alares - Celis"
+day = false
+size = Vector2i(1024, 768)
+actual_size = Vector2i(1024, 768)
+wind_force = PackedFloat64Array(0, 0, 0)
+
+[node name="00 start" parent="Spawns" index="0" instance=ExtResource("17_aqxwo")]
+position = Vector2(474, 290)
+facing = 2
+
+[node name="Background" parent="." index="1"]
+texture = ExtResource("rn_bg")
+
+[node name="00 forest_top" type="Sprite2D" parent="Overhead" index="0"]
+use_parent_material = true
+position = Vector2(0, 0)
+texture = ExtResource("rn_top0")
+centered = false
+
+[node name="01 mayor_bushes" type="Sprite2D" parent="Overhead" index="1"]
+use_parent_material = true
+position = Vector2(952, 238)
+texture = ExtResource("rn_top1")
+centered = false
+
+[node name="02 mayor" type="Sprite2D" parent="Overhead" index="2"]
+use_parent_material = true
+position = Vector2(731, 60)
+texture = ExtResource("rn_top2")
+centered = false
+
+[node name="03 mayor_fence" type="Sprite2D" parent="Overhead" index="3"]
+use_parent_material = true
+position = Vector2(986, 215)
+texture = ExtResource("rn_top3")
+centered = false
+
+[node name="04 inn_sign" type="Sprite2D" parent="Overhead" index="4"]
+use_parent_material = true
+position = Vector2(393, 230)
+texture = ExtResource("rn_top4")
+centered = false
+
+[node name="05 inn" type="Sprite2D" parent="Overhead" index="5"]
+use_parent_material = true
+position = Vector2(415, 66)
+texture = ExtResource("rn_top5")
+centered = false
+
+[node name="06 tree_inn" type="Sprite2D" parent="Overhead" index="6"]
+use_parent_material = true
+position = Vector2(610, 262)
+texture = ExtResource("rn_top6")
+centered = false
+
+[node name="07 church" type="Sprite2D" parent="Overhead" index="7"]
+use_parent_material = true
+position = Vector2(139, 72)
+texture = ExtResource("rn_top7")
+centered = false
+
+[node name="08 fountain" type="Sprite2D" parent="Overhead" index="8"]
+use_parent_material = true
+position = Vector2(670, 323)
+texture = ExtResource("rn_top8")
+centered = false
+
+[node name="09 tree_fountain_right" type="Sprite2D" parent="Overhead" index="9"]
+use_parent_material = true
+position = Vector2(773, 333)
+texture = ExtResource("rn_top9")
+centered = false
+
+[node name="10 tree_fountain_left" type="Sprite2D" parent="Overhead" index="10"]
+use_parent_material = true
+position = Vector2(562, 333)
+texture = ExtResource("rn_top10")
+centered = false
+
+[node name="11 smithy_bush" type="Sprite2D" parent="Overhead" index="11"]
+use_parent_material = true
+position = Vector2(432, 503)
+texture = ExtResource("rn_top11")
+centered = false
+
+[node name="12 stall_yard_left" type="Sprite2D" parent="Overhead" index="12"]
+use_parent_material = true
+position = Vector2(887, 445)
+texture = ExtResource("rn_top12")
+centered = false
+
+[node name="13 stall" type="Sprite2D" parent="Overhead" index="13"]
+use_parent_material = true
+position = Vector2(916, 358)
+texture = ExtResource("rn_top13")
+centered = false
+
+[node name="14 tree_library_left" type="Sprite2D" parent="Overhead" index="14"]
+use_parent_material = true
+position = Vector2(550, 479)
+texture = ExtResource("rn_top14")
+centered = false
+
+[node name="15 smithy" type="Sprite2D" parent="Overhead" index="15"]
+use_parent_material = true
+position = Vector2(148, 402)
+texture = ExtResource("rn_top15")
+centered = false
+
+[node name="16 library" type="Sprite2D" parent="Overhead" index="16"]
+use_parent_material = true
+position = Vector2(617, 468)
+texture = ExtResource("rn_top16")
+centered = false
+
+[node name="17 tree_library_right" type="Sprite2D" parent="Overhead" index="17"]
+use_parent_material = true
+position = Vector2(789, 478)
+texture = ExtResource("rn_top17")
+centered = false
+
+[node name="18 bookshelf" type="Sprite2D" parent="Overhead" index="18"]
+use_parent_material = true
+position = Vector2(550, 568)
+texture = ExtResource("rn_top18")
+centered = false
+
+[node name="19 smithy_rail" type="Sprite2D" parent="Overhead" index="19"]
+use_parent_material = true
+position = Vector2(155, 588)
+texture = ExtResource("rn_top19")
+centered = false
+
+[node name="20 forest_se" type="Sprite2D" parent="Overhead" index="20"]
+use_parent_material = true
+position = Vector2(1019, 440)
+texture = ExtResource("rn_top20")
+centered = false
+
+[node name="21 forest_s" type="Sprite2D" parent="Overhead" index="21"]
+use_parent_material = true
+position = Vector2(564, 697)
+texture = ExtResource("rn_top21")
+centered = false
+
+[node name="22 forest_sw" type="Sprite2D" parent="Overhead" index="22"]
+use_parent_material = true
+position = Vector2(164, 698)
+texture = ExtResource("rn_top22")
+centered = false

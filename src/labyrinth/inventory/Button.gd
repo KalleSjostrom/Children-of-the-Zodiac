@@ -35,6 +35,13 @@ func _init(node = null, dir = null, nrOfTexs = null, image = null, status = null
 	message = "The lever is already on!"
 
 
+## Also drops the hinders (LabyrinthMap.release): the buttons of a combination
+## are each other's hinders.
+func release():
+	super.release()
+	hinders = []
+
+
 ## Sets the settings for the button textures, such as scale, y position and
 ## z offset.
 func setSettings():

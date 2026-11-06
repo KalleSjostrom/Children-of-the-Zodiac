@@ -57,6 +57,13 @@ static var pos: Array = _createPos()
 var page = null
 
 
+## Port fix: the menu's nodes refer to their parents, so the page's menu is
+## taken apart when the page is freed (MenuNode.releaseTree).
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_PREDELETE:
+		MenuNode.releaseTree(activeNode)
+
+
 static func _createImages() -> Array:
 	var ims: Array = J.array(16, "")
 	for i in range(16):

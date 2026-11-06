@@ -11,8 +11,19 @@
 //
 // Include after the render_mode line; the shader that includes it adds
 // nothing else.
+//
+// A prototype look (DungeonLook; proto/pixel) defines LOOK_NEAREST (the
+// texture sampled nearest) and LOOK_BANDS (the light and the fog in
+// look_bands steps) before the include; the default shaders define neither.
 
+#ifdef LOOK_NEAREST
+uniform sampler2D tex : filter_nearest, repeat_disable;
+#else
 uniform sampler2D tex : filter_linear, repeat_disable;
+#endif
+#ifdef LOOK_BANDS
+uniform float look_bands = 6.0;
+#endif
 uniform bool use_tex = true;
 uniform bool lit = false;
 uniform bool fog = false;
@@ -76,6 +87,9 @@ void vertex() {
 
 void fragment() {
 	vec4 c = v_color;
+#ifdef LOOK_BANDS
+	c.rgb = floor(c.rgb * look_bands + 0.5) / look_bands;
+#endif
 	if (use_tex) {
 		c *= texture(tex, UV);
 	}
@@ -93,6 +107,9 @@ void fragment() {
 		if (fog_params.x < 0.5) { f = exp(-fog_params.y * z); }
 		else if (fog_params.x < 1.5) { f = exp(-pow(fog_params.y * z, 2.0)); }
 		else { f = (fog_params.w - z) / max(fog_params.w - fog_params.z, 0.00001); }
+#ifdef LOOK_BANDS
+		f = floor(clamp(f, 0.0, 1.0) * look_bands + 0.5) / look_bands;
+#endif
 		c.rgb = mix(fog_color.rgb, c.rgb, clamp(f, 0.0, 1.0));
 	}
 	ALBEDO = to_linear(clamp(c.rgb, 0.0, 1.0));

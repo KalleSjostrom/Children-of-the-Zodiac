@@ -324,7 +324,7 @@ func _help(args: PackedStringArray) -> Result:
 			current = command.group
 			lines.push_back("-- %s" % current)
 		lines.push_back("%s  %s" % [command.usage().rpad(width), command.help])
-	lines.push_back("Tab completes, Up and Down pick a suggestion or an earlier line, Escape closes.")
+	lines.push_back("Tab completes, Up and Down pick a suggestion (Enter runs it) or an earlier line, Escape closes.")
 	return done("\n".join(lines))
 
 

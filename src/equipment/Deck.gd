@@ -22,7 +22,10 @@ var nrOfCardsShown: int = 0
 var handLine: int = 1
 var currentLine: int = 1
 var shownLines: int = 1
-var owner = null # Character
+## Port fix: the Character, held weakly. The character holds its deck, and
+## reference counting cannot free a reference back (Java's garbage collector
+## freed the party of a game loaded over).
+var owner: WeakRef = null
 var menuCursor: int = 0
 var xDistance: int = X_DISTANCE
 var yDistance: int = Y_DISTANCE
@@ -32,7 +35,7 @@ var change: bool = false
 
 ## Creates an empty deck and the menu hand.
 func _init(owner = null) -> void:
-	self.owner = owner
+	self.owner = weakref(owner) if owner != null else null
 	deck = []
 	hand = MenuHand.new(Values.DOWN)
 
@@ -489,7 +492,8 @@ func getCard(i):
 
 ## Gets the max size of the deck.
 func getDeckSize():
-	return owner.getAttribute(Creature.DECK_SIZE) if owner != null else DEFAULT_DECK_SIZE
+	var character = owner.get_ref() if owner != null else null
+	return character.getAttribute(Creature.DECK_SIZE) if character != null else DEFAULT_DECK_SIZE
 
 
 ## Gets the current number of cards in the deck.

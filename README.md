@@ -55,7 +55,8 @@ Developer options (after `--` on the command line):
 Developer console (debug builds, e.g. run from the editor): the key under
 Escape (§ or `) or F1 opens it; `help` lists the commands. It replaces the
 old Cheater (Space + Down), whose menu the `cheater` command still opens.
-Tab completes names, Up/Down pick a suggestion or an earlier command.
+Tab completes names, Up/Down pick a suggestion (Enter runs it) or an earlier
+command.
 
 | Command | Does |
 |---|---|

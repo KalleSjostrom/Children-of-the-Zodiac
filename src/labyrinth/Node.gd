@@ -199,6 +199,12 @@ func getInventory():
 	return inventory
 
 
+## Drops the references to the neighbours and the inventory (LabyrinthMap.release).
+func release() -> void:
+	neighbors = [null, null, null, null]
+	inventory = null
+
+
 func visit() -> void:
 	if not visited:
 		visited = true

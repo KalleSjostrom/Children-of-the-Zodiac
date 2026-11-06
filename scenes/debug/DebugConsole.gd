@@ -7,7 +7,9 @@ extends CanvasLayer
 ##
 ## What is typed is completed as it goes: the suggestions under the line are
 ## the commands, or the options of the argument being typed; Tab takes the
-## one picked and Up and Down pick another. Without suggestions Up and Down
+## one picked and Up and Down pick another, which Enter then runs as Tab and
+## Enter would (without Up or Down, Enter runs the line as typed: the first
+## suggestion is only for Tab). Without suggestions Up and Down
 ## go through the lines run before, which are kept between runs
 ## (HISTORY_PATH). Escape or the key that opened it closes it.
 ##
@@ -53,6 +55,8 @@ var _suggestion_text: RichTextLabel
 var _suggestions: Array[DebugCommands.Suggestion] = []
 ## The suggestion Tab takes, -1 for none.
 var _picked := -1
+## _picked was picked with Up or Down: Enter runs it.
+var _picked_by_hand := false
 ## Lines run, the latest last.
 var _history: PackedStringArray = []
 ## Going through the history: how far back (0 the latest), -1 on the line
@@ -199,6 +203,9 @@ func _input(event: InputEvent) -> void:
 			close()
 		KEY_TAB:
 			_take_suggestion()
+		KEY_ENTER, KEY_KP_ENTER:
+			if not _run_picked():
+				return # the line edit runs the line as typed
 		KEY_UP:
 			_go(-1)
 		KEY_DOWN:
@@ -250,6 +257,7 @@ func _scroll(pages: int) -> void:
 func _refresh_suggestions() -> void:
 	_suggestions = commands.complete(_line.text) if is_open and _history_index < 0 else []
 	_picked = -1
+	_picked_by_hand = false
 	for i in range(_suggestions.size()):
 		if _suggestions[i].line != "":
 			_picked = i
@@ -265,6 +273,7 @@ func _pick(step: int) -> void:
 		if _suggestions[index].line != "":
 			_picked = index
 			break
+	_picked_by_hand = true
 	_show_suggestions()
 
 
@@ -274,6 +283,15 @@ func _take_suggestion() -> void:
 	_line.text = _suggestions[_picked].line
 	_line.caret_column = _line.text.length()
 	_refresh_suggestions()
+
+
+## Enter on a suggestion picked with Up or Down: runs it, as Tab and Enter
+## would. False if none was picked so (Enter runs the line as typed then).
+func _run_picked() -> bool:
+	if not _picked_by_hand or _history_index >= 0 or _picked < 0:
+		return false
+	_on_line_text_submitted(_suggestions[_picked].line)
+	return true
 
 
 func _show_suggestions() -> void:

@@ -1,0 +1,376 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://proto/villages/alares-diorama/Alares/Alares.tscn" id="1_base"]
+[ext_resource type="Script" path="res://scenes/villages/VillageBuilding.gd" id="2_fnuva"]
+[ext_resource type="PackedScene" path="res://scenes/common/ActorView.tscn" id="3_jntiu"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Alares/GTgirlpink.tres" id="5_o3aec"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Alares/GTElmer.tres" id="6_3mh2a"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Alares/GTladybrown.tres" id="7_6a8gd"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Alares/GTgirlbrown.tres" id="8_53wm1"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Alares/GTgirlfarm.tres" id="9_8fnf4"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Alares/GTboyfarmer.tres" id="10_ofvyh"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Alares/GTboygreen.tres" id="11_prflg"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Alares/GTladyhat.tres" id="12_bsrxq"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Alares/Marge.tres" id="13_jkbsu"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Alares/GTredhair.tres" id="14_6ey5x"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Alares/Recruitingsoldier.tres" id="15_npu4k"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Alares/GTthief.tres" id="16_yq127"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Alares/GTleader.tres" id="17_ks1tj"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Characters/Marcus.tres" id="18_xc0yj"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Alares/Hilda.tres" id="19_4inr4"]
+[ext_resource type="PackedScene" path="res://scenes/common/particles/LegacyParticles2D.tscn" id="20_sd3of"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageSpawn.tscn" id="21_48hf0"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageDoor.tscn" id="22_kpjtv"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageSign.tscn" id="23_a658j"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageLoot.tscn" id="24_vae2y"]
+
+[sub_resource type="Resource" id="Resource_kvgcx"]
+script = ExtResource("2_fnuva")
+store_name = "Church"
+background = "alaresChurch.jpg"
+keeper = "alaresPastorMikel.png"
+keeper_name = "Pastor Mikel"
+first_line = "How can I be of assistance?"
+second_line = " "
+music = "Alares Church"
+
+[sub_resource type="Resource" id="Resource_gd7jb"]
+script = ExtResource("2_fnuva")
+store_name = "grasstownWeapons"
+background = "alaresWeaponShop.jpg"
+keeper = "alaresWeaponShopClerk.png"
+keeper_name = "Clerk"
+first_line = "What can I do for you?"
+second_line = " "
+music = "Item Shop"
+
+[sub_resource type="Resource" id="Resource_ce2cv"]
+script = ExtResource("2_fnuva")
+store_name = "Inn"
+background = "alaresInn.jpg"
+keeper = "alaresInnKeeperBurt.png"
+keeper_name = "Burt"
+first_line = "Whaddaya want?!"
+second_line = " "
+music = "House"
+
+[sub_resource type="Resource" id="Resource_fyq4h"]
+script = ExtResource("2_fnuva")
+store_name = "alaresCardShop"
+background = "alaresCardShop.jpg"
+keeper = "alaresCardShopDenther.png"
+keeper_name = "Denter"
+first_line = "Want any cards?"
+second_line = " "
+music = "Item Shop"
+
+[node name="Alares - 0" instance=ExtResource("1_base")]
+has_wind = true
+wind_force = PackedFloat64Array(10, 0, 0)
+wind_turbulence = 0.1
+buildings = Array[ExtResource("2_fnuva")]([SubResource("Resource_kvgcx"), SubResource("Resource_gd7jb"), SubResource("Resource_ce2cv"), SubResource("Resource_fyq4h")])
+
+[node name="01 Bella" parent="Actors" index="0" instance=ExtResource("3_jntiu")]
+position = Vector2(730, 440)
+sprite_frames = ExtResource("5_o3aec")
+animation = &"down"
+role = 1
+villager_name = "Bella"
+statuses = PackedInt32Array()
+villager_folder = "Alares"
+walk_override = true
+walk = PackedStringArray("1 100 false", "2 150 false", "2 100 true", "0 150 false", "3 100 false", "2 100 true")
+
+[node name="02 Elmer" parent="Actors" index="1" instance=ExtResource("3_jntiu")]
+position = Vector2(420, 354)
+sprite_frames = ExtResource("6_3mh2a")
+animation = &"down"
+role = 1
+villager_name = "Elmer"
+statuses = PackedInt32Array()
+villager_folder = "Alares"
+walk_override = true
+walk = PackedStringArray("2 180 true")
+
+[node name="03 Elthea" parent="Actors" index="2" instance=ExtResource("3_jntiu")]
+position = Vector2(220, 380)
+sprite_frames = ExtResource("7_6a8gd")
+animation = &"down"
+role = 1
+villager_name = "Elthea"
+statuses = PackedInt32Array()
+villager_folder = "Alares"
+walk_override = true
+walk = PackedStringArray("1 160 false", "1 50 true", "0 40 false", "2 50 true", "2 40 false", "3 160 false", "3 50 true")
+
+[node name="04 Eve" parent="Actors" index="3" instance=ExtResource("3_jntiu")]
+position = Vector2(520, 430)
+sprite_frames = ExtResource("8_53wm1")
+animation = &"up"
+role = 1
+villager_name = "Eve"
+statuses = PackedInt32Array()
+villager_folder = "Alares"
+walk_override = true
+walk = PackedStringArray("0 30 false", "1 150 false", "0 50 true", "2 30 false", "3 150 false", "2 50 true")
+
+[node name="05 Farmer Jane" parent="Actors" index="4" instance=ExtResource("3_jntiu")]
+position = Vector2(943, 310)
+sprite_frames = ExtResource("9_8fnf4")
+animation = &"down"
+role = 1
+villager_name = "Farmer Jane"
+statuses = PackedInt32Array()
+villager_folder = "Alares"
+walk_override = true
+walk = PackedStringArray("2 100 true")
+
+[node name="06 Farmer John" parent="Actors" index="5" instance=ExtResource("3_jntiu")]
+position = Vector2(905, 310)
+sprite_frames = ExtResource("10_ofvyh")
+animation = &"down"
+role = 1
+villager_name = "Farmer John"
+statuses = PackedInt32Array()
+villager_folder = "Alares"
+walk_override = true
+walk = PackedStringArray("2 100 true")
+
+[node name="07 Flog" parent="Actors" index="6" instance=ExtResource("3_jntiu")]
+position = Vector2(850, 520)
+sprite_frames = ExtResource("11_prflg")
+animation = &"left"
+role = 1
+villager_name = "Flog"
+statuses = PackedInt32Array()
+villager_folder = "Alares"
+walk_override = true
+walk = PackedStringArray("1 90 false", "1 50 true", "3 90 false", "2 100 false", "2 50 true", "0 100 false")
+
+[node name="08 Ghertrudd" parent="Actors" index="7" instance=ExtResource("3_jntiu")]
+position = Vector2(1290, 371)
+sprite_frames = ExtResource("12_bsrxq")
+animation = &"right"
+role = 1
+villager_name = "Ghertrudd"
+statuses = PackedInt32Array()
+villager_folder = "Alares"
+walk_override = true
+walk = PackedStringArray("3 100 false", "3 50 true", "1 100 false", "1 40 false", "1 50 true", "3 40 false")
+
+[node name="09 Marge" parent="Actors" index="8" instance=ExtResource("3_jntiu")]
+position = Vector2(540, 610)
+sprite_frames = ExtResource("13_jkbsu")
+animation = &"down"
+role = 1
+villager_name = "Marge"
+statuses = PackedInt32Array()
+villager_folder = "Alares"
+walk_override = true
+walk = PackedStringArray("2 180 true")
+
+[node name="10 Pavier" parent="Actors" index="9" instance=ExtResource("3_jntiu")]
+position = Vector2(350, 250)
+sprite_frames = ExtResource("14_6ey5x")
+animation = &"down"
+role = 1
+villager_name = "Pavier"
+statuses = PackedInt32Array()
+villager_folder = "Alares"
+walk_override = true
+walk = PackedStringArray("2 180 true")
+
+[node name="11 Recruiter" parent="Actors" index="10" instance=ExtResource("3_jntiu")]
+position = Vector2(430, 600)
+sprite_frames = ExtResource("15_npu4k")
+animation = &"down"
+role = 1
+villager_name = "Recruiter"
+statuses = PackedInt32Array()
+villager_folder = "Alares"
+walk_override = true
+walk = PackedStringArray("2 180 true")
+
+[node name="12 Thieving looking guy" parent="Actors" index="11" instance=ExtResource("3_jntiu")]
+position = Vector2(640, 205)
+sprite_frames = ExtResource("16_yq127")
+animation = &"down"
+role = 1
+villager_name = "Thieving looking guy"
+statuses = PackedInt32Array(1, 2, 3, 4, 5)
+villager_folder = "Alares"
+walk_override = true
+walk = PackedStringArray("2 180 true")
+
+[node name="13 Uri" parent="Actors" index="12" instance=ExtResource("3_jntiu")]
+position = Vector2(836, 292)
+sprite_frames = ExtResource("17_ks1tj")
+animation = &"down"
+role = 1
+villager_name = "Uri"
+statuses = PackedInt32Array()
+villager_folder = "Alares"
+walk_override = true
+walk = PackedStringArray("2 100 true")
+
+[node name="14 Marcus" parent="Actors" index="13" instance=ExtResource("3_jntiu")]
+position = Vector2(170, 398)
+sprite_frames = ExtResource("18_xc0yj")
+animation = &"down"
+role = 1
+villager_name = "Marcus"
+statuses = PackedInt32Array(6)
+villager_folder = "Alares"
+walk_override = true
+walk = PackedStringArray("2 180 true")
+
+[node name="15 Hilda1" parent="Actors" index="14" instance=ExtResource("3_jntiu")]
+position = Vector2(1365, 416)
+sprite_frames = ExtResource("19_4inr4")
+animation = &"left"
+role = 1
+villager_name = "Hilda1"
+statuses = PackedInt32Array(4)
+villager_folder = "Alares"
+walk_override = true
+walk = PackedStringArray("3 250 true")
+
+[node name="00 smokesystemAlares" parent="Effects" index="0" instance=ExtResource("20_sd3of")]
+position = Vector2(326, 435)
+system_name = "smokesystemAlares"
+
+[node name="00 start0" parent="Spawns" index="0" instance=ExtResource("21_48hf0")]
+position = Vector2(482, 700)
+number = 0
+
+[node name="01 start1" parent="Spawns" index="1" instance=ExtResource("21_48hf0")]
+position = Vector2(474, 300)
+number = 1
+facing = 2
+
+[node name="00 Church" parent="Doors" index="0" instance=ExtResource("22_kpjtv")]
+position = Vector2(224, 307)
+kinds = PackedStringArray("church")
+targets = PackedStringArray("Church")
+radius = 50
+directions = PackedInt32Array(0)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray()
+
+[node name="01 grasstownWeapons" parent="Doors" index="1" instance=ExtResource("22_kpjtv")]
+position = Vector2(179, 564)
+kinds = PackedStringArray("weapon")
+targets = PackedStringArray("grasstownWeapons")
+directions = PackedInt32Array(0)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray()
+
+[node name="02 Inn" parent="Doors" index="2" instance=ExtResource("22_kpjtv")]
+position = Vector2(479, 287)
+kinds = PackedStringArray("inn")
+targets = PackedStringArray("Inn")
+directions = PackedInt32Array(0)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray(" I\'m out, come back later.", "  - Innkeeper Burt.")
+
+[node name="03 alaresCardShop" parent="Doors" index="3" instance=ExtResource("22_kpjtv")]
+position = Vector2(964, 510)
+kinds = PackedStringArray("card")
+targets = PackedStringArray("alaresCardShop")
+directions = PackedInt32Array(0)
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray()
+
+[node name="04 Alares_-_Belmet\'s_House" parent="Doors" index="4" instance=ExtResource("22_kpjtv")]
+position = Vector2(1069, 255)
+kinds = PackedStringArray("house")
+targets = PackedStringArray("Alares_-_Belmet\'s_House")
+directions = PackedInt32Array(0)
+fade = 2
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray(" No one is home.")
+
+[node name="05 Alares_-_Library" parent="Doors" index="5" instance=ExtResource("22_kpjtv")]
+position = Vector2(687, 591)
+kinds = PackedStringArray("house")
+targets = PackedStringArray("Alares_-_Library")
+directions = PackedInt32Array(0)
+fade = 2
+to_pos = PackedFloat64Array()
+sign_lines = PackedStringArray(" The library is closed.")
+
+[node name="00 North west_ Weapon Shop_" parent="Signs" index="0" instance=ExtResource("23_a658j")]
+position = Vector2(630, 625)
+radius = 35
+directions = PackedInt32Array(0)
+lines = PackedStringArray("North west: Weapon Shop.", "North east: Scientist Belmets residence.")
+listed = Array[bool]([true, true])
+
+[node name="01 Weapon Shop_" parent="Signs" index="1" instance=ExtResource("23_a658j")]
+position = Vector2(395, 590)
+radius = 50
+directions = PackedInt32Array(0)
+lines = PackedStringArray("Weapon Shop.")
+listed = Array[bool]([true])
+
+[node name="02 Item shop_" parent="Signs" index="2" instance=ExtResource("23_a658j")]
+position = Vector2(884, 515)
+radius = 30
+directions = PackedInt32Array(0)
+lines = PackedStringArray("Item shop.")
+listed = Array[bool]([true])
+
+[node name="03 The uri mansion_" parent="Signs" index="3" instance=ExtResource("23_a658j")]
+position = Vector2(875, 275)
+radius = 30
+directions = PackedInt32Array(0)
+lines = PackedStringArray("The uri mansion.")
+listed = Array[bool]([true])
+
+[node name="04 Hot hot hot!!!" parent="Signs" index="4" instance=ExtResource("23_a658j")]
+position = Vector2(304, 562)
+radius = 52
+directions = PackedInt32Array(0)
+lines = PackedStringArray("Hot hot hot!!!")
+listed = Array[bool]([true])
+
+[node name="05 Maybe we shouldn\'t read" parent="Signs" index="5" instance=ExtResource("23_a658j")]
+position = Vector2(214, 580)
+radius = 30
+directions = PackedInt32Array(0)
+lines = PackedStringArray("Maybe we shouldn\'t read someone elses mail...")
+listed = Array[bool]([true])
+
+[node name="06 Left_ Church and item st" parent="Signs" index="6" instance=ExtResource("23_a658j")]
+position = Vector2(1334, 362)
+radius = 30
+directions = PackedInt32Array(0)
+lines = PackedStringArray("Left: Church and item store.", "Right: Town square.")
+listed = Array[bool]([true, true])
+
+[node name="00 barrelLoot" parent="Loot" index="0" instance=ExtResource("24_vae2y")]
+position = Vector2(345, 562)
+loot_name = "barrelLoot"
+directions = PackedInt32Array(0)
+content_name = "cards.magic.Ice"
+content_type = 2
+card_level = 1
+all_cards = true
+lines = PackedStringArray("A card was wedged in between the barrels!")
+
+[node name="01 stoneLoot" parent="Loot" index="1" instance=ExtResource("24_vae2y")]
+position = Vector2(1126, 318)
+loot_name = "stoneLoot"
+directions = PackedInt32Array(0, 1, 2, 3)
+content_name = "25"
+amount = 25
+lines = PackedStringArray("You found 25 gold coins under the stone!")
+
+[node name="02 treeLoot" parent="Loot" index="2" instance=ExtResource("24_vae2y")]
+position = Vector2(430, 510)
+loot_name = "treeLoot"
+directions = PackedInt32Array(0, 1, 2, 3)
+content_name = "cards.offense.BattleCard"
+content_type = 2
+card_level = 2
+lines = PackedStringArray("You found a card hidden among the", "leaves of the small tree!")

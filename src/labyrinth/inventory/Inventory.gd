@@ -202,6 +202,11 @@ func getNode():
 	return node
 
 
+## Drops the reference to the node (LabyrinthMap.release).
+func release():
+	node = null
+
+
 func getDirection():
 	return dir
 

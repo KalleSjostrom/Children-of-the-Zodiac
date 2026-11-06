@@ -132,6 +132,13 @@ func finishOff():
 	nextPlace = Load.getStartLocation()
 
 
+## Port fix: the menu's nodes refer to their parents (MenuNode.removeChildren),
+## so the menu is taken apart when the title screen is freed.
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_PREDELETE:
+		MenuNode.releaseTree(activeNode)
+
+
 func draw(g, alpha = null):
 	g.setColor(1)
 	g.setFontSize(24)

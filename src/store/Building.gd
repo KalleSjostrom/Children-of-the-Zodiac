@@ -40,6 +40,13 @@ func init(info, lab = null, hinders = null):
 	Dialog.getDialog().resetDialog()
 
 
+## Port fix: the menu's nodes refer to their parents, so the menu is taken
+## apart when the building is freed (MenuNode.releaseTree).
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_PREDELETE:
+		MenuNode.releaseTree(activeNode)
+
+
 func setStoreImages(p_store):
 	store = p_store
 

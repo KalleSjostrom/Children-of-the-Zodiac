@@ -369,9 +369,16 @@ func exitWithoutFading(p_mode: int) -> void:
 ## Phase 2 (docs/ARCHITECTURE.md section 10): reports in the log that the
 ## floor's mode is freed (its scene with it), so parity runs show that every
 ## floor left is.
+##
+## Port fix: a floor visited before uses the map of the visited labyrinths
+## (Database), and the map loader's own map of the floor (the renderer's) is
+## released here; the graph cannot be freed by reference counting
+## (LabyrinthMap.release).
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_PREDELETE:
 		print("Labyrinth: freed %s" % name)
+		if mapLoader != null and graph != null and mapLoader.getMap() != graph.map:
+			mapLoader.getMap().release()
 
 
 func releaseBackReferences():

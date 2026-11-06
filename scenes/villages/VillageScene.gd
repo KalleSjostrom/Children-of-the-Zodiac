@@ -74,6 +74,11 @@ const STORY_IMAGE := preload("res://scenes/common/StoryImage.tscn")
 @export var night_screen_fixed := false
 ## The buildings the doors lead to.
 @export var buildings: Array[VillageBuilding] = []
+## A remake (VillageRemake) moves the points that other places' doors bring
+## the player back to (their to_pos, in the default scene's coordinates): a
+## return to entries_from[i] lands on entries_to[i] (entry_point).
+@export var entries_from: PackedVector2Array = []
+@export var entries_to: PackedVector2Array = []
 
 static var _alpha_materials := {}
 
@@ -95,12 +100,31 @@ var _story_image: StoryImage
 
 
 ## The scene for the .vil file at vil_path (res://maps/Village/<Place>/<file>.vil,
-## as GameResourceLoader resolves it), or "" when there is none.
+## as GameResourceLoader resolves it), or "" when there is none: an active
+## remake's (VillageRemake), else the one in scenes/villages/.
 static func path_for(vil_path: String) -> String:
 	if not vil_path.begins_with(VILLAGE_MAPS):
 		return ""
-	var path := SCENE_DIR + vil_path.trim_prefix(VILLAGE_MAPS).get_basename() + ".tscn"
+	var relative := vil_path.trim_prefix(VILLAGE_MAPS).get_basename() + ".tscn"
+	var remade := VillageRemake.scene_path(relative)
+	if remade != "":
+		return remade
+	var path := SCENE_DIR + relative
 	return path if ResourceLoader.exists(path) else ""
+
+
+## The point a door of another place returns the player to (Village.fromHouse:
+## [y, x, direction, start], see Values.X/Y), moved by entries_from /
+## entries_to; the same array when it is not moved.
+func entry_point(to_pos: Array) -> Array:
+	for i in entries_from.size():
+		var from := entries_from[i]
+		if absf(to_pos[Values.X] - from.x) < 1.0 and absf(to_pos[Values.Y] - from.y) < 1.0:
+			var moved := to_pos.duplicate()
+			moved[Values.X] = entries_to[i].x
+			moved[Values.Y] = entries_to[i].y
+			return moved
+	return to_pos
 
 
 ## Fills the legacy village loader vl (a VillageLoader that has its infoMap
@@ -287,6 +311,8 @@ func _load_actor(vl, view: ActorView) -> void:
 				Database.addStatus(view.villager_name, status)
 			if view.statuses.is_empty() or view.statuses.has(status):
 				var v := Villager.new(view.villager_name, view.villager_folder, status)
+				if view.walk_override:
+					_override_walk(v, view)
 				vl.sprites[v.get_instance_id()] = v
 				view.sprite_key = v.get_instance_id()
 		ActorView.Role.ANIMATED_OBJECT:
@@ -294,6 +320,19 @@ func _load_actor(vl, view: ActorView) -> void:
 			var ao := AnimatedObjects.new(vl.folderName, view.object_name, pos, view.image_count)
 			vl.sprites[ao.get_instance_id()] = ao
 			view.sprite_key = ao.get_instance_id()
+
+
+## A remake's villager (ActorView.walk_override): it starts at the view's
+## position and walks the view's walk lines instead of its .char file's
+## start and in lines (its dialogs stay the .char file's).
+static func _override_walk(v: Villager, view: ActorView) -> void:
+	v.pos = Values.createNormalFloatPoint(view.position.x, view.position.y)
+	v.instructions = Instructions.new()
+	v.currentInstructions = v.instructions
+	for line in view.walk:
+		v.instructions.executeCommand("in", StringTokenizer.new(line))
+	assert(v.instructions.check(), "VillageScene: %s's walk does not end where it starts" % view.villager_name)
+	v.setInstructions(0)
 
 
 ## The children of parent that are of type, in order.

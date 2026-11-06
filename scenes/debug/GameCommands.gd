@@ -2,7 +2,7 @@ class_name GameCommands
 extends RefCounted
 ## The game's commands for the debug console (COTZ-006, DebugConsole):
 ## places (goto, exits, teleport, savepoint, boss, cheater), the party and
-## battles (heal, god, kill, skip), the world (map, roads, noenemies) and
+## battles (heal, god, kill, skip), the world (map, roads, noenemies, look, village) and
 ## development (status, trigger, difficulty, save, padlost, emotion). They replace the
 ## developer Cheater, whose menu the "cheater" command still opens.
 ##
@@ -65,6 +65,11 @@ func _register(c: DebugCommands) -> void:
 	c.add("roads", "Opens the roads of the world map", _roads, [
 		DebugCommands.opt("continent", func() -> PackedStringArray: return PackedStringArray(ROAD_ZONES.keys()), "all if left out")])
 	c.add("noenemies", "No random battles in labyrinths", _noenemies, [DebugCommands.switch()])
+	c.add("look", "Switches the prototype look of the labyrinths (docs/LOOK_PROTOTYPES_PLAN.md) and enters this floor again in it", _look, [
+		DebugCommands.opt("look", func() -> PackedStringArray: return DungeonLook.names()),
+		DebugCommands.opt("settings", Callable(), "key=value ...; look <name> alone lists them").to_end().loose()])
+	c.add("village", "Switches the village remakes (VillageRemake, the village-remake skill) and enters this village again in them", _village, [
+		DebugCommands.opt("remake", _remake_names, "off for none; a,b for several")])
 	c.group("Game")
 	c.add("status", "Where the game is: mode, place, labyrinth position, difficulty", _status)
 	c.add("trigger", "Shows or sets a Database status (trigger)", _trigger, [
@@ -592,6 +597,70 @@ func _noenemies(args: PackedStringArray) -> DebugCommands.Result:
 	if lab != null:
 		lab.noEncounters = Main.no_encounters
 	return DebugCommands.done("No random battles %s" % DebugCommands.on_off(Main.no_encounters))
+
+
+## Switches the prototype look (DungeonLook): its global part at once. On a
+## labyrinth floor, outside a battle or riddle, the floor is entered again at
+## the same node and facing, so that it takes the look; elsewhere floors
+## take it when they are entered.
+func _look(args: PackedStringArray) -> DebugCommands.Result:
+	if args.is_empty():
+		return DebugCommands.done("Look: %s %s(%s)" % [Main.look, _look_settings(), ", ".join(DungeonLook.names())])
+	var settings := DungeonLook.parse_settings(args[1]) if args.size() > 1 else {}
+	var bad := DungeonLook.set_current(StringName(args[0]), settings)
+	if bad != "":
+		return DebugCommands.fail(bad)
+	var now := "Look: %s %s" % [Main.look, _look_settings()]
+	var lab := _labyrinth()
+	if lab == null or lab.runSubGameMode or _ready_for_jump() != null:
+		return DebugCommands.done(now + "; floors take it when they are entered")
+	var floor: String = lab.getName()
+	var place := _place_on_floor(floor)
+	if place == "":
+		return DebugCommands.done(now + "; %s takes it when it is entered" % floor)
+	var address: int = lab.currentNode.getAddress()
+	# The facing as a save has it (Values.UP ... LEFT; the player's
+	# getDirection is the camera's angle in degrees).
+	var direction: int = lab.getPlayerDirection()
+	Load.labyrinthPosition = [floor, address, direction]
+	_organizer().jump_to(place)
+	return DebugCommands.done(now + "; entering %s again" % floor)
+
+
+static func _look_settings() -> String:
+	var s := DungeonLook.current_settings()
+	return "" if s == "" else "(%s) " % s
+
+
+static func _remake_names() -> PackedStringArray:
+	var names := VillageRemake.names()
+	names.append("off")
+	return names
+
+
+## Switches the village remakes (VillageRemake): places take them when they
+## are next loaded. In a village, outside a cutscene, the village is entered
+## again (at its first start), so that it takes them.
+func _village(args: PackedStringArray) -> DebugCommands.Result:
+	if args.is_empty():
+		return DebugCommands.done("Village remakes: %s (%s)" % [_remakes_on(), ", ".join(VillageRemake.names())])
+	var list := PackedStringArray() if args[0] == "off" else args[0].split(",", false)
+	var bad := VillageRemake.set_active(list)
+	if bad != "":
+		return DebugCommands.fail(bad)
+	var now := "Village remakes: %s" % _remakes_on()
+	var village := _mode() as Village
+	if village == null or _ready_for_jump() != null:
+		return DebugCommands.done(now + "; villages take them when they are entered")
+	var place := str(village.getName())
+	if _organizer().getInformationFor(place) == null:
+		return DebugCommands.done(now + "; %s takes them when it is entered" % place)
+	_organizer().jump_to(place)
+	return DebugCommands.done(now + "; entering %s again" % place)
+
+
+static func _remakes_on() -> String:
+	return "off" if VillageRemake.active.is_empty() else ", ".join(VillageRemake.active)
 
 
 # --- Game ---

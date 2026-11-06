@@ -193,6 +193,10 @@ func circlePressed(pressAnyWay = null):
 func zoomOut():
 	var n = activeNode.getParent()
 	if n != null:
+		# Port fix: the floors' node (setCurrent) is not one of n's children,
+		# and its children refer back to it (MenuNode.removeChildren): they
+		# are removed when it is left.
+		activeNode.removeChildren(false)
 		activeNode = MenuNode.switchNode(activeNode, n)
 		activeNode.updateHandPos()
 	else:

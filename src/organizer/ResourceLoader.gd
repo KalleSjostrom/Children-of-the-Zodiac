@@ -147,6 +147,9 @@ static func _readFileText(path: String) -> String:
 ## Gets a line reader (java.io.BufferedReader) for the file path + filename.
 func getBufferedReader(path: String, filename: String = "") -> BufferedReader:
 	var full := path + filename
+	# Bridge: a village remake's files (VillageRemake) are not in the index.
+	if full.begins_with(VillageRemake.ROOT):
+		return BufferedReader.new(_readFileText(full)) if FileAccess.file_exists(full) else null
 	var res := resolve(full)
 	if res == "":
 		push_error("ResourceLoader: file not found: " + full)

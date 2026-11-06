@@ -1,0 +1,1592 @@
+{
+	"features": {
+		"Actors/Bella": {
+			"number": 21,
+			"pos": [
+				1310,
+				585
+			],
+			"standing": false,
+			"statuses": [],
+			"text": "villager Bella (GTgirlpink), walking: 2 140 false | 3 290 false | 2 480 false | 3 100 true | 1 100 true | 2 100 true | 0 480 false | 1 290 false | 0 140 false | 2 400 true",
+			"variants": [
+				"Alares - 0.tscn",
+				"Alares - 1.tscn"
+			],
+			"villager": "Bella",
+			"walk": [
+				"2 140 false",
+				"3 290 false",
+				"2 480 false",
+				"3 100 true",
+				"1 100 true",
+				"2 100 true",
+				"0 480 false",
+				"1 290 false",
+				"0 140 false",
+				"2 400 true"
+			]
+		},
+		"Actors/Elmer": {
+			"number": 22,
+			"pos": [
+				800,
+				315
+			],
+			"standing": true,
+			"statuses": [],
+			"text": "villager Elmer (GTElmer), standing: 2 180 true",
+			"variants": [
+				"Alares - 0.tscn"
+			],
+			"villager": "Elmer",
+			"walk": [
+				"2 180 true"
+			]
+		},
+		"Actors/Elthea": {
+			"number": 23,
+			"pos": [
+				205,
+				540
+			],
+			"standing": false,
+			"statuses": [],
+			"text": "villager Elthea (GTladybrown), walking: 2 500 false | 2 50 true | 3 50 true | 2 50 true | 1 505 false | 1 50 true | 2 155 false | 1 70 false | 1 50 true | 2 50 true | 1 400 true | 3 70 false | 0 155 false | 3 50 true | 0 290 false | 2 400 true | 2 445 false | 1 70 false | 1 50 true | 2 50 true | 1 400 true | 3 70 false | 0 155 false | 3 505 false | 0 500 false | 2 400 true",
+			"variants": [
+				"Alares - 0.tscn"
+			],
+			"villager": "Elthea",
+			"walk": [
+				"2 500 false",
+				"2 50 true",
+				"3 50 true",
+				"2 50 true",
+				"1 505 false",
+				"1 50 true",
+				"2 155 false",
+				"1 70 false",
+				"1 50 true",
+				"2 50 true",
+				"1 400 true",
+				"3 70 false",
+				"0 155 false",
+				"3 50 true",
+				"0 290 false",
+				"2 400 true",
+				"2 445 false",
+				"1 70 false",
+				"1 50 true",
+				"2 50 true",
+				"1 400 true",
+				"3 70 false",
+				"0 155 false",
+				"3 505 false",
+				"0 500 false",
+				"2 400 true"
+			]
+		},
+		"Actors/Eve": {
+			"number": 24,
+			"pos": [
+				1370,
+				1220
+			],
+			"standing": false,
+			"statuses": [],
+			"text": "villager Eve (GTgirlbrown), walking: 0 50 false | 3 200 false | 0 50 true | 2 50 true | 3 50 true | 1 50 true | 2 100 false | 1 100 false | 0 50 true | 2 50 true | 1 50 true | 3 50 true | 0 50 false | 1 100 false | 0 50 true | 2 50 true | 3 50 true | 1 50 true",
+			"variants": [
+				"Alares - 0.tscn",
+				"Alares - 1.tscn"
+			],
+			"villager": "Eve",
+			"walk": [
+				"0 50 false",
+				"3 200 false",
+				"0 50 true",
+				"2 50 true",
+				"3 50 true",
+				"1 50 true",
+				"2 100 false",
+				"1 100 false",
+				"0 50 true",
+				"2 50 true",
+				"1 50 true",
+				"3 50 true",
+				"0 50 false",
+				"1 100 false",
+				"0 50 true",
+				"2 50 true",
+				"3 50 true",
+				"1 50 true"
+			]
+		},
+		"Actors/Farmer Jane": {
+			"number": 25,
+			"pos": [
+				1575,
+				1200
+			],
+			"standing": true,
+			"statuses": [],
+			"text": "villager Farmer Jane (GTgirlfarm), standing: 2 100 true",
+			"variants": [
+				"Alares - 0.tscn",
+				"Alares - 1.tscn"
+			],
+			"villager": "Farmer Jane",
+			"walk": [
+				"2 100 true"
+			]
+		},
+		"Actors/Farmer John": {
+			"number": 26,
+			"pos": [
+				1550,
+				1200
+			],
+			"standing": true,
+			"statuses": [],
+			"text": "villager Farmer John (GTboyfarmer), standing: 2 100 true",
+			"variants": [
+				"Alares - 0.tscn",
+				"Alares - 1.tscn"
+			],
+			"villager": "Farmer John",
+			"walk": [
+				"2 100 true"
+			]
+		},
+		"Actors/Flog": {
+			"number": 27,
+			"pos": [
+				1090,
+				1700
+			],
+			"standing": false,
+			"statuses": [],
+			"text": "villager Flog (GTboygreen), walking: 3 100 false | 2 100 false | 1 100 false | 0 100 false | 1 50 true | 2 100 false | 3 100 false | 0 100 false | 1 100 false | 0 50 true",
+			"variants": [
+				"Alares - 0.tscn",
+				"Alares - 1.tscn"
+			],
+			"villager": "Flog",
+			"walk": [
+				"3 100 false",
+				"2 100 false",
+				"1 100 false",
+				"0 100 false",
+				"1 50 true",
+				"2 100 false",
+				"3 100 false",
+				"0 100 false",
+				"1 100 false",
+				"0 50 true"
+			]
+		},
+		"Actors/Ghertrudd": {
+			"number": 28,
+			"pos": [
+				1600,
+				600
+			],
+			"standing": false,
+			"statuses": [],
+			"text": "villager Ghertrudd (GTladyhat), walking: 1 50 false | 0 50 false | 1 50 false | 2 50 false | 3 50 false | 0 100 false | 3 50 false | 0 50 false | 1 100 false | 2 50 false | 3 50 false | 2 50 false | 3 50 false | 2 50 false | 1 100 false | 0 150 false | 3 50 false | 2 150 false | 1 50 false | 0 100 false | 3 50 false | 0 50 false | 3 50 false | 2 150 false",
+			"variants": [
+				"Alares - 0.tscn"
+			],
+			"villager": "Ghertrudd",
+			"walk": [
+				"1 50 false",
+				"0 50 false",
+				"1 50 false",
+				"2 50 false",
+				"3 50 false",
+				"0 100 false",
+				"3 50 false",
+				"0 50 false",
+				"1 100 false",
+				"2 50 false",
+				"3 50 false",
+				"2 50 false",
+				"3 50 false",
+				"2 50 false",
+				"1 100 false",
+				"0 150 false",
+				"3 50 false",
+				"2 150 false",
+				"1 50 false",
+				"0 100 false",
+				"3 50 false",
+				"0 50 false",
+				"3 50 false",
+				"2 150 false"
+			]
+		},
+		"Actors/Hilda1": {
+			"number": 35,
+			"pos": [
+				1870,
+				1170
+			],
+			"standing": true,
+			"statuses": [
+				4
+			],
+			"text": "villager Hilda1 (Hilda) statuses [4], standing: 3 250 true",
+			"variants": [
+				"Alares - 0.tscn"
+			],
+			"villager": "Hilda1",
+			"walk": [
+				"3 250 true"
+			]
+		},
+		"Actors/Marcus": {
+			"number": 34,
+			"pos": [
+				430,
+				700
+			],
+			"standing": true,
+			"statuses": [
+				6
+			],
+			"text": "villager Marcus (char/Marcus) statuses [6], standing: 2 180 true",
+			"variants": [
+				"Alares - 0.tscn"
+			],
+			"villager": "Marcus",
+			"walk": [
+				"2 180 true"
+			]
+		},
+		"Actors/Marge": {
+			"number": 29,
+			"pos": [
+				1350,
+				1700
+			],
+			"standing": true,
+			"statuses": [],
+			"text": "villager Marge (Marge), standing: 2 180 true",
+			"variants": [
+				"Alares - 0.tscn",
+				"Alares - 1.tscn"
+			],
+			"villager": "Marge",
+			"walk": [
+				"2 180 true"
+			]
+		},
+		"Actors/Pavier": {
+			"number": 30,
+			"pos": [
+				1795,
+				190
+			],
+			"standing": true,
+			"statuses": [],
+			"text": "villager Pavier (GTredhair), standing: 2 180 true",
+			"variants": [
+				"Alares - 0.tscn"
+			],
+			"villager": "Pavier",
+			"walk": [
+				"2 180 true"
+			]
+		},
+		"Actors/Recruiter": {
+			"number": 31,
+			"pos": [
+				1270,
+				1598
+			],
+			"standing": true,
+			"statuses": [],
+			"text": "villager Recruiter (Recruitingsoldier), standing: 2 180 true",
+			"variants": [
+				"Alares - 0.tscn"
+			],
+			"villager": "Recruiter",
+			"walk": [
+				"2 180 true"
+			]
+		},
+		"Actors/Thieving looking guy": {
+			"number": 32,
+			"pos": [
+				200,
+				125
+			],
+			"standing": true,
+			"statuses": [
+				1,
+				2,
+				3,
+				4,
+				5
+			],
+			"text": "villager Thieving looking guy (GTthief) statuses [1, 2, 3, 4, 5], standing: 2 180 true",
+			"variants": [
+				"Alares - 0.tscn"
+			],
+			"villager": "Thieving looking guy",
+			"walk": [
+				"2 180 true"
+			]
+		},
+		"Actors/Uri": {
+			"number": 33,
+			"pos": [
+				1330,
+				1080
+			],
+			"standing": true,
+			"statuses": [],
+			"text": "villager Uri (GTleader), standing: 2 100 true",
+			"variants": [
+				"Alares - 0.tscn",
+				"Alares - 1.tscn"
+			],
+			"villager": "Uri",
+			"walk": [
+				"2 100 true"
+			]
+		},
+		"Actors/fountain": {
+			"number": 20,
+			"pos": [
+				1303.0,
+				1279.0
+			],
+			"text": "animated object fountain (4 images)",
+			"variants": [
+				"Alares - 0.tscn",
+				"Alares - 1.tscn"
+			]
+		},
+		"Doors/Alares_-_Belmet's_House": {
+			"number": 7,
+			"pos": [
+				1569.0,
+				1515.0
+			],
+			"text": "door [\"house\"] -> [\"Alares_-_Belmet\\'s_House\"] radius 30 facing [0]  sign:  No one is home.",
+			"variants": [
+				"Alares - 0.tscn"
+			]
+		},
+		"Doors/Alares_-_Library": {
+			"number": 8,
+			"pos": [
+				1319.0,
+				518.0
+			],
+			"text": "door [\"house\"] -> [\"Alares_-_Library\"] radius 30 facing [0]  sign:  The library is closed.",
+			"variants": [
+				"Alares - 0.tscn"
+			]
+		},
+		"Doors/Church": {
+			"number": 3,
+			"pos": [
+				708.0,
+				725.0
+			],
+			"text": "door [\"church\"] -> [\"Church\"] radius 50 facing [0]",
+			"variants": [
+				"Alares - 0.tscn"
+			]
+		},
+		"Doors/Inn": {
+			"number": 5,
+			"pos": [
+				1810.0,
+				1048.0
+			],
+			"text": "door [\"inn\"] -> [\"Inn\"] radius 30 facing [0]  sign:  I'm out, come back later. /   - Innkeeper Burt.",
+			"variants": [
+				"Alares - 0.tscn"
+			]
+		},
+		"Doors/alaresCardShop": {
+			"number": 6,
+			"pos": [
+				328.0,
+				471.0
+			],
+			"text": "door [\"card\"] -> [\"alaresCardShop\"] radius 30 facing [0]",
+			"variants": [
+				"Alares - 0.tscn"
+			]
+		},
+		"Doors/cardHouse": {
+			"number": 9,
+			"pos": [
+				213.0,
+				504.0
+			],
+			"text": "door [\"house\"] -> [\"cardHouse\"] radius 30 facing [0]  sign:  The shop is to the right.",
+			"variants": [
+				"Alares - 0.tscn"
+			]
+		},
+		"Doors/grasstownWeapons": {
+			"number": 4,
+			"pos": [
+				1006.0,
+				1518.0
+			],
+			"text": "door [\"weapon\"] -> [\"grasstownWeapons\"] radius 30 facing [0]",
+			"variants": [
+				"Alares - 0.tscn"
+			]
+		},
+		"Effects/smokesystemAlares": {
+			"number": 36,
+			"pos": [
+				1158.0,
+				1359.0
+			],
+			"text": "particle system smokesystemAlares, layer 1",
+			"variants": [
+				"Alares - 0.tscn"
+			]
+		},
+		"Loot/barrelLoot": {
+			"number": 17,
+			"pos": [
+				1080.0,
+				1527.0
+			],
+			"text": "loot barrelLoot facing [0]: A card was wedged in between the barrels!",
+			"variants": [
+				"Alares - 0.tscn"
+			]
+		},
+		"Loot/stoneLoot": {
+			"number": 18,
+			"pos": [
+				868.0,
+				481.0
+			],
+			"text": "loot stoneLoot facing [0, 1, 2, 3]: You found 25 gold coins under the stone!",
+			"variants": [
+				"Alares - 0.tscn"
+			]
+		},
+		"Loot/treeLoot": {
+			"number": 19,
+			"pos": [
+				1532.0,
+				528.0
+			],
+			"text": "loot treeLoot facing [0, 1, 2, 3]: You found a card hidden among the / leaves of the small tree!",
+			"variants": [
+				"Alares - 0.tscn"
+			]
+		},
+		"Signs/Hot hot hot!!!": {
+			"number": 14,
+			"pos": [
+				1148.0,
+				1504.0
+			],
+			"text": "sign radius 52 facing [0]: Hot hot hot!!!",
+			"variants": [
+				"Alares - 0.tscn"
+			]
+		},
+		"Signs/Item shop_": {
+			"number": 12,
+			"pos": [
+				262.0,
+				547.0
+			],
+			"text": "sign radius 30 facing [0]: Item shop.",
+			"variants": [
+				"Alares - 0.tscn"
+			]
+		},
+		"Signs/Left_ Church and item st": {
+			"number": 16,
+			"pos": [
+				806.0,
+				1248.0
+			],
+			"text": "sign radius 30 facing [0]: Left: Church and item store. / Right: Town square.",
+			"variants": [
+				"Alares - 0.tscn"
+			]
+		},
+		"Signs/Maybe we shouldn't read": {
+			"number": 15,
+			"pos": [
+				986.0,
+				1527.0
+			],
+			"text": "sign radius 30 facing [0]: Maybe we shouldn't read someone elses mail...",
+			"variants": [
+				"Alares - 0.tscn"
+			]
+		},
+		"Signs/North west_ Weapon Shop_": {
+			"number": 10,
+			"pos": [
+				1390.0,
+				1813.0
+			],
+			"text": "sign radius 35 facing [0]: North west: Weapon Shop. / North east: Scientist Belmets residence.",
+			"variants": [
+				"Alares - 0.tscn"
+			]
+		},
+		"Signs/The uri mansion_": {
+			"number": 13,
+			"pos": [
+				1289.0,
+				1167.0
+			],
+			"text": "sign radius 30 facing [0]: The uri mansion.",
+			"variants": [
+				"Alares - 0.tscn"
+			]
+		},
+		"Signs/Weapon Shop_": {
+			"number": 11,
+			"pos": [
+				1205.0,
+				1555.0
+			],
+			"text": "sign radius 50 facing [0]: Weapon Shop.",
+			"variants": [
+				"Alares - 0.tscn"
+			]
+		},
+		"Spawns/start": {
+			"number": 37,
+			"pos": [
+				1333.0,
+				1809.0
+			],
+			"text": "spawn -1 facing 0",
+			"variants": [
+				"Alares - 1.tscn"
+			]
+		},
+		"Spawns/start0": {
+			"number": 1,
+			"pos": [
+				1333.0,
+				1809.0
+			],
+			"text": "spawn 0 facing 0",
+			"variants": [
+				"Alares - 0.tscn"
+			]
+		},
+		"Spawns/start1": {
+			"number": 2,
+			"pos": [
+				1805.0,
+				1070.0
+			],
+			"text": "spawn 1 facing 2",
+			"variants": [
+				"Alares - 0.tscn"
+			]
+		}
+	},
+	"obstacle_groups": [
+		{
+			"count": 3,
+			"name": "East woods",
+			"number": 38,
+			"rect": [
+				1621,
+				779,
+				1955,
+				878
+			]
+		},
+		{
+			"count": 39,
+			"name": "North woods",
+			"number": 39,
+			"rect": [
+				428,
+				0,
+				1906,
+				337
+			]
+		},
+		{
+			"count": 20,
+			"name": "Plotter trŠd",
+			"number": 40,
+			"rect": [
+				74,
+				216,
+				1569,
+				1841
+			]
+		},
+		{
+			"count": 1,
+			"name": "Eastroadsign",
+			"number": 41,
+			"rect": [
+				808,
+				1246,
+				840,
+				1287
+			]
+		},
+		{
+			"count": 1,
+			"name": "Twinstone2",
+			"number": 42,
+			"rect": [
+				386,
+				971,
+				418,
+				1000
+			]
+		},
+		{
+			"count": 1,
+			"name": "Twinstone1",
+			"number": 43,
+			"rect": [
+				396,
+				957,
+				428,
+				986
+			]
+		},
+		{
+			"count": 1,
+			"name": "Majorstone",
+			"number": 44,
+			"rect": [
+				1398,
+				1175,
+				1429,
+				1205
+			]
+		},
+		{
+			"count": 1,
+			"name": "Southstone",
+			"number": 45,
+			"rect": [
+				1039,
+				1801,
+				1070,
+				1828
+			]
+		},
+		{
+			"count": 1,
+			"name": "Well",
+			"number": 46,
+			"rect": [
+				1302,
+				1293,
+				1392,
+				1363
+			]
+		},
+		{
+			"count": 1,
+			"name": "Eastroadstone",
+			"number": 47,
+			"rect": [
+				754,
+				1258,
+				785,
+				1288
+			]
+		},
+		{
+			"count": 1,
+			"name": "Majorsign",
+			"number": 48,
+			"rect": [
+				1289,
+				1164,
+				1319,
+				1205
+			]
+		},
+		{
+			"count": 1,
+			"name": "Northroadstone",
+			"number": 49,
+			"rect": [
+				979,
+				708,
+				1009,
+				739
+			]
+		},
+		{
+			"count": 1,
+			"name": "Enterensesign",
+			"number": 50,
+			"rect": [
+				1389,
+				1812,
+				1418,
+				1854
+			]
+		},
+		{
+			"count": 5,
+			"name": "South east woods",
+			"number": 51,
+			"rect": [
+				1686,
+				1327,
+				1964,
+				1889
+			]
+		},
+		{
+			"count": 20,
+			"name": "South west woods",
+			"number": 52,
+			"rect": [
+				0,
+				1181,
+				1964,
+				1906
+			]
+		},
+		{
+			"count": 5,
+			"name": "Belmets house",
+			"number": 53,
+			"rect": [
+				1498,
+				1476,
+				1683,
+				1573
+			]
+		},
+		{
+			"count": 1,
+			"name": "Church",
+			"number": 54,
+			"rect": [
+				629,
+				635,
+				839,
+				767
+			]
+		},
+		{
+			"count": 5,
+			"name": "Inn",
+			"number": 55,
+			"rect": [
+				1637,
+				879,
+				1867,
+				1113
+			]
+		},
+		{
+			"count": 7,
+			"name": "Item shop",
+			"number": 56,
+			"rect": [
+				149,
+				449,
+				419,
+				582
+			]
+		},
+		{
+			"count": 6,
+			"name": "Library",
+			"number": 57,
+			"rect": [
+				1126,
+				391,
+				1556,
+				570
+			]
+		},
+		{
+			"count": 3,
+			"name": "Majors House",
+			"number": 58,
+			"rect": [
+				1236,
+				982,
+				1459,
+				1112
+			]
+		},
+		{
+			"count": 57,
+			"name": "River",
+			"number": 59,
+			"rect": [
+				0,
+				0,
+				608,
+				934
+			]
+		},
+		{
+			"count": 12,
+			"name": "Weapon shop",
+			"number": 60,
+			"rect": [
+				976,
+				1477,
+				1251,
+				1591
+			]
+		}
+	],
+	"place": "Alares",
+	"related": [
+		"Alares - Belmet's House",
+		"Alares - Celis",
+		"Alares - Library"
+	],
+	"returns": [
+		{
+			"door": "00 Alares",
+			"from": "Alares - Belmet's House/Alares - Belmet's House - 0.tscn",
+			"number": 67,
+			"pos": [
+				1569.0,
+				1530.0
+			]
+		},
+		{
+			"door": "00 Alares",
+			"from": "Alares - Library/Alares - Library - 0.tscn",
+			"number": 68,
+			"pos": [
+				1317.0,
+				533.0
+			]
+		}
+	],
+	"sequences": {
+		"Chapter 1 - Running Away From Home/A Permission From Uri": {
+			"actors": [
+				{
+					"name": "Uri",
+					"path": [
+						[
+							1330.0,
+							1080.0
+						],
+						[
+							1330.0,
+							1090.0
+						],
+						[
+							1330.0,
+							1085.0
+						],
+						[
+							1330.0,
+							1090.0
+						]
+					],
+					"pos": null
+				},
+				{
+					"name": "Eve",
+					"path": [
+						[
+							1370.0,
+							1220.0
+						],
+						[
+							1080.0,
+							1170.0
+						],
+						[
+							1080.0,
+							1120.0
+						],
+						[
+							1080.0,
+							1170.0
+						],
+						[
+							1370.0,
+							1220.0
+						]
+					],
+					"pos": null
+				},
+				{
+					"name": "Farmer John",
+					"path": [
+						[
+							1550.0,
+							1200.0
+						]
+					],
+					"pos": null
+				},
+				{
+					"name": "Farmer Jane",
+					"path": [
+						[
+							1575.0,
+							1200.0
+						],
+						[
+							1575.0,
+							1190.0
+						],
+						[
+							1575.0,
+							1200.0
+						]
+					],
+					"pos": null
+				},
+				{
+					"name": "Elthea",
+					"path": [
+						[
+							205.0,
+							540.0
+						]
+					],
+					"pos": null
+				},
+				{
+					"name": "Bella",
+					"path": [
+						[
+							1310.0,
+							585.0
+						],
+						[
+							1310.0,
+							585.0
+						]
+					],
+					"pos": null
+				},
+				{
+					"name": "Kin",
+					"path": [
+						[
+							1330.0,
+							1120.0
+						],
+						[
+							1330.0,
+							1110.0
+						],
+						[
+							1330.0,
+							1120.0
+						],
+						[
+							1330.0,
+							1170.0
+						],
+						[
+							1330.0,
+							1160.0
+						],
+						[
+							1330.0,
+							1180.0
+						],
+						[
+							1330.0,
+							1160.0
+						]
+					],
+					"pos": [
+						1330.0,
+						1120.0
+					]
+				},
+				{
+					"name": "Celis",
+					"path": [
+						[
+							1330.0,
+							1150.0
+						],
+						[
+							1330.0,
+							1140.0
+						]
+					],
+					"pos": [
+						1360.0,
+						1120.0
+					]
+				},
+				{
+					"name": "Characters/Alaressoldier/AlaressoldierExtras",
+					"path": [
+						[
+							1930.0,
+							1250.0
+						],
+						[
+							1680.0,
+							1250.0
+						],
+						[
+							1680.0,
+							1265.0
+						],
+						[
+							1480.0,
+							1265.0
+						],
+						[
+							1480.0,
+							1235.0
+						],
+						[
+							1180.0,
+							1235.0
+						],
+						[
+							1180.0,
+							1265.0
+						],
+						[
+							-1820.0,
+							1265.0
+						]
+					],
+					"pos": [
+						1930.0,
+						1250.0
+					]
+				}
+			],
+			"from_village": false,
+			"number": 61,
+			"runners": [
+				"Uri"
+			]
+		},
+		"Chapter 1 - Running Away From Home/Alaresnode1": {
+			"actors": [
+				{
+					"name": "Kin",
+					"path": [
+						[
+							1333.0,
+							1889.0
+						],
+						[
+							1333.0,
+							1793.0
+						]
+					],
+					"pos": null
+				},
+				{
+					"name": "Celis",
+					"path": [
+						[
+							1290.0,
+							1899.0
+						],
+						[
+							1290.0,
+							1799.0
+						],
+						[
+							1290.0,
+							1779.0
+						]
+					],
+					"pos": null
+				}
+			],
+			"from_village": false,
+			"number": 62,
+			"runners": []
+		},
+		"Chapter 1 - Running Away From Home/Meeting a Crazy Man": {
+			"actors": [
+				{
+					"name": "Elmer",
+					"path": [
+						[
+							800.0,
+							315.0
+						],
+						[
+							810.0,
+							315.0
+						],
+						[
+							800.0,
+							315.0
+						],
+						[
+							800.0,
+							305.0
+						],
+						[
+							788.0,
+							305.0
+						],
+						[
+							776.0,
+							305.0
+						],
+						[
+							671.0,
+							305.0
+						],
+						[
+							671.0,
+							330.0
+						]
+					],
+					"pos": null
+				},
+				{
+					"name": "Kin",
+					"path": [
+						[
+							800.0,
+							355.0
+						],
+						[
+							800.0,
+							395.0
+						],
+						[
+							800.0,
+							370.0
+						],
+						[
+							800.0,
+							330.0
+						],
+						[
+							795.0,
+							330.0
+						],
+						[
+							820.0,
+							330.0
+						]
+					],
+					"pos": [
+						800.0,
+						345.0
+					]
+				},
+				{
+					"name": "Celis",
+					"path": [
+						[
+							800.0,
+							385.0
+						],
+						[
+							800.0,
+							390.0
+						],
+						[
+							800.0,
+							385.0
+						],
+						[
+							785.0,
+							385.0
+						],
+						[
+							805.0,
+							385.0
+						]
+					],
+					"pos": [
+						770.0,
+						345.0
+					]
+				}
+			],
+			"from_village": false,
+			"number": 63,
+			"runners": [
+				"Elmer"
+			]
+		},
+		"Chapter 1 - Running Away From Home/Talking to Farmer John": {
+			"actors": [
+				{
+					"name": "Kin",
+					"path": [
+						[
+							1550.0,
+							1240.0
+						],
+						[
+							1535.0,
+							1240.0
+						],
+						[
+							1530.0,
+							1248.0
+						],
+						[
+							1530.0,
+							1258.0
+						]
+					],
+					"pos": [
+						1565.0,
+						1240.0
+					]
+				},
+				{
+					"name": "Celis",
+					"path": [
+						[
+							1550.0,
+							1270.0
+						],
+						[
+							1550.0,
+							1300.0
+						],
+						[
+							1550.0,
+							1320.0
+						]
+					],
+					"pos": [
+						1535.0,
+						1240.0
+					]
+				}
+			],
+			"from_village": false,
+			"number": 64,
+			"runners": [
+				"Farmer John"
+			]
+		},
+		"Chapter 1 - Running Away From Home/The Revelation of Elmer": {
+			"actors": [
+				{
+					"name": "Elmer",
+					"path": [
+						[
+							800.0,
+							315.0
+						],
+						[
+							795.0,
+							292.0
+						],
+						[
+							795.0,
+							297.0
+						],
+						[
+							795.0,
+							287.0
+						],
+						[
+							795.0,
+							302.0
+						],
+						[
+							795.0,
+							292.0
+						]
+					],
+					"pos": null
+				},
+				{
+					"name": "Kin",
+					"path": [
+						[
+							800.0,
+							355.0
+						],
+						[
+							785.0,
+							355.0
+						],
+						[
+							785.0,
+							340.0
+						],
+						[
+							793.0,
+							347.0
+						],
+						[
+							793.0,
+							342.0
+						],
+						[
+							793.0,
+							337.0
+						],
+						[
+							793.0,
+							347.0
+						],
+						[
+							793.0,
+							362.0
+						],
+						[
+							893.0,
+							362.0
+						],
+						[
+							893.0,
+							432.0
+						],
+						[
+							893.0,
+							422.0
+						],
+						[
+							893.0,
+							412.0
+						],
+						[
+							893.0,
+							402.0
+						],
+						[
+							883.0,
+							402.0
+						]
+					],
+					"pos": [
+						770.0,
+						345.0
+					]
+				},
+				{
+					"name": "Celis",
+					"path": [
+						[
+							800.0,
+							385.0
+						],
+						[
+							800.0,
+							380.0
+						],
+						[
+							800.0,
+							385.0
+						],
+						[
+							800.0,
+							375.0
+						],
+						[
+							885.0,
+							375.0
+						],
+						[
+							885.0,
+							395.0
+						],
+						[
+							885.0,
+							475.0
+						]
+					],
+					"pos": [
+						800.0,
+						345.0
+					]
+				},
+				{
+					"name": "Characters/barncelis/barncelisExtras",
+					"path": [
+						[
+							800.0,
+							300.0
+						],
+						[
+							850.0,
+							300.0
+						],
+						[
+							850.0,
+							270.0
+						],
+						[
+							800.0,
+							270.0
+						],
+						[
+							800.0,
+							260.0
+						],
+						[
+							820.0,
+							260.0
+						],
+						[
+							820.0,
+							230.0
+						],
+						[
+							800.0,
+							230.0
+						],
+						[
+							800.0,
+							240.0
+						],
+						[
+							800.0,
+							40.0
+						]
+					],
+					"pos": [
+						800.0,
+						300.0
+					]
+				}
+			],
+			"from_village": false,
+			"number": 65,
+			"runners": [
+				"Elmer"
+			]
+		},
+		"Chapter 6 - The End Draws Near/Ending - Part 2.2": {
+			"actors": [
+				{
+					"name": "Flog",
+					"path": [
+						[
+							1090.0,
+							1700.0
+						],
+						[
+							1255.0,
+							1200.0
+						]
+					],
+					"pos": null
+				},
+				{
+					"name": "Eve",
+					"path": [
+						[
+							1370.0,
+							1220.0
+						],
+						[
+							1285.0,
+							1200.0
+						]
+					],
+					"pos": null
+				},
+				{
+					"name": "Farmer John",
+					"path": [
+						[
+							1550.0,
+							1200.0
+						],
+						[
+							1345.0,
+							1200.0
+						]
+					],
+					"pos": null
+				},
+				{
+					"name": "Farmer Jane",
+					"path": [
+						[
+							1575.0,
+							1200.0
+						],
+						[
+							1315.0,
+							1200.0
+						]
+					],
+					"pos": null
+				},
+				{
+					"name": "Pensara - The North District/villagers/Farmer Bob/Farmer BobExtras",
+					"path": [
+						[
+							1375.0,
+							1200.0
+						]
+					],
+					"pos": [
+						1375.0,
+						1200.0
+					]
+				},
+				{
+					"name": "Pensara - The North District - Farmer House/villagers/Ella/EllaExtras",
+					"path": [
+						[
+							1405.0,
+							1200.0
+						]
+					],
+					"pos": [
+						1405.0,
+						1200.0
+					]
+				}
+			],
+			"from_village": false,
+			"number": 66,
+			"runners": []
+		}
+	},
+	"size": [
+		1953,
+		1877
+	],
+	"variants": {
+		"Alares - 0.tscn": {
+			"buildings": [
+				"Church",
+				"grasstownWeapons",
+				"Inn",
+				"alaresCardShop"
+			],
+			"day": true,
+			"has_wind": true
+		},
+		"Alares - 1.tscn": {
+			"buildings": [],
+			"day": true,
+			"has_wind": false
+		}
+	}
+}

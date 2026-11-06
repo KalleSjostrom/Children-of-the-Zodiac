@@ -1,0 +1,94 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://proto/villages/alares-diorama/Alares/Alares.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://scenes/common/ActorView.tscn" id="2_vdgvk"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Alares/GTgirlpink.tres" id="4_a2s77"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Alares/GTgirlbrown.tres" id="5_fnlck"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Alares/GTgirlfarm.tres" id="6_87vx5"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Alares/GTboyfarmer.tres" id="7_hfssq"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Alares/GTboygreen.tres" id="8_jm8d5"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Alares/Marge.tres" id="9_pq32a"]
+[ext_resource type="SpriteFrames" path="res://resources/sprite_frames/Alares/GTleader.tres" id="10_c7a6n"]
+[ext_resource type="PackedScene" path="res://scenes/common/VillageSpawn.tscn" id="11_vbfxh"]
+
+[node name="Alares - 1" instance=ExtResource("1_base")]
+
+[node name="01 Bella" parent="Actors" index="0" instance=ExtResource("2_vdgvk")]
+position = Vector2(730, 440)
+sprite_frames = ExtResource("4_a2s77")
+animation = &"down"
+role = 1
+villager_name = "Bella"
+statuses = PackedInt32Array()
+villager_folder = "Alares"
+walk_override = true
+walk = PackedStringArray("1 100 false", "2 150 false", "2 100 true", "0 150 false", "3 100 false", "2 100 true")
+
+[node name="02 Eve" parent="Actors" index="1" instance=ExtResource("2_vdgvk")]
+position = Vector2(520, 430)
+sprite_frames = ExtResource("5_fnlck")
+animation = &"up"
+role = 1
+villager_name = "Eve"
+statuses = PackedInt32Array()
+villager_folder = "Alares"
+walk_override = true
+walk = PackedStringArray("0 30 false", "1 150 false", "0 50 true", "2 30 false", "3 150 false", "2 50 true")
+
+[node name="03 Farmer Jane" parent="Actors" index="2" instance=ExtResource("2_vdgvk")]
+position = Vector2(943, 310)
+sprite_frames = ExtResource("6_87vx5")
+animation = &"down"
+role = 1
+villager_name = "Farmer Jane"
+statuses = PackedInt32Array()
+villager_folder = "Alares"
+walk_override = true
+walk = PackedStringArray("2 100 true")
+
+[node name="04 Farmer John" parent="Actors" index="3" instance=ExtResource("2_vdgvk")]
+position = Vector2(905, 310)
+sprite_frames = ExtResource("7_hfssq")
+animation = &"down"
+role = 1
+villager_name = "Farmer John"
+statuses = PackedInt32Array()
+villager_folder = "Alares"
+walk_override = true
+walk = PackedStringArray("2 100 true")
+
+[node name="05 Flog" parent="Actors" index="4" instance=ExtResource("2_vdgvk")]
+position = Vector2(850, 520)
+sprite_frames = ExtResource("8_jm8d5")
+animation = &"left"
+role = 1
+villager_name = "Flog"
+statuses = PackedInt32Array()
+villager_folder = "Alares"
+walk_override = true
+walk = PackedStringArray("1 90 false", "1 50 true", "3 90 false", "2 100 false", "2 50 true", "0 100 false")
+
+[node name="06 Marge" parent="Actors" index="5" instance=ExtResource("2_vdgvk")]
+position = Vector2(540, 610)
+sprite_frames = ExtResource("9_pq32a")
+animation = &"down"
+role = 1
+villager_name = "Marge"
+statuses = PackedInt32Array()
+villager_folder = "Alares"
+walk_override = true
+walk = PackedStringArray("2 180 true")
+
+[node name="07 Uri" parent="Actors" index="6" instance=ExtResource("2_vdgvk")]
+position = Vector2(836, 292)
+sprite_frames = ExtResource("10_c7a6n")
+animation = &"down"
+role = 1
+villager_name = "Uri"
+statuses = PackedInt32Array()
+villager_folder = "Alares"
+walk_override = true
+walk = PackedStringArray("2 100 true")
+
+[node name="00 start" parent="Spawns" index="0" instance=ExtResource("11_vbfxh")]
+position = Vector2(482, 700)

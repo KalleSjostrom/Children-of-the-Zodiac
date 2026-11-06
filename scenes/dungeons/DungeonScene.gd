@@ -46,6 +46,11 @@ extends Node3D
 ## legacy batches go through the same transforms, to the bit, as in the
 ## legacy drawing; inverting the view into a moving camera would round
 ## differently. Step C turns it around (a camera rig that moves).
+##
+## A prototype look (DungeonLook, --look) may take over the drawing of the
+## floors it covers: set_up and floor_built change the scene, and a look that
+## moves the camera gets the inverse view on the Rig, with the floor at the
+## identity and the eye-space meshes at the camera.
 
 const SCENE_DIR := "res://scenes/dungeons/"
 ## Sorting offsets: Godot draws transparent instances by distance minus
@@ -76,6 +81,13 @@ const SORT_STEP := 1000.0
 var _run_time := false
 var _views := {} # database name -> DungeonObject
 var _legacy: Node3D
+## The prototype look of this floor (DungeonLook.for_floor), or null.
+var _look: DungeonLook
+## Where the eye-space meshes go (the legacy 3D drawing, the objects'
+## batches, the legacy weather quads): the camera's transform. The identity
+## (the camera at the origin) unless the look moves the camera.
+var _eye := Transform3D.IDENTITY
+var _moves_camera := false
 # The objects' quads of this frame, batched as GLBackend batches them:
 # [material, vertices, uvs, colours, normals] per batch, and the meshes that
 # draw them.
@@ -116,7 +128,10 @@ func legacy_root() -> Node3D:
 ## state the compile leaves.
 func show_floor(gl: Dictionary) -> Dictionary:
 	_set_up()
-	return ($Layout as DungeonFloor).build(style, gl)
+	var left := ($Layout as DungeonFloor).build(style, gl)
+	if _look != null:
+		_look.floor_built(self)
+	return left
 
 
 ## Step B, every frame: the camera. modelview is the legacy view
@@ -125,6 +140,18 @@ func show_floor(gl: Dictionary) -> Dictionary:
 ## origin (see the class description).
 func show_view(modelview: Transform3D) -> void:
 	_set_up()
+	if _moves_camera:
+		# A prototype look (DungeonLook): the camera moves and the floor stays;
+		# the eye-space meshes go with the camera.
+		_eye = modelview.affine_inverse()
+		($Rig as Node3D).transform = _eye
+		($Layout as Node3D).transform = Transform3D.IDENTITY
+		($Objects as Node3D).transform = Transform3D.IDENTITY
+		($Weather as Node3D).transform = Transform3D.IDENTITY
+		($Weather as DungeonWeather).eye = _eye
+		_legacy.transform = _eye
+		_look.view_shown(self, _eye)
+		return
 	($Layout as Node3D).transform = modelview
 	($Objects as Node3D).transform = modelview
 	# The GPU weather is in the floor's units (the legacy quads are in eye
@@ -154,6 +181,9 @@ func show_object(inv, view: Dictionary) -> void:
 	var o: DungeonObject = _views.get(inv.getDatabaseName())
 	if o != null:
 		o.show_view(inv, view)
+	# A prototype look (DungeonLook) may draw the object itself.
+	if _look != null and _look.show_object(self, o, view):
+		return
 	if not view.get("visible", false):
 		return
 	if view.has("particles") and view.particles.get("gpu", false):
@@ -202,6 +232,8 @@ func end_objects() -> void:
 			if normals.size() != b[1].size():
 				normals = PackedVector3Array()
 			DungeonWeather.set_quads(_batch_meshes[i], b[1], b[2], b[3], normals, b[0], (i + 1) * SORT_STEP)
+			if _moves_camera:
+				_batch_meshes[i].transform = _eye
 		else:
 			_batch_meshes[i].visible = false
 
@@ -249,6 +281,10 @@ func _set_up() -> void:
 	_batch_root = Node3D.new()
 	_batch_root.name = "ObjectBatches"
 	add_child(_batch_root)
+	_look = DungeonLook.for_floor(map_name)
+	if _look != null:
+		_moves_camera = _look.moves_camera()
+		_look.set_up(self)
 
 
 ## The scene made from the .map file at map_path (a res:// path, as

@@ -46,6 +46,15 @@ func init(name, lab = null, hinders = null):
 	releaseAll()
 
 
+## Port fix: the nodes and their roads refer to each other, and reference
+## counting cannot free that graph after the mode is left; the nodes drop
+## their roads when the mode is freed.
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_PREDELETE:
+		for n in nodes:
+			n.roads = J.array(4, null)
+
+
 ## Java: private void loadImages(String name). Loads all the images.
 func loadImages(name = null, nightLayer = null, extra = null):
 	player = LandPlayer.new()

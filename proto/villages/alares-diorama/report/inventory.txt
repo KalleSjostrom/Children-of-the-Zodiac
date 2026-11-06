@@ -1,0 +1,90 @@
+Place Alares: size (1953, 1877), folder Alares, village_name Alares
+Overhead pieces in the base scene: 29
+
+== Alares - 0.tscn: day true, wind true [10.0, 0.0, 0.0], buildings: Church, grasstownWeapons, Inn, alaresCardShop
+  1  Spawns/start0 at (1333, 1809)  spawn 0 facing 0
+  2  Spawns/start1 at (1805, 1070)  spawn 1 facing 2
+  3  Doors/Church at (708, 725)  door ["church"] -> ["Church"] radius 50 facing [0]
+  4  Doors/grasstownWeapons at (1006, 1518)  door ["weapon"] -> ["grasstownWeapons"] radius 30 facing [0]
+  5  Doors/Inn at (1810, 1048)  door ["inn"] -> ["Inn"] radius 30 facing [0]  sign:  I'm out, come back later. /   - Innkeeper Burt.
+  6  Doors/alaresCardShop at (328, 471)  door ["card"] -> ["alaresCardShop"] radius 30 facing [0]
+  7  Doors/Alares_-_Belmet's_House at (1569, 1515)  door ["house"] -> ["Alares_-_Belmet\'s_House"] radius 30 facing [0]  sign:  No one is home.
+  8  Doors/Alares_-_Library at (1319, 518)  door ["house"] -> ["Alares_-_Library"] radius 30 facing [0]  sign:  The library is closed.
+  9  Doors/cardHouse at (213, 504)  door ["house"] -> ["cardHouse"] radius 30 facing [0]  sign:  The shop is to the right.
+ 10  Signs/North west_ Weapon Shop_ at (1390, 1813)  sign radius 35 facing [0]: North west: Weapon Shop. / North east: Scientist Belmets residence.
+ 11  Signs/Weapon Shop_ at (1205, 1555)  sign radius 50 facing [0]: Weapon Shop.
+ 12  Signs/Item shop_ at (262, 547)  sign radius 30 facing [0]: Item shop.
+ 13  Signs/The uri mansion_ at (1289, 1167)  sign radius 30 facing [0]: The uri mansion.
+ 14  Signs/Hot hot hot!!! at (1148, 1504)  sign radius 52 facing [0]: Hot hot hot!!!
+ 15  Signs/Maybe we shouldn't read at (986, 1527)  sign radius 30 facing [0]: Maybe we shouldn't read someone elses mail...
+ 16  Signs/Left_ Church and item st at (806, 1248)  sign radius 30 facing [0]: Left: Church and item store. / Right: Town square.
+ 17  Loot/barrelLoot at (1080, 1527)  loot barrelLoot facing [0]: A card was wedged in between the barrels!
+ 18  Loot/stoneLoot at (868, 481)  loot stoneLoot facing [0, 1, 2, 3]: You found 25 gold coins under the stone!
+ 19  Loot/treeLoot at (1532, 528)  loot treeLoot facing [0, 1, 2, 3]: You found a card hidden among the / leaves of the small tree!
+ 20  Actors/fountain at (1303, 1279)  animated object fountain (4 images)
+ 21  Actors/Bella at (1310, 585)  villager Bella (GTgirlpink), walking: 2 140 false | 3 290 false | 2 480 false | 3 100 true | 1 100 true | 2 100 true | 0 480 false | 1 290 false | 0 140 false | 2 400 true
+ 22  Actors/Elmer at (800, 315)  villager Elmer (GTElmer), standing: 2 180 true
+ 23  Actors/Elthea at (205, 540)  villager Elthea (GTladybrown), walking: 2 500 false | 2 50 true | 3 50 true | 2 50 true | 1 505 false | 1 50 true | 2 155 false | 1 70 false | 1 50 true | 2 50 true | 1 400 true | 3 70 false | 0 155 false | 3 50 true | 0 290 false | 2 400 true | 2 445 false | 1 70 false | 1 50 true | 2 50 true | 1 400 true | 3 70 false | 0 155 false | 3 505 false | 0 500 false | 2 400 true
+ 24  Actors/Eve at (1370, 1220)  villager Eve (GTgirlbrown), walking: 0 50 false | 3 200 false | 0 50 true | 2 50 true | 3 50 true | 1 50 true | 2 100 false | 1 100 false | 0 50 true | 2 50 true | 1 50 true | 3 50 true | 0 50 false | 1 100 false | 0 50 true | 2 50 true | 3 50 true | 1 50 true
+ 25  Actors/Farmer Jane at (1575, 1200)  villager Farmer Jane (GTgirlfarm), standing: 2 100 true
+ 26  Actors/Farmer John at (1550, 1200)  villager Farmer John (GTboyfarmer), standing: 2 100 true
+ 27  Actors/Flog at (1090, 1700)  villager Flog (GTboygreen), walking: 3 100 false | 2 100 false | 1 100 false | 0 100 false | 1 50 true | 2 100 false | 3 100 false | 0 100 false | 1 100 false | 0 50 true
+ 28  Actors/Ghertrudd at (1600, 600)  villager Ghertrudd (GTladyhat), walking: 1 50 false | 0 50 false | 1 50 false | 2 50 false | 3 50 false | 0 100 false | 3 50 false | 0 50 false | 1 100 false | 2 50 false | 3 50 false | 2 50 false | 3 50 false | 2 50 false | 1 100 false | 0 150 false | 3 50 false | 2 150 false | 1 50 false | 0 100 false | 3 50 false | 0 50 false | 3 50 false | 2 150 false
+ 29  Actors/Marge at (1350, 1700)  villager Marge (Marge), standing: 2 180 true
+ 30  Actors/Pavier at (1795, 190)  villager Pavier (GTredhair), standing: 2 180 true
+ 31  Actors/Recruiter at (1270, 1598)  villager Recruiter (Recruitingsoldier), standing: 2 180 true
+ 32  Actors/Thieving looking guy at (200, 125)  villager Thieving looking guy (GTthief) statuses [1, 2, 3, 4, 5], standing: 2 180 true
+ 33  Actors/Uri at (1330, 1080)  villager Uri (GTleader), standing: 2 100 true
+ 34  Actors/Marcus at (430, 700)  villager Marcus (char/Marcus) statuses [6], standing: 2 180 true
+ 35  Actors/Hilda1 at (1870, 1170)  villager Hilda1 (Hilda) statuses [4], standing: 3 250 true
+ 36  Effects/smokesystemAlares at (1158, 1359)  particle system smokesystemAlares, layer 1
+
+== Alares - 1.tscn: day true, wind false [0.0, 0.0, 0.0], buildings: 
+ 37  Spawns/start at (1333, 1809)  spawn -1 facing 0
+     Actors/fountain (as above)
+     Actors/Bella (as above)
+     Actors/Eve (as above)
+     Actors/Farmer Jane (as above)
+     Actors/Farmer John (as above)
+     Actors/Flog (as above)
+     Actors/Marge (as above)
+     Actors/Uri (as above)
+
+== Obstacle groups (.vil comments)
+ 38  obstacles "East woods": 3 rects within [1621, 779, 1955, 878]
+ 39  obstacles "North woods": 39 rects within [428, 0, 1906, 337]
+ 40  obstacles "Plotter trŠd": 20 rects within [74, 216, 1569, 1841]
+ 41  obstacles "Eastroadsign": 1 rects within [808, 1246, 840, 1287]
+ 42  obstacles "Twinstone2": 1 rects within [386, 971, 418, 1000]
+ 43  obstacles "Twinstone1": 1 rects within [396, 957, 428, 986]
+ 44  obstacles "Majorstone": 1 rects within [1398, 1175, 1429, 1205]
+ 45  obstacles "Southstone": 1 rects within [1039, 1801, 1070, 1828]
+ 46  obstacles "Well": 1 rects within [1302, 1293, 1392, 1363]
+ 47  obstacles "Eastroadstone": 1 rects within [754, 1258, 785, 1288]
+ 48  obstacles "Majorsign": 1 rects within [1289, 1164, 1319, 1205]
+ 49  obstacles "Northroadstone": 1 rects within [979, 708, 1009, 739]
+ 50  obstacles "Enterensesign": 1 rects within [1389, 1812, 1418, 1854]
+ 51  obstacles "South east woods": 5 rects within [1686, 1327, 1964, 1889]
+ 52  obstacles "South west woods": 20 rects within [0, 1181, 1964, 1906]
+ 53  obstacles "Belmets house": 5 rects within [1498, 1476, 1683, 1573]
+ 54  obstacles "Church": 1 rects within [629, 635, 839, 767]
+ 55  obstacles "Inn": 5 rects within [1637, 879, 1867, 1113]
+ 56  obstacles "Item shop": 7 rects within [149, 449, 419, 582]
+ 57  obstacles "Library": 6 rects within [1126, 391, 1556, 570]
+ 58  obstacles "Majors House": 3 rects within [1236, 982, 1459, 1112]
+ 59  obstacles "River": 57 rects within [0, 0, 608, 934]
+ 60  obstacles "Weapon shop": 12 rects within [976, 1477, 1251, 1591]
+
+== Cutscenes in Alares
+ 61  cutscene Chapter 1 - Running Away From Home/A Permission From Uri (status 0, run by Uri: the party starts beside them): Uri, Eve, Farmer John, Farmer Jane, Elthea, Bella, Kin@(1330, 1120), Celis@(1360, 1120), AlaressoldierExtras@(1930, 1250)
+ 62  cutscene Chapter 1 - Running Away From Home/Alaresnode1 (status -): Kin, Celis
+ 63  cutscene Chapter 1 - Running Away From Home/Meeting a Crazy Man (status -, run by Elmer: the party starts beside them): Elmer, Kin@(800, 345), Celis@(770, 345)
+ 64  cutscene Chapter 1 - Running Away From Home/Talking to Farmer John (status -, run by Farmer John: the party starts beside them): Kin@(1565, 1240), Celis@(1535, 1240)
+ 65  cutscene Chapter 1 - Running Away From Home/The Revelation of Elmer (status -, run by Elmer: the party starts beside them): Elmer, Kin@(770, 345), Celis@(800, 345), barncelisExtras@(800, 300)
+ 66  cutscene Chapter 6 - The End Draws Near/Ending - Part 2.2 (status 1): Flog, Eve, Farmer John, Farmer Jane, Farmer BobExtras@(1375, 1200), EllaExtras@(1405, 1200)
+
+== Doors of other places that return into Alares
+ 67  return from Alares - Belmet's House/Alares - Belmet's House - 0.tscn door 00 Alares to x 1569 y 1530 facing 2
+ 68  return from Alares - Library/Alares - Library - 0.tscn door 00 Alares to x 1317 y 533 facing 2
+
+Related places: Alares - Belmet's House, Alares - Celis, Alares - Library

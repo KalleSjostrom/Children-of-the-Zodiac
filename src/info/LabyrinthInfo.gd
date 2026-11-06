@@ -9,6 +9,14 @@ var floors = {}
 func _init(labyrinthName = null) -> void:
 	self.labyrinthName = labyrinthName
 
+## Port fix: the floors' graphs cannot be freed by reference counting
+## (LabyrinthMap.release); they are released with the information, when a
+## game is loaded over this one (Database.reset).
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_PREDELETE:
+		for f in floors.values():
+			f.release()
+
 func getLabyrinthName():
 	return labyrinthName
 

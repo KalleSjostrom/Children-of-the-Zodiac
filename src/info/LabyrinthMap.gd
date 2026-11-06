@@ -243,3 +243,15 @@ func setSize(size):
 
 func getSize():
 	return size
+
+## Port fix: Java's garbage collector freed a floor's graph when it was no
+## longer used. Here the nodes refer to their neighbours both ways and to
+## their inventories, which refer back (and combo buttons to each other), so
+## reference counting cannot free it: this drops those references. Only for
+## a map that nothing uses any more (LabyrinthInfo, Labyrinth: when they are
+## freed).
+func release():
+	for n in nodes.values():
+		n.release()
+	for i in inve.values():
+		i.release()

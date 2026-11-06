@@ -126,5 +126,11 @@ func end(pos, removedVillagers, playersAdded):
 		v.exit()
 		super.exit(Values.LABYRINTH)
 
+## Port fix: the time line refers back to the story, and that RefCounted
+## cycle kept every story played (and its village, with the village's scene)
+## alive. The time line is not run after the story is over; not when it is
+## only suspended.
 func finishOff():
-	pass # ImageHandler.clearList(Values.VILLAGE_STORY);
+	# ImageHandler.clearList(Values.VILLAGE_STORY);
+	if not isSuspended() and timeLine != null:
+		timeLine.releaseBackReferences()

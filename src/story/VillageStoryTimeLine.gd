@@ -849,6 +849,14 @@ func setVillage(village):
 	self.village = village
 
 
+## Drops the references back to the story and from the current image
+## (VillageStory.finishOff).
+func releaseBackReferences():
+	story = null
+	if currentImage != null:
+		currentImage.timeLine = null
+
+
 class ImageSettings extends RefCounted:
 	var scrollingRight: bool = false
 	var scrollingDown: bool = false
