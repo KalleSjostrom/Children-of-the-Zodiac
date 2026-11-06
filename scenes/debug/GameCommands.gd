@@ -8,8 +8,8 @@ extends RefCounted
 ##
 ## Jumps go through Organizer.jump_to, as the Cheater's did. A position on a
 ## labyrinth floor (boss) is handed to the labyrinth the way a save's is
-## (Load.labyrinthPosition). Labyrinth facts (save points, bosses, the ways
-## between nodes) are read from the .map files.
+## (Load.labyrinthPosition). Labyrinth facts (save points, bosses, the links
+## between nodes) are read from the floor scenes (DungeonScene).
 
 ## God mode: the party takes no damage from enemies (EnemyLogic reads it).
 static var god := false
@@ -30,7 +30,8 @@ const EMOTIONS: PackedStringArray = ["exclamation", "question", "questionEx", "d
 var _casts := PackedStringArray()
 var _casts_read := false
 ## Floor (Organizer.convert) -> {"floor", "save": bool, "boss": [address,
-## name] or [], "ways": Array of [from, direction, to]}, from the .map files.
+## name] or [], "neighbours": address -> DungeonCell.neighbours}, from the
+## floor scenes.
 var _floors := {}
 
 
@@ -138,31 +139,42 @@ func _place_on_floor(floor: String) -> String:
 	return ""
 
 
-## What the .map file of a floor says (see _floors).
+## What the scene of a floor says (see _floors): its cells' neighbours,
+## whether it has a save point, its boss (the last one, cell and name).
 func _floor_data(floor: String) -> Dictionary:
 	var key := Organizer.convert(floor)
 	if _floors.has(key):
 		return _floors[key]
-	var data := {"floor": floor, "save": false, "boss": [], "ways": []}
-	var text := GameResourceLoader.readText(Values.LabyrinthMaps + floor + ".map")
-	for raw in text.split("\n"):
-		var words := raw.strip_edges().split(" ", false)
-		if words.size() >= 4 and words[0] == "dir":
-			data.ways.append([int(words[1]), int(words[2]), int(words[3])])
-		elif words.size() >= 2 and words[0] == "inv" and words[1] == "save":
-			data.save = true
-		elif words.size() >= 3 and words[0] == "inv" and words[1] == "boss":
-			data.boss = [int(words[2]), words[words.size() - 1]]
+	var data := {"floor": floor, "save": false, "boss": [], "neighbours": {}}
+	var path := DungeonScene.path_for(floor + ".map")
+	if path == "":
+		push_error("GameCommands: no scene for the floor " + floor)
+	else:
+		var scene: DungeonScene = (load(path) as PackedScene).instantiate()
+		for c: DungeonCell in (scene.get_node("Layout") as DungeonFloor).layout.cells:
+			data.neighbours[c.address] = c.neighbours
+		for o in scene.get_node("Objects").get_children():
+			if o is DungeonSavePoint:
+				data.save = true
+			elif o is DungeonBoss:
+				data.boss = [(o as DungeonBoss).cell, (o as DungeonBoss).image]
+		scene.free()
 	_floors[key] = data
 	return data
 
 
-## Every labyrinth floor ("Area--Floor"), from the .map files.
+## Every labyrinth floor ("Area--Floor"), from the floor scenes, in the order
+## of the names of their (deleted) .map files.
 func _all_floors() -> PackedStringArray:
+	var files: Array = []
+	for area in GameResourceLoader.listDirectories(DungeonScene.SCENE_DIR):
+		for file in GameResourceLoader.listFiles(DungeonScene.SCENE_DIR + area):
+			if String(file).ends_with(".tscn"):
+				files.append(area + "--" + String(file).get_basename() + ".map")
+	files.sort()
 	var floors := PackedStringArray()
-	for file in GameResourceLoader.listFiles(Values.LabyrinthMaps):
-		if file.ends_with(".map") and file.contains("--"):
-			floors.append(file.get_basename())
+	for file in files:
+		floors.append(String(file).get_basename())
 	return floors
 
 
@@ -171,15 +183,16 @@ static func _area_of(floor: String) -> String:
 
 
 ## A node next to the given one and the direction from it towards it
-## ([address, direction]), from the floor's ways ("dir a d b": b is a's
-## neighbour in direction d + 2, a is b's in direction d).
-static func _next_to(ways: Array, address: int) -> Array:
-	for way in ways:
-		if way[2] == address:
-			return [way[0], Values.getCounterAngle(way[1])]
-		if way[0] == address:
-			return [way[2], way[1]]
-	return []
+## ([address, direction]), or []: the neighbour with the lowest address. For
+## every boss that is the one the first "dir" line of its floor's .map file
+## named, which this chose before the files were deleted.
+static func _next_to(neighbours: Dictionary, address: int) -> Array:
+	var best := []
+	var links: PackedInt32Array = neighbours.get(address, PackedInt32Array())
+	for d in links.size():
+		if links[d] != -1 and (best.is_empty() or links[d] < best[0]):
+			best = [links[d], Values.getCounterAngle(d)]
+	return best
 
 
 # --- Places ---
@@ -299,7 +312,7 @@ func _boss(args: PackedStringArray) -> DebugCommands.Result:
 		var data := _floor_data(floor)
 		if data.boss.is_empty():
 			continue
-		var spot := _next_to(data.ways, data.boss[0])
+		var spot := _next_to(data.neighbours, data.boss[0])
 		var place := _place_on_floor(floor)
 		if spot.is_empty() or place == "":
 			return DebugCommands.fail("Cannot find a way to the boss on %s" % floor)
@@ -573,21 +586,18 @@ func _roads(args: PackedStringArray) -> DebugCommands.Result:
 	return DebugCommands.done("Opened %d roads" % opened)
 
 
-## The addresses of the roads of a world map file, in file order: its
-## scene's roads (WorldMapRoad), or its road lines with --legacy=world_map.
+## The addresses of the roads of a world map ("world0.map"), in its scene's
+## order (WorldMapRoad; the order of the deleted .map file's road lines).
 static func _road_addresses(file: String) -> Array[int]:
 	var out: Array[int] = []
 	var path := WorldMapScene.path_for(file)
-	if path != "" and not Main.is_legacy("world_map"):
-		var scene: WorldMapScene = (load(path) as PackedScene).instantiate()
-		for road: WorldMapRoad in scene.get_node("Roads").get_children():
-			out.append(road.address)
-		scene.free()
+	if path == "":
+		push_error("GameCommands: no scene for the world map " + file)
 		return out
-	for raw in GameResourceLoader.readText(Values.LandscapeMaps + file).split("\n"):
-		var words := raw.strip_edges().split(" ", false)
-		if words.size() >= 2 and words[0] == "road" and words[1].is_valid_int():
-			out.append(words[1].to_int())
+	var scene: WorldMapScene = (load(path) as PackedScene).instantiate()
+	for road: WorldMapRoad in scene.get_node("Roads").get_children():
+		out.append(road.address)
+	scene.free()
 	return out
 
 

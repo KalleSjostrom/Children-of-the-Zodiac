@@ -523,15 +523,10 @@ func sortSprites() -> int:
 
 ## Draws what is drawn over the village: the emotion bubbles of the given
 ## sprites (none if null), the dialog or the sign. Bridge (phase 3 step B):
-## the bubbles are UI nodes (show_emotions); --legacy=emotions keeps the
-## drawing.
+## the bubbles are UI nodes (show_emotions).
 func drawOverlays(g, sprites = null):
 	if sprites != null:
-		if not Main.is_legacy("emotions"):
-			show_emotions(g, sprites.values())
-		else:
-			for k in sprites:
-				sprites[k].drawEmotions(g)
+		show_emotions(g, sprites.values())
 
 	if talkmode:
 		dialog.draw(g)

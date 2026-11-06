@@ -1,18 +1,18 @@
 class_name WorldMapScene
 extends Node2D
-## The scene of a world map or an airship map: one per file of
+## The scene of a world map or an airship map: one per file of the former
 ## maps/Landscape (world0.map West, world1.map East, world2.map North;
 ## land1.map and land2.map, the airship's map by its Database status
 ## "airship"). Every one inherits scenes/world_map/WorldMapScene.tscn (this
-## layout); tools/import/world_to_scene.gd makes them from the .map files.
+## layout). The world map converter made them from the .map files; both are
+## deleted (closing phase 4.1, plan 9.1), and the scenes are edited by hand.
 ##
 ## Coordinates are screen pixels (the 1024 x 768 virtual screen): the maps do
 ## not scroll or zoom, and the legacy nodes, roads and sprites use them.
 ##
 ## Step A (data, docs/MODERNIZATION_PLAN.md 9.1): LandscapeLoader and
-## AirLandscapeLoader build the legacy map from the scene (load_into) instead
-## of parsing the .map file; --legacy=world_map and --legacy=airship keep the
-## .map files.
+## AirLandscapeLoader build the legacy map from the scene (load_into) as
+## parsing the .map file did.
 ##
 ## Step B (presentation): the same scene then draws the map while the legacy
 ## objects stay in charge of the state, the input and the timing (walking

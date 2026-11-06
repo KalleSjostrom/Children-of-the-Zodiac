@@ -34,22 +34,15 @@ func draw(g, alpha = null):
 	if alpha == null:
 		draw(g, fadeValue)
 		return
-	if not Main.is_legacy("story_texts"):
-		show_text(g, alpha)
-		return
-	g.startText(alpha, color, size - 6 if whisper else size)
-	g.drawMultiCenteredText(firstLine, pos[1])
-	if secondLine != "":
-		g.drawMultiCenteredText(secondLine, pos[1] + 70)
-	g.finishText()
+	show_text(g, alpha)
 
-## Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): draw(g, alpha)
-## without the drawing: the same state changes (startText's font size, text
+## Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): the legacy
+## draw(g, alpha) without the drawing: the same state changes (startText's font size, text
 ## colour and alpha; finishText), and the node scenes/ui/StoryText.tscn on
 ## the Transition layer shows the lines where they would have been drawn
 ## (Graphics.show_ui), centred as drawMultiCenteredText centres them, in the
-## colour and alpha drawMultiString draws with. --legacy=story_texts keeps the
-## drawing.
+## colour and alpha drawMultiString draws with. The legacy drawing
+## (--legacy=story_texts) is removed (closing phase 3, plan 8.4).
 func show_text(g, alpha):
 	g.startText(alpha, color, size - 6 if whisper else size)
 	var textColor: Color = Graphics.text_color(g.text_alpha())

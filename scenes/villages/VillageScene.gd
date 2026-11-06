@@ -8,8 +8,8 @@ extends Node2D
 ## "<Place> at Night - 1.tscn", named after the .vil file) adds that
 ## variant's doors, signs, loot, villagers, particle systems and buildings.
 ## The scenes are the village data: phase 1 converted the .vil files into
-## them, and the .vil files are no longer read (they still name the variants
-## for VillageLoader.village_scene_for).
+## them, and the .vil files are deleted (plan 6.9, decision 5). Their names
+## still name the variants (VillageLoader.village_scene_for, path_for).
 ##
 ## Coordinates are village pixels: 1 unit = 1 pixel, origin at the
 ## background's top-left, y down, as in the legacy code (cutscenes, saves and
@@ -99,17 +99,25 @@ var _systems := {} # legacy particle system key -> the LegacyParticles2D built w
 var _story_image: StoryImage
 
 
-## The scene for the .vil file at vil_path (res://maps/Village/<Place>/<file>.vil,
-## as GameResourceLoader resolves it), or "" when there is none: an active
-## remake's (VillageRemake), else the one in scenes/villages/.
+## The scene of the variant that vil_path names (maps/Village/<Place>/<file>.vil,
+## with or without res://, in any case, as the legacy loader names it; the
+## .vil files themselves are deleted), or "" when there is none: an active
+## remake's (VillageRemake), else the one in scenes/villages/. The scene's
+## name is resolved without regard to case, as the legacy loader resolved
+## the file (GameResourceLoader.resolve; tools/gen_file_index.py lists the
+## scenes).
 static func path_for(vil_path: String) -> String:
-	if not vil_path.begins_with(VILLAGE_MAPS):
+	var p := vil_path.trim_prefix("res://")
+	var prefix := VILLAGE_MAPS.trim_prefix("res://")
+	if not p.to_lower().begins_with(prefix.to_lower()):
 		return ""
-	var relative := vil_path.trim_prefix(VILLAGE_MAPS).get_basename() + ".tscn"
-	var remade := VillageRemake.scene_path(relative)
+	var path := GameResourceLoader.resolve(
+			SCENE_DIR + p.substr(prefix.length()).get_basename() + ".tscn")
+	if path == "":
+		return ""
+	var remade := VillageRemake.scene_path(path.trim_prefix(SCENE_DIR))
 	if remade != "":
 		return remade
-	var path := SCENE_DIR + relative
 	return path if ResourceLoader.exists(path) else ""
 
 

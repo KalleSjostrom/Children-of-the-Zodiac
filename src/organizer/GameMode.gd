@@ -241,13 +241,10 @@ func updateFadeValue() -> void:
 
 ## Steps the fade and draws it, last in every mode's frame. Bridge (phase 3
 ## step B, docs/ARCHITECTURE.md section 12): the Transition layer's Fade node
-## draws it (Graphics.show_fade); --legacy=fades keeps the drawing.
+## draws it (Graphics.show_fade).
 func draw(g: Graphics) -> void:
 	updateFadeValue()
-	if Main.is_legacy("fades"):
-		g.fadeOldSchool(fadeValue)
-	else:
-		g.show_fade(fadeValue)
+	g.show_fade(fadeValue)
 
 
 ## Java overloads switchGameMode(mode[, switchMusic[, fade]]).

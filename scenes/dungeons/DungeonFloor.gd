@@ -4,10 +4,11 @@ extends Node3D
 ## The walls, floors and roofs of a dungeon floor, built from its
 ## DungeonLayout and the DungeonStyle's textures with SurfaceTool, in the
 ## editor and at run time (docs/MODERNIZATION_PLAN.md 7.1). The mesh is the
-## one the legacy display list holds (Labyrinth.init3D: renderSky, then
-## LabyrinthRenderer.draw), ported mechanically from LabyrinthNode.draw,
-## drawOneWall and drawFloors/drawRoof, Horizontal.draw (carpet floors) and
-## the pillar walls' slots (PillarWalls, chosen by the converter): the same
+## one the legacy display list held (Labyrinth.init3D: renderSky, then
+## LabyrinthRenderer.draw; removed with the legacy dungeon drawing, plan
+## 7.9), ported mechanically from LabyrinthNode.draw, drawOneWall and
+## drawFloors/drawRoof, Horizontal.draw (carpet floors) and the pillar walls'
+## slots (PillarWalls, chosen by the converter): the same
 ## vertices, texture coordinates, normals, colours and winding, in the same
 ## order, one surface per material in the order the display list made them.
 ##
@@ -20,8 +21,8 @@ extends Node3D
 ## walls is in eye space (its glLoadIdentity runs when the list is called):
 ## it fills the top of the view. It is a mesh of its own (Sky, top level),
 ## at the camera the floor is seen from (set_sky_camera: the origin at run
-## time, where the camera stays) and drawn before the walls, as
-## Graphics.DisplayList draws the list's eye-space part first.
+## time, where the camera stays) and drawn before the walls, as the legacy
+## display list drew its eye-space part first.
 
 const FLOOR_HEIGHT := -2.0
 const ROOF_HEIGHT := 2.0

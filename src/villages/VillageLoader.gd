@@ -66,10 +66,10 @@ func load(info):
 
 
 ## A new instance of the scene of the variant maps/Village/<vil>
-## (VillageScene; the .vil file names the variant), or null when there is
-## none.
+## (VillageScene; the .vil file name names the variant), or null when there
+## is none.
 static func village_scene_for(vil: String) -> VillageScene:
-	var path := VillageScene.path_for(GameResourceLoader.resolve(Values.VillageMaps + vil))
+	var path := VillageScene.path_for(Values.VillageMaps + vil)
 	if path == "":
 		return null
 	return (ResourceLoader.load(path) as PackedScene).instantiate()

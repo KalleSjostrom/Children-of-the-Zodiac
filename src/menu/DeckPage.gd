@@ -360,39 +360,18 @@ func drawDeckHelp(g):
 	g.drawCenteredImage(AbstractPage.BUTTON_ICONS[GameMode.L1R1], helpxicons + step, helpyicons)
 
 
+## The card's info popup at y (the battle's, a gift's, the dialog's): the UI
+## node (show_card_info). The legacy drawing (--legacy=dialog) is removed
+## (closing phase 3, plan 8.4).
 static func drawCardInfo(g, c, y):
-	if not Main.is_legacy("dialog"):
-		show_card_info(g, c, y)
-		return
-	g.drawImage(cardHelp, 4, y + 35)
-	if c != null:
-		var x: int = 150
-		c.drawCard(g, 10, y + 25, 1.0)
-		var info = c.getInfo()
-		var name = info[0]
-		y += 75
-		g.drawStringSetSize("Name: " + str(name), x, y, 26)
-
-		g.setFontSize(MenuValues.MENU_FONT_SIZE)
-		g.startText()
-		y += 32
-		g.drawMultiString(info[1], x + 20, y)
-		y += 27
-		g.drawMultiString(info[2], x + 20, y)
-		y += 27
-		g.drawMultiString(info[3], x + 20, y)
-		y += 32
-		g.finishText()
-
-		info = c.getVeryShortInfo()
-		g.drawStringSetSize("Effect: " + str(info[0]) + str(info[1]), x, y, 20)
+	show_card_info(g, c, y)
 
 
 ## Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): drawCardInfo
 ## without the drawing: the same state changes (the images bound, the font
 ## sizes, drawString's setColor(color), startText and finishText), and the
 ## UI node scenes/ui/CardInfo.tscn shows the popup where it was drawn
-## (Graphics.show_ui). --legacy=dialog keeps the drawing.
+## (Graphics.show_ui).
 static func show_card_info(g, c, y):
 	var tint: Color = g.getCurrentColor()
 	var mat = g.canvas_material()

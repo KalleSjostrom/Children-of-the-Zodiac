@@ -35,38 +35,6 @@ func kill():
 	life = 0
 
 
-## Java overloads: draw(Graphics g, GameTexture t, Vector3f pPos) and the
-## empty draw(Graphics g, int x, int y).
-func draw(g, t = null, pPos = null):
-	if t is GameTexture:
-		if isAlive():
-			g.setColor4(rgb, life)
-			var pos = getPosition()
-			t.drawMany(g, pos.x + pPos.x, -(pos.y + pPos.y), modifySize(size))
-
-
-## Bridge (phase 1 step B, docs/ARCHITECTURE.md): draw(g, t, pPos) without
-## drawing (for an alive body): the quad that t.drawMany would draw, [four
-## corners in drawi's vertex order (screen pixels), colour]. Does what draw
-## does: modifySize may change the body (SmokeParticle clamps its life).
-func place_quad(t, pPos) -> Array:
-	var color := Color(rgb[0], rgb[1], rgb[2], life)
-	var pos = getPosition()
-	var px: float = pos.x + pPos.x
-	var py: float = -(pos.y + pPos.y)
-	var scale: float = modifySize(size)
-	# GameTexture.drawMany:
-	var halfHeight: float = (t.getHeight() * scale) / 2.0
-	var halfWidth: float = (t.getWidth() * scale) / 2.0
-	py -= halfHeight
-	px -= halfWidth
-	var nyh := int(py + 2 * halfHeight)
-	var xw := int(px + 2 * halfWidth)
-	var x0 := int(px)
-	var y0 := int(py)
-	return [Vector2(x0, nyh), Vector2(xw, nyh), Vector2(xw, y0), Vector2(x0, y0), color]
-
-
 func modifySize(size):
 	return size
 

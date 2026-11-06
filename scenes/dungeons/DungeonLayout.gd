@@ -3,7 +3,8 @@ class_name DungeonLayout
 extends Resource
 ## The layout of a dungeon floor: its cells with their neighbours and texture
 ## slots (DungeonCell), and the floor's place in the menu's map page. Written
-## by tools/import/map_to_scene.gd from a .map file; DungeonFloor builds the
+## by the dungeon converter from a .map file (both deleted, plan 7.9; edited
+## by hand now); DungeonFloor builds the
 ## walls, floors and roofs from it (with the DungeonStyle's textures), and
 ## DungeonScene.load_into builds the legacy LabyrinthMap and its nodes from
 ## it (step A).

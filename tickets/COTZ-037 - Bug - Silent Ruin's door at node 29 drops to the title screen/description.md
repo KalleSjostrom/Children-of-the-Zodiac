@@ -11,3 +11,5 @@ In Silent Ruin--The Great Ruins, the door at node 29 leads to `-mark12`, a place
 **Fix idea:** add the missing place:
 `place mode="4" name="Silent Ruin--The Great Ruins-mark12" start="12" music="Silent Cave" map="Silent Ruin--The Great Ruins.map"`.
 A start index is the door's position in load order (`InventoryDoor.doorCount`, which hinder doors share; `Graph.doorLocation`). The floor's doors come in pairs: door 19 → mark2 ↔ hinder door 35 → mark1, ..., door 29 → mark12 ↔ hinder door 45 → mark11. So start 12 is the 13th door, hinder door 45, and the door at 29 should take the player there. Check that the `.tscn`'s door order matches the `.map`.
+
+**Note (2026-11-06):** the `.vil` and `.map` files this ticket names are deleted (decision 5; `docs/MODERNIZATION_PLAN.md` 6.9, 7.9, 9.1; the git history up to aab714c9 has them). Their data is in the scenes, which a fix edits: a village variant in `scenes/villages/<Place>/<file>.tscn`, a floor in `scenes/dungeons/<Area>/<Floor>.tscn` (with `resources/dungeon_layouts/` and `resources/dungeon_styles/`), a world map in `scenes/world_map/<file>.tscn`. The line numbers above are the old files'.

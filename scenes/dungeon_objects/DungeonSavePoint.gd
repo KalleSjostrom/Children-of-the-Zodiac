@@ -14,7 +14,7 @@ func _new_inventory(node, map, status: int) -> Inventory:
 
 
 ## Step B on the GPU path (the dungeon particles phase): the particles the
-## legacy save point draws this frame (SaveSystem.place_gpu), shown by the
+## legacy save point draws this frame (SaveSystem.place_particles), shown by the
 ## "Particles" child (SaveParticles3D, made at the first frame; its local
 ## coordinates are the floor's units, so it undoes this node's position).
 ## Returns it, for its place among the objects' batches.

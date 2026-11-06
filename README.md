@@ -49,7 +49,7 @@ Developer options (after `--` on the command line):
 * `--autoplay=<file> --shots=<dir>`: scripted input and screenshots, see
   `src/main/AutoPlay.gd`.
 * `--seed=<n>` (deterministic run), `--fixed-step`, `--uncapped`,
-  `--legacy=<subsystems>`, `--bridge-test`: for parity testing, see
+  `--legacy=<subsystems>`: for parity testing, see
   `docs/ARCHITECTURE.md` section 7 and `tools/parity/parity.sh`.
 
 Developer console (debug builds, e.g. run from the editor): the key under

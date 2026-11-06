@@ -70,8 +70,17 @@ State:
   with every variant (MenuNode.place_children, show_children_freely); the twins in
   AbstractPage, StartPage, StatusPage, EquipPage, Deck, AbstractCard, MenuScrollBar, SaveSlots,
   LabyrinthMap; Graphics.place_image, place_centered_image; MenuText.role; --legacy=menu_frame,
-  menu_list, menu_text, status, deck, automap; the console's give; the menu_* cases. If git
-  status shows its files uncommitted, stop and tell me.
+  menu_list, menu_text, status, deck, automap; the console's give; the menu_* cases.
+- Phases 1 to 4.1 are closed (2026-11-06; plan 6.9, 7.9, 8.4, 9.1, decision 5 in section 13)
+  and committed: the .vil and .map files, the converters and data checks, the bridge test and
+  the --legacy= flags of those phases (villages, dungeons, dungeon_drawing, particles,
+  dungeon_particles, dialog, fades, emotions, mission, pause, story_images, story_texts,
+  tutorials, world_map, airship) are gone. The flags left are phase 4.2's (title, game_over,
+  menu_list, menu_frame, menu_text, status, deck, automap) and the battle effects'
+  (battle_effects, effect_waits). Phase 3's nodes (the dialog, the card info, the tutorials,
+  the fade) have no legacy path any more. The village, dungeon and world map scenes are
+  edited by hand.
+- If git status shows the menu's files or the closings uncommitted, stop and tell me.
 - The stores still draw everything through Graphics except phase 3's nodes (the keeper's
   dialog, the card info, the tutorials, the Inn's prize message, the fade). Their call sites
   of the shared helpers are legacy on purpose: MenuNode.draw*, EquipPage.drawStatus and
@@ -90,20 +99,29 @@ State:
   the levels only rise in a frame, so the dim needs a Fade node on the UI layer.
 - Left open, not part of this task:
   * the riddle fade's port bug (plan Appendix; fix it before the mini-games);
-  * the dungeons' 1/255 (plan 7.8, 8.3), the minimap on the 3D bridge;
-  * the closings of phases 1 to 4.1;
-  * the quirks in tickets/triage.md (W1 to W4, R1).
-- Do not run tools/import/vil_to_scene.sh --all. It rewrites three village scenes that the
-  editor saved by hand in 4b74ade3 (plan 12).
-- Record goldens on the commit you start from. m1gold in tools/parity/out was recorded on the
-  menu's unconverted code with the menu's cases.
-  * A full run (407 cases and bridge_test, --jobs=8) takes about 15 minutes.
+  * the minimap on the 3D bridge (plan 8.4: until the battles leave the bridge);
+  * the quirks in tickets/triage.md (W1 to W4, R1) and the open tickets (COTZ-033: Zazo's
+    night Inn and Church name images that do not exist, as in the Java; a content quirk
+    that stays).
+- The look prototypes (committed in aab714c9: res://proto/, --look, --village, the console's
+  look and village; docs/LOOK_PROTOTYPES_PLAN.md) are dev only and off by default. Leave
+  them alone. tools/check.sh compiles res://proto too, and other sessions may be editing
+  it: if a failure there is not yours, tell me.
+- The exit-leak cleanup (2026-11-05, committed in aab714c9) frees the stores' menus when a
+  store is freed (Building and AbstractStore: MenuNode.releaseTree at PREDELETE). Keep it.
+- Record goldens on the commit you start from. The newest set in tools/parity/out is cafter2
+  (409 cases, 7,674 shots), recorded on the closings' tree (it equals cbase, the set on
+  aab714c9, which equals leakfinal, the leak cleanup's): compare your golden with it too
+  (shots, logs, error and leak lines); it should be identical. m1gold is the menu's golden.
+  * A full run (409 cases, --jobs=8) takes about 15 minutes. There is no bridge_test case
+    any more.
   * The machine has 16 GB of memory, and an 8-job recording leaves about 3 GB. Run nothing
     beside a recording: no windowed run, and not even a headless `parity.sh compare` (in the
     menu's session one ran the machine out: four runs crashed in AutoPlay's get_image, four
     logged WebP decode errors with identical shots). Compare each case's error lines, not only
-    the shots: a game pad or audio device event during a run adds WASAPI or HIDAPI lines (and
-    changes that run's exit leak counts); those are not differences of the code.
+    the shots: a game pad or audio device event during a run adds WASAPI or HIDAPI lines;
+    those are not differences of the code. Since the leak cleanup only the effects_* cases
+    print an exit leak report (7 objects): a new one is a RefCounted cycle, a regression.
   * With more parallel jobs some runs fail to start (exit 127, an empty log). Re-record those
     cases.
   * Record from a copy of the project (HANDOFF) when you want to edit code meanwhile.
@@ -131,7 +149,9 @@ Decisions (plan section 13):
   keeper's dialog, the card info, the tutorials, the prize message), needs its own slot.
 - Decision 3 (step C) is not made: no Tweens or Timers, no signals or InputMap replacing the
   polled input. The InputMap wrapper and the Game autoload are phase 4.3.
-- Decision 5, text formats: not made. The .help files stay; no BBCode converter.
+- Decision 5, text formats: decided for the converted formats (the .vil and .map files are
+  deleted). The formats that are not converted stay the data: the .help and .tut files stay;
+  no BBCode converter.
 - Decision 6 (time base) is not needed: the bless hands' animation stays legacy.
 - Decision 8, the UI look: not made. Keep the legacy images, fonts, sizes, positions, colours
   and alphas. BaselineLabel.oversampling stays 1.
@@ -144,7 +164,7 @@ recorded on unconverted code.
 
 0. Baseline
    - tools/check.sh reports 0 failed.
-   - Record goldens of all existing cases and bridge_test.
+   - Record goldens of all existing cases.
    - Re-run the menu's check on top of whatever landed since: --legacy=title,game_over,
      menu_list,menu_frame,menu_text,status,deck,automap vs. the goldens, on every case:
      identical at tolerance 0.
@@ -238,7 +258,7 @@ recorded on unconverted code.
      identical at tolerance 0; each flag alone on its parts' cases too.
    - Golden vs. after on all other cases: identical, logs and error lines too.
    - With every flag on (this task's, the menu's and the pilot's), the run equals the golden.
-   - The bridge test must still pass.
+   - No new exit leak report (only the effects_* cases print one).
    - Choose any tolerance deliberately, and explain every remaining difference with its diff
      image. Fix what fails in the bridge code (the nodes, the twins), not in legacy logic.
    - Measure the frame rate in normal runs (no --seed), legacy vs. nodes, capped and uncapped:
@@ -286,7 +306,7 @@ When done, report:
   * legacy vs. nodes per flag on its cases, and all flags together;
   * golden vs. after on all other cases;
   * every flag on vs. the golden;
-  * the bridge test;
+  * the exit leak reports;
 - what the stores still draw through legacy code, and why;
 - the screenshots you checked and what each showed (contact sheets are fine);
 - fps per measured page, legacy vs. nodes;

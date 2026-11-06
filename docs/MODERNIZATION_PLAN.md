@@ -1,16 +1,16 @@
 # Modernization plan: from the GL emulation to Godot scenes
 
-Status: **phase 0 done** (2026-10-16); **phase 1 steps A and B done** for
-all 63 places and 89 variants (pilot: Zazo and "Zazo - Miner's Home", 6.7;
-rollout: the other 61 places, 6.8; closing the phase, 6.9); **phase 2
-steps A and B done** for all 80 floors (pilot 7.7, rollout 7.8, closing
-7.9); **the particles phases P and P2 done** (6.10, 6.12); **phase 3 steps
-A and B done** (pilot: the dialog family and the fade, 8.1; rollout: the
-other overlays of villages, labyrinths and cutscenes, 8.3; closing the
-phase, 8.4); **phase 4.1 steps A and B done** (the world map and the
-airship, 9.1); **phase 4.2's pilot done through step B** (the title, the
-game over and the menu list, 9.2; the rollout to the menu, the stores and
-the mini-games prepared there); the rest of phases 4–5 are proposals. The plan
+Status: **phase 0 done** (2026-10-16); **phases 1, 2, 3 and 4.1 done and
+closed** through step B, their legacy paths, `--legacy=` flags and the
+`.vil` and `.map` files removed (decision 5, 2026-11-06): the villages (63
+places, 86 variants; pilot 6.7, rollout 6.8, closing 6.9), the dungeons (80
+floors; 7.7, 7.8, closing 7.9), the shared UI and transitions (8.1, 8.3,
+closing 8.4), the world map and the airship (9.1 and its closing); **the
+particles phases P and P2 done** (6.10, 6.12; the village and dungeon
+legacy paths closed with phases 1 and 2, the battle effects' stay until
+4.4); **phase 4.2's pilot and the menu done through step B** (the title, the
+game over and the menu list; the menu pages; 9.2, which prepares the stores
+and the mini-games); the rest of phases 4–5 are proposals. The plan
 assumes the state described in `docs/HANDOFF.md` (all classes ported, main
 paths run). Conventions for new code: `docs/ARCHITECTURE.md`.
 
@@ -698,7 +698,7 @@ history up to 1e0229df. The scenes are now edited by hand.*
   at 60 FPS": Dellna's snow runs at 12 FPS in normal play. A GPU preset
   (6.4, after decision 6) is the way to remove it.
 
-### 6.9 Closing phase 1 (done on 2026-11-03, except decision 5)
+### 6.9 Closing phase 1 (done on 2026-11-03; decision 5 on 2026-11-06)
 
 Removing the legacy village path deletes or changes (line counts as of the
 rollout, including doc comments; as built below the table):
@@ -758,13 +758,30 @@ What kept the exit criteria of 6.6 from being met before this:
   the expected differences (a tolerance or a list), not fixed.
 * "`Village`/`VillageLoader` contain no world drawing": met (as built
   above).
-* "Delete each `.vil`": decision 5 is open; nothing reads them any more.
-* Particles: done on the GPU (6.10); `--legacy=particles` keeps the legacy
+* "Delete each `.vil`": done on 2026-11-06 (decision 5, below).
+* Particles: done on the GPU (6.10); `--legacy=particles` kept the legacy
   simulation (`BodiesParticleSystem`'s bodies, `step`, `drawIt`,
-  `place_quad` and `LegacyParticles2D`'s quads) until the phase closes.
+  `place_quad` and `LegacyParticles2D`'s quads) until 2026-11-06 (below).
 * The emotion bubbles, dialogs, signs, fades and the cover-all/story/
   translucent-over-actor cutscene images are legacy overlays until phase 3
   (not part of the exit criteria).
+
+*Decision 5 (2026-11-06):* the 86 `.vil` files are deleted (the git
+history up to aab714c9 has them), with the closings of phases 2, 3 and 4.1
+(7.9, 8.4, 9.1) and one parity check for all of them (9.1, "Parity of the
+closings").
+
+* The legacy code still names a variant by its `.vil` path
+  (`VillageLoader.load`); `VillageScene.path_for` resolves the scene's name
+  in `file_index.txt` without regard to case, where the `.vil` path was
+  resolved before (`tools/gen_file_index.py` lists the village and dungeon
+  scenes for it; every `.vil` had exactly one scene).
+* The village-remake tool (`remake_inventory.gd`) read the obstacle groups,
+  the comment headings over each place's `o` lines, from its `- 0.vil`:
+  they are saved in `tools/village_remake/obstacle_groups.json` (60 places,
+  189 groups); its output for Alares and Zazo is byte-identical before and
+  after.
+* `--legacy=particles` is removed (closing the particles phase, 6.10).
 
 ### 6.10 The particles phase (P): village and cutscene particles on the GPU
 
@@ -923,6 +940,14 @@ docs/CONVERTING_PARTICLES.md.
   (`preprocess`, 30 steps a second): 10 s for most systems; the snow's
   ~200 s warm-up takes 2 steps a second (its law is linear), without which
   Dellna's load was 0.89 s.
+
+*Closed (2026-11-06, with phase 1's decision 5, 6.9):* `--legacy=particles`
+and the legacy simulation are removed: the bodies (`addBody` at build,
+`step` and its command queue, `drawIt`, `init`), the quads
+(`place_particles`' legacy branch, `Body.place_quad`, `LegacyParticles2D`'s
+canvas items) and the bodies' draws (`Body.draw`, `BodySystem.draw`, whose
+last caller was the world map's legacy `DoubleBackground.drawSystem`). The
+particle classes keep the laws, which `particles_to_scenes.gd` samples.
 
 ### 6.11 The next particles (prepared; done in 6.12)
 
@@ -1192,6 +1217,12 @@ and 5.
   | Tornado 3, lowest FPS, capped / uncapped | 25 / 25 | 60 / 265 |
   | Fire 3, Ice 3, Earth 3, Blizzard 3, Colliding 3, Ultima 3, lowest capped FPS | 58-60 | 52-60 |
   | Menthu's Flame (`Flame.getStaticAnimation`), the game stands still | 10,450 ms | 1.6 ms |
+
+*Closed for the dungeons (2026-11-06, with phase 2, 7.9):*
+`--legacy=dungeon_particles` and the weather's and save points' legacy
+simulation and quads are removed. `--legacy=battle_effects` and
+`effect_waits` stay until the battles are converted (4.4): the legacy
+effect pool still decides the waits on the GPU path.
 
 ## 7. Phase 2: dungeons as scenes
 
@@ -1684,7 +1715,7 @@ calls.
     no visible effect. A floor with "No Music" would do the same unmuted
     (the Java would throw there too).
 
-### 7.9 Closing phase 2 (prepared, not done)
+### 7.9 Closing phase 2 (done on 2026-11-06)
 
 Removing the legacy dungeon path deletes or changes (line counts as of the
 rollout, including doc comments):
@@ -1729,6 +1760,36 @@ What keeps the exit criteria of 7.6 from being met:
 * Delete the `.map` files: decision 5 is open.
 * Parity at tolerance 0 is not reached everywhere (the 1/255 of 7.8); closing
   needs that tolerance accepted, or the renderer stage found.
+
+*As built (2026-11-06):* decision 5 is decided (delete the text files)
+and the 1/255 of 7.8 accepted: with the legacy path gone there is nothing
+to compare it with. Everything in the table is removed, and:
+
+* `MapLoader` keeps `addTexture` (`load_into` calls it) and the constants;
+  a floor without a scene stays empty with one error, as a missing file
+  left it. `DungeonScene.path_for` resolves the floor's scene by its `.map`
+  name in `file_index.txt`, without regard to case (6.9).
+* `PillarWalls` is deleted (`PillarWalls.node`, which `load_into` set, is
+  read by nothing but the parse; the data check compared it), and
+  `MenuMapLoader` (no caller; it parsed `.map` files).
+* With `--legacy=dungeon_particles` (6.12) gone, `WeatherSystem` and
+  `SaveSystem` build no particles and `place_particles` returns the GPU
+  state; `WeatherParticle.drawParticle`, `SaveParticle.drawParticle` and
+  `place_quad`, `DungeonWeather.show_pass` and its meshes go too (the front
+  pass over a battle is the GPU pass, `show_weather_over`); `set_quads`
+  stays (the objects' batches).
+* The display lists go with `Graphics`' eye-space bookkeeping
+  (`DisplayList`, `_list_eye`).
+* The debug console reads the floors from the scenes (the floor list, save
+  points, bosses, the cells' links); `boss` puts the party on the boss's
+  neighbour with the lowest address, which for all six bosses is the one
+  the first `dir` line of the `.map` file gave.
+* A prototype look's camera set `DungeonWeather.eye`, which only the
+  legacy quads used; the line is removed with them.
+
+Not in the table and still there: `init_scene_3d`'s GL state (the battles
+read it), the minimap (the 3D bridge, 8.4), `drawOneWall` and
+`drawOneFloor` (`DungeonQuads`), `Inventory._drawQuad` (`place_view`).
 
 ## 8. Phase 3: shared UI and transitions
 
@@ -2159,7 +2220,7 @@ section 12; the procedure: docs/CONVERTING_UI.md.
   Church's tutorials (`HelpText`'s rows stay legacy: phase 4.2; its
   `Tutorial` pages are the node, as in the stores).
 
-### 8.4 Closing phase 3 (prepared, not done)
+### 8.4 Closing phase 3 (done on 2026-11-06)
 
 Removing the legacy overlay paths deletes or changes (line counts as of the
 rollout, including doc comments):
@@ -2224,6 +2285,14 @@ except battles and riddles") from being met after the rollout:
 * The world map, the airship, the stores' menus and the menu pages are other
   modes (4.1, 4.2); they draw the shared dialog, fade, card info and
   tutorials through the same twins.
+
+*As built (2026-11-06):* everything in the table is removed. `Dialog.draw`'s
+branch to the private overload that drew the lines (`_drawLines`) had no
+caller (every call passes nothing or a bool), nor had the public
+`drawQuestion`: both are gone with the layout tables. `GameCore` keeps
+`--legacy=menu_list` for the game pad lost menu (phase 4.2). The minimap
+stays the 3D bridge's (above); the stores', riddles' and battles' overlays
+are phase 4's.
 
 ## 9. Phase 4: remaining modes
 
@@ -2377,7 +2446,7 @@ state, the input and the timing.
   The debug console's `roads` reads the road addresses from the scenes now
   (the `.map` text with `--legacy=world_map`).
 
-**Closing phase 4.1 (prepared, not done).** Removing the legacy world map and
+**Closing phase 4.1 (done on 2026-11-06).** Removing the legacy world map and
 airship paths deletes or changes (line counts with doc comments):
 
 | Part | Lines | Still used by |
@@ -2399,6 +2468,39 @@ mode of its own, or BridgeTest inside the map's scene, is a choice); the
 twins' binds and the `DoubleBackground` state, which matter while legacy 2D
 follows the map in the frame (the name plate's twin binds last, so only the
 GL state the plate leaves is observable); step C for walking and flying.
+
+*As built (2026-11-06):* everything in the table is removed except
+`DoubleBackground`'s landscape path, which the scene path builds for the
+twins: decision 5 (the five `.map` files), the parse, the legacy drawing
+(with `DoubleBackground.drawBottom`, `drawBottomLayer`, `drawTop`,
+`drawSystem` and `Sprite.draw`, `drawSprite`, `drawAtPosition`, whose last
+callers these were), `world_to_scene.gd` (+ `.sh`), `tile_art.gd`,
+`verify_world_map.gd` and the flags. A map without a scene, or a missing
+index, is an error (the airship still loads its images, as a missing file
+left it). The bridge test is deleted (decided on 2026-11-06): every
+village, labyrinth, cutscene and world map case runs through the bridge it
+checked, and a scene that is not freed shows as an exit leak report
+(ARCHITECTURE section 8).
+
+**Parity of the closings** (phase 1's decision 5, P, phase 2 with P2's
+dungeon part, phase 3, phase 4.1; 2026-11-06). Goldens `cbase` on aab714c9
+(409 cases, 7,674 shots; recorded from a copy of the project) are identical
+to `leakfinal` (the leak cleanup's set: shots, logs, error and leak lines),
+so the prototypes' commit changed nothing in a default run. After the
+closings, `cafter2` vs. `cbase`: all 7,674 shots identical at tolerance 0,
+every AutoPlay log identical, and per case the same exit code, shot count
+and counts of script errors, engine errors, exit leak lines (only the
+`effects_*` cases, as before) and device events. A first recording
+(`cafter`) caught a bug of the change: `VillageScene.path_for` still
+expected the `res://` path that `resolve` used to return, and no village
+loaded; fixed before `cafter2` (a smoke set `cfix`, 11 cases, first). There
+is no `bridge_test` case any more. Beyond parity: `tools/check.sh` 494
+scripts, 0 failed; the remake tool's inventory of Alares and Zazo is
+byte-identical; an exported debug build runs a village, a floor, the world
+map and a cutscene (the village's 916 "image not found" lines are Hilda's,
+triage C1, and the same in an export of aab714c9). The frame rate was not
+measured: only legacy paths and dev tools were removed, and normal play runs
+the same code.
 
 ### 9.2 Title, game over, mini-games, stores, menu
 
@@ -3183,9 +3285,9 @@ When no mode draws through `g` any more:
   village scenes in 4b74ade3; the converter no longer reproduces them and
   `vil_to_scene.sh --all` overwrites them. Re-convert one place at a time
   and keep hand edits out of generated scenes (or in the data they come
-  from). *Since 6.9 the village converter is gone: the village scenes are
-  edited by hand, and the world map's and dungeons' converters keep this
-  risk.*
+  from). *Since 6.9 the village converter is gone, and since 7.9 and 9.1
+  the dungeon and world map converters too: every scene is edited by hand,
+  and this risk is gone with them.*
 * **Curves that only look like paths** (phase 4.1). A road's `Path2D` curve
   is the road's data: editing it in the editor changes where the player
   walks (`Road.addCoordinates` builds the line from its points), but
@@ -3240,7 +3342,11 @@ When no mode draws through `g` any more:
    now; menus, battle and dungeons assume it). Scenes make widescreen
    villages possible later.
 5. **Text formats:** delete them after conversion (recommended) or keep them
-   as an export format.
+   as an export format. *Decided (2026-11-06):* delete them. The `.vil` and
+   `.map` files are deleted with the closings of phases 1, 2 and 4.1 (6.9,
+   7.9, 9.1; the git history has them). The text formats that were not
+   converted (`.char`, `.seq`, `.bank`, `.help`, `.tut`,
+   `particleSystems.info`, `.trig`, saves) stay the data.
 6. **Time base** (2.5): when motion moves to nodes, which speed is the
    target?
    * The original's feel: about 30 updates/s, expressed as per-second
@@ -3301,12 +3407,12 @@ Sizes are relative: S ≈ a focused session, XL ≈ many sessions.
 | # | Phase | Size | Depends on | Unlocks |
 |---|---|---|---|---|
 | 0 | Groundwork: bridge, parity tool, `ARCHITECTURE.md` | S | — | everything |
-| 1 | Villages + cutscenes + village particles + SpriteFrames | L | 0; decisions 1, 6 | editable villages |
-| 2 | Dungeons + weather + minimap | L | 0; decision 2 (the weather: 6) | editable dungeons; FPS fix (with decision 6) |
-| P | Village and cutscene particles on the GPU (6.4; `docs/particles_prompt.md`). *Done (6.10).* | M | 1; decision 6 (decided for particles) | Dellna's snow back on; Home of the Gods and Dellna at 60 FPS |
-| P2 | Dungeon weather, save points and the card and enemy effects that are particles, on the GPU (6.11). *Done (6.12).* | M | 2, P | rainy and snowy floors at 60 FPS; battles without the effects' stalls (Wind 3 at 7 FPS, the Flame's 10 s) |
-| 3 | Theme, Dialog, signs, emotions, fades, HUD. *Done through step B: the pilot (8.1: the Theme, the dialog family, the fade) and the rollout (8.3: emotions, mission display, pause overlays, cutscene images and texts, tutorials; the minimap stays the 3D bridge's); closing prepared (8.4).* | M | 1 (or 2) | most of the remaining `draw(g)` |
-| 4.1 | World map + airship. *Done through step B (9.1): the scenes, the name plate, legacy vs. scene identical; closing prepared.* | M | 1 (converter), 3 | — |
+| 1 | Villages + cutscenes + village particles + SpriteFrames. *Done and closed (6.9).* | L | 0; decisions 1, 6 | editable villages |
+| 2 | Dungeons + weather + minimap. *Done and closed (7.9); the minimap stays the 3D bridge's (8.4).* | L | 0; decision 2 (the weather: 6) | editable dungeons; FPS fix (with decision 6) |
+| P | Village and cutscene particles on the GPU (6.4; `docs/particles_prompt.md`). *Done (6.10); closed with phase 1 (6.9).* | M | 1; decision 6 (decided for particles) | Dellna's snow back on; Home of the Gods and Dellna at 60 FPS |
+| P2 | Dungeon weather, save points and the card and enemy effects that are particles, on the GPU (6.11). *Done (6.12); the dungeon part closed with phase 2 (7.9), the battle effects' legacy path stays until 4.4.* | M | 2, P | rainy and snowy floors at 60 FPS; battles without the effects' stalls (Wind 3 at 7 FPS, the Flame's 10 s) |
+| 3 | Theme, Dialog, signs, emotions, fades, HUD. *Done through step B: the pilot (8.1: the Theme, the dialog family, the fade) and the rollout (8.3: emotions, mission display, pause overlays, cutscene images and texts, tutorials; the minimap stays the 3D bridge's); closed (8.4).* | M | 1 (or 2) | most of the remaining `draw(g)` |
+| 4.1 | World map + airship. *Done through step B (9.1): the scenes, the name plate, legacy vs. scene identical; closed (9.1).* | M | 1 (converter), 3 | — |
 | 4.2 | Title, game over, mini-games, stores, menu. *Pilot done through step B (9.2): the title, the game over, the menu list; the menu done through step B (9.2, one session); prepared: the stores (1–2), the mini-games (1).* | L | 3 | — |
 | 4.3 | Input, audio, saves, `Game` autoload | M | any time after 0; the autoload is best after 4.2 | 5 |
 | 4.4 | Battle, cards, effects | XL | 2, 3 | 5 |

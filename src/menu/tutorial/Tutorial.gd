@@ -58,30 +58,15 @@ func crossedPressed():
 
 func drawTopLayer(g):
 	if active and chapter != null:
-		if not Main.is_legacy("tutorials"):
-			show_page(g)
-			return
-		g.fadeOldSchoolColor(1, 1, 1, .5)
-		var x: int = int(IMAGE_X) + AbstractPage.xoffset
-		var y: int = IMAGE_HEIGHT
-
-		g.push()
-		g.drawImage(AbstractPage.images[15], x - 35, IMAGE_HEIGHT)
-		g.pop()
-		g.setFontSize(34)
-		Graphics.setTextColor(0)
-		var l = chapter.getCurrentPage()
-		g.drawSingleCenteredText(title, y + 50, 1.0, 0.0)
-
-		g.setFontSize(26)
-		Row.drawRows(g, l)
+		show_page(g)
 
 ## Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): drawTopLayer's
 ## drawing without the drawing: the same state changes (fadeOldSchoolColor's
 ## colours and bind, the paper's bind, the font sizes, the text colours,
 ## startText and finishText; Row.place_rows), and the UI node
 ## scenes/ui/Tutorial.tscn shows the page where it would have been drawn
-## (Graphics.show_ui). --legacy=tutorials keeps the drawing.
+## (Graphics.show_ui). The legacy drawing (--legacy=tutorials) is removed
+## (closing phase 3, plan 8.4).
 func show_page(g):
 	var mat = g.canvas_material()
 	g.glColor4f(1, 1, 1, .5)

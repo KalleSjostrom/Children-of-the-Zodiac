@@ -1,0 +1,311 @@
+{
+	"Alares": [
+		{"name": "East woods", "rect": [1621, 779, 1955, 878], "count": 3},
+		{"name": "North woods", "rect": [428, 0, 1906, 337], "count": 39},
+		{"name": "Plotter trŠd", "rect": [74, 216, 1569, 1841], "count": 20},
+		{"name": "Eastroadsign", "rect": [808, 1246, 840, 1287], "count": 1},
+		{"name": "Twinstone2", "rect": [386, 971, 418, 1000], "count": 1},
+		{"name": "Twinstone1", "rect": [396, 957, 428, 986], "count": 1},
+		{"name": "Majorstone", "rect": [1398, 1175, 1429, 1205], "count": 1},
+		{"name": "Southstone", "rect": [1039, 1801, 1070, 1828], "count": 1},
+		{"name": "Well", "rect": [1302, 1293, 1392, 1363], "count": 1},
+		{"name": "Eastroadstone", "rect": [754, 1258, 785, 1288], "count": 1},
+		{"name": "Majorsign", "rect": [1289, 1164, 1319, 1205], "count": 1},
+		{"name": "Northroadstone", "rect": [979, 708, 1009, 739], "count": 1},
+		{"name": "Enterensesign", "rect": [1389, 1812, 1418, 1854], "count": 1},
+		{"name": "South east woods", "rect": [1686, 1327, 1964, 1889], "count": 5},
+		{"name": "South west woods", "rect": [0, 1181, 1964, 1906], "count": 20},
+		{"name": "Belmets house", "rect": [1498, 1476, 1683, 1573], "count": 5},
+		{"name": "Church", "rect": [629, 635, 839, 767], "count": 1},
+		{"name": "Inn", "rect": [1637, 879, 1867, 1113], "count": 5},
+		{"name": "Item shop", "rect": [149, 449, 419, 582], "count": 7},
+		{"name": "Library", "rect": [1126, 391, 1556, 570], "count": 6},
+		{"name": "Majors House", "rect": [1236, 982, 1459, 1112], "count": 3},
+		{"name": "River", "rect": [0, 0, 608, 934], "count": 57},
+		{"name": "Weapon shop", "rect": [976, 1477, 1251, 1591], "count": 12}
+	],
+	"Alares - Belmet's House": [
+		{"name": "start Player xpos ypos angle, Background xpos ypos", "rect": [507, 364, 518, 441], "count": 1},
+		{"name": "o 506 490 517 527", "rect": [314, 208, 711, 690], "count": 22}
+	],
+	"Alares - Library": [
+		{"name": "start Player xpos ypos angle, Background xpos ypos", "rect": [98, 193, 927, 710], "count": 34}
+	],
+	"Berca": [
+		{"name": "particlesystem sandsystem", "rect": [7, 95, 2026, 1149], "count": 121}
+	],
+	"Berca - Bar": [
+		{"name": "start0.x, start0.y + 20, width, dir, ?, village.x, village.y + 15, dir of player", "rect": [222, 200, 797, 669], "count": 23}
+	],
+	"Berca - Dolly's House": [
+		{"name": "start0.x, start0.y + 20, width, dir, ?, village.x, village.y + 15, dir of player", "rect": [1, 0, 1006, 716], "count": 13}
+	],
+	"Berca - House": [
+		{"name": "start0.x, start0.y + 20, width, dir, ?, village.x, village.y + 15, dir of player", "rect": [179, 197, 774, 674], "count": 18}
+	],
+	"Berca - Library - Floor 1": [
+		{"name": "start Player xpos ypos angle, Background xpos ypos", "rect": [252, 176, 778, 730], "count": 22}
+	],
+	"Berca - Library - Floor 2": [
+		{"name": "holeDoor village Berca 494 430 30 0 2 1826 104 0", "rect": [480, 281, 643, 469], "count": 5},
+		{"name": "o 478 394 545 457", "rect": [237, 190, 797, 702], "count": 15}
+	],
+	"Crossroad": [
+		{"name": "start Player xpos ypos angle, Background xpos ypos", "rect": [149, 133, 863, 566], "count": 5}
+	],
+	"Crystal Room": [
+		{"name": "start Player xpos ypos angle, Background xpos ypos", "rect": [409, 227, 614, 791], "count": 3}
+	],
+	"Dellna": [
+		{"name": "The inn + trees on the left side", "rect": [-60, 1068, 224, 1150], "count": 1},
+		{"name": "The left part of the biggest house (above the inn)", "rect": [20, 751, 163, 838], "count": 1},
+		{"name": "The right part of the biggest house (above the inn)", "rect": [318, 751, 460, 838], "count": 1},
+		{"name": "The middle part of the biggest house (above the inn)", "rect": [163, 751, 318, 800], "count": 1},
+		{"name": "The north fence", "rect": [-60, 225, 1940, 232], "count": 2},
+		{"name": "The north west trees", "rect": [-25, 232, 276, 400], "count": 3},
+		{"name": "Dead tree to the left of elders house", "rect": [304, 310, 424, 388], "count": 1},
+		{"name": "Elders house and trees around", "rect": [407, 172, 810, 397], "count": 7},
+		{"name": "Tree logs", "rect": [824, 296, 904, 377], "count": 1},
+		{"name": "Snowman", "rect": [1186, 318, 1218, 355], "count": 1},
+		{"name": "The snowed in house", "rect": [1169, 505, 1325, 602], "count": 1},
+		{"name": "Itemshop (right side)", "rect": [1033, 894, 1236, 964], "count": 1},
+		{"name": "Itemshop (left side)", "rect": [982, 896, 1000, 966], "count": 1},
+		{"name": "Lake (from bottom to up)", "rect": [1365, 486, 1622, 870], "count": 14},
+		{"name": "The well", "rect": [356, 950, 412, 1000], "count": 1},
+		{"name": "The south forrest", "rect": [778, 1110, 1560, 1262], "count": 6},
+		{"name": "The forrest south of the lake", "rect": [1496, 928, 1700, 1043], "count": 2},
+		{"name": "The forrest north of the lake", "rect": [1345, 284, 1563, 457], "count": 3},
+		{"name": "The weapon store", "rect": [552, 1080, 698, 1164], "count": 1},
+		{"name": "church + trees on the sides", "rect": [593, 599, 1026, 731], "count": 9}
+	],
+	"Dellna - Ana's Home": [
+		{"name": "null", "rect": [278, 201, 720, 674], "count": 21}
+	],
+	"Dellna - Ana's Home Memory": [
+	],
+	"Dellna - Elder House - Floor 1": [
+		{"name": "", "rect": [373, 235, 641, 686], "count": 10}
+	],
+	"Dellna - Elder House - Floor 2": [
+		{"name": "", "rect": [370, 236, 659, 634], "count": 10}
+	],
+	"Dellna - Elder House - Floor 3": [
+		{"name": "", "rect": [367, 213, 674, 592], "count": 9}
+	],
+	"Dellna - House": [
+		{"name": "start Player xpos ypos angle, Background xpos ypos", "rect": [17, 190, 1026, 646], "count": 42}
+	],
+	"Home of Celis": [
+		{"name": "", "rect": [1, 9, 1022, 714], "count": 30}
+	],
+	"Home of Celis - Celis Home": [
+		{"name": "start Player xpos ypos angle, Background xpos ypos", "rect": [260, 198, 764, 708], "count": 20}
+	],
+	"Home of Celis - Memory": [
+	],
+	"Home of the Gods": [
+		{"name": "outer circle", "rect": [469, 389, 1304, 1205], "count": 94},
+		{"name": "inner circle", "rect": [703, 613, 1054, 970], "count": 39},
+		{"name": "door", "rect": [832, 437, 927, 502], "count": 1},
+		{"name": "pillars", "rect": [543, 466, 1217, 1108], "count": 12}
+	],
+	"Kin's Place": [
+	],
+	"No Place": [
+	],
+	"Parasne": [
+		{"name": "start Player xpos ypos angle, Background xpos ypos", "rect": [117, 14, 1843, 1616], "count": 116},
+		{"name": "House", "rect": [116, 27, 1841, 828], "count": 67},
+		{"name": "boat", "rect": [36, 0, 1888, 1720], "count": 43},
+		{"name": "o 1115 1044 1169 1660", "rect": [36, 436, 1888, 1665], "count": 11}
+	],
+	"Parasne - Tavern": [
+		{"name": "start Player xpos ypos angle, Background xpos ypos", "rect": [0, 1, 1024, 749], "count": 36}
+	],
+	"Pass to Zazo": [
+		{"name": "Fireplace", "rect": [649, 461, 720, 550], "count": 2},
+		{"name": "Mountain", "rect": [0, 0, 1005, 406], "count": 36},
+		{"name": "Trees...", "rect": [31, 253, 1023, 726], "count": 9}
+	],
+	"Pensara - The North District": [
+		{"name": "Berg", "rect": [610, 322, 1540, 942], "count": 65},
+		{"name": "Fluffy trees", "rect": [141, 324, 1619, 1135], "count": 17},
+		{"name": "East house", "rect": [1783, 504, 1925, 616], "count": 1},
+		{"name": "South east house", "rect": [1587, 853, 1784, 995], "count": 1},
+		{"name": "Shut down house", "rect": [275, 381, 409, 469], "count": 1},
+		{"name": "Vincents house front", "rect": [1026, 631, 1183, 736], "count": 1},
+		{"name": "Vincents house up", "rect": [934, 499, 1276, 631], "count": 1},
+		{"name": "South west house", "rect": [241, 840, 485, 997], "count": 1},
+		{"name": "Water north of wall", "rect": [0, 0, 130, 289], "count": 1},
+		{"name": "North wall", "rect": [130, 191, 2666, 289], "count": 4},
+		{"name": "East wall", "rect": [2666, 191, 2761, 1337], "count": 2},
+		{"name": "Pine trees", "rect": [192, 314, 1348, 1166], "count": 13},
+		{"name": "MISC", "rect": [230, 334, 2665, 1337], "count": 33},
+		{"name": "Water", "rect": [1, 290, 2329, 1353], "count": 4},
+		{"name": "Trees and stuff north east in pensara", "rect": [2321, 307, 2629, 454], "count": 4},
+		{"name": "Large tree", "rect": [158, 309, 2632, 457], "count": 9}
+	],
+	"Pensara - The North District - Civil House": [
+		{"name": "start Player xpos ypos angle, Background xpos ypos", "rect": [232, 194, 793, 760], "count": 31}
+	],
+	"Pensara - The North District - Farmer House": [
+		{"name": "start Player xpos ypos angle, Background xpos ypos", "rect": [290, 201, 751, 693], "count": 21}
+	],
+	"Pensara - The North District - Library": [
+		{"name": "start Player xpos ypos angle, Background xpos ypos", "rect": [256, 185, 761, 742], "count": 13}
+	],
+	"Pensara - The School District": [
+		{"name": "Churchandtrees", "rect": [225, 286, 1087, 2375], "count": 39},
+		{"name": "Wall", "rect": [166, 2549, 1099, 2645], "count": 1},
+		{"name": "Lantern3", "rect": [907, 1733, 934, 1770], "count": 1},
+		{"name": "Wall", "rect": [70, 717, 165, 1417], "count": 1},
+		{"name": "null", "rect": [281, 2119, 332, 2146], "count": 1},
+		{"name": "Grave7", "rect": [224, 1034, 254, 1073], "count": 1},
+		{"name": "Fence", "rect": [602, 1890, 949, 1923], "count": 1},
+		{"name": "School", "rect": [694, 2043, 852, 2237], "count": 1},
+		{"name": "Grave6", "rect": [435, 903, 464, 943], "count": 1},
+		{"name": "Bench", "rect": [533, 1702, 596, 1742], "count": 1},
+		{"name": "Schoolblommor1", "rect": [689, 2215, 752, 2241], "count": 1},
+		{"name": "Grave1", "rect": [224, 783, 253, 821], "count": 1},
+		{"name": "lantern1", "rect": [458, 1851, 485, 1888], "count": 1},
+		{"name": "Fence", "rect": [603, 1923, 948, 2320], "count": 2},
+		{"name": "Clocktower", "rect": [252, 1622, 463, 1738], "count": 1},
+		{"name": "Wall", "rect": [70, 288, 165, 2124], "count": 2},
+		{"name": "Schoolblommor4", "rect": [852, 2211, 887, 2251], "count": 1},
+		{"name": "mailbox", "rect": [584, 2209, 596, 2248], "count": 1},
+		{"name": "mote", "rect": [963, 1376, 1100, 1766], "count": 1},
+		{"name": "Bluehousestuff", "rect": [414, 2119, 437, 2144], "count": 2},
+		{"name": "Grave3", "rect": [366, 781, 394, 825], "count": 1},
+		{"name": "Grave9", "rect": [366, 1035, 393, 1081], "count": 1},
+		{"name": "brige", "rect": [955, 1722, 962, 1766], "count": 1},
+		{"name": "Shoolblommor3", "rect": [825, 2251, 847, 2257], "count": 1},
+		{"name": "Mote", "rect": [960, 1861, 1099, 2548], "count": 1},
+		{"name": "Bridge", "rect": [955, 1839, 1099, 1861], "count": 1},
+		{"name": "Grave8", "rect": [295, 1034, 326, 1077], "count": 1},
+		{"name": "Lantern2", "rect": [908, 1843, 935, 1880], "count": 1},
+		{"name": "Grave2", "rect": [295, 783, 326, 824], "count": 1},
+		{"name": "Fence", "rect": [602, 1923, 948, 2355], "count": 2},
+		{"name": "Wall", "rect": [70, 191, 1099, 288], "count": 1},
+		{"name": "Grave4", "rect": [436, 782, 467, 821], "count": 1},
+		{"name": "mote", "rect": [1081, 288, 1100, 752], "count": 1},
+		{"name": "Grave10", "rect": [436, 1032, 466, 1071], "count": 1},
+		{"name": "mote", "rect": [967, 746, 1100, 1377], "count": 1},
+		{"name": "Wall", "rect": [70, 2124, 165, 2644], "count": 1},
+		{"name": "Schoolblommor2", "rect": [805, 2238, 851, 2251], "count": 1},
+		{"name": "Sign", "rect": [603, 1120, 649, 1157], "count": 1},
+		{"name": "Grave5", "rect": [224, 903, 254, 947], "count": 1},
+		{"name": "Bluehouse", "rect": [286, 2009, 431, 2129], "count": 1},
+		{"name": "Clocktowerblomma", "rect": [223, 889, 650, 2248], "count": 4}
+	],
+	"Pensara - The School District - The Clock Tower - Floor 1": [
+		{"name": "start0.x, start0.y + 20, width, dir, ?, village.x, village.y + 15, dir of player", "rect": [270, 188, 765, 689], "count": 8}
+	],
+	"Pensara - The School District - The Clock Tower - Floor 2": [
+		{"name": "start0.x, start0.y + 20, width, dir, ?, village.x, village.y + 15, dir of player", "rect": [315, 244, 705, 638], "count": 8}
+	],
+	"Pensara - The School District - The School": [
+		{"name": "start0.x, start0.y + 20, width, dir, ?, village.x, village.y + 15, dir of player", "rect": [293, 206, 757, 771], "count": 22}
+	],
+	"Pensara - The Trade District": [
+		{"name": "obsticles x y x2 y2", "rect": [35, 69, 2665, 1057], "count": 67},
+		{"name": "Mail box", "rect": [0, 0, 2761, 1448], "count": 94},
+		{"name": "Entrance trees", "rect": [926, 1253, 1258, 1450], "count": 4},
+		{"name": "right door soldiers quarter", "rect": [1868, 313, 1898, 367], "count": 1}
+	],
+	"Pensara - The Trade District - House 1 - Floor 1": [
+		{"name": "0 = FADE_DOWN", "rect": [298, 202, 741, 652], "count": 15},
+		{"name": "o 325 599 458 639", "rect": [325, 448, 456, 487], "count": 1},
+		{"name": "o 351 327 439 385", "rect": [445, 364, 518, 620], "count": 4}
+	],
+	"Pensara - The Trade District - House 1 - Floor 2": [
+		{"name": "start Player xpos ypos angle, Background xpos ypos", "rect": [317, 171, 698, 669], "count": 17}
+	],
+	"Pensara - The Trade District - House 2 - Floor 1": [
+		{"name": "start Player xpos ypos angle, Background xpos ypos", "rect": [298, 202, 741, 652], "count": 24}
+	],
+	"Pensara - The Trade District - House 2 - Floor 2": [
+		{"name": "start Player xpos ypos angle, Background xpos ypos", "rect": [317, 171, 698, 669], "count": 17}
+	],
+	"Pensara - The Trade District - Mezza's House": [
+		{"name": "2 = Fade half", "rect": [292, 201, 722, 631], "count": 10},
+		{"name": "Pins & ByrŒ and wall", "rect": [507, 526, 699, 565], "count": 1},
+		{"name": "Wall down right", "rect": [505, 610, 699, 637], "count": 1},
+		{"name": "Right wall", "rect": [445, 279, 720, 632], "count": 5}
+	],
+	"Pensara - The Trade District - Tent": [
+		{"name": "start0.x, start0.y + 20, width, dir, ?, village.x, village.y + 15, dir of player", "rect": [436, 288, 586, 505], "count": 11}
+	],
+	"Pensara - The Trade District - Tower Prison": [
+		{"name": "start0.x, start0.y + 20, width, dir, ?, village.x, village.y + 15, dir of player", "rect": [363, 251, 676, 582], "count": 6}
+	],
+	"Port of Alares": [
+		{"name": "Hus och vatten", "rect": [41, 75, 922, 258], "count": 5},
+		{"name": "vatten", "rect": [0, 308, 1024, 376], "count": 2},
+		{"name": "trŠd stubbar lŒdor", "rect": [233, 96, 1003, 257], "count": 13},
+		{"name": "bridge", "rect": [531, 308, 610, 652], "count": 3}
+	],
+	"Port of Alares - Tavern": [
+		{"name": "start Player xpos ypos angle, Background xpos ypos", "rect": [275, 191, 748, 696], "count": 24}
+	],
+	"Port of Zazo": [
+		{"name": "start Player xpos ypos angle, Background xpos ypos", "rect": [0, 0, 1023, 768], "count": 18}
+	],
+	"Rebel Hideout": [
+		{"name": "", "rect": [143, 202, 865, 760], "count": 64}
+	],
+	"Serphia Hall": [
+		{"name": "start Player xpos ypos angle, Background xpos ypos", "rect": [314, 0, 709, 768], "count": 28}
+	],
+	"The Prison Cell": [
+		{"name": "holeDoor labyrinth Central_Pass--South_Part-mark1 360 432 50 3", "rect": [290, 261, 782, 675], "count": 10}
+	],
+	"The Senate": [
+	],
+	"The Ship Cabin": [
+		{"name": "", "rect": [261, 234, 795, 586], "count": 16}
+	],
+	"The Ship Cabin - Story": [
+	],
+	"Vincent's Office": [
+		{"name": "shelf4", "rect": [419, 295, 473, 311], "count": 1},
+		{"name": "shelf2", "rect": [318, 362, 378, 399], "count": 1},
+		{"name": "shelf8", "rect": [642, 448, 702, 485], "count": 1},
+		{"name": "shelf6", "rect": [643, 293, 702, 312], "count": 1},
+		{"name": "leftwall", "rect": [308, 294, 328, 530], "count": 2},
+		{"name": "shelf5", "rect": [546, 294, 601, 311], "count": 1},
+		{"name": "shelf3", "rect": [319, 295, 394, 312], "count": 2},
+		{"name": "shelf1", "rect": [319, 448, 379, 485], "count": 1},
+		{"name": "shelf7", "rect": [642, 362, 702, 399], "count": 1},
+		{"name": "toppwall1", "rect": [376, 285, 420, 295], "count": 1},
+		{"name": "desk", "rect": [354, 308, 539, 453], "count": 3},
+		{"name": "rightwall", "rect": [533, 294, 713, 530], "count": 2},
+		{"name": "toppwall2", "rect": [602, 287, 643, 294], "count": 1},
+		{"name": "bottonwall", "rect": [319, 530, 706, 544], "count": 1}
+	],
+	"Zazo": [
+		{"name": "Graveyard", "rect": [1681, 409, 1973, 705], "count": 20},
+		{"name": "Houses", "rect": [142, -1, 1940, 838], "count": 26},
+		{"name": "River", "rect": [534, 0, 705, 1027], "count": 34},
+		{"name": "Signs", "rect": [1143, 421, 1324, 973], "count": 2},
+		{"name": "StonesAndTrees", "rect": [0, 180, 1995, 1006], "count": 36},
+		{"name": "Children listening", "rect": [1170, 747, 1258, 756], "count": 1},
+		{"name": "Extra in top left corner", "rect": [18, 110, 463, 222], "count": 6}
+	],
+	"Zazo - Farl's House": [
+	],
+	"Zazo - Miner's Home": [
+		{"name": "start Player xpos ypos angle, Background xpos ypos", "rect": [109, 207, 923, 698], "count": 34},
+		{"name": "Bottom line", "rect": [111, 575, 931, 639], "count": 1}
+	],
+	"Zazo - Miner's Home2": [
+		{"name": "start Player xpos ypos angle, Background xpos ypos", "rect": [109, 207, 923, 698], "count": 34}
+	],
+	"Zazo - Tent": [
+		{"name": "start Player xpos ypos angle, Background xpos ypos", "rect": [436, 288, 586, 505], "count": 11}
+	],
+	"Zazo - Teo": [
+	],
+	"Zazo - Teo's House": [
+		{"name": "start Player xpos ypos angle, Background xpos ypos", "rect": [82, 63, 914, 730], "count": 19}
+	]
+}

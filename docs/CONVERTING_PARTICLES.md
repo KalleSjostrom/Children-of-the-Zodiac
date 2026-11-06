@@ -57,8 +57,9 @@ the original's `ParticleFactory` makes null bodies for them, and nothing
 builds those systems) gets no scene; the generator says so.
 
 Generating twice writes the same files (the node unique_ids and the resource
-ids are made deterministic). A new system needs nothing else: a `.vil`
-`particlesystem` line or a cutscene `actor name="...System"` builds the legacy
+ids are made deterministic). A new system needs nothing else: a village
+scene's `LegacyParticles2D` node (the `particlesystem` line of the deleted
+`.vil` files) or a cutscene `actor name="...System"` builds the legacy
 system, and `LegacyParticles2D` instances the scene named after it.
 
 ## 2. Tuning a system's look in the editor
@@ -115,8 +116,8 @@ Open the scene, change, save; every floor uses it. A weather floor draws
 two instances of its weather scene (the back and the front pass, the same
 seed); a save point draws its scene as its `Particles` child.
 
-Which floors have rain or snow is the floor's style (`DungeonStyle`, the
-`.map` file's weather flags; `docs/CONVERTING_DUNGEONS.md`).
+Which floors have rain or snow is the floor's style (`DungeonStyle`: the
+weather flags the deleted `.map` file had; docs/ARCHITECTURE.md section 10).
 
 ## 5. The card and enemy effects
 

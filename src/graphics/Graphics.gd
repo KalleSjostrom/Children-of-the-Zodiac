@@ -111,8 +111,6 @@ const GL_DEPTH_BUFFER_BIT := 0x0100
 const GL_LIGHTING_BIT := 0x0040
 const GL_ENABLE_BIT := 0x2000
 const GL_CURRENT_BIT := 0x0001
-const GL_COMPILE := 0x1300
-const GL_COMPILE_AND_EXECUTE := 0x1301
 const GL_TRUE := 1
 const GL_FALSE := 0
 
@@ -185,15 +183,6 @@ var _im_v := PackedVector3Array()
 var _im_uv := PackedVector2Array()
 var _im_c := PackedColorArray()
 var _im_n := PackedVector3Array()
-
-# Display lists
-var _next_list := 1
-var _lists := {}
-var _compiling: DisplayList = null
-# While compiling: a glLoadIdentity inside the list (and not undone by its
-# glPopMatrix) puts what follows in eye space when the list is called.
-var _list_eye := false
-var _list_eye_stack: Array[bool] = []
 
 # Bridge (phase 3 step B): the 3D primitives kept instead of drawn
 # (begin_capture_3d).
@@ -839,11 +828,6 @@ func translateBack(pos) -> void:
 	glTranslatef(-pos.x, -pos.y, -pos.z)
 
 
-func drawList(list: int) -> void:
-	if list != -1:
-		glCallList(list)
-
-
 func loadIdentity() -> void:
 	glLoadIdentity()
 
@@ -978,26 +962,6 @@ func pushTranslateRotatez(x: float, y: float, z: float, angle: float) -> void:
 	push()
 	translate(x, y, z)
 	rotate(-angle, 0, 0, 1)
-
-
-func generateList() -> int:
-	return glGenLists(1)
-
-
-func compileDrawList(drawList: int) -> void:
-	glNewList(drawList, GL_COMPILE)
-
-
-func endList() -> void:
-	glEndList()
-
-
-func callList(drawList: int) -> void:
-	glCallList(drawList)
-
-
-func deleteList(list: int) -> void:
-	glDeleteLists(list, 1)
 
 
 func checkError() -> void:
@@ -1167,17 +1131,11 @@ func glMatrixMode(mode: int) -> void:
 func glLoadIdentity() -> void:
 	if _matrix_mode == GL_MODELVIEW:
 		_mv = Transform3D.IDENTITY
-		# GL records the call in a list being compiled and runs it when the
-		# list is called: what follows is in eye space then (DisplayList).
-		if _compiling != null:
-			_list_eye = true
 
 
 func glPushMatrix() -> void:
 	if _matrix_mode == GL_MODELVIEW:
 		_mv_stack.append(_mv)
-		if _compiling != null:
-			_list_eye_stack.append(_list_eye)
 
 
 func glPopMatrix() -> void:
@@ -1186,8 +1144,6 @@ func glPopMatrix() -> void:
 			push_warning("glPopMatrix: stack underflow")
 		else:
 			_mv = _mv_stack.pop_back()
-		if _compiling != null and not _list_eye_stack.is_empty():
-			_list_eye = _list_eye_stack.pop_back()
 
 
 func glTranslatef(x: float, y: float, z: float) -> void:
@@ -1440,9 +1396,6 @@ func _texForDraw() -> Texture2D:
 
 func _emitTriangles(v: PackedVector3Array, uv: PackedVector2Array, c: PackedColorArray,
 		n: PackedVector3Array) -> void:
-	if _compiling != null:
-		_compiling.add(self, v, uv, c, n)
-		return
 	if backend == null:
 		return
 	if _proj3d:
@@ -1715,44 +1668,6 @@ func place_with_shadow(c = null) -> Array[Color]:
 	return [shadow, line]
 
 
-# --- Display lists ---
-
-func glGenLists(range_count: int) -> int:
-	var id := _next_list
-	_next_list += range_count
-	return id
-
-
-func glNewList(list: int, mode: int) -> void:
-	_compiling = DisplayList.new()
-	_compiling.base_inv = _mv.affine_inverse()
-	_lists[list] = _compiling
-	_list_eye = false
-	_list_eye_stack.clear()
-
-
-func glEndList() -> void:
-	if _compiling != null:
-		_compiling.finish()
-	_compiling = null
-
-
-func glCallList(list: int) -> void:
-	var dl: DisplayList = _lists.get(list)
-	if dl == null or dl.parts.is_empty() or backend == null:
-		return
-	if not _proj3d:
-		push_warning("glCallList in 2D projection is not supported")
-		return
-	for part: Array in dl.parts:
-		backend.vp_3d().add_mesh(part[1], Transform3D.IDENTITY if part[0] else _mv)
-
-
-func glDeleteLists(list: int, range_count: int) -> void:
-	for i in range_count:
-		_lists.erase(list + i)
-
-
 # --- GLU ---
 
 func gluNewQuadric():
@@ -1806,65 +1721,3 @@ static func _sph(theta: float, phi: float) -> Vector3:
 ## no-ops in this port.
 func glUseProgram(program: int) -> void:
 	pass
-
-
-## A compiled display list (glNewList/glEndList): ArrayMeshes with one surface
-## per material, relative to the matrix active when the list was started, or
-## in eye space for what a glLoadIdentity inside the list put there (GL runs
-## the recorded call when the list is called: LabyrinthRenderer.renderSky's
-## gradient fills the top of the view). parts is [eye space, mesh] in the
-## order the list draws them; glCallList draws each part with the identity or
-## the current modelview.
-class DisplayList extends RefCounted:
-	var base_inv := Transform3D.IDENTITY
-	var groups := {} # [eye space, material] -> [v, uv, c, n]
-	var order: Array = []
-	var parts: Array = []
-
-	func add(g: Graphics, v: PackedVector3Array, uv: PackedVector2Array,
-			c: PackedColorArray, n: PackedVector3Array) -> void:
-		if g.backend == null:
-			return
-		var mat := g._material3D()
-		var eye: bool = g._list_eye
-		var rel := g.getModelView() if eye else base_inv * g.getModelView()
-		var key := [eye, mat]
-		if not groups.has(key):
-			groups[key] = [PackedVector3Array(), PackedVector2Array(), PackedColorArray(), PackedVector3Array()]
-			order.append(key)
-		var grp: Array = groups[key]
-		var gv: PackedVector3Array = grp[0]
-		var gn: PackedVector3Array = grp[3]
-		for i in v.size():
-			gv.append(rel * v[i])
-			gn.append(rel.basis * n[i])
-		grp[0] = gv
-		grp[3] = gn
-		var guv: PackedVector2Array = grp[1]
-		guv.append_array(uv)
-		grp[1] = guv
-		var gc: PackedColorArray = grp[2]
-		gc.append_array(c)
-		grp[2] = gc
-
-	## One mesh per run of groups in the same space, in the list's order.
-	func finish() -> void:
-		var mesh: ArrayMesh = null
-		var mesh_eye := false
-		for key: Array in order:
-			var grp: Array = groups[key]
-			if grp[0].is_empty():
-				continue
-			if mesh == null or key[0] != mesh_eye:
-				mesh = ArrayMesh.new()
-				mesh_eye = key[0]
-				parts.append([mesh_eye, mesh])
-			var arrays := []
-			arrays.resize(Mesh.ARRAY_MAX)
-			arrays[Mesh.ARRAY_VERTEX] = grp[0]
-			arrays[Mesh.ARRAY_TEX_UV] = grp[1]
-			arrays[Mesh.ARRAY_COLOR] = grp[2]
-			arrays[Mesh.ARRAY_NORMAL] = grp[3]
-			mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-			mesh.surface_set_material(mesh.get_surface_count() - 1, key[1])
-		groups.clear()

@@ -81,10 +81,6 @@ static func clearDrawList() -> void:
 	pass
 
 
-static func generateDrawList(g: Graphics) -> int:
-	return g.generateList()
-
-
 static func load(g = null) -> void:
 	pass
 

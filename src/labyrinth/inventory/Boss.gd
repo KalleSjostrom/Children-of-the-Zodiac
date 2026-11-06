@@ -36,11 +36,6 @@ func initDraw(gl):
 
 ## Java's draw(Graphics) does nothing: the drawings of the boss are taken
 ## care of by the battle. draw(gl, dir) is the inherited Inventory version.
-func draw(gl, dir = null):
-	if dir != null:
-		super.draw(gl, dir)
-
-
 ## Checks in the database if the boss is alive or not.
 ## Bridge (phase 2 step B): a boss draws nothing.
 func place_view(g, dir = null):

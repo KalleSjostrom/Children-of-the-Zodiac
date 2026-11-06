@@ -10,3 +10,5 @@ Several village variants have no obstacle (`o`) lines, so the player walks throu
 * Probably meant to be empty (cutscene stages, memories, unreachable): Dellna - Ana's Home Memory, Home of Celis - Memory, The Senate, The Ship Cabin - Story, No Place (and at Night), Zazo - Teo (and at Night).
 
 **Fix idea:** copy the obstacles of the variant with the same background; draw new ones for Kin's Place and Farl's House. Check which of the last group the player can walk in. Mirror each change in the village's `.tscn` (docs/CONVERTING_VILLAGES.md).
+
+**Note (2026-11-06):** the `.vil` and `.map` files this ticket names are deleted (decision 5; `docs/MODERNIZATION_PLAN.md` 6.9, 7.9, 9.1; the git history up to aab714c9 has them). Their data is in the scenes, which a fix edits: a village variant in `scenes/villages/<Place>/<file>.tscn`, a floor in `scenes/dungeons/<Area>/<Floor>.tscn` (with `resources/dungeon_layouts/` and `resources/dungeon_styles/`), a world map in `scenes/world_map/<file>.tscn`. The line numbers above are the old files'.

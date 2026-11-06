@@ -9,7 +9,7 @@ extends SceneTree
 ## Writes <out>_rig.png (from the scene's Rig camera: the first door, the
 ## legacy projection) and <out>_top.png (from above, orthographic, the whole
 ## floor; the roofs face down and are culled from there). <scene> may be a
-## path outside the project (a dry run of map_to_scene.gd --out).
+## path outside the project.
 
 var _scene: DungeonScene
 var _out := ""

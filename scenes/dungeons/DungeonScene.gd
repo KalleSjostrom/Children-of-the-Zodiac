@@ -1,7 +1,7 @@
 @tool
 class_name DungeonScene
 extends Node3D
-## The scene of a dungeon floor: a .map file of maps/Labyrinth. Every floor
+## The scene of a dungeon floor (a .map file of maps/Labyrinth). Every floor
 ## scene, scenes/dungeons/<Area>/<Floor>.tscn, inherits
 ## scenes/dungeons/DungeonScene.tscn (this layout):
 ##
@@ -17,13 +17,14 @@ extends Node3D
 ##                                projection (fov 45, near 1, far 75); in the
 ##                                editor at the first door
 ##
-## tools/import/map_to_scene.gd makes them from the .map files. Coordinates
+## The dungeon converter made them from the .map files; both are deleted
+## (plan 7.9), and the scenes are edited by hand. Coordinates
 ## are the legacy dungeon units: 4 per cell, a cell's centre at
 ## DungeonCell.center, floors at y -2 and roofs at +2; saves, the console's
 ## teleport and AutoPlay name cells by their addresses.
 ##
 ## Step A (data, docs/MODERNIZATION_PLAN.md 7.4): MapLoader builds the floor
-## from this scene (load_into) instead of parsing the .map file, for
+## from this scene (load_into) as parsing the .map file did, for
 ## Labyrinth.init and for Load's saved floor maps: the same objects in the
 ## same order, the same Database reads and the same static state.
 ##
@@ -148,7 +149,6 @@ func show_view(modelview: Transform3D) -> void:
 		($Layout as Node3D).transform = Transform3D.IDENTITY
 		($Objects as Node3D).transform = Transform3D.IDENTITY
 		($Weather as Node3D).transform = Transform3D.IDENTITY
-		($Weather as DungeonWeather).eye = _eye
 		_legacy.transform = _eye
 		_look.view_shown(self, _eye)
 		return
@@ -186,9 +186,9 @@ func show_object(inv, view: Dictionary) -> void:
 		return
 	if not view.get("visible", false):
 		return
-	if view.has("particles") and view.particles.get("gpu", false):
-		# The GPU path (SaveSystem.place_gpu): the object's particle node draws
-		# in the slot of the legacy quads' batch.
+	if view.has("particles"):
+		# A save point (SaveSystem.place_particles): the object's particle node
+		# draws in the slot of the legacy quads' batch.
 		var p: QuadParticles3D = o.show_particles(view.particles, style) if o is DungeonSavePoint else null
 		if p != null:
 			if not _particle_views.has(p):
@@ -196,8 +196,8 @@ func show_object(inv, view: Dictionary) -> void:
 			if view.particles.shown:
 				_batches.append([null, p])
 		return
-	var q: Dictionary = view.particles if view.has("particles") else view.get("quad", {})
-	var st: Dictionary = q.state if view.has("particles") else view.state
+	var q: Dictionary = view.get("quad", {})
+	var st: Dictionary = view.state
 	if q.is_empty() or q.vertices.is_empty():
 		return
 	var m := DungeonMaterials.material(st, style)
@@ -238,27 +238,15 @@ func end_objects() -> void:
 			_batch_meshes[i].visible = false
 
 
-## Step B, every frame: a weather pass (&"back" or &"front"), the quads of
-## WeatherSystem.place_particles, or on the GPU path its state
-## (WeatherSystem.place_gpu). slot: the sorting offset of the front pass over
-## a battle or riddle, among the 3D bridge's batches (NAN: after the
-## objects).
-func show_weather(pass_name: StringName, quads: Dictionary, slot := NAN) -> void:
+## Step B, every frame: a weather pass (&"back" or &"front"), the state of
+## its GPU particles (WeatherSystem.place_particles). slot: the sorting
+## offset of the front pass over a battle or riddle, among the 3D bridge's
+## batches (NAN: after the objects).
+func show_weather(pass_name: StringName, state: Dictionary, slot := NAN) -> void:
 	var offset: float = ($Objects.get_child_count() + (2 if pass_name == &"front" else 1)) * SORT_STEP
 	if not is_nan(slot):
 		offset = slot
-	var weather := $Weather as DungeonWeather
-	if quads.get("gpu", false):
-		weather.show_gpu(pass_name, quads, style, offset)
-		return
-	weather.show_pass(pass_name, quads.vertices, quads.uvs, quads.colors,
-			DungeonMaterials.material(quads.state, style), offset)
-
-
-## Step B: hides a weather pass (the front pass during a battle: the legacy
-## code draws it over the battle).
-func hide_weather(pass_name: StringName) -> void:
-	($Weather as DungeonWeather).hide_pass(pass_name)
+	($Weather as DungeonWeather).show_gpu(pass_name, state, style, offset)
 
 
 ## The run-time parts: the objects by name, the current camera, the node of
@@ -287,15 +275,18 @@ func _set_up() -> void:
 		_look.set_up(self)
 
 
-## The scene made from the .map file at map_path (a res:// path, as
-## GameResourceLoader.resolve gives it), or "" when the floor is not
-## converted: scenes/dungeons/<Area>/<Floor>.tscn for <Area>--<Floor>.map.
-static func path_for(map_path: String, scene_dir := SCENE_DIR) -> String:
-	var base := map_path.get_file().get_basename()
+## The scene of the floor that map_file names ("<Area>--<Floor>.map", the
+## name of the deleted .map file, in any case; a path before it is ignored),
+## or "" when it has none: scenes/dungeons/<Area>/<Floor>.tscn, its name
+## resolved without regard to case, as the legacy loader resolved the file
+## (GameResourceLoader.resolve; tools/gen_file_index.py lists the scenes).
+static func path_for(map_file: String) -> String:
+	var base := map_file.get_file().get_basename()
 	if not base.contains("--"):
 		return ""
-	var path := scene_dir.path_join(base.get_slice("--", 0)).path_join(base.get_slice("--", 1) + ".tscn")
-	return path if ResourceLoader.exists(path) else ""
+	var path := GameResourceLoader.resolve(
+			SCENE_DIR.path_join(base.get_slice("--", 0)).path_join(base.get_slice("--", 1) + ".tscn"))
+	return path if path != "" and ResourceLoader.exists(path) else ""
 
 
 ## Step A: fills a new legacy MapLoader (its constructor's state: an empty
@@ -334,7 +325,6 @@ func load_into(loader) -> void:
 func _load_nodes(map, layout: DungeonLayout) -> void:
 	for c in layout.cells:
 		map.put(c.address, LabyrinthNode.new(c.address))
-	var last = null
 	for c in layout.cells:
 		var n = map.getNode(c.address)
 		for d in 4:
@@ -349,7 +339,3 @@ func _load_nodes(map, layout: DungeonLayout) -> void:
 			carpet.direction = c.carpet_slot
 			carpet.rotation = c.carpet_rotation
 			n.carpetFloor = carpet
-		last = n
-	# mapEnd's sort leaves PillarWalls on the last node it gave pillar walls.
-	if style.pillar_walls and last != null:
-		PillarWalls.node = last

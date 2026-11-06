@@ -618,12 +618,8 @@ func draw(g, alpha = null):
 		g.setFadeColor(color[0], color[1], color[2], color[3])
 		draw_scene(g)
 		# Bridge (phase 3 step B): the actors' emotion bubbles are UI nodes
-		# (Village.show_emotions; --legacy=emotions keeps the drawing).
-		if not Main.is_legacy("emotions"):
-			Village.show_emotions(g, members)
-		else:
-			for i in range(members.size()):
-				members[i].drawEmotion(g)
+		# (Village.show_emotions).
+		Village.show_emotions(g, members)
 		drawTop(g)
 	else:
 		# The legacy code draws nothing of the village while paused.
@@ -707,28 +703,17 @@ func image_entry(scroll: Vector2i, c: Color, a: float) -> Array:
 	return ["image", t.getGodotTexture() if t != null else null, at, image_scale, c, a]
 
 ## Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): the images are
-## the UI node scenes/ui/CutsceneImage.tscn (show_image; --legacy=story_images
-## keeps the drawing), the texts Text's and ScrollableTexts' nodes.
+## the UI node scenes/ui/CutsceneImage.tscn (show_image), the texts Text's
+## and ScrollableTexts' nodes.
 func drawTop(g, sprites = null):
-	var legacyImages: bool = Main.is_legacy("story_images")
 	if imageMode == COVERALL_MODE:
-		if legacyImages:
-			currentImage.draw(g)
-		else:
-			show_image(g, Graphics.UI_LAYER, false)
+		show_image(g, Graphics.UI_LAYER, false)
 	if imageMode == STORY_MODE:
-		if legacyImages:
-			currentImage.draw(g)
-			currentImage.drawTextBack(g)
-		else:
-			show_image(g, Graphics.UI_LAYER, true)
+		show_image(g, Graphics.UI_LAYER, true)
 	g.setFontSize(30)
 	if imageMode == VILLAGE_MODE and currentImage != null:
 		g.setColor(1)
-		if legacyImages:
-			currentImage.draw(g)
-		else:
-			show_image(g, Graphics.UI_LAYER, false)
+		show_image(g, Graphics.UI_LAYER, false)
 		g.setColor(1)
 	if compareMode(DIALOG) or compareMode(WAITING_FOR_INPUT):
 		g.loadIdentity()
@@ -737,20 +722,14 @@ func drawTop(g, sprites = null):
 			and imageMode != TRANSLUCENT_MODE_UNDER_ACTOR:
 		# Bridge (phase 3 step B): the Transition layer's Fade node; the
 		# texts drawn next are drawn over it (Graphics.show_fade).
-		if Main.is_legacy("fades"):
-			g.fadeOldSchool(fadeValue)
-		else:
-			g.show_fade(fadeValue)
+		g.show_fade(fadeValue)
 	if currentText != null:
 		currentText.draw(g)
 	if scrollText != null:
 		scrollText.draw(g)
 	if imageMode == TRANSLUCENT_MODE_OVER_ACTOR:
 		g.setColor(1, 1, 1, fadeValue)
-		if legacyImages:
-			currentImage.draw(g)
-		else:
-			show_image(g, Graphics.TRANSITION_LAYER, false)
+		show_image(g, Graphics.TRANSITION_LAYER, false)
 		g.setColor(1)
 
 ## Bridge (phase 3 step B): currentImage.draw (and drawTextBack when
@@ -922,16 +901,8 @@ class ImageSettings extends RefCounted:
 			return [pos[0], pos[1] - scroll]
 		return [pos[0], pos[1]]
 
-	func draw(g):
-		var p: Array = drawPos()
-		g.drawImage(name, p[0], p[1], size)
-
-	func drawTextBack(g):
-		g.loadIdentity()
-		g.drawImage(Graphics.textBack, 0, 576, 1)
-
-	## Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): draw without
-	## the drawing: the image bound as drawImage binds it (Graphics.skip_image).
+	## Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): the legacy
+	## draw (removed with drawTextBack, plan 8.4) without the drawing: the image bound as drawImage binds it (Graphics.skip_image).
 	## Returns [texture, x, y, far x, far y]: the corners of the quad drawImage
 	## would draw (GameTexture.drawPart: the position rounded, the far corner
 	## truncated to whole pixels), before the modelview; [] when it draws
@@ -945,7 +916,7 @@ class ImageSettings extends RefCounted:
 		var py: int = roundi(p[1])
 		return [t, px, py, int(px + t.getWidth() * size), int(py + t.getHeight() * size)]
 
-	## Bridge (phase 3 step B): drawTextBack without the drawing.
+	## Bridge (phase 3 step B): the legacy drawTextBack without the drawing.
 	func place_text_back(g):
 		g.loadIdentity()
 		g.skip_image(Graphics.textBack)

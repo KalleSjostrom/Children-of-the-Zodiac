@@ -14,10 +14,10 @@
 #   tools/parity/parity.sh ab "<args_a>" "<args_b>" [options] [case...]
 #       Records set <name>-a with args_a and <name>-b with args_b added to the
 #       game arguments, then compares them. Example (once a subsystem has a
-#       scene path): tools/parity/parity.sh ab "--legacy=world_map" "" 'world_*'
+#       scene path): tools/parity/parity.sh ab "--legacy=menu_frame" "" 'menu_*'
 #
 # Options:
-#   --args="<game args>"   extra game arguments for record (e.g. --legacy=world_map)
+#   --args="<game args>"   extra game arguments for record (e.g. --legacy=menu_frame)
 #   --seed=<n>             random seed (default 1)
 #   --tolerance=<0-255>    per channel difference that is ignored (default 0)
 #   --max-pixels=<n>       pixels over the tolerance a shot may have (default 0)

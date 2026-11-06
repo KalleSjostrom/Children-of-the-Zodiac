@@ -4,8 +4,9 @@ extends Resource
 ## One cell of a dungeon floor (a legacy LabyrinthNode): a 4 x 4 x 4 cube of
 ## the floor grid, with its neighbours and the texture slots of its walls,
 ## floor and roof (DungeonStyle.textures). Part of a DungeonLayout, which
-## tools/import/map_to_scene.gd writes from the "dir", "wall", "floor",
-## "roof", "normal" and texture lines of a .map file.
+## the dungeon converter wrote from the "dir", "wall", "floor", "roof",
+## "normal" and texture lines of a .map file (the converter and the .map
+## files are deleted, plan 7.9: the layouts are edited by hand now).
 ##
 ## The address numbers the 16-wide grid row by row: world x = (address / 16)
 ## * 4 + 2, world z = (address % 16 - 15) * 4 - 2 at the cell's centre

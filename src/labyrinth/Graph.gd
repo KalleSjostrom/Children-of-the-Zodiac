@@ -116,17 +116,10 @@ func initDrawInventory(g):
 		var in_ = map.getInventory(k)
 		in_.initDraw(g)
 
-func drawInventory(g):
-	for i in range(inventories.size()):
-		var inv = inventories[i]
-		if inv is InventorySave:
-			inv.draw(g, labyrinth.getPlayerAngle())
-		else:
-			inv.draw(g)
-
-## Bridge (phase 2 step B, docs/ARCHITECTURE.md section 10): drawInventory
-## for a floor its scene draws: each object's draw without the drawing
-## (place_view), in the same order, handed to the scene.
+## Bridge (phase 2 step B, docs/ARCHITECTURE.md section 10): the legacy
+## drawInventory (removed, plan 7.9) for the floor's scene: each object's
+## draw without the drawing (place_view), in the same order, handed to the
+## scene.
 func show_inventory(g, scene):
 	scene.begin_objects()
 	for i in range(inventories.size()):

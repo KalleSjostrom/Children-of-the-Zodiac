@@ -102,16 +102,16 @@ func crossPressed():
 
 
 ## The scene of the airship (docs/ARCHITECTURE.md section 13): the map's
-## scene the loader built it from (WorldMapScene, scene_root), or none with
-## --legacy=airship (drawn by legacy code).
+## scene the loader built it from (WorldMapScene, scene_root).
 func create_scene() -> Node:
 	return scene_root
 
 
-## The drawing method of the airship. A map scene draws the map, the
+## The drawing method of the airship. The map's scene draws the map, the
 ## airship and the name plate (Landscape.scene_bottom, scene_player,
 ## scene_top and show_name_plate: the drawing's state changes, each part in
-## the legacy GL state).
+## the legacy GL state). The legacy drawing (--legacy=airship) is removed
+## (closing phase 4.1, plan 9.1).
 func draw(g, alpha = null):
 	g.setColor(1)
 	g.setFontSize(30)
@@ -121,13 +121,6 @@ func draw(g, alpha = null):
 		Landscape.scene_top(g, scene_root, background)
 		Landscape.show_name_plate(g, nameBackGround, plateName() if currentNode != null else "",
 				currentNode != null)
-	else:
-		background.drawBottom(g)
-		airShip.draw(g)
-		background.drawTop(g, false, null)
-		g.drawCenteredImage(nameBackGround, 10)
-		if currentNode != null:
-			g.drawSingleCenteredText(plateName(), 60, 1, 0)
 	super.checkMenu()
 	super.draw(g)
 

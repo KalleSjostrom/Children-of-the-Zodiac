@@ -2,10 +2,13 @@
 
 Every content quirk the docs list (HANDOFF.md, CONVERTING_VILLAGES.md
 (removed with the village converter; git history up to 1e0229df),
-CONVERTING_DUNGEONS.md, MODERNIZATION_PLAN.md 6.3, 6.8 and 7.8,
+CONVERTING_DUNGEONS.md (removed with the dungeon converter; git history up
+to aab714c9), MODERNIZATION_PLAN.md 6.3, 6.8 and 7.8,
 tools/parity/cases.txt), gathered on 2026-10-22 so each can become a ticket
 or be closed as intended. They were kept during the phases for parity; none
-is fixed here unless it says so.
+is fixed here unless it says so. The `.vil` and `.map` files the entries
+name are deleted (decision 5, 2026-11-06): their data is in the village,
+dungeon and world map scenes, which a fix edits.
 
 "Effect" is the game as of this list: the game's code no longer quits
 anywhere (Java's `System.exit` checks are asserts now). A failed assert

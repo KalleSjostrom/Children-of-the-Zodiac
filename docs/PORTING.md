@@ -230,7 +230,10 @@ keeps its name; the Java *instance* method `getText(StringTokenizer)` is
 `GameResourceLoader.readText(path)`, `.resolve(path)` (→ `res://` path or
 `""`), `.fileExists(path)`, `.listFiles(dir)`, `.listDirectories(dir)`
 (replacements for `java.io.File.list()`). Paths are the Java ones
-(`Values.VillageMaps + name + ".vil"`), resolved case-insensitively.
+(`Values.EnemyMaps + name + ".enemy"`), resolved case-insensitively through
+`file_index.txt` (which also lists the village and dungeon scenes: the
+deleted `.vil` and `.map` names resolve to them, docs/ARCHITECTURE.md
+sections 9 and 10).
 `AbstractMapLoader` subclasses override
 `func parseFile(path: String, filename: String = "")`; when `filename` is
 `""` the single Java argument (the file name) is in `path`.

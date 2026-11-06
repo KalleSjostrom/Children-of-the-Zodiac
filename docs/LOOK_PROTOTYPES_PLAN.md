@@ -133,9 +133,9 @@ Where the code branches:
 | `Main._sync_world` and the window | the scene under `World`, the frame at the window's resolution | as default | the whole frame rendered at 512×384 (5.1) |
 | `BattleEnemy.draw` | the painted quad | skipped while an `EnemyView3D` shows the enemy | as default, or pixel frames |
 
-The prototype scenes inherit the generated floor scenes. A re-run of
-`map_to_scene.sh` keeps their additions as long as node names stay the
-same.
+The prototype scenes inherit the floor scenes, which are edited by hand
+since the dungeon converter and the `.map` files were deleted
+(MODERNIZATION_PLAN 7.9): keep the node names the prototype scenes refer to.
 
 ## 4. Mode 1: HD
 

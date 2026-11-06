@@ -57,15 +57,6 @@ func getDoorIndex():
 	return index
 
 
-func draw(gl, dir = null):
-	if dir != null:
-		super.draw(gl, dir)
-		return
-	# The door is just a texture which is drawn by the wall renderer.
-	if images.size() > 0:
-		super.draw(gl)
-
-
 ## Bridge (phase 2 step B): draw without the drawing (Inventory.place_view);
 ## only a door with images (a ladder) draws.
 func place_view(g, dir = null):

@@ -1,6 +1,10 @@
 class_name SaveParticle
 extends RefCounted
 ## Port of particleSystem.SaveParticle: a particle of the save point effect.
+##
+## drawParticle and its quads (place_quad, s1 to s4) are removed with the
+## legacy save point drawing (plan 7.9): the GPU particles (SaveParticles3D)
+## run these laws and draw.
 
 var pos = [0.0, 0.0, 0.0]
 var rgb = [0.0, 0.0, 0.0]
@@ -45,98 +49,6 @@ func resurrect():
 	rgb[0] = rand.nextFloat()
 	rgb[1] = rand.nextFloat()
 	rgb[2] = rand.nextFloat()
-
-func drawParticle(g, dir):
-	g.setColor4(rgb, life)
-	var x1: float = pos[0] - size / 2
-	var y1: float = pos[1] - size / 2
-	var y2: float = y1 + size / 2
-	var z1: float = pos[2] - size / 2
-	var gl = g.getGL()
-	gl.glTexCoord2i(0, 0)
-	gl.glVertex3f(x1, y1, z1)
-	match dir:
-		0:
-			s3(gl, x1, y1, y2, z1)
-		3:
-			s2(gl, x1, y1, y2, z1)
-		2:
-			s1(gl, x1, y1, y2, z1)
-		1:
-			s4(gl, x1, y1, y2, z1)
-
-## Bridge (phase 2 step B): drawParticle without the drawing: sets the GL
-## colour as it does and adds its quad (4 vertices, the same values) to out
-## (SaveSystem.place_particles).
-func place_quad(g, dir, out: Dictionary) -> void:
-	g.setColor4(rgb, life)
-	var c: Color = g.getCurrentColor()
-	var x1: float = pos[0] - size / 2
-	var y1: float = pos[1] - size / 2
-	var y2: float = y1 + size / 2
-	var z1: float = pos[2] - size / 2
-	var x2: float = x1 + size / 2
-	var z2: float = z1 + size / 2
-	var v: PackedVector3Array = out.vertices
-	var uv: PackedVector2Array = out.uvs
-	var col: PackedColorArray = out.colors
-	v.append(Vector3(x1, y1, z1))
-	uv.append(Vector2(0, 0))
-	match dir:
-		0:
-			v.append_array([Vector3(x2, y1, z1), Vector3(x2, y2, z1), Vector3(x1, y2, z1)])
-			uv.append_array([Vector2(1, 0), Vector2(1, 1), Vector2(0, 1)])
-		3:
-			v.append_array([Vector3(x1, y2, z1), Vector3(x1, y2, z2), Vector3(x1, y1, z2)])
-			uv.append_array([Vector2(0, 1), Vector2(1, 1), Vector2(1, 0)])
-		2:
-			v.append_array([Vector3(x1, y2, z1), Vector3(x2, y2, z1), Vector3(x2, y1, z1)])
-			uv.append_array([Vector2(0, 1), Vector2(1, 1), Vector2(1, 0)])
-		1:
-			v.append_array([Vector3(x1, y1, z2), Vector3(x1, y2, z2), Vector3(x1, y2, z1)])
-			uv.append_array([Vector2(1, 0), Vector2(1, 1), Vector2(0, 1)])
-	for i in v.size() - col.size():
-		col.append(c)
-	out.vertices = v
-	out.uvs = uv
-	out.colors = col
-
-
-func s4(gl, x1, y1, y2, z1):
-	var z2: float = z1 + size / 2
-	gl.glTexCoord2i(1, 0)
-	gl.glVertex3f(x1, y1, z2)
-	gl.glTexCoord2i(1, 1)
-	gl.glVertex3f(x1, y2, z2)
-	gl.glTexCoord2i(0, 1)
-	gl.glVertex3f(x1, y2, z1)
-
-func s2(gl, x1, y1, y2, z1):
-	var z2: float = z1 + size / 2
-	gl.glTexCoord2i(0, 1)
-	gl.glVertex3f(x1, y2, z1)
-	gl.glTexCoord2i(1, 1)
-	gl.glVertex3f(x1, y2, z2)
-	gl.glTexCoord2i(1, 0)
-	gl.glVertex3f(x1, y1, z2)
-
-func s1(gl, x1, y1, y2, z1):
-	var x2: float = x1 + size / 2
-	gl.glTexCoord2i(0, 1)
-	gl.glVertex3f(x1, y2, z1)
-	gl.glTexCoord2i(1, 1)
-	gl.glVertex3f(x2, y2, z1)
-	gl.glTexCoord2i(1, 0)
-	gl.glVertex3f(x2, y1, z1)
-
-func s3(gl, x1, y1, y2, z1):
-	var x2: float = x1 + size / 2
-	gl.glTexCoord2i(1, 0)
-	gl.glVertex3f(x2, y1, z1)
-	gl.glTexCoord2i(1, 1)
-	gl.glVertex3f(x2, y2, z1)
-	gl.glTexCoord2i(0, 1)
-	gl.glVertex3f(x1, y2, z1)
 
 func getPos(i):
 	return pos[i]

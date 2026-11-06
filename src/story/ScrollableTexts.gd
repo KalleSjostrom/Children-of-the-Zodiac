@@ -25,25 +25,15 @@ func update(elapsedTime):
 	y -= speed * elapsedTime / Values.ORIGINAL_FRAME_MS
 
 func draw(g):
-	if not Main.is_legacy("story_texts"):
-		show_texts(g)
-		return
-	g.setTextColorAndApply(1, 1)
-	var yVal: float = y
-	for i in range(texts.size()):
-		var st = texts[i]
-		if yVal > -50:
-			st.draw(g, yVal)
-		elif yVal > 800:
-			break
-		yVal += st.distance
+	show_texts(g)
 
-## Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): draw without the
-## drawing: the same state changes (the text colour, each line's font size
+## Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): the legacy draw
+## without the drawing: the same state changes (the text colour, each line's font size
 ## and bold font, which stay set; drawString's and finishText's setColor),
 ## and the node scenes/ui/ScrollText.tscn on the Transition layer shows the
-## lines draw would draw (ScrollableText.place_text). --legacy=story_texts
-## keeps the drawing.
+## lines draw would draw (ScrollableText.place_text). The legacy drawing
+## (--legacy=story_texts, ScrollableText.draw) is removed (closing phase 3,
+## plan 8.4).
 func show_texts(g):
 	g.setTextColorAndApply(1, 1)
 	var mat = g.canvas_material()
@@ -92,21 +82,7 @@ class ScrollableText extends RefCounted:
 	func setIsBold(bold):
 		isBold = bold
 
-	func draw(g, y):
-		g.setFontSize(fontsize, isBold)
-		match mode:
-			LEFT_ALIGNED:
-				g.drawString(text, x, J.round(y))
-			CENTERED:
-				g.drawSingleCenteredText(text, J.round(y))
-			CENTERED_AT:
-				g.drawSingleCenteredText(text, J.round(y), x)
-			RIGHT_ALIGNED:
-				g.drawStringRightAligned(text, J.round(y), x)
-			_:
-				pass
-
-	## Bridge (phase 3 step B): draw(g, y) without the drawing: the same state
+	## Bridge (phase 3 step B): the legacy draw(g, y) without the drawing: the same state
 	## changes (setFontSize with the bold font; drawString's setColor(color);
 	## drawSingleCenteredText's startText and finishText). Returns [text,
 	## position, font size, colour, bold, alignment] (the position is the

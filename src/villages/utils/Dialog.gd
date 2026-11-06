@@ -8,19 +8,14 @@ extends RefCounted
 ## Each draw method hands its node what it would have drawn, where it would
 ## have drawn it (Graphics.show_ui), with the state changes its drawing made
 ## (the font size, the colours, the bound textures; the shown image's alpha
-## still steps here). --legacy=dialog keeps the drawing.
+## still steps here). The legacy drawing (--legacy=dialog, the layout tables
+## xs, ys, handX and handY) is removed (closing phase 3, plan 8.4).
 
 const DIALOG_VIEW := "res://scenes/ui/Dialog.tscn"
 const SIGN_VIEW := "res://scenes/ui/SignBox.tscn"
 
 const FIRST = 0
 const SECOND = 1
-const DIALOG = 0
-const NAME = 1
-const FIRST_LINE = 2
-const SECOND_LINE = 3
-var xs = [[0, 30], [45, 75], [65, 95], [65, 90]]
-var ys = [[20, 50], [75, 105], [110, 140], [145, 170]]
 static var dialog = null
 var dialogSec = null
 static var DIALOG_1: String = ImageHandler.addPermanentlyLoadNow(
@@ -29,8 +24,6 @@ static var DIALOG_2: String = ImageHandler.addPermanentlyLoadNow(
 		Values.MenuImages + "dialog/dialog2.png")
 var hand = ""
 var alternatives = null
-var handX = [25, 330]
-var handY = [50, 110]
 var index: int = 0
 var xChoice: int = 0
 var yChoice: int = 0
@@ -140,16 +133,15 @@ func setDS(ds, responses = null):
 	self.responses = responses
 
 
-## Java overloads: draw(Graphics g),
-## draw(g, boolean first, String name, String fl, String sl, boolean small)
-## and the private draw(g, String name, String fl, String sl, int pos, boolean small).
+## Java overloads: draw(Graphics g) and
+## draw(g, boolean first, String name, String fl, String sl, boolean small).
+## (The private draw(g, String name, String fl, String sl, int pos, boolean
+## small) drew the latter's lines; it went with the legacy drawing.)
 func draw(g, first = null, name = null, fl = null, sl = null, small = null):
 	if first == null and name == null and fl == null:
 		_drawCurrent(g)
-	elif first is bool:
-		_drawDialog(g, first, name, fl, sl, small)
 	else:
-		_drawLines(g, first, name, fl, sl, small)
+		_drawDialog(g, first, name, fl, sl, small)
 
 
 ## Java: draw(Graphics g).
@@ -166,10 +158,7 @@ func _drawCurrent(g) -> void:
 	elif DS.image:
 		g.setColor(1, 1, 1, alpha)
 		# Drawn above the screen (y -384 to -192): nothing shows.
-		if Main.is_legacy("dialog"):
-			g.drawImage(Graphics.fadeImage, 0, -384, 2)
-		else:
-			g.skip_image(Graphics.fadeImage)
+		g.skip_image(Graphics.fadeImage)
 		if speed > 0 and alpha <= 2:
 			alpha += speed
 		elif speed < 0 and alpha >= 0:
@@ -178,10 +167,7 @@ func _drawCurrent(g) -> void:
 				alpha = 0.0
 				isFinished()
 		g.setColor(1, 1, 1, alpha - 1)
-		if Main.is_legacy("dialog"):
-			g.drawCenteredImage(DS.getImage(), 0)
-		else:
-			_show_image(g, DS.getImage())
+		_show_image(g, DS.getImage())
 	else:
 		_drawDialog(g, DS.first, DS.name, DS.firstLine, DS.secondLine, DS.whisper)
 
@@ -190,31 +176,7 @@ func drawInputQuestion(g, ds):
 	input = inputNr[0] * 1000 + inputNr[1] * 100 + inputNr[2] * 10 + inputNr[3]
 	xChoice = -1
 	g.setFontSize(26)
-	if not Main.is_legacy("dialog"):
-		_show_input_question(g, ds)
-		return
-	if secondHasBeenShown:
-		g.drawImage(DIALOG_2, xs[DIALOG][SECOND], ys[DIALOG][SECOND])
-	g.drawImage(DIALOG_1, xs[DIALOG][FIRST], ys[DIALOG][FIRST])
-
-	g.startText()
-	g.drawMultiString(ds.name, xs[NAME][FIRST], ys[NAME][FIRST])
-	g.drawMultiString(str(inputNr[0]), 70, 130)
-	g.drawMultiString(str(inputNr[1]), 100, 130)
-	g.drawMultiString(str(inputNr[2]), 130, 130)
-	g.drawMultiString(str(inputNr[3]), 160, 130)
-	g.finishText()
-	var x: int = 0
-	match current:
-		0:
-			x = 30
-		1:
-			x = 60
-		2:
-			x = 90
-		3:
-			x = 120
-	g.drawImage(hand, x, 110)
+	_show_input_question(g, ds)
 
 
 ## Draws the current dialog in the sequence as a message.
@@ -229,41 +191,9 @@ func _drawDialog(g, first: bool, name, fl, sl, small) -> void:
 	if fontSize != 30:
 		g.setFontSize(30)
 	Graphics.setTextColor(JColor.black)
-	if not Main.is_legacy("dialog"):
-		_show_dialog(g, first, name, fl, sl, small)
-	elif first:
-		if secondHasBeenShown:
-			g.drawImage(DIALOG_2, xs[DIALOG][SECOND], ys[DIALOG][SECOND])
-		g.drawImage(DIALOG_1, xs[DIALOG][FIRST], ys[DIALOG][FIRST])
-		_drawLines(g, name, fl, sl, FIRST, small)
-	else:
-		g.drawImage(DIALOG_1, xs[DIALOG][FIRST], ys[DIALOG][FIRST])
-		g.drawImage(DIALOG_2, xs[DIALOG][SECOND], ys[DIALOG][SECOND])
-		_drawLines(g, name, fl, sl, SECOND, small)
+	_show_dialog(g, first, name, fl, sl, small)
 	if fontSize != 30:
 		g.setFontSize(fontSize)
-
-
-## Java: private draw(Graphics g, String name, String fl, String sl, int pos, boolean small).
-func _drawLines(g, name, fl, sl, pos: int, small) -> void:
-	var y1: int = ys[FIRST_LINE][pos]
-	var y2: int = ys[SECOND_LINE][pos]
-	var size: int = 24
-	if name != null and name != "":
-		g.drawString(name + ":", xs[NAME][pos], ys[NAME][pos])
-	else:
-		y1 -= 25
-		y2 -= 10
-		size = 24
-	if sl == "" and (name == null or name == ""):
-		g.setFontSize(size if small else size + 6)
-		g.drawString(fl, xs[FIRST_LINE][pos], y1)
-	else:
-		g.setFontSize(size if small else size + 6)
-		g.startText()
-		g.drawMultiString(fl, xs[FIRST_LINE][pos], y1)
-		g.drawMultiString(sl, xs[SECOND_LINE][pos], y2)
-		g.finishText()
 
 
 ## Draws a message, like "The door is closed". If the second line equals ""
@@ -274,16 +204,7 @@ func drawMessages(g, fl, sl, loadIdent):
 		g.setBlendFunc(Graphics.GL_ONE_MINUS_SRC_ALPHA)
 		g.setAlphaFunc(0.1)
 	Graphics.setTextColor(JColor.black)
-	if not Main.is_legacy("dialog"):
-		_show_messages(g, fl, sl)
-		return
-	g.drawImage(DIALOG_1, xs[DIALOG][FIRST], ys[DIALOG][FIRST])
-	g.setFontSize(MenuValues.MENU_FONT_SIZE_LARGE)
-	var yValue: int = 110 if sl == "" else 85
-	g.startText()
-	g.drawMultiString(fl, 65, yValue)
-	g.drawMultiString(sl, 65, 135)
-	g.finishText()
+	_show_messages(g, fl, sl)
 
 
 func drawGift(g, ds):
@@ -306,46 +227,13 @@ static func drawGiftStatic(g, first, second, l):
 			DeckPage.drawCardInfo(g, content, 530)
 
 
-## Java overloads: the private drawQuestion(g, first, alt) and the public
-## drawQuestion(g, first, alt, String title).
-func drawQuestion(g, first, alt, title = null):
-	if title == null:
-		_drawQuestion(g, first, alt)
-		return
-	alternatives = alt
-	g.setFontSize(26)
-	if secondHasBeenShown:
-		g.drawImage(DIALOG_2, xs[DIALOG][SECOND], ys[DIALOG][SECOND])
-	g.drawImage(DIALOG_1, xs[DIALOG][FIRST], ys[DIALOG][FIRST])
-
-	g.startText()
-	g.drawMultiString(title, xs[NAME][FIRST], ys[NAME][FIRST])
-	g.drawMultiString(alt[0], xs[FIRST_LINE][FIRST], ys[FIRST_LINE][FIRST])
-	g.drawMultiString(alt[1], 370, ys[SECOND_LINE][FIRST])
-	g.drawMultiString(alt[2], xs[SECOND_LINE][FIRST], ys[SECOND_LINE][FIRST])
-	g.drawMultiString(alt[3], 370, ys[SECOND_LINE][FIRST])
-	g.finishText()
-	g.drawImage(hand, handX[xChoice], handY[yChoice])
-
-
-## Java: private drawQuestion(Graphics g, boolean first, String[] alt).
+## Java: private drawQuestion(Graphics g, boolean first, String[] alt). (The
+## public drawQuestion with a title had no caller; it went with the legacy
+## drawing.)
 func _drawQuestion(g, first, alt) -> void:
 	alternatives = alt
 	g.setFontSize(26)
-	if not Main.is_legacy("dialog"):
-		_show_question(g, alt)
-		return
-	if secondHasBeenShown:
-		g.drawImage(DIALOG_2, xs[DIALOG][SECOND], ys[DIALOG][SECOND])
-	g.drawImage(DIALOG_1, xs[DIALOG][FIRST], ys[DIALOG][FIRST])
-
-	g.startText()
-	g.drawMultiString(alt[0], 65, 75)
-	g.drawMultiString(alt[1], 370, 75)
-	g.drawMultiString(alt[2], 65, 135)
-	g.drawMultiString(alt[3], 370, 135)
-	g.finishText()
-	g.drawImage(hand, handX[xChoice], handY[yChoice])
+	_show_question(g, alt)
 
 
 func shouldTrigger():
@@ -419,7 +307,7 @@ func getCurrentAlternative():
 # drawMultiString's alpha is startText's), the material of the 2D state and
 # the font.
 
-## _drawDialog without the drawing (with _drawLines'): a speech on the paper
+## _drawDialog without the legacy drawing (of its lines too): a speech on the paper
 ## of its side.
 func _show_dialog(g, first: bool, name, fl, sl, small) -> void:
 	var tint: Color = g.getCurrentColor()

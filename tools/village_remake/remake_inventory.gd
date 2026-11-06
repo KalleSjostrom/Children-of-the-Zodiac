@@ -3,7 +3,8 @@ extends SceneTree
 ## village-remake skill, step 1): per variant scene its doors, signs, loot,
 ## spawns, villagers (start and walk from their .char files), animated
 ## objects and particle systems; the obstacle groups of its .vil file (the
-## comments name buildings); the cutscenes that take place in it, with their
+## comments name buildings; saved in obstacle_groups.json when the .vil files
+## were deleted); the cutscenes that take place in it, with their
 ## actors' paths; the doors of other places that return into it (to_pos);
 ## the places named "<Place> - ...".
 ##
@@ -16,6 +17,10 @@ extends SceneTree
 const Lib := preload("res://tools/village_remake/remake_lib.gd")
 const Draw := preload("res://tools/village_remake/remake_draw.gd")
 const VIEW_SCALE := 0.5
+## The obstacle groups of each place's "<Place> - 0.vil" (its "o" lines under
+## their comment headings: name, rect [x1, y1, x2, y2], count), saved from
+## the .vil files before they were deleted.
+const OBSTACLE_GROUPS := "res://tools/village_remake/obstacle_groups.json"
 
 var _items: Array = []
 var _lines := PackedStringArray()
@@ -135,35 +140,25 @@ func _feature(group: String, node: Node, scene: VillageScene) -> Dictionary:
 
 
 ## The "o" lines of the place's first .vil file under their comment headings:
-## [{"name", "rect": [x1, y1, x2, y2] (the bounds), "count"}].
+## [{"name", "rect": [x1, y1, x2, y2] (the bounds), "count"}]. The .vil files
+## are deleted (plan 13, decision 5): their groups were saved in
+## OBSTACLE_GROUPS (the scenes' obstacles have no headings).
 func _obstacle_groups(place: String) -> Array:
-	var vil := Lib.CHARS + place + "/" + place + " - 0.vil"
 	var groups: Array = []
-	if not FileAccess.file_exists(vil):
+	if not FileAccess.file_exists(OBSTACLE_GROUPS):
 		return groups
-	var heading := ""
-	var current: Dictionary = {}
-	for raw in FileAccess.get_file_as_string(vil).split("\n"):
-		var line := raw.strip_edges()
-		if line.begins_with("#"):
-			var text := line.trim_prefix("#").strip_edges()
-			if text != "" and not text.begins_with("#"):
-				heading = text
-		elif line.begins_with("o "):
-			var w := line.split(" ", false)
-			var r := Rect2i(Vector2i(int(w[1]), int(w[2])), Vector2i(int(w[3]) - int(w[1]), int(w[4]) - int(w[2])))
-			if current.is_empty() or current["name"] != heading:
-				current = {"name": heading, "bounds": r, "count": 0}
-				groups.append(current)
-			current["bounds"] = (current["bounds"] as Rect2i).merge(r)
-			current["count"] += 1
+	var saved = JSON.parse_string(FileAccess.get_file_as_string(OBSTACLE_GROUPS))
+	if not (saved is Dictionary) or not saved.has(place):
+		return groups
+	for s: Dictionary in saved[place]:
+		var a: Array = s["rect"]
+		groups.append({"name": String(s["name"]), "count": int(s["count"]),
+				"rect": [int(a[0]), int(a[1]), int(a[2]), int(a[3])]})
 	_lines.append("")
 	_lines.append("== Obstacle groups (.vil comments)")
 	for g: Dictionary in groups:
-		var r: Rect2i = g["bounds"]
-		g["rect"] = [r.position.x, r.position.y, r.end.x, r.end.y]
-		g.erase("bounds")
-		g["number"] = _item("obstacles", Vector2(r.position), "obstacles \"%s\": %d rects within %s" % [g["name"], g["count"], g["rect"]])
+		var r: Array = g["rect"]
+		g["number"] = _item("obstacles", Vector2(r[0], r[1]), "obstacles \"%s\": %d rects within %s" % [g["name"], g["count"], g["rect"]])
 	return groups
 
 

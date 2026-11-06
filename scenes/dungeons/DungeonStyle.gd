@@ -5,7 +5,8 @@ extends Resource
 ## enemy colour and weather, the "look" lines of a .map file. Floors of an
 ## area share a style where their lines agree (resources/dungeon_styles/
 ## <Area>.tres); a floor whose look differs has its own
-## (<Area>--<Floor>.tres). tools/import/map_to_scene.gd writes them.
+## (<Area>--<Floor>.tres). The dungeon converter wrote them (deleted with
+## the .map files, plan 7.9; edited by hand now).
 ##
 ## Decision 2 (docs/MODERNIZATION_PLAN.md section 13): the fixed-function
 ## look is kept exactly. DungeonFloor and the object views use the dungeon

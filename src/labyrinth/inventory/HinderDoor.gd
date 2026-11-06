@@ -41,18 +41,6 @@ func setHaveBeen(lastNodesName = null):
 		_setHaveBeen()
 
 
-func draw(gl, dir = null):
-	if dir != null:
-		super.draw(gl, dir)
-		return
-	var g = gl
-	var tex: int = 0 if checkIfOpen() else 1
-	texture[tex].bind(g)
-	g.beginQuads()
-	node.drawOneWall(g, self.dir, false)
-	g.end()
-
-
 ## Bridge (phase 2 step B): draw without the drawing (Inventory.place_view):
 ## it reads its status (checkIfOpen) and binds the open or the locked image,
 ## drawn as its node's wall; "frame" is 0 when open, 1 when locked.

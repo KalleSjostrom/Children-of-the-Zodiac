@@ -5,38 +5,23 @@ extends Node3D
 ## every frame: the back pass and the front pass (the particles close to the
 ## camera, drawn again; over a battle or riddle after the battle's batches).
 ##
-## On the GPU path (the dungeon particles phase, WeatherSystem.gpu_path) the
-## passes are two instances of the weather's scene (WeatherParticles3D:
-## Rain.tscn, Snow.tscn) with the same seed, which run in step (show_gpu);
-## this node carries the legacy modelview, as Objects does.
+## The passes are two instances of the weather's scene (WeatherParticles3D:
+## Rain.tscn, Snow.tscn) with the same seed, which run in step (show_gpu; the
+## dungeon particles phase); this node carries the legacy modelview, as
+## Objects does. The legacy simulation (10 000 particles in GDScript) and its
+## quads (--legacy=dungeon_particles) are removed (plan 7.9).
 ##
-## With --legacy=dungeon_particles the legacy simulation (10 000 particles in
-## GDScript) runs, and this node draws the quads its draw would draw, one
-## mesh per pass and frame (WeatherSystem.place_particles), with the GL
-## render state they are drawn in. The vertices are in eye space
-## (transformed by the legacy modelview, as GLBackend does): the meshes are
-## top level, at the identity.
-##
-## set_quads draws an object's quads the same way (DungeonScene's batches).
+## set_quads draws quads of the legacy drawing in eye space (DungeonScene's
+## object batches).
 
 const SCENE_DIR := "res://scenes/common/particles/"
 
-## Where the legacy path's eye-space quads go: the camera's transform when a
-## prototype look moves the camera (DungeonScene.show_view, DungeonLook);
-## else they stay at the identity.
-var eye := Transform3D.IDENTITY:
-	set(value):
-		eye = value
-		_eye_moves = true
-
-var _meshes := {}
 var _gpu := {} # pass name -> WeatherParticles3D
-var _eye_moves := false
 static var _indices := PackedInt32Array()
 
 
 ## The GPU path: shows a pass (&"back", &"front") from the state of
-## WeatherSystem.place_gpu, drawn at sorting_offset. The first call makes the
+## WeatherSystem.place_particles, drawn at sorting_offset. The first call makes the
 ## pass's instance of the weather scene and starts it with the legacy seed.
 func show_gpu(pass_name: StringName, state: Dictionary, style: DungeonStyle, sorting_offset: float) -> void:
 	var p: WeatherParticles3D = _gpu.get(pass_name)
@@ -49,22 +34,6 @@ func show_gpu(pass_name: StringName, state: Dictionary, style: DungeonStyle, sor
 		_gpu[pass_name] = p
 	p.sorting_offset = sorting_offset
 	p.show_state(state, style)
-
-
-## Shows one pass (&"back", &"front"): quads of 4 vertices each, with their
-## texture coordinates and colours.
-func show_pass(pass_name: StringName, vertices: PackedVector3Array, uvs: PackedVector2Array,
-		colors: PackedColorArray, material: Material, sorting_offset: float) -> void:
-	var mi := _mesh(pass_name)
-	set_quads(mi, vertices, uvs, colors, PackedVector3Array(), material, sorting_offset)
-	if _eye_moves:
-		mi.transform = eye
-
-
-## Hides a pass (the front pass during a battle).
-func hide_pass(pass_name: StringName) -> void:
-	if _meshes.has(pass_name):
-		_meshes[pass_name].visible = false
 
 
 ## Draws quads (GL_QUADS, eye space) with mi: one surface, the triangles 0 1 2
@@ -120,13 +89,3 @@ static func _quad_indices(quads: int) -> PackedInt32Array:
 			_indices[k + 4] = i + 2
 			_indices[k + 5] = i + 3
 	return _indices.slice(0, quads * 6)
-
-
-func _mesh(pass_name: StringName) -> MeshInstance3D:
-	var mi: MeshInstance3D = _meshes.get(pass_name)
-	if mi == null:
-		mi = MeshInstance3D.new()
-		mi.name = String(pass_name).capitalize()
-		add_child(mi)
-		_meshes[pass_name] = mi
-	return mi

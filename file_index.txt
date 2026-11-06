@@ -633,9 +633,13 @@ res/Menu/0slot.png
 res/Menu/1slot.png
 res/Menu/2slot.png
 res/Menu/Borealis.jpg
+res/Menu/Borealis_pixel.jpg
 res/Menu/Celis.jpg
+res/Menu/Celis_pixel.jpg
 res/Menu/Kin.jpg
+res/Menu/Kin_pixel.jpg
 res/Menu/Zalzi.jpg
+res/Menu/Zalzi_pixel.jpg
 res/Menu/aegis0.png
 res/Menu/aegis1.png
 res/Menu/aegis2.png
@@ -1266,63 +1270,106 @@ res/SoundEffects/Village/Gods Portal.wav
 res/SoundEffects/Village/Sleep.wav
 res/Store/alaresCardShop.jpg
 res/Store/alaresCardShopDenther.png
+res/Store/alaresCardShopDenther_pixel.jpg
+res/Store/alaresCardShop_pixel.jpg
 res/Store/alaresChurch.jpg
+res/Store/alaresChurch_pixel.jpg
 res/Store/alaresInn.jpg
 res/Store/alaresInnKeeperBurt.png
+res/Store/alaresInnKeeperBurt_pixel.jpg
+res/Store/alaresInn_pixel.jpg
+res/Store/alaresPastorMike0_pixel.jpg
 res/Store/alaresPastorMikel0.png
 res/Store/alaresPastorMikel1.png
 res/Store/alaresPastorMikel2.png
 res/Store/alaresWeaponShop.jpg
 res/Store/alaresWeaponShopClerk.png
+res/Store/alaresWeaponShopClerk_pixel.jpg
+res/Store/alaresWeaponShop_pixel.jpg
 res/Store/bercaCardShop.jpg
 res/Store/bercaCardShopRomero.png
+res/Store/bercaCardShopRomero_pixel.jpg
+res/Store/bercaCardShop_pixel.jpg
 res/Store/bercaChurch.jpg
+res/Store/bercaChurch_pixel.jpg
 res/Store/bercaInn.jpg
 res/Store/bercaInnKeeperSamuler.png
+res/Store/bercaInnKeeperSamuler_pixel.jpg
+res/Store/bercaInn_pixel.jpg
 res/Store/bercaPastorTemeth0.png
+res/Store/bercaPastorTemeth0_pixel.jpg
 res/Store/bercaPastorTemeth1.png
 res/Store/bercaPastorTemeth2.png
 res/Store/bercaWeaponShop.jpg
 res/Store/bercaWeaponShopHelgar.png
+res/Store/bercaWeaponShopHelgar_pixel.jpg
+res/Store/bercaWeaponShop_pixel.jpg
 res/Store/dellnaCardShop.jpg
 res/Store/dellnaCardShopHaness.png
+res/Store/dellnaCardShopHaness_pixel.jpg
+res/Store/dellnaCardShop_pixel.jpg
 res/Store/dellnaChurch.jpg
+res/Store/dellnaChurch_pixel.jpg
 res/Store/dellnaInn.jpg
 res/Store/dellnaInnKeeperRamhuld.png
+res/Store/dellnaInnKeeperRamhuld_pixel.jpg
+res/Store/dellnaInn_pixel.jpg
 res/Store/dellnaPastorGid0.png
+res/Store/dellnaPastorGid0_pixel.jpg
 res/Store/dellnaPastorGid1.png
 res/Store/dellnaPastorGid2.png
 res/Store/dellnaWeaponShop.jpg
 res/Store/dellnaWeaponShopFistrid.png
+res/Store/dellnaWeaponShopFistrid_pixel.jpg
+res/Store/dellnaWeaponShop_pixel.jpg
 res/Store/parasneCardShop.jpg
 res/Store/parasneCardShopKurt.png
+res/Store/parasneCardShopKurt_pixel.jpg
+res/Store/parasneCardShop_pixel.jpg
 res/Store/pensaraCardShop.jpg
 res/Store/pensaraCardShopDeel.png
+res/Store/pensaraCardShopDeel_pixel.jpg
+res/Store/pensaraCardShop_pixel.jpg
 res/Store/pensaraChurch.jpg
+res/Store/pensaraChurch_pixel.jpg
 res/Store/pensaraInn.jpg
 res/Store/pensaraInnKeeperGustel.png
+res/Store/pensaraInn_pixel.jpg
 res/Store/pensaraPastorKai0.png
+res/Store/pensaraPastorKai0_pixel.jpg
 res/Store/pensaraPastorKai1.png
 res/Store/pensaraPastorKai2.png
 res/Store/pensaraWeaponShop.jpg
 res/Store/pensaraWeaponShopDenril.png
 res/Store/zazoCardShop.jpg
 res/Store/zazoCardShopDaniel.png
+res/Store/zazoCardShopDaniel_pixel.jpg
+res/Store/zazoCardShopDaniel_pixel2.jpg
+res/Store/zazoCardShop_pixel.jpg
 res/Store/zazoChurch.jpg
+res/Store/zazoChurch_pixel.jpg
 res/Store/zazoInn.jpg
 res/Store/zazoInnKeeperCivler.png
+res/Store/zazoInnKeeperCivler_pixel.jpg
+res/Store/zazoInn_pixel.jpg
 res/Store/zazoPastorHent0.png
+res/Store/zazoPastorHent0_pixel.jpg
 res/Store/zazoPastorHent1.png
 res/Store/zazoPastorHent2.png
 res/Store/zazoWeaponShop.jpg
 res/Store/zazoWeaponShopEgger.png
+res/Store/zazoWeaponShopEgger_pixel.jpg
+res/Store/zazoWeaponShop_pixel.jpg
 res/Story/1.jpg
 res/Story/10.jpg
 res/Story/2.jpg
 res/Story/3.jpg
+res/Story/3_pixel.jpg
 res/Story/4.jpg
 res/Story/6.jpg
 res/Story/7.jpg
+res/Story/7_pixel.jpg
+res/Story/7_pixel2.jpg
 res/Story/8.jpg
 res/Story/9.jpg
 res/Story/Celis' Hands.jpg
@@ -2422,93 +2469,8 @@ maps/Battle/EnemyMaps/winterwolf.enemy
 maps/Battle/EnemyMaps/wraith.enemy
 maps/Battle/EnemyMaps/zombie.enemy
 maps/Battle/EnemyMaps/zombie2.enemy
-maps/Labyrinth/Berca Desert--North East.map
-maps/Labyrinth/Berca Desert--North West.map
-maps/Labyrinth/Berca Desert--North.map
-maps/Labyrinth/Berca Desert--South East.map
-maps/Labyrinth/Berca Desert--South West.map
-maps/Labyrinth/Berca Desert--South.map
-maps/Labyrinth/Boss--Test.map
-maps/Labyrinth/Central Pass--Central Part.map
-maps/Labyrinth/Central Pass--North East Part.map
-maps/Labyrinth/Central Pass--North Part.map
-maps/Labyrinth/Central Pass--West Part.map
-maps/Labyrinth/Dorma's Forest--Forest of Hate.map
-maps/Labyrinth/East Passage--East Mountain.map
-maps/Labyrinth/East Passage--West Mountain.map
-maps/Labyrinth/Empyrian Temple--Dark.map
-maps/Labyrinth/Empyrian Temple--Hall of Memories.map
-maps/Labyrinth/Empyrian Temple--Hall of Wind.map
-maps/Labyrinth/Empyrian Temple--Light.map
-maps/Labyrinth/Empyrian Temple--Tower of Magic.map
-maps/Labyrinth/Empyrian Temple--Tower of Strength.map
-maps/Labyrinth/Fire Cavern--Blazing Maze.map
-maps/Labyrinth/Fire Cavern--Furnace.map
-maps/Labyrinth/Fire Cavern--Hall of Fire.map
-maps/Labyrinth/Fire Cavern--Hall of the Damned.map
-maps/Labyrinth/Fire Cavern--Inferno.map
-maps/Labyrinth/Fire Cavern--Passage of Ifrit.map
-maps/Labyrinth/Forest of Bri--East Forest.map
-maps/Labyrinth/Forest of Bri--West Forest.map
-maps/Labyrinth/Forest of Reil--Deep Forest.map
-maps/Labyrinth/Forest of Reil--Forest Path.map
-maps/Labyrinth/Frozen Forest--Forest Passage.map
-maps/Labyrinth/Grivera--Corridor of Agony.map
-maps/Labyrinth/Grivera--First Floor.map
-maps/Labyrinth/Grivera--Omnious Hall.map
-maps/Labyrinth/Grivera--Second Floor.map
-maps/Labyrinth/Grivera--Third Floor.map
-maps/Labyrinth/Ice Cavern--Frozen Field.map
-maps/Labyrinth/Ice Cavern--Hall of Anguish.map
-maps/Labyrinth/Ice Cavern--Hall of Confusion.map
-maps/Labyrinth/Ice Cavern--Mysterious Forest.map
-maps/Labyrinth/Ice Cavern--Pillar Room.map
-maps/Labyrinth/Ice Cavern--Throne Room.map
-maps/Labyrinth/Menthu's Lair--Hall of Memories.map
-maps/Labyrinth/Menthu's Lair--Room of Chaos.map
-maps/Labyrinth/Menthu's Lair--Room of Confusion.map
-maps/Labyrinth/Menthu's Lair--Room of Doubt.map
-maps/Labyrinth/Menthu's Lair--Room of Turmoil.map
-maps/Labyrinth/Menthu's Lair--Throne of Serpents.map
-maps/Labyrinth/Mt. Cesadur--Basement.map
-maps/Labyrinth/Mt. Cesadur--Entrance.map
-maps/Labyrinth/Mt. Cesadur--Fourth Floor.map
-maps/Labyrinth/Mt. Cesadur--Mountain Top.map
-maps/Labyrinth/Mt. Cesadur--Second Floor.map
-maps/Labyrinth/Mt. Cesadur--Third Floor.map
-maps/Labyrinth/Pensara Forest--Forest.map
-maps/Labyrinth/Pensara Prison--Floor 1.map
-maps/Labyrinth/Pensara Prison--Floor 2.map
-maps/Labyrinth/Pensara Prison--Floor 3.map
-maps/Labyrinth/Pensara Prison--Floor 4.map
-maps/Labyrinth/Pensara Prison--Floor 5.map
-maps/Labyrinth/Pensara Prison--Floor 6.map
-maps/Labyrinth/Silent Ruin--The Great Ruins.map
-maps/Labyrinth/Temple of Aegis--Base Level.map
-maps/Labyrinth/Temple of Aegis--First Floor.map
-maps/Labyrinth/Temple of Aegis--Fourth Floor.map
-maps/Labyrinth/Temple of Aegis--Second Floor.map
-maps/Labyrinth/Temple of Aegis--Third Floor.map
-maps/Labyrinth/Temple of Aegis--Top Floor.map
-maps/Labyrinth/The Great Mine--Great Deep.map
-maps/Labyrinth/The Great Mine--Mine Shaft.map
-maps/Labyrinth/The Great Mine--The Hall.map
-maps/Labyrinth/The Great Mine--The Mine Core.map
-maps/Labyrinth/The Great Mine--Tunnel.map
-maps/Labyrinth/The Great Mine--West Wing.map
-maps/Labyrinth/The Sewers--North East.map
-maps/Labyrinth/The Sewers--North West.map
-maps/Labyrinth/The Sewers--North.map
-maps/Labyrinth/The Sewers--South East.map
-maps/Labyrinth/The Sewers--South West.map
-maps/Labyrinth/The Sewers--South.map
 maps/Labyrinth/Triggers/Central Pass - New Tutorial.trig
 maps/Labyrinth/Triggers/Grivera - New Tutorial.trig
-maps/Landscape/land1.map
-maps/Landscape/land2.map
-maps/Landscape/world0.map
-maps/Landscape/world1.map
-maps/Landscape/world2.map
 maps/Main/main.bank
 maps/Main/settings.txt
 maps/MiniGames/aegis
@@ -2629,8 +2591,6 @@ maps/Tutorials/forest of reil--forest path.tut
 maps/Tutorials/grivera--first floor.tut
 maps/Tutorials/weaponstore.tut
 maps/Village/boat.txt
-maps/Village/Alares/Alares - 0.vil
-maps/Village/Alares/Alares - 1.vil
 maps/Village/Alares/villagers/Bella.char
 maps/Village/Alares/villagers/Elmer.char
 maps/Village/Alares/villagers/Elthea.char
@@ -2646,15 +2606,10 @@ maps/Village/Alares/villagers/Pavier.char
 maps/Village/Alares/villagers/Recruiter.char
 maps/Village/Alares/villagers/Thieving looking guy.char
 maps/Village/Alares/villagers/Uri.char
-maps/Village/Alares - Belmet's House/Alares - Belmet's House - 0.vil
 maps/Village/Alares - Belmet's House/villagers/Belmet.char
-maps/Village/Alares - Celis/Alares - Celis at Night - 0.vil
-maps/Village/Alares - Library/Alares - Library - 0.vil
 maps/Village/Alares - Library/villagers/Falk.char
 maps/Village/Alares - Library/villagers/Ginis.char
 maps/Village/Alares - Library/villagers/Onrod.char
-maps/Village/Berca/Berca - 0.vil
-maps/Village/Berca/Berca - 1.vil
 maps/Village/Berca/villagers/Alishia.char
 maps/Village/Berca/villagers/Benzer.char
 maps/Village/Berca/villagers/BercaCommander 1.char
@@ -2685,27 +2640,16 @@ maps/Village/Berca/villagers/Rashidar.char
 maps/Village/Berca/villagers/Rebel 2.char
 maps/Village/Berca/villagers/Temeth.char
 maps/Village/Berca/villagers/Tilly.char
-maps/Village/Berca - Bar/Berca - Bar - 0.vil
 maps/Village/Berca - Bar/villagers/Don Carlos.char
 maps/Village/Berca - Bar/villagers/Gilo.char
 maps/Village/Berca - Bar/villagers/Milo.char
 maps/Village/Berca - Bar/villagers/Quintis.char
-maps/Village/Berca - Dolly's House/Berca - Dolly's House - 0.vil
 maps/Village/Berca - Dolly's House/villagers/Dolly.char
 maps/Village/Berca - Dolly's House/villagers/Guy.char
-maps/Village/Berca - House/Berca - House - 0.vil
 maps/Village/Berca - House/villagers/Gregory.char
 maps/Village/Berca - House/villagers/Yolly.char
-maps/Village/Berca - Library - Floor 1/Berca - Library - Floor 1 - 0.vil
 maps/Village/Berca - Library - Floor 1/villagers/Mizoram.char
-maps/Village/Berca - Library - Floor 2/Berca - Library - Floor 2 - 0.vil
 maps/Village/Berca - Library - Floor 2/villagers/Garli.char
-maps/Village/Crossroad/Crossroad - 0.vil
-maps/Village/Crossroad/Crossroad at Night - 0.vil
-maps/Village/Crystal Room/Crystal Room - 0.vil
-maps/Village/Dellna/Dellna - 0.vil
-maps/Village/Dellna/Dellna - 1.vil
-maps/Village/Dellna/Dellna - 2.vil
 maps/Village/Dellna/villagers/Diana.char
 maps/Village/Dellna/villagers/Eno.char
 maps/Village/Dellna/villagers/Haness.char
@@ -2717,25 +2661,10 @@ maps/Village/Dellna/villagers/Ribby.char
 maps/Village/Dellna/villagers/Tori.char
 maps/Village/Dellna/villagers/Ulph.char
 maps/Village/Dellna/villagers/Wilko.char
-maps/Village/Dellna - Ana's Home/Dellna - Ana's Home - 0.vil
-maps/Village/Dellna - Ana's Home Memory/Dellna - Ana's Home Memory - 0.vil
-maps/Village/Dellna - Elder House - Floor 1/Dellna - Elder House - Floor 1 - 0.vil
-maps/Village/Dellna - Elder House - Floor 1/Dellna - Elder House - Floor 1 - 1.vil
 maps/Village/Dellna - Elder House - Floor 1/villagers/Gabriel.char
-maps/Village/Dellna - Elder House - Floor 2/Dellna - Elder House - Floor 2 - 0.vil
-maps/Village/Dellna - Elder House - Floor 2/Dellna - Elder House - Floor 2 - 1.vil
-maps/Village/Dellna - Elder House - Floor 3/Dellna - Elder House - Floor 3 - 0.vil
-maps/Village/Dellna - Elder House - Floor 3/Dellna - Elder House - Floor 3 - 1.vil
-maps/Village/Dellna - House/Dellna - House - 0.vil
-maps/Village/Dellna - House/Dellna - House - 1.vil
 maps/Village/Dellna - House/villagers/Gullie.char
 maps/Village/Dellna - House/villagers/Kilty.char
 maps/Village/Dellna - House/villagers/Smallie.char
-maps/Village/Home of Celis/Home of Celis - 0.vil
-maps/Village/Home of Celis/Home of Celis at Night - 0.vil
-maps/Village/Home of Celis - Celis Home/Home of Celis - Celis Home - 0.vil
-maps/Village/Home of Celis - Memory/Home of Celis - Memory - 0.vil
-maps/Village/Home of the Gods/Home of the Gods - 0.vil
 maps/Village/Home of the Gods/villagers/Aquarius.char
 maps/Village/Home of the Gods/villagers/Aries.char
 maps/Village/Home of the Gods/villagers/Cancer.char
@@ -2748,13 +2677,6 @@ maps/Village/Home of the Gods/villagers/Sagittarius.char
 maps/Village/Home of the Gods/villagers/Scorpius.char
 maps/Village/Home of the Gods/villagers/Taurus.char
 maps/Village/Home of the Gods/villagers/Virgo.char
-maps/Village/Kin's Place/Kin's Place - 0.vil
-maps/Village/No Place/No Place - 0.vil
-maps/Village/No Place/No Place at Night - 0.vil
-maps/Village/Parasne/Parasne - 0.vil
-maps/Village/Parasne/Parasne - 1.vil
-maps/Village/Parasne/Parasne - 2.vil
-maps/Village/Parasne/Parasne at Night - 0.vil
 maps/Village/Parasne/villagers/Amy.char
 maps/Village/Parasne/villagers/Dave.char
 maps/Village/Parasne/villagers/Dexter.char
@@ -2797,15 +2719,11 @@ maps/Village/Parasne/villagers/ShipCaptain.char
 maps/Village/Parasne/villagers/Stienie.char
 maps/Village/Parasne/villagers/Willy.char
 maps/Village/Parasne/villagers/Woldou.char
-maps/Village/Parasne - Tavern/Parasne - Tavern - 0.vil
 maps/Village/Parasne - Tavern/villagers/Alsie.char
 maps/Village/Parasne - Tavern/villagers/Boris.char
 maps/Village/Parasne - Tavern/villagers/Forah.char
-maps/Village/Pass to Zazo/Pass to Zazo - 0.vil
-maps/Village/Pass to Zazo/Pass to Zazo at Night - 0.vil
 maps/Village/Pass to Zazo/villagers/Passguard Marcus.char
 maps/Village/Pass to Zazo/villagers/Passguard Seth.char
-maps/Village/Pensara - The North District/Pensara - The North District - 0.vil
 maps/Village/Pensara - The North District/villagers/Billy.char
 maps/Village/Pensara - The North District/villagers/Farmer Bob.char
 maps/Village/Pensara - The North District/villagers/Nodd.char
@@ -2817,16 +2735,12 @@ maps/Village/Pensara - The North District/villagers/PensaraSoldier 19.char
 maps/Village/Pensara - The North District/villagers/Podd.char
 maps/Village/Pensara - The North District/villagers/Thieving looking guy.char
 maps/Village/Pensara - The North District/villagers/Uli.char
-maps/Village/Pensara - The North District - Civil House/Pensara - The North District - Civil House - 0.vil
 maps/Village/Pensara - The North District - Civil House/villagers/Podd.char
-maps/Village/Pensara - The North District - Farmer House/Pensara - The North District - Farmer House - 0.vil
 maps/Village/Pensara - The North District - Farmer House/villagers/Dido.char
 maps/Village/Pensara - The North District - Farmer House/villagers/Ella.char
-maps/Village/Pensara - The North District - Library/Pensara - The North District - Library - 0.vil
 maps/Village/Pensara - The North District - Library/villagers/Hanrry.char
 maps/Village/Pensara - The North District - Library/villagers/Luna.char
 maps/Village/Pensara - The North District - Library/villagers/Philiph.char
-maps/Village/Pensara - The School District/Pensara - The School District - 0.vil
 maps/Village/Pensara - The School District/villagers/Aldrin.char
 maps/Village/Pensara - The School District/villagers/Buttenar.char
 maps/Village/Pensara - The School District/villagers/Emma.char
@@ -2834,13 +2748,8 @@ maps/Village/Pensara - The School District/villagers/Gravekeeper.char
 maps/Village/Pensara - The School District/villagers/Lecca.char
 maps/Village/Pensara - The School District/villagers/PensaraSoldier 13.char
 maps/Village/Pensara - The School District/villagers/Valie.char
-maps/Village/Pensara - The School District - The Clock Tower - Floor 1/Pensara - The School District - The Clock Tower - Floor 1 - 0.vil
-maps/Village/Pensara - The School District - The Clock Tower - Floor 2/Pensara - The School District - The Clock Tower - Floor 2 - 0.vil
 maps/Village/Pensara - The School District - The Clock Tower - Floor 2/villagers/Howorod.char
-maps/Village/Pensara - The School District - The School/Pensara - The School District - The School - 0.vil
 maps/Village/Pensara - The School District - The School/villagers/Eufrin.char
-maps/Village/Pensara - The Trade District/Pensara - The Trade District - 0.vil
-maps/Village/Pensara - The Trade District/Pensara - The Trade District at Night - 0.vil
 maps/Village/Pensara - The Trade District/villagers/Benth.char
 maps/Village/Pensara - The Trade District/villagers/Billy.char
 maps/Village/Pensara - The Trade District/villagers/Bobby.char
@@ -2869,22 +2778,12 @@ maps/Village/Pensara - The Trade District/villagers/Polandera.char
 maps/Village/Pensara - The Trade District/villagers/Tito.char
 maps/Village/Pensara - The Trade District/villagers/Ulias.char
 maps/Village/Pensara - The Trade District/villagers/Ylwaa.char
-maps/Village/Pensara - The Trade District - House 1 - Floor 1/Pensara - The Trade District - House 1 - Floor 1 - 0.vil
 maps/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Piano.char
 maps/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Sarah.char
 maps/Village/Pensara - The Trade District - House 1 - Floor 1/villagers/Ylwa.char
-maps/Village/Pensara - The Trade District - House 1 - Floor 2/Pensara - The Trade District - House 1 - Floor 2 - 0.vil
-maps/Village/Pensara - The Trade District - House 2 - Floor 1/Pensara - The Trade District - House 2 - Floor 1 - 0.vil
 maps/Village/Pensara - The Trade District - House 2 - Floor 1/villagers/Elviri.char
-maps/Village/Pensara - The Trade District - House 2 - Floor 2/Pensara - The Trade District - House 2 - Floor 2 - 0.vil
-maps/Village/Pensara - The Trade District - Mezza's House/Pensara - The Trade District - Mezza's House - 0.vil
 maps/Village/Pensara - The Trade District - Mezza's House/villagers/Mezza.char
-maps/Village/Pensara - The Trade District - Tent/Pensara - The Trade District - Tent - 0.vil
 maps/Village/Pensara - The Trade District - Tent/villagers/Tord.char
-maps/Village/Pensara - The Trade District - Tower Prison/Pensara - The Trade District - Tower Prison - 0.vil
-maps/Village/Port of Alares/Port of Alares - 0.vil
-maps/Village/Port of Alares/Port of Alares - 1.vil
-maps/Village/Port of Alares/Port of Alares at Night - 0.vil
 maps/Village/Port of Alares/villagers/AlaresSoldier 1.char
 maps/Village/Port of Alares/villagers/AlaresSoldier 2.char
 maps/Village/Port of Alares/villagers/AlaresSoldier 3.char
@@ -2896,30 +2795,14 @@ maps/Village/Port of Alares/villagers/Sailor1.char
 maps/Village/Port of Alares/villagers/Sailor2.char
 maps/Village/Port of Alares/villagers/ShipCaptain.char
 maps/Village/Port of Alares/villagers/Sigge.char
-maps/Village/Port of Alares - Tavern/Port of Alares - Tavern - 0.vil
 maps/Village/Port of Alares - Tavern/villagers/Earl.char
 maps/Village/Port of Alares - Tavern/villagers/Felix.char
 maps/Village/Port of Alares - Tavern/villagers/Herb.char
-maps/Village/Port of Zazo/Port of Zazo - 0.vil
-maps/Village/Port of Zazo/Port of Zazo at Night - 0.vil
-maps/Village/Rebel Hideout/Rebel Hideout - 0.vil
 maps/Village/Rebel Hideout/villagers/Rebel 1.char
-maps/Village/Serphia Hall/Serphia Hall - 0.vil
 maps/Village/Serphia Hall/villagers/Serphia.char
-maps/Village/The Prison Cell/The Prison Cell - 0.vil
-maps/Village/The Prison Cell/The Prison Cell - 1.vil
 maps/Village/The Prison Cell/villagers/prisonBorealis.char
 maps/Village/The Prison Cell/villagers/prisonCelis.char
 maps/Village/The Prison Cell/villagers/prisonZalzi.char
-maps/Village/The Senate/The Senate - 0.vil
-maps/Village/The Ship Cabin/The Ship Cabin - 0.vil
-maps/Village/The Ship Cabin/The Ship Cabin - 1.vil
-maps/Village/The Ship Cabin - Story/The Ship Cabin - Story - 0.vil
-maps/Village/Vincent's Office/Vincent's Office - 0.vil
-maps/Village/Zazo/Zazo - 0.vil
-maps/Village/Zazo/Zazo - 1.vil
-maps/Village/Zazo/Zazo at Night - 0.vil
-maps/Village/Zazo/Zazo at Night - 1.vil
 maps/Village/Zazo/villagers/Ander0.char
 maps/Village/Zazo/villagers/Ander1.char
 maps/Village/Zazo/villagers/Argus1.char
@@ -2948,15 +2831,237 @@ maps/Village/Zazo/villagers/Shaun.char
 maps/Village/Zazo/villagers/Thom0.char
 maps/Village/Zazo/villagers/Thom1.char
 maps/Village/Zazo/villagers/WaterBarrel.char
-maps/Village/Zazo - Farl's House/Zazo - Farl's House - 0.vil
 maps/Village/Zazo - Farl's House/villagers/Farl.char
-maps/Village/Zazo - Miner's Home/Zazo - Miner's Home - 0.vil
 maps/Village/Zazo - Miner's Home/villagers/Beorn.char
 maps/Village/Zazo - Miner's Home/villagers/Leorn.char
-maps/Village/Zazo - Miner's Home2/Zazo - Miner's Home2 - 0.vil
 maps/Village/Zazo - Miner's Home2/villagers/Marcus.char
-maps/Village/Zazo - Tent/Zazo - Tent - 0.vil
 maps/Village/Zazo - Tent/villagers/Shaun.char
-maps/Village/Zazo - Teo/Zazo - Teo - 0.vil
-maps/Village/Zazo - Teo/Zazo - Teo at Night - 0.vil
-maps/Village/Zazo - Teo's House/Zazo - Teo's House - 0.vil
+scenes/villages/VillageScene.tscn
+scenes/villages/Alares/Alares - 0.tscn
+scenes/villages/Alares/Alares - 1.tscn
+scenes/villages/Alares/Alares.tscn
+scenes/villages/Alares - Belmet's House/Alares - Belmet's House - 0.tscn
+scenes/villages/Alares - Belmet's House/Alares - Belmet's House.tscn
+scenes/villages/Alares - Celis/Alares - Celis at Night - 0.tscn
+scenes/villages/Alares - Celis/Alares - Celis.tscn
+scenes/villages/Alares - Library/Alares - Library - 0.tscn
+scenes/villages/Alares - Library/Alares - Library.tscn
+scenes/villages/Berca/Berca - 0.tscn
+scenes/villages/Berca/Berca - 1.tscn
+scenes/villages/Berca/Berca.tscn
+scenes/villages/Berca - Bar/Berca - Bar - 0.tscn
+scenes/villages/Berca - Bar/Berca - Bar.tscn
+scenes/villages/Berca - Dolly's House/Berca - Dolly's House - 0.tscn
+scenes/villages/Berca - Dolly's House/Berca - Dolly's House.tscn
+scenes/villages/Berca - House/Berca - House - 0.tscn
+scenes/villages/Berca - House/Berca - House.tscn
+scenes/villages/Berca - Library - Floor 1/Berca - Library - Floor 1 - 0.tscn
+scenes/villages/Berca - Library - Floor 1/Berca - Library - Floor 1.tscn
+scenes/villages/Berca - Library - Floor 2/Berca - Library - Floor 2 - 0.tscn
+scenes/villages/Berca - Library - Floor 2/Berca - Library - Floor 2.tscn
+scenes/villages/Crossroad/Crossroad - 0.tscn
+scenes/villages/Crossroad/Crossroad at Night - 0.tscn
+scenes/villages/Crossroad/Crossroad.tscn
+scenes/villages/Crystal Room/Crystal Room - 0.tscn
+scenes/villages/Crystal Room/Crystal Room.tscn
+scenes/villages/Dellna/Dellna - 0.tscn
+scenes/villages/Dellna/Dellna - 1.tscn
+scenes/villages/Dellna/Dellna - 2.tscn
+scenes/villages/Dellna/Dellna.tscn
+scenes/villages/Dellna - Ana's Home/Dellna - Ana's Home - 0.tscn
+scenes/villages/Dellna - Ana's Home/Dellna - Ana's Home.tscn
+scenes/villages/Dellna - Ana's Home Memory/Dellna - Ana's Home Memory - 0.tscn
+scenes/villages/Dellna - Ana's Home Memory/Dellna - Ana's Home Memory.tscn
+scenes/villages/Dellna - Elder House - Floor 1/Dellna - Elder House - Floor 1 - 0.tscn
+scenes/villages/Dellna - Elder House - Floor 1/Dellna - Elder House - Floor 1 - 1.tscn
+scenes/villages/Dellna - Elder House - Floor 1/Dellna - Elder House - Floor 1.tscn
+scenes/villages/Dellna - Elder House - Floor 2/Dellna - Elder House - Floor 2 - 0.tscn
+scenes/villages/Dellna - Elder House - Floor 2/Dellna - Elder House - Floor 2 - 1.tscn
+scenes/villages/Dellna - Elder House - Floor 2/Dellna - Elder House - Floor 2.tscn
+scenes/villages/Dellna - Elder House - Floor 3/Dellna - Elder House - Floor 3 - 0.tscn
+scenes/villages/Dellna - Elder House - Floor 3/Dellna - Elder House - Floor 3 - 1.tscn
+scenes/villages/Dellna - Elder House - Floor 3/Dellna - Elder House - Floor 3.tscn
+scenes/villages/Dellna - House/Dellna - House - 0.tscn
+scenes/villages/Dellna - House/Dellna - House - 1.tscn
+scenes/villages/Dellna - House/Dellna - House.tscn
+scenes/villages/Home of Celis/Home of Celis - 0.tscn
+scenes/villages/Home of Celis/Home of Celis at Night - 0.tscn
+scenes/villages/Home of Celis/Home of Celis.tscn
+scenes/villages/Home of Celis - Celis Home/Home of Celis - Celis Home - 0.tscn
+scenes/villages/Home of Celis - Celis Home/Home of Celis - Celis Home.tscn
+scenes/villages/Home of Celis - Memory/Home of Celis - Memory - 0.tscn
+scenes/villages/Home of Celis - Memory/Home of Celis - Memory.tscn
+scenes/villages/Home of the Gods/Home of the Gods - 0.tscn
+scenes/villages/Home of the Gods/Home of the Gods.tscn
+scenes/villages/Kin's Place/Kin's Place - 0.tscn
+scenes/villages/Kin's Place/Kin's Place.tscn
+scenes/villages/No Place/No Place - 0.tscn
+scenes/villages/No Place/No Place at Night - 0.tscn
+scenes/villages/No Place/No Place.tscn
+scenes/villages/Parasne/Parasne - 0.tscn
+scenes/villages/Parasne/Parasne - 1.tscn
+scenes/villages/Parasne/Parasne - 2.tscn
+scenes/villages/Parasne/Parasne at Night - 0.tscn
+scenes/villages/Parasne/Parasne.tscn
+scenes/villages/Parasne - Tavern/Parasne - Tavern - 0.tscn
+scenes/villages/Parasne - Tavern/Parasne - Tavern.tscn
+scenes/villages/Pass to Zazo/Pass to Zazo - 0.tscn
+scenes/villages/Pass to Zazo/Pass to Zazo at Night - 0.tscn
+scenes/villages/Pass to Zazo/Pass to Zazo.tscn
+scenes/villages/Pensara - The North District/Pensara - The North District - 0.tscn
+scenes/villages/Pensara - The North District/Pensara - The North District.tscn
+scenes/villages/Pensara - The North District - Civil House/Pensara - The North District - Civil House - 0.tscn
+scenes/villages/Pensara - The North District - Civil House/Pensara - The North District - Civil House.tscn
+scenes/villages/Pensara - The North District - Farmer House/Pensara - The North District - Farmer House - 0.tscn
+scenes/villages/Pensara - The North District - Farmer House/Pensara - The North District - Farmer House.tscn
+scenes/villages/Pensara - The North District - Library/Pensara - The North District - Library - 0.tscn
+scenes/villages/Pensara - The North District - Library/Pensara - The North District - Library.tscn
+scenes/villages/Pensara - The School District/Pensara - The School District - 0.tscn
+scenes/villages/Pensara - The School District/Pensara - The School District.tscn
+scenes/villages/Pensara - The School District - The Clock Tower - Floor 1/Pensara - The School District - The Clock Tower - Floor 1 - 0.tscn
+scenes/villages/Pensara - The School District - The Clock Tower - Floor 1/Pensara - The School District - The Clock Tower - Floor 1.tscn
+scenes/villages/Pensara - The School District - The Clock Tower - Floor 2/Pensara - The School District - The Clock Tower - Floor 2 - 0.tscn
+scenes/villages/Pensara - The School District - The Clock Tower - Floor 2/Pensara - The School District - The Clock Tower - Floor 2.tscn
+scenes/villages/Pensara - The School District - The School/Pensara - The School District - The School - 0.tscn
+scenes/villages/Pensara - The School District - The School/Pensara - The School District - The School.tscn
+scenes/villages/Pensara - The Trade District/Pensara - The Trade District - 0.tscn
+scenes/villages/Pensara - The Trade District/Pensara - The Trade District at Night - 0.tscn
+scenes/villages/Pensara - The Trade District/Pensara - The Trade District.tscn
+scenes/villages/Pensara - The Trade District - House 1 - Floor 1/Pensara - The Trade District - House 1 - Floor 1 - 0.tscn
+scenes/villages/Pensara - The Trade District - House 1 - Floor 1/Pensara - The Trade District - House 1 - Floor 1.tscn
+scenes/villages/Pensara - The Trade District - House 1 - Floor 2/Pensara - The Trade District - House 1 - Floor 2 - 0.tscn
+scenes/villages/Pensara - The Trade District - House 1 - Floor 2/Pensara - The Trade District - House 1 - Floor 2.tscn
+scenes/villages/Pensara - The Trade District - House 2 - Floor 1/Pensara - The Trade District - House 2 - Floor 1 - 0.tscn
+scenes/villages/Pensara - The Trade District - House 2 - Floor 1/Pensara - The Trade District - House 2 - Floor 1.tscn
+scenes/villages/Pensara - The Trade District - House 2 - Floor 2/Pensara - The Trade District - House 2 - Floor 2 - 0.tscn
+scenes/villages/Pensara - The Trade District - House 2 - Floor 2/Pensara - The Trade District - House 2 - Floor 2.tscn
+scenes/villages/Pensara - The Trade District - Mezza's House/Pensara - The Trade District - Mezza's House - 0.tscn
+scenes/villages/Pensara - The Trade District - Mezza's House/Pensara - The Trade District - Mezza's House.tscn
+scenes/villages/Pensara - The Trade District - Tent/Pensara - The Trade District - Tent - 0.tscn
+scenes/villages/Pensara - The Trade District - Tent/Pensara - The Trade District - Tent.tscn
+scenes/villages/Pensara - The Trade District - Tower Prison/Pensara - The Trade District - Tower Prison - 0.tscn
+scenes/villages/Pensara - The Trade District - Tower Prison/Pensara - The Trade District - Tower Prison.tscn
+scenes/villages/Port of Alares/Port of Alares - 0.tscn
+scenes/villages/Port of Alares/Port of Alares - 1.tscn
+scenes/villages/Port of Alares/Port of Alares at Night - 0.tscn
+scenes/villages/Port of Alares/Port of Alares.tscn
+scenes/villages/Port of Alares - Tavern/Port of Alares - Tavern - 0.tscn
+scenes/villages/Port of Alares - Tavern/Port of Alares - Tavern.tscn
+scenes/villages/Port of Zazo/Port of Zazo - 0.tscn
+scenes/villages/Port of Zazo/Port of Zazo at Night - 0.tscn
+scenes/villages/Port of Zazo/Port of Zazo.tscn
+scenes/villages/Rebel Hideout/Rebel Hideout - 0.tscn
+scenes/villages/Rebel Hideout/Rebel Hideout.tscn
+scenes/villages/Serphia Hall/Serphia Hall - 0.tscn
+scenes/villages/Serphia Hall/Serphia Hall.tscn
+scenes/villages/The Prison Cell/The Prison Cell - 0.tscn
+scenes/villages/The Prison Cell/The Prison Cell - 1.tscn
+scenes/villages/The Prison Cell/The Prison Cell.tscn
+scenes/villages/The Senate/The Senate - 0.tscn
+scenes/villages/The Senate/The Senate.tscn
+scenes/villages/The Ship Cabin/The Ship Cabin - 0.tscn
+scenes/villages/The Ship Cabin/The Ship Cabin - 1.tscn
+scenes/villages/The Ship Cabin/The Ship Cabin.tscn
+scenes/villages/The Ship Cabin - Story/The Ship Cabin - Story - 0.tscn
+scenes/villages/The Ship Cabin - Story/The Ship Cabin - Story.tscn
+scenes/villages/Vincent's Office/Vincent's Office - 0.tscn
+scenes/villages/Vincent's Office/Vincent's Office.tscn
+scenes/villages/Zazo/Zazo - 0.tscn
+scenes/villages/Zazo/Zazo - 1.tscn
+scenes/villages/Zazo/Zazo at Night - 0.tscn
+scenes/villages/Zazo/Zazo at Night - 1.tscn
+scenes/villages/Zazo/Zazo.tscn
+scenes/villages/Zazo - Farl's House/Zazo - Farl's House - 0.tscn
+scenes/villages/Zazo - Farl's House/Zazo - Farl's House.tscn
+scenes/villages/Zazo - Miner's Home/Zazo - Miner's Home - 0.tscn
+scenes/villages/Zazo - Miner's Home/Zazo - Miner's Home.tscn
+scenes/villages/Zazo - Miner's Home2/Zazo - Miner's Home2 - 0.tscn
+scenes/villages/Zazo - Miner's Home2/Zazo - Miner's Home2.tscn
+scenes/villages/Zazo - Tent/Zazo - Tent - 0.tscn
+scenes/villages/Zazo - Tent/Zazo - Tent.tscn
+scenes/villages/Zazo - Teo/Zazo - Teo - 0.tscn
+scenes/villages/Zazo - Teo/Zazo - Teo at Night - 0.tscn
+scenes/villages/Zazo - Teo/Zazo - Teo.tscn
+scenes/villages/Zazo - Teo's House/Zazo - Teo's House - 0.tscn
+scenes/villages/Zazo - Teo's House/Zazo - Teo's House.tscn
+scenes/dungeons/DungeonScene.tscn
+scenes/dungeons/Berca Desert/North East.tscn
+scenes/dungeons/Berca Desert/North West.tscn
+scenes/dungeons/Berca Desert/North.tscn
+scenes/dungeons/Berca Desert/South East.tscn
+scenes/dungeons/Berca Desert/South West.tscn
+scenes/dungeons/Berca Desert/South.tscn
+scenes/dungeons/Boss/Test.tscn
+scenes/dungeons/Central Pass/Central Part.tscn
+scenes/dungeons/Central Pass/North East Part.tscn
+scenes/dungeons/Central Pass/North Part.tscn
+scenes/dungeons/Central Pass/West Part.tscn
+scenes/dungeons/Dorma's Forest/Forest of Hate.tscn
+scenes/dungeons/East Passage/East Mountain.tscn
+scenes/dungeons/East Passage/West Mountain.tscn
+scenes/dungeons/Empyrian Temple/Dark.tscn
+scenes/dungeons/Empyrian Temple/Hall of Memories.tscn
+scenes/dungeons/Empyrian Temple/Hall of Wind.tscn
+scenes/dungeons/Empyrian Temple/Light.tscn
+scenes/dungeons/Empyrian Temple/Tower of Magic.tscn
+scenes/dungeons/Empyrian Temple/Tower of Strength.tscn
+scenes/dungeons/Fire Cavern/Blazing Maze.tscn
+scenes/dungeons/Fire Cavern/Furnace.tscn
+scenes/dungeons/Fire Cavern/Hall of Fire.tscn
+scenes/dungeons/Fire Cavern/Hall of the Damned.tscn
+scenes/dungeons/Fire Cavern/Inferno.tscn
+scenes/dungeons/Fire Cavern/Passage of Ifrit.tscn
+scenes/dungeons/Forest of Bri/East Forest.tscn
+scenes/dungeons/Forest of Bri/West Forest.tscn
+scenes/dungeons/Forest of Reil/Deep Forest.tscn
+scenes/dungeons/Forest of Reil/Forest Path.tscn
+scenes/dungeons/Frozen Forest/Forest Passage.tscn
+scenes/dungeons/Grivera/Corridor of Agony.tscn
+scenes/dungeons/Grivera/First Floor.tscn
+scenes/dungeons/Grivera/Omnious Hall.tscn
+scenes/dungeons/Grivera/Second Floor.tscn
+scenes/dungeons/Grivera/Third Floor.tscn
+scenes/dungeons/Ice Cavern/Frozen Field.tscn
+scenes/dungeons/Ice Cavern/Hall of Anguish.tscn
+scenes/dungeons/Ice Cavern/Hall of Confusion.tscn
+scenes/dungeons/Ice Cavern/Mysterious Forest.tscn
+scenes/dungeons/Ice Cavern/Pillar Room.tscn
+scenes/dungeons/Ice Cavern/Throne Room.tscn
+scenes/dungeons/Menthu's Lair/Hall of Memories.tscn
+scenes/dungeons/Menthu's Lair/Room of Chaos.tscn
+scenes/dungeons/Menthu's Lair/Room of Confusion.tscn
+scenes/dungeons/Menthu's Lair/Room of Doubt.tscn
+scenes/dungeons/Menthu's Lair/Room of Turmoil.tscn
+scenes/dungeons/Menthu's Lair/Throne of Serpents.tscn
+scenes/dungeons/Mt. Cesadur/Basement.tscn
+scenes/dungeons/Mt. Cesadur/Entrance.tscn
+scenes/dungeons/Mt. Cesadur/Fourth Floor.tscn
+scenes/dungeons/Mt. Cesadur/Mountain Top.tscn
+scenes/dungeons/Mt. Cesadur/Second Floor.tscn
+scenes/dungeons/Mt. Cesadur/Third Floor.tscn
+scenes/dungeons/Pensara Forest/Forest.tscn
+scenes/dungeons/Pensara Prison/Floor 1.tscn
+scenes/dungeons/Pensara Prison/Floor 2.tscn
+scenes/dungeons/Pensara Prison/Floor 3.tscn
+scenes/dungeons/Pensara Prison/Floor 4.tscn
+scenes/dungeons/Pensara Prison/Floor 5.tscn
+scenes/dungeons/Pensara Prison/Floor 6.tscn
+scenes/dungeons/Silent Ruin/The Great Ruins.tscn
+scenes/dungeons/Temple of Aegis/Base Level.tscn
+scenes/dungeons/Temple of Aegis/First Floor.tscn
+scenes/dungeons/Temple of Aegis/Fourth Floor.tscn
+scenes/dungeons/Temple of Aegis/Second Floor.tscn
+scenes/dungeons/Temple of Aegis/Third Floor.tscn
+scenes/dungeons/Temple of Aegis/Top Floor.tscn
+scenes/dungeons/The Great Mine/Great Deep.tscn
+scenes/dungeons/The Great Mine/Mine Shaft.tscn
+scenes/dungeons/The Great Mine/The Hall.tscn
+scenes/dungeons/The Great Mine/The Mine Core.tscn
+scenes/dungeons/The Great Mine/Tunnel.tscn
+scenes/dungeons/The Great Mine/West Wing.tscn
+scenes/dungeons/The Sewers/North East.tscn
+scenes/dungeons/The Sewers/North West.tscn
+scenes/dungeons/The Sewers/North.tscn
+scenes/dungeons/The Sewers/South East.tscn
+scenes/dungeons/The Sewers/South West.tscn
+scenes/dungeons/The Sewers/South.tscn

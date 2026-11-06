@@ -12,7 +12,6 @@ menu_pages         menu_pages         --load="Slot 1" --start=Alares
 landscape          landscape          --load="Slot 1" --start=landAlares
 title_start        title_start
 boss               boss               --load="Slot 1" --start=Serphia
-bridge_test        bridge_test        --load="Slot 1" --start=landAlares --bridge-test  # extra
 # Phase 1 pilot: Zazo (all four .vil variants, Zazo - Miner's Home inside the
 # day cases) and two Zazo cutscenes. Dev options (src/main/Main.gd):
 # --start-time=night reaches the night variants (no story starts Zazo at
@@ -623,7 +622,7 @@ menu_tutorial_scroll     menu_tutorial_scroll     --load="Slot 1" --start=Alares
 # (Pensarasoldier in Berca, Parasne and Pensara), Sailor1/Sailor2
 # (tour_port_of_alares_1), cutscene Extras actors and animation=17 poses
 # (story_*), zoomed cutscenes (story_meeting_vincent, ...), Kin on the world
-# map (world_*; legacy drawing: bridge_test), a store entered from a village
+# map (world_*), a store entered from a village
 # (zazo_night_*).
 sprites_villager_walk    sprites_villager_walk    --load="Slot 1" --start=Alares
 sprites_party_walk       sprites_party_walk       --load="Slot 1" --start=Berca

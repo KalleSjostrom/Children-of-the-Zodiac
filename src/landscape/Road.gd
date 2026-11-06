@@ -91,12 +91,6 @@ func done():
 	J.removeAt(dots, dots.size() - 1)
 
 
-## Draws this road on the given graphics.
-func drawRoad(g):
-	for i in range(dots.size()):
-		dots[i].draw(g)
-
-
 func isClosed():
 	return closed
 
@@ -132,6 +126,3 @@ class MoveDot extends RefCounted:
 		ypos = y
 		dot = Values.LandscapeImages + "movedot.png"
 		ImageHandler.addToCurrentLoadOnUse(dot)
-
-	func draw(g):
-		g.drawImage(dot, xpos, ypos)

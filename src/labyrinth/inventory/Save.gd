@@ -29,21 +29,10 @@ func arrive(labyrinth):
 	Load.shuffleAllDecks()
 
 
-func draw(gl, dir = null):
-	if dir == null:
-		super.draw(gl)
-		return
-	var g = gl
-	g.setLightEnabled(false)
-	save.update()
-	save.draw(g, dir)
-	g.setLightEnabled(true)
-
-
-## Bridge (phase 2 step B): draw(g, dir) without the drawing
-## (Inventory.place_view): the particles move (SaveSystem.update) and their
-## quads are placed as draw would draw them (SaveSystem.place_particles),
-## with lighting off meanwhile; "particles" holds them.
+## Bridge (phase 2 step B): the legacy draw(g, dir) without the drawing
+## (Inventory.place_view): the particles move (SaveSystem.update) and the
+## state of their GPU node is placed (SaveSystem.place_particles), with
+## lighting off meanwhile; "particles" holds it.
 func place_view(g, dir = null):
 	if dir == null:
 		return super.place_view(g)

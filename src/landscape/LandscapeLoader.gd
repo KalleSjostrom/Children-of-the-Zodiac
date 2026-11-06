@@ -1,20 +1,20 @@
 class_name LandscapeLoader
 extends MenuStarter
-## Port of landscape.LandscapeLoader: loads the landscape from a world*.map
+## Port of landscape.LandscapeLoader: loads the landscape of a world*.map
 ## file.
 ##
-## Bridge (phase 4.1, docs/ARCHITECTURE.md section 13): a map with a scene
-## (scenes/world_map/<file>.tscn) is built from it (WorldMapScene.load_into,
-## step A) instead of parsing the file, and the scene stays the mode's
-## scene_root and draws the map (step B, Landscape.draw_scene); the index of
-## the node names (PlaceMapLoader's) is resources/world_map/place_index.tres.
-## --legacy=world_map keeps the .map files and the legacy drawing.
+## Bridge (phase 4.1, docs/ARCHITECTURE.md section 13): the map is built from
+## its scene (scenes/world_map/<file>.tscn; WorldMapScene.load_into, step A),
+## which stays the mode's scene_root and draws the map (step B,
+## Landscape.draw_scene); the index of the node names (PlaceMapLoader's) is
+## resources/world_map/place_index.tres. The .map files, their parse
+## (LandscapeLoaderMapLoader, PlaceMapLoader) and --legacy=world_map are
+## removed (closing phase 4.1, plan 9.1).
 
 var roads = []
 var nameBackGround = ""
 var background = null
 var player = null
-var mapLoader = null
 var loadRoad = null
 var nodes = []
 ## Java: private static final placeMap = createMap(); created lazily here,
@@ -27,7 +27,6 @@ static var placeMap = null
 func init(name, lab = null, hinders = null):
 	var info = name
 	initGameMode(info, Values.DETECT_ALL)
-	mapLoader = LandscapeLoaderMapLoader.new(self)
 	var sn = info.get("startNode")
 	var landscape = _getPlaceMap().get(sn)
 	if landscape == null:
@@ -38,11 +37,7 @@ func init(name, lab = null, hinders = null):
 			scene.load_into(self)
 			scene_root = scene
 		else:
-			mapLoader.parseFile(landscape)
-	# Port fix: the map loader refers back to this loader (Java's inner class
-	# reference), and the RefCounted cycle would keep the mode, and its scene,
-	# alive after it is left. It is not used after parsing.
-	mapLoader = null
+			push_error("LandscapeLoader: no scene for the world map " + str(landscape))
 	releaseAll()
 
 
@@ -111,16 +106,13 @@ static func createMap():
 		Parser.reset()
 		map.merge(index.maps)
 	else:
-		PlaceMapLoader.new(map)
+		push_error("LandscapeLoader: no place index " + WorldMapIndex.PATH)
 	return map
 
 
 ## Bridge (phase 4.1 step A): a new instance of the scene of the world map
-## file map_file (WorldMapScene), or null when it has none or with
-## --legacy=world_map (the file is parsed).
+## file map_file (WorldMapScene), or null when it has none.
 func world_scene_for(map_file):
-	if Main.is_legacy("world_map"):
-		return null
 	var path := WorldMapScene.path_for(str(map_file))
 	if path == "":
 		return null
@@ -128,92 +120,12 @@ func world_scene_for(map_file):
 
 
 ## Bridge (phase 4.1 step A): PlaceMapLoader's index as the converter wrote
-## it (WorldMapIndex), or null with --legacy=world_map (the files are
-## parsed).
+## it (WorldMapIndex), or null when it is missing.
 static func place_index():
-	if Main.is_legacy("world_map") or not ResourceLoader.exists(WorldMapIndex.PATH):
+	if not ResourceLoader.exists(WorldMapIndex.PATH):
 		return null
 	return ResourceLoader.load(WorldMapIndex.PATH)
 
 
 static func checkPlace(startNode):
 	return _getPlaceMap().get(Organizer.convert(startNode))
-
-
-## Loads the information about the landscape from a *.map file in
-## Values.LandscapeMaps. Holds a reference to the outer loader.
-class LandscapeLoaderMapLoader extends AbstractMapLoader:
-	var outer = null
-
-	func _init(p_outer = null) -> void:
-		outer = p_outer
-
-	## Java: protected void parseFile(String filename).
-	func parseFile(path: String, filename: String = ""):
-		if filename == "":
-			super.parseFile(Values.LandscapeMaps, path)
-		else:
-			super.parseFile(path, filename)
-
-	func executeCommand(command: String, tokenizer: StringTokenizer):
-		var tok: StringTokenizer = tokenizer
-		if command == "node":
-			var X: int = J.parseInt(tok.nextToken())
-			var Y: int = J.parseInt(tok.nextToken())
-			var type: String = tok.nextToken()
-			var name: String = tok.nextToken()
-			var node = LandscapeNode.new(X, Y, type, name.replace("_", " "))
-			outer.nodes.append(node)
-		elif command == "road":
-			var address: int = getInt(tok)
-			var source = outer.getNode(tok.nextToken().replace("_", " "))
-			var dirToDest: int = getInt(tok)
-			var dest = outer.getNode(tok.nextToken().replace("_", " "))
-			var dirToSource: int = getInt(tok)
-			var closed: bool = Database.getStatusFor("road" + str(address)) == 0
-			outer.loadRoad = Road.new(address, source, dest, closed)
-			source.setRoad(dirToDest, outer.loadRoad, true)
-			dest.setRoad(dirToSource, outer.loadRoad, false)
-			outer.roads.append(outer.loadRoad)
-		elif command == "co":
-			var a: int = getInt(tok)
-			var b: int = getInt(tok)
-			outer.loadRoad.addCoordinates(a, b)
-		elif command == "oc":
-			outer.loadRoad.done()
-		elif command == "background":
-			outer.loadImages(tok.nextToken())
-
-	## Gets the integer that the given tokenizer parses.
-	func getInt(t):
-		return J.parseInt(t.nextToken())
-
-
-## Maps every node name (Organizer.convert) to its world*.map file.
-class PlaceMapLoader extends AbstractMapLoader:
-	var map = null
-	var current = ""
-
-	func _init(map = null) -> void:
-		self.map = map
-		parseFile("")
-
-	## Java: protected void parseFile(String filename) (the name is ignored).
-	func parseFile(path: String, filename: String = ""):
-		if filename != "":
-			super.parseFile(path, filename)
-			return
-		current = "world0.map"
-		super.parseFile(Values.LandscapeMaps, current)
-		current = "world1.map"
-		super.parseFile(Values.LandscapeMaps, current)
-		current = "world2.map"
-		super.parseFile(Values.LandscapeMaps, current)
-
-	func executeCommand(command: String, tokenizer: StringTokenizer):
-		var t: StringTokenizer = tokenizer
-		if command == "node":
-			while t.hasMoreTokens():
-				command = t.nextToken()
-			var s: String = Organizer.convert(command)
-			map[s] = current

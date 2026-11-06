@@ -21,7 +21,6 @@ var zerotime: int = 0
 var animate: bool = false
 var message: bool = false
 
-const BRIDGE_TEST_SCENE := "res://tools/bridge_test/BridgeTest.tscn"
 ## Bridge (phase 4.1 step B): the UI node of the name plate.
 const NAME_PLATE_VIEW := "res://scenes/ui/NamePlate.tscn"
 
@@ -220,40 +219,20 @@ func exitLandscape(p_mode, place):
 
 
 ## The scene of the world map (docs/ARCHITECTURE.md section 13): the map's
-## scene the loader built it from (WorldMapScene, scene_root), or none with
-## --legacy=world_map (drawn by legacy code); with Main --bridge-test (dev
-## only, which implies --legacy=world_map) the bridge test's placeholder,
-## which stands in for the background tiles (section 8).
+## scene the loader built it from (WorldMapScene, scene_root).
 func create_scene() -> Node:
-	if scene_root != null:
-		return scene_root
-	if Main.bridge_test:
-		var packed: PackedScene = ResourceLoader.load(BRIDGE_TEST_SCENE)
-		return packed.instantiate()
-	return null
+	return scene_root
 
 
-## The drawing method of landscape. A map scene draws the map (draw_scene);
-## another scene (the bridge test) shows instead of the background tiles.
+## The drawing method of landscape: the map's scene draws the map
+## (draw_scene). The legacy drawing (--legacy=world_map, and the bridge
+## test's placeholder under it, --bridge-test) is removed (closing phase 4.1,
+## plan 9.1).
 func draw(g, alpha = null):
 	g.setColor(1)
 	g.setFontSize(30)
 	if scene_root is WorldMapScene:
 		draw_scene(g)
-	else:
-		if scene_root == null:
-			background.drawBottom(g)
-		for address in visitedRoads:
-			visitedRoads.get(address).drawRoad(g)
-		for i in range(nodes.size()):
-			if nodes[i].isVisited():
-				nodes[i].draw(g)
-		player.draw(g)
-		background.drawTop(g, false, null)
-		g.drawCenteredImage(nameBackGround, 10)
-		if not animate:
-			if currentNode.getType() != "crossroad":
-				g.drawSingleCenteredText(plateName(currentNode.getName()), 60, 1, 0)
 	if message:
 		Dialog.getDialog().draw(g, true, "Kin", "We can't enter now!", "", false)
 	super.checkMenu()

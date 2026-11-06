@@ -2,6 +2,11 @@ class_name LabyrinthRenderer
 extends RefCounted
 ## Port of labyrinth.LabyrinthRenderer: renders the walls, floors and
 ## ceilings of the labyrinth (not the inventory), plus fog, light and sky.
+##
+## The walls, floors, ceilings and sky are the floor scenes' (DungeonFloor):
+## draw and renderSky, which compiled them into a display list, are removed
+## (plan 7.9). The GL state stays: Labyrinth.init_scene_3d sets the lights,
+## material and fog, which the battle reads.
 
 var textures = null
 var settings = null
@@ -28,33 +33,6 @@ func getSettingValue(index):
 func init(g):
 	for i in range(textures.size()):
 		textures[i].loadTexture()
-
-func draw(g):
-	var nodes = map.getNodes()
-	for j in range(5):
-		var temp: int = j
-		if j == MapLoader.WALL:
-			temp = j + 1
-		elif j == MapLoader.ROOF:
-			temp = j - 1
-		for i in range(MapLoader.textureNorm[temp][0], MapLoader.textureNorm[temp][1]):
-			textures[i].getTexture().bind(g)
-			g.beginQuads()
-			for addr in nodes:
-				var n = nodes[addr]
-				match temp:
-					MapLoader.FLOOR:
-						n.drawFloors(g, i)
-					MapLoader.WALL:
-						n.drawWall(g, i, false, tangent)
-					MapLoader.ROOF:
-						if not settings[MapLoader.SKY]:
-							n.drawRoof(g, i)
-					MapLoader.CARPET_FLOOR:
-						n.drawFloors(g, i)
-					MapLoader.PILLAR_WALLS:
-						n.drawWall(g, i, true, tangent)
-			g.end()
 
 func addFog(g):
 	var gl = g.getGL()
@@ -114,29 +92,6 @@ func getWeatherSystem():
 	elif settings[MapLoader.USE_RAIN]:
 		system = RainSystem.new()
 	return system
-
-func renderSky(g):
-	if settings[MapLoader.SKY]:
-		g.push()
-		g.loadIdentity()
-		g.setLightEnabled(false)
-		g.setDepthTestEnabled(false)
-		g.setTextureEnabled(false)
-		var gl = g.getGL()
-		gl.glDisable(Graphics.GL_CULL_FACE)
-		var colors: Array = settingValues[MapLoader.SKY]
-		g.beginQuads()
-		g.setColorv(colors, MapLoader.SKY_TOP_COLOR)
-		gl.glVertex3f(-2, 0.827, -2)
-		gl.glVertex3f(2, 0.827, -2)
-		g.setColorv(colors, MapLoader.SKY_BOTTOM_COLOR)
-		gl.glVertex3f(2, 0, -2)
-		gl.glVertex3f(-2, 0, -2)
-		g.end()
-		gl.glEnable(Graphics.GL_CULL_FACE)
-		g.setDepthTestEnabled(true)
-		g.setTextureEnabled(true)
-		g.pop()
 
 func setMaterial(g):
 	var material: Array = settingValues[MapLoader.MATERIAL]

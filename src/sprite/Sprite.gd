@@ -183,25 +183,9 @@ static func _isIntPos(p) -> bool:
 	return p is Array and p.size() >= 3 and p[0] is int and p[1] is int
 
 
-func drawAtPosition(g, x, y):
-	drawSprite(g, x, y)
-
-
-## Java overloads: draw(Graphics g) and the abstract draw(g, int x, int y).
-func draw(g, x = null, y = null):
-	if x == null:
-		drawSprite(g, drawX, drawY)
-
-
-func drawSprite(g, x, y):
-	g.drawImage(anim.getImage(), x, y)
-	if currentEmotion != -1:
-		emotionX = x
-		emotionY = y
-
-
-## Bridge (phase 1 step B, docs/ARCHITECTURE.md): drawSprite(g, x, y)
-## without drawing, for a mode whose scene draws the sprite (ActorView):
+## Bridge (phase 1 step B, docs/ARCHITECTURE.md): the legacy drawSprite(g,
+## x, y) without drawing (draw, drawSprite and drawAtPosition are removed with
+## the last legacy sprite drawing, the world map's: plan 9.1), for a mode whose scene draws the sprite (ActorView):
 ## keeps what drawSprite sets (the emotion bubble's position) and returns
 ## the image it would draw (an image path, or null).
 func place_sprite(x, y):
@@ -219,18 +203,8 @@ func place_view(x, y):
 	return []
 
 
-func drawEmotions(g):
-	if currentEmotion != -1:
-		if shakeEmotion:
-			if ((counter + emotionSpeed) > xs.size() - 1) or ((counter + emotionSpeed) < 0):
-				emotionSpeed *= -1
-			counter += emotionSpeed
-			currentX = J.round(counter)
-		g.drawImage(_getEmotions()[currentEmotion], emotionX + xs[currentX], emotionY - 13)
-
-
-## Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): drawEmotions
-## without the drawing, for a village scene's bubble (VillageScene.show_emotions):
+## Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): the legacy
+## drawEmotions (removed, plan 8.4) without the drawing, for a village scene's bubble (VillageScene.show_emotions):
 ## the shake steps and the image is bound as drawImage binds it
 ## (Graphics.skip_image). Returns [image path, screen x, screen y], or []
 ## when drawEmotions draws nothing.

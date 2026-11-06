@@ -3,8 +3,12 @@ extends RefCounted
 ## Port of labyrinth.Node: a position in the labyrinth. The player can walk
 ## between these nodes via edges and the graph.
 ##
-## Port note: Java's setWall(dir, nr) and setWall(dir, i, j) are merged into
-## setWall(direction, i, j = null).
+## The .map parse's setters (setWall, setRoof, setFloor, addCarpetFloor,
+## setWalls) and the display list's drawing (drawRoof, drawFloors, drawWall)
+## are removed (plan 7.9): the floor scenes hold the walls, floors, roofs and
+## carpets (DungeonScene.load_into sets the fields). drawOneWall and
+## drawOneFloor stay: hinder doors and floor buttons draw through them
+## (DungeonQuads).
 
 const DISTANCE = 4
 const WIDTH = 4
@@ -36,73 +40,6 @@ func _init(p_address = null) -> void:
 	walls = [-1, -1, -1, -1]
 
 
-## Java: setWall(int dir, int nr) and setWall(int direction, int i, int j).
-func setWall(direction, i, j = null) -> void:
-	if j == null:
-		walls[direction] = i
-	else:
-		walls[direction] = i if walls[direction] == 0 else j
-
-
-func setRoof(nr) -> void:
-	roof = nr
-
-
-func setFloor(useCarpetFloor, offset) -> void:
-	if useCarpetFloor:
-		addCarpetFloor(offset)
-	else:
-		floor = offset
-
-
-func addCarpetFloor(offset) -> void:
-	carpetFloor = Horizontal.new(position.getX(), position.getZ())
-	var sum: int = 0
-	var array: Array = J.array(nrOfNeighbors, 0)
-	var j: int = 0
-	for i in 4:
-		if neighbors[i] != null:
-			array[j] = i
-			sum += array[j]
-			j += 1
-	match nrOfNeighbors:
-		1:
-			carpetFloor.setEnd(sum if sum % 2 == 0 else Values.getCounterAngle(sum), offset)
-		2:
-			var even: bool = sum % 2 == 0
-			if even:
-				carpetFloor.setStraight(sum, offset)
-			else:
-				if sum == 3:
-					sum += 0 if array[1] == 3 else 4
-				carpetFloor.setHook(sum, offset)
-		3:
-			carpetFloor.setTCross(sum, offset)
-		4:
-			carpetFloor.setCross(offset)
-
-
-func setWalls(usePillarWalls, tex) -> void:
-	if usePillarWalls:
-		PillarWalls.addPillarWalls(self, tex, nrOfNeighbors)
-	else:
-		for i in 4:
-			if neighbors[i] == null:
-				walls[i] = tex
-
-
-func drawRoof(g, direction) -> void:
-	if direction == roof:
-		draw(g, ROOF_HEIGHT)
-
-
-func drawFloors(g, direction) -> void:
-	if carpetFloor != null:
-		carpetFloor.draw(g, -2, 4, direction)
-	elif direction == floor:
-		draw(g, FLOOR_HEIGHT)
-
-
 func drawOneFloor(g) -> void:
 	draw(g, FLOOR_HEIGHT)
 
@@ -124,12 +61,6 @@ func draw(g, height) -> void:
 		gl.glTexCoord2f(1, 0); gl.glVertex3f(x + WIDTH, h, z - WIDTH)
 		gl.glTexCoord2f(1, 1); gl.glVertex3f(x + WIDTH, h, z)
 		gl.glTexCoord2f(0, 1); gl.glVertex3f(x, h, z)
-
-
-func drawWall(g, texture, flip, tangent) -> void:
-	for i in 4:
-		if walls[i] != -1 and walls[i] == texture:
-			drawOneWall(g, i, flip)
 
 
 func drawOneWall(g, dir, flip) -> void:

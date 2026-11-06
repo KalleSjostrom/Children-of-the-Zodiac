@@ -7,11 +7,10 @@ extends RefCounted
 ## buttons, doors and so on.
 ##
 ## Port notes:
-## * Java's draw(Graphics g) and draw(GL2 gl, int dir) are merged into
-##   draw(gl, dir = null): dir == null is draw(Graphics), otherwise the quad
-##   of the inventory is emitted (no glBegin/glEnd) facing dir. No Java
-##   subclass overrides draw(GL2, int), so the Graphics version calls the
-##   non virtual helper _drawQuad().
+## * Java's draw(Graphics g) is removed with the legacy dungeon drawing
+##   (plan 7.9): the floor's scene draws the objects (place_view). Java's
+##   draw(GL2 gl, int dir), which emits the quad facing dir, is the non
+##   virtual helper _drawQuad().
 ## * Java's setHaveBeen() and setHaveBeen(String) are merged into
 ##   setHaveBeen(lastNodesName = null). The Java no-argument version (used
 ##   internally by the doors) is _setHaveBeen().
@@ -83,22 +82,8 @@ func setSize(index, scale):
 
 
 ## Java overloads: draw(Graphics g) [dir == null] and draw(GL2 gl, int dir).
-func draw(gl, dir = null):
-	if dir != null:
-		_drawQuad(gl, dir)
-		return
-	var g = gl
-	if currentTex != Object2D.INVISIBLE:
-		gl = g.getGL()
-		if currentTex < texture.size() and texture[currentTex] != null:
-			texture[currentTex].bind(g)
-		gl.glBegin(Graphics.GL_QUADS)
-		_drawQuad(gl, self.dir)
-		gl.glEnd()
-
-
-## Bridge (phase 2 step B, docs/ARCHITECTURE.md section 10): draw(g) without
-## the drawing, for a floor its scene draws (Graph.show_inventory): the same
+## Bridge (phase 2 step B, docs/ARCHITECTURE.md section 10): the legacy draw(g)
+## without the drawing, for the floor's scene (Graph.show_inventory): the same
 ## checks and GL state changes (the texture it binds; its quad, recorded by
 ## DungeonQuads, leaves the same normal and texture coordinate current), and
 ## what it would draw: "visible", "frame" (the index of the texture),

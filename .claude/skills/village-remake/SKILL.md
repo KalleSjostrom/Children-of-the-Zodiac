@@ -50,7 +50,8 @@ legacy collision, cutscene parsing), `remake_draw.gd`.
    `report/inventory.txt` and look at `report/inventory.png` (numbered items).
    It lists every feature key the layout must place or drop, the villagers
    (standing or walking, with their walks), the `.vil` obstacle groups (they
-   name the buildings), the cutscenes (and which villager's dialog runs each),
+   name the buildings; saved in `tools/village_remake/obstacle_groups.json`
+   when the `.vil` files were deleted), the cutscenes (and which villager's dialog runs each),
    the doors of other places that return into it, and related places (a
    `<Place> - …` folder without doors that shows the place, such as
    `Alares - Celis`, is a view; see step 4).
@@ -278,7 +279,7 @@ Its cutscenes need entries too.
 
 ## Don't
 
-* Edit the default scenes, `.vil`, `.char` or `.seq` files: the remake is a
+* Edit the default scenes, `.char` or `.seq` files: the remake is a
   copy; the default game must stay as it is (parity).
 * Generate art with PixelLab without the user's explicit go-ahead.
 * Write whole files that other sessions may be editing (`Main.gd`,

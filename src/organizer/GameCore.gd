@@ -74,15 +74,8 @@ func testDraw(g: Graphics) -> void:
 				gameActions[i].changeBehavior(GameAction.DETECT_INITAL_PRESS_ONLY)
 		firstTimeIn = false
 		# Bridge (phase 3 step B): the Transition layer's PadLost node shows
-		# the overlay (_show_pad_lost); --legacy=pause keeps the drawing.
-		if Main.is_legacy("pause"):
-			g.fadeOldSchool(0.5)
-			var cx: int = Values.ORIGINAL_RESOLUTION[Values.X] / 2
-			g.drawSingleCenteredText("Connection to game pad lost", 250, 1, 1, 50, cx)
-			g.drawSingleCenteredText("Please reconnect the game pad in a USB port", 320, 1, 1, 30, cx)
-			g.drawSingleCenteredText("(You can connect to the gamepad from the menu (Settings) later)", 350, 1, 1, 20, cx)
-		else:
-			_show_pad_lost(g)
+		# the overlay (_show_pad_lost).
+		_show_pad_lost(g)
 		if gameActions[GameMode.UP].isPressed():
 			activeNode.previousChild()
 		elif gameActions[GameMode.DOWN].isPressed():
@@ -99,20 +92,14 @@ func testDraw(g: Graphics) -> void:
 		# Bridge (phase 4.2 step B): the menu is a MenuList node after the
 		# overlay's (MenuNode.show_all_children); --legacy=menu_list keeps its
 		# drawing.
-		if Main.is_legacy("pause") or Main.is_legacy("menu_list"):
+		if Main.is_legacy("menu_list"):
 			activeNode.drawAllChildren(g)
 		else:
 			activeNode.show_all_children(g, Graphics.TRANSITION_LAYER)
 	elif paused:
 		# Bridge (phase 3 step B): the Transition layer's Paused node
-		# (_show_paused); --legacy=pause keeps the drawing.
-		if Main.is_legacy("pause"):
-			g.fadeOldSchool(0.5)
-			var fs := g.getFontSize()
-			g.drawSingleCenteredText("Paused", 250, 1, 1, 50, Values.ORIGINAL_RESOLUTION[Values.X] / 2)
-			g.setFontSize(fs)
-		else:
-			_show_paused(g)
+		# (_show_paused).
+		_show_paused(g)
 
 
 # Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): testDraw's

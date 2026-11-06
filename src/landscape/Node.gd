@@ -26,11 +26,6 @@ func _init(X = null, Y = null, t = null, n = null) -> void:
 	drawy = y - 4
 
 
-## Draws this node.
-func draw(g):
-	g.drawImage(im, drawx, drawy)
-
-
 ## Connects a road with the given direction to this place.
 func setRoad(dir, r, isSource):
 	self.isSource_[dir] = isSource

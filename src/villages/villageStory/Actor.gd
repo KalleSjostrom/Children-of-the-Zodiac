@@ -267,10 +267,8 @@ func updateDialog(value):
 	var v = actor
 	v.updateDialog(value)
 
-func drawEmotion(g):
-	actor.drawEmotions(g)
-
-## Bridge (phase 3 step B): drawEmotion without the drawing (Sprite.place_emotion).
+## Bridge (phase 3 step B): the legacy drawEmotion (removed, plan 8.4)
+## without the drawing (Sprite.place_emotion).
 func place_emotion(g) -> Array:
 	return actor.place_emotion(g)
 

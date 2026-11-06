@@ -19,17 +19,6 @@ func _init(node = null, dir = null, nrOfTexs = null, image = null, status = null
 		self.status = 0
 
 
-func draw(gl, dir = null):
-	if dir != null:
-		super.draw(gl, dir)
-		return
-	var g = gl
-	texture[status].bind(g)
-	g.beginQuads()
-	node.drawOneFloor(g)
-	g.end()
-
-
 ## Bridge (phase 2 step B): draw without the drawing (Inventory.place_view):
 ## the image of its status, drawn as its node's floor.
 func place_view(g, dir = null):

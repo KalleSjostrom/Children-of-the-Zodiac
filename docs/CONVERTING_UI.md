@@ -10,7 +10,10 @@ are in `docs/ARCHITECTURE.md` section 12. This is the procedure for the next
 overlays (phase 4's: a battle's and a riddle's top layer, the stores'
 menus; the world map's name plate is done, docs/ARCHITECTURE.md
 section 13) and for whole 2D modes (section 5 below; the title, the game
-over and the menu are done, docs/ARCHITECTURE.md section 14). Run everything from bash in the project root, Godot with
+over and the menu are done, docs/ARCHITECTURE.md section 14). Phase 3's
+`--legacy=` flags that the examples below name (`dialog`, `fades`, the
+rollout's overlays) are removed since the phase closed (plan 8.4): a new
+part gets a flag of its own, which goes when its phase closes. Run everything from bash in the project root, Godot with
 `< /dev/null`; close the Godot editor first (it imports new files and makes
 `.uid` files), and do not type while a recording runs (a new run's window
 takes the focus).

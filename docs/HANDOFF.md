@@ -1,10 +1,16 @@
-# Handoff: state of the Godot port (2026-11-03, after steps 1–3, modernization phase 0, phase 1 steps A and B, phase 2 steps A and B, the particles phase, P2, phase 3 steps A and B, phase 4.1 steps A and B, phase 4.2's pilot and its menu through step B, the character sprite sheets)
+# Handoff: state of the Godot port (2026-11-06, after steps 1–3, modernization phase 0, phases 1, 2, 3 and 4.1 done and closed, the particles phases P and P2, phase 4.2's pilot and its menu through step B, the character sprite sheets)
 
 Conventions: legacy (ported) code follows `docs/PORTING.md`; new code
 (scenes, resources, tools, bridge) follows `docs/ARCHITECTURE.md`. The
 modernization plan is `docs/MODERNIZATION_PLAN.md`.
 
 ## Done
+
+The entries below are in the order the work was done. The `--legacy=`
+flags they name for phases 1 to 4.1 (and the particles phases' `particles`
+and `dungeon_particles`), the converters and data checks, the `.vil` and
+`.map` files and the bridge test are removed since those phases closed
+(last entry of the modernization, "Closing phases 1 to 4.1").
 
 **Source decision.** The downloaded `Children-of-the-Zodiac-master` is an
 unfinished refactor (its last commits say "THIS DOESN'T COMPILE"). The port
@@ -65,11 +71,12 @@ section 5; conventions and workflow in `docs/ARCHITECTURE.md`):
   (without freeing) when the mode is suspended or left, and `GameMode` frees
   it in `NOTIFICATION_PREDELETE`. `--legacy=<a,b>` + `Main.is_legacy()` are
   in place for later phases (unused).
-- Bridge test: `--bridge-test` + `tools/autoplay/bridge_test.txt` (parity case
-  `bridge_test`) shows `tools/bridge_test/BridgeTest.tscn` instead of the
-  world map's background tiles (Alares until the phase 1 rollout), through
-  fade-in, walking a road, the menu (thumbnail), entering a labyrinth and
-  the menu there (the scene is freed at that mode switch).
+- Bridge test (deleted when phase 4.1 closed, 2026-11-06): `--bridge-test`
+  + `tools/autoplay/bridge_test.txt` (parity case `bridge_test`) showed
+  `tools/bridge_test/BridgeTest.tscn` instead of the world map's background
+  tiles (Alares until the phase 1 rollout), through fade-in, walking a road,
+  the menu (thumbnail), entering a labyrinth and the menu there (the scene
+  was freed at that mode switch).
 
 **Modernization phase 1 (villages as scenes): steps A and B done** for all
 63 places and 89 `.vil` variants: the pilot (Zazo, "Zazo - Miner's Home",
@@ -97,8 +104,8 @@ the scenes are the village data, edited in Godot.
   a tour of every variant a main.bank place reaches (`tour_*`), four
   particle cases and 24 cutscenes (`story_*`). `parity.sh --jobs=<n>` and
   case patterns make a full run about 40 minutes.
-- The `.vil` files stay (decision 5) but are not read; their paths name
-  the variants. Plan 6.9 has what closing the phase removed.
+- The `.vil` files are deleted (decision 5, 2026-11-06); their names still
+  name the variants. Plan 6.9 has what closing the phase removed.
 - Dev options: `--start-time=night`, `--status=<name>:<value>`, AutoPlay
   `pos`, `heading`, `guard`, the relative buttons `AHEAD`/`BEHIND`/`ALEFT`/
   `ARIGHT`, `[zoom]` lines; parity `--ignore-world`, `--jobs`; `--seed` runs
@@ -441,17 +448,39 @@ section 5):
   invisible villagers, Storygroup's empty frames, KinSmall, the
   unreferenced and duplicate sets).
 
+**Closing phases 1 to 4.1 (2026-11-06): done** (plan 6.9, 7.9, 8.4, 9.1;
+decision 5 decided in plan section 13):
+- Deleted: the 86 `.vil` and 85 `.map` files (80 floors, 5 world and
+  airship maps), their parsers (`MapLoader`'s, `MenuMapLoader`,
+  `PillarWalls`, the world map loaders' inner classes), the converters and
+  data checks (`map_to_scene`, `world_to_scene`, `tile_art`,
+  `verify_dungeons`, `verify_world_map`), `docs/CONVERTING_DUNGEONS.md`, the
+  bridge test, the display lists and every legacy drawing those phases kept
+  (the floor, the objects, the weather and save points, the village and
+  cutscene particles, the dialog family, fades, emotions, mission, pause
+  overlays, cutscene images and texts, tutorials, the world map and the
+  airship), with their flags. The git history up to aab714c9 has them.
+- The legacy code still names places by their `.vil` and `.map` names:
+  `VillageScene.path_for` and `DungeonScene.path_for` resolve the scenes
+  through `file_index.txt` without regard to case (`tools/gen_file_index.py`
+  lists the village and dungeon scenes for it). The debug console reads the
+  floors from the scenes; the remake tool's obstacle groups are in
+  `tools/village_remake/obstacle_groups.json`. The scenes are edited by hand.
+- Kept: the battle effects' `--legacy=battle_effects` and `effect_waits`
+  (phase 4.4), phase 4.2's flags, the minimap on the 3D bridge (8.4).
+- Parity (tolerance 0; sets `cbase` on aab714c9 and `cafter2`, 409 cases,
+  7,674 shots): identical shots, logs and per-case error and leak lines;
+  `cbase` also equals the leak cleanup's `leakfinal`. An export runs a
+  village, a floor, the world map and a cutscene.
+- The open tickets that name `.vil` or `.map` lines say where the data is now.
+
 ## Plan (what is left)
 
-0. **Modernization:** closing phase 1 (plan 6.9) needs decision 5 (delete
-   the `.vil` files) and the removal of the legacy village path (and of
-   `--legacy=particles`). Closing phase 2 (plan 7.9) needs decision 5 and
-   the 1/255 tolerance accepted. Closing phase 3 (plan 8.4) needs phases 1
-   and 2 closed (their legacy paths draw through the same overlays) and the
-   minimap's geometry made by its node. Closing phase 4.1 (plan 9.1) needs
-   decision 5 and another home for the bridge test. Next: the rest of
-   phase 4.2's rollout (plan 9.2: the stores, which reuse the menu's nodes,
-   then the mini-games; battles still draw overlays of their own). Record
+0. **Modernization:** phases 1 to 4.1 are closed (2026-11-06). Next: the
+   rest of phase 4.2's rollout (plan 9.2: the stores, which reuse the
+   menu's nodes, `docs/phase4_2_stores_prompt.md`; then the mini-games;
+   battles still draw overlays of their own, phase 4.4). The minimap stays
+   the 3D bridge's until the battles leave the bridge (plan 8.4). Record
    goldens before each change.
 
 1. **Performance:** since P2 the labyrinths with rain or snow run at 60 FPS
@@ -490,14 +519,12 @@ section 5):
   only the shipped saves.
 - Parity: `tools/parity/parity.sh record <set>` / `compare <a> <b>` /
   `ab "<args a>" "<args b>" [case…]`, see `docs/ARCHITECTURE.md` section 7.
-  Runs are windowed (screenshots need a renderer); all 409 cases and
-  `bridge_test` take about 14-15 minutes with `--jobs=8` on 12 logical
-  cores (run nothing beside them, not even a headless compare: 16 GB run out, plan 12) since the particles run
-  on the GPU (60-70 minutes before P2; `--uncapped`; with
-  `--legacy=particles`, `particles_hotg` and the Berca cutscene are bound by
-  the legacy particles at ~6 FPS, with `--legacy=dungeon_particles` the
-  weather floors by the weather, with `--legacy=battle_effects` or
-  `effect_waits` Menthu's Flame takes 10 s of real time). Recording from a
+  Runs are windowed (screenshots need a renderer); all 409 cases take
+  about 14-15 minutes with `--jobs=8` on 12 logical cores (run nothing
+  beside them, not even a headless compare: 16 GB run out, plan 12) since
+  the particles run on the GPU (60-70 minutes before P2; `--uncapped`; with
+  `--legacy=battle_effects` or `effect_waits` Menthu's Flame takes 10 s of
+  real time). Recording from a
   copy of the project (without `.git` and `tools/parity/out`, about 2.4 GB)
   keeps the tree free for edits meanwhile; move the set back into `out/`.
   The `fps=` values of parity runs are meaningless; measure performance in
@@ -514,10 +541,10 @@ section 5):
   port. The particles that fade per update but move per ms (village systems in
   `bodies/system/ParticleSystem.update`, card/enemy effects in
   `particleSystem/ParticleSystemPacket.update`) are stepped by
-  `Values.originalFrameStep` for this reason (the village systems only with
-  `--legacy=particles` since the particles phase: the GPU systems run the
-  same laws as per-second rates every frame, and the card effects since
-  P2: their legacy systems still step, with a smaller pool, for the waits).
+  `Values.originalFrameStep` for this reason (the card effects' legacy
+  systems still step, with a smaller pool, for the waits; the village
+  systems' legacy simulation is removed: the GPU systems run the same laws
+  as per-second rates every frame).
   The purely per-frame ones (labyrinth weather, save points) run their laws
   as per-second rates at 60 steps a second since P2; the battle background
   snow (dead code) still runs at 60 updates per second.

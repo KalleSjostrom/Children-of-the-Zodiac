@@ -243,62 +243,14 @@ func getPos():
 	return pos
 
 
-func drawBottom(g):
-	if extraBackground == null:
-		drawBottomLayer(g)
-	else:
-		g.drawImage(extraBackground, pos[Values.X], pos[Values.Y], 1)
-
-
-## Draws the top layer in the village: every static object that should be
-## drawn on top of the player (roofs, treetops) and the night layer.
-## sprites: Java HashMap<Integer, Sprite> (Dictionary) or null.
-func drawTop(g, removeAlpha, sprites):
-	if extraBackground == null:
-		if removeAlpha:
-			g.setAlphaFunc(0.9)
-		var px: float = pos[Values.X]
-		var py: float = pos[Values.Y]
-		var spriteList = null
-		if sprites != null:
-			spriteList = sprites.values()
-		for entry in top:
-			var p: Array = entry[0]
-			var s: String = entry[1]
-			if spriteList != null:
-				var gt: GameTexture = ImageHandler.getTexture(s)
-				var h: int = gt.getHeight()
-				var w: int = gt.getWidth()
-				for sprite in spriteList:
-					if sprite.isVisible():
-						var sPos
-						if sprite is PartyMember:
-							sPos = sprite.getMemberPos()
-						else:
-							sPos = sprite.getPos()
-						var temp: int = int(sPos[Values.X] - p[Values.X])
-						if (temp + 36) > 0 and temp < w:
-							var tempy: int = int(sPos[Values.Y] - p[Values.Y])
-							if (tempy + 55) > 0 and tempy < h:
-								g.drawImage(s, px + p[Values.X], py + p[Values.Y], 1)
-								break
-			else:
-				g.drawImage(s, px + p[Values.X], py + p[Values.Y], 1)
-		g.setAlphaFunc(0)
-		if nightTop != null:
-			if nightTop.contains("standard"):
-				g.drawImage(nightTop, 0, 0, 2)
-			else:
-				g.drawImage(nightTop, pos[Values.X], pos[Values.Y], 2)
-	drawSystem(g, systems.get(UPPER_LAYER))
-	drawSystem(g, systems.get(WEATHER_LAYER))
-
-
-## Bridge (phase 1 step B, docs/ARCHITECTURE.md): the overlap test of
-## drawTop without drawing: for each top layer piece, whether drawTop draws
-## it (with sprites, only where a visible sprite overlaps it; without, all).
-## Does what drawTop does besides drawing: loads the pieces' textures and
+## Bridge (phase 1 step B, docs/ARCHITECTURE.md): the overlap test of the
+## legacy drawTop without drawing: for each top layer piece, whether drawTop
+## drew it (with sprites, only where a visible sprite overlaps it; without,
+## all). Does what drawTop did besides drawing: loads the pieces' textures and
 ## brings the party members' positions up to date (PartyMember.getMemberPos).
+## (drawBottom, drawBottomLayer, drawTop and drawSystem, the legacy drawing
+## of the villages, the world map and the airship, are removed: plan 6.9 and
+## 9.1.)
 func overlapped_pieces(sprites) -> Array:
 	var drawn := []
 	var spriteList = null
@@ -329,40 +281,10 @@ func overlapped_pieces(sprites) -> Array:
 	return drawn
 
 
-func drawSystem(g, systems):
-	if systems != null:
-		for p in systems:
-			p.draw(g, int(pos[Values.X]), int(pos[Values.Y]))
-
-
 func updateSystem(elapsedTime, systems):
 	if systems != null:
 		for p in systems:
 			p.update(elapsedTime)
-
-
-func drawBottomLayer(g):
-	drawSystem(g, systems.get(BOTTOM_LAYER))
-	if USE_CUT:
-		var x: int
-		var y: int
-		var resX: int = Values.ORIGINAL_RESOLUTION[Values.X]
-		var resY: int = Values.ORIGINAL_RESOLUTION[Values.Y]
-		var px: float = pos[Values.X]
-		var py: float = pos[Values.Y]
-		for i in range(HORIZONTAL_IMAGES):
-			x = int(i * imageWidth + px) + offsetx
-			if x > -imageWidth and x < resX:
-				var column: Array = bg[i]
-				for j in range(VERTICAL_IMAGES):
-					y = int(j * imageHeight + py + offsety)
-					if y > -imageHeight and y < resY:
-						g.drawImage(column[j], x, y)
-	else:
-		for entry in bottom:
-			var p: Array = entry[0]
-			g.drawImage(entry[1], pos[Values.X] + p[Values.X] + offsetx,
-					pos[Values.Y] + p[Values.Y] + offsety, 1)
 
 
 func update(elapsedTime):

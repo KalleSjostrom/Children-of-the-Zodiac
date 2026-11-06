@@ -2,16 +2,18 @@ class_name BodiesParticleSystem
 extends BodySystem
 ## Port of bodies.system.ParticleSystem (GDScript class BodiesParticleSystem):
 ## a system of particles emitted by an emitter and updated by commands.
+##
+## Bridge (particles phase, docs/ARCHITECTURE.md section 9): a
+## VillageParticles2D draws the system; it builds no bodies and runs no
+## simulation. The legacy simulation and drawing (--legacy=particles: the
+## bodies, step and its command queue, draw, drawIt and the quads of
+## place_particles) are removed (closing the particles phase, plan 6.10); the
+## particle classes (ParticleFactory) keep the laws the GPU systems run, which
+## tools/import/particles_to_scenes.gd samples.
 
-var UPDATE_COMMAND = UpdateCommand.new()
-var GRAVITY_COMMAND = GravityCommand.new()
-var EMITTER_COMMAND = EmitterUpdateCommand.new()
 var emitter = null
 var additiveBlending: bool = false
-var inited: bool = false
 var active: bool = true
-var cq = CommandQueue.new()
-var tex = null
 var position = Vector3f.new()
 var background = null
 var texture = null
@@ -26,15 +28,10 @@ static var windCommand = WindCommand.new()
 ## how much the particles draw. Main seeds it in deterministic runs.
 static var rand := JRandom.new()
 var zeroTime: int = 0
-# Not in Java: milliseconds not yet simulated (see update).
-var stepTime: float = 0.0
-## Bridge (particles phase, docs/ARCHITECTURE.md section 9): true when a
-## VillageParticles2D draws this system (gpu_path()): it builds no bodies and
-## runs no simulation. Then: the game time (ms) it was updated for since the
-## last draw, the warm-up (s) its build ran, the random seed of its GPU
-## system, the name of its definition in particleSystems.info and its
+## Bridge (particles phase): the game time (ms) the system was updated for
+## since the last draw, the warm-up (s) its build ran, the random seed of its
+## GPU system, the name of its definition in particleSystems.info and its
 ## particle kind (ParticleFactory).
-var gpu: bool = false
 var gpu_elapsed: float = 0.0
 var gpu_warm_up: float = 0.0
 var gpu_seed: int = 0
@@ -49,7 +46,6 @@ func _init(settings = null, pSettings = null, emitter = null, warmer = null) -> 
 	var particleType: int = int(pSettings.getValue(ParticleSettings.KIND))
 	var nrParticles: int = 0
 	particle_kind = particleType
-	gpu = gpu_path()
 	if settings != null:
 		definition = str(settings.getName())
 		for type in SystemLoader.settingKeys(settings):
@@ -72,26 +68,8 @@ func _init(settings = null, pSettings = null, emitter = null, warmer = null) -> 
 				_:
 					pass
 	self.emitter = emitter
-
-	if gpu:
-		# Bridge: no bodies (the GPU system has the particles).
-		gpu_seed = rand.nextInt(J.INT_MAX)
-	else:
-		for i in range(nrParticles):
-			var b = addBody(ParticleFactory.createParticle(particleType, pSettings))
-			b.setParent(self)
-			if warmer != null:
-				emitter.emitFrom(b, warmer)
-			else:
-				emitter.fillPool(b)
-	EMITTER_COMMAND.setEmitter(emitter)
-
-
-## Bridge (particles phase): whether the village and cutscene systems are
-## drawn by VillageParticles2D (--legacy=particles is not given) instead of
-## the legacy simulation.
-static func gpu_path() -> bool:
-	return not Main.is_legacy("particles")
+	# Bridge: no bodies (the GPU system has the particles).
+	gpu_seed = rand.nextInt(J.INT_MAX)
 
 
 func setTexture(tex):
@@ -117,87 +95,21 @@ func getY():
 	return -(emitter.getPosition().y + 56)
 
 
-## Java: update(float elapsedTime) (milliseconds). The particles fade per
-## update but move per second, so the port steps them as the original's real
-## frame rate did (Values.originalFrameStep). Stepping every 60 FPS frame made
-## the smoke rise a third as high, as a bright clump.
+## Java: update(float elapsedTime) (milliseconds): the GPU system runs for
+## that time (gpu_run). The particles fade per update but move per second,
+## so the GPU systems run the laws as the original's real frame rate stepped
+## them (Values.originalFrameStep).
 func update(f, player = null, reset = null):
 	var elapsedTime: float = f
 	if active:
 		if elapsedTime < 5 * Values.LOGIC_INTERVAL:
-			if gpu:
-				gpu_run(elapsedTime)
-				return
-			stepTime += elapsedTime
-			var dt: float = Values.originalFrameStep(stepTime)
-			if dt > 0:
-				stepTime -= dt
-				step(dt / 1000.0)
+			gpu_run(elapsedTime)
 	elif activateStatus != -1:
 		if Database.getStatusFor(getName()) == activateStatus:
 			active = true
 
 
-## The body of Java's update, for one step of elapsedTime seconds.
-func step(elapsedTime):
-	enqueue(cq, elapsedTime)
-	cq.run(getBodies(), elapsedTime)
-
-	var b = getBodies()
-	var tempBody
-	var it = b.iterator()
-	var index: int = 0
-	while it.hasNext():
-		tempBody = it.next()
-		if tempBody.isDead():
-			emitter.postEmit(tempBody)
-		index += 1
-
-
-func drawSprite(g, x, y):
-	drawIt(g, x, y)
-
-
-## Java overloads: draw(Graphics g, int x, int y) and the inherited
-## draw(Graphics g) (x == null).
-func draw(g, x = null, y = null):
-	if x == null:
-		super.draw(g)
-		return
-	var pos = getPosition()
-	pos.x = x
-	pos.y = -y
-	drawIt(g, x, y)
-
-
-func drawIt(g, x, y):
-	if active:
-		if not inited:
-			init(g)
-			inited = true
-		# Main.hide_particles (dev): no image and no particles, the same GL state.
-		if background != null and not Main.hide_particles:
-			g.drawImage(background, x + backx, y + backy)
-		g.beginBlend(false)
-		g.setBlendFunc(Graphics.GL_ONE if additiveBlending else Graphics.GL_ONE_MINUS_SRC_ALPHA)
-		tex.bind(g)
-		g.beginQuads()
-		var b = getBodies()
-		var it = b.iterator()
-		while it.hasNext():
-			var body = it.next()
-			if body.isAlive():
-				if Main.hide_particles:
-					body.modifySize(body.getSize()) # draw's state change (SmokeParticle)
-				else:
-					body.draw(g, tex, position)
-		g.end()
-		g.setBlendFunc(Graphics.GL_ONE_MINUS_SRC_ALPHA)
-		g.setAlphaFunc(0.1)
-		g.setColor(1)
-
-
-## Bridge (particles phase): what update's step does on the GPU path, for
+## Bridge (particles phase): what the legacy update's step did, for
 ## elapsedTime ms: the GPU system runs for that game time (gpu_elapsed, handed
 ## over at draw time), and what stays legacy goes on: the emitter's clock
 ## (its fade, AbstractEmitter.advance) and the turbulence of the shared wind
@@ -222,9 +134,9 @@ func gpu_warm(seconds: float) -> void:
 		windCommand.drift(seconds)
 
 
-## Bridge (phase 1 step B, docs/ARCHITECTURE.md): draw(g, x, y) without
-## drawing, for a scene that draws the system (LegacyParticles2D): sets the
-## position as draw does and returns place_particles(x, y).
+## Bridge (phase 1 step B, docs/ARCHITECTURE.md): the legacy draw(g, x, y)
+## without drawing, for a scene that draws the system (LegacyParticles2D):
+## sets the position as draw did and returns place_particles(x, y).
 func place_view(x, y):
 	var pos = getPosition()
 	pos.x = x
@@ -232,44 +144,19 @@ func place_view(x, y):
 	return place_particles(x, y)
 
 
-## Bridge (phase 1 step B): drawSprite(g, x, y) (a story actor's draw)
-## without drawing: place_particles(x, y).
+## Bridge (phase 1 step B): the legacy drawSprite(g, x, y) (a story actor's
+## draw) without drawing: place_particles(x, y).
 func place_sprite(x, y):
 	return place_particles(x, y)
 
 
-## Bridge (phase 1 step B): drawIt(g, x, y) without drawing: initializes the
-## texture as drawIt does and returns what it would draw, for
-## LegacyParticles2D.show_systems: "texture", "additive", "corners" and
-## "colors" (four corners per particle, screen pixels, in drawi's vertex
-## order), and "image" / "image_at" for the background image. Empty when the
-## system is inactive (drawIt draws nothing). On the GPU path the state of
-## the system instead (gpu_view).
+## Bridge (phase 1 step B): the legacy drawIt(g, x, y) without drawing, for
+## LegacyParticles2D.show_systems: the state of the system (gpu_view), or
+## empty when the system is inactive (drawIt drew nothing).
 func place_particles(x, y) -> Dictionary:
 	if not active:
 		return {}
-	if gpu:
-		return gpu_view()
-	if not inited:
-		init()
-		inited = true
-	var corners := PackedVector2Array()
-	var colors := PackedColorArray()
-	var b = getBodies()
-	var it = b.iterator()
-	while it.hasNext():
-		var body = it.next()
-		if body.isAlive():
-			var quad: Array = body.place_quad(tex, position)
-			for i in 4:
-				corners.append(quad[i])
-				colors.append(quad[4])
-	var view := {"texture": tex.getGodotTexture(), "additive": additiveBlending,
-		"corners": corners, "colors": colors}
-	if background != null:
-		view["image"] = ImageHandler.getTexture(background).getGodotTexture()
-		view["image_at"] = Vector2i(x + backx, y + backy)
-	return view
+	return gpu_view()
 
 
 ## Bridge (particles phase): the state VillageParticles2D.show_state takes
@@ -295,24 +182,6 @@ func gpu_view() -> Dictionary:
 	return view
 
 
-func init(g = null):
-	tex = ImageHandler.getTexture(texture)
-
-
-func enqueue(cq, elapsedTime):
-	cq.enqueue(UPDATE_COMMAND)
-	var bs = getBodies()
-	if bs.size() > 0 and bs.iterator().next() is SmokeParticle:
-		cq.enqueue(windCommand)
-	# cq.enqueue(DRAG_COMMAND)
-	cq.enqueue(GRAVITY_COMMAND)
-	cq.enqueue(EMITTER_COMMAND)
-
-
-func getCommandQueue():
-	return cq
-
-
 func setEmitter(emitter):
 	self.emitter = emitter
 
@@ -326,14 +195,10 @@ static func setWind(windForce, turbulence):
 	windCommand.setTurbulence(turbulence)
 
 
-## Java: update(Values.LOGIC_INTERVAL) warmUp times; here one step each (on
-## the GPU path, gpu_warm for that time).
+## Java: update(Values.LOGIC_INTERVAL) warmUp times: gpu_warm for that time
+## (one original frame each).
 func warmUp():
-	if gpu:
-		gpu_warm(warmUp_ * Values.ORIGINAL_FRAME_MS / 1000.0)
-		return
-	for i in range(warmUp_):
-		self.update(Values.ORIGINAL_FRAME_MS)
+	gpu_warm(warmUp_ * Values.ORIGINAL_FRAME_MS / 1000.0)
 
 
 func getWarmUp():
