@@ -74,46 +74,13 @@ func getNode(address):
 func put(source, sourceNode):
 	nodes[source] = sourceNode
 
-func draw(g, currentNode, currentDir, pos, drawAll, calcPercent):
-	var y: int
-	var x: int
-	var counter: int = 0
-	var isOnFloor: bool = false
-	for address in nodes:
-		var n = nodes[address]
-		if n.isVisited() or (n.isSeen() and n.hasInventory()):
-			counter += 1
-			if n == currentNode:
-				isOnFloor = true
-	if pos != null:
-		if isOnFloor:
-			Graphics.setTextColor(0, 0, 0)
-			g.drawSingleCenteredText(self.getName(), pos[1] * 330 + 86, 1, 0, 24, pos[0] * 215 + 171)
-			Graphics.setTextColor(0.2, 0.8, 0.2)
-			g.drawSingleCenteredText(self.getName(), pos[1] * 330 + 85, 1, -1, 24, pos[0] * 215 + 170)
-			Graphics.setTextColor(0, 0, 0)
-		else:
-			g.drawSingleCenteredText(self.getName(), pos[1] * 330 + 85, 1, -1, 24, pos[0] * 215 + 170)
-	else:
-		g.drawSingleCenteredText(self.getName(), 60, 1, 0, 34, 380)
-	g.setFontSize(MenuValues.MENU_FONT_SIZE)
-	for address in nodes:
-		var n = nodes[address]
-		y = (address % 16) * SIZE + OFFSET_Y
-		x = (address / 16) * SIZE + OFFSET_X
-		n.drawInMap(g, x, y, currentNode == n, currentDir, isOnFloor, drawAll)
-	var percent: int
-	if calcPercent:
-		percent = J.round((counter / float(nodes.size())) * 100)
-	else:
-		percent = counter
-	return percent
-
-## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): draw without
-## the drawing, for the menu's Automap node: the same state changes in the
-## same order (the text colours, the font sizes 24 or 34 and 22, startText
-## and finishText of the floor's name, each node's colours and binds and the
-## Database reads and writes of its map image: LabyrinthNode.place_in_map).
+## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): draw (the
+## floor's name and its visited nodes, for the menu's map page; the legacy
+## drawing is removed: closing phase 4.2, plan 9.2) without the drawing, for
+## the menu's Automap node: the same state changes in the same order (the
+## text colours, the font sizes 24 or 34 and 22, startText and finishText of
+## the floor's name, each node's colours and binds and the Database reads and
+## writes of its map image: LabyrinthNode.place_in_map).
 ## Returns {"percent": draw's, "names": the floor's name (and its shadow on
 ## the player's floor) as [text, position (its centre), font size, colour,
 ## bold, alignment] each, "images": the pieces, icons and arrow as

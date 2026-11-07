@@ -194,88 +194,17 @@ func iterator():
 	return deck
 
 
-## Java overloads:
-##   drawDeck(g)                                  -> (MAX, false, null, null)
-##   drawDeck(g, Card currentCard)                -> (MAX, false, card, null)
-##   drawDeck(g, Card currentCard, HashMap map)   -> (MAX, true, card, map)
-##   drawDeck(g, int gold, boolean large, Card currentCard, HashMap map)
-## Draws the cards in the deck. Cards that cost more than the given gold
-## (or are disabled in the map) are drawn in black and white.
-func drawDeck(g, gold = null, large = null, currentCard = null, map = null):
-	if not (gold is int):
-		currentCard = gold
-		map = large
-		large = map != null
-		gold = J.INT_MAX
-	var offset: int = currentLine - handLine
-	if offset < 0:
-		offset = 0
-	var ci: int = 0
-	var cj: int = 0
-	var fs: int = g.getFontSize()
-	g.setFontSize(26, true)
-	for i in shownLines:
-		for j in lineLength:
-			var index: int = lineLength * (i + offset) + j
-			if index < deck.size():
-				var x: int = pos[Values.X] + j * xDistance
-				var y: int = pos[Values.Y] + i * yDistance
-				var c = deck[index]
-				if currentCard != c:
-					var enabled := true
-					if map != null:
-						var info = map.get(c.getSortingValue())
-						enabled = info.isEnabled()
-						drawCard(g, large, x, y, c, enabled)
-						Graphics.setTextColor(0)
-						g.drawStringRightAligned(str(info.getIndex()), y + 171, x + 118)
-						Graphics.setTextColor(1)
-						g.drawStringRightAligned(str(info.getIndex()), y + 169, x + 116)
-					else:
-						enabled = c.getPrice() <= gold
-						drawCard(g, large, x, y, c, enabled)
-				else:
-					ci = i
-					cj = j
-	if currentCard != null:
-		var x: int = pos[Values.X] + cj * xDistance
-		var y: int = pos[Values.Y] + ci * yDistance
-		var enabled := true
-		g.setFontSize(28, true)
-		if map != null:
-			var info = map.get(currentCard.getSortingValue())
-			enabled = info.isEnabled()
-			if enabled:
-				currentCard.drawCard(g, x - 15, y - 20, 1.2 if large else 0.9)
-			else:
-				currentCard.drawGrayCard(g, x - 15, y - 20, 1.2 if large else 0.9)
-			Graphics.setTextColor(0)
-			g.drawStringRightAligned(str(info.getIndex()), y + 186, x + 128)
-			Graphics.setTextColor(1)
-			g.drawStringRightAligned(str(info.getIndex()), y + 184, x + 126)
-		else:
-			if currentCard.getPrice() <= gold:
-				currentCard.drawCard(g, x - 15, y - 20, 1.2 if large else 0.9)
-			else:
-				currentCard.drawGrayCard(g, x - 15, y - 20, 1.2 if large else 0.9)
-	if active:
-		hand.drawHand(g)
-	Graphics.setTextColor(0)
-	g.setFontSize(fs, false)
-
-
-func drawCard(g, large, x, y, c, enabled):
-	if enabled:
-		c.drawCard(g, x, y, 1.0 if large else 0.7)
-	else:
-		c.drawGrayCard(g, x, y, 1.0 if large else 0.7)
-
-
-## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): drawDeck
-## (every overload) without the drawing: the same state changes in the same
-## order (the font sizes, the bold font set and turned off again, the
-## cards' binds, the text colours and drawString's setColor(color) of the
-## card store's numbers, the hand's bind). Returns {"cards": [{"images":
+## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): drawDeck (the
+## cards in the deck; cards that cost more than the given gold, or are
+## disabled in the map, in black and white) without the drawing. The Java
+## overloads: drawDeck(g) -> (MAX, false, null, null), drawDeck(g, Card
+## currentCard) -> (MAX, false, card, null), drawDeck(g, Card currentCard,
+## HashMap map) -> (MAX, true, card, map), drawDeck(g, int gold, boolean
+## large, Card currentCard, HashMap map). The legacy drawing (drawDeck,
+## drawCard; --legacy=deck) is removed (closing phase 4.2, plan 9.2). The same
+## state changes in the same order (the font sizes, the bold font set and
+## turned off again, the cards' binds, the text colours and drawString's
+## setColor(color) of the card store's numbers, the hand's bind). Returns {"cards": [{"images":
 ## AbstractCard.place_at's, "index": the card store's number and its shadow
 ## as [text, position (its end), font size, colour, bold] each}, …] in drawing
 ## order (the current card last, larger), "hand": MenuHand.place_hand's}.

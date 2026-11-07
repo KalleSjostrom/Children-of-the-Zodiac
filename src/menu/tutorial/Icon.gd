@@ -15,11 +15,9 @@ func _init(icon = null, x = null, y = null, scale = null) -> void:
 		yoffset = y
 		self.scale = scale
 
-func draw(g, x, y):
-	g.drawImage(icon, x + xoffset, y + yoffset, scale)
-
-## Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): draw without the
-## drawing: the image bound as drawImage binds it (Graphics.skip_image).
+## Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): draw
+## (drawImage(icon, x + xoffset, y + yoffset, scale); removed: closing phase
+## 4.2, plan 9.2) without the drawing: the image bound as drawImage binds it (Graphics.skip_image).
 ## Returns [texture, rect (the quad drawImage would draw: its position
 ## rounded, its far corner truncated to whole pixels), tint (the current
 ## colour)], or [] when it draws nothing.

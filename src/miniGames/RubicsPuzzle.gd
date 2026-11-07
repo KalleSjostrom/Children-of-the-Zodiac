@@ -106,19 +106,12 @@ func moveLineDown(x):
 
 
 ## Bridge (phase 4.2 step B): the marker is a MenuBackground node's image
-## (Graphics.place_image, AbstractPage.show_pieces); --legacy=riddle draws it.
+## (Graphics.place_image, AbstractPage.show_pieces).
 func drawTopLayer(g):
 	super.drawTopLayer(g)
-	var legacy := Main.is_legacy("riddle")
 	if horizontal:
-		if legacy:
-			g.drawImage(marker[0], xs[0] + markeroffset, ys[cursory] + markeroffset)
-		else:
-			AbstractPage.show_pieces(g, [g.place_image(marker[0], xs[0] + markeroffset,
-					ys[cursory] + markeroffset)])
+		AbstractPage.show_pieces(g, [g.place_image(marker[0], xs[0] + markeroffset,
+				ys[cursory] + markeroffset)])
 	else:
-		if legacy:
-			g.drawImage(marker[1], xs[cursorx] + markeroffset, ys[0] + markeroffset)
-		else:
-			AbstractPage.show_pieces(g, [g.place_image(marker[1], xs[cursorx] + markeroffset,
-					ys[0] + markeroffset)])
+		AbstractPage.show_pieces(g, [g.place_image(marker[1], xs[cursorx] + markeroffset,
+				ys[0] + markeroffset)])

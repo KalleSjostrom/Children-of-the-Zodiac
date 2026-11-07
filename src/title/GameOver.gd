@@ -5,7 +5,8 @@ extends GameMode
 ##
 ## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): the UI layer's
 ## GameOverScreen node shows the image where the drawing drew it
-## (_show_image); --legacy=game_over keeps the drawing.
+## (_show_image). The legacy drawing (--legacy=game_over) is removed (closing
+## phase 4.2, plan 9.2).
 
 const GAME_OVER_VIEW := "res://scenes/ui/GameOverScreen.tscn"
 
@@ -57,10 +58,7 @@ func checkGameInput():
 func draw(g, alpha = null):
 	g.setColor(1)
 	g.setFontSize(24)
-	if Main.is_legacy("game_over"):
-		g.drawImage(background, 0, 0)
-	else:
-		_show_image(g)
+	_show_image(g)
 	super.draw(g)
 
 

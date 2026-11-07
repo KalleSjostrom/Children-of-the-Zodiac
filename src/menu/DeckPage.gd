@@ -223,52 +223,42 @@ func setCurrentDeck(activeDeck, passiveDeck):
 
 
 ## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): each part is
-## shown by its node where it was drawn, or drawn with its --legacy flag
-## (_show_titles, _draw_deck, AbstractPage.draw_title, draw_list, the card
-## info (phase 3's node), StatusPage.draw_top, _draw_bar, the flying cards
+## shown by its node where it was drawn (_show_titles, Deck.show_deck,
+## AbstractPage.draw_title, MenuNode.show_children, the card info (phase 3's
+## node), StatusPage.show_top, MenuScrollBar.show_bar, the flying cards
 ## (Animator.show_card), AbstractPage.draw_help).
 func draw3D(g):
 	drawStandard(g)
-	var deck: bool = Main.is_legacy("deck")
 	g.startText()
-	if deck:
-		g.drawMultiString(charName + "'s Deck - " + str(charDeck.getSizeInfo()),
-				MenuValues.CHAR_DECK_X - 10, MenuValues.DECK_Y - 20)
-		g.drawMultiString("Party Deck - " + str(mainDeck.getSizeInfo()),
-				MenuValues.MAIN_DECK_X - 10, MenuValues.DECK_Y - 20)
-	else:
-		_show_titles(g)
+	_show_titles(g)
 	g.finishText()
 	match activeDeck:
 		NO_DECK:
 			g.setImageColor(1, 1, 1, 1)
-			_draw_deck(g, charDeck, null)
-			_draw_deck(g, mainDeck, null)
+			charDeck.show_deck(g)
+			mainDeck.show_deck(g)
 		CHARACTER_DECK:
-			_draw_deck(g, charDeck, currentDeck.getCurrent())
+			charDeck.show_deck(g, currentDeck.getCurrent())
 			g.setImageColor(1, 1, 1, .5)
-			_draw_deck(g, mainDeck, null)
+			mainDeck.show_deck(g)
 		MAIN_DECK:
-			_draw_deck(g, mainDeck, currentDeck.getCurrent())
+			mainDeck.show_deck(g, currentDeck.getCurrent())
 			g.setImageColor(1, 1, 1, .5)
-			_draw_deck(g, charDeck, null)
+			charDeck.show_deck(g)
 	AbstractPage.draw_title(g, activeNode.getName())
-	AbstractPage.draw_list(g, activeNode, false, false, false, false, false)
+	activeNode.show_children(g, Graphics.UI_LAYER)
 	var card = null
 	if displayCardHelp:
 		if currentDeck != null:
 			card = currentDeck.getCurrent()
 		drawCardInfo(g, card, -29)
 		if card == null:
-			StatusPage.draw_top(g, self.c)
-	_draw_bar(g, charScrollBar, charDeck.getCurrentLine() - 1, charDeck.getTotalNrOfLines())
-	_draw_bar(g, mainScrollBar, mainDeck.getCurrentLine() - 1, mainDeck.getTotalNrOfLines())
+			StatusPage.show_top(g, self.c)
+	charScrollBar.show_bar(g, charDeck.getCurrentLine() - 1, charDeck.getTotalNrOfLines())
+	mainScrollBar.show_bar(g, mainDeck.getCurrentLine() - 1, mainDeck.getTotalNrOfLines())
 
 	for a in animators:
-		if deck:
-			a.draw(g)
-		else:
-			a.show_card(g)
+		a.show_card(g)
 	match activeDeck:
 		NO_DECK:
 			AbstractPage.draw_help(g, drawTopHelp)
@@ -289,30 +279,6 @@ func _show_titles(g) -> void:
 	for line: Array in lines:
 		line.append_array([g.getFontSize(), color, Graphics.font_bold(), HORIZONTAL_ALIGNMENT_LEFT])
 	AbstractPage.show_lines(g, lines)
-
-
-## Bridge (phase 4.2 step B): deck.drawDeck(g[, current]), or with
-## --legacy=deck off its twin (Deck.show_deck: a DeckView node).
-static func _draw_deck(g, deck, current) -> void:
-	if Main.is_legacy("deck"):
-		if current == null:
-			deck.drawDeck(g)
-		else:
-			deck.drawDeck(g, current)
-	elif current == null:
-		deck.show_deck(g)
-	else:
-		deck.show_deck(g, current)
-
-
-## Bridge (phase 4.2 step B): one of the decks' scroll bars, bar.draw, or
-## with --legacy=deck off its twin (MenuScrollBar.show_bar: a PageScrollBar
-## node).
-static func _draw_bar(g, bar, current, total) -> void:
-	if Main.is_legacy("deck"):
-		bar.draw(g, current, total)
-	else:
-		bar.show_bar(g, current, total)
 
 
 func drawTopHelp(g):
@@ -444,15 +410,10 @@ class Animator extends RefCounted:
 		percent = currentTime / endTime
 		currentPos = start.add(startToEnd.mult(percent))
 
-	func draw(g):
-		g.setColor(1, 1, 1, 1 - percent)
-		card.drawCard(g, int(currentPos.x), int(currentPos.y))
-		g.setColor(1)
-
-	## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): draw
-	## without the drawing (the colours, the card's binds:
-	## AbstractCard.place_at), and the frame's next CardView node on the UI
-	## layer shows the flying card (Graphics.show_ui).
+	## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): draw (the
+	## flying card, fading out) without the drawing (the colours, the card's
+	## binds: AbstractCard.place_at), and the frame's next CardView node on the
+	## UI layer shows the flying card (Graphics.show_ui).
 	func show_card(g):
 		var mat = g.canvas_material()
 		g.setColor(1, 1, 1, 1 - percent)

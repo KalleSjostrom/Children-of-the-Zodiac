@@ -178,7 +178,8 @@ func place_card(g) -> Array:
 ## y, size, type, level) without the drawing: the same binds, and the images
 ## as Graphics.place_image places them (the picture, then the level's balls:
 ## the card's own level, or p_level's, as the card store's merge preview draws
-## the next level), for a CardView node (a deck's cards, a flying card).
+## the next level), for a CardView node (a deck's cards, drawGrayCard's as
+## type GRAY; a flying card).
 func place_at(g, x, y, size, type = NORMAL, p_level = null) -> Array:
 	var lvl: int = level if p_level == null else int(p_level)
 	var s: float = float(size)
@@ -194,17 +195,6 @@ func place_at(g, x, y, size, type = NORMAL, p_level = null) -> Array:
 		placed.append(g.place_image(images[type][BALL], x + (s * 65), yy, s))
 		placed.append(g.place_image(images[type][BALL], x + (s * 90), yy, s))
 	return placed
-
-
-## Draws the card on the given graphics in black and white.
-## Java overloads: drawGrayCard(g, x, y) and drawGrayCard(g, x, y, size).
-## Note: as in the original, the three argument version draws the normal
-## (colored) card.
-func drawGrayCard(g, x, y, size = null):
-	if size == null:
-		drawCard(g, x, y, 0.7)
-	else:
-		drawCard(g, x, y, size, GRAY, level)
 
 
 #####################

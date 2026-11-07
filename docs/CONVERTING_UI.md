@@ -210,6 +210,8 @@ reasons. What it adds to sections 1–4:
   node on its own; with all of a mode's flags on, the frame is drawn exactly
   as before. Parts whose pixels never overlap may change their relative
   order between flag combinations without a pixel changing; check which do.
+  The flags go with the legacy drawing when the phase closes (phase 4.2's
+  eleven: plan 9.2, "Closing phase 4.2").
 * **Pooled nodes keep their textures.** A pooled node stays (hidden) after
   its mode is left, with the textures it was last given; release large
   ones when hidden if a mode's pages hold many.
@@ -224,7 +226,12 @@ What the menu added (phase 4.2's rollout; docs/ARCHITECTURE.md section 14,
   call sites choose with the flag, through small wrappers where many sites do
   the same (`AbstractPage.draw_list`, `draw_title`, `draw_help`,
   `StartPage.draw_screen_shot`, `draw_info`, `StatusPage.draw_top`). The
-  stores keep the legacy calls until their part.
+  stores keep the legacy calls until their part. When the phase closes, a
+  wrapper that only chose between the two becomes a plain call of the twin
+  at its call sites (`draw_list` → `MenuNode.show_children_freely`,
+  `show_children`, `show_all_children`; `draw_top` → `show_top`), and one
+  whose body was the twin keeps its name (`draw_title`, `draw_help`,
+  `draw_screen_shot`, `draw_info`).
 * **Images.** `Graphics.place_image(image, x, y[, scale])` is drawImage
   without the drawing: the bind and the quad's rect as `GameTexture.drawPart`
   rounds it (position rounded, far corner truncated), with the current
@@ -339,3 +346,16 @@ What the mini-games added (phase 4.2's rollout; docs/ARCHITECTURE.md section
 * **Game state shown through the console.** A solved riddle sets its doors'
   statuses: the console's `trigger <name>` prints a Database status in the
   log before and after (`riddle_*_solved` cases), no dev hook needed.
+
+What the closing of phase 4.2 added (plan 9.2, "Closing phase 4.2"):
+
+* **Unreachable code keeps legacy helpers alive.** The status and bestiary
+  pages (opened only from themselves) were the last callers of
+  `StatusPage.drawTop`, `StartPage.drawInfo` and `MenuNode.drawAllChildren`;
+  a survey of who calls a helper must ask whether the caller can run.
+* **A dev mode is a caller too.** The developer Cheater drew its list
+  through `MenuNode.draw`; it got a case with shots first (`cheater_menu`),
+  then the twin (`MenuNode.show_children`), and the shots stayed identical.
+* **A removed flag is ignored.** `Main.is_legacy` answers only for the names
+  the code asks about: a run with a removed `--legacy=` name is a normal
+  run. Check it with a few cases rather than assume it.

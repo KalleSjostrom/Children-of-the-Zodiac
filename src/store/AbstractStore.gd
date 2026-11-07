@@ -104,62 +104,29 @@ func negativeConfirm(type):
 ## active node) and drawConfirmDialog(g, String name, int price).
 ##
 ## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): the dim, the
-## box and its list are nodes where they were drawn (draw_dim,
-## _show_confirm_box, AbstractPage.draw_list), or drawn with their --legacy
-## flags (dim, menu_text, menu_list).
+## box and its list are nodes where they were drawn (_show_confirm_box,
+## MenuNode.show_all_children).
 func drawConfirmDialog(g, name = null, price = null):
 	if name == null:
 		var n = activeNode.getCurrentChild()
 		drawConfirmDialog(g, n.getName(), n.getPrice())
 		return
-	if not Main.is_legacy("menu_text"):
-		_show_confirm_box(g, name, price)
-	else:
-		match confirm:
-			POSITIVE:
-				draw_dim(g)
-				g.setColor(1)
-				g.drawImage(AbstractPage.images[14], 400, 300)
-				g.drawString(name, 430, 360)
-				var s: String = str(price) + " gp"
-				var x: int = Graphics.calcAlignRight(s, 630)
-				g.drawString(s, x, 390)
-			NOT_AFFORD:
-				draw_dim(g)
-				g.setColor(1)
-				g.drawImage(AbstractPage.images[3], 400, 315)
-				g.drawString("You can't afford that!", 430, 360)
-			CANT_EQUIP:
-				draw_dim(g)
-				g.setColor(1)
-				g.drawImage(AbstractPage.images[3], 400, 315)
-				g.drawString("No one can equip that.", 430, 360)
-			CANT_MERGE:
-				draw_dim(g)
-				g.setColor(1)
-				g.drawImage(AbstractPage.images[3], 400, 315)
-				g.drawString("Can't merge that card.", 430, 360)
-			POSITIVE_MERGE:
-				draw_dim(g)
-				g.setColor(1)
-				g.drawImage(AbstractPage.images[3], 400, 315)
-				g.drawString("Are you sure?", 430, 360)
-			_:
-				pass
-	AbstractPage.draw_list(g, confirmNode, false, true, false, false, false)
+	_show_confirm_box(g, name, price)
+	confirmNode.show_all_children(g, Graphics.UI_LAYER)
 
 
 ## Bridge (phase 4.2 step B): drawConfirmDialog's dim and box without the
-## drawing: the dim (draw_dim), setColor(1), and the box of the current kind
-## (show_box: piece 14 with the name and the price right-aligned to 630, or
-## piece 3 with the store's answer).
+## drawing: the dim (fadeOldSchool(0.5): a Fade node on the UI layer, before
+## the box and its list, Graphics.show_fade), setColor(1), and the box of the
+## current kind (show_box: piece 14 with the name and the price right-aligned
+## to 630, or piece 3 with the store's answer).
 func _show_confirm_box(g, name, price) -> void:
 	var image = AbstractPage.images[3]
 	var at := Vector2i(400, 315)
 	var text: String
 	match confirm:
 		POSITIVE:
-			draw_dim(g)
+			g.show_fade(0.5, Graphics.UI_LAYER)
 			g.setColor(1)
 			show_box(g, AbstractPage.images[14], Vector2i(400, 300), [
 					[name, Vector2i(430, 360), HORIZONTAL_ALIGNMENT_LEFT],
@@ -175,20 +142,9 @@ func _show_confirm_box(g, name, price) -> void:
 			text = "Are you sure?"
 		_:
 			return
-	draw_dim(g)
+	g.show_fade(0.5, Graphics.UI_LAYER)
 	g.setColor(1)
 	show_box(g, image, at, [[text, Vector2i(430, 360), HORIZONTAL_ALIGNMENT_LEFT]])
-
-
-## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): the dim behind
-## a confirm box, g.fadeOldSchool(0.5) (the current fade mode's image at
-## alpha .5), or with --legacy=dim off its twin: a Fade node on the UI layer,
-## before the box and its list (Graphics.show_fade).
-static func draw_dim(g) -> void:
-	if Main.is_legacy("dim"):
-		g.fadeOldSchool(0.5)
-	else:
-		g.show_fade(0.5, Graphics.UI_LAYER)
 
 
 ## Bridge (phase 4.2 step B): a box's piece (drawImage at at) and its texts

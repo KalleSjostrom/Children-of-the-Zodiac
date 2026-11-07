@@ -25,18 +25,9 @@ func _init(dir = null) -> void:
 	hand = handDown if dir == Values.DOWN else handRight
 
 
-## Draws the hand on the given graphics if it is not hidden.
-func drawHand(g):
-	if show:
-		if dimmed:
-			g.dim(.3)
-		g.drawImage(hand, pos[X], pos[Y])
-		if dimmed:
-			g.dim(1)
-
-
-## Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): drawHand without
-## the drawing: the dim's colour changes and drawImage's bind
+## Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): drawHand (the
+## hand, dimmed to .3 or not, unless it is hidden) without the drawing: the
+## dim's colour changes and drawImage's bind
 ## (Graphics.skip_image). Returns [image, x, y, tint (the colour it would be
 ## drawn in)], or [] when the hand is hidden.
 func place_hand(g) -> Array:
@@ -66,13 +57,9 @@ func place_hand_image(g) -> Array:
 	return placed
 
 
-func drawHandWithColor(g):
-	if show:
-		g.drawImage(hand, pos[X], pos[Y])
-
-
-## Bridge (phase 4.2 step B): drawHandWithColor without the drawing
-## (place_hand_image without the dim).
+## Bridge (phase 4.2 step B): drawHandWithColor (the hand in the current
+## colour) without the drawing (place_hand_image without the dim). The legacy
+## drawHand and drawHandWithColor are removed (closing phase 4.2, plan 9.2).
 func place_hand_with_color(g) -> Array:
 	if not show:
 		return []

@@ -84,31 +84,20 @@ func draw(g, alpha = null):
 
 ## Bridge (phase 4.2 step B): the digits and the code are a MenuText node
 ## (AbstractPage.show_lines), the hand a MenuBackground node's image
-## (MenuHand.place_hand_image, AbstractPage.show_pieces); --legacy=riddle draws
-## them.
+## (MenuHand.place_hand_image, AbstractPage.show_pieces).
 func drawTopLayer(g):
 	super.drawTopLayer(g)
-	var legacy := Main.is_legacy("riddle")
 	g.setFontSize(36)
 	Graphics.setTextColor(JColor.BLACK)
 	g.startText(fade, -1)
 	var lines := []
 	for j in ys.size():
 		for i in xs.size():
-			if legacy:
-				g.drawMultiString(str(j * 3 + i + 1), xs[i], ys[j])
-			else:
-				lines.append(RiddleGame.multi_line(g, j * 3 + i + 1, xs[i], ys[j]))
+			lines.append(RiddleGame.multi_line(g, j * 3 + i + 1, xs[i], ys[j]))
 	var sb: String = ""
 	for c in choosenCode:
 		sb += c + " "
-	if legacy:
-		g.drawMultiCenteredText(sb, ys[2] + 80)
-	else:
-		lines.append(RiddleGame.multi_centered_line(g, sb, ys[2] + 80))
-		AbstractPage.show_lines(g, lines)
+	lines.append(RiddleGame.multi_centered_line(g, sb, ys[2] + 80))
+	AbstractPage.show_lines(g, lines)
 	g.finishText()
-	if legacy:
-		hand.drawHand(g)
-	else:
-		AbstractPage.show_pieces(g, [hand.place_hand_image(g)])
+	AbstractPage.show_pieces(g, [hand.place_hand_image(g)])

@@ -128,24 +128,12 @@ func checkGameInput():
 		squarePressed()
 
 
-## Draws the menu background strips that have been set to be used.
-func drawMenuBackground(g):
-	AbstractPage.drawMenuBackgroundStatic(g, store, menusUsed)
-
-
 ## Draws the standard things in a building: background, dialog, keeper and
 ## the menu background.
 func drawStandard(g):
 	# Bridge (phase 4.2 step B): the frame's MenuBackground nodes
-	# (show_standard); --legacy=menu_frame keeps the drawing.
-	if not Main.is_legacy("menu_frame"):
-		show_standard(g)
-		return
-	g.drawImage(background, 0, 0)
-	if dialogIsShowing:
-		Dialog.getDialog().draw(g, true, name, dialog[0], dialog[1], false)
-	g.drawCenteredImage(keeper, keeperHeight())
-	drawMenuBackground(g)
+	# (show_standard).
+	show_standard(g)
 
 
 ## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): drawStandard

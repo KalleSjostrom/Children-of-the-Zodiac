@@ -226,11 +226,9 @@ func draw(g, alpha = null):
 ## nodes (AbstractPage.show_lines; the pool's setColor(0, 0, 0, .3) is the GL
 ## colour, which text ignores), the two hands a MenuBackground node's images
 ## (MenuHand.place_hand_image, AbstractPage.show_pieces), the help a HelpLine
-## (AbstractPage.draw_help, --legacy=menu_frame); --legacy=riddle draws the
-## words, the pool and the hands.
+## (AbstractPage.draw_help).
 func drawTopLayer(g):
 	super.drawTopLayer(g)
-	var legacy := Main.is_legacy("riddle")
 	Graphics.setTextColor(JColor.BLACK)
 	g.setColor(0, 0, 0, 1)
 	g.startText()
@@ -238,30 +236,19 @@ func drawTopLayer(g):
 	for i in xs.size():
 		for j in ys.size() - 1:
 			if texts_[i][j] != null:
-				if legacy:
-					texts_[i][j].draw(g)
-				else:
-					texts_[i][j].place(g, lines)
-	if not legacy:
-		AbstractPage.show_lines(g, lines)
+				texts_[i][j].place(g, lines)
+	AbstractPage.show_lines(g, lines)
 	g.finishText()
 	g.startText()
 	if mode_ == SELECT_WORD:
 		g.setColor(0, 0, 0, .3)
-	if legacy:
-		texts_[0][ys.size() - 1].draw(g)
-	else:
-		lines = []
-		texts_[0][ys.size() - 1].place(g, lines)
-		AbstractPage.show_lines(g, lines)
+	lines = []
+	texts_[0][ys.size() - 1].place(g, lines)
+	AbstractPage.show_lines(g, lines)
 	g.finishText()
-	if legacy:
-		hand.drawHand(g)
-		wordHand.drawHand(g)
-	else:
-		var hands := [hand.place_hand_image(g)]
-		hands.append(wordHand.place_hand_image(g))
-		AbstractPage.show_pieces(g, hands)
+	var hands := [hand.place_hand_image(g)]
+	hands.append(wordHand.place_hand_image(g))
+	AbstractPage.show_pieces(g, hands)
 	AbstractPage.draw_help(g, drawHelp)
 
 
@@ -374,12 +361,9 @@ class CesadurRiddleText extends RefCounted:
 		if not letters[cursor].hasLetter():
 			right()
 
-	func draw(g):
-		for l in letters:
-			l.draw(g)
-
-	## Bridge (phase 4.2 step B): draw without the drawing; appends the lines
-	## its letters would draw (RiddleGame.multi_line) to lines.
+	## Bridge (phase 4.2 step B): draw (each letter's) without the drawing;
+	## appends the lines its letters would draw (RiddleGame.multi_line) to
+	## lines.
 	func place(g, lines: Array) -> void:
 		for l in letters:
 			l.place(g, lines)
@@ -405,12 +389,9 @@ class CesadurRiddleText extends RefCounted:
 		func hasLetter():
 			return letter != "" and letter != " "
 
-		func draw(g):
-			g.drawMultiString(letter, x, y)
-			g.drawMultiString("__", x, y + 2)
-
-		## Bridge (phase 4.2 step B): draw without the drawing; appends its two
-		## lines (an empty letter draws nothing and is left out).
+		## Bridge (phase 4.2 step B): draw (drawMultiString of the letter, then
+		## of "__" 2 px under it) without the drawing; appends its two lines (an
+		## empty letter draws nothing and is left out).
 		func place(g, lines: Array) -> void:
 			if letter != "":
 				lines.append(RiddleGame.multi_line(g, letter, x, y))

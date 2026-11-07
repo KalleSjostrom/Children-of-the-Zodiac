@@ -81,60 +81,15 @@ static func releaseTree(node) -> void:
 		node = parent
 
 
-## Draws just the children of this node with default configuration, not this
-## nodes grand children.
-func drawChildren(g):
-	draw(g, false, false, false, false, false)
-
-
-## Draws all children (including grand children) of this node.
-func drawAllChildren(g):
-	draw(g, false, true, false, false, false)
-
-
-## Draws the children of this node with the given configuration.
-## withPrice: the children are drawn with their price next to the text.
-## allChildren: grand children of active children are drawn as well.
-## withNumber: the children are drawn with their number next to the text.
-## down: the extra information (price, equipment) is drawn 25 pixels down.
-## withEquipment: the children are drawn with the name of their equipment.
-func drawChildrenFreely(g, withPrice, allChildren, withNumber, down, withEquipment):
-	draw(g, withPrice, allChildren, withNumber, down, withEquipment)
-
-
-func draw(g, withPrice, allChildren, withNumber, down, withEquipment):
-	if menuCursor >= children.size():
-		previousChild()
-	var child = null
-	for i in range(children.size()):
-		child = children[i]
-		if allChildren and child.isActive():
-			child.drawAllChildren(g)
-		Graphics.setTextColor(enableColor if child.enabled else disableColor)
-		if not str(child.getName()).contains("character"):
-			var y: int = (Ypos + i * distance) + bboffset
-			if bbMinY == -1 or (y >= bbMinY and y <= bbMaxY):
-				if withPrice:
-					drawWithPrice(child, g, y, down)
-				if withNumber:
-					drawWithNumber(child, g, y, withNumber)
-				if not withPrice and not withNumber:
-					g.drawString(child.getName(), Xpos, y)
-				if withEquipment:
-					drawWithEquipment(child, g, y, down)
-		if not child.enabled:
-			Graphics.setTextColor(enableColor)
-	if child != null:
-		hand.drawHand(g)
-		if bbMinY != -1:
-			var h: int = bbMaxY - bbMinY
-			if (children.size() - 1) * distance > h:
-				scrollBar.draw(g, menuCursor, children.size())
-
-
-## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): draw without
-## the drawing, for the MenuList nodes that show the list (show_children_freely):
-## the same state changes in the same order (the cursor's fix-up, which is
+## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): the Java draw
+## (the children as a vertical list with the hand; the legacy drawing, draw,
+## drawChildren, drawAllChildren, drawChildrenFreely and drawWithPrice,
+## drawWithNumber, drawWithEquipment, is removed: closing phase 4.2, plan 9.2)
+## without the drawing, for the MenuList nodes that show the list
+## (show_children_freely). withPrice: each child's price after its name;
+## allChildren: an active child's own list as well; withNumber: each child's
+## number after its name; down: the price or equipment 25 px lower;
+## withEquipment: the name of each child's equipment. The same state changes in the same order (the cursor's fix-up, which is
 ## game state and plays the cursor sound; the text colours; the font sizes of
 ## the prices, numbers and equipment; drawString's setColor(color) after each
 ## line; the hand's dim and bind; the scroll bar's lazy init and
@@ -233,8 +188,8 @@ func _place_with_number(child, g, y, lines: Array) -> void:
 ## given layer (Graphics.UI_LAYER or TRANSITION_LAYER) show the list where it
 ## would have been drawn (Graphics.show_ui), one per part that shows
 ## something: its lines, its hand, its scroll bar, the material of the 2D
-## state. Called where drawChildrenFreely was (show_children for
-## drawChildren, show_all_children for drawAllChildren).
+## state. The Java drawChildrenFreely (show_children for drawChildren,
+## show_all_children for drawAllChildren).
 func show_children_freely(g, withPrice, allChildren, withNumber, down, withEquipment,
 		layer: int) -> void:
 	var parts := place_children(g, withPrice, allChildren, withNumber, down, withEquipment)
@@ -253,7 +208,8 @@ func show_children_freely(g, withPrice, allChildren, withNumber, down, withEquip
 		view.show_list(part.lines, hand_view, part.bar, mat)
 
 
-## drawChildren without the drawing (show_children_freely).
+## drawChildren without the drawing (show_children_freely): the plain lists
+## (the stores' and the pages', the developer Cheater's).
 func show_children(g, layer: int) -> void:
 	show_children_freely(g, false, false, false, false, false, layer)
 
@@ -262,42 +218,6 @@ func show_children(g, layer: int) -> void:
 ## lists and the game pad lost overlay's (on Transition), the menu pages'.
 func show_all_children(g, layer: int) -> void:
 	show_children_freely(g, false, true, false, false, false, layer)
-
-
-## Draws the given child at the given y position with the price stored in
-## the child (right aligned, a bit further down if down is true).
-func drawWithPrice(child, g, y, down):
-	g.drawString(child.getName(), Xpos, y)
-	if child.getPrice() > 0:
-		g.setFontSize(20)
-		var p: String = str(child.getPrice()) + " gp"
-		g.drawStringRightWithReg(p, y + (25 if down else 0))
-		g.setFontSize(MenuValues.MENU_FONT_SIZE)
-
-
-## Draws the name of the equipment stored in the given child, right aligned,
-## with a smaller font (a bit further down if down is true).
-func drawWithEquipment(child, g, y, down):
-	var ae = child.getEquipment()
-	if ae != null:
-		var n: String = ae.getName()
-		g.setFontSize(20)
-		g.drawStringRightWithReg(n, y + (25 if down else 0))
-		g.setFontSize(MenuValues.MENU_FONT_SIZE)
-
-
-## Draws the given child at the given y position with the number stored in
-## the child.
-func drawWithNumber(child, g, y, withNumber):
-	g.drawString(child.getName(), Xpos, y)
-	if child.number > 0:
-		var nr: String = ""
-		if child.number > 1:
-			nr = "(" + str(child.number) + ")"
-		g.setFontSize(20)
-		var x: int = Graphics.calcAlignRight(nr, 980)
-		g.drawString(nr, x, y)
-		g.setFontSize(MenuValues.MENU_FONT_SIZE)
 
 
 ## Switches the active node from the given node activeNode to the node n.

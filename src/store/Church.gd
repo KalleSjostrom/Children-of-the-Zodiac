@@ -204,9 +204,6 @@ func crossPressedInNormalMode():
 			if levelTutorial.increment():
 				mode_ = LEVEL_TUTORIAL
 				levelTutorial.setActive(true)
-		elif choice == "Resurrect":
-			activeNode = n
-			initResurrectMenu()
 		elif choice == "Bless":
 			blessTutorial = Tutorial.new("churchbless", false)
 			if blessTutorial.increment():
@@ -309,94 +306,42 @@ func initSaveMenu():
 	makeNewDialog("Which slot do you wish to use?", "")
 
 
-## Creates the resurrect menu. It changes the default dialog.
-func initResurrectMenu():
-	if fillResurrect():
-		makeNewDialog("Who do you wish do resurrect?", "")
-	else:
-		makeNewDialog("There are no partymembers in need of resurrection.", "")
-
-
 ## Draws the church.
 ##
 ## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): each part is
-## shown by its node where it was drawn, or drawn with its --legacy flag (the
-## pieces and the info lines: menu_frame; the bless page's costs, bars,
-## markers, help text and total: bless, _show_bless; the lists:
-## AbstractPage.draw_list; the dates: menu_text; the help line and the title:
-## AbstractPage.draw_help, draw_title; the tutorials are phase 3's nodes).
+## shown by its node where it was drawn (the pieces: AbstractPage.show_pieces;
+## the bless page's costs, bars, markers, help text and total: _show_bless;
+## the lists: MenuNode.show_all_children, show_children; the dates:
+## SaveSlots.show_dates_under; the info lines, the help line and the title:
+## StartPage.draw_info, AbstractPage.draw_help, draw_title; the tutorials are
+## phase 3's nodes).
 func draw3D(g3D):
 	var g = g3D
 	if blessMode != BLESS_NOT_ACTIVE and mode_ != BLESS_TUTORIAL:
-		var frame: bool = Main.is_legacy("menu_frame")
-		if frame:
-			AbstractPage.drawMenuBackgroundStatic(g, 6)
-			AbstractPage.drawMenuBackgroundStatic(g, 5)
-		else:
-			var pieces := AbstractPage.place_menu_background_static(g, 6)
-			pieces.append_array(AbstractPage.place_menu_background_static(g, 5))
-			AbstractPage.show_pieces(g, pieces)
+		var pieces := AbstractPage.place_menu_background_static(g, 6)
+		pieces.append_array(AbstractPage.place_menu_background_static(g, 5))
+		AbstractPage.show_pieces(g, pieces)
 		var barDist: int = -20
 		var barX: int = 180
 		var costX: int = 560
 		var active: int = activeNode.getMenuCursor()
 		var cs = Load.getCharacters()
-		if not Main.is_legacy("bless"):
-			_show_bless(g, cs, active, barDist, barX, costX)
-		else:
-			g.drawStringSetSize("Cost", costX, BLESS_NAME_Y - 40, 30)
-			totalCost = 0
-			for i in range(cs.size()):
-				var c = cs[i]
-				var pair = percents.get(c.getName())
-				var y: int = BLESS_NAME_Y + i * BLESS_NAME_DISTANCE
-				g.drawStringSetSize(pair.getCost(), costX, y, 26)
-				totalCost += pair.cost
-				LevelUpBar.drawStatic(g, barX, y + barDist, pair.getLow(), pair.getHigh(), 1.7)
-				if i == active:
-					if blessMode == BLESS_MODE_ANIMATE:
-						handAnim.setYpos(y + barDist - 30)
-						handAnim.drawHand(g)
-					else:
-						handLow.setXpos(barX - 28 + pair.getLowHand())
-						handLow.setYpos(y + barDist - 30)
-						drawHand(g, handLow, BLUE)
-
-						handHigh.setXpos(barX - 28 + pair.getHighHand())
-						handHigh.setYpos(y + barDist - 30)
-
-						drawHand(g, handHigh, GREEN)
-						g.setColor(1)
-			text.drawTopLayer(g)
-
-			var ty: int = BLESS_NAME_Y + (cs.size() + 1) * BLESS_NAME_DISTANCE
-			g.drawString("Total cost: ", costX - 120, ty)
-			g.drawString(str(totalCost) + " gp", costX, ty)
+		_show_bless(g, cs, active, barDist, barX, costX)
 		g.setFontSize(26)
-		AbstractPage.draw_list(g, activeNode, false, true, false, false, false)
+		activeNode.show_all_children(g, Graphics.UI_LAYER)
 		g.setFontSize(MenuValues.MENU_FONT_SIZE)
 
-		if frame:
-			AbstractPage.drawMenuBackgroundStatic(g, 3)
-			var x: int = MenuValues.MENU_TEXT_X
-			g.drawString("Gold: " + str(Load.getPartyItems().getGold()) + " gp", x, 648)
-			g.drawString("Steps: " + str(Load.getPartyItems().getSteps()), x, 689)
-			g.drawString("Time: " + str(Load.getTime().getHours()) + ":" + str(Load.getTime().getMin()), x, 730)
-		else:
-			AbstractPage.show_pieces(g, AbstractPage.place_menu_background_static(g, 3))
-			# The lines of StartPage.drawInfo, which this copies.
-			StartPage.draw_info(g)
+		AbstractPage.show_pieces(g, AbstractPage.place_menu_background_static(g, 3))
+		# The lines of StartPage.drawInfo, which this copies.
+		StartPage.draw_info(g)
 		AbstractPage.draw_help(g, drawHelp)
 	else:
-		AbstractPage.draw_list(g, activeNode, false, true, false, false, false)
+		activeNode.show_all_children(g, Graphics.UI_LAYER)
 		if activeNode.getName() == "Save":
-			if Main.is_legacy("menu_text"):
-				SaveSlots.draw_dates_under(g, activeNode, MenuValues.MENU_FONT_SIZE)
-			else:
-				SaveSlots.show_dates_under(g, activeNode, MenuValues.MENU_FONT_SIZE)
+			SaveSlots.show_dates_under(g, activeNode, MenuValues.MENU_FONT_SIZE)
 	var n = activeNode.getParent()
 	if n != null and activeNode.getName() == "Bless":
-		AbstractPage.draw_list(g, n, false, false, false, false, false)
+		n.show_children(g, Graphics.UI_LAYER)
 	var title = activeNode.getName()
 	AbstractPage.draw_title(g, title)
 	if levelTutorial != null:
@@ -475,16 +420,6 @@ func _place_hand(g, hand, v) -> Array:
 	return [white, hand.place_hand_with_color(g)]
 
 
-func drawHand(g, hand, v):
-	if hand.isDimmed():
-		hand.drawHand(g)
-	else:
-		g.setColor(1)
-		hand.drawHandWithColor(g)
-		g.setColor(v, 0.3)
-		hand.drawHandWithColor(g)
-
-
 func drawHelp(g):
 	var helpx: int = 90
 	var step: int = 195
@@ -529,21 +464,6 @@ func fillSave():
 		n.insertChild("Back")
 		n.setDistance(SaveSlots.MENU_DISTANCE)
 		n.setPositions(MenuValues.MENU_TEXT_X, MenuValues.MENU_TEXT_Y)
-
-
-## Fills the resurrect menu. Returns true if there is any character in need
-## of resurrection.
-func fillResurrect():
-	var n = activeNode
-	n.removeChildren(true)
-	for i in range(Load.getCharacters().size()):
-		var c = Load.getCharacters()[i]
-		if not c.isAlive():
-			n.insertChild(c.getName()).setPrice(200)
-	n.insertChild("Back")
-	n.setDistance(MenuValues.DISTANCE)
-	n.setPositions(MenuValues.MENU_TEXT_X, MenuValues.MENU_TEXT_Y)
-	return n.getSize() - 1 != 0
 
 
 func fillBless():

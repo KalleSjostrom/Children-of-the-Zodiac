@@ -16,7 +16,7 @@ const AUTOSAVE := "Autosave"
 const MONTHS: PackedStringArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
 	"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 ## Distance between the entries of a menu slot list, with room for the date
-## under each name (draw_dates_under).
+## under each name (show_dates_under).
 const MENU_DISTANCE := 72
 const DATE_FONT_SIZE := 20
 ## The node that shows the dates (show_dates_beside).
@@ -75,44 +75,26 @@ static func note_saved(slot: String) -> void:
 		_saved_game_ms[slot] = J.gameClockMs
 
 
-## Draws the date of each slot of a menu list under its name (the list's
-## distance should be MENU_DISTANCE), then sets the font size back to
-## font_size. Entries that are not slots ("Back") get nothing.
-static func draw_dates_under(g: Graphics, node: MenuNode, font_size: int) -> void:
-	_draw_dates(g, node, Vector2i(14, 30))
-	g.setFontSize(font_size)
-
-
-## Draws the date of each slot of a list to the right of its name, at x,
-## then sets the font size back to font_size.
-static func draw_dates_beside(g: Graphics, node: MenuNode, x: int, font_size: int) -> void:
-	_draw_dates(g, node, Vector2i(x - node.Xpos, 0))
-	g.setFontSize(font_size)
-
-
-## draw_dates_beside without the drawing (phase 4.2 step B,
-## docs/ARCHITECTURE.md section 14): the same state changes (the font sizes,
-## drawString's setColor(color)), and the frame's next SlotDates node on the
-## UI layer shows the dates where they would have been drawn (Graphics.show_ui).
+## The date of each slot of a list to the right of its name, at x, then the
+## font size set back to font_size (phase 4.2 step B, docs/ARCHITECTURE.md
+## section 14): the drawing's state changes (the font sizes, drawString's
+## setColor(color)), and the frame's next SlotDates node on the UI layer shows
+## the dates where they were drawn (Graphics.show_ui).
 static func show_dates_beside(g: Graphics, node: MenuNode, x: int, font_size: int) -> void:
 	_show_dates(g, node, Vector2i(x - node.Xpos, 0))
 	g.setFontSize(font_size)
 
 
-## draw_dates_under without the drawing (phase 4.2 step B,
-## docs/ARCHITECTURE.md section 14): the same state changes, and the frame's
-## next SlotDates node on the UI layer shows the dates (the menu's Save list).
+## The date of each slot of a menu list under its name (the list's distance
+## should be MENU_DISTANCE), then the font size set back to font_size;
+## entries that are not slots ("Back") get nothing (phase 4.2 step B,
+## docs/ARCHITECTURE.md section 14): the drawing's state changes, and the
+## frame's next SlotDates node on the UI layer shows the dates (the menu's
+## Save list, the Church's). The legacy drawing (draw_dates_under,
+## draw_dates_beside) is removed (closing phase 4.2, plan 9.2).
 static func show_dates_under(g: Graphics, node: MenuNode, font_size: int) -> void:
 	_show_dates(g, node, Vector2i(14, 30))
 	g.setFontSize(font_size)
-
-
-static func _draw_dates(g: Graphics, node: MenuNode, offset: Vector2i) -> void:
-	g.setFontSize(DATE_FONT_SIZE)
-	for i in range(node.getSize()):
-		var slot: String = node.children[i].getName()
-		if slot == AUTOSAVE or MANUAL.has(slot):
-			g.drawString(saved_at(slot), node.Xpos + offset.x, node.Ypos + i * node.distance + offset.y)
 
 
 static func _show_dates(g: Graphics, node: MenuNode, offset: Vector2i) -> void:

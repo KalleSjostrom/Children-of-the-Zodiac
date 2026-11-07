@@ -670,3 +670,8 @@ riddle_rubics19_solved   riddle_rubics19_solved   --load=Start --start="Silent R
 riddle_hate_code         riddle_hate_code         --load=Start --start="Dorma's Forest--Forest of Hate-mark0" --start-node=171:0 --no-encounters
 riddle_cesadur_word      riddle_cesadur_word      --load=Start --start="Mt. Cesadur--Basement-mark0" --start-node=169:1 --no-encounters
 riddle_paused            riddle_paused            --load=Start --start="Silent Ruin--The Great Ruins-mark0" --start-node=72:3 --no-encounters
+# Closing phase 4.2 (docs/phase4_2_close_prompt.md, plan 9.2): the developer
+# Cheater's menu (the console's "cheater"), which the store cases pass
+# through without a shot: its root, Buildings, the card stores, Villages,
+# Stories and a chapter, the cursor moved and wrapped, "Paused" over it.
+cheater_menu             cheater_menu             --load="Slot 1" --start=Alares

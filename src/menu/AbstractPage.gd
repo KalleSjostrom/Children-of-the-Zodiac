@@ -6,9 +6,9 @@ extends SubGameMode
 ## implement draw3D().
 ##
 ## Port notes:
-##  - The static drawMenuBackground(g, page|index[, used]) overloads are
-##    drawMenuBackgroundStatic(g, page, used = null) (an instance method
-##    drawMenuBackground(g) exists).
+##  - The static drawMenuBackground(g, page|index[, used]) overloads became
+##    place_menu_background_static(g, page, used = null) (phase 4.2's bridge;
+##    the drawing itself is removed: closing phase 4.2, plan 9.2).
 ##  - BUTTON_ICONS and xoffset depend on the input managers, which do not
 ##    exist yet when this script is loaded. They are therefore computed lazily
 ##    (on first access, as the Java static initializer ran on first use of the
@@ -22,7 +22,6 @@ const MENU_TEXT_VIEW := "res://scenes/ui/MenuText.tscn"
 
 static var EQUIP_PAGE: Array = [1, 7, 3, 5, 6]
 static var START_PAGE: Array = [0, 1, 2, 3, 10, 11, 12]
-static var STATUS_PAGE: Array = [1, 2, 3, 5, 6]
 static var DECK_PAGE: Array = [1, 8, 9]
 static var BESTIARY_PAGE: Array = [1, 2, 3, 4]
 
@@ -210,29 +209,6 @@ static func createPSMap():
 	return map
 
 
-## Draws the menu background (the pieces of this page's layout).
-func drawMenuBackground(g):
-	drawMenuBackgroundStatic(g, page)
-
-
-## Java overloads drawMenuBackground(g, int index),
-## drawMenuBackground(g, int[] page) and
-## drawMenuBackground(g, int[] page, boolean[] used).
-static func drawMenuBackgroundStatic(g, p_page, used = null):
-	if p_page is int:
-		var index: int = p_page
-		g.drawImage(images[index], pos[index][Values.X], pos[index][Values.Y])
-	elif used == null:
-		for i in range(p_page.size()):
-			var index: int = p_page[i]
-			g.drawImage(images[index], pos[index][Values.X], pos[index][Values.Y])
-	else:
-		for i in range(p_page.size()):
-			if used[i]:
-				var index: int = p_page[i]
-				g.drawImage(images[index], pos[index][Values.X], pos[index][Values.Y])
-
-
 ## Gets the position of the hand used in the menu.
 func getHandPos():
 	return activeNode.getHandPos()
@@ -243,8 +219,8 @@ static func getImages():
 	return images
 
 
-## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14):
-## drawMenuBackgroundStatic without the drawing: the pieces' binds, and the
+## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): the menu
+## background's pieces without the drawing: the pieces' binds, and the
 ## pieces as Graphics.place_image places them, in drawing order (for a
 ## MenuBackground node: the pages' through show_standard; the stores' with
 ## their mask).
@@ -271,12 +247,8 @@ func drawStandard(g3D):
 	g3D.setFontSize(MenuValues.MENU_FONT_SIZE)
 	Graphics.setTextColor(JColor.BLACK)
 	# Bridge (phase 4.2 step B): the frame's MenuBackground node
-	# (show_standard); --legacy=menu_frame keeps the drawing.
-	if not Main.is_legacy("menu_frame"):
-		show_standard(g3D)
-		return
-	g3D.drawImage(background, 0, 0)
-	drawMenuBackground(g3D)
+	# (show_standard).
+	show_standard(g3D)
 
 
 ## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): the drawing of
@@ -306,11 +278,8 @@ static func show_pieces(g, pieces: Array) -> void:
 ## Bridge (phase 4.2 step B): a page's title line, g.drawString(title,
 ## MenuValues.MENU_TEXT_X, MenuValues.MENU_TITLE_Y), without the drawing
 ## (drawString's setColor(color)); the frame's next MenuTitle node on the UI
-## layer shows it there (Graphics.show_ui). --legacy=menu_frame draws it.
+## layer shows it there (Graphics.show_ui).
 static func draw_title(g, title) -> void:
-	if Main.is_legacy("menu_frame"):
-		g.drawString(title, MenuValues.MENU_TEXT_X, MenuValues.MENU_TITLE_Y)
-		return
 	if title == null:
 		return
 	var color: Color = Graphics.text_color(1.0)
@@ -320,27 +289,11 @@ static func draw_title(g, title) -> void:
 		view.show_title(str(title), g.getFontSize(), color, Graphics.font_bold(), g.canvas_material())
 
 
-## Bridge (phase 4.2 step B): node.drawChildrenFreely(g, …) at a page's call
-## site, or its twin (MenuNode.show_children_freely: MenuList nodes on the
-## UI layer); --legacy=menu_list draws it. drawChildren is (g, node, false,
-## false, false, false, false), drawAllChildren (g, node, false, true, false,
-## false, false).
-static func draw_list(g, node, withPrice, allChildren, withNumber, down, withEquipment) -> void:
-	if Main.is_legacy("menu_list"):
-		node.drawChildrenFreely(g, withPrice, allChildren, withNumber, down, withEquipment)
-	else:
-		node.show_children_freely(g, withPrice, allChildren, withNumber, down, withEquipment,
-				Graphics.UI_LAYER)
-
-
-## Bridge (phase 4.2 step B): a page's drawHelp(g), or its twin: drawHelp
-## run against a HelpLineCapture (the same state changes), and the frame's
-## next HelpLine node shows it (--legacy=menu_frame draws it). help is the
-## page's drawHelp (or drawTopHelp, drawDeckHelp) as a Callable taking g.
+## Bridge (phase 4.2 step B): a page's drawHelp(g) without the drawing: run
+## against a HelpLineCapture (the same state changes), and the frame's next
+## HelpLine node shows it. help is the page's drawHelp (or drawTopHelp,
+## drawDeckHelp, a riddle's drawHelp) as a Callable taking g.
 static func draw_help(g, help: Callable) -> void:
-	if Main.is_legacy("menu_frame"):
-		help.call(g)
-		return
 	var capture := HelpLineCapture.new(g)
 	help.call(capture)
 	capture.show()

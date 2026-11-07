@@ -8,8 +8,6 @@ const LEFT_HAND = 1
 const ARMORS = 2
 ## Bridge (phase 4.2 step B): the node of show_status.
 const EQUIP_STATUS_VIEW := "res://scenes/ui/EquipStatus.tscn"
-static var x = MenuValues.STATUS_X
-static var y = MenuValues.STATUS_Y
 var c = null
 var mode: int = 0
 var characterIndex: int = 0
@@ -113,8 +111,8 @@ func initEquipPage(charIndex):
 
 
 ## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): each part is
-## shown by its node where it was drawn, or drawn with its --legacy flag
-## (show_status, show_equip, AbstractPage.draw_list, draw_title,
+## shown by its node where it was drawn (show_status, show_equip,
+## MenuNode.show_children_freely, AbstractPage.draw_title,
 ## StartPage.draw_info, AbstractPage.draw_help).
 func draw3D(g):
 	super.drawStandard(g)
@@ -122,60 +120,17 @@ func draw3D(g):
 	var n = activeNode.getParent()
 	var index: int = -1 if n == null else n.getMenuCursor()
 
-	if Main.is_legacy("status"):
-		drawStatus(g, c, ae, index)
-		drawEquip(g, ae)
-	else:
-		show_status(g, c, ae, index)
-		show_equip(g, ae)
+	show_status(g, c, ae, index)
+	show_equip(g, ae)
 	var p = activeNode.getParent()
 	if p != null:
-		AbstractPage.draw_list(g, p, false, false, false, true, true)
-		AbstractPage.draw_list(g, activeNode, false, false, true, false, false)
+		p.show_children_freely(g, false, false, false, true, true, Graphics.UI_LAYER)
+		activeNode.show_children_freely(g, false, false, true, false, false, Graphics.UI_LAYER)
 	else:
-		AbstractPage.draw_list(g, activeNode, false, false, false, true, true)
+		activeNode.show_children_freely(g, false, false, false, true, true, Graphics.UI_LAYER)
 	AbstractPage.draw_title(g, activeNode.getName().replace(":", ""))
 	StartPage.draw_info(g)
 	AbstractPage.draw_help(g, drawHelp)
-
-
-static func drawStatus(g, p_c, ae, p_mode):
-	if p_c != null:
-		var equipped = null
-		if p_mode == RIGHT_HAND:
-			equipped = p_c.getWeapon()
-		elif p_mode == LEFT_HAND:
-			equipped = p_c.getLeftHand()
-		elif p_mode == ARMORS:
-			equipped = p_c.getArmor()
-		var change = AbstractEquipment.getChange(p_c, ae, equipped)
-
-		Graphics.setTextColor(JColor.BLACK)
-		if ae == equipped:
-			ae = null
-		StatusPage.draw(g, p_c, ae)
-
-		if p_mode != -1:
-			for i in range(2):
-				for j in range(4):
-					var nr: int = i * 4 + j
-					var index: int = Values.ATTRIBUTE_MAP[nr]
-					drawChange(p_c.get_(index), x[j], y[i + 5], change[index], g)
-
-
-static func drawChange(line, px, py, change, g):
-	if change == 0:
-		return
-	elif change < 0:
-		var cc: int = change * -1
-		g.drawString(str(line) + " -" + str(cc), px, py)
-		Graphics.setTextColor(JColor.RED)
-		g.drawString(str(line) + " -" + str(cc), px - 1, py - 1)
-	elif change > 0:
-		g.drawString(str(line) + " +" + str(change), px, py)
-		Graphics.setTextColor(JColor.GREEN)
-		g.drawString(str(line) + " +" + str(change), px - 1, py - 1)
-	Graphics.setTextColor(JColor.BLACK)
 
 
 ## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): drawStatus
@@ -236,11 +191,6 @@ static func _place_change(line, attribute: int, change, g, changes: Array) -> vo
 	changes.append([attribute, text, -1, Graphics.text_color(1.0)])
 	g.setColor(g.color)
 	Graphics.setTextColor(JColor.BLACK)
-
-
-static func drawEquip(g, ae):
-	if ae != null:
-		StatusPage.drawEquip(g, ae, 324)
 
 
 ## Bridge (phase 4.2 step B): drawEquip without the drawing

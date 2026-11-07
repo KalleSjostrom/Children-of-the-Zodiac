@@ -90,12 +90,8 @@ func testDraw(g: Graphics) -> void:
 				gameActions[i].changeBehaviorBack()
 			firstTimeIn = true
 		# Bridge (phase 4.2 step B): the menu is a MenuList node after the
-		# overlay's (MenuNode.show_all_children); --legacy=menu_list keeps its
-		# drawing.
-		if Main.is_legacy("menu_list"):
-			activeNode.drawAllChildren(g)
-		else:
-			activeNode.show_all_children(g, Graphics.TRANSITION_LAYER)
+		# overlay's (MenuNode.show_all_children).
+		activeNode.show_all_children(g, Graphics.TRANSITION_LAYER)
 	elif paused:
 		# Bridge (phase 3 step B): the Transition layer's Paused node
 		# (_show_paused).

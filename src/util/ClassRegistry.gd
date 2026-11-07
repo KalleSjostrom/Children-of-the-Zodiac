@@ -242,7 +242,6 @@ const JAVA_TO_PATH := {
 	"landscape.airship.AirLandscapeLoader": "res://src/landscape/airship/AirLandscapeLoader.gd",
 	"landscape.airship.AirShip": "res://src/landscape/airship/AirShip.gd",
 	"menu.AbstractPage": "res://src/menu/AbstractPage.gd",
-	"menu.BestiaryPage": "res://src/menu/BestiaryPage.gd",
 	"menu.DeckPage": "res://src/menu/DeckPage.gd",
 	"menu.EquipPage": "res://src/menu/EquipPage.gd",
 	"menu.Help": "res://src/menu/Help.gd",

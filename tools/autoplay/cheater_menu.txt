@@ -1,0 +1,73 @@
+# --load="Slot 1" --start=Alares: the developer Cheater's menu (the debug
+# console's "cheater"), for closing phase 4.2 (plan 9.2): its list moves from
+# the legacy MenuNode.drawChildren to a MenuList node. The root (size 26, red,
+# at 40, 40), the cursor moved and wrapped, Buildings and the card stores (17
+# entries), "Paused" over it, Villages (20), Stories and a chapter, CIRCLE back
+# to the root and out to the village.
+wait 3100
+console cheater
+wait 1200
+shot c_root
+log in_cheater
+tap DOWN
+wait 300
+shot c_root_down
+tap UP
+wait 300
+tap UP
+wait 300
+shot c_root_wrapped
+tap CROSS
+wait 400
+shot c_buildings
+tap DOWN
+wait 300
+tap CROSS
+wait 400
+shot c_card_stores
+tap UP
+wait 300
+shot c_card_stores_last
+tap CIRCLE
+wait 400
+tap CIRCLE
+wait 400
+shot c_root_back
+tap START
+wait 400
+shot c_paused
+tap START
+wait 400
+tap DOWN
+wait 300
+tap CROSS
+wait 400
+shot c_villages
+tap CIRCLE
+wait 400
+tap DOWN
+wait 300
+tap DOWN
+wait 300
+tap DOWN
+wait 300
+tap DOWN
+wait 300
+tap CROSS
+wait 400
+shot c_stories
+tap DOWN
+wait 300
+tap CROSS
+wait 400
+shot c_chapter
+tap CIRCLE
+wait 400
+tap CIRCLE
+wait 400
+shot c_root_stories
+tap CIRCLE
+wait 2000
+shot c_back
+log back
+quit

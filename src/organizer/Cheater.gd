@@ -628,12 +628,15 @@ func fillInnStore(n):
 
 
 ## Draws the cheat mode: all the places that the player can go to.
+##
+## Bridge (closing phase 4.2, plan 9.2): the list is a MenuList node on the UI
+## layer (MenuNode.show_children, the twin of the drawChildren it drew).
 func draw(g, alpha = null):
 	g.setColor(1)
 	g.loadIdentity()
 	Graphics.setTextColor(JColor.RED)
 	g.setFontSize(26)
-	activeNode.drawChildren(g)
+	activeNode.show_children(g, Graphics.UI_LAYER)
 
 
 ## Returns the mode chosen by the player (NO_MODE_IS_SELECTED until then).

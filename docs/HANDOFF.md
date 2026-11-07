@@ -1,4 +1,4 @@
-# Handoff: state of the Godot port (2026-11-07, after steps 1–3, modernization phase 0, phases 1, 2, 3 and 4.1 done and closed, the particles phases P and P2, phase 4.2 through step B (its pilot, the menu, the stores and the mini-games), the character sprite sheets)
+# Handoff: state of the Godot port (2026-11-07, after steps 1–3, modernization phase 0, phases 1, 2, 3, 4.1 and 4.2 done and closed, the particles phases P and P2, the character sprite sheets)
 
 Conventions: legacy (ported) code follows `docs/PORTING.md`; new code
 (scenes, resources, tools, bridge) follows `docs/ARCHITECTURE.md`. The
@@ -7,10 +7,11 @@ modernization plan is `docs/MODERNIZATION_PLAN.md`.
 ## Done
 
 The entries below are in the order the work was done. The `--legacy=`
-flags they name for phases 1 to 4.1 (and the particles phases' `particles`
+flags they name for phases 1 to 4.2 (and the particles phases' `particles`
 and `dungeon_particles`), the converters and data checks, the `.vil` and
 `.map` files and the bridge test are removed since those phases closed
-(last entry of the modernization, "Closing phases 1 to 4.1").
+(the modernization's entries "Closing phases 1 to 4.1" and "Closing phase
+4.2"); only the battle effects' `battle_effects` and `effect_waits` are left.
 
 **Source decision.** The downloaded `Children-of-the-Zodiac-master` is an
 unfinished refactor (its last commits say "THIS DOESN'T COMPILE"). The port
@@ -70,7 +71,8 @@ section 5; conventions and workflow in `docs/ARCHITECTURE.md`):
   current mode's scene under `World` while it is not loading, removes it
   (without freeing) when the mode is suspended or left, and `GameMode` frees
   it in `NOTIFICATION_PREDELETE`. `--legacy=<a,b>` + `Main.is_legacy()` are
-  in place for later phases (unused).
+  in place for later phases (since phase 4.2's closing only the battle
+  effects' flags are left).
 - Bridge test (deleted when phase 4.1 closed, 2026-11-06): `--bridge-test`
   + `tools/autoplay/bridge_test.txt` (parity case `bridge_test`) showed
   `tools/bridge_test/BridgeTest.tscn` instead of the world map's background
@@ -502,6 +504,36 @@ section 14, "The riddles"; the procedure in `docs/CONVERTING_UI.md` section
 - Prepared (plan 9.2, "Closing phase 4.2"): the closing of phase 4.2
   (`docs/phase4_2_close_prompt.md`).
 
+**Closing phase 4.2 (2026-11-07): done** (plan 9.2, "Closing phase 4.2";
+`docs/phase4_2_close_prompt.md`):
+- Deleted (about 1,530 lines): the legacy drawing of the title, the game
+  over, the menu, the stores and the riddles, their eleven flags (`title`,
+  `game_over`, `menu_list`, `menu_frame`, `menu_text`, `status`, `deck`,
+  `automap`, `dim`, `bless`, `riddle`), the wrappers that only chose a path
+  (`AbstractPage.draw_list`, `StatusPage.draw_top`, `AbstractStore.draw_dim`,
+  `RiddleGame.draw_dim`, `DeckPage._draw_deck`, `_draw_bar`: their call
+  sites call the twins), the helpers only those paths reached (`MenuNode.draw`
+  and its variants, `MenuHand.drawHand`, `MenuScrollBar.draw`, `Deck.drawDeck`,
+  `AbstractCard.drawGrayCard`, `LabyrinthMap.draw`, `LevelUpBar.drawStatic`,
+  `HelpText`'s and `Row`'s draws, `SaveSlots.draw_dates_*` …) and dead code:
+  the unreachable status and bestiary pages (`BestiaryPage` deleted;
+  `StatusPage` keeps only its twins), `CardStore.drawMergedCard`, the
+  Church's "Resurrect" branch. The git history up to 9a9c2341 has them.
+- The developer Cheater (the console's `cheater`) draws its list through
+  `MenuNode.show_children` (a `MenuList`); a new case, `cheater_menu` (13
+  shots), was recorded before the switch.
+- Kept for the battles (phase 4.4): `Graphics.drawWithShadow`,
+  `drawValueWithShadow`, `fadeOldSchool`, `fadeOldSchoolColorWhite`,
+  `AbstractCard.drawCard`, `LevelUpBar.draw`; `Graphics`' API stays whole
+  until phase 5. Left flags: `battle_effects`, `effect_waits`.
+- Parity (tolerance 0; 428 cases, 8,096 shots): the baseline `c42base`
+  equals `r3node` on its 427 cases; `c42after` vs. `c42base`: every shot,
+  log and per-case error and leak line identical; the eleven removed names
+  on 18 cases behave as no flag. `tools/check.sh`: 496 scripts, 0 failed.
+  Only `c42after` is kept in `tools/parity/out`.
+- Prepared (plan 9.3, 9.4): phases 4.3 and 4.4; recommended next: 4.4's
+  pilot, the battle's 2D top layer (`docs/phase4_4_prompt.md`).
+
 **Character sprite sheets (2026-11-03): plans A and B done**
 (`docs/VILLAGER_SPRITES_PLAN.md`, "As built"; conventions in
 `docs/ARCHITECTURE.md` section 9, "Character frames and sheets"):
@@ -573,12 +605,14 @@ decision 5 decided in plan section 13):
 ## Plan (what is left)
 
 0. **Modernization:** phases 1 to 4.1 are closed (2026-11-06), phase 4.2
-   is done through step B (2026-11-07: the mini-games were its last part).
-   Next: closing phase 4.2 (plan 9.2, "Closing phase 4.2": its eleven flags,
-   their legacy branches and the helpers only they reach;
-   `docs/phase4_2_close_prompt.md`), then phase 4.3 or 4.4 (battles still
-   draw overlays of their own). The minimap stays the 3D bridge's until the
-   battles leave the bridge (plan 8.4). Record goldens before each change.
+   too (2026-11-07). Next (plan 9.4's recommendation): phase 4.4's pilot,
+   the battle's 2D top layer (the result and spoils screens, the level-up
+   bars, an enemy's red flash, the legend's icons;
+   `docs/phase4_4_prompt.md`), then the battle's 3D; phase 4.3 (input,
+   audio, saves, the `Game` autoload; plan 9.3) can come at any time and
+   first if step C of the converted modes comes first. The minimap stays
+   the 3D bridge's until the battles leave the bridge (plan 8.4). Record
+   goldens before each change.
 
 1. **Performance:** since P2 the labyrinths with rain or snow run at 60 FPS
    (Forest Path was 35, Ice Cavern--Frozen Field 50; plan 6.12), and since
@@ -616,7 +650,7 @@ decision 5 decided in plan section 13):
   only the shipped saves.
 - Parity: `tools/parity/parity.sh record <set>` / `compare <a> <b>` /
   `ab "<args a>" "<args b>" [case…]`, see `docs/ARCHITECTURE.md` section 7.
-  Runs are windowed (screenshots need a renderer); all 427 cases take
+  Runs are windowed (screenshots need a renderer); all 428 cases take
   about 23 minutes with `--jobs=4` (with about 6 GB free at idle; 19 with
   `--jobs=5` for 417 cases, 14-15 with `--jobs=8` when 10 GB are
   free at idle; check first: with 7 GB free, 8 jobs crashed runs) on 12
@@ -634,7 +668,9 @@ decision 5 decided in plan section 13):
 - The developer console (§ / ` / F1 in debug builds, README) jumps to any
   place (`goto`). It replaces the Cheater (formerly SELECT + DOWN, i.e.
   Space + Down), whose menu of places, stories and buildings its `cheater`
-  command still opens; `tools/autoplay/stores.txt` shows how to drive it.
+  command still opens; `tools/autoplay/stores.txt` shows how to drive it,
+  and the case `cheater_menu` shoots it (its list is a `MenuList` node since
+  phase 4.2's closing).
 - Time units: `update(elapsedTime)` in **ms**; `draw(g)` per frame at 60 FPS.
 - The original really ran at ≈30 FPS, not `Values.FPS = 60`: its
   `organizer/FPSAnimator` sleeps a fixed 23 ms after every vsynced frame.

@@ -20,12 +20,9 @@ func _init(x = null, y = null, p_image = null) -> void:
 	image = p_image
 
 
-func draw(g, xs, ys):
-	g.drawImage(image, xs[currentX], ys[currentY])
-
-
-## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): draw without
-## the drawing (Graphics.place_image: the bind; [texture, rect, tint], [] for
+## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): draw
+## (drawImage(image, xs[currentX], ys[currentY])) without the drawing
+## (Graphics.place_image: the bind; [texture, rect, tint], [] for
 ## the free slot of a Puzzle, which has no image).
 func place(g, xs, ys) -> Array:
 	return g.place_image(image, xs[currentX], ys[currentY])

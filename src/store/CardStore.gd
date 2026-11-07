@@ -253,13 +253,12 @@ func fillPositiveConfirm(n):
 ## Draws the card store.
 ##
 ## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): each part is
-## shown by its node where it was drawn, or drawn with its --legacy flag
-## (AbstractPage.draw_list, draw_title, drawMerge's and drawBuy's parts,
-## drawInfo, the confirm boxes; the card info and the tutorial are phase 3's
-## nodes).
+## shown by its node where it was drawn (MenuNode.show_all_children,
+## AbstractPage.draw_title, drawMerge's and drawBuy's parts, drawInfo, the
+## confirm boxes; the card info and the tutorial are phase 3's nodes).
 func draw3D(g3D):
 	var g = g3D
-	AbstractPage.draw_list(g, activeNode, false, true, false, false, false)
+	activeNode.show_all_children(g, Graphics.UI_LAYER)
 	var title = activeNode.getName() if menuMode == MENU else activeNode.getCurrentChild().getName()
 	AbstractPage.draw_title(g, title)
 	var c
@@ -282,39 +281,19 @@ func draw3D(g3D):
 		tutorial.drawTopLayer(g)
 
 
-## Bridge (phase 4.2 step B): the pieces (--legacy=menu_frame), the deck,
-## its scroll bar and the merge preview (--legacy=deck) are nodes where they
-## were drawn (AbstractPage.show_pieces, Deck.show_deck,
-## MenuScrollBar.show_bar, _show_merge_preview).
+## Bridge (phase 4.2 step B): the pieces, the deck, its scroll bar and the
+## merge preview are nodes where they were drawn (AbstractPage.show_pieces,
+## Deck.show_deck, MenuScrollBar.show_bar, _show_merge_preview).
 func drawMerge(g):
-	if Main.is_legacy("menu_frame"):
-		g.drawImage(AbstractPage.images[13], 4, 195)
-		g.drawImage(AbstractPage.images[12], 4, 565)
-	else:
-		var pieces := [g.place_image(AbstractPage.images[13], 4, 195)]
-		pieces.append(g.place_image(AbstractPage.images[12], 4, 565))
-		AbstractPage.show_pieces(g, pieces)
-	var deck: bool = Main.is_legacy("deck")
-	if deck:
-		currentDeck.drawDeck(g, currentDeck.getCurrent(), map)
-	else:
-		currentDeck.show_deck(g, currentDeck.getCurrent(), map)
+	var pieces := [g.place_image(AbstractPage.images[13], 4, 195)]
+	pieces.append(g.place_image(AbstractPage.images[12], 4, 565))
+	AbstractPage.show_pieces(g, pieces)
+	currentDeck.show_deck(g, currentDeck.getCurrent(), map)
 	if currentDeck.getTotalNrOfLines() > currentDeck.getShowLines():
-		if deck:
-			mergeScrollBar.draw(g, currentDeck.getCurrentLine() - 1, currentDeck.getTotalNrOfLines())
-		else:
-			mergeScrollBar.show_bar(g, currentDeck.getCurrentLine() - 1, currentDeck.getTotalNrOfLines())
+		mergeScrollBar.show_bar(g, currentDeck.getCurrentLine() - 1, currentDeck.getTotalNrOfLines())
 	var c = currentDeck.getCurrent()
 	if c != null and c.getLevel() < 3:
-		if not deck:
-			_show_merge_preview(g, c)
-		else:
-			var fs: int = g.getFontSize()
-			g.setFontSize(40)
-			c.drawCard(g, 10, 554, 1.0)
-			g.drawString("x 5 merges to", 200, 654)
-			c.drawCard(g, 400, 554, 1.0, AbstractCard.NORMAL, c.getLevel() + 1)
-			g.setFontSize(fs)
+		_show_merge_preview(g, c)
 
 	drawInfo(g)
 
@@ -342,48 +321,27 @@ func _show_merge_preview(g, c) -> void:
 	g.setFontSize(fs)
 
 
-func drawMergedCard(g):
-	var c = currentDeck.getCurrent()
-	DeckPage.drawCardInfo(g, c, 530)
-
-
-## Bridge (phase 4.2 step B): the deck and its scroll bar (--legacy=deck)
-## are nodes where they were drawn (Deck.show_deck, MenuScrollBar.show_bar).
+## Bridge (phase 4.2 step B): the deck and its scroll bar are nodes where
+## they were drawn (Deck.show_deck, MenuScrollBar.show_bar).
 func drawBuy(g, c):
 	c = currentDeck.getCurrent()
 	if c != null:
 		var gold: int = Load.getPartyItems().getGold()
-		var deck: bool = Main.is_legacy("deck")
-		if deck:
-			currentDeck.drawDeck(g, gold, true, currentDeck.getCurrent(), null)
-		else:
-			currentDeck.show_deck(g, gold, true, currentDeck.getCurrent(), null)
+		currentDeck.show_deck(g, gold, true, currentDeck.getCurrent(), null)
 		DeckPage.drawCardInfo(g, currentDeck.getCurrent(), -23)
 		drawInfo(g)
 		if currentDeck.getTotalNrOfLines() > 2:
-			if deck:
-				scrollBar.draw(g, currentDeck.getCurrentLine() - 1, currentDeck.getTotalNrOfLines())
-			else:
-				scrollBar.show_bar(g, currentDeck.getCurrentLine() - 1, currentDeck.getTotalNrOfLines())
+			scrollBar.show_bar(g, currentDeck.getCurrentLine() - 1, currentDeck.getTotalNrOfLines())
 
 
 ## Draws the number of stocked cards equal to the selected card, its price
-## and the party's gold. Bridge (phase 4.2 step B): with --legacy=menu_frame
-## off, a MenuInfo node shows the three lines (StartPage.show_info).
+## and the party's gold. Bridge (phase 4.2 step B): a MenuInfo node shows the
+## three lines (StartPage.show_info).
 func drawInfo(g):
-	var x: int = MenuValues.MENU_TEXT_X
-	if not Main.is_legacy("menu_frame"):
-		var cur = currentDeck.getCurrent()
-		StartPage.show_info(g, PackedStringArray(["Stocked: " + str(stocked),
-				"Price: " + str(0 if cur == null else cur.getPrice()),
-				"Gold: " + str(Load.getPartyItems().getGold())]))
-		return
-
-	g.drawString("Stocked: " + str(stocked), x, 648)
-	var c = currentDeck.getCurrent()
-	var price: int = 0 if c == null else c.getPrice()
-	g.drawString("Price: " + str(price), x, 689)
-	g.drawString("Gold: " + str(Load.getPartyItems().getGold()), x, 730)
+	var cur = currentDeck.getCurrent()
+	StartPage.show_info(g, PackedStringArray(["Stocked: " + str(stocked),
+			"Price: " + str(0 if cur == null else cur.getPrice()),
+			"Gold: " + str(Load.getPartyItems().getGold())]))
 
 
 static func setTestMap(info):

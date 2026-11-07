@@ -1,16 +1,17 @@
 # Modernization plan: from the GL emulation to Godot scenes
 
-Status: **phase 0 done** (2026-10-16); **phases 1, 2, 3 and 4.1 done and
-closed** through step B, their legacy paths, `--legacy=` flags and the
+Status: **phase 0 done** (2026-10-16); **phases 1, 2, 3, 4.1 and 4.2 done
+and closed** through step B, their legacy paths, `--legacy=` flags and the
 `.vil` and `.map` files removed (decision 5, 2026-11-06): the villages (63
 places, 86 variants; pilot 6.7, rollout 6.8, closing 6.9), the dungeons (80
 floors; 7.7, 7.8, closing 7.9), the shared UI and transitions (8.1, 8.3,
-closing 8.4), the world map and the airship (9.1 and its closing); **the
-particles phases P and P2 done** (6.10, 6.12; the village and dungeon
-legacy paths closed with phases 1 and 2, the battle effects' stay until
-4.4); **phase 4.2's pilot and the menu done through step B** (the title, the
-game over and the menu list; the menu pages; 9.2, which prepares the stores
-and the mini-games); the rest of phases 4–5 are proposals. The plan
+closing 8.4), the world map and the airship (9.1 and its closing), the
+title, the game over, the menu, the stores and the mini-games (9.2: the
+pilot, three rollout parts and the closing, 2026-11-07); **the particles
+phases P and P2 done** (6.10, 6.12; the village and dungeon legacy paths
+closed with phases 1 and 2, the battle effects' stay until 4.4); 4.3 and
+4.4 are prepared (9.3, 9.4: 4.4's top layer recommended next); the rest of
+phases 4–5 are proposals. The plan
 assumes the state described in `docs/HANDOFF.md` (all classes ported, main
 paths run). Conventions for new code: `docs/ARCHITECTURE.md`.
 
@@ -3540,10 +3541,11 @@ timing.
   other ported loops that step a float to a bound). `Puzzle`'s scramble and
   the pause that stops nothing are the Java's (Appendix).
 
-**Closing phase 4.2 (prepared; nothing deleted yet).** What deleting the
-phase's legacy paths and its eleven flags would remove, per flag (from a
-survey of the code after the mini-games; the battles are `src/battle`,
-phase 4.4). "Dead" = no caller left once the flag is gone.
+**Closing phase 4.2 (done on 2026-11-07, `docs/phase4_2_close_prompt.md`).**
+What deleting the phase's legacy paths and its eleven flags removes, per
+flag (the list it was done from: a survey of the code after the mini-games;
+the battles are `src/battle`, phase 4.4; *As built* below says where it was
+wrong). "Dead" = no caller left once the flag is gone.
 
 | Flag | Its legacy branches (call sites) | Dead with it | Stays, for |
 |---|---|---|---|
@@ -3599,6 +3601,84 @@ phase 4.4). "Dead" = no caller left once the flag is gone.
   the 19 riddle cases (`dungeon_riddle_*`, `riddle_*`). The closing changes
   no picture: every case before and after, identical.
 
+*As built (2026-11-07):* every call site of the eleven flags is gone; the
+twins are the only paths. In this order: the Cheater's shot first (a new
+case, `cheater_menu`: its root, the cursor moved and wrapped, Buildings and
+the 17 card stores, Villages, Stories and a chapter, "Paused" over it, back
+to the village; 13 shots, recorded twice on the unchanged code: identical),
+then flag by flag, then the dead code. Deleted (about 1,530 lines removed
+and 400 rewritten or added, comments included; per flag, roughly):
+
+| Part | Removed (about) | What |
+|---|---|---|
+| `title` | 20 | `TitleScreen`'s four branches; `SaveSlots.draw_dates_beside` |
+| `game_over` | 3 | `GameOver`'s branch |
+| `menu_list` | 60 | `TitleScreen`'s and `GameCore`'s branches; `AbstractPage.draw_list` (its 19 call sites call `MenuNode.show_children_freely`, `show_children` or `show_all_children`); `MenuNode.drawChildrenFreely`, `drawWithPrice`, `drawWithNumber`, `drawWithEquipment` |
+| `menu_frame` | 90 | the branches in `AbstractPage` (`drawStandard`, `draw_title`, `draw_help`), `StartPage` (`draw_screen_shot`, `draw_info`), `Building`, `WeaponStore.drawInfo`, `CardStore` (pieces, info), `Church` (pieces, info), `CesadurRiddle` (through `draw_help`); `AbstractPage.drawMenuBackground`, `drawMenuBackgroundStatic`, `Building.drawMenuBackground`, `StartPage.drawScreenShot`, `drawInfo` |
+| `menu_text` | 90 | the branches in `StartPage`, `MapPage`, `HelpPage`, `WeaponStore`, `AbstractStore` (the confirm boxes), `Church`; `SaveSlots.draw_dates_under`, `_draw_dates`, `StartPage.drawConfirmBuyDialog`, `HelpPage.drawDifficulty` |
+| `status` | 190 | `StatusPage.draw_top` (its callers call `show_top`), `draw`, `drawTop`, `drawAttributes`, `drawSlots`, `_drawCharacterSlots`, `drawEquip`; `EquipPage.drawStatus`, `drawChange`, `drawEquip` and its static `x`, `y` (only `drawChange` read them); the branches in `EquipPage`, `WeaponStore` |
+| `deck` | 140 | `DeckPage`'s titles, flying cards, `_draw_deck`, `_draw_bar` (the call sites call `Deck.show_deck`, `MenuScrollBar.show_bar`), `Animator.draw`; `CardStore`'s branches; `Deck.drawDeck`, `drawCard`; `AbstractCard.drawGrayCard` |
+| `automap` | 90 | `MapPage.drawAll`, `drawSingle` and the branch; `LabyrinthMap.draw`; `LabyrinthNode.drawInMap` (the minimap's `drawInSmallMap` and the inventories' four-argument `drawInMap` stay) |
+| `dim` | 20 | `AbstractStore.draw_dim`, `RiddleGame.draw_dim` (their call sites call `Graphics.show_fade` on the UI layer) |
+| `bless` | 90 | `Church`'s bless branch and `drawHand`; `MenuHand.drawHandWithColor`; `LevelUpBar.drawStatic`; `HelpText.drawTopLayer`; `Row.draw`, `drawIcon`, `drawRows`; `Icon.draw` |
+| `riddle` | 75 | the branches in `RiddleGame`, `AbstractPuzzle`, `Puzzle`, `RubicsPuzzle`, `AegisRiddle`, `GriveraRiddle`, `HateRiddle`, `CesadurRiddle`; `RiddleLoaderImage.draw`, `Tile.draw`, `CesadurRiddleText.draw`, `Letter.draw` |
+| The Cheater's switch | 55 | `Cheater.draw` calls `MenuNode.show_children(g, Graphics.UI_LAYER)`; `MenuNode.draw`, `drawChildren`, `drawAllChildren`, `MenuHand.drawHand`, `MenuScrollBar.draw` lost their last caller |
+| Dead code | 300 | `BestiaryPage` (the file), `StatusPage`'s page (its constructor, buttons, `draw3D`, `drawHelp`; the class keeps the twins and `extends RefCounted`), `MainMenu.initStatusPage`, `initBestiaryPage`, `checkEnemyInRange`, `AbstractPage.STATUS_PAGE`, `MenuValues.BESTIARY_STATS_X`/`Y`, the registry's `menu.BestiaryPage`; `CardStore.drawMergedCard`; the Church's "Resurrect" branch (`initResurrectMenu`, `fillResurrect`) |
+
+The git history has all of it up to 9a9c2341. Kept: `Graphics`' API whole
+(the methods no game code calls any more: `drawStringRightWithReg`,
+`drawStringRightAligned`, `drawSingleCenteredText`, `drawStringSetSize`,
+`drawCenteredImage` (the pages' `drawHelp` run against a `HelpLineCapture`),
+the (low, high) `drawImage` and `GameTexture.drawPartRange`), and what the
+battles call:
+`Graphics.drawWithShadow`, `drawValueWithShadow`, `AbstractCard.drawCard`,
+`Graphics.fadeOldSchool`, `fadeOldSchoolColorWhite`, `LevelUpBar.draw` with
+drawImage's percent part (9.4). `BESTIARY_PAGE` stays (the help and map
+pages use its layout), and so do `Help.gd` and `RotatePuzzle` (Appendix).
+`tools/parity/parity.sh`'s examples name `--legacy=battle_effects` now.
+
+Where the list above was wrong or short:
+* `MenuHand.drawHand` does not stay for the Cheater: the Cheater's switch
+  removed its last caller (with `MenuNode.draw`), as the Cheater's bullet
+  foresaw; the riddle row's "Stays" is stale.
+* There were no `CardStore._draw_deck` or `_draw_bar`: only `DeckPage` had
+  the wrappers; `CardStore`'s branches were inline.
+* `AbstractStore.draw_dim` and `RiddleGame.draw_dim` did not become
+  forwards: they were removed and their callers call `Graphics.show_fade`.
+  `StatusPage.draw_top` and `AbstractPage.draw_list` likewise; the wrappers
+  whose body was the twin keep their names (`draw_title`, `draw_help`,
+  `StartPage.draw_screen_shot`, `draw_info`).
+* `GameTexture.drawPartRange` and the (low, high) `drawImage` are not dead
+  code to delete: they are the emulation's API (phase 5).
+* More dead code than listed: `EquipPage.x`/`y`,
+  `MainMenu.checkEnemyInRange`, `MenuValues.BESTIARY_STATS_X`/`Y`,
+  `AbstractPage.STATUS_PAGE`.
+* The table's line references (close42_list.md) were right on the commit
+  the closing started from; nothing had moved. The two stale comments
+  (`StatusPage`, `StartPage`) went with the functions they were on.
+
+**Parity of the closing** (2026-11-07; tolerance 0; 428 cases, 8,096
+shots). Baseline `c42base` on 9a9c2341 plus the new case (recorded from a
+project copy, 4 jobs, no failed run): identical to the mini-games' node run
+`r3node` on its 427 cases (8,083 of 8,083 shots, all logs, every case's
+script error, error and exit leak lines: 3, 2,421, the five `effects_*`
+reports). `cheater_menu` recorded twice on the unchanged code: 13 of 13
+identical. After the closing (`tools/check.sh`: 496 scripts, 0 failed; a
+smoke set of 18 cases first, the title, the game over, the menu pages, the
+automap, the stores, the bless page, the riddles, the Cheater and the game
+pad lost menu: 322 of 322 identical), `c42after` vs. `c42base`: 8,096 of
+8,096 shots identical (the Cheater's 13 on `MenuList` among them), all 428
+logs identical, the same script error, error and exit leak lines in every
+case (only the five `effects_*` cases print a leak report, as before). A
+run of 18 cases that cover every removed flag with
+`--legacy=title,game_over,menu_list,menu_frame,menu_text,status,deck,
+automap,dim,bless,riddle` vs. `c42after`: 318 of 318 shots, logs and error
+lines identical (a removed name is ignored). No tolerance, no difference.
+The frame rate was not measured: only legacy paths and dead code were
+removed, and the node paths that normal play runs are unchanged (the
+Cheater, dev only, draws one `MenuList` instead of its legacy list). Only
+`c42after` is kept in `tools/parity/out`.
+
 ### 9.3 Infrastructure
 
 * **Game modes:** a `Game` autoload with a place registry generated from
@@ -3617,6 +3697,42 @@ phase 4.4). "Dead" = no caller left once the flag is gone.
 * **Saves:** JSON (or a Resource) under `user://saves/`, plus a reader for
   the old text format so the 24 shipped `.sav` files still load. Add the
   "last save data" and autosave items from `TODO.md` here.
+
+**Prepared after closing phase 4.2 (2026-11-07).** What 4.3 touches, and
+what checks it (counts as of the closing):
+
+* **Input:** `src/input` (6 files, 573 lines): `GameAction`'s three
+  behaviours, the keyboard and game pad managers (`InputKeyBoardManager`,
+  `InputGamePadManager`, `GamePadController`, the lost pad's overlay),
+  `FakeInputManager`; read through `gameActions[…]` at 130 places in 22
+  files. AutoPlay presses the actions, so every parity case runs the input
+  path: a wrapper over InputMap, with AutoPlay injecting
+  `Input.parse_input_event`, must keep every shot and log line (key repeat
+  included: the menu and store cases hold buttons). Seeded runs read no pad
+  (`GameCore.init2`). No step B needs it; step C of every converted mode
+  does (decision 3).
+* **The `Game` autoload:** `Organizer` (289 lines), `GameCore` (175),
+  `GameMode` (417), `GameModeQueue`, `ResourceLoader`; 49
+  `Organizer.getOrganizer()` calls in 17 files. Every case's log has the
+  mode and place at each shot (`mode=`, `place=`), so parity checks the
+  registry and the switches; the developer console's jumps (`goto`, the
+  Cheater, `--start`) go through `Organizer.jump_to`.
+* **Audio:** `src/sound` (3 files, 335 lines: `SoundPlayer`, `OggStreamer`'s
+  intro and loop, its fades). Parity runs are `--mute`: no case checks it.
+  A log of the music and sound calls (name, time, fade) before and after,
+  and the user listening, are the checks.
+* **Saves:** `Save` (284 lines) and `Load` (489); 49 shipped `.sav` files
+  under `maps/Banks` (13 at its top, 28 older ones in `testStarts`), and the
+  tickets' saves, which the user edits by hand: the text format is a
+  working tool. Deterministic runs read the shipped files
+  and write `user://saves_deterministic/`: every `--load` case checks
+  loading, `store_church_save`, `menu_start_save` and
+  `title_continue_autosave` check saving and the slot dates. The format
+  (JSON, a Resource, or the text kept with a schema) is a decision for the
+  user.
+* **Order inside 4.3:** the input wrapper and the autoload first (parity
+  checks them; step C needs the wrapper), audio and saves after a decision
+  each (neither changes a picture).
 
 ### 9.4 Battle, cards and effects (largest)
 
@@ -3660,6 +3776,77 @@ Keep the logic classes (`Battle`'s state machine, `EnemyLogic`,
 * **Riskiest code change:** `Vector3f` is a reference type with `*Local`
   mutators, and card code relies on the aliasing (`Fire.gd:66`).
   Replacing it with the value type `Vector3` must be done per call site.
+
+**Prepared after closing phase 4.2 (2026-11-07).** How a battle draws
+today, what the closing left for it, and the order:
+
+* **The frame.** A battle is the labyrinth's `labDrawable`
+  (`Labyrinth.drawExtra`). After the floor's scene and the weather's back
+  pass, `BattleManager.draw` draws, through the 3D bridge's chunks: the
+  enemies (`BattleEnemy.draw`: textured quads with the slice, the colour,
+  the shake and rise, their particle systems), the info panels
+  (`Creature3D`: text drawn into a texture through a 2D `Graphics`), then
+  `Battle.drawBattle` with the depth test off (COTZ-011): the deck (`GLDeck`,
+  `GLCard`: 3D quads), the hand (`GLHand`), the legend (`Legend.draw`: a
+  gradient and six lines), the card effects (`Animation`: the GPU particles
+  of 6.12; the spheres, image and slow systems legacy), the attack text
+  (`AttackText`); the clock (`Clock.draw`: "Fleeing" with `drawWithShadow`,
+  the time bar) and an enemy's attack name (`Attack.draw`,
+  `drawWithShadow`) are 2D text among those chunks. Then the weather's
+  front pass (`show_weather_over`), the minimap (the 3D bridge's, 8.4), the
+  mission and the dialog, and the battle's 2D top layer
+  (`BattleManager.drawTopLayer`): an enemy's red flash
+  (`BattleEnemy.drawTopLayer`: `fadeOldSchoolColorWhite(.8, 0, 0, .5)`), the
+  result screen (`ResultScreen.drawResult`: `fadeOldSchool(.5)`,
+  `resultBack.png` at 1.1, `drawWithShadow` and `drawValueWithShadow` at
+  size 26, the played cards: `AbstractCard.drawCard`), the spoils screen
+  (`SpoilsScreen.drawSpoils`: the same background, lines over their
+  shadows, a `LevelUpBar.draw` per character), the legend's button icons
+  (`Legend.drawTopLayer`), the tutorial (phase 3's node); last the mode
+  fade, "Paused" and "game pad lost" (nodes).
+* **What the closing of 4.2 kept for it** (9.2, "Closing phase 4.2"), by
+  caller: `Graphics.drawWithShadow` (`ResultScreen`, `SpoilsScreen`,
+  `Attack`, `Clock`), `drawValueWithShadow` (`ResultScreen`),
+  `AbstractCard.drawCard` (`ResultScreen`), `Graphics.fadeOldSchool`
+  (`ResultScreenBase.drawBackground`), `fadeOldSchoolColorWhite`
+  (`BattleEnemy`), `LevelUpBar.draw` with drawImage's percent part
+  (`SpoilsScreen.drawBars`). Nothing of `MenuNode`, `MenuHand`,
+  `MenuScrollBar` or `Deck`: the battle's decks, hand and scroll bar are
+  its own (`AbstractDeck`, `GLHand`, `BattleScrollBar`), and the game pad
+  lost menu over a battle is a `MenuList` already.
+* **What 4.2 built that the top layer can reuse:** UI nodes in the frame's
+  order after the labyrinth's dialog's slot, as the riddles' (ARCHITECTURE
+  section 14): `ShadowText` (a line over its shadow, in a colour), the Fade
+  node on UI (the result dim; the flash is `fadeOldSchoolColorWhite`'s
+  colour at its alpha), `LevelBar` (`resultBack.png` at 1.1 as its legacy
+  quad; the level-up bars' parts through `place_image_part`), `CardView`
+  (`AbstractCard.place_at`), `MenuBackground` images (the legend's icons).
+* **The rest** (the rollout): the 3D view (`Battle.tscn` under the camera
+  rig, above), the info panels, the legend's and the clock's 2D text among
+  the 3D chunks (a UI node before a 3D chunk turns that chunk into a
+  SubViewport at its layer, ARCHITECTURE section 12; check the 1/255 of 8.3
+  first), the effects that are not particles, then step C (signals,
+  Tweens).
+* **Which first: 4.4, starting with the top layer (recommendation).**
+  * It continues the work of phases 3 and 4.2 with their tools (UI nodes in
+    the frame's order, twins, flags, parity at tolerance 0) and their
+    nodes: a pilot of the result and spoils screens, the level-up bars, the
+    red flash and the legend's icons needs few new nodes and ends four of
+    the five helpers 4.2's closing kept (`drawWithShadow` stays for the
+    clock and the attack name until the 3D part).
+  * 4.4 is the largest and riskiest phase left (XL: the bridge, the waits,
+    `Vector3f`); phase 5, the minimap's node (8.4) and the last `--legacy=`
+    flags (`battle_effects`, `effect_waits`) all wait for it. Starting it
+    early brings its risks up early.
+  * 4.3 changes no picture and has no step B: it can come at any time
+    (14). Its input wrapper is needed for step C, whose timing decision 3
+    leaves open; its audio and saves need the user (no parity check, a
+    format decision). If step C of the converted modes comes first, the
+    input wrapper (and with it the autoload) should come first instead.
+  * Coverage to check first: the level-up screen has no case (HANDOFF);
+    `battle`, `boss`, the `dungeon_battle_*` and `effects_*` cases show
+    battles, and a probe would tell which shots show the result and spoils
+    screens.
 
 ## 10. Phase 5: remove the emulation
 
@@ -3849,7 +4036,17 @@ When no mode draws through `g` any more:
   `Deck.drawDeck`, `StartPage.drawInfo`, `drawMenuBackgroundStatic`):
   switching inside them would convert the stores' drawing with the menu's,
   untested. Twins go beside them, and the converted mode's call sites
-  switch.
+  switch. *Closing phase 4.2 (9.2)* removed them once no caller was left;
+  the ones the battles still call stay until phase 4.4 (9.4).
+* **Callers that cannot run** (closing phase 4.2). A legacy helper can look
+  shared while its only other callers are unreachable (the status and
+  bestiary pages, opened only from themselves) or dev-only (the Cheater's
+  list): a survey of callers must say which can run, and a dev mode that
+  draws through the helper needs a shot before it moves to the twin.
+* **A removed flag is silently ignored** (closing phase 4.2).
+  `Main.is_legacy` answers only for names the code asks about: a run with a
+  removed `--legacy=` name is a normal run and would "pass" a parity check it
+  no longer makes. Keep the flag lists in ARCHITECTURE section 7 current.
 
 ## 13. Open decisions
 
@@ -3950,9 +4147,9 @@ Sizes are relative: S ≈ a focused session, XL ≈ many sessions.
 | P2 | Dungeon weather, save points and the card and enemy effects that are particles, on the GPU (6.11). *Done (6.12); the dungeon part closed with phase 2 (7.9), the battle effects' legacy path stays until 4.4.* | M | 2, P | rainy and snowy floors at 60 FPS; battles without the effects' stalls (Wind 3 at 7 FPS, the Flame's 10 s) |
 | 3 | Theme, Dialog, signs, emotions, fades, HUD. *Done through step B: the pilot (8.1: the Theme, the dialog family, the fade) and the rollout (8.3: emotions, mission display, pause overlays, cutscene images and texts, tutorials; the minimap stays the 3D bridge's); closed (8.4).* | M | 1 (or 2) | most of the remaining `draw(g)` |
 | 4.1 | World map + airship. *Done through step B (9.1): the scenes, the name plate, legacy vs. scene identical; closed (9.1).* | M | 1 (converter), 3 | — |
-| 4.2 | Title, game over, mini-games, stores, menu. *Pilot done through step B (9.2): the title, the game over, the menu list; the menu, the stores and the mini-games done through step B (9.2, one session each); next: closing phase 4.2 (its legacy paths and flags; 9.2 lists them).* | L | 3 | — |
-| 4.3 | Input, audio, saves, `Game` autoload | M | any time after 0; the autoload is best after 4.2 | 5 |
-| 4.4 | Battle, cards, effects | XL | 2, 3 | 5 |
+| 4.2 | Title, game over, mini-games, stores, menu. *Done through step B (9.2: the pilot, the menu, the stores and the mini-games, one session each) and closed (9.2, "Closing phase 4.2").* | L | 3 | — |
+| 4.3 | Input, audio, saves, `Game` autoload. *Prepared (9.3).* | M | any time after 0; the autoload is best after 4.2 | 5; step C (the input wrapper) |
+| 4.4 | Battle, cards, effects. *Prepared (9.4); recommended next, starting with the battle's 2D top layer (9.4).* | XL | 2, 3 | 5; the minimap's node (8.4) |
 | 5 | Remove the GL emulation; per-delta time | M | all of the above | — |
 
 After phase 2, P comes before phase 3 (2026-10-27): the particle
@@ -3989,6 +4186,11 @@ fixed or deleted at any time.
     Java's StartPage has no entry for them either); `menu/Help.gd` is never
     instantiated; `CardStore.drawMergedCard` is never called; no map uses
     `RotatePuzzle`; the Church's "Resurrect" branch has no menu entry.
+    *Removed when phase 4.2 closed (9.2):* the two pages (`BestiaryPage`,
+    `MainMenu.initStatusPage`, `initBestiaryPage`, `checkEnemyInRange`;
+    `StatusPage` keeps only the twins of its static helpers), `drawMergedCard`
+    and the "Resurrect" branch (`initResurrectMenu`, `fillResurrect`). Kept:
+    `Help.gd` (draws nothing), `RotatePuzzle` (data could use it).
   * *Found in phase 4.2's menu:* the start page's Load path (`executeNode`'s
     "Load" and a slot under another list than Save: `Load.loadGame`,
     `exitTo`) has no entry: the Java's `fillRoot` inserts Save under

@@ -204,26 +204,22 @@ func zoomOut():
 
 
 ## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): each part is
-## shown by its node where it was drawn, or drawn with its --legacy flag
-## (AbstractPage.draw_title, draw_list, _show_all and _show_single (the
-## Automap node), AbstractPage.draw_help, _show_explored,
-## StartPage.draw_screen_shot, draw_info).
+## shown by its node where it was drawn (AbstractPage.draw_title,
+## MenuNode.show_all_children, _show_all and _show_single (the Automap
+## node), AbstractPage.draw_help, _show_explored, StartPage.draw_screen_shot,
+## draw_info).
 func draw3D(g):
 	super.drawStandard(g)
 	AbstractPage.draw_title(g, activeNode.getName())
-	AbstractPage.draw_list(g, activeNode, false, true, false, false, false)
+	activeNode.show_all_children(g, Graphics.UI_LAYER)
 	var percent: int = 0
-	var automap: bool = not Main.is_legacy("automap")
 	if isZoomedOut():
-		percent = _show_all(g) if automap else drawAll(g)
+		percent = _show_all(g)
 		AbstractPage.draw_help(g, drawHelp.bind(true))
 	else:
-		percent = _show_single(g) if automap else drawSingle(g)
+		percent = _show_single(g)
 		AbstractPage.draw_help(g, drawHelp.bind(false))
-	if Main.is_legacy("menu_text"):
-		g.drawString("Explored: " + str(percent) + " %", 40, 50)
-	else:
-		_show_explored(g, percent)
+	_show_explored(g, percent)
 	StartPage.draw_screen_shot(g)
 	StartPage.draw_info(g)
 
@@ -239,36 +235,6 @@ func _show_explored(g, percent: int) -> void:
 
 func isZoomedOut():
 	return activeNode.getName() == "Map" # Fulhack...
-
-
-func drawSingle(g):
-	var currentDir: int = -1
-	if lab != null:
-		currentDir = lab.getPlayerDirection()
-	return map.draw(g, currentNode, currentDir, null, false, true)
-
-
-func drawAll(g):
-	g.push()
-	g.translate(25, 80, 0)
-	g.scale(1.0 / 3)
-	var percent: int = 0
-	var size: int = 0
-	for i in range(currentFloors.size()):
-		var m = currentFloors[i]
-		size = m.getSize()
-		var pos = m.getMapPos()
-		var currentDir: int = -1
-		if lab != null:
-			currentDir = lab.getPlayerDirection()
-		g.push()
-		g.translate(pos[0] * 700, pos[1] * 1000, 0)
-		percent += m.draw(g, currentNode, currentDir, pos, true, false)
-		g.pop()
-	g.scale(3)
-	g.pop()
-	percent = J.round((percent / float(size)) * 100)
-	return percent
 
 
 ## Bridge (phase 4.2 step B): drawSingle without the drawing

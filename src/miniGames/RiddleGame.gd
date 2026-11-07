@@ -108,36 +108,23 @@ func draw(g, alpha = null):
 
 ## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14, "The riddles"):
 ## the riddle's parts are UI nodes in the frame's order, after the
-## labyrinth's dialog (Graphics.show_ui): the dim a Fade node on the UI layer
-## (draw_dim, --legacy=dim keeps fadeOldSchool), the image a LevelBar node (its
-## legacy quad: RiddleLoaderImage.place), the kinds' images (tiles, markers,
-## hands) MenuBackground nodes with their placed images
+## labyrinth's dialog (Graphics.show_ui): the dim (fadeOldSchool(1 - fos): the
+## current fade mode's image at alpha fos) a Fade node on the UI layer, before
+## the riddle's nodes (Graphics.show_fade, as the stores' confirm dims), the
+## image a LevelBar node (its legacy quad: RiddleLoaderImage.place), the kinds'
+## images (tiles, markers, hands) MenuBackground nodes with their placed images
 ## (AbstractPage.show_pieces), their texts MenuText nodes
-## (AbstractPage.show_lines), Cesadur's help a HelpLine (AbstractPage.draw_help,
-## --legacy=menu_frame); --legacy=riddle keeps the legacy drawing of the image,
-## the images and the texts.
+## (AbstractPage.show_lines), Cesadur's help a HelpLine
+## (AbstractPage.draw_help). The legacy drawing (--legacy=riddle, dim,
+## menu_frame) is removed (closing phase 4.2, plan 9.2).
 func drawTopLayer(g):
 	var fos: float = fade * image.getAlpha()
-	draw_dim(g, 1 - fos)
+	g.show_fade(1 - fos, Graphics.UI_LAYER)
 	g.setColor(1, 1, 1, fade)
-	if Main.is_legacy("riddle"):
-		image.draw(g)
-	else:
-		var placed: Array = image.place(g)
-		var view = g.show_ui(IMAGE_VIEW, Graphics.UI_LAYER)
-		if view != null:
-			view.show_parts([placed], g.canvas_material())
-
-
-## Bridge (phase 4.2 step B): the riddle's dim, g.fadeOldSchool(fadeindex)
-## (the current fade mode's image at alpha 1 - fadeindex), or with --legacy=dim
-## off its twin: a Fade node on the UI layer, before the riddle's nodes
-## (Graphics.show_fade), as the stores' confirm dims.
-static func draw_dim(g, fadeindex: float) -> void:
-	if Main.is_legacy("dim"):
-		g.fadeOldSchool(fadeindex)
-	else:
-		g.show_fade(fadeindex, Graphics.UI_LAYER)
+	var placed: Array = image.place(g)
+	var view = g.show_ui(IMAGE_VIEW, Graphics.UI_LAYER)
+	if view != null:
+		view.show_parts([placed], g.canvas_material())
 
 
 ## Bridge (phase 4.2 step B): a line drawMultiString(text, x, y) would draw

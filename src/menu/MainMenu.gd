@@ -140,18 +140,6 @@ func checkCharacterInRange(character):
 	return character
 
 
-## Initiates the status page.
-func initStatusPage(character, current):
-	character = checkCharacterInRange(character)
-	currentPage = StatusPage.new(character, current)
-
-
-## Initiates the bestiary page.
-func initBestiaryPage(enemy, current):
-	enemy = checkEnemyInRange(enemy)
-	currentPage = BestiaryPage.new(enemy, current)
-
-
 func initTutorialPage():
 	currentPage = TutorialPage.new()
 
@@ -163,16 +151,6 @@ func initHelpPage():
 ## shortcut: opened with Square from the game (MapPage.shortcut).
 func initMapPage(shortcut = false):
 	currentPage = MapPage.new(shortcut)
-
-
-## Wraps the given enemy index into the range of the bestiary.
-func checkEnemyInRange(enemyIndex):
-	var size: int = Bestiary.getBestiary().getSize()
-	if enemyIndex < 0:
-		enemyIndex = size - 1
-	elif enemyIndex >= size:
-		enemyIndex = 0
-	return enemyIndex
 
 
 ## Gets the background image for the status page.

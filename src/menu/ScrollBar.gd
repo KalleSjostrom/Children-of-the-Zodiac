@@ -28,21 +28,10 @@ func _init(p_x = null, p_y = null, p_height = null) -> void:
 	height = p_height
 
 
-func draw(g, current, total):
-	if not initiated:
-		init()
-		initiated = true
-	g.loadIdentity()
-	g.drawImage(triangle, x, y, SCALE)
-	total -= 1
-	var percent: float = 0.0 if total == 0 else (current / float(total))
-	var ballY: float = minBallY + percent * ballRange
-	g.drawImage(ball, x + 8, ballY, SCALE)
-	g.drawImage(Values.MenuImages + "triangDown.png", x, y + height, SCALE)
-
-
-## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): draw without
-## the drawing: the same state changes (the lazy init, loadIdentity, the three
+## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): draw (the top
+## triangle, the ball at the current line's place and the bottom triangle,
+## scaled .4; removed: closing phase 4.2, plan 9.2) without the drawing: the
+## same state changes (the lazy init, loadIdentity, the three
 ## images' binds). Returns the three images as Graphics.place_image places
 ## them (the top triangle, the ball, the bottom triangle), for a PageScrollBar
 ## node (a list's in MenuList, the deck page's and the card store's on their

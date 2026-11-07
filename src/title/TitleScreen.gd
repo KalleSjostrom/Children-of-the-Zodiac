@@ -10,8 +10,8 @@ extends GameMode
 ## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): UI nodes show
 ## the title where the drawing drew it: Title (the background and the logo),
 ## MenuList (activeNode, MenuNode.show_all_children), ShadowText (the
-## difficulty's description), SlotDates (the slots' dates);
-## --legacy=title and --legacy=menu_list keep the drawing.
+## difficulty's description), SlotDates (the slots' dates). The legacy drawing
+## (--legacy=title, menu_list) is removed (closing phase 4.2, plan 9.2).
 
 const TITLE_VIEW := "res://scenes/ui/Title.tscn"
 const SHADOW_TEXT_VIEW := "res://scenes/ui/ShadowText.tscn"
@@ -142,24 +142,15 @@ func _notification(what: int) -> void:
 func draw(g, alpha = null):
 	g.setColor(1)
 	g.setFontSize(24)
-	if Main.is_legacy("title"):
-		g.drawImage(background, x, y)
-	else:
-		_show_background(g)
+	_show_background(g)
 	if not fadein:
 		drawTitle(g)
 		if doneFading():
-			if Main.is_legacy("menu_list"):
-				activeNode.drawAllChildren(g)
-			else:
-				activeNode.show_all_children(g, Graphics.UI_LAYER)
+			activeNode.show_all_children(g, Graphics.UI_LAYER)
 			if activeNode.getName() == "Start":
 				drawDifficultyInfo(g)
 			elif activeNode.getName() == "Continue":
-				if Main.is_legacy("title"):
-					SaveSlots.draw_dates_beside(g, activeNode, 620, 24)
-				else:
-					SaveSlots.show_dates_beside(g, activeNode, 620, 24)
+				SaveSlots.show_dates_beside(g, activeNode, 620, 24)
 	super.draw(g)
 
 
@@ -167,10 +158,7 @@ func draw(g, alpha = null):
 func drawDifficultyInfo(g):
 	var level = Difficulty.LEVELS[activeNode.getMenuCursor()]
 	g.setFontSize(20)
-	if Main.is_legacy("title"):
-		g.drawWithShadow(level.description, 450, 728)
-	else:
-		_show_difficulty_info(g, level.description)
+	_show_difficulty_info(g, level.description)
 	g.setFontSize(24)
 
 
@@ -181,10 +169,7 @@ func doneFading():
 func drawTitle(g):
 	if index < .9:
 		g.setColor(1, 1, 1, index)
-	if Main.is_legacy("title"):
-		g.drawImage(titleBackground, x, y, 1)
-	else:
-		_show_logo(g)
+	_show_logo(g)
 
 
 # Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): the drawing

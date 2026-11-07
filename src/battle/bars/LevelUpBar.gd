@@ -31,22 +31,10 @@ func draw(g, x, y, canLevelUp):
 	g.setColor(1)
 
 
-## Java: static draw(Graphics g, int x, int y, float p1, float p2, float scale).
-static func drawStatic(g, x, y, p1, p2, scale):
-	var b: Array = _getBar()
-	g.drawImage(b[0], x, y, 200, 20, float(scale), 1.0)
-	g.setColor(1)
-	g.drawImage(b[1], x, y, 200, 20, float(scale), 0.0, float(p1))
-	g.setColor(0, 1, 0, 1)
-	g.drawImage(b[1], x, y, 200, 20, float(scale), float(p1), float(p2))
-	g.setColor(1)
-	g.drawImage(b[2], x, y, 200, 20, float(scale), 0.0, float(p2))
-	g.setColor(1)
-
-
 ## Bridge (phase 4.2 step B, the stores, docs/ARCHITECTURE.md section 14):
-## drawStatic without the drawing: the same colours and binds in the same
-## order. Returns the four parts as Graphics.place_image_part places them (the
+## drawStatic (Java: static draw(Graphics g, int x, int y, float p1, float p2,
+## float scale); removed: closing phase 4.2, plan 9.2) without the drawing:
+## the same colours and binds in the same order. Returns the four parts as Graphics.place_image_part places them (the
 ## empty bar, the blue bar from 0 to p1 in white and from p1 to p2 in green,
 ## the overlay from 0 to p2), for a LevelBar node (the Church's bless page).
 static func place_static(g, x, y, p1, p2, scale) -> Array:

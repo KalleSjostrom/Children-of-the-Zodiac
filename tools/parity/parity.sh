@@ -13,11 +13,11 @@
 #       summary.txt). Exit code 0 = everything passed.
 #   tools/parity/parity.sh ab "<args_a>" "<args_b>" [options] [case...]
 #       Records set <name>-a with args_a and <name>-b with args_b added to the
-#       game arguments, then compares them. Example (once a subsystem has a
-#       scene path): tools/parity/parity.sh ab "--legacy=menu_frame" "" 'menu_*'
+#       game arguments, then compares them. Example (a subsystem that keeps
+#       its legacy path): tools/parity/parity.sh ab "--legacy=battle_effects" "" 'effects_*'
 #
 # Options:
-#   --args="<game args>"   extra game arguments for record (e.g. --legacy=menu_frame)
+#   --args="<game args>"   extra game arguments for record (e.g. --legacy=effect_waits)
 #   --seed=<n>             random seed (default 1)
 #   --tolerance=<0-255>    per channel difference that is ignored (default 0)
 #   --max-pixels=<n>       pixels over the tolerance a shot may have (default 0)
