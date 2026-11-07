@@ -173,7 +173,7 @@ they trigger (the time mission's "Time's up!" leaves the floor), input
   once (`record after`), then `--legacy=<overlay>` on the overlay's cases,
   compared with it: the same pairs as `ab`, recorded once.
 
-## 5. Whole 2D modes (phase 4.2: the title, the game over, the menu, the stores; next the mini-games)
+## 5. Whole 2D modes (phase 4.2: the title, the game over, the menu, the stores, the mini-games)
 
 A mode whose whole frame is UI (no world under it) is converted the same
 way, part by part; ARCHITECTURE section 14 has the conventions and the
@@ -300,3 +300,42 @@ What the stores added (phase 4.2's rollout; docs/ARCHITECTURE.md section 14,
   `mode_`) tell which sub-page each shot shows; headless probe runs print
   exit leak reports that windowed runs do not, so take leak lines from the
   windowed parity logs only.
+
+What the mini-games added (phase 4.2's rollout; docs/ARCHITECTURE.md section
+14, "The riddles"):
+
+* **An overlay of another mode with the same nodes.** A riddle is the
+  labyrinth's top layer, not a mode of its own, but its parts are the kinds
+  the menu and the stores already show: images (`show_pieces` with
+  `place_image`), lines (`show_lines`), a dim (`show_fade` on the UI layer),
+  a help line (`draw_help`). It needed call sites and two small line
+  helpers, no scene.
+* **Scaled images up are not exact as TextureRects.** The riddles' images
+  at 1.12, 1.2 and 1.7 came out 1/255 apart on a few pixels (18/255 on one)
+  as TextureRects of `place_image`'s rect, where the menu's cards scaled down
+  (0.7, 0.9) and every 1:1 image match. Draw such an image as its legacy
+  quad: `Graphics.place_image_part` with percent 1 and a `LevelBar` (its
+  corners and texture coordinates as `GameTexture.drawPart` emits them).
+* **Port bugs of number width.** The Java's `float` is 32-bit; a value
+  stepped in a loop and compared (`fade += .1f` until `>= 1`) can take one
+  step more in GDScript's 64-bit floats. Round each step to a 32-bit float
+  where the Java's count of steps matters (`RiddleGame._toFloat`:
+  `PackedFloat32Array([x])[0]`), as its own change with new goldens before
+  the conversion.
+* **Every frame of a fade.** A fade stepped per update shows its values only
+  frame by frame: shots `wait 16` apart are one frame each (a run of up to
+  about twenty; the remainder of 1000/60 adds up), and the probe's value per
+  shot proves that every step is shot.
+* **"Paused" does not stop a mode.** `GameCore` only draws the overlay (the
+  Java too): under "Paused" and "game pad lost" the mode keeps updating and
+  reading input (a riddle fades in, the pad lost menu's DOWN also moves a
+  puzzle's cursor). Plan pause cases with that in mind.
+* **State the mode inherits.** A top layer draws with whatever the frame
+  left: the colour of the minimap's arrow, the alpha test of the floor's
+  weather or save point (`setAlphaFunc(.1)`: the dim's first frames are
+  dropped), the font size of earlier frames (Cesadur's text at 24). The
+  nodes take `canvas_material()` and the sizes where the drawing was, so
+  they inherit the same; the probe should print them.
+* **Game state shown through the console.** A solved riddle sets its doors'
+  statuses: the console's `trigger <name>` prints a Database status in the
+  log before and after (`riddle_*_solved` cases), no dev hook needed.

@@ -1,0 +1,61 @@
+# A riddle that is only an image (RiddleGame; parity case riddle_image, phase
+# 4.2's mini-games: Mysterious Forest's iceriddle.png at 1.2): every frame of
+# the fade-in (the dim at the riddle's fade times the image's alpha .3, the
+# image at the fade), the riddle open, CROSS and every frame of the fade-out
+# until the labyrinth is back.
+wait 3000
+tap CROSS
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 600
+shot open
+log open
+tap CROSS
+wait 16
+shot out_#
+wait 16
+shot out_#
+wait 16
+shot out_#
+wait 16
+shot out_#
+wait 16
+shot out_#
+wait 16
+shot out_#
+wait 16
+shot out_#
+wait 16
+shot out_#
+wait 16
+shot out_#
+wait 16
+shot out_#
+wait 16
+shot out_#
+wait 800
+shot left
+log left
+quit

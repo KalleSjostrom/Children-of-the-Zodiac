@@ -91,6 +91,12 @@ func swapTiles(ax, ay, bx, by):
 	freey = ay
 
 
+## Bridge (phase 4.2 step B): the marker is a MenuBackground node's image
+## (Graphics.place_image, AbstractPage.show_pieces); --legacy=riddle draws it.
 func drawTopLayer(g):
 	super.drawTopLayer(g)
-	g.drawImage(marker, xs[cursorx] + markeroffset, ys[cursory] + markeroffset)
+	if Main.is_legacy("riddle"):
+		g.drawImage(marker, xs[cursorx] + markeroffset, ys[cursory] + markeroffset)
+	else:
+		AbstractPage.show_pieces(g, [g.place_image(marker, xs[cursorx] + markeroffset,
+				ys[cursory] + markeroffset)])

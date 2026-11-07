@@ -649,3 +649,24 @@ store_card_merge_last    store_card_merge_last    --load=Start --start=Alares
 store_inn                store_inn                --load="Slot 1" --start=Alares
 store_church_save        store_church_save        --load="Slot 1" --start=Alares
 store_church_bless       store_church_bless       --load="Slot 1" --start=Alares --status=churchbless.tut:1
+# Phase 4.2's mini-games (docs/phase4_2_minigames_prompt.md, plan 9.2): what
+# the dungeon_riddle_* cases above do not show (every kind shown, none
+# fading in or out, solved, with Cesadur's letter pool or dimmed hand, or
+# Hate's code entered). Every kind's fade-in and fade-out frame by frame (the
+# image riddle, Aegis's and Grivera's pages turned, the sliding puzzle's
+# tiles slid, the row puzzle's rows and columns shifted with both markers);
+# solved: the 4 x 4 magic square on its first move (tickets/triage.md R1),
+# Hate's code (a wrong one first) and Cesadur's four words (the letter
+# pool, a letter undone, both hands dimmed in turn), each opening its door
+# (the console's trigger prints the door's status before and after); the
+# Silent Ruin's one-page hint; "Paused" and "game pad lost" over a riddle.
+riddle_image             riddle_image             --load=Start --start="Ice Cavern--Mysterious Forest-mark0" --start-node=23:3 --no-encounters
+riddle_aegis_pages       riddle_aegis_pages       --load=Start --start="Temple of Aegis--First Floor-mark0" --start-node=107:0 --no-encounters
+riddle_grivera_pages     riddle_grivera_pages     --load=Start --start="Grivera--Omnious Hall-mark0" --start-node=123:0 --no-encounters
+riddle_silent            riddle_silent            --load=Start --start="Silent Ruin--The Great Ruins-mark0" --start-node=134:3 --no-encounters
+riddle_puzzle_moves      riddle_puzzle_moves      --load=Start --start="Silent Ruin--The Great Ruins-mark0" --start-node=138:3 --no-encounters
+riddle_rubics_moves      riddle_rubics_moves      --load=Start --start="Silent Ruin--The Great Ruins-mark0" --start-node=168:1 --no-encounters
+riddle_rubics19_solved   riddle_rubics19_solved   --load=Start --start="Silent Ruin--The Great Ruins-mark0" --start-node=102:1 --no-encounters
+riddle_hate_code         riddle_hate_code         --load=Start --start="Dorma's Forest--Forest of Hate-mark0" --start-node=171:0 --no-encounters
+riddle_cesadur_word      riddle_cesadur_word      --load=Start --start="Mt. Cesadur--Basement-mark0" --start-node=169:1 --no-encounters
+riddle_paused            riddle_paused            --load=Start --start="Silent Ruin--The Great Ruins-mark0" --start-node=72:3 --no-encounters

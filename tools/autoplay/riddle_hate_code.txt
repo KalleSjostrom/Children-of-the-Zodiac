@@ -1,0 +1,115 @@
+# The number pad of the Forest of Hate (HateRiddle; parity case
+# riddle_hate_code, phase 4.2's mini-games): every frame of the fade-in (the
+# digits and the code at the riddle's fade, the hand), TRIANGLE checks the
+# empty code, a wrong code 1234 entered digit by digit (reset with the error
+# sound), the right code 8145: its hinder door's status set to 1 (the
+# console's trigger before and after), every frame of the fade-out of the
+# solved riddle, the labyrinth back.
+wait 3000
+console trigger dorma's_forest--forest_of_hate.maphinderdoor124
+tap CROSS
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 600
+shot open
+log open
+tap TRIANGLE
+wait 300
+shot checked_empty
+tap CROSS
+wait 300
+shot wrong_1
+tap RIGHT
+wait 300
+tap CROSS
+wait 300
+shot wrong_12
+tap RIGHT
+wait 300
+tap CROSS
+wait 300
+shot wrong_123
+tap DOWN
+wait 300
+tap LEFT
+wait 300
+tap LEFT
+wait 300
+shot wrong_hand
+tap CROSS
+wait 300
+shot wrong_reset
+log wrong
+tap DOWN
+wait 300
+tap RIGHT
+wait 300
+tap CROSS
+wait 300
+shot right_8
+tap UP
+wait 300
+tap UP
+wait 300
+tap LEFT
+wait 300
+tap CROSS
+wait 300
+shot right_81
+tap DOWN
+wait 300
+tap CROSS
+wait 300
+shot right_814
+tap RIGHT
+wait 300
+tap CROSS
+wait 16
+shot solved_#
+wait 16
+shot solved_#
+wait 16
+shot solved_#
+wait 16
+shot solved_#
+wait 16
+shot solved_#
+wait 16
+shot solved_#
+wait 16
+shot solved_#
+wait 16
+shot solved_#
+wait 16
+shot solved_#
+wait 16
+shot solved_#
+wait 16
+shot solved_#
+wait 800
+shot left
+log left
+console trigger dorma's_forest--forest_of_hate.maphinderdoor124
+quit

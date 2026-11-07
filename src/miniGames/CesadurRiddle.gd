@@ -222,24 +222,47 @@ func draw(g, alpha = null):
 	pass
 
 
+## Bridge (phase 4.2 step B): the words and the letter pool are two MenuText
+## nodes (AbstractPage.show_lines; the pool's setColor(0, 0, 0, .3) is the GL
+## colour, which text ignores), the two hands a MenuBackground node's images
+## (MenuHand.place_hand_image, AbstractPage.show_pieces), the help a HelpLine
+## (AbstractPage.draw_help, --legacy=menu_frame); --legacy=riddle draws the
+## words, the pool and the hands.
 func drawTopLayer(g):
 	super.drawTopLayer(g)
+	var legacy := Main.is_legacy("riddle")
 	Graphics.setTextColor(JColor.BLACK)
 	g.setColor(0, 0, 0, 1)
 	g.startText()
+	var lines := []
 	for i in xs.size():
 		for j in ys.size() - 1:
 			if texts_[i][j] != null:
-				texts_[i][j].draw(g)
+				if legacy:
+					texts_[i][j].draw(g)
+				else:
+					texts_[i][j].place(g, lines)
+	if not legacy:
+		AbstractPage.show_lines(g, lines)
 	g.finishText()
 	g.startText()
 	if mode_ == SELECT_WORD:
 		g.setColor(0, 0, 0, .3)
-	texts_[0][ys.size() - 1].draw(g)
+	if legacy:
+		texts_[0][ys.size() - 1].draw(g)
+	else:
+		lines = []
+		texts_[0][ys.size() - 1].place(g, lines)
+		AbstractPage.show_lines(g, lines)
 	g.finishText()
-	hand.drawHand(g)
-	wordHand.drawHand(g)
-	drawHelp(g)
+	if legacy:
+		hand.drawHand(g)
+		wordHand.drawHand(g)
+	else:
+		var hands := [hand.place_hand_image(g)]
+		hands.append(wordHand.place_hand_image(g))
+		AbstractPage.show_pieces(g, hands)
+	AbstractPage.draw_help(g, drawHelp)
 
 
 func drawHelp(g):
@@ -355,6 +378,12 @@ class CesadurRiddleText extends RefCounted:
 		for l in letters:
 			l.draw(g)
 
+	## Bridge (phase 4.2 step B): draw without the drawing; appends the lines
+	## its letters would draw (RiddleGame.multi_line) to lines.
+	func place(g, lines: Array) -> void:
+		for l in letters:
+			l.place(g, lines)
+
 	func _to_string():
 		var sb: String = ""
 		for l in letters:
@@ -379,6 +408,13 @@ class CesadurRiddleText extends RefCounted:
 		func draw(g):
 			g.drawMultiString(letter, x, y)
 			g.drawMultiString("__", x, y + 2)
+
+		## Bridge (phase 4.2 step B): draw without the drawing; appends its two
+		## lines (an empty letter draws nothing and is left out).
+		func place(g, lines: Array) -> void:
+			if letter != "":
+				lines.append(RiddleGame.multi_line(g, letter, x, y))
+			lines.append(RiddleGame.multi_line(g, "__", x, y + 2))
 
 
 ## Java: CesadurRiddle.State, one move that can be undone.

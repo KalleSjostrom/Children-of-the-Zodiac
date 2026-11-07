@@ -1,0 +1,41 @@
+# "Paused" and "game pad lost" over a riddle (Puzzle, 5 x 5 Greed in The
+# Great Ruins; parity case riddle_paused, phase 4.2's mini-games): the riddle
+# fades in, START pauses it ("Paused" over the riddle, its fade-in stopped),
+# START again, the console's padlost (the overlay and its menu over the
+# riddle), CROSS answers it, CIRCLE and frames of the fade-out.
+wait 3000
+tap CROSS
+wait 66
+shot in_#
+tap START
+wait 300
+shot paused_#
+log paused
+wait 300
+shot paused_#
+tap START
+wait 16
+shot resumed_#
+wait 300
+shot resumed_#
+log resumed
+console padlost on
+wait 300
+shot padlost_#
+log padlost
+tap DOWN
+wait 300
+shot padlost_#
+tap CROSS
+wait 300
+shot answered
+log answered
+tap CIRCLE
+wait 33
+shot out_#
+wait 66
+shot out_#
+wait 800
+shot left
+log left
+quit

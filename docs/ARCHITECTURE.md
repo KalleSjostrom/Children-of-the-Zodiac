@@ -173,7 +173,8 @@ Main (Node, src/main/Main.gd)
 │                                   emotion bubbles, the mission display, the cutscene images,
 │                                   the tutorials, the world map's and the airship's name plate
 │                                   (section 12); the title's, the game over's and the menu
-│                                   pages' nodes, the menu lists and the stores' nodes (section 14)
+│                                   pages' nodes, the menu lists, the stores' and the riddles'
+│                                   nodes (section 14)
 ├── Transition (CanvasLayer 3)      the fade, the cutscene texts and the image over the
 │                                   actors, "Paused", "game pad lost" and its menu (sections 12, 14)
 ├── Audio (Node, created by Main)   music and sound effect players
@@ -314,8 +315,9 @@ of section 12, `Graphics.modelview_2d`, `screen_points`, `begin_capture_3d`,
 `Graphics.place_image_part`, `show_fade`'s layer, `AbstractPage.show_pieces`,
 `StartPage.show_info`, `MenuHand.place_hand_image`, `place_hand_with_color`,
 `LevelUpBar.place_static`, `HelpText.place_top_layer`, `AbstractCard.place_at`'s level,
-`Building.show_standard`, `AbstractStore.draw_dim`, `show_box` and the stores' twins: section
-14); refactors of a
+`Building.show_standard`, `AbstractStore.draw_dim`, `show_box` and the stores' twins; the
+riddles' `RiddleGame.draw_dim`, `multi_line`, `multi_centered_line`, `RiddleLoaderImage.place`,
+`Tile.place`, `CesadurRiddleText.place` and `Letter.place`: section 14); refactors of a
 legacy method's own code keep Java style (`Village.sortSprites`).
 
 **Flags in legacy code.** A subsystem being converted keeps its old path for
@@ -341,7 +343,7 @@ Game options go after `--` on the command line (see the header of
 | `--fixed-step` | The game advances exactly 1000/60 ms per frame, whatever the real frame time. |
 | `--seed=<n>` | Deterministic run (implies `--fixed-step`): every random generator (`J`, every `JRandom`, Godot's global one) is seeded from `n`; `J.currentTimeMillis()`, `Scheduler` and `GameAction` read a game clock advanced by the elapsed game time instead of the wall clock; saves are read from the shipped files and written to `user://saves_deterministic/` (emptied at start), never to the player's `user://saves/`; the slot lists date a slot saved in the run by the game clock from 1 Jan 2000, 00:00 (`SaveSlots.note_saved`; a file's time is wall-clock time, phase 4.2); no game pad is read (`GameCore.init2`: an idle pad releases AutoPlay's buttons every 40 ms). Two runs of an AutoPlay script then produce the same frames. |
 | `--uncapped` | No 60 FPS cap and no vsync. With `--seed` the result is the same, only faster. |
-| `--legacy=<a,b,…>` | Keep the legacy path of the listed subsystems (`Main.is_legacy`). `all` keeps every one. The flags of closed phases are gone with their legacy paths: phase 1's `villages` and `village_top_layer` (2026-11-03), phase 2's `dungeons` and `dungeon_drawing`, the particles phases' `particles` and `dungeon_particles`, phase 3's `dialog`, `fades`, `emotions`, `mission`, `pause`, `story_images`, `story_texts` and `tutorials`, phase 4.1's `world_map` and `airship` (2026-11-06; plan 6.9, 7.9, 8.4, 9.1). The battle effects (section 11): `battle_effects`: the card and enemy effects run the legacy simulation and draw its quads; `effect_waits` (dev): the GPU effects' legacy systems keep their whole pool, so the legacy particle counts decide when a battle goes on, as before (for parity runs with `--hide-particles`). Phase 4.2 (section 14): `title`: the title's background, logo, difficulty description and slots' dates are drawn by the legacy code; `game_over`: the game over's image likewise; `menu_list`: the `MenuNode` lists that are `MenuList` nodes (the title's menus, the game pad lost overlay's, the menu pages' with their variants and their scroll bars) are drawn by the legacy code (`MenuNode.drawChildrenFreely`). Phase 4.2's menu (section 14), each the legacy drawing of its parts on the menu pages (the stores keep their legacy drawing until their part): `menu_frame`: the background and the layout's pieces (`drawStandard`), the title line, the info (gold, steps, time), the thumbnail and the help lines; `menu_text`: a page's own text and boxes (the Save list's dates, the saving box, the help page's difficulty text, the map page's "Explored"); `status`: the status line (`StatusPage.drawTop`), the equip page's status with the comparison (`EquipPage.drawStatus`) and its item (`StatusPage.drawEquip`); `deck`: the deck page's decks (`Deck.drawDeck`), their titles and scroll bars and the flying cards; `automap`: the map page's map (`LabyrinthMap.draw`). Phase 4.2's stores (section 14) use the menu's flags for the parts they share (`menu_frame`: the background, keeper and pieces, the title, the info lines, the help line; `menu_list`: the lists; `status`: the Weapon Store's status and item; `deck`: the card store's decks, scroll bars and merge preview; `menu_text`: the confirm boxes and the Church's save dates) and two of their own: `dim`: the confirm boxes' dims (`fadeOldSchool(.5)`); `bless`: the Church's bless page (its costs, level bars, markers, help text and total). With all of them and the pilot's three the frame is drawn exactly as before phase 4.2. |
+| `--legacy=<a,b,…>` | Keep the legacy path of the listed subsystems (`Main.is_legacy`). `all` keeps every one. The flags of closed phases are gone with their legacy paths: phase 1's `villages` and `village_top_layer` (2026-11-03), phase 2's `dungeons` and `dungeon_drawing`, the particles phases' `particles` and `dungeon_particles`, phase 3's `dialog`, `fades`, `emotions`, `mission`, `pause`, `story_images`, `story_texts` and `tutorials`, phase 4.1's `world_map` and `airship` (2026-11-06; plan 6.9, 7.9, 8.4, 9.1). The battle effects (section 11): `battle_effects`: the card and enemy effects run the legacy simulation and draw its quads; `effect_waits` (dev): the GPU effects' legacy systems keep their whole pool, so the legacy particle counts decide when a battle goes on, as before (for parity runs with `--hide-particles`). Phase 4.2 (section 14): `title`: the title's background, logo, difficulty description and slots' dates are drawn by the legacy code; `game_over`: the game over's image likewise; `menu_list`: the `MenuNode` lists that are `MenuList` nodes (the title's menus, the game pad lost overlay's, the menu pages' with their variants and their scroll bars) are drawn by the legacy code (`MenuNode.drawChildrenFreely`). Phase 4.2's menu (section 14), each the legacy drawing of its parts on the menu pages (the stores keep their legacy drawing until their part): `menu_frame`: the background and the layout's pieces (`drawStandard`), the title line, the info (gold, steps, time), the thumbnail and the help lines; `menu_text`: a page's own text and boxes (the Save list's dates, the saving box, the help page's difficulty text, the map page's "Explored"); `status`: the status line (`StatusPage.drawTop`), the equip page's status with the comparison (`EquipPage.drawStatus`) and its item (`StatusPage.drawEquip`); `deck`: the deck page's decks (`Deck.drawDeck`), their titles and scroll bars and the flying cards; `automap`: the map page's map (`LabyrinthMap.draw`). Phase 4.2's stores (section 14) use the menu's flags for the parts they share (`menu_frame`: the background, keeper and pieces, the title, the info lines, the help line; `menu_list`: the lists; `status`: the Weapon Store's status and item; `deck`: the card store's decks, scroll bars and merge preview; `menu_text`: the confirm boxes and the Church's save dates) and two of their own: `dim`: the confirm boxes' dims (`fadeOldSchool(.5)`); `bless`: the Church's bless page (its costs, level bars, markers, help text and total). Phase 4.2's riddles (section 14) use `dim` for the dim behind a riddle (`fadeOldSchool(1 − fade × image alpha)`), `menu_frame` for Cesadur's help line and one of their own: `riddle`: the riddle's image, the puzzles' tiles and markers, Aegis's, Grivera's, Hate's and Cesadur's texts and the hands of Hate and Cesadur. With all of them and the pilot's three the frame is drawn exactly as before phase 4.2. |
 | `--hide-particles` | Dev only: the particles draw nothing (`Main.hide_particles`; they still run): the village and cutscene systems, the dungeon weather and save points, the card and enemy effects drawn as particles (not the sphere, image, slow and enemy-colour systems), with the GL state their drawing leaves; for parity runs that compare everything else. |
 | `--minimap-node` | Dev only: the labyrinth's minimap is drawn by `MinimapPart` nodes (`MapRenderer.show_map`) instead of the 3D bridge's batches; the floor's frames are the same to the bit, a battle's frames after them differ by 1/255 (plan 8.3), so it is not the default. |
 | Console `padlost [on\|off]`, `emotion <who> <emotion\|off> [shake]` | Dev only (debug console, `scenes/debug/GameCommands.gd`; AutoPlay `console`): `padlost` makes `InputManagers.connectionLost` report a lost game pad (`lost_simulated`) until the overlay's menu is answered, for the "game pad lost" overlay without a pad (seeded runs read none); `emotion` sets a bubble on a party member or villager of the current village (`Sprite.setEmotion`, which only cutscenes call), for the emotions in a village frame. Parity cases `pad_lost`, `emotions_village`. |
@@ -980,10 +982,11 @@ game mode); what a boss leads to after the win (another boss's
 `BossBattleArea`, a story, the world map) is a mode of its own.
 
 **Still legacy** in Labyrinth's frame: the minimap (`MapRenderer`, 3D, in
-the scene's chunk: plan 8.3 tells why it stays there), battles and riddles
+the scene's chunk: plan 8.3 tells why it stays there) and battles
 (`labDrawable`, their top layers; their card and enemy effects are GPU
 particles, section 11). The mission display, dialogs and card info, the top
-layer (tutorials) and the fade are phase 3's nodes (section 12).
+layer (tutorials) and the fade are phase 3's nodes (section 12); a riddle's
+top layer is phase 4.2's UI nodes (section 14, "The riddles").
 
 **Dungeon particles (the dungeon particles phase, plan 6.11).** The rain or
 snow and the save points' particles run on the GPU: `QuadParticles3D`
@@ -1118,8 +1121,8 @@ mission display, "Paused" and "game pad lost", the cutscene images drawn
 over the actors, the story and scroll texts and the tutorials' top layer.
 The minimap stays the 3D bridge's batches (a node for it exists behind the
 dev flag `--minimap-node`; plan 8.3 tells why it is not the default). Still
-legacy as well: a battle's and a riddle's top layer and the riddle's fade
-(phase 4; the title, the game over, the menu pages and the stores are done,
+legacy as well: a battle's top layer (phase 4.4; the title, the game over,
+the menu pages, the stores and the riddles with their fade are done,
 section 14). The world map's
 and the airship's name plate is a node since phase 4.1 (section 13). How to
 convert an overlay: `docs/CONVERTING_UI.md`.
@@ -1367,11 +1370,12 @@ tinted by the colour), at alpha 1 − fade value. The legacy `Fadeable` keeps
 the fade value and its pace (0.03 per drawn frame; no Tween or Timer).
 The dims of "Paused" and "game pad lost" (`fadeOldSchool(0.5)`) are Fade
 nodes too (rollout). The tutorial's dim (`fadeOldSchoolColor`) is the
-Tutorial node's `Dim`. Still legacy: the riddle's fade (`RiddleGame.drawTopLayer`,
-the backdrop of its image: phase 4) and the battle's (result screens, an
-enemy's red flash); the stores' dims behind their confirm boxes are Fade
-nodes on the UI layer (`show_fade(.5, Graphics.UI_LAYER)`, section 14); the
-menu hand's dim is the tint of `MenuList`'s hand (section 14).
+Tutorial node's `Dim`. Still legacy: the battle's (result screens, an
+enemy's red flash: phase 4.4); the stores' dims behind their confirm boxes
+and the riddle's dim behind its image (`RiddleGame.drawTopLayer`'s
+`fadeOldSchool(1 − fade × image alpha)`) are Fade nodes on the UI layer
+(`show_fade(value, Graphics.UI_LAYER)`, section 14); the menu hand's dim is
+the tint of `MenuList`'s hand (section 14).
 
 **Flags (removed).** `--legacy=dialog` kept the legacy drawing of the dialog
 box, the message box and the card info popup, `--legacy=fades` the legacy
@@ -1381,7 +1385,8 @@ the frame was drawn exactly as before phase 3 (plan 8.1, 8.3). Closing phase
 3 (2026-11-06, plan 8.4) removed them with the legacy drawing they kept. Still
 legacy, not part of phase 3's closing: the minimap (the 3D bridge's batches;
 `--minimap-node` is a dev check) and the overlays of the modes phase 4
-converts (the stores, the riddles, the battles).
+converts (the stores and the riddles are done, section 14; the battles are
+phase 4.4's).
 
 ## 13. The world map and the airship (phase 4.1)
 
@@ -1805,8 +1810,8 @@ stores").
 **Flags** (section 7): `menu_frame`, `menu_list`, `menu_text`, `status`,
 `deck`, `automap`, one per kind of part, so that the stores use the same
 flags for the parts they share; with all of them (and the pilot's `title`
-and `game_over`, and the stores' `dim` and `bless`) the frame is drawn
-exactly as before phase 4.2.
+and `game_over`, the stores' `dim` and `bless`, the riddles' `riddle`) the
+frame is drawn exactly as before phase 4.2.
 
 **Still legacy** in the menu: the state, the input and the timing (step C:
 decision 3, phase 4.3's input wrapper); the `draw(g)` methods themselves
@@ -1835,7 +1840,8 @@ saving coroutine, the Inn's prize and its seven seconds after a rest.
 ```
 LevelBar (Control)                  LevelUpBar's images, each over its part of the bar: the
                                     legacy quads (Graphics.place_image_part's corners and
-                                    texture coordinates, two triangles each, as EmotionBubble)
+                                    texture coordinates, two triangles each, as EmotionBubble);
+                                    also a riddle's scaled image ("The riddles" below)
 BlessPage (Control)                 the Church's bless page between its pieces and its list
 ├── Cost (BaselineLabel Text30, 560, 360)
 ├── Rows                            a BlessRow per character
@@ -1932,3 +1938,71 @@ store's background (1024 × 768, about 3 MB as a texture) and keeper, which
 by the two `MenuBackground` nodes until the next store or the menu replaces
 them; the pieces, cards, hands and bars are loaded permanently. A few MB:
 nothing to release.
+
+### The riddles (phase 4.2's rollout)
+
+The riddles of `src/miniGames` (a dungeon `riddle` object makes one the
+labyrinth's `labDrawable`: `Labyrinth.enterRiddle`) are converted through
+step B: `RiddleGame` (an image), `Puzzle`, `RubicsPuzzle` and
+`RubicsPuzzle19` (tiles and a marker), `AegisRiddle` and `GriveraRiddle`
+(pages of centred lines), `HateRiddle` (a number pad and its hand),
+`CesadurRiddle` (an anagram: four words, a letter pool, two hands and a help
+line); `RotatePuzzle` (unused: plan Appendix) inherits `Puzzle`'s drawing
+and its nodes. A riddle draws nothing in 3D (its `draw` is empty): all of
+it is its top layer, which `Labyrinth.draw`
+calls after the minimap and its dialog's slot (no dialog, mission or
+top-layer item is ever shown with a riddle: plan 9.2) and before the mode
+fade. The riddles keep the state, the input and the timing: the fade (per
+update, .1 up and .12 down, each step a 32-bit float as the Java computes
+it: plan Appendix), the cursors, the tiles' moves, Cesadur's words and undo
+stack, Hate's code, the solved status (the hinder doors). No new node: a
+riddle's parts are the stores' and the menu's nodes fed with the riddle's
+state (`LevelBar` for the scaled image), each shown where it was drawn (`Graphics.show_ui`, the UI layer,
+pooled per scene and occurrence; the nodes keep no reference to a riddle or
+the labyrinth).
+
+| Riddle | Nodes, in the frame's order (after the floor's scene, its weather's front pass and the minimap; before the mode fade, "Paused" and "game pad lost" on Transition) |
+|---|---|
+| Every riddle | Fade (the dim: `show_fade(1 − fade × image alpha, UI_LAYER)`, the fade mode's image (black) at alpha fade × .3; none at fade 0), LevelBar (the image at its scale, tinted `(1, 1, 1, fade)`, as its legacy quad: `RiddleLoaderImage.place`, the whole image as a part of percent 1, `Graphics.place_image_part`) |
+| Puzzle, RubicsPuzzle, RubicsPuzzle19 | MenuBackground (the tiles, `Tile.place`, at the fade; a Puzzle's free slot has no image), MenuBackground (the marker: `NxNsingle.png` round the cursor's tile, or `NxNhorizontal.png` / `NxNvertical.png` over its row or column) |
+| AegisRiddle, GriveraRiddle | MenuText (the page's lines centred at 512, `Text28`, black at alpha 1 (Aegis) or at the fade (Grivera); none on the way out) |
+| HateRiddle | MenuText (the nine digits and the code centred at 512, `Text36`, black at the fade), MenuBackground (the hand) |
+| CesadurRiddle | MenuText (the four words' letters and the "__" under each), MenuText (the letter pool), both black at the labyrinth's fade value and the size earlier drawing left (24 in every probed frame); MenuBackground (the letter hand, then the word hand; a dimmed one at alpha .3); HelpLine (four button icons and their labels) |
+
+**Step B.** At each call site the riddle calls the twin, or with the part's
+flag the legacy drawing: `RiddleGame.draw_dim` (the dim: the stores' confirm
+dim's node, `Graphics.show_fade` on the UI layer); a `LevelBar` with the
+image's quad (`RiddleLoaderImage.place`: a TextureRect of the image scaled by
+1.12, 1.2 or 1.7 drew a few pixels 1/255 apart, one 18/255, while the 1:1
+images match to the bit; the stores' `LevelBar` draws the legacy quads of
+image parts, and a whole image is a part of percent 1);
+`AbstractPage.show_pieces` with `Graphics.place_image`'s images (the tiles,
+the markers, the hands through `MenuHand.place_hand_image`, all at 1:1);
+`AbstractPage.show_lines` with `RiddleGame.multi_line` and
+`multi_centered_line` (a line `drawMultiString` or `drawMultiCenteredText`
+would draw now: the font size, the text colour at `startText`'s alpha, the
+font; centred by `BaselineLabel`'s alignment, which rounds as
+`calcAlignCenter`); `AbstractPage.draw_help` (Cesadur's own `drawHelp` run
+against a `HelpLineCapture`). Every state change of the drawing is kept in
+its order: the dim's colour and the fade image's bind, `setColor(1, 1, 1,
+fade)`, each image's bind, the font sizes 28 and 36, the black text colour,
+`startText` and `finishText` (its `setColor(color)`), Cesadur's
+`setColor(0, 0, 0, 1)` and `setColor(0, 0, 0, .3)` (the GL colour, which the
+port's text ignores: its letter pool is drawn at the same alpha as its
+words), the hands' `dim(.3)` and `dim(1)`, the help's `setColor(color)`
+after each label. A riddle's draw changes no game state. The state it leaves
+(the colour `(1, 1, 1, fade)` after an image or a puzzle, `(1, 1, 1, 1)`
+after the text kinds, the sizes 28 and 36, black text) carries into the next
+frame, whose 2D sets its own before drawing (plan 9.2).
+
+**Flags** (section 7): `dim` (the dim, as the stores' confirm dims),
+`menu_frame` (Cesadur's help line, as the menu's) and `riddle` (the image,
+the tiles and markers, the texts, the hands). With all three (and every
+other phase 4.2 flag) the frame is drawn exactly as before.
+
+**Still legacy** in the riddles: the state, the input and the timing (step
+C: decision 3; decision 6 for the fade; phase 4.3's input wrapper); the
+`drawTopLayer` methods (the twins run there).
+Nothing of a riddle is drawn through `Graphics` with the flags off. The
+pooled nodes keep their last textures (the last riddle's image and tiles,
+which `ImageHandler` loads for the place): a few MB, nothing to release.

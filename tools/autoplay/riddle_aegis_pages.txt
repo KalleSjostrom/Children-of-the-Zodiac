@@ -1,0 +1,65 @@
+# The Temple of Aegis' inscription (AegisRiddle; parity case
+# riddle_aegis_pages, phase 4.2's mini-games): the fade-in (the texts at
+# alpha 1 over the fading image), the first page, CROSS turns to the second,
+# CROSS fades out (no text on the way out), every frame until the labyrinth
+# is back.
+wait 3000
+tap CROSS
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 600
+shot page1
+log page1
+tap CROSS
+wait 400
+shot page2
+log page2
+tap CROSS
+wait 16
+shot out_#
+wait 16
+shot out_#
+wait 16
+shot out_#
+wait 16
+shot out_#
+wait 16
+shot out_#
+wait 16
+shot out_#
+wait 16
+shot out_#
+wait 16
+shot out_#
+wait 16
+shot out_#
+wait 16
+shot out_#
+wait 16
+shot out_#
+wait 800
+shot left
+log left
+quit

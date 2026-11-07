@@ -9,7 +9,10 @@ extends Control
 ## the low mark in white and from the low to the high mark in green, the
 ## overlay up to the high mark); a battle's level-up screen can show
 ## LevelUpBar.draw's (the empty bar, the blue bar and the overlay up to the
-## experience) the same way.
+## experience) the same way. A whole image is a part of percent 1: a riddle
+## shows its scaled image as one (RiddleLoaderImage.place, the mini-games of
+## phase 4.2; a TextureRect of the image at 1.12, 1.2 or 1.7 was 1/255 off on
+## a few pixels).
 ##
 ## Each part is the legacy drawing's quad: its corners and texture
 ## coordinates as GameTexture.drawPart and drawPartRange emit them, drawn as

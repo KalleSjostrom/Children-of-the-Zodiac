@@ -1,0 +1,29 @@
+# The Silent Ruin's hint (GriveraRiddle "silent": one page, 35 px apart, its
+# image 14.png at 1.12; parity case riddle_silent, phase 4.2's mini-games):
+# frames of the fade-in, the page, CROSS and frames of the fade-out.
+wait 3000
+tap CROSS
+wait 16
+shot in_#
+wait 16
+shot in_#
+wait 33
+shot in_#
+wait 66
+shot in_#
+wait 600
+shot page
+log page
+tap CROSS
+wait 16
+shot out_#
+wait 33
+shot out_#
+wait 66
+shot out_#
+wait 33
+shot out_#
+wait 800
+shot left
+log left
+quit

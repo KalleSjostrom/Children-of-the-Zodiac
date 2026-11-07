@@ -1,4 +1,4 @@
-# Handoff: state of the Godot port (2026-11-06, after steps 1–3, modernization phase 0, phases 1, 2, 3 and 4.1 done and closed, the particles phases P and P2, phase 4.2's pilot, its menu and its stores through step B, the character sprite sheets)
+# Handoff: state of the Godot port (2026-11-07, after steps 1–3, modernization phase 0, phases 1, 2, 3 and 4.1 done and closed, the particles phases P and P2, phase 4.2 through step B (its pilot, the menu, the stores and the mini-games), the character sprite sheets)
 
 Conventions: legacy (ported) code follows `docs/PORTING.md`; new code
 (scenes, resources, tools, bridge) follows `docs/ARCHITECTURE.md`. The
@@ -459,6 +459,49 @@ section 14, "The stores"; the procedure in `docs/CONVERTING_UI.md` section
 - Prepared (plan 9.2): the mini-games (one session, the fade's port bug
   first; `docs/phase4_2_minigames_prompt.md`).
 
+**Modernization phase 4.2's rollout, part 3 (the mini-games): step B done**
+(plan 9.2, "Results of the mini-games"; conventions in `docs/ARCHITECTURE.md`
+section 14, "The riddles"; the procedure in `docs/CONVERTING_UI.md` section
+5):
+- First, its own change with new goldens: the riddle fade's port bug
+  (`RiddleGame.update` steps the fade as the Java's 32-bit float,
+  `_toFloat`: the fade-in ends at 1.0000001 after 10 updates, not 1.1 after
+  11; the fade-out takes 9). It changed the 36 old shots that show a riddle
+  (the dim at alpha .3 instead of .33: up to 8/255 lighter; translucent
+  texels and Hate's digits at alpha 1.0000001 instead of 1.1: up to 23/255),
+  nothing else.
+- The eight riddle kinds draw through UI nodes after the labyrinth's dialog's
+  slot: the dim is the Fade node on UI (as the stores' confirm dims), the
+  scaled image a `LevelBar` (its legacy quad: as a TextureRect it was 1/255
+  off on a few pixels), the tiles, markers and hands `MenuBackground`
+  images, the texts `MenuText` lines (Aegis, Grivera, Hate's digits and
+  code, Cesadur's words and letter pool), Cesadur's help a `HelpLine`. No
+  new scene. The riddles keep the state, the input and the fade.
+- Flags: `--legacy=riddle` (new), `dim` (the dim) and `menu_frame`
+  (Cesadur's help); with every phase 4.2 flag the frame is drawn exactly as
+  before phase 4.2.
+- Coverage: ten new cases (`riddle_*`, 266 shots: every kind's fade-in and
+  fade-out frame by frame, Aegis's and Grivera's pages, the puzzles' moves
+  and both row-puzzle markers, the 4 × 4 magic square, Hate's code and
+  Cesadur's four words solved with their doors' statuses printed (the
+  console's `trigger`), the Silent Ruin's hint, "Paused" and "game pad
+  lost" over a riddle); 427 cases in all, 8,083 shots. No dev hook needed.
+- Parity (tolerance 0; golden `r1gold`, nodes `r3node`): golden vs. nodes
+  identical on every case (logs and error lines too); `dim`, `riddle`,
+  `menu_frame` alone and together vs. nodes and vs. the golden on the 19
+  riddle cases identical; every phase 4.2 flag vs. the golden identical; no
+  legacy text or quad in any riddle frame with the flags off.
+- Frame rate (normal runs): 60 capped either way; uncapped, legacy → nodes,
+  the 4 × 4 sliding puzzle 570 → 680 FPS, Cesadur's anagram 582 → 615.
+- Found: the Java's `Puzzle` scrambles before setting its free slot (an
+  original bug: solvable or not by chance), "Paused" stops nothing but the
+  play time (as in the Java: a riddle fades in under it), the riddles
+  inherit the alpha test of a floor's weather or save point (the dim's first
+  frames dropped): plan Appendix and 9.2. Afterwards only `r3node` was kept
+  in `tools/parity/out`.
+- Prepared (plan 9.2, "Closing phase 4.2"): the closing of phase 4.2
+  (`docs/phase4_2_close_prompt.md`).
+
 **Character sprite sheets (2026-11-03): plans A and B done**
 (`docs/VILLAGER_SPRITES_PLAN.md`, "As built"; conventions in
 `docs/ARCHITECTURE.md` section 9, "Character frames and sheets"):
@@ -529,13 +572,13 @@ decision 5 decided in plan section 13):
 
 ## Plan (what is left)
 
-0. **Modernization:** phases 1 to 4.1 are closed (2026-11-06). Next: the
-   last part of phase 4.2's rollout (plan 9.2: the mini-games, which reuse
-   the stores' dim, box, hands and help line,
-   `docs/phase4_2_minigames_prompt.md`; then closing phase 4.2; battles
-   still draw overlays of their own, phase 4.4). The minimap stays
-   the 3D bridge's until the battles leave the bridge (plan 8.4). Record
-   goldens before each change.
+0. **Modernization:** phases 1 to 4.1 are closed (2026-11-06), phase 4.2
+   is done through step B (2026-11-07: the mini-games were its last part).
+   Next: closing phase 4.2 (plan 9.2, "Closing phase 4.2": its eleven flags,
+   their legacy branches and the helpers only they reach;
+   `docs/phase4_2_close_prompt.md`), then phase 4.3 or 4.4 (battles still
+   draw overlays of their own). The minimap stays the 3D bridge's until the
+   battles leave the bridge (plan 8.4). Record goldens before each change.
 
 1. **Performance:** since P2 the labyrinths with rain or snow run at 60 FPS
    (Forest Path was 35, Ice Cavern--Frozen Field 50; plan 6.12), and since
@@ -546,9 +589,9 @@ decision 5 decided in plan section 13):
    the scene, 5 ms from its `.map` (plan 7.8); a save point no longer adds
    ≈0.4 s. Per-frame fades assume 60 FPS. Measure with the `fps=` value
    that AutoPlay prints with every `log`/`shot`, in normal runs.
-2. **More runtime coverage:** level-up screen, riddle mini-games
-   (`src/miniGames`), buying/selling/merging cards, inn rest, the later
-   chapters and their bosses. Compare look and timing with the original
+2. **More runtime coverage:** level-up screen, the later chapters and
+   their bosses (the riddles and the stores' buying, selling, merging and
+   resting have cases since phase 4.2). Compare look and timing with the original
    logic.
 3. **Polish (former step 4):** fades at 60 FPS, music transitions (all tests
    so far ran with `--mute`), saves in `user://saves/`, export (install the
@@ -573,8 +616,9 @@ decision 5 decided in plan section 13):
   only the shipped saves.
 - Parity: `tools/parity/parity.sh record <set>` / `compare <a> <b>` /
   `ab "<args a>" "<args b>" [case…]`, see `docs/ARCHITECTURE.md` section 7.
-  Runs are windowed (screenshots need a renderer); all 417 cases take
-  about 19 minutes with `--jobs=5` (14-15 with `--jobs=8` when 10 GB are
+  Runs are windowed (screenshots need a renderer); all 427 cases take
+  about 23 minutes with `--jobs=4` (with about 6 GB free at idle; 19 with
+  `--jobs=5` for 417 cases, 14-15 with `--jobs=8` when 10 GB are
   free at idle; check first: with 7 GB free, 8 jobs crashed runs) on 12
   logical cores (run nothing beside them, not even a headless compare:
   16 GB run out, plan 12); a compare of two full sets takes about 5

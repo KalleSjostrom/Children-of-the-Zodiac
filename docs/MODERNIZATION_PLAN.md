@@ -2693,7 +2693,7 @@ stores and the menu are 2D images (`AbstractCard.drawCard`,
 `Deck.drawDeck`), so nothing waits for phase 4.4's cards; a riddle's frame
 is the labyrinth's (3D walls and weather, the riddle's 2D after them).
 
-* **Mini-games** (`src/miniGames`, 12 files, 1,253 lines; `RiddleGame` and
+* **Mini-games** (*done through step B: results below*; `src/miniGames`, 12 files, 1,253 lines; `RiddleGame` and
   `HateRiddle`, `CesadurRiddle`, `GriveraRiddle`, `AegisRiddle`, `Puzzle`,
   `RubicsPuzzle`, `RubicsPuzzle19`; `RotatePuzzle` is unused). A dungeon
   `riddle` object (Cross in front of it) makes the riddle the labyrinth's
@@ -2945,11 +2945,11 @@ is the labyrinth's (3D walls and weather, the riddle's 2D after them).
      menu's pieces, lists, deck, status helpers, info lines, help line and
      box; new: the confirm dim (the Fade node on UI), `LevelBar` (the bars'
      image parts) and the Church's bless page (`BlessPage`, `BlessRow`).
-  3. The mini-games (one session): independent of both (only `MenuHand`,
-     whose node is `MenuList`'s hand, and the button icons); fix the fade's
-     port bug first, as its own change with new goldens; its top layer is a
-     UI node after the labyrinth's dialog. It can go first if a short
-     session is wanted.
+  3. The mini-games: *done in one session (results below)*. They reused
+     the stores' dim (the Fade node on UI), `LevelBar` (the scaled image as
+     its legacy quad), the menu's `MenuBackground` images, `MenuText` lines
+     and `HelpLine`; the fade's port bug was fixed first, as its own change
+     with new goldens.
   No part needs a decision of section 13 for step B; step C of all of them
   needs decision 3 (and 6 for the riddle's fade and the stores' and menu's
   animations) and phase 4.3's input wrapper.
@@ -3359,6 +3359,246 @@ the timing.
   copy until `check_all.gd` skipped `.gdignore`d folders. The free memory
   at idle was 7 GB: an 8-job recording crashed 11 runs (12).
 
+**Results of the mini-games (phase 4.2's rollout, part 3,
+`docs/phase4_2_minigames_prompt.md`; conventions in docs/ARCHITECTURE.md
+section 14, "The riddles").** The fade's port bug fixed first (its own
+change, new goldens), then step B for the eight riddle kinds with the menu's
+and the stores' nodes; the legacy riddles keep the state, the input and the
+timing.
+
+* **Baseline** (on 735eaee8): `tools/check.sh` 0 failed (497 scripts);
+  goldens of the 417 cases (`r0base`, 7,817 shots), identical to the stores'
+  node run `st2node` shot for shot, log for log and in every case's error and
+  leak lines (3 script errors, 2,421 errors, the exit leak reports of the
+  five `effects_*` cases); every phase 4.2 flag (`--legacy=title,game_over,
+  menu_list,menu_frame,menu_text,status,deck,automap,dim,bless`, every case)
+  vs. `r0base`: 7,817 of 7,817, all logs and error lines identical. Recorded
+  with 4 jobs (5.5–6 GB free at idle).
+* **The fade's port bug** (Appendix; `RiddleGame.update` rounds each step to
+  a 32-bit float, `_toFloat`): the fade-in ends at 1.0000001 after 10
+  updates (was 1.1 after 11), the fade-out after 9 (was 10). Goldens of every
+  case on it vs. `r0base`: the 36 old shots that show a riddle differ (every
+  one open: no old shot showed a fade), the other 7,781 shots, all 417 logs
+  and every case's error lines are identical. The 36, explained pixel by
+  pixel (`sheet_fadefix.png` in `tools/parity/out/_work` had them side by
+  side): outside the riddle's image only the dim changed, its alpha fade ×
+  .3 from .33 to .30000004: every differing pixel there is lighter after the
+  fix, by at most 8/255 (.03 × 255; the bright ones round a little off the
+  linear estimate); inside the image the opaque texels hide the dim and are
+  unchanged (all of `hate1.png`, an RGB image: no pixel differs), the
+  translucent ones (the parchment's edges, `iceriddle.png`, `back.png` and
+  the tiles' edges) took the image's alpha 1.1 before and 1.0000001 now
+  (up to 23/255), and Hate's digits' antialiased edges, drawn at the fade,
+  changed with it (up to 16/255). Cesadur's text (at the labyrinth's fade)
+  and the hands (after `finishText`'s colour) did not change. The one update
+  less of the fade-out shows in no old shot (none during it; the riddle
+  leaves the labyrinth one frame earlier, and every later shot and log line
+  is the same).
+* **Facts** (deliverable 2; the probe over every case), where they add to or
+  differ from the prompt and the mini-games entry above:
+  * The frame. A riddle starts in the labyrinth's update (CROSS on the
+    riddle object: `Riddle.activate` → `enterRiddle`: `push` hides the
+    minimap, which slides out, and the mission) and is drawn the same frame
+    at fade 0 (nothing shows: the dim at 1 draws nothing, the image at alpha
+    0); the labyrinth draws its scene, the back weather pass, the riddle's
+    `draw` (empty, once its `initDraw`, empty too), the front weather pass
+    over it (`show_weather_over`), the minimap, then in 2D the mission (no
+    riddle floor has one), the dialog (never shown with a riddle: the
+    riddle's `dialog.setDS` gets an empty list, and the labyrinth's `dialog`
+    stays null), the riddle's top layer, the top-layer items (none in any
+    probed riddle frame) and the mode fade (the labyrinth's fade value is 1
+    in every riddle frame: nothing). "Paused" and "game pad lost" are drawn
+    over it (Transition), but neither stops it: as in the Java, `GameCore`
+    only draws them, so a riddle goes on fading in under "Paused" and reads
+    its input under both (the pad lost menu's DOWN moved a puzzle's cursor
+    too; Appendix). The riddle ends in the update its fade-out goes below 0
+    (`exitRiddle`, `pop`); that frame draws the labyrinth.
+  * Order per kind: the dim (the fade image, black in every probed frame,
+    scaled ×8 over the screen at alpha fade × .3), `setColor(1, 1, 1, fade)`,
+    the image (`RiddleLoader`'s, scaled: `resultBack.png` 608 × 337 at 1.12,
+    `hatetest.png` at 1.7, `iceriddle.png` at 1.2, `14.png` at 1.12, the image
+    riddles' and `back.png` at 1); then the puzzles' tiles (125 or 100 px,
+    filling `back.png`'s inner square; a Puzzle's free slot has no image),
+    and their marker (the 129 × 129 `4x4single.png` 2 px round the cursor's
+    tile, over its neighbours' edges; `horizontal`/`vertical.png` over the
+    cursor's row or column); Aegis's six lines a page and Grivera's page
+    (centred at 512 from y 250, 50 apart; Silent Ruin's hint 35), black, size
+    28, not drawn on the way out; Hate's nine digits and its code (size 36,
+    black, at the fade; "_ _ _ _ " centred at y 500, the trailing space
+    measured too), its hand (45 × 40 at x − 40, y − 25: over the digit's
+    first pixels); Cesadur's four words and its pool (each letter and "__"
+    2 px under it, 28 px apart, size 24: the size earlier drawing left, in
+    every probed frame), its letter hand (hidden until the first CROSS),
+    then its word hand (one of them dimmed in the letter or word mode), its
+    help (four icons centred 28 px left of their labels at y 510, "Exit"
+    overlapping its icon by 4 px, as the menu's help lines).
+  * State changes in the draws: none of the game's (the fade, the cursors,
+    the hands' places and dims change in `update`); the GL and text state as
+    listed in ARCHITECTURE section 14. What the riddle starts from: the
+    colour of the minimap's arrow `(1, .85, 0, 1)`, the font size and text
+    colour earlier frames left (24, or the 28 and 36 the riddle's own text
+    left), and the alpha test of the frame: `GREATER .1` on the floors whose
+    weather (Forest of Hate, Mysterious Forest) or save point (Omnious Hall,
+    Temple of Aegis) drew before it (`setAlphaFunc(.1)`), so the dim's
+    first three frames (alpha .03 to .09) are dropped there. What it leaves: the colour `(1, 1, 1,
+    fade)` after an image riddle or a puzzle, `(1, 1, 1, 1)` after the text
+    kinds and Cesadur; the size and the black text carry into the next
+    frame, whose 2D sets its own before it draws (the minimap's colour comes
+    first; the walls and objects are lit and ignore the current colour).
+  * Text: centred by `calcAlignCenter` at 512 (Aegis's and Grivera's lines,
+    Hate's code), at `startText`'s alpha: 1 (Aegis), the riddle's fade
+    (Grivera, Hate), the labyrinth's fade value (Cesadur: 1 in every probed
+    frame). Cesadur's `setColor(0, 0, 0, .3)` before its pool is the GL
+    colour, which the port's text ignores (`Graphics.drawMultiString` uses
+    the text colour and alpha): the pool is drawn as the words.
+  * Solved: the 4 × 4 magic square on its first move (tickets/triage.md
+    R1; its tiles are never scrambled: 16 of 16 in place), Hate's 8145 and
+    Cesadur's four words each set their hinder door's status 0 → 1
+    (`InventoryButton.updateDoorStatus`) and fade out.
+  * Found: `Puzzle` scrambles before its free slot is set (an original bug,
+    Appendix); the probe saw 1 of 15 tiles in place and the free slot at
+    (3, 3).
+* **Coverage.** The probe (prints in `RiddleGame.drawTopLayer` with the kind,
+  fade, dim, colour, font size, text colour and alpha, each kind's
+  `drawTopLayer` with its state, the tiles drawn and in place, the hands, the
+  labyrinth's frame around it and the state the riddle leaves, the solved
+  doors, "Paused", "game pad lost" and AutoPlay's shot) over every case: the
+  riddles in 36 shots of the 9 `dungeon_riddle_*` cases, every kind open at
+  fade 1 (Grivera's ten pages and Aegis's second page already turned, the
+  plan did not list them); no shot of a fade, a solved riddle, Cesadur's
+  letter mode or Hate's code. Ten new cases (266 shots): `riddle_image` (Mysterious
+  Forest's image: every frame of the fade-in and fade-out),
+  `riddle_aegis_pages`, `riddle_grivera_pages` (the fades, every page),
+  `riddle_silent` (Silent Ruin's hint), `riddle_puzzle_moves` (the marker
+  wrapped, tiles slid), `riddle_rubics_moves` (rows and columns shifted,
+  both markers), `riddle_rubics19_solved`, `riddle_hate_code` (TRIANGLE on
+  the empty code, 1234 reset, 8145), `riddle_cesadur_word` (the word hand
+  moved, SQUARE on the empty words, the letter pool, a letter picked and
+  undone, SUN, EARTH, MOON, WATER, both hands dimmed in turn, SQUARE), the
+  last three printing their door's status before and after (the console's
+  `trigger`), `riddle_paused` (a 5 × 5 Puzzle: "Paused" during the fade-in,
+  "game pad lost" and its menu). Each kind's fade-in and fade-out is shot
+  frame by frame (`wait 16`): 10 frames in (.1 to 1.0000001), 8 out (.88 to
+  .04). Goldens: `r1gold` (427 cases, 8,083 shots), `r1gold2` (the new cases
+  again: 266 of 266 identical, logs too, no error line). No dev hook was
+  needed.
+* **Built** (ARCHITECTURE section 14, "The riddles"): no node; the bridge
+  members `RiddleGame.draw_dim`, `multi_line`, `multi_centered_line`,
+  `RiddleLoaderImage.place` (the image's quad for `LevelBar`), `Tile.place`,
+  `CesadurRiddleText.place`, `Letter.place`; the flag `--legacy=riddle`; the
+  riddles use `dim` and `menu_frame` too.
+* **Parity** (tolerance 0 everywhere; the final code, 427 cases, 8,083 shots;
+  the node run is `r3node`; "the riddle cases": the 19 `dungeon_riddle_*`
+  and `riddle_*` cases, 348 shots):
+  * golden (`r1gold`) vs. nodes, every case: 8,083 of 8,083 shots
+    identical, all 427 logs identical, the same error lines in every log (3
+    script errors, 2,421 errors; the exit leak reports only in the five
+    `effects_*` cases);
+  * `--legacy=dim,riddle,menu_frame` vs. nodes and vs. the golden on the
+    riddle cases: 348 of 348, logs and error lines identical; each flag
+    alone (`dim`, `riddle`, `menu_frame`) vs. nodes and vs. the golden: 348
+    of 348 each, logs and error lines identical;
+  * every flag on (`--legacy=title,game_over,menu_list,menu_frame,menu_text,
+    status,deck,automap,dim,bless,riddle`, every case) vs. the golden: 8,083
+    of 8,083, all logs and error lines identical;
+  * no exit leak report in the riddle cases (none before either).
+  * No tolerance was needed. The one difference on the way: the riddle's
+    image as a TextureRect of `place_image`'s scaled rect (the first node
+    run of the riddle cases: 132 of 348 shots, 1/255 on 1 to 127 pixels,
+    18/255 on one pixel of `iceriddle.png`; every scaled image: 1.12, 1.2,
+    1.7) — drawn as its legacy quad (`LevelBar`) it is exact (12); every
+    1:1 image (tiles, markers, hands, `hate1.png`) and every text was
+    identical from the start.
+* **Frame rate** (normal runs: no `--seed`, windowed, one at a time, the
+  shipped saves (`APPDATA` a scratch folder), `--no-encounters`; AutoPlay's
+  `fps=` every 0.5 s for 11 s with the riddle open, the first second
+  dropped; legacy (`--legacy=dim,riddle,menu_frame`) → nodes, median and
+  range):
+
+  | Where | Capped | Uncapped |
+  |---|---|---|
+  | The 4 × 4 sliding puzzle (The Great Ruins: the image, 15 tiles, the marker) | 60 → 60 | 570 (548–581) → 680 (668–685) |
+  | Cesadur's anagram (Mt. Cesadur: 96 lines of letters and "__", two hands, the help line) | 60 → 60 | 582 (564–593) → 615 (603–621) |
+
+  A smaller gain than the menu's and the stores': the labyrinth under the
+  riddle (its 3D scene, the minimap) costs most of the frame.
+* **Still legacy** in the riddles: the state, the input and the timing (step
+  C: decision 3; decision 6 for the fade; phase 4.3's input wrapper); the
+  `drawTopLayer` methods (the twins run there); `RotatePuzzle` is unused (it
+  inherits `Puzzle`'s drawing and nodes; no case can show it). The
+  dungeon around a riddle keeps the minimap on the 3D bridge (8.4); the
+  battles' top layers are phase 4.4's. With the flags off nothing of a riddle
+  is drawn through `Graphics`: a run of the 19 riddle cases with prints in
+  `Graphics._drawText` and `_emit2D` while a riddle's top layer draws found
+  no legacy text or quad in 4,439 riddle frames (with the three flags on,
+  the same prints counted 90,360 texts and 9,947 quads in Cesadur's case
+  alone).
+* **Found on the way:** scaled-up images as TextureRects round a few pixels
+  1/255 apart from the legacy quads (12, "Parts of images"): the riddle's
+  image is a `LevelBar` quad. The Java's 32-bit `float` counts steps
+  differently from GDScript's 64-bit floats (the fade's port bug; check
+  other ported loops that step a float to a bound). `Puzzle`'s scramble and
+  the pause that stops nothing are the Java's (Appendix).
+
+**Closing phase 4.2 (prepared; nothing deleted yet).** What deleting the
+phase's legacy paths and its eleven flags would remove, per flag (from a
+survey of the code after the mini-games; the battles are `src/battle`,
+phase 4.4). "Dead" = no caller left once the flag is gone.
+
+| Flag | Its legacy branches (call sites) | Dead with it | Stays, for |
+|---|---|---|---|
+| `title` | `TitleScreen`: the background and logo `drawImage`s, `SaveSlots.draw_dates_beside`, `drawWithShadow` (the description) | `SaveSlots.draw_dates_beside`; `_draw_dates` with `menu_text` | `Graphics.drawWithShadow`: the battles (`SpoilsScreen`, `ResultScreen`, `Attack`, `Clock`) |
+| `game_over` | `GameOver`: the image's `drawImage` | — | — |
+| `menu_list` | `TitleScreen`'s and `GameCore`'s (game pad lost) `drawAllChildren`, `AbstractPage.draw_list`'s `drawChildrenFreely` | `MenuNode.drawChildrenFreely`, `drawWithPrice`, `drawWithEquipment`, `drawWithNumber`, `Graphics.drawStringRightWithReg` (no game caller) | `MenuNode.draw`, `drawChildren`, `MenuHand.drawHand`, `MenuScrollBar.draw`: the Cheater (`Cheater.draw`, dev) — `MenuNode.show_children` fits it and has no caller yet |
+| `menu_frame` | `AbstractPage.show_standard`'s, `draw_title`'s and `draw_help`'s legacy halves, `StartPage.draw_screen_shot`, `draw_info`; `Building.show_standard`, `WeaponStore.drawInfo`, `CardStore` (pieces 13 and 12, its info), `Church` (pieces, its info copy); `CesadurRiddle`'s help (through `draw_help`) | `AbstractPage.drawMenuBackground`, `drawMenuBackgroundStatic`, `Building.drawMenuBackground` | the pages' and Cesadur's `drawHelp` (the twin runs them against `HelpLineCapture`) |
+| `menu_text` | `StartPage` (the Save list's dates, the saving box), `MapPage` ("Explored"), `HelpPage` (the difficulty text), `WeaponStore` (the sell confirm's line), `AbstractStore`'s confirm boxes, `Church`'s save dates | `SaveSlots.draw_dates_under`, `StartPage.drawConfirmBuyDialog`, `HelpPage.drawDifficulty` (`wrapText` stays: the twin uses it) | — |
+| `status` | `StatusPage.draw_top`, `EquipPage` (`drawStatus`, `drawEquip`), `WeaponStore`'s | `EquipPage.drawStatus`, `drawChange`, `drawEquip`, `StatusPage.drawEquip` | — |
+| `deck` | `DeckPage` (the titles, the decks, the scroll bars, the flying cards), `CardStore` (the decks, the scroll bars, the merge preview) | `Deck.drawDeck`, `Deck.drawCard`, `DeckPage.Animator.draw`, `AbstractCard.drawGrayCard`, `Graphics.drawStringRightAligned` (no game caller) | `AbstractCard.drawCard`: the battles (`ResultScreen`) |
+| `automap` | `MapPage` (`drawAll`, `drawSingle`) | `MapPage.drawAll`, `drawSingle`, `LabyrinthMap.draw`, `LabyrinthNode.drawInMap`, `Graphics.drawSingleCenteredText` (only tools/render_test.gd) | the minimap's `LabyrinthMap.draw2`, `drawInSmallMap` (`MapRenderer`) |
+| `dim` | `AbstractStore.draw_dim`, `RiddleGame.draw_dim` (`fadeOldSchool`) | — | `Graphics.fadeOldSchool`: the battles (`Screen`) |
+| `bless` | `Church`'s bless page | `Church.drawHand`, `MenuHand.drawHandWithColor`, `LevelUpBar.drawStatic`, `HelpText.drawTopLayer`, `Row.drawRows`, `draw`, `drawIcon`, `Icon.draw`, `Graphics.drawStringSetSize`, drawImage's (low, high) part and `GameTexture.drawPartRange` | `LevelUpBar.draw` with drawImage's (percent) part: the battles (`SpoilsScreen`) |
+| `riddle` | `RiddleGame` (the image), `AbstractPuzzle` (the tiles), `Puzzle`, `RubicsPuzzle` (the markers), `AegisRiddle`, `GriveraRiddle`, `HateRiddle`, `CesadurRiddle` (the texts, the hands) | `RiddleLoaderImage.draw`, `Tile.draw`, `CesadurRiddleText.draw`, `Letter.draw` | `MenuHand.drawHand`: the Cheater (above) |
+
+* Effectively dead already: `StatusPage.draw3D` and `BestiaryPage.draw3D`
+  (unreachable pages, Appendix) are the last callers of `StatusPage.draw`,
+  `drawTop`, `drawAttributes`, `drawSlots`, `StartPage.drawInfo`,
+  `drawScreenShot` and `MenuNode.drawAllChildren`; deleting the two pages'
+  drawing (or the pages) frees them. `CardStore.drawMergedCard` and the
+  Church's "Resurrect" branch draw nothing reachable.
+* The Cheater (the console's `cheater`, dev only, unconverted) keeps the
+  legacy list drawing (`MenuNode.draw` → `MenuHand.drawHand`,
+  `MenuScrollBar.draw`) once every flag is gone; 12 of the 14 store cases
+  pass through it, none shoots it. Switching it to `MenuNode.show_children`
+  (a case shot first) frees that drawing too.
+* What the battles need of it all: `Graphics.drawWithShadow`,
+  `AbstractCard.drawCard`, `Graphics.fadeOldSchool` and `LevelUpBar.draw`
+  (with drawImage's percent part); nothing of `MenuNode`, `MenuHand`,
+  `MenuScrollBar` or `Deck` (their decks and scroll bars are their own:
+  `AbstractDeck`, `BattleScrollBar`). The game pad lost menu over a battle is
+  `MenuList` already.
+* `Graphics` methods that lose their last game caller (`drawStringRightWithReg`,
+  `drawStringRightAligned`, `drawSingleCenteredText`, `drawStringSetSize`,
+  the (low, high) `drawImage`, `drawCenteredImage` after `menu_frame` and
+  `menu_text`) are the emulation's API, which phase 5 deletes whole.
+* Two comments are stale already: `StatusPage` and `StartPage` still say the
+  stores keep `drawTop` and `drawScreenShot` until their part.
+* The bridge members become the only paths (`AbstractPage.draw_list`,
+  `draw_title`, `draw_help`, `StatusPage.draw_top`, `AbstractStore.draw_dim`,
+  `RiddleGame.draw_dim`, `DeckPage`'s and `CardStore`'s `_draw_deck` and
+  `_draw_bar` turn into plain forwards).
+* The cases that cover each part (the parity results above): `title`,
+  `game_over`, `menu_list`: the pilot's 17 cases (the `title_*` and
+  `game_over*` cases, `dungeon_save_load`, `story_ana_reaction`,
+  `story_someones_comming`, `newgame_to_forest`, `story_long`, `boss`,
+  `pad_lost`), the menu's 285 and the store cases; `menu_frame`, `status`:
+  the menu's 285 cases and the 14 store cases (Cesadur's help: the
+  Cesadur riddle cases); `menu_text`: 10 menu cases and the store cases;
+  `deck`: `dialog_deck_page`, `menu_pages`, `menu_deck_edit` and the card
+  store's four; `automap`: the six map page cases; `dim`: the store cases with
+  a confirm and the 19 riddle cases; `bless`: `store_church_bless`; `riddle`:
+  the 19 riddle cases (`dungeon_riddle_*`, `riddle_*`). The closing changes
+  no picture: every case before and after, identical.
+
 ### 9.3 Infrastructure
 
 * **Game modes:** a `Game` autoload with a place registry generated from
@@ -3543,7 +3783,9 @@ When no mode draws through `g` any more:
   the other programs of that day): an 8-job recording crashed 11 runs in
   `get_image` (exit 139), one more logged WebP decode errors, one failed to
   start. Check the free memory first and record with fewer jobs (5); count
-  each log's error lines against the last set.
+  each log's error lines against the last set. *The mini-games:* 5.5–6 GB
+  free at idle; five full recordings with 4 jobs (about 23 minutes for 427
+  cases) had no failed run.
 * **Disk during recordings** (4.2's stores). A full set is 5.3 GB (7,674
   shots) and `tools/parity/out` had grown to 290 GB of old sets, the disk to
   96%: a task needs four or five full sets at once (baseline, golden, nodes,
@@ -3557,7 +3799,12 @@ When no mode draws through `g` any more:
   17 on one pixel), though the quad, the texture coordinates and the colour
   were the same; whole images in TextureRects match to the bit. Draw such
   parts as the legacy quad (`LevelBar`, as `EmotionBubble`). Note too: an
-  AtlasTexture whose region has width 0 draws the whole texture.
+  AtlasTexture whose region has width 0 draws the whole texture. *4.2's
+  mini-games:* whole images scaled up (the riddles' at 1.12, 1.2 and 1.7) as
+  TextureRects of `place_image`'s rect were 1/255 off on a few pixels (18/255
+  on one) in 132 of 348 riddle shots, where images scaled down (the menu's
+  cards) and at 1:1 match; drawn as the legacy quad (a `LevelBar` part of
+  percent 1) they are exact.
 * **Generated scenes edited by hand** (phase 4.1). The editor saved three
   village scenes in 4b74ade3; the converter no longer reproduces them and
   `vil_to_scene.sh --all` overwrites them. Re-convert one place at a time
@@ -3590,6 +3837,13 @@ When no mode draws through `g` any more:
   the size 20 the card info leaves, came out at 24. Look up a type's own
   entries (`Theme.get_font_size_list`, `MenuText.role`); the pilot's
   `MenuList` had the same check (never hit: its sizes had roles).
+* **The Java's 32-bit floats** (phase 4.2's mini-games). The port computes
+  every `float` in 64 bits. A value the Java steps in a loop until a bound
+  (`fade += .1f` until `>= 1`) can take one step more in GDScript (the
+  riddle's fade: 11 updates to 1.1 where the Java took 10 to 1.0000001), a
+  port bug that changes the picture and the timing. Where the count of
+  steps matters, round each step to a 32-bit float (`RiddleGame._toFloat`),
+  as its own change with new goldens before a conversion.
 * **Shared legacy helpers** (phase 4.2's menu). The menu and the stores call
   the same static helpers (`MenuNode.draw`, `StatusPage.drawTop`,
   `Deck.drawDeck`, `StartPage.drawInfo`, `drawMenuBackgroundStatic`):
@@ -3665,6 +3919,9 @@ When no mode draws through `g` any more:
    swing (`Church.update`: per update, its speed × .95), its saving dots
    (`Scheduler.sleep`), the markers' moves (per update while held) and the
    Inn's seven seconds after a rest stay legacy; the nodes mirror them.
+   *Not needed for the mini-games (9.2):* the riddle's fade (.1 up and .12
+   down per update, now in 32-bit steps as the Java's) stays legacy; the
+   nodes mirror it. A Tween for it is step C.
 7. **Village top layer** (from the pilot, 6.7): *decided (phase 1
    rollout):* roofs and treetops are always drawn (6.1, the pilot's
    default). The legacy rule draws a piece only where a sprite overlaps it,
@@ -3678,7 +3935,7 @@ When no mode draws through `g` any more:
    (`BaselineLabel.oversampling` 0) change the look; the pilot kept the
    legacy look so that parity holds. Each is a theme or scene edit now.
    Open (the rollout kept the legacy look too, and so did phase 4.1, 4.2's
-   pilot, the menu and the stores).
+   pilot, the menu, the stores and the mini-games).
 
 ## 14. Suggested order and size
 
@@ -3693,7 +3950,7 @@ Sizes are relative: S ≈ a focused session, XL ≈ many sessions.
 | P2 | Dungeon weather, save points and the card and enemy effects that are particles, on the GPU (6.11). *Done (6.12); the dungeon part closed with phase 2 (7.9), the battle effects' legacy path stays until 4.4.* | M | 2, P | rainy and snowy floors at 60 FPS; battles without the effects' stalls (Wind 3 at 7 FPS, the Flame's 10 s) |
 | 3 | Theme, Dialog, signs, emotions, fades, HUD. *Done through step B: the pilot (8.1: the Theme, the dialog family, the fade) and the rollout (8.3: emotions, mission display, pause overlays, cutscene images and texts, tutorials; the minimap stays the 3D bridge's); closed (8.4).* | M | 1 (or 2) | most of the remaining `draw(g)` |
 | 4.1 | World map + airship. *Done through step B (9.1): the scenes, the name plate, legacy vs. scene identical; closed (9.1).* | M | 1 (converter), 3 | — |
-| 4.2 | Title, game over, mini-games, stores, menu. *Pilot done through step B (9.2): the title, the game over, the menu list; the menu and the stores done through step B (9.2, one session each); prepared: the mini-games (1).* | L | 3 | — |
+| 4.2 | Title, game over, mini-games, stores, menu. *Pilot done through step B (9.2): the title, the game over, the menu list; the menu, the stores and the mini-games done through step B (9.2, one session each); next: closing phase 4.2 (its legacy paths and flags; 9.2 lists them).* | L | 3 | — |
 | 4.3 | Input, audio, saves, `Game` autoload | M | any time after 0; the autoload is best after 4.2 | 5 |
 | 4.4 | Battle, cards, effects | XL | 2, 3 | 5 |
 | 5 | Remove the GL emulation; per-delta time | M | all of the above | — |
@@ -3774,9 +4031,24 @@ fixed or deleted at any time.
     32-bit float stops at 1.0000001 after 10. The riddle's dim is then
     1.1 × its image's alpha (.33 for .3), its colour's alpha 1.1 (clamped)
     and Grivera's text alpha 1.1, and the fade-out takes one update more.
-    Fixing it (the Java's float rounding) changes the `dungeon_riddle_*`
-    shots: do it as its own change before the riddles are converted, with
-    new goldens.
+    *Fixed (phase 4.2's mini-games, before their conversion, with new
+    goldens):* each step is rounded to a 32-bit float as the Java computes
+    it (`RiddleGame._toFloat`); the fade-in ends at 1.0000001 after 10
+    updates, the fade-out after 9 (9.2, "Results of the mini-games").
+  * *Found in phase 4.2's mini-games (an original bug, kept):* `Puzzle`
+    scrambles its tiles in `AbstractPuzzle.init` before its own `init` sets
+    the free slot, so the 500 swaps start from a free slot at (0, 0) (its
+    first swap exchanges two tiles that are not neighbours); `init` then
+    takes the image off whichever tile ended at (N − 1, N − 1) and declares
+    that the free slot. The Java does the same (`Puzzle.init` after
+    `super.init`). The puzzle is then solvable or not by chance (a
+    transposition changes the permutation's parity). A fix: set the free
+    slot before scrambling (a ticket: it changes the puzzles' layouts).
+  * *Found in phase 4.2's mini-games (as in the Java):* "Paused" stops
+    nothing but the play time (`Time`): `GameCore.testDraw` draws the
+    overlay over the mode, which keeps updating and reading input (a riddle
+    goes on fading in under "Paused"; with "game pad lost" up, the menu's
+    DOWN also moves a puzzle's cursor and its CROSS reaches the puzzle).
   * `VillageStoryTimeLine` calls `updateFadeValue()` in both `update` and
     `draw` (`:262-265`, `:602-604`), so its fades may step twice per frame.
     *Checked (phase 3 rollout):* the Java does the same

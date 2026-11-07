@@ -40,13 +40,22 @@ func init(name, lab = null, p_hinders = null):
 			p.text.append(t)
 
 
+## Bridge (phase 4.2 step B): the page's lines are a MenuText node
+## (AbstractPage.show_lines, centred as drawMultiCenteredText, at the riddle's
+## fade); --legacy=riddle draws them.
 func drawTopLayer(g):
 	super.drawTopLayer(g)
 	if pageNr < pages.size():
 		g.startText(fade, 0, 28)
 		var p: Page = pages[pageNr]
-		for i in p.text.size():
-			g.drawMultiCenteredText(p.text[i], 250 + i * p.distance)
+		if Main.is_legacy("riddle"):
+			for i in p.text.size():
+				g.drawMultiCenteredText(p.text[i], 250 + i * p.distance)
+		else:
+			var lines := []
+			for i in p.text.size():
+				lines.append(RiddleGame.multi_centered_line(g, p.text[i], 250 + i * p.distance))
+			AbstractPage.show_lines(g, lines)
 		g.finishText()
 
 

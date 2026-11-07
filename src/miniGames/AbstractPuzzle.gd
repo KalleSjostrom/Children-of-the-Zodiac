@@ -83,8 +83,17 @@ func isRiddleDone():
 	return not found
 
 
+## Bridge (phase 4.2 step B): the tiles are a MenuBackground node's images
+## (Tile.place, AbstractPage.show_pieces); --legacy=riddle draws them.
 func drawTopLayer(g):
 	super.drawTopLayer(g)
+	if Main.is_legacy("riddle"):
+		for ts in tiles:
+			for t in ts:
+				t.draw(g, xs, ys)
+		return
+	var placed := []
 	for ts in tiles:
 		for t in ts:
-			t.draw(g, xs, ys)
+			placed.append(t.place(g, xs, ys))
+	AbstractPage.show_pieces(g, placed)

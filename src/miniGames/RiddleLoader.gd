@@ -102,3 +102,17 @@ class RiddleLoaderImage extends RefCounted:
 
 	func draw(g):
 		g.drawImage(name, x, y, scale)
+
+	## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): draw without
+	## the drawing, as the quad GameTexture.draw would draw (the whole image
+	## as a part: Graphics.place_image_part with percent 1, its bind; [texture,
+	## rect, uv, tint], [] for no image), for a LevelBar node that draws the
+	## legacy quad (a TextureRect of the scaled image was 1/255 off on a few
+	## pixels).
+	func place(g) -> Array:
+		if name == null:
+			return []
+		var t: GameTexture = ImageHandler.getTexture(name)
+		if t == null:
+			return []
+		return g.place_image_part(name, x, y, t.getWidth(), t.getHeight(), scale, 1.0)
