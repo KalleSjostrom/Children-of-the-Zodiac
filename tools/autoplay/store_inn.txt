@@ -1,0 +1,108 @@
+# Phase 4.2's stores (docs/phase4_2_stores_prompt.md, plan 9.2): the Inn
+# (--load="Slot 1" --start=Alares; Alares's Inn through the Cheater): its
+# fade-in; the rest confirm ("Rent a room", its price right-aligned) with its
+# hand moved, cancelled; the trade list ("Trade map info": the labyrinths
+# Slot 1 has fully explored, in a bounding box) moved down; a map traded for
+# its prize (the gift message and the prize's card info), back to the list
+# (the traded map greyed) and to the root; "Paused" over the Inn; a night's
+# rest: the fade-out and the seven seconds the Inn waits faded out.
+wait 3100
+console cheater
+wait 1200
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap CROSS
+wait 400
+tap DOWN
+wait 300
+tap DOWN
+wait 300
+tap DOWN
+wait 300
+tap CROSS
+wait 400
+tap CROSS
+mark
+wait 100
+loopuntil Inn 5000
+shot i00_fade_in
+wait 200
+shot i01_fade_in
+wait 200
+shot i02_fade_in
+wait 1500
+shot i03_in
+log in_inn
+tap CROSS
+wait 700
+shot i04_confirm
+tap DOWN
+wait 700
+shot i05_confirm_cancel
+tap CROSS
+wait 700
+shot i06_cancelled
+tap DOWN
+wait 700
+tap CROSS
+wait 700
+shot i07_trade
+tap DOWN
+wait 700
+shot i08_trade_down
+tap DOWN
+wait 700
+shot i09_trade_down
+tap DOWN
+wait 700
+shot i10_trade_down
+tap DOWN
+wait 700
+shot i11_trade_down
+tap CROSS
+wait 700
+shot i12_prize
+tap CROSS
+wait 700
+shot i13_traded
+tap CIRCLE
+wait 700
+shot i14_root
+tap START
+wait 600
+shot i15_paused
+tap START
+wait 600
+tap UP
+wait 700
+tap CROSS
+wait 700
+tap CROSS
+wait 200
+shot i16_rest_fade_out
+wait 200
+shot i17_rest_fade_out
+wait 200
+shot i18_rest_fade_out
+wait 3000
+shot i19_rest_waiting
+log rest_waiting
+mark
+wait 200
+loopuntil Cheater 12000
+wait 600
+shot i20_after
+log after_rest
+quit

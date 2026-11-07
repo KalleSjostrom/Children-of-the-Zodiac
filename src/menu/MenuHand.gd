@@ -51,9 +51,32 @@ func place_hand(g) -> Array:
 	return [hand, pos[X], pos[Y], tint]
 
 
+## Bridge (phase 4.2 step B, the stores, docs/ARCHITECTURE.md section 14):
+## drawHand without the drawing, as an image Graphics.place_image places it
+## ([texture, rect, tint]; [] when the hand is hidden), for a node that shows
+## the hand among other images (the Church's bless markers).
+func place_hand_image(g) -> Array:
+	if not show:
+		return []
+	if dimmed:
+		g.dim(.3)
+	var placed: Array = g.place_image(hand, pos[X], pos[Y])
+	if dimmed:
+		g.dim(1)
+	return placed
+
+
 func drawHandWithColor(g):
 	if show:
 		g.drawImage(hand, pos[X], pos[Y])
+
+
+## Bridge (phase 4.2 step B): drawHandWithColor without the drawing
+## (place_hand_image without the dim).
+func place_hand_with_color(g) -> Array:
+	if not show:
+		return []
+	return g.place_image(hand, pos[X], pos[Y])
 
 
 ## Sets the visibility of the menu hand.

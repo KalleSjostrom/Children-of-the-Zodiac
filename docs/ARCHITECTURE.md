@@ -64,7 +64,8 @@ scenes/
                           EquipItem, DeckView, CardView, Automap, AutomapFloor (.tscn + .gd each);
                           BaselineLabel.gd (a line of text placed by its baseline), LabelList.gd
                           (pooled lines), ImageList.gd (pooled images), HelpLineCapture.gd
-                          (stands in for Graphics in drawHelp); the stores later
+                          (stands in for Graphics in drawHelp); the stores (section 14):
+                          LevelBar, BlessPage, BlessRow
   world_map/              WorldMapScene.tscn + .gd (the layout every world map and airship map
                           inherits), WorldMapRoad, WorldMapNode, AirshipNode (.tscn + .gd each),
                           WorldMapIndex.gd (resource); one scene per (deleted) maps/Landscape file
@@ -172,7 +173,7 @@ Main (Node, src/main/Main.gd)
 │                                   emotion bubbles, the mission display, the cutscene images,
 │                                   the tutorials, the world map's and the airship's name plate
 │                                   (section 12); the title's, the game over's and the menu
-│                                   pages' nodes and the menu lists (section 14; the stores later)
+│                                   pages' nodes, the menu lists and the stores' nodes (section 14)
 ├── Transition (CanvasLayer 3)      the fade, the cutscene texts and the image over the
 │                                   actors, "Paused", "game pad lost" and its menu (sections 12, 14)
 ├── Audio (Node, created by Main)   music and sound effect players
@@ -309,7 +310,11 @@ of section 12, `Graphics.modelview_2d`, `screen_points`, `begin_capture_3d`,
 `StartPage.draw_screen_shot`, `draw_info`, `StatusPage.place_top`, `show_top`, `draw_top`,
 `place_attributes`, `place_slots`, `show_equip`, `EquipPage.show_status`, `show_equip`,
 `Deck.place_deck`, `show_deck`, `AbstractCard.place_at`, `LabyrinthMap.place_map`,
-`LabyrinthNode.place_in_map`, `SaveSlots.show_dates_under` and the pages' twins: section
+`LabyrinthNode.place_in_map`, `SaveSlots.show_dates_under` and the pages' twins; the stores'
+`Graphics.place_image_part`, `show_fade`'s layer, `AbstractPage.show_pieces`,
+`StartPage.show_info`, `MenuHand.place_hand_image`, `place_hand_with_color`,
+`LevelUpBar.place_static`, `HelpText.place_top_layer`, `AbstractCard.place_at`'s level,
+`Building.show_standard`, `AbstractStore.draw_dim`, `show_box` and the stores' twins: section
 14); refactors of a
 legacy method's own code keep Java style (`Village.sortSprites`).
 
@@ -336,11 +341,12 @@ Game options go after `--` on the command line (see the header of
 | `--fixed-step` | The game advances exactly 1000/60 ms per frame, whatever the real frame time. |
 | `--seed=<n>` | Deterministic run (implies `--fixed-step`): every random generator (`J`, every `JRandom`, Godot's global one) is seeded from `n`; `J.currentTimeMillis()`, `Scheduler` and `GameAction` read a game clock advanced by the elapsed game time instead of the wall clock; saves are read from the shipped files and written to `user://saves_deterministic/` (emptied at start), never to the player's `user://saves/`; the slot lists date a slot saved in the run by the game clock from 1 Jan 2000, 00:00 (`SaveSlots.note_saved`; a file's time is wall-clock time, phase 4.2); no game pad is read (`GameCore.init2`: an idle pad releases AutoPlay's buttons every 40 ms). Two runs of an AutoPlay script then produce the same frames. |
 | `--uncapped` | No 60 FPS cap and no vsync. With `--seed` the result is the same, only faster. |
-| `--legacy=<a,b,…>` | Keep the legacy path of the listed subsystems (`Main.is_legacy`). `all` keeps every one. The flags of closed phases are gone with their legacy paths: phase 1's `villages` and `village_top_layer` (2026-11-03), phase 2's `dungeons` and `dungeon_drawing`, the particles phases' `particles` and `dungeon_particles`, phase 3's `dialog`, `fades`, `emotions`, `mission`, `pause`, `story_images`, `story_texts` and `tutorials`, phase 4.1's `world_map` and `airship` (2026-11-06; plan 6.9, 7.9, 8.4, 9.1). The battle effects (section 11): `battle_effects`: the card and enemy effects run the legacy simulation and draw its quads; `effect_waits` (dev): the GPU effects' legacy systems keep their whole pool, so the legacy particle counts decide when a battle goes on, as before (for parity runs with `--hide-particles`). Phase 4.2 (section 14): `title`: the title's background, logo, difficulty description and slots' dates are drawn by the legacy code; `game_over`: the game over's image likewise; `menu_list`: the `MenuNode` lists that are `MenuList` nodes (the title's menus, the game pad lost overlay's, the menu pages' with their variants and their scroll bars) are drawn by the legacy code (`MenuNode.drawChildrenFreely`). Phase 4.2's menu (section 14), each the legacy drawing of its parts on the menu pages (the stores keep their legacy drawing until their part): `menu_frame`: the background and the layout's pieces (`drawStandard`), the title line, the info (gold, steps, time), the thumbnail and the help lines; `menu_text`: a page's own text and boxes (the Save list's dates, the saving box, the help page's difficulty text, the map page's "Explored"); `status`: the status line (`StatusPage.drawTop`), the equip page's status with the comparison (`EquipPage.drawStatus`) and its item (`StatusPage.drawEquip`); `deck`: the deck page's decks (`Deck.drawDeck`), their titles and scroll bars and the flying cards; `automap`: the map page's map (`LabyrinthMap.draw`). With all of them and the pilot's three the frame is drawn exactly as before phase 4.2. |
+| `--legacy=<a,b,…>` | Keep the legacy path of the listed subsystems (`Main.is_legacy`). `all` keeps every one. The flags of closed phases are gone with their legacy paths: phase 1's `villages` and `village_top_layer` (2026-11-03), phase 2's `dungeons` and `dungeon_drawing`, the particles phases' `particles` and `dungeon_particles`, phase 3's `dialog`, `fades`, `emotions`, `mission`, `pause`, `story_images`, `story_texts` and `tutorials`, phase 4.1's `world_map` and `airship` (2026-11-06; plan 6.9, 7.9, 8.4, 9.1). The battle effects (section 11): `battle_effects`: the card and enemy effects run the legacy simulation and draw its quads; `effect_waits` (dev): the GPU effects' legacy systems keep their whole pool, so the legacy particle counts decide when a battle goes on, as before (for parity runs with `--hide-particles`). Phase 4.2 (section 14): `title`: the title's background, logo, difficulty description and slots' dates are drawn by the legacy code; `game_over`: the game over's image likewise; `menu_list`: the `MenuNode` lists that are `MenuList` nodes (the title's menus, the game pad lost overlay's, the menu pages' with their variants and their scroll bars) are drawn by the legacy code (`MenuNode.drawChildrenFreely`). Phase 4.2's menu (section 14), each the legacy drawing of its parts on the menu pages (the stores keep their legacy drawing until their part): `menu_frame`: the background and the layout's pieces (`drawStandard`), the title line, the info (gold, steps, time), the thumbnail and the help lines; `menu_text`: a page's own text and boxes (the Save list's dates, the saving box, the help page's difficulty text, the map page's "Explored"); `status`: the status line (`StatusPage.drawTop`), the equip page's status with the comparison (`EquipPage.drawStatus`) and its item (`StatusPage.drawEquip`); `deck`: the deck page's decks (`Deck.drawDeck`), their titles and scroll bars and the flying cards; `automap`: the map page's map (`LabyrinthMap.draw`). Phase 4.2's stores (section 14) use the menu's flags for the parts they share (`menu_frame`: the background, keeper and pieces, the title, the info lines, the help line; `menu_list`: the lists; `status`: the Weapon Store's status and item; `deck`: the card store's decks, scroll bars and merge preview; `menu_text`: the confirm boxes and the Church's save dates) and two of their own: `dim`: the confirm boxes' dims (`fadeOldSchool(.5)`); `bless`: the Church's bless page (its costs, level bars, markers, help text and total). With all of them and the pilot's three the frame is drawn exactly as before phase 4.2. |
 | `--hide-particles` | Dev only: the particles draw nothing (`Main.hide_particles`; they still run): the village and cutscene systems, the dungeon weather and save points, the card and enemy effects drawn as particles (not the sphere, image, slow and enemy-colour systems), with the GL state their drawing leaves; for parity runs that compare everything else. |
 | `--minimap-node` | Dev only: the labyrinth's minimap is drawn by `MinimapPart` nodes (`MapRenderer.show_map`) instead of the 3D bridge's batches; the floor's frames are the same to the bit, a battle's frames after them differ by 1/255 (plan 8.3), so it is not the default. |
 | Console `padlost [on\|off]`, `emotion <who> <emotion\|off> [shake]` | Dev only (debug console, `scenes/debug/GameCommands.gd`; AutoPlay `console`): `padlost` makes `InputManagers.connectionLost` report a lost game pad (`lost_simulated`) until the overlay's menu is answered, for the "game pad lost" overlay without a pad (seeded runs read none); `emotion` sets a bubble on a party member or villager of the current village (`Sprite.setEmotion`, which only cutscenes call), for the emotions in a village frame. Parity cases `pad_lost`, `emotions_village`. |
-| Console `give <item\|equipment> <name> [number]` | Dev only (phase 4.2's menu): gives the party a key item (`PartyItems.addItem`, any name) or a piece of equipment of `equipment.bank` (`Load.addEquipment`, as a chest gives one, number times); `_` stands for a space. The shipped saves have too few for the menu's lists that scroll in their bounding box (Key Items, the equip page's lists) and their "(n)" numbers. Parity cases `menu_key_items`, `menu_equip_list`. |
+| Console `give <item\|equipment\|card> <name> [number]` | Dev only (phase 4.2's menu): gives the party a key item (`PartyItems.addItem`, any name) or a piece of equipment of `equipment.bank` (`Load.addEquipment`, as a chest gives one, number times); `_` stands for a space. The shipped saves have too few for the menu's lists that scroll in their bounding box (Key Items, the equip page's lists) and their "(n)" numbers. Parity cases `menu_key_items`, `menu_equip_list`. Phase 4.2's stores: `card <card>[:<level>][:all]` adds that card to the party deck number times (the names of `cast`), for a merge page with more kinds than two lines show (`store_card_merge`). |
+| Console `gold [amount]` | Dev only (phase 4.2's stores): shows or sets the party's gold, for the cards and equipment the party cannot afford (grey in the card store, "You can't afford that!"). Parity cases `store_weapon_buy`, `store_card_buy`. |
 | `--casts=<round>/…` | Dev only: the rounds the console's `cast next` plays on the party's turns (cards `<card>[:<level>][:all]` joined by `+`; `scenes/debug/GameCommands.gd`), for the parity cases of the battle effects (`effects_*`). |
 | `--no-encounters` | Dev only: labyrinths start no random battles (`Labyrinth.noEncounters`, which nothing else sets; the steps are still counted), for parity tours of dungeon floors. |
 | `--start-node=<address>:<direction>` | Dev only: a labyrinth `--start` place starts at this node and facing (0-3), as a game saved there does (`Load.labyrinthPosition`, COTZ-005), not at its door: parity cases start in front of the object they use. |
@@ -1113,8 +1119,8 @@ over the actors, the story and scroll texts and the tutorials' top layer.
 The minimap stays the 3D bridge's batches (a node for it exists behind the
 dev flag `--minimap-node`; plan 8.3 tells why it is not the default). Still
 legacy as well: a battle's and a riddle's top layer and the riddle's fade
-(phase 4), the stores' menus (phase 4.2; the title, the game over and the menu
-pages are done, section 14). The world map's
+(phase 4; the title, the game over, the menu pages and the stores are done,
+section 14). The world map's
 and the airship's name plate is a node since phase 4.1 (section 13). How to
 convert an overlay: `docs/CONVERTING_UI.md`.
 
@@ -1362,9 +1368,10 @@ the fade value and its pace (0.03 per drawn frame; no Tween or Timer).
 The dims of "Paused" and "game pad lost" (`fadeOldSchool(0.5)`) are Fade
 nodes too (rollout). The tutorial's dim (`fadeOldSchoolColor`) is the
 Tutorial node's `Dim`. Still legacy: the riddle's fade (`RiddleGame.drawTopLayer`,
-the backdrop of its image: phase 4), the stores' dims behind their confirm
-boxes and the battle's (result screens, an enemy's red flash); the menu
-hand's dim is the tint of `MenuList`'s hand (section 14).
+the backdrop of its image: phase 4) and the battle's (result screens, an
+enemy's red flash); the stores' dims behind their confirm boxes are Fade
+nodes on the UI layer (`show_fade(.5, Graphics.UI_LAYER)`, section 14); the
+menu hand's dim is the tint of `MenuList`'s hand (section 14).
 
 **Flags (removed).** `--legacy=dialog` kept the legacy drawing of the dialog
 box, the message box and the card info popup, `--legacy=fades` the legacy
@@ -1792,31 +1799,14 @@ quad (`Graphics.screen_points` and `canvas_item_add_triangle_array`, as
 `EmotionBubble`) was identical too; the TextureRects are the scene a later
 step can keep.
 
-**The stores** (the rollout's next part) show the shared nodes with their
-own state: `MenuBackground.show_background([], pieces, mat)` with
-`AbstractPage.place_menu_background_static(g, store, menusUsed)` (their
-mask), after the keeper's dialog (a node) and the keeper (an image);
-`MenuTitle` for their titles (the same place); `MenuInfo` with their own
-three lines (the Weapon Store's "Equipped/Total/Gold", the card store's
-"Stocked/Price/Gold", the Inn's `StartPage.drawInfo`: `draw_info`, the
-Church's copy of it); `MenuList` with the price variant (`withPrice`,
-`down`: built, not yet shown by a case) and the bounding boxes of the sell
-and trade lists; `EquipStatus` and `EquipItem` (`EquipPage.show_status`,
-`show_equip`) in the Weapon Store; `DeckView` with the card store's map (the
-numbers over their shadows: `Deck.place_deck`'s map and gold branches,
-built, not yet shown by a case), `PageScrollBar` (`MenuScrollBar.show_bar`)
-and `CardView` for the merge preview; `MenuBox` for the confirm boxes
-(piece 14 or 3, the texts, the right-aligned price), after their dim (a
-`show_fade(.5)`-like Fade node) and before their Yes/No `MenuList`;
-`SlotDates` (`show_dates_under`) for the Church's save list; `HelpLine`
-(`AbstractPage.draw_help`) for the Church's help line. Each store's call
-sites then switch on the same flags (`menu_frame`, `menu_list`, `status`,
-`deck`, `menu_text`).
+**The stores** show the shared nodes with their own state (below, "The
+stores").
 
 **Flags** (section 7): `menu_frame`, `menu_list`, `menu_text`, `status`,
 `deck`, `automap`, one per kind of part, so that the stores use the same
 flags for the parts they share; with all of them (and the pilot's `title`
-and `game_over`) the frame is drawn exactly as before phase 4.2.
+and `game_over`, and the stores' `dim` and `bless`) the frame is drawn
+exactly as before phase 4.2.
 
 **Still legacy** in the menu: the state, the input and the timing (step C:
 decision 3, phase 4.3's input wrapper); the `draw(g)` methods themselves
@@ -1826,3 +1816,119 @@ phase 3's nodes. Nothing of a menu page is drawn through `Graphics` with the
 flags off. The pooled nodes keep their last textures after the menu is left
 (back.jpg, the pieces and the cards are loaded permanently anyway; the
 thumbnail is 183 x 137): nothing to release.
+
+### The stores (phase 4.2's rollout)
+
+The Weapon Store, the card store, the Inn and the Church (`Building`,
+`AbstractStore` and the four stores; `Door` draws nothing) are converted
+through step B with the menu's nodes and three new ones. `Building.draw` is
+unchanged (`setColor(1)`, size 22, `setAlphaFunc(.02)`, black text; then
+`drawStandard`, the store's `draw3D` and the mode fade); each part is
+shown, where it was drawn, by its node on the UI layer (`Graphics.show_ui`,
+pooled per scene and occurrence). The stores keep the state, the input and
+the timing: the menus (`MenuNode`, `GameAction`), the decks and the merge
+map, the Church's markers, its blessing's swing (`Church.update`) and its
+saving coroutine, the Inn's prize and its seven seconds after a rest.
+
+**New nodes** (`scenes/ui/`; legacy screen pixels):
+
+```
+LevelBar (Control)                  LevelUpBar's images, each over its part of the bar: the
+                                    legacy quads (Graphics.place_image_part's corners and
+                                    texture coordinates, two triangles each, as EmotionBubble)
+BlessPage (Control)                 the Church's bless page between its pieces and its list
+├── Cost (BaselineLabel Text30, 560, 360)
+├── Rows                            a BlessRow per character
+├── Words (LabelList)               the help text's rows (HelpText: black words, coloured ones
+│                                   over a black shadow)
+├── Icons (ImageList)               their icons (bless.help has none)
+└── Total (LabelList)               "Total cost: " and the sum
+BlessRow (Control)                  a character's row
+├── Cost (BaselineLabel Text26, 560, y)
+├── Bar (LevelBar)                  the empty bar, the blue bar to the low mark in white and from
+│                                   it to the high mark in green, the overlay to the high mark
+└── Hands (ImageList)               the current row's markers: a dimmed hand once at alpha .3, the
+                                    other twice (white, then its colour at .3); the blessing's
+                                    swinging hand
+```
+
+The confirm dim is the Fade node (section 12) on the UI layer
+(`Graphics.show_fade(.5, Graphics.UI_LAYER)`): the box and its list come
+after it in the frame, and a node of the UI layer after one of Transition
+would be drawn under it. The merge preview is two `CardView`s
+(`AbstractCard.place_at` with the next level for the second) around a
+`MenuText` ("x 5 merges to" at size 40, `Text40`).
+
+**The frame of each store** (all UI; the mode fade and "Paused" after it on
+Transition):
+
+| Store, state | Nodes, in the frame's order |
+|---|---|
+| Every store (`drawStandard`) | MenuBackground (the store's background, no pieces), Dialog (the keeper's, phase 3) when shown, MenuBackground (the keeper, then the pieces of the store's mask), then the store's own nodes |
+| Weapon Store, a list | MenuList (the root, or the Buy/Sell categories; an equipment list: price + `down`, the sell lists in their bounding boxes with a `PageScrollBar`), MenuList (the categories beside an equipment list), MenuTitle, EquipStatus and EquipItem and MenuInfo ("Equipped/Total/Gold") beside an equipment list |
+| Weapon Store, a confirm | the above, then Fade (UI, .5), MenuBox (piece 14: the name and its price right-aligned to 630, or "<name>: <price> gp" for a sale; piece 3: "You can't afford that!", "No one can equip that."), MenuList (Equip/Put in inventory/Cancel, Keep/Sell, OK) |
+| Card store, root | MenuList, MenuTitle |
+| Card store, buy page | MenuList, MenuTitle, DeckView (the stock: large cards, the current one at 1.2, the unaffordable grey), CardInfo (phase 3, at −23), MenuInfo ("Stocked/Price/Gold"), PageScrollBar (more than two lines) |
+| Card store, merge page | MenuList, MenuTitle, MenuBackground (pieces 13 and 12), DeckView (the merge deck with its numbers over their shadows in bold 26, the current card's 28), PageScrollBar (more than two lines), CardView, MenuText, CardView (the preview, when there is a current card), MenuInfo |
+| Card store, a confirm | the page, then Fade, MenuBox, MenuList (Buy card/Cancel, Merge cards/Cancel, OK) |
+| Inn | MenuTitle, MenuInfo (gold, steps, time), MenuList (price; the trade list in its bounding box), then Fade, MenuBox, MenuList (the rest confirm) or SignBox and CardInfo (the prize, phase 3) |
+| Church, a list | MenuList (the root or the save list), SlotDates (the save list's dates under each slot), MenuTitle, Tutorial (phase 3) |
+| Church, bless page | MenuBackground (pieces 6 and 5), BlessPage, MenuList (the bless list at size 26), MenuBackground (piece 3), MenuInfo, HelpLine, MenuList (the root list), MenuTitle |
+| Every store's tutorial | the store's nodes, then Tutorial (phase 3) |
+
+**Step B.** At each call site the store calls the twin (or, with the
+part's flag, the legacy drawing): `Building.show_standard`
+(`Graphics.place_image`, `place_centered_image`,
+`AbstractPage.place_menu_background_static` with the mask,
+`AbstractPage.show_pieces`); `AbstractPage.draw_list`, `draw_title`,
+`draw_help`; `StartPage.draw_info` and `show_info` (the Weapon Store's and
+the card store's own lines); `EquipPage.show_status`, `show_equip`;
+`Deck.show_deck`, `MenuScrollBar.show_bar`, `CardStore._show_merge_preview`;
+`AbstractStore.draw_dim` (the dim), `_show_confirm_box` and `show_box` (the
+box: the piece's bind, drawString's `setColor(color)`);
+`SaveSlots.show_dates_under`; `Church._show_bless` (drawStringSetSize's
+sizes, `totalCost` summed: CROSS on "Done" reads it, the markers' positions,
+`LevelUpBar.place_static`'s colours and binds, `drawHand`'s colours through
+`MenuHand.place_hand_image` and `place_hand_with_color`,
+`HelpText.place_top_layer`'s sizes and colours, startText and finishText).
+Every state change of the drawing is kept in its order (plan 9.2, "Results
+of the stores"): the cursor fix-up and its sound, the scroll bars' lazy
+init and `loadIdentity`, `drawDeck`'s bold font turned off, the dim's colour
+and the fade image's bind, `setColor(1)` after it, the merge preview's size
+40 and back.
+
+**Image parts.** `LevelUpBar` draws parts of its images:
+`drawImage(name, x, y, 200, 20, scale, percent)` (`GameTexture.drawPart`: the
+quad from x to x + 200 × scale × percent, its corners truncated, the
+texture's u from 0 to percent) and `drawImage(name, x, y, 200, 20, scale,
+low, high)` (`drawPartRange`: from x + 200 × scale × low, u from low to
+high). `Graphics.place_image_part` returns the quad and its texture
+coordinates; `LevelBar` draws each part as the legacy quad (the same
+`canvas_item_add_triangle_array` call with the same corners, coordinates and
+colour: exact by construction, as `EmotionBubble`). A TextureRect of the
+rect with an AtlasTexture of the part's region, tried first, drew the bars'
+antialiased left ends up to 5/255 apart (17/255 on one pixel; plan 9.2). A
+part without width draws nothing either way.
+
+**Flags** (section 7): the menu's flags for the parts the stores share with
+it (`menu_frame`: the background, the keeper and the pieces, the title, the
+info lines, the merge and bless pages' pieces and the help line;
+`menu_list`: every list; `status`: the Weapon Store's status and item;
+`deck`: the decks, their scroll bars and the merge preview; `menu_text`: the
+confirm boxes and the save list's dates) and two new ones: `dim` (the
+confirm boxes' dims) and `bless` (the bless page's costs, bars, markers,
+help text and total). With all of them on the frame is drawn exactly as
+before the stores' part.
+
+**Still legacy** in the stores: the state, the input and the timing (step
+C); the `draw(g)` methods (the twins run there); `CardStore.drawMergedCard`
+(never called) and the Church's "Resurrect" branch (no menu entry), which
+draw nothing a case can reach. The keeper's dialog, the card info, the
+tutorials, the Inn's prize message, the mode fade and "Paused" are phase 3's
+nodes. Nothing of a store is drawn through `Graphics` with the flags off.
+The pooled nodes keep their last textures after a store is left: the last
+store's background (1024 × 768, about 3 MB as a texture) and keeper, which
+`ImageHandler` loads per place (`addToCurrentLoadOnUse`), stay referenced
+by the two `MenuBackground` nodes until the next store or the menu replaces
+them; the pieces, cards, hands and bars are loaded permanently. A few MB:
+nothing to release.

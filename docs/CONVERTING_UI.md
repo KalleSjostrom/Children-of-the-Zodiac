@@ -10,7 +10,7 @@ are in `docs/ARCHITECTURE.md` section 12. This is the procedure for the next
 overlays (phase 4's: a battle's and a riddle's top layer, the stores'
 menus; the world map's name plate is done, docs/ARCHITECTURE.md
 section 13) and for whole 2D modes (section 5 below; the title, the game
-over and the menu are done, docs/ARCHITECTURE.md section 14). Phase 3's
+over, the menu and the stores are done, docs/ARCHITECTURE.md section 14). Phase 3's
 `--legacy=` flags that the examples below name (`dialog`, `fades`, the
 rollout's overlays) are removed since the phase closed (plan 8.4): a new
 part gets a flag of its own, which goes when its phase closes. Run everything from bash in the project root, Godot with
@@ -158,8 +158,9 @@ they trigger (the time mission's "Time's up!" leaves the floor), input
 * `tools/parity/parity.sh ab "--legacy=<overlay>" "" <cases that show it>`:
   identical at tolerance 0 (the pilot's nodes are exact; a difference is a
   missed state change, a wrong slot, or a different draw call).
-* Golden vs. after on all other cases (`record after --jobs=8`, about 15
-  minutes for 380 cases): identical.
+* Golden vs. after on all other cases (`record after --jobs=5`, about 19
+  minutes for 417 cases; more jobs only with enough free memory, plan 12):
+  identical.
 * With every flag of the phase on (`--legacy=dialog,fades,<overlay>`) the run
   equals the golden: the legacy paths did not change.
 * Look at the shots that show the overlay (a contact sheet,
@@ -172,7 +173,7 @@ they trigger (the time mission's "Time's up!" leaves the floor), input
   once (`record after`), then `--legacy=<overlay>` on the overlay's cases,
   compared with it: the same pairs as `ab`, recorded once.
 
-## 5. Whole 2D modes (phase 4.2: the title, the game over, the menu; next the stores)
+## 5. Whole 2D modes (phase 4.2: the title, the game over, the menu, the stores; next the mini-games)
 
 A mode whose whole frame is UI (no world under it) is converted the same
 way, part by part; ARCHITECTURE section 14 has the conventions and the
@@ -259,3 +260,43 @@ What the menu added (phase 4.2's rollout; docs/ARCHITECTURE.md section 14,
 * **Flags per kind of part** (`menu_frame`, `menu_list`, `menu_text`,
   `status`, `deck`, `automap`), not per page: the stores' parts are the same
   kinds and use the same flags.
+
+What the stores added (phase 4.2's rollout; docs/ARCHITECTURE.md section 14,
+"The stores"):
+
+* **Reuse first.** A mode that draws what another mode's nodes already show
+  needs call sites, not nodes: the stores' frame, lists, status, decks, info
+  lines, help line and boxes are the menu's nodes fed with the store's state
+  (`StartPage.show_info` takes any three lines, `AbstractPage.show_pieces`
+  any placed images, `AbstractStore.show_box` any piece and texts). New
+  nodes only where nothing covers a part: `LevelBar` (parts of images),
+  `BlessPage`/`BlessRow` (a page of the Church's own).
+* **A dim under later UI nodes** is the Fade node on the UI layer
+  (`Graphics.show_fade(value, Graphics.UI_LAYER)`): the levels only rise in a
+  frame, and the box and the list that follow a confirm dim are UI nodes.
+  The riddles' backdrop and the battles' result screens can use the same.
+* **Parts of images** (`drawImage` with a percent or a range:
+  `GameTexture.drawPart`, `drawPartRange`): `Graphics.place_image_part`
+  gives the quad and its texture coordinates; draw the legacy quad
+  (`canvas_item_add_triangle_array` with the same corners, coordinates and
+  colour, as `EmotionBubble`: `LevelBar`). A TextureRect with an
+  AtlasTexture of the part's region was 1–5/255 off on the antialiased edges
+  of the image (up to 17 on one pixel), though whole images drawn by
+  TextureRects match the legacy quads to the bit.
+* **A hand drawn twice in two colours** (the Church's markers) is two
+  images of the hand (`MenuHand.place_hand_image`, `place_hand_with_color`)
+  in an `ImageList`, each with the colour it was drawn in.
+* **Game state in a draw.** The Church sums `totalCost` in its draw and
+  places its markers there; the twin does both, in the same order, and
+  CROSS on "Done" reads the sum. A list's cursor fix-up in the draw is
+  reached when a refill leaves the cursor past the end (the Weapon Store
+  selling the last entry of a list: plan 9.2).
+* **Coverage.** Most store states need routes through the Cheater
+  (`console cheater`, `tools/autoplay/stores.txt`) and dev-only state: the
+  console's `gold` (unaffordable items and cards), `give card` (a merge page
+  that scrolls), `--status=churchbless.tut:1` (a tutorial shown once), a
+  store whose stock or blessing Slot 1 has not used up (Dellna's). The probe
+  prints of the store's modes (`menuMode`, the Church's `blessMode` and
+  `mode_`) tell which sub-page each shot shows; headless probe runs print
+  exit leak reports that windowed runs do not, so take leak lines from the
+  windowed parity logs only.

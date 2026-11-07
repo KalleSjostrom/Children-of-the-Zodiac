@@ -202,12 +202,17 @@ func hasStoredTriggers():
 
 
 ## Draws the inn.
+##
+## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): each part is
+## shown by its node where it was drawn, or drawn with its --legacy flag
+## (AbstractPage.draw_title, StartPage.draw_info, AbstractPage.draw_list, the
+## confirm box; the prize's message and card info are phase 3's nodes).
 func draw3D(g3D):
 	var g = g3D
 	var title = activeNode.getName()
-	g.drawString(title, MenuValues.MENU_TEXT_X, MenuValues.MENU_TITLE_Y)
-	StartPage.drawInfo(g)
-	activeNode.drawChildrenFreely(g, true, false, false, false, false)
+	AbstractPage.draw_title(g, title)
+	StartPage.draw_info(g)
+	AbstractPage.draw_list(g, activeNode, true, false, false, false, false)
 	if menuMode == CONFIRM_BUY:
 		drawConfirmDialog(g, "Rent a room", activeNode.getCurrentChild().getPrice())
 	elif menuMode == SHOW_PRIZE:

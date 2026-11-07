@@ -3,7 +3,9 @@ extends SceneTree
 ## res://proto (the look prototypes, docs/LOOK_PROTOTYPES_PLAN.md) (or
 ## the folders given after "--") and prints a summary. Run through
 ## tools/check.sh, which refreshes the global class cache first. This script
-## skips itself (loading the running script again does not return).
+## skips itself (loading the running script again does not return) and the
+## folders Godot does not import (a .gdignore in them: tools/parity/out,
+## where the parity sets and project copies for recordings live).
 ##
 ##   godot --headless --path . --script res://tools/check_all.gd -- src/battle src/cards
 
@@ -40,7 +42,7 @@ func _collect(dir: String, out: Array) -> void:
 	var n := d.get_next()
 	while n != "":
 		if d.current_is_dir():
-			if not n.begins_with("."):
+			if not n.begins_with(".") and not FileAccess.file_exists(dir + "/" + n + "/.gdignore"):
 				_collect(dir + "/" + n, out)
 		elif n.ends_with(".gd"):
 			out.append(dir + "/" + n)

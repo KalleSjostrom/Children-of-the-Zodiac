@@ -3,7 +3,7 @@ extends RefCounted
 ## The game's commands for the debug console (COTZ-006, DebugConsole):
 ## places (goto, exits, teleport, savepoint, boss, cheater), the party and
 ## battles (heal, god, kill, skip), the world (map, roads, noenemies, look, village) and
-## development (status, trigger, difficulty, save, padlost, emotion). They replace the
+## development (status, trigger, difficulty, give, gold, save, padlost, emotion). They replace the
 ## developer Cheater, whose menu the "cheater" command still opens.
 ##
 ## Jumps go through Organizer.jump_to, as the Cheater's did. A position on a
@@ -77,10 +77,13 @@ func _register(c: DebugCommands) -> void:
 		DebugCommands.arg("name", Callable()), DebugCommands.opt("value", Callable())])
 	c.add("difficulty", "Shows or sets the difficulty (either way, unlike the menu)", _difficulty, [
 		DebugCommands.opt("level", func() -> PackedStringArray: return PackedStringArray(LEVELS.keys()))])
-	c.add("give", "Gives the party a key item or a piece of equipment (weapon, shield, armour), as a chest gives one, number times", _give, [
-		DebugCommands.arg("what", func() -> PackedStringArray: return PackedStringArray(["item", "equipment"])),
-		DebugCommands.arg("name", _equipment_names, "_ for a space; any name for an item").loose(),
+	c.add("give", "Gives the party a key item, a piece of equipment (weapon, shield, armour) as a chest gives one, or a card to the party deck, number times", _give, [
+		DebugCommands.arg("what", func() -> PackedStringArray: return PackedStringArray(["item", "equipment", "card"])),
+		DebugCommands.arg("name", _equipment_names,
+				"_ for a space; any name for an item; a card is <card>[:<level>][:all], as for cast").loose(),
 		DebugCommands.opt("number", Callable(), "1 if left out")])
+	c.add("gold", "Shows or sets the party's gold", _gold, [
+		DebugCommands.opt("amount", Callable())])
 	c.add("save", "Saves the game here, wherever this is", _save, [
 		DebugCommands.arg("slot", func() -> PackedStringArray: return PackedStringArray(SAVE_SLOTS.keys()))])
 	c.add("padlost", "Shows the game pad lost overlay, as if a game pad were unplugged, until its menu is answered", _padlost, [
@@ -752,7 +755,9 @@ func _difficulty(args: PackedStringArray) -> DebugCommands.Result:
 
 ## Dev only (phase 4.2's menu cases): more key items and equipment than the
 ## shipped saves have, for the menu's lists that scroll in their bounding
-## box ("Key Items", the equip page's lists) and their "(n)" numbers.
+## box ("Key Items", the equip page's lists) and their "(n)" numbers; the
+## stores' cases: cards for the card store's merge page (five equal cards
+## of a level below 3 can be merged; more kinds than two lines show scroll).
 func _give(args: PackedStringArray) -> DebugCommands.Result:
 	if not Load.hasLoaded():
 		return DebugCommands.fail("No game loaded")
@@ -765,12 +770,38 @@ func _give(args: PackedStringArray) -> DebugCommands.Result:
 	if args[0] == "item":
 		Load.getPartyItems().addItem(name, number)
 		return DebugCommands.done("%s: %d more" % [name, number])
+	if args[0] == "card":
+		var parts := args[1].split(":")
+		var java_name: String = _card_classes().get(parts[0].to_lower(), "")
+		if java_name == "":
+			return DebugCommands.fail("No card called %s" % parts[0])
+		var level := 1 if parts.size() < 2 else int(parts[1])
+		if level < 1 or level > 3:
+			return DebugCommands.fail("The level is 1, 2 or 3: %s" % args[1])
+		var all: bool = parts.size() > 2 and parts[2] == "all"
+		for i in number:
+			Load.getPartyItems().addCard(Card.createCard(java_name, level, all))
+		return DebugCommands.done("%s: %d more in the party deck" % [args[1], number])
 	if not EquipmentFactory._getFactory().bank.has(name):
 		return DebugCommands.fail("No equipment called %s" % name)
 	var ae = EquipmentFactory.getEquipment(name)
 	for i in number:
 		Load.addEquipment(ae)
 	return DebugCommands.done("%s: %d owned" % [name, ae.getNumber()])
+
+
+## Dev only (phase 4.2's stores cases): the party's gold, for the stores'
+## cards and equipment the party cannot afford (greyed in the card store,
+## "You can't afford that!").
+func _gold(args: PackedStringArray) -> DebugCommands.Result:
+	if not Load.hasLoaded():
+		return DebugCommands.fail("No game loaded")
+	var items = Load.getPartyItems()
+	if not args.is_empty():
+		if not args[0].is_valid_int() or int(args[0]) < 0:
+			return DebugCommands.fail("The amount is a whole number from 0: %s" % args[0])
+		items.addGold(int(args[0]) - items.getGold())
+	return DebugCommands.done("Gold: %d" % items.getGold())
 
 
 ## The names of the equipment.bank, with _ for a space (give's completion).

@@ -1,0 +1,110 @@
+# Phase 4.2's stores (docs/phase4_2_stores_prompt.md, plan 9.2): the weapon
+# store's sell pages (--load="Slot 1" --start=Alares; Alares's store through
+# the Cheater, as stores.txt): the category list; the party's five weapons
+# at half price in their bounding box (four rows: the list overflows it, its
+# scroll bar) beside the category list, moved down past the box (scrolled),
+# wrapped to the top and from the top to the bottom; the sell confirm
+# (Keep/Sell, "<name>: <price> gp") with its hand moved, kept, then a weapon
+# sold (the list filled again, four rows: no scroll bar); then the last
+# weapon of the list sold: the list is filled again with the cursor past its
+# end (an original bug: WeaponStore.updateCurrent reads the child at the
+# cursor, two script errors, as the Java's ArrayList.get threw) and the
+# list's draw moves the cursor back (MenuNode.draw's fix-up, with its
+# sound); the shields and the armours (one each).
+wait 3100
+console cheater
+wait 1200
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap CROSS
+wait 400
+tap CROSS
+wait 400
+tap CROSS
+wait 3500
+shot s00_in
+log in_weapon
+tap DOWN
+wait 600
+tap CROSS
+wait 600
+shot s01_sell
+tap CROSS
+wait 600
+shot s02_weapons
+tap DOWN
+wait 600
+shot s03_down
+tap DOWN
+wait 600
+tap DOWN
+wait 600
+shot s04_down
+tap DOWN
+wait 600
+shot s05_scrolled
+tap DOWN
+wait 600
+shot s06_wrapped_top
+tap UP
+wait 600
+shot s07_wrapped_bottom
+tap CROSS
+wait 600
+shot s08_confirm
+tap CROSS
+wait 600
+shot s09_kept
+tap UP
+wait 600
+tap UP
+wait 600
+tap CROSS
+wait 600
+tap DOWN
+wait 600
+shot s10_confirm_sell
+tap CROSS
+wait 600
+shot s11_sold
+tap DOWN
+wait 600
+shot s12_last
+tap CROSS
+wait 600
+tap DOWN
+wait 600
+tap CROSS
+wait 100
+shot s13_sold_last
+wait 500
+shot s14_sold_last
+log sold_last
+tap CIRCLE
+wait 600
+shot s15_back
+tap DOWN
+wait 600
+tap CROSS
+wait 600
+shot s16_shields
+tap CIRCLE
+wait 600
+tap DOWN
+wait 600
+tap CROSS
+wait 600
+shot s17_armours
+quit

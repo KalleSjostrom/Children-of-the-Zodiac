@@ -136,11 +136,36 @@ func drawMenuBackground(g):
 ## Draws the standard things in a building: background, dialog, keeper and
 ## the menu background.
 func drawStandard(g):
+	# Bridge (phase 4.2 step B): the frame's MenuBackground nodes
+	# (show_standard); --legacy=menu_frame keeps the drawing.
+	if not Main.is_legacy("menu_frame"):
+		show_standard(g)
+		return
 	g.drawImage(background, 0, 0)
 	if dialogIsShowing:
 		Dialog.getDialog().draw(g, true, name, dialog[0], dialog[1], false)
 	g.drawCenteredImage(keeper, keeperHeight())
 	drawMenuBackground(g)
+
+
+## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): drawStandard
+## without the drawing (the background's, the keeper's and the pieces'
+## binds), the background in one MenuBackground node, the keeper's dialog in
+## its own slot (phase 3's node), then the keeper and the store's pieces (its
+## mask over Building.store) in a second MenuBackground node
+## (Graphics.show_ui).
+func show_standard(g) -> void:
+	var mat = g.canvas_material()
+	var back: Array = g.place_image(background, 0, 0)
+	var view = g.show_ui(AbstractPage.MENU_BACKGROUND_VIEW, Graphics.UI_LAYER)
+	if view != null:
+		view.show_background(back, [], mat)
+	if dialogIsShowing:
+		Dialog.getDialog().draw(g, true, name, dialog[0], dialog[1], false)
+	var pieces := [g.place_centered_image(keeper, Values.ORIGINAL_RESOLUTION[Values.X] / 2,
+			keeperHeight())]
+	pieces.append_array(AbstractPage.place_menu_background_static(g, store, menusUsed))
+	AbstractPage.show_pieces(g, pieces)
 
 
 func keeperHeight():

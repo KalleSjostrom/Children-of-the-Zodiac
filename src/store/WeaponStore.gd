@@ -189,23 +189,32 @@ func initiateEquipMenu(n, mode):
 
 
 ## Draws the weapon store on the given graphics.
+##
+## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): each part is
+## shown by its node where it was drawn, or drawn with its --legacy flag
+## (AbstractPage.draw_list, draw_title, EquipPage.show_status and show_equip,
+## drawInfo, the confirm boxes; the tutorial is phase 3's node).
 func draw3D(g3D):
 	var g = g3D
 	if mode_ != NO_MODE:
-		activeNode.drawChildrenFreely(g, true, false, false, true, false)
+		AbstractPage.draw_list(g, activeNode, true, false, false, true, false)
 	else:
-		activeNode.drawAllChildren(g)
+		AbstractPage.draw_list(g, activeNode, false, true, false, false, false)
 
 	var n = activeNode.getParent()
 	if n != null and n.isActive():
-		activeNode.getParent().drawChildren(g)
+		AbstractPage.draw_list(g, activeNode.getParent(), false, false, false, false, false)
 
 	var title = activeNode.getName()
-	g.drawString(title, MenuValues.MENU_TEXT_X, MenuValues.MENU_TITLE_Y)
+	AbstractPage.draw_title(g, title)
 
 	if mode_ != NO_MODE:
-		EquipPage.drawStatus(g, currentCharacter, current, mode_)
-		EquipPage.drawEquip(g, current)
+		if Main.is_legacy("status"):
+			EquipPage.drawStatus(g, currentCharacter, current, mode_)
+			EquipPage.drawEquip(g, current)
+		else:
+			EquipPage.show_status(g, currentCharacter, current, mode_)
+			EquipPage.show_equip(g, current)
 		drawInfo(g)
 	if menuMode == CONFIRM_BUY:
 		drawConfirmDialog(g)
@@ -216,14 +225,21 @@ func draw3D(g3D):
 
 
 ## Draws the confirm sell dialog asking if the player would like to sell
-## the current equipment.
+## the current equipment. Bridge (phase 4.2 step B): its dim, box and list
+## as drawConfirmDialog's (AbstractStore.draw_dim, show_box,
+## AbstractPage.draw_list).
 func drawConfirmSellDialog(g):
-	g.fadeOldSchool(0.5)
+	draw_dim(g)
 	g.setColor(1)
 	var n = activeNode.getCurrentChild()
-	g.drawImage(AbstractPage.images[14], 400, 300)
-	g.drawString(n.getName() + ": " + str(n.getPrice()) + " gp", 430, 360)
-	confirmNode.drawAllChildren(g)
+	if Main.is_legacy("menu_text"):
+		g.drawImage(AbstractPage.images[14], 400, 300)
+		g.drawString(n.getName() + ": " + str(n.getPrice()) + " gp", 430, 360)
+	else:
+		show_box(g, AbstractPage.images[14], Vector2i(400, 300), [
+				[n.getName() + ": " + str(n.getPrice()) + " gp", Vector2i(430, 360),
+					HORIZONTAL_ALIGNMENT_LEFT]])
+	AbstractPage.draw_list(g, confirmNode, false, true, false, false, false)
 
 
 ## Updates the total amount of owned and equipped equipment of the current
@@ -238,9 +254,15 @@ func updateNumbers():
 		total = 0
 
 
-## Draws the equipped/total counts and the party's gold.
+## Draws the equipped/total counts and the party's gold. Bridge (phase 4.2
+## step B): with --legacy=menu_frame off, a MenuInfo node shows the three
+## lines (StartPage.show_info).
 func drawInfo(g):
 	var x: int = MenuValues.MENU_TEXT_X
+	if not Main.is_legacy("menu_frame"):
+		StartPage.show_info(g, PackedStringArray(["Equipped: " + str(equipped),
+				"Total: " + str(total), "Gold: " + str(Load.getPartyItems().getGold())]))
+		return
 
 	g.drawString("Equipped: " + str(equipped), x, 648)
 	g.drawString("Total: " + str(total), x, 689)

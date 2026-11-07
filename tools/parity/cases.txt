@@ -626,3 +626,26 @@ menu_tutorial_scroll     menu_tutorial_scroll     --load="Slot 1" --start=Alares
 # (zazo_night_*).
 sprites_villager_walk    sprites_villager_walk    --load="Slot 1" --start=Alares
 sprites_party_walk       sprites_party_walk       --load="Slot 1" --start=Berca
+# Phase 4.2's stores (docs/phase4_2_stores_prompt.md, plan 9.2): what the
+# cases above do not show of the stores (they show only the root menus; the
+# Weapon Store's fades are dialog_store_fade's). Each store through the
+# Cheater (tools/autoplay/stores.txt): the Weapon Store's buy lists with
+# their prices and comparisons, the buy confirm, "No one can equip that.",
+# "You can't afford that!" (the dev-only console's gold) and "Paused"; its
+# sell lists in their bounding boxes, scrolled (the console's give adds
+# equipment), the sell confirm; the card store's fades, its buy page
+# scrolled with greyed cards and its confirms; its merge page scrolled (the
+# console's give adds cards), the preview of a level 1 and a level 2 card,
+# the merge confirm; the merge page left empty (the Start save); the Inn's
+# fades, rest confirm, trade list and prize, "Paused" and a night's rest;
+# the Church's fades, save list before and after a save (the game clock's
+# dates), its levels tutorial; the bless tutorial and page (Dellna, never
+# blessed in Slot 1), the markers moved and the blessing.
+store_weapon_buy         store_weapon_buy         --load="Slot 1" --start=Alares
+store_weapon_sell        store_weapon_sell        --load="Slot 1" --start=Alares
+store_card_buy           store_card_buy           --load="Slot 1" --start=Alares
+store_card_merge         store_card_merge         --load="Slot 1" --start=Alares
+store_card_merge_last    store_card_merge_last    --load=Start --start=Alares
+store_inn                store_inn                --load="Slot 1" --start=Alares
+store_church_save        store_church_save        --load="Slot 1" --start=Alares
+store_church_bless       store_church_bless       --load="Slot 1" --start=Alares --status=churchbless.tut:1

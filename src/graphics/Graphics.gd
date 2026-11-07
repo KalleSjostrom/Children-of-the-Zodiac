@@ -715,8 +715,10 @@ func fadeOldSchool(fadeindex: float) -> void:
 ## without the drawing: the same state changes (the current colour, the
 ## image's texture), and the Transition layer's Fade node draws the quad in
 ## the frame's order (show_ui): a colour (the fade image's black or white
-## times the colour) or the image of setFadeImage, at 1 - fadeindex.
-func show_fade(fadeindex: float) -> void:
+## times the colour) or the image of setFadeImage, at 1 - fadeindex. A dim
+## that UI nodes are drawn over in the same frame (a store's confirm box and
+## its list: phase 4.2, section 14) is a Fade node on the UI layer.
+func show_fade(fadeindex: float, layer: int = TRANSITION_LAYER) -> void:
 	fadeindex = 0.0 if fadeindex <= 0 else fadeindex
 	if fadeindex >= 1:
 		return
@@ -734,7 +736,7 @@ func show_fade(fadeindex: float) -> void:
 	var t := skip_image(image)
 	if t == null:
 		return
-	var fade = show_ui(FADE_VIEW, TRANSITION_LAYER)
+	var fade = show_ui(FADE_VIEW, layer)
 	if fade == null:
 		return
 	if fadeMode == FADE_TO_IMAGE:
@@ -1607,6 +1609,43 @@ func place_image(image, x, y, scale: float = 1.0) -> Array:
 	var py := roundi(y)
 	return [t.getGodotTexture(), Rect2i(px, py, int(px + t.getWidth() * scale) - px,
 			int(py + t.getHeight() * scale) - py), tint]
+
+
+## Bridge (phase 4.2 step B, the stores, docs/ARCHITECTURE.md section 14):
+## drawImage(image, x, y, w, h, scale, percent) and drawImage(image, x, y, w,
+## h, scale, low, high) without the drawing (the bind and the texture
+## coordinate of the quad's last vertex), for a node that draws that part of
+## the image where it would have been drawn (LevelBar). Returns [texture, rect
+## (the quad GameTexture.drawPart or drawPartRange draws: its corners
+## truncated to whole pixels), uv (the quad's texture coordinates, [u left, u
+## right, v top, v bottom]: u from 0 to percent or from low to high), tint
+## (the current colour)], or [] when drawImage would draw nothing.
+func place_image_part(image, x, y, w, h, scale: float, low: float, high = null) -> Array:
+	var tint := _cur_color
+	var t := skip_image(image)
+	if t == null:
+		return []
+	var tc := t.getImageTexCoords()
+	var px := int(x)
+	var py := int(y)
+	var nyh := int(py + h * scale)
+	var nx: int
+	var xw: int
+	var u0: float
+	var u1: float
+	if high == null:
+		nx = px
+		xw = int(px + w * scale * low)
+		u0 = tc.left()
+		u1 = tc.right() * low
+	else:
+		nx = int(px + w * scale * low)
+		xw = int(px + w * scale * float(high))
+		u0 = tc.left() + low
+		u1 = tc.right() * float(high)
+		glTexCoord2f(u0, tc.top())
+	return [t.getGodotTexture(), Rect2i(nx, py, xw - nx, nyh - py),
+			[u0, u1, tc.top(), tc.bottom()], tint]
 
 
 ## Bridge (phase 4.2 step B): drawCenteredImage(name, x, y) without the

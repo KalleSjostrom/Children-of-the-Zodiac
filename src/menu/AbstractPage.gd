@@ -292,6 +292,17 @@ func show_standard(g) -> void:
 		view.show_background(back, pieces, mat)
 
 
+## Bridge (phase 4.2 step B, the stores, docs/ARCHITECTURE.md section 14):
+## images placed by Graphics.place_image (a store's keeper and its masked
+## pieces, the card store's merge pieces, the Church's bless pieces), shown by
+## the frame's next MenuBackground node on the UI layer without back.jpg, in
+## the order given.
+static func show_pieces(g, pieces: Array) -> void:
+	var view = g.show_ui(MENU_BACKGROUND_VIEW, Graphics.UI_LAYER)
+	if view != null:
+		view.show_background([], pieces, g.canvas_material())
+
+
 ## Bridge (phase 4.2 step B): a page's title line, g.drawString(title,
 ## MenuValues.MENU_TEXT_X, MenuValues.MENU_TITLE_Y), without the drawing
 ## (drawString's setColor(color)); the frame's next MenuTitle node on the UI

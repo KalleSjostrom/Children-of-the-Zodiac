@@ -1,0 +1,51 @@
+# Phase 4.2's stores (docs/phase4_2_stores_prompt.md, plan 9.2): the card
+# store's merge page with nothing left to merge (--load=Start --start=Alares;
+# Alares's store through the Cheater): the Start save's party deck has seven
+# Battle Cards of level 1, the only cards that can be merged; one merge
+# leaves two and a level 2 card, and the merge page is empty: no cards, no
+# preview, "Price: 0", the deck's hand alone; CROSS does nothing there.
+wait 3100
+console cheater
+wait 1200
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap CROSS
+wait 400
+tap DOWN
+wait 300
+tap CROSS
+wait 400
+tap CROSS
+wait 3500
+shot l00_in
+log in_card
+tap DOWN
+wait 700
+tap CROSS
+wait 700
+shot l01_merge
+tap CROSS
+wait 700
+shot l02_confirm
+tap CROSS
+wait 700
+shot l03_empty
+tap CROSS
+wait 700
+shot l04_cross
+tap CIRCLE
+wait 700
+shot l05_root
+quit

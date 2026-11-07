@@ -2721,7 +2721,40 @@ is the labyrinth's (3D walls and weather, the riddle's 2D after them).
     in use. Cases still needed: each kind fading in and out (not only
     shown), a puzzle solved (the door's status), Cesadur's dimmed hand and
     its letter pool, Hate's code entered.
-* **Stores** (`src/store`, 7 files, 2,082 lines; `Building`, `AbstractStore`,
+  * *Prepared by the menu and the stores (phase 4.2's rollout, parts 1 and
+    2; ARCHITECTURE section 14).* Built, for a riddle to show with its own
+    state at its call sites (`RiddleGame.drawTopLayer` and the kinds'
+    overrides, which run after the labyrinth's dialog: UI nodes in the
+    frame's order, before the labyrinth's fade on Transition):
+    * The dim: `g.fadeOldSchool(1 − fos)` → `g.show_fade(1 − fos,
+      Graphics.UI_LAYER)` (a Fade node on UI: the fade mode's colour or
+      image at 1 − the value, as the stores' confirm dims; the riddle's
+      nodes come after it). Its own flag, as the stores' `dim`.
+    * The riddle's image (`RiddleLoader`'s, at its scale, in `(1, 1, 1,
+      fade)`) and Aegis's and Grivera's centred lines (size 28):
+      `AbstractStore.show_box(g, image, at, lines)` takes one placed image
+      and lines with an alignment (MenuBox: its `Piece` is drawn at
+      `place_image`'s rect, scaled too; a centred line is BaselineLabel's
+      `HORIZONTAL_ALIGNMENT_CENTER`, as `calcAlignCenter`); a scale needs a
+      `place_image(image, x, y, scale)` call instead of show_box's unscaled
+      one (a parameter to add). Hate's digits (size 36, at the riddle's
+      fade through `startText(fade, -1)`) and code (centred), Cesadur's
+      letters and rows (`drawMultiString` at the labyrinth's fade, the size
+      earlier drawing left): `AbstractPage.show_lines` (MenuText; roles by
+      size through `MenuText.role`: `Text28`, `Text36`).
+    * The hands: `MenuHand.place_hand_image(g)` (the dim of a dimmed hand,
+      the bind; Cesadur's two hands, one dimmed) gives images for an
+      `ImageList`, shown by `AbstractPage.show_pieces(g, images)`
+      (MenuBackground without its back) or a small node of the riddle's.
+    * Cesadur's help (button icons and four labels): `AbstractPage.draw_help(g,
+      drawHelp)` (HelpLineCapture records the icons and labels: HelpLine).
+    * Left for them: the tiles and the markers (`Tile.draw`,
+      `NxNsingle.png`, `horizontal`/`vertical.png`: images at computed
+      places, `ImageList` through `place_image`), the riddles' texts and
+      their alphas (above), Cesadur's letter pool and rows, the riddle's
+      image and fade; the fade's port bug first (Appendix), as its own change
+      with new goldens; the cases above. One session.
+* **Stores** (*done through step B: results below*; `src/store`, 7 files, 2,082 lines; `Building`, `AbstractStore`,
   `CardStore`, `WeaponStore`, `Inn`, `Church`; `Door` draws nothing).
   * Draws: `Building.draw` sets `setColor(1)`, size 22, `setAlphaFunc(.02)`,
     black text; `drawStandard`: the background (0, 0), the keeper's dialog
@@ -2908,12 +2941,10 @@ is the labyrinth's (3D walls and weather, the riddle's 2D after them).
      card images), the thumbnail, the info, the help line, the confirm box;
      the automap is TextureRects under a `Zoom` with the page's modelview,
      as planned (exact: results).
-  2. The stores (one or two sessions): after the menu (they reuse its
-     pieces, lists, deck and status helpers: the stores entry above says
-     how); first the cases above (no sub-page is covered today); the
-     confirm dim is `show_fade(.5)`-like but on UI (a Fade node on UI: the
-     box and its list come after it), `HelpText`'s rows are
-     `Row.place_rows` (phase 3), `LevelUpBar` is new.
+  2. The stores: *done in one session (results below)*. They reused the
+     menu's pieces, lists, deck, status helpers, info lines, help line and
+     box; new: the confirm dim (the Fade node on UI), `LevelBar` (the bars'
+     image parts) and the Church's bless page (`BlessPage`, `BlessRow`).
   3. The mini-games (one session): independent of both (only `MenuHand`,
      whose node is `MenuList`'s hand, and the button icons); fix the fade's
      port bug first, as its own change with new goldens; its top layer is a
@@ -3101,6 +3132,233 @@ reuse; the legacy objects keep the state, the input and the timing.
   runs crashed in AutoPlay's `get_image`, four logged WebP decode errors
   with identical shots; the eight were recorded again, alone: identical.
 
+**Results of the stores (phase 4.2's rollout, part 2,
+`docs/phase4_2_stores_prompt.md`; conventions in docs/ARCHITECTURE.md
+section 14, "The stores").** Step B for the Weapon Store, the card store,
+the Inn and the Church with the menu's nodes and three new ones (`LevelBar`,
+`BlessPage`, `BlessRow`); the legacy stores keep the state, the input and
+the timing.
+
+* **Baseline** (on 2a3a7b35): `tools/check.sh` 0 failed (494 scripts);
+  goldens of the 409 cases (`st0base`, 7,674 shots), identical to `cafter2` (the closings' set) shot for shot and log for
+  log, and in each case's error and leak lines but one: a run of
+  `particles_save_grivera` logged WebP decode errors (memory pressure:
+  12 runs of that 8-job recording crashed or failed to start and were
+  recorded again; its shots were identical, and the golden's run of it
+  equals `cafter2`);
+  the menu's check (`--legacy=title,game_over,menu_list,menu_frame,
+  menu_text,status,deck,automap`, every case, on the golden's code: the
+  baseline and the console's two new commands, which no old case uses) vs.
+  the golden: 7,817 of 7,817 shots, all logs and error lines identical.
+* **Facts** (deliverable 1), where they add to or differ from the prompt and
+  the stores entry above:
+  * The frame. `Building.draw` as listed: `setColor(1)`, size 22,
+    `setAlphaFunc(.02)`, black text every frame, not the blending (only the
+    Inn's prize message sets it, to the usual `ONE_MINUS_SRC_ALPHA`) or the
+    bold font (`setFontSize(22)` keeps the font: `drawDeck` turns bold off
+    itself). `drawStandard`: the background at (0, 0), the keeper's dialog
+    (a phase 3 node) while `dialogIsShowing` (the Weapon Store's equipment
+    lists and the card store after its buy or merge page hide it; the merge
+    page shows "The following cards can be merged."), the keeper centred at
+    y 205 (the Church's at 105), the pieces of the store's mask. Every store
+    fades in when entered and out when left (`initGameMode`'s fade-in, the
+    exit's fade-out), with the current fade mode's image: black in every
+    probed frame; the Inn's rest fades out and then waits seven seconds
+    faded out (`checkExit`). The stores are pausable (only the title is
+    not): START draws "Paused" over a store and over its confirm box (now
+    cases); "game pad lost" is drawn after the store as after every mode.
+  * Order and overlaps. The keeper is drawn after the keeper's dialog and
+    before the pieces; the lists' hands over the pieces (x 765 over piece
+    2's or 14's left edge); the Weapon Store's equipment list and its hand,
+    then the category list and its hand (two lists, two hands); the dim over
+    everything before it, the box and its list over the dim; the card info
+    at −23 (its panel x 4 to 762, y 12 to 209) over the keeper's dialog and
+    the keeper's top rows, not over the pieces (from x 762) or the deck
+    (from y 410); the bless page's markers (hand2.png, 45 × 40, at y − 50)
+    over their own row's bar and the row above's, under nothing drawn later;
+    the bars (165 × 25 images drawn 340 × 34) under the markers only; the
+    merge preview's text between its two cards, which do not overlap it.
+  * State changes in the draws, all kept by the twins in order: the
+    Church's `totalCost` (set to 0 and summed in the bless page's draw,
+    read by CROSS on "Done") and its markers' positions (`handLow`,
+    `handHigh`; `handAnim`'s y, its x stepped in `update`); the scroll bars'
+    lazy init and `loadIdentity` (the card store's two, the lists'); the
+    cursor fix-up and its sound; `drawDeck`'s bold font and black text;
+    `fadeOldSchool(.5)`'s colour (the fade colour at alpha .5) and the fade
+    image's bind, then `setColor(1)`; `LevelUpBar.drawStatic`'s `setColor`
+    calls (white, green `(0, 1, 0, 1)`, white, white); the merge preview's
+    size 40 and back; `drawStringSetSize`'s sizes (30, 26 per row); the help
+    text's sizes 34 and 26, black, startText (the store's fade value) and
+    each word's `setTextColorAndApply`; drawString's `setColor(color)` after
+    every line. The Inn's prize (`currentLoot`, the gift message) is set in
+    its update, not its draw.
+  * The cursor fix-up is reachable in one place: selling the last weapon of
+    a sell list that has more (Slot 1: Arcane Rod, the fifth of five).
+    `WeaponStore.crossPressed` refills the list with the cursor kept, and
+    `updateCurrent` reads the child at the cursor, which is past the end:
+    two script errors (the Java's `ArrayList.get` threw: an original bug,
+    Appendix), then the list's draw moves the cursor back (with its sound).
+    `store_weapon_sell` sells it.
+  * Text. Measured: the prices right-aligned to 985 at size 20 (25 px lower
+    on the Weapon Store's lists), the confirm's price to 630 at 22, the card
+    store's numbers right-aligned in bold 26 (x + 118 / 116, the shadow
+    first) and the current card's at 28 (x + 128 / 126). Sizes: 22; 20 for
+    prices; 26 (the bless list, each row's cost, the help text, "Total
+    cost") and 30 ("Cost"); 40 ("x 5 merges to"). Bold only in `drawDeck`.
+  * Variants by call site: plain (`drawAllChildren`: every root, the Weapon
+    Store's categories, the confirm lists, the Church's lists; `drawChildren`:
+    the Weapon Store's categories beside an equipment list, the Church's
+    root beside the bless page), price + `down` (the Weapon Store's equipment
+    lists; the sell lists in their bounding boxes, 370 to 550, bar at 978),
+    price (the Inn's root and its trade list, bounding box 147 to 270: no
+    price on the maps). MenuList's price variant draws what `drawWithPrice`
+    draws (the name, then "<price> gp" at size 20 right-aligned to 985, the
+    size back to 22): identical (parity below).
+  * Images in parts. `LevelUpBar.drawStatic` draws `emptyBar.png` whole and
+    `blueBar.png` twice and `overlay.png` once in parts
+    (`GameTexture.drawPart` with percent 1, `drawPartRange` 0 to p1, p1 to
+    p2, 0 to p2): the quad from `int(x + 200 × 1.7 × low)` to `int(x + 200
+    × 1.7 × high)`, `int(y)` to `int(y + 34)`, the texture's u from low to
+    high (the images are 165 × 25, drawn 340 × 34). A TextureRect of that
+    rect with an AtlasTexture of that region, the first node tried, drew the
+    bars' antialiased left ends (x 185 to 197 of every bar) 1–5/255 apart
+    (17 on one pixel), in all 17 bless page shots: Godot's region rect does
+    not sample the texture quite as the legacy triangles do. `LevelBar`
+    draws the legacy quad instead (`Graphics.place_image_part`'s corners
+    and texture coordinates, `canvas_item_add_triangle_array`, as
+    `EmotionBubble`): exact. A zero-width part (p1 = 0, or p1 = p2 after the
+    blessing) draws nothing either way.
+  * Not reachable, so not covered: "Can't merge that card." (`CANT_MERGE`):
+    the merge deck holds only the kinds whose `enabled` is true (five or more,
+    `canBeMerged`, level below 3), so CROSS on a card of it always confirms
+    (the Java does the same); for the same reason the merge page never shows
+    a level 3 card without its preview: the page is without a preview only
+    when it is empty (`store_card_merge_last`). `CardStore.drawMergedCard`
+    and the Church's "Resurrect" (plan Appendix).
+  * Coverage the plan missed: `dialog_card_store` already showed the card
+    store's buy page (Alares at level 0: five cards, one line) and its merge
+    page with the preview (three kinds; levels 1 and 2), the numbers and the
+    card info.
+  * The mini-games share: `MenuHand` (now also as images:
+    `place_hand_image`), the button icons (`HelpLine`), the dim (the Fade
+    node on UI) and the box (`MenuBox`): entry above.
+* **Coverage.** The probe (prints in `Building.draw` with the store and its
+  modes and fade, each store's `draw3D`, the confirm boxes, `MenuNode.draw`
+  with its flags, cursor, bounding box offset and fix-up while a store
+  draws, `MenuScrollBar.draw`, `Deck.drawDeck`, `LevelUpBar.drawStatic`,
+  the Church's hands, `HelpText`, the dates, the Inn's gift, "Paused" and
+  AutoPlay's shot) over every case: the stores in 50 shots of 6 cases
+  (`stores`, `dialog_card_store`, `dialog_store_fade`, `tutorial_store`,
+  `zazo_night_0`, `zazo_night_1`): every root list (the Inn's with its
+  price, the Church's with Bless greyed), the Weapon Store's fade in and
+  out, both stores' tutorials, and (not in the plan) the card store's buy
+  page and merge page in `dialog_card_store`. Not shown: any Weapon Store
+  list below the root, a confirm, a scroll bar, the bless page, the save
+  list, the Inn's trade list or prize, "Paused" over a store, the other
+  stores' fades. Eight new cases (143 shots): `store_weapon_buy` (Zazo:
+  the categories, the weapons with prices and comparison, the hand moved,
+  the buy confirm moved, a purchase, Borealis's greyed Iron Armlet and "No
+  one can equip that.", the armours greyed after the console's `gold 100`,
+  "You can't afford that!", "Paused" over the confirm and over the list),
+  `store_weapon_sell` (Alares: the five weapons in their bounding box,
+  scrolled, wrapped both ways, the sell confirm kept and confirmed, the
+  last weapon sold: the fix-up, the shields and armours), `store_card_buy`
+  (Dellna at level 1: 31 cards on five lines, the fade-in, the deck moved
+  and scrolled, grey cards after `gold 14000`, "You can't afford that!", the
+  confirm moved and cancelled, a purchase, the fade-out), `store_card_merge`
+  (the console's `give card` for twelve more kinds: 16 kinds on three lines,
+  the scroll bar, previews of level 1 and 2 cards, the confirm moved and
+  cancelled, a merge), `store_card_merge_last` (the Start save: one merge
+  leaves the page empty), `store_inn` (the fade-in, the rest confirm moved
+  and cancelled, the trade list of five maps scrolled, a prize, the traded
+  map greyed, "Paused", a night's rest: the fade-out and the wait),
+  `store_church_save` (the fade-in, the save list "Empty", a save to Slot 2
+  and its game-clock date, "Tutorial - Levels", the fade-out),
+  `store_church_bless` (Dellna, `--status=churchbless.tut:1`: the five pages
+  of the bless tutorial, the bless page, the blue marker moved, the green
+  one chosen and moved both ways, the next rows, "Done" and the blessing on
+  each row, the page when done). Goldens: `st1gold` (417 cases, 7,817
+  shots; its old cases identical to the baseline and to `cafter2`, shots,
+  logs and per-case error and leak lines), `st1gold2` (the new cases again:
+  143 of 143 identical, logs and error lines too).
+* **Built** (ARCHITECTURE section 14, "The stores"): the nodes `LevelBar`,
+  `BlessPage`, `BlessRow`; the bridge members `Graphics.place_image_part`,
+  `show_fade`'s layer (the confirm dim: a Fade node on UI),
+  `AbstractPage.show_pieces`, `StartPage.show_info`,
+  `MenuHand.place_hand_image`, `place_hand_with_color`,
+  `LevelUpBar.place_static`, `HelpText.place_top_layer`,
+  `AbstractCard.place_at`'s level, `Building.show_standard`,
+  `AbstractStore.draw_dim`, `show_box`, `_show_confirm_box`,
+  `CardStore._show_merge_preview`, `Church._show_bless`; the stores' call
+  sites switched to the menu's twins (`draw_list`, `draw_title`,
+  `draw_help`, `draw_info`, `EquipPage.show_status`, `show_equip`,
+  `Deck.show_deck`, `MenuScrollBar.show_bar`, `SaveSlots.show_dates_under`);
+  flags `--legacy=dim`, `bless`; the console's `gold` and `give card`;
+  `tools/check_all.gd` skips folders with a `.gdignore` (project copies in
+  `tools/parity/out`).
+* **Parity** (tolerance 0 everywhere; the final code, 417 cases, 7,817 shots;
+  the node run is `st2node`; "the store cases": the 14 cases that draw a
+  store, by the probe, 222 shots):
+  * golden (`st1gold`) vs. nodes, every case: 7,817 of 7,817 shots
+    identical, all 417 logs identical, the same error lines in every log
+    (2,421 errors, 3 script errors: `store_weapon_sell`'s two and an older
+    case's one; the exit leak reports only in the five `effects_*` cases,
+    as before);
+  * the stores' flags (`--legacy=menu_frame,menu_list,menu_text,status,deck,
+    dim,bless`) vs. nodes on the store cases: 222 of 222, logs and error
+    lines identical (and vs. the golden); each flag alone vs. nodes and vs.
+    the golden on the store cases: `menu_frame`, `menu_list`, `menu_text`,
+    `status`, `deck`, `dim`, `bless` each 222 of 222, logs and error lines
+    identical;
+  * every flag on (`--legacy=title,game_over,menu_list,menu_frame,menu_text,
+    status,deck,automap,dim,bless`, every case) vs. the golden: 7,817 of
+    7,817, all logs and error lines identical (the legacy paths and the
+    frame without nodes are unchanged);
+  * the baseline's check: the menu's flags on every case of the golden's
+    code vs. the golden: 7,817 of 7,817, logs and error lines identical;
+  * the new cases recorded twice: 143 of 143, logs and error lines
+    identical; no exit leak report in them.
+  * No tolerance was needed. The one difference on the way was the first
+    `LevelBar` (a TextureRect with an AtlasTexture region): 202 to 240
+    pixels of the 17 bless page shots, up to 5/255 (17 once), on the bars'
+    antialiased left ends (Facts); drawn as the legacy quad it is exact.
+    The first node run of every other store case was identical.
+* **Frame rate** (normal runs: no `--seed`, windowed, one at a time, the
+  shipped saves (`APPDATA` a scratch folder); AutoPlay's `fps=` every 0.5 s
+  for 11 s, the first second dropped; legacy (the stores' flags) → nodes,
+  median and range):
+
+  | Where | Capped | Uncapped |
+  |---|---|---|
+  | The Weapon Store's weapons with the comparison (Zazo; the status, the item, two lists) | 60 → 60 | 858 (830–868) → 1,526 (1,513–1,530) |
+  | The card store's buy page (Dellna at level 1: 14 cards shown, the card info, the scroll bar) | 60 → 60 | 585 (578–588) → 1,211 (1,190–1,226) |
+  | The Church's bless page (Dellna: three bars and rows, the help text) | 60 → 60 | 459 (454–462) → 863 (857–866) |
+
+  The legacy drew every glyph and image each frame (the help text's about 70
+  words, the deck's cards and balls, the status's attributes); the nodes
+  keep their glyphs and rects.
+* **Still legacy** in the stores: the state, the input and the timing (step
+  C: decisions 3 and 6, phase 4.3's input wrapper); the `draw(g)` methods
+  (the twins run there); `CardStore.drawMergedCard` (never called) and the
+  Church's "Resurrect" branch (no menu entry). The keeper's dialog, the card
+  info, the tutorials, the Inn's prize message, the mode fade and "Paused"
+  are phase 3's nodes. With the flags off nothing of a store frame is drawn
+  through `Graphics`: a run of the 14 store cases with prints in
+  `Graphics._drawText` and `_emit2D` during the stores' draws found no
+  legacy text or quad in 12,451 store frames.
+* **Found on the way:** a TextureRect with an AtlasTexture region does not
+  draw a part of an image as the legacy quad does (the bars' antialiased
+  ends up to 5/255, Facts): `LevelBar` draws the legacy quads (12). Selling
+  a sell list's last entry reads past its end (two script errors; an
+  original bug, Appendix). "Can't merge that card." is unreachable
+  (Appendix). The plan's "no shot of the card store's deck or merge page"
+  was wrong (`dialog_card_store`). Project copies in the session scratchpad
+  lost their old files to Windows' temp cleanup while the disk was full: a
+  golden recording failed half-way and was redone from a copy in
+  `tools/parity/out/_gold` (12, HANDOFF); `tools/check.sh` compiled that
+  copy until `check_all.gd` skipped `.gdignore`d folders. The free memory
+  at idle was 7 GB: an 8-job recording crashed 11 runs (12).
+
 ### 9.3 Infrastructure
 
 * **Game modes:** a `Game` autoload with a place registry generated from
@@ -3280,7 +3538,26 @@ When no mode draws through `g` any more:
   that did not decode, both with identical shots once re-recorded). Run
   nothing windowed beside a recording, and check the error lines of every
   log, not only the shots. *4.2's menu:* not even a headless shot compare
-  (`diff_shots.gd` over 4,000 shots): it did the same to eight runs.
+  (`diff_shots.gd` over 4,000 shots): it did the same to eight runs. *The
+  stores:* the free memory at idle varies with what else runs (7 GB with
+  the other programs of that day): an 8-job recording crashed 11 runs in
+  `get_image` (exit 139), one more logged WebP decode errors, one failed to
+  start. Check the free memory first and record with fewer jobs (5); count
+  each log's error lines against the last set.
+* **Disk during recordings** (4.2's stores). A full set is 5.3 GB (7,674
+  shots) and `tools/parity/out` had grown to 290 GB of old sets, the disk to
+  96%: a task needs four or five full sets at once (baseline, golden, nodes,
+  every flag on) besides two project copies. Delete a task's intermediate
+  sets once compared, and old sets when they are not needed. *Done
+  (2026-11-07): every set older than the stores' node run `st2node` was
+  deleted.*
+* **Parts of images through AtlasTextures** (4.2's stores). A TextureRect
+  with an AtlasTexture of a part of an image (the level bars' ranges) drew
+  the image's antialiased edges 1–5/255 apart from the legacy quad (up to
+  17 on one pixel), though the quad, the texture coordinates and the colour
+  were the same; whole images in TextureRects match to the bit. Draw such
+  parts as the legacy quad (`LevelBar`, as `EmotionBubble`). Note too: an
+  AtlasTexture whose region has width 0 draws the whole texture.
 * **Generated scenes edited by hand** (phase 4.1). The editor saved three
   village scenes in 4b74ade3; the converter no longer reproduces them and
   `vil_to_scene.sh --all` overwrites them. Re-convert one place at a time
@@ -3384,7 +3661,10 @@ When no mode draws through `g` any more:
    legacy; the nodes mirror them. A Tween for them is step C. *Not needed
    for the menu (9.2):* the flying cards (`DeckPage.Animator`, 2 px per ms)
    and the saving box's dots (`Scheduler` timers) stay legacy; the nodes
-   mirror them.
+   mirror them. *Not needed for the stores (9.2):* the Church's blessing
+   swing (`Church.update`: per update, its speed × .95), its saving dots
+   (`Scheduler.sleep`), the markers' moves (per update while held) and the
+   Inn's seven seconds after a rest stay legacy; the nodes mirror them.
 7. **Village top layer** (from the pilot, 6.7): *decided (phase 1
    rollout):* roofs and treetops are always drawn (6.1, the pilot's
    default). The legacy rule draws a piece only where a sprite overlaps it,
@@ -3398,7 +3678,7 @@ When no mode draws through `g` any more:
    (`BaselineLabel.oversampling` 0) change the look; the pilot kept the
    legacy look so that parity holds. Each is a theme or scene edit now.
    Open (the rollout kept the legacy look too, and so did phase 4.1, 4.2's
-   pilot and the menu).
+   pilot, the menu and the stores).
 
 ## 14. Suggested order and size
 
@@ -3413,7 +3693,7 @@ Sizes are relative: S ≈ a focused session, XL ≈ many sessions.
 | P2 | Dungeon weather, save points and the card and enemy effects that are particles, on the GPU (6.11). *Done (6.12); the dungeon part closed with phase 2 (7.9), the battle effects' legacy path stays until 4.4.* | M | 2, P | rainy and snowy floors at 60 FPS; battles without the effects' stalls (Wind 3 at 7 FPS, the Flame's 10 s) |
 | 3 | Theme, Dialog, signs, emotions, fades, HUD. *Done through step B: the pilot (8.1: the Theme, the dialog family, the fade) and the rollout (8.3: emotions, mission display, pause overlays, cutscene images and texts, tutorials; the minimap stays the 3D bridge's); closed (8.4).* | M | 1 (or 2) | most of the remaining `draw(g)` |
 | 4.1 | World map + airship. *Done through step B (9.1): the scenes, the name plate, legacy vs. scene identical; closed (9.1).* | M | 1 (converter), 3 | — |
-| 4.2 | Title, game over, mini-games, stores, menu. *Pilot done through step B (9.2): the title, the game over, the menu list; the menu done through step B (9.2, one session); prepared: the stores (1–2), the mini-games (1).* | L | 3 | — |
+| 4.2 | Title, game over, mini-games, stores, menu. *Pilot done through step B (9.2): the title, the game over, the menu list; the menu and the stores done through step B (9.2, one session each); prepared: the mini-games (1).* | L | 3 | — |
 | 4.3 | Input, audio, saves, `Game` autoload | M | any time after 0; the autoload is best after 4.2 | 5 |
 | 4.4 | Battle, cards, effects | XL | 2, 3 | 5 |
 | 5 | Remove the GL emulation; per-delta time | M | all of the above | — |
@@ -3468,6 +3748,27 @@ fixed or deleted at any time.
     `fadeparticlesystem` or builds a rain or sand system (checked in the
     phase 1 rollout).
   * `HelpPage`'s volume options never match (9.2).
+  * *Found in phase 4.2's stores:* selling the last entry of a Weapon Store
+    sell list that has more entries (Slot 1's fifth weapon) refills the
+    list with the cursor kept, past its new end; `WeaponStore.updateCurrent`
+    then reads the child at the cursor (`getCurrentChild`): two script
+    errors in the port (an index out of bounds, then a call on null), where
+    the Java's `ArrayList.get` threw. The list's next draw moves the cursor
+    back (`MenuNode.draw`'s fix-up), so the store goes on. Not a port bug
+    (the Java's `fillEquipment` keeps the cursor too); `store_weapon_sell`
+    sells that weapon (its two errors are in the goldens). A fix: reset or
+    clamp the cursor in `fillEquipment`, or check the size in
+    `updateCurrent`.
+  * *Found in phase 4.2's stores:* the card store's "Can't merge that
+    card." (`CANT_MERGE`) cannot be reached: the merge deck holds only the
+    kinds that can be merged, so every card of it confirms (as in the
+    Java).
+  * *Found in phase 4.2's stores (cosmetic, from COTZ-005):* the Church's
+    save list puts its entries 72 px apart for the date under each slot
+    (`SaveSlots.MENU_DISTANCE`; the Java's 41), so Slot 3's date and "Back"
+    run past the bottom of piece 14 (y 322) onto the background
+    (`store_church_save`'s shots). A layout fix (a shorter distance, a
+    taller piece) changes the look: decision 8, or a ticket.
   * *Port bug (found in phase 4.2):* `RiddleGame.fade` steps by .1 in a
     64-bit float, so the fade-in stops at 1.1 after 11 updates; the Java's
     32-bit float stops at 1.0000001 after 10. The riddle's dim is then

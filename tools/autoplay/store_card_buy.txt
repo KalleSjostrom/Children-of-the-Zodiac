@@ -1,0 +1,110 @@
+# Phase 4.2's stores (docs/phase4_2_stores_prompt.md, plan 9.2): the card
+# store's buy page (--load="Slot 1" --start=Alares; Dellna's store at stock
+# level 1 through the Cheater, "Dellna--1": 31 cards on five lines): its
+# fade-in; the deck of large cards with the card info and "Stocked/Price/
+# Gold", its scroll bar (five lines, two shown), the hand moved along and
+# down to the third line (the deck scrolled) and back up; the cards it
+# cannot afford greyed after the dev-only console's gold; "You can't afford
+# that!"; the buy confirm (its price right-aligned) with its hand moved,
+# cancelled, then a card bought (it leaves the stock, the gold left greys
+# the rest); back to the root list and its fade-out.
+wait 3100
+console cheater
+wait 1200
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap CROSS
+wait 400
+tap DOWN
+wait 300
+tap CROSS
+wait 400
+tap UP
+wait 300
+tap CROSS
+mark
+wait 100
+loopuntil CardStore 5000
+shot c00_fade_in
+wait 200
+shot c01_fade_in
+wait 200
+shot c02_fade_in
+wait 1500
+shot c03_in
+log in_card
+tap CROSS
+wait 700
+shot c04_buy
+tap RIGHT
+wait 700
+shot c05_right
+tap DOWN
+wait 700
+shot c06_down
+tap DOWN
+wait 700
+shot c07_third_line
+tap LEFT
+wait 700
+shot c08_left
+tap UP
+wait 700
+shot c09_up
+tap UP
+wait 700
+shot c10_top
+console gold 14000
+wait 300
+shot c11_poor
+tap CROSS
+wait 700
+shot c12_cant_afford
+tap CROSS
+wait 700
+tap RIGHT
+wait 700
+shot c13_affordable
+tap CROSS
+wait 700
+shot c14_confirm
+tap DOWN
+wait 700
+shot c15_confirm_cancel
+tap CROSS
+wait 700
+shot c16_cancelled
+tap CROSS
+wait 700
+tap CROSS
+wait 700
+shot c17_bought
+tap CIRCLE
+wait 700
+shot c18_root
+tap DOWN
+wait 300
+tap DOWN
+wait 300
+tap DOWN
+wait 300
+tap CROSS
+wait 100
+shot c19_fade_out
+wait 200
+shot c20_fade_out
+wait 200
+shot c21_fade_out
+quit

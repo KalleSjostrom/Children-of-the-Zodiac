@@ -1,0 +1,116 @@
+# Phase 4.2's stores (docs/phase4_2_stores_prompt.md, plan 9.2): the
+# Church's bless page (--load="Slot 1" --start=Alares
+# --status=churchbless.tut:1; Dellna's Church through the Cheater: Slot 1
+# was never blessed there; the status shows the bless tutorial as on a
+# first visit): "Tutorial - Bless" paged through over the root list; the
+# bless page: the pieces, "Cost", each character's cost and bar (the range
+# between the markers in green), the current row's markers (the blue one
+# moving, the green one dimmed), the help text's coloured rows, "Total cost",
+# the list at size 26 and the root list, gold/steps/time and the help line;
+# the blue marker moved right, the green one chosen and moved, the next
+# character's row, "Done" and the blessing's swinging hand on each row, the
+# page when it is done.
+wait 3100
+console cheater
+wait 1200
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap CROSS
+wait 400
+tap DOWN
+wait 300
+tap DOWN
+wait 300
+tap CROSS
+wait 400
+tap DOWN
+wait 300
+tap DOWN
+wait 300
+tap DOWN
+wait 300
+tap DOWN
+wait 300
+tap CROSS
+wait 3500
+shot g00_in
+log in_church
+tap DOWN
+wait 700
+tap CROSS
+wait 700
+shot g01_tutorial
+tap CROSS
+wait 700
+shot g02_tutorial
+tap CROSS
+wait 700
+shot g03_tutorial
+tap CROSS
+wait 700
+shot g04_tutorial
+tap CROSS
+wait 700
+shot g04_tutorial_last
+tap CROSS
+wait 700
+shot g05_bless
+tap RIGHT
+wait 700
+shot g06_low_right
+tap RIGHT 300
+wait 700
+shot g07_low_right
+tap CROSS
+wait 700
+shot g08_high
+tap RIGHT 300
+wait 700
+shot g09_high_right
+tap LEFT
+wait 700
+shot g10_high_left
+tap DOWN
+wait 700
+shot g11_celis
+tap RIGHT
+wait 700
+shot g12_celis_right
+tap DOWN
+wait 700
+shot g13_zalzi
+tap DOWN
+wait 700
+shot g14_done
+tap CROSS
+wait 300
+shot g15_blessing
+wait 300
+shot g16_blessing
+wait 300
+shot g17_blessing
+wait 600
+shot g18_blessing
+wait 1500
+shot g19_blessing
+wait 1500
+shot g20_blessing
+wait 2000
+shot g21_blessed
+log blessed
+tap CIRCLE
+wait 700
+shot g22_root
+quit

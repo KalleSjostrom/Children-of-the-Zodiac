@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/BlessRow.gd" id="1_row"]
+[ext_resource type="Theme" path="res://resources/theme/game_theme.tres" id="2_theme"]
+[ext_resource type="Script" uid="uid://sko2muwq7vf3" path="res://scenes/ui/BaselineLabel.gd" id="3_label"]
+[ext_resource type="PackedScene" path="res://scenes/ui/LevelBar.tscn" id="4_bar"]
+[ext_resource type="Script" path="res://scenes/ui/ImageList.gd" id="5_images"]
+
+[node name="BlessRow" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1024.0
+offset_bottom = 768.0
+mouse_filter = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_row")
+
+[node name="Cost" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 560.0
+offset_top = 400.0
+offset_right = 560.0
+offset_bottom = 400.0
+mouse_filter = 2
+theme_type_variation = &"Text26"
+script = ExtResource("3_label")
+
+[node name="Bar" parent="." instance=ExtResource("4_bar")]
+use_parent_material = true
+layout_mode = 0
+
+[node name="Hands" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+mouse_filter = 2
+script = ExtResource("5_images")

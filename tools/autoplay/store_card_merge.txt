@@ -1,0 +1,107 @@
+# Phase 4.2's stores (docs/phase4_2_stores_prompt.md, plan 9.2): the card
+# store's merge page (--load="Slot 1" --start=Alares; Alares's store through
+# the Cheater): the party deck's cards that can be merged (five equal ones
+# below level 3: Slot 1 has three kinds, the dev-only console's give adds
+# twelve more, so the deck has three lines and its scroll bar), the numbers
+# over their shadows in bold (26, the current card's 28), the merge preview
+# ("x 5 merges to" at size 40 between the card and the next level's), the
+# hand moved along, down to the third line (scrolled) and up; a level 2
+# card's preview (three balls); the merge confirm ("Are you sure?") with its
+# hand moved, cancelled, then a merge (the deck made again).
+wait 3100
+console give card Fire:1 5
+wait 100
+console give card Ice:1 5
+wait 100
+console give card Earth:1 5
+wait 100
+console give card Wind:1 1
+wait 100
+console give card Cure:1 5
+wait 100
+console give card Haste:1 5
+wait 100
+console give card Shield:1 5
+wait 100
+console give card Slow:1 5
+wait 100
+console give card Drain:1 5
+wait 100
+console give card MagicalBlow:1 5
+wait 100
+console give card LaceratingCut:1 5
+wait 100
+console give card CrushingSaber:1 5
+wait 100
+console give card Fungi:1 5
+wait 100
+console cheater
+wait 1200
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap CROSS
+wait 400
+tap DOWN
+wait 300
+tap CROSS
+wait 400
+tap CROSS
+wait 3500
+shot m00_in
+log in_card
+tap DOWN
+wait 700
+tap CROSS
+wait 700
+shot m01_merge
+tap RIGHT
+wait 700
+shot m02_right
+tap RIGHT
+wait 700
+shot m03_right
+tap DOWN
+wait 700
+shot m04_down
+tap DOWN
+wait 700
+shot m05_third_line
+tap UP
+wait 700
+shot m06_up
+tap UP
+wait 700
+shot m07_top
+tap LEFT
+wait 700
+shot m08_left
+tap CROSS
+wait 700
+shot m09_confirm
+tap DOWN
+wait 700
+shot m10_confirm_cancel
+tap CROSS
+wait 700
+shot m11_cancelled
+tap CROSS
+wait 700
+tap CROSS
+wait 700
+shot m12_merged
+tap RIGHT
+wait 700
+shot m13_right
+quit

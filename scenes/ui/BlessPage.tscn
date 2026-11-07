@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/BlessPage.gd" id="1_page"]
+[ext_resource type="Theme" path="res://resources/theme/game_theme.tres" id="2_theme"]
+[ext_resource type="Script" uid="uid://sko2muwq7vf3" path="res://scenes/ui/BaselineLabel.gd" id="3_label"]
+[ext_resource type="Script" path="res://scenes/ui/LabelList.gd" id="4_labels"]
+[ext_resource type="Script" path="res://scenes/ui/ImageList.gd" id="5_images"]
+
+[node name="BlessPage" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1024.0
+offset_bottom = 768.0
+mouse_filter = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_page")
+
+[node name="Cost" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_left = 560.0
+offset_top = 360.0
+offset_right = 560.0
+offset_bottom = 360.0
+mouse_filter = 2
+theme_type_variation = &"Text30"
+script = ExtResource("3_label")
+
+[node name="Rows" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+mouse_filter = 2
+
+[node name="Words" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+mouse_filter = 2
+script = ExtResource("4_labels")
+
+[node name="Icons" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+mouse_filter = 2
+script = ExtResource("5_images")
+
+[node name="Total" type="Control" parent="."]
+use_parent_material = true
+layout_mode = 0
+mouse_filter = 2
+script = ExtResource("4_labels")

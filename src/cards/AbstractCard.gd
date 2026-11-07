@@ -176,18 +176,20 @@ func place_card(g) -> Array:
 
 ## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): drawCard(g, x,
 ## y, size, type, level) without the drawing: the same binds, and the images
-## as Graphics.place_image places them (the picture, then the level's balls),
-## for a CardView node (a deck's cards, a flying card).
-func place_at(g, x, y, size, type = NORMAL) -> Array:
+## as Graphics.place_image places them (the picture, then the level's balls:
+## the card's own level, or p_level's, as the card store's merge preview draws
+## the next level), for a CardView node (a deck's cards, a flying card).
+func place_at(g, x, y, size, type = NORMAL, p_level = null) -> Array:
+	var lvl: int = level if p_level == null else int(p_level)
 	var s: float = float(size)
 	var yy: int = int(y + s * 25)
 	var placed := [g.place_image(images[type][BASE], x, y, s)]
-	if level == 1:
+	if lvl == 1:
 		placed.append(g.place_image(images[type][BALL], x + (s * 65), yy, s))
-	elif level == 2:
+	elif lvl == 2:
 		placed.append(g.place_image(images[type][BALL], x + (s * 50), yy, s))
 		placed.append(g.place_image(images[type][BALL], x + (s * 80), yy, s))
-	elif level == 3:
+	elif lvl == 3:
 		placed.append(g.place_image(images[type][BALL], x + (s * 40), yy, s))
 		placed.append(g.place_image(images[type][BALL], x + (s * 65), yy, s))
 		placed.append(g.place_image(images[type][BALL], x + (s * 90), yy, s))

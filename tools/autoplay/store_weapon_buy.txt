@@ -1,0 +1,106 @@
+# Phase 4.2's stores (docs/phase4_2_stores_prompt.md, plan 9.2): the weapon
+# store's buy pages (--load="Slot 1" --start=Alares; Zazo's store through
+# the Cheater, as stores.txt): the category list; the weapons with their
+# prices 25 px lower and the category list beside them (two lists, two
+# hands), the character's status compared with the item (red and green
+# changes) and the item, "Equipped/Total/Gold"; the hand moved; the buy
+# confirm (the price right-aligned) with its hand moved; buying ("Put in
+# inventory"); the accessories with Borealis's Iron Armlet greyed (he is not
+# in the party) and "No one can equip that."; the armours greyed after the
+# dev-only console's gold and "You can't afford that!"; "Paused" over the
+# store and over its confirm box.
+wait 3100
+console cheater
+wait 1200
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap CROSS
+wait 400
+tap CROSS
+wait 400
+tap DOWN
+wait 300
+tap CROSS
+wait 3500
+shot b00_in
+log in_weapon
+tap CROSS
+wait 600
+shot b01_buy
+tap CROSS
+wait 600
+shot b02_weapons
+tap DOWN
+wait 600
+shot b03_weapons_down
+tap CROSS
+wait 600
+shot b04_confirm
+tap DOWN
+wait 600
+shot b05_confirm_down
+tap CROSS
+wait 600
+shot b06_bought
+tap CIRCLE
+wait 600
+shot b07_back
+tap DOWN
+wait 600
+tap CROSS
+wait 600
+shot b08_accessories
+tap DOWN
+wait 600
+shot b09_accessories_down
+tap DOWN
+wait 600
+shot b10_armlet
+tap CROSS
+wait 600
+shot b11_cant_equip
+tap CROSS
+wait 600
+shot b12_ok
+tap CIRCLE
+wait 600
+console gold 100
+wait 300
+tap DOWN
+wait 600
+tap CROSS
+wait 600
+shot b13_armours_poor
+tap DOWN
+wait 600
+shot b14_armours_down
+tap CROSS
+wait 600
+shot b15_cant_afford
+tap START
+wait 600
+shot b16_paused_confirm
+tap START
+wait 600
+tap CROSS
+wait 600
+shot b17_ok
+tap START
+wait 600
+shot b18_paused
+tap START
+wait 600
+shot b19_unpaused
+quit

@@ -1,0 +1,96 @@
+# Phase 4.2's stores (docs/phase4_2_stores_prompt.md, plan 9.2): the
+# Church's save list (--load="Slot 1" --start=Alares; Alares's Church
+# through the Cheater): its fade-in; the root list with Bless greyed (Slot 1
+# was blessed in Alares); the save list with the date under each slot
+# ("Empty": a seeded run reads no player saves) and its hand moved; saving to
+# Slot 2 ("Saving." to "Game saved!"); the list again with Slot 2's date (the
+# dev-only game clock date of seeded runs); "Tutorial - Levels" paged
+# through; the Church's fade-out.
+wait 3100
+console cheater
+wait 1200
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap DOWN
+wait 250
+tap CROSS
+wait 400
+tap DOWN
+wait 300
+tap DOWN
+wait 300
+tap CROSS
+wait 400
+tap CROSS
+mark
+wait 100
+loopuntil Church 5000
+shot h00_fade_in
+wait 200
+shot h01_fade_in
+wait 200
+shot h02_fade_in
+wait 1500
+shot h03_in
+log in_church
+tap CROSS
+wait 700
+shot h04_save_list
+tap DOWN
+wait 700
+shot h05_slot2
+tap CROSS
+wait 300
+shot h06_saving
+wait 500
+shot h07_saving
+wait 500
+shot h08_saving
+wait 1200
+shot h09_saved
+log saved
+tap CROSS
+wait 700
+shot h10_save_list_dated
+tap DOWN
+wait 700
+tap DOWN
+wait 700
+tap DOWN
+wait 700
+tap CROSS
+wait 700
+shot h11_back
+tap DOWN
+wait 700
+tap DOWN
+wait 700
+tap CROSS
+wait 700
+shot h12_tutorial
+tap CROSS
+wait 700
+shot h13_tutorial
+tap CROSS
+wait 700
+shot h14_after_tutorial
+tap DOWN
+wait 700
+tap CROSS
+wait 100
+shot h16_fade_out
+wait 200
+shot h17_fade_out
+wait 200
+shot h18_fade_out
+quit

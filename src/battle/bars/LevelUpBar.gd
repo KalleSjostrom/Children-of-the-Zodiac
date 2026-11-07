@@ -44,6 +44,24 @@ static func drawStatic(g, x, y, p1, p2, scale):
 	g.setColor(1)
 
 
+## Bridge (phase 4.2 step B, the stores, docs/ARCHITECTURE.md section 14):
+## drawStatic without the drawing: the same colours and binds in the same
+## order. Returns the four parts as Graphics.place_image_part places them (the
+## empty bar, the blue bar from 0 to p1 in white and from p1 to p2 in green,
+## the overlay from 0 to p2), for a LevelBar node (the Church's bless page).
+static func place_static(g, x, y, p1, p2, scale) -> Array:
+	var b: Array = _getBar()
+	var parts := [g.place_image_part(b[0], x, y, 200, 20, float(scale), 1.0)]
+	g.setColor(1)
+	parts.append(g.place_image_part(b[1], x, y, 200, 20, float(scale), 0.0, float(p1)))
+	g.setColor(0, 1, 0, 1)
+	parts.append(g.place_image_part(b[1], x, y, 200, 20, float(scale), float(p1), float(p2)))
+	g.setColor(1)
+	parts.append(g.place_image_part(b[2], x, y, 200, 20, float(scale), 0.0, float(p2)))
+	g.setColor(1)
+	return parts
+
+
 ## Updates the level up bar with the given progress (0 to 1).
 func update(progress):
 	percent = progress

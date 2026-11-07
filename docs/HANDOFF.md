@@ -1,4 +1,4 @@
-# Handoff: state of the Godot port (2026-11-06, after steps 1–3, modernization phase 0, phases 1, 2, 3 and 4.1 done and closed, the particles phases P and P2, phase 4.2's pilot and its menu through step B, the character sprite sheets)
+# Handoff: state of the Godot port (2026-11-06, after steps 1–3, modernization phase 0, phases 1, 2, 3 and 4.1 done and closed, the particles phases P and P2, phase 4.2's pilot, its menu and its stores through step B, the character sprite sheets)
 
 Conventions: legacy (ported) code follows `docs/PORTING.md`; new code
 (scenes, resources, tools, bridge) follows `docs/ARCHITECTURE.md`. The
@@ -406,6 +406,59 @@ section 5):
 - Prepared (plan 9.2): the stores (one or two sessions; their cases first),
   then the mini-games.
 
+**Modernization phase 4.2's rollout, part 2 (the stores): step B done**
+(plan 9.2, "Results of the stores"; conventions in `docs/ARCHITECTURE.md`
+section 14, "The stores"; the procedure in `docs/CONVERTING_UI.md` section
+5):
+- The Weapon Store, the card store, the Inn and the Church draw through UI
+  nodes in the frame's order: the menu's `MenuBackground` (the store's
+  background; then the keeper and the masked pieces after the keeper's
+  dialog), `MenuList` (every list: price, price + `down`, the bounding boxes
+  of the sell and trade lists), `MenuTitle`, `MenuInfo` (the stores' own
+  lines too), `EquipStatus`/`EquipItem`, `DeckView`/`CardView` (the stock,
+  the merge deck with its numbers, the merge preview at the next level),
+  `PageScrollBar`, `MenuText`, `MenuBox` (the confirm boxes), `SlotDates`,
+  `HelpLine`; the confirm dim is the Fade node on the UI layer; new:
+  `LevelBar` (`LevelUpBar`'s image parts, drawn as the legacy quads: an
+  AtlasTexture region was up to 5/255 off), `BlessPage` and `BlessRow` (the Church's bless page: costs,
+  bars, the two-colour markers, the help text's rows, the total). The
+  stores keep the state, the input and the timing; the twins keep every
+  state change of the drawing (the Church's `totalCost` and markers, the
+  cursor fix-up, the dim's colour, the scroll bars' init).
+- Flags: the menu's (`menu_frame`, `menu_list`, `menu_text`, `status`,
+  `deck`) for the parts the stores share, and `--legacy=dim` (the confirm
+  dims) and `bless` (the bless page); with every phase 4.2 flag the frame is
+  drawn exactly as before phase 4.2.
+- Dev only: the console's `gold [amount]` and `give card <card>[:<level>]
+  [number]`.
+- Coverage: eight new cases (`store_*`: the Weapon Store's buy and sell
+  pages with their confirms, "Paused"; the card store's buy page scrolled
+  with grey cards, the merge page scrolled with level 1 and 2 previews, the
+  empty merge page; the Inn's rest, trade list, prize and night; the
+  Church's save list before and after a save, its levels tutorial, the
+  bless tutorial and page with the blessing); 417 cases in all, 7,817
+  shots.
+- Parity (tolerance 0; 417 cases, 7,817 shots; golden `st1gold`, nodes
+  `st2node`): golden vs. nodes identical (logs and error lines too); the
+  stores' flags vs. nodes on the 14 store cases (222 shots) identical, each
+  flag alone too; every phase 4.2 flag vs. the golden identical; the new
+  cases recorded twice identical; no new exit leak report. The first
+  `LevelBar` (AtlasTexture regions) was the one difference on the way.
+  Afterwards every older set was deleted (2026-11-07, about 285 GB):
+  `tools/parity/out` keeps only `st2node` (and `_work`, the helper
+  scripts); record a new baseline before the next change.
+- Frame rate (normal runs): 60 capped either way; uncapped, legacy →
+  nodes, the Weapon Store's weapons with the comparison 858 → 1,526 FPS,
+  the card store's buy page 585 → 1,211, the Church's bless page 459 →
+  863.
+- Found: selling the last weapon of a sell list reads past the list's end
+  (two script errors; the Java threw: plan Appendix); "Can't merge that
+  card." is unreachable; project copies in the scratchpad lose their old
+  files to Windows' temp cleanup when the disk is full (copy to
+  `tools/parity/out/_<name>`, plan 12).
+- Prepared (plan 9.2): the mini-games (one session, the fade's port bug
+  first; `docs/phase4_2_minigames_prompt.md`).
+
 **Character sprite sheets (2026-11-03): plans A and B done**
 (`docs/VILLAGER_SPRITES_PLAN.md`, "As built"; conventions in
 `docs/ARCHITECTURE.md` section 9, "Character frames and sheets"):
@@ -477,9 +530,10 @@ decision 5 decided in plan section 13):
 ## Plan (what is left)
 
 0. **Modernization:** phases 1 to 4.1 are closed (2026-11-06). Next: the
-   rest of phase 4.2's rollout (plan 9.2: the stores, which reuse the
-   menu's nodes, `docs/phase4_2_stores_prompt.md`; then the mini-games;
-   battles still draw overlays of their own, phase 4.4). The minimap stays
+   last part of phase 4.2's rollout (plan 9.2: the mini-games, which reuse
+   the stores' dim, box, hands and help line,
+   `docs/phase4_2_minigames_prompt.md`; then closing phase 4.2; battles
+   still draw overlays of their own, phase 4.4). The minimap stays
    the 3D bridge's until the battles leave the bridge (plan 8.4). Record
    goldens before each change.
 
@@ -519,9 +573,12 @@ decision 5 decided in plan section 13):
   only the shipped saves.
 - Parity: `tools/parity/parity.sh record <set>` / `compare <a> <b>` /
   `ab "<args a>" "<args b>" [case…]`, see `docs/ARCHITECTURE.md` section 7.
-  Runs are windowed (screenshots need a renderer); all 409 cases take
-  about 14-15 minutes with `--jobs=8` on 12 logical cores (run nothing
-  beside them, not even a headless compare: 16 GB run out, plan 12) since
+  Runs are windowed (screenshots need a renderer); all 417 cases take
+  about 19 minutes with `--jobs=5` (14-15 with `--jobs=8` when 10 GB are
+  free at idle; check first: with 7 GB free, 8 jobs crashed runs) on 12
+  logical cores (run nothing beside them, not even a headless compare:
+  16 GB run out, plan 12); a compare of two full sets takes about 5
+  minutes; a full set is about 5.5 GB (the disk was 96% full) since
   the particles run on the GPU (60-70 minutes before P2; `--uncapped`; with
   `--legacy=battle_effects` or `effect_waits` Menthu's Flame takes 10 s of
   real time). Recording from a
@@ -568,6 +625,13 @@ decision 5 decided in plan section 13):
   "Start demon1" has Kin and Celis, "Start demon2" adds Borealis, "Start
   Menthu1" and "Start d3" add Zalzi; "Slot 2" and "Slot 3" are an older
   data version (loading them asserts for each missing labyrinth node).
+- Project copies for recordings: `robocopy <project>
+  <project>\tools\parity\out\_gold /E /XD <project>\.git
+  <project>\tools\parity\out /MT:16` (~20 s, 2.4 GB; exit code 1 means
+  copied), then the copy's own `tools/parity/parity.sh`; move its sets into
+  `out/`. Not in the session scratchpad (`%TEMP%`): Windows' temp cleanup
+  deletes the copies' old files when the disk is full (2026-11-07: a
+  recording failed half-way); `tar` keeps the old times too.
 - The game's code never quits: Java's `System.exit` checks are `assert`s
   (the editor's debugger stops there; a console run prints a SCRIPT ERROR
   and goes on), and `GameCore.exitGame()` is only the player's Escape.

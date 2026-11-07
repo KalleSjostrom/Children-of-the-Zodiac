@@ -295,16 +295,23 @@ static func drawInfo(g):
 
 ## Bridge (phase 4.2 step B): drawInfo, or with --legacy=menu_frame off its
 ## twin: drawString's setColor(color) after each line, and the frame's next
-## MenuInfo node on the UI layer shows the three lines (Graphics.show_ui). The
-## menu's pages call this; the Inn keeps drawInfo until the stores' part.
+## MenuInfo node on the UI layer shows the three lines (show_info). The
+## menu's pages, the Inn and the Church (its copy of drawInfo) call this.
 static func draw_info(g) -> void:
 	if Main.is_legacy("menu_frame"):
 		drawInfo(g)
 		return
-	var lines := PackedStringArray([
+	show_info(g, PackedStringArray([
 		"Gold: " + str(Load.getPartyItems().getGold()) + " gp",
 		"Steps: " + str(Load.getPartyItems().getSteps()),
-		"Time: " + str(Load.getTime().getHours()) + ":" + str(Load.getTime().getMin())])
+		"Time: " + str(Load.getTime().getHours()) + ":" + str(Load.getTime().getMin())]))
+
+
+## Bridge (phase 4.2 step B): three lines drawn at drawInfo's places
+## without the drawing (drawString's setColor(color) after each), shown by
+## the frame's next MenuInfo node on the UI layer (Graphics.show_ui):
+## drawInfo's, and the stores' own (WeaponStore.drawInfo, CardStore.drawInfo).
+static func show_info(g, lines: PackedStringArray) -> void:
 	var colors: Array[Color] = []
 	for i in lines.size():
 		colors.append(Graphics.text_color(1.0))

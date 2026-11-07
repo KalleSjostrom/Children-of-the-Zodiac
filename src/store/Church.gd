@@ -22,6 +22,8 @@ const BLESS_COST_SPEED_HIGH = 30 # 30
 const NORMAL = -1
 const LEVEL_TUTORIAL = 0
 const BLESS_TUTORIAL = 1
+## Bridge (phase 4.2 step B): the node of the bless page (_show_bless).
+const BLESS_VIEW := "res://scenes/ui/BlessPage.tscn"
 var place = ""
 var keeperName = ""
 var images = [null, null, null]
@@ -316,67 +318,161 @@ func initResurrectMenu():
 
 
 ## Draws the church.
+##
+## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): each part is
+## shown by its node where it was drawn, or drawn with its --legacy flag (the
+## pieces and the info lines: menu_frame; the bless page's costs, bars,
+## markers, help text and total: bless, _show_bless; the lists:
+## AbstractPage.draw_list; the dates: menu_text; the help line and the title:
+## AbstractPage.draw_help, draw_title; the tutorials are phase 3's nodes).
 func draw3D(g3D):
 	var g = g3D
 	if blessMode != BLESS_NOT_ACTIVE and mode_ != BLESS_TUTORIAL:
-		AbstractPage.drawMenuBackgroundStatic(g, 6)
-		AbstractPage.drawMenuBackgroundStatic(g, 5)
+		var frame: bool = Main.is_legacy("menu_frame")
+		if frame:
+			AbstractPage.drawMenuBackgroundStatic(g, 6)
+			AbstractPage.drawMenuBackgroundStatic(g, 5)
+		else:
+			var pieces := AbstractPage.place_menu_background_static(g, 6)
+			pieces.append_array(AbstractPage.place_menu_background_static(g, 5))
+			AbstractPage.show_pieces(g, pieces)
 		var barDist: int = -20
 		var barX: int = 180
 		var costX: int = 560
 		var active: int = activeNode.getMenuCursor()
 		var cs = Load.getCharacters()
-		g.drawStringSetSize("Cost", costX, BLESS_NAME_Y - 40, 30)
-		totalCost = 0
-		for i in range(cs.size()):
-			var c = cs[i]
-			var pair = percents.get(c.getName())
-			var y: int = BLESS_NAME_Y + i * BLESS_NAME_DISTANCE
-			g.drawStringSetSize(pair.getCost(), costX, y, 26)
-			totalCost += pair.cost
-			LevelUpBar.drawStatic(g, barX, y + barDist, pair.getLow(), pair.getHigh(), 1.7)
-			if i == active:
-				if blessMode == BLESS_MODE_ANIMATE:
-					handAnim.setYpos(y + barDist - 30)
-					handAnim.drawHand(g)
-				else:
-					handLow.setXpos(barX - 28 + pair.getLowHand())
-					handLow.setYpos(y + barDist - 30)
-					drawHand(g, handLow, BLUE)
+		if not Main.is_legacy("bless"):
+			_show_bless(g, cs, active, barDist, barX, costX)
+		else:
+			g.drawStringSetSize("Cost", costX, BLESS_NAME_Y - 40, 30)
+			totalCost = 0
+			for i in range(cs.size()):
+				var c = cs[i]
+				var pair = percents.get(c.getName())
+				var y: int = BLESS_NAME_Y + i * BLESS_NAME_DISTANCE
+				g.drawStringSetSize(pair.getCost(), costX, y, 26)
+				totalCost += pair.cost
+				LevelUpBar.drawStatic(g, barX, y + barDist, pair.getLow(), pair.getHigh(), 1.7)
+				if i == active:
+					if blessMode == BLESS_MODE_ANIMATE:
+						handAnim.setYpos(y + barDist - 30)
+						handAnim.drawHand(g)
+					else:
+						handLow.setXpos(barX - 28 + pair.getLowHand())
+						handLow.setYpos(y + barDist - 30)
+						drawHand(g, handLow, BLUE)
 
-					handHigh.setXpos(barX - 28 + pair.getHighHand())
-					handHigh.setYpos(y + barDist - 30)
+						handHigh.setXpos(barX - 28 + pair.getHighHand())
+						handHigh.setYpos(y + barDist - 30)
 
-					drawHand(g, handHigh, GREEN)
-					g.setColor(1)
-		text.drawTopLayer(g)
+						drawHand(g, handHigh, GREEN)
+						g.setColor(1)
+			text.drawTopLayer(g)
 
-		var ty: int = BLESS_NAME_Y + (cs.size() + 1) * BLESS_NAME_DISTANCE
-		g.drawString("Total cost: ", costX - 120, ty)
-		g.drawString(str(totalCost) + " gp", costX, ty)
+			var ty: int = BLESS_NAME_Y + (cs.size() + 1) * BLESS_NAME_DISTANCE
+			g.drawString("Total cost: ", costX - 120, ty)
+			g.drawString(str(totalCost) + " gp", costX, ty)
 		g.setFontSize(26)
-		activeNode.drawAllChildren(g)
+		AbstractPage.draw_list(g, activeNode, false, true, false, false, false)
 		g.setFontSize(MenuValues.MENU_FONT_SIZE)
 
-		AbstractPage.drawMenuBackgroundStatic(g, 3)
-		var x: int = MenuValues.MENU_TEXT_X
-		g.drawString("Gold: " + str(Load.getPartyItems().getGold()) + " gp", x, 648)
-		g.drawString("Steps: " + str(Load.getPartyItems().getSteps()), x, 689)
-		g.drawString("Time: " + str(Load.getTime().getHours()) + ":" + str(Load.getTime().getMin()), x, 730)
-		drawHelp(g)
+		if frame:
+			AbstractPage.drawMenuBackgroundStatic(g, 3)
+			var x: int = MenuValues.MENU_TEXT_X
+			g.drawString("Gold: " + str(Load.getPartyItems().getGold()) + " gp", x, 648)
+			g.drawString("Steps: " + str(Load.getPartyItems().getSteps()), x, 689)
+			g.drawString("Time: " + str(Load.getTime().getHours()) + ":" + str(Load.getTime().getMin()), x, 730)
+		else:
+			AbstractPage.show_pieces(g, AbstractPage.place_menu_background_static(g, 3))
+			# The lines of StartPage.drawInfo, which this copies.
+			StartPage.draw_info(g)
+		AbstractPage.draw_help(g, drawHelp)
 	else:
-		activeNode.drawAllChildren(g)
+		AbstractPage.draw_list(g, activeNode, false, true, false, false, false)
 		if activeNode.getName() == "Save":
-			SaveSlots.draw_dates_under(g, activeNode, MenuValues.MENU_FONT_SIZE)
+			if Main.is_legacy("menu_text"):
+				SaveSlots.draw_dates_under(g, activeNode, MenuValues.MENU_FONT_SIZE)
+			else:
+				SaveSlots.show_dates_under(g, activeNode, MenuValues.MENU_FONT_SIZE)
 	var n = activeNode.getParent()
 	if n != null and activeNode.getName() == "Bless":
-		n.drawChildren(g)
+		AbstractPage.draw_list(g, n, false, false, false, false, false)
 	var title = activeNode.getName()
-	g.drawString(title, MenuValues.MENU_TEXT_X, MenuValues.MENU_TITLE_Y)
+	AbstractPage.draw_title(g, title)
 	if levelTutorial != null:
 		levelTutorial.drawTopLayer(g)
 	if blessTutorial != null:
 		blessTutorial.drawTopLayer(g)
+
+
+## Bridge (phase 4.2 step B, docs/ARCHITECTURE.md section 14): the bless
+## page's cost column, bars, markers, help text and total without the
+## drawing: the same state changes in the same order (drawStringSetSize's
+## sizes and drawString's setColor(color), totalCost summed (CROSS on "Done"
+## reads it), the markers' positions, LevelUpBar.place_static's colours and
+## binds, drawHand's colours, the help text's sizes, colours, startText and
+## finishText: HelpText.place_top_layer), and the frame's next BlessPage node
+## shows them where they would have been drawn (Graphics.show_ui).
+func _show_bless(g, cs, active, barDist, barX, costX) -> void:
+	var mat = g.canvas_material()
+	g.setFontSize(30)
+	var cost: Array = _place_line(g, "Cost", Vector2i(costX, BLESS_NAME_Y - 40))
+	totalCost = 0
+	var rows := []
+	for i in range(cs.size()):
+		var c = cs[i]
+		var pair = percents.get(c.getName())
+		var y: int = BLESS_NAME_Y + i * BLESS_NAME_DISTANCE
+		g.setFontSize(26)
+		var row := {"cost": _place_line(g, pair.getCost(), Vector2i(costX, y)), "bar": [], "hands": []}
+		totalCost += pair.cost
+		row.bar = LevelUpBar.place_static(g, barX, y + barDist, pair.getLow(), pair.getHigh(), 1.7)
+		if i == active:
+			if blessMode == BLESS_MODE_ANIMATE:
+				handAnim.setYpos(y + barDist - 30)
+				row.hands.append(handAnim.place_hand_image(g))
+			else:
+				handLow.setXpos(barX - 28 + pair.getLowHand())
+				handLow.setYpos(y + barDist - 30)
+				row.hands.append_array(_place_hand(g, handLow, BLUE))
+
+				handHigh.setXpos(barX - 28 + pair.getHighHand())
+				handHigh.setYpos(y + barDist - 30)
+
+				row.hands.append_array(_place_hand(g, handHigh, GREEN))
+				g.setColor(1)
+		rows.append(row)
+	var help: Dictionary = text.place_top_layer(g)
+	var words := []
+	for word: Array in help.words:
+		words.append([word[0], word[1], g.getFontSize(), word[2], Graphics.font_bold()])
+
+	var ty: int = BLESS_NAME_Y + (cs.size() + 1) * BLESS_NAME_DISTANCE
+	var total := [_place_line(g, "Total cost: ", Vector2i(costX - 120, ty)),
+			_place_line(g, str(totalCost) + " gp", Vector2i(costX, ty))]
+	var view = g.show_ui(BLESS_VIEW, Graphics.UI_LAYER)
+	if view != null:
+		view.show_page(cost, rows, words, help.icons, total, mat)
+
+
+## drawString without the drawing (for _show_bless): the line, [text,
+## position, font size, colour, bold], and drawString's setColor(color).
+static func _place_line(g, line: String, at: Vector2i) -> Array:
+	var placed := [line, at, g.getFontSize(), Graphics.text_color(1.0), Graphics.font_bold()]
+	g.setColor(g.color)
+	return placed
+
+
+## drawHand without the drawing: the hand's images ([texture, rect, tint]
+## each, MenuHand.place_hand_image and place_hand_with_color) with the same
+## colours.
+func _place_hand(g, hand, v) -> Array:
+	if hand.isDimmed():
+		return [hand.place_hand_image(g)]
+	g.setColor(1)
+	var white: Array = hand.place_hand_with_color(g)
+	g.setColor(v, 0.3)
+	return [white, hand.place_hand_with_color(g)]
 
 
 func drawHand(g, hand, v):
