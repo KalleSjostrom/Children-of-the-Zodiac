@@ -66,12 +66,31 @@ func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 func drawTopLayer(g: Graphics):
 	g.setColor(1)
 	var x: int = int(IMAGE_X + super.getXtrans() * 200) + AbstractPage.xoffset
+	if not Main.is_legacy("battle_legend"):
+		_show_icons(g, x)
+		return
 	g.drawImage(AbstractPage.getExecuteButtonIcon(), x, IMAGE_HEIGHT)
 	g.drawImage(AbstractPage.BUTTON_ICONS[GameMode.CROSS], x, IMAGE_HEIGHT + STEP)
 	g.drawImage(AbstractPage.BUTTON_ICONS[GameMode.SQUARE], x, IMAGE_HEIGHT + 2 * STEP)
 	g.drawImage(AbstractPage.BUTTON_ICONS[GameMode.CIRCLE], x, IMAGE_HEIGHT + 3 * STEP)
 	g.drawImage(AbstractPage.BUTTON_ICONS[GameMode.L2R2], x, IMAGE_HEIGHT + 4 * STEP)
 	g.drawImage(AbstractPage.BUTTON_ICONS[GameMode.L1R1], x, IMAGE_HEIGHT + 5 * STEP)
+
+
+## Bridge (phase 4.4 step B, docs/ARCHITECTURE.md section 15): drawTopLayer's
+## six button icons without the drawing (their binds, Graphics.place_image at
+## 1:1), shown by the frame's next MenuBackground node on the UI layer
+## (AbstractPage.show_pieces) at the x that slides with the legend (off the
+## screen at -190 while it is hidden: it is drawn every frame).
+## --legacy=battle_legend keeps the legacy drawing.
+func _show_icons(g: Graphics, x: int) -> void:
+	AbstractPage.show_pieces(g, [
+		g.place_image(AbstractPage.getExecuteButtonIcon(), x, IMAGE_HEIGHT),
+		g.place_image(AbstractPage.BUTTON_ICONS[GameMode.CROSS], x, IMAGE_HEIGHT + STEP),
+		g.place_image(AbstractPage.BUTTON_ICONS[GameMode.SQUARE], x, IMAGE_HEIGHT + 2 * STEP),
+		g.place_image(AbstractPage.BUTTON_ICONS[GameMode.CIRCLE], x, IMAGE_HEIGHT + 3 * STEP),
+		g.place_image(AbstractPage.BUTTON_ICONS[GameMode.L2R2], x, IMAGE_HEIGHT + 4 * STEP),
+		g.place_image(AbstractPage.BUTTON_ICONS[GameMode.L1R1], x, IMAGE_HEIGHT + 5 * STEP)])
 
 
 static func toggleActive():

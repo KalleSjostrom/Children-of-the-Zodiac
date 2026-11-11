@@ -152,6 +152,10 @@ func update(elapsedTime):
 
 ## Draws the spoils of battle (and level ups) on the given graphics.
 func drawSpoils(g):
+	if not Main.is_legacy("battle_screens"):
+		show_background(g)
+		_show_spoil(g)
+		return
 	drawBackground(g)
 	drawSpoil(g)
 
@@ -199,6 +203,63 @@ func drawBars(g, barIndex, progress, canLevelUp):
 		bars[barIndex] = LevelUpBar.new()
 	bars[barIndex].update(progress)
 	bars[barIndex].draw(g, x[1], 330 + barIndex * BAR_HEIGHT_DISTANCE, canLevelUp)
+
+
+## Bridge (phase 4.4 step B, docs/ARCHITECTURE.md section 15): drawSpoil
+## without the drawing (the state changes in the same order: the font size
+## 26, each line's text colours and setColor(color), the bars' lazy creation,
+## their percent and LevelUpBar.draw's colours and binds), and its nodes in
+## the frame's order: the lines drawn before a character's bar (a MenuText),
+## the bar (a LevelBar), the lines after it, and so on.
+func _show_spoil(g) -> void:
+	g.setFontSize(26)
+	var lines := shadow_lines(g, "Result", 200, y[0])
+
+	var totalgold: int = Load.getPartyItems().getGold()
+	if step > 0:
+		lines += shadow_lines(g, "The enemy dropped " + str(gold) + " gp, " +
+				"total: " + str(totalgold) + " gp", x[0], y[1])
+		lines += shadow_lines(g, "The party got " + str(exp) + " exp.", x[0], y[2])
+
+	var characters = Load.getCharacters()
+	for i in range(characters.size()):
+		if step > 1 + i:
+			var c = characters[i]
+			if c.isAlive():
+				var color: Color = JColor.WHITE
+				var canLevelUp: bool = info[i].canLevelUp
+
+				if info[i].hasLeveledUp:
+					color = JColor.GREEN
+					lines += shadow_lines(g, "Level up!", x[3], y[3 + i], color)
+					lines += shadow_lines(g, str(J.round(info[i].recievedExp)) + " exp", x[2], y[3 + i], color)
+				elif not canLevelUp:
+					lines += shadow_lines(g, "Max level", x[3], y[3 + i], JColor.RED)
+					lines += shadow_lines(g, "0 exp", x[2], y[3 + i], JColor.RED)
+				else:
+					lines += shadow_lines(g, str(J.round(info[i].recievedExp)) + " exp", x[2], y[3 + i], JColor.WHITE)
+				AbstractPage.show_lines(g, lines)
+				lines = []
+				_show_bar(g, i, info[i].etn, canLevelUp)
+
+				lines += shadow_lines(g, c.getName(), x[0], y[3 + i], color)
+			else:
+				lines += shadow_lines(g, c.getName(), x[0], y[3 + i], JColor.RED)
+	if step >= 2 + characters.size() and droppedItem != null:
+		lines += shadow_lines(g, "You found " + droppedItem.getName() + " laying on the ground!", x[0], y[3 + 4])
+	AbstractPage.show_lines(g, lines)
+
+
+## drawBars without the drawing: the bar's lazy creation and its percent, and
+## the frame's next LevelBar shows its parts (LevelUpBar.place).
+func _show_bar(g, barIndex, progress, canLevelUp) -> void:
+	if bars[barIndex] == null:
+		bars[barIndex] = LevelUpBar.new()
+	bars[barIndex].update(progress)
+	var parts: Array = bars[barIndex].place(g, x[1], 330 + barIndex * BAR_HEIGHT_DISTANCE, canLevelUp)
+	var view = g.show_ui(BACK_VIEW, Graphics.UI_LAYER)
+	if view != null:
+		view.show_parts(parts, g.canvas_material())
 
 
 ## Advances the screen one step.

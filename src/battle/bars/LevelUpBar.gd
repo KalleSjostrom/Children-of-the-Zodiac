@@ -31,6 +31,25 @@ func draw(g, x, y, canLevelUp):
 	g.setColor(1)
 
 
+## Bridge (phase 4.4 step B, docs/ARCHITECTURE.md section 15): draw without
+## the drawing: the same colours (red when the character cannot level up,
+## the bar then full) and binds in the same order. Returns the three parts as
+## Graphics.place_image_part places them (the empty bar whole, the blue bar
+## and the overlay up to the percent), for a LevelBar node (a battle's spoils
+## screen).
+func place(g, x, y, canLevelUp) -> Array:
+	var b: Array = _getBar()
+	var p: float = percent
+	if not canLevelUp:
+		g.setImageColor(1, 0, 0, 1)
+		p = 1
+	var parts := [g.place_image_part(b[0], x, y, 200, 20, 1.0, 1.0),
+			g.place_image_part(b[1], x, y, 200, 20, 1.0, p),
+			g.place_image_part(b[2], x, y, 200, 20, 1.0, p)]
+	g.setColor(1)
+	return parts
+
+
 ## Bridge (phase 4.2 step B, the stores, docs/ARCHITECTURE.md section 14):
 ## drawStatic (Java: static draw(Graphics g, int x, int y, float p1, float p2,
 ## float scale); removed: closing phase 4.2, plan 9.2) without the drawing:

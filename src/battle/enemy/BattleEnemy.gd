@@ -117,8 +117,15 @@ func slice():
 	Scheduler.after(1500, func(): slice_ = false)
 
 
+## The red flash while a critical hit hides the enemy. Bridge (phase 4.4 step
+## B, docs/ARCHITECTURE.md section 15): a Fade node on the UI layer
+## (Graphics.show_fade_colour_white: the same state changes);
+## --legacy=battle_flash keeps the legacy quad.
 func drawTopLayer(g: Graphics):
 	if useCritImage and not isVisible():
+		if not Main.is_legacy("battle_flash"):
+			g.show_fade_colour_white(0.8, 0, 0, 0.5, Graphics.UI_LAYER)
+			return
 		g.fadeOldSchoolColorWhite(0.8, 0, 0, 0.5)
 
 

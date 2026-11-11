@@ -61,6 +61,11 @@ func _register(c: DebugCommands) -> void:
 		DebugCommands.opt("what", func() -> PackedStringArray: return SKIPPABLE, "the battle or cutscene going on if left out")])
 	c.add("cast", "Plays cards on a party member's turn, as if they were in the weapon: support cards on the party, the others on the enemies", _cast, [
 		DebugCommands.arg("cards", _card_names, "<card>[:<level>][:all] ..., e.g. Fire:3 Cure:2:all").to_end().loose()])
+	c.add("exp", "Gives party members experience as a won battle does, level after level (at the last level of a class the rest is lost)", _exp, [
+		DebugCommands.arg("amount", Callable(), "exp"),
+		DebugCommands.opt("who", _exp_targets, "party if left out; a name").loose()])
+	c.add("drop", "The enemies of the battle going on drop this item when beaten (no enemy's data has a drop)", _drop, [
+		DebugCommands.arg("item", Callable(), "_ for a space").to_end().loose()])
 	c.group("World")
 	c.add("map", "Shows the whole map of this labyrinth floor", _map)
 	c.add("roads", "Opens the roads of the world map", _roads, [
@@ -450,6 +455,62 @@ func _kill(_args: PackedStringArray) -> DebugCommands.Result:
 		battle.glCharacters.setTarget(-1, false)
 	battle.checkIfEnemiesAreDead(mode == BattleManager.BATTLING)
 	return DebugCommands.done("Killed %s" % ", ".join(killed))
+
+
+func _exp_targets() -> PackedStringArray:
+	var names := PackedStringArray(["party"])
+	names.append_array(PackedStringArray(_party_by_name().keys()))
+	return names
+
+
+## Gives experience as SpoilsScreen.calcSpoils does (the experience, the
+## experience left to the next level, Character.levelUpStatic once it is
+## used up), but level after level (a battle levels a character up once at
+## most). Dev only (phase 4.4): a character at the last level of a class
+## ("Max level" on the spoils screen) or just below a level up.
+func _exp(args: PackedStringArray) -> DebugCommands.Result:
+	if not args[0].is_valid_int() or int(args[0]) < 0:
+		return DebugCommands.fail("The amount is a whole number from 0: %s" % args[0])
+	if not Load.hasLoaded():
+		return DebugCommands.fail("No game loaded")
+	var who := "party" if args.size() < 2 else args[1].to_lower()
+	var party := _party_by_name()
+	var members: Array = party.values() if who == "party" else ([party[who]] if party.has(who) else [])
+	if members.is_empty():
+		return DebugCommands.fail("No one called %s (%s)" % [who, ", ".join(_exp_targets())])
+	var lines := PackedStringArray()
+	for c in members:
+		var left := int(args[0])
+		while left > 0 and c.canLevelUp():
+			var next := int(c.getAttribute(Creature.EXP_LEFT_TO_NEXT_LEVEL))
+			if left <= next:
+				c.addAttribute(Creature.EXPERIANCE, left)
+				c.addAttribute(Creature.EXP_LEFT_TO_NEXT_LEVEL, -left)
+				left = 0
+			else:
+				c.addAttribute(Creature.EXPERIANCE, next)
+				c.addAttribute(Creature.EXP_LEFT_TO_NEXT_LEVEL, -next)
+				left -= next
+				Character.levelUpStatic(c)
+		var state := "max" if not c.canLevelUp() \
+				else "%d to the next" % int(c.getAttribute(Creature.EXP_LEFT_TO_NEXT_LEVEL))
+		lines.append("%s class %d level %d, %s" % [c.getName(), int(c.getAttribute(Creature.CLASS)),
+				int(c.getAttribute(Creature.LEVEL)), state])
+	return DebugCommands.done(", ".join(lines))
+
+
+## Gives the enemies of the battle going on drop data (Enemy.setDropData: the
+## item, rate 1), so that the spoils screen shows "You found <item> laying on
+## the ground!" and the party gets it. Dev only (phase 4.4): no enemy in
+## enemyBank.bank has a dropdata line, so that line is never shown otherwise.
+func _drop(args: PackedStringArray) -> DebugCommands.Result:
+	var battle := _battle()
+	if battle == null:
+		return DebugCommands.fail("Not in a battle")
+	var item := " ".join(args).replace("_", " ")
+	for enemy in battle.enemies:
+		enemy.setDropData(Items.Item.new(item, 1), 1.0)
+	return DebugCommands.done("The enemies drop %s" % item)
 
 
 ## The cards cast can play: short name (lowercase) -> Java class name.

@@ -1,0 +1,142 @@
+# Phase 4.4 (the battle's top layer): the spoils screen step by step with the
+# levels (--load="Slot 1" --start="Forest of Reil--Forest Path-mark0"). Before
+# the battle the console's exp (dev) leaves Kin at the last level but one of
+# his class with 0 exp to the next (his level up ends it: "Level up!" in
+# green over a full red bar) and takes Celis to her class's last level ("Max
+# level", "0 exp", the red bar); Zalzi gets plain experience (white, her bar
+# filling). The route of the battle case starts a battle; at the first party
+# turn the console's kill wins it: the spoils screen (no result screen), a
+# shot every frame while the legend's icons slide out over it, then one every
+# 100 ms through its steps (one every 700 ms: the gold, then each character)
+# and the bars filling; CROSS leaves it.
+wait 3000
+console exp 36168 kin
+console exp 100000 celis
+log exp
+mark
+press UP
+wait 700
+release UP
+wait 300
+tap RIGHT
+wait 400
+loopuntil sub=battle 120000
+mark
+wait 16
+loopuntil battlemode=1 20000
+console kill
+log killed
+shot s_#_slide
+wait 16
+shot s_#_slide
+wait 16
+shot s_#_slide
+wait 16
+shot s_#_slide
+wait 16
+shot s_#_slide
+wait 16
+shot s_#_slide
+wait 16
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+wait 100
+shot s_#
+log spoils_done
+tap CROSS
+wait 1500
+shot s99_after
+log after
+quit

@@ -1,0 +1,158 @@
+# Phase 4.4 (the battle's top layer): the result screens and the legend's
+# icons (--load="Slot 1" --start="Berca Desert--South-mark0"
+# --start-node=20:3: Ogre, Ogre). Steps until the battle (as dungeon_battle);
+# god mode. The first party turn (the battle starts on it, the legend already
+# in): R2 to the support legend and back. On each party turn the console
+# heals the enemies and casts a round (cast: as if the cards were in the
+# weapon), the first time with a shot every frame while the legend slides
+# out, the second time with one every frame while it slides in first; at each
+# result screen (battlemode 5) a shot, CROSS pages it. Rounds: an attack on one
+# enemy (its damage in red, the other's zeros in white), magic on all (both
+# enemies), three cards of two kinds (the played cards' row), support on all
+# (the party's values in green). "Paused" over the first result screen. Then
+# kill: the spoils screen at its steps.
+wait 3000
+console god on
+mark
+tap UP
+wait 700
+tap DOWN
+wait 700
+loopuntil sub=battle 90000
+mark
+wait 16
+loopuntil battlemode=1 30000
+log party_turn
+shot l00_turn
+tap R2
+wait 300
+shot r01_support
+tap R2
+wait 300
+shot r02_offense
+console heal 100000 enemies
+console cast BattleCard:3
+log cast_attack
+shot l_#_out
+wait 16
+shot l_#_out
+wait 16
+shot l_#_out
+wait 16
+shot l_#_out
+wait 16
+shot l_#_out
+wait 16
+shot l_#_out
+wait 16
+shot l_#_out
+wait 16
+shot l_#_out
+wait 16
+shot l_#_out
+wait 16
+shot l_#_out
+wait 16
+shot l_#_out
+wait 16
+shot l_#_out
+wait 16
+mark
+wait 100
+loopuntil battlemode=5 30000
+wait 300
+shot a01_result_attack
+log result_attack
+tap START
+wait 500
+shot a02_paused
+tap START
+wait 500
+shot a03_unpaused
+tap CROSS
+mark
+wait 16
+loopuntil battlemode=1 30000
+shot l_#_in
+wait 16
+shot l_#_in
+wait 16
+shot l_#_in
+wait 16
+shot l_#_in
+wait 16
+shot l_#_in
+wait 16
+shot l_#_in
+wait 16
+shot l_#_in
+wait 16
+shot l_#_in
+wait 16
+shot l_#_in
+wait 16
+shot l_#_in
+wait 16
+shot l_#_in
+wait 16
+shot l_#_in
+wait 16
+console heal 100000 enemies
+console cast Fire:3:all
+log cast_all
+mark
+wait 100
+loopuntil battlemode=5 30000
+wait 300
+shot a04_result_all
+tap CROSS
+mark
+wait 200
+loopuntil battlemode=1 30000
+console heal 100000 enemies
+console cast BattleCard:1 Fire:1 LaceratingCut:2
+log cast_three
+mark
+wait 100
+loopuntil battlemode=5 30000
+wait 300
+shot a05_result_three
+tap CROSS
+mark
+wait 200
+loopuntil battlemode=1 30000
+console heal 100000 enemies
+console cast Cure:2:all
+log cast_support
+mark
+wait 100
+loopuntil battlemode=5 30000
+wait 300
+shot a06_result_support
+tap CROSS
+mark
+wait 200
+loopuntil battlemode=1 30000
+console kill
+log killed
+wait 500
+shot s_#
+wait 500
+shot s_#
+wait 500
+shot s_#
+wait 500
+shot s_#
+wait 500
+shot s_#
+wait 500
+shot s_#
+wait 500
+shot s_#
+wait 500
+shot s_#
+tap CROSS
+wait 1500
+shot a99_after
+log after
+quit

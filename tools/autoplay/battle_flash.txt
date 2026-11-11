@@ -1,0 +1,122 @@
+# Phase 4.4 (the battle's top layer): an enemy's red flash
+# (--load="Slot 1" --start="Berca Desert--South-mark0" --start-node=20:3:
+# Ogre, Ogre). Steps until the battle (as dungeon_battle); god mode. At the
+# first party turn the console casts Critical Blow 3, which lands a critical
+# hit about 0.88 s later (seed 1): the enemy is hidden for 200 ms and the
+# battle's top layer draws the red flash (BattleEnemy.drawTopLayer), shot
+# every frame from just before it to just after; then the result screen and
+# CROSS, a second Critical Blow by another party member (a critical hit
+# about 0.58 s after the cast), kill.
+wait 3000
+console god on
+mark
+tap UP
+wait 700
+tap DOWN
+wait 700
+loopuntil sub=battle 90000
+mark
+wait 100
+loopuntil battlemode=1 30000
+console heal 100000 enemies
+console cast CriticalBlow:3
+log cast
+wait 833
+shot f_#
+wait 16
+shot f_#
+wait 16
+shot f_#
+wait 16
+shot f_#
+wait 16
+shot f_#
+wait 16
+shot f_#
+wait 16
+shot f_#
+wait 16
+shot f_#
+wait 16
+shot f_#
+wait 16
+shot f_#
+wait 16
+shot f_#
+wait 16
+shot f_#
+wait 16
+shot f_#
+wait 16
+shot f_#
+wait 16
+shot f_#
+wait 16
+shot f_#
+wait 16
+shot f_#
+wait 16
+shot f_#
+wait 16
+mark
+wait 100
+loopuntil battlemode=5 30000
+wait 300
+shot f20_result
+tap CROSS
+mark
+wait 100
+loopuntil battlemode=1 30000
+console heal 100000 enemies
+console cast CriticalBlow:3
+log cast2
+wait 550
+shot g_#
+wait 16
+shot g_#
+wait 16
+shot g_#
+wait 16
+shot g_#
+wait 16
+shot g_#
+wait 16
+shot g_#
+wait 16
+shot g_#
+wait 16
+shot g_#
+wait 16
+shot g_#
+wait 16
+shot g_#
+wait 16
+shot g_#
+wait 16
+shot g_#
+wait 16
+shot g_#
+wait 16
+shot g_#
+wait 16
+shot g_#
+wait 16
+shot g_#
+wait 16
+shot g_#
+wait 16
+shot g_#
+wait 16
+mark
+wait 100
+loopuntil battlemode=5 30000
+wait 300
+shot g20_result
+tap CROSS
+mark
+wait 100
+loopuntil battlemode=1 30000
+console kill
+wait 1000
+shot f99_spoils
+quit

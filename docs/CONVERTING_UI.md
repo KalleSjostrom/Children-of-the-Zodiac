@@ -359,3 +359,38 @@ What the closing of phase 4.2 added (plan 9.2, "Closing phase 4.2"):
 * **A removed flag is ignored.** `Main.is_legacy` answers only for the names
   the code asks about: a run with a removed `--legacy=` name is a normal
   run. Check it with a few cases rather than assume it.
+
+What the battle's top layer added (phase 4.4's pilot; docs/ARCHITECTURE.md
+section 15, plan 9.4):
+
+* **Another overlay with the same nodes.** A battle's 2D top layer is drawn
+  where a riddle's is (after the labyrinth's dialog's slot; in a boss area of
+  its own after its dialog), and its parts are kinds that exist: the dims
+  and the flash are Fade nodes on UI, the scaled background a `LevelBar`
+  quad, the lines `MenuText`, the cards `CardView`, the bars `LevelBar`
+  parts, the icons `MenuBackground` pieces. Twins and two `Graphics` bridge
+  members (`show_fade_colour_white`, `place_value_with_shadow`), no scene.
+* **Lines over shadows in one node.** `drawWithShadow` and
+  `drawValueWithShadow` are two lines each (the shadow 1 px down and to the
+  right, then the line): `ResultScreenBase.shadow_lines` and `value_lines`
+  give both entries for a `MenuText`, so a screen of 30 lines is one node.
+  Split it where another part is drawn between its lines (the spoils
+  screen's bars), so the order stays the legacy one.
+* **Probe every frame, not only the shots.** A part can overlap another in
+  frames no shot catches: the probe's lines per frame (a small script over
+  the logs) found the legend's icons sliding out over the spoils screen in
+  the frames after the console's `kill`, the tutorial over the icons, no
+  flash during a screen. Shoot such frames on purpose.
+* **Legacy that never draws.** `Clock.draw` has no caller (nor in the Java),
+  no enemy's data has a drop, and the party's red screen
+  (`Character3D.draw`) is a 2D image drawn under the 3D projection at z 0,
+  behind the near plane: check that a drawing can show before planning its
+  node or its case.
+* **Dev state for screens a route cannot reach** (the console's `exp`: the
+  last level of a class, a level up; `drop`: a dropped item) and a crit
+  found with the probe (the seed fixes which cast lands a critical hit and
+  when: the frames of the flash are shot one by one).
+* **A screen's display can disagree with the game.** The spoils screen shows
+  "Level up!" when the experience exactly fills the bar, though
+  `calcSpoils` levels the character up only when it exceeds what is left (as
+  in the Java): plan cases on the logic, not on what the screen says.

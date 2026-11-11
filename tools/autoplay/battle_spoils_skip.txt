@@ -1,0 +1,84 @@
+# Phase 4.4 (the battle's top layer): the spoils screen skipped ahead
+# (--load="Slot 1" --start="Berca Desert--South-mark0" --start-node=20:3: Ogre,
+# Ogre). Before the battle the console's exp (dev) leaves Kin one point below
+# his next level (his bar fills, he levels up, the bar starts again). At the
+# first party turn the console kills Zalzi (heal -100000: her name in red, no
+# bar), makes the enemies drop an item (drop, dev: no enemy's data has a
+# drop) and wins the battle (kill). The spoils screen at its first steps,
+# CROSS at the gold line skips to the end (every line at once, "You found
+# ..."), a shot every 50 ms while both bars fill, CROSS leaves it.
+wait 3000
+console exp 2667 kin
+log exp
+mark
+tap UP
+wait 700
+tap DOWN
+wait 700
+loopuntil sub=battle 90000
+mark
+wait 16
+loopuntil battlemode=1 20000
+console heal -100000 zalzi
+console drop Healing_Potion
+console kill
+log killed
+wait 100
+shot k00_spoils
+wait 1000
+shot k01_gold
+tap CROSS
+wait 50
+shot k_#
+wait 50
+shot k_#
+wait 50
+shot k_#
+wait 50
+shot k_#
+wait 50
+shot k_#
+wait 50
+shot k_#
+wait 50
+shot k_#
+wait 50
+shot k_#
+wait 50
+shot k_#
+wait 50
+shot k_#
+wait 50
+shot k_#
+wait 50
+shot k_#
+wait 50
+shot k_#
+wait 50
+shot k_#
+wait 50
+shot k_#
+wait 50
+shot k_#
+wait 50
+shot k_#
+wait 50
+shot k_#
+wait 50
+shot k_#
+wait 50
+shot k_#
+wait 50
+shot k_#
+wait 50
+shot k_#
+wait 50
+shot k_#
+wait 50
+shot k_#
+log skipped
+tap CROSS
+wait 1500
+shot k99_after
+log after
+quit

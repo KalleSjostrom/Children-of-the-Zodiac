@@ -759,6 +759,23 @@ func fadeOldSchoolColorWhite(r: float, g: float, b: float, a: float) -> void:
 	glColor4f(1, 1, 1, 1)
 
 
+## Bridge (phase 4.4 step B, docs/ARCHITECTURE.md section 15):
+## fadeOldSchoolColorWhite without the drawing: the same state changes (the
+## colour, the white fade image's bind, the colour set back to white), and
+## the frame's next Fade node on layer shows its quad: the white image tinted
+## by the colour, i.e. the colour (an enemy's red flash: UI, under the
+## battle's result screens and the legend's icons).
+func show_fade_colour_white(r: float, g: float, b: float, a: float, layer: int) -> void:
+	glColor4f(r, g, b, a)
+	var tint := _cur_color
+	var mat := canvas_material()
+	if skip_image(whiteFadeImage) != null:
+		var fade = show_ui(FADE_VIEW, layer)
+		if fade != null:
+			fade.show_colour(tint, mat)
+	glColor4f(1, 1, 1, 1)
+
+
 ## Java overloads: setFadeImage(int mode) and setFadeImage(String image).
 static func setFadeImage(image) -> void:
 	if image is String:
@@ -1702,6 +1719,23 @@ func place_with_shadow(c = null) -> Array[Color]:
 	var shadow := text_color(1.0)
 	setColor(color)
 	setTextColor(c)
+	var line := text_color(1.0)
+	setColor(color)
+	return [shadow, line]
+
+
+## Bridge (phase 4.4 step B, docs/ARCHITECTURE.md section 15):
+## drawValueWithShadow without the drawing: the same text colours (the value
+## in c when it is above 0, else in white) and drawString's setColor(color)
+## after each line. Returns [the shadow's colour, the value's].
+func place_value_with_shadow(value: int, c: Color) -> Array[Color]:
+	setTextColor(JColor.black)
+	var shadow := text_color(1.0)
+	setColor(color)
+	if value > 0:
+		setTextColor(c)
+	else:
+		setTextColor(JColor.white)
 	var line := text_color(1.0)
 	setColor(color)
 	return [shadow, line]

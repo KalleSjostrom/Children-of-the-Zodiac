@@ -1,4 +1,4 @@
-# Handoff: state of the Godot port (2026-11-07, after steps 1–3, modernization phase 0, phases 1, 2, 3, 4.1 and 4.2 done and closed, the particles phases P and P2, the character sprite sheets)
+# Handoff: state of the Godot port (2026-11-11, after steps 1–3, modernization phase 0, phases 1, 2, 3, 4.1 and 4.2 done and closed, the particles phases P and P2, the character sprite sheets, phase 4.4's pilot (the battle's 2D top layer))
 
 Conventions: legacy (ported) code follows `docs/PORTING.md`; new code
 (scenes, resources, tools, bridge) follows `docs/ARCHITECTURE.md`. The
@@ -534,6 +534,45 @@ section 14, "The riddles"; the procedure in `docs/CONVERTING_UI.md` section
 - Prepared (plan 9.3, 9.4): phases 4.3 and 4.4; recommended next: 4.4's
   pilot, the battle's 2D top layer (`docs/phase4_4_prompt.md`).
 
+**Modernization phase 4.4's pilot (the battle's 2D top layer): step B done**
+(2026-11-11; plan 9.4, "Results of the pilot"; conventions in
+`docs/ARCHITECTURE.md` section 15; `docs/phase4_4_prompt.md`):
+- An enemy's red flash, the result screen, the spoils screen with its
+  level-up bars and the legend's button icons draw through UI nodes in the
+  battle's top layer (after the labyrinth's or boss area's dialog): the
+  flash and the dims are Fade nodes on UI (`Graphics.show_fade_colour_white`,
+  `show_fade`), the scaled background a `LevelBar` quad, the lines over their
+  shadows `MenuText` entries (`ResultScreenBase.shadow_lines`,
+  `value_lines`), the played cards `CardView`s, the bars `LevelBar` parts
+  (`LevelUpBar.place`), the icons `MenuBackground` pieces. No new scene. The
+  legacy battle keeps the state, the input and the timing.
+- Flags: `--legacy=battle_screens`, `battle_flash`, `battle_legend`; with all
+  three the top layer is drawn exactly as before.
+- Coverage: four new cases (`battle_result`, `battle_spoils`,
+  `battle_spoils_skip`, `battle_flash`; 161 shots: the result screens of one
+  enemy, two, three cards and support, "Paused" over one, the legend's slide
+  frame by frame, the spoils screen step by step with a level up into a
+  class's last level, "Max level", a dead member, a dropped item, CROSS
+  skipping ahead, two critical hits' flashes frame by frame); 432 cases in
+  all, 8,257 shots. Dev only: the console's `exp` (experience level after
+  level) and `drop` (drop data for the battle's enemies).
+- Parity (tolerance 0; golden `c44gold`, nodes `c44node`): golden vs. nodes
+  identical on every case (logs and error lines too); each flag alone and
+  all three vs. nodes and vs. the golden identical; no legacy text or quad
+  in any top-layer frame with the flags off.
+- Frame rate (normal runs): 60 capped either way; uncapped the battle's 3D
+  under the screens dominates (about 290 FPS on Berca's Ogres) and the
+  change is within the run-to-run spread (plan 9.4).
+- Afterwards `c44node` (432 cases, 8,257 shots) is the set to keep in
+  `tools/parity/out`.
+- Found: `Clock.draw` has no caller (no "Fleeing", no time bar: the plan was
+  wrong), no enemy has drop data, "Level up!" shows without a level up when
+  the experience exactly fills the bar, the party's red screen is drawn
+  behind the near plane (all original: plan Appendix).
+- Prepared (plan 9.4, "Prepared after the pilot"): the rollout of the
+  battle's 3D, part by part, with its order and sizes; the next prompt is
+  `docs/phase4_4_rollout_prompt.md`.
+
 **Character sprite sheets (2026-11-03): plans A and B done**
 (`docs/VILLAGER_SPRITES_PLAN.md`, "As built"; conventions in
 `docs/ARCHITECTURE.md` section 9, "Character frames and sheets"):
@@ -605,10 +644,9 @@ decision 5 decided in plan section 13):
 ## Plan (what is left)
 
 0. **Modernization:** phases 1 to 4.1 are closed (2026-11-06), phase 4.2
-   too (2026-11-07). Next (plan 9.4's recommendation): phase 4.4's pilot,
-   the battle's 2D top layer (the result and spoils screens, the level-up
-   bars, an enemy's red flash, the legend's icons;
-   `docs/phase4_4_prompt.md`), then the battle's 3D; phase 4.3 (input,
+   too (2026-11-07); phase 4.4's pilot, the battle's 2D top layer, is done
+   (2026-11-11). Next (plan 9.4, "Prepared after the pilot"): the rollout,
+   the battle's 3D (`docs/phase4_4_rollout_prompt.md`); phase 4.3 (input,
    audio, saves, the `Game` autoload; plan 9.3) can come at any time and
    first if step C of the converted modes comes first. The minimap stays
    the 3D bridge's until the battles leave the bridge (plan 8.4). Record
@@ -623,7 +661,7 @@ decision 5 decided in plan section 13):
    the scene, 5 ms from its `.map` (plan 7.8); a save point no longer adds
    ≈0.4 s. Per-frame fades assume 60 FPS. Measure with the `fps=` value
    that AutoPlay prints with every `log`/`shot`, in normal runs.
-2. **More runtime coverage:** level-up screen, the later chapters and
+2. **More runtime coverage:** the later chapters and
    their bosses (the riddles and the stores' buying, selling, merging and
    resting have cases since phase 4.2). Compare look and timing with the original
    logic.
@@ -650,7 +688,7 @@ decision 5 decided in plan section 13):
   only the shipped saves.
 - Parity: `tools/parity/parity.sh record <set>` / `compare <a> <b>` /
   `ab "<args a>" "<args b>" [case…]`, see `docs/ARCHITECTURE.md` section 7.
-  Runs are windowed (screenshots need a renderer); all 428 cases take
+  Runs are windowed (screenshots need a renderer); all 432 cases take
   about 23 minutes with `--jobs=4` (with about 6 GB free at idle; 19 with
   `--jobs=5` for 417 cases, 14-15 with `--jobs=8` when 10 GB are
   free at idle; check first: with 7 GB free, 8 jobs crashed runs) on 12

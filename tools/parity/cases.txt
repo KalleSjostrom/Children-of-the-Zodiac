@@ -675,3 +675,20 @@ riddle_paused            riddle_paused            --load=Start --start="Silent R
 # through without a shot: its root, Buildings, the card stores, Villages,
 # Stories and a chapter, the cursor moved and wrapped, "Paused" over it.
 cheater_menu             cheater_menu             --load="Slot 1" --start=Alares
+# Phase 4.4's pilot, the battle's 2D top layer (docs/phase4_4_prompt.md, plan
+# 9.4): what the battle cases above do not show. The result screens of an
+# attack on one enemy, of magic on two, of three cards (the played cards'
+# row) and of support on the party, "Paused" over one, the legend's icons
+# sliding in and out frame by frame and the support legend (Berca's Ogre,
+# Ogre; god mode, the console's cast); the spoils screen step by step with a
+# level up to the last level of a class, "Max level" and plain experience
+# (the console's dev-only exp), and skipped ahead with a level up, a dead
+# party member and a dropped item (the console's dev-only drop: no enemy's
+# data has one).
+battle_result            battle_result            --load="Slot 1" --start="Berca Desert--South-mark0" --start-node=20:3
+battle_spoils            battle_spoils            --load="Slot 1" --start="Forest of Reil--Forest Path-mark0"
+battle_spoils_skip       battle_spoils_skip       --load="Slot 1" --start="Berca Desert--South-mark0" --start-node=20:3
+# An enemy's red flash while a critical hit hides it (Critical Blow 3 on
+# Berca's Ogres; seed 1 lands a critical hit on the first and the second
+# cast), frame by frame.
+battle_flash             battle_flash             --load="Slot 1" --start="Berca Desert--South-mark0" --start-node=20:3

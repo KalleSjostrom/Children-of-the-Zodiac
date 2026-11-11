@@ -3848,6 +3848,312 @@ today, what the closing left for it, and the order:
     battles, and a probe would tell which shots show the result and spoils
     screens.
 
+**Results of the pilot (phase 4.4, `docs/phase4_4_prompt.md`; conventions in
+docs/ARCHITECTURE.md section 15).** Step B for the battle's 2D top layer: an
+enemy's red flash, the result screen, the spoils screen with its level-up
+bars, the legend's button icons, with the nodes of phases 3 and 4.2 (no new
+scene); the legacy battle keeps the state, the input and the timing.
+
+* **Baseline** (on a16c172b): `tools/check.sh` 0 failed (496 scripts);
+  goldens of the 428 cases (`c44base`, 8,096 shots), identical to the closing's
+  `c42after` shot for shot, log for log and in every case's error and leak
+  lines (3 script errors, 2,421 errors, the exit leak reports of the five
+  `effects_*` cases). Recorded from a project copy with 4 jobs.
+* **Facts** (deliverable 1; the probe over every case), where they add to or
+  differ from the prompt and the entry above:
+  * Two callers. `BattleManager.drawTopLayer` runs from `Labyrinth.drawExtra`
+    (after the mission and the dialog; a boss's words are the dialog) and from
+    `BossBattleArea.drawExtra` (Serphia, Menthu, Memory Salmonman: 7 cases;
+    after the area's dialog). A boss area's battle 3D is all SubViewport
+    chunks (it sets no `use_scene_3d`); its weather (`battleBacks.*`) never
+    runs: no place has a `particles` entry.
+  * The clock is never drawn: `Clock.draw` has no caller (the Java's
+    `Battle` neither), so "Fleeing" and the time bar of the entry above do
+    not exist; `drawWithShadow` stays for `Attack.draw` alone.
+  * The order: each object's top layer (the enemy's flash; the rows draw
+    nothing there), then the result screen (RESULT) or the spoils screen
+    (SPOILS), the legend's icons, the tutorial; after it the floor's
+    top-layer items (none in any probed battle frame) and the mode fade.
+    Overlaps, over every probed frame (not only the shots): the flash (12 or
+    13 frames: the 200 ms hide of a critical hit, during ANIMATE) is drawn
+    over the whole battle, the attack texts included, and never with a
+    screen; the legend's icons are drawn every frame, at x 10 while it shows,
+    −190 while hidden (−209 before its first show: `instantHide` stops a step
+    past the limit), sliding 20 px an update over 10 updates; they are over a
+    screen only in the frames after the console's `kill` on a party turn (the
+    spoils screen comes at once and the icons slide out over its dim, bright
+    over the dimmed legend gradient: 7 frames in `battle_spoils`; in play the
+    legend has slid out before a screen comes); the tutorial is drawn over
+    the icons (`tutorial_battle`, 176 frames); "Paused" (Transition) over a
+    result screen. The party's red screen is not here: `Character3D.draw`
+    draws it in the battle's 3D (below, the rollout).
+  * State changes in the draws, all kept by the twins in order: the flash's
+    `glColor4f(.8, 0, 0, .5)`, the white fade image's bind,
+    `glColor4f(1, 1, 1, 1)`; `fadeOldSchool(.5)`'s colour (the fade colour,
+    white, at .5) and the fade image's bind, `setColor(1)`, the background's
+    bind; `setFontSize(26)` (it keeps the font: plain in every probed
+    frame); each `drawWithShadow`: black text, `setColor(color)`, the line's
+    colour, `setColor(color)`; `drawValueWithShadow` the same with the value's
+    colour when it is above 0, else white; the cards' binds (picture, balls);
+    the bars' lazy creation and `LevelUpBar.update`'s percent (read only by
+    the bars' drawing: no game state), `LevelUpBar.draw`'s
+    `setImageColor(1, 0, 0, 1)` at a class's last level, its three binds,
+    `setColor(1)`; the legend's `setColor(1)` and six binds. No draw of the
+    top layer changes game state.
+  * What the top layer starts from: the minimap arrow's colour
+    `(1, .85, 0, 1)` in a labyrinth (white, or the colour an effect left, in
+    a boss area); the alpha test `GREATER 0` (the enemy's draw leaves it),
+    `GEQUAL .01` (a blended effect's `endBlend`) or `GREATER .1` (the
+    weather's front pass), as the riddles met; the blending
+    `ONE_MINUS_SRC_ALPHA`; the font size 24 or 40 and black or white text
+    (the legend's and the deck's lines); the fade mode black with a white
+    fade colour (the image fade of Menthu1's defeat shows no screen). Every
+    part sets its own colour; the nodes take `canvas_material()` where their
+    part was drawn, so they inherit the alpha test (text edges below it are
+    dropped as before). What it leaves: the colour white and
+    `Graphics.color` 1 (the legend's `setColor(1)`), the size 26 after a
+    screen, the last line's text colour, the last icon bound; the next frame
+    sets its own before it draws.
+  * Text: size 26, plain, at alpha 1 (`drawString`); every line over its
+    shadow (1 px down and to the right, black). The result screen's values in
+    red (attack, magic) or green (support; a total of 0 or less, as its
+    absolute value), 0 in white; the spoils screen's names white, green
+    after a level up, red when dead; "Max level" and "0 exp" red.
+  * The dropped item ("You found <item> laying on the ground!") cannot be
+    shown: no enemy in `enemyBank.bank` has a `dropdata` line (nor the
+    Java's data), so `dropRate` is 0. `getSpoils` still draws a
+    `J.random()` for every non-boss battle (the "<enemy>drop" status is −1,
+    not 0). The console's `drop` (dev) gives the battle's enemies drop data.
+  * "Level up!" when the experience exactly fills the bar: `calcSpoils`
+    levels a character up only when the experience exceeds what is left
+    (`gottenExp <= cnext`, as in the Java), but `LevelInfo.update` shows
+    "Level up!" once the bar is full; the level up comes with the next
+    battle's experience (the probe's first `battle_spoils`: Kin 1 point
+    short got 1). Kept (original); the case gives him 0 left instead.
+  * A character's bar at the last level of a class: red and full, "Max
+    level" and "0 exp" in red; reaching that level in the battle: "Level
+    up!" in green over the red bar (COTZ-003's path).
+  * Scaled and partial images: the background `resultBack.png` at 1.1 (a
+    scaled-up image: drawn as its legacy quad, a `LevelBar`, plan 12); the
+    played cards at 0.7 (scaled down: `CardView`'s TextureRects, as the
+    menu's); the bars' parts at 1:1 (200 × 20 from 165 × 25 images, the
+    percent of the width: `LevelBar` quads); the icons at 1:1.
+* **Coverage.** The probe (prints in `BattleManager.drawTopLayer` with the
+  caller, the mode and the 2D state, the flash, the result screen's team,
+  values and cards, the spoils screen's step and each character's state, the
+  legend's x and slide, the tutorial, the state the top layer leaves, the
+  labyrinth's or area's frame, the enemy's hide timer, the party's hidden
+  creatures, the attack name, the clock, "Paused", "game pad lost" and
+  AutoPlay's shot) over every case: 27 old cases draw a battle; the result
+  screen in 65 shots of 13 cases (the `effects_*` cases and `boss`: one
+  enemy, or the party after support cards), the spoils screen in 10 shots of
+  the 6 `dungeon_battle_*` cases (its gold line, and the end after CROSS
+  skipped ahead: no level up, "Max level", death or drop), the flash in one
+  shot (`effects_offense_3/c_020`), the legend's icons in 159 shots and
+  sliding in 18, the tutorial over them in 3, no "Paused" over a battle.
+  Four new cases (161 shots): `battle_result` (Berca's Ogre, Ogre, god mode,
+  the console's `cast`: an attack on one enemy with the other's zeros, magic
+  on both, three cards in the played row, support on the party in green,
+  "Paused" over a result screen, the legend sliding out and in frame by
+  frame, the support legend; then the spoils screen at its steps),
+  `battle_spoils` (the console's `exp`: Kin at the last level but one of his
+  class with 0 to the next, Celis at the last level; the icons sliding out
+  over the spoils screen frame by frame, then a shot every 100 ms: each step,
+  Kin's "Level up!" over his red bar, Celis's "Max level", Zalzi's plain
+  experience), `battle_spoils_skip` (Kin 1 short of a level, Zalzi killed by
+  the console's `heal -100000`, the console's `drop`: CROSS at the gold line
+  skips to the end, both bars filling, Kin's level up and his bar starting
+  again, Zalzi's red name, "You found Healing Potion …"), `battle_flash`
+  (Critical Blow 3: seed 1 lands a critical hit on the first and the second
+  cast, 0.88 s and 0.58 s after them: both flashes frame by frame). Goldens:
+  `c44gold` (432 cases, 8,257 shots; the old cases identical to `c44base`,
+  logs and error lines too), `c44gold2` (the new cases again: 161 of 161
+  identical, logs and error lines too). `battle_result` prints the exit
+  leak report of the console's `cast` cards (7 objects, as the `effects_*`
+  cases; `battle_flash` casts too and prints none).
+* **Built** (ARCHITECTURE section 15): no scene; the bridge members
+  `Graphics.show_fade_colour_white` (fadeOldSchoolColorWhite: a Fade node's
+  colour), `place_value_with_shadow`, `ResultScreenBase.show_background`,
+  `shadow_lines`, `value_lines`, `LevelUpBar.place`, the twins
+  `ResultScreen._show_result`, `SpoilsScreen._show_spoil`, `_show_bar`,
+  `Legend._show_icons` and the flash's in `BattleEnemy.drawTopLayer`; flags
+  `--legacy=battle_screens`, `battle_flash`, `battle_legend`; the console's
+  `exp` and `drop` (dev).
+* **Parity** (tolerance 0 everywhere; the final code, 432 cases, 8,257
+  shots; the node run is `c44node`; "the battle cases": the 31 cases that
+  draw a battle, by the probe, 1,331 shots):
+  * golden (`c44gold`) vs. nodes, every case: 8,257 of 8,257 shots
+    identical, all 432 logs identical, the same error lines in every log (3
+    script errors, 2,421 errors; the exit leak reports in the five
+    `effects_*` cases and `battle_result`);
+  * each flag alone (`--legacy=battle_screens`, `battle_flash`,
+    `battle_legend`) vs. nodes and vs. the golden on the battle cases: 1,331
+    of 1,331 each, logs and error lines identical;
+  * every flag on (`--legacy=battle_screens,battle_flash,battle_legend`,
+    every case) vs. the golden: 8,257 of 8,257, all logs and error lines
+    identical (the legacy paths and the frame without the nodes are
+    unchanged); vs. nodes on the battle cases: 1,331 of 1,331;
+  * the new cases recorded twice: 161 of 161, logs and error lines
+    identical.
+  * No tolerance was needed, and there was no difference on the way: the
+    first node run (a smoke set of 8 battle cases, 367 shots) was identical.
+* **No legacy 2D left:** a run of the 31 battle cases with prints in
+  `Graphics._drawText` and `_emit2D` while `BattleManager.drawTopLayer`
+  draws found no legacy text or quad in 49,189 top-layer frames with the
+  flags off (with the three flags on, the same prints counted 4,450 texts and
+  14,255 quads in `battle_result` alone).
+* **Frame rate** (normal runs: no `--seed`, windowed, one at a time, the
+  shipped saves (`APPDATA` a scratch folder); Berca Desert--South, god mode,
+  the console's `cast` and `kill`; AutoPlay's `fps=` every 0.5 s for 11 s on
+  each screen, the first second dropped; legacy (the three flags) → nodes,
+  median and range):
+
+  | Where (normal runs meet random enemies: the runs below met Ogre and Ogre) | Capped | Uncapped |
+  |---|---|---|
+  | The result screen (Battle Card 1 on an Ogre: the dim, the background, 15 lines over their shadows, one card) | 60 → 60 | 289 (282–292) → 286 (280–331) and 286 (277–290) |
+  | The spoils screen (its end: 9 lines, three bars) | 60 → 60 | 306 (299–309) → 358 (350–367) and 312 (296–319) |
+
+  The other runs met other enemies (legacy, a Stitchman: 327 and 304 on the
+  result screen, 318 and 305 on the spoils screen; nodes, one Ogre: 309 and
+  326). The battle's 3D under the screens costs most of the frame (about
+  3.3 ms); the top layer's legacy drawing (18 to 30 text draws and 9 to 17
+  quads a frame, the icons' six included) is within the run-to-run spread: no measurable change on the
+  result screen, at most a small gain on the spoils screen.
+* **Still legacy** in a battle: the state, the input and the timing (step C:
+  decision 3; decision 6 for the legend's slide, the bars' counting, the
+  steps); the `drawTopLayer`/`drawResult`/`drawSpoils` methods (the twins
+  run there); the whole 3D part with its 2D text (the rollout, below). The
+  helpers closing phase 4.2 kept (deliverable 3): `Graphics.drawWithShadow`
+  is still called by `Attack.draw` (the attack name, drawn among the 3D
+  chunks; and by `Clock.draw`, which nothing calls) and by the legacy path
+  of `--legacy=battle_screens`; `drawValueWithShadow`,
+  `Graphics.fadeOldSchool`, `fadeOldSchoolColorWhite`, `AbstractCard.drawCard`
+  and `LevelUpBar.draw` (with drawImage's percent part) only by the legacy
+  paths of the three flags. When phase 4.4 closes, `AbstractCard.drawCard`
+  and `LevelUpBar.draw` lose their last caller (legacy classes: delete them);
+  `drawValueWithShadow`, `fadeOldSchool`, `fadeOldSchoolColorWhite` and the
+  percent `drawImage` (`GameTexture.drawPart` with a percent below 1) become
+  `Graphics`' API only, which phase 5 deletes; `drawWithShadow` keeps
+  `Attack.draw` until the rollout's texts.
+* **Found on the way:** `Clock.draw` has no caller (the plan's "Fleeing" and
+  time bar); no enemy can drop an item; "Level up!" shows without a level up
+  when the experience exactly fills the bar (both original: Appendix); the
+  party's red screen is drawn behind the near plane (the rollout's table
+  below). The legend's icons are drawn after the screens, so in the frames
+  after the console's `kill` they slide out bright over the spoils screen's
+  dim (as legacy). The probe per frame, not per shot, found the overlaps
+  (CONVERTING_UI). Afterwards only `c44node` was kept in `tools/parity/out` (the
+  baseline, the golden and the check sets were deleted after their
+  compares).
+
+**Prepared after the pilot (2026-11-11): the rollout, the battle's 3D.** What
+`BattleManager.draw` draws, part by part, in the frame's order (a survey of
+the code after the pilot; line counts are of the drawing involved). Every
+part is drawn under the 3D projection with its own `loadIdentity` (eye
+space, the camera at the origin), at z −2 (`STANDARD_Z_DEPTH`; the enemy at
+its `.enemy` depth); `Battle.drawBattle` draws the deck, the hand and the
+legend without the depth test (COTZ-011), the effects with it, the attack
+texts without. In a labyrinth the 3D bridge puts the battle's 3D drawn
+before the frame's first 2D into the floor scene's World3D (it shares the
+depth buffer, the fog and the linear blending with the walls, 7.5); the
+first 2D is the attack name when it shows, else the deck's text, else the
+legend's text (always drawn), so the cards, the hand, the effects and the
+attack texts are SubViewport chunks composited in sRGB after it. A boss
+area (Serphia, Menthu, Memory Salmonman) sets no `use_scene_3d`: all of its
+battle is SubViewport chunks.
+
+| # | Part | What it draws | State it changes in the draw | 2D among it | Size |
+|---|---|---|---|---|---|
+| 1 | The enemy (`BattleEnemy.draw`, `drawSlice`) | its frame (`drawTex`) at its depth, shaken and risen (`translate`), in `usedColor`; while an effect slices it (`destroyEnemySlice`) two quads, the top one sliding (`xs`), at alpha `life` | `life -= sliceFade`, `xsSpeed`, `xs`, `test1`/`test2` per draw; alpha test on (`GREATER .1`, left at `GREATER 0`: never turned off) | — | ~100 lines |
+| 1b | Its particle systems, the attack name (`Attack.draw`: `AttackBackground`'s quad, then the name), the enemy's card (`EnemyCard`: an identity quad) | the systems (GPU nodes, 11); `attackBack.png`; the name with `drawWithShadow` at size 46 twice (a black copy 3 px off, then white over its shadow) | `Attack.pos += SPEED` per draw (the name's slide); `ParticleSystem.gpu_state` per draw; `endBlend` leaves the depth mask off | the attack name: the frame's first 2D when shown | ~40 |
+| 2 | The info panels (`CharacterRow`, `EnemyRow`, `CreatureRow`, `Creature3D`, `Character3D`, `Enemy3D`, `ProgressBar`) | the row's gradient; per creature its portrait (`drawTex`), the progress bar (`emptyBar`, `white.png` tinted blue/green/red to the percent, `overlay`: `Utils3D.draw3DPart`), the info texture (name, "Elem:", life drawn into an Image by `GraphicHelp`: `updateTexture` when `Battle.update_`), the element icon, the boosts' cards | `progressBar.update` (its percent) per draw; the info texture rebuilt in the draw; `setColor(.75)` for an inactive creature (also `Graphics.color`); the info, element and boosts tinted by the colour the bar leaves `(1, 1, 1, a)` | — | ~150 |
+| 2b | The party's red screen (`Character3D.draw` while a critical hit hides a party member) | `setImageColor(.7, 0, 0, .5)`, `drawImage` of a 1024 × 768 white image at (0, 0) | `loadIdentity` (the row's later characters drawn at z 0) | a 2D image drawn under the 3D projection at z 0, behind the near plane (1): never visible (the Java too; no probed frame) | 5 |
+| 3 | The deck (`GLDeck`, `AbstractDeck`, `GLWeapon`, `GLSlot`, `WeaponModeIcon`, `GLCard`) | the weapon's slots and mode icon, the deck's balls and "save" image, the cards (two-sided, rotating), the hand pointer (`hand2.png`), a gradient and the deck's texts (the card's name at 34, the count at 50, its info and "Deck" at 24, at the mode's fade value) | `GLSlot.draw` calls `update()` (the slot's flip advances per draw: `rotation`, `currentList`, `rotateDone`); `setAlphaFunc(.5)` around the cards, then 0 | the deck's texts | ~140 (33 of text) |
+| 4 | The hand (`GLHand.draw`) | `hand1.png` at the target, turned for the party | — | — | 7 |
+| 5 | The legend (`Legend.draw`, every frame, off the screen while hidden) | a gradient, six lines twice (black at the fade value, then white 2 px up and left) | — | its lines | ~33 |
+| 6 | The card effects (`Animation.draw`) | the systems (GPU nodes); still legacy: the spheres (Demolish: `gluSphere`, lit), the image and slow systems (Death, Slow: sprites), the enemy colour system (Elements) | the image and slow systems start their coroutine on their first draw (it fades, switches images and calls `plainDestroy`: the battle waits on it); Slow moves its particles; the enemy colour sets `usedColor` (the enemy, drawn earlier, takes it a frame late) | `Animation.draw` draws the attack texts too: twice per frame during ANIMATE (the Java too) | ~150 (effects) |
+| 7 | The attack texts (`AttackText.draw`) | damage, "Miss!", "Critical Hit!": 2D text at the screen point of an eye-space position (`draw3DText`), in its colour at its `life` | — (`life` changes in `update`) | all of it | ~30 |
+| — | The clock (`Clock.draw`: "Fleeing", the time bar) | nothing: no caller (the Java neither) | | | — |
+| — | `BossBattleArea`'s weather (`battleBacks.*`) | nothing: no place's info has a `particles` entry (main.bank's only one is a comment) | | | — |
+
+Also in the draw: in TALKING mode `drawBattle` calls `manager.setDialog`
+every frame (in a labyrinth `drawDialog`: the dialog's `setDS` and the
+minimap's and mission's `pushState`, once a frame; as in the Java); the
+first frame's `initDraw` draws stray quads (`GLSlot`, `EnemyCard`,
+`AttackBackground`). `ScrollBar.gd` (`BattleScrollBar`) has no user.
+
+* **What the 3D bridge does today:** the battle's 3D is GLBackend's
+  geometry: rebuilt as ArrayMeshes every frame, in the floor's world up to
+  the first 2D, in SubViewports after it; the effects' GPU nodes are
+  `show_node` nodes in the current chunk. The texts are GLBackend's 2D
+  canvas items between those chunks.
+* **The 2D text among the 3D chunks** (the attack name, the deck's and the
+  legend's lines, the attack texts): a UI node before a 3D chunk turns that
+  chunk into a SubViewport at the node's layer (ARCHITECTURE section 12),
+  composited in sRGB, where today the 3D after the first text is a
+  SubViewport on LegacyLayer. A text made a UI node while legacy 3D still
+  follows it lifts that 3D, and everything the frame draws after it (the
+  weather's front pass, the minimap's batches), to the UI layer, in chunks
+  laid out differently: parity would have to show that unchanged. Text in the 3D scene instead (`Label3D`, or
+  Controls placed with `Camera3D.unproject_position`) needs the 3D around
+  it converted first. The other way round has the same problem: 3D moved
+  out of its chunk into the floor's world (the plan's `Battle.tscn` under
+  the camera rig) is drawn under every 2D text of the frame, also the texts
+  that were drawn before it (an effect or the hand over the deck's or the
+  legend's lines today would go under them). Recommended for step B: each
+  3D part as nodes in the chunk and slot where its batches were
+  (`Graphics.show_node`, as the effects' GPU particles and the minimap's
+  `MinimapPart`), which keeps every chunk boundary and the boss areas'
+  SubViewports; the texts as nodes after the 3D around them is converted;
+  `Battle.tscn` under the rig (and a camera of its own in a boss area,
+  which would change the boss areas' sRGB compositing: a look change) once
+  nothing of the battle is legacy, with step C.
+* **The minimap's 1/255 (8.3):** the bridge's pool instances that drew the
+  minimap render a battle's batches 1/255 apart from instances that did
+  not. Moving some of a battle's batches to nodes while others stay on the
+  bridge changes which pool instance draws which batch: expect 1/255 on the
+  battle's remaining legacy batches (and on later battle frames) even where
+  the converted part is exact; compare the frames after the change, explain
+  a 1/255 by the pool before blaming the node, and prefer converting a whole
+  chunk's content at once. Once no battle batch is left on the bridge, the
+  minimap's node (`--minimap-node`) can be the default (8.4).
+* **Coverage** (the pilot's probe, 31 battle cases): the enemy, the info
+  panels, the deck, the hand and the legend in every battle shot; the
+  attack name in 144 shots of 14 cases; the effects in the `effects_*`
+  cases; the slide of the legend frame by frame (`battle_result`), a
+  critical hit's hide (`battle_flash`); the inactive creatures' 0.75 tint on
+  every other creature's turn. To probe before the rollout (the pilot's
+  probe did not print them): the enemy's slice (an effect's
+  `destroyEnemySlice`, `ParticleSystem.update`), a haste or slow bar, the
+  boosts' cards and the element icons on a panel, a slot's flip (R2) frame
+  by frame, the deck's shuffle (`animate.init("Shuffle")`: a deck that runs
+  out), a boss's TALKING frames (the `dungeon_boss_*` cases page them). Not
+  reachable: the enemy colour system (the neutral Elements card fails in
+  `ResultScreen.calcResult`, as in the Java), the party's red screen, the
+  clock. Write the missing cases first, on the unconverted code.
+* **Order and sizes** (S ≈ a session):
+  1. The enemy (`show_node` in its chunk and slot): its frame as a quad
+     with its texture (an `AnimatedSprite3D` later), the slice as a shader
+     or the two legacy quads, the colour, shake and rise mirrored from the
+     legacy values (step B: the coroutines and the slice's per-draw steps
+     stay in the twin). With it the coverage cases of the whole 3D. M.
+  2. The info panels: portraits, bars (a quad with a percent uniform), the
+     info texture (a SubViewport with Labels, or the legacy Image kept as a
+     texture first), elements, boosts. M.
+  3. The deck and the hand: two-sided card quads, slots and the mode icon
+     mirroring `GLSlot`'s rotation (its `update` in the draw stays in the
+     twin), the deck's balls and pointer. M–L.
+  4. The legend's gradient, the rows' gradients. S.
+  5. The texts among the chunks: the attack name, the deck's and the
+     legend's lines, the attack texts (UI nodes or `Label3D` once the 3D
+     around each is nodes; then `Battle.tscn` under the rig). M.
+  6. The effects that are not particles: the spheres (`SphereMesh` and a
+     light), the image and slow systems (sprites; their coroutines stay),
+     the enemy colour. M.
+  7. Then the minimap's node (8.4), the closing of 4.4 (the flags, the
+     legacy drawing, `battle_effects` and `effect_waits`), step C (signals,
+     Tweens; decisions 3 and 6) and phase 5.
+
 ## 10. Phase 5: remove the emulation
 
 When no mode draws through `g` any more:
@@ -4047,6 +4353,18 @@ When no mode draws through `g` any more:
   `Main.is_legacy` answers only for names the code asks about: a run with a
   removed `--legacy=` name is a normal run and would "pass" a parity check it
   no longer makes. Keep the flag lists in ARCHITECTURE section 7 current.
+* **Drawing that never shows** (phase 4.4's pilot). The plan listed the
+  clock's "Fleeing" and time bar among a battle's parts: `Clock.draw` has no
+  caller (the Java neither). The spoils screen's dropped item needs drop
+  data no enemy has, and the party's red screen is a 2D image drawn under
+  the 3D projection behind the near plane. Check that a drawing can show
+  (a caller, the data, a probe line in some frame) before planning its node
+  or its case; dev state (the console's `drop`) can still cover a twin.
+* **Overlaps between shots** (phase 4.4's pilot). Which parts overlap is a
+  question about frames, not shots: the legend's icons slid out over the
+  spoils screen only in the frames after the console's `kill`, and no shot
+  showed it until a case shot those frames. Print the probe per frame and
+  look for coincidences over all frames.
 
 ## 13. Open decisions
 
@@ -4118,7 +4436,10 @@ When no mode draws through `g` any more:
    Inn's seven seconds after a rest stay legacy; the nodes mirror them.
    *Not needed for the mini-games (9.2):* the riddle's fade (.1 up and .12
    down per update, now in 32-bit steps as the Java's) stays legacy; the
-   nodes mirror it. A Tween for it is step C.
+   nodes mirror it. A Tween for it is step C. *Not needed for 4.4's pilot
+   (9.4):* the spoils screen's steps (a `Scheduler` tick every 700 ms), its
+   bars' counting (per update), the legend's slide (0.1 per update) and the
+   enemy's 200 ms hide stay legacy; the nodes mirror them.
 7. **Village top layer** (from the pilot, 6.7): *decided (phase 1
    rollout):* roofs and treetops are always drawn (6.1, the pilot's
    default). The legacy rule draws a piece only where a sprite overlaps it,
@@ -4132,7 +4453,7 @@ When no mode draws through `g` any more:
    (`BaselineLabel.oversampling` 0) change the look; the pilot kept the
    legacy look so that parity holds. Each is a theme or scene edit now.
    Open (the rollout kept the legacy look too, and so did phase 4.1, 4.2's
-   pilot, the menu, the stores and the mini-games).
+   pilot, the menu, the stores, the mini-games and 4.4's pilot).
 
 ## 14. Suggested order and size
 
@@ -4149,7 +4470,7 @@ Sizes are relative: S ≈ a focused session, XL ≈ many sessions.
 | 4.1 | World map + airship. *Done through step B (9.1): the scenes, the name plate, legacy vs. scene identical; closed (9.1).* | M | 1 (converter), 3 | — |
 | 4.2 | Title, game over, mini-games, stores, menu. *Done through step B (9.2: the pilot, the menu, the stores and the mini-games, one session each) and closed (9.2, "Closing phase 4.2").* | L | 3 | — |
 | 4.3 | Input, audio, saves, `Game` autoload. *Prepared (9.3).* | M | any time after 0; the autoload is best after 4.2 | 5; step C (the input wrapper) |
-| 4.4 | Battle, cards, effects. *Prepared (9.4); recommended next, starting with the battle's 2D top layer (9.4).* | XL | 2, 3 | 5; the minimap's node (8.4) |
+| 4.4 | Battle, cards, effects. *The pilot, the battle's 2D top layer, done through step B (9.4: the result and spoils screens, the level-up bars, an enemy's red flash, the legend's icons); the rollout, the battle's 3D, prepared (9.4).* | XL | 2, 3 | 5; the minimap's node (8.4) |
 | 5 | Remove the GL emulation; per-delta time | M | all of the above | — |
 
 After phase 2, P comes before phase 3 (2026-10-27): the particle
@@ -4207,6 +4528,21 @@ fixed or deleted at any time.
     `fadeparticlesystem` or builds a rain or sand system (checked in the
     phase 1 rollout).
   * `HelpPage`'s volume options never match (9.2).
+  * *Found in phase 4.4's pilot (as in the Java):* `Clock.draw` has no
+    caller, so a battle never shows "Fleeing" or its time bar (the clock's
+    time is not counted either: `timesUp` is always false). No enemy can drop
+    an item: `enemyBank.bank` has no `dropdata` line, so the spoils screen's
+    "You found …" is never shown, while `getSpoils` draws a `J.random()` for
+    every battle won (the "<enemy>drop" status is −1, not 0). The spoils
+    screen shows "Level up!" when the experience exactly fills the bar, but
+    `calcSpoils` levels up only when it exceeds what is left (`gottenExp <=
+    cnext`): the level up comes with the next battle. The party's red screen
+    of a critical hit (`Character3D.draw`: a 1024 × 768 image at (0, 0)) is
+    drawn under the 3D projection at z 0, behind the near plane, so it never
+    shows, and its `loadIdentity` puts the row's later characters at z 0 for
+    the 150 ms (by reading; no case has a critical hit on the party). In
+    TALKING mode `Battle.drawBattle` calls `setDialog` every frame (in a
+    labyrinth the minimap's and the mission's `pushState` once a frame).
   * *Found in phase 4.2's stores:* selling the last entry of a Weapon Store
     sell list that has more entries (Slot 1's fifth weapon) refills the
     list with the cursor kept, past its new end; `WeaponStore.updateCurrent`
