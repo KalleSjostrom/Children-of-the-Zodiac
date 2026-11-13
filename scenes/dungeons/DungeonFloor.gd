@@ -33,9 +33,19 @@ const WALL := 1
 const ROOF := 2
 const CARPET := 3
 const PILLAR := 4
-## The sky is drawn before the walls (sorting offset 0) and everything else
-## of the scene (DungeonScene.SORT_STEP and up).
+## The sky is drawn before the walls (sorting offsets from 0) and everything
+## else of the scene (DungeonScene.SORT_STEP and up).
 const SKY_SORTING_OFFSET := -1000.0
+## At run time the walls' surfaces are drawn as one instance each, this much
+## further on in the sorting than the surface before (show_walls_in_order):
+## their order is the surfaces' (the order the display list first used their
+## materials) in every frame. As surfaces of one instance they share its
+## depth, and Godot's transparent sort (unstable, its result depends on the
+## whole render list) ordered them anew with whatever else a frame drew:
+## where two of them overlap (a wall's edge on the floor, a corner) frames
+## changed by 1/255 with the battle's batches (plan 9.4, the rollout's
+## 1/255). Far below DungeonScene.SORT_STEP: nothing else comes between.
+const WALL_SORTING_STEP := 0.001
 
 ## The cells to build.
 @export var layout: DungeonLayout
@@ -56,6 +66,11 @@ var _uv := Vector2.ZERO
 var _slot := -1
 var _material: ShaderMaterial
 var _left := {}
+# show_walls_in_order: the instances drawing the walls' surfaces, and the
+# surfaces as build made them one by one (of the mesh _surfaces_of).
+var _walls_in_order: Array[MeshInstance3D] = []
+var _surface_meshes: Array[ArrayMesh] = []
+var _surfaces_of: ArrayMesh
 
 
 ## Builds (or rebuilds) the mesh for style and the GL state of the legacy
@@ -90,6 +105,9 @@ func build(style: DungeonStyle, gl := {}) -> Dictionary:
 		add_child(_sky_mesh, false, Node.INTERNAL_MODE_FRONT)
 	_mesh.mesh = null
 	_sky_mesh.mesh = null
+	_drop_walls_in_order()
+	_surface_meshes.clear()
+	_surfaces_of = null
 	_color = gl.get("color", Color(1, 1, 1, 1))
 	_normal = gl.get("normal", Vector3(0, 0, 1))
 	_uv = gl.get("uv", Vector2.ZERO)
@@ -114,7 +132,8 @@ func build(style: DungeonStyle, gl := {}) -> Dictionary:
 		base.depth_test = true
 		base.cull = 1
 	_passes(style, base)
-	_mesh.mesh = _commit(_groups, _order)
+	_mesh.mesh = _commit(_groups, _order, _surface_meshes)
+	_surfaces_of = _mesh.mesh
 	_sky_mesh.mesh = _commit(_sky_groups, _sky_order) if not _sky_order.is_empty() else null
 	_groups.clear()
 	_order.clear()
@@ -143,14 +162,56 @@ func walls_mesh() -> ArrayMesh:
 	return _mesh.mesh as ArrayMesh if _mesh != null else null
 
 
-## The instances that draw the walls' mesh and the sky's (a prototype look,
-## DungeonLook, swaps their meshes or hides the sky); null before build.
+## The instances that hold the walls' mesh and draw the sky's (a prototype
+## look, DungeonLook, swaps their meshes or materials or hides the sky before
+## show_walls_in_order); null before build.
 func walls_instance() -> MeshInstance3D:
 	return _mesh
 
 
 func sky_instance() -> MeshInstance3D:
 	return _sky_mesh
+
+
+## At run time (DungeonScene.show_floor, after a look's floor_built): draws
+## the walls' mesh (walls_instance's, as a look may have left it) as one
+## instance per surface, in the surfaces' order (WALL_SORTING_STEP apart),
+## and hides walls_instance, which keeps the whole mesh. Without a look the
+## surfaces are those build made one by one (the same vertices); a look's
+## own mesh has its surfaces copied.
+func show_walls_in_order() -> void:
+	_drop_walls_in_order()
+	if _mesh == null:
+		return
+	var mesh := _mesh.mesh as ArrayMesh
+	_mesh.visible = mesh == null
+	if mesh == null:
+		return
+	for s in mesh.get_surface_count():
+		var one: ArrayMesh
+		if mesh == _surfaces_of and s < _surface_meshes.size():
+			one = _surface_meshes[s]
+		else:
+			one = ArrayMesh.new()
+			one.add_surface_from_arrays(mesh.surface_get_primitive_type(s), mesh.surface_get_arrays(s))
+		one.surface_set_material(0, mesh.surface_get_material(s))
+		var mi := MeshInstance3D.new()
+		mi.name = "Walls%d" % s
+		mi.cast_shadow = _mesh.cast_shadow
+		mi.sorting_use_aabb_center = false
+		mi.sorting_offset = s * WALL_SORTING_STEP
+		mi.mesh = one
+		add_child(mi, false, Node.INTERNAL_MODE_BACK)
+		_walls_in_order.append(mi)
+
+
+func _drop_walls_in_order() -> void:
+	for mi in _walls_in_order:
+		remove_child(mi)
+		mi.free()
+	_walls_in_order.clear()
+	if _mesh != null:
+		_mesh.visible = true
 
 
 ## The materials of the mesh's surfaces, in order.
@@ -346,7 +407,9 @@ func _vertex(uv: Vector2, pos: Vector3) -> void:
 
 
 # One surface per material group, in order.
-static func _commit(groups: Dictionary, order: Array[ShaderMaterial]) -> ArrayMesh:
+## The mesh of groups in order, a surface per material; each surface also
+## goes into a mesh of its own appended to parts (show_walls_in_order).
+static func _commit(groups: Dictionary, order: Array[ShaderMaterial], parts: Array[ArrayMesh] = []) -> ArrayMesh:
 	var mesh := ArrayMesh.new()
 	for m in order:
 		var g: Array = groups[m]
@@ -363,4 +426,7 @@ static func _commit(groups: Dictionary, order: Array[ShaderMaterial]) -> ArrayMe
 			st.add_vertex(v[i])
 		st.set_material(m)
 		st.commit(mesh)
+		var one := ArrayMesh.new()
+		st.commit(one)
+		parts.append(one)
 	return mesh

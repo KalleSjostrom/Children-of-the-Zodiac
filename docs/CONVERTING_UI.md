@@ -113,7 +113,29 @@ takes the focus).
   The frame is then the same to the bit, but the 3D bridge's pool of
   instances no longer holds that drawing, and its instances render later
   batches (a battle's) 1/255 apart: compare the frames after the overlay too
-  (plan 8.3).
+  (plan 8.3). That was the floor's walls, reordered by Godot's sort: since
+  they are drawn in a fixed order (phase 4.4's rollout) the minimap's node
+  is identical on the battle cases.
+* A 3D part as a node of its own in its chunk (the battle's enemy, phase
+  4.4's rollout: `EnemyView`): the twin computes what the legacy vertices
+  would have been (`Graphics.eye_points`: the corners through the
+  modelview, eye space; `eye_normal`; the colour at the draw,
+  `getCurrentColor`; the texture coordinates of the legacy quads) and the
+  node draws them with the material of the render state there
+  (`Graphics.material_3d`), as GL_QUADS' triangles. Probe the part's batch
+  first: its chunk and index per frame, what merges into it (consecutive
+  triangles of one material are one batch; a slot ends the batch before it),
+  its render states (the alpha test the previous frame left is part of
+  them), and what the first frame's `initDraw` adds before it. Key
+  `show_node` by the legacy object's instance id: the node is kept from
+  frame to frame and freed in a frame it is not shown. A slot takes no pool
+  instance, so the batches after it move to other instances: compare the
+  frames of every case that draws the part, not only its own shots.
+  Since the floor's walls are drawn in a fixed order (ARCHITECTURE section
+  10, `WALL_SORTING_STEP`), that moves nothing on the screen: a difference
+  there is the node's. Before, it reordered the walls' tied surfaces (1/255
+  on their overlaps, plan 9.4).
+
 
 ## 3. The twin and the flag
 

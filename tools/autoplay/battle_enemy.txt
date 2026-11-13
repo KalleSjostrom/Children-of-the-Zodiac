@@ -1,0 +1,67 @@
+# Phase 4.4's rollout (the battle's 3D: the enemy): Berca's Ogre, Ogre
+# (--load="Slot 1" --start="Berca Desert--South-mark0" --start-node=20:3).
+# Steps until the battle (as dungeon_battle); god mode; the console heals the
+# enemies before each cast so that none dies. Earth 1 hits about 1 s after
+# the cast (seed 1): the enemy is hidden for 200 ms (TimeHideable) and shaken
+# (DESTROY_ENEMY_SHAKE: shakeoffx every 50 ms), shot every frame. Destroyer 3
+# hits and slices it (destroyEnemySlice: the two quads, the top one sliding
+# away at alpha life, for 1.5 s), shot every frame. Then TRIANGLE ends the
+# party's turns until an Ogre attacks: its attack frames, the attack name and
+# the party member its hit hides, shot every frame.
+wait 3000
+console god on
+mark
+tap UP
+wait 700
+tap DOWN
+wait 700
+loopuntil sub=battle 90000
+mark
+wait 100
+loopuntil battlemode=1 30000
+log turn1
+console heal 100000 enemies
+console cast Earth:1
+log cast_earth
+wait 950
+mark
+wait 16
+shot a_#
+loopuntil xxnever 1100
+mark
+wait 100
+loopuntil !battlemode=4 30000
+mark
+tap CROSS
+wait 600
+loopuntil !battlemode=5 15000
+mark
+wait 100
+loopuntil battlemode=1 40000
+log turn2
+console heal 100000 enemies
+console cast Destroyer:3
+log cast_destroyer
+wait 550
+mark
+wait 16
+shot b_#
+loopuntil xxnever 1700
+mark
+wait 100
+loopuntil !battlemode=4 30000
+mark
+tap CROSS
+wait 600
+loopuntil !battlemode=5 15000
+mark
+wait 100
+loopuntil battlemode=1 40000
+log turn3
+mark
+tap TRIANGLE 16
+wait 17
+shot c_#
+loopuntil xxnever 1600
+log end
+quit

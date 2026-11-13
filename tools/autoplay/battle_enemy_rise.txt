@@ -1,0 +1,24 @@
+# Phase 4.4's rollout (the battle's 3D: the enemy's rise): Menthu's Wrath of
+# Ophiuchus in a battle area of its own (--load="Start Menthu1"
+# --start=Menthuattack: SubViewport chunks). The opening of effects_enemy
+# (god mode; TRIANGLE ends each party turn with no card, CROSS pages the
+# boss's words) until his attack's frames lift him (menthuattack.enemy's
+# r=: risey, about 14.8 s in a seeded run), then a shot every frame for
+# 1.5 s with no input.
+wait 4000
+console god on
+shot e00_battle
+log battle
+mark
+tap TRIANGLE
+wait 150
+tap CROSS
+wait 150
+loopuntil xxnever 10500
+log rise
+mark
+wait 16
+shot r_#
+loopuntil xxnever 1500
+log end
+quit

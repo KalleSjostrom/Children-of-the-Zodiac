@@ -1,4 +1,4 @@
-# Handoff: state of the Godot port (2026-11-11, after steps 1–3, modernization phase 0, phases 1, 2, 3, 4.1 and 4.2 done and closed, the particles phases P and P2, the character sprite sheets, phase 4.4's pilot (the battle's 2D top layer))
+# Handoff: state of the Godot port (2026-11-11, after steps 1–3, modernization phase 0, phases 1, 2, 3, 4.1 and 4.2 done and closed, the particles phases P and P2, the character sprite sheets, phase 4.4's pilot (the battle's 2D top layer) and its rollout's first part (the battle's enemy))
 
 Conventions: legacy (ported) code follows `docs/PORTING.md`; new code
 (scenes, resources, tools, bridge) follows `docs/ARCHITECTURE.md`. The
@@ -534,6 +534,40 @@ section 14, "The riddles"; the procedure in `docs/CONVERTING_UI.md` section
 - Prepared (plan 9.3, 9.4): phases 4.3 and 4.4; recommended next: 4.4's
   pilot, the battle's 2D top layer (`docs/phase4_4_prompt.md`).
 
+**Modernization phase 4.4's rollout, part 1 (the battle's 3D: the enemy):
+step B done** (2026-11-13; plan 9.4, "Results of the rollout, part 1";
+conventions in `docs/ARCHITECTURE.md` section 15, "The battle's 3D";
+`docs/phase4_4_rollout_prompt.md`):
+- The enemy's frame and slice draw through `EnemyView`
+  (`scenes/battle/EnemyView.tscn`, a MeshInstance3D: the legacy quads in eye
+  space with GLBackend's material of the render state there) in the 3D
+  chunk and batch slot of its batch (`Graphics.show_node`); twins
+  `BattleEnemy._show_frame`, `_show_slice`; bridge members
+  `Graphics.material_3d`, `eye_points`, `eye_normal`. Flag
+  `--legacy=battle_enemy`. The rest of the battle's 3D is legacy.
+- The floor's walls are drawn in a fixed order (`DungeonFloor.show_walls_in_order`:
+  an instance per surface, `WALL_SORTING_STEP` apart, called by
+  `DungeonScene.show_floor` after a prototype look's `floor_built`): as one
+  instance their surfaces tied in Godot's transparent sort and a battle's
+  instances reordered them (1/255 where two overlap; plan 8.3's 1/255 too).
+  New goldens for it: 1,686 of 8,918 shots differ from the old ones, on
+  floors only (1/255; 4 shots of Temple of Aegis 27–29/255).
+- Coverage: three new cases (`battle_enemy`, `battle_panels`,
+  `battle_enemy_rise`; 661 shots: the enemy's hide, shake and slice frame by
+  frame, an Ogre's attack frames, the slots' flip, haste and slow bars,
+  boosts, the shuffle, Menthu's rise); 435 cases, 8,918 shots.
+- Parity (tolerance 0; golden `e2gold`, node `e2node`): identical on every
+  case (logs and error lines too); the flag, all four phase 4.4 flags and
+  `battle_effects` with them identical to the golden; no legacy quad while
+  the enemy draws with the flag off; `--minimap-node` identical on the
+  battle cases now.
+- Frame rate (normal runs): unchanged (60 capped; uncapped within the
+  spread, plan 9.4).
+- Afterwards `e2node` (435 cases, 8,918 shots) is the set to keep in
+  `tools/parity/out`.
+- Prepared (plan 9.4, "Prepared after part 1"): part 2, the info panels;
+  the next prompt is `docs/phase4_4_rollout2_prompt.md`.
+
 **Modernization phase 4.4's pilot (the battle's 2D top layer): step B done**
 (2026-11-11; plan 9.4, "Results of the pilot"; conventions in
 `docs/ARCHITECTURE.md` section 15; `docs/phase4_4_prompt.md`):
@@ -645,8 +679,9 @@ decision 5 decided in plan section 13):
 
 0. **Modernization:** phases 1 to 4.1 are closed (2026-11-06), phase 4.2
    too (2026-11-07); phase 4.4's pilot, the battle's 2D top layer, is done
-   (2026-11-11). Next (plan 9.4, "Prepared after the pilot"): the rollout,
-   the battle's 3D (`docs/phase4_4_rollout_prompt.md`); phase 4.3 (input,
+   (2026-11-11), and the rollout's first part, the enemy (2026-11-13).
+   Next (plan 9.4, "Prepared after part 1"): part 2, the info panels
+   (`docs/phase4_4_rollout2_prompt.md`); phase 4.3 (input,
    audio, saves, the `Game` autoload; plan 9.3) can come at any time and
    first if step C of the converted modes comes first. The minimap stays
    the 3D bridge's until the battles leave the bridge (plan 8.4). Record
@@ -749,7 +784,14 @@ decision 5 decided in plan section 13):
   copied), then the copy's own `tools/parity/parity.sh`; move its sets into
   `out/`. Not in the session scratchpad (`%TEMP%`): Windows' temp cleanup
   deletes the copies' old files when the disk is full (2026-11-07: a
-  recording failed half-way); `tar` keeps the old times too.
+  recording failed half-way); `tar` keeps the old times too. Run the copy's
+  own `tools/check.sh` (0 failed) before recording or probing from it: a
+  probe copy whose patch broke a script made four headless runs allocate
+  until Windows ran out of memory (two hard lock-ups, 2026-11-11/12). Beside
+  multi-job runs keep `tools/parity/watchdog.ps1 <stop file>` running
+  (powershell; it kills a Godot run from a copy under `out/_*` over 3 GB,
+  or the largest below 1 GB free, and logs to `out/watchdog.log`; create
+  the stop file to end it).
 - The game's code never quits: Java's `System.exit` checks are `assert`s
   (the editor's debugger stops there; a console run prints a SCRIPT ERROR
   and goes on), and `GameCore.exitGame()` is only the player's Escape.

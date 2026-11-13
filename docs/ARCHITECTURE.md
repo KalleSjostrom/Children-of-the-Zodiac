@@ -320,7 +320,8 @@ of section 12, `Graphics.modelview_2d`, `screen_points`, `begin_capture_3d`,
 `CesadurRiddleText.place` and `Letter.place`: section 14; phase 4.4's pilot's
 `Graphics.show_fade_colour_white`, `place_value_with_shadow`, `ResultScreenBase.show_background`,
 `shadow_lines`, `value_lines`, `LevelUpBar.place` and the screens', the legend's and the
-enemy's twins: section 15. Closing phase 4.2 removed the
+enemy's twins: section 15; its rollout's `Graphics.material_3d`, `eye_points`, `eye_normal`
+and `BattleEnemy._show_frame`, `_show_slice`: section 15. Closing phase 4.2 removed the
 wrappers that only chose between a legacy drawing and its twin, `AbstractPage.draw_list`,
 `StatusPage.draw_top`, `AbstractStore.draw_dim`, `RiddleGame.draw_dim`, `DeckPage`'s
 `_draw_deck` and `_draw_bar`: their call sites call the twin, plan 9.2); refactors of a
@@ -349,9 +350,9 @@ Game options go after `--` on the command line (see the header of
 | `--fixed-step` | The game advances exactly 1000/60 ms per frame, whatever the real frame time. |
 | `--seed=<n>` | Deterministic run (implies `--fixed-step`): every random generator (`J`, every `JRandom`, Godot's global one) is seeded from `n`; `J.currentTimeMillis()`, `Scheduler` and `GameAction` read a game clock advanced by the elapsed game time instead of the wall clock; saves are read from the shipped files and written to `user://saves_deterministic/` (emptied at start), never to the player's `user://saves/`; the slot lists date a slot saved in the run by the game clock from 1 Jan 2000, 00:00 (`SaveSlots.note_saved`; a file's time is wall-clock time, phase 4.2); no game pad is read (`GameCore.init2`: an idle pad releases AutoPlay's buttons every 40 ms). Two runs of an AutoPlay script then produce the same frames. |
 | `--uncapped` | No 60 FPS cap and no vsync. With `--seed` the result is the same, only faster. |
-| `--legacy=<a,b,…>` | Keep the legacy path of the listed subsystems (`Main.is_legacy`). `all` keeps every one. The flags of closed phases are gone with their legacy paths: phase 1's `villages` and `village_top_layer` (2026-11-03), phase 2's `dungeons` and `dungeon_drawing`, the particles phases' `particles` and `dungeon_particles`, phase 3's `dialog`, `fades`, `emotions`, `mission`, `pause`, `story_images`, `story_texts` and `tutorials`, phase 4.1's `world_map` and `airship` (2026-11-06), phase 4.2's `title`, `game_over`, `menu_list`, `menu_frame`, `menu_text`, `status`, `deck`, `automap`, `dim`, `bless` and `riddle` (2026-11-07; plan 6.9, 7.9, 8.4, 9.1, 9.2): a removed name is ignored (`Main.is_legacy` only answers for the names the code still asks about). Left, the battle effects (section 11): `battle_effects`: the card and enemy effects run the legacy simulation and draw its quads; `effect_waits` (dev): the GPU effects' legacy systems keep their whole pool, so the legacy particle counts decide when a battle goes on, as before (for parity runs with `--hide-particles`). Phase 4.4's pilot, the battle's 2D top layer (section 15): `battle_screens` (the result and spoils screens: the dim, the background, the lines, the played cards, the level-up bars), `battle_flash` (an enemy's red flash), `battle_legend` (the legend's button icons); with all three the top layer is drawn exactly as before. |
+| `--legacy=<a,b,…>` | Keep the legacy path of the listed subsystems (`Main.is_legacy`). `all` keeps every one. The flags of closed phases are gone with their legacy paths: phase 1's `villages` and `village_top_layer` (2026-11-03), phase 2's `dungeons` and `dungeon_drawing`, the particles phases' `particles` and `dungeon_particles`, phase 3's `dialog`, `fades`, `emotions`, `mission`, `pause`, `story_images`, `story_texts` and `tutorials`, phase 4.1's `world_map` and `airship` (2026-11-06), phase 4.2's `title`, `game_over`, `menu_list`, `menu_frame`, `menu_text`, `status`, `deck`, `automap`, `dim`, `bless` and `riddle` (2026-11-07; plan 6.9, 7.9, 8.4, 9.1, 9.2): a removed name is ignored (`Main.is_legacy` only answers for the names the code still asks about). Left, the battle effects (section 11): `battle_effects`: the card and enemy effects run the legacy simulation and draw its quads; `effect_waits` (dev): the GPU effects' legacy systems keep their whole pool, so the legacy particle counts decide when a battle goes on, as before (for parity runs with `--hide-particles`). Phase 4.4's pilot, the battle's 2D top layer (section 15): `battle_screens` (the result and spoils screens: the dim, the background, the lines, the played cards, the level-up bars), `battle_flash` (an enemy's red flash), `battle_legend` (the legend's button icons); with all three the top layer is drawn exactly as before. Its rollout, the battle's 3D (section 15): `battle_enemy` (the enemy's frame and slice: its legacy quads instead of the `EnemyView` node). |
 | `--hide-particles` | Dev only: the particles draw nothing (`Main.hide_particles`; they still run): the village and cutscene systems, the dungeon weather and save points, the card and enemy effects drawn as particles (not the sphere, image, slow and enemy-colour systems), with the GL state their drawing leaves; for parity runs that compare everything else. |
-| `--minimap-node` | Dev only: the labyrinth's minimap is drawn by `MinimapPart` nodes (`MapRenderer.show_map`) instead of the 3D bridge's batches; the floor's frames are the same to the bit, a battle's frames after them differ by 1/255 (plan 8.3), so it is not the default. |
+| `--minimap-node` | Dev only: the labyrinth's minimap is drawn by `MinimapPart` nodes (`MapRenderer.show_map`) instead of the 3D bridge's batches; the floor's frames are the same to the bit; a battle's frames after them differed by 1/255 (plan 8.3) until the floor's walls were drawn in a fixed order (phase 4.4's rollout, section 10: identical on the 34 battle cases since). Not the default yet (plan 8.4). |
 | Console `padlost [on\|off]`, `emotion <who> <emotion\|off> [shake]` | Dev only (debug console, `scenes/debug/GameCommands.gd`; AutoPlay `console`): `padlost` makes `InputManagers.connectionLost` report a lost game pad (`lost_simulated`) until the overlay's menu is answered, for the "game pad lost" overlay without a pad (seeded runs read none); `emotion` sets a bubble on a party member or villager of the current village (`Sprite.setEmotion`, which only cutscenes call), for the emotions in a village frame. Parity cases `pad_lost`, `emotions_village`. |
 | Console `give <item\|equipment\|card> <name> [number]` | Dev only (phase 4.2's menu): gives the party a key item (`PartyItems.addItem`, any name) or a piece of equipment of `equipment.bank` (`Load.addEquipment`, as a chest gives one, number times); `_` stands for a space. The shipped saves have too few for the menu's lists that scroll in their bounding box (Key Items, the equip page's lists) and their "(n)" numbers. Parity cases `menu_key_items`, `menu_equip_list`. Phase 4.2's stores: `card <card>[:<level>][:all]` adds that card to the party deck number times (the names of `cast`), for a merge page with more kinds than two lines show (`store_card_merge`). |
 | Console `gold [amount]` | Dev only (phase 4.2's stores): shows or sets the party's gold, for the cards and equipment the party cannot afford (grey in the card store, "You can't afford that!"). Parity cases `store_weapon_buy`, `store_card_buy`. |
@@ -809,7 +810,7 @@ inherits `scenes/dungeons/DungeonScene.tscn` (root script
 
 | Node | Content |
 |---|---|
-| `Layout` | `DungeonFloor` (`@tool`): builds the walls, floors and roofs from its `DungeonLayout` and the style's textures with SurfaceTool, in the editor and at run time; one instance, one surface per material in the legacy display list's order; on a floor with a sky also `Sky` (top level, in the camera's space: renderSky's gradient, drawn first) |
+| `Layout` | `DungeonFloor` (`@tool`): builds the walls, floors and roofs from its `DungeonLayout` and the style's textures with SurfaceTool, in the editor and at run time; one mesh, one surface per material in the legacy display list's order, drawn at run time as one instance per surface in that order (`show_walls_in_order`, `WALL_SORTING_STEP` apart; `walls_instance` holds the whole mesh); on a floor with a sky also `Sky` (top level, in the camera's space: renderSky's gradient, drawn first) |
 | `Environment` | `WorldEnvironment`: the clear colour background, linear tonemapping, as GLBackend's chunks; no Godot fog or light (the dungeon shader does them) |
 | `Objects` | the `inv` lines in file order, one `DungeonObject` scene per line (`scenes/dungeon_objects/Dungeon<Kind>.tscn`): the order the legacy loader created them in (door indices, links, Database reads) |
 | `Weather` | `DungeonWeather`: the rain or snow (two `WeatherParticles3D` passes on the GPU path) |
@@ -917,14 +918,23 @@ plan 7.8):
   (the legacy batches, the objects' quads, the weather) need a camera at
   the origin to be drawn as they are. A camera moving by the inverse view
   would round both differently. Step C turns this around.
-* The walls are one instance with the display list's surfaces (one instance
-  per surface drew some pixels differently: the order Godot's unstable sort
-  gives equal-depth surfaces then changes). That order still decides where
-  two of them blend: before the rollout's fix of the look (below) the walls
-  of the floors with a translucent sky were drawn at alpha 0.8 and the sky
-  quad without depth test was one of them, and the two paths differed by up
-  to 111/255 there (plan 7.8). The sky is now an instance of its own, drawn
-  first, and the walls are opaque.
+* The walls are one mesh with the display list's surfaces, one per
+  material in the order the display list first used it. The shader writes
+  `ALPHA`, so Godot draws them in its transparent pass, sorted per instance
+  (depth minus `sorting_offset`) with an unstable sort whose result depends
+  on the whole render list. As one instance the surfaces shared its depth,
+  and their order changed with whatever else a frame drew: where two of
+  them overlap (a wall's edge on the floor, a corner) frames differed by
+  1/255 when a battle's batches changed (plan 9.4, the rollout's 1/255;
+  8.3's too: the minimap's node is identical since; likely 7.7's). Since phase 4.4's rollout
+  `DungeonScene.show_floor` draws each surface as an instance of its own,
+  `DungeonFloor.WALL_SORTING_STEP` (0.001) further on than the one before
+  (`show_walls_in_order`, after a prototype look changed the mesh): the
+  order is fixed in every frame. Before the phase 2 rollout's fix of the
+  look (below) the walls of the floors with a translucent sky were drawn at
+  alpha 0.8 and the sky quad without depth test was one of them, and the
+  two paths differed by up to 111/255 there (plan 7.8). The sky is now an
+  instance of its own, drawn first, and the walls are drawn at alpha 1.
 * Objects draw the legacy quads: `DungeonQuads` stands in for Graphics in
   the legacy geometry code (`Inventory._drawQuad`, `LabyrinthNode.drawOneWall`
   and `drawOneFloor`), records the vertices and passes the state on; their
@@ -2053,9 +2063,9 @@ A battle is drawn inside another mode's frame: in a labyrinth it is the
 `labDrawable` (`Labyrinth.enterBattle`), in a boss battle area of its own
 (Serphia, Menthu, Memory Salmonman) `BossBattleArea.bm`. Its 3D part
 (`BattleManager.draw`: the enemy, the info panels, the deck and hand, the
-legend's gradient and lines, the card effects, the attack texts) is still
-legacy, drawn through the 3D bridge (section 10; plan 9.4 prepares its
-rollout). Its 2D top layer
+legend's gradient and lines, the card effects, the attack texts) is drawn
+through the 3D bridge (section 10) and converted part by part (phase 4.4's
+rollout, below: the enemy so far). Its 2D top layer
 (`BattleManager.drawTopLayer`) is converted through step B: an enemy's red
 flash, the result screen, the spoils screen with its level-up bars and the
 legend's button icons. The legacy objects keep the state, the input and the
@@ -2114,7 +2124,7 @@ screens), `battle_flash`, `battle_legend`; with all three the top layer is
 drawn exactly as before. They go when phase 4.4 closes.
 
 **Still legacy** in a battle: the state, the input and the timing (step C);
-the 3D part (`BattleManager.draw`, `Battle.drawBattle`) with the 2D text
+the 3D part but the enemy (`BattleManager.draw`, `Battle.drawBattle`; below) with the 2D text
 drawn among its chunks (the attack name: `Attack.draw`'s `drawWithShadow`;
 the deck's and the legend's lines; the attack texts) and the effects that
 are not particles (section 11); `Clock.draw` has no caller (nor in the Java:
@@ -2129,3 +2139,68 @@ level of a class: "Max level" on the next spoils screen), and `drop <item>`
 makes the enemies of the battle going on drop an item (no enemy's data has a
 drop: "You found …" is shown no other way). Parity cases `battle_result`,
 `battle_spoils`, `battle_spoils_skip`, `battle_flash`.
+
+### The battle's 3D (phase 4.4's rollout)
+
+`BattleManager.draw` draws the battle's 3D through the 3D bridge (section
+10): in a labyrinth its batches up to the frame's first 2D (the attack name
+while it shows, else the deck's text) are in the floor scene's chunk
+(`GLBackend.scene_3d`: MeshInstance3D children of the scene's Legacy node,
+in the floor's World3D, sorting offsets from 1e6), the rest in SubViewport
+chunks; in a boss area (Serphia, Menthu, Memory Salmonman: no
+`use_scene_3d`) all of it is SubViewport chunks. Plan 9.4 has the parts, the
+chunks and the batches. The rollout converts the 3D part by part through
+step B, each part a node of `scenes/battle/` shown in the chunk and the batch
+slot its batches had (`Graphics.show_node`, as the effects' GPU particles of
+section 11 and the minimap's `MinimapPart`); the texts among the chunks stay
+GLBackend's 2D until the 3D around them is nodes, and `Battle.tscn` under the
+camera rig comes with step C (plan 9.4).
+
+| Part | Node | Twin | Flag |
+|---|---|---|---|
+| The enemy's frame (`BattleEnemy.draw`'s `drawTex`) and slice (`drawSlice`: two quads) | `EnemyView` (`scenes/battle/EnemyView.tscn`, a MeshInstance3D): the quad, or the slice's two, in eye space, in GLBackend's material of the render state where they were drawn | `BattleEnemy._show_frame`, `_show_slice`, `_show_view` | `battle_enemy` |
+
+**The enemy.** One `BattleEnemy` per battle draws the image (the other
+enemies of a group are logic only). Its batch is the first of its chunk in
+every frame but a battle's first (`initDraw`'s stray quads come first):
+`S:0` on a floor, the first batch of the first SubViewport in a boss area;
+nothing merges into it, the slice's second quad merges into its first. Its
+render state is never additive or opaque, with the depth test and write on,
+back faces culled, unlit, the floor's fog (on the floors with fog), and the
+alpha test the previous frame left (`GREATER 0`, `GREATER .1` or
+`GEQUAL .01`): the node takes the material `Graphics.material_3d` gives where
+the quads were (`GLBackend.material_3d` of `render_state_3d`), so it follows
+any of them. The twins make the drawing's state changes in the same order:
+`drawTex`'s bind and last texture coordinate (`Utils3D.draw3D`); the slice's
+`xsSpeed`, `xs`, `test1`, `test2` (per draw), `setColor4(usedColor, life)`,
+the matrix push and pop, both binds and the last texture coordinate; `life
+-= sliceFade` stays in `draw`. The node gets the corners as the vertices
+would have been emitted (`Graphics.eye_points`: through the modelview, so
+the shake, the rise and the enemy's depth are in them), the current colour
+and the normal in eye space (`eye_normal`) and the texture coordinates of the
+legacy quads; GL_QUADS' triangles (0, 1, 2, 0, 2, 3). The node is kept from
+frame to frame (`show_node`, keyed by the enemy's instance id) and freed in a
+frame the enemy is not drawn (killed or hidden by a hit). Its particle
+systems, the attack name, `AttackBackground` and `EnemyCard` stay legacy
+(the next parts).
+
+**The 1/255 and the walls.** A node in a slot takes no instance of the
+bridge's pool, so the batches after it move to other pool instances and the
+floor's transparent render list holds other instances in another order.
+With the walls as one instance (section 10) that reordered their tied
+surfaces: 26 of the battle cases' 1,992 shots differed from the golden by
+1/255, all on walls where two surfaces overlap, never on the enemy. Keeping
+the pool's mapping (the slot taking its instance, hidden) left 3; with the
+walls' surfaces as instances in a fixed order (`DungeonFloor.show_walls_in_order`)
+the node and the legacy quads are identical in every shot. That change is
+its own (new goldens: plan 9.4); every later part in the floor's chunk can
+rely on it.
+
+**Coverage** (the rollout's probe and three cases recorded on the
+unconverted code; plan 9.4, "Results of the rollout, part 1"):
+`battle_enemy` (the enemy hidden and shaken by Earth's hit and sliced by
+Destroyer, frame by frame; an Ogre's attack frames), `battle_panels` (the
+weapon's slots flipped and back frame by frame, the panels' haste and slow
+bars and boosts' cards, the deck discarded until its owner shuffles),
+`battle_enemy_rise` (Menthu's rise frame by frame, in his battle area). No
+new console command.

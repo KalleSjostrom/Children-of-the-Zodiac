@@ -1515,6 +1515,32 @@ func current_tex_coord() -> Vector2:
 	return _cur_uv
 
 
+## Bridge (phase 4.4's rollout, step B, docs/ARCHITECTURE.md section 15): the
+## material the next 3D primitive would be drawn with (GLBackend.material_3d
+## of render_state_3d: its batch's material), for a node that draws it in its
+## place (EnemyView); null without a backend.
+func material_3d() -> Material:
+	if backend == null:
+		return null
+	return _material3D()
+
+
+## Bridge (phase 4.4's rollout): points in eye space as the next 3D
+## primitive's vertices are put there (_emitTriangles: through the modelview).
+func eye_points(points: PackedVector3Array) -> PackedVector3Array:
+	var ev := PackedVector3Array()
+	ev.resize(points.size())
+	for i in points.size():
+		ev[i] = _mv * points[i]
+	return ev
+
+
+## Bridge (phase 4.4's rollout): the current normal in eye space, as the next
+## vertex takes it (_emitTriangles).
+func eye_normal() -> Vector3:
+	return _mv.basis * _cur_normal
+
+
 ## Bridge (phase 2 step B): this frame's legacy 3D drawing goes into node, a
 ## node of the current mode's 3D scene, until the first 2D drawing
 ## (GLBackend.scene_3d).

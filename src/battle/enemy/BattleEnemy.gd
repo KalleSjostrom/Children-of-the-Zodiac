@@ -41,6 +41,8 @@ var enemy = null
 var slice_: bool = false
 var useCritImage: bool = false
 const XS_ACC = 0.00003
+## Bridge (phase 4.4's rollout): the enemy's node (_show_view).
+const ENEMY_VIEW := preload("res://scenes/battle/EnemyView.tscn")
 var xsSpeed: float = 0.0
 var life: float = 0.0
 var sliceFade: float = 0.0
@@ -130,17 +132,27 @@ func drawTopLayer(g: Graphics):
 
 
 ## Draws the enemy, its particle systems, the attack name and the card.
+## Bridge (phase 4.4's rollout, step B, docs/ARCHITECTURE.md section 15): the
+## enemy's frame or slice is an EnemyView node in the 3D chunk and batch slot
+## of its batch (_show_frame, _show_slice: the same state changes);
+## --legacy=battle_enemy keeps the legacy quads.
 func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 	if not killed:
 		g.loadIdentity()
 		g.translate(shakeoffx, shakeoffy + risey, info.get_(EnemyInfo.DEPTH))
 		g.setColor3(usedColor)
 		if isVisible():
+			var legacy: bool = Main.is_legacy("battle_enemy")
 			if slice_:
 				life -= sliceFade
-				drawSlice(g, currentList, 0)
-			else:
+				if legacy:
+					drawSlice(g, currentList, 0)
+				else:
+					_show_slice(g, currentList, 0)
+			elif legacy:
 				drawTex(g, currentList, 0)
+			else:
+				_show_frame(g, currentList, 0)
 
 		g.loadIdentity()
 		for psp in particleSystem.duplicate():
@@ -200,6 +212,82 @@ func drawSlice(g, texture, x, y = null, z = null):
 	gl.glTexCoord2f(1, test2); gl.glVertex3f(x[1], testy2, z[1])
 	gl.glTexCoord2f(0, test1); gl.glVertex3f(x[0], testy1, z[1])
 	g.end()
+
+
+
+## Bridge (phase 4.4's rollout, step B): drawTex(g, texIndex, coordIndex)
+## without the drawing (Utils3D.draw3D's quad): the texture's bind and the
+## last texture coordinate; the quad, in eye space, to the EnemyView in the
+## enemy's slot.
+func _show_frame(g, texIndex: int, coordIndex: int) -> void:
+	if texture[texIndex] == null:
+		return
+	var tex: GameTexture = texture[texIndex].getTexture()
+	var tc = tex.getImageTexCoords()
+	var cl: Array = coordList[coordIndex]
+	var x: Array = cl[0]
+	var y: Array = cl[1]
+	var z: Array = cl[2]
+	tex.bind(g)
+	var corners := PackedVector3Array([Vector3(x[0], y[0], z[0]), Vector3(x[1], y[0], z[0]),
+		Vector3(x[1], y[1], z[1]), Vector3(x[0], y[1], z[1])])
+	var uvs := PackedVector2Array([Vector2(tc.left(), tc.bottom()), Vector2(tc.right(), tc.bottom()),
+		Vector2(tc.right(), tc.top()), Vector2(tc.left(), tc.top())])
+	g.glTexCoord2f(tc.left(), tc.top())
+	_show_view(g, g.eye_points(corners), uvs)
+
+
+## Bridge (phase 4.4's rollout, step B): drawSlice without the drawing: the
+## same per-draw steps (xsSpeed, xs, test1, test2), the colour at alpha life,
+## the binds, the matrix push and pop and the last texture coordinate; the two
+## quads, in eye space, to the EnemyView in the enemy's slot.
+func _show_slice(g, texIndex: int, coordIndex: int) -> void:
+	if self.texture[texIndex] == null:
+		return
+	var tex: GameTexture = self.texture[texIndex].getTexture()
+	var cl: Array = coordList[coordIndex]
+	var x: Array = cl[0]
+	var y: Array = cl[1]
+	var z: Array = cl[2]
+	xsSpeed += XS_ACC * Values.INTERVAL
+	xs -= xsSpeed
+	var ys: float = xs * 0.3
+
+	var y1: float = info.get_(EnemyInfo.HEIGHT)
+	var y0: float = y1 + height
+	var ym: float = info.get_(EnemyInfo.MIDDLE_POINT)
+	var p: float = (y0 - ym) / (y0 - y1)
+
+	test1 = p + 0.1
+	test2 = p - 0.1
+	var test1c: float = 1 - test1
+	var test2c: float = 1 - test2
+
+	var testy1: float = y[0] + (y[1] - y[0]) * test1c
+	var testy2: float = y[0] + (y[1] - y[0]) * test2c
+	g.setColor4(usedColor, life)
+	g.push()
+	tex.bind(g)
+	var corners: PackedVector3Array = g.eye_points(PackedVector3Array([
+		Vector3(x[0] + xs, testy1 + ys, z[0]), Vector3(x[1] + xs, testy2 + ys, z[0]),
+		Vector3(x[1] + xs, y[1] + ys, z[1]), Vector3(x[0] + xs, y[1] + ys, z[1])]))
+	g.pop()
+	tex.bind(g)
+	corners.append_array(g.eye_points(PackedVector3Array([
+		Vector3(x[0], y[0], z[0]), Vector3(x[1], y[0], z[0]),
+		Vector3(x[1], testy2, z[1]), Vector3(x[0], testy1, z[1])])))
+	var uvs := PackedVector2Array([Vector2(0, test1), Vector2(1, test2), Vector2(1, 0), Vector2(0, 0),
+		Vector2(0, 1), Vector2(1, 1), Vector2(1, test2), Vector2(0, test1)])
+	g.glTexCoord2f(0, test1)
+	_show_view(g, corners, uvs)
+
+
+## The EnemyView in this frame's 3D chunk, in the slot of the enemy's batch,
+## with the quads (eye space) in the current colour, normal and render state.
+func _show_view(g, corners: PackedVector3Array, uvs: PackedVector2Array) -> void:
+	var view: EnemyView = g.show_node(get_instance_id(), func() -> GeometryInstance3D: return ENEMY_VIEW.instantiate()) as EnemyView
+	if view != null:
+		view.show_quads(g.material_3d(), corners, uvs, g.getCurrentColor(), g.eye_normal())
 
 
 func setScale():

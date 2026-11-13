@@ -1,0 +1,103 @@
+# Phase 4.4's rollout (the battle's 3D: the info panels and the deck):
+# Berca's Ogre, Ogre (--load="Slot 1" --start="Berca Desert--South-mark0"
+# --start-node=20:3). Steps until the battle (as dungeon_battle); god mode;
+# the console heals the enemies before each cast. R2 flips the weapon's slots
+# and back (GLSlot's rotation, the support target), shot every frame; the
+# console casts Haste 3 on the party (the panels' haste bars), Slow 3 on the
+# enemies (their slow bars), Focus 3 and Shield 3 on the party (the boosts'
+# cards on the panels). CIRCLE discards cards until the deck runs out;
+# TRIANGLE ends the party's turns until the deck's owner starts a round with
+# an empty deck: the shuffle (animate.init("Shuffle"), ANIMATE), shot every
+# 66 ms.
+wait 3000
+console god on
+mark
+tap UP
+wait 700
+tap DOWN
+wait 700
+loopuntil sub=battle 90000
+mark
+wait 100
+loopuntil battlemode=1 30000
+log turn1
+tap R2
+mark
+wait 16
+shot f_#
+loopuntil xxnever 1000
+tap R2
+mark
+wait 16
+shot g_#
+loopuntil xxnever 600
+wait 400
+console heal 100000 enemies
+console cast Haste:3:all
+log cast_haste
+mark
+wait 100
+loopuntil !battlemode=4 30000
+shot h_result
+mark
+tap CROSS
+wait 600
+loopuntil !battlemode=5 15000
+mark
+wait 100
+shot h_#
+loopuntil battlemode=1 40000
+log turn2
+console heal 100000 enemies
+console cast Slow:3:all
+log cast_slow
+mark
+wait 100
+loopuntil !battlemode=4 30000
+mark
+tap CROSS
+wait 600
+loopuntil !battlemode=5 15000
+mark
+wait 100
+shot i_#
+loopuntil battlemode=1 40000
+log turn3
+console heal 100000 enemies
+console cast Focus:3:all Shield:3:all
+log cast_boosts
+mark
+wait 100
+loopuntil !battlemode=4 30000
+mark
+tap CROSS
+wait 600
+loopuntil !battlemode=5 15000
+mark
+wait 100
+shot j_#
+loopuntil battlemode=1 40000
+log turn4
+mark
+tap CIRCLE 16
+wait 50
+shot k_#
+loopuntil xxnever 2500
+tap TRIANGLE
+log end_turn4
+mark
+wait 500
+shot l_#
+loopuntil xxnever 20000
+mark
+tap TRIANGLE 16
+wait 50
+loopuntil xxnever 3400
+log shuffle
+mark
+tap TRIANGLE 16
+wait 50
+shot m_#
+loopuntil xxnever 2400
+log end
+quit

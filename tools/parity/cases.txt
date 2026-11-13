@@ -692,3 +692,13 @@ battle_spoils_skip       battle_spoils_skip       --load="Slot 1" --start="Berca
 # Berca's Ogres; seed 1 lands a critical hit on the first and the second
 # cast), frame by frame.
 battle_flash             battle_flash             --load="Slot 1" --start="Berca Desert--South-mark0" --start-node=20:3
+# Phase 4.4's rollout (the battle's 3D, recorded on the unconverted code):
+# the enemy shaken and hidden by a hit and sliced by Destroyer, frame by
+# frame, an Ogre's attack frames (Berca's Ogres; god mode, the console's heal
+# and cast); the panels' haste and slow bars and boosts' cards, the weapon's
+# slots flipped and back frame by frame, the deck discarded until its owner
+# shuffles (Berca); Menthu's rise (his attack's frames) frame by frame in a
+# battle area of its own.
+battle_enemy             battle_enemy             --load="Slot 1" --start="Berca Desert--South-mark0" --start-node=20:3
+battle_panels            battle_panels            --load="Slot 1" --start="Berca Desert--South-mark0" --start-node=20:3
+battle_enemy_rise        battle_enemy_rise        --load="Start Menthu1" --start=Menthuattack

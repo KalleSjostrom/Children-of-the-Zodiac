@@ -126,12 +126,15 @@ func legacy_root() -> Node3D:
 
 ## Step B, at the floor's first frame: builds the walls in the GL state the
 ## legacy display list would be compiled in (DungeonFloor.build); returns the
-## state the compile leaves.
+## state the compile leaves. The walls' surfaces are drawn in their order
+## (DungeonFloor.show_walls_in_order, after a look changed them).
 func show_floor(gl: Dictionary) -> Dictionary:
 	_set_up()
-	var left := ($Layout as DungeonFloor).build(style, gl)
+	var floor_node := $Layout as DungeonFloor
+	var left := floor_node.build(style, gl)
 	if _look != null:
 		_look.floor_built(self)
+	floor_node.show_walls_in_order()
 	return left
 
 

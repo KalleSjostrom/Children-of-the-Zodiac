@@ -2189,7 +2189,11 @@ section 12; the procedure: docs/CONVERTING_UI.md.
   there) the 1/255 shots are 112 with the bridge's minimap, and the node adds
   `dungeon_tunnel_battle`'s 8. That fails the bar (7.8's shots, nothing
   more), so the bridge draws the minimap by default. A minimap node is worth
-  trying again when battles leave the 3D bridge (phase 4.4).
+  trying again when battles leave the 3D bridge (phase 4.4). *Phase 4.4's
+  rollout, part 1: the differing pixels were the floor's walls, whose tied
+  surfaces Godot's sort reordered; with the walls drawn in a fixed order
+  `--minimap-node` is identical to the node run on all 34 battle cases
+  (1,992 shots; 9.4).*
 * **Frame rate** (normal runs: no `--seed`, windowed, one at a time, the
   shipped saves (`APPDATA` a scratch folder); AutoPlay's `fps=` every 0.5 s
   for 10 s, legacy (`--legacy=emotions,mission,pause,story_images,
@@ -4116,7 +4120,10 @@ first frame's `initDraw` draws stray quads (`GLSlot`, `EnemyCard`,
   the converted part is exact; compare the frames after the change, explain
   a 1/255 by the pool before blaming the node, and prefer converting a whole
   chunk's content at once. Once no battle batch is left on the bridge, the
-  minimap's node (`--minimap-node`) can be the default (8.4).
+  minimap's node (`--minimap-node`) can be the default (8.4). *Part 1 found
+  the mechanism: the differing pixels are the floor's walls, whose tied
+  surfaces Godot's sort reordered with the rest of the list; they are drawn
+  in a fixed order now (below).*
 * **Coverage** (the pilot's probe, 31 battle cases): the enemy, the info
   panels, the deck, the hand and the legend in every battle shot; the
   attack name in 144 shots of 14 cases; the effects in the `effects_*`
@@ -4130,13 +4137,16 @@ first frame's `initDraw` draws stray quads (`GLSlot`, `EnemyCard`,
   out), a boss's TALKING frames (the `dungeon_boss_*` cases page them). Not
   reachable: the enemy colour system (the neutral Elements card fails in
   `ResultScreen.calcResult`, as in the Java), the party's red screen, the
-  clock. Write the missing cases first, on the unconverted code.
+  clock. Write the missing cases first, on the unconverted code. *Done in
+  part 1 (below): `battle_enemy`, `battle_panels`, `battle_enemy_rise`.*
 * **Order and sizes** (S ≈ a session):
   1. The enemy (`show_node` in its chunk and slot): its frame as a quad
      with its texture (an `AnimatedSprite3D` later), the slice as a shader
      or the two legacy quads, the colour, shake and rise mirrored from the
      legacy values (step B: the coroutines and the slice's per-draw steps
      stay in the twin). With it the coverage cases of the whole 3D. M.
+     *Done (part 1, below): the quads as they were (an `EnemyView` mesh),
+     not an AnimatedSprite3D or a shader yet.*
   2. The info panels: portraits, bars (a quad with a percent uniform), the
      info texture (a SubViewport with Labels, or the legacy Image kept as a
      texture first), elements, boosts. M.
@@ -4153,6 +4163,170 @@ first frame's `initDraw` draws stray quads (`GLSlot`, `EnemyCard`,
   7. Then the minimap's node (8.4), the closing of 4.4 (the flags, the
      legacy drawing, `battle_effects` and `effect_waits`), step C (signals,
      Tweens; decisions 3 and 6) and phase 5.
+
+**Results of the rollout, part 1 (phase 4.4, `docs/phase4_4_rollout_prompt.md`;
+conventions in docs/ARCHITECTURE.md section 15, "The battle's 3D").** The
+coverage of the whole battle 3D, then the enemy's frame and slice through
+step B: an `EnemyView` node in the chunk and batch slot of its batch; on the
+way, the floor's walls drawn in a fixed order (its own change, decided by
+the user).
+
+* **Baseline** (on d53546be): `tools/check.sh` 0 failed (496 scripts); the
+  432 cases (`e0base`, 8,257 shots) identical to the pilot's `c44node` shot
+  for shot, log for log and in every case's error and leak lines. Recorded
+  from a project copy with 4 jobs.
+* **Facts** (deliverable 1; a headless probe over the 31 battle cases and
+  the new ones: `[cov]` prints of each part's batches, their chunk, index
+  and merges, the enemy's render state, its frame, visibility, slice, shake,
+  rise and colour, the panels' bars, boosts and elements, the slots' turning,
+  the shuffle, the mode; per-frame checks over about 55,000 battle frames),
+  where they add to or differ from the prompt and the table above:
+  * One `BattleEnemy` per battle draws the image; a group's other enemies
+    are logic only (`Battle.fillIdling`).
+  * The enemy's batch is the first of its chunk in every frame but a
+    battle's first: on a floor the scene chunk's batch 0 (the floor's scene
+    and the weather's back pass are nodes of the scene, not batches), in a
+    boss area the first SubViewport's; on a battle's first frame
+    `initDraw`'s stray quads (`AttackBackground`, `EnemyCard`'s three, two
+    per `GLSlot`) come first. Nothing merges into it (the attack background,
+    another texture, follows); the slice's two quads are one batch.
+  * Its render state: never additive or opaque; depth test and write on;
+    back faces culled; unlit (lit only in a boss area's first frame); the GL
+    fog only on the floors with fog (Forest Path, the frozen floors,
+    Pensara; the prompt had it on in every labyrinth); the alpha test as the
+    previous frame left it (`GREATER 0`, `GREATER .1` or `GEQUAL .01`; the
+    table's "left at `GREATER 0`" is what the enemy's own draw leaves). It
+    starts from `loadIdentity`, `translate(shakeoffx, shakeoffy + risey,
+    depth)`, `setColor3(usedColor)`; it leaves its texture bound, the last
+    texture coordinate (`(left, top)`; the slice's `(0, test1)`) and the
+    colour (the slice's at alpha `life`), then `loadIdentity`.
+  * `usedColor` is the floor's enemy colour (.7 Grivera and Forest Path, .8
+    Forest of Bri, 1 Berca and the boss areas) and fades while an enemy
+    attacks; the Elements card's colour system stays unreachable.
+  * The shake is along x only (`shakeoffy` is never set: `mode %= 3`): attack
+    frames with `s=true` and Earth's and Colliding's hits, 1 s. The rise is
+    Menthu's alone (`menthuattack.enemy`'s `r=`). The slice lasts 90 frames
+    (1.5 s) from Destroyer's hit; a hit hides the enemy 12 frames (200 ms).
+  * `AttackBackground` and `EnemyCard` are drawn every frame (off the
+    screen while hidden), not only while the attack name shows.
+  * The chunks: on a floor the scene chunk holds the enemy, the attack
+    background, the enemy's card, both rows and the deck's 3D up to the
+    deck's text (the frame's first 2D); while the attack name shows only the
+    enemy and the attack background (the rest in SubViewports). The
+    weather's front pass and the minimap come after the battle's 3D, in a
+    SubViewport (in the scene chunk only in frames without battle 2D). The
+    character row is 15 to 25 batches, the enemy row 1 to 9.
+  * TALKING frames (a boss's words) were shot already (`boss`,
+    `dungeon_boss_salmonman`, `image_fade_menthu1`, `effects_area_*`,
+    `effects_menthu_flame`): the enemy and the rows (hidden) are drawn,
+    nothing of `drawBattle`. The deck's shuffle (`initNewRound` with an
+    empty deck) is ANIMATE for 125 frames with the "Shuffle" text.
+* **Coverage** (deliverable 1): `battle_enemy` (265 shots: the enemy hidden
+  and shaken by Earth's hit and sliced by Destroyer, frame by frame; an
+  Ogre's attack frames, the attack name and a hidden party member),
+  `battle_panels` (303: the weapon's slots flipped and back frame by frame,
+  haste and slow bars, Focus's and Shield's boost cards, discards until the
+  deck's owner shuffles), `battle_enemy_rise` (93: Menthu's rise frame by
+  frame, a boss area); no new console command. The enemy in the scene chunk
+  with snow (the frozen floors), rain (Forest Path, Pensara) and none
+  (Berca, Grivera, Bri), the element icons (three elements) and a boss's
+  words were in the old cases. Goldens of the 435 cases on the unconverted
+  code (`e1gold`), the new ones twice: identical (661 shots).
+* **The enemy (step B, ARCHITECTURE section 15):** `scenes/battle/EnemyView`
+  (a MeshInstance3D) draws the frame's quad or the slice's two in eye space
+  (`Graphics.eye_points`, `eye_normal`, the colour at the draw) with the
+  material of the render state there (`Graphics.material_3d`), shown through
+  `Graphics.show_node` in the chunk and slot of the enemy's batch (keyed by
+  the enemy's instance id: kept from frame to frame, freed when the enemy is
+  not drawn). The twins `BattleEnemy._show_frame` and `_show_slice` make the
+  drawing's state changes in order (the binds, the last texture coordinate,
+  the slice's `xsSpeed`, `xs`, `test1`, `test2`, its colour at `life`, the
+  matrix push and pop). Flag `--legacy=battle_enemy`.
+* **The 1/255 and the walls.** Golden vs. node on the battle cases: 26 of
+  1,992 shots differed by 1/255 (frozen field 5, frozen forest 5, the
+  Tunnel 2, `image_fade_menthu1` 13, `tutorial_battle` 1), all on the
+  floor's walls, the enemy identical in every shot. Experiments (each on the
+  battle cases): the enemy's slot taking its pool instance (hidden), so that
+  every later batch keeps its instance: 3 left; that instance kept visible
+  with an empty mesh: the same as the plain node (on 3 cases); the walls'
+  surfaces as one instance each in a fixed order: legacy and node identical
+  (1,992 of 1,992), and the golden differs from that in 816. The mechanism:
+  the walls are one instance with a surface per material; the shader writes
+  `ALPHA`, so Godot sorts them in its transparent pass per instance (depth
+  minus `sorting_offset`) with an unstable sort whose result depends on the
+  whole render list; the surfaces tie (the instance's depth), so a frame
+  with other instances, or the same ones in another cull order, reorders
+  them, and where two overlap (a wall's edge on the floor, a corner) the
+  pixels change. 8.3's minimap node and likely 7.7's objects did the same.
+  Decided by the user: the walls are drawn in a fixed order
+  (`DungeonFloor.show_walls_in_order`: an instance per surface,
+  `WALL_SORTING_STEP` 0.001 apart, after a prototype look's `floor_built`;
+  `walls_instance` keeps the whole mesh, hidden). That is the surfaces'
+  order (the order the display list first used their materials), not
+  exactly GL's, which interleaved them quad by quad.
+* **The walls' change, new goldens** (`e2gold`, 435 cases, 8,918 shots)
+  vs. `e1gold`: 1,686 shots in 179 cases differ, every differing pixel on a
+  floor's walls, floors or roofs (also the floor in the menu's screenshot
+  and behind the pause, a pad's loss, a tutorial or a dialog); 1,679 by
+  1/255, 3 by 2/255 (the menu's scaled screenshot, a turn in Pensara's
+  prison), 4 by 27–29/255 (`dungeon_tour_temple_of_aegis_second_floor` and
+  `_third_floor`, both saves, the frame mid-step backwards: translucent
+  surfaces in the dark opening, where the order changes the blend, not only
+  the rounding). Logs, exit codes and error lines identical.
+* **Parity on the new goldens** (tolerance 0; node run `e2node`, 435 cases,
+  8,918 shots; 3 script errors, 2,421 errors and 12 exit leak lines, as the
+  baseline): golden vs. node identical (every shot, log and per-case error
+  and leak line); the new cases recorded twice identical (661);
+  `--legacy=battle_enemy` vs. the node run and vs. the golden on the 34
+  battle cases identical (1,992); all four phase 4.4 flags vs. the golden on
+  every case identical (8,918); with `--legacy=battle_effects` added, vs. a
+  golden with it, on the battle cases identical (1,992). With prints in
+  `Graphics._emitTriangles` while the enemy draws (headless, the 34 battle
+  cases): flag off 47,903 enemy frames, 47,903 node calls (all under the 3D
+  projection) and no legacy emission; flag on no node call and 48,059
+  emissions (one quad a frame, two in the 156 slice frames).
+  `--minimap-node` vs. the node run on the battle cases: identical (1,992;
+  8.3's 1/255 is gone).
+* **Frame rate** (normal runs: no `--seed`, windowed, one at a time, the
+  shipped saves; `fps=` every 0.5 s for 11 s at a party turn, the first
+  second dropped; legacy `--legacy=battle_enemy` → node; random enemy
+  groups): capped 60 → 60 on a floor (Berca Desert--South) and in Serphia's
+  boss area; uncapped on the floor 301, 293, 293 → 289, 306, 297, in the
+  boss area 365, 422, 340 → 364, 420, 352: within the run-to-run spread.
+* **Surprises:** the 1/255 was not the bridge's pool but the walls' tied
+  surfaces (above); the probe copy's first patch had a parse error that made
+  four headless runs exhaust the machine's memory (two hard lock-ups): the
+  copies' `tools/check.sh` comes first now, and a watchdog kills a copy's
+  runaway Godot (HANDOFF).
+
+**Prepared after part 1 (2026-11-13): part 2, the info panels.** Plan 9.4's
+order holds (the enemy's results change neither the order nor the place):
+with the walls in a fixed order a part's slots move nothing on the screen,
+so `Graphics.show_node` in the chunk and slot of each batch stays the place
+until the 3D around the texts is nodes; `Battle.tscn` under the rig with
+step C. What the panels draw (`CharacterRow`, `EnemyRow`: `CreatureRow.draw`
+per creature): the row's slide (`Hideable`) and gradient
+(`Graphics.drawGradient`: untextured, black from the top alpha to the
+bottom; the enemy row's height by its creature count), then per
+`Creature3D`: the tint (`setColor(.75)`, alpha .2, when the creature is not
+active and not a support target; .7 else), the portrait (`drawTex`; a party
+member with the turn translated and scaled), the progress bar
+(`progressBar.update` in the draw; `emptyBar`, `white.png` tinted blue,
+green with haste, red with slow at the alpha, to the percent, `overlay`:
+`Utils3D.draw3DPart`), the info texture (rebuilt in the draw when
+`mustUpdateText`: name, "Elem:", life in an Image, `GameTexture.updateImage`;
+red under 20 % or dead), the element icon (bound, but drawn with the info
+texture's coordinates: original), the boosts' cards (`Cards/<n>.png`; the
+enemy's scaled .9 and moved). The party's red screen is never visible
+(Appendix). Lessons for it: a node with several overlapping batches must not
+be one instance with several surfaces (they would tie like the walls did):
+one instance per legacy batch, each in its own slot (`show_node` per batch,
+as `MinimapPart`), or one surface where the batch was one material; probe
+which panel quads merge into one batch; keep the info texture's Image as the
+node's texture first. Coverage still to write: a creature's life under 20 %
+(red), the rows sliding in at a battle's start frame by frame, a group of
+three enemies (the enemy row's height), a dead party member's panel during a
+battle, the info texture's update frames. Size M.
 
 ## 10. Phase 5: remove the emulation
 
@@ -4231,8 +4405,12 @@ When no mode draws through `g` any more:
   different order: up to 111/255 on the translucent walls of the rollout's
   first step B (7.8). Keep surfaces that blend with each other at distinct
   depths or sorting offsets (the sky is its own instance now), or opaque.
-  A 1/255 rounding where legacy drawing blends over a scene remains
-  unexplained (7.8).
+  *Phase 4.4's rollout:* the floor's walls were one instance whose surfaces
+  tied (its depth): their order changed with the rest of the list, 1/255
+  where two overlap, whenever a change moved other instances (the battle's
+  pool, the minimap's nodes: 8.3's 1/255 for certain, likely 7.7's). They are
+  drawn as one instance per surface in a fixed order now (9.4); a mesh of
+  several surfaces that overlap one another needs the same.
 * **Load time.** A floor's scene is a text `.tscn` with a layout of one
   sub-resource per cell, loaded twice per floor entry: about 180 ms on the
   largest floor where the `.map` path took 5 ms (7.8).
@@ -4260,7 +4438,9 @@ When no mode draws through `g` any more:
   batches with nodes instead of the bridge's pool instances leaves every
   frame that draws it the same, but the pool's instances then render a later
   battle's batches 1/255 apart (8.3). Compare the frames after a change, not
-  only those that show it.
+  only those that show it. *Phase 4.4's rollout:* the differing pixels were
+  the walls', reordered by Godot's sort (above), not the battle's batches;
+  fixed with the walls' order (9.4).
 * **A Control's culling rect** (phase 3 rollout). Godot culls a Control by
   its size from its position; text drawn outside that rect (a
   `BaselineLabel` at a baseline off the screen) vanished: check new nodes at
@@ -4381,6 +4561,9 @@ When no mode draws through `g` any more:
    style's values. It also kept the emulation's glColor bug (7.5); *the
    rollout applied it to every floor and fixed that bug and the misplaced
    sky in both paths (7.8).* The Godot-lights variant was not tried.
+   *Phase 4.4's rollout:* the walls' surfaces are drawn in a fixed order
+   (one instance each; 9.4, decided by the user): where two overlap the
+   pixels no longer change with the rest of the frame (1/255).
 3. **Step C timing:** accept changes in movement and collision feel (and fix
    the speed TODOs) right after step B, or only after every mode is on
    scenes.
@@ -4439,7 +4622,10 @@ When no mode draws through `g` any more:
    nodes mirror it. A Tween for it is step C. *Not needed for 4.4's pilot
    (9.4):* the spoils screen's steps (a `Scheduler` tick every 700 ms), its
    bars' counting (per update), the legend's slide (0.1 per update) and the
-   enemy's 200 ms hide stay legacy; the nodes mirror them.
+   enemy's 200 ms hide stay legacy; the nodes mirror them. *Nor for the
+   rollout's enemy:* its frame, shake, rise, colour and slice stay legacy
+   (coroutines, the slice's per-draw steps in the twin); its node mirrors
+   them each frame.
 7. **Village top layer** (from the pilot, 6.7): *decided (phase 1
    rollout):* roofs and treetops are always drawn (6.1, the pilot's
    default). The legacy rule draws a piece only where a sprite overlaps it,
@@ -4453,7 +4639,8 @@ When no mode draws through `g` any more:
    (`BaselineLabel.oversampling` 0) change the look; the pilot kept the
    legacy look so that parity holds. Each is a theme or scene edit now.
    Open (the rollout kept the legacy look too, and so did phase 4.1, 4.2's
-   pilot, the menu, the stores, the mini-games and 4.4's pilot).
+   pilot, the menu, the stores, the mini-games and 4.4's pilot and its
+   rollout's first part).
 
 ## 14. Suggested order and size
 
@@ -4470,7 +4657,7 @@ Sizes are relative: S ≈ a focused session, XL ≈ many sessions.
 | 4.1 | World map + airship. *Done through step B (9.1): the scenes, the name plate, legacy vs. scene identical; closed (9.1).* | M | 1 (converter), 3 | — |
 | 4.2 | Title, game over, mini-games, stores, menu. *Done through step B (9.2: the pilot, the menu, the stores and the mini-games, one session each) and closed (9.2, "Closing phase 4.2").* | L | 3 | — |
 | 4.3 | Input, audio, saves, `Game` autoload. *Prepared (9.3).* | M | any time after 0; the autoload is best after 4.2 | 5; step C (the input wrapper) |
-| 4.4 | Battle, cards, effects. *The pilot, the battle's 2D top layer, done through step B (9.4: the result and spoils screens, the level-up bars, an enemy's red flash, the legend's icons); the rollout, the battle's 3D, prepared (9.4).* | XL | 2, 3 | 5; the minimap's node (8.4) |
+| 4.4 | Battle, cards, effects. *The pilot, the battle's 2D top layer, done through step B (9.4: the result and spoils screens, the level-up bars, an enemy's red flash, the legend's icons); the rollout, the battle's 3D: part 1, the enemy, done through step B (9.4: `EnemyView` in its chunk's slot; the floor's walls drawn in a fixed order); next the info panels.* | XL | 2, 3 | 5; the minimap's node (8.4) |
 | 5 | Remove the GL emulation; per-delta time | M | all of the above | — |
 
 After phase 2, P comes before phase 3 (2026-10-27): the particle
