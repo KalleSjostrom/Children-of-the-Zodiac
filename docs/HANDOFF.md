@@ -1,4 +1,4 @@
-# Handoff: state of the Godot port (2026-11-11, after steps 1–3, modernization phase 0, phases 1, 2, 3, 4.1 and 4.2 done and closed, the particles phases P and P2, the character sprite sheets, phase 4.4's pilot (the battle's 2D top layer) and its rollout's first part (the battle's enemy))
+# Handoff: state of the Godot port (2026-11-11, after steps 1–3, modernization phase 0, phases 1, 2, 3, 4.1 and 4.2 done and closed, the particles phases P and P2, the character sprite sheets, phase 4.4's pilot (the battle's 2D top layer) and its rollout's first two parts (the battle's enemy and info panels))
 
 Conventions: legacy (ported) code follows `docs/PORTING.md`; new code
 (scenes, resources, tools, bridge) follows `docs/ARCHITECTURE.md`. The
@@ -534,6 +534,46 @@ section 14, "The riddles"; the procedure in `docs/CONVERTING_UI.md` section
 - Prepared (plan 9.3, 9.4): phases 4.3 and 4.4; recommended next: 4.4's
   pilot, the battle's 2D top layer (`docs/phase4_4_prompt.md`).
 
+**Modernization phase 4.4's rollout, part 2 (the battle's 3D: the info
+panels): step B done** (2026-11-13; plan 9.4, "Results of the rollout, part
+2"; conventions in `docs/ARCHITECTURE.md` section 15, "The info panels";
+`docs/phase4_4_rollout2_prompt.md`):
+- The rows' gradients and each creature's portrait, progress bar (three
+  quads), info texture (the legacy Image), element icon and boosts' cards
+  draw through `PanelQuad` (`scenes/battle/PanelQuad.tscn`, a MeshInstance3D
+  per legacy batch, in its chunk and slot through `Graphics.show_node`,
+  keyed `[instance id, part]`; the enemy row's gradient joins the character
+  row's node in the frames its batch merged into it). Twins
+  `Creature3D._show_panel` and its parts, `BattleProgressBar.show_bar`, the
+  rows' `drawBack`; bridge members `Graphics.place_quad`, `place_gradient`,
+  `batch_mark`, `Utils3D.place_3d`, `place_3d_coords`, `place_3d_part`,
+  `CreatureRow.show_panel_quad`. Flag `--legacy=battle_panels`. The party's
+  red screen (never visible, no probed frame) stays a legacy batch.
+- Coverage: two new cases (`battle_rows`: three Demon Goblins, the rows'
+  slides, lives under 20 %, a dead party member, the info texture's
+  rebuilds; `battle_rows_boss`: the rows sliding in and out around
+  Salmonman's words; 126 shots); 437 cases, 9,044 shots.
+- Parity (tolerance 0; golden `f1gold`, node `f2node`): golden vs. node, every
+  case: every shot, log and per-case error and leak line identical (3 script
+  errors, 2,421 errors, 12 exit leak lines in both); `--legacy=battle_panels`
+  vs. node and vs. golden on the 36 battle cases (2,118 shots), all five
+  phase 4.4 flags vs. golden on every case, and with `--legacy=battle_effects`
+  added vs. a golden with it on the battle cases: identical. No legacy panel
+  quad is emitted with the flag off (prints in `Graphics._emitTriangles`).
+  `tools/check.sh`: 0 failed.
+- Frame rate (normal runs): capped 60 → 60; uncapped floor 298, 299, 289 →
+  266, 289, 291, boss area 336, 357, 399 → 321, 392, 325 (legacy → node; the
+  runs spread by ±10 %).
+- Afterwards `f2node` (437 cases, 9,044 shots) is the set to keep in
+  `tools/parity/out`.
+- Audio-device events (WASAPI "GetBufferSize error" and "output_device
+  invalidated") appeared in some logs of every recording that day: they are
+  the machine's audio output changing, not the change; `errcounts.py` counts
+  them apart from the error lines.
+- Prepared (plan 9.4, "Prepared after part 2"): part 3, the deck and the
+  hand (with the legend's gradient); the next prompt is
+  `docs/phase4_4_rollout3_prompt.md`.
+
 **Modernization phase 4.4's rollout, part 1 (the battle's 3D: the enemy):
 step B done** (2026-11-13; plan 9.4, "Results of the rollout, part 1";
 conventions in `docs/ARCHITECTURE.md` section 15, "The battle's 3D";
@@ -679,9 +719,9 @@ decision 5 decided in plan section 13):
 
 0. **Modernization:** phases 1 to 4.1 are closed (2026-11-06), phase 4.2
    too (2026-11-07); phase 4.4's pilot, the battle's 2D top layer, is done
-   (2026-11-11), and the rollout's first part, the enemy (2026-11-13).
-   Next (plan 9.4, "Prepared after part 1"): part 2, the info panels
-   (`docs/phase4_4_rollout2_prompt.md`); phase 4.3 (input,
+   (2026-11-11), and the rollout's first two parts, the enemy and the info
+   panels (2026-11-13). Next (plan 9.4, "Prepared after part 2"): part 3,
+   the deck and the hand (`docs/phase4_4_rollout3_prompt.md`); phase 4.3 (input,
    audio, saves, the `Game` autoload; plan 9.3) can come at any time and
    first if step C of the converted modes comes first. The minimap stays
    the 3D bridge's until the battles leave the bridge (plan 8.4). Record
@@ -724,12 +764,14 @@ decision 5 decided in plan section 13):
 - Parity: `tools/parity/parity.sh record <set>` / `compare <a> <b>` /
   `ab "<args a>" "<args b>" [case…]`, see `docs/ARCHITECTURE.md` section 7.
   Runs are windowed (screenshots need a renderer); all 432 cases take
-  about 23 minutes with `--jobs=4` (with about 6 GB free at idle; 19 with
+  about 23 minutes with `--jobs=4` (with about 6 GB free at idle; the 437
+  cases about 30 with `--jobs=3` at 4.6 GB free; 19 with
   `--jobs=5` for 417 cases, 14-15 with `--jobs=8` when 10 GB are
   free at idle; check first: with 7 GB free, 8 jobs crashed runs) on 12
   logical cores (run nothing beside them, not even a headless compare:
   16 GB run out, plan 12); a compare of two full sets takes about 5
-  minutes; a full set is about 5.5 GB (the disk was 96% full) since
+  minutes; a full set is about 6.3 GB (437 cases; the disk was 96% full
+  once) since
   the particles run on the GPU (60-70 minutes before P2; `--uncapped`; with
   `--legacy=battle_effects` or `effect_waits` Menthu's Flame takes 10 s of
   real time). Recording from a

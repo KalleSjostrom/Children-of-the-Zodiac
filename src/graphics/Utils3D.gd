@@ -105,6 +105,45 @@ static func draw3DPart(g: Graphics, tex: GameTexture, coordList: Array, percent:
 	g.end()
 
 
+## Bridge (phase 4.4's rollout, part 2, step B, docs/ARCHITECTURE.md section
+## 15): draw3D(g, texture, coordList) without the drawing: the texture's bind
+## and the quad as its batch would hold it (Graphics.place_quad).
+static func place_3d(g: Graphics, tex: GameTexture, coordList: Array) -> Dictionary:
+	tex.bind(g)
+	return place_3d_coords(g, tex.getImageTexCoords(), coordList)
+
+
+## Bridge (phase 4.4's rollout, part 2): draw3D(g, texCoords, coordList)
+## without the drawing (no bind: the texture bound before is drawn with these
+## coordinates); the quad as Graphics.place_quad gives it.
+static func place_3d_coords(g: Graphics, tc, coordList: Array) -> Dictionary:
+	var x: Array = coordList[0]
+	var y: Array = coordList[1]
+	var z: Array = coordList[2]
+	return g.place_quad(
+			PackedVector3Array([Vector3(x[0], y[0], z[0]), Vector3(x[1], y[0], z[0]),
+				Vector3(x[1], y[1], z[1]), Vector3(x[0], y[1], z[1])]),
+			PackedVector2Array([Vector2(tc.left(), tc.bottom()), Vector2(tc.right(), tc.bottom()),
+				Vector2(tc.right(), tc.top()), Vector2(tc.left(), tc.top())]))
+
+
+## Bridge (phase 4.4's rollout, part 2): draw3DPart without the drawing: the
+## bind and the quad to the percent of the width (Graphics.place_quad).
+static func place_3d_part(g: Graphics, tex: GameTexture, coordList: Array, percent: float,
+		width: float) -> Dictionary:
+	tex.bind(g)
+	var tc := tex.getImageTexCoords()
+	var x: Array = coordList[0]
+	var y: Array = coordList[1]
+	var z: Array = coordList[2]
+	var xs: float = x[0] + width * percent
+	return g.place_quad(
+			PackedVector3Array([Vector3(x[0], y[0], z[0]), Vector3(xs, y[0], z[0]),
+				Vector3(xs, y[1], z[1]), Vector3(x[0], y[1], z[1])]),
+			PackedVector2Array([Vector2(tc.left(), tc.bottom()), Vector2(tc.right() * percent, tc.bottom()),
+				Vector2(tc.right() * percent, tc.top()), Vector2(tc.left(), tc.top())]))
+
+
 static func draw2DPart(gl: Graphics, tex: GameTexture, x: int, y: int, height: int, width: int, percent: float) -> void:
 	tex.bind(gl)
 	gl.glBegin(Graphics.GL_QUADS)

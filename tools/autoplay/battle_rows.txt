@@ -1,0 +1,90 @@
+# Phase 4.4's rollout, part 2 (the battle's 3D: the info panels):
+# Empyrian Temple--Hall of Wind, whose group is always three Demon Goblins
+# (enemyBank.bank: chance for three 1): the enemy row's height for three
+# (--load="Slot 1" --start="Empyrian Temple--Hall of Wind-mark0"). Steps
+# until the battle (as dungeon_battle, but the battle's start found within a
+# frame: seed 1 starts it after a step forward, and the DOWN tap after it is
+# released before the first party turn): the rows sliding in, shot every
+# frame (the first battle frame, both rows still off the screen, is not
+# shot); god mode. At the first party turn (Zalzi's) the console hurts Kin
+# under 20 % of his life (red), Celis to just over 20 % (white) and then 1 hp
+# under it (red), kills Zalzi ("Dead", the dead member's panel) and hurts
+# the first Demon Goblin under 20 % (its life is shown: red): each shot in
+# the frames after (the info texture rebuilt in Battle.drawBattle in the
+# next frame). Then TRIANGLE ends the turn and the enemies attack: the rows
+# sliding out with the target (Kin) staying, sliding in again and turning
+# back out half-way for the next attack, and in again, each shot every
+# frame from the battle mode's change.
+wait 3000
+console god on
+mark
+tap UP
+mark
+wait 16
+loopuntil sub=battle 700
+tap DOWN
+mark
+wait 16
+loopuntil sub=battle 700
+loopuntil sub=battle 90000
+log battle
+mark
+shot a_#
+wait 16
+loopuntil xxnever 250
+mark
+wait 50
+loopuntil battlemode=1 30000
+log turn1
+shot b01_turn1
+console heal 0 all
+console heal -1138 kin
+wait 16
+shot b02_kin_red
+wait 16
+shot b03_kin_red
+console heal -966 celis
+wait 16
+shot c01_celis_white
+console heal -1 celis
+wait 16
+shot c02_celis_red
+wait 16
+shot c03_celis_red
+console heal -100000 zalzi
+wait 16
+shot d01_zalzi_dead
+wait 16
+shot d02_zalzi_dead
+console heal -2424 demon_goblin
+wait 16
+shot d03_goblin_red
+wait 16
+shot d04_goblin_red
+wait 500
+shot d05_later
+tap TRIANGLE
+log end_turn1
+mark
+wait 16
+loopuntil battlemode=2 15000
+mark
+shot e_#
+wait 16
+loopuntil xxnever 250
+mark
+wait 16
+loopuntil !battlemode=2 15000
+mark
+shot f_#
+wait 16
+loopuntil xxnever 300
+mark
+wait 16
+loopuntil !battlemode=2 15000
+mark
+shot g_#
+wait 16
+loopuntil xxnever 250
+log end
+quit

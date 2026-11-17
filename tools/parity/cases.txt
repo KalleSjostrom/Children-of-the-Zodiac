@@ -702,3 +702,12 @@ battle_flash             battle_flash             --load="Slot 1" --start="Berca
 battle_enemy             battle_enemy             --load="Slot 1" --start="Berca Desert--South-mark0" --start-node=20:3
 battle_panels            battle_panels            --load="Slot 1" --start="Berca Desert--South-mark0" --start-node=20:3
 battle_enemy_rise        battle_enemy_rise        --load="Start Menthu1" --start=Menthuattack
+# Phase 4.4's rollout, part 2 (the info panels, recorded on the unconverted
+# code): three Demon Goblins in the Hall of Wind (the enemy row's height),
+# the rows sliding in at a battle's start, out and in on the enemies' turns
+# (the target staying), a life under 20 % in red (Kin, Celis at the limit, a
+# Demon Goblin), a dead party member's panel, the info texture's rebuilds
+# (the console's heal; god mode), each frame by frame; the rows sliding in
+# after Salmonman's first words and out for his last ones (a boss's row).
+battle_rows              battle_rows              --load="Slot 1" --start="Empyrian Temple--Hall of Wind-mark0"
+battle_rows_boss         battle_rows_boss         --load="Slot 1" --start="Grivera--Corridor of Agony-mark0"

@@ -1541,6 +1541,71 @@ func eye_normal() -> Vector3:
 	return _mv.basis * _cur_normal
 
 
+## Bridge (phase 4.4's rollout, part 2, step B, docs/ARCHITECTURE.md section
+## 15): a GL_QUADS quad of four points (glBegin, a glTexCoord2f and a
+## glVertex3f per point, glEnd) without the drawing, for a node that draws it
+## in its batch's slot (PanelQuad): the last point's texture coordinate (and
+## colour, when colours are given) stays current, as after the drawing.
+## Returns the quad as its batch would hold it: {"mat": the material of the
+## render state (material_3d), "v": the corners in eye space (eye_points),
+## "uv": their texture coordinates, "c": their colours (the current colour
+## where none are given), "n": their normals in eye space (eye_normal)}.
+func place_quad(points: PackedVector3Array, uvs: PackedVector2Array,
+		colors := PackedColorArray()) -> Dictionary:
+	if colors.is_empty():
+		colors.resize(points.size())
+		colors.fill(_cur_color)
+	else:
+		_cur_color = colors[colors.size() - 1]
+	_cur_uv = uvs[uvs.size() - 1]
+	var normals := PackedVector3Array()
+	normals.resize(points.size())
+	normals.fill(eye_normal())
+	return {"mat": material_3d(), "v": eye_points(points), "uv": uvs, "c": colors,
+		"n": normals}
+
+
+## Bridge (phase 4.4's rollout, part 2): where the next 3D batch would go now,
+## [frame, chunk, batch count], or [] outside a 3D chunk. Two equal marks:
+## nothing was added to the chunk in between, so a primitive of the batch's
+## material would have merged into it (GLBackend's Chunk3D.add_triangles: the
+## panels' gradients, CreatureRow.show_panel_quad).
+func batch_mark() -> Array:
+	if backend == null or not _proj3d:
+		return []
+	return backend.batch_mark()
+
+
+## Bridge (phase 4.4's rollout, part 2, step B): drawGradient (with
+## beginQuadsFlag: its own quad) without the drawing: the same state changes
+## (the matrix push, identity and translation with popPush, the texture off
+## and on, the top and bottom colours, the colour set back to white and the
+## pop with popPush) and the quad as place_quad gives it: untextured, the top
+## corners in the top colour, the bottom ones in the bottom colour.
+func place_gradient(c, topAlpha: float, bottomAlpha: float, xRight: float,
+		xLeft: float, yBottom: float, yTop: float, popPush: bool, beginQuadsFlag: bool) -> Dictionary:
+	assert(beginQuadsFlag, "Graphics.place_gradient: a gradient inside another primitive cannot be placed")
+	if popPush:
+		push()
+		loadIdentity()
+		translate(0, 0, BattleValues.STANDARD_Z_DEPTH)
+	setTextureEnabled(false)
+	setColor(c, topAlpha)
+	var top := _cur_color
+	setColor(c, bottomAlpha)
+	var bottom := _cur_color
+	var quad := place_quad(
+			PackedVector3Array([Vector3(xRight, yTop, 0), Vector3(xLeft, yTop, 0),
+				Vector3(xLeft, yBottom, 0), Vector3(xRight, yBottom, 0)]),
+			PackedVector2Array([_cur_uv, _cur_uv, _cur_uv, _cur_uv]),
+			PackedColorArray([top, top, bottom, bottom]))
+	setTextureEnabled(true)
+	if popPush:
+		setColor(1, 1, 1)
+		pop()
+	return quad
+
+
 ## Bridge (phase 2 step B): this frame's legacy 3D drawing goes into node, a
 ## node of the current mode's 3D scene, until the first 2D drawing
 ## (GLBackend.scene_3d).
@@ -1594,8 +1659,10 @@ func _capture_triangles(m: Material, v: PackedVector3Array, uv: PackedVector2Arr
 
 ## Bridge (the battle effects phase): the node of key that draws itself in
 ## the current 3D chunk where the legacy drawing would draw
-## (GLBackend.show_node; make makes it the first time); null in 2D.
-func show_node(key: int, make: Callable) -> GeometryInstance3D:
+## (GLBackend.show_node; make makes it the first time); null in 2D. The key
+## is an instance id, or an array of one and a part (the battle's panels:
+## several nodes of one legacy object).
+func show_node(key: Variant, make: Callable) -> GeometryInstance3D:
 	if backend == null or not _proj3d:
 		return null
 	return backend.show_node(key, make)

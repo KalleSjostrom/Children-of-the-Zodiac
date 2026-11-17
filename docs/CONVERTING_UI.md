@@ -135,6 +135,25 @@ takes the focus).
   10, `WALL_SORTING_STEP`), that moves nothing on the screen: a difference
   there is the node's. Before, it reordered the walls' tied surfaces (1/255
   on their overlaps, plan 9.4).
+* A 3D part of several batches (the battle's info panels, phase 4.4's
+  rollout part 2: `PanelQuad`): one node per legacy batch, each in its own
+  slot (`show_node` keyed `[instance id, part]`), never one instance with a
+  surface per batch (overlapping surfaces of one instance tie in Godot's
+  transparent sort). Probe which quads merge into one batch, also across the
+  part's objects and with what comes before and after it: a merge happens
+  where nothing changes the material between two quads, and that can depend
+  on the state (the enemy row's gradient merged into the character row's
+  only when an attack on all hid every party member). Keep a merge as one
+  node with both quads (`Graphics.batch_mark`: nothing was added to the
+  chunk since the last quad). Compute the quads with the legacy arithmetic
+  through small bridges that do what the drawing does without emitting
+  (`Graphics.place_quad`: the material, the corners through the modelview,
+  the colours and normals, the last texture coordinate; `place_gradient`,
+  `Utils3D.place_3d`, `place_3d_part`), so every twin is the drawing's code
+  with its emitting calls swapped. Then check the frames, not only the
+  shots: prints in `Graphics._emitTriangles` and `show_node` while the part
+  draws count the legacy quads with the flag off (none) and the node calls
+  with it on (none); the two counts differ by the merges.
 
 
 ## 3. The twin and the flag

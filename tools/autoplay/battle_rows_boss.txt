@@ -1,0 +1,47 @@
+# Phase 4.4's rollout, part 2 (the battle's 3D: the info panels): the rows
+# sliding in after a boss's first words and out for its last ones, frame by
+# frame (a boss's row: no gradient behind the party). Salmonman
+# (--load="Slot 1" --start="Grivera--Corridor of Agony-mark0"; as
+# dungeon_boss): the console's "boss" goes next to him, a step starts the
+# battle (TALKING: the rows hidden), CROSS pages his line and the rows slide
+# in, shot every frame; at the party's turn the console's "kill": the rows
+# slide out (Battle.checkIfEnemiesAreDead: hide(); the enemy row empty, its
+# gradient of height 0), shot every frame, then his last words.
+# AutoPlay saves one shot per frame (the last name asked for): k01_words falls
+# in the frame of a_002 (wait 16 is shorter than a frame, its remainder after
+# wait 1500 runs on), so the words' frame is a_002; a skipped number in a loop
+# is two waits in one frame, not a frame without a shot.
+wait 3000
+console boss
+wait 4000
+tap UP
+wait 1500
+shot k01_words
+log words
+tap CROSS
+mark
+wait 16
+shot a_#
+loopuntil xxnever 400
+mark
+wait 50
+loopuntil battlemode=1 30000
+shot k02_party_turn
+log party_turn
+console kill
+mark
+wait 16
+shot b_#
+loopuntil xxnever 250
+wait 800
+shot k03_last_words
+log last_words
+mark
+tap CROSS
+wait 800
+shot k_#_after
+loopuntil !sub= 60000
+wait 2000
+shot k04_over
+log over
+quit

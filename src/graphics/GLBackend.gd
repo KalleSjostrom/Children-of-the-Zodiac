@@ -412,8 +412,9 @@ func reserve_scene_slot() -> float:
 ## EffectParticles3D): the node of key, made with make the first time, kept
 ## from frame to frame (moved along when the drawing lands in another
 ## chunk), in a batch slot of the chunk (reserve_slot). A node not shown in
-## a frame is freed at its end.
-func show_node(key: int, make: Callable) -> GeometryInstance3D:
+## a frame is freed at its end. The key is an int or an array (compared by
+## value).
+func show_node(key: Variant, make: Callable) -> GeometryInstance3D:
 	var chunk := vp_3d()
 	var entry: Array = _chunk_nodes.get(key, [])
 	var node: GeometryInstance3D = entry[0] if not entry.is_empty() and is_instance_valid(entry[0]) else null
@@ -428,9 +429,17 @@ func show_node(key: int, make: Callable) -> GeometryInstance3D:
 	return node
 
 
+## Bridge (phase 4.4's rollout, part 2, Graphics.batch_mark): the frame, the
+## current 3D chunk and its batch count, or [] outside a 3D chunk.
+func batch_mark() -> Array:
+	if _cur_kind != 2 or _cur_vp == null:
+		return []
+	return [_frame, _cur_vp, _cur_vp.batches.size()]
+
+
 ## Frees the nodes of show_node that were not shown this frame.
 func _free_chunk_nodes() -> void:
-	for key: int in _chunk_nodes.keys():
+	for key: Variant in _chunk_nodes.keys():
 		var entry: Array = _chunk_nodes[key]
 		if entry[1] != _frame or not is_instance_valid(entry[0]):
 			if is_instance_valid(entry[0]):

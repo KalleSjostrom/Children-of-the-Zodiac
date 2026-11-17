@@ -72,6 +72,29 @@ func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 	Utils3D.draw3DPart(g, texture[2].getTexture(), coordList[0], percent, width)
 
 
+## Bridge (phase 4.4's rollout, part 2, step B, docs/ARCHITECTURE.md section
+## 15): draw(g, alpha, mode) without the drawing: the same state changes (the
+## binds, the colours, the last texture coordinates) and the bar's three
+## quads (the empty bar, the fill and the overlay to the percent), each to
+## the PanelQuad of key [owner, part] in its batch's slot.
+func show_bar(g, alpha: float, mode: int, owner: int) -> void:
+	if texture[0] != null:
+		CreatureRow.show_panel_quad(g, [owner, &"bar"],
+				Utils3D.place_3d(g, texture[0].getTexture(), coordList[0]))
+	match mode:
+		BattleValues.HASTE:
+			g.setColor(GREEN[0], GREEN[1], GREEN[2], alpha)
+		BattleValues.SLOW:
+			g.setColor(RED[0], RED[1], RED[2], alpha)
+		_:
+			g.setColor(color[0], color[1], color[2], alpha)
+	CreatureRow.show_panel_quad(g, [owner, &"bar_fill"],
+			Utils3D.place_3d_part(g, texture[1].getTexture(), coordList[0], percent, width))
+	g.setColor(1, 1, 1, alpha)
+	CreatureRow.show_panel_quad(g, [owner, &"bar_overlay"],
+			Utils3D.place_3d_part(g, texture[2].getTexture(), coordList[0], percent, width))
+
+
 ## Updates the progress bar with the given progress (0 to 100).
 func update(progress = null):
 	if progress == null:

@@ -78,7 +78,9 @@ func setSupport(support):
 
 
 ## Draws the creature image, the progress bar, the info texture, the
-## element and the boosts.
+## element and the boosts. Bridge (phase 4.4's rollout, part 2): PanelQuad
+## nodes in their batches' slots (_show_panel, the same state changes);
+## --legacy=battle_panels keeps the legacy quads.
 func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 	if creature.isActive() and creature.isAlive():
 		self.alpha = 0.7
@@ -88,6 +90,9 @@ func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 			self.alpha = 0.2
 		else:
 			self.alpha = 0.7
+	if not Main.is_legacy("battle_panels"):
+		_show_panel(g)
+		return
 	drawImage(g)
 	progressBar.update(creature.getProgress())
 	progressBar.draw(g, self.alpha, creature.getSpeedMode())
@@ -102,6 +107,60 @@ func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 	g.pop()
 	drawElements(g)
 	drawBoosts(g)
+
+
+## Bridge (phase 4.4's rollout, part 2, step B): the panel's drawing (from
+## drawImage on) without the drawing: the same state changes in the same
+## order (the binds and texture coordinates, the colours, the matrix calls,
+## the bar's update, the info texture's rebuild) and a PanelQuad per batch,
+## in the batch's slot (CreatureRow.show_panel_quad).
+func _show_panel(g) -> void:
+	_show_image(g)
+	progressBar.update(creature.getProgress())
+	progressBar.show_bar(g, self.alpha, creature.getSpeedMode(), get_instance_id())
+
+	if mustUpdateText:
+		updateTexture(g)
+		mustUpdateText = false
+	g.push()
+	g.translate(0.13, -0.15, 0)
+	g.scale(0.45)
+	CreatureRow.show_panel_quad(g, [get_instance_id(), &"info"], Utils3D.place_3d(g, tex, coordList[1]))
+	g.pop()
+	_show_elements(g)
+	_show_boosts(g)
+
+
+## Bridge (phase 4.4's rollout, part 2): drawElements without the drawing
+## (the element's bind, the info texture's coordinates: as the original).
+func _show_elements(g) -> void:
+	var element: int = creature.getElement()
+	if element != AbstractCard.NO_ELEMENT:
+		var t = ImageHandler.getTexture(
+				Values.MenuImages + "Elements/" + str(element) + ".png").getTexture()
+		t.bind(g.getGL())
+		g.push()
+		g.scale(0.65)
+		CreatureRow.show_panel_quad(g, [get_instance_id(), &"element"],
+				Utils3D.place_3d_coords(g, tex.getImageTexCoords(), coordList[3]))
+		g.pop()
+
+
+## Bridge (phase 4.4's rollout, part 2): drawBoosts without the drawing.
+func _show_boosts(g) -> void:
+	g.push()
+	if creature is Enemy:
+		g.scale(0.9)
+		g.translate(-0.22, -0.05, 0)
+	var boosts: Array = creature.getBoosts()
+	for i in boosts.size():
+		if boosts[i] != 0:
+			var nr: int = (i + 1) * (1 if boosts[i] == 1 else 11)
+			var t = ImageHandler.getTexture(Values.Cards + str(nr) + ".png").getTexture()
+			g.translate(DISTANCE_BETWEEN_ICONS, 0, 0)
+			CreatureRow.show_panel_quad(g, [get_instance_id(), &"boost", i],
+					Utils3D.place_3d(g, t, coordList[2]))
+	g.pop()
 
 
 ## Hides the creature for hideTime ms; criticalHit draws the red screen.
@@ -190,4 +249,9 @@ func drawInfo(g):
 
 ## Abstract: draws the creature image.
 func drawImage(g):
+	pass
+
+
+## Bridge (phase 4.4's rollout, part 2): drawImage without the drawing.
+func _show_image(g) -> void:
 	pass
