@@ -86,7 +86,7 @@ func testHideCharacters():
 func drawBack(g):
 	var x: float = 1.08
 	if not Main.is_legacy("battle_panels"):
-		show_panel_quad(g, [get_instance_id(), &"back"], g.place_gradient(
+		Utils3D.show_quad(g, [get_instance_id(), &"back"], g.place_gradient(
 				Vector3f.ZERO, BACK_ALPHA_TOP, BACK_ALPHA_BOTTOM,
 				x, -x, -0.07, 0.3, false, true))
 		return

@@ -1,0 +1,136 @@
+# Phase 4.4's rollout, part 3 (the battle's 3D: the deck and the hand):
+# Berca's Ogre, Ogre (--load="Slot 1" --start="Berca Desert--South-mark0"
+# --start-node=20:3). Steps until the battle (the battle's start found
+# within a frame, as battle_rows); god mode. Zalzi's first turn (seed 1; his
+# hand: Fungi, Battle Card 2, Fire 2, Herb of Vitality 2, Haste; the support
+# cards gray): the deck and the weapon sliding in and the dealt cards flying
+# from the pile and turning, shot every frame; R2 (support): the weapon's
+# slots turning, the support cards in colour and the others gray, the hand
+# turned on Zalzi, R1 to Kin and Celis; R2 back (the hand on the first Ogre),
+# R1 to the second one, L1 back. RIGHT to Battle Card, SQUARE: it flies to
+# the save slot, Fungi moves right and a card is dealt from the pile, shot
+# every frame; RIGHT to the saved card (raised, the pointer under it);
+# CROSS: it flies from the save slot into the weapon along its line, shot
+# every frame. LEFT to Fire, CROSS: it flies into the weapon's magic slot,
+# the cards left of it move right and a card is dealt, shot every frame.
+# TRIANGLE: the deck, the weapon, the hand and the legend sliding out, shot
+# every frame; the round's result; then Kin's first turn: his deck sliding
+# in (his cards were dealt at the battle's start, off the screen), shot
+# every frame; RIGHT to Slow, CROSS: it flies into the weapon and Battle
+# Card is dealt from the pile; LEFT to it and CROSS while it still turns: it
+# flies into the weapon turning (both sides, at the weapon's alpha test),
+# shot every frame from the first CROSS.
+wait 3000
+console god on
+mark
+tap UP
+mark
+wait 16
+loopuntil sub=battle 700
+tap DOWN
+mark
+wait 16
+loopuntil sub=battle 700
+loopuntil sub=battle 90000
+log battle
+mark
+wait 16
+loopuntil battlemode=1 30000
+log turn1
+mark
+shot a_#
+wait 16
+loopuntil xxnever 1000
+tap R2
+mark
+wait 16
+shot b_#
+loopuntil xxnever 400
+tap R1
+wait 200
+shot c1_support_next
+tap R1
+wait 200
+shot c2_support_next
+tap R2
+mark
+wait 16
+shot d_#
+loopuntil xxnever 400
+tap R1
+wait 200
+shot e1_second_ogre
+tap L1
+wait 200
+shot e2_first_ogre
+tap RIGHT
+wait 200
+shot f0_selected
+tap SQUARE 16
+mark
+wait 16
+shot f_#
+loopuntil xxnever 600
+tap RIGHT
+wait 150
+tap RIGHT
+wait 150
+tap RIGHT
+wait 150
+tap RIGHT
+wait 200
+shot g0_saved_selected
+tap CROSS 16
+mark
+wait 16
+shot g_#
+loopuntil xxnever 700
+tap LEFT
+wait 150
+tap LEFT
+wait 200
+shot h0_selected
+tap CROSS 16
+mark
+wait 16
+shot h_#
+loopuntil xxnever 600
+log end_turn1
+tap TRIANGLE 16
+mark
+wait 16
+shot i_#
+loopuntil xxnever 400
+mark
+wait 100
+loopuntil battlemode=5 30000
+shot j_result
+tap CROSS
+mark
+wait 16
+loopuntil battlemode=1 30000
+log turn2
+mark
+shot k_#
+wait 16
+loopuntil xxnever 300
+tap RIGHT
+wait 200
+shot l0_selected
+tap CROSS 16
+mark
+wait 16
+shot l_#
+loopuntil xxnever 100
+tap LEFT 16
+mark
+wait 16
+shot m_#
+loopuntil xxnever 200
+tap CROSS 16
+mark
+wait 16
+shot n_#
+loopuntil xxnever 800
+log end
+quit

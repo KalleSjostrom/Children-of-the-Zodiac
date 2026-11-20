@@ -101,8 +101,13 @@ func initDraw(g: Graphics):
 
 
 ## Draws the slots on the current location.
+## Bridge (phase 4.4's rollout, part 3): PanelQuads in their batches' slots
+## (_show_slots); --legacy=battle_deck keeps the legacy quads.
 func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 	translate(g)
+	if not Main.is_legacy("battle_deck"):
+		_show_slots(g)
+		return
 
 	var cl: Array = J.array2d(3, 2, 0.0)
 	cl[X][0] = coordList[0][X][0]
@@ -116,6 +121,25 @@ func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 		cl[X][0] += BattleValues.CARD_DISTANCE_BETWEEN
 		cl[X][1] += BattleValues.CARD_DISTANCE_BETWEEN
 	Utils3D.draw3D(g, texture[1].getTexture(), coordList[1])
+
+
+## Bridge (phase 4.4's rollout, part 3, step B, docs/ARCHITECTURE.md section
+## 15): draw's slots without the drawing: the binds and the quads of the
+## hand's slots (transball.png each: one batch, Utils3D.show_quad joins them)
+## and of the save slot, each batch a PanelQuad in its slot.
+func _show_slots(g) -> void:
+	var cl: Array = J.array2d(3, 2, 0.0)
+	cl[X][0] = coordList[0][X][0]
+	cl[X][1] = coordList[0][X][1]
+	cl[Y][0] = coordList[0][Y][0]
+	cl[Y][1] = coordList[0][Y][1]
+	cl[Z][0] = coordList[0][Z][0]
+	cl[Z][1] = coordList[0][Z][1]
+	for i in nrOfSlots:
+		Utils3D.show_quad(g, [get_instance_id(), &"slot", i], Utils3D.place_3d(g, texture[0].getTexture(), cl))
+		cl[X][0] += BattleValues.CARD_DISTANCE_BETWEEN
+		cl[X][1] += BattleValues.CARD_DISTANCE_BETWEEN
+	Utils3D.show_quad(g, [get_instance_id(), &"save"], Utils3D.place_3d(g, texture[1].getTexture(), coordList[1]))
 
 
 ## Draws all the cards in the given deck (Array of GLCard). The selected card
@@ -132,10 +156,16 @@ func drawDeck(g, deck, a = null):
 
 
 ## Draws the pointer hand at the position xs[index] + offset.
+## Bridge (phase 4.4's rollout, part 3): a PanelQuad in its batch's slot;
+## --legacy=battle_deck keeps the legacy quad.
 func drawHand(g, index, offset):
 	if visible:
 		g.loadIdentity()
 		g.translate(xs[index] + offset + 0.01, 0, BattleValues.STANDARD_Z_DEPTH)
+		if not Main.is_legacy("battle_deck"):
+			Utils3D.show_quad(g, [get_instance_id(), &"pointer"],
+					Utils3D.place_3d(g, texture[2].getTexture(), coordList[2]))
+			return
 		Utils3D.draw3D(g, texture[2].getTexture(), coordList[2])
 
 

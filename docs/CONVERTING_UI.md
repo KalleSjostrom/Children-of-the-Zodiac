@@ -154,6 +154,26 @@ takes the focus).
   shots: prints in `Graphics._emitTriangles` and `show_node` while the part
   draws count the legacy quads with the flag off (none) and the node calls
   with it on (none); the two counts differ by the merges.
+* Two-sided, turning parts (the battle's deck: cards, weapon slots, phase
+  4.4's rollout part 3). A turn is the modelview's (`translate`, then
+  `rotate` about y), so the twin keeps the matrix calls and the node gets
+  eye-space corners (`Graphics.place_quad` through the modelview); the node
+  itself has no transform. A side is a quad: the front in its winding, the
+  back in the reverse winding (`draw3DBackside`: `Utils3D.place_3d_backside`),
+  each in the material of the render state, whose face culling decides which
+  side shows, as GL's did; a part that draws both sides while it turns is two
+  batches (or more). State a draw steps (`GLSlot.draw` advances its flip and
+  switches the side half-way) stays before the flag's branch. Merges cross
+  objects (the hand's slots, a card's balls, weapon slots of one image, the
+  backs of two cards turning side by side when the second is gray: it draws
+  its back first): one shared helper (`Utils3D.show_quad`) joins a quad of
+  the last node's material when nothing was added to the chunk since, so a
+  twin need not know its neighbours; `Object2D.show_tex` is `drawTex`
+  without the drawing. Drawing in an init method counts too (`GLSlot.initDraw`
+  draws both sides once, out of sight): convert it as well, or the batches
+  after it change slots. A part drawn once per frame per object keys its
+  nodes by the object's instance id; check with the probe that no object is
+  drawn twice in a frame (a key shown twice keeps only its last slot).
 
 
 ## 3. The twin and the flag

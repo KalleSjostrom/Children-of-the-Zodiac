@@ -1,4 +1,4 @@
-# Handoff: state of the Godot port (2026-11-11, after steps 1–3, modernization phase 0, phases 1, 2, 3, 4.1 and 4.2 done and closed, the particles phases P and P2, the character sprite sheets, phase 4.4's pilot (the battle's 2D top layer) and its rollout's first two parts (the battle's enemy and info panels))
+# Handoff: state of the Godot port (2026-11-11, after steps 1–3, modernization phase 0, phases 1, 2, 3, 4.1 and 4.2 done and closed, the particles phases P and P2, the character sprite sheets, phase 4.4's pilot (the battle's 2D top layer) and its rollout's first three parts (the battle's enemy, info panels, deck and hand))
 
 Conventions: legacy (ported) code follows `docs/PORTING.md`; new code
 (scenes, resources, tools, bridge) follows `docs/ARCHITECTURE.md`. The
@@ -534,6 +534,50 @@ section 14, "The riddles"; the procedure in `docs/CONVERTING_UI.md` section
 - Prepared (plan 9.3, 9.4): phases 4.3 and 4.4; recommended next: 4.4's
   pilot, the battle's 2D top layer (`docs/phase4_4_prompt.md`).
 
+**Modernization phase 4.4's rollout, part 3 (the battle's 3D: the deck,
+the hand and the legend's gradient): step B done** (2026-11-18; plan 9.4,
+"Results of the rollout, part 3"; conventions in `docs/ARCHITECTURE.md`
+section 15, "The deck and the hand"; `docs/phase4_4_rollout3_prompt.md`):
+- The weapon's mode icon and slots (one side each, turning), the weapon's
+  cards, the hand's slots and the save slot, the shown cards, the pointer,
+  the saved card and the pile's top card (each card's picture, balls and
+  back), the deck's gradient, the target hand, the legend's gradient and
+  `GLSlot.initDraw`'s stray quads draw through `PanelQuad` (one per legacy
+  batch, in its chunk and slot, keyed `[instance id, part]`). Part 2's
+  `CreatureRow.show_panel_quad` is the shared `Utils3D.show_quad` (merges:
+  a card's balls, the hand's slots, weapon slots of one image, two gray
+  cards' backs); new bridges `Utils3D.place_3d_backside`,
+  `Object2D.show_tex`; twins in `GLSlot`, `AbstractDeck`, `GLCard`,
+  `GLHand`, `GLDeck` and `Legend`. Flags `--legacy=battle_deck`,
+  `battle_legend_back`.
+- Coverage: new cases `battle_deck` (the slides, the dealt cards, the save
+  slot, cards into the weapon, one still turning, a card turning gray, the
+  hand on every creature, frame by frame), `battle_deck_three` (the hand on
+  three enemies and the party) and `battle_deck_init` (a battle's first
+  frames on Grivera, with `initDraw`'s quads in front of the eye: they
+  show nothing); 364 shots; 440 cases, 9,408 shots.
+- Parity (tolerance 0; golden `d1gold`, node `d2node`): golden vs. node,
+  every case: every shot, log and per-case error and leak line identical;
+  each new flag vs. node and vs. golden on the battle cases, all seven phase
+  4.4 flags vs. golden on every case, and with `--legacy=battle_effects`
+  added vs. a golden with it on the battle cases: identical. No legacy quad
+  of the deck, the hand or the legend's gradient is emitted with the flags
+  off. `tools/check.sh`: 0 failed.
+- Frame rate (normal runs): capped 60 → 60; uncapped floor 318, 297, 290 →
+  291, 286, 268, boss area 362, 411, 403 → 360, 322, 374 (legacy → node;
+  likely a small cost of the ~25 meshes rebuilt per frame, near the runs'
+  ±10 % spread).
+- Afterwards `d2node` (440 cases, 9,408 shots) is the set to keep in
+  `tools/parity/out`. Probe scripts in `out/_work`: `probe_panels_patch_head.py`
+  (part 2's probe for code with the panels' twins) + `probe_deck_patch.py`,
+  `probe_deck_report.py`, `chunk_layout.py`, `hand_trace.py`,
+  `deck_batches.py`, `legacy3d_deck_patch.py` with `legacy3d_deck_runs.sh`,
+  `fps_deck.sh`, `full_runs3.sh`, `battle_cases3.txt` (39 battle cases).
+- Prepared (plan 9.4, "Prepared after part 3"): part 4, the texts among the
+  chunks (the attack name, the deck's and the legend's lines, the attack
+  texts) with `AttackBackground` and `EnemyCard`; the next prompt is
+  `docs/phase4_4_rollout4_prompt.md`.
+
 **Modernization phase 4.4's rollout, part 2 (the battle's 3D: the info
 panels): step B done** (2026-11-13; plan 9.4, "Results of the rollout, part
 2"; conventions in `docs/ARCHITECTURE.md` section 15, "The info panels";
@@ -719,9 +763,11 @@ decision 5 decided in plan section 13):
 
 0. **Modernization:** phases 1 to 4.1 are closed (2026-11-06), phase 4.2
    too (2026-11-07); phase 4.4's pilot, the battle's 2D top layer, is done
-   (2026-11-11), and the rollout's first two parts, the enemy and the info
-   panels (2026-11-13). Next (plan 9.4, "Prepared after part 2"): part 3,
-   the deck and the hand (`docs/phase4_4_rollout3_prompt.md`); phase 4.3 (input,
+   (2026-11-11), and the rollout's first three parts, the enemy and the
+   info panels (2026-11-13) and the deck, the hand and the legend's
+   gradient (2026-11-18). Next (plan 9.4, "Prepared after part 3"): part 4,
+   the texts among the chunks with the attack background and the enemy's
+   card (`docs/phase4_4_rollout4_prompt.md`); phase 4.3 (input,
    audio, saves, the `Game` autoload; plan 9.3) can come at any time and
    first if step C of the converted modes comes first. The minimap stays
    the 3D bridge's until the battles leave the bridge (plan 8.4). Record
@@ -763,14 +809,14 @@ decision 5 decided in plan section 13):
   only the shipped saves.
 - Parity: `tools/parity/parity.sh record <set>` / `compare <a> <b>` /
   `ab "<args a>" "<args b>" [case…]`, see `docs/ARCHITECTURE.md` section 7.
-  Runs are windowed (screenshots need a renderer); all 432 cases take
-  about 23 minutes with `--jobs=4` (with about 6 GB free at idle; the 437
+  Runs are windowed (screenshots need a renderer); all 439 cases take
+  about 25 minutes with `--jobs=4` (with about 7.5 GB free at idle; the 437
   cases about 30 with `--jobs=3` at 4.6 GB free; 19 with
   `--jobs=5` for 417 cases, 14-15 with `--jobs=8` when 10 GB are
   free at idle; check first: with 7 GB free, 8 jobs crashed runs) on 12
   logical cores (run nothing beside them, not even a headless compare:
   16 GB run out, plan 12); a compare of two full sets takes about 5
-  minutes; a full set is about 6.3 GB (437 cases; the disk was 96% full
+  minutes (8 with 439 cases); a full set is about 6.4 GB (439 cases; the disk was 96% full
   once) since
   the particles run on the GPU (60-70 minutes before P2; `--uncapped`; with
   `--legacy=battle_effects` or `effect_waits` Menthu's Flame takes 10 s of

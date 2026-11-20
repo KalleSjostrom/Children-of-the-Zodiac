@@ -1,0 +1,29 @@
+# Phase 4.4's rollout, part 3 (the battle's 3D: the deck): a battle's first
+# frames on Grivera--Second Floor (--load="Slot 1"
+# --start="Grivera--Second Floor-mark0" --start-node=43:0, as
+# dungeon_battle_grivera), where GLSlot.initDraw's stray quads (both sides of
+# each party member's mode icon and slots, drawn once in a battle's first
+# frame at the modelview the labyrinth left) are 14 units in front of the
+# eye, depth-tested. Steps until the battle (its start found within a frame,
+# as battle_rows; seed 1: during the tenth step forward), a shot at the end
+# of each step forward (w_#: the floor, the last one the battle's first
+# frame, where initDraw draws), then a shot every frame of the next frames.
+wait 3000
+mark
+tap UP
+mark
+wait 16
+loopuntil sub=battle 700
+shot w_#
+tap DOWN
+mark
+wait 16
+loopuntil sub=battle 700
+loopuntil sub=battle 90000
+log battle
+mark
+shot a_#
+wait 16
+loopuntil xxnever 100
+log end
+quit

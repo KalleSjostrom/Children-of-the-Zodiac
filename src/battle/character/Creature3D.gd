@@ -113,7 +113,7 @@ func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 ## drawImage on) without the drawing: the same state changes in the same
 ## order (the binds and texture coordinates, the colours, the matrix calls,
 ## the bar's update, the info texture's rebuild) and a PanelQuad per batch,
-## in the batch's slot (CreatureRow.show_panel_quad).
+## in the batch's slot (Utils3D.show_quad).
 func _show_panel(g) -> void:
 	_show_image(g)
 	progressBar.update(creature.getProgress())
@@ -125,7 +125,7 @@ func _show_panel(g) -> void:
 	g.push()
 	g.translate(0.13, -0.15, 0)
 	g.scale(0.45)
-	CreatureRow.show_panel_quad(g, [get_instance_id(), &"info"], Utils3D.place_3d(g, tex, coordList[1]))
+	Utils3D.show_quad(g, [get_instance_id(), &"info"], Utils3D.place_3d(g, tex, coordList[1]))
 	g.pop()
 	_show_elements(g)
 	_show_boosts(g)
@@ -141,7 +141,7 @@ func _show_elements(g) -> void:
 		t.bind(g.getGL())
 		g.push()
 		g.scale(0.65)
-		CreatureRow.show_panel_quad(g, [get_instance_id(), &"element"],
+		Utils3D.show_quad(g, [get_instance_id(), &"element"],
 				Utils3D.place_3d_coords(g, tex.getImageTexCoords(), coordList[3]))
 		g.pop()
 
@@ -158,7 +158,7 @@ func _show_boosts(g) -> void:
 			var nr: int = (i + 1) * (1 if boosts[i] == 1 else 11)
 			var t = ImageHandler.getTexture(Values.Cards + str(nr) + ".png").getTexture()
 			g.translate(DISTANCE_BETWEEN_ICONS, 0, 0)
-			CreatureRow.show_panel_quad(g, [get_instance_id(), &"boost", i],
+			Utils3D.show_quad(g, [get_instance_id(), &"boost", i],
 					Utils3D.place_3d(g, t, coordList[2]))
 	g.pop()
 

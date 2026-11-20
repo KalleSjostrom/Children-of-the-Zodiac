@@ -1,25 +1,31 @@
 class_name PanelQuad
 extends MeshInstance3D
-## One batch of the battle's info panels (phase 4.4's rollout, part 2, step B;
-## docs/ARCHITECTURE.md section 15): a row's gradient, or of a creature's
-## panel its portrait, a part of its progress bar (the empty bar, the fill or
-## the overlay to the percent), its info texture (name, "Elem:", life: the
-## legacy Image as the texture), its element icon or a boost's card. Each is
-## a quad in the battle's 3D chunk and in the batch slot of the legacy batch
-## it replaces (Graphics.show_node), one instance per batch: the panel's
-## parts overlap, and surfaces of one instance would tie in Godot's
-## transparent sort (as the floor's walls did, section 10). A batch of two
-## quads (the enemy row's gradient merged into the character row's when no
-## character is drawn) is one node with both. The node stays at the chunk
-## camera's origin and its corners are in eye space, as the legacy batch's
-## vertices are, so it draws the same pixels.
+## One legacy batch of quads of the battle's 3D (phase 4.4's rollout, parts 2
+## and 3, step B; docs/ARCHITECTURE.md section 15). The info panels: a row's
+## gradient, or of a creature's panel its portrait, a part of its progress bar
+## (the empty bar, the fill or the overlay to the percent), its info texture
+## (name, "Elem:", life: the legacy Image as the texture), its element icon
+## or a boost's card. The deck and the hand: a weapon slot's side or the mode
+## icon, the hand's slots, the save slot, a card's picture, balls or back, the
+## pointer, the deck's gradient, the target hand; the legend's gradient. Each
+## is a quad (or a batch's quads) in the battle's 3D chunk and in the batch
+## slot of the legacy batch it replaces (Graphics.show_node), one instance
+## per batch: the parts overlap, and surfaces of one instance would tie in
+## Godot's transparent sort (as the floor's walls did, section 10). A batch of
+## several quads (a card's balls, the hand's slots, the enemy row's gradient
+## merged into the character row's when no character is drawn) is one node
+## with all of them. The node stays at the chunk camera's origin and its
+## corners are in eye space, as the legacy batch's vertices are (a card's or
+## a slot's turn is in them; its back is the reverse winding, which the
+## material's face culling hides or shows), so it draws the same pixels.
 ##
-## The legacy panels (CreatureRow, Creature3D, BattleProgressBar) keep the
-## state, the slide, the bars' percent and the info texture's rebuild; their
-## twins make the drawing's state changes and hand this node the quads they
-## would have drawn, with GLBackend's material for the GL render state
-## (decision 2's exact look: the texture, the blending, the alpha test, the
-## depth test and write, the fog).
+## The legacy objects (CreatureRow, Creature3D, BattleProgressBar; GLDeck,
+## GLWeapon, GLSlot, GLCard, GLHand, Legend) keep the state, the slides, the
+## turns, the bars' percent and the info texture's rebuild; their twins make
+## the drawing's state changes and hand this node the quads they would have
+## drawn (Utils3D.show_quad), with GLBackend's material for the GL render
+## state (decision 2's exact look: the texture, the blending, the alpha test,
+## the depth test and write, the face culling, the fog).
 
 ## A quad's two triangles, as Graphics triangulates GL_QUADS.
 const QUAD_TRIANGLES: Array[int] = [0, 1, 2, 0, 2, 3]

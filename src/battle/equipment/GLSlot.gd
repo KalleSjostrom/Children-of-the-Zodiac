@@ -19,7 +19,10 @@ func _init(slot1 = null, slot2 = null, x = null) -> void:
 	targetRotation = rotation
 
 
-## Loads the textures and creates the position coordinates.
+## Loads the textures and creates the position coordinates (and draws both
+## sides once, stray quads at the modelview of the moment, as the original).
+## Bridge (phase 4.4's rollout, part 3): PanelQuads in their batches' slots;
+## --legacy=battle_deck keeps the legacy quads.
 func initDraw(g: Graphics):
 	loadTextures()
 	createCoordList(2)
@@ -32,6 +35,10 @@ func initDraw(g: Graphics):
 	copyCoords(1, 0, Y)
 	createCoordFor(0.001, 0.001, 1, Z)
 
+	if not Main.is_legacy("battle_deck"):
+		show_tex(g, [get_instance_id(), &"init_front"], 0, 0, true)
+		show_tex(g, [get_instance_id(), &"init_back"], 1, 1, false)
+		return
 	drawTex(g, 0, 0, true)
 	drawTex(g, 1, 1, false)
 
@@ -52,6 +59,9 @@ func loadTextures():
 
 ## Java overloads: draw(Graphics g) (empty) and draw(Graphics g, float y).
 ## Draws the slot at the given y position. Loads the identity matrix.
+## Bridge (phase 4.4's rollout, part 3): the side drawn is a PanelQuad in its
+## batch's slot (show_tex); the flip's update and the matrix calls stay.
+## --legacy=battle_deck keeps the legacy quad.
 func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 	if alpha == null:
 		return
@@ -60,6 +70,12 @@ func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 	g.loadIdentity()
 	g.translate(xPos, y, BattleValues.STANDARD_Z_DEPTH - 0.001)
 	g.rotate(rotation, 0, 1, 0)
+	if not Main.is_legacy("battle_deck"):
+		if currentList == 0:
+			show_tex(g, [get_instance_id(), &"side"], 0, 0, true)
+		else:
+			show_tex(g, [get_instance_id(), &"side"], 1, 1, false)
+		return
 	if currentList == 0:
 		drawTex(g, 0, 0, true)
 	else:

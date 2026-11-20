@@ -711,3 +711,15 @@ battle_enemy_rise        battle_enemy_rise        --load="Start Menthu1" --start
 # after Salmonman's first words and out for his last ones (a boss's row).
 battle_rows              battle_rows              --load="Slot 1" --start="Empyrian Temple--Hall of Wind-mark0"
 battle_rows_boss         battle_rows_boss         --load="Slot 1" --start="Grivera--Corridor of Agony-mark0"
+# Phase 4.4's rollout, part 3 (the deck and the hand, recorded on the
+# unconverted code): the deck and the weapon sliding in and out, the dealt
+# cards flying from the pile and turning, a card flying to the save slot and
+# from it into the weapon, cards flying into the weapon (one still turning),
+# a card turning gray when its slot fills, the saved card selected with its
+# pointer, each frame by frame; the hand turned on each party member
+# (support) and on both Ogres (Berca; god mode); the hand on each of three
+# Demon Goblins and on the party (Hall of Wind); a battle's first frames on
+# Grivera, whose GLSlot.initDraw quads are in front of the eye.
+battle_deck              battle_deck              --load="Slot 1" --start="Berca Desert--South-mark0" --start-node=20:3
+battle_deck_three        battle_deck_three        --load="Slot 1" --start="Empyrian Temple--Hall of Wind-mark0"
+battle_deck_init         battle_deck_init         --load="Slot 1" --start="Grivera--Second Floor-mark0" --start-node=43:0

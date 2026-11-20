@@ -81,12 +81,18 @@ func initDraw(g: Graphics):
 	createCoords()
 
 
+## Draws the hand at the marked creature (turned for a party member).
+## Bridge (phase 4.4's rollout, part 3): a PanelQuad in its batch's slot
+## (show_tex); --legacy=battle_deck keeps the legacy quad.
 func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 	if showing and not done:
 		g.loadIdentity()
 		g.translate(pos[currentPos][0], pos[currentPos][1], -2)
 		if not isEnemySelected():
 			g.rotate(-90, 0, 0, 1)
+		if not Main.is_legacy("battle_deck"):
+			show_tex(g, [get_instance_id(), &"hand"], 0, 0)
+			return
 		drawTex(g, 0, 0)
 
 

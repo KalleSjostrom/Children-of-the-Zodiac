@@ -81,5 +81,5 @@ func drawImage(g):
 ## without the drawing; its quad to the PanelQuad in its slot.
 func _show_image(g) -> void:
 	if texture[0] != null:
-		CreatureRow.show_panel_quad(g, [get_instance_id(), &"image"],
+		Utils3D.show_quad(g, [get_instance_id(), &"image"],
 				Utils3D.place_3d(g, texture[0].getTexture(), coordList[0]))

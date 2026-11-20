@@ -59,6 +59,19 @@ func drawTex(g: Graphics, texIndex: int, coordIndex: int, drawFront = null) -> v
 			Utils3D.draw3DBackside(g, texture[texIndex].getTexture(), coordList[coordIndex])
 
 
+## Bridge (phase 4.4's rollout, part 3, step B, docs/ARCHITECTURE.md section
+## 15): drawTex without the drawing: the bind and the quad (the front, or the
+## back in the backside's order) shown by the PanelQuad of key in its batch's
+## slot (Utils3D.show_quad); nothing when the texture is not loaded.
+func show_tex(g: Graphics, key: Array, texIndex: int, coordIndex: int, drawFront = null) -> void:
+	if texture[texIndex] != null:
+		if drawFront == null or drawFront:
+			Utils3D.show_quad(g, key, Utils3D.place_3d(g, texture[texIndex].getTexture(), coordList[coordIndex]))
+		else:
+			Utils3D.show_quad(g, key, Utils3D.place_3d_backside(g, texture[texIndex].getTexture(),
+					coordList[coordIndex]))
+
+
 ## Java overloads loadTexture(String image, int index) and
 ## loadTexture(String path, String name, int index).
 func loadTexture(a, b, c = null) -> void:

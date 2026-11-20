@@ -3,6 +3,12 @@ extends RefCounted
 ## Port of graphics.Utils3D: static helpers for drawing textures as quads in 3D.
 ## Texture coordinates follow the JOGL convention (see GameTexture.TextureCoords).
 
+## Bridge (phase 4.4's rollout, parts 2 and 3): the node of a legacy batch of
+## quads (show_quad) and the one shown last, with its quad and batch mark (a
+## merge).
+const QUAD_NODE := preload("res://scenes/battle/PanelQuad.tscn")
+static var _last_quad := {}
+
 
 static func _draw3D(g: Graphics, tc, x: Array, y: Array, z: Array) -> void:
 	var gl := g.getGL()
@@ -125,6 +131,50 @@ static func place_3d_coords(g: Graphics, tc, coordList: Array) -> Dictionary:
 				Vector3(x[1], y[1], z[1]), Vector3(x[0], y[1], z[1])]),
 			PackedVector2Array([Vector2(tc.left(), tc.bottom()), Vector2(tc.right(), tc.bottom()),
 				Vector2(tc.right(), tc.top()), Vector2(tc.left(), tc.top())]))
+
+
+## Bridge (phase 4.4's rollout, part 3): draw3DBackside without the drawing:
+## the bind and the quad in the backside's order (the reverse winding: the
+## material's face culling decides which side shows), as Graphics.place_quad
+## gives it.
+static func place_3d_backside(g: Graphics, tex: GameTexture, coordList: Array) -> Dictionary:
+	tex.bind(g)
+	var tc := tex.getImageTexCoords()
+	var x: Array = coordList[0]
+	var y: Array = coordList[1]
+	var z: Array = coordList[2]
+	return g.place_quad(
+			PackedVector3Array([Vector3(x[0], y[1], z[1]), Vector3(x[1], y[1], z[1]),
+				Vector3(x[1], y[0], z[0]), Vector3(x[0], y[0], z[0])]),
+			PackedVector2Array([Vector2(tc.right(), tc.top()), Vector2(tc.left(), tc.top()),
+				Vector2(tc.left(), tc.bottom()), Vector2(tc.right(), tc.bottom())]))
+
+
+## Bridge (phase 4.4's rollout, parts 2 and 3, step B, docs/ARCHITECTURE.md
+## section 15): the PanelQuad of key (an array: the legacy object's instance
+## id and the part) in this frame's 3D chunk, in the slot of the batch the
+## quad would have been (Graphics.show_node: kept from frame to frame, freed
+## in a frame it is not shown), showing quad (Graphics.place_quad's). A quad
+## of the same material right after the last one shown, with nothing drawn in
+## the chunk in between, would have merged into its batch (a card's balls,
+## the deck's slots, the enemy row's gradient after the character row's when
+## no character is drawn): it joins that node instead (Graphics.batch_mark).
+## Nothing is shown in 2D (no 3D chunk: show_node gives no node).
+static func show_quad(g: Graphics, key: Array, quad: Dictionary) -> void:
+	var mark: Array = g.batch_mark()
+	if not mark.is_empty() and _last_quad.get("mark") == mark and _last_quad.quad.mat == quad.mat:
+		var merged: Dictionary = _last_quad.quad.duplicate()
+		merged.v = merged.v + quad.v
+		merged.uv = merged.uv + quad.uv
+		merged.c = merged.c + quad.c
+		merged.n = merged.n + quad.n
+		_last_quad.node.show_quads(merged.mat, merged.v, merged.uv, merged.c, merged.n)
+		_last_quad.quad = merged
+		return
+	var node: PanelQuad = g.show_node(key, func() -> GeometryInstance3D: return QUAD_NODE.instantiate()) as PanelQuad
+	if node != null:
+		node.show_quads(quad.mat, quad.v, quad.uv, quad.c, quad.n)
+		_last_quad = {"mark": g.batch_mark(), "node": node, "quad": quad}
 
 
 ## Bridge (phase 4.4's rollout, part 2): draw3DPart without the drawing: the

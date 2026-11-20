@@ -1,0 +1,52 @@
+# Phase 4.4's rollout, part 3 (the battle's 3D: the hand): Empyrian
+# Temple--Hall of Wind, whose group is always three Demon Goblins
+# (--load="Slot 1" --start="Empyrian Temple--Hall of Wind-mark0"; the start
+# as battle_rows); god mode. At the first party turn the hand on each of the
+# three enemies (R1 three times, around to the first again, L1 back twice),
+# then R2 (support): the hand turned on the party member with the turn and on
+# the others (L1 twice).
+wait 3000
+console god on
+mark
+tap UP
+mark
+wait 16
+loopuntil sub=battle 700
+tap DOWN
+mark
+wait 16
+loopuntil sub=battle 700
+loopuntil sub=battle 90000
+log battle
+mark
+wait 50
+loopuntil battlemode=1 30000
+log turn1
+wait 1000
+shot a1_first_goblin
+tap R1
+wait 200
+shot a2_second_goblin
+tap R1
+wait 200
+shot a3_third_goblin
+tap R1
+wait 200
+shot a4_first_again
+tap L1
+wait 200
+shot a5_third
+tap L1
+wait 200
+shot a6_second
+tap R2
+wait 400
+shot b1_support
+tap L1
+wait 200
+shot b2_support_previous
+tap L1
+wait 200
+shot b3_support_previous
+log end
+quit

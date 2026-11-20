@@ -1569,7 +1569,7 @@ func place_quad(points: PackedVector3Array, uvs: PackedVector2Array,
 ## [frame, chunk, batch count], or [] outside a 3D chunk. Two equal marks:
 ## nothing was added to the chunk in between, so a primitive of the batch's
 ## material would have merged into it (GLBackend's Chunk3D.add_triangles: the
-## panels' gradients, CreatureRow.show_panel_quad).
+## panels' gradients, Utils3D.show_quad).
 func batch_mark() -> Array:
 	if backend == null or not _proj3d:
 		return []

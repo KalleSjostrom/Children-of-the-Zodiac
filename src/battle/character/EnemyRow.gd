@@ -68,7 +68,7 @@ func drawBack(g):
 	# batch slot (Graphics.place_gradient); --legacy=battle_panels keeps the
 	# legacy quad.
 	if not Main.is_legacy("battle_panels"):
-		show_panel_quad(g, [get_instance_id(), &"back"], g.place_gradient(
+		Utils3D.show_quad(g, [get_instance_id(), &"back"], g.place_gradient(
 				Vector3f.ZERO, BACK_ALPHA_TOP, BACK_ALPHA_BOTTOM, xRight,
 				xLeft, yBottom, yTop, false, true))
 	else:

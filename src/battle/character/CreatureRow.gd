@@ -9,10 +9,6 @@ extends Hideable
 
 const BACK_ALPHA_TOP = 0.8
 const BACK_ALPHA_BOTTOM = 0.3
-## Bridge (phase 4.4's rollout, part 2): the panels' node (show_panel_quad)
-## and the one shown last with its quad and batch mark (a merge).
-const PANEL_QUAD := preload("res://scenes/battle/PanelQuad.tscn")
-static var _last_panel_quad := {}
 var creatures3D: Array = []
 var boss: bool = false
 
@@ -77,33 +73,6 @@ func size():
 ## Abstract.
 func drawBack(g):
 	pass
-
-
-## Bridge (phase 4.4's rollout, part 2, step B, docs/ARCHITECTURE.md section
-## 15): the PanelQuad of key (an array: the panel's legacy object's instance
-## id and the part) in this frame's 3D chunk, in the slot of the batch the
-## quad would have been (Graphics.show_node: kept from frame to frame, freed
-## in a frame it is not shown), showing quad (Graphics.place_quad's). A quad
-## of the same material right after the last one shown, with nothing drawn
-## in the chunk in between, would have merged into its batch (the enemy
-## row's gradient after the character row's when no character is drawn): it
-## joins that node instead (Graphics.batch_mark).
-static func show_panel_quad(g, key: Array, quad: Dictionary) -> void:
-	var mark: Array = g.batch_mark()
-	if not mark.is_empty() and _last_panel_quad.get("mark") == mark \
-			and _last_panel_quad.quad.mat == quad.mat:
-		var merged: Dictionary = _last_panel_quad.quad.duplicate()
-		merged.v = merged.v + quad.v
-		merged.uv = merged.uv + quad.uv
-		merged.c = merged.c + quad.c
-		merged.n = merged.n + quad.n
-		_last_panel_quad.node.show_quads(merged.mat, merged.v, merged.uv, merged.c, merged.n)
-		_last_panel_quad.quad = merged
-		return
-	var node: PanelQuad = g.show_node(key, func() -> GeometryInstance3D: return PANEL_QUAD.instantiate()) as PanelQuad
-	if node != null:
-		node.show_quads(quad.mat, quad.v, quad.uv, quad.c, quad.n)
-		_last_panel_quad = {"mark": g.batch_mark(), "node": node, "quad": quad}
 
 
 ## Abstract: the list of creatures to display.

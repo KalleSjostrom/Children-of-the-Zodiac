@@ -323,8 +323,11 @@ of section 12, `Graphics.modelview_2d`, `screen_points`, `begin_capture_3d`,
 enemy's twins: section 15; its rollout's `Graphics.material_3d`, `eye_points`, `eye_normal`
 and `BattleEnemy._show_frame`, `_show_slice`, and part 2's (the info panels) `Graphics.place_quad`,
 `place_gradient`, `batch_mark`, `show_node`'s array keys, `Utils3D.place_3d`, `place_3d_coords`,
-`place_3d_part`, `BattleProgressBar.show_bar`, `CreatureRow.show_panel_quad` and the twins
-`Creature3D._show_panel`, `_show_image`, `_show_elements`, `_show_boosts`: section 15. Closing phase 4.2 removed the
+`place_3d_part`, `BattleProgressBar.show_bar` and the twins
+`Creature3D._show_panel`, `_show_image`, `_show_elements`, `_show_boosts`, and part 3's (the deck and the hand)
+`Utils3D.show_quad` (part 2's `CreatureRow.show_panel_quad`, shared since), `place_3d_backside`,
+`Object2D.show_tex` and the twins `GLCard._show_card`, `_show_card_draw_list`, `AbstractDeck._show_slots`:
+section 15. Closing phase 4.2 removed the
 wrappers that only chose between a legacy drawing and its twin, `AbstractPage.draw_list`,
 `StatusPage.draw_top`, `AbstractStore.draw_dim`, `RiddleGame.draw_dim`, `DeckPage`'s
 `_draw_deck` and `_draw_bar`: their call sites call the twin, plan 9.2); refactors of a
@@ -353,7 +356,7 @@ Game options go after `--` on the command line (see the header of
 | `--fixed-step` | The game advances exactly 1000/60 ms per frame, whatever the real frame time. |
 | `--seed=<n>` | Deterministic run (implies `--fixed-step`): every random generator (`J`, every `JRandom`, Godot's global one) is seeded from `n`; `J.currentTimeMillis()`, `Scheduler` and `GameAction` read a game clock advanced by the elapsed game time instead of the wall clock; saves are read from the shipped files and written to `user://saves_deterministic/` (emptied at start), never to the player's `user://saves/`; the slot lists date a slot saved in the run by the game clock from 1 Jan 2000, 00:00 (`SaveSlots.note_saved`; a file's time is wall-clock time, phase 4.2); no game pad is read (`GameCore.init2`: an idle pad releases AutoPlay's buttons every 40 ms). Two runs of an AutoPlay script then produce the same frames. |
 | `--uncapped` | No 60 FPS cap and no vsync. With `--seed` the result is the same, only faster. |
-| `--legacy=<a,b,…>` | Keep the legacy path of the listed subsystems (`Main.is_legacy`). `all` keeps every one. The flags of closed phases are gone with their legacy paths: phase 1's `villages` and `village_top_layer` (2026-11-03), phase 2's `dungeons` and `dungeon_drawing`, the particles phases' `particles` and `dungeon_particles`, phase 3's `dialog`, `fades`, `emotions`, `mission`, `pause`, `story_images`, `story_texts` and `tutorials`, phase 4.1's `world_map` and `airship` (2026-11-06), phase 4.2's `title`, `game_over`, `menu_list`, `menu_frame`, `menu_text`, `status`, `deck`, `automap`, `dim`, `bless` and `riddle` (2026-11-07; plan 6.9, 7.9, 8.4, 9.1, 9.2): a removed name is ignored (`Main.is_legacy` only answers for the names the code still asks about). Left, the battle effects (section 11): `battle_effects`: the card and enemy effects run the legacy simulation and draw its quads; `effect_waits` (dev): the GPU effects' legacy systems keep their whole pool, so the legacy particle counts decide when a battle goes on, as before (for parity runs with `--hide-particles`). Phase 4.4's pilot, the battle's 2D top layer (section 15): `battle_screens` (the result and spoils screens: the dim, the background, the lines, the played cards, the level-up bars), `battle_flash` (an enemy's red flash), `battle_legend` (the legend's button icons); with all three the top layer is drawn exactly as before. Its rollout, the battle's 3D (section 15): `battle_enemy` (the enemy's frame and slice: its legacy quads instead of the `EnemyView` node), `battle_panels` (the info panels: the rows' gradients and each creature's portrait, bar, info texture, element icon and boosts' cards as legacy quads instead of `PanelQuad` nodes). |
+| `--legacy=<a,b,…>` | Keep the legacy path of the listed subsystems (`Main.is_legacy`). `all` keeps every one. The flags of closed phases are gone with their legacy paths: phase 1's `villages` and `village_top_layer` (2026-11-03), phase 2's `dungeons` and `dungeon_drawing`, the particles phases' `particles` and `dungeon_particles`, phase 3's `dialog`, `fades`, `emotions`, `mission`, `pause`, `story_images`, `story_texts` and `tutorials`, phase 4.1's `world_map` and `airship` (2026-11-06), phase 4.2's `title`, `game_over`, `menu_list`, `menu_frame`, `menu_text`, `status`, `deck`, `automap`, `dim`, `bless` and `riddle` (2026-11-07; plan 6.9, 7.9, 8.4, 9.1, 9.2): a removed name is ignored (`Main.is_legacy` only answers for the names the code still asks about). Left, the battle effects (section 11): `battle_effects`: the card and enemy effects run the legacy simulation and draw its quads; `effect_waits` (dev): the GPU effects' legacy systems keep their whole pool, so the legacy particle counts decide when a battle goes on, as before (for parity runs with `--hide-particles`). Phase 4.4's pilot, the battle's 2D top layer (section 15): `battle_screens` (the result and spoils screens: the dim, the background, the lines, the played cards, the level-up bars), `battle_flash` (an enemy's red flash), `battle_legend` (the legend's button icons); with all three the top layer is drawn exactly as before. Its rollout, the battle's 3D (section 15): `battle_enemy` (the enemy's frame and slice: its legacy quads instead of the `EnemyView` node), `battle_panels` (the info panels: the rows' gradients and each creature's portrait, bar, info texture, element icon and boosts' cards as legacy quads instead of `PanelQuad` nodes), `battle_deck` (the deck and the hand: the weapon's mode icon and slots, the hand's slots and the save slot, the cards' pictures, balls and backs, the pointer, the deck's gradient, the target hand and `GLSlot.initDraw`'s stray quads as legacy quads instead of `PanelQuad` nodes), `battle_legend_back` (the legend's gradient as its legacy quad). |
 | `--hide-particles` | Dev only: the particles draw nothing (`Main.hide_particles`; they still run): the village and cutscene systems, the dungeon weather and save points, the card and enemy effects drawn as particles (not the sphere, image, slow and enemy-colour systems), with the GL state their drawing leaves; for parity runs that compare everything else. |
 | `--minimap-node` | Dev only: the labyrinth's minimap is drawn by `MinimapPart` nodes (`MapRenderer.show_map`) instead of the 3D bridge's batches; the floor's frames are the same to the bit; a battle's frames after them differed by 1/255 (plan 8.3) until the floor's walls were drawn in a fixed order (phase 4.4's rollout, section 10: identical on the 34 battle cases since). Not the default yet (plan 8.4). |
 | Console `padlost [on\|off]`, `emotion <who> <emotion\|off> [shake]` | Dev only (debug console, `scenes/debug/GameCommands.gd`; AutoPlay `console`): `padlost` makes `InputManagers.connectionLost` report a lost game pad (`lost_simulated`) until the overlay's menu is answered, for the "game pad lost" overlay without a pad (seeded runs read none); `emotion` sets a bubble on a party member or villager of the current village (`Sprite.setEmotion`, which only cutscenes call), for the emotions in a village frame. Parity cases `pad_lost`, `emotions_village`. |
@@ -2068,7 +2071,8 @@ A battle is drawn inside another mode's frame: in a labyrinth it is the
 (`BattleManager.draw`: the enemy, the info panels, the deck and hand, the
 legend's gradient and lines, the card effects, the attack texts) is drawn
 through the 3D bridge (section 10) and converted part by part (phase 4.4's
-rollout, below: the enemy and the info panels so far). Its 2D top layer
+rollout, below: the enemy, the info panels, the deck and the hand and the
+legend's gradient so far). Its 2D top layer
 (`BattleManager.drawTopLayer`) is converted through step B: an enemy's red
 flash, the result screen, the spoils screen with its level-up bars and the
 legend's button icons. The legacy objects keep the state, the input and the
@@ -2127,7 +2131,8 @@ screens), `battle_flash`, `battle_legend`; with all three the top layer is
 drawn exactly as before. They go when phase 4.4 closes.
 
 **Still legacy** in a battle: the state, the input and the timing (step C);
-the 3D part but the enemy and the info panels (`Battle.drawBattle`; below) with the 2D text
+the 3D part but the enemy, the info panels, the deck and the hand and the legend's
+gradient (`Battle.drawBattle`; below) with the 2D text
 drawn among its chunks (the attack name: `Attack.draw`'s `drawWithShadow`;
 the deck's and the legend's lines; the attack texts) and the effects that
 are not particles (section 11); `Clock.draw` has no caller (nor in the Java:
@@ -2147,7 +2152,7 @@ drop: "You found …" is shown no other way). Parity cases `battle_result`,
 
 `BattleManager.draw` draws the battle's 3D through the 3D bridge (section
 10): in a labyrinth its batches up to the frame's first 2D (the attack name
-while it shows, else the deck's text) are in the floor scene's chunk
+while it shows, else the deck's text, else the legend's lines) are in the floor scene's chunk
 (`GLBackend.scene_3d`: MeshInstance3D children of the scene's Legacy node,
 in the floor's World3D, sorting offsets from 1e6), the rest in SubViewport
 chunks; in a boss area (Serphia, Menthu, Memory Salmonman: no
@@ -2163,6 +2168,9 @@ camera rig comes with step C (plan 9.4).
 |---|---|---|---|
 | The enemy's frame (`BattleEnemy.draw`'s `drawTex`) and slice (`drawSlice`: two quads) | `EnemyView` (`scenes/battle/EnemyView.tscn`, a MeshInstance3D): the quad, or the slice's two, in eye space, in GLBackend's material of the render state where they were drawn | `BattleEnemy._show_frame`, `_show_slice`, `_show_view` | `battle_enemy` |
 | The info panels (`CharacterRow.draw`, the enemy row's `CreatureRow.draw`): each row's gradient (`drawBack`), then per creature its portrait (a party member's), its progress bar (the empty bar, the fill, the overlay), its info texture, its element icon (an enemy's), its boosts' cards | `PanelQuad` (`scenes/battle/PanelQuad.tscn`, a MeshInstance3D) per legacy batch: its quad (or the batch's quads) in eye space, in GLBackend's material of the render state there | `CharacterRow.drawBack`, `EnemyRow.drawBack` (`Graphics.place_gradient`), `Creature3D._show_panel`, `_show_image`, `_show_elements`, `_show_boosts`, `BattleProgressBar.show_bar`, `CreatureRow.show_panel_quad` | `battle_panels` |
+| The deck (`GLDeck.draw`, the party member with the turn): the weapon's mode icon and slots (`GLSlot.draw`: one side, turning), its cards; the hand's slots and the save slot (`AbstractDeck.draw`); the shown cards, the pointer, the saved card, the pile's top card (`GLCard.draw`: the picture and the level's balls, the back while turning or on the pile); the gradient; `GLSlot.initDraw`'s stray quads (a battle's first frame) | `PanelQuad` per legacy batch | `GLSlot.draw`, `initDraw` (`Object2D.show_tex`), `AbstractDeck._show_slots`, `drawHand`, `GLCard._show_card`, `_show_card_draw_list`, the gradient in `GLDeck.draw` (`Graphics.place_gradient`); `Utils3D.show_quad` | `battle_deck` |
+| The target hand (`GLHand.draw`: `hand1.png`, turned by −90 degrees on a party member) | `PanelQuad` | `GLHand.draw` (`show_tex`) | `battle_deck` |
+| The legend's gradient (`Legend.draw`, every frame) | `PanelQuad` | `Legend.draw` (`place_gradient`) | `battle_legend_back` |
 
 **The enemy.** One `BattleEnemy` per battle draws the image (the other
 enemies of a group are logic only). Its batch is the first of its chunk in
@@ -2203,7 +2211,7 @@ and keyed `[legacy object's instance id, part]` (`&"back"`, `&"image"`,
 `&"bar"`, `&"bar_fill"`, `&"bar_overlay"`, `&"info"`, `&"element"`,
 `[id, &"boost", i]`): one instance per batch, never one instance with a
 surface per part (the parts overlap, and tied surfaces reorder, as the walls
-did). `CreatureRow.show_panel_quad` keeps the merge: a quad of the material
+did). `Utils3D.show_quad` (part 2's `CreatureRow.show_panel_quad`, shared since part 3) keeps the merge: a quad of the material
 of the last panel quad shown, with nothing added to the chunk since
 (`Graphics.batch_mark`: the frame, the chunk, its batch count), joins that
 node. The twins keep every state change of the drawing in its order: the
@@ -2235,6 +2243,64 @@ red screen (`Character3D.draw` while a critical hit hides a party member:
 visible; and the later party members of the row drawn at z 0 after its
 `loadIdentity`, as hidden) stays the legacy batch; no probed frame drew it.
 
+**The deck and the hand** (part 3). `Battle.drawBattle` draws them with the
+depth test off (`ignore_depth_test`, COTZ-011) after the panels, in every
+mode but TALKING: the deck of the party member with the turn
+(`currentDeck`; off the screen while hidden): the weapon (its slide; the
+mode icon and each slot: `GLSlot.draw` steps its flip in the draw
+(`update()`), then `loadIdentity`, `translate`, `rotate` about y and one
+side: the front, or the back in the reverse winding once the flip is half
+way; `setAlphaFunc(.5)`, the weapon's cards, `setAlphaFunc(0)`), the hand's
+slots (`transball.png` each) and the save slot, the shown cards (the
+selected one raised, the pointer under it), the saved card (raised, with the
+pointer, when selected), the pile's top card, then while cards are shown the
+gradient and the deck's lines (2D); then the target hand (while it shows;
+turned on a party member) and the legend (every frame: its gradient, its
+lines). A card (`GLCard.draw`: `loadIdentity`, `translate`, `rotate`)
+draws its picture and its level's balls (one to three quads of one texture),
+in colour, or gray when it fits no free slot (the balls stay in colour);
+while it turns or lies on the pile both sides: the front, then the back; a
+gray card its back first, then its gray front (as the original). The cards
+move and turn in `Battle`'s update (`updatePos`), not in the draw.
+
+The deck's batches are contiguous in every frame (5 to 28, of 12 to 43
+quads), after the enemy row's: on a floor in the scene chunk, while the
+attack name shows in the first SubViewport after it, in a boss area in its
+first SubViewport. The hand and the legend's gradient follow the deck's lines
+in the next SubViewport (in the scene chunk, after the deck, when no card is
+shown: the deck draws no lines then). Batches of several quads: a card's
+balls, the hand's slots, weapon slots of one image, and the backs of two
+cards turning side by side when the second one is gray; nothing merges
+across the parts or with the panels. Each batch is a `PanelQuad` through
+`Utils3D.show_quad` (part 2's merge rule, shared), keyed `[legacy object's
+instance id, part]` (a slot's `&"side"`, `&"init_front"`, `&"init_back"`;
+the deck's `&"slot", i`, `&"save"`, `&"pointer"`, `&"back"`; a card's
+`&"picture"`, `&"ball", i`, `&"back"`; the hand's `&"hand"`; the legend's
+`&"back"`). The render states met: never additive or opaque; depth test
+off, depth write on (off after an effect's `endBlend`), back faces culled,
+unlit (lit in a boss area's first frame), the floor's fog; the alpha test
+the frame's earlier drawing left (`GREATER 0`, or `GREATER .1` for the mode
+icon and the slots in some frames), `GREATER .5` for the weapon's cards;
+white; the gradients untextured, black at .8 at the top and .3 at the
+bottom. The deck starts from white, `Graphics.color` 1 and the texture the
+rows left bound; it leaves the alpha test `GREATER 0`, white and its last
+quad's texture bound (mostly the pile's back). The twins keep every state
+change in its order: the slides' translation, the slots' `update()`, every
+matrix call (a turn is in the eye-space corners, `Graphics.place_quad`
+through the modelview: the node has no transform), the binds and the last
+texture coordinate (`Utils3D.place_3d`, `place_3d_backside`: the backside's
+reverse winding, which the material's face culling hides or shows),
+`GLWeapon`'s `setAlphaFunc` calls (untouched), the gradients' colours,
+texture switch and matrix push and pop (`place_gradient`).
+`GLSlot.initDraw` (each party member's deck in a battle's first frame,
+through `Creature3D.initDraw`) draws both sides of the mode icon and of each
+slot at the modelview the labyrinth left (behind the eye on most floors,
+14 to 50 units in front with the depth test on on others, inside the near
+plane in a boss area: no visible pixel where shot, `battle_deck_init`), in
+the scene chunk or a boss area's SubViewport: nodes too (`show_tex`), so
+that the batches after them keep their slots. The texts (the deck's and the legend's lines) stay GLBackend's
+2D; the flags `battle_deck` and `battle_legend_back` keep the legacy quads.
+
 **The 1/255 and the walls.** A node in a slot takes no instance of the
 bridge's pool, so the batches after it move to other pool instances and the
 floor's transparent render list holds other instances in another order.
@@ -2260,4 +2326,18 @@ the battle's start, out and in on the enemies' turns with the target
 staying; lives under 20 % in red, Celis just over and just under it, a dead
 party member, each in the frame of the info texture's rebuild: the console's
 heal) and `battle_rows_boss` (the rows sliding in after Salmonman's first
-words and out for his last ones, a boss's row without its gradient).
+words and out for his last ones, a boss's row without its gradient). Part 3
+(the deck and the hand): `battle_deck` (Berca's Ogres; Zalzi's first turn:
+the deck and the weapon sliding in and the dealt cards flying from the pile
+and turning, the slots turning for support and the support cards in colour,
+the hand turned on each party member and on both Ogres, a card flying to the
+save slot, the saved card selected with its pointer and flying from the save
+slot into the weapon, a card flying into the magic slot, the deck sliding
+out; Kin's turn: his deck sliding in, a card turning gray when its slot
+fills, a card flying into the weapon while it still turns: each frame by
+frame), `battle_deck_three` (the hand on each of three Demon Goblins and
+on each party member) and `battle_deck_init` (a battle's first frame on
+Grivera, where `GLSlot.initDraw`'s quads are in front of the eye). The old
+cases had the piles of 10 to 19 cards and the
+empty pile (`battle_panels`), cards of levels 1 to 3, gray cards, the
+pointer on every shown card. No new console command.

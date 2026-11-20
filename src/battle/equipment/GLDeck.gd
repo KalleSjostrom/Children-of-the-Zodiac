@@ -68,6 +68,11 @@ func setWeaponDeck(deck):
 	weaponDeck = deck
 
 
+## Draws the weapon, the slots, the cards, the pointer and, while cards are
+## shown, the gradient and the texts. Bridge (phase 4.4's rollout, part 3):
+## the 3D parts are PanelQuads in their batches' slots (the twins of GLSlot,
+## AbstractDeck, GLCard; the gradient through Graphics.place_gradient); the
+## texts stay legacy 2D. --legacy=battle_deck keeps the legacy quads.
 func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 	weaponDeck.draw(g)
 	super.draw(g)
@@ -86,9 +91,14 @@ func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 		var yBottom: float = -0.145 + getYtrans()
 		var yTop: float = 0.146 + getYtrans()
 
-		g.drawGradient(
-				Vector3f.ZERO, CreatureRow.BACK_ALPHA_TOP, CreatureRow.BACK_ALPHA_BOTTOM,
-				xRight, xLeft, yBottom, yTop, true, true)
+		if not Main.is_legacy("battle_deck"):
+			Utils3D.show_quad(g, [get_instance_id(), &"back"], g.place_gradient(
+					Vector3f.ZERO, CreatureRow.BACK_ALPHA_TOP, CreatureRow.BACK_ALPHA_BOTTOM,
+					xRight, xLeft, yBottom, yTop, true, true))
+		else:
+			g.drawGradient(
+					Vector3f.ZERO, CreatureRow.BACK_ALPHA_TOP, CreatureRow.BACK_ALPHA_BOTTOM,
+					xRight, xLeft, yBottom, yTop, true, true)
 
 		if c != null:
 			var x: int = 760

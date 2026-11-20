@@ -79,7 +79,7 @@ func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 ## the PanelQuad of key [owner, part] in its batch's slot.
 func show_bar(g, alpha: float, mode: int, owner: int) -> void:
 	if texture[0] != null:
-		CreatureRow.show_panel_quad(g, [owner, &"bar"],
+		Utils3D.show_quad(g, [owner, &"bar"],
 				Utils3D.place_3d(g, texture[0].getTexture(), coordList[0]))
 	match mode:
 		BattleValues.HASTE:
@@ -88,10 +88,10 @@ func show_bar(g, alpha: float, mode: int, owner: int) -> void:
 			g.setColor(RED[0], RED[1], RED[2], alpha)
 		_:
 			g.setColor(color[0], color[1], color[2], alpha)
-	CreatureRow.show_panel_quad(g, [owner, &"bar_fill"],
+	Utils3D.show_quad(g, [owner, &"bar_fill"],
 			Utils3D.place_3d_part(g, texture[1].getTexture(), coordList[0], percent, width))
 	g.setColor(1, 1, 1, alpha)
-	CreatureRow.show_panel_quad(g, [owner, &"bar_overlay"],
+	Utils3D.show_quad(g, [owner, &"bar_overlay"],
 			Utils3D.place_3d_part(g, texture[2].getTexture(), coordList[0], percent, width))
 
 

@@ -28,6 +28,10 @@ func setSupport(p_support):
 	self.support = p_support
 
 
+## Draws the gradient and the lines (every frame: off the screen while the
+## legend is hidden). Bridge (phase 4.4's rollout, part 3): the gradient is a
+## PanelQuad in its batch's slot (Graphics.place_gradient); the lines stay
+## legacy 2D. --legacy=battle_legend_back keeps the legacy quad.
 func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 	g.loadIdentity()
 	g.setFontSize(40)
@@ -38,9 +42,14 @@ func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 	var xr: float = 0.26 + getXtrans()
 	var ybottom: float = -0.19 # -.145f
 	var ytop: float = 0.4
-	g.drawGradient(
-			Vector3f.ZERO, CreatureRow.BACK_ALPHA_TOP, CreatureRow.BACK_ALPHA_BOTTOM,
-			xr, xl, ybottom, ytop, true, true)
+	if not Main.is_legacy("battle_legend_back"):
+		Utils3D.show_quad(g, [get_instance_id(), &"back"], g.place_gradient(
+				Vector3f.ZERO, CreatureRow.BACK_ALPHA_TOP, CreatureRow.BACK_ALPHA_BOTTOM,
+				xr, xl, ybottom, ytop, true, true))
+	else:
+		g.drawGradient(
+				Vector3f.ZERO, CreatureRow.BACK_ALPHA_TOP, CreatureRow.BACK_ALPHA_BOTTOM,
+				xr, xl, ybottom, ytop, true, true)
 
 	var x: int = int(TEXT_X + super.getXtrans() * 600)
 

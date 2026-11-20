@@ -4154,9 +4154,11 @@ first frame's `initDraw` draws stray quads (`GLSlot`, `EnemyCard`,
      texture the legacy Image, the rows' gradients with them.*
   3. The deck and the hand: two-sided card quads, slots and the mode icon
      mirroring `GLSlot`'s rotation (its `update` in the draw stays in the
-     twin), the deck's balls and pointer. M–L.
+     twin), the deck's balls and pointer. M–L. *Done (part 3, below): a
+     `PanelQuad` per legacy batch, each side of a card or slot a quad in
+     eye space (the turn in its corners, the back in the reverse winding).*
   4. The legend's gradient, the rows' gradients. S. *The rows' are done with
-     the panels (part 2); the legend's can join part 3.*
+     the panels (part 2), the legend's with the deck (part 3).*
   5. The texts among the chunks: the attack name, the deck's and the
      legend's lines, the attack texts (UI nodes or `Label3D` once the 3D
      around each is nodes; then `Battle.tscn` under the rig). M.
@@ -4532,6 +4534,280 @@ for later). What `Battle.drawBattle` draws first, with `ignore_depth_test` on
   the texts among the chunks (item 5) and the effects that are not particles
   (item 6).
 
+**Results of the rollout, part 3 (phase 4.4, `docs/phase4_4_rollout3_prompt.md`;
+conventions in docs/ARCHITECTURE.md section 15, "The deck and the hand").**
+The deck, the hand and the legend's gradient through step B: a `PanelQuad`
+per legacy batch of the weapon's mode icon and slots, the hand's slots and
+the save slot, the cards' pictures, balls and backs, the pointer, the deck's
+gradient, the target hand and the legend's gradient, each in the chunk and
+batch slot of its batch.
+
+* **Baseline** (on b67bcb94): `tools/check.sh` 0 failed (498 scripts); the
+  437 cases (`d0base`, 9,044 shots) identical to part 2's `f2node` shot for
+  shot and log for log, with the same script errors (3), errors (2,421) and
+  exit leak lines (12); only audio-device lines differ (15 vs. 18). Recorded
+  from a project copy with 4 jobs (about 25 minutes at 7.5 GB free).
+* **Facts** (deliverable 1; a headless probe over the 36 battle cases and the
+  two new ones, on part 2's probe: per frame the deck's state (its owner,
+  selection, counts, slide, the weapon's mode and slide, each slot's flip at
+  its draw, each card's position, target, offset, turn, sides, gray and
+  level), the hand's and the legend's, the GL state at the deck's start and
+  after each part, and per batch of the deck, the hand and the legend's
+  gradient its chunk, index, merge and render state; 52,244 deck frames),
+  where they add to or differ from the prompt and the entry above:
+  * The order is the prompt's. The deck is drawn in every mode but TALKING
+    (3,867 frames draw no deck), off the screen while hidden (its last owner's
+    deck between turns).
+  * Batches: the deck's are contiguous in every frame, 5 to 28 (12 to 43
+    quads), right after the enemy row's (node slots since part 2), and
+    nothing merges into them from the panels or out of them into the hand or
+    the legend. Merges inside the deck: the hand's slots (`transball.png`,
+    one batch), a card's balls, weapon slots of one image next to each other,
+    and, depending on the state, the backs of two cards turning side by side
+    when the second is gray: a gray card that turns draws its back first,
+    then its gray front (`side = currentSide[i] + 1`), so its back follows
+    the first card's back (1,355 frames, 122 shots). Cards are never drawn
+    twice in a frame.
+  * Chunks: in a labyrinth (35,209 frames) the deck is in the floor's scene
+    chunk but in the first SubViewport after the attack name while it shows;
+    in a boss area (17,035 frames) in the first SubViewport; the hand and
+    the legend's gradient follow the deck's lines as the first batches of
+    the next SubViewport; with no
+    card shown (`battle_panels`' emptied deck: 153 frames, 27 shots) the deck
+    draws no gradient and no lines, and the hand and the legend's gradient
+    stay in the scene chunk after the deck (the legend's lines are then the
+    frame's first 2D). The deck's gradient is always followed by its lines
+    (`c` is never null while cards are shown).
+  * Render states: never additive or opaque; depth test off (all of it is
+    drawn under `ignore_depth_test`), depth write on (off in frames after an
+    effect's `endBlend`), back faces culled, unlit (lit only in a boss area's
+    first frame), the floor's fog (Forest Path, the frozen floors, Pensara);
+    the alpha test as the frame's earlier drawing left it (`GREATER 0`; the
+    mode icon and the slots `GREATER .1` in some frames), `GREATER .5` for
+    the weapon's cards (`setAlphaFunc(.5)`, then 0 after them, so everything
+    after the weapon is `GREATER 0`); every quad white; the gradients
+    untextured, black at .8 on top and .3 at the bottom.
+  * The state: the deck starts from white, `Graphics.color` 1, the texture
+    the rows left; it leaves `GREATER 0`, white, its last quad's texture
+    (mostly the pile's back); the hand leaves `hand1.png`, the legend white
+    and the texture as found. The slots' flip steps per draw (`GLSlot.draw`'s
+    `update()`: 10 degrees a draw, the side switched half-way), the mode
+    icon's too; the cards move (0.03 a step) and turn (10 degrees a step) in
+    `updatePos`, 18 steps a turn.
+  * `GLSlot.initDraw` (each party member's deck in a battle's first frame,
+    from `Creature3D.initDraw`) draws both sides of the mode icon and of
+    each slot as stray batches: 31 a battle with Slot 1's party (40 with
+    Start Menthu1's four, 5 with Kin alone in the tutorial), at the
+    modelview the labyrinth left: behind the eye on most floors (z +6 to
+    +34), 14 to 50 units in front with the depth test on in others
+    (Grivera, the frozen floors, the Hall of Memories, Menthu's floor), at z
+    ±0.001 (inside the near plane) in a boss area; in the scene chunk or the
+    boss area's SubViewport, never in 2D. No shot showed a battle's first
+    frame; the new `battle_deck_init` shoots Grivera's (14 units in front):
+    a run with the quads left out draws the same frame, so they show
+    nothing there.
+  * A deck's cards are dealt (fly from the pile and turn) when it first
+    becomes the current deck: Kin's at the battle's start, off the screen,
+    so his first turn shows them in place; in Berca and the Hall of Wind
+    (seed 1) Zalzi has the first turn, and his cards are dealt as his deck
+    slides in. CROSS on a gray card
+    does nothing, and CROSS on a gray saved card drops it: it leaves the
+    save slot for the deck's list but not the weapon (original; `battle_deck`
+    avoids it).
+* **Coverage.** The probe over the old cases: the deck, the pointer and the
+  pile in every battle shot, cards of levels 1 to 3, gray cards, piles of 20
+  and more, 10 to 19 (224 shots) and 1 to 9, the emptied deck and pile
+  (`battle_panels`), the slots turning (support) and their back sides, the
+  deck and the legend sliding (not frame by frame), the hand on an enemy, a
+  card in the weapon; never shot: the saved card, a card flying into the
+  weapon or the save slot frame by frame, a card in the weapon while it
+  still turns (17 frames), the hand on each party member and on each of
+  three enemies, a battle's first frame (`initDraw`'s quads). Three new
+  cases (364 shots): `battle_deck` (Berca's Ogres;
+  Zalzi's first turn: the deck and the weapon sliding in and his cards dealt
+  from the pile and turning, shot every frame; R2: the slots turning, the
+  support cards in colour and the others gray, the hand turned on Zalzi, on
+  Kin and on Celis; R2 back, the hand on both Ogres; Battle Card flying to
+  the save slot while Fungi moves right and a card is dealt, every frame;
+  the saved card selected with its pointer, then flying from the save slot
+  into the weapon along its line, every frame; Fire flying into the magic
+  slot and a card dealt, every frame; the deck, the weapon, the hand and the
+  legend sliding out, every frame; the round's result; Kin's turn: his deck
+  sliding in, Slow into the weapon (his other Slow turns gray), Battle Card
+  dealt and, while it still turns, sent into the weapon, every frame) and
+  `battle_deck_three` (the hand on each of three Demon Goblins, around and
+  back, and turned on each party member) and `battle_deck_init`
+  (Grivera--Second Floor: a shot at the end of each step forward, the last
+  one the battle's first frame, then every frame). No new console command.
+  The new cases recorded twice on the unconverted code: identical (364
+  shots, logs, error lines). The golden `d1gold`: the baseline and the new
+  cases (440 cases, 9,408 shots).
+* **Built** (ARCHITECTURE section 15): no new scene: `PanelQuad` holds any
+  batch of quads; part 2's `CreatureRow.show_panel_quad` became the shared
+  `Utils3D.show_quad` (the panels call it too); the bridges
+  `Utils3D.place_3d_backside`, `Object2D.show_tex` (drawTex without the
+  drawing); the twins in `GLSlot.draw` and `initDraw`, `AbstractDeck._show_slots`,
+  `drawHand`, `GLCard._show_card`, `_show_card_draw_list`, `GLHand.draw`, the
+  gradients in `GLDeck.draw` and `Legend.draw` (`Graphics.place_gradient`);
+  flags `--legacy=battle_deck` (the deck and the hand) and
+  `battle_legend_back` (the legend's gradient).
+* **Parity** (tolerance 0 everywhere; the final code; node run `d2node`, 440
+  cases, 9,408 shots; "the battle cases": the 39 that draw a battle, 2,482
+  shots): golden (`d1gold`) vs. node: 9,408 of 9,408 shots
+  identical, all 440 logs identical, the same script errors (3), errors
+  (2,421) and exit leak lines (12) in every case (only audio-device lines
+  differ: 18 vs. 0); `--legacy=battle_deck` and `--legacy=battle_legend_back`
+  each vs. the node run and vs. the golden on the battle cases: 2,482 of
+  2,482 each, logs and error lines identical; all seven phase 4.4 flags
+  (`battle_deck`, `battle_legend_back`, `battle_panels`, `battle_enemy`,
+  `battle_screens`, `battle_flash`, `battle_legend`) vs. the golden on every
+  case: 9,408 of 9,408, logs and error lines identical, and vs. the node run
+  on the battle cases: 2,482 of 2,482; with `--legacy=battle_effects` added,
+  vs. a golden with it (`d1goldfx`), on the battle cases: 2,482 of 2,482;
+  the new cases recorded twice: 364 of 364. (`battle_deck_init` was added
+  after the full runs and recorded alone in each of them.) No difference had to be
+  explained: the first node run (a smoke set of 8 battle cases, 849 shots,
+  the new cases among them) was already identical.
+* **No legacy quad left:** a run of the 39 battle cases with prints in
+  `Graphics._emitTriangles` and `show_node` while the deck, the hand, the
+  legend's gradient and `GLSlot.initDraw` draw (headless): flags off 52,331
+  deck frames (11,747 with the hand), 1,126,101 node calls (none in 2D) and
+  no legacy emission; with `--legacy=battle_deck,battle_legend_back` no node
+  call and 1,769,472 legacy quads (the 643,371 more are the merged quads: a
+  card's balls, the hand's slots, weapon slots of one image, two gray backs,
+  82 of initDraw's).
+* **Frame rate** (normal runs: no `--seed`, windowed, one at a time, the
+  shipped saves; `fps=` every 0.5 s for 11 s at a party turn, the first
+  second dropped; legacy `--legacy=battle_deck,battle_legend_back` → node;
+  random enemy groups): capped 60 → 60 on a floor (Berca Desert--South) and
+  in Serphia's boss area; uncapped on the floor 318, 297, 290 → 291, 286, 268
+  (the runs met a Stitchman, a Stitchman, an Ogre → a Stitchman, an Ogre, two
+  Ogres), in the boss area 362, 411, 403 → 360, 322, 374. The node runs are
+  lower in five of six pairs, by up to about 10 % (the spread between
+  repeats is as large): likely a small real cost, about 25 more meshes
+  rebuilt every frame (each `PanelQuad` rebuilds its `ArrayMesh` in
+  `show_quads`, as the panels' do). Not profiled; rebuilding a mesh only when
+  its quads change is the later option (most of the deck's are the same
+  from frame to frame), and step C replaces the per-frame rebuild anyway.
+* **Still legacy** in the battle's 3D: `AttackBackground` and `EnemyCard`
+  (row 1b: one quad each, three stray quads each in `initDraw`), the
+  effects that are not particles, the party's red screen (never visible);
+  the texts among the chunks (the attack name, the deck's and the legend's
+  lines, the attack texts). The deck's state, input and timing (the slides,
+  the cards' moves and turns, the slots' flips) stay legacy (step C).
+* **Found on the way:** a gray card that turns draws its back before its
+  gray front, so two turning cards' backs can share a batch; CROSS on a gray
+  saved card takes it out of the save slot without putting it anywhere it
+  is drawn (both original); `GLSlot.initDraw`'s stray quads are sometimes in
+  front of the eye (46 units, behind the floor's walls with the depth test
+  on), not only behind it; part 2's probe patch finds two of its anchors
+  twice in code that has the panels' twins (`probe_panels_patch_head.py`
+  patches both).
+
+**Prepared after part 3 (2026-11-18): part 4, the texts among the chunks.**
+Plan 9.4's order holds: the deck changed neither the order nor the place
+(nodes in their batches' slots moved nothing on the screen), and with the
+enemy, the panels, the deck, the hand and the legend's gradient converted,
+the battle's 3D between its texts is nodes but for two small quads of row 1b
+and the effects that are not particles. What the frame draws, from part 3's
+probe (every battle frame of the 38 battle cases; "S" the floor's scene
+chunk, "V" a SubViewport, "T" GLBackend's 2D text):
+
+* **The layouts.** On a floor, in most frames: S (the enemy, the attack
+  background, the enemy's card, the rows, the deck), T (the deck's lines), V
+  (the hand, the legend's gradient), T (the legend's lines), V (the
+  effects, during ANIMATE), T (the attack texts: during ANIMATE twice,
+  `Animation.draw`'s then `Battle.drawBattle`'s), V (the weather's front pass
+  and the minimap). While the attack name shows: S (the enemy, the attack
+  background), T (the attack name), V (the enemy's card, the rows, the deck),
+  T, V (the legend's gradient), T, …. With no card shown (the deck emptied,
+  `battle_panels`) the deck draws no lines: the hand and the legend's
+  gradient stay in S and the legend's lines are the first 2D. In a boss area
+  every 3D chunk is a SubViewport, and nothing is drawn after the battle's
+  last text. TALKING: the enemy and the rows only.
+* **What each text draws** (all GLBackend's 2D, `Graphics._drawText`):
+  * the attack name (`Attack.draw`, while an enemy attacks: 7,498 probed
+    frames, 352 shots, 22 cases): after `AttackBackground`'s quad,
+    `setFontSize(46)`, the name slid in by `pos += SPEED` (60 px) per draw
+    (state stepped in the draw) to its centre, `drawWithShadow` twice: a
+    black copy 3 px down and right of a point that slides in from the other
+    side (`dest + |pos - dest|`), then the white line at `pos`; each
+    `drawWithShadow` is a black line 1 px down and right, then the line
+    (`drawString`, alpha 1): four lines;
+  * the deck's lines (`GLDeck.draw`, while cards are shown; 52,091 frames,
+    2,267 shots): `startText` at the mode's fade value, black copies 2 px
+    down and right, then white (`setTextColorAndApply(1, 1)`): the card's
+    name at 34, the pile's count at 50 (centred, 5 px further left for 10 to
+    19 cards, none when the pile is empty), its two info lines and "Deck" at
+    24, at a y that slides with the deck;
+  * the legend's lines (`Legend.draw`, every frame, off the screen while it
+    is hidden; 52,244 frames, 2,294 shots): six lines at 24 (`setFontSize(40)`
+    first, which `startText`'s 24 replaces), black, then white 2 px up and
+    left, at an x that slides with the legend; "Offense" for "Support" in
+    support mode;
+  * the attack texts (`AttackText.draw`: damage, "Miss!", "Critical Hit!",
+    the shuffle's "Shuffle" (`Animation.init` with a text); 17,541 frames in `drawBattle`, 10,076 in
+    `Animation.draw`, 818 and 489 shots): per text `setColor(colour, life)`
+    and `setBlendFunc(ONE_MINUS_SRC_ALPHA)`, the text at the screen point of
+    its eye-space position (`draw3DText`: the modelview `translate(0, 0,
+    -2)`, `scale(0.8)`; the font size scaled to the projection: 40, 30, bold
+    20 and bold 16 become about 74, 56, 37 and 30 px), red or green at
+    `life`; `loadIdentity` after. During ANIMATE each text is drawn twice per
+    frame (as the Java), so it looks brighter.
+* **What a UI node there changes.** A node of `show_ui` takes the text's
+  slot in the frame's 2D order; from there on the frame's legacy 2D goes to
+  the UI layer's canvas and every later 3D chunk is a SubViewport composited
+  on the UI layer (ARCHITECTURE section 12): on a floor the hand and the
+  legend's gradient, the effects, the weather's front pass and the minimap
+  (and, while the attack name shows, the rows and the deck), in a boss area
+  everything after the first text. The scene chunk before the first text is
+  unchanged, and so is every chunk's content and order; only the layer of the
+  composite changes, which should draw the same pixels (to prove: the 8.3
+  1/255 is gone since the walls are drawn in a fixed order). The levels only
+  rise in a frame: the top layer, the mission and the dialog are UI or
+  Transition nodes after it anyway. A `Label3D` (or Controls placed with
+  `Camera3D.unproject_position`) would draw the text in the 3D chunk with
+  Godot's glyph rendering, in the chunk's blending (linear in the floor's
+  scene, sRGB in SubViewports), not JOGL's: a look change (decision 8).
+* **State the texts change:** the attack name's `pos` (per draw) and font
+  size 46; the deck's and the legend's `startText`/`finishText`, font sizes
+  (34, 50, 24) and text colours (black, then white); the attack texts' colour
+  (`setColor` at `life`), blend function and the modelview (`loadIdentity`
+  after). Each twin keeps them (the font size and text colour the next text
+  starts from; the colour left after the attack texts is what the weather's
+  front pass and the minimap start from).
+* **The remaining legacy 3D of row 1b:** `AttackBackground` (the attack
+  name's background, drawn every frame, off the screen while hidden) and
+  `EnemyCard` (the enemy's card, sliding in while it attacks), each one
+  `drawTex` (and three stray quads each in `initDraw`): `Object2D.show_tex`
+  converts them as it did `GLSlot`; they belong with the attack name (the
+  background is drawn right before it).
+* **Coverage known:** every text in many shots (above); the legend in
+  support mode, the pile's count for 10 to 19 cards, an empty pile, three
+  enemies' attack names (`battle_rows`), a boss's attacks in his area. To
+  probe and shoot: the attack name sliding in frame by frame (`pos` per
+  draw), "Miss!", "Critical Hit!" (`battle_flash`'s crits), the shuffle's
+  text, support numbers (green), several texts at once, a text fading out
+  frame by frame, the deck's lines while it slides; the font sizes and
+  positions per text (print them, as the 2D top layer's probe did).
+* **Battle.tscn under the camera rig: not with the texts.** It moves the
+  battle's 3D into the floor's world, under every 2D of the frame, so a 3D
+  part drawn after a text today would go under it: the hand and the legend's
+  gradient after the deck's lines, the effects after the legend's lines, the
+  weather's front pass after the attack texts (rain and snow over them
+  today). Whether any of those overlap on the screen needs the probe's
+  rectangles; at least the weather's front pass and the large effects do.
+  That is a look change for the user to decide (with decision 8 and step C);
+  a boss area would also need a camera of its own (its SubViewports' sRGB
+  compositing). Recommended: part 4 = the four texts as UI nodes in the
+  frame's order (`ShadowText` for the attack name; line nodes as the top
+  layer's for the deck's and the legend's lines; a node for the attack texts
+  at their projected points and sizes) with `AttackBackground` and
+  `EnemyCard` as `PanelQuad`s; then part 5, the effects that are not
+  particles; then the minimap's node as the default (8.4), the closing of
+  4.4 and step C, where `Battle.tscn` under the rig comes with the decision
+  on the texts' order. Size M.
+
 ## 10. Phase 5: remove the emulation
 
 When no mode draws through `g` any more:
@@ -4756,7 +5032,12 @@ When no mode draws through `g` any more:
   attack on all hid every party member. A node per quad would still draw the
   same pixels there (distinct sorting offsets), but the mapping "a node per
   batch" needs the merge kept (`Graphics.batch_mark`); probe the merges per
-  frame over every case before planning a part's nodes.
+  frame over every case before planning a part's nodes. *Part 3 (the
+  deck):* merges across objects of one part (a card's balls, the hand's
+  slots, weapon slots of one image) and, depending on the state, across two
+  cards (their backs when the second is gray and both turn: a gray card
+  draws its back first). One shared helper keeps every merge
+  (`Utils3D.show_quad`); the twins need not know their neighbours.
 
 ## 13. Open decisions
 
@@ -4839,7 +5120,11 @@ When no mode draws through `g` any more:
    (coroutines, the slice's per-draw steps in the twin); its node mirrors
    them each frame. *Nor for the info panels (part 2):* the rows' slide (0.1
    per update), the bars' percent (updated in the draw) and the hide timers
-   stay legacy; the nodes mirror them each frame.
+   stay legacy; the nodes mirror them each frame. *Nor for the deck and the
+   hand (part 3):* the slides (0.1 per update), the cards' moves and turns
+   (`updatePos`, per update), the slots' flips (stepped in their draw) stay
+   legacy; the nodes mirror them each frame. The plan's "Tweens for flip and
+   move" are step C.
 7. **Village top layer** (from the pilot, 6.7): *decided (phase 1
    rollout):* roofs and treetops are always drawn (6.1, the pilot's
    default). The legacy rule draws a piece only where a sprite overlaps it,
@@ -4854,7 +5139,8 @@ When no mode draws through `g` any more:
    legacy look so that parity holds. Each is a theme or scene edit now.
    Open (the rollout kept the legacy look too, and so did phase 4.1, 4.2's
    pilot, the menu, the stores, the mini-games and 4.4's pilot and its
-   rollout's first two parts: the info texture is still the legacy Image).
+   rollout's first three parts: the info texture is still the legacy Image,
+   the cards and slots the legacy quads).
 
 ## 14. Suggested order and size
 
@@ -4871,7 +5157,7 @@ Sizes are relative: S ≈ a focused session, XL ≈ many sessions.
 | 4.1 | World map + airship. *Done through step B (9.1): the scenes, the name plate, legacy vs. scene identical; closed (9.1).* | M | 1 (converter), 3 | — |
 | 4.2 | Title, game over, mini-games, stores, menu. *Done through step B (9.2: the pilot, the menu, the stores and the mini-games, one session each) and closed (9.2, "Closing phase 4.2").* | L | 3 | — |
 | 4.3 | Input, audio, saves, `Game` autoload. *Prepared (9.3).* | M | any time after 0; the autoload is best after 4.2 | 5; step C (the input wrapper) |
-| 4.4 | Battle, cards, effects. *The pilot, the battle's 2D top layer, done through step B (9.4: the result and spoils screens, the level-up bars, an enemy's red flash, the legend's icons); the rollout, the battle's 3D: part 1, the enemy, done through step B (9.4: `EnemyView` in its chunk's slot; the floor's walls drawn in a fixed order); part 2, the info panels, done through step B (9.4: a `PanelQuad` per legacy batch in its slot); next the deck and the hand.* | XL | 2, 3 | 5; the minimap's node (8.4) |
+| 4.4 | Battle, cards, effects. *The pilot, the battle's 2D top layer, done through step B (9.4: the result and spoils screens, the level-up bars, an enemy's red flash, the legend's icons); the rollout, the battle's 3D: part 1, the enemy, done through step B (9.4: `EnemyView` in its chunk's slot; the floor's walls drawn in a fixed order); part 2, the info panels, done through step B (9.4: a `PanelQuad` per legacy batch in its slot); part 3, the deck, the hand and the legend's gradient, done through step B (9.4: `PanelQuad`s in their slots, the merges through `Utils3D.show_quad`); next the texts among the chunks.* | XL | 2, 3 | 5; the minimap's node (8.4) |
 | 5 | Remove the GL emulation; per-delta time | M | all of the above | — |
 
 After phase 2, P comes before phase 3 (2026-10-27): the particle
