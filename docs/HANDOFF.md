@@ -1,4 +1,4 @@
-# Handoff: state of the Godot port (2026-11-11, after steps 1–3, modernization phase 0, phases 1, 2, 3, 4.1 and 4.2 done and closed, the particles phases P and P2, the character sprite sheets, phase 4.4's pilot (the battle's 2D top layer) and its rollout's first three parts (the battle's enemy, info panels, deck and hand))
+# Handoff: state of the Godot port (2026-11-11, after steps 1–3, modernization phase 0, phases 1, 2, 3, 4.1 and 4.2 done and closed, the particles phases P and P2, the character sprite sheets, phase 4.4's pilot (the battle's 2D top layer) and its rollout's first four parts (the battle's enemy, info panels, deck and hand, and the texts among its 3D chunks))
 
 Conventions: legacy (ported) code follows `docs/PORTING.md`; new code
 (scenes, resources, tools, bridge) follows `docs/ARCHITECTURE.md`. The
@@ -534,6 +534,49 @@ section 14, "The riddles"; the procedure in `docs/CONVERTING_UI.md` section
 - Prepared (plan 9.3, 9.4): phases 4.3 and 4.4; recommended next: 4.4's
   pilot, the battle's 2D top layer (`docs/phase4_4_prompt.md`).
 
+**Modernization phase 4.4's rollout, part 4 (the battle's 3D: the texts
+among the chunks, the attack's background and the enemy's card): step B
+done** (2026-11-20; plan 9.4, "Results of the rollout, part 4"; conventions
+in `docs/ARCHITECTURE.md` section 15, "The texts among the chunks";
+`docs/phase4_4_rollout4_prompt.md`):
+- The attack name (two `ShadowText`s), the deck's lines and the legend's
+  lines (a `MenuText` each) and the attack texts (`scenes/ui/AttackTexts`,
+  each text at its projected point and pixel size) are UI nodes in the
+  frame's 2D order where each was drawn (`Graphics.show_ui`); from the first
+  of them on, the frame's later 3D chunks are composited on the UI layer
+  (the same pixels). `AttackBackground` and `EnemyCard` (and their `initDraw`
+  quads) are `PanelQuad`s (`Object2D.show_tex`). New bridges
+  `Graphics.place_multi_string`, `place_multi_centered_text`,
+  `AttackText.place_3d_text` (shared with the legacy `draw3DText`),
+  `AttackTextText.place_text`. Flags `--legacy=battle_attack_name`,
+  `battle_deck_text`, `battle_legend_text`, `battle_attack_text`,
+  `battle_enemy_quads`.
+- Coverage: new case `battle_texts` (a damage text from its first frame to
+  its last; an Ogre's heal at 74 px after the console's `heal -700
+  enemies`, every frame); 379 shots; 441 cases, 9,787 shots.
+- Parity at tolerance 0: golden `t1gold` vs. node `t2node` 9,787 of 9,787
+  shots, logs and per-case error lines identical; each new flag, all twelve
+  4.4 flags, and with `battle_effects` added: identical. No legacy text or
+  quad left with the flags off (counters on the 40 battle cases).
+- Frame rate (normal runs, legacy → node): capped 60 → 60 on a floor and in
+  Serphia's boss area; uncapped no difference beyond the spread between
+  repeats (turn on the floor 312, 305, 306 → 325, 299, 324; in the boss area
+  436, 353, 365 → 372, 430, 420). One boss-area node run segfaulted at exit
+  after AutoPlay's `quit` (no output, no Windows event); 10 repeats each way
+  and every parity run exited 0 (plan 9.4, "Found on the way").
+- Afterwards `t2node` (441 cases, 9,787 shots) is the set to keep in
+  `tools/parity/out`. Scripts in `out/_work`: `probe_text_patch.py` (on
+  `probe_panels_patch_head.py`), `probe_text_report.py`, `probe_text_runs.py`,
+  `legacy_text_patch.py`, `fps_texts.sh` with `fps/fps_texts*.txt`,
+  `full_runs4.sh`, `battle_cases4.txt` (40 battle cases).
+- Found: the GPU weather's front pass is under the battle in every frame
+  with battle text since P2 (plan 9.4); `SwordBackground` is never drawn (as
+  the Java); Demolish's spheres are lit by the light state their `end` pops
+  back (GLBackend's lights are global shader parameters).
+- Prepared (plan 9.4, "Prepared after part 4"): part 5, the effects that are
+  not particles (Demolish's spheres, Death's and Slow's images); the next
+  prompt is `docs/phase4_4_rollout5_prompt.md`.
+
 **Modernization phase 4.4's rollout, part 3 (the battle's 3D: the deck,
 the hand and the legend's gradient): step B done** (2026-11-18; plan 9.4,
 "Results of the rollout, part 3"; conventions in `docs/ARCHITECTURE.md`
@@ -763,11 +806,12 @@ decision 5 decided in plan section 13):
 
 0. **Modernization:** phases 1 to 4.1 are closed (2026-11-06), phase 4.2
    too (2026-11-07); phase 4.4's pilot, the battle's 2D top layer, is done
-   (2026-11-11), and the rollout's first three parts, the enemy and the
-   info panels (2026-11-13) and the deck, the hand and the legend's
-   gradient (2026-11-18). Next (plan 9.4, "Prepared after part 3"): part 4,
-   the texts among the chunks with the attack background and the enemy's
-   card (`docs/phase4_4_rollout4_prompt.md`); phase 4.3 (input,
+   (2026-11-11), and the rollout's first four parts, the enemy and the
+   info panels (2026-11-13), the deck, the hand and the legend's gradient
+   (2026-11-18) and the texts among the chunks with the attack background
+   and the enemy's card (2026-11-20). Next (plan 9.4, "Prepared after part
+   4"): part 5, the effects that are not particles
+   (`docs/phase4_4_rollout5_prompt.md`); phase 4.3 (input,
    audio, saves, the `Game` autoload; plan 9.3) can come at any time and
    first if step C of the converted modes comes first. The minimap stays
    the 3D bridge's until the battles leave the bridge (plan 8.4). Record
@@ -809,14 +853,14 @@ decision 5 decided in plan section 13):
   only the shipped saves.
 - Parity: `tools/parity/parity.sh record <set>` / `compare <a> <b>` /
   `ab "<args a>" "<args b>" [case…]`, see `docs/ARCHITECTURE.md` section 7.
-  Runs are windowed (screenshots need a renderer); all 439 cases take
-  about 25 minutes with `--jobs=4` (with about 7.5 GB free at idle; the 437
+  Runs are windowed (screenshots need a renderer); all 441 cases take
+  about 26 minutes with `--jobs=4` (with about 7.5 GB free at idle; the 437
   cases about 30 with `--jobs=3` at 4.6 GB free; 19 with
   `--jobs=5` for 417 cases, 14-15 with `--jobs=8` when 10 GB are
   free at idle; check first: with 7 GB free, 8 jobs crashed runs) on 12
   logical cores (run nothing beside them, not even a headless compare:
-  16 GB run out, plan 12); a compare of two full sets takes about 5
-  minutes (8 with 439 cases); a full set is about 6.4 GB (439 cases; the disk was 96% full
+  16 GB run out, plan 12); a compare of two full sets takes about 6
+  minutes (441 cases); a full set is about 6.9 GB (441 cases; the disk was 96% full
   once) since
   the particles run on the GPU (60-70 minutes before P2; `--uncapped`; with
   `--legacy=battle_effects` or `effect_waits` Menthu's Flame takes 10 s of

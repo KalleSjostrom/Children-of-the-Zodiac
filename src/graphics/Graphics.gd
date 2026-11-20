@@ -1817,6 +1817,28 @@ func place_with_shadow(c = null) -> Array[Color]:
 	return [shadow, line]
 
 
+## Bridge (phase 4.4's rollout, part 4, step B, docs/ARCHITECTURE.md section
+## 15): drawMultiString(string, x, y) without the drawing: appends the line
+## to lines as a MenuText entry ([text, position (the baseline's start), font
+## size, colour, bold, alignment]: the text colour at startText's alpha, the
+## size and the font set now); nothing for a null or empty string (the legacy
+## drawing draws nothing then).
+func place_multi_string(lines: Array, string, x: int, y: int) -> void:
+	if string == null or str(string) == "":
+		return
+	lines.append([str(string), Vector2i(x, y), _fontSize, text_color(_textAlpha), font_bold(),
+			HORIZONTAL_ALIGNMENT_LEFT])
+
+
+## Bridge (phase 4.4's rollout, part 4): drawMultiCenteredText(string, y[, x])
+## without the drawing: place_multi_string at the start calcAlignCenter gives
+## (half of the line's advance width at the size set now, rounded half up).
+func place_multi_centered_text(lines: Array, string: String, y: int, x = null) -> void:
+	if x == null:
+		x = Values.ORIGINAL_RESOLUTION[Values.X] / 2
+	place_multi_string(lines, string, calcAlignCenter(string, x), y)
+
+
 ## Bridge (phase 4.4 step B, docs/ARCHITECTURE.md section 15):
 ## drawValueWithShadow without the drawing: the same text colours (the value
 ## in c when it is above 0, else in white) and drawString's setColor(color)

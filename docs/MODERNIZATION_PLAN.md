@@ -4161,7 +4161,10 @@ first frame's `initDraw` draws stray quads (`GLSlot`, `EnemyCard`,
      the panels (part 2), the legend's with the deck (part 3).*
   5. The texts among the chunks: the attack name, the deck's and the
      legend's lines, the attack texts (UI nodes or `Label3D` once the 3D
-     around each is nodes; then `Battle.tscn` under the rig). M.
+     around each is nodes; then `Battle.tscn` under the rig). M. *Done
+     (part 4, below): UI nodes in the frame's 2D order (`ShadowText`,
+     `MenuText`, `AttackTexts`), with `AttackBackground` and `EnemyCard` as
+     `PanelQuad`s; `Battle.tscn` under the rig stays with step C.*
   6. The effects that are not particles: the spheres (`SphereMesh` and a
      light), the image and slow systems (sprites; their coroutines stay),
      the enemy colour. M.
@@ -4808,6 +4811,297 @@ chunk, "V" a SubViewport, "T" GLBackend's 2D text):
   4.4 and step C, where `Battle.tscn` under the rig comes with the decision
   on the texts' order. Size M.
 
+**Results of the rollout, part 4 (phase 4.4, `docs/phase4_4_rollout4_prompt.md`;
+conventions in docs/ARCHITECTURE.md section 15, "The texts among the
+chunks").** The texts among the battle's 3D chunks (the attack name, the
+deck's lines, the legend's lines, the attack texts) as UI nodes in the
+frame's 2D order where each was drawn, and the last legacy quads of row 1b
+(`AttackBackground`, `EnemyCard`) as `PanelQuad`s, through step B.
+
+* **Baseline** (on b3e76ba1): `tools/check.sh` 0 failed (498 scripts); the
+  440 cases (`t0base`, 9,408 shots) identical to part 3's `d2node` shot for
+  shot and log for log, with the same script errors (3), errors (2,421) and
+  exit leak lines (12) in every case, and no audio-device line in either.
+  Recorded from a project copy with 4 jobs (25 minutes at 7.8 GB free).
+* **Facts** (deliverable 1; a headless probe over the 39 battle cases, on
+  part 2's probe: per battle frame every 2D text drawn (its part, string,
+  baseline, size, font, colour, canvas key and level), the GL and text state
+  where each text starts and ends, the attack name's slide, the
+  `AttackBackground`'s and `EnemyCard`'s batches with their render state and
+  `initDraw`'s; 56,198 battle frames), where they add to or differ from the
+  prompt and the entry above:
+  * Every text is drawn on LegacyLayer (level 0) in every frame: nothing UI
+    comes before the battle's texts. Canvas keys: the attack name's alpha
+    test is `GREATER .1` (`BattleEnemy.draw` sets `setAlphaFunc(.1)` before
+    `attack_.draw`), the deck's and the legend's `GREATER 0`, the attack
+    texts' `GREATER 0` or `GEQUAL .01` (after an effect's `endBlend`); never
+    additive (the attack texts set `ONE_MINUS_SRC_ALPHA` first).
+  * The attack name (7,498 frames, 352 shots, 14 attacks: Attack, Bite,
+    Crush, Scythe, Wrath of Ophiuchus …; the new case adds Heal): four lines
+    at 46, plain, alpha
+    1: black at (shadow + 4, 739) and (shadow + 3, 738), black at (pos + 1,
+    736), white at (pos, 735), where `shadowX = dest + |pos − dest|`. `pos`
+    starts at minus half the name's width at 50 and steps 60 px a draw for
+    8 frames, then lands on `dest` (512 − half the width; the last step is
+    the remainder), so the shadow slides in from the right as the name
+    slides in from the left and both meet on the 9th frame. It starts from
+    the font size 46 it sets, white text and `Graphics.color` 1, the alpha
+    test `GREATER .1`, `attackBack.png` bound; it leaves the size 46 and
+    white text (the deck's text after it sets its own).
+  * The deck's lines (52,178 frames, 2,341 shots): 6, 8 or 10 lines: the
+    card's name at 34 (black at (762, y + 2), white at (760, y)), the
+    pile's count at 50 centred on 72 and 70 (67 and 65 for 10 to 19 cards;
+    none for an empty pile: 6 lines), the card's info at 24 (black at x 762,
+    white at 760; the second info line is empty for most cards and draws
+    nothing) and "Deck" at 24 (49 and 47). y = 660 + 200 × (−slide − .65),
+    rounded: 660 shown, 860 hidden. The black copies at `startText`'s alpha
+    (the mode's fade value: below 1 during a fade, in 1,527 frames), the
+    white lines at 1. It starts from whatever size the
+    frame left (24, 46 after the attack name, 26 after a screen, 40) and
+    text colour (white, red after a result screen's value); it leaves 24 and
+    white.
+  * The legend's lines (52,331 frames, 2,368 shots): twelve lines at 24 (the
+    40 `draw` sets is replaced by `startText`'s 24): the six in black at x
+    680 + 600 × slide (80 shown, −520 hidden, −579 before its first show)
+    and y 244 to 444 by 40, then the six in white 2 px up and left;
+    "Offense" for "Support" in 175 frames (support mode); black at the fade
+    value, white at 1.
+  * The attack texts (17,619 frames in `Battle.drawBattle`, 10,076 in
+    `Animation.draw`, 885 and 489 shots): `Animation.draw`'s texts are
+    `Battle.drawBattle`'s in every ANIMATE frame (drawn twice); 1 to 6 texts
+    a frame. Sizes: bold 16 → 30 px (SMALLEST: the enemies' and most
+    others), plain 30 → 56 px (MEDIUM: a card's damage, its effect text),
+    bold 20 → 37 px (SMALL: "Shuffle" only), plain 40 → 74 px (LARGE: an
+    enemy's heal, never in the old cases); the eye-space point at z −2
+    through `scale(.8)`, so f ≈ 463.5 and the baseline is not on whole
+    pixels. Strings: numbers, "No Damage", "Miss" (an enemy's miss, red) and
+    "Miss!" (a card's, green on a support target), "Critical Hit!",
+    "Immune!", "Instant Kill!", "Open wound!", "Drained 163", "Shuffle", the
+    boosts' "Attack Up!", "Agility down!" and the like; red, or green for
+    support. Each text sets `setColor(r, g, b, life)` and
+    `setBlendFunc(ONE_MINUS_SRC_ALPHA)`; the colour left is the last text's
+    at its life, which the weather's front pass and the minimap start from
+    (or the effects' colour when no text is drawn).
+  * `AttackBackground` and `EnemyCard`: one batch each in every frame (off
+    the screen while hidden), never merged with a neighbour: on a floor in
+    the scene chunk, right after the enemy (and its particle systems' GPU
+    nodes) and before the attack name or the enemy's card; the card before
+    the character row; while the attack name shows, the card is in the
+    SubViewport after it. Render states: depth test and write on (write off
+    after an effect's `endBlend`), back faces culled, unlit, the floor's
+    fog, the alpha test `GREATER .1` (the background: set before the attack
+    name) and `GREATER 0` (the card), white; the card shows the attack's
+    image, a magic element's or Cure's. Their `initDraw` quads (a battle's
+    first frame: 26 battles) are four batches at the modelview the labyrinth
+    left, in the minimap arrow's yellow and the alpha test the frame left
+    (`LEQUAL 1` or `GREATER .1`), in the scene chunk or a boss area's
+    SubViewport.
+  * The layouts are the entry above's (S, T, V, T, V, T …); the attack
+    name's frames start a SubViewport after the attack background. The
+    weather's front pass over a battle is not where the entry above puts it:
+    its reserved slot falls in the SubViewport after the battle's texts
+    (`reserve_scene_slot` gives no slot there: `R:V1:-1` in the probe), so
+    the GPU rain or snow is drawn in the floor's world at its own sorting
+    offset, under the whole battle, in every frame with battle text (only
+    TALKING frames keep it over the battle's batches). That is so since the
+    dungeon particles phase (P2, 6.12) and is no part's change; "rain and
+    snow over the attack texts today" (above) does not hold.
+  * The party's red screen: still never drawn (the probe's `Pc<i>red` tag
+    marks the hidden party member's later nodes, not a red-screen batch).
+* **What a UI node there changes** (deliverable 1): from a text's node on,
+  every later 3D chunk of the frame is a SubViewport composited on the UI
+  layer, with the same content, order and boundaries (a node ends the
+  current canvas item and chunk as the legacy text did; an empty string
+  draws nothing and ends nothing, and the twins show no node then). Per
+  layout: on a floor the hand and the legend's gradient, the effects, the
+  minimap (and the enemy's card, the rows and the deck while the attack name
+  shows) move to UI; in a boss area everything after its first text. No later
+  legacy 2D or node expects LegacyLayer (only GLBackend reads the levels;
+  the mission, the dialog and the top layer were UI or Transition nodes
+  after them already). Checked with one text first: the legend's lines alone
+  as a node (the other four flags on) on a smoke set of 10 battle cases (the
+  rain and the snow, a boss area, Demolish's spheres, Death and Slow,
+  Menthu's Flame, the shuffle, the first frame, the new case: 1,361 shots):
+  identical to the golden, so the composite on the UI layer draws the same
+  pixels.
+* **Coverage** (deliverable 1). The probe over the old cases: the attack name
+  sliding in frame by frame (`battle_enemy`: all 8 sliding frames;
+  `battle_rows`: 16), "Miss" (134 shots), "Miss!" (8), "Critical Hit!" (35,
+  `battle_flash`, `effects_offense_3`), "Shuffle" (42, `battle_panels`),
+  green numbers (39), several texts at once (in most attack-text shots), the
+  deck's and the legend's lines sliding frame by frame (`battle_deck`,
+  `battle_result`, `battle_rows_boss`, `battle_spoils`), the support
+  legend; not shot: a text from its first frame to its last (the best: 96
+  of 125), the LARGE size (an enemy's heal: never drawn in a probed frame).
+  One new case (379 shots): `battle_texts` (Berca's Ogres: Battle Card 1's
+  264 from its first frame to its last, 125 frames; the console's `heal
+  -700 enemies` puts both Ogres below half their life, where an Ogre may
+  heal itself (`EnemyLogic.makeMove`), and TRIANGLE ends the party's turns
+  until one does, 55 s later with seed 1: its attack name "Heal" sliding in
+  and its 682 in green at 74 px, beside a "No Damage", every frame). No new
+  console command. Timed with headless probe runs of the script first. The
+  new case recorded twice on the unconverted code: identical (379 shots,
+  logs, error lines). The golden `t1gold`: the baseline and the new case
+  (441 cases, 9,787 shots).
+* **Built** (ARCHITECTURE section 15): `scenes/ui/AttackTexts` (a Control
+  that draws each text with `draw_string` at its projected point and pixel
+  size); the bridges `Graphics.place_multi_string`,
+  `place_multi_centered_text`, `AttackText.place_3d_text` (`draw3DText`'s
+  arithmetic, which the legacy path calls too), `AttackTextText.place_text`;
+  the twins `Attack._show_with_shadow` (two `ShadowText`s), `GLDeck._show_lines`
+  and `Legend._show_lines` (a `MenuText` each, `AbstractPage.show_lines`),
+  `AttackText._show_texts`, and `Object2D.show_tex` in `AttackBackground`'s
+  and `EnemyCard`'s `draw` and `initDraw`; flags `--legacy=battle_attack_name`,
+  `battle_deck_text`, `battle_legend_text`, `battle_attack_text`,
+  `battle_enemy_quads`.
+* **Parity** (tolerance 0 everywhere; the final code; node run `t2node`, 441
+  cases, 9,787 shots; "the battle cases": the 40 that draw a battle, 2,861
+  shots): golden (`t1gold`) vs. node: 9,787 of 9,787 shots identical, all 441
+  logs identical, the same script errors (3), errors (2,421) and exit leak
+  lines (12) in every case (no audio-device lines on either side); each of
+  the five new flags (`battle_attack_name`, `battle_deck_text`,
+  `battle_legend_text`, `battle_attack_text`, `battle_enemy_quads`) vs. the
+  node run and vs. the golden on the battle cases: 2,861 of 2,861 each, logs
+  and error lines identical; all twelve phase 4.4 flags (the five and
+  `battle_deck`, `battle_legend_back`, `battle_panels`, `battle_enemy`,
+  `battle_screens`, `battle_flash`, `battle_legend`) vs. the golden on every
+  case: 9,787 of 9,787, logs and error lines identical, and vs. the node run
+  on the battle cases: 2,861 of 2,861; with `--legacy=battle_effects` added,
+  vs. a golden with it (`t1goldfx`), on the battle cases: 2,861 of 2,861; the
+  new case recorded twice: 379 of 379. No difference had to be explained:
+  both smoke sets (above) were already identical.
+* **No legacy text or quad left:** a run of the 40 battle cases (60,121
+  battle frames, headless) with counters in `Graphics._drawText`,
+  `AttackText.draw3DText`, `Graphics._emitTriangles`, `show_ui` and
+  `show_node` while the five parts draw (the attack name, the deck's and the
+  legend's lines and the attack texts; `AttackBackground` and `EnemyCard`
+  with their `initDraw`): flags off 162,077 UI nodes in 56,254 frames and
+  108,548 3D nodes in 54,190 frames, no legacy text and no legacy triangle;
+  with the five flags no UI node, no 3D node, 1,227,729 legacy texts (each
+  line of the deck and the legend, the attack name's two, each attack text;
+  a UI node holds a group of them) and 108,548 legacy 3D quads in the same
+  frames.
+* **Frame rate** (normal runs: no `--seed`, windowed, one at a time, the
+  shipped saves; legacy (the five flags) → node; medians of `fps=` every
+  0.5 s for 11 s at a party turn with no input (the deck's and the legend's
+  lines), every 0.25 s for 3 s after Battle Card 1 (its attack texts), every
+  0.5 s for 11 s of enemy turns (TRIANGLE: attack names and texts), the
+  first second of each dropped; random enemy groups on the floor): capped 60
+  → 60 in all three on a floor (Berca Desert--South) and in Serphia's boss
+  area. Uncapped on the floor (the runs met a Stitchman, two Ogres, two
+  Ogres → a Stitchman, two Ogres, a Stitchman): turn 312, 305, 306 → 325,
+  299, 324; cast 291, 288, 291 → 320, 284, 315; enemies 291, 307, 302 →
+  303, 291, 300. In the boss area: turn 436, 353, 365 → 372, 430, 420; cast
+  414, 340, 347 → 349, 405, 403; enemies 370, 357, 356 → 377, 346, 368. No
+  difference beyond the spread between repeats (up to 80 in the boss area):
+  the texts' nodes cost nothing measurable. One of these runs (the boss
+  area, uncapped, node) crashed at exit (below).
+* **Still legacy** in the battle's 3D: the effects that are not particles
+  (Demolish's spheres, Death's and Slow's images; the Elements colour, which
+  draws nothing) and the party's red screen (never visible). The state, the
+  input and the timing (the attack name's slide in its draw, the texts' life
+  in their update, the slides) stay legacy (step C).
+* **Found on the way:** the GPU weather's front pass is under the battle in
+  every frame with battle text, since P2 (above); `SwordBackground` (Battle
+  Card's "ground" quad) is never drawn, because `ParticleSystem.drawable` is
+  never assigned (the Java neither: Appendix); GLBackend's lights are global
+  shader parameters read when the frame renders, so Demolish's spheres are
+  lit by the state its `end` pops back, not by its light 2 and material
+  (part 5, below). One normal run crashed at exit: the frame-rate run in
+  Serphia's area, uncapped, node, segfaulted after AutoPlay's `quit` (every
+  sample taken; nothing printed, no Godot crash handler output, no Windows
+  application error event; the memory watchdog stopped nothing, one run
+  alone). Not reproduced: 10 more runs each way of the same script
+  (alternating node and legacy) and the other two node runs of the frame
+  rates exited 0, as did every parity run of the node code (441 cases in
+  `t2node` and `t2allf`, the flag sets). Unexplained; one crash in 13 node
+  runs of that script, none in 13 legacy runs; a teardown crash would need a
+  debug build's backtrace to tell.
+
+**Prepared after part 4 (2026-11-20): part 5, the effects that are not
+particles.** Plan 9.4's order holds: the texts changed neither the order nor
+the place (UI nodes in their slots moved nothing on the screen), and after
+part 4 the battle's 3D is nodes but for these effects and the party's red
+screen. From the code and part 4's probe (its `X<class>` tags of each packet's
+systems):
+
+* **What each draws, and where.** All of them in `Animation.draw` (a card's
+  effect, during ANIMATE), in the SubViewport after the legend's lines
+  (composited on the UI layer since part 4) and before the attack texts; in
+  a boss area in its SubViewports. None was met among an enemy's particle
+  systems (`BattleEnemy.draw`).
+  * Demolish (`SphereParticleSystem`, `SphereParticle`; `effects_magic_4`,
+    `effects_area_2`): per living particle with z ≥ −6, `translate(pos)`,
+    `gluSphere(size, 50, 50)` (5,000 triangles), `translateBack`. `start`
+    pushes the matrix and the lighting attributes, puts GL_LIGHT2 at (0, 2,
+    0) (positional; ambient 0, diffuse and specular 1), disables the texture
+    and lights 0 and 1, sets the colour black and the material (ambient 0,
+    diffuse (.2, 0, .2), specular 1, emission 0, shininess 100); `end` pops
+    both. Batches: lit, untextured, depth test and write on, back faces
+    culled, `GREATER 0`, not additive; consecutive spheres merge into one
+    batch up to 60,000 vertices (`MAX_SURFACE_VERTS`): 2 to 6 and more
+    batches a frame. The look: GLBackend's lights and material are global
+    shader parameters read when the frame renders, after `end` popped them,
+    so the spheres are lit by the restored state (the floor's lights and
+    material in a labyrinth), not by light 2 and the purple specular
+    material; and GLBackend has no specular term (7.5). A node with
+    GLBackend's material keeps that look; the original's is a look change
+    (decisions 2 and 8).
+  * Death (`ImageParticleSystem`; `effects_magic_5`): one quad a frame
+    (`particles[0].drawParticle`) with one of three images (`death0`–`2.png`),
+    one batch. Its first draw starts a coroutine (`_animate`, `Scheduler`):
+    the life up by .05 every 30 ms to .5, 500 ms, the image flipped between
+    1 and 2 four times (180 and 100 ms), 180 ms, `plainDestroy()` (the hit:
+    the battle's `isDestroyed`), then the life down by .025 every 30 ms to
+    0 (`isDead`: the next card).
+  * Slow (`SlowParticleSystem`; `effects_magic_5`, `battle_panels`, `boss`):
+    three quads a frame at the source (the clock at the particle's life +
+    .5, then the hour and the minute hand rotated about z by `hourTheta` and
+    `minuteTheta`, which `update` advances by 60 and 720 degrees a second),
+    each its own texture: three batches. Its coroutine as Death's, with 750
+    ms before `plainDestroy`.
+  * Elements (`EnemySystem`): draws nothing; its `draw` sets the enemy's
+    colour (`BattleEnemy.setColor`), which the enemy, drawn earlier, takes a
+    frame late. Unreachable (the neutral Elements card fails in
+    `ResultScreen.calcResult`).
+  * Battle Card's `SwordBackground.drawGround`: never drawn (above).
+* **What the battle waits on:** `Animation.update` steps each packet;
+  `isDestroyed()` lands the hit (`attackTarget`, the enemy's hide), `isReady()`
+  starts the next card, `isDead()` removes it. Death's and Slow's are timed
+  by their coroutines (game time); Demolish's by its legacy particles (the
+  sphere systems are not GPU systems: no `reduce_for_waits`). Step B keeps
+  all of it: the coroutines start in the draw (their first draw), so the
+  twin must start them where the drawing did.
+* **State in the draws:** the spheres' matrix and attribute push and pop,
+  light 2, the material and the colour; Death's and Slow's binds, the
+  matrix push, translate, rotate and pop, the particle's life raised by .5
+  and set back (Slow), the coroutines' start (`hasStarted`, `hasInited`:
+  `loadGLTextures` on the first draw).
+* **Coverage** known: Demolish 3 on a floor and in Serphia's area, Death 3
+  and Slow 3 on Memory Taur, Slow in `battle_panels` and `boss`. To probe
+  and shoot: Death's image flips frame by frame, Slow's hands frame by frame,
+  Demolish 1 and 2, the spheres' merges per frame (which spheres share a
+  batch), the spheres in a boss area's first frames, each effect's last
+  frames (its fade to 0).
+* **Recommended:** one node per legacy batch in its slot, as the panels'
+  (`Utils3D.show_quad`'s merge rule for Death's and Slow's quads; the
+  spheres' triangles through `Graphics.begin_capture_3d` / `end_capture_3d`
+  as the minimap's, one node per captured batch, in `material_3d`, so the
+  merges and the globals' look stay), the coroutines and the per-draw state
+  in the twins. Flag `--legacy=battle_effect_draw` (or one per kind). Size
+  S–M.
+* **What is left of the battle on the 3D bridge after part 5:** the party's
+  red screen (`Character3D.draw`: a 2D image at z 0 behind the near plane,
+  never visible; keep it as a legacy batch, make it a node, or drop it: the
+  user's decision before the closing) and the flags' legacy paths. Then the
+  minimap's node can be the default (8.4: its battle frames are identical
+  since part 1), and phase 4.4 can close: the flags and their legacy drawing,
+  `battle_effects` and `effect_waits` (section 11), the helpers only they
+  call (`AbstractCard.drawCard`, `LevelUpBar.draw`, `drawWithShadow`'s last
+  caller `Attack.draw`'s legacy path); then step C (decisions 3 and 6) with
+  `Battle.tscn` under the rig and the decision on the texts' order (the
+  weather's front pass, now under the battle, is part of that decision).
+
 ## 10. Phase 5: remove the emulation
 
 When no mode draws through `g` any more:
@@ -5038,6 +5332,24 @@ When no mode draws through `g` any more:
   cards (their backs when the second is gray and both turn: a gray card
   draws its back first). One shared helper keeps every merge
   (`Utils3D.show_quad`); the twins need not know their neighbours.
+* **A UI node lifts what follows it** (phase 4.4's rollout, part 4). A node
+  of `show_ui` among 3D chunks raises the frame's level, so every later
+  chunk is composited on the UI layer, not only the node's own drawing. It
+  drew the same pixels (the battle's texts: the effects, the weather and the
+  minimap after them), but a later step that gives the layers different
+  transforms or post-processing would change all of it at once; check one
+  node first (one flag per text) and grep for readers of the levels.
+* **Global state read at render time** (phase 4.4's rollout, part 4).
+  GLBackend's lights and material are global shader parameters, read when
+  the frame renders: a drawing that sets them and pops them back before the
+  frame ends (Demolish's spheres) is lit by the popped state, not by its own.
+  A node with GLBackend's material keeps that; a node with its own uniforms
+  (or `Battle.tscn` with Godot lights) changes the look (decision 2).
+* **Plan facts about the frame go stale** (phase 4.4's rollout, part 4). The
+  plan had the GPU weather's front pass over a battle's texts; since P2 it is
+  in the floor's world under the battle whenever battle text came first (its
+  slot falls in a SubViewport). Probe what a frame draws before a decision
+  rests on it (`Battle.tscn` under the rig, the texts' order).
 
 ## 13. Open decisions
 
@@ -5139,8 +5451,14 @@ When no mode draws through `g` any more:
    legacy look so that parity holds. Each is a theme or scene edit now.
    Open (the rollout kept the legacy look too, and so did phase 4.1, 4.2's
    pilot, the menu, the stores, the mini-games and 4.4's pilot and its
-   rollout's first three parts: the info texture is still the legacy Image,
-   the cards and slots the legacy quads).
+   rollout's first four parts: the info texture is still the legacy Image,
+   the cards and slots the legacy quads, the battle's texts the legacy
+   fonts, sizes, points and order among the 3D chunks). *Found in 4.4's
+   part 4:* the order of the battle's texts and 3D (a `Battle.tscn` under
+   the rig draws all of its 3D under every text; today the hand, the
+   effects and the minimap are drawn over the texts before them) and the
+   weather's front pass over a battle (under it since P2, 9.4) belong to
+   this decision.
 
 ## 14. Suggested order and size
 
@@ -5157,7 +5475,7 @@ Sizes are relative: S ≈ a focused session, XL ≈ many sessions.
 | 4.1 | World map + airship. *Done through step B (9.1): the scenes, the name plate, legacy vs. scene identical; closed (9.1).* | M | 1 (converter), 3 | — |
 | 4.2 | Title, game over, mini-games, stores, menu. *Done through step B (9.2: the pilot, the menu, the stores and the mini-games, one session each) and closed (9.2, "Closing phase 4.2").* | L | 3 | — |
 | 4.3 | Input, audio, saves, `Game` autoload. *Prepared (9.3).* | M | any time after 0; the autoload is best after 4.2 | 5; step C (the input wrapper) |
-| 4.4 | Battle, cards, effects. *The pilot, the battle's 2D top layer, done through step B (9.4: the result and spoils screens, the level-up bars, an enemy's red flash, the legend's icons); the rollout, the battle's 3D: part 1, the enemy, done through step B (9.4: `EnemyView` in its chunk's slot; the floor's walls drawn in a fixed order); part 2, the info panels, done through step B (9.4: a `PanelQuad` per legacy batch in its slot); part 3, the deck, the hand and the legend's gradient, done through step B (9.4: `PanelQuad`s in their slots, the merges through `Utils3D.show_quad`); next the texts among the chunks.* | XL | 2, 3 | 5; the minimap's node (8.4) |
+| 4.4 | Battle, cards, effects. *The pilot, the battle's 2D top layer, done through step B (9.4: the result and spoils screens, the level-up bars, an enemy's red flash, the legend's icons); the rollout, the battle's 3D: part 1, the enemy, done through step B (9.4: `EnemyView` in its chunk's slot; the floor's walls drawn in a fixed order); part 2, the info panels, done through step B (9.4: a `PanelQuad` per legacy batch in its slot); part 3, the deck, the hand and the legend's gradient, done through step B (9.4: `PanelQuad`s in their slots, the merges through `Utils3D.show_quad`); part 4, the texts among the chunks with the attack's background and the enemy's card, done through step B (9.4: UI nodes in the frame's 2D order, `ShadowText`, `MenuText` and `AttackTexts`; `PanelQuad`s); next the effects that are not particles (part 5).* | XL | 2, 3 | 5; the minimap's node (8.4) |
 | 5 | Remove the GL emulation; per-delta time | M | all of the above | — |
 
 After phase 2, P comes before phase 3 (2026-10-27): the particle
@@ -5230,6 +5548,14 @@ fixed or deleted at any time.
     the 150 ms (by reading; no case has a critical hit on the party). In
     TALKING mode `Battle.drawBattle` calls `setDialog` every frame (in a
     labyrinth the minimap's and the mission's `pushState` once a frame).
+  * *Found in phase 4.4's rollout, part 4 (as in the Java):* Battle Card's
+    "ground" (`SwordBackground.drawGround`, set as the settings' system
+    drawable by `BattleCard` and `AnimationSettingsFactory`) is never drawn:
+    `ParticleSystem.drawable` is never assigned. Every attack text of
+    `Animation.draw` is drawn twice a frame during ANIMATE (`Battle.drawBattle`
+    draws the same texts again), so it looks brighter than after the
+    animation. An enemy heals only below half its life (`makeMove` drops a
+    support attack above it).
   * *Found in phase 4.2's stores:* selling the last entry of a Weapon Store
     sell list that has more entries (Slot 1's fifth weapon) refills the
     list with the cursor kept, past its new end; `WeaponStore.updateCurrent`

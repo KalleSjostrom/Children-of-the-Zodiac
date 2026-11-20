@@ -1,0 +1,57 @@
+# Phase 4.4's rollout, part 4 (the texts among the battle's 3D chunks): what
+# the battle cases above do not show (--load="Slot 1" --start="Berca
+# Desert--South-mark0" --start-node=20:3: Ogre, Ogre). Steps until the battle
+# (as dungeon_battle); god mode. At the first party turn the console heals the
+# enemies and casts Battle Card 1 on an Ogre: its damage text (264, red, 56 px)
+# from its first frame (about 0.8 s after the cast, seed 1) to its last (life
+# 1 to 0 in 125 updates, rising and fading), shot every frame (a_#). Then
+# CROSS past the result, and at the next party turn the console hurts both
+# Ogres below half their life (heal -700 of 1,147), so that an Ogre may heal
+# itself (EnemyLogic.makeMove); TRIANGLE ends the party's turns until it does,
+# about 55 s later (seed 1): its attack name ("Heal") sliding in and its
+# healing (682, green, at the large size: 74 px, the only size no other case
+# shows) beside a "No Damage", shot every frame from the name to the end of
+# the text (b_#).
+wait 3000
+console god on
+mark
+tap UP
+wait 700
+tap DOWN
+wait 700
+loopuntil sub=battle 90000
+mark
+wait 100
+loopuntil battlemode=1 30000
+log turn1
+console heal 100000 enemies
+console cast BattleCard:1
+log cast
+mark
+wait 16
+shot a_#
+loopuntil xxnever 3000
+mark
+wait 100
+loopuntil !battlemode=4 30000
+mark
+tap CROSS
+wait 600
+loopuntil !battlemode=5 15000
+mark
+wait 100
+loopuntil battlemode=1 40000
+log turn2
+console heal -700 enemies
+mark
+tap TRIANGLE 16
+wait 17
+loopuntil xxnever 54400
+log heal
+mark
+tap TRIANGLE 16
+wait 16
+shot b_#
+loopuntil xxnever 3300
+log end
+quit

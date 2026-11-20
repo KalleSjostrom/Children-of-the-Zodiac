@@ -723,3 +723,13 @@ battle_rows_boss         battle_rows_boss         --load="Slot 1" --start="Grive
 battle_deck              battle_deck              --load="Slot 1" --start="Berca Desert--South-mark0" --start-node=20:3
 battle_deck_three        battle_deck_three        --load="Slot 1" --start="Empyrian Temple--Hall of Wind-mark0"
 battle_deck_init         battle_deck_init         --load="Slot 1" --start="Grivera--Second Floor-mark0" --start-node=43:0
+# Phase 4.4's rollout, part 4 (the texts among the battle's 3D chunks,
+# recorded on the unconverted code): a damage text from its first frame to
+# its last (rising and fading out), shot every frame; an Ogre healing itself
+# (the console hurts both below half their life, TRIANGLE ends the party's
+# turns until one heals, about 55 s later): its attack name sliding in and its
+# healing in green at the large size (74 px, no other case shows it), every
+# frame (Berca; god mode). The other texts (the attack names sliding in, "Miss",
+# "Critical Hit!", "Shuffle", support numbers, several texts at once, the
+# deck's and the legend's lines sliding) were in the cases above.
+battle_texts             battle_texts             --load="Slot 1" --start="Berca Desert--South-mark0" --start-node=20:3

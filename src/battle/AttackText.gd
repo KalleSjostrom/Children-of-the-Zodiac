@@ -15,6 +15,8 @@ var smallText = null
 var smallerText = null
 var smallestText = null
 static var attackText = null
+## Bridge (phase 4.4's rollout, part 4): the node of the texts.
+const ATTACK_TEXTS_VIEW := "res://scenes/ui/AttackTexts.tscn"
 const HALF_DISTANCE = 1.39
 const HEIGHT_DISTANCE_BETWEEN_TEXT = 0.1
 
@@ -43,14 +45,51 @@ func update(elapsedTime):
 
 
 ## Draws the stored texts. Loads identity and translates 2 units into the screen.
+## Bridge (phase 4.4's rollout, part 4, step B, docs/ARCHITECTURE.md section
+## 15): the texts are an AttackTexts node on the UI layer in the frame's 2D
+## order (_show_texts: the same state changes); --legacy=battle_attack_text
+## keeps the legacy text.
 func draw(g):
 	g.loadIdentity()
 	g.translate(0, 0, BattleValues.STANDARD_Z_DEPTH)
 	g.scale(0.8)
-	for i in range(textToDraw.size()):
-		var t = textToDraw[i]
-		t.draw(g)
+	if not Main.is_legacy("battle_attack_text"):
+		_show_texts(g)
+	else:
+		for i in range(textToDraw.size()):
+			var t = textToDraw[i]
+			t.draw(g)
 	g.loadIdentity()
+
+
+## Bridge (phase 4.4's rollout, part 4): the texts' drawing without the
+## drawing (each text's colour at its life and blend function, then its
+## place: AttackTextText.place_text), shown by the frame's next AttackTexts
+## node on the UI layer in the material of the 2D state where they were
+## drawn; texts drawn in another material (a canvas item of their own in the
+## legacy drawing) go to a node of their own, in order. Nothing is shown when
+## no text is drawn.
+func _show_texts(g) -> void:
+	var texts: Array = []
+	var mat: Material = null
+	for i in range(textToDraw.size()):
+		var t: Array = textToDraw[i].place_text(g)
+		if t.is_empty():
+			continue
+		var m: Material = g.canvas_material()
+		if not texts.is_empty() and m != mat:
+			_show_view(g, texts, mat)
+			texts = []
+		mat = m
+		texts.append(t)
+	if not texts.is_empty():
+		_show_view(g, texts, mat)
+
+
+static func _show_view(g, texts: Array, mat: Material) -> void:
+	var view = g.show_ui(ATTACK_TEXTS_VIEW, Graphics.UI_LAYER)
+	if view != null:
+		view.show_texts(texts, mat)
 
 
 ## Checks if there are no more texts in this AttackText.
@@ -142,12 +181,31 @@ static func _getFont(rend) -> Font:
 ## one font pixel is scaleFactor units wide.
 static func draw3DText(g, s: String, x: float, y: float, z: float, scaleFactor: float,
 		rend, col: Color) -> void:
-	if s == "" or g.backend == null:
+	if g.backend == null:
 		return
+	var t: Array = place_3d_text(g, s, x, y, z, scaleFactor, rend, col)
+	if t.is_empty():
+		return
+	var ci: RID = g.backend.ci_2d(g._blend_dst == Graphics.GL_ONE, g._effAlphaFunc(), g._alpha_ref)
+	g.backend.set_ci_transform(ci, Transform2D.IDENTITY)
+	_getFont(rend).draw_string(ci, t[1], s, HORIZONTAL_ALIGNMENT_LEFT, -1, t[2], col)
+
+
+## Bridge (phase 4.4's rollout, part 4, step B, docs/ARCHITECTURE.md section
+## 15): where draw3DText draws the text, without the drawing: [text, the
+## baseline's start on the screen (the projection of (x, y, z) through the
+## modelview: not whole pixels), the font size in pixels (the renderer's size
+## times scaleFactor, the modelview's scale and the projection's scale there),
+## bold, colour], or [] when nothing is drawn (an empty text, a point at or
+## behind the eye).
+static func place_3d_text(g, s: String, x: float, y: float, z: float, scaleFactor: float,
+		rend, col: Color) -> Array:
+	if s == "":
+		return []
 	var mv: Transform3D = g.getModelView()
 	var p: Vector3 = mv * Vector3(x, y, z)
 	if p.z > -0.0001:
-		return
+		return []
 	var half_h: float = GLBackend.VIRTUAL_SIZE.y / 2.0
 	var half_w: float = GLBackend.VIRTUAL_SIZE.x / 2.0
 	var f: float = half_h / tan(deg_to_rad(22.5)) / -p.z
@@ -155,9 +213,7 @@ static func draw3DText(g, s: String, x: float, y: float, z: float, scaleFactor: 
 	var px: int = maxi(1, int(round(rend[0] * scaleFactor * mvScale * f)))
 	var sx: float = half_w + p.x * f
 	var sy: float = half_h - p.y * f
-	var ci: RID = g.backend.ci_2d(g._blend_dst == Graphics.GL_ONE, g._effAlphaFunc(), g._alpha_ref)
-	g.backend.set_ci_transform(ci, Transform2D.IDENTITY)
-	_getFont(rend).draw_string(ci, Vector2(sx, sy), s, HORIZONTAL_ALIGNMENT_LEFT, -1, px, col)
+	return [s, Vector2(sx, sy), px, bool(rend[1]), col]
 
 
 ## Java enum AttackText.textSize.
@@ -199,6 +255,15 @@ class AttackTextText extends RefCounted:
 		g.setColor(color[0], color[1], color[2], life)
 		g.setBlendFunc(Graphics.GL_ONE_MINUS_SRC_ALPHA)
 		AttackText.draw3DText(g, text, x, y + (1 - life) / 5, 0, 0.005, textRenderer,
+				Color(color[0], color[1], color[2], life))
+
+	## Bridge (phase 4.4's rollout, part 4): draw without the drawing: the same
+	## colour and blend function, and the text where it would be drawn
+	## (AttackText.place_3d_text; [] when it would draw nothing).
+	func place_text(g) -> Array:
+		g.setColor(color[0], color[1], color[2], life)
+		g.setBlendFunc(Graphics.GL_ONE_MINUS_SRC_ALPHA)
+		return AttackText.place_3d_text(g, text, x, y + (1 - life) / 5, 0, 0.005, textRenderer,
 				Color(color[0], color[1], color[2], life))
 
 	## Reduces the life by FADE; returns true if life is above zero.

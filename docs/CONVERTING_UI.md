@@ -455,3 +455,41 @@ section 15, plan 9.4):
   "Level up!" when the experience exactly fills the bar, though
   `calcSpoils` levels the character up only when it exceeds what is left (as
   in the Java): plan cases on the logic, not on what the screen says.
+
+What the texts among the battle's 3D chunks added (phase 4.4's rollout, part
+4; docs/ARCHITECTURE.md section 15, "The texts among the chunks"):
+
+* **A UI node among 3D chunks.** Legacy 2D text between 3D chunks ends the
+  current chunk, and the next 3D is a new SubViewport; a node of `show_ui`
+  does the same (it ends the current canvas item and chunk) but raises the
+  frame's level, so every later chunk is composited on the UI layer instead of
+  LegacyLayer, with the same content and order. Check with one text first: a
+  flag per text lets one text be a node while the others stay legacy (the
+  legend's lines, drawn every frame, lift everything after them: identical
+  on the smoke set before the other texts were tried). Grep for code that
+  reads the levels or LegacyLayer (only GLBackend does) before trusting it.
+* **Show a node only where the drawing drew.** `_drawText` draws nothing for
+  an empty string and takes no canvas item then, so it does not end a 3D
+  chunk: a twin collects the lines (`Graphics.place_multi_string` skips null
+  and empty strings, as `drawMultiString` draws them) and shows its node only
+  when one is left. The deck's second info line is often empty (6, 8 or 10
+  lines a frame).
+* **Text that is not on whole pixels or theme sizes.** The attack texts are
+  3D text: projected points and scaled pixel sizes (37 for bold 20). A
+  `BaselineLabel` is placed and sized in whole pixels and theme sizes; a node
+  that draws each text with `draw_string` at the legacy point and size
+  (`AttackTexts`) draws the legacy pixels. Factor the legacy drawing's
+  arithmetic into a placing helper both paths call (`AttackText.place_3d_text`
+  under `draw3DText`), so they cannot drift.
+* **What the drawing leaves for later parts.** A text's state changes reach
+  the 3D drawn after it: the attack texts' `setColor(colour, life)` is the
+  colour the weather's front pass and the minimap start from. The probe
+  prints the GL and text state where each text starts and ends.
+* **Coverage per frame.** The probe's per-frame text entries (part, string,
+  point, size, font, colour, canvas key, level) told which shots show what:
+  no text's fade-out was shot frame by frame, and one size (an enemy's heal,
+  74 px) was never drawn; a seeded route reaches both (the console's `heal`
+  with a negative amount puts an Ogre below half its life, where it may heal
+  itself). Time such a route with a headless probe run of the new script
+  first, then shoot the window frame by frame (`wait 16` loops: `tap 16` +
+  `wait 17` skipped frames).

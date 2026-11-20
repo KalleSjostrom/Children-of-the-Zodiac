@@ -30,8 +30,10 @@ func setSupport(p_support):
 
 ## Draws the gradient and the lines (every frame: off the screen while the
 ## legend is hidden). Bridge (phase 4.4's rollout, part 3): the gradient is a
-## PanelQuad in its batch's slot (Graphics.place_gradient); the lines stay
-## legacy 2D. --legacy=battle_legend_back keeps the legacy quad.
+## PanelQuad in its batch's slot (Graphics.place_gradient);
+## --legacy=battle_legend_back keeps the legacy quad. Part 4: the lines are a
+## MenuText node on the UI layer in the frame's 2D order (_show_lines);
+## --legacy=battle_legend_text keeps the legacy text.
 func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 	g.loadIdentity()
 	g.setFontSize(40)
@@ -52,6 +54,9 @@ func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 				xr, xl, ybottom, ytop, true, true)
 
 	var x: int = int(TEXT_X + super.getXtrans() * 600)
+	if not Main.is_legacy("battle_legend_text"):
+		_show_lines(g, x)
+		return
 
 	g.startText(-1, 0, 24)
 	g.drawMultiString(INFO[0], x, TEXT_HEIGHT)
@@ -70,6 +75,35 @@ func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 	g.drawMultiString(INFO[5 if support else 4], x, y + 4 * STEP)
 	g.drawMultiString(INFO[6], x, y + 5 * STEP)
 	g.finishText()
+
+
+## Bridge (phase 4.4's rollout, part 4, step B, docs/ARCHITECTURE.md section
+## 15): the six lines without the drawing (black at the text alpha, then white
+## at alpha 1 two pixels up and to the left, at 24: startText's size, which
+## replaces draw's 40): the same text state changes in the same order
+## (startText, setTextColorAndApply, finishText), the lines shown by the
+## frame's next MenuText on the UI layer in the order they were drawn, in the
+## material of the 2D state here (AbstractPage.show_lines).
+func _show_lines(g: Graphics, x: int) -> void:
+	var lines: Array = []
+	g.startText(-1, 0, 24)
+	for i in 6:
+		g.place_multi_string(lines, INFO[_info_index(i)], x, TEXT_HEIGHT + i * STEP)
+	g.setTextColorAndApply(1, 1)
+	for i in 6:
+		g.place_multi_string(lines, INFO[_info_index(i)], x - 2, TEXT_HEIGHT - 2 + i * STEP)
+	g.finishText()
+	if not lines.is_empty():
+		AbstractPage.show_lines(g, lines)
+
+
+## The INFO entry of line i: "Support" in offense mode, "Offense" in support mode.
+func _info_index(i: int) -> int:
+	if i < 4:
+		return i
+	if i == 4:
+		return 5 if support else 4
+	return 6
 
 
 func drawTopLayer(g: Graphics):

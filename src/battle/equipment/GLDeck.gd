@@ -71,8 +71,10 @@ func setWeaponDeck(deck):
 ## Draws the weapon, the slots, the cards, the pointer and, while cards are
 ## shown, the gradient and the texts. Bridge (phase 4.4's rollout, part 3):
 ## the 3D parts are PanelQuads in their batches' slots (the twins of GLSlot,
-## AbstractDeck, GLCard; the gradient through Graphics.place_gradient); the
-## texts stay legacy 2D. --legacy=battle_deck keeps the legacy quads.
+## AbstractDeck, GLCard; the gradient through Graphics.place_gradient);
+## --legacy=battle_deck keeps the legacy quads. Part 4: the texts are a
+## MenuText node on the UI layer in the frame's 2D order (_show_lines);
+## --legacy=battle_deck_text keeps the legacy text.
 func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 	weaponDeck.draw(g)
 	super.draw(g)
@@ -101,6 +103,9 @@ func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 					xRight, xLeft, yBottom, yTop, true, true)
 
 		if c != null:
+			if not Main.is_legacy("battle_deck_text"):
+				_show_lines(g, c)
+				return
 			var x: int = 760
 			g.startText(-1, 0, 34)
 			var y: int = J.round(660 + 200 * (-getYtrans() - 0.65))
@@ -133,6 +138,52 @@ func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 			g.drawMultiString(info[1], x, y2 + 25)
 			g.drawMultiString("Deck", textx, texty)
 			g.finishText()
+
+
+## Bridge (phase 4.4's rollout, part 4, step B, docs/ARCHITECTURE.md section
+## 15): the deck's lines without the drawing (the card's name at 34, the
+## pile's count at 50 centred, the card's two info lines and "Deck" at 24,
+## each black copy 2 px down and to the right at the text alpha, then white at
+## alpha 1): the same text state changes in the same order (startText,
+## setTextColorAndApply, finishText), the lines shown by the frame's next
+## MenuText on the UI layer in the order they were drawn, in the material of
+## the 2D state here (AbstractPage.show_lines).
+func _show_lines(g, c) -> void:
+	var lines: Array = []
+	var x: int = 760
+	g.startText(-1, 0, 34)
+	var y: int = J.round(660 + 200 * (-getYtrans() - 0.65))
+	var y2: int = y + 40
+	g.place_multi_string(lines, c.getName(), x + 2, y + 2)
+	g.setTextColorAndApply(1, 1)
+	g.place_multi_string(lines, c.getName(), x, y)
+	g.finishText()
+
+	g.startText(-1, 0, 50)
+	var size: int = deckCards.size()
+	var textx: int = 70
+	if size > 0:
+		if size >= 10 and size <= 19:
+			textx -= 5
+		g.place_multi_centered_text(lines, str(deckCards.size()), y + 62, textx + 2)
+		g.setTextColorAndApply(1, 1)
+		g.place_multi_centered_text(lines, str(deckCards.size()), y + 60, textx)
+	g.finishText()
+	textx = 47
+	var texty: int = y + 10
+
+	g.startText(-1, 0, 24)
+	var info: Array = c.getVeryShortInfo()
+	g.place_multi_string(lines, info[0], x + 2, y2 + 2)
+	g.place_multi_string(lines, info[1], x + 2, y2 + 27)
+	g.place_multi_string(lines, "Deck", textx + 2, texty + 2)
+	g.setTextColorAndApply(1, 1)
+	g.place_multi_string(lines, info[0], x, y2)
+	g.place_multi_string(lines, info[1], x, y2 + 25)
+	g.place_multi_string(lines, "Deck", textx, texty)
+	g.finishText()
+	if not lines.is_empty():
+		AbstractPage.show_lines(g, lines)
 
 
 func initCards(g):
