@@ -138,13 +138,18 @@ and enemy colour systems: list it in `ParticleSystem._init`'s test); its
 drawing is `PanelQuad` nodes in its batches' slots, through a twin in its
 `draw` (phase 4.4's rollout, part 5: `Particle.show_particle` for a
 particle's quad, `SphereParticle.show_particle` for captured triangles;
-`docs/ARCHITECTURE.md` section 15), so a new one needs such a twin and its
-`--legacy=battle_effect_draw` path.
+`docs/ARCHITECTURE.md` section 15), so a new one needs such a twin (since
+phase 4.4's closing there is no legacy path beside it to compare with: a new
+kind gets a flag of its own while it is converted, plan 12).
 
 The legacy system still decides when the battle goes on, with a pool of at
-most 64 particles (`ParticleSystem.reduce_for_waits`). Check a changed
-effect's waits against the legacy ones with `--legacy=effect_waits` (the
-whole pool) or `--legacy=battle_effects` (the legacy effect).
+most 64 particles (`ParticleSystem.reduce_for_waits`). The flags that
+compared the waits and the look with the legacy effects,
+`--legacy=effect_waits` (the whole pool) and `--legacy=battle_effects` (the
+legacy simulation's quads, the Flame's pre-run), are removed with those
+paths since phase 4.4's closing (2026-11-22, plan 9.4; the git history up
+to 88bf7d76 has them): a changed effect's waits are checked by its battle
+cases' log lines (the `battlemode=` of each shot) against a golden.
 
 Checking:
 
@@ -154,9 +159,7 @@ Checking:
   `effects_area`; an enemy's effects: `effects_enemy`). The enemies' Flame,
   SerphiaDeath and BlackDeath cannot be cast by the party (they read the
   attacking enemy).
-* `tools/parity/parity.sh ab "--legacy=battle_effects" "" 'effects_*'` shows
-  the legacy and the GPU effects side by side (they differ by design: other
-  random numbers, smooth emission, waits within about 0.1 s).
-* `--hide-particles --legacy=effect_waits` makes a battle identical to the
-  legacy one with `--hide-particles` (everything but the effects' pixels).
+* `--hide-particles` (dev) hides the GPU systems (they still run): a parity
+  run with it compares everything but the effects' pixels
+  (`tools/parity/parity.sh ab "--hide-particles" "" 'effects_*'`).
 * Frame rate: normal runs (not `--seed`), AutoPlay's `fps=`.

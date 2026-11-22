@@ -28,7 +28,7 @@ const ADDITIVE_COLORING = 24
 const VELOCITY_RANDOM_MULT = 25
 const VELOCITY_RANDOM_ADD = 26
 const SET_VELOCITY_ON_PARTICLES = 27
-const SYSTEM_DRAWABLE = 28
+# 28: the Java's SYSTEM_DRAWABLE (removed with SwordBackground, closing phase 4.4)
 const LIFE_MULTIPLIER = 29
 const SIZE_RANDOM_MULT = 30
 const MASS_RANDOM_MULT = 31

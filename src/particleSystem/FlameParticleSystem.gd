@@ -11,18 +11,10 @@ func update(elapsedTime, body = null):
 
 func create(nrOfParticles, p_settings):
 	super.create(nrOfParticles, p_settings)
-	# Bridge (the battle effects phase): on the GPU path the GPU system warms
-	# up instead (its legacy particles decide nothing: the flame is never
-	# destroyed). This pre-run blocked the game for 11 s (docs/MODERNIZATION_PLAN.md
-	# 6.11). --legacy=effect_waits keeps it, for the same random numbers.
-	if gpu and not Main.is_legacy("effect_waits"):
-		gpu_preprocess = 400 * Values.ORIGINAL_FRAME_MS / 1000.0
-		return
-	# For burning man: pre-run the system (in the port's steps, see
-	# ParticleSystemPacket.update; Java: Values.LOGIC_INTERVAL).
-	for i in range(200):
-		var elapsedTime: float = Values.ORIGINAL_FRAME_MS / 1000.0
-		super.update(elapsedTime)
-		# Same as the particle loop of ParticleSystem.update (duplicated in Java).
-		_updateParticles(elapsedTime)
-		emitter.update(self, elapsedTime)
+	# Bridge (the battle effects phase): the GPU system warms up (400 of the
+	# original's steps) instead of the Java's pre-run "for burning man" (200
+	# legacy updates of the system: its legacy particles decide nothing, the
+	# flame is never destroyed). That pre-run blocked the game for 11 s
+	# (docs/MODERNIZATION_PLAN.md 6.11); --legacy=effect_waits kept it until
+	# the closing of phase 4.4 (plan 9.4).
+	gpu_preprocess = 400 * Values.ORIGINAL_FRAME_MS / 1000.0

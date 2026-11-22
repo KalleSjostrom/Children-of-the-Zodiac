@@ -40,18 +40,10 @@ func _setValues(p_back, x, y, p_scale, p_alpha) -> void:
 	self.alpha = float(p_alpha)
 
 
-## Draws the background on the given graphics.
-func drawBackground(g):
-	g.fadeOldSchool(alpha)
-	g.setColor(1)
-	g.drawImage(background, bx, by, scale)
-
-
 # Bridge (phase 4.4 step B, docs/ARCHITECTURE.md section 15): the result and
 # spoils screens' drawing without the drawing. The twins make the drawing's
 # state changes in the same order and show, where each part was drawn, its
 # UI node (Graphics.show_ui, the UI layer; pooled per scene and occurrence).
-# --legacy=battle_screens keeps the legacy drawing.
 
 ## The nodes of the screens: the background (a LevelBar: the scaled image as
 ## its legacy quad) and the played cards; the lines are MenuText nodes
@@ -60,7 +52,7 @@ const BACK_VIEW := "res://scenes/ui/LevelBar.tscn"
 const CARD_VIEW := "res://scenes/ui/CardView.tscn"
 
 
-## drawBackground without the drawing: the dim (fadeOldSchool's colour and
+## The Java drawBackground without the drawing: the dim (fadeOldSchool's colour and
 ## bind: a Fade node on the UI layer, the screen's lines and cards drawn over
 ## it), setColor(1), the background's bind; the frame's next LevelBar shows
 ## the background at its scale as the legacy quad (Graphics.place_image_part

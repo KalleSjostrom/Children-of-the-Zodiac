@@ -81,18 +81,13 @@ func testHideCharacters():
 
 
 ## The row's gradient. Bridge (phase 4.4's rollout, part 2): a PanelQuad in
-## its batch's slot (Graphics.place_gradient: the same state changes);
-## --legacy=battle_panels keeps the legacy quad.
+## its batch's slot (Graphics.place_gradient: the same state changes as the
+## Java's drawGradient).
 func drawBack(g):
 	var x: float = 1.08
-	if not Main.is_legacy("battle_panels"):
-		Utils3D.show_quad(g, [get_instance_id(), &"back"], g.place_gradient(
-				Vector3f.ZERO, BACK_ALPHA_TOP, BACK_ALPHA_BOTTOM,
-				x, -x, -0.07, 0.3, false, true))
-		return
-	g.drawGradient(
+	Utils3D.show_quad(g, [get_instance_id(), &"back"], g.place_gradient(
 			Vector3f.ZERO, BACK_ALPHA_TOP, BACK_ALPHA_BOTTOM,
-			x, -x, -0.07, 0.3, false, true)
+			x, -x, -0.07, 0.3, false, true))
 
 
 func get_(i):

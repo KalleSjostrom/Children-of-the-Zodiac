@@ -44,15 +44,10 @@ func start(g):
 ## Bridge (phase 4.4's rollout, part 5, step B, docs/ARCHITECTURE.md section
 ## 15): each sphere is kept and shown by a PanelQuad in the slot of its batch
 ## (SphereParticle.show_particle), lit as the batch was (GLBackend's material
-## and the light state the frame ends with); --legacy=battle_effect_draw keeps
-## the legacy triangles.
+## and the light state the frame ends with).
 func draw(g, t = null, pPos = null):
-	var legacy: bool = Main.is_legacy("battle_effect_draw")
 	for p in particles:
-		if legacy:
-			p.drawParticle(g, false)
-		else:
-			p.show_particle(g, [p.get_instance_id(), &"sphere"])
+		p.show_particle(g, [p.get_instance_id(), &"sphere"])
 
 func end(g):
 	var gl = g.getGL()

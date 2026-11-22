@@ -137,32 +137,8 @@ func copyCard():
 #  DRAWING METHODS  #
 #####################
 
-## Java overloads:
-##   drawCard(g, x, y)                        -> size .7
-##   drawCard(g, x, y, float size)            -> NORMAL, this level
-##   drawCard(g, x, y, size, int type, int level)
-func drawCard(g, x, y, size = null, type = null, level = null):
-	if size == null:
-		drawCard(g, x, y, 0.7)
-		return
-	if type == null:
-		drawCard(g, x, y, size, NORMAL, self.level)
-		return
-	var s: float = float(size)
-	var yy: int = int(y + s * 25)
-	g.drawImage(images[type][BASE], x, y, s)
-	if level == 1:
-		g.drawImage(images[type][BALL], x + (s * 65), yy, s)
-	elif level == 2:
-		g.drawImage(images[type][BALL], x + (s * 50), yy, s)
-		g.drawImage(images[type][BALL], x + (s * 80), yy, s)
-	elif level == 3:
-		g.drawImage(images[type][BALL], x + (s * 40), yy, s)
-		g.drawImage(images[type][BALL], x + (s * 65), yy, s)
-		g.drawImage(images[type][BALL], x + (s * 90), yy, s)
-
-
-## Bridge (phase 3 step B): drawCard(g, x, y, size) without the drawing: its
+## Bridge (phase 3 step B): drawCard(g, x, y, size) without the drawing (the
+## Java drawCard: removed, closing phase 4.4, plan 9.4): its
 ## images bound as it binds them (Graphics.skip_image). Returns the picture's
 ## texture, the ball's (null when no ball is drawn) and the level.
 func place_card(g) -> Array:

@@ -21,7 +21,6 @@ var monster = null
 var manager = null
 var attacker = null
 var glCharacters = null
-var clock = null
 var legend = null
 var tutorial = null
 var glEnemies = null
@@ -32,7 +31,6 @@ var resultScreen = ResultScreen.new()
 var spoilsScreen = null
 var finishRound_ = null # Java Semaphore (not needed)
 var update_: bool = false
-var firstTimeFlee: bool = true
 var dialog = null
 var mode: int = 0
 var enemySize: int = 0
@@ -54,7 +52,6 @@ func _init(boss = null, en = null, freq = null, p_manager = null) -> void:
 	var e = enemies[0]
 	monster = getBoss(e) if boss else BattleEnemy.new(e)
 	monster.setBattle(self)
-	clock = Clock.new()
 	legend = Legend.new()
 	tutorial = Tutorial.new(p_manager.getName(), false)
 
@@ -132,9 +129,6 @@ func update(elapsedTime = null):
 		spoilsScreen.update(elapsedTime)
 	elif mode == BattleManager.IDLING:
 		updateIdlingMode()
-	elif mode == BattleManager.BATTLING:
-		if clock.timesUp():
-			finishRound()
 	if mode == BattleManager.ENEMY_TURN:
 		if monster.shouldHit():
 			calcEnemyDamage()
@@ -175,7 +169,7 @@ func updateIdlingMode():
 
 
 ## Sets the given character as the attacker of the next round and initiates
-## the round (deck, clock, ...).
+## the round (deck, legend, hand, ...).
 func initNewRound(character):
 	attacker = character
 
@@ -187,9 +181,7 @@ func initNewRound(character):
 	else:
 		currentDeck = attacker.get2DDeck()
 		currentDeck.initNewRound()
-		clock.show()
 		legend.show()
-		clock.reset()
 		hand.show()
 		hand.reset()
 		switchMode(BattleManager.BATTLING)
@@ -203,7 +195,6 @@ func initNewRound(character):
 
 ## Initiates the drawing of the hand shown in battle.
 func initDraw(g):
-	clock.initDraw(g)
 	legend.initDraw(g)
 	hand.initDraw(g)
 	hand.hide()
@@ -248,9 +239,7 @@ func drawBattle(g):
 func finishRound():
 	var cards = currentDeck.finish()
 	calcDamage(cards)
-	clock.hide()
 	legend.hide()
-	clock.finish()
 	hand.hide()
 	glCharacters.setTarget(-1, false)
 
@@ -545,15 +534,6 @@ func flee():
 	if J.random() < 0.002:
 		hide()
 		mode = BattleManager.EXIT
-	if firstTimeFlee:
-		clock.initFlee()
-		firstTimeFlee = false
-
-
-## Resets the fleeing procedure (removes the "Fleeing" text).
-func resetFlee():
-	firstTimeFlee = true
-	clock.resetFlee()
 
 
 ## Creates the boss class battle.bosses.<DbName> (capitalized) for the enemy,

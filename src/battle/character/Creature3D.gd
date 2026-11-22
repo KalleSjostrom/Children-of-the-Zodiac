@@ -79,8 +79,7 @@ func setSupport(support):
 
 ## Draws the creature image, the progress bar, the info texture, the
 ## element and the boosts. Bridge (phase 4.4's rollout, part 2): PanelQuad
-## nodes in their batches' slots (_show_panel, the same state changes);
-## --legacy=battle_panels keeps the legacy quads.
+## nodes in their batches' slots (_show_panel, the same state changes).
 func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 	if creature.isActive() and creature.isAlive():
 		self.alpha = 0.7
@@ -90,27 +89,11 @@ func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 			self.alpha = 0.2
 		else:
 			self.alpha = 0.7
-	if not Main.is_legacy("battle_panels"):
-		_show_panel(g)
-		return
-	drawImage(g)
-	progressBar.update(creature.getProgress())
-	progressBar.draw(g, self.alpha, creature.getSpeedMode())
-
-	if mustUpdateText:
-		updateTexture(g)
-		mustUpdateText = false
-	g.push()
-	g.translate(0.13, -0.15, 0)
-	g.scale(0.45)
-	Utils3D.draw3D(g, tex, coordList[1])
-	g.pop()
-	drawElements(g)
-	drawBoosts(g)
+	_show_panel(g)
 
 
-## Bridge (phase 4.4's rollout, part 2, step B): the panel's drawing (from
-## drawImage on) without the drawing: the same state changes in the same
+## Bridge (phase 4.4's rollout, part 2, step B): the panel's drawing (the
+## Java's from drawImage on) without the drawing: the same state changes in the same
 ## order (the binds and texture coordinates, the colours, the matrix calls,
 ## the bar's update, the info texture's rebuild) and a PanelQuad per batch,
 ## in the batch's slot (Utils3D.show_quad).
@@ -131,8 +114,9 @@ func _show_panel(g) -> void:
 	_show_boosts(g)
 
 
-## Bridge (phase 4.4's rollout, part 2): drawElements without the drawing
-## (the element's bind, the info texture's coordinates: as the original).
+## Bridge (phase 4.4's rollout, part 2): drawElements (the element icon)
+## without the drawing (the element's bind, the info texture's coordinates:
+## as the original, its bound texture is drawn with them).
 func _show_elements(g) -> void:
 	var element: int = creature.getElement()
 	if element != AbstractCard.NO_ELEMENT:
@@ -146,7 +130,8 @@ func _show_elements(g) -> void:
 		g.pop()
 
 
-## Bridge (phase 4.4's rollout, part 2): drawBoosts without the drawing.
+## Bridge (phase 4.4's rollout, part 2): drawBoosts (the boosts' cards under
+## the creature) without the drawing.
 func _show_boosts(g) -> void:
 	g.push()
 	if creature is Enemy:
@@ -167,38 +152,6 @@ func _show_boosts(g) -> void:
 func setHideTimer(hideTime, criticalHit):
 	hideFor(hideTime)
 	self.criticalHit = criticalHit
-
-
-## Draws the element icon of the creature. (As in the original, the element
-## texture is bound but the tex coords of the info texture are used.)
-func drawElements(g):
-	var element: int = creature.getElement()
-	if element != AbstractCard.NO_ELEMENT:
-		var t = ImageHandler.getTexture(
-				Values.MenuImages + "Elements/" + str(element) + ".png").getTexture()
-		t.bind(g.getGL())
-		g.push()
-		g.scale(0.65)
-		g.beginQuads()
-		Utils3D.draw3D(g, tex.getImageTexCoords(), coordList[3])
-		g.end()
-		g.pop()
-
-
-## Draws the boost icons under the creature.
-func drawBoosts(g):
-	g.push()
-	if creature is Enemy:
-		g.scale(0.9)
-		g.translate(-0.22, -0.05, 0)
-	var boosts: Array = creature.getBoosts()
-	for i in boosts.size():
-		if boosts[i] != 0:
-			var nr: int = (i + 1) * (1 if boosts[i] == 1 else 11)
-			var t = ImageHandler.getTexture(Values.Cards + str(nr) + ".png").getTexture()
-			g.translate(DISTANCE_BETWEEN_ICONS, 0, 0)
-			Utils3D.draw3D(g, t, coordList[2])
-	g.pop()
 
 
 func getName():
@@ -247,11 +200,7 @@ func drawInfo(g):
 	pass
 
 
-## Abstract: draws the creature image.
-func drawImage(g):
-	pass
-
-
-## Bridge (phase 4.4's rollout, part 2): drawImage without the drawing.
+## Bridge (phase 4.4's rollout, part 2): the Java drawImage (abstract: the
+## creature image) without the drawing.
 func _show_image(g) -> void:
 	pass

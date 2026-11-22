@@ -97,6 +97,7 @@ static func getDefaultBattleCardSettings(level):
 	var l: float = st.length() / 2.0
 	source.addLocal(st.mult(l))
 	targetvec.subtractLocal(st.mult(l))
-	var sb := SwordBackground.new(source, targetvec)
-	settings.setSystemDrawable(AnimSettings.SYSTEM_DRAWABLE, sb)
+	# The Java sets a SwordBackground (the sword's "ground") as the settings'
+	# system drawable here; nothing ever drew it (ParticleSystem.drawable was
+	# never assigned): removed with it (closing phase 4.4, plan Appendix).
 	return settings

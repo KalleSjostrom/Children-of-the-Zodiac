@@ -80,7 +80,6 @@ var target = null
 var gravity = null
 var targetPoint = null
 var isDeadLimit: int = 0
-var drawable = null
 var emitTimeStep: float = 0.0
 var destroyFadeGravity = null
 var additiveColoring: bool = false
@@ -105,13 +104,12 @@ var _tmpForce = null
 ## Bridge (the battle effects phase, docs/ARCHITECTURE.md section 11): a
 ## system drawn as particles (this class's draw and ShatterParticleSystem's;
 ## not the sphere, image, slow and enemy systems) runs on the GPU
-## (EffectParticles3D) unless --legacy=battle_effects: its draw hands the
-## node its state (gpu_state) instead of drawing quads. The legacy system
-## stays in charge: it still moves, emits, is destroyed and decides when the
-## battle goes on (isDestroyed, isReady, isDead), with a pool of at most
-## GPU_WAIT_PARTICLES particles (reduce_for_waits; not with
-## --legacy=effect_waits, which keeps the legacy pool and so the legacy
-## waits, for parity runs). gpu_amount and gpu_emit_step: the legacy pool
+## (EffectParticles3D): its draw hands the node its state (gpu_state) instead
+## of drawing quads (the legacy quads and their flag battle_effects are
+## removed: closing phase 4.4, plan 9.4). The legacy system stays in charge:
+## it still moves, emits, is destroyed and decides when the battle goes on
+## (isDestroyed, isReady, isDead), with a pool of at most GPU_WAIT_PARTICLES
+## particles (reduce_for_waits). gpu_amount and gpu_emit_step: the legacy pool
 ## and time step, which the GPU draws; gpu_seed: the GPU particles' seed,
 ## from gpu_rand (the particles' own draws stay those of rand); gpu_age,
 ## gpu_stepped, gpu_elapsed: the game time since the system started, the time
@@ -140,7 +138,7 @@ func _init(p_settings = null, p_enemy = null) -> void:
 	ParticleSystem.load()
 	setSettings(p_settings)
 	enemy = p_enemy
-	gpu = gpu_path() and not (self is SphereParticleSystem or self is ImageParticleSystem
+	gpu = not (self is SphereParticleSystem or self is ImageParticleSystem
 			or self is SlowParticleSystem or self is EnemySystem)
 	if gpu:
 		gpu_amount = nrParticles
@@ -150,21 +148,15 @@ func _init(p_settings = null, p_enemy = null) -> void:
 	create(nrParticles, settings)
 
 
-## Bridge: whether the card and enemy effects run on the GPU (not with
-## --legacy=battle_effects).
-static func gpu_path() -> bool:
-	return not Main.is_legacy("battle_effects")
-
-
 ## Bridge: on the GPU path the legacy particles only decide the waits, so a
 ## pool of at most GPU_WAIT_PARTICLES does: the same rate per pool slot (a
 ## longer time step) and the same share of the pool for isDead's limit.
-## Not with --legacy=effect_waits, nor for the flare (FlareEmitter takes 400
+## Not for the flare (FlareEmitter takes 400
 ## of the pool and its destroy counts them), nor for a system that waits for
 ## its last particle (an isDeadLimit of 0: the last of a smaller pool dies
 ## sooner; Ultima's 250 waited 0.3 s less) up to 4 x GPU_WAIT_PARTICLES.
 func reduce_for_waits() -> void:
-	if Main.is_legacy("effect_waits") or nrParticles <= GPU_WAIT_PARTICLES:
+	if nrParticles <= GPU_WAIT_PARTICLES:
 		return
 	if int(settings.getValue(AnimSettings.EMITTER_TYPE)) == FLARE_EMITTER_TYPE:
 		return
@@ -403,7 +395,10 @@ func kill():
 	for p in particles:
 		p.kill()
 
-## Java: draw(Graphics g).
+## Java: draw(Graphics g). Bridge (the battle effects phase): the GPU system
+## (show_gpu) instead of the particles' quads; the same GL state changes (the
+## blending, the binds, each particle's colour and texture coordinate:
+## Particle.place_particle).
 func draw(g, t = null, pPos = null):
 	if not hasInited:
 		loadGLTextures()
@@ -415,23 +410,16 @@ func draw(g, t = null, pPos = null):
 
 	var gl = g.getGL()
 	tex[textures[0]].bind(gl)
-	if drawable != null:
-		drawable.drawGround(
-				g, destroyed, getPosition(), particles, particlesLeft)
-	if gpu:
-		show_gpu(g)
+	show_gpu(g)
 
 	var piece: int = particles.size() / textures.size()
 	for i in range(textures.size()):
 		tex[textures[i]].bind(gl)
 		g.beginQuads()
 		for j in range(i * piece, (i + 1) * piece):
-			# Main.hide_particles (dev) and the GPU path: no quads, the same GL
-			# state (as far as the GPU path's smaller pool gives it).
-			if Main.hide_particles or gpu:
-				particles[j].place_particle(g)
-			else:
-				particles[j].drawParticle(g, additiveColoring)
+			# No quads: the same GL state (as far as the GPU path's smaller
+			# pool gives it).
+			particles[j].place_particle(g)
 		g.end()
 	if blendMode != BLEND_MODE_NO_BLEND:
 		g.endBlend()

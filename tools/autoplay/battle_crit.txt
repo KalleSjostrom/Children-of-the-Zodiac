@@ -1,0 +1,46 @@
+# Phase 4.4's closing: the party's red screen. An enemy's critical hit on a
+# party member hides the member for 150 ms, and while it is hidden
+# Character3D.draw draws the red screen (loadIdentity, a 1024 x 768 white
+# image in red at .5 under the 3D projection at z 0: behind the near plane,
+# never visible; the row's later members are drawn at the identity too).
+# --load="Slot 1" --start="Berca Desert--South-mark0" --start-node=20:3 (Ogre,
+# Ogre, as battle_flash): god mode; steps until the battle; at the first party
+# turn the console's crit 100 makes every enemy hit that does not miss a
+# critical one (the shipped data's 5 % of Stitchmen and Trolls reached no
+# case); TRIANGLE ends the party's turns until an enemy's, then a shot every
+# frame until its turn ends (e_#), twice (f_#).
+wait 3000
+console god on
+mark
+tap UP
+wait 700
+tap DOWN
+wait 700
+loopuntil sub=battle 90000
+mark
+wait 100
+loopuntil battlemode=1 30000
+console crit 100
+log crit
+mark
+tap TRIANGLE 16
+wait 17
+loopuntil battlemode=2 30000
+log enemy_turn
+mark
+wait 16
+shot e_#
+loopuntil !battlemode=2 8000
+log done
+mark
+tap TRIANGLE 16
+wait 17
+loopuntil battlemode=2 30000
+log enemy_turn2
+mark
+wait 16
+shot f_#
+loopuntil !battlemode=2 8000
+log done2
+wait 300
+quit

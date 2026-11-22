@@ -49,7 +49,7 @@ scenes/
                           DungeonCell.gd, DungeonStyle.gd (resources), DungeonMaterials.gd,
                           dungeon_gl.gdshaderinc (decision 2's shader), DungeonWeather.gd
                           (the weather's GPU passes), DungeonQuads.gd (records legacy quads),
-                          MinimapPart.gd (a batch of the minimap; dev, section 12)
+                          MinimapPart.gd (a batch of the minimap, section 12)
   dungeons/<Area>/        <Floor>.tscn, one per floor, named after its (deleted) .map file
                           ("The Great Mine/Tunnel.tscn")
   dungeon_objects/        DungeonObject.gd (base) and one scene per object kind:
@@ -282,7 +282,6 @@ not rename legacy members to suit new code.
 `GameMode.create_scene()`, `scene_root`, `shown_scene()`,
 `Main.is_legacy("<subsystem>")`, `Main.no_encounters`,
 `MapLoader.dungeon_scene_for`, `Graphics.use_scene_3d`, `Main.hide_particles`,
-`ParticleSystem.gpu_path()`,
 `Graphics.reserve_scene_slot`, `Graphics.show_node`, `Graphics.show_ui`,
 `Graphics.show_fade` (section 12), the snake_case
 methods of the scenes it owns (`VillageScene.load_into`, `show_*`;
@@ -333,11 +332,13 @@ and the twins `Attack._show_with_shadow`, `GLDeck._show_lines`, `Legend._show_li
 and those of `AttackBackground` and `EnemyCard` (`show_tex`), and part 5's (the card effects that are not
 particles) `Graphics.place_centered_current_2d`, `Utils3D.show_triangles`, `Particle.show_particle`,
 `SphereParticle.show_particle` and the twins in `SphereParticleSystem.draw`, `ImageParticleSystem.draw` and
-`SlowParticleSystem.draw` (`_drawQuad`):
+`SlowParticleSystem.draw`, and the closing's `Character3D._show_red_screen`:
 section 15. Closing phase 4.2 removed the
 wrappers that only chose between a legacy drawing and its twin, `AbstractPage.draw_list`,
 `StatusPage.draw_top`, `AbstractStore.draw_dim`, `RiddleGame.draw_dim`, `DeckPage`'s
-`_draw_deck` and `_draw_bar`: their call sites call the twin, plan 9.2); refactors of a
+`_draw_deck` and `_draw_bar`: their call sites call the twin, plan 9.2; closing phase 4.4
+likewise `SlowParticleSystem._drawQuad` (its call sites call `Particle.show_particle`), and
+`ResultScreen.drawResult` took its twin `_show_result`'s body, plan 9.4); refactors of a
 legacy method's own code keep Java style (`Village.sortSprites`).
 
 **Flags in legacy code.** A subsystem being converted keeps its old path for
@@ -352,6 +353,8 @@ func create_scene() -> Node:
 
 `Main.is_legacy(name)` is true when `--legacy=` lists `name` (or `all`).
 Remove the flag and the old path when the phase's exit criteria are met.
+Since phase 4.4's closing (2026-11-22) no code asks for a flag: the
+mechanism stays for later conversions (step C, phase 5).
 
 ## 7. Flags, determinism and the parity workflow
 
@@ -363,13 +366,13 @@ Game options go after `--` on the command line (see the header of
 | `--fixed-step` | The game advances exactly 1000/60 ms per frame, whatever the real frame time. |
 | `--seed=<n>` | Deterministic run (implies `--fixed-step`): every random generator (`J`, every `JRandom`, Godot's global one) is seeded from `n`; `J.currentTimeMillis()`, `Scheduler` and `GameAction` read a game clock advanced by the elapsed game time instead of the wall clock; saves are read from the shipped files and written to `user://saves_deterministic/` (emptied at start), never to the player's `user://saves/`; the slot lists date a slot saved in the run by the game clock from 1 Jan 2000, 00:00 (`SaveSlots.note_saved`; a file's time is wall-clock time, phase 4.2); no game pad is read (`GameCore.init2`: an idle pad releases AutoPlay's buttons every 40 ms). Two runs of an AutoPlay script then produce the same frames. |
 | `--uncapped` | No 60 FPS cap and no vsync. With `--seed` the result is the same, only faster. |
-| `--legacy=<a,b,…>` | Keep the legacy path of the listed subsystems (`Main.is_legacy`). `all` keeps every one. The flags of closed phases are gone with their legacy paths: phase 1's `villages` and `village_top_layer` (2026-11-03), phase 2's `dungeons` and `dungeon_drawing`, the particles phases' `particles` and `dungeon_particles`, phase 3's `dialog`, `fades`, `emotions`, `mission`, `pause`, `story_images`, `story_texts` and `tutorials`, phase 4.1's `world_map` and `airship` (2026-11-06), phase 4.2's `title`, `game_over`, `menu_list`, `menu_frame`, `menu_text`, `status`, `deck`, `automap`, `dim`, `bless` and `riddle` (2026-11-07; plan 6.9, 7.9, 8.4, 9.1, 9.2): a removed name is ignored (`Main.is_legacy` only answers for the names the code still asks about). Left, the battle effects (section 11): `battle_effects`: the card and enemy effects run the legacy simulation and draw its quads; `effect_waits` (dev): the GPU effects' legacy systems keep their whole pool, so the legacy particle counts decide when a battle goes on, as before (for parity runs with `--hide-particles`). Phase 4.4's pilot, the battle's 2D top layer (section 15): `battle_screens` (the result and spoils screens: the dim, the background, the lines, the played cards, the level-up bars), `battle_flash` (an enemy's red flash), `battle_legend` (the legend's button icons); with all three the top layer is drawn exactly as before. Its rollout, the battle's 3D (section 15): `battle_enemy` (the enemy's frame and slice: its legacy quads instead of the `EnemyView` node), `battle_panels` (the info panels: the rows' gradients and each creature's portrait, bar, info texture, element icon and boosts' cards as legacy quads instead of `PanelQuad` nodes), `battle_deck` (the deck and the hand: the weapon's mode icon and slots, the hand's slots and the save slot, the cards' pictures, balls and backs, the pointer, the deck's gradient, the target hand and `GLSlot.initDraw`'s stray quads as legacy quads instead of `PanelQuad` nodes), `battle_legend_back` (the legend's gradient as its legacy quad); part 4, the texts among the 3D chunks: `battle_attack_name` (an enemy's attack name: its four lines as legacy 2D text instead of two `ShadowText` nodes), `battle_deck_text` (the deck's lines instead of a `MenuText` node), `battle_legend_text` (the legend's six lines over their black copies instead of a `MenuText` node), `battle_attack_text` (the attack texts: the damage, "Miss", "Critical Hit!", a heal, "Shuffle" … instead of `AttackTexts` nodes), `battle_enemy_quads` (`AttackBackground` and `EnemyCard`, with their `initDraw` quads, as legacy quads instead of `PanelQuad` nodes); part 5, the card effects that are not particles: `battle_effect_draw` (Demolish's spheres, Death's image and Slow's clock and hands as legacy triangles and quads instead of `PanelQuad` nodes). With every phase 4.4 flag the battle is drawn exactly as before. |
+| `--legacy=<a,b,…>` | Keep the legacy path of the listed subsystems (`Main.is_legacy`). `all` keeps every one. No code asks for a flag since phase 4.4 closed: the flags of the closed phases are gone with their legacy paths: phase 1's `villages` and `village_top_layer` (2026-11-03), phase 2's `dungeons` and `dungeon_drawing`, the particles phases' `particles` and `dungeon_particles`, phase 3's `dialog`, `fades`, `emotions`, `mission`, `pause`, `story_images`, `story_texts` and `tutorials`, phase 4.1's `world_map` and `airship` (2026-11-06), phase 4.2's `title`, `game_over`, `menu_list`, `menu_frame`, `menu_text`, `status`, `deck`, `automap`, `dim`, `bless` and `riddle` (2026-11-07), phase 4.4's `battle_screens`, `battle_flash`, `battle_legend`, `battle_enemy`, `battle_panels`, `battle_deck`, `battle_legend_back`, `battle_attack_name`, `battle_deck_text`, `battle_legend_text`, `battle_attack_text`, `battle_enemy_quads` and `battle_effect_draw` and the battle effects' `battle_effects` and `effect_waits` (2026-11-22; plan 6.9, 7.9, 8.4, 9.1, 9.2, 9.4): a removed name is ignored (`Main.is_legacy` only answers for the names the code still asks about). The mechanism stays for later conversions (step C, phase 5): a phase that keeps a legacy path adds its name here. |
 | `--hide-particles` | Dev only: the particles draw nothing (`Main.hide_particles`; they still run): the village and cutscene systems, the dungeon weather and save points, the card and enemy effects drawn as particles (not the sphere, image, slow and enemy-colour systems), with the GL state their drawing leaves; for parity runs that compare everything else. |
-| `--minimap-node` | Dev only: the labyrinth's minimap is drawn by `MinimapPart` nodes (`MapRenderer.show_map`) instead of the 3D bridge's batches; the floor's frames are the same to the bit; a battle's frames after them differed by 1/255 (plan 8.3) until the floor's walls were drawn in a fixed order (phase 4.4's rollout, section 10: identical on the 34 battle cases since). Not the default yet (plan 8.4). |
 | Console `padlost [on\|off]`, `emotion <who> <emotion\|off> [shake]` | Dev only (debug console, `scenes/debug/GameCommands.gd`; AutoPlay `console`): `padlost` makes `InputManagers.connectionLost` report a lost game pad (`lost_simulated`) until the overlay's menu is answered, for the "game pad lost" overlay without a pad (seeded runs read none); `emotion` sets a bubble on a party member or villager of the current village (`Sprite.setEmotion`, which only cutscenes call), for the emotions in a village frame. Parity cases `pad_lost`, `emotions_village`. |
 | Console `give <item\|equipment\|card> <name> [number]` | Dev only (phase 4.2's menu): gives the party a key item (`PartyItems.addItem`, any name) or a piece of equipment of `equipment.bank` (`Load.addEquipment`, as a chest gives one, number times); `_` stands for a space. The shipped saves have too few for the menu's lists that scroll in their bounding box (Key Items, the equip page's lists) and their "(n)" numbers. Parity cases `menu_key_items`, `menu_equip_list`. Phase 4.2's stores: `card <card>[:<level>][:all]` adds that card to the party deck number times (the names of `cast`), for a merge page with more kinds than two lines show (`store_card_merge`). |
 | Console `gold [amount]` | Dev only (phase 4.2's stores): shows or sets the party's gold, for the cards and equipment the party cannot afford (grey in the card store, "You can't afford that!"). Parity cases `store_weapon_buy`, `store_card_buy`. |
 | Console `exp <amount> [who]`, `drop <item>` | Dev only (phase 4.4's pilot, section 15): `exp` gives party members (all if left out) experience as a won battle does (`SpoilsScreen.calcSpoils`: the experience, the experience left, `Character.levelUpStatic`), but level after level, so a character can reach the last level of a class ("Max level" on the next spoils screen) or stand just before a level up; `drop` gives the enemies of the battle going on drop data (the item, rate 1: `Enemy.setDropData`), so the spoils screen shows "You found <item> laying on the ground!" (no enemy in `enemyBank.bank` has a `dropdata` line). Parity cases `battle_spoils`, `battle_spoils_skip`. |
+| Console `crit <percent>` | Dev only (phase 4.4's closing, section 15): sets the critical hit chance of the battle's enemies (`Creature.CRITICAL_HIT_PRECENT`, read by `EnemyLogic.calcEnemyDamage` at every hit on the party; its `J.random()` is drawn either way): at 100 every hit that does not miss is critical, so the party member hit is hidden for 150 ms with the party's red screen (Stitchmen's and Trolls' data have 5; no case met one). Parity case `battle_crit`. |
 | `--casts=<round>/…` | Dev only: the rounds the console's `cast next` plays on the party's turns (cards `<card>[:<level>][:all]` joined by `+`; `scenes/debug/GameCommands.gd`), for the parity cases of the battle effects (`effects_*`). |
 | `--no-encounters` | Dev only: labyrinths start no random battles (`Labyrinth.noEncounters`, which nothing else sets; the steps are still counted), for parity tours of dungeon floors. |
 | `--start-node=<address>:<direction>` | Dev only: a labyrinth `--start` place starts at this node and facing (0-3), as a game saved there does (`Load.labyrinthPosition`, COTZ-005), not at its door: parity cases start in front of the object they use. |
@@ -399,7 +402,7 @@ and by Godot's importer).
 tools/parity/parity.sh record golden --jobs=5       # all cases, current code
 tools/parity/parity.sh record after 'tour_*'        # a group, after a change
 tools/parity/parity.sh compare golden after         # diff images + summary
-tools/parity/parity.sh ab "--legacy=battle_effects" "" 'effects_*'
+tools/parity/parity.sh ab "--hide-particles" "" 'effects_*'
 ```
 
 * `record <set> [case…]` runs each case windowed (screenshots need a
@@ -1011,10 +1014,12 @@ battle runs inside the labyrinth's frame (`Labyrinth.enterBattle`, its sub
 game mode); what a boss leads to after the win (another boss's
 `BossBattleArea`, a story, the world map) is a mode of its own.
 
-**Still legacy** in Labyrinth's frame: the minimap (`MapRenderer`, 3D, in
-the scene's chunk: plan 8.3 tells why it stays there) and a battle's 3D
-(`labDrawable`; its card and enemy effects are GPU particles, section 11,
-and its 2D top layer UI nodes since phase 4.4's pilot, section 15). The mission display, dialogs and card info, the top
+**Still legacy** in Labyrinth's frame: nothing is drawn through the 3D
+bridge any more (since phase 4.4's closing, 2026-11-22). The minimap
+(`MapRenderer`) runs its legacy drawing captured for its `MinimapPart`
+nodes (section 12), a battle (`labDrawable`) keeps its legacy state and
+timing and draws nodes (section 15; its card and enemy effects are GPU
+particles, section 11). The mission display, dialogs and card info, the top
 layer (tutorials) and the fade are phase 3's nodes (section 12); a riddle's
 top layer is phase 4.2's UI nodes (section 14, "The riddles").
 
@@ -1082,8 +1087,9 @@ GPUParticles3D made in code) per legacy `ParticleSystem`. The sphere systems
 (Demolish's lit spheres), the image and slow systems (Death, Slow: sprites)
 and the enemy colour system (Elements) are not particles: the first three
 draw `PanelQuad` nodes in their batches' slots since phase 4.4's rollout,
-part 5 (section 15, `--legacy=battle_effect_draw`), the enemy colour system
-draws nothing.
+part 5 (section 15), the enemy colour system draws nothing. Since phase
+4.4's closing (2026-11-22, plan 9.4) the GPU path is the only one: the
+legacy simulation's quads, the Flame's pre-run and their flags are gone.
 
 * The process shader (`effect_particle.gdshader`) runs the legacy laws:
   `Particle.update` (gravity with its per-step x jitter, a target point's
@@ -1107,9 +1113,9 @@ draws nothing.
   quads never are, but would cull the QuadMesh).
 * Step B. The legacy `ParticleSystem` stays in charge: the cards build the
   same packets, the packets step their systems as before, and a system still
-  moves, emits, is destroyed and triggers its shakes and slices. On the GPU
-  path (`ParticleSystem.gpu_path()`: not `--legacy=battle_effects`) its pool
-  is at most `GPU_WAIT_PARTICLES` (64) particles (`reduce_for_waits`: the
+  moves, emits, is destroyed and triggers its shakes and slices. A system
+  drawn as particles (`ParticleSystem.gpu`: not the sphere, image, slow and
+  enemy colour systems) has a pool of at most `GPU_WAIT_PARTICLES` (64) particles (`reduce_for_waits`: the
   same rate per slot and the same share of the pool for isDead's limit; not
   for the flare, whose emitter takes 400 of the pool, nor for a system that
   waits for its last particle and has at most 256): its particle counts
@@ -1130,15 +1136,16 @@ draws nothing.
   chunk's camera is at the origin (a labyrinth battle's effects land in a
   SubViewport chunk, after the battle's 2D).
 * The Flame's pre-run (200 steps of 3,000 particles when Menthu's frames
-  preload it, 11 s in normal runs) is skipped; the GPU system warms up
-  instead (`preprocess`).
+  preload it, 11 s in normal runs) is gone (closing phase 4.4); the GPU
+  system warms up instead (`preprocess`).
 * Seeds: `ParticleSystem.gpu_rand`, seeded from a hash of `--seed`; the
-  legacy particles' own draws stay `ParticleSystem.rand`'s, so
-  `--legacy=effect_waits` draws what the legacy drew.
-* `--legacy=battle_effects` keeps the legacy simulation and quads;
-  `--legacy=effect_waits` keeps the legacy pool on the GPU path (the legacy
-  waits: with `--hide-particles` a battle is identical to the legacy one);
-  `--hide-particles` shows no node.
+  legacy particles' own draws stay `ParticleSystem.rand`'s (the removed
+  `--legacy=effect_waits` drew what the legacy drew).
+* Flags (removed with their paths when phase 4.4 closed, plan 9.4):
+  `--legacy=battle_effects` kept the legacy simulation and quads,
+  `--legacy=effect_waits` the legacy pool on the GPU path (the legacy waits);
+  the git history up to 88bf7d76 has them. `--hide-particles` (dev) shows
+  no node; the systems still run.
 * Coverage: the console's `cast` plays chosen cards on a party member's turn
   (`cast next`: the rounds of `--casts=`); parity cases `effects_*` (scripts
   `effects_boss`, `effects_area`, `effects_enemy`).
@@ -1152,11 +1159,10 @@ last (also a cutscene's own). The rollout (plan 8.3) converts the overlays
 that villages, labyrinths and cutscenes still drew: the emotion bubbles, the
 mission display, "Paused" and "game pad lost", the cutscene images drawn
 over the actors, the story and scroll texts and the tutorials' top layer.
-The minimap stays the 3D bridge's batches (a node for it exists behind the
-dev flag `--minimap-node`; plan 8.3 tells why it is not the default). The
+The minimap's batches are `MinimapPart` nodes since phase 4.4's closing
+(they stayed the 3D bridge's until then, plan 8.3 and 8.4). The
 title, the game over, the menu pages, the stores and the riddles with their
-fade are done (section 14), and so is a battle's 2D top layer (phase 4.4's
-pilot, section 15); a battle's 3D part is still legacy. The world map's
+fade are done (section 14), and so is the battle (phase 4.4, section 15). The world map's
 and the airship's name plate is a node since phase 4.1 (section 13). How to
 convert an overlay: `docs/CONVERTING_UI.md`.
 
@@ -1255,7 +1261,7 @@ Tutorial (Control, on UI)           a tutorial's top layer (menu.tutorial.Tutori
 └── Icons                           TextureRects (scaled button icons and images)
 ```
 
-Dev only (`--minimap-node`), in 3D:
+The minimap, in 3D (the default since phase 4.4's closing):
 
 ```
 MinimapPart × n (MeshInstance3D, scenes/dungeons/MinimapPart.gd)  the minimap's batches,
@@ -1337,16 +1343,19 @@ The nodes keep no reference to a mode or to the legacy objects.
   (`Battle.drawTopLayer`), a store's menus, the menu's tutorial page.
 * "Paused", "game pad lost": Transition, after the mode's fade; their dim is
   `Graphics.show_fade(0.5)` (a Fade node).
-* Minimap: the 3D bridge's batches, as before. With `--minimap-node` (dev)
-  `MapRenderer.show_map` runs the legacy drawing with its 3D primitives kept
+* Minimap: `Labyrinth.draw` calls `MapRenderer.show_map` (since phase 4.4's
+  closing; before it the dev flag `--minimap-node`), which runs the legacy drawing with its 3D primitives kept
   (`Graphics.begin_capture_3d`, `end_capture_3d`) and shows each batch as a
   `MinimapPart` in the frame's current 3D chunk (`Graphics.show_node`, keys
   `MapRenderer.PART_KEY` down): the floor's world (the 3D bridge's chunk,
   after the walls, objects, weather and a battle's 3D) or, at a battle's
   start, the SubViewport chunk after the battle's 2D, in the slots the legacy
-  batches had. Every floor frame is drawn to the bit; a battle's frames after
-  them differ by 1/255, because the bridge's pool instances that drew the
-  minimap render a battle's batches 1/255 apart from new ones (plan 8.3).
+  batches had. Every frame is drawn to the bit: the floor's since phase 3
+  (8.3), a battle's after them since the floor's walls are drawn in a fixed
+  order (phase 4.4's rollout; until then the bridge's pool instances that drew
+  the minimap rendered a battle's batches 1/255 apart, plan 8.3). The
+  closing's check: every case with `--minimap-node` vs. the baseline,
+  identical (plan 8.4, 9.4).
 
 **A UI node's place in the legacy frame** (`Graphics.show_ui(path, layer)` →
 `GLBackend.show_ui`). A node of new code on UI or Transition takes a slot in
@@ -1419,10 +1428,11 @@ fade quads, and the rollout's `emotions`, `mission`, `pause`,
 the frame was drawn exactly as before phase 3 (plan 8.1, 8.3). Closing phase
 3 (2026-11-06, plan 8.4) removed them with the legacy drawing they kept. Still
 legacy, not part of phase 3's closing: the minimap (the 3D bridge's batches;
-`--minimap-node` is a dev check) and the battles' overlays (phase 4.4; the
+`--minimap-node` was a dev check) and the battles' overlays (phase 4.4; the
 stores' and the riddles' are nodes, and phase 4.2's legacy drawing is
-removed too: section 14; a battle's 2D top layer is nodes since phase 4.4's
-pilot, behind its own flags: section 15).
+removed too: section 14). Closing phase 4.4 (2026-11-22, plan 9.4) made the
+minimap's node the default (the flag is gone) and removed the battle's legacy
+drawing with its fifteen flags (section 15).
 
 ## 13. The world map and the airship (phase 4.1)
 
@@ -2073,19 +2083,19 @@ through `Graphics`. The
 pooled nodes keep their last textures (the last riddle's image and tiles,
 which `ImageHandler` loads for the place): a few MB, nothing to release.
 
-## 15. The battle's 2D top layer (phase 4.4's pilot)
+## 15. The battle (phase 4.4)
 
 A battle is drawn inside another mode's frame: in a labyrinth it is the
 `labDrawable` (`Labyrinth.enterBattle`), in a boss battle area of its own
 (Serphia, Menthu, Memory Salmonman) `BossBattleArea.bm`. Its 3D part
 (`BattleManager.draw`: the enemy, the info panels, the deck and hand, the
-legend's gradient and lines, the card effects, the attack texts) is drawn
-through the 3D bridge (section 10) and converted part by part (phase 4.4's
-rollout, below: the enemy, the info panels, the deck and the hand, the
-legend's gradient, the texts among the chunks with the attack's background
-and the enemy's card, and the card effects that are not particles; only the
-party's red screen, never visible, is left on the bridge). Its 2D top layer
-(`BattleManager.drawTopLayer`) is converted through step B: an enemy's red
+legend's gradient and lines, the card effects, the attack texts) was drawn
+through the 3D bridge (section 10) and is converted part by part through
+step B (phase 4.4's rollout, below: the enemy, the info panels, the deck and
+the hand, the legend's gradient, the texts among the chunks with the
+attack's background and the enemy's card, the card effects that are not
+particles; the closing: the party's red screen, never visible). Its 2D top
+layer (`BattleManager.drawTopLayer`, the pilot) is converted through step B: an enemy's red
 flash, the result screen, the spoils screen with its level-up bars and the
 legend's button icons. The legacy objects keep the state, the input and the
 timing: the battle's modes, the spoils screen's steps (a `Scheduler` tick
@@ -2099,7 +2109,7 @@ the nodes keep no reference to the battle).
 **The frame** (plan 9.4, "Results of the pilot", has the facts). In a
 labyrinth: the floor's scene, the weather's back pass, the battle's 3D (with
 2D text among its chunks), the weather's front pass (`show_weather_over`),
-the minimap (the 3D bridge's), then in 2D the mission (a node), the dialog
+the minimap (`MinimapPart` nodes), then in 2D the mission (a node), the dialog
 and card info (nodes: a boss's words), the battle's top layer, the floor's
 top-layer items (none in any probed battle frame), the mode fade (Transition)
 and "Paused" or "game pad lost" (Transition). In a boss area: the battle's
@@ -2109,7 +2119,7 @@ card info, the top layer, the fade. The top layer, all on UI:
 | Part (in the frame's order) | Node | Twin (where the drawing was) |
 |---|---|---|
 | An enemy's red flash while a critical hit hides it (`BattleEnemy.drawTopLayer`) | Fade (`show_colour`: `(.8, 0, 0, .5)`) | `Graphics.show_fade_colour_white(.8, 0, 0, .5, UI_LAYER)` |
-| The result screen (RESULT mode, `ResultScreen.drawResult`) | Fade (the dim, `show_fade(.5, UI_LAYER)`), LevelBar (`resultBack.png` at 1.1 as its legacy quad), MenuText (the labels, the names and the values, each over its shadow, size 26), a CardView per played card (at 0.7) | `ResultScreen._show_result` (`ResultScreenBase.show_background`, `shadow_lines`, `value_lines`, `AbstractCard.place_at`) |
+| The result screen (RESULT mode, `ResultScreen.drawResult`) | Fade (the dim, `show_fade(.5, UI_LAYER)`), LevelBar (`resultBack.png` at 1.1 as its legacy quad), MenuText (the labels, the names and the values, each over its shadow, size 26), a CardView per played card (at 0.7) | `ResultScreen.drawResult` (the twin `_show_result` until the closing took its place: `ResultScreenBase.show_background`, `shadow_lines`, `value_lines`, `AbstractCard.place_at`) |
 | The spoils screen (SPOILS mode, `SpoilsScreen.drawSpoils`) | Fade, LevelBar (the background), then per character shown alive: MenuText (the lines up to its experience line), LevelBar (its bar: `emptyBar.png` whole, `blueBar.png` and `overlay.png` to its percent; red and full at the class's last level), and so on; a MenuText with the rest (its name, the dead in red, "You found …") | `SpoilsScreen._show_spoil`, `_show_bar` (`LevelUpBar.place`) |
 | The legend's six button icons (`Legend.drawTopLayer`, every frame: off the screen at x −190 while it is hidden, sliding by 20 px an update) | MenuBackground (no back, the icons as pieces at 1:1) | `Legend._show_icons` (`Graphics.place_image`, `AbstractPage.show_pieces`) |
 | The tutorial (phase 3's node, over the icons on a battle's first turns) | Tutorial | `Tutorial.show_page` |
@@ -2132,23 +2142,20 @@ size 26 (the font as earlier drawing left it: plain in every probed frame);
 each line's text colours and drawString's `setColor(color)`
 (`Graphics.place_with_shadow`, `place_value_with_shadow`: a value in its
 colour when above 0, else white); the cards' binds; the bars' lazy creation
-and percent (read only by their drawing), `LevelUpBar.draw`'s red
-`setImageColor` and `setColor(1)`; the legend's `setColor(1)` and binds. No
+and percent (read only by their drawing), the Java `LevelUpBar.draw`'s red
+`setImageColor` and `setColor(1)` (`LevelUpBar.place`); the legend's `setColor(1)` and binds. No
 draw of the top layer changes game state. Each node takes the material of
 the 2D state where its part was drawn (`Graphics.canvas_material`: the
 alpha test the frame left, `GREATER 0`, `GEQUAL .01` or `GREATER .1`).
 
-**Flags** (section 7): `--legacy=battle_screens` (the result and spoils
-screens), `battle_flash`, `battle_legend`; with all three the top layer is
-drawn exactly as before. They go when phase 4.4 closes.
+**Flags (removed).** `--legacy=battle_screens` (the result and spoils
+screens), `battle_flash` and `battle_legend` kept the top layer's legacy
+drawing until phase 4.4 closed (2026-11-22, plan 9.4; section 7).
 
-**Still legacy** in a battle: the state, the input and the timing (step C);
-of the 3D part (below: the enemy, the info panels, the deck and the hand, the
-legend's gradient, the attack's background, the enemy's card and the card
-effects that are not particles are nodes, and the texts among its chunks UI
-nodes) the party's red screen (never visible); `Clock.draw` has no caller (nor in the Java:
-"Fleeing" and the time bar are never drawn). With the flags off nothing of
-the top layer is drawn through `Graphics` (plan 9.4). The pooled nodes keep
+**Still legacy** in a battle: the state, the input and the timing (step C:
+below, "After the closing"). Nothing of the top layer is drawn through
+`Graphics` (plan 9.4); the clock (`Clock`, "Fleeing" and the time bar) had
+no caller, nor in the Java, and is deleted with its `TimeBar`. The pooled nodes keep
 their last textures (`resultBack.png`, the bars, the icons, the last played
 cards: loaded permanently): nothing to release.
 
@@ -2176,7 +2183,7 @@ section 11 and the minimap's `MinimapPart`); the texts among the chunks (part
 (`Graphics.show_ui`, as the top layer's), and `Battle.tscn` under the camera
 rig comes with step C (plan 9.4).
 
-| Part | Node | Twin | Flag |
+| Part | Node | Twin | Flag (removed by the closing) |
 |---|---|---|---|
 | The enemy's frame (`BattleEnemy.draw`'s `drawTex`) and slice (`drawSlice`: two quads) | `EnemyView` (`scenes/battle/EnemyView.tscn`, a MeshInstance3D): the quad, or the slice's two, in eye space, in GLBackend's material of the render state where they were drawn | `BattleEnemy._show_frame`, `_show_slice`, `_show_view` | `battle_enemy` |
 | The info panels (`CharacterRow.draw`, the enemy row's `CreatureRow.draw`): each row's gradient (`drawBack`), then per creature its portrait (a party member's), its progress bar (the empty bar, the fill, the overlay), its info texture, its element icon (an enemy's), its boosts' cards | `PanelQuad` (`scenes/battle/PanelQuad.tscn`, a MeshInstance3D) per legacy batch: its quad (or the batch's quads) in eye space, in GLBackend's material of the render state there | `CharacterRow.drawBack`, `EnemyRow.drawBack` (`Graphics.place_gradient`), `Creature3D._show_panel`, `_show_image`, `_show_elements`, `_show_boosts`, `BattleProgressBar.show_bar`, `CreatureRow.show_panel_quad` | `battle_panels` |
@@ -2189,6 +2196,7 @@ rig comes with step C (plan 9.4).
 | The legend's lines (`Legend.draw`, every frame) | `MenuText`, on UI | `Legend._show_lines` (`place_multi_string`) | `battle_legend_text` |
 | The attack texts (`AttackText.draw`, from `Battle.drawBattle` and, during ANIMATE, `Animation.draw`) | `AttackTexts` (`scenes/ui/AttackTexts.tscn`), on UI | `AttackText._show_texts` (`AttackTextText.place_text`, `AttackText.place_3d_text`) | `battle_attack_text` |
 | The card effects that are not particles (`ParticleSystemPacket.draw` from `Animation.draw`, or from `BattleEnemy.draw` for an enemy's attack frame): Demolish's lit spheres (`SphereParticleSystem`, `SphereParticle.drawParticle`: `gluSphere`), Death's image (`ImageParticleSystem`), Slow's clock and hands (`SlowParticleSystem`) | `PanelQuad` per legacy batch (the spheres' triangles, up to three spheres a batch, built once a frame: `queue_triangles`; one quad each for the image, the clock and each hand) | `SphereParticle.show_particle` (`Graphics.begin_capture_3d`, `end_capture_3d`, `Utils3D.show_triangles`), `Particle.show_particle` (`Graphics.place_centered_current_2d`, `Utils3D.show_quad`) from the three systems' `draw` | `battle_effect_draw` |
+| The party's red screen (`Character3D.draw` while a critical hit hides a party member: a 1024 × 768 white image in red at .5 at z 0, behind the near plane) | `PanelQuad` | `Character3D._show_red_screen` (the closing; `Graphics.skip_image`, `place_quad`, `Utils3D.show_quad`) | — |
 
 **The enemy.** One `BattleEnemy` per battle draws the image (the other
 enemies of a group are logic only). Its batch is the first of its chunk in
@@ -2257,9 +2265,13 @@ after an effect's `endBlend`), back faces culled, unlit (lit in a boss
 area's first frame), the floor's fog, the alpha test `GREATER 0` or
 `GREATER .1`: the nodes take `material_3d` where the quads were. The party's
 red screen (`Character3D.draw` while a critical hit hides a party member:
-`drawImage` of a 1024 × 768 white image at z 0, behind the near plane, never
-visible; and the later party members of the row drawn at z 0 after its
-`loadIdentity`, as hidden) stays the legacy batch; no probed frame drew it.
+`loadIdentity`, `setImageColor(.7, 0, 0, .5)`, `drawImage` of a 1024 × 768
+white image at z 0, behind the near plane, never visible; and the later
+party members of the row drawn at z 0 after its `loadIdentity`, as hidden)
+is a `PanelQuad` too since the closing (`Character3D._show_red_screen`: the
+same state changes, the image's bind and last texture coordinate through
+`Graphics.skip_image`, the quad `drawImage` draws through `place_quad`,
+keyed `[id, &"red"]`); its case is `battle_crit`.
 
 **The deck and the hand** (part 3). `Battle.drawBattle` draws them with the
 depth test off (`ignore_depth_test`, COTZ-011) after the panels, in every
@@ -2317,7 +2329,7 @@ slot at the modelview the labyrinth left (behind the eye on most floors,
 plane in a boss area: no visible pixel where shot, `battle_deck_init`), in
 the scene chunk or a boss area's SubViewport: nodes too (`show_tex`), so
 that the batches after them keep their slots. The texts (the deck's and the legend's lines) are part 4's
-nodes (below); the flags `battle_deck` and `battle_legend_back` keep the legacy quads.
+nodes (below).
 
 **The texts among the chunks and the two last quads** (part 4). Every 2D text
 the battle's 3D drawing draws is a UI node now, shown by `Graphics.show_ui`
@@ -2508,4 +2520,39 @@ up to three), `battle_effects_chrono` (Salmonman's Chrono: an enemy's Slow
 clock in the floor's scene chunk) and `battle_effects_area` (Demolish 1 and
 Slow 1 in Serphia's battle area). The old cases had Demolish 3, Death 3 and
 Slow 3 every 250 ms (`effects_magic_4`, `effects_magic_5`, `effects_area_2`).
-No new console command.
+No new console command. The closing: `battle_crit` (Berca's Ogres after the
+console's `crit 100`: an attack on all and one on Kin, both critical, each
+enemy turn shot every frame: the red screen's 9 frames for all three party
+members, then for Kin with Celis and Zalzi drawn at the identity).
+
+### After the closing (2026-11-22)
+
+Phase 4.4's fifteen flags are gone with the legacy drawing they kept (plan
+9.4, "Results of the closing"): every part of a battle is a node in the
+frame's order (the 3D parts `EnemyView`, `PanelQuad` and the effects'
+`EffectParticles3D` in their chunks' slots, the texts and the top layer UI
+nodes), and the minimap's `MinimapPart`s are the default. Nothing of a
+labyrinth's or a boss area's frame is emitted through the 3D bridge's
+geometry any more; the bridge orders the nodes (`Graphics.show_node`,
+`show_ui`: the chunks, the slots, the layers). What stays legacy, for step C:
+
+* the state and the logic: `Battle`'s modes, `BattleManager`, `EnemyLogic`,
+  the cards and their packets, the hide timers (`TimeHideable`), the waits on
+  the effects (`isDestroyed`, `isReady`, `isDead`);
+* the input (`gameActions[…]` in `BattleManager.update`; phase 4.3's wrapper);
+* the timing: the slides (0.1 an update: the rows, the deck, the legend),
+  the cards' moves and turns (`updatePos`), the slots' flips (stepped in their
+  draw), the attack name's slide (per draw), the texts' life (per update), the
+  effects' 30 Hz steps and the image and slow systems' coroutines (`Scheduler`
+  game time), the spoils screen's ticks and bars (decision 6);
+* the legacy `draw` methods as the place the twins run each frame: they make
+  the GL state changes the nodes' materials and the later drawing read
+  (colours, matrices, binds, the alpha test, blending), and the info texture
+  (`Creature3D.updateTexture`: `GraphicHelp` into an Image), the minimap's
+  geometry (`MapRenderer.draw`, captured) and Demolish's spheres
+  (`gluSphere`, captured: 15,000 vertices each in GDScript, the stall of 9.4)
+  are still built by legacy code;
+* `Graphics`' API whole until phase 5 (`drawWithShadow`, `drawValueWithShadow`,
+  `fadeOldSchool`, `fadeOldSchoolColorWhite`, `drawGradient`,
+  `drawMultiString`, `drawCenteredCurrent2D`, drawImage's percent part,
+  `gluSphere`): no battle code calls the drawing ones any more.

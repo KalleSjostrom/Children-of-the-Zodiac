@@ -46,46 +46,14 @@ func calcResult(hitElements):
 			attack[index][h.getType()] += 0 if att == -2 else att
 
 
-## Draws the result screen on the given graphics.
-func drawResult(g):
-	if not Main.is_legacy("battle_screens"):
-		_show_result(g)
-		return
-	drawBackground(g)
-
-	var x: Array = X_POS
-	var y: Array = Y_POS
-
-	g.setFontSize(26)
-	g.drawWithShadow("Result", x[0], y[0])
-	g.drawWithShadow("Attack", x[0], y[1])
-	g.drawWithShadow("Magic", x[0], y[2])
-	g.drawWithShadow("Support", x[0], y[3])
-	g.drawWithShadow("Total", x[0], y[4])
-
-	for i in range(team.size()):
-		var c = team[i]
-		g.drawWithShadow(c.getName(), x[i + 1], y[0])
-		var color: Color
-		for j in range(3):
-			color = JColor.red if j < 2 else JColor.green
-			g.drawValueWithShadow(attack[i][j], x[1 + i], y[j + 1], color)
-		var total: int = attack[i][0] + attack[i][1] - attack[i][2]
-		color = JColor.red if total > 0 else JColor.green
-		g.drawValueWithShadow(absi(total), x[i + 1], y[4], color)
-	for i in range(cards.size()):
-		var c = cards[i]
-		if c != null:
-			c.drawCard(g, 175 + (i * 80), 385)
-
-
-## Bridge (phase 4.4 step B, docs/ARCHITECTURE.md section 15): drawResult
-## without the drawing (the state changes in the same order: the
-## background's, the font size 26, each line's text colours and
-## setColor(color), the cards' binds), and its nodes in the frame's order: the
+## Draws the result screen on the given graphics. Bridge (phase 4.4 step B,
+## docs/ARCHITECTURE.md section 15): the drawing's state changes in the same
+## order (the background's, the font size 26, each line's text colours and
+## setColor(color), the cards' binds) and its nodes in the frame's order: the
 ## background (show_background), a MenuText with every line over its shadow,
-## a CardView per played card (AbstractCard.place_at at drawCard's 0.7).
-func _show_result(g) -> void:
+## a CardView per played card (AbstractCard.place_at at the Java drawCard's
+## 0.7).
+func drawResult(g):
 	show_background(g)
 
 	var x: Array = X_POS

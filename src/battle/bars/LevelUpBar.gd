@@ -18,21 +18,9 @@ static func _getBar() -> Array:
 	return bar
 
 
-## Initiates the drawings of the level up bar.
-func draw(g, x, y, canLevelUp):
-	var b: Array = _getBar()
-	var p: float = percent
-	if not canLevelUp:
-		g.setImageColor(1, 0, 0, 1)
-		p = 1
-	g.drawImage(b[0], x, y, 200, 20, 1.0, 1.0)
-	g.drawImage(b[1], x, y, 200, 20, 1.0, p)
-	g.drawImage(b[2], x, y, 200, 20, 1.0, p)
-	g.setColor(1)
-
-
-## Bridge (phase 4.4 step B, docs/ARCHITECTURE.md section 15): draw without
-## the drawing: the same colours (red when the character cannot level up,
+## Bridge (phase 4.4 step B, docs/ARCHITECTURE.md section 15): draw (Java:
+## draw(Graphics g, int x, int y, boolean canLevelUp); removed: closing phase
+## 4.4, plan 9.4) without the drawing: the same colours (red when the character cannot level up,
 ## the bar then full) and binds in the same order. Returns the three parts as
 ## Graphics.place_image_part places them (the empty bar whole, the blue bar
 ## and the overlay up to the percent), for a LevelBar node (a battle's spoils

@@ -41,7 +41,8 @@ func initCreature(g):
 		deck.setNeedUpdate(false)
 
 
-## Draws the character if it is not hidden (see setHideTimer()).
+## Draws the character if it is not hidden (see setHideTimer()), else after a
+## critical hit the red screen (_show_red_screen).
 func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 	if isVisible():
 		g.push()
@@ -52,9 +53,31 @@ func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 		g.pop()
 	else:
 		if criticalHit:
-			g.loadIdentity()
-			g.setImageColor(0.7, 0, 0, 0.5)
-			g.drawImage(_getImW(), 0, 0)
+			_show_red_screen(g)
+
+
+## Bridge (phase 4.4's closing, step B, docs/ARCHITECTURE.md section 15): the
+## red screen (Java: loadIdentity, setImageColor(.7, 0, 0, .5), drawImage(imW,
+## 0, 0)) without the drawing: the same state changes (the identity, which
+## puts the row's later members at z 0 too, the colour, the white image's bind
+## and the texture coordinate its quad leaves: Graphics.skip_image) and the
+## quad drawImage draws (GameTexture.drawPart's corners, glVertex2i at z 0
+## under the 3D projection: behind the near plane, so it never shows) as
+## Graphics.place_quad gives it, shown by the PanelQuad in its batch's slot
+## (Utils3D.show_quad).
+func _show_red_screen(g) -> void:
+	g.loadIdentity()
+	g.setImageColor(0.7, 0, 0, 0.5)
+	var t: GameTexture = g.skip_image(_getImW())
+	if t == null:
+		return
+	var tc = t.getImageTexCoords()
+	var w: int = t.getWidth()
+	var h: int = t.getHeight()
+	Utils3D.show_quad(g, [get_instance_id(), &"red"], g.place_quad(
+			PackedVector3Array([Vector3(0, h, 0), Vector3(w, h, 0), Vector3(w, 0, 0), Vector3(0, 0, 0)]),
+			PackedVector2Array([Vector2(tc.left(), tc.bottom()), Vector2(tc.right(), tc.bottom()),
+				Vector2(tc.right(), tc.top()), Vector2(tc.left(), tc.top())])))
 
 
 ## Draws the name and life of the character on the info image.
@@ -73,12 +96,8 @@ func drawInfo(g):
 	GraphicHelp.drawStringWithBlackFrame(g, life, 5, 139, 30, c, 3, Values.BOLD)
 
 
-func drawImage(g):
-	drawTex(g, 0, 0)
-
-
-## Bridge (phase 4.4's rollout, part 2): drawImage (the portrait, drawTex)
-## without the drawing; its quad to the PanelQuad in its slot.
+## Bridge (phase 4.4's rollout, part 2): the Java drawImage (the portrait,
+## drawTex) without the drawing; its quad to the PanelQuad in its slot.
 func _show_image(g) -> void:
 	if texture[0] != null:
 		Utils3D.show_quad(g, [get_instance_id(), &"image"],

@@ -70,24 +70,8 @@ func initDraw(g: Graphics):
 	copyCoords(6, 2, Z)
 
 
-func makeCardDrawList(g, base, ball):
-	match card.getLevel():
-		1:
-			Utils3D.draw3D(g, texture[base].getTexture(), coordList[0])
-			Utils3D.draw3D(g, texture[ball].getTexture(), coordList[2])
-		2:
-			Utils3D.draw3D(g, texture[base].getTexture(), coordList[0])
-			Utils3D.draw3D(g, texture[ball].getTexture(), coordList[3])
-			Utils3D.draw3D(g, texture[ball].getTexture(), coordList[4])
-		3:
-			Utils3D.draw3D(g, texture[base].getTexture(), coordList[0])
-			Utils3D.draw3D(g, texture[ball].getTexture(), coordList[2])
-			Utils3D.draw3D(g, texture[ball].getTexture(), coordList[5])
-			Utils3D.draw3D(g, texture[ball].getTexture(), coordList[6])
-
-
 ## Bridge (phase 4.4's rollout, part 3, step B, docs/ARCHITECTURE.md section
-## 15): makeCardDrawList without the drawing: the binds and a PanelQuad per
+## 15): the Java makeCardDrawList without the drawing: the binds and a PanelQuad per
 ## batch (the picture; the level's balls, one batch of one to three quads of
 ## one texture: Utils3D.show_quad joins them).
 func _show_card_draw_list(g, base, ball) -> void:
@@ -111,7 +95,7 @@ func _show_card_draw_list(g, base, ball) -> void:
 ## Draws the card at the given y location on the battle plane
 ## (0, 0, -2 after the identity matrix has been loaded).
 ## Bridge (phase 4.4's rollout, part 3): the sides are PanelQuads in their
-## batches' slots (_show_card); --legacy=battle_deck keeps the legacy quads.
+## batches' slots (_show_card).
 func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 	if alpha == null:
 		return
@@ -119,27 +103,12 @@ func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 	g.loadIdentity()
 	g.translate(xPos, y + yOffset, BattleValues.STANDARD_Z_DEPTH)
 	g.rotate(rotation, 0, 1, 0)
-	if not Main.is_legacy("battle_deck"):
-		_show_card(g)
-		return
-	if is_same(currentSide, BOTH_SIDES):
-		for i in currentSide.size():
-			var side: int = currentSide[i] + (0 if enabled else 1)
-			if side == 0:
-				makeCardDrawList(g, 0, 3)
-			elif side == 1:
-				drawTex(g, 1, 1, false)
-			elif side == 2:
-				makeCardDrawList(g, 2, 4)
-	else:
-		if enabled:
-			makeCardDrawList(g, 0, 3)
-		else:
-			makeCardDrawList(g, 2, 4)
+	_show_card(g)
 
 
-## Bridge (phase 4.4's rollout, part 3, step B): the card's sides without the
-## drawing, in the drawing's order: both sides while it turns or lies on the
+## Bridge (phase 4.4's rollout, part 3, step B): the card's sides (the Java's
+## makeCardDrawList calls and the back's drawTex) without the drawing, in the
+## drawing's order: both sides while it turns or lies on the
 ## pile (the front then the back; a gray card the back then its gray front,
 ## as the original), else the front, in colour or gray.
 func _show_card(g) -> void:

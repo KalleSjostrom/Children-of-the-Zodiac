@@ -84,9 +84,8 @@ static func getDefaultSword():
 	settings.setVector(AnimSettings.DESTROY_FADE_GRAVITY, Vector3f.new(0.0, 0.0, 0.0))
 	settings.setBoolean(AnimSettings.ADDITIVE_COLORING, true)
 	settings.setValue(AnimSettings.DESTROY_MODE, ParticleValues.PLAIN_DESTROY)
-	var sb := SwordBackground.new(
-			settings.getVector(AnimSettings.SOURCE), settings.getVector(AnimSettings.TARGET))
-	settings.setSystemDrawable(AnimSettings.SYSTEM_DRAWABLE, sb)
+	# (The Java's SwordBackground, the settings' system drawable, was never
+	# drawn: removed, closing phase 4.4.)
 
 	settings.setValue(AnimSettings.NR_TEXTURES, 1.0)
 	settings.setValue(AnimSettings.NR_TEXTURES + 1, ParticleSystem.ROUND)

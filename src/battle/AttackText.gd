@@ -4,10 +4,11 @@ extends RefCounted
 ## ("Miss!", "Critical Hit!", "31", ...). The texts move upwards while fading.
 ##
 ## Port notes: JOGL's TextRenderer (3D text rendering) does not exist in the
-## framework. A "renderer" here is [fontSize, bold]; draw3DText() projects the
-## 3D text position with the current modelview and the game's perspective
-## (gluPerspective(45, 4/3, 1, 75)) and draws the text in screen space with
-## the scaled font size.
+## framework. A "renderer" here is [fontSize, bold]; place_3d_text() projects
+## the 3D text position with the current modelview and the game's perspective
+## (gluPerspective(45, 4/3, 1, 75)) and the text is shown in screen space with
+## the scaled font size (an AttackTexts node; the legacy draw3DText is removed:
+## closing phase 4.4, plan 9.4).
 
 var textToDraw = []
 var text = null
@@ -47,23 +48,17 @@ func update(elapsedTime):
 ## Draws the stored texts. Loads identity and translates 2 units into the screen.
 ## Bridge (phase 4.4's rollout, part 4, step B, docs/ARCHITECTURE.md section
 ## 15): the texts are an AttackTexts node on the UI layer in the frame's 2D
-## order (_show_texts: the same state changes); --legacy=battle_attack_text
-## keeps the legacy text.
+## order (_show_texts: the same state changes).
 func draw(g):
 	g.loadIdentity()
 	g.translate(0, 0, BattleValues.STANDARD_Z_DEPTH)
 	g.scale(0.8)
-	if not Main.is_legacy("battle_attack_text"):
-		_show_texts(g)
-	else:
-		for i in range(textToDraw.size()):
-			var t = textToDraw[i]
-			t.draw(g)
+	_show_texts(g)
 	g.loadIdentity()
 
 
-## Bridge (phase 4.4's rollout, part 4): the texts' drawing without the
-## drawing (each text's colour at its life and blend function, then its
+## Bridge (phase 4.4's rollout, part 4): the texts' drawing (each
+## AttackTextText's draw in the Java) without the drawing (each text's colour at its life and blend function, then its
 ## place: AttackTextText.place_text), shown by the frame's next AttackTexts
 ## node on the UI layer in the material of the 2D state where they were
 ## drawn; texts drawn in another material (a canvas item of their own in the
@@ -176,23 +171,9 @@ static func _getFont(rend) -> Font:
 	return Graphics._fonts[Values.BOLD if rend[1] else Values.PLAIN]
 
 
-## Local replacement of TextRenderer.draw3D(text, x, y, z, scaleFactor):
-## the text baseline starts at (x, y, z) in the current modelview space and
-## one font pixel is scaleFactor units wide.
-static func draw3DText(g, s: String, x: float, y: float, z: float, scaleFactor: float,
-		rend, col: Color) -> void:
-	if g.backend == null:
-		return
-	var t: Array = place_3d_text(g, s, x, y, z, scaleFactor, rend, col)
-	if t.is_empty():
-		return
-	var ci: RID = g.backend.ci_2d(g._blend_dst == Graphics.GL_ONE, g._effAlphaFunc(), g._alpha_ref)
-	g.backend.set_ci_transform(ci, Transform2D.IDENTITY)
-	_getFont(rend).draw_string(ci, t[1], s, HORIZONTAL_ALIGNMENT_LEFT, -1, t[2], col)
-
-
 ## Bridge (phase 4.4's rollout, part 4, step B, docs/ARCHITECTURE.md section
-## 15): where draw3DText draws the text, without the drawing: [text, the
+## 15): where the Java's TextRenderer.draw3D drew the text (the port's
+## draw3DText, removed: closing phase 4.4), without the drawing: [text, the
 ## baseline's start on the screen (the projection of (x, y, z) through the
 ## modelview: not whole pixels), the font size in pixels (the renderer's size
 ## times scaleFactor, the modelview's scale and the projection's scale there),
@@ -250,14 +231,8 @@ class AttackTextText extends RefCounted:
 	func setRenderer(renderer):
 		textRenderer = renderer
 
-	## Draws the string with the renderer (TextRenderer.draw3D in Java).
-	func draw(g):
-		g.setColor(color[0], color[1], color[2], life)
-		g.setBlendFunc(Graphics.GL_ONE_MINUS_SRC_ALPHA)
-		AttackText.draw3DText(g, text, x, y + (1 - life) / 5, 0, 0.005, textRenderer,
-				Color(color[0], color[1], color[2], life))
-
-	## Bridge (phase 4.4's rollout, part 4): draw without the drawing: the same
+	## Bridge (phase 4.4's rollout, part 4): draw (Java: the string drawn with
+	## the renderer, TextRenderer.draw3D) without the drawing: the same
 	## colour and blend function, and the text where it would be drawn
 	## (AttackText.place_3d_text; [] when it would draw nothing).
 	func place_text(g) -> Array:

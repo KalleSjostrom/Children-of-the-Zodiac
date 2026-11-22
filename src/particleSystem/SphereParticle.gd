@@ -18,15 +18,9 @@ func kill():
 	super.kill()
 	alive = false
 
-func drawParticle(g, additiveColoring):
-	var pos = getPosition()
-	if pos.z >= -6: # TODO (original): Change to enemy depth.
-		g.translate(pos)
-		g.gluSphere(quad, size, 50, 50)
-		g.translateBack(pos)
-
 ## Bridge (phase 4.4's rollout, part 5, step B, docs/ARCHITECTURE.md section
-## 15): drawParticle without the drawing: the same matrix calls, and the
+## 15): drawParticle (Java: translate, gluSphere, translateBack; removed:
+## closing phase 4.4, plan 9.4) without the drawing: the same matrix calls, and the
 ## sphere's triangles kept instead of drawn (Graphics.begin_capture_3d: the
 ## same glNormal3f and glVertex3f calls, in the material of the render state
 ## SphereParticleSystem.start set) and shown by the PanelQuad of key in the

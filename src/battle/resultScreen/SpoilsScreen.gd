@@ -150,65 +150,18 @@ func update(elapsedTime):
 				step = info[i].update(elapsedTime, step, i == characters.size() - 1)
 
 
-## Draws the spoils of battle (and level ups) on the given graphics.
+## Draws the spoils of battle (and level ups) on the given graphics. Bridge
+## (phase 4.4 step B, docs/ARCHITECTURE.md section 15): the background's
+## nodes (show_background), then the lines' and the bars' (_show_spoil).
 func drawSpoils(g):
-	if not Main.is_legacy("battle_screens"):
-		show_background(g)
-		_show_spoil(g)
-		return
-	drawBackground(g)
-	drawSpoil(g)
+	show_background(g)
+	_show_spoil(g)
 
 
-## Draws the spoils of battle on the given graphics.
-func drawSpoil(g):
-	g.setFontSize(26)
-	g.drawWithShadow("Result", 200, y[0])
-
-	var totalgold: int = Load.getPartyItems().getGold()
-	if step > 0:
-		g.drawWithShadow("The enemy dropped " + str(gold) + " gp, " +
-				"total: " + str(totalgold) + " gp", x[0], y[1])
-		g.drawWithShadow("The party got " + str(exp) + " exp.", x[0], y[2])
-
-	var characters = Load.getCharacters()
-	for i in range(characters.size()):
-		if step > 1 + i:
-			var c = characters[i]
-			if c.isAlive():
-				var color: Color = JColor.WHITE
-				var canLevelUp: bool = info[i].canLevelUp
-
-				if info[i].hasLeveledUp:
-					color = JColor.GREEN
-					g.drawWithShadow("Level up!", x[3], y[3 + i], color)
-					g.drawWithShadow(str(J.round(info[i].recievedExp)) + " exp", x[2], y[3 + i], color)
-				elif not canLevelUp:
-					g.drawWithShadow("Max level", x[3], y[3 + i], JColor.RED)
-					g.drawWithShadow("0 exp", x[2], y[3 + i], JColor.RED)
-				else:
-					g.drawWithShadow(str(J.round(info[i].recievedExp)) + " exp", x[2], y[3 + i], JColor.WHITE)
-				drawBars(g, i, info[i].etn, canLevelUp)
-
-				g.drawWithShadow(c.getName(), x[0], y[3 + i], color)
-			else:
-				g.drawWithShadow(c.getName(), x[0], y[3 + i], JColor.RED)
-	if step >= 2 + characters.size() and droppedItem != null:
-		g.drawWithShadow("You found " + droppedItem.getName() + " laying on the ground!", x[0], y[3 + 4])
-
-
-## Draws the experience bar with the given index.
-func drawBars(g, barIndex, progress, canLevelUp):
-	if bars[barIndex] == null:
-		bars[barIndex] = LevelUpBar.new()
-	bars[barIndex].update(progress)
-	bars[barIndex].draw(g, x[1], 330 + barIndex * BAR_HEIGHT_DISTANCE, canLevelUp)
-
-
-## Bridge (phase 4.4 step B, docs/ARCHITECTURE.md section 15): drawSpoil
-## without the drawing (the state changes in the same order: the font size
+## Bridge (phase 4.4 step B, docs/ARCHITECTURE.md section 15): the Java
+## drawSpoil without the drawing (the state changes in the same order: the font size
 ## 26, each line's text colours and setColor(color), the bars' lazy creation,
-## their percent and LevelUpBar.draw's colours and binds), and its nodes in
+## their percent and LevelUpBar.place's colours and binds), and its nodes in
 ## the frame's order: the lines drawn before a character's bar (a MenuText),
 ## the bar (a LevelBar), the lines after it, and so on.
 func _show_spoil(g) -> void:
@@ -250,7 +203,7 @@ func _show_spoil(g) -> void:
 	AbstractPage.show_lines(g, lines)
 
 
-## drawBars without the drawing: the bar's lazy creation and its percent, and
+## The Java drawBars without the drawing: the bar's lazy creation and its percent, and
 ## the frame's next LevelBar shows its parts (LevelUpBar.place).
 func _show_bar(g, barIndex, progress, canLevelUp) -> void:
 	if bars[barIndex] == null:

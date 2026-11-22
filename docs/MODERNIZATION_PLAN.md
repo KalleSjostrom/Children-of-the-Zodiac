@@ -2283,7 +2283,12 @@ except battles and riddles") from being met after the rollout:
   (8.3): a node in the floor's world changes the battles drawn after it by
   1/255; with the battles out of the bridge (phase 4.4) a minimap node (one
   that builds its disks, compass, cells and arrow from the state, with the
-  legacy CPU vertex math for parity) can be checked again.
+  legacy CPU vertex math for parity) can be checked again. *Done (closing
+  phase 4.4, 2026-11-22, 9.4):* `--minimap-node` on every case was identical
+  to the baseline, so `Labyrinth.draw` calls `MapRenderer.show_map` (the
+  legacy drawing captured, a `MinimapPart` per batch in its slot) and the
+  flag is gone. A minimap built from the state is later work (step C or
+  phase 5).
 * Labyrinths: `init_scene_3d`'s GL state, which battles read, the 3D bridge
   for a battle's drawing, the frame's structure (`GLBackend.begin_frame`,
   chunks) until phase 5 (8.2).
@@ -2296,8 +2301,8 @@ branch to the private overload that drew the lines (`_drawLines`) had no
 caller (every call passes nothing or a bool), nor had the public
 `drawQuestion`: both are gone with the layout tables. `GameCore` keeps
 `--legacy=menu_list` for the game pad lost menu (phase 4.2). The minimap
-stays the 3D bridge's (above); the stores', riddles' and battles' overlays
-are phase 4's.
+stays the 3D bridge's (above; its node is the default since closing phase
+4.4, 9.4); the stores', riddles' and battles' overlays are phase 4's.
 
 ## 9. Phase 4: remaining modes
 
@@ -5391,6 +5396,218 @@ own prompt:
   8 are made, or phase 4.3 (the input wrapper that step C needs). Size of the
   closing: M (mostly deletions, one full parity run before and after).
 
+**Results of the closing (phase 4.4, `docs/phase4_4_close_prompt.md`;
+2026-11-22).** In this order, each its own listed change: the exit-crash fix,
+the minimap's node as the default, the party's red screen as a node (the
+user's decision), then the fifteen flags with the legacy drawing they kept and
+the dead code. The legacy battle keeps the state, the input and the timing
+(ARCHITECTURE section 15, "After the closing").
+
+* **Baseline** (on 88bf7d76): `tools/check.sh` 0 failed (499 scripts); the
+  445 cases (`z0base`, 11,468 shots) identical to part 5's `p3node` shot for
+  shot and log for log, with the same script errors (3), errors (2,421) and
+  exit leak lines (16) in every case; no audio-device lines. Recorded from a
+  project copy with 3 jobs (34.5 minutes at 6 GB free); every case exited 0.
+* **The exit crash** (its own change). Cause: a lambda still in the static
+  `Scheduler._tasks` when the game quits (the party members' 150 ms hide after
+  an enemy's attack, `TimeHideable.hideFor` → `Scheduler.after`) makes the
+  engine segfault while it shuts down, after the last frame and log line.
+  Reproduced on HEAD with `battle_effects_chrono` without its last `wait 300`
+  (it quits in the frame Salmonman's turn ends): 7 of 7 headless runs and 3
+  of 3 windowed exited 139. Fix: `Scheduler.clear()` (it had no caller) drops
+  the deterministic timers too, and `Main._exit_tree` calls it first, before
+  the scenes and `ExitCleanup`. After it the same run exits 0: 7 of 7
+  headless, 3 of 3 windowed, the windowed runs' 126 shots identical to HEAD's
+  (and their logs, but for the shots' paths); every case of every later run
+  exited 0 (the 446 of `z1mini`, the 45 of `z1hide`, the smoke set, the
+  final runs). The headless runs now print an exit leak report (6 objects, 2
+  resources: headless runs print such reports in many cases, HANDOFF); the
+  windowed runs print none.
+* **The minimap's node** (8.4). `--minimap-node` on every case (`z1mini`,
+  from a copy with the exit fix, the console's `crit` and the new case, before
+  any other change) vs. the baseline: 11,468 of 11,468 shots identical, all
+  445 logs, the same error and leak lines in every case (the new case vs. its
+  golden: 188 of 188). Then the switch: `Labyrinth.draw` calls
+  `MapRenderer.show_map` (the legacy drawing with its primitives captured, a
+  `MinimapPart` per batch in its slot); `Main.minimap_node` and the flag are
+  gone. `z1mini` is the golden of everything after the switch.
+* **The party's red screen** (decided: a node). `Character3D._show_red_screen`:
+  `loadIdentity` (it puts the row's later members at z 0, so they are hidden
+  as well for the 150 ms), `setImageColor(.7, 0, 0, .5)`, the white image's
+  bind and last texture coordinate (`Graphics.skip_image`), and the quad
+  `drawImage(imW, 0, 0)` draws (`GameTexture.drawPart`'s corners,
+  `glVertex2i` at z 0 under the 3D projection) as `Graphics.place_quad` gives
+  it, shown by a `PanelQuad` in its slot (`Utils3D.show_quad`, `[id,
+  &"red"]`). No case had a critical hit on the party: the console's `crit
+  <percent>` (dev) sets the battle's enemies' `CRITICAL_HIT_PRECENT` (its
+  `J.random()` is drawn either way), and `battle_crit` (Berca's Ogres, god
+  mode, `crit 100`, TRIANGLE until an enemy's turn, every frame of two enemy
+  turns: 188 shots) meets an attack on all (the red screen for all three
+  members, 9 frames) and one on Kin (9 frames, Celis and Zalzi drawn at the
+  identity): a probe counted 36 calls of the twin in those 18 frames.
+  Recorded twice on the code before the closing: identical.
+* **The closing, flag by flag** (`tools/check.sh` 0 failed after the code
+  changes; 494 scripts: Clock, TimeBar, ScrollBar, SwordBackground and
+  SystemDrawable deleted). About 1,100 lines removed and 240 added or
+  rewritten in `src/` (comments included); roughly, per part:
+
+  | Part | Removed (about) | What |
+  |---|---|---|
+  | `battle_screens` | 145 | the branches in `ResultScreen.drawResult` (it took its twin `_show_result`'s body) and `SpoilsScreen.drawSpoils` (`show_background` and `_show_spoil`); `SpoilsScreen.drawSpoil`, `drawBars`; `ResultScreenBase.drawBackground`; `AbstractCard.drawCard`; `LevelUpBar.draw` |
+  | `battle_flash` | 8 | `BattleEnemy.drawTopLayer`'s `fadeOldSchoolColorWhite` |
+  | `battle_enemy` | 60 | `BattleEnemy.draw`'s branches; `drawSlice` |
+  | `battle_legend` | 12 | `Legend.drawTopLayer`'s six `drawImage`s |
+  | `battle_panels` | 130 | the rows' `drawGradient`s; `Creature3D.draw`'s legacy half, `drawElements`, `drawBoosts`, `drawImage` (and `Character3D`'s, `Enemy3D`'s); `BattleProgressBar.draw`; `Utils3D.draw3DPart`, `_draw3DPercent` |
+  | `battle_deck` | 120 | the branches in `AbstractDeck.draw`, `drawHand`, `GLCard.draw`, `GLSlot.initDraw`, `draw`, `GLHand.draw`, `GLDeck.draw`'s gradient; `GLCard.makeCardDrawList`; `Object2D.drawTex`; `Utils3D.draw3DBackside`, `_draw3DBackside` |
+  | `battle_legend_back` | 8 | `Legend.draw`'s `drawGradient` |
+  | `battle_attack_name` | 9 | `Attack.draw`'s two `drawWithShadow`s |
+  | `battle_deck_text` | 40 | `GLDeck.draw`'s text |
+  | `battle_legend_text` | 27 | `Legend.draw`'s text |
+  | `battle_attack_text` | 38 | `AttackText.draw`'s branch; `AttackTextText.draw`; `AttackText.draw3DText` |
+  | `battle_enemy_quads` | 25 | `AttackBackground`'s and `EnemyCard`'s `drawTex`s |
+  | `battle_effect_draw` | 50 | the branches in the sphere, image and slow systems; `SlowParticleSystem._drawQuad` (its call sites call `Particle.show_particle`); `Particle.drawParticle`, `SphereParticle.drawParticle` |
+  | `battle_effects` | 37 | `ParticleSystem.gpu_path()` (deleted: `gpu` is true for every system but the sphere, image, slow and enemy colour ones), the `drawParticle` path of `ParticleSystem.draw` and `ShatterParticleSystem.draw` |
+  | `effect_waits` | 17 | the Flame's pre-run; `reduce_for_waits`' check |
+  | Dead code | 340 | `Clock.gd`, `TimeBar.gd` (only the clock used it), `Battle`'s clock (its field, `Clock.new`, the `timesUp` branch: always false, `show`, `reset`, `initDraw`, `hide`, `finish`, `initFlee`), `firstTimeFlee` and `Battle.resetFlee` (its only caller, `BattleManager.update`'s last branch, goes too), the console's `kill` and `cast` clock calls; `ScrollBar.gd` (`BattleScrollBar`) and `Utils3D.draw3DPartY`, `_draw3DY`; `SwordBackground.gd`, `SystemDrawable.gd`, `ParticleSystem.drawable` and its `drawGround` call, `Settings.setSystemDrawable` and the setting's field, `AnimSettings.SYSTEM_DRAWABLE`, the two places that set one (`BattleCard`, `AnimationSettingsFactory`); their `ClassRegistry` entries |
+  | The minimap's switch | 15 | `Labyrinth.draw`'s branch, `Main.minimap_node`, `--minimap-node` |
+  | The red screen | — | 29 added (`Character3D._show_red_screen`) |
+  | The exit crash | — | 8 added (`Scheduler.clear`, `Main._exit_tree`) |
+
+  The git history up to 88bf7d76 has all of it. A grep for every removed
+  name (`src/`, `scenes/`, `tools/`, the AutoPlay scripts, `cases.txt`)
+  finds none but comments that say where it went; `tools/parity/parity.sh`'s
+  examples name `--hide-particles` now. Kept: `Graphics`' API whole (phase 5:
+  `drawWithShadow`, `drawValueWithShadow`, `fadeOldSchool`,
+  `fadeOldSchoolColorWhite`, `drawGradient`, `drawMultiString`,
+  `drawMultiCenteredText`, `drawCenteredCurrent2D`, drawImage's percent part,
+  `gluSphere`, which the spheres' twin captures); `Utils3D.draw3D` (the
+  minimap draws its square form: the arrow, the cells' doors and items; its
+  coordinate-list forms have no caller now) and `draw2DPart` (no caller before the closing
+  either); `Main.is_legacy` and `--legacy=` (no code asks for a flag now:
+  later phases); `--hide-particles`.
+* **Parity** (tolerance 0; the final code; 446 cases, 11,656 shots): a
+  smoke set first (24 cases: `battle_result`, `battle_spoils`,
+  `battle_flash`, `battle_crit`, `boss`, the 13 `effects_*` cases, the four
+  part 5 cases, `dungeon_tour_grivera_first_floor`, `dungeon_battle_berca`;
+  3,037 shots) vs. `z1mini`: identical, logs and error lines too. The final
+  run `z2after` (446 cases, every one exited 0) vs.
+  `z1mini` (the golden after the minimap's switch): 11,656 of 11,656 shots
+  identical, all 446 logs, the same script errors (3), errors (2,421) and
+  exit leak lines (16) in every case; vs. the baseline `z0base`: 11,468 of
+  11,468 (only `battle_crit`'s 188 are new), 445 logs, the same lines; vs.
+  `battle_crit`'s golden: 188 of 188. The fifteen removed names
+  (`--legacy=battle_screens,…,battle_effect_draw,battle_effects,effect_waits`)
+  on the 45 battle cases behave as no flag: 4,730 of 4,730 shots, logs and
+  error lines identical to `z2after`. With `--hide-particles` the 45 battle
+  cases vs. a golden recorded with it on the code before (`z1hide`, with
+  `--minimap-node`): 4,730 of 4,730, logs and lines identical. The exit leak
+  lines did not go down: no removed path held a cycle (the 16 are the console
+  `cast` cards' report in `battle_result`, the five `effects_*` cases with it,
+  `battle_effects_demolish` and `battle_effects_area`, as before). No
+  difference had to be explained; no tolerance. Only `z2after` is kept in
+  `tools/parity/out`.
+* **Frame rate.** Only the minimap's switch changes what normal play runs:
+  normal runs (no `--seed`, windowed, uncapped, one at a time, alternating;
+  The Sewers--North West, no encounters; `fps=` every 0.5 s standing, every
+  0.4 s turning) of the bridge's minimap (a copy with `Labyrinth.draw`
+  calling `MapRenderer.draw`) vs. the node: standing 779, 759, 769 → 758,
+  738, 753, turning 786, 759, 765 → 764, 748, 754 (medians): about 2 % lower
+  with the node, about 0.03 ms of a 1.3 ms frame (`MinimapPart` rebuilds its
+  batch's mesh every frame, as the bridge's chunks did, and the nodes are
+  looked up by key); nothing at the 60 FPS cap. The rest of the closing
+  removed legacy paths and dead code that normal play did not run.
+* **Where the plan's list was wrong or short:** the clock is more than
+  `Clock.gd` (its `TimeBar`, `Battle`'s eight calls, `firstTimeFlee`,
+  `resetFlee` and `BattleManager`'s call, the console's four); the scroll bar
+  takes `Utils3D.draw3DPartY` with it; `SwordBackground` takes
+  `SystemDrawable`, `ParticleSystem.drawable`, `Settings.setSystemDrawable`
+  and the settings' slot; more helpers lose their last caller than listed
+  (`BattleProgressBar.draw`, `Creature3D.drawElements`, `drawBoosts`,
+  `drawImage`, `GLCard.makeCardDrawList`, `SpoilsScreen.drawSpoil`,
+  `drawBars`, `ResultScreenBase.drawBackground`, `AttackTextText.draw`, the
+  private `Utils3D` helpers); `Object2D.drawTex` had no caller left at all
+  (its last was `BattleProgressBar.draw`), not "where only battle quads call
+  it"; `gpu_path()` was deleted rather than made always true (`gpu` still
+  tells the GPU systems from the four drawn as `PanelQuad`s); the only
+  wrapper that just chose was `SlowParticleSystem._drawQuad`, and
+  `ResultScreen.drawResult` became one (it took its twin's body, keeping the
+  Java name `Battle` calls). `Graphics.drawWithShadow` and `fadeOldSchool`
+  keep one caller, `tools/render_test.gd` (a dev tool, unchanged).
+* **Found on the way:** editing a recording's driver script while bash ran it
+  would have shifted the byte offset bash resumes at (a CRLF conversion
+  too); restored before the stage ended, the new stages in files of their
+  own (CONVERTING_UI, the closing's lessons). Nothing else: no frame, log or
+  error line changed anywhere.
+
+**Prepared after the closing (2026-11-22): what is left, and what comes
+next.**
+
+* **Nothing is drawn through `Graphics` any more.** A probe over all 446
+  cases on the final code (`out/_work/p5_survey_patch.py`: every
+  `Graphics._emitTriangles` and `_drawText`, counted per mode with its call
+  sites) found no legacy 3D batch, no 2D quad and no text in any mode. The
+  only primitives legacy code still builds are captured for nodes: the
+  minimap's (`MapRenderer.draw`, `drawBackground`'s disks,
+  `Node.drawInSmallMap`, the doors' and items' `drawInMap`: 3.4 million in
+  250,376 frames of the 279 cases with a labyrinth, 0.4 million more under a
+  battle and 36,000 under a riddle) and Demolish's spheres (`gluSphere` in
+  `SphereParticle.show_particle`). Villages, cutscenes, the world map and the
+  airship, the title, the game over, the menu, the stores and the riddles
+  emit nothing.
+* **What plan 14 leaves:**
+  * Phase 4.3 (9.3): the input wrapper (130 `gameActions[…]` reads in 22
+    files; AutoPlay presses every case's buttons, so parity checks it), the
+    `Game` autoload (49 `Organizer.getOrganizer()` calls in 17 files; every
+    case's `mode=`/`place=` lines check it), audio (no case checks it: a log
+    of the calls and the user listening) and saves (a format decision). None
+    changes a picture.
+  * Step C of the converted modes (6.5, 7.6, phase 3's overlays, 4.1, 4.2,
+    the battle): their logic and motion as Godot code (signals, Tweens,
+    `_process(delta)`, real cameras), which gives up exact parity (12,
+    "Pixel parity rests on renderer details"; decision 3). The battle is the
+    largest and the most tied to the bridge (its parts sit in the bridge's
+    chunks and slots).
+  * Phase 5 (10): what still runs through `Graphics` is the frame's
+    orchestration, not drawing. GLBackend orders the nodes (`show_ui`: 46
+    calls in 32 files, `show_node` 5 in 4, `show_fade` 9 in 7,
+    `Utils3D.show_quad` 27 in 11, `show_tex` 10 in 6: the chunks, the slots,
+    the layers); the twins read its state machine (the matrices, colours,
+    binds, alpha test and blending: `canvas_material` 52 calls in 32 files,
+    `material_3d`, `place_image` 41 in 15, `place_quad`, `place_gradient`,
+    `place_multi_string`, `place_with_shadow`); legacy code builds the
+    minimap's and the spheres' geometry (captured) and the info panels'
+    texture (`GraphicHelp`, `ImageGraphics`); 71 legacy files have a
+    `draw(g)` or `drawTopLayer(g)` the Organizer runs every frame. `Graphics`,
+    GLBackend and the texture paths (about 3,600 lines with `Utils3D` and
+    `Object2D`) can go only once each mode's step C places its nodes itself
+    (its scene, camera and order instead of the bridge's slots): mode by
+    mode, after its step C.
+* **What step C of the battle needs decided** (as "Prepared after part 5"
+  lists it): decision 3 (when: now, every mode being through step B, or
+  after another mode's step C); decision 6 (the battle's per-update motion:
+  the slides at 0.1 an update, the cards' moves and turns, the slots'
+  flips, the texts' life, the effects' coroutines and 30 Hz steps: the
+  original's speed as per-second rates, or today's); decision 8 with
+  decision 2 (`Battle.tscn` under the camera rig puts all of the battle's
+  3D under every text; a boss area needs a camera of its own; the weather's
+  front pass under the battle or over it; Demolish's spheres as GLBackend's
+  flat discs or the original's lit purple spheres; the info texture, the
+  cards and the texts as Godot nodes instead of the legacy pixels; the
+  party's red screen kept invisible or shown as the Java meant it, a red
+  flash over the battle). Not a decision: Demolish's stall (180,000
+  vertices a frame built in GDScript) goes with a `SphereMesh` or a sphere
+  built once.
+* **Recommended next: phase 4.3's input wrapper**
+  (`docs/phase4_3_prompt.md`). It needs no decision, parity checks it on
+  every case (no picture changes), and every step C needs it (the battle's
+  input is `BattleManager.update`'s `gameActions[…]`); the `Game` autoload
+  follows it (also parity-checked; phase 5 makes the Organizer that
+  autoload), audio and saves after a decision each. Step C of the battle
+  comes once decisions 3, 6 and 8 are made: the user can make them
+  meanwhile, and if they come first, step C of the battle can follow the
+  wrapper directly. Phase 5 after step C. Sizes: the wrapper S–M, the
+  autoload M, step C of the battle XL.
+
 ## 10. Phase 5: remove the emulation
 
 When no mode draws through `g` any more:
@@ -5596,6 +5813,8 @@ When no mode draws through `g` any more:
   `Main.is_legacy` answers only for names the code asks about: a run with a
   removed `--legacy=` name is a normal run and would "pass" a parity check it
   no longer makes. Keep the flag lists in ARCHITECTURE section 7 current.
+  *Closing 4.4:* phase 4.4's fifteen names on the battle cases: identical to
+  no flag (9.4); no code asks for a flag now.
 * **Drawing that never shows** (phase 4.4's pilot). The plan listed the
   clock's "Fleeing" and time bar among a battle's parts: `Clock.draw` has no
   caller (the Java neither). The spoils screen's dropped item needs drop
@@ -5603,6 +5822,9 @@ When no mode draws through `g` any more:
   the 3D projection behind the near plane. Check that a drawing can show
   (a caller, the data, a probe line in some frame) before planning its node
   or its case; dev state (the console's `drop`) can still cover a twin.
+  *Closing 4.4:* the red screen is a node anyway, because its state changes
+  matter (its `loadIdentity` puts the row's later members at z 0, hidden
+  too); the console's `crit` reaches it (`battle_crit`).
 * **Overlaps between shots** (phase 4.4's pilot). Which parts overlap is a
   question about frames, not shots: the legend's icons slid out over the
   spoils screen only in the frames after the console's `kill`, and no shot
@@ -5646,9 +5868,11 @@ When no mode draws through `g` any more:
   segfault at exit, after every frame was drawn (a script that quit in the
   frame Salmonman's turn ended: 7 of 7 runs; 0 of 3 with the tasks cleared
   first). A case or a frame-rate script that quits during a battle's enemy
-  turn can crash at random (part 4's one crash in 13 runs). Until it is
-  fixed, let scripts quit outside such windows and check every run's exit
-  code.
+  turn can crash at random (part 4's one crash in 13 runs). *Fixed in the
+  closing of 4.4 (9.4):* `Main._exit_tree` clears the Scheduler's tasks and
+  deterministic timers first (`Scheduler.clear`); the same run exits 0 (7
+  of 7 headless, 3 of 3 windowed, with the same frames), and so does every
+  case since. Keep checking every run's exit code.
 * **Plan facts about the frame go stale** (phase 4.4's rollout, part 4). The
   plan had the GPU weather's front pass over a battle's texts; since P2 it is
   in the floor's world under the battle whenever battle text came first (its
@@ -5681,7 +5905,10 @@ When no mode draws through `g` any more:
    with a Godot light): a look change, with decision 8.
 3. **Step C timing:** accept changes in movement and collision feel (and fix
    the speed TODOs) right after step B, or only after every mode is on
-   scenes.
+   scenes. *Since the closing of phase 4.4 (2026-11-22) every mode is through
+   step B and closed:* the choice left is which step C comes first and
+   whether phase 4.3's input wrapper comes before it (9.4, "Prepared after
+   the closing").
 4. **Resolution:** keep the 1024×768, 4:3 virtual screen (recommended for
    now; menus, battle and dungeons assume it). Scenes make widescreen
    villages possible later.
@@ -5783,14 +6010,14 @@ Sizes are relative: S ≈ a focused session, XL ≈ many sessions.
 |---|---|---|---|---|
 | 0 | Groundwork: bridge, parity tool, `ARCHITECTURE.md` | S | — | everything |
 | 1 | Villages + cutscenes + village particles + SpriteFrames. *Done and closed (6.9).* | L | 0; decisions 1, 6 | editable villages |
-| 2 | Dungeons + weather + minimap. *Done and closed (7.9); the minimap stays the 3D bridge's (8.4).* | L | 0; decision 2 (the weather: 6) | editable dungeons; FPS fix (with decision 6) |
+| 2 | Dungeons + weather + minimap. *Done and closed (7.9); the minimap stayed the 3D bridge's (8.4) until closing 4.4 made its node the default (9.4).* | L | 0; decision 2 (the weather: 6) | editable dungeons; FPS fix (with decision 6) |
 | P | Village and cutscene particles on the GPU (6.4; `docs/particles_prompt.md`). *Done (6.10); closed with phase 1 (6.9).* | M | 1; decision 6 (decided for particles) | Dellna's snow back on; Home of the Gods and Dellna at 60 FPS |
 | P2 | Dungeon weather, save points and the card and enemy effects that are particles, on the GPU (6.11). *Done (6.12); the dungeon part closed with phase 2 (7.9), the battle effects' legacy path stays until 4.4.* | M | 2, P | rainy and snowy floors at 60 FPS; battles without the effects' stalls (Wind 3 at 7 FPS, the Flame's 10 s) |
-| 3 | Theme, Dialog, signs, emotions, fades, HUD. *Done through step B: the pilot (8.1: the Theme, the dialog family, the fade) and the rollout (8.3: emotions, mission display, pause overlays, cutscene images and texts, tutorials; the minimap stays the 3D bridge's); closed (8.4).* | M | 1 (or 2) | most of the remaining `draw(g)` |
+| 3 | Theme, Dialog, signs, emotions, fades, HUD. *Done through step B: the pilot (8.1: the Theme, the dialog family, the fade) and the rollout (8.3: emotions, mission display, pause overlays, cutscene images and texts, tutorials; the minimap stayed the 3D bridge's until closing 4.4); closed (8.4).* | M | 1 (or 2) | most of the remaining `draw(g)` |
 | 4.1 | World map + airship. *Done through step B (9.1): the scenes, the name plate, legacy vs. scene identical; closed (9.1).* | M | 1 (converter), 3 | — |
 | 4.2 | Title, game over, mini-games, stores, menu. *Done through step B (9.2: the pilot, the menu, the stores and the mini-games, one session each) and closed (9.2, "Closing phase 4.2").* | L | 3 | — |
 | 4.3 | Input, audio, saves, `Game` autoload. *Prepared (9.3).* | M | any time after 0; the autoload is best after 4.2 | 5; step C (the input wrapper) |
-| 4.4 | Battle, cards, effects. *The pilot, the battle's 2D top layer, done through step B (9.4: the result and spoils screens, the level-up bars, an enemy's red flash, the legend's icons); the rollout, the battle's 3D: part 1, the enemy, done through step B (9.4: `EnemyView` in its chunk's slot; the floor's walls drawn in a fixed order); part 2, the info panels, done through step B (9.4: a `PanelQuad` per legacy batch in its slot); part 3, the deck, the hand and the legend's gradient, done through step B (9.4: `PanelQuad`s in their slots, the merges through `Utils3D.show_quad`); part 4, the texts among the chunks with the attack's background and the enemy's card, done through step B (9.4: UI nodes in the frame's 2D order, `ShadowText`, `MenuText` and `AttackTexts`; `PanelQuad`s); part 5, the card effects that are not particles, done through step B (9.4: `PanelQuad`s in their slots, the spheres' triangles captured and merged as before); next the closing of 4.4 (9.4, "Prepared after part 5").* | XL | 2, 3 | 5; the minimap's node (8.4) |
+| 4.4 | Battle, cards, effects. *The pilot, the battle's 2D top layer, done through step B (9.4: the result and spoils screens, the level-up bars, an enemy's red flash, the legend's icons); the rollout, the battle's 3D: part 1, the enemy, done through step B (9.4: `EnemyView` in its chunk's slot; the floor's walls drawn in a fixed order); part 2, the info panels, done through step B (9.4: a `PanelQuad` per legacy batch in its slot); part 3, the deck, the hand and the legend's gradient, done through step B (9.4: `PanelQuad`s in their slots, the merges through `Utils3D.show_quad`); part 4, the texts among the chunks with the attack's background and the enemy's card, done through step B (9.4: UI nodes in the frame's 2D order, `ShadowText`, `MenuText` and `AttackTexts`; `PanelQuad`s); part 5, the card effects that are not particles, done through step B (9.4: `PanelQuad`s in their slots, the spheres' triangles captured and merged as before); closed (9.4, "Results of the closing": the exit-crash fix, the minimap's node as the default, the party's red screen as a node, the fifteen flags and their legacy drawing removed).* | XL | 2, 3 | 5; step C of the battle |
 | 5 | Remove the GL emulation; per-delta time | M | all of the above | — |
 
 After phase 2, P comes before phase 3 (2026-10-27): the particle
@@ -5817,7 +6044,9 @@ fixed or deleted at any time.
     files it reads do not exist.
   * `src/battleBacks/*`: only reachable through a commented-out line in
     `main.bank`.
-  * `SwordBackground`: its `drawable` is never assigned.
+  * `SwordBackground`: its `drawable` is never assigned. *Removed in the
+    closing of 4.4 (9.4), with `SystemDrawable`, `ParticleSystem.drawable`
+    and `Settings.setSystemDrawable`.*
   * `MenuMapLoader`: no callers.
   * The `Values.getClassMap()` entries `story.Story`,
     `story.StorySequence`, `store.Library`, `store.House` and
@@ -5850,7 +6079,8 @@ fixed or deleted at any time.
   * `HelpPage`'s volume options never match (9.2).
   * *Found in phase 4.4's pilot (as in the Java):* `Clock.draw` has no
     caller, so a battle never shows "Fleeing" or its time bar (the clock's
-    time is not counted either: `timesUp` is always false). No enemy can drop
+    time is not counted either: `timesUp` is always false; *the closing of
+    4.4 deleted `Clock` and its `TimeBar`*). No enemy can drop
     an item: `enemyBank.bank` has no `dropdata` line, so the spoils screen's
     "You found …" is never shown, while `getSpoils` draws a `J.random()` for
     every battle won (the "<enemy>drop" status is −1, not 0). The spoils
@@ -5860,13 +6090,15 @@ fixed or deleted at any time.
     of a critical hit (`Character3D.draw`: a 1024 × 768 image at (0, 0)) is
     drawn under the 3D projection at z 0, behind the near plane, so it never
     shows, and its `loadIdentity` puts the row's later characters at z 0 for
-    the 150 ms (by reading; no case has a critical hit on the party). In
+    the 150 ms (*confirmed by the closing's `battle_crit`, the console's
+    `crit 100`: the red screen's 9 frames; the twin keeps both*). In
     TALKING mode `Battle.drawBattle` calls `setDialog` every frame (in a
     labyrinth the minimap's and the mission's `pushState` once a frame).
   * *Found in phase 4.4's rollout, part 4 (as in the Java):* Battle Card's
     "ground" (`SwordBackground.drawGround`, set as the settings' system
     drawable by `BattleCard` and `AnimationSettingsFactory`) is never drawn:
-    `ParticleSystem.drawable` is never assigned. Every attack text of
+    `ParticleSystem.drawable` is never assigned (*removed in the closing of
+    4.4*). Every attack text of
     `Animation.draw` is drawn twice a frame during ANIMATE (`Battle.drawBattle`
     draws the same texts again), so it looks brighter than after the
     animation. An enemy heals only below half its life (`makeMove` drops a
@@ -5876,8 +6108,8 @@ fixed or deleted at any time.
     lambda in the static `Scheduler._tasks`: the party members' 150 ms hide
     after an enemy's attack; 9.4, "Results of the rollout, part 5"). Clearing
     the pending tasks at the start of `Main._exit_tree` made the crashing run
-    exit 0 (3 of 3). Not fixed yet (its own change, before the closing of
-    4.4).
+    exit 0 (3 of 3). *Fixed in the closing of 4.4 (9.4), its own change:*
+    `Main._exit_tree` clears the Scheduler first.
   * *Found in phase 4.2's stores:* selling the last entry of a Weapon Store
     sell list that has more entries (Slot 1's fifth weapon) refills the
     list with the cursor kept, past its new end; `WeaponStore.updateCurrent`

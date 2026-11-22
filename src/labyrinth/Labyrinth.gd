@@ -17,8 +17,10 @@ extends MenuStarter
 ## Phase 2 (docs/ARCHITECTURE.md section 10): a floor is built from its scene
 ## (MapLoader, step A) and drawn by it (create_scene, step B): draw hands the
 ## scene what the display list, the objects and the weather would have drawn;
-## the battle, the minimap and the 2D overlays stay legacy. The legacy drawing
-## of the floor (init3D, the display list) is removed (plan 7.9).
+## the battle, the minimap and the 2D overlays keep their legacy state and
+## draw through nodes in the legacy frame's order (phases 3 and 4.4; the
+## minimap's legacy drawing runs captured, MapRenderer.show_map). The legacy
+## drawing of the floor (init3D, the display list) is removed (plan 7.9).
 
 var graph = null
 var player = null
@@ -490,13 +492,9 @@ func draw(g, alpha = null):
 	g.loadIdentity()
 	g.getGL().glDepthMask(false)
 	g.getGL().glDisable(Graphics.GL_DEPTH_TEST)
-	# Phase 3: the minimap stays the 3D bridge's batches; --minimap-node (dev)
-	# draws them with nodes (MapRenderer.show_map), which changes later
-	# battle frames by 1/255 (docs/MODERNIZATION_PLAN.md 8.3).
-	if Main.minimap_node:
-		mapRenderer.show_map(g, player.get_(), player.getDirection(), currentNode.getAddress(), lastAddress)
-	else:
-		mapRenderer.draw(g, player.get_(), player.getDirection(), currentNode.getAddress(), lastAddress)
+	# The minimap's batches are MinimapPart nodes (MapRenderer.show_map: the
+	# default since phase 4.4's closing, docs/MODERNIZATION_PLAN.md 8.4).
+	mapRenderer.show_map(g, player.get_(), player.getDirection(), currentNode.getAddress(), lastAddress)
 
 	g.loadIdentity()
 	GameEventListener.set2DNow(g)

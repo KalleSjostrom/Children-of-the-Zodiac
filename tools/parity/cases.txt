@@ -747,3 +747,9 @@ battle_effects_image     battle_effects_image     --load="Slot 1" --start="Berca
 battle_effects_demolish  battle_effects_demolish  --load="Slot 1" --start="Berca Desert--South-mark0" --start-node=20:3
 battle_effects_chrono    battle_effects_chrono    --load="Slot 1" --start="Grivera--Corridor of Agony-mark0"
 battle_effects_area      battle_effects_area      --load="Slot 1" --start=Serphia
+# Phase 4.4's closing (recorded on the code before it): the party's red
+# screen. An enemy's critical hit on a party member (the console's crit 100:
+# no case met one with the data's 5 %) hides the member for 150 ms while
+# Character3D.draw draws the red screen behind the near plane; two enemy
+# turns shot every frame (Berca's Ogres; god mode).
+battle_crit              battle_crit              --load="Slot 1" --start="Berca Desert--South-mark0" --start-node=20:3

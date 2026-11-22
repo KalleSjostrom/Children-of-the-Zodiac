@@ -14,10 +14,12 @@
 #   tools/parity/parity.sh ab "<args_a>" "<args_b>" [options] [case...]
 #       Records set <name>-a with args_a and <name>-b with args_b added to the
 #       game arguments, then compares them. Example (a subsystem that keeps
-#       its legacy path): tools/parity/parity.sh ab "--legacy=battle_effects" "" 'effects_*'
+#       its legacy path while it is converted): tools/parity/parity.sh ab
+#       "--legacy=<subsystem>" "" '<cases>'; or a dev option: tools/parity/parity.sh
+#       ab "--hide-particles" "" 'effects_*'
 #
 # Options:
-#   --args="<game args>"   extra game arguments for record (e.g. --legacy=effect_waits)
+#   --args="<game args>"   extra game arguments for record (e.g. --hide-particles)
 #   --seed=<n>             random seed (default 1)
 #   --tolerance=<0-255>    per channel difference that is ignored (default 0)
 #   --max-pixels=<n>       pixels over the tolerance a shot may have (default 0)

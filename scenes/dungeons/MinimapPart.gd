@@ -1,7 +1,7 @@
 class_name MinimapPart
 extends MeshInstance3D
-## A part of the labyrinth's minimap drawn with one material (phase 3, dev
-## only: --minimap-node; docs/ARCHITECTURE.md section 12): the two dark
+## A part of the labyrinth's minimap drawn with one material (phase 3; the
+## default since phase 4.4's closing; docs/ARCHITECTURE.md section 12): the two dark
 ## disks, the compass, the visited cells of one image, the yellow arrow. The legacy MapRenderer stays
 ## in charge (its slide, the cells, the angle) and makes its drawing's GL
 ## state changes and geometry; its primitives are kept instead of drawn

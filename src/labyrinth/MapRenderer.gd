@@ -55,14 +55,14 @@ func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 	g.setImageColor(1, 0.85, 0, 1)
 	Utils3D.draw3D(g, t.getTexture(), 0, 0, 0, 0.09)
 
-## Bridge (phase 3, dev only: --minimap-node): draw(g, alpha, angle, origin,
-## lastOrigin) drawn by nodes. The legacy drawing runs (the same GL state
-## changes, the same geometry), its 3D primitives are kept instead of drawn
-## (Graphics.begin_capture_3d), and each batch is a MinimapPart node in the
-## frame's 3D chunk, in the batch's slot (Graphics.show_node). The floor's
-## frames are drawn to the bit, but a battle's frames after them differ by
-## 1/255 (docs/MODERNIZATION_PLAN.md 8.3), so by default the 3D bridge draws
-## the minimap.
+## Bridge (phase 3; the default since phase 4.4's closing,
+## docs/MODERNIZATION_PLAN.md 8.4): draw(g, alpha, angle, origin, lastOrigin)
+## drawn by nodes, Labyrinth.draw's call. The legacy drawing runs (the same GL
+## state changes, the same geometry), its 3D primitives are kept instead of
+## drawn (Graphics.begin_capture_3d), and each batch is a MinimapPart node in
+## the frame's 3D chunk, in the batch's slot (Graphics.show_node): the frames
+## are the 3D bridge's to the bit, a battle's after them too since the floor's
+## walls are drawn in a fixed order (plan 9.4).
 func show_map(g, alpha, angle, origin, lastOrigin):
 	g.begin_capture_3d()
 	draw(g, alpha, angle, origin, lastOrigin)

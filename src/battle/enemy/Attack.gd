@@ -54,7 +54,7 @@ func hide():
 ## by SPEED per draw). Bridge (phase 4.4's rollout, part 4, step B,
 ## docs/ARCHITECTURE.md section 15): each drawWithShadow is a ShadowText node
 ## on the UI layer in the frame's 2D order (_show_with_shadow: the same state
-## changes); --legacy=battle_attack_name keeps the legacy text.
+## changes).
 func draw(g):
 	ab.draw(g)
 	if visible:
@@ -65,16 +65,12 @@ func draw(g):
 		else:
 			pos = dest
 		var shadowX: int = dest + absi(pos - dest)
-		if not Main.is_legacy("battle_attack_name"):
-			_show_with_shadow(g, shadowX + 3, Y_POS + 3, JColor.BLACK)
-			_show_with_shadow(g, pos, Y_POS)
-			return
-		g.drawWithShadow(name, shadowX + 3, Y_POS + 3, JColor.BLACK)
-		g.drawWithShadow(name, pos, Y_POS)
+		_show_with_shadow(g, shadowX + 3, Y_POS + 3, JColor.BLACK)
+		_show_with_shadow(g, pos, Y_POS)
 
 
-## Bridge (phase 4.4's rollout, part 4): drawWithShadow(name, x, y, c) without
-## the drawing (Graphics.place_with_shadow: the text colours and drawString's
+## Bridge (phase 4.4's rollout, part 4): Graphics.drawWithShadow(name, x, y,
+## c) without the drawing (Graphics.place_with_shadow: the text colours and drawString's
 ## setColor(color) after each line), shown by the frame's next ShadowText on
 ## the UI layer at the size and in the font set now, in the material of the
 ## 2D state here (the alpha test BattleEnemy.draw sets: GREATER .1). Nothing

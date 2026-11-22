@@ -59,9 +59,6 @@ func setVector(i, x, y = null, z = null):
 func setVectorEquation(i, ve):
 	get_(i).vectorEquation = ve
 
-func setSystemDrawable(i, ve):
-	get_(i).systemDrawable = ve
-
 func get_(i):
 	var s = settings.get(i)
 	if s == null:
@@ -80,7 +77,6 @@ func clone():
 
 
 class Setting extends RefCounted:
-	var systemDrawable = null
 	var vectorEquation = null
 	var value: float = 0.0
 	var vector = null
@@ -88,7 +84,6 @@ class Setting extends RefCounted:
 
 	func copy():
 		var s = Setting.new()
-		s.systemDrawable = systemDrawable
 		s.vectorEquation = vectorEquation
 		s.value = value
 		s.vector = null if vector == null else vector.clone()

@@ -66,6 +66,8 @@ func _register(c: DebugCommands) -> void:
 		DebugCommands.opt("who", _exp_targets, "party if left out; a name").loose()])
 	c.add("drop", "The enemies of the battle going on drop this item when beaten (no enemy's data has a drop)", _drop, [
 		DebugCommands.arg("item", Callable(), "_ for a space").to_end().loose()])
+	c.add("crit", "The enemies of the battle going on land critical hits at this chance (Stitchmen's and Trolls' data have 5)", _crit, [
+		DebugCommands.arg("percent", Callable(), "0 to 100")])
 	c.group("World")
 	c.add("map", "Shows the whole map of this labyrinth floor", _map)
 	c.add("roads", "Opens the roads of the world map", _roads, [
@@ -448,9 +450,7 @@ func _kill(_args: PackedStringArray) -> DebugCommands.Result:
 	if mode == BattleManager.BATTLING:
 		# Battle.finishRound without the attack.
 		battle.currentDeck.finish()
-		battle.clock.hide()
 		battle.legend.hide()
-		battle.clock.finish()
 		battle.hand.hide()
 		battle.glCharacters.setTarget(-1, false)
 	battle.checkIfEnemiesAreDead(mode == BattleManager.BATTLING)
@@ -511,6 +511,22 @@ func _drop(args: PackedStringArray) -> DebugCommands.Result:
 	for enemy in battle.enemies:
 		enemy.setDropData(Items.Item.new(item, 1), 1.0)
 	return DebugCommands.done("The enemies drop %s" % item)
+
+
+## Sets the critical hit chance of the battle's enemies (their attribute
+## Creature.CRITICAL_HIT_PRECENT, which EnemyLogic.calcEnemyDamage reads at
+## every hit on the party; it draws its J.random() either way): at 100 every
+## hit that does not miss is critical, and the party member hit is hidden for
+## 150 ms with the party's red screen (Character3D.draw), for its case.
+func _crit(args: PackedStringArray) -> DebugCommands.Result:
+	if not args[0].is_valid_int() or int(args[0]) < 0 or int(args[0]) > 100:
+		return DebugCommands.fail("The chance is a whole number from 0 to 100: %s" % args[0])
+	var battle := _battle()
+	if battle == null:
+		return DebugCommands.fail("Not in a battle")
+	for enemy in battle.enemies:
+		enemy.setAttribute(Creature.CRITICAL_HIT_PRECENT, int(args[0]))
+	return DebugCommands.done("The enemies land critical hits at %s %%" % args[0])
 
 
 ## The cards cast can play: short name (lowercase) -> Java class name.
@@ -576,9 +592,7 @@ func _cast(args: PackedStringArray) -> DebugCommands.Result:
 	battle.hand.setPos(support, target)
 	battle.currentDeck.finish()
 	battle.calcDamage(cards)
-	battle.clock.hide()
 	battle.legend.hide()
-	battle.clock.finish()
 	battle.hand.hide()
 	battle.glCharacters.setTarget(-1, false)
 	battle.animate.init(cards, target, team, battle.monster, battle.attacker, battle.glCharacters)

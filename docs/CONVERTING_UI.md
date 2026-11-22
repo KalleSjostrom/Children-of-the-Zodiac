@@ -4,16 +4,17 @@ Phase 3 of `docs/MODERNIZATION_PLAN.md` (shared UI and transitions). The
 pilot converted, through step B, the dialog box, the message box, the card
 info popup and the fade (plan 8.1); the rollout the emotion bubbles, the
 mission display, "Paused" and "game pad lost", the cutscene images and
-texts and the tutorials' top layer (plan 8.3; the minimap stays the 3D
-bridge's batches, its node is a dev flag); the conventions
+texts and the tutorials' top layer (plan 8.3; the minimap's node, a dev flag
+then, is the default since phase 4.4's closing); the conventions
 are in `docs/ARCHITECTURE.md` section 12. This is the procedure for the next
 overlays (phase 4's: a battle's and a riddle's top layer, the stores'
 menus; the world map's name plate is done, docs/ARCHITECTURE.md
 section 13) and for whole 2D modes (section 5 below; the title, the game
 over, the menu and the stores are done, docs/ARCHITECTURE.md section 14). Phase 3's
 `--legacy=` flags that the examples below name (`dialog`, `fades`, the
-rollout's overlays) are removed since the phase closed (plan 8.4): a new
-part gets a flag of its own, which goes when its phase closes. Run everything from bash in the project root, Godot with
+rollout's overlays) are removed since the phase closed (plan 8.4), and so
+are phase 4.2's and 4.4's (plan 9.2, 9.4): a new part gets a flag of its
+own, which goes when its phase closes. Run everything from bash in the project root, Godot with
 `< /dev/null`; close the Godot editor first (it imports new files and makes
 `.uid` files), and do not type while a recording runs (a new run's window
 takes the focus).
@@ -115,7 +116,7 @@ takes the focus).
   batches (a battle's) 1/255 apart: compare the frames after the overlay too
   (plan 8.3). That was the floor's walls, reordered by Godot's sort: since
   they are drawn in a fixed order (phase 4.4's rollout) the minimap's node
-  is identical on the battle cases.
+  is identical on every case, and the default since phase 4.4's closing.
 * A 3D part as a node of its own in its chunk (the battle's enemy, phase
   4.4's rollout: `EnemyView`): the twin computes what the legacy vertices
   would have been (`Graphics.eye_points`: the corners through the
@@ -480,7 +481,8 @@ What the texts among the battle's 3D chunks added (phase 4.4's rollout, part
   that draws each text with `draw_string` at the legacy point and size
   (`AttackTexts`) draws the legacy pixels. Factor the legacy drawing's
   arithmetic into a placing helper both paths call (`AttackText.place_3d_text`
-  under `draw3DText`), so they cannot drift.
+  under `draw3DText`, which the closing removed with the legacy path), so
+  they cannot drift.
 * **What the drawing leaves for later parts.** A text's state changes reach
   the 3D drawn after it: the attack texts' `setColor(colour, life)` is the
   colour the weather's front pass and the minimap start from. The probe
@@ -532,3 +534,33 @@ particles"):
   the flag. The probe printed each coroutine step with the game time
   (`Scheduler.sleep` reads the game clock in seeded runs) against the frames
   the battle's waits answered (the hit, the next card, the removal).
+
+What the closing of phase 4.4 added (plan 9.4, "Results of the closing"):
+
+* **A drawing that never shows can still matter.** The party's red screen
+  is behind the near plane, but its `loadIdentity` puts the row's later
+  members at z 0 too (hidden for the hit's 150 ms): dropping it would have
+  meant keeping that call. As a node, its twin keeps every state change. A
+  dev console command reaches state the data never does (`crit`: no case met
+  a critical hit on the party at the data's 5 %); the case is shot frame by
+  frame though no pixel can change, so a later step that moves it in front of
+  the near plane (decision 8) shows up there.
+* **Delete flag by flag, then grep every name.** Removing a legacy path
+  frees more than its own branch: helpers of the framework files
+  (`Object2D.drawTex`, `BattleProgressBar.draw`, `Utils3D.draw3DPart`,
+  `draw3DBackside`, `draw3DPartY` and their inner helpers), a class's
+  companion (`Clock`'s `TimeBar`), and settings no one reads
+  (`Settings.setSystemDrawable` after `SwordBackground`). `Graphics`' own
+  methods stay (phase 5 deletes it whole).
+* **Wrappers after the branch is gone.** A legacy method whose whole body
+  became one call of its twin takes the twin's body (`ResultScreen.drawResult`:
+  it keeps the Java name its callers use); a bridge helper that only chose
+  goes, and its call sites call the twin (`SlowParticleSystem._drawQuad`).
+* **Every run's exit code.** A pending `Scheduler` lambda at quit crashed
+  the engine after every frame was drawn; `Main._exit_tree` clears the
+  Scheduler first now. A recording that reports only shots would not have
+  shown it: compare the exit codes and the error and leak lines too.
+* **Never edit a script a run is executing.** Bash reads a running script
+  as it goes: a recording driver edited (or converted to CRLF) while it ran
+  would continue at the old byte offset in the new text. Put each stage in
+  its own file.

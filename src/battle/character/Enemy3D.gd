@@ -52,8 +52,3 @@ func drawInfo(g):
 ## Not used for enemies.
 func initCreature(g):
 	pass
-
-
-## Not used: the enemy image is not shown here.
-func drawImage(g):
-	pass

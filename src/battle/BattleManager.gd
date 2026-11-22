@@ -117,8 +117,6 @@ func update(elapsedTime: float):
 					battle.R2Pressed()
 				elif gameActions[GameMode.L2].isPressed():
 					battle.L2Pressed()
-				else:
-					battle.resetFlee()
 		EXIT:
 			exit()
 		EXIT_TO_NEXT:

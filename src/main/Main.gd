@@ -36,9 +36,6 @@ extends Node
 ##                       village and cutscene systems, the dungeon weather and save
 ##                       points, the card and enemy effects; for parity runs that
 ##                       compare everything else
-##   --minimap-node      dev only: the labyrinth's minimap is drawn by nodes
-##                       (MapRenderer.show_map; it changes battle frames by 1/255,
-##                       docs/MODERNIZATION_PLAN.md 8.3), not by the 3D bridge
 ##   --casts=<round>/... dev only: the rounds the console's "cast next" plays
 ##                       (scenes/debug/GameCommands.gd; parity cases effects_*)
 ##   --look=<name>       dev only: a prototype look of the labyrinths, legacy
@@ -63,8 +60,6 @@ static var instance: Main
 static var no_encounters := false
 ## --hide-particles: village and cutscene particle systems are not drawn.
 static var hide_particles := false
-## --minimap-node (dev): the minimap's batches are nodes (Labyrinth.draw).
-static var minimap_node := false
 ## --look (dev): the prototype look of the labyrinths (DungeonLook).
 static var look: StringName = &"legacy"
 static var _legacy: PackedStringArray = []
@@ -118,7 +113,6 @@ func _ready() -> void:
 		_legacy = String(_args["legacy"]).split(",", false)
 	no_encounters = _args.has("no-encounters")
 	hide_particles = _args.has("hide-particles")
-	minimap_node = _args.has("minimap-node")
 	if _args.has("village"):
 		var bad_remake := VillageRemake.set_active(String(_args["village"]).split(",", false))
 		if bad_remake != "":
@@ -353,6 +347,10 @@ func _notification(what: int) -> void:
 
 
 func _exit_tree() -> void:
+	# The pending Scheduler callbacks first: a lambda still in its static
+	# tasks at quit crashed the engine at exit (plan 12, "Pending callbacks
+	# at quit").
+	Scheduler.clear()
 	if backend != null:
 		backend.free_all()
 	# The scenes of modes that are not shown (suspended for the menu, or the

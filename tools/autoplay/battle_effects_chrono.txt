@@ -8,8 +8,9 @@
 # console's "boss" goes next to him, a step starts the battle, CROSS pages his
 # words; TRIANGLE ends the party's turns until his, then a shot every frame
 # until his turn ends (e_#). It quits 300 ms later: quitting while the hit's
-# 150 ms hide of the party members is pending (a Scheduler.after callback)
-# crashed at exit (part 5, "Found on the way").
+# 150 ms hide of the party members was pending (a Scheduler.after callback)
+# crashed at exit (part 5, "Found on the way"; fixed in the closing of 4.4:
+# Main._exit_tree clears the Scheduler first).
 wait 3000
 console god on
 console boss

@@ -1,4 +1,4 @@
-# Handoff: state of the Godot port (2026-11-11, after steps 1–3, modernization phase 0, phases 1, 2, 3, 4.1 and 4.2 done and closed, the particles phases P and P2, the character sprite sheets, phase 4.4's pilot (the battle's 2D top layer) and its rollout's five parts (the battle's enemy, info panels, deck and hand, the texts among its 3D chunks, and the card effects that are not particles))
+# Handoff: state of the Godot port (2026-11-22, after steps 1–3, modernization phase 0, phases 1, 2, 3, 4.1, 4.2 and 4.4 done and closed, the particles phases P and P2 and the character sprite sheets; phase 4.4: the pilot (the battle's 2D top layer), its rollout's five parts (the battle's enemy, info panels, deck and hand, the texts among its 3D chunks, the card effects that are not particles) and its closing)
 
 Conventions: legacy (ported) code follows `docs/PORTING.md`; new code
 (scenes, resources, tools, bridge) follows `docs/ARCHITECTURE.md`. The
@@ -11,7 +11,8 @@ flags they name for phases 1 to 4.2 (and the particles phases' `particles`
 and `dungeon_particles`), the converters and data checks, the `.vil` and
 `.map` files and the bridge test are removed since those phases closed
 (the modernization's entries "Closing phases 1 to 4.1" and "Closing phase
-4.2"); only the battle effects' `battle_effects` and `effect_waits` are left.
+4.2"), and so are phase 4.4's and the battle effects' `battle_effects` and
+`effect_waits` ("Closing phase 4.4"): no code asks for a flag now.
 
 **Source decision.** The downloaded `Children-of-the-Zodiac-master` is an
 unfinished refactor (its last commits say "THIS DOESN'T COMPILE"). The port
@@ -71,8 +72,8 @@ section 5; conventions and workflow in `docs/ARCHITECTURE.md`):
   current mode's scene under `World` while it is not loading, removes it
   (without freeing) when the mode is suspended or left, and `GameMode` frees
   it in `NOTIFICATION_PREDELETE`. `--legacy=<a,b>` + `Main.is_legacy()` are
-  in place for later phases (since phase 4.2's closing only the battle
-  effects' flags are left).
+  in place for later phases (since phase 4.4's closing no code asks for a
+  flag).
 - Bridge test (deleted when phase 4.1 closed, 2026-11-06): `--bridge-test`
   + `tools/autoplay/bridge_test.txt` (parity case `bridge_test`) showed
   `tools/bridge_test/BridgeTest.tscn` instead of the world map's background
@@ -534,6 +535,48 @@ section 14, "The riddles"; the procedure in `docs/CONVERTING_UI.md` section
 - Prepared (plan 9.3, 9.4): phases 4.3 and 4.4; recommended next: 4.4's
   pilot, the battle's 2D top layer (`docs/phase4_4_prompt.md`).
 
+**Closing phase 4.4 (2026-11-22): done** (plan 9.4, "Results of the
+closing"; `docs/phase4_4_close_prompt.md`):
+- The exit crash fixed (its own change): `Main._exit_tree` clears the
+  Scheduler's pending tasks and deterministic timers first
+  (`Scheduler.clear`); a lambda left there at quit (a party member's 150 ms
+  hide after an enemy's hit) made Godot segfault at exit. The run that
+  crashed 7 of 7 times (headless) and 3 of 3 (windowed) exits 0, with the
+  same frames; every case of every later run exited 0.
+- The minimap's node is the default: `Labyrinth.draw` calls
+  `MapRenderer.show_map` (`MinimapPart` nodes); `--minimap-node` is gone
+  (checked first: identical on every case). About 2 % fewer frames uncapped
+  (0.03 ms a frame), nothing at the cap.
+- The party's red screen is a node (`Character3D._show_red_screen`, a
+  `PanelQuad`); the console's `crit <percent>` (dev) and the case
+  `battle_crit` (an enemy's critical hits on the party, frame by frame).
+- Deleted (about 1,100 lines): the fifteen flags (`battle_screens`,
+  `battle_flash`, `battle_legend`, `battle_enemy`, `battle_panels`,
+  `battle_deck`, `battle_legend_back`, `battle_attack_name`,
+  `battle_deck_text`, `battle_legend_text`, `battle_attack_text`,
+  `battle_enemy_quads`, `battle_effect_draw`, `battle_effects`,
+  `effect_waits`) with the legacy drawing they kept (the legacy effects'
+  quads and the Flame's pre-run too; `ParticleSystem.gpu_path()`), the
+  helpers only they reached (`AbstractCard.drawCard`, `LevelUpBar.draw`,
+  `BattleEnemy.drawSlice`, `AttackText.draw3DText`, `Object2D.drawTex`,
+  `BattleProgressBar.draw`, `Utils3D.draw3DPart`, `draw3DBackside`, the
+  effects' `drawParticle`s …) and dead code: `Clock` and its `TimeBar`,
+  `BattleScrollBar`, `SwordBackground` with `SystemDrawable`. The git history
+  up to 88bf7d76 has them. No code asks for a `--legacy=` flag now
+  (`Main.is_legacy` stays for later phases); `Graphics`' API stays whole
+  until phase 5.
+- Parity (tolerance 0; 446 cases, 11,656 shots; the baseline `z0base` on
+  88bf7d76 equals `p3node`): the final run `z2after` vs. the golden after the
+  minimap's switch: every shot, log and per-case error and leak line
+  identical (3 script errors, 2,421 errors, 16 exit leak lines); the removed
+  names on the 45 battle cases behave as no flag; `--hide-particles` on them
+  vs. a golden with it: identical. Only `z2after` is kept in
+  `tools/parity/out`.
+- Prepared (plan 9.4, "Prepared after the closing"): what is left before
+  phase 5 and the recommendation: phase 4.3's input wrapper next
+  (`docs/phase4_3_prompt.md`), step C of the battle once decisions 3, 6 and 8
+  are made.
+
 **Modernization phase 4.4's rollout, part 5 (the battle's 3D: the card
 effects that are not particles): step B done** (2026-11-20; plan 9.4,
 "Results of the rollout, part 5"; conventions in `docs/ARCHITECTURE.md`
@@ -863,13 +906,13 @@ decision 5 decided in plan section 13):
    info panels (2026-11-13), the deck, the hand and the legend's gradient
    (2026-11-18), the texts among the chunks with the attack background
    and the enemy's card, and the card effects that are not particles
-   (2026-11-20). Next (plan 9.4, "Prepared after part 5"): the closing of
-   4.4 (`docs/phase4_4_close_prompt.md`: the exit-crash fix, the minimap's
-   node as the default, the party's red screen as decided, the flags and
-   their legacy drawing); phase 4.3 (input,
-   audio, saves, the `Game` autoload; plan 9.3) can come at any time and
-   first if step C of the converted modes comes first. Record
-   goldens before each change.
+   (2026-11-20), and phase 4.4 is closed (2026-11-22): every mode is
+   through step B and closed. Next (plan 9.4, "Prepared after the closing"):
+   phase 4.3's first part, the input wrapper (`docs/phase4_3_prompt.md`;
+   then the `Game` autoload; audio and saves after a decision each), and
+   step C of the converted modes, the battle's first, once decisions 3, 6
+   and 8 are made (plan 13); phase 5 after step C. Record goldens before
+   each change.
 
 1. **Performance:** since P2 the labyrinths with rain or snow run at 60 FPS
    (Forest Path was 35, Ice Cavern--Frozen Field 50; plan 6.12), and since
@@ -907,24 +950,25 @@ decision 5 decided in plan section 13):
   only the shipped saves.
 - Parity: `tools/parity/parity.sh record <set>` / `compare <a> <b>` /
   `ab "<args a>" "<args b>" [case…]`, see `docs/ARCHITECTURE.md` section 7.
-  Runs are windowed (screenshots need a renderer); all 445 cases (11,468
-  shots) take about 35 minutes with `--jobs=3` at about 5.5 GB free (the
+  Runs are windowed (screenshots need a renderer); all 446 cases (11,656
+  shots) take about 34 minutes with `--jobs=3` at about 5-6 GB free (the
   441 cases about 26 minutes with `--jobs=4` at 7.5 GB free; the 437
   cases about 30 with `--jobs=3` at 4.6 GB free; 19 with
   `--jobs=5` for 417 cases, 14-15 with `--jobs=8` when 10 GB are
   free at idle; check first: with 7 GB free, 8 jobs crashed runs) on 12
   logical cores (run nothing beside them, not even a headless compare:
   16 GB run out, plan 12); a compare of two full sets takes about 6
-  minutes (441 cases); a full set is about 8 GB (445 cases; 6.9 GB for 441; the disk was 96% full
+  minutes (441 cases; 7 for 446); a full set is about 8 GB (8.2 GB for 446; 6.9 GB for 441; the disk was 96% full
   once) since
-  the particles run on the GPU (60-70 minutes before P2; `--uncapped`; with
-  `--legacy=battle_effects` or `effect_waits` Menthu's Flame takes 10 s of
-  real time). Recording from a
+  the particles run on the GPU (60-70 minutes before P2; `--uncapped`).
+  Recording from a
   copy of the project (without `.git` and `tools/parity/out`, about 2.4 GB)
   keeps the tree free for edits meanwhile; move the set back into `out/`.
   The `fps=` values of parity runs are meaningless; measure performance in
   normal runs. Do not type while a recording runs (a new run's window takes
-  the focus).
+  the focus). Never edit a driver script while a background run executes
+  it: bash resumes a running script at its old byte offset (a CRLF
+  conversion shifts it too); give each stage its own file.
 - The developer console (§ / ` / F1 in debug builds, README) jumps to any
   place (`goto`). It replaces the Cheater (formerly SELECT + DOWN, i.e.
   Space + Down), whose menu of places, stories and buildings its `cheater`

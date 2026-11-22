@@ -70,19 +70,13 @@ func applyRand(pos, rand):
 func getFade():
 	return ParticleSystem.rand.nextDouble() * fadeRandomMult + fadeRandomAdd
 
-## Draws the particle (inside a beginQuads/end block of the system).
-func drawParticle(g, additiveColoring):
-	var pos = getPosition()
-	if color != null:
-		g.setColor(color.x, color.y, color.z, life * lifeMultiplier)
-	else:
-		g.setColor(rgb[0], rgb[1], rgb[2], life * lifeMultiplier)
-	g.drawCenteredCurrent2D(pos, size)
-
-## Bridge (battle effects, docs/ARCHITECTURE.md): drawParticle without the
-## drawing: the GL colour it sets and the texture coordinate its quad leaves
-## (drawCenteredCurrent2D's last corner), for a system that draws nothing
-## (--hide-particles, Main.hide_particles).
+## Bridge (battle effects, docs/ARCHITECTURE.md section 11): drawParticle
+## (Java: the particle's colour and drawCenteredCurrent2D's quad, inside a
+## beginQuads/end block of the system; removed: closing phase 4.4, plan 9.4)
+## without the drawing: the GL colour it sets and the texture coordinate its
+## quad leaves (drawCenteredCurrent2D's last corner), for a system the GPU
+## draws (EffectParticles3D) or that draws nothing (--hide-particles,
+## Main.hide_particles).
 func place_particle(g):
 	if color != null:
 		g.setColor(color.x, color.y, color.z, life * lifeMultiplier)
@@ -94,7 +88,7 @@ func place_particle(g):
 ## 15): drawParticle in its own beginQuads/end block (the image and slow
 ## systems' draw) without the drawing: the same colour, and the quad
 ## (Graphics.place_centered_current_2d) shown by the PanelQuad of key in the
-## slot of its batch (Utils3D.show_quad); not with --legacy=battle_effect_draw.
+## slot of its batch (Utils3D.show_quad).
 func show_particle(g, key: Array) -> void:
 	var pos = getPosition()
 	if color != null:

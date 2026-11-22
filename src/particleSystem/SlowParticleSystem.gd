@@ -23,10 +23,10 @@ func end(g):
 	pass
 
 ## Bridge (phase 4.4's rollout, part 5, step B, docs/ARCHITECTURE.md section
-## 15): the clock's quad and each hand's are a PanelQuad in the slot of their
-## batch (_drawQuad); the coroutine still starts in the first draw, and the
-## particle's position and life are set as before; --legacy=battle_effect_draw
-## keeps the legacy quads.
+## 15): the clock's quad and each hand's (Java: the particle drawn in a
+## beginQuads/end block of its own) are a PanelQuad in the slot of their batch
+## (Particle.show_particle); the coroutine still starts in the first draw, and
+## the particle's position and life are set as before.
 func draw(g, t = null, pPos = null):
 	if not hasInited:
 		loadGLTextures()
@@ -42,7 +42,7 @@ func draw(g, t = null, pPos = null):
 	p.setPosition(Vector3f.new())
 	bindTexture(g, 0)
 	var l: float = p.getLife()
-	_drawQuad(g, p, &"clock")
+	p.show_particle(g, [get_instance_id(), &"clock"])
 	p.setLife(l + 0.5)
 	g.pop()
 
@@ -51,28 +51,17 @@ func draw(g, t = null, pPos = null):
 
 	g.rotate(hourTheta, 0, 0, 1) # For FPS = 60, angle+=2 for FPS = 30
 	bindTexture(g, 1)
-	_drawQuad(g, p, &"hour")
+	p.show_particle(g, [get_instance_id(), &"hour"])
 	g.pop()
 
 	g.push()
 	g.translate(settings.getVector(AnimSettings.SOURCE))
 	g.rotate(minuteTheta, 0, 0, 1)
 	bindTexture(g, 2)
-	_drawQuad(g, p, &"minute")
+	p.show_particle(g, [get_instance_id(), &"minute"])
 	g.pop()
 
 	p.setLife(l)
-
-## The particle's quad in a beginQuads/end block of its own (Java: inlined in
-## draw); bridge: the PanelQuad of [this system, part] in the slot of its batch
-## (Particle.show_particle) unless --legacy=battle_effect_draw.
-func _drawQuad(g, p, part: StringName) -> void:
-	if Main.is_legacy("battle_effect_draw"):
-		g.beginQuads()
-		p.drawParticle(g, additiveColoring)
-		g.end()
-	else:
-		p.show_particle(g, [get_instance_id(), part])
 
 ## Java: the anonymous Thread of draw (runs as a coroutine, not awaited).
 func _animate() -> void:

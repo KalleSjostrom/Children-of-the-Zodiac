@@ -30,10 +30,8 @@ func setSupport(p_support):
 
 ## Draws the gradient and the lines (every frame: off the screen while the
 ## legend is hidden). Bridge (phase 4.4's rollout, part 3): the gradient is a
-## PanelQuad in its batch's slot (Graphics.place_gradient);
-## --legacy=battle_legend_back keeps the legacy quad. Part 4: the lines are a
-## MenuText node on the UI layer in the frame's 2D order (_show_lines);
-## --legacy=battle_legend_text keeps the legacy text.
+## PanelQuad in its batch's slot (Graphics.place_gradient). Part 4: the lines
+## are a MenuText node on the UI layer in the frame's 2D order (_show_lines).
 func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 	g.loadIdentity()
 	g.setFontSize(40)
@@ -44,41 +42,16 @@ func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 	var xr: float = 0.26 + getXtrans()
 	var ybottom: float = -0.19 # -.145f
 	var ytop: float = 0.4
-	if not Main.is_legacy("battle_legend_back"):
-		Utils3D.show_quad(g, [get_instance_id(), &"back"], g.place_gradient(
-				Vector3f.ZERO, CreatureRow.BACK_ALPHA_TOP, CreatureRow.BACK_ALPHA_BOTTOM,
-				xr, xl, ybottom, ytop, true, true))
-	else:
-		g.drawGradient(
-				Vector3f.ZERO, CreatureRow.BACK_ALPHA_TOP, CreatureRow.BACK_ALPHA_BOTTOM,
-				xr, xl, ybottom, ytop, true, true)
+	Utils3D.show_quad(g, [get_instance_id(), &"back"], g.place_gradient(
+			Vector3f.ZERO, CreatureRow.BACK_ALPHA_TOP, CreatureRow.BACK_ALPHA_BOTTOM,
+			xr, xl, ybottom, ytop, true, true))
 
-	var x: int = int(TEXT_X + super.getXtrans() * 600)
-	if not Main.is_legacy("battle_legend_text"):
-		_show_lines(g, x)
-		return
-
-	g.startText(-1, 0, 24)
-	g.drawMultiString(INFO[0], x, TEXT_HEIGHT)
-	g.drawMultiString(INFO[1], x, TEXT_HEIGHT + STEP)
-	g.drawMultiString(INFO[2], x, TEXT_HEIGHT + 2 * STEP)
-	g.drawMultiString(INFO[3], x, TEXT_HEIGHT + 3 * STEP)
-	g.drawMultiString(INFO[5 if support else 4], x, TEXT_HEIGHT + 4 * STEP)
-	g.drawMultiString(INFO[6], x, TEXT_HEIGHT + 5 * STEP)
-	g.setTextColorAndApply(1, 1)
-	x -= 2
-	var y: int = TEXT_HEIGHT - 2
-	g.drawMultiString(INFO[0], x, y)
-	g.drawMultiString(INFO[1], x, y + STEP)
-	g.drawMultiString(INFO[2], x, y + 2 * STEP)
-	g.drawMultiString(INFO[3], x, y + 3 * STEP)
-	g.drawMultiString(INFO[5 if support else 4], x, y + 4 * STEP)
-	g.drawMultiString(INFO[6], x, y + 5 * STEP)
-	g.finishText()
+	_show_lines(g, int(TEXT_X + super.getXtrans() * 600))
 
 
 ## Bridge (phase 4.4's rollout, part 4, step B, docs/ARCHITECTURE.md section
-## 15): the six lines without the drawing (black at the text alpha, then white
+## 15): the six lines (the Java's drawMultiString calls) without the drawing
+## (black at the text alpha, then white
 ## at alpha 1 two pixels up and to the left, at 24: startText's size, which
 ## replaces draw's 40): the same text state changes in the same order
 ## (startText, setTextColorAndApply, finishText), the lines shown by the
@@ -108,24 +81,14 @@ func _info_index(i: int) -> int:
 
 func drawTopLayer(g: Graphics):
 	g.setColor(1)
-	var x: int = int(IMAGE_X + super.getXtrans() * 200) + AbstractPage.xoffset
-	if not Main.is_legacy("battle_legend"):
-		_show_icons(g, x)
-		return
-	g.drawImage(AbstractPage.getExecuteButtonIcon(), x, IMAGE_HEIGHT)
-	g.drawImage(AbstractPage.BUTTON_ICONS[GameMode.CROSS], x, IMAGE_HEIGHT + STEP)
-	g.drawImage(AbstractPage.BUTTON_ICONS[GameMode.SQUARE], x, IMAGE_HEIGHT + 2 * STEP)
-	g.drawImage(AbstractPage.BUTTON_ICONS[GameMode.CIRCLE], x, IMAGE_HEIGHT + 3 * STEP)
-	g.drawImage(AbstractPage.BUTTON_ICONS[GameMode.L2R2], x, IMAGE_HEIGHT + 4 * STEP)
-	g.drawImage(AbstractPage.BUTTON_ICONS[GameMode.L1R1], x, IMAGE_HEIGHT + 5 * STEP)
+	_show_icons(g, int(IMAGE_X + super.getXtrans() * 200) + AbstractPage.xoffset)
 
 
 ## Bridge (phase 4.4 step B, docs/ARCHITECTURE.md section 15): drawTopLayer's
-## six button icons without the drawing (their binds, Graphics.place_image at
+## six button icons (the Java's drawImage calls) without the drawing (their binds, Graphics.place_image at
 ## 1:1), shown by the frame's next MenuBackground node on the UI layer
 ## (AbstractPage.show_pieces) at the x that slides with the legend (off the
 ## screen at -190 while it is hidden: it is drawn every frame).
-## --legacy=battle_legend keeps the legacy drawing.
 func _show_icons(g: Graphics, x: int) -> void:
 	AbstractPage.show_pieces(g, [
 		g.place_image(AbstractPage.getExecuteButtonIcon(), x, IMAGE_HEIGHT),

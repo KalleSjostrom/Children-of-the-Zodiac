@@ -51,29 +51,10 @@ func initDraw(g: Graphics):
 	createCoords()
 
 
-## Java overloads: draw(Graphics g) (does nothing) and
-## draw(Graphics g, float alpha, int mode) (mode: BattleValues.HASTE, SLOW or
-## anything else for default).
-func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
-	if alpha == null:
-		return
-	var a: float = float(alpha)
-	var mode: int = int(angle) if angle != null else 0
-	drawTex(g, 0, 0)
-	match mode:
-		BattleValues.HASTE:
-			g.setColor(GREEN[0], GREEN[1], GREEN[2], a)
-		BattleValues.SLOW:
-			g.setColor(RED[0], RED[1], RED[2], a)
-		_:
-			g.setColor(color[0], color[1], color[2], a)
-	Utils3D.draw3DPart(g, texture[1].getTexture(), coordList[0], percent, width)
-	g.setColor(1, 1, 1, a)
-	Utils3D.draw3DPart(g, texture[2].getTexture(), coordList[0], percent, width)
-
-
 ## Bridge (phase 4.4's rollout, part 2, step B, docs/ARCHITECTURE.md section
-## 15): draw(g, alpha, mode) without the drawing: the same state changes (the
+## 15): the Java draw(Graphics g, float alpha, int mode) (mode: BattleValues.HASTE,
+## SLOW or anything else for default; removed: closing phase 4.4, plan 9.4)
+## without the drawing: the same state changes (the
 ## binds, the colours, the last texture coordinates) and the bar's three
 ## quads (the empty bar, the fill and the overlay to the percent), each to
 ## the PanelQuad of key [owner, part] in its batch's slot.

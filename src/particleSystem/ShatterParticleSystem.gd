@@ -25,14 +25,10 @@ func draw(g, t = null, pPos = null):
 		hasInited = true
 
 	bindTexture(g, 0)
-	if gpu:
-		show_gpu(g)
+	show_gpu(g)
 	g.beginQuads()
 	for p in particles:
-		# Main.hide_particles (dev) and the GPU path: no quads, the same GL
-		# state (as far as the GPU path's smaller pool gives it).
-		if Main.hide_particles or gpu:
-			p.place_particle(g)
-		else:
-			p.drawParticle(g, additiveColoring)
+		# The GPU system draws them (ParticleSystem.draw): no quads, the same
+		# GL state (as far as the GPU path's smaller pool gives it).
+		p.place_particle(g)
 	g.end()

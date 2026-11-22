@@ -65,15 +65,9 @@ func drawBack(g):
 	yBottom = yTop - d
 
 	# Bridge (phase 4.4's rollout, part 2): a PanelQuad in the gradient's
-	# batch slot (Graphics.place_gradient); --legacy=battle_panels keeps the
-	# legacy quad.
-	if not Main.is_legacy("battle_panels"):
-		Utils3D.show_quad(g, [get_instance_id(), &"back"], g.place_gradient(
-				Vector3f.ZERO, BACK_ALPHA_TOP, BACK_ALPHA_BOTTOM, xRight,
-				xLeft, yBottom, yTop, false, true))
-	else:
-		g.drawGradient(
-				Vector3f.ZERO, BACK_ALPHA_TOP, BACK_ALPHA_BOTTOM, xRight,
-				xLeft, yBottom, yTop, false, true)
+	# batch slot (Graphics.place_gradient: the Java's drawGradient).
+	Utils3D.show_quad(g, [get_instance_id(), &"back"], g.place_gradient(
+			Vector3f.ZERO, BACK_ALPHA_TOP, BACK_ALPHA_BOTTOM, xRight,
+			xLeft, yBottom, yTop, false, true))
 
 	g.setColor(1)

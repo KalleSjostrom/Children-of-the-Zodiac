@@ -21,42 +21,6 @@ static func _draw3D(g: Graphics, tc, x: Array, y: Array, z: Array) -> void:
 	gl.glTexCoord2f(tc.left(), tc.top()); gl.glVertex3f(x[0], y[1], z[1])
 
 
-static func _draw3DPercent(g: Graphics, tc, percent: float, x: Array, y: Array,
-		z: Array, length: float) -> void:
-	var gl := g.getGL()
-	gl.glTexCoord2f(tc.left(), tc.bottom())
-	gl.glVertex3f(x[0], y[0], z[0])
-	gl.glTexCoord2f(tc.right() * percent, tc.bottom())
-	var xs: float = x[0] + length * percent
-	gl.glVertex3f(xs, y[0], z[0])
-	gl.glTexCoord2f(tc.right() * percent, tc.top())
-	gl.glVertex3f(xs, y[1], z[1])
-	gl.glTexCoord2f(tc.left(), tc.top())
-	gl.glVertex3f(x[0], y[1], z[1])
-
-
-static func _draw3DY(g: Graphics, tc, percent: float, x: Array, y: Array, z: Array,
-		length: float) -> void:
-	var gl := g.getGL()
-	var ys: float = y[1] - length * percent
-	gl.glTexCoord2f(tc.left(), tc.bottom() * percent)
-	gl.glVertex3f(x[0], ys, z[0])
-	gl.glTexCoord2f(tc.right(), tc.bottom() * percent)
-	gl.glVertex3f(x[1], ys, z[0])
-	gl.glTexCoord2f(tc.right(), tc.top())
-	gl.glVertex3f(x[1], y[1], z[1])
-	gl.glTexCoord2f(tc.left(), tc.top())
-	gl.glVertex3f(x[0], y[1], z[1])
-
-
-static func _draw3DBackside(g: Graphics, tc, x: Array, y: Array, z: Array) -> void:
-	var gl := g.getGL()
-	gl.glTexCoord2f(tc.right(), tc.top()); gl.glVertex3f(x[0], y[1], z[1])
-	gl.glTexCoord2f(tc.left(), tc.top()); gl.glVertex3f(x[1], y[1], z[1])
-	gl.glTexCoord2f(tc.left(), tc.bottom()); gl.glVertex3f(x[1], y[0], z[0])
-	gl.glTexCoord2f(tc.right(), tc.bottom()); gl.glVertex3f(x[0], y[0], z[0])
-
-
 ## Java overloads:
 ##   draw3D(Graphics g, TextureCoords tc, float[][] coordList)  (no begin/end)
 ##   draw3D(Graphics g, Texture texture, float[][] coordList)   (binds, begin/end)
@@ -100,20 +64,6 @@ static func draw3DwithHW(g: Graphics, tex: GameTexture, x: float, y: float, z: f
 	gl.glEnd()
 
 
-static func draw3DBackside(g: Graphics, tex: GameTexture, coordList: Array) -> void:
-	tex.bind(g)
-	g.beginQuads()
-	_draw3DBackside(g, tex.getImageTexCoords(), coordList[0], coordList[1], coordList[2])
-	g.end()
-
-
-static func draw3DPart(g: Graphics, tex: GameTexture, coordList: Array, percent: float, width: float) -> void:
-	tex.bind(g)
-	g.beginQuads()
-	_draw3DPercent(g, tex.getImageTexCoords(), percent, coordList[0], coordList[1], coordList[2], width)
-	g.end()
-
-
 ## Bridge (phase 4.4's rollout, part 2, step B, docs/ARCHITECTURE.md section
 ## 15): draw3D(g, texture, coordList) without the drawing: the texture's bind
 ## and the quad as its batch would hold it (Graphics.place_quad).
@@ -136,7 +86,8 @@ static func place_3d_coords(g: Graphics, tc, coordList: Array) -> Dictionary:
 				Vector2(tc.right(), tc.top()), Vector2(tc.left(), tc.top())]))
 
 
-## Bridge (phase 4.4's rollout, part 3): draw3DBackside without the drawing:
+## Bridge (phase 4.4's rollout, part 3): draw3DBackside (removed: closing
+## phase 4.4, plan 9.4) without the drawing:
 ## the bind and the quad in the backside's order (the reverse winding: the
 ## material's face culling decides which side shows), as Graphics.place_quad
 ## gives it.
@@ -206,7 +157,8 @@ static func show_triangles(g: Graphics, key: Array, batch: Dictionary) -> void:
 		_last_triangles = {"mark": g.batch_mark(), "node": node, "batch": batch}
 
 
-## Bridge (phase 4.4's rollout, part 2): draw3DPart without the drawing: the
+## Bridge (phase 4.4's rollout, part 2): draw3DPart (removed: closing phase
+## 4.4, plan 9.4) without the drawing: the
 ## bind and the quad to the percent of the width (Graphics.place_quad).
 static func place_3d_part(g: Graphics, tex: GameTexture, coordList: Array, percent: float,
 		width: float) -> Dictionary:
@@ -238,13 +190,6 @@ static func draw2DPart(gl: Graphics, tex: GameTexture, x: int, y: int, height: i
 	gl.glTexCoord2f(tc.left(), tc.bottom())
 	gl.glVertex2i(x, ys)
 	gl.glEnd()
-
-
-static func draw3DPartY(g: Graphics, tex: GameTexture, coordList: Array, percent: float, height: float) -> void:
-	tex.bind(g)
-	g.beginQuads()
-	_draw3DY(g, tex.getImageTexCoords(), percent, coordList[0], coordList[1], coordList[2], height)
-	g.end()
 
 
 static func calcDistance(firstPoint: Array, secondPoint: Array, size: int) -> float:

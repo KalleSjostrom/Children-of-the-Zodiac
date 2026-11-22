@@ -91,5 +91,9 @@ static func processTimers(delta_ms: float) -> void:
 	_timers = keep
 
 
+## Drops every pending task and deterministic timer. Main._exit_tree calls it
+## first: a lambda left in _tasks at quit (a party member's 150 ms hide after
+## an enemy's hit, TimeHideable.hideFor) made Godot segfault at exit.
 static func clear() -> void:
 	_tasks.clear()
+	_timers.clear()

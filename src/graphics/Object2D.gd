@@ -4,7 +4,9 @@ extends TimeHideable
 ## creatures, bars ...). coordList[i] = [[x0, x1], [y0, y1], [z0, z1]].
 ##
 ## Port note: Java's protected draw(g, texIndex, coordIndex[, drawFront])
-## overloads are named drawTex(...) here; draw(g) is the abstract draw.
+## overloads were named drawTex(...) here (removed with the battle's legacy
+## quads: closing phase 4.4, plan 9.4; show_tex is their twin); draw(g) is the
+## abstract draw.
 
 const X := 0
 const Y := 1
@@ -50,17 +52,10 @@ func createCoordFor(bottomLeft: float, topRight: float, index: int, axle: int) -
 	coordList[index][axle][1] = topRight
 
 
-## Java: protected draw(Graphics g, int texIndex, int coordIndex[, boolean drawFront]).
-func drawTex(g: Graphics, texIndex: int, coordIndex: int, drawFront = null) -> void:
-	if texture[texIndex] != null:
-		if drawFront == null or drawFront:
-			Utils3D.draw3D(g, texture[texIndex].getTexture(), coordList[coordIndex])
-		else:
-			Utils3D.draw3DBackside(g, texture[texIndex].getTexture(), coordList[coordIndex])
-
-
 ## Bridge (phase 4.4's rollout, part 3, step B, docs/ARCHITECTURE.md section
-## 15): drawTex without the drawing: the bind and the quad (the front, or the
+## 15): drawTex (Java: protected draw(Graphics g, int texIndex, int
+## coordIndex[, boolean drawFront]): Utils3D.draw3D, or draw3DBackside for
+## the back) without the drawing: the bind and the quad (the front, or the
 ## back in the backside's order) shown by the PanelQuad of key in its batch's
 ## slot (Utils3D.show_quad); nothing when the texture is not loaded.
 func show_tex(g: Graphics, key: Array, texIndex: int, coordIndex: int, drawFront = null) -> void:
