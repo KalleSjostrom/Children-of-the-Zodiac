@@ -133,8 +133,13 @@ law (a new `Particle` subclass, a new `AnimSettings` value that changes
 motion or life) needs the same law in `effect_particle.gdshader` (its
 emitter kind, equation kind or uniform) and in
 `ParticleSystem.gpu_settings`. A system whose class overrides `draw` with
-something that is not particles stays legacy (the sphere, image, slow and
-enemy colour systems: list it in `ParticleSystem._init`'s test).
+something that is not particles is not a GPU system (the sphere, image, slow
+and enemy colour systems: list it in `ParticleSystem._init`'s test); its
+drawing is `PanelQuad` nodes in its batches' slots, through a twin in its
+`draw` (phase 4.4's rollout, part 5: `Particle.show_particle` for a
+particle's quad, `SphereParticle.show_particle` for captured triangles;
+`docs/ARCHITECTURE.md` section 15), so a new one needs such a twin and its
+`--legacy=battle_effect_draw` path.
 
 The legacy system still decides when the battle goes on, with a pool of at
 most 64 particles (`ParticleSystem.reduce_for_waits`). Check a changed

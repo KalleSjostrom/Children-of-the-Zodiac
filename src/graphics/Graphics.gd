@@ -905,6 +905,26 @@ func drawCenteredCurrent2D(pos, width: float, height = null) -> void:
 	glVertex3f(pos.x - hw, pos.y + hh, pos.z)
 
 
+## Bridge (phase 4.4's rollout, part 5, step B, docs/ARCHITECTURE.md section
+## 15): drawCenteredCurrent2D's quad (inside a beginQuads/end block) without
+## the drawing, as place_quad gives it (the last corner's texture coordinate,
+## (0, 0), stays current), for a node that draws it in its batch's slot (an
+## image or slow system's particle: Particle.show_particle).
+func place_centered_current_2d(pos, width: float, height = null) -> Dictionary:
+	var hw: float
+	var hh: float
+	if height == null:
+		hw = width
+		hh = width
+	else:
+		hw = width * 0.5
+		hh = float(height) * 0.5
+	return place_quad(
+			PackedVector3Array([Vector3(pos.x - hw, pos.y - hh, pos.z), Vector3(pos.x + hw, pos.y - hh, pos.z),
+				Vector3(pos.x + hw, pos.y + hh, pos.z), Vector3(pos.x - hw, pos.y + hh, pos.z)]),
+			PackedVector2Array([Vector2(0, 1), Vector2(1, 1), Vector2(1, 0), Vector2(0, 0)]))
+
+
 func rotate(angle: float, x: float, y: float, z: float) -> void:
 	glRotatef(angle, x, y, z)
 

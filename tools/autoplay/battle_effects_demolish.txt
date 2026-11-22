@@ -1,0 +1,56 @@
+# Phase 4.4's rollout, part 5 (the card effects that are not particles):
+# Demolish's lit spheres frame by frame, levels 1, 2 and 3 (one, two and three
+# rings of four spheres; consecutive spheres share a batch up to 60,000
+# vertices) on a floor (--load="Slot 1" --start="Berca Desert--South-mark0"
+# --start-node=20:3: Ogre, Ogre; steps until the battle as battle_texts): the
+# effect in the SubViewport after the legend's lines, lit by the light state
+# the frame ends with. God mode; at each of three party turns the console
+# heals the enemies and casts Demolish at the next level, shot every frame
+# until the animation ends (a_#, b_#, c_#).
+wait 3000
+console god on
+mark
+tap UP
+wait 700
+tap DOWN
+wait 700
+loopuntil sub=battle 90000
+mark
+wait 100
+loopuntil battlemode=1 30000
+log turn1
+console heal 100000 enemies
+console cast Demolish:1
+log cast1
+mark
+wait 16
+shot a_#
+loopuntil !battlemode=4 6000
+log done1
+mark
+tap CROSS
+wait 600
+loopuntil battlemode=1 40000
+log turn2
+console heal 100000 enemies
+console cast Demolish:2
+log cast2
+mark
+wait 16
+shot b_#
+loopuntil !battlemode=4 6000
+log done2
+mark
+tap CROSS
+wait 600
+loopuntil battlemode=1 40000
+log turn3
+console heal 100000 enemies
+console cast Demolish:3
+log cast3
+mark
+wait 16
+shot c_#
+loopuntil !battlemode=4 6000
+log done3
+quit

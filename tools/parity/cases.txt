@@ -733,3 +733,17 @@ battle_deck_init         battle_deck_init         --load="Slot 1" --start="Grive
 # "Critical Hit!", "Shuffle", support numbers, several texts at once, the
 # deck's and the legend's lines sliding) were in the cases above.
 battle_texts             battle_texts             --load="Slot 1" --start="Berca Desert--South-mark0" --start-node=20:3
+# Phase 4.4's rollout, part 5 (the card effects that are not particles,
+# recorded on the unconverted code), each shot every frame from the cast to
+# the end of its animation: Death 1 (its image fading in, its four flips, the
+# fade to 0) and Slow 1 (the clock and its hands turning) on Berca's Ogres;
+# Demolish 1, 2 and 3 there (one to three rings of spheres: their batches of
+# up to three spheres, lit by the floor's light state); Salmonman's Chrono (his
+# first attack: the Slow clock from an enemy's attack frame, in the floor's
+# scene chunk); Demolish 1 and Slow 1 in Serphia's battle area. God mode;
+# effects_magic_4/5, effects_area_2, battle_panels and boss had them every
+# 250 ms or not at all.
+battle_effects_image     battle_effects_image     --load="Slot 1" --start="Berca Desert--South-mark0" --start-node=20:3
+battle_effects_demolish  battle_effects_demolish  --load="Slot 1" --start="Berca Desert--South-mark0" --start-node=20:3
+battle_effects_chrono    battle_effects_chrono    --load="Slot 1" --start="Grivera--Corridor of Agony-mark0"
+battle_effects_area      battle_effects_area      --load="Slot 1" --start=Serphia

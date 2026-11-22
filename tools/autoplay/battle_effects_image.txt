@@ -1,0 +1,46 @@
+# Phase 4.4's rollout, part 5 (the card effects that are not particles): Death's
+# and Slow's images frame by frame (--load="Slot 1" --start="Berca
+# Desert--South-mark0" --start-node=20:3: Ogre, Ogre). Steps until the battle
+# (as battle_texts); god mode. At the first party turn the console heals the
+# enemies and casts Death 1 on an Ogre (ImageParticleSystem: the image fading
+# in, its four flips between the two eyes' images, the hit, the fade to 0),
+# shot every frame until the animation ends (d_#); at the next party turn
+# Slow 1 (SlowParticleSystem: the clock and its hands turning, fading in and
+# out), every frame (s_#).
+wait 3000
+console god on
+mark
+tap UP
+wait 700
+tap DOWN
+wait 700
+loopuntil sub=battle 90000
+mark
+wait 100
+loopuntil battlemode=1 30000
+log turn1
+console heal 100000 enemies
+console cast Death:1
+log cast_death
+mark
+wait 16
+shot d_#
+loopuntil !battlemode=4 6000
+log death_done
+mark
+tap CROSS
+wait 600
+loopuntil !battlemode=5 15000
+mark
+wait 100
+loopuntil battlemode=1 40000
+log turn2
+console heal 100000 enemies
+console cast Slow:1
+log cast_slow
+mark
+wait 16
+shot s_#
+loopuntil !battlemode=4 6000
+log slow_done
+quit

@@ -90,6 +90,19 @@ func place_particle(g):
 		g.setColor(rgb[0], rgb[1], rgb[2], life * lifeMultiplier)
 	g.glTexCoord2f(0, 0)
 
+## Bridge (phase 4.4's rollout, part 5, step B, docs/ARCHITECTURE.md section
+## 15): drawParticle in its own beginQuads/end block (the image and slow
+## systems' draw) without the drawing: the same colour, and the quad
+## (Graphics.place_centered_current_2d) shown by the PanelQuad of key in the
+## slot of its batch (Utils3D.show_quad); not with --legacy=battle_effect_draw.
+func show_particle(g, key: Array) -> void:
+	var pos = getPosition()
+	if color != null:
+		g.setColor(color.x, color.y, color.z, life * lifeMultiplier)
+	else:
+		g.setColor(rgb[0], rgb[1], rgb[2], life * lifeMultiplier)
+	Utils3D.show_quad(g, key, g.place_centered_current_2d(pos, size))
+
 func setLifeMultiplier(lm):
 	lifeMultiplier = lm
 

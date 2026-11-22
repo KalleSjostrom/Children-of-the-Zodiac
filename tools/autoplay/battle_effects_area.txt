@@ -1,0 +1,38 @@
+# Phase 4.4's rollout, part 5 (the card effects that are not particles): the
+# effects in a battle area of its own (--load="Slot 1" --start=Serphia:
+# BossBattleArea, all of its battle 3D in SubViewport chunks, and no light
+# enabled when its frames end: Demolish's spheres, lit by that state, are
+# almost black there). As effects_area.txt: god mode, CROSS pages the boss's
+# words until the party's first turn; then the console casts Demolish 1, shot
+# every frame until the animation ends (a_#), and at the next party turn Slow
+# 1, every frame (b_#).
+wait 4000
+console god on
+mark
+tap CROSS
+wait 500
+loopuntil battlemode=1 30000
+log turn1
+console heal 100000 enemies
+console cast Demolish:1
+log cast1
+mark
+wait 16
+shot a_#
+loopuntil !battlemode=4 6000
+log done1
+mark
+tap CROSS
+wait 400
+loopuntil battlemode=1 40000
+log turn2
+console heal 100000 enemies
+console cast Slow:1
+log cast2
+mark
+wait 16
+shot b_#
+loopuntil !battlemode=4 6000
+log done2
+wait 300
+quit

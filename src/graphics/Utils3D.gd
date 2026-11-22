@@ -8,6 +8,9 @@ extends RefCounted
 ## merge).
 const QUAD_NODE := preload("res://scenes/battle/PanelQuad.tscn")
 static var _last_quad := {}
+## Bridge (part 5): the node of a legacy batch of triangles (show_triangles)
+## shown last, with its batch and batch mark (a merge).
+static var _last_triangles := {}
 
 
 static func _draw3D(g: Graphics, tc, x: Array, y: Array, z: Array) -> void:
@@ -175,6 +178,32 @@ static func show_quad(g: Graphics, key: Array, quad: Dictionary) -> void:
 	if node != null:
 		node.show_quads(quad.mat, quad.v, quad.uv, quad.c, quad.n)
 		_last_quad = {"mark": g.batch_mark(), "node": node, "quad": quad}
+
+
+## Bridge (phase 4.4's rollout, part 5, step B, docs/ARCHITECTURE.md section
+## 15): show_quad for a batch of triangles (Graphics.end_capture_3d's: one
+## captured primitive, Demolish's sphere), shown by the PanelQuad of key in
+## the slot of its batch. Triangles of the same material right after the last
+## ones shown, with nothing drawn in the chunk in between, merge into their
+## batch while it stays under GLBackend.MAX_SURFACE_VERTS vertices (as
+## Chunk3D.add_triangles merges them: three spheres a batch): they are
+## appended to that node's batch, whose mesh is built once at the end of the
+## frame's processing (PanelQuad.queue_triangles). Nothing is shown in 2D.
+static func show_triangles(g: Graphics, key: Array, batch: Dictionary) -> void:
+	var mark: Array = g.batch_mark()
+	if not mark.is_empty() and _last_triangles.get("mark") == mark \
+			and _last_triangles.batch.mat == batch.mat \
+			and _last_triangles.batch.v.size() + batch.v.size() < GLBackend.MAX_SURFACE_VERTS:
+		var last: Dictionary = _last_triangles.batch
+		last.v.append_array(batch.v)
+		last.uv.append_array(batch.uv)
+		last.c.append_array(batch.c)
+		last.n.append_array(batch.n)
+		return
+	var node: PanelQuad = g.show_node(key, func() -> GeometryInstance3D: return QUAD_NODE.instantiate()) as PanelQuad
+	if node != null:
+		node.queue_triangles(batch)
+		_last_triangles = {"mark": g.batch_mark(), "node": node, "batch": batch}
 
 
 ## Bridge (phase 4.4's rollout, part 2): draw3DPart without the drawing: the

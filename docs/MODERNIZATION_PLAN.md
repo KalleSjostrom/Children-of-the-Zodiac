@@ -5102,6 +5102,295 @@ systems):
   `Battle.tscn` under the rig and the decision on the texts' order (the
   weather's front pass, now under the battle, is part of that decision).
 
+**Results of the rollout, part 5 (phase 4.4, `docs/phase4_4_rollout5_prompt.md`;
+conventions in docs/ARCHITECTURE.md section 15, "The card effects that are
+not particles").** Demolish's spheres, Death's image and Slow's clock and
+hands through step B: a `PanelQuad` per legacy batch in its chunk and slot
+(the spheres' triangles captured from the legacy `gluSphere`, merged three to
+a batch as before); the legacy systems keep the particles, the coroutines and
+the waits.
+
+* **Baseline** (on 54221fca): `tools/check.sh` 0 failed (499 scripts); the
+  441 cases (`p0base`, 9,787 shots) identical to part 4's `t2node` shot for
+  shot and log for log, with the same script errors (3), errors (2,421) and
+  exit leak lines (12) in every case; only 16 audio-device lines (WASAPI) in
+  8 cases. Recorded from a project copy with 3 jobs (32 minutes at 5.4 GB
+  free).
+* **Facts** (deliverable 1; a headless probe over the 40 battle cases and the
+  four new ones, in every frame where a packet holds a sphere, image, slow or
+  enemy colour system: each 3D batch, node and slot of the battle's drawing
+  with its chunk, index and merge, and for the effects' batches their render
+  state and vertex counts; each system's state (its delay, particles, life,
+  image, the hands' angles, the spheres' depth, the coroutine's step); the GL
+  state at `Animation.draw`'s start, around each packet's `start` and `end`
+  and before the attack texts; the global lights and material at the frame's
+  end; per update the waits (destroyed, the hit, `isReady`, `isDead`, the
+  removal); 1,442 effect frames in nine cases), where they add to or differ from the
+  prompt and the entry above:
+  * Where: on a floor the effects are the first batches of the SubViewport
+    after the legend's lines (composited on UI), in Serphia's area of the
+    SubViewport after them; after them Animation's attack texts (a UI node:
+    the chunk ends) or, in frames without one, the weather's front pass and
+    the minimap in the same SubViewport. Nothing merges into an effect's batch
+    and an effect's batch merges only into the sphere batch before it.
+  * Not only `Animation.draw`: an enemy's attack frame plays a card's packet
+    (`AttackInfo.getCardSystem`) in `BattleEnemy.draw`, right after the
+    enemy's node: Salmonman's and Memory Salmonman's first attack, Chrono
+    (their scripts' first list), and Menthu's "Salmonman's Distortion" (two
+    packets) play Slow's, at size .4 at the attack's card source + (0, 0, .5);
+    on a floor in the scene chunk (the floor's world: its depth and linear
+    blending), before the attack background's node, with the alpha test the
+    frame left (`GREATER .1`) and Salmonman's colour (.7) and texture bound
+    before it. No old case reaches his first turn (the entry above: "none was
+    met"). `BlackDeath` (an image system) is in no enemy's data;
+    `SerphiaDeath` is particles (GPU).
+  * Demolish: 4, 8 or 12 systems of one particle (level 1 to 3), a ring's
+    spheres 230 ms apart; all vanish at once when the packet is destroyed
+    (`SphereParticleSystem.update` kills them); 101 frames drawn a cast. Each
+    sphere is 15,000 vertices (2,500 quads), so three share a batch (a fourth
+    would make 60,000, not below `MAX_SURFACE_VERTS`): 1 to 4 batches a frame
+    (level 1: 3 + 1; level 3: 3 + 3 + 3 + 3), in drawing order (ring by ring).
+    Render state: lit, untextured, not additive, not opaque, depth test and
+    write on, back faces culled, `GREATER 0`, no fog on the probed places
+    (Berca, the Hall of Memories, Serphia's area); colour black (a lit vertex
+    takes the material's). `start` pushes the matrix (its stack 1 → 2 on a
+    floor: the labyrinth's push; 0 → 1 in a boss area) and the lighting
+    attributes (0 → 1), turns the texture and lights 0 and 1 off, lighting
+    and light 2 on (at (0, 2, 0) in eye space: the modelview is the identity),
+    sets the purple material; `end` pops both: the colour white, the texture
+    on, lighting off and the place's lights and material again. The attack
+    texts start from white, `GREATER 0`, `ONE_MINUS_SRC_ALPHA`, the depth
+    mask on, the legend's texture bound and the last sphere vertex's normal
+    (glPopAttrib's lighting bit has no normal, as in GL).
+  * The light state the spheres are rendered with (the global shader
+    parameters at the frame's end): on Berca's floor lights 0 (at the eye,
+    ambient and diffuse .8, attenuation 1, .01, .01) and 1 (ambient 1, no
+    direction), material ambient and diffuse .7, emission .1: the spheres
+    clamp to flat white discs; in the Hall of Memories light 0 alone
+    (ambient and diffuse 1), material ambient .8, diffuse .7: near white; in
+    Serphia's area no light enabled (light 2's values left in the first slot,
+    switched off) and GL's default material (ambient .2, diffuse .8): .04,
+    flat near-black discs. Never light 2 and the purple material; no
+    highlight (GLBackend has no specular term).
+  * Death: one quad (size .7 at (0, 0, −4)), its own batch, textured
+    (`death0`–`2.png`), unlit, depth test and write on, culled, `GREATER 0`,
+    white at its life; 149 frames: its first frame at life .05 (the
+    coroutine's first step runs inside the draw, before its first await),
+    image 0 while it fades in (19 frames, to .5) and for 500 ms, then image 1
+    (180 ms) and 2 (100 ms) four times and image 1 (180 ms): 75 frames of
+    image 1, 24 of image 2; `plainDestroy` 2,133 ms after the first draw (game
+    time); the hit and the next card (`isReady`) in the next frame's update;
+    the life falls from .5 to 0 in about 20 frames (the coroutine's .025 every
+    30 ms and the destroy fade of the particle's update together), then
+    `isDead` removes the packet. It leaves its image bound, the colour at its
+    life and the texture coordinate (0, 0).
+  * Slow: three quads, three batches (`clock.png`, `clockHour.png`,
+    `clockMinute.png`) in Death's render state (the enemy's: `GREATER .1`, in
+    the scene chunk); the clock at the particle's life, the hands at the
+    life + .5 (the prompt had the clock at the life + .5); the hour hand 2
+    and the minute hand 24 degrees a 30 Hz step (every other frame); 87
+    frames, `plainDestroy` 1,083 ms after the first draw, the fade out about
+    20 frames. It leaves the minute hand's texture and the colour at the
+    life + .5.
+  * Elements (`EnemySystem`): no probed frame (unreachable, as known).
+  * The waits: Death's and Slow's by their coroutines (game time), Demolish's
+    by its particles; the twins start the coroutines in the same draw, so the
+    waits do not depend on the flag (the frames are identical, below).
+* **Coverage.** The probe over the old cases: Demolish 3 in `effects_magic_4`
+  (6 of 103 effect frames shot) and `effects_area_2` (7 of 105), Death 3 and
+  Slow 3 in `effects_magic_5` (13 of 236), Slow in `battle_panels` (83 frames)
+  and `boss` (89), no shot; never Demolish 1 or 2, an image flip or a hand's
+  turn frame by frame, an effect's last frames, an enemy's Slow. Four new
+  cases (1,681 shots), each shot every frame from the cast to the end of its
+  animation: `battle_effects_image` (Death 1 and Slow 1 on Berca's Ogres: 236
+  effect frames, all shot), `battle_effects_demolish` (Demolish 1, 2 and 3
+  there: 313, all shot), `battle_effects_chrono` (Salmonman's Chrono: 87, all
+  shot) and `battle_effects_area` (Demolish 1 and Slow 1 in Serphia's area:
+  190, all shot). No new console command. Timed with headless probe runs
+  first. The new cases recorded twice on the unconverted code: identical
+  (1,681 shots, logs, error lines; four exit leak lines each, in
+  `battle_effects_demolish` and `battle_effects_area`, as the `effects_*`
+  cases' cast cards). The golden `p1gold`: the baseline and the new cases
+  (445 cases, 11,468 shots).
+* **Built** (ARCHITECTURE section 15): no new scene: `PanelQuad.show_triangles`
+  (a batch of triangles; `show_quads` builds on it) and `queue_triangles` (a
+  batch that merged spheres still extend: its mesh built once, at the end of
+  the frame's processing); the bridges
+  `Graphics.place_centered_current_2d` (drawCenteredCurrent2D's quad),
+  `Utils3D.show_triangles` (`show_quad`'s merge rule with the 60,000-vertex
+  limit), `Particle.show_particle` and `SphereParticle.show_particle` (the
+  sphere through `begin_capture_3d` / `end_capture_3d`, as the minimap's
+  dev path); the twins in `SphereParticleSystem.draw`,
+  `ImageParticleSystem.draw` and `SlowParticleSystem.draw` (`_drawQuad`);
+  flag `--legacy=battle_effect_draw` (one for the three kinds).
+* **Parity** (tolerance 0 everywhere; node run `p2node`, 445 cases, 11,468
+  shots, on the code before the spheres' mesh was built once a frame, and
+  `p3node` on the final code (below); "the battle cases": the 44 that draw a
+  battle, 4,542 shots): golden (`p1gold`) vs. node: 11,468 of 11,468 shots
+  identical, all 445 logs identical, the same script errors (3), errors
+  (2,421) and exit leak lines (16) in every case (only audio-device lines
+  differ: 16 vs. 0); `--legacy=battle_effect_draw` vs. the node run and vs.
+  the golden on the battle cases: 4,542 of 4,542 each, logs and error lines
+  identical; all thirteen phase 4.4 flags (`battle_effect_draw` and part 4's
+  twelve) vs. the golden on every case: 11,468 of 11,468, logs and error
+  lines identical, and vs. the node run on the battle cases: 4,542 of 4,542;
+  with `--legacy=battle_effects` added, vs. a golden with it (`p1goldfx`), on
+  the battle cases: 4,542 of 4,542; the new cases recorded twice: 1,681 of
+  1,681. Every run of the parity sets exited 0. No difference had to be
+  explained: the first node run (a smoke set of the nine cases that draw
+  these effects, 2,305 shots) was already identical.
+* **No legacy drawing left:** a run of the 44 battle cases (headless) with
+  counters in `Graphics._emitTriangles` and `show_node` while a sphere, image
+  or slow system draws: flag off 1,442 effect frames, 298 image nodes, 1,560
+  clock and hand nodes, 3,107 spheres captured and shown by 1,148 nodes (the
+  rest merged), no legacy 3D or 2D emission; with the flag no node and no
+  capture, and 298 + 1,560 + 3,107 legacy emissions in the same frames.
+* **Final code** (the spheres' mesh built once a frame, below): node run
+  `p3node` vs. the golden: 11,468 of 11,468 shots, all logs and per-case
+  error and leak lines identical, and identical to `p2node`; the counters
+  again: the same 1,148 sphere nodes for 3,107 spheres, no legacy emission
+  with the flag off, the same legacy emissions with it.
+* **Frame rate.** Demolish 3 stalls the game in both paths: its 12 spheres
+  are 180,000 vertices a frame built in GDScript (`gluSphere`, then the
+  vertices' transform), about 42 ms of each frame on Berca's floor and 21
+  ms in Serphia's area. The first node code rebuilt a node's mesh for each
+  sphere merged into it (15,000, 30,000 and 45,000 vertices for a batch of
+  three, against one 45,000 build of the bridge's batch): measured frame by
+  frame in seeded, uncapped windowed runs of `battle_effects_demolish`
+  (identical frames with and without the flag), the effects' draw took 47.9
+  ms against 42.1 (medians), the frame interval 54.3 against 51.7 ms. Since
+  `PanelQuad.queue_triangles` builds the mesh once a frame: draw 42.5 vs.
+  42.4 ms, interval 52.2 vs. 52.0 ms (means 60.1 vs. 60.2) on the floor;
+  21.4 vs. 21.5 and 28.3 vs. 28.2 in Serphia's area (`battle_effects_area`);
+  Death and Slow about 0.1 ms either way. Normal runs (no `--seed`,
+  windowed, one at a time, the shipped saves; Memory Taur's floor for
+  Demolish 3, Death 3 and Slow 3, Serphia's area for Demolish 3; `fps=`, a
+  one-second average, 1.3 s after each cast; legacy
+  `--legacy=battle_effect_draw` → node, final code): capped 60 → 60 at a
+  party turn and during Death and Slow; Demolish 3 10–43 → 13–48 on the floor
+  (medians 36 → 20), 18–48 → 10–50 in the boss area (28 → 20); uncapped
+  turn 292 → 310 (boss 372 → 424), Death 286 → 311, Slow 280 → 301, Demolish
+  3 11–141 → 11–189 (floor), 11–256 → 10–259 (boss area). The Demolish
+  samples spread over the whole range in both paths (where the one-second
+  window falls on the spheres): they cannot tell the paths apart, the
+  frame-by-frame times do (equal). The stall is the legacy sphere geometry
+  (step C: a `SphereMesh`, or the sphere built once and transformed).
+* **Still legacy** in the battle's 3D: the party's red screen (never
+  visible) and the flags' legacy paths; the effects' state, particles,
+  coroutines and waits (step C). The enemy colour system draws nothing.
+* **Found on the way:** an enemy's attack frame plays a card's effect
+  (Salmonman's Chrono: Slow's clock in the floor's scene chunk; above). The
+  game segfaults on quit while a `Scheduler.after` callback is pending: the
+  party members' 150 ms hide after an enemy's attack on all
+  (`TimeHideable.hideFor`: a lambda in the static `Scheduler._tasks`) when the
+  quit comes in the frame the enemy's turn ends: `battle_effects_chrono`'s
+  first script quit there and crashed in 7 of 7 runs, headless, on the
+  unconverted code too; quitting 200 ms or more later, or at the party's
+  turn, exited 0, and so did 3 of 3 runs that cleared the pending tasks at
+  the start of `Main._exit_tree` (4 tasks pending). Part 4's unexplained
+  crash at exit (a frame-rate run that quit during the enemies' turns) fits
+  it. Not fixed here (not this part's; proposed below); the case waits 300
+  ms before it quits. Demolish's spheres look as the probe says (white discs
+  on Berca, near-black ones in Serphia's area): the original's dark purple
+  spheres with a white highlight (light 2, the material, the specular term)
+  are a look change for step C (decisions 2 and 8).
+
+**Prepared after part 5 (2026-11-20): the closing of phase 4.4.** With the
+flags off nothing of a battle is drawn through the 3D bridge but the party's
+red screen, which never shows; what the closing needs, so that it can be its
+own prompt:
+
+* **The minimap's node as the default (8.4).** `--minimap-node` vs. this
+  part's node run on the 44 battle cases: 4,542 of 4,542 shots identical,
+  logs and error lines too (as since part 1; every battle batch drawn before
+  the minimap is a node or a GPU system now); the floor frames were drawn to
+  the bit already (8.3). The closing should check every labyrinth case with
+  it before the switch. The node is
+  `MapRenderer.show_map`: the legacy drawing runs with its primitives
+  captured, one `MinimapPart` per batch in its slot. Making it the default:
+  `Labyrinth.draw` calls `show_map` (drop `Main.minimap_node` and
+  `--minimap-node`); keep the legacy `draw` call behind a flag
+  (`--legacy=minimap`) for the closing's parity, or compare against this
+  part's node run, which drew the minimap through the bridge. A minimap that
+  builds its disks, compass, cells and arrow from the state (8.4) is later
+  work (step C or phase 5).
+* **The party's red screen** (`Character3D.draw` while a critical hit hides a
+  party member: `loadIdentity`, `setImageColor(.7, 0, 0, .5)`, `drawImage` of
+  a 1024 × 768 white image under the 3D projection at z 0, behind the near
+  plane; by reading, the row's later party members are then drawn at z 0,
+  also behind it, for the 150 ms). Reachable: Stitchmen and Trolls have a
+  critical chance of 5 (no case shows one). The user decides:
+  * keep it as the legacy batch: nothing to build; the closing keeps
+    `drawImage`'s 3D path and the bridge's battle chunk for it until phase 5;
+  * a node: a twin (`loadIdentity`, the colour, the image's bind, the quad
+    through the modelview: `Graphics.place_image`'s corners as
+    `place_quad` gives them) and a `PanelQuad` in its slot; a case with a
+    critical hit on the party (a seeded route with Stitchmen, or a dev
+    console command) to cover the twin, though no pixel can show;
+  * drop the drawing: delete the `setImageColor` and `drawImage` but keep
+    the `loadIdentity` (it decides where the later members are drawn) and
+    check that the colour the next drawing starts from is set by it anyway
+    (probe); identical frames by construction. Showing the red screen as
+    the Java meant it (a red flash over the battle, like the enemy's, a Fade
+    node) is a look change (decision 8).
+* **The flags and the legacy drawing the closing removes:** every phase 4.4
+  name (`battle_screens`, `battle_flash`, `battle_legend`, `battle_enemy`,
+  `battle_panels`, `battle_deck`, `battle_legend_back`, `battle_attack_name`,
+  `battle_deck_text`, `battle_legend_text`, `battle_attack_text`,
+  `battle_enemy_quads`, `battle_effect_draw`) with its legacy branch
+  (`ResultScreen.drawResult`'s and `SpoilsScreen.drawSpoils`' drawing, the
+  flash's `fadeOldSchoolColorWhite`, `Legend.drawTopLayer`'s icons,
+  `BattleEnemy.drawSlice` and its `drawTex`, the panels', the deck's, the
+  hand's and the legend's quads, the texts' `drawWithShadow`,
+  `drawMultiString` and `draw3DText` drawing, `AttackBackground`'s and
+  `EnemyCard`'s `drawTex`, the effects' `drawParticle` blocks), and the
+  effects' `battle_effects` (the legacy simulation's quads:
+  `ParticleSystem.draw`'s `drawParticle` path, `ShatterParticleSystem`'s,
+  the Flame's pre-run; `gpu_path()` always true) and `effect_waits` (dev:
+  the whole legacy pool; `reduce_for_waits` always applies). Helpers that
+  then lose their last caller (grep each first: "Callers that cannot run",
+  12): `AbstractCard.drawCard`, `LevelUpBar.draw` and drawImage's percent
+  part, `Graphics.drawValueWithShadow`, `fadeOldSchoolColorWhite`,
+  `drawWithShadow` (also `Clock.draw`, which nothing calls),
+  `AttackText.draw3DText`, `BattleEnemy.drawSlice`, `Particle.drawParticle`
+  (the image and slow systems; the village systems have their own) and
+  `SphereParticle.drawParticle`, `Utils3D.draw3DPart`, `draw3DBackside`,
+  `Object2D.drawTex` where only battle quads call it (`ScrollBar.gd`, the
+  unused `BattleScrollBar`, too); `--hide-particles` keeps its meaning (the
+  GPU systems). `Graphics.gluSphere` stays (the spheres' twin captures it).
+  The closing's dead code: `Clock.gd` (no caller), `SwordBackground` (never
+  drawn), `BattleScrollBar`.
+* **What the closing's parity needs:** a golden on the code before it (this
+  part's final node run is one: `p3node`, 445 cases), the closing's run vs. it on
+  every case (identical at tolerance 0, logs and per-case error and leak
+  lines); every removed name on the battle cases behaves as no flag (a removed
+  name is ignored, 12); with `battle_effects` and `effect_waits` gone there is
+  no legacy-effects comparison any more (`--hide-particles` still hides the
+  GPU systems); if the minimap's node becomes the default in the same
+  change, its golden is the `--minimap-node` run of the code before it.
+  The exit crash (above) should be fixed first, as its own listed change
+  (clear `Scheduler`'s tasks and timers at the start of `Main._exit_tree`;
+  no frame changes; check every case's exit code).
+* **What step C of the battle needs decided** (after the closing): decision
+  3 (when: right after the closing, or after every mode is on scenes) and
+  decision 6 (the battle's per-update motion: the slides at 0.1 an update,
+  the cards' moves and turns, the slots' flips, the texts' life, the
+  effects' coroutines and 30 Hz steps: the original's speed as per-second
+  rates, or today's); decision 8 with decision 2: `Battle.tscn` under the
+  camera rig puts all of the battle's 3D under every text (today the hand,
+  the legend's gradient, the effects and the minimap are drawn over the
+  texts before them), a boss area needs a camera of its own (its
+  SubViewports' sRGB compositing), the weather's front pass is under the
+  battle since P2 (over it as the Java drew it, or as now), Demolish's
+  spheres' look (GLBackend's flat discs or the original's lit purple
+  spheres), and the info texture, the cards and the texts as Godot nodes
+  (Label3D, theme fonts) instead of the legacy pixels.
+* **Recommended next:** the closing of 4.4 as its own prompt (the exit-crash
+  fix first, then the minimap's node, the red screen as decided, the flags
+  and the legacy drawing), then step C of the battle once decisions 3, 6 and
+  8 are made, or phase 4.3 (the input wrapper that step C needs). Size of the
+  closing: M (mostly deletions, one full parity run before and after).
+
 ## 10. Phase 5: remove the emulation
 
 When no mode draws through `g` any more:
@@ -5331,7 +5620,10 @@ When no mode draws through `g` any more:
   slots, weapon slots of one image) and, depending on the state, across two
   cards (their backs when the second is gray and both turn: a gray card
   draws its back first). One shared helper keeps every merge
-  (`Utils3D.show_quad`); the twins need not know their neighbours.
+  (`Utils3D.show_quad`); the twins need not know their neighbours. *Part 5
+  (the effects):* a merge also stops at `MAX_SURFACE_VERTS` (60,000
+  vertices): Demolish's spheres (15,000 each) share a batch three at a time,
+  and the helper for triangles (`Utils3D.show_triangles`) keeps the limit.
 * **A UI node lifts what follows it** (phase 4.4's rollout, part 4). A node
   of `show_ui` among 3D chunks raises the frame's level, so every later
   chunk is composited on the UI layer, not only the node's own drawing. It
@@ -5345,6 +5637,18 @@ When no mode draws through `g` any more:
   frame ends (Demolish's spheres) is lit by the popped state, not by its own.
   A node with GLBackend's material keeps that; a node with its own uniforms
   (or `Battle.tscn` with Godot lights) changes the look (decision 2).
+  *Part 5:* the spheres' nodes keep it (identical frames): white discs on
+  Berca's floor, near-black ones in Serphia's area (no light enabled when its
+  frames end); light 2 never lights anything.
+* **Pending callbacks at quit** (phase 4.4's rollout, part 5). A lambda left
+  in the static `Scheduler._tasks` when the game quits (the party members'
+  150 ms hide after an enemy's hit, `TimeHideable.hideFor`) makes Godot
+  segfault at exit, after every frame was drawn (a script that quit in the
+  frame Salmonman's turn ended: 7 of 7 runs; 0 of 3 with the tasks cleared
+  first). A case or a frame-rate script that quits during a battle's enemy
+  turn can crash at random (part 4's one crash in 13 runs). Until it is
+  fixed, let scripts quit outside such windows and check every run's exit
+  code.
 * **Plan facts about the frame go stale** (phase 4.4's rollout, part 4). The
   plan had the GPU weather's front pass over a battle's texts; since P2 it is
   in the floor's world under the battle whenever battle text came first (its
@@ -5368,7 +5672,13 @@ When no mode draws through `g` any more:
    sky in both paths (7.8).* The Godot-lights variant was not tried.
    *Phase 4.4's rollout:* the walls' surfaces are drawn in a fixed order
    (one instance each; 9.4, decided by the user): where two overlap the
-   pixels no longer change with the rest of the frame (1/255).
+   pixels no longer change with the rest of the frame (1/255). *Part 5:*
+   Demolish's spheres keep GLBackend's look, lit by the light state the
+   frame ends with (flat white or near-black discs, 9.4); the original's
+   dark purple spheres with a white highlight (light 2 above the camera, a
+   diffuse (.2, 0, .2) and specular 1 material, shininess 100) need that
+   light, the material and a specular term in the shader (or a `SphereMesh`
+   with a Godot light): a look change, with decision 8.
 3. **Step C timing:** accept changes in movement and collision feel (and fix
    the speed TODOs) right after step B, or only after every mode is on
    scenes.
@@ -5436,7 +5746,11 @@ When no mode draws through `g` any more:
    hand (part 3):* the slides (0.1 per update), the cards' moves and turns
    (`updatePos`, per update), the slots' flips (stepped in their draw) stay
    legacy; the nodes mirror them each frame. The plan's "Tweens for flip and
-   move" are step C.
+   move" are step C. *Nor for the texts (part 4) and the effects that are
+   not particles (part 5):* the attack name's slide (per draw), the texts'
+   life (per update), the image and slow systems' coroutines (`Scheduler`
+   game time) and the clock's hands (per 30 Hz step) stay legacy; the nodes
+   mirror them each frame.
 7. **Village top layer** (from the pilot, 6.7): *decided (phase 1
    rollout):* roofs and treetops are always drawn (6.1, the pilot's
    default). The legacy rule draws a piece only where a sprite overlaps it,
@@ -5451,9 +5765,10 @@ When no mode draws through `g` any more:
    legacy look so that parity holds. Each is a theme or scene edit now.
    Open (the rollout kept the legacy look too, and so did phase 4.1, 4.2's
    pilot, the menu, the stores, the mini-games and 4.4's pilot and its
-   rollout's first four parts: the info texture is still the legacy Image,
+   rollout's five parts: the info texture is still the legacy Image,
    the cards and slots the legacy quads, the battle's texts the legacy
-   fonts, sizes, points and order among the 3D chunks). *Found in 4.4's
+   fonts, sizes, points and order among the 3D chunks, Demolish's spheres
+   GLBackend's flat discs: decision 2). *Found in 4.4's
    part 4:* the order of the battle's texts and 3D (a `Battle.tscn` under
    the rig draws all of its 3D under every text; today the hand, the
    effects and the minimap are drawn over the texts before them) and the
@@ -5475,7 +5790,7 @@ Sizes are relative: S ≈ a focused session, XL ≈ many sessions.
 | 4.1 | World map + airship. *Done through step B (9.1): the scenes, the name plate, legacy vs. scene identical; closed (9.1).* | M | 1 (converter), 3 | — |
 | 4.2 | Title, game over, mini-games, stores, menu. *Done through step B (9.2: the pilot, the menu, the stores and the mini-games, one session each) and closed (9.2, "Closing phase 4.2").* | L | 3 | — |
 | 4.3 | Input, audio, saves, `Game` autoload. *Prepared (9.3).* | M | any time after 0; the autoload is best after 4.2 | 5; step C (the input wrapper) |
-| 4.4 | Battle, cards, effects. *The pilot, the battle's 2D top layer, done through step B (9.4: the result and spoils screens, the level-up bars, an enemy's red flash, the legend's icons); the rollout, the battle's 3D: part 1, the enemy, done through step B (9.4: `EnemyView` in its chunk's slot; the floor's walls drawn in a fixed order); part 2, the info panels, done through step B (9.4: a `PanelQuad` per legacy batch in its slot); part 3, the deck, the hand and the legend's gradient, done through step B (9.4: `PanelQuad`s in their slots, the merges through `Utils3D.show_quad`); part 4, the texts among the chunks with the attack's background and the enemy's card, done through step B (9.4: UI nodes in the frame's 2D order, `ShadowText`, `MenuText` and `AttackTexts`; `PanelQuad`s); next the effects that are not particles (part 5).* | XL | 2, 3 | 5; the minimap's node (8.4) |
+| 4.4 | Battle, cards, effects. *The pilot, the battle's 2D top layer, done through step B (9.4: the result and spoils screens, the level-up bars, an enemy's red flash, the legend's icons); the rollout, the battle's 3D: part 1, the enemy, done through step B (9.4: `EnemyView` in its chunk's slot; the floor's walls drawn in a fixed order); part 2, the info panels, done through step B (9.4: a `PanelQuad` per legacy batch in its slot); part 3, the deck, the hand and the legend's gradient, done through step B (9.4: `PanelQuad`s in their slots, the merges through `Utils3D.show_quad`); part 4, the texts among the chunks with the attack's background and the enemy's card, done through step B (9.4: UI nodes in the frame's 2D order, `ShadowText`, `MenuText` and `AttackTexts`; `PanelQuad`s); part 5, the card effects that are not particles, done through step B (9.4: `PanelQuad`s in their slots, the spheres' triangles captured and merged as before); next the closing of 4.4 (9.4, "Prepared after part 5").* | XL | 2, 3 | 5; the minimap's node (8.4) |
 | 5 | Remove the GL emulation; per-delta time | M | all of the above | — |
 
 After phase 2, P comes before phase 3 (2026-10-27): the particle
@@ -5556,6 +5871,13 @@ fixed or deleted at any time.
     draws the same texts again), so it looks brighter than after the
     animation. An enemy heals only below half its life (`makeMove` drops a
     support attack above it).
+  * *Port bug (found in phase 4.4's rollout, part 5):* quitting the game
+    while a `Scheduler.after` callback is pending segfaults at exit (a
+    lambda in the static `Scheduler._tasks`: the party members' 150 ms hide
+    after an enemy's attack; 9.4, "Results of the rollout, part 5"). Clearing
+    the pending tasks at the start of `Main._exit_tree` made the crashing run
+    exit 0 (3 of 3). Not fixed yet (its own change, before the closing of
+    4.4).
   * *Found in phase 4.2's stores:* selling the last entry of a Weapon Store
     sell list that has more entries (Slot 1's fifth weapon) refills the
     list with the cursor kept, past its new end; `WeaponStore.updateCurrent`

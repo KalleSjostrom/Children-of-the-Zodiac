@@ -1,0 +1,35 @@
+# Phase 4.4's rollout, part 5 (the card effects that are not particles): an
+# enemy's Slow clock. Salmonman's first attack, Chrono (salmonman.script: at
+# 100 to 50 % of his life), plays the Slow card's effect from his attack frame
+# (BattleEnemy.draw: the clock and its hands at his card source, size 0.4,
+# drawn right after him in the floor's scene chunk, before the attack's
+# background and name), not from a party member's card. --load="Slot 1"
+# --start="Grivera--Corridor of Agony-mark0" (as dungeon_boss): god mode; the
+# console's "boss" goes next to him, a step starts the battle, CROSS pages his
+# words; TRIANGLE ends the party's turns until his, then a shot every frame
+# until his turn ends (e_#). It quits 300 ms later: quitting while the hit's
+# 150 ms hide of the party members is pending (a Scheduler.after callback)
+# crashed at exit (part 5, "Found on the way").
+wait 3000
+console god on
+console boss
+wait 4000
+tap UP
+wait 1500
+mark
+tap CROSS
+wait 500
+loopuntil battlemode=1 30000
+log party_turn
+mark
+tap TRIANGLE 16
+wait 17
+loopuntil battlemode=2 30000
+log enemy_turn
+mark
+wait 16
+shot e_#
+loopuntil !battlemode=2 8000
+log done
+wait 300
+quit

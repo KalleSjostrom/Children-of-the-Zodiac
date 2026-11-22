@@ -24,3 +24,20 @@ func drawParticle(g, additiveColoring):
 		g.translate(pos)
 		g.gluSphere(quad, size, 50, 50)
 		g.translateBack(pos)
+
+## Bridge (phase 4.4's rollout, part 5, step B, docs/ARCHITECTURE.md section
+## 15): drawParticle without the drawing: the same matrix calls, and the
+## sphere's triangles kept instead of drawn (Graphics.begin_capture_3d: the
+## same glNormal3f and glVertex3f calls, in the material of the render state
+## SphereParticleSystem.start set) and shown by the PanelQuad of key in the
+## slot of their batch, merged with the spheres before it as the batch would
+## have merged them (Utils3D.show_triangles).
+func show_particle(g, key: Array) -> void:
+	var pos = getPosition()
+	if pos.z >= -6: # TODO (original): Change to enemy depth.
+		g.translate(pos)
+		g.begin_capture_3d()
+		g.gluSphere(quad, size, 50, 50)
+		for batch in g.end_capture_3d():
+			Utils3D.show_triangles(g, key, batch)
+		g.translateBack(pos)

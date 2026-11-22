@@ -18,6 +18,10 @@ func start(g):
 func end(g):
 	pass
 
+## Bridge (phase 4.4's rollout, part 5, step B, docs/ARCHITECTURE.md section
+## 15): the image's quad is a PanelQuad in the slot of its batch
+## (Particle.show_particle); the coroutine still starts in the first draw;
+## --legacy=battle_effect_draw keeps the legacy quad.
 func draw(g, t = null, pPos = null):
 	if not hasInited:
 		loadGLTextures()
@@ -29,9 +33,12 @@ func draw(g, t = null, pPos = null):
 		_animate()
 
 	bindTexture(g, currentImage)
-	g.beginQuads()
-	particles[0].drawParticle(g, additiveColoring)
-	g.end()
+	if Main.is_legacy("battle_effect_draw"):
+		g.beginQuads()
+		particles[0].drawParticle(g, additiveColoring)
+		g.end()
+	else:
+		particles[0].show_particle(g, [get_instance_id(), &"image"])
 
 ## Java: the anonymous Thread of draw (runs as a coroutine, not awaited).
 func _animate() -> void:

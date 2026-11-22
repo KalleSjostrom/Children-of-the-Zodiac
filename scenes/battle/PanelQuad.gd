@@ -1,13 +1,17 @@
 class_name PanelQuad
 extends MeshInstance3D
-## One legacy batch of quads of the battle's 3D (phase 4.4's rollout, parts 2
-## and 3, step B; docs/ARCHITECTURE.md section 15). The info panels: a row's
+## One legacy batch of quads (or triangles) of the battle's 3D (phase 4.4's
+## rollout, parts 2 to 5, step B; docs/ARCHITECTURE.md section 15). The info
+## panels: a row's
 ## gradient, or of a creature's panel its portrait, a part of its progress bar
 ## (the empty bar, the fill or the overlay to the percent), its info texture
 ## (name, "Elem:", life: the legacy Image as the texture), its element icon
 ## or a boost's card. The deck and the hand: a weapon slot's side or the mode
 ## icon, the hand's slots, the save slot, a card's picture, balls or back, the
-## pointer, the deck's gradient, the target hand; the legend's gradient. Each
+## pointer, the deck's gradient, the target hand; the legend's gradient. The
+## card effects that are not particles (part 5): Death's image, Slow's clock
+## and each of its hands, and Demolish's lit spheres (triangles: up to three
+## spheres of 15,000 vertices a batch). Each
 ## is a quad (or a batch's quads) in the battle's 3D chunk and in the batch
 ## slot of the legacy batch it replaces (Graphics.show_node), one instance
 ## per batch: the parts overlap, and surfaces of one instance would tie in
@@ -29,6 +33,10 @@ extends MeshInstance3D
 
 ## A quad's two triangles, as Graphics triangulates GL_QUADS.
 const QUAD_TRIANGLES: Array[int] = [0, 1, 2, 0, 2, 3]
+
+## The batch queue_triangles was given this frame (its triangles may still
+## grow), built at the end of the frame's processing.
+var _pending := {}
 
 
 func _init() -> void:
@@ -61,7 +69,15 @@ func show_quads(mat: Material, corners: PackedVector3Array, uvs: PackedVector2Ar
 			vertex_colors[k] = colors[i]
 			vertex_normals[k] = normals[i]
 			k += 1
+	show_triangles(mat, vertices, tex_coords, vertex_colors, vertex_normals)
 
+
+## Shows triangles as the legacy batch holds them (three eye-space vertices
+## each, in drawing order: Demolish's spheres, Graphics.begin_capture_3d),
+## with their texture coordinates, colours and eye-space normals, in the
+## material of the legacy render state.
+func show_triangles(mat: Material, vertices: PackedVector3Array, uvs: PackedVector2Array,
+		colors: PackedColorArray, normals: PackedVector3Array) -> void:
 	var am := mesh as ArrayMesh
 	if am == null:
 		am = ArrayMesh.new()
@@ -70,10 +86,30 @@ func show_quads(mat: Material, corners: PackedVector3Array, uvs: PackedVector2Ar
 	var arrays := []
 	arrays.resize(Mesh.ARRAY_MAX)
 	arrays[Mesh.ARRAY_VERTEX] = vertices
-	arrays[Mesh.ARRAY_TEX_UV] = tex_coords
-	arrays[Mesh.ARRAY_COLOR] = vertex_colors
-	arrays[Mesh.ARRAY_NORMAL] = vertex_normals
+	arrays[Mesh.ARRAY_TEX_UV] = uvs
+	arrays[Mesh.ARRAY_COLOR] = colors
+	arrays[Mesh.ARRAY_NORMAL] = normals
 	am.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	am.surface_set_material(0, mat)
 	transform = Transform3D.IDENTITY
 	visible = true
+
+
+## Shows a batch of triangles ({"mat", "v", "uv", "c", "n"}: a captured
+## primitive, Utils3D.show_triangles) whose arrays may still grow this frame
+## (the spheres merged into it), so its mesh is built once, when the frame's
+## processing ends (a deferred call runs before the frame renders), not per
+## merged sphere.
+func queue_triangles(batch: Dictionary) -> void:
+	if _pending.is_empty():
+		_build_pending.call_deferred()
+	_pending = batch
+	transform = Transform3D.IDENTITY
+	visible = true
+
+
+func _build_pending() -> void:
+	var b := _pending
+	_pending = {}
+	if not b.is_empty():
+		show_triangles(b.mat, b.v, b.uv, b.c, b.n)

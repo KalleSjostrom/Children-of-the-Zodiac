@@ -493,3 +493,42 @@ What the texts among the battle's 3D chunks added (phase 4.4's rollout, part
   itself). Time such a route with a headless probe run of the new script
   first, then shoot the window frame by frame (`wait 16` loops: `tap 16` +
   `wait 17` skipped frames).
+
+What the card effects that are not particles added (phase 4.4's rollout, part
+5; docs/ARCHITECTURE.md section 15, "The card effects that are not
+particles"):
+
+* **Triangles that are not quads.** A legacy primitive that is not a quad
+  (Demolish's `gluSphere`) is kept with `Graphics.begin_capture_3d` /
+  `end_capture_3d` around the legacy call (its glNormal3f and glVertex3f
+  calls still run, so the state it leaves is the same) and shown as a
+  triangle batch (`Utils3D.show_triangles`, `PanelQuad.queue_triangles`).
+  Capture one primitive at a time and let the shared helper merge: a batch
+  holds consecutive primitives of one material only below
+  `MAX_SURFACE_VERTS` (60,000 vertices), so three spheres of 15,000 share a
+  batch and the fourth starts the next one. Build a merged node's mesh once
+  a frame (a deferred build from the batch the merges append to), not per
+  merge: rebuilding it per sphere cost 6 ms of a 42 ms Demolish frame.
+* **Time the drawing, not only the frame rate.** Engine's FPS is a
+  one-second average, too coarse for an effect of 1.7 s whose cost changes
+  frame by frame; a seeded, uncapped windowed run draws the same frames with
+  and without the flag, so per-frame times (the effects' draw, the process,
+  the interval) pair frame by frame (`out/_work/timing_fx_patch.py`).
+* **State that is read when the frame renders.** A node with GLBackend's
+  material of the render state (`Graphics.material_3d`) reads the same
+  global lights and material as the legacy batch did, so a drawing that sets
+  them and pops them back (`SphereParticleSystem.start`, `end`) keeps the
+  look it had: the popped state's. Print the globals at the frame's end in
+  the probe (the values `GLBackend.set_global` set last; RenderingServer's
+  getter returns nothing in a headless run).
+* **Drawing that is not where the plan says.** The plan had these effects in
+  `Animation.draw` only; an enemy's attack frame can play a card's packet too
+  (`AttackInfo.getCardSystem`: Salmonman's Chrono plays Slow's), drawn by
+  `BattleEnemy.draw` in another chunk. Grep the effect's classes and the data
+  (`.enemy` files' `c=` frames) for every caller before planning coverage.
+* **Coroutines started in a draw.** The image and slow systems start their
+  coroutine on their first draw: the twin keeps that call outside the
+  legacy-or-node branch, so the timing the battle waits on does not depend on
+  the flag. The probe printed each coroutine step with the game time
+  (`Scheduler.sleep` reads the game clock in seeded runs) against the frames
+  the battle's waits answered (the hit, the next card, the removal).

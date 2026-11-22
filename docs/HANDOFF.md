@@ -1,4 +1,4 @@
-# Handoff: state of the Godot port (2026-11-11, after steps 1–3, modernization phase 0, phases 1, 2, 3, 4.1 and 4.2 done and closed, the particles phases P and P2, the character sprite sheets, phase 4.4's pilot (the battle's 2D top layer) and its rollout's first four parts (the battle's enemy, info panels, deck and hand, and the texts among its 3D chunks))
+# Handoff: state of the Godot port (2026-11-11, after steps 1–3, modernization phase 0, phases 1, 2, 3, 4.1 and 4.2 done and closed, the particles phases P and P2, the character sprite sheets, phase 4.4's pilot (the battle's 2D top layer) and its rollout's five parts (the battle's enemy, info panels, deck and hand, the texts among its 3D chunks, and the card effects that are not particles))
 
 Conventions: legacy (ported) code follows `docs/PORTING.md`; new code
 (scenes, resources, tools, bridge) follows `docs/ARCHITECTURE.md`. The
@@ -534,6 +534,59 @@ section 14, "The riddles"; the procedure in `docs/CONVERTING_UI.md` section
 - Prepared (plan 9.3, 9.4): phases 4.3 and 4.4; recommended next: 4.4's
   pilot, the battle's 2D top layer (`docs/phase4_4_prompt.md`).
 
+**Modernization phase 4.4's rollout, part 5 (the battle's 3D: the card
+effects that are not particles): step B done** (2026-11-20; plan 9.4,
+"Results of the rollout, part 5"; conventions in `docs/ARCHITECTURE.md`
+section 15, "The card effects that are not particles";
+`docs/phase4_4_rollout5_prompt.md`):
+- Demolish's lit spheres, Death's image and Slow's clock and hands draw
+  through `PanelQuad` (one per legacy batch, in its chunk and slot): the
+  quads through `Particle.show_particle` (`Graphics.place_centered_current_2d`,
+  `Utils3D.show_quad`), each sphere through `SphereParticle.show_particle`
+  (`gluSphere` captured with `begin_capture_3d`, shown or merged by
+  `Utils3D.show_triangles`: three spheres a batch, as the 60,000-vertex
+  limit merged them; `PanelQuad.show_triangles`). The spheres keep
+  GLBackend's look: lit by the light state the frame ends with (white discs
+  on Berca's floor, near-black ones in Serphia's area). The legacy systems
+  keep the particles, the coroutines (started in the first draw) and the
+  waits. Flag `--legacy=battle_effect_draw`.
+- Found: Salmonman's Chrono (his first attack; Memory Salmonman's too, and
+  Menthu's "Salmonman's Distortion") plays Slow's clock from his attack frame
+  in `BattleEnemy.draw`, in the floor's scene chunk. Quitting while a
+  `Scheduler.after` callback is pending (the party's 150 ms hide after an
+  enemy's hit) segfaults at exit: reproducible (7 of 7), gone with the tasks
+  cleared at the start of `Main._exit_tree` (not applied: its own change,
+  proposed in plan 9.4); part 4's unexplained crash fits it.
+- Coverage: new cases `battle_effects_image` (Death 1, Slow 1),
+  `battle_effects_demolish` (Demolish 1, 2, 3), `battle_effects_chrono`
+  (Salmonman's Chrono), `battle_effects_area` (Demolish 1, Slow 1 in
+  Serphia's area), each every frame through the effect; 1,681 shots; 445
+  cases, 11,468 shots.
+- Parity at tolerance 0: golden `p1gold` vs. node `p2node` and, on the final code, `p3node` 11,468 of
+  11,468 shots, logs and per-case error lines identical; the new flag, all
+  thirteen 4.4 flags, and with `battle_effects` added: identical (4,542
+  battle shots; 11,468 for all flags on every case). No legacy triangle or
+  quad left while the effects draw with the flag off (counters on the 44
+  battle cases).
+- Frame rate: Demolish 3 stalls in both paths (about 42 ms of GDScript
+  sphere geometry a frame on a floor). Measured frame by frame (seeded,
+  uncapped, windowed: identical frames), the node path costs the same since
+  a merged node builds its mesh once a frame (`PanelQuad.queue_triangles`;
+  rebuilding it per sphere had cost 6 ms): draw 42.5 vs. 42.4 ms, frame
+  interval 52.2 vs. 52.0 ms. Normal runs: capped 60 → 60 at a turn and
+  during Death and Slow; uncapped Death 286 → 311, Slow 280 → 301; the
+  Demolish samples (one-second `fps=`) spread 10–259 in both paths.
+- Afterwards `p3node` (445 cases, 11,468 shots, the final code) is the set
+  to keep in `tools/parity/out`. Scripts in `out/_work`: `probe_fx_patch.py`
+  (the effects probe, on HEAD 54221fca), `probe_fx_report.py`,
+  `legacy_fx_patch.py` (the counters), `timing_fx_patch.py` (per-frame
+  times of the effects' draw), `fps_fx.sh` with `fps/fps_fx*.txt`,
+  `full_runs5.sh`, `final_runs5.sh`, `battle_cases5.txt` (44 battle cases).
+- Prepared (plan 9.4, "Prepared after part 5"): the closing of phase 4.4
+  (the exit-crash fix first, the minimap's node as the default, the party's
+  red screen as decided, the flags and their legacy drawing); the next
+  prompt is `docs/phase4_4_close_prompt.md`.
+
 **Modernization phase 4.4's rollout, part 4 (the battle's 3D: the texts
 among the chunks, the attack's background and the enemy's card): step B
 done** (2026-11-20; plan 9.4, "Results of the rollout, part 4"; conventions
@@ -806,15 +859,16 @@ decision 5 decided in plan section 13):
 
 0. **Modernization:** phases 1 to 4.1 are closed (2026-11-06), phase 4.2
    too (2026-11-07); phase 4.4's pilot, the battle's 2D top layer, is done
-   (2026-11-11), and the rollout's first four parts, the enemy and the
+   (2026-11-11), and the rollout's five parts, the enemy and the
    info panels (2026-11-13), the deck, the hand and the legend's gradient
-   (2026-11-18) and the texts among the chunks with the attack background
-   and the enemy's card (2026-11-20). Next (plan 9.4, "Prepared after part
-   4"): part 5, the effects that are not particles
-   (`docs/phase4_4_rollout5_prompt.md`); phase 4.3 (input,
+   (2026-11-18), the texts among the chunks with the attack background
+   and the enemy's card, and the card effects that are not particles
+   (2026-11-20). Next (plan 9.4, "Prepared after part 5"): the closing of
+   4.4 (`docs/phase4_4_close_prompt.md`: the exit-crash fix, the minimap's
+   node as the default, the party's red screen as decided, the flags and
+   their legacy drawing); phase 4.3 (input,
    audio, saves, the `Game` autoload; plan 9.3) can come at any time and
-   first if step C of the converted modes comes first. The minimap stays
-   the 3D bridge's until the battles leave the bridge (plan 8.4). Record
+   first if step C of the converted modes comes first. Record
    goldens before each change.
 
 1. **Performance:** since P2 the labyrinths with rain or snow run at 60 FPS
@@ -853,14 +907,15 @@ decision 5 decided in plan section 13):
   only the shipped saves.
 - Parity: `tools/parity/parity.sh record <set>` / `compare <a> <b>` /
   `ab "<args a>" "<args b>" [case…]`, see `docs/ARCHITECTURE.md` section 7.
-  Runs are windowed (screenshots need a renderer); all 441 cases take
-  about 26 minutes with `--jobs=4` (with about 7.5 GB free at idle; the 437
+  Runs are windowed (screenshots need a renderer); all 445 cases (11,468
+  shots) take about 35 minutes with `--jobs=3` at about 5.5 GB free (the
+  441 cases about 26 minutes with `--jobs=4` at 7.5 GB free; the 437
   cases about 30 with `--jobs=3` at 4.6 GB free; 19 with
   `--jobs=5` for 417 cases, 14-15 with `--jobs=8` when 10 GB are
   free at idle; check first: with 7 GB free, 8 jobs crashed runs) on 12
   logical cores (run nothing beside them, not even a headless compare:
   16 GB run out, plan 12); a compare of two full sets takes about 6
-  minutes (441 cases); a full set is about 6.9 GB (441 cases; the disk was 96% full
+  minutes (441 cases); a full set is about 8 GB (445 cases; 6.9 GB for 441; the disk was 96% full
   once) since
   the particles run on the GPU (60-70 minutes before P2; `--uncapped`; with
   `--legacy=battle_effects` or `effect_waits` Menthu's Flame takes 10 s of
