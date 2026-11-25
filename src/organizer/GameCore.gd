@@ -39,9 +39,10 @@ func _fillRoot() -> void:
 
 func init2(obs: Array = []) -> void:
 	# Determinism hook: a deterministic run (Main --seed, driven by AutoPlay)
-	# reads no game pad. A connected pad, even untouched, releases every
-	# button it does not hold each poll, so AutoPlay's presses would end
-	# after one frame (and connecting it pauses the game).
+	# reads no game pad: what a pad holds and whether it stays connected are
+	# not part of a script (a pad that drops out shows the "game pad lost"
+	# overlay, which takes the input and makes every device's directions
+	# press-once until it is answered: testDraw).
 	if GamePadController.areThereAnyGamePadControllers() and not J.deterministic:
 		inputManager.addInputManager(InputGamePadManager.new())
 	for o in obs:

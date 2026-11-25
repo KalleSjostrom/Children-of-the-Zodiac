@@ -220,13 +220,19 @@ func _input(event: InputEvent) -> void:
 			GameCore.setFullScreen()
 		get_viewport().set_input_as_handled()
 		return
-	# While the console is open the keys are its (DebugConsole), and while a
-	# text box has the focus (a prototype look's tuning panel) the box's.
-	if debug_console != null and debug_console.is_open:
-		return
-	if event is InputEventKey and get_viewport().gui_get_focus_owner() is LineEdit:
+	if event is InputEventKey and not keys_reach_game():
 		return
 	GameCore.inputManager.handleEvent(event)
+
+
+## False while the keys are not the game's: while the developer console is
+## open they are its (DebugConsole), and while a text box has the focus (a
+## prototype look's tuning panel) the box's. _input, and the keyboard's held
+## keys (InputKeyBoardManager.poll).
+func keys_reach_game() -> bool:
+	if debug_console != null and debug_console.is_open:
+		return false
+	return not (get_viewport().gui_get_focus_owner() is LineEdit)
 
 
 func _process(delta: float) -> void:

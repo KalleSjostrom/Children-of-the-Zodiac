@@ -1,4 +1,4 @@
-# Handoff: state of the Godot port (2026-11-22, after steps 1–3, modernization phase 0, phases 1, 2, 3, 4.1, 4.2 and 4.4 done and closed, the particles phases P and P2 and the character sprite sheets; phase 4.4: the pilot (the battle's 2D top layer), its rollout's five parts (the battle's enemy, info panels, deck and hand, the texts among its 3D chunks, the card effects that are not particles) and its closing)
+# Handoff: state of the Godot port (2026-11-22, after steps 1–3, modernization phase 0, phases 1, 2, 3, 4.1, 4.2 and 4.4 done and closed, the particles phases P and P2 and the character sprite sheets; phase 4.4: the pilot (the battle's 2D top layer), its rollout's five parts (the battle's enemy, info panels, deck and hand, the texts among its 3D chunks, the card effects that are not particles) and its closing; phase 4.3's first part, the input wrapper, done and closed)
 
 Conventions: legacy (ported) code follows `docs/PORTING.md`; new code
 (scenes, resources, tools, bridge) follows `docs/ARCHITECTURE.md`. The
@@ -535,6 +535,45 @@ section 14, "The riddles"; the procedure in `docs/CONVERTING_UI.md` section
 - Prepared (plan 9.3, 9.4): phases 4.3 and 4.4; recommended next: 4.4's
   pilot, the battle's 2D top layer (`docs/phase4_4_prompt.md`).
 
+**Modernization phase 4.3, part 1 (the input wrapper): done and closed**
+(2026-11-22; plan 9.3, "Results of the input wrapper"; conventions in
+`docs/ARCHITECTURE.md` section 16; `docs/phase4_3_prompt.md`):
+- Every button the game reads is a Godot InputMap action (`project.godot`'s
+  `[input]`: the 14 PlayStation-style buttons with today's keys, pad
+  buttons, triggers and left stick; `quit`, `fullscreen`,
+  `emergency_save_1` to `_3`). The devices feed the legacy `GameAction`s
+  from them, each its own as before (the call sites depend on their OR): the
+  keyboard (key events; a held key's button pressed again every frame, the
+  repeat on the game clock, 483 ms then every 100 ms at 60 FPS; echo events
+  ignored), the pad (its 40 ms poll of its actions' pad events; the lost pad
+  as before), AutoPlay (`InputEventAction`s through
+  `Input.parse_input_event`, flushed at once, into `FakeInputManager`: in the
+  frame and order of the command, pressed once, as before). The 130
+  `gameActions[…]` reads are unchanged. AutoPlay: new `keydown` and `keyup`
+  (a held real key, the keyboard's path).
+- The closing deleted `--legacy=input`, the keyboard's key map, the pad's
+  fixed layout, `FakeInputManager.pressButton` and `releaseButton`, and the
+  cheat input's dead members of `InputManager`; the git history up to
+  e16bdb01 has them.
+- Parity (tolerance 0; 446 cases, 11,656 shots; the baseline `i0base` on
+  e16bdb01 equals `z2after`): the wrapper (`i1node`), `--legacy=input`
+  (`i1leg`) and the closed code (`i2after`, the set kept) are identical to
+  it: every shot, every log, the per-case script, error and leak lines (3,
+  2,421 and 16 in all), every run exiting with 0.
+- Normal runs (no `--seed`): a held Down key repeats in the menu (483 ms,
+  then 100 ms); a held AutoPlay button presses once; the keys 1 and 3 held
+  in a battle flee, before and after. No pad was connected: a headless
+  check of the pad's layout through injected pad events (every button and
+  axis) found no difference; the lost pad with a real unplug is not tried.
+- Found: no case ever repeated a button (AutoPlay pressed once; a probe
+  lists the 32 cases a repeating device would change); the keyboard's
+  repeat was the OS's echo events; the pad is polled every 50 ms at 60 FPS;
+  `Input.parse_input_event` hands an event over in the next frame unless
+  flushed.
+- Prepared (plan 9.3, "Prepared after the input wrapper"): the `Game`
+  autoload (next prompt `docs/phase4_3_game_prompt.md`) and the questions
+  for audio and saves.
+
 **Closing phase 4.4 (2026-11-22): done** (plan 9.4, "Results of the
 closing"; `docs/phase4_4_close_prompt.md`):
 - The exit crash fixed (its own change): `Main._exit_tree` clears the
@@ -907,12 +946,12 @@ decision 5 decided in plan section 13):
    (2026-11-18), the texts among the chunks with the attack background
    and the enemy's card, and the card effects that are not particles
    (2026-11-20), and phase 4.4 is closed (2026-11-22): every mode is
-   through step B and closed. Next (plan 9.4, "Prepared after the closing"):
-   phase 4.3's first part, the input wrapper (`docs/phase4_3_prompt.md`;
-   then the `Game` autoload; audio and saves after a decision each), and
-   step C of the converted modes, the battle's first, once decisions 3, 6
-   and 8 are made (plan 13); phase 5 after step C. Record goldens before
-   each change.
+   through step B and closed. Phase 4.3's first part, the input wrapper, is
+   done and closed (2026-11-22). Next (plan 9.3, "Prepared after the input
+   wrapper"): the `Game` autoload (`docs/phase4_3_game_prompt.md`); audio
+   and saves after the answers to 9.3's questions; step C of the converted
+   modes, the battle's first, once decisions 3, 6 and 8 are made (plan 13);
+   phase 5 after step C. Record goldens before each change.
 
 1. **Performance:** since P2 the labyrinths with rain or snow run at 60 FPS
    (Forest Path was 35, Ice Cavern--Frozen Field 50; plan 6.12), and since
@@ -942,7 +981,11 @@ decision 5 decided in plan section 13):
   a run without screenshots). AutoPlay prints `mode=<game mode> sub=<battle>
   battlemode=<n> enemies=<names> place=<place> fps=<n>` at every `log`/`shot`;
   scripts can loop (nested) with `mark` … `loopuntil [!]<text> <ms>` (see the
-  header of `src/main/AutoPlay.gd` and `tools/autoplay/battle.txt`).
+  header of `src/main/AutoPlay.gd` and `tools/autoplay/battle.txt`). Its
+  buttons are pressed once (no repeat, as always); `keydown`/`keyup` hold a
+  real key, which repeats as a player's does (the keyboard's path; there are
+  no echo events for injected keys). A key sent right after a `shot` arrives
+  late in a normal run (the shot's readback stalls the frame).
 - Use the shipped `Slot 1` (or `Start`) save with `--start`; the saves in
   `maps/Banks/testStarts/` are from an older data version. Note that a normal
   run reads `user://saves/<slot>.sav` first when it exists (a slot you saved

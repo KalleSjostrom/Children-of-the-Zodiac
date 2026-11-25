@@ -333,7 +333,8 @@ and those of `AttackBackground` and `EnemyCard` (`show_tex`), and part 5's (the 
 particles) `Graphics.place_centered_current_2d`, `Utils3D.show_triangles`, `Particle.show_particle`,
 `SphereParticle.show_particle` and the twins in `SphereParticleSystem.draw`, `ImageParticleSystem.draw` and
 `SlowParticleSystem.draw`, and the closing's `Character3D._show_red_screen`:
-section 15. Closing phase 4.2 removed the
+section 15; phase 4.3's `InputManager.BUTTON_ACTIONS`, `press_actions`,
+`Main.keys_reach_game` and `AutoPlay._send_action`: section 16. Closing phase 4.2 removed the
 wrappers that only chose between a legacy drawing and its twin, `AbstractPage.draw_list`,
 `StatusPage.draw_top`, `AbstractStore.draw_dim`, `RiddleGame.draw_dim`, `DeckPage`'s
 `_draw_deck` and `_draw_bar`: their call sites call the twin, plan 9.2; closing phase 4.4
@@ -364,9 +365,9 @@ Game options go after `--` on the command line (see the header of
 | Flag | Effect |
 |---|---|
 | `--fixed-step` | The game advances exactly 1000/60 ms per frame, whatever the real frame time. |
-| `--seed=<n>` | Deterministic run (implies `--fixed-step`): every random generator (`J`, every `JRandom`, Godot's global one) is seeded from `n`; `J.currentTimeMillis()`, `Scheduler` and `GameAction` read a game clock advanced by the elapsed game time instead of the wall clock; saves are read from the shipped files and written to `user://saves_deterministic/` (emptied at start), never to the player's `user://saves/`; the slot lists date a slot saved in the run by the game clock from 1 Jan 2000, 00:00 (`SaveSlots.note_saved`; a file's time is wall-clock time, phase 4.2); no game pad is read (`GameCore.init2`: an idle pad releases AutoPlay's buttons every 40 ms). Two runs of an AutoPlay script then produce the same frames. |
+| `--seed=<n>` | Deterministic run (implies `--fixed-step`): every random generator (`J`, every `JRandom`, Godot's global one) is seeded from `n`; `J.currentTimeMillis()`, `Scheduler` and `GameAction` read a game clock advanced by the elapsed game time instead of the wall clock; saves are read from the shipped files and written to `user://saves_deterministic/` (emptied at start), never to the player's `user://saves/`; the slot lists date a slot saved in the run by the game clock from 1 Jan 2000, 00:00 (`SaveSlots.note_saved`; a file's time is wall-clock time, phase 4.2); no game pad is read (`GameCore.init2`: what a pad holds and whether it stays connected, which shows the "game pad lost" overlay, are not part of a script). Two runs of an AutoPlay script then produce the same frames. |
 | `--uncapped` | No 60 FPS cap and no vsync. With `--seed` the result is the same, only faster. |
-| `--legacy=<a,b,…>` | Keep the legacy path of the listed subsystems (`Main.is_legacy`). `all` keeps every one. No code asks for a flag since phase 4.4 closed: the flags of the closed phases are gone with their legacy paths: phase 1's `villages` and `village_top_layer` (2026-11-03), phase 2's `dungeons` and `dungeon_drawing`, the particles phases' `particles` and `dungeon_particles`, phase 3's `dialog`, `fades`, `emotions`, `mission`, `pause`, `story_images`, `story_texts` and `tutorials`, phase 4.1's `world_map` and `airship` (2026-11-06), phase 4.2's `title`, `game_over`, `menu_list`, `menu_frame`, `menu_text`, `status`, `deck`, `automap`, `dim`, `bless` and `riddle` (2026-11-07), phase 4.4's `battle_screens`, `battle_flash`, `battle_legend`, `battle_enemy`, `battle_panels`, `battle_deck`, `battle_legend_back`, `battle_attack_name`, `battle_deck_text`, `battle_legend_text`, `battle_attack_text`, `battle_enemy_quads` and `battle_effect_draw` and the battle effects' `battle_effects` and `effect_waits` (2026-11-22; plan 6.9, 7.9, 8.4, 9.1, 9.2, 9.4): a removed name is ignored (`Main.is_legacy` only answers for the names the code still asks about). The mechanism stays for later conversions (step C, phase 5): a phase that keeps a legacy path adds its name here. |
+| `--legacy=<a,b,…>` | Keep the legacy path of the listed subsystems (`Main.is_legacy`). `all` keeps every one. No code asks for a flag since phase 4.4 closed: the flags of the closed phases are gone with their legacy paths: phase 1's `villages` and `village_top_layer` (2026-11-03), phase 2's `dungeons` and `dungeon_drawing`, the particles phases' `particles` and `dungeon_particles`, phase 3's `dialog`, `fades`, `emotions`, `mission`, `pause`, `story_images`, `story_texts` and `tutorials`, phase 4.1's `world_map` and `airship` (2026-11-06), phase 4.2's `title`, `game_over`, `menu_list`, `menu_frame`, `menu_text`, `status`, `deck`, `automap`, `dim`, `bless` and `riddle` (2026-11-07), phase 4.4's `battle_screens`, `battle_flash`, `battle_legend`, `battle_enemy`, `battle_panels`, `battle_deck`, `battle_legend_back`, `battle_attack_name`, `battle_deck_text`, `battle_legend_text`, `battle_attack_text`, `battle_enemy_quads` and `battle_effect_draw` and the battle effects' `battle_effects` and `effect_waits` (2026-11-22), phase 4.3's `input` (the managers' own key and pad layouts and AutoPlay's direct presses, 2026-11-22; plan 6.9, 7.9, 8.4, 9.1, 9.2, 9.3, 9.4): a removed name is ignored (`Main.is_legacy` only answers for the names the code still asks about). The mechanism stays for later conversions (step C, phase 5): a phase that keeps a legacy path adds its name here. |
 | `--hide-particles` | Dev only: the particles draw nothing (`Main.hide_particles`; they still run): the village and cutscene systems, the dungeon weather and save points, the card and enemy effects drawn as particles (not the sphere, image, slow and enemy-colour systems), with the GL state their drawing leaves; for parity runs that compare everything else. |
 | Console `padlost [on\|off]`, `emotion <who> <emotion\|off> [shake]` | Dev only (debug console, `scenes/debug/GameCommands.gd`; AutoPlay `console`): `padlost` makes `InputManagers.connectionLost` report a lost game pad (`lost_simulated`) until the overlay's menu is answered, for the "game pad lost" overlay without a pad (seeded runs read none); `emotion` sets a bubble on a party member or villager of the current village (`Sprite.setEmotion`, which only cutscenes call), for the emotions in a village frame. Parity cases `pad_lost`, `emotions_village`. |
 | Console `give <item\|equipment\|card> <name> [number]` | Dev only (phase 4.2's menu): gives the party a key item (`PartyItems.addItem`, any name) or a piece of equipment of `equipment.bank` (`Load.addEquipment`, as a chest gives one, number times); `_` stands for a space. The shipped saves have too few for the menu's lists that scroll in their bounding box (Key Items, the equip page's lists) and their "(n)" numbers. Parity cases `menu_key_items`, `menu_equip_list`. Phase 4.2's stores: `card <card>[:<level>][:all]` adds that card to the party deck number times (the names of `cast`), for a merge page with more kinds than two lines show (`store_card_merge`). |
@@ -2556,3 +2557,71 @@ geometry any more; the bridge orders the nodes (`Graphics.show_node`,
   `fadeOldSchool`, `fadeOldSchoolColorWhite`, `drawGradient`,
   `drawMultiString`, `drawCenteredCurrent2D`, drawImage's percent part,
   `gluSphere`): no battle code calls the drawing ones any more.
+
+## 16. Input (phase 4.3)
+
+Every button the game reads is an action of Godot's InputMap
+(`project.godot`, `[input]`; plan 9.3 has the facts and the results). One
+action per PlayStation-style button of `GameMode`, with today's keys and pad
+events (dead zone 0.5, the pad's):
+
+| Action | Keys | Pad |
+|---|---|---|
+| `triangle`, `circle`, `cross`, `square` | W, D, S, A | Y, B, A, X |
+| `l1`, `r1` | Q, E | the shoulders |
+| `l2`, `r2` | 1, 3 | the triggers (axes 4, 5) |
+| `select`, `start` | Space; Enter, keypad Enter | Back; Start |
+| `up`, `right`, `down`, `left` | the arrows | the d-pad; the left stick (axes 0, 1) |
+
+and five for the keyboard's own keys: `quit` (Escape), `fullscreen` (F),
+`emergency_save_1` to `emergency_save_3` (6, 7, 8). The keys are keycodes
+(the layout's Latin keys), as before. `InputManager.BUTTON_ACTIONS` maps the
+`GameMode` button constants to the actions (L1R1 and L2R2 have none). Main's
+Alt+Enter and the developer console's key (§, `, F1) are their own, not
+actions. A rebinding UI is later; editing the InputMap rebinds a button now.
+
+**The wrapper.** The legacy code still reads `GameCore.gameActions[button]`
+(130 places; `GameAction`'s three behaviours) until step C. The devices feed
+those from the actions, each with its own `GameAction`s as before, because
+the call sites depend on the OR over the devices (`isReleased()` is true
+unless every device holds the button: plan 9.3):
+
+* **The keyboard** (`InputKeyBoardManager`): a key event that is a button's
+  action presses or releases it (`InputManager.press_actions`); echo events
+  do nothing. Instead, every frame each held key presses its button again
+  (`poll`), which is what makes `GameAction` repeat (480 ms, then 90 ms, on
+  the game clock: at 60 FPS the first repeat 483 ms after the press, then
+  every 100 ms) and see a held NORMAL button again after a mode reset it.
+  Not while the keys are the console's or a text box's
+  (`Main.keys_reach_game`, which `Main._input` uses too); a key let go
+  meanwhile is dropped (`Input.is_key_pressed`).
+* **The game pad** (`InputGamePadManager`, `GamePadController`): as before,
+  the first pad connected at start, polled every 40 ms of game time (every
+  third frame at 60 FPS), pressing its held buttons and releasing the
+  others; a button is held while one of its action's pad events is on that
+  pad (a button, or an axis past the dead zone in the event's direction).
+  The lost pad and its overlay are unchanged; seeded runs read no pad.
+* **AutoPlay** (`AutoPlay._send_action`): a button is an `InputEventAction`
+  through `Input.parse_input_event`, followed by
+  `Input.flush_buffered_events()`: Input hands a parsed event over in the
+  next frame's event processing, the flush hands it over now, in the frame
+  and order of the script's command, as `FakeInputManager.pressButton` did.
+  `Main._input` passes it to `FakeInputManager`, AutoPlay's own device
+  (Main adds it, as before), which presses once: nothing presses an AutoPlay
+  button again while it is held, so it never repeats (no case ever did).
+  `key` and `type` stay real key events, parsed at the end of AutoPlay's
+  update so that a flush never hands them over early (the game gets them in
+  the next frame); `keydown` and `keyup` hold a real key, the keyboard's
+  path with its repeat. `Input.is_action_pressed` sees AutoPlay's buttons
+  too.
+
+**Rules for new code.** Read buttons as InputMap actions
+(`event.is_action_pressed(&"cross")` in `_unhandled_input`,
+`Input.is_action_pressed`), never as keycodes or pad buttons; AutoPlay's
+action events reach them. Godot's action state merges every device, which
+the legacy `GameActions` did not (a step C that reads `Input` changes what
+`isReleased()` meant with two devices; with AutoPlay it was always true).
+The repeat of step C's menus is a decision of its own (`GameAction`'s 480
+ms and 90 ms on the game clock, or the OS's echo through
+`is_action_pressed(…, true)`). An `InputEventAction` for an action the
+InputMap lacks logs an error: add the action first.

@@ -3,14 +3,21 @@ extends RefCounted
 ## Port of input.InputManager: a list of game actions for one input device.
 ## keyActions holds the 16 button actions (indexed by the GameMode button
 ## constants); devices map their own codes to these actions.
+##
+## Phase 4.3 (docs/ARCHITECTURE.md section 16): every device reads its
+## buttons through Godot's InputMap (project.godot's [input]: one action per
+## button, BUTTON_ACTIONS). Each device keeps its own GameActions, as the
+## original's managers did: the call sites read them through
+## InputManagers.getGameActions, whose OR over the devices they depend on.
+## (The original's typed cheats, Shift+0, went with COTZ-006's console.)
 
-const NORMAL := 0
-const CHEATING := 1
+## The InputMap action of each button, indexed by the GameMode button
+## constants (L1R1 and L2R2 have no button).
+const BUTTON_ACTIONS: Array[StringName] = [&"triangle", &"circle", &"cross", &"square",
+	&"l2", &"r2", &"l1", &"r1", &"select", &"", &"", &"start", &"up", &"right", &"down",
+	&"left"]
 
 var keyActions: Array = []
-var mode := NORMAL
-var cheat := ""
-var value := 0
 
 
 func reset() -> void:
@@ -21,15 +28,6 @@ func resetAllGameActions() -> void:
 	for ga in keyActions:
 		if ga != null:
 			ga.reset()
-
-
-func hasSelectDownBeenPressed() -> bool:
-	return keyActions[GameMode.SELECT].isPressedDontReset() \
-		and keyActions[GameMode.DOWN].isPressedDontReset()
-
-
-func hasSelectBeenPressed() -> bool:
-	return keyActions[GameMode.SELECT].isPressed()
 
 
 func hasStartBeenPressed() -> bool:
@@ -52,17 +50,23 @@ func exit() -> void:
 	pass
 
 
-func isCheating() -> bool:
-	return mode == CHEATING
-
-
-func getCheat() -> String:
-	return cheat
-
-
 ## Called by the main loop for every input event.
 func handleEvent(event: InputEvent) -> void:
 	pass
+
+
+## Presses (a press event) or releases (a release event) the buttons whose
+## InputMap action the event is; false if it is none of them.
+func press_actions(event: InputEvent) -> bool:
+	var found := false
+	for i in BUTTON_ACTIONS.size():
+		if BUTTON_ACTIONS[i] != &"" and event.is_action(BUTTON_ACTIONS[i]):
+			found = true
+			if event.is_pressed():
+				keyActions[i].press()
+			else:
+				keyActions[i].release()
+	return found
 
 
 ## Called by the main loop once per frame.
@@ -85,18 +89,6 @@ class InputManagers extends RefCounted:
 		var pressed := false
 		for im in managers:
 			pressed = pressed or im.hasStartBeenPressed()
-		return pressed
-
-	func hasSelectDownBeenPressed() -> bool:
-		var pressed := false
-		for im in managers:
-			pressed = pressed or im.hasSelectDownBeenPressed()
-		return pressed
-
-	func hasSelectBeenPressed() -> bool:
-		var pressed := false
-		for im in managers:
-			pressed = pressed or im.hasSelectBeenPressed()
 		return pressed
 
 	func createGameActions() -> void:
@@ -144,18 +136,6 @@ class InputManagers extends RefCounted:
 		for im in managers:
 			im.exit()
 
-	func isCheating() -> bool:
-		for im in managers:
-			if im.isCheating():
-				return true
-		return false
-
-	func getCheat() -> String:
-		for im in managers:
-			if im.isCheating():
-				return im.getCheat()
-		return ""
-
 	func handleEvent(event: InputEvent) -> void:
 		for im in managers:
 			im.handleEvent(event)
@@ -163,9 +143,3 @@ class InputManagers extends RefCounted:
 	func poll(delta_ms: float) -> void:
 		for im in managers:
 			im.poll(delta_ms)
-
-	func getManager(script) -> InputManager:
-		for im in managers:
-			if is_instance_of(im, script):
-				return im
-		return null

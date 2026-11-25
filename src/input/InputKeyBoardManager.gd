@@ -8,8 +8,15 @@ extends InputManager
 ## Alt+Enter, which Main._input takes before it gets here), 6/7/8 make an
 ## emergency save. (Java: Space + Down opened the cheat menu and
 ## Shift+0 started typing a cheat; the debug console replaces both, COTZ-006.)
+##
+## Phase 4.3 (docs/ARCHITECTURE.md section 16): the keys are the InputMap's
+## (the buttons' actions, "quit", "fullscreen" and "emergency_save_1" to 3).
+## A key's press and release press and release its button; its echo events
+## do nothing: poll presses a held key's button again every frame instead
+## (GameAction's repeat, 480 ms then 90 ms on the game clock).
 
-var keyMap := {} # Godot keycode -> GameAction
+## The keys held whose press reached the game: keycode -> the press event.
+var _held_keys := {}
 
 
 func _init(comp = null) -> void:
@@ -20,38 +27,6 @@ func createGameActions() -> void:
 	keyActions = []
 	for i in GameMode.NUMBER_OF_BUTTONS + 1:
 		keyActions.append(GameAction.new(GameAction.DETECT_INITAL_PRESS_ONLY))
-	keyMap.clear()
-	mapToKey(keyActions[GameMode.UP], KEY_UP)
-	mapToKey(keyActions[GameMode.RIGHT], KEY_RIGHT)
-	mapToKey(keyActions[GameMode.DOWN], KEY_DOWN)
-	mapToKey(keyActions[GameMode.LEFT], KEY_LEFT)
-	mapToKey(keyActions[GameMode.TRIANGLE], KEY_W)
-	mapToKey(keyActions[GameMode.CIRCLE], KEY_D)
-	mapToKey(keyActions[GameMode.CROSS], KEY_S)
-	mapToKey(keyActions[GameMode.SQUARE], KEY_A)
-	mapToKey(keyActions[GameMode.START], KEY_ENTER)
-	mapToKey(keyActions[GameMode.START], KEY_KP_ENTER)
-	mapToKey(keyActions[GameMode.SELECT], KEY_SPACE)
-	mapToKey(keyActions[GameMode.R2], KEY_3)
-	mapToKey(keyActions[GameMode.R1], KEY_E)
-	mapToKey(keyActions[GameMode.L1], KEY_Q)
-	mapToKey(keyActions[GameMode.L2], KEY_1)
-
-
-func mapToKey(gameAction: GameAction, keyCode: int) -> void:
-	keyMap[keyCode] = gameAction
-
-
-func _getKeyAction(e: InputEventKey) -> GameAction:
-	var keyCode := e.keycode
-	if e.pressed and not e.echo:
-		if keyCode == KEY_6:
-			_saveEmergency(1)
-		elif keyCode == KEY_7:
-			_saveEmergency(2)
-		elif keyCode == KEY_8:
-			_saveEmergency(3)
-	return keyMap.get(keyCode)
 
 
 func _saveEmergency(nr: int) -> void:
@@ -66,30 +41,40 @@ func _saveEmergency(nr: int) -> void:
 		Save.save_game_in("E" + str(nr), gm)
 
 
+## A key through the InputMap: Escape, F and 6/7/8 when pressed, then its
+## button pressed or released; echo events are left to poll.
 func handleEvent(event: InputEvent) -> void:
-	if not (event is InputEventKey):
-		return
 	var e := event as InputEventKey
+	if e == null or e.echo:
+		return
 	if e.pressed:
-		_keyPressed(e)
-	else:
-		_keyReleased(e)
+		if e.is_action(&"quit"):
+			GameCore.exitGame()
+		elif e.is_action(&"fullscreen"):
+			GameCore.setFullScreen()
+		for nr in range(1, 4):
+			if e.is_action(StringName("emergency_save_%d" % nr)):
+				_saveEmergency(nr)
+	if press_actions(e):
+		if e.pressed:
+			_held_keys[e.keycode] = e
+		else:
+			_held_keys.erase(e.keycode)
 
 
-func _keyPressed(e: InputEventKey) -> void:
-	if e.keycode == KEY_ESCAPE and not e.echo:
-		GameCore.exitGame()
-	elif e.keycode == KEY_F and not e.echo:
-		GameCore.setFullScreen()
-	var gameAction := _getKeyAction(e)
-	if gameAction != null:
-		gameAction.press()
-
-
-func _keyReleased(e: InputEventKey) -> void:
-	var gameAction := _getKeyAction(e)
-	if gameAction != null:
-		gameAction.release()
+## Every frame: each held key presses its button again, as its echo events
+## did (the repeat of a DETECT_AS_KEY_LISTENER button; a button reset or let
+## go by the game while its key is held is seen again). Not while the keys
+## are the developer console's or a text box's (Main.keys_reach_game, as
+## Main._input); a key let go meanwhile is dropped.
+func poll(delta_ms: float) -> void:
+	if _held_keys.is_empty() or (Main.instance != null and not Main.instance.keys_reach_game()):
+		return
+	for keycode: int in _held_keys.keys():
+		if Input.is_key_pressed(keycode as Key):
+			press_actions(_held_keys[keycode])
+		else:
+			_held_keys.erase(keycode)
 
 
 func isActive() -> bool:

@@ -37,7 +37,11 @@ Controls (as in the original, PlayStation-style buttons):
 | 6 / 7 / 8 | | emergency save to slots E1–E3 |
 | § / ` / F1 | | developer console (debug builds), see below |
 
-A game pad works too (PlayStation layout: cross = bottom face button).
+A game pad works too (PlayStation layout: cross = bottom face button; the
+left stick moves too). The keys and pad buttons are Godot InputMap actions
+(Project Settings → Input Map: `cross`, `circle`, …, `quit`, `fullscreen`,
+`emergency_save_1`–`3`); a held key repeats in menus after 480 ms, then
+every 90 ms.
 
 Developer options (after `--` on the command line):
 

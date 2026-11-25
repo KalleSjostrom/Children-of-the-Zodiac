@@ -3743,6 +3743,335 @@ what checks it (counts as of the closing):
   checks them; step C needs the wrapper), audio and saves after a decision
   each (neither changes a picture).
 
+**How the game read input before the wrapper (phase 4.3's first part,
+`docs/phase4_3_prompt.md`; 2026-11-22).** Where it adds to the list above or
+differs from it:
+
+* **Devices, and the OR the call sites depend on.** `GameCore.inputManager`
+  (`InputManagers`) holds the devices in this order: the game pad
+  (`InputGamePadManager`, only when a pad is connected at start and the run
+  is not seeded: `GameCore.init2`), the ones Main passes (AutoPlay's
+  `FakeInputManager`), the keyboard (`InputKeyBoardManager`). Each device
+  has its own `GameAction` per button (16; the keyboard and AutoPlay's one
+  more, never read). `GameCore.gameActions[button]` (built once,
+  `getGameActions`) is a `GameActions` over the devices' objects in that
+  order, and its OR is part of the behaviour: `isPressed()` asks the devices
+  in turn and stops at the first that has the press (only that one is
+  consumed); `isPressedDontReset()` is true while any device holds the
+  button; `isReleased()` is true unless *every* device holds it. With
+  AutoPlay (its device and the keyboard) `isReleased()` is always true, so
+  `Village.checkGameInput` and `AirLandscape.checkGameInput` stop the moving
+  player every update and the held direction moves it again in the same
+  update (only pictures change, and the move sets them back; the airship's
+  speed step is set again by `go`); with the keyboard alone it is false
+  while the key is held. `changeBehavior`, `release` and `reset` reach every
+  device; the pause (`GameCore._preDraw`) asks each device's Start
+  (`hasStartBeenPressed`).
+* **When a button repeats.** `GameAction`'s repeat (DETECT_AS_KEY_LISTENER:
+  once, then after 480 ms every 90 ms) and a held NORMAL button seen again
+  after a `reset()` both need `press()` to be called again while the button
+  is held: the timer only arms it. The keyboard called it on a key's press
+  and on every echo event (the OS's key repeat: here a 500 ms delay, then
+  about 30 a second; `KeyboardDelay` 1, `KeyboardSpeed` 31), so a held key
+  repeated at the first echo after 480 ms and then at the first echo 90 ms
+  after the last (about every 100 ms). The pad presses its held buttons and
+  releases the others at each poll: every 40 ms of game time, which at 60
+  FPS is every third frame (50 ms: the accumulator restarts at 0), so a held
+  pad button repeated after 500 ms and then every 100 ms. AutoPlay's device
+  is pressed once per `press` or `tap`: **no case repeats**, and a held
+  NORMAL direction that a mode resets stays unseen until it is pressed
+  again. "Key repeat included" (above) was wrong: parity cannot check the
+  repeat (the probe in the results lists the holds that would repeat).
+* **Behaviours.** Every button starts DETECT_INITAL_PRESS_ONLY; only the
+  directions change, by mode (`initGameMode`'s and `resumeWith`'s detection
+  mode: `Values.DETECT_ALL` is NORMAL, `DETECT_INIT` press-once,
+  `DETECT_AS_KEY` key-listener): NORMAL in a village, on the world map and
+  the airship, in a boss battle area, and in a labyrinth resumed from the
+  menu (`Labyrinth.resume`, the Java's too: a labyrinth's directions repeat
+  until its menu was left once, then they are held; a quirk, kept);
+  key-listener in a labyrinth (`init`), the menu and the riddles;
+  press-once in battles, stores, the title, the game over, cutscenes and the
+  Cheater, and on the world map and the airship when resumed. Besides:
+  `BattleManager.init` makes Right and Left key-listener (the hand),
+  `Church` makes them NORMAL (the blessing's swing), a village's question
+  dialog makes the directions press-once and NORMAL again, the "game pad
+  lost" overlay makes them press-once and switches them back
+  (`changeBehaviorBack`). `resetAllGameActions` (every amount to 0): a
+  labyrinth's every step and turn, the world map's and the airship's
+  `init`, every resume (`setSuspended(false)`); the world map's arrival at a
+  node `resetAll`; its and the airship's loaders `releaseAll`; the console
+  releases every button when it opens.
+* **Reads.** The 130 `gameActions[…]` in 22 files: 115 `isPressed`, 4
+  `isPressedDontReset` (Circle: `Main._fast_cutscene`, the village sprint;
+  R2 and L2: the battle's flee), 2 `isReleased` (above), 6
+  `changeBehavior`, 1 `changeBehaviorBack`, 1 `reset`, 1 `release`; besides
+  `MenuStarter` (Triangle, Square) and `hasStartBeenPressed`. The four
+  `isPressedDontReset` are the only reads of a held state. L1R1 and L2R2
+  (9, 10) have no key or pad button (the legend and the menu use the
+  indices for icons).
+* **Frames.** Godot delivers the OS's events (the keyboard) before the
+  frame's `_process`: `Main._input` → `InputManagers.handleEvent` → the
+  keyboard's actions. `Main._process` then: the game clock; AutoPlay's update
+  (its presses straight into its device; `key` and `type` parse key events
+  into Input's buffer, delivered in the next frame); the devices' poll (the
+  pad); `Scheduler`; the music; `Organizer.update` (the modes read their
+  buttons; three times while Circle is held in a cutscene, forty when it is
+  skipped); the draw (`GameCore.testDraw`: Start's pause, the pad lost
+  menu's Up, Down and Cross); the shots; the deterministic timers.
+* **Main's, the console's and the keyboard's own keys.** `Main._input` takes
+  Alt+Enter (full screen, also while the console is open; the game never
+  sees it) and passes no event to the game while the console is open or a
+  text box has the focus. The console opens on §, ` or F1 (keycode,
+  physical keycode or character, in `DebugConsole._input`, before Main's)
+  and releases every button. The keyboard maps keycodes (the layout's Latin
+  keys); Escape quits (`GameCore.exitGame`) and F toggles full screen on a
+  press (not an echo); 6, 7 and 8 save to E1 to E3 (`Save.save_game_in`,
+  COTZ-005). The original's cheat input (Space + Down, Shift + 0) is gone
+  since COTZ-006, and its members had no caller (`InputManager`'s `mode`,
+  `cheat`, `value`, `isCheating`, `getCheat`, `hasSelectBeenPressed`,
+  `hasSelectDownBeenPressed`; `InputManagers`' too and its `getManager`).
+* **The pad.** Only the first pad connected at start
+  (`Input.get_connected_joypads()[0]`); one connected later is read after
+  the overlay's "Try to reconnect". Its fixed layout: Y, B, A, X are
+  Triangle, Circle, Cross, Square; the shoulders L1 and R1; the triggers L2
+  and R2 past 0.5; Back is Select; Start; the d-pad and the left stick past
+  0.5 on each axis (diagonals) the directions. `connectionLost()` is true
+  when the pad's device is gone (or after the console's `padlost`), and
+  `GameCore.testDraw` shows the overlay, whose menu takes Up, Down and
+  Cross.
+* **AutoPlay.** `press`, `tap` and `release` call
+  `FakeInputManager.pressButton` and `releaseButton` inside
+  `AutoPlay.update`, before the game's update of the same frame (a `tap`'s
+  release at the start of a later update). No script sends `key` or `type`;
+  none presses L2 (no case flees). A probe over every case (HEAD, headless:
+  each frame, the holds of AutoPlay's device; `out/_work/
+  probe_input_patch.py`, `probe_input_report.py`) found no hold of 480 ms or
+  more in the menu, a store or a riddle (their scripts tap: 120 ms); the
+  long holds are village walks (337, NORMAL), labyrinth walks (66: Up for
+  700 ms in `battle.txt` and the battle cases, key-listener), Triangle in
+  labyrinth battles (70, press-once) and the airship (8). A device that
+  pressed held buttons again (the keyboard's way) would change 32 cases:
+  66 holds would repeat, in 5 (`battle`, `battle_spoils`, `dungeon_tunnel_battle`,
+  `newgame_to_forest`, `tutorial_battle`: a second step 480 ms into the
+  700 ms) and 49 turns seen again after a labyrinth's reset in 27 (the
+  `dungeon_door_*`, `dungeon_riddle_*` and `dungeon_battle_*` cases).
+
+**Results of the input wrapper (phase 4.3, part 1; 2026-11-22).** Every
+button goes through the InputMap; the 130 call sites are unchanged
+(ARCHITECTURE section 16 has the conventions).
+
+* **Baseline** (on e16bdb01): `tools/check.sh` 0 failed (494 scripts); the
+  446 cases (`i0base`, 11,656 shots) identical to `z2after` shot for shot and
+  log for log, with the same script errors (3), errors (2,421) and exit leak
+  lines (16) in every case. From a project copy, 3 jobs, 34.5 minutes at 4.7
+  GB free; every case exited 0.
+* **Built.** `project.godot`'s `[input]`: the 14 buttons (`triangle` …
+  `left`, today's keys, pad buttons, the triggers and the left stick, dead
+  zone 0.5) and `quit`, `fullscreen`, `emergency_save_1` to `_3`.
+  `InputManager.BUTTON_ACTIONS` (the `GameMode` constants to the actions)
+  and `press_actions` (an event that is a button's action presses or
+  releases it). The keyboard: key events through the actions, echo events
+  ignored, every held key's button pressed again each frame (`poll`: the
+  repeat on the game clock, 483 ms then every 100 ms at 60 FPS; not while
+  the console or a text box has the keys, `Main.keys_reach_game`). The pad:
+  the same 40 ms poll and lost pad, its buttons from the actions' pad events
+  (`GamePadController._is_action_held`). AutoPlay: `InputEventAction`s
+  through `Input.parse_input_event` and `Input.flush_buffered_events()`
+  (Input hands a parsed event over in the next frame otherwise: checked
+  headless), into `FakeInputManager`, its own device (kept: the devices' OR
+  is behaviour, above; it presses once, so nothing repeats, as before);
+  `key` and `type` are sent at the end of AutoPlay's update, so a flush
+  never hands them over early. New AutoPlay commands `keydown` and `keyup`
+  (a held real key: the keyboard's path with its repeat). `Main._input`
+  keeps the console's and text boxes' gate for key events only (AutoPlay's
+  action events pass, as its direct presses did).
+* **Deleted** (the closing; `--legacy=input` kept them until then): the
+  keyboard's key map (`keyMap`, `mapToKey`, `_getKeyAction`, `_keyPressed`,
+  `_keyReleased`), the pad's fixed layout (`getButtons`' fifteen reads,
+  `getXYStickDir`, `DEADZONE`, the stick's merge in `InputGamePadManager.
+  poll`), `FakeInputManager.pressButton` and `releaseButton` (AutoPlay
+  injects), and the cheat input's dead members (`InputManager`'s `NORMAL`,
+  `CHEATING`, `mode`, `cheat`, `value`, `isCheating`, `getCheat`,
+  `hasSelectBeenPressed`, `hasSelectDownBeenPressed`; `InputManagers`' same
+  four and `getManager`). The git history up to e16bdb01 has them. A grep
+  for every removed name finds none. Kept: `GameAction` and `GameActions`
+  whole (the call sites' API until step C), the three device classes (their
+  names are the menu's icon choice, `AbstractPage._isGamePadManager`), the
+  lost pad and `padlost`, `Load.setupForTest`'s fake device (a Java test
+  main).
+* **Parity** (tolerance 0): a 25-case smoke set first (626 shots) vs. the
+  baseline: identical. The wrapper on every case (`i1node`) vs. `i0base`:
+  446 cases, 11,656 shots identical, 0 log fails, the same script, error
+  and leak lines in every case (3, 2,421 and 16 in all); `--legacy=input`
+  (`i1leg`) vs. `i0base` and vs. `i1node`: the same, identical. After the
+  closing: the smoke set again (626 shots) and every case (`i2after`, the
+  final code) vs. `i0base`: identical, the same counts. Every run exited
+  with 0 (446 of 446 in each set). No case could check the repeat (none
+  repeats), so the normal runs did:
+* **Normal runs** (no `--seed`, windowed, one at a time; `out/_work/norm`,
+  a copy with prints): the menu's root list with Down held as a real key
+  (`keydown`): pressed, then repeated 483 ms later and every 100 ms after
+  (the shot before the `keydown` stalled its frame 250 ms, so the key was
+  held 1,255 ms: eight repeats); with `--legacy=input` an injected key
+  never repeats (no echo events), as expected; Down held as AutoPlay's
+  button: one press in both. A battle on Forest Path with the keys 1 and 3
+  held: the party fled in both (`Battle.flee` 249 and 843 calls before its
+  0.2 % chance hit). No pad was connected (`pads=[]`): a headless check
+  injected pad events on device 0 (`Input` records them) and compared
+  `getButtons` through the actions with the fixed layout for every button,
+  each axis at ±0.49, ±0.5, ±0.51 and ±1 and the d-pad with the stick: 0
+  mismatches. The lost pad's overlay with a real unplug is left to the user
+  (no pad).
+* **Where the plan was wrong or short:** "key repeat included" (no case
+  repeats; a device that repeated would change 32 cases); the keyboard's
+  repeat was the OS's echo, gated by `GameAction`'s 480 ms and 90 ms, not
+  `GameAction`'s timer alone; the pad is polled every 50 ms at 60 FPS, not
+  40; `GameCore.init2`'s comment had a wrong mechanism (an idle pad releases
+  only its own actions; rewritten); the devices' OR (`isReleased()`) is part
+  of the behaviour, so AutoPlay keeps a device of its own; "About 40
+  `Organizer.getOrganizer()` call sites" (9.3's first list) are 49.
+* **Found on the way:** `Input.parse_input_event` hands an event over in the
+  next frame's event processing (a flush hands it over at once); a shot's
+  readback stalls its frame (about 250 ms in a normal run), so a key sent
+  right after a shot arrives late. By the code (no pad to try it): "Use
+  keyboard instead" drops the pad's device but not its actions from
+  `GameCore.gameActions` (built once), and a lost pad is no longer polled,
+  so a pad button held when the pad was lost stays held for
+  `isPressedDontReset` (Circle's sprint, R2 + L2) until the game restarts
+  (the Java's; kept).
+
+**Prepared after the input wrapper (2026-11-22): the `Game` autoload, the
+questions for audio and saves.** Counts as of the wrapper's closing
+(`out/_work/game_autoload_survey.md` has the survey with its line
+references).
+
+* **What the autoload takes over.** `Organizer` (289 lines, `extends
+  GameCore`, the static `Organizer.o`): main.bank's places (`mainInfo`), the
+  place asked for last (`nextPlace`), the current and previous modes, the
+  suspended stack (`GameModeQueue`, 32 lines), `jump_to` and `open_cheater`,
+  the frame (`update`; `draw` with the loading gate). `GameCore` (175): the
+  input devices, `testDraw` (Start's pause, the pad lost overlay),
+  `exitGame`, `setFullScreen`, static state. `GameMode` (417): each mode's
+  fade, music, input behaviours, exit and suspend, the scene API.
+  `ResourceLoader.gd` (235, class `GameResourceLoader`): the case-insensitive
+  paths and main.bank's parser; everything loads synchronously (no thread, no
+  deferred load). The 49 `Organizer.getOrganizer()` calls in 17 files
+  (Cheater 14, AutoPlay 7, GameMode 4, Village 4, VillageStory 4, MainMenu
+  3, Battle 2, StartPage 2, one each in Graphics, InputKeyBoardManager,
+  Labyrinth, HinderDoor, IfDoor, TimeMission, MapPage, VillageStoryTimeLine
+  and GameCommands): `getPreviousMode` 12, the Cheater's `setNext` 12 (dead:
+  `update` overwrites `next`), AutoPlay's field reads 7, `getInformationFor`
+  5, `getCurrentMode` 4 (one is `Graphics`' text alpha: the mode's
+  `fadeValue`), `getNextSuspendedMode`, `updateNextPlaceFor`,
+  `deleteSuspended` and `overwritePreviousMode` 2 each, the console's
+  `_organizer()` 1. Besides: Main's own `organizer` field (it reads the
+  suspended queue at exit) and the console's and AutoPlay's field reads
+  (`mainInfo`, `nextPlace`, `currentGameMode`).
+* **The place registry.** `maps/Main/main.bank`: 601 places (450 labyrinth
+  floors' marks and saves, 83 cutscenes, 56 villages, 6 boss areas, 3 world
+  maps, the title, the airship's world, the game over), `var` substitutions,
+  names lower-cased with `_` as spaces (`Organizer.convert`). The prefixes:
+  `land::<music>::<node>` (sets the static `Landscape.music_`), `land<node>`
+  (the world map whose place index has the node), `air<node>` (the airship);
+  both write `startNode` into main.bank's shared dictionary, even for a mere
+  check (`GameMode`, `Battle` and the console's `goto` call
+  `getInformationFor` to check), and `updateNextPlaceFor` (HinderDoor's
+  missions, IfDoor's first use) overwrites a place's `nextPlace` there;
+  loading a game undoes neither. A mode number becomes a class through
+  `Values.getClassMap` (five entries name classes that do not exist:
+  `story.Story`, `StorySequence`, `store.Library`, `House`,
+  `villages.Landscape`). The menu, the stores, a villager's story and the
+  Cheater come from `switchGameMode`, not from main.bank; battles and riddles
+  are a labyrinth's sub modes (`labDrawable`), a boss area's battle its own.
+* **The rules to keep.** The loading gate (a new mode updates and draws only
+  after it has loaded; `Organizer.draw` ends the loading, the image queue
+  being always empty; only a village's `delay` could hold it, and main.bank
+  sets none). Previous and current (`_initNext`). The suspended stack (the
+  menu, the stores and houses, a villager's story suspend; going back pops
+  it, or swaps current and previous when it is empty). Exit after the fade
+  (`done` is set in the draw when the fade ends; `update` calls `finishOff`
+  before it reads the exit mode and the place: the title loads the game
+  there). `jump_to` (no `finishOff`, no fade, the suspended stack kept, an
+  autosave on Easy and Medium unless the title or the menu is left; the
+  Cheater's picks and `--start` do not go through it). The music (a mode
+  keeps the previous mode's player for "continue" or the same track; leaving
+  fades out at SLOW, 2500 ms, and kills unless the next place continues;
+  suspending pauses and resuming resumes at FAST, 1500 ms; the menu fades the
+  mode's music to HALF).
+* **What parity checks.** `AutoPlay._state` reads two fields,
+  `currentGameMode` and `nextPlace`: every shot's and log's `mode=` and
+  `place=` (`place=` is the place asked for last: `""` in the menu, a store
+  or a villager's story, and after going back from one). The cases switch
+  through every kind of mode, the console's jumps (`goto` 10 times in
+  the scripts, `boss` 5, `teleport` and `savepoint` once; `cheater` 13) and `--start`,
+  `--load`, `--start-node`, `--start-time`, `--status`.
+* **What an autoload meets.** Static state: `Organizer.o`, `GameCore`'s,
+  `GameMode.mute`, `MainMenu.menu`, `ImageHandler`'s current and secondary
+  mode, `Load.labyrinthPosition`, `Landscape.music_`, `Village.fromHouse`,
+  `VillageLoader.staticStartPos`. `ClassRegistry` lists `organizer.Game`,
+  `FPSAnimator`, `GraphicUI` and `Screen`, whose files do not exist (the
+  Java classes Godot replaced): `organizer.Game` goes before an autoload
+  named `Game`. No autoload exists yet. Dead: `Organizer.getGameMode`,
+  `continueMusic` and the branch it guards, `GameCore.enterCheat` and its
+  statics, the Cheater's `setNext` calls and its Battle and Landscape tests.
+  An unknown `land<node>` fails (a null world into a typed variable).
+* **Order and size.** (1) The dead code and the ghost entries (S). (2) The
+  registry: main.bank read once into typed places (the `var`s, the
+  prefixes), the runtime changes (`startNode`, `updateNextPlaceFor`) as an
+  overlay instead of writes into the parsed data, with today's effects kept
+  (a check leaves `startNode` for the next read: parity tells) (M).
+  (3) The `Game` autoload: the Organizer's state and switch rules, Main's
+  start flags, the 49 calls and the field reads (`Game.current_mode`,
+  `Game.next_place` …), `place=` keeping its meaning (M). (4) Later, with
+  step C: the rules out of `GameMode` (logic in the draw, the fade's `done`)
+  (L). Parts 1 to 3 are one session (M), parity on every case (`mode=`,
+  `place=`, every shot); no picture changes.
+* **Audio: questions for the user** (no case checks it, parity runs are
+  `--mute`; a log of the music and sound calls before and after, and
+  listening, are the checks):
+  1. The fades: `OggStreamer` steps the volume every 100 ms (the original's
+     fade thread); a `Music` autoload with Tweens fades every frame over the
+     same times (FAST 1500 ms, SLOW 2500 ms, HALF 0.6). Tweens (recommended),
+     or the 100 ms steps kept?
+  2. The intro and the loop: `<Name>1.ogg` plays once and `<Name>2.ogg`
+     starts when it ends (a gap of up to a frame). Gapless
+     (`AudioStreamPlaylist` or `AudioStreamInteractive`), or as now?
+  3. Buses: everything plays on Master. Music and SFX buses (recommended),
+     and volume options in the menu now or later (a new UI)?
+  4. The switch policy (continue, the same track, FAST, SLOW, HALF): kept
+     exactly (recommended), or retuned?
+  5. The check: a dev `--audio-log` printing every music and sound call
+     (name, game time, fade, volume), compared before and after on every
+     case, then you listening to a list of transitions. Enough?
+  6. `TODO.md`'s audio items (the world map's water sound, two tracks at
+     once at the Zodiac place after the shadow bosses, the cards' and hits'
+     sounds): inside the audio part, or tickets after it?
+* **Saves: questions for the user** (`Save` 284 lines, `Load` 489; a save is
+  about 3,550 text lines, mostly `node` and `status`; 49 shipped `.sav`
+  files under `maps/Banks`: 13 at its top, 28 in `testStarts`, 8 in
+  per-person folders; 9 in `tickets/`, which you edit by hand):
+  1. The format: the text kept, with a written schema and a round-trip check
+     (load, save, the same text: recommended, the hand edits stay as they
+     are); JSON; or a Godot Resource?
+  2. If JSON or a Resource: convert every shipped and ticket save once and
+     drop the text reader, or read both?
+  3. The 28 `testStarts` saves and "Slot 2" and "Slot 3" (an older data
+     version; loading them asserts for each missing labyrinth node), and the
+     per-person folders (`Hampus`, `Jonas`, `Selle`, `Recording`): keep,
+     fix or delete?
+  4. A version line in the header (so a later format can still read today's
+     files)?
+  5. `Save.crypt` (an obfuscated copy, uncalled in the original too): delete?
+  The plan's "last save data" and autosave items are done (COTZ-005: save
+  anywhere, the autosave, the slot dates); `TODO.md` has none left.
+* **Recommended next: the `Game` autoload** (`docs/phase4_3_game_prompt.md`):
+  parity checks it on every case, and it needs no decision if the registry
+  stays main.bank read at start (decision 5 keeps the `.bank` files as the
+  data; "generated from main.bank" in the list above would add a resource
+  file to keep in step). Step C of the battle instead if decisions 3, 6 and
+  8 are made first; audio and saves after their answers (each S–M, no
+  picture changes); phase 5 after step C.
+
 ### 9.4 Battle, cards and effects (largest)
 
 Keep the logic classes (`Battle`'s state machine, `EnemyLogic`,
@@ -5878,6 +6207,29 @@ When no mode draws through `g` any more:
   in the floor's world under the battle whenever battle text came first (its
   slot falls in a SubViewport). Probe what a frame draws before a decision
   rests on it (`Battle.tscn` under the rig, the texts' order).
+* **Parity cannot see what no case does** (phase 4.3). The plan expected the
+  menu and store cases to check the key repeat; AutoPlay's device pressed
+  once, so no case ever repeated, and the 120 ms taps of the menu, store and
+  riddle cases never could. A behaviour only a person's input reaches (a
+  held key's repeat, a pad that drops out) needs a normal run, a probe of
+  what the cases do, or a headless check of the code (the pad's layout
+  through injected joypad events: `Input` keeps their state per device).
+* **Input arrives a frame late** (phase 4.3). `Input.parse_input_event`
+  buffers the event; Godot hands it over in the next frame's event
+  processing, before `_process`, unless `Input.flush_buffered_events()` runs.
+  AutoPlay flushes its buttons (they land in the frame of the command, as the
+  direct presses did); its `key` events stay a frame later, as a real key's.
+  A shot's readback stalls its frame (about 250 ms in a normal run): a key
+  sent right after a shot arrives that much later in wall time.
+* **The devices' OR** (phase 4.3). The legacy buttons are one `GameAction`
+  per device, read through an OR whose `isReleased()` is true unless every
+  device holds the button: with AutoPlay (its device and the keyboard) it is
+  always true, so AutoPlay runs stop and restart a walking village player or
+  airship every update where keyboard play does not. Godot's action state
+  merges every device: a step C that reads `Input` changes that (with no
+  visible effect today: only pictures the move sets back), and AutoPlay's
+  buttons then repeat like a held key if the new code repeats; re-record the
+  32 cases the probe lists (9.3) or keep AutoPlay's presses repeat-free.
 
 ## 13. Open decisions
 
@@ -5908,7 +6260,9 @@ When no mode draws through `g` any more:
    scenes. *Since the closing of phase 4.4 (2026-11-22) every mode is through
    step B and closed:* the choice left is which step C comes first and
    whether phase 4.3's input wrapper comes before it (9.4, "Prepared after
-   the closing").
+   the closing"). *Phase 4.3's input wrapper is done (9.3, 2026-11-22):* step
+   C can read the InputMap's actions; the legacy `gameActions[…]` stay for
+   the modes still legacy.
 4. **Resolution:** keep the 1024×768, 4:3 virtual screen (recommended for
    now; menus, battle and dungeons assume it). Scenes make widescreen
    villages possible later.
@@ -5977,7 +6331,10 @@ When no mode draws through `g` any more:
    not particles (part 5):* the attack name's slide (per draw), the texts'
    life (per update), the image and slow systems' coroutines (`Scheduler`
    game time) and the clock's hands (per 30 Hz step) stay legacy; the nodes
-   mirror them each frame.
+   mirror them each frame. *Decided for the input (phase 4.3, 2026-11-22):*
+   a held key repeats as `GameAction` says, 480 ms and then every 90 ms on
+   the game clock (checked every frame: 483 ms and 100 ms at 60 FPS), no
+   longer at the OS's echo events; the pad keeps its 40 ms poll.
 7. **Village top layer** (from the pilot, 6.7): *decided (phase 1
    rollout):* roofs and treetops are always drawn (6.1, the pilot's
    default). The legacy rule draws a piece only where a sprite overlaps it,
@@ -6016,7 +6373,7 @@ Sizes are relative: S ≈ a focused session, XL ≈ many sessions.
 | 3 | Theme, Dialog, signs, emotions, fades, HUD. *Done through step B: the pilot (8.1: the Theme, the dialog family, the fade) and the rollout (8.3: emotions, mission display, pause overlays, cutscene images and texts, tutorials; the minimap stayed the 3D bridge's until closing 4.4); closed (8.4).* | M | 1 (or 2) | most of the remaining `draw(g)` |
 | 4.1 | World map + airship. *Done through step B (9.1): the scenes, the name plate, legacy vs. scene identical; closed (9.1).* | M | 1 (converter), 3 | — |
 | 4.2 | Title, game over, mini-games, stores, menu. *Done through step B (9.2: the pilot, the menu, the stores and the mini-games, one session each) and closed (9.2, "Closing phase 4.2").* | L | 3 | — |
-| 4.3 | Input, audio, saves, `Game` autoload. *Prepared (9.3).* | M | any time after 0; the autoload is best after 4.2 | 5; step C (the input wrapper) |
+| 4.3 | Input, audio, saves, `Game` autoload. *Prepared (9.3). Part 1, the input wrapper, done and closed (9.3, "Results of the input wrapper": the InputMap's actions, the devices fed from them, AutoPlay through `Input.parse_input_event`; `--legacy=input` and the old layouts removed). Part 2, the `Game` autoload, prepared (9.3, "Prepared after the input wrapper"); audio and saves wait for their decisions.* | M | any time after 0; the autoload is best after 4.2 | 5; step C (the input wrapper) |
 | 4.4 | Battle, cards, effects. *The pilot, the battle's 2D top layer, done through step B (9.4: the result and spoils screens, the level-up bars, an enemy's red flash, the legend's icons); the rollout, the battle's 3D: part 1, the enemy, done through step B (9.4: `EnemyView` in its chunk's slot; the floor's walls drawn in a fixed order); part 2, the info panels, done through step B (9.4: a `PanelQuad` per legacy batch in its slot); part 3, the deck, the hand and the legend's gradient, done through step B (9.4: `PanelQuad`s in their slots, the merges through `Utils3D.show_quad`); part 4, the texts among the chunks with the attack's background and the enemy's card, done through step B (9.4: UI nodes in the frame's 2D order, `ShadowText`, `MenuText` and `AttackTexts`; `PanelQuad`s); part 5, the card effects that are not particles, done through step B (9.4: `PanelQuad`s in their slots, the spheres' triangles captured and merged as before); closed (9.4, "Results of the closing": the exit-crash fix, the minimap's node as the default, the party's red screen as a node, the fifteen flags and their legacy drawing removed).* | XL | 2, 3 | 5; step C of the battle |
 | 5 | Remove the GL emulation; per-delta time | M | all of the above | — |
 

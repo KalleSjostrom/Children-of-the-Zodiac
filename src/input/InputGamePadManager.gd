@@ -1,9 +1,13 @@
 class_name InputGamePadManager
 extends InputManager
 ## Port of input.InputGamePadManager: polls the first game pad every 40 ms
-## (like the original's javax.swing.Timer) and presses/releases the actions.
+## (like the original's javax.swing.Timer; every third frame at 60 FPS: the
+## time left over is dropped) and presses/releases the actions.
 ## Buttons use the PlayStation layout the game was designed for:
 ## cross = bottom face button, circle = right, square = left, triangle = top.
+## Phase 4.3: GamePadController reads them through the InputMap (the left
+## stick is the directions' axis events there); the lost pad and its overlay
+## (GameCore.testDraw) are as before.
 
 const DELAY := 40.0
 
@@ -42,10 +46,6 @@ func poll(delta_ms: float) -> void:
 	if not active:
 		return
 	var buttons: Array = gpController.getButtons()
-	var compassDir: Array = gpController.getXYStickDir()
-	for i in compassDir.size():
-		if compassDir[i] != -1:
-			buttons[compassDir[i] + GameMode.UP] = true
 	for i in buttons.size():
 		if buttons[i]:
 			_keyPressed(i)

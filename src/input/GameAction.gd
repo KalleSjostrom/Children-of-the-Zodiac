@@ -7,6 +7,10 @@ extends RefCounted
 ##  - DETECT_AS_KEY_LISTENER: true once, then repeating after 480 ms every 90 ms.
 ## The Java version used threads for the repeat timing; here it uses timestamps
 ## (J.currentTimeMillis: the game clock in deterministic mode).
+## The repeat (and a held NORMAL button seen again after reset()) needs
+## press() to be called again while the button is held: the keyboard's poll
+## does every frame, the game pad's every 40 ms; AutoPlay's buttons are
+## pressed once (docs/ARCHITECTURE.md section 16).
 
 const NORMAL := 0
 const DETECT_INITAL_PRESS_ONLY := 1

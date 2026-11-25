@@ -30,6 +30,9 @@ extends RefCounted
 ##                        dialog (not printed in the state lines)
 ##   key <KEY>            press and release a keyboard key (a real key event,
 ##                        Godot's key names: F1, Enter, Escape, Tab, Up ...)
+##   keydown <KEY>        press a keyboard key and hold it (until keyup): the
+##   keyup <KEY>          keyboard's path, with its repeat (the game reads a
+##                        held key every frame; there are no echo events)
 ##   type <text>          type the text as key events (for the debug console)
 ##   console <line>       run a debug console command (DebugConsole, debug
 ##                        builds), e.g. "console cheater", "console goto Alares"
@@ -44,7 +47,15 @@ extends RefCounted
 ##   quit                 quit the game
 ## Buttons: TRIANGLE CIRCLE CROSS SQUARE L1 R1 L2 R2 SELECT START UP DOWN LEFT RIGHT,
 ## and AHEAD BEHIND ALEFT ARIGHT after "heading"
+##
+## A button is pressed and let go as an InputMap action event through Godot's
+## Input (_send_action, docs/ARCHITECTURE.md section 16), in the frame and
+## order of its command, before the game's update; the game takes it through
+## its own device (FakeInputManager, which Main adds). A held button is
+## pressed once (no repeat). "key" and "type" send real key events, which
+## the game gets in the next frame, as a key pressed on the keyboard.
 
+## AutoPlay's device; Main adds it to the game's input managers.
 var input := FakeInputManager.new()
 var lines: PackedStringArray = []
 var pos := 0
@@ -58,6 +69,9 @@ var _marks: Array = [] # [line after the mark, time first reached]
 var _heading := -1 # Values.UP.. LEFT, set by "heading"
 var _guard := 0.0 # "guard" distance in village pixels, 0: off
 var _held := {} # direction buttons held by press/tap -> true
+## The key events of "key" and "type", sent at the end of update (after the
+## buttons' action events, which are handed to the game at once).
+var _key_events: Array[InputEventKey] = []
 
 const RELATIVE := {"AHEAD": 0, "ARIGHT": 1, "BEHIND": 2, "ALEFT": 3}
 
@@ -94,14 +108,28 @@ func _button(name: String) -> int:
 
 
 func _press(b: int) -> void:
-	input.pressButton(b)
+	_send_action(b, true)
 	if b >= GameMode.UP and b <= GameMode.LEFT:
 		_held[b] = true
 
 
 func _release(b: int) -> void:
-	input.releaseButton(b)
+	_send_action(b, false)
 	_held.erase(b)
+
+
+## Presses or lets go of a button as its InputMap action event. Input hands
+## a parsed event to the game in the next frame; the flush hands it over now
+## (Main._input, FakeInputManager), in the frame of the command.
+static func _send_action(b: int, pressed: bool) -> void:
+	if b < 0:
+		push_warning("AutoPlay: not a button")
+		return
+	var ev := InputEventAction.new()
+	ev.action = InputManager.BUTTON_ACTIONS[b]
+	ev.pressed = pressed
+	Input.parse_input_event(ev)
+	Input.flush_buffered_events()
 
 
 func update(elapsed: float) -> void:
@@ -161,6 +189,9 @@ func update(elapsed: float) -> void:
 					pos = _marks.back()[0]
 			"key":
 				_send_key(OS.find_keycode_from_string(parts[1]), 0)
+			"keydown", "keyup":
+				var down: bool = parts[0] == "keydown"
+				_send_key(OS.find_keycode_from_string(parts[1]), 0, down, not down)
 			"type":
 				var text := lines[pos - 1].substr(lines[pos - 1].find(" ") + 1)
 				for ch in text:
@@ -179,6 +210,9 @@ func update(elapsed: float) -> void:
 				push_warning("AutoPlay: unknown command " + parts[0])
 	if _guard > 0.0 and not _held.is_empty():
 		_check_guard()
+	for ev in _key_events:
+		Input.parse_input_event(ev)
+	_key_events.clear()
 
 
 ## Words "loopuntil" also tests that the state lines do not print (so the
@@ -249,15 +283,23 @@ func _village():
 	return village
 
 
-## Sends a key press and release as real input events.
-static func _send_key(keycode: Key, unicode: int) -> void:
-	for pressed in [true, false]:
+## Sends a key press and release (or only the press or the release) as real
+## input events, at the end of update after the buttons' action events have
+## been handed over: the game gets them in the next frame, as a key pressed
+## on the keyboard.
+func _send_key(keycode: Key, unicode: int, down := true, up := true) -> void:
+	var states: Array[bool] = []
+	if down:
+		states.append(true)
+	if up:
+		states.append(false)
+	for pressed in states:
 		var ev := InputEventKey.new()
 		ev.keycode = keycode
 		ev.physical_keycode = keycode
 		ev.unicode = unicode
 		ev.pressed = pressed
-		Input.parse_input_event(ev)
+		_key_events.append(ev)
 
 
 ## "mode=<Java class of the current game mode> place=<current place>", so
