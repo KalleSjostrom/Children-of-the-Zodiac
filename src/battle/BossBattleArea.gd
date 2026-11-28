@@ -105,7 +105,7 @@ func setNextPlace(next):
 	self.nextPlace = next
 
 
-## Used by the organizer to check what to initialize next.
+## Used by the Game autoload to check what to initialize next.
 func checkNextPlace():
 	return nextPlace
 

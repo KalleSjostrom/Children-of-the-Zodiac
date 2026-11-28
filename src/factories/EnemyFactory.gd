@@ -33,15 +33,15 @@ func getEnemyGroup(name):
 
 func executeCommand(command: String, tokenizer: StringTokenizer):
 	if command == "newGroup":
-		currentName = Organizer.convertKeepCase(tokenizer.nextToken())
+		currentName = Values.convertKeepCase(tokenizer.nextToken())
 		currentChance = 0.0
 		bank[currentName] = EnemyGroup.new()
 	elif command == "newEnemy":
-		var name: String = Organizer.convertKeepCase(tokenizer.nextToken())
+		var name: String = Values.convertKeepCase(tokenizer.nextToken())
 		var enemy = createEnemy(name)
 		enemyBank[name] = enemy
 	elif command == "enemy":
-		var name: String = Organizer.convertKeepCase(tokenizer.nextToken())
+		var name: String = Values.convertKeepCase(tokenizer.nextToken())
 		var e = enemyBank.get(name)
 		var chance: float = J.parseFloat(tokenizer.nextToken())
 		currentChance += chance
@@ -52,19 +52,19 @@ func executeCommand(command: String, tokenizer: StringTokenizer):
 		group.addChance(currentChance)
 		group.addEnemy(e)
 	elif command == "dropdata":
-		var enemyName: String = Organizer.convertKeepCase(tokenizer.nextToken())
+		var enemyName: String = Values.convertKeepCase(tokenizer.nextToken())
 		var e = enemyBank.get(enemyName)
-		var itemName: String = Organizer.convertKeepCase(tokenizer.nextToken())
+		var itemName: String = Values.convertKeepCase(tokenizer.nextToken())
 		var item = Items.Item.new(itemName, J.parseInt(tokenizer.nextToken()))
 		e.setDropData(item, J.parseFloat(tokenizer.nextToken()))
 	elif command == "stats":
-		var name: String = Organizer.convertKeepCase(tokenizer.nextToken())
+		var name: String = Values.convertKeepCase(tokenizer.nextToken())
 		var stats: Array = J.array(16, 0)
 		for i in range(1, stats.size()):
 			stats[i] = J.parseInt(tokenizer.nextToken())
 		Bestiary.getBestiary().addEnemy(enemyBank.get(name), stats)
 	elif command == "cardPreference":
-		var name: String = Organizer.convertKeepCase(tokenizer.nextToken())
+		var name: String = Values.convertKeepCase(tokenizer.nextToken())
 		var cardPreferences := {}
 		while tokenizer.hasMoreTokens():
 			var card: String = tokenizer.nextToken()

@@ -4072,6 +4072,255 @@ references).
   8 are made first; audio and saves after their answers (each S–M, no
   picture changes); phase 5 after step C.
 
+**How the Organizer worked before the autoload (phase 4.3's second part,
+`docs/phase4_3_game_prompt.md`; 2026-11-25).** Where it adds to "Prepared
+after the input wrapper" or differs from it:
+
+* **The keys written at run time.** `getInformationFor` wrote `startNode`
+  into main.bank's shared dictionary of the world (`land<node>`,
+  `land::<music>::<node>`: the world map whose index has the node) or of
+  `airworld` (`air<node>`: any key that begins with "air", `airworld` itself
+  too, which is the place `Save.place_for` gives the airship) at every
+  lookup, the checks too: `GameMode._fadeOutGameMode`'s music check, the two
+  in `Battle.checkIfEnemiesAreDead`, the console's `goto`, `village` and
+  `_place_on_floor`. `land::` also set `Landscape.music_` (`setInfo`) at every
+  lookup; the data has one such place (Forest Path's door
+  `land::continue::forest_of_reil--deep_forest-mark0`). The only readers of
+  `startNode` are `Landscape.init`, `LandscapeLoader.init` and
+  `AirLandscape.init`, each right after the lookup that wrote it (`_checkNext`
+  → `init`): `getInfoForNextPlace` (the path without main.bank) never hands
+  out a world, only a building's info or a villager's story's. So no read
+  depends on an earlier write, except a world map entered by its own name
+  (the console's `goto world0.map`): it starts at the node the last lookup
+  left (a script error when none did). Kept. `nextPlace`
+  (`updateNextPlaceFor`: `HinderDoor.enter` gives a mission's next place the
+  door's, `IfDoor` the true case's the false case's, once) is read by
+  `GameMode.initGameMode` whenever that place is entered later, in this game
+  or another one loaded in the same session. `time` (`--start-time`) went on
+  a duplicate of the first place's info only.
+* **Who writes into the dictionaries handed out.** No one but the
+  Organizer: `VillageLoader.init`, `Landscape.init` (when `music_` is not
+  normal) and `BossBattleArea.enterBattle` copy before they write, and
+  `VillageScene` writes `VillageLoader`'s copy. The modes that keep the
+  dictionary (`infoMap`) read only `name`, `music`, `landname` and
+  `villageName` from it later, never `startNode` or `nextPlace`. A new
+  dictionary per lookup, with the run-time keys applied, therefore reads as
+  the shared one did.
+* **The frames of a switch.** `Organizer.update`, from
+  `Main._update_organizer` (one update a frame, three while Circle is held in
+  a cutscene, forty while one is skipped; the repeats stop when the mode
+  changes or loads): the exit (checkExit, finishOff, the exit mode, `next`,
+  the next place, `getInfoForNextPlace`) and the new mode's `init` happen
+  inside that update. The console's `jump_to` and `open_cheater` run in
+  `DebugConsole._input` for a typed line (Godot's event processing, before
+  `Main._process`) and inside `AutoPlay.update` for AutoPlay's `console`
+  (before the devices' poll and the update): the new mode is made there, the
+  frame's update skips it (loading), the draw ends the loading and draws it.
+  `--start` and `--load` make the first mode in `Main._ready`. A mode made in
+  a frame's update draws in that frame (the draw's `loadingDone`) and updates
+  in the next; `Main._sync_world` shows its scene at the end of that frame.
+* **Statics that hold a mode or the Organizer.** `Organizer.o` and
+  `MainMenu.menu` (the last menu, never cleared). `ImageHandler`'s current
+  and secondary mode and `GameEventListener.mode` hold mode numbers;
+  `Landscape.music_`, `Village.fromHouse`, `VillageLoader.staticStartPos`,
+  `Load.labyrinthPosition` and the stores' `testInfo` (the Cheater's) hand
+  state to the next mode. `Main._exit_tree` cleared the Scheduler, freed the
+  backend's items, the scenes of the current, previous and suspended modes
+  that were not in the tree and the dungeon materials, then `ExitCleanup`
+  (every loaded `class_name` script's statics and every node's script
+  variables: it cleared the Organizer's fields, Main's `organizer` being one).
+* **The console's and the Cheater's ways in.** The console
+  (`GameCommands`): the current mode (`_mode`, most commands), checks
+  through `getInformationFor` (`goto`, `village`, `_place_on_floor`),
+  `jump_to` (`goto`, `teleport`, `savepoint`, `boss`, `look`, `village`; `boss`
+  and `look` set `Load.labyrinthPosition` first), `open_cheater` (`cheater`),
+  main.bank's places (the completion of `goto`, `_place_on_floor`,
+  `_door_names`) and `nextPlace` (`status`). The Cheater is a mode
+  (`open_cheater`: `exitWithoutFading(CHEATER)`; the mode left becomes the
+  previous one, not suspended), not a `switchGameMode` (9.3's list had it
+  so); its picks `exit(mode)` and its `checkExit` reports the mode at once
+  (no fade), so `update` reads `next` from `shouldGetInfoFromMain` (its
+  twelve `setNext` were overwritten); the stores get their info through the
+  `setTestMap` statics (`next` false), built by `getStoreInfo`, which makes a
+  whole `Village` from the village's info. Circle at its root goes back.
+* **`GameCore`'s parts.** Statics: `screen` (Main), `inputManager` and
+  `gameActions` (the devices: `GameMode` copies them per mode, Main,
+  `AbstractPage`, `Load.setupForTest`, the console, `HDTuner`), `paused`
+  (`Time`), `exitGame` (Escape), `setFullScreen` (F, Alt+Enter). `testDraw`:
+  Start's pause (`_preDraw`, only when the mode is pausable), the Organizer's
+  draw, `checkError`, the game pad lost overlay and its menu, or "Paused".
+  Only the Organizer used the instance part and the virtuals (`update`,
+  `draw`, `isPausable`); `enterCheat` with `strings`, `values`, `zeroTime`
+  and three counters were dead.
+* **The class map.** The five entries without a class cannot be reached with
+  the shipped data: no village scene has a "library" door; "house" doors
+  exit as `VILLAGE`; story doors and a villager's "exit" sequences name a
+  place, so main.bank's mode replaces the exit mode (`next` is true), and no
+  villager's sequence is "exit" alone. `BattleTest` was reachable only from
+  the Cheater's "Battle Test", whose entry is commented out.
+* **Also dead:** `Database.openAllRoads` and `getStoredKeys` (the cheat
+  input's and `enterCheat`'s), `Cheater.doCheat` (the cheat input, gone
+  since COTZ-006), `Values.init` (empty; the Organizer's call).
+* **The target layout** (built as proposed, ARCHITECTURE section 17): the
+  autoload `Game` (`main/Game.gd`, new code) with `current_mode`,
+  `previous_mode`, `next_place`, `places`, the suspended stack
+  (`next_suspended_mode`, `suspended_modes`, `delete_suspended`), `start`,
+  `update`, `draw`, `jump_to`, `open_cheater`, `is_pausable`, `release`; the
+  registry `PlaceRegistry` (`main/PlaceRegistry.gd`, new code: main.bank read
+  through the legacy tokenizer into typed places; `resolve`, `info_of`,
+  `info_for`, `get_place`, `all`, `update_next_place_for`, the run-time keys
+  as an overlay); `GameCore` kept as a legacy class without the Organizer
+  above it (the devices stay its statics until step C; its overlays are
+  `preDraw` and `drawOverlays`, which `Game.draw` calls around the mode's
+  draw); `Organizer.convert`, `convertKeepCase` and `convertBack` (71 calls in
+  26 files: the names of places, statuses, enemies, items) move to
+  `Values`; `GameModeQueue` becomes `Game`'s typed array.
+
+**Results of the Game autoload (phase 4.3, part 2; 2026-11-25).** The
+Organizer is the autoload `Game` and main.bank's places are `PlaceRegistry`'s;
+every switch and every case is as before (ARCHITECTURE section 17 has the
+conventions).
+
+* **Baseline** (on dbb27a2c): `tools/check.sh` 0 failed (494 scripts); the
+  446 cases (`g0base`, 11,656 shots) identical to `i2after` shot for shot and
+  log for log, with the same script errors (3), errors (2,421) and exit leak
+  lines (16) in every case. From a project copy, 3 jobs, 35 minutes at about
+  5 GB free; every case exited 0.
+* **The dead code and the ghost entries** (step 2, its own change):
+  `Organizer.getGameMode`, `continueMusic`, `continueMeusic` and the branch
+  in `_initNext`, `setNext` and the Cheater's twelve calls, `_convertChars`,
+  the second `classMap`, `Values.init` and its call; `GameCore.enterCheat`
+  with `strings`, `values`, `zeroTime` and the counters; the Cheater's
+  "Battle Test" and "Landscape Test" branches, `setLandTest`,
+  `shouldGetInfoFromMain_` and `doCheat` (the cheat input's, gone since
+  COTZ-006), and with them `Database.openAllRoads` and `getStoredKeys`;
+  `BattleTest.gd` (reachable only from "Battle Test") with
+  `Values.BATTLE_TEST` and `LANDSCAPE_TEST`; the five `Values.getClassMap`
+  entries without a class; `ClassRegistry`'s `organizer.Game`,
+  `FPSAnimator`, `GraphicUI`, `Screen` and `battleTest.BattleTest` (and
+  their rows in `docs/class_map.tsv`). A grep for every removed name finds
+  only the docs' history. A 37-case smoke set (793 shots; the title, a
+  village, the stores, the menu, the world map, the airship, labyrinths, a
+  battle, a boss, riddles, cutscenes, the IfDoor cases, the Cheater, the
+  console's goto) vs. the baseline: identical, the same error lines.
+* **The registry** (step 3): `main/PlaceRegistry.gd` (new code, 197 lines):
+  main.bank read once at start through the legacy tokenizer (its parse left
+  `GameResourceLoader`, which no longer extends `AbstractMapLoader`), typed
+  places, `resolve`, `info_of`, `info_for`, `get_place`, `all`,
+  `update_next_place_for`, the run-time keys as an ordered overlay; the
+  Organizer and the console's place lists used it. A headless probe against
+  the old parse and `getInformationFor` (`out/_work/probe_registry.gd`):
+  every place, every world map node through `land`, `LAND` (case),
+  `air`, `land::night::` and `land::continue::`, the worlds by their own
+  names after those lookups, the one `land::` place of the data, null, "",
+  an unknown place and `nextPlace` changes (with and without a parsed
+  `nextPlace`): 2,603 checks, 0 differences, key order included. Every case
+  (`g2reg`) vs. the baseline: 446 cases, 11,656 shots identical, 0 log
+  fails, the same script, error and leak lines in every case.
+* **The `Game` autoload** (step 4): `main/Game.gd` (new code, 262 lines;
+  `project.godot`'s `[autoload]`): the Organizer's state, switch rules,
+  loading gate, `jump_to`, `open_cheater`, update and draw, and Main's start
+  flags (`start`). The 49 `Organizer.getOrganizer()` calls and the field
+  reads (Main's, AutoPlay's seven, the console's) go through it; `place=`
+  is `Game.next_place`. `GameCore` (176 → 154 lines) is no longer a base
+  class: its statics (the devices, `paused`, `exitGame`, `setFullScreen`)
+  stay, `testDraw` is `preDraw` and `drawOverlays` around the mode's draw
+  (`Game.draw`). `Organizer.convert`, `convertKeepCase` and `convertBack`
+  (71 calls in 26 files) are `Values`'; `Organizer.reset()` was
+  `Database.reset()` (`Load`). Deleted: `Organizer.gd` (289 lines),
+  `GameModeQueue.gd` (32; a typed array in `Game`); the git history up to
+  dbb27a2c has them. `Main._exit_tree` frees the out-of-tree scenes as
+  before, `ExitCleanup` reaches the modes through the `Game` node, then
+  `Game.release` drops them (the Organizer's fields were cleared there).
+* **Tools** (found on the way, the user chose the fix): a `--script` run
+  compiles its script before Godot registers the autoloads' names, so the
+  ten tools that name game classes failed with "Identifier not found: Game"
+  (12 compile errors each), `_initialize()` instead of `_init()` or not.
+  Each is a launcher at its path with its command line and header, its code
+  in `<tool>_job.gd` (a `RefCounted`: `run(tree)`, `tree.quit()`,
+  `tree.root`; `dungeon_preview`'s launcher forwards `_process`);
+  `check_all.gd` works in `_initialize()` and checks `main/` too. Every tool
+  run before (from a copy of step 3) and after (step 4) on the same inputs
+  (both previews, the four remake tools on `alares-diorama` and `Alares`,
+  build included, the three art tools' dry runs, `particles_to_scenes` on
+  one system, a contact sheet): the same exit codes and error lines, every
+  output file identical byte for byte. A headless `--script` run starts in
+  about 2.7 s instead of 0.25 s (the autoload loads the game's scripts).
+* **Parity** (tolerance 0): a smoke set (the same 37 cases) and every case
+  (`g3game`) vs. the baseline: identical: 446 cases, 11,656 shots, 0 log fails, the same script, error and
+  leak lines in every case (3, 2,421 and 16 in all); every run exited with
+  0 (446 of 446 in each set). Every set from a project copy, 3 jobs, about
+  35 minutes at 5 GB free.
+* **Normal run** (deliverable 4): no `--seed`, the music on, windowed, an
+  empty APPDATA of its own; the same AutoPlay script on the baseline's code
+  and on the new one, twice each (`out/_work/norm_game.txt`,
+  `norm_game.sh`): the title's New game (Easy), the prolog's three cutscenes
+  skipped, the Forest of Reil, the menu and back, `goto Alares`, the
+  Cheater's weapon store and back to the Cheater, `goto landAlares`,
+  `boss Grivera`, `goto Title Screen`, Continue (the autosave the boss floor
+  wrote), then a real Escape. The 19 states (mode, scene, place) in the same
+  order in all four runs; every run quit by the Escape with exit code 0, no
+  script error. Each prints the same exit leak report (861 objects, 2
+  resources), the old code too: a pre-existing cycle of a normal run with
+  the music on (not chased; a ticket). The one line in another place, a
+  world map scene's "freed" message, moved with the frame timing (the
+  previous mode is held by the music's `Scheduler.waitUntil` until its
+  music faded; one run of each code had either order). An export (debug,
+  the copy of the new code) starts at a floor, a village, the world map and
+  the title with no script or parse error (`--start`, `--load`); its 616
+  missing images of Alares' Hilda are the old code's export's too (a
+  ticket: source runs have none).
+* **Where the plan was wrong or short:** the registry is not "generated from
+  main.bank" (decision 5: read at start); the music policy stays in
+  `GameMode` (the plan's first list gave it to the autoload); the Cheater
+  comes from `open_cheater`, not `switchGameMode`; `ImageHandler`'s modes
+  are mode numbers, not modes; the console's checks write `startNode` too,
+  and the only read that sees a check's leftover is a world map entered by
+  its own name; `GameCore` cannot simply go (its statics are the legacy
+  devices); an autoload's name is unknown to scripts that `--script`
+  compiles (the tools), and every `--script` run instantiates it.
+* **Found on the way:** the five ghost entries are unreachable with the
+  shipped data (no "library" door in any scene; "house" doors exit as
+  `VILLAGE`); `check.sh` did not compile `main/`; a normal run with the
+  music on leaks 861 objects at exit (the old code too); an export misses
+  Hilda's images in Alares (the old code's too).
+
+**Prepared after the Game autoload (2026-11-25): audio next.** Neither 9.3's
+audio and saves questions nor decisions 3, 6 and 8 are answered yet, so this
+is a recommendation: **audio** (`docs/phase4_3_audio_prompt.md`, with 9.3's
+recommended answers filled in as its decisions, to change before running
+it).
+
+* **Why audio before saves.** Audio has the user-visible gains (a gapless
+  intro to loop, fades every frame instead of 100 ms steps, Music and SFX
+  buses for volume options later) and needs a check of its own that parity
+  cannot give (its runs are `--mute`, which makes no music player at all):
+  an `--audio-log` of every music and sound call, recorded on every case
+  with the music on and Godot's Dummy audio driver. The switches are
+  `Game`'s now, so the music policy `GameMode` applies at each switch has
+  one caller to follow. Saves change no picture and have working parity
+  checks already (every `--load` case, `store_church_save`,
+  `menu_start_save`, `title_continue_autosave`); the recommended format (the
+  text kept, with a schema, a version line and a round-trip check) is small
+  and can follow.
+* **What audio meets.** `OggStreamer` (243 lines): fades in 100 ms steps of
+  game time with the law `volume ± step × (1 + 2 × volume)`, a second fade
+  of the same track ending the first (`fadeThreads`), pause, resume and
+  kill, the intro's `finished` starting the loop (a gap of up to a frame).
+  `SoundPlayer` (69): a pool of 12 players, the volumes, everything on
+  Master. `GameMode`'s policy (`_initMusic`'s "continue" and same-track
+  reuse of `Game.previous_mode`'s player, the start after the previous one
+  faded down and the mode loaded, `_fadeOutGameMode`'s SLOW kill unless the
+  next place continues, suspend and resume at FAST, `switchMusic`), the
+  menu's HALF, the battle's and a cutscene's own players
+  (`VillageStoryTimeLine`). 189 `playSound` calls; four `OggStreamer.new`.
+  A second autoload is instantiated in every `--script` run too (the
+  "Tools" rule of ARCHITECTURE section 17 applies).
+* **Then:** saves after the user's answers; step C of the battle once
+  decisions 3, 6 and 8 are made (the switches through `Game`, the input
+  through the InputMap); phase 5 after step C (plan 10: `Game` gets its own
+  `_process`).
+
 ### 9.4 Battle, cards and effects (largest)
 
 Keep the logic classes (`Battle`'s state machine, `EnemyLogic`,
@@ -5944,6 +6193,10 @@ When no mode draws through `g` any more:
 * Delete `Graphics.gd`, `GLBackend.gd`, the texture paths of
   `GameTexture`/`ImageHandler`, `Utils3D` and `Object2D`.
 * `Main` becomes a plain scene, and Organizer becomes the `Game` autoload.
+  *Done in phase 4.3 (9.3):* the Organizer is the autoload `Game`; left for
+  phase 5: its `update` and `draw` from its own `_process` (Main calls them
+  now), Main's start flags read by it, and `GameCore`'s devices and
+  overlays gone with the legacy buttons (step C).
 * `update(ms)` becomes `_process(delta)`, and the
   `Values.originalFrameStep` workarounds go away.
 * `PORTING.md` becomes historical.
@@ -6230,6 +6483,17 @@ When no mode draws through `g` any more:
   visible effect today: only pictures the move sets back), and AutoPlay's
   buttons then repeat like a held key if the new code repeats; re-record the
   32 cases the probe lists (9.3) or keep AutoPlay's presses repeat-free.
+* **Tools compiled before the autoloads** (phase 4.3's `Game` autoload).
+  A `--script` run compiles its script, and every script that script names,
+  before Godot registers the autoloads' names; the legacy classes lead to
+  the ones that name `Game` (even `Values` does), so ten tools failed with
+  "Identifier not found: Game" (the art tools, the previews,
+  `particles_to_scenes`, the village remake tools). Doing the work in
+  `_initialize()` instead of `_init()` is not enough. The fix (9.3, chosen
+  by the user): a tool that names a game class is a launcher that loads its
+  `<tool>_job.gd` in `_initialize()` (ARCHITECTURE section 17, "Tools").
+  Every `--script` run now loads the game's scripts (the autoload): about
+  2.4 s instead of 0.25 s to start. A second autoload (audio) adds to both.
 
 ## 13. Open decisions
 
@@ -6262,7 +6526,9 @@ When no mode draws through `g` any more:
    whether phase 4.3's input wrapper comes before it (9.4, "Prepared after
    the closing"). *Phase 4.3's input wrapper is done (9.3, 2026-11-22):* step
    C can read the InputMap's actions; the legacy `gameActions[…]` stay for
-   the modes still legacy.
+   the modes still legacy. *The `Game` autoload is done (9.3, 2026-11-25):*
+   a step C switches modes through `Game`; the rules inside `GameMode` (the
+   fade's `done` set in the draw, the music) move with it.
 4. **Resolution:** keep the 1024×768, 4:3 virtual screen (recommended for
    now; menus, battle and dungeons assume it). Scenes make widescreen
    villages possible later.
@@ -6272,6 +6538,9 @@ When no mode draws through `g` any more:
    7.9, 9.1; the git history has them). The text formats that were not
    converted (`.char`, `.seq`, `.bank`, `.help`, `.tut`,
    `particleSystems.info`, `.trig`, saves) stay the data.
+   *Phase 4.3's `Game` autoload:* main.bank stays the data; its registry
+   (`PlaceRegistry`) reads it at start through the legacy tokenizer, with
+   the run-time changes as an overlay (9.3): no generated resource.
 6. **Time base** (2.5): when motion moves to nodes, which speed is the
    target?
    * The original's feel: about 30 updates/s, expressed as per-second
@@ -6373,7 +6642,7 @@ Sizes are relative: S ≈ a focused session, XL ≈ many sessions.
 | 3 | Theme, Dialog, signs, emotions, fades, HUD. *Done through step B: the pilot (8.1: the Theme, the dialog family, the fade) and the rollout (8.3: emotions, mission display, pause overlays, cutscene images and texts, tutorials; the minimap stayed the 3D bridge's until closing 4.4); closed (8.4).* | M | 1 (or 2) | most of the remaining `draw(g)` |
 | 4.1 | World map + airship. *Done through step B (9.1): the scenes, the name plate, legacy vs. scene identical; closed (9.1).* | M | 1 (converter), 3 | — |
 | 4.2 | Title, game over, mini-games, stores, menu. *Done through step B (9.2: the pilot, the menu, the stores and the mini-games, one session each) and closed (9.2, "Closing phase 4.2").* | L | 3 | — |
-| 4.3 | Input, audio, saves, `Game` autoload. *Prepared (9.3). Part 1, the input wrapper, done and closed (9.3, "Results of the input wrapper": the InputMap's actions, the devices fed from them, AutoPlay through `Input.parse_input_event`; `--legacy=input` and the old layouts removed). Part 2, the `Game` autoload, prepared (9.3, "Prepared after the input wrapper"); audio and saves wait for their decisions.* | M | any time after 0; the autoload is best after 4.2 | 5; step C (the input wrapper) |
+| 4.3 | Input, audio, saves, `Game` autoload. *Prepared (9.3). Part 1, the input wrapper, done and closed (9.3, "Results of the input wrapper": the InputMap's actions, the devices fed from them, AutoPlay through `Input.parse_input_event`; `--legacy=input` and the old layouts removed). Part 2, the `Game` autoload, done (9.3, "Results of the Game autoload": the Organizer's state and rules in the autoload `Game`, main.bank's places in `PlaceRegistry`, the 49 calls through it; `Organizer.gd` and `GameModeQueue.gd` deleted). Audio and saves wait for their decisions (9.3's questions; "Prepared after the Game autoload" recommends audio next).* | M | any time after 0; the autoload is best after 4.2 | 5; step C (the input wrapper) |
 | 4.4 | Battle, cards, effects. *The pilot, the battle's 2D top layer, done through step B (9.4: the result and spoils screens, the level-up bars, an enemy's red flash, the legend's icons); the rollout, the battle's 3D: part 1, the enemy, done through step B (9.4: `EnemyView` in its chunk's slot; the floor's walls drawn in a fixed order); part 2, the info panels, done through step B (9.4: a `PanelQuad` per legacy batch in its slot); part 3, the deck, the hand and the legend's gradient, done through step B (9.4: `PanelQuad`s in their slots, the merges through `Utils3D.show_quad`); part 4, the texts among the chunks with the attack's background and the enemy's card, done through step B (9.4: UI nodes in the frame's 2D order, `ShadowText`, `MenuText` and `AttackTexts`; `PanelQuad`s); part 5, the card effects that are not particles, done through step B (9.4: `PanelQuad`s in their slots, the spheres' triangles captured and merged as before); closed (9.4, "Results of the closing": the exit-crash fix, the minimap's node as the default, the party's red screen as a node, the fifteen flags and their legacy drawing removed).* | XL | 2, 3 | 5; step C of the battle |
 | 5 | Remove the GL emulation; per-delta time | M | all of the above | — |
 

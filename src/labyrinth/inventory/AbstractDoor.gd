@@ -25,7 +25,7 @@ func setGoingUp(goingUp):
 func checkHaveBeen():
 	super.checkHaveBeen()
 	var temp: Array = J.split(dataBaseName, "\\.")
-	nameInMain = Organizer.convert(temp[0]) + "-mark" + str(index)
+	nameInMain = Values.convert(temp[0]) + "-mark" + str(index)
 	haveBeenIn = Database.getStatusFor(dataBaseName + "havebeenin") == 1
 
 

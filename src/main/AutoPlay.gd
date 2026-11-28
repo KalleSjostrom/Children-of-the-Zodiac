@@ -221,12 +221,11 @@ func update(elapsed: float) -> void:
 ## " battlemode=<n>" in a battle area of its own (BossBattleArea), as the
 ## state lines show it for a labyrinth's battle.
 func _hidden_state() -> String:
-	var o := Organizer.getOrganizer()
-	if o != null and o.currentGameMode is Labyrinth and o.currentGameMode.dialog != null:
+	var gm = Game.current_mode
+	if gm is Labyrinth and gm.dialog != null:
 		return " dialog"
-	if o != null and o.currentGameMode is BossBattleArea and o.currentGameMode.bm != null \
-			and o.currentGameMode.bm.battle != null:
-		return " battlemode=%d" % o.currentGameMode.bm.battle.mode
+	if gm is BossBattleArea and gm.bm != null and gm.bm.battle != null:
+		return " battlemode=%d" % gm.bm.battle.mode
 	return ""
 
 
@@ -235,7 +234,7 @@ func _hidden_state() -> String:
 ## place there) or into a hole door's range. Positions are Values [y, x].
 func _check_guard() -> void:
 	var village = _village()
-	if village == null or Organizer.getOrganizer().currentGameMode != village:
+	if village == null or Game.current_mode != village:
 		return
 	var p: Array = village.player.getPos()
 	for b: int in _held.keys():
@@ -262,20 +261,19 @@ func _check_guard() -> void:
 ## little above 1): "[zoom] <shot> scale=<s>". Not an "[autoplay" line, so
 ## parity compares do not see it; it tells which shots a zoom resamples.
 func _print_zoom() -> void:
-	var o := Organizer.getOrganizer()
-	if o == null or not (o.currentGameMode is VillageStory) or o.currentGameMode.timeLine == null:
+	var gm = Game.current_mode
+	if not (gm is VillageStory) or gm.timeLine == null:
 		return
-	var t = o.currentGameMode.timeLine
+	var t = gm.timeLine
 	if t.scaling and t.useStaticPos:
 		print("[zoom] %s scale=%.6f" % [_pending_shot, t.scale])
 
 
 ## The current village (also the one under a village story), or null.
 func _village():
-	var o := Organizer.getOrganizer()
-	if o == null or o.currentGameMode == null:
+	var village = Game.current_mode
+	if village == null:
 		return null
-	var village = o.currentGameMode
 	if village is VillageStory:
 		village = village.village
 	if not (village is Village) or village.player == null:
@@ -306,10 +304,9 @@ func _send_key(keycode: Key, unicode: int, down := true, up := true) -> void:
 ## headless runs show where the game is. "world=<node>" when Main's World
 ## shows a scene (docs/ARCHITECTURE.md).
 func _state() -> String:
-	var o := Organizer.getOrganizer()
-	if o == null or o.currentGameMode == null:
+	var gm = Game.current_mode
+	if gm == null:
 		return "mode=<none>"
-	var gm = o.currentGameMode
 	var s := "mode=%s" % ClassRegistry.getClassName(gm)
 	# Labyrinth runs battles/riddles as a sub game mode in labDrawable.
 	if "runSubGameMode" in gm and gm.runSubGameMode and "labDrawable" in gm and gm.labDrawable != null:
@@ -324,7 +321,7 @@ func _state() -> String:
 				s += " enemies=%s" % ",".join(names).replace(" ", "_")
 	if Main.instance != null and Main.instance.world.get_child_count() > 0:
 		s += " world=%s" % Main.instance.world.get_child(0).name
-	return s + " place=%s fps=%d" % [str(o.nextPlace), Engine.get_frames_per_second()]
+	return s + " place=%s fps=%d" % [Game.next_place, Engine.get_frames_per_second()]
 
 
 ## "x=<x> y=<y> dir=<d> back=<x>,<y>" of the village player (also during a
@@ -347,10 +344,9 @@ func _player_pos() -> String:
 ## location and angle are LabyrinthPlayer's, interpolated while moving or
 ## turning.
 func _labyrinth_pos() -> String:
-	var o := Organizer.getOrganizer()
-	if o == null or not (o.currentGameMode is Labyrinth):
+	if not (Game.current_mode is Labyrinth):
 		return "-"
-	var lab: Labyrinth = o.currentGameMode
+	var lab: Labyrinth = Game.current_mode
 	if lab.isLoading() or lab.player == null or lab.currentNode == null:
 		return "-"
 	var cam = lab.player.camera
@@ -363,10 +359,9 @@ func _labyrinth_pos() -> String:
 ## node=<the node in range, or ->" (screen pixels; the facing 0-3); "-"
 ## elsewhere.
 func _world_map_pos() -> String:
-	var o := Organizer.getOrganizer()
-	if o == null or o.currentGameMode == null or o.currentGameMode.isLoading():
+	var gm = Game.current_mode
+	if gm == null or gm.isLoading():
 		return "-"
-	var gm = o.currentGameMode
 	if gm is Landscape and gm.player != null and gm.currentNode != null:
 		var p: Array = gm.player.getPos()
 		return "node=%s x=%.1f y=%.1f dir=%d road=%s" % [str(gm.currentNode.getName()).replace(" ", "_"),

@@ -6,7 +6,7 @@ extends RefCounted
 ## development (status, trigger, difficulty, give, gold, save, padlost, emotion). They replace the
 ## developer Cheater, whose menu the "cheater" command still opens.
 ##
-## Jumps go through Organizer.jump_to, as the Cheater's did. A position on a
+## Jumps go through Game.jump_to, as the Cheater's did. A position on a
 ## labyrinth floor (boss) is handed to the labyrinth the way a save's is
 ## (Load.labyrinthPosition). Labyrinth facts (save points, bosses, the links
 ## between nodes) are read from the floor scenes (DungeonScene).
@@ -29,7 +29,7 @@ const EMOTIONS: PackedStringArray = ["exclamation", "question", "questionEx", "d
 ## The rounds "cast next" has not played yet (--casts=, see _cast).
 var _casts := PackedStringArray()
 var _casts_read := false
-## Floor (Organizer.convert) -> {"floor", "save": bool, "boss": [address,
+## Floor (Values.convert) -> {"floor", "save": bool, "boss": [address,
 ## name] or [], "neighbours": address -> DungeonCell.neighbours}, from the
 ## floor scenes.
 var _floors := {}
@@ -103,13 +103,8 @@ func _register(c: DebugCommands) -> void:
 
 # --- The game ---
 
-static func _organizer() -> Organizer:
-	return Organizer.getOrganizer()
-
-
 static func _mode() -> GameMode:
-	var o := _organizer()
-	return null if o == null else o.getCurrentMode()
+	return Game.current_mode
 
 
 static func _labyrinth() -> Labyrinth:
@@ -138,21 +133,19 @@ static func _ready_for_jump() -> DebugCommands.Result:
 ## The main.bank place to enter a labyrinth floor at: its "-save" place,
 ## else any place on it.
 func _place_on_floor(floor: String) -> String:
-	var o := _organizer()
-	if o.getInformationFor(floor + "-save") != null:
+	if Game.places.info_for(floor + "-save") != null:
 		return floor + "-save"
-	var map := Organizer.convert(floor + ".map")
-	for key in o.mainInfo:
-		var info: Dictionary = o.mainInfo[key]
-		if Organizer.convert(str(info.get("map", ""))) == map:
-			return str(info.get("name", key))
+	var map := Values.convert(floor + ".map")
+	for place in Game.places.all():
+		if Values.convert(place.map) == map:
+			return place.name
 	return ""
 
 
 ## What the scene of a floor says (see _floors): its cells' neighbours,
 ## whether it has a save point, its boss (the last one, cell and name).
 func _floor_data(floor: String) -> Dictionary:
-	var key := Organizer.convert(floor)
+	var key := Values.convert(floor)
 	if _floors.has(key):
 		return _floors[key]
 	var data := {"floor": floor, "save": false, "boss": [], "neighbours": {}}
@@ -210,11 +203,10 @@ static func _next_to(neighbours: Dictionary, address: int) -> Array:
 ## The places of main.bank and the world map's nodes ("land<node>").
 func _place_names() -> PackedStringArray:
 	var names := PackedStringArray()
-	var o := _organizer()
-	if o == null:
+	if Game.places == null:
 		return names
-	for key in o.mainInfo:
-		names.append(str(o.mainInfo[key].get("name", key)))
+	for place in Game.places.all():
+		names.append(place.name)
 	for node in LandscapeLoader._getPlaceMap():
 		names.append("land" + str(node))
 	return names
@@ -224,9 +216,9 @@ func _goto(args: PackedStringArray) -> DebugCommands.Result:
 	var not_now := _ready_for_jump()
 	if not_now != null:
 		return not_now
-	if _organizer().getInformationFor(args[0]) == null:
+	if Game.places.info_for(args[0]) == null:
 		return DebugCommands.fail("No place %s" % args[0])
-	_organizer().jump_to(args[0])
+	Game.jump_to(args[0])
 	return DebugCommands.done("Going to %s" % args[0])
 
 
@@ -236,10 +228,10 @@ func _door_names() -> PackedStringArray:
 	var lab := _labyrinth()
 	if lab == null:
 		return names
-	var prefix := Organizer.convert(lab.getName()) + "-mark"
-	for key in _organizer().mainInfo:
-		if String(key).begins_with(prefix):
-			names.append("mark" + String(key).substr(prefix.length()))
+	var prefix := Values.convert(lab.getName()) + "-mark"
+	for place in Game.places.all():
+		if place.key.begins_with(prefix):
+			names.append("mark" + place.key.substr(prefix.length()))
 	names.sort()
 	return names
 
@@ -272,7 +264,7 @@ func _teleport(args: PackedStringArray) -> DebugCommands.Result:
 	if not_now != null:
 		return not_now
 	var place: String = lab.getName() + "-" + args[0]
-	_organizer().jump_to(place)
+	Game.jump_to(place)
 	return DebugCommands.done("Going to %s" % place)
 
 
@@ -290,7 +282,7 @@ func _savepoint(_args: PackedStringArray) -> DebugCommands.Result:
 	for floor in floors:
 		if _floor_data(floor).save:
 			var place := floor + "-save"
-			_organizer().jump_to(place)
+			Game.jump_to(place)
 			return DebugCommands.done("Going to %s" % place)
 	return DebugCommands.fail("No save point in %s" % _area_of(lab.getName()))
 
@@ -317,7 +309,7 @@ func _boss(args: PackedStringArray) -> DebugCommands.Result:
 	if not_now != null:
 		return not_now
 	for floor in _all_floors():
-		if Organizer.convert(_area_of(floor)) != Organizer.convert(area):
+		if Values.convert(_area_of(floor)) != Values.convert(area):
 			continue
 		var data := _floor_data(floor)
 		if data.boss.is_empty():
@@ -327,7 +319,7 @@ func _boss(args: PackedStringArray) -> DebugCommands.Result:
 		if spot.is_empty() or place == "":
 			return DebugCommands.fail("Cannot find a way to the boss on %s" % floor)
 		Load.labyrinthPosition = [floor, spot[0], spot[1]]
-		_organizer().jump_to(place)
+		Game.jump_to(place)
 		return DebugCommands.done("Going next to %s on %s; step forward to fight" % [data.boss[1], floor])
 	return DebugCommands.fail("No boss in %s" % area)
 
@@ -336,7 +328,7 @@ func _cheater(_args: PackedStringArray) -> DebugCommands.Result:
 	var not_now := _ready_for_jump()
 	if not_now != null:
 		return not_now
-	_organizer().open_cheater()
+	Game.open_cheater()
 	return DebugCommands.done("")
 
 
@@ -711,7 +703,7 @@ func _look(args: PackedStringArray) -> DebugCommands.Result:
 	# getDirection is the camera's angle in degrees).
 	var direction: int = lab.getPlayerDirection()
 	Load.labyrinthPosition = [floor, address, direction]
-	_organizer().jump_to(place)
+	Game.jump_to(place)
 	return DebugCommands.done(now + "; entering %s again" % floor)
 
 
@@ -741,9 +733,9 @@ func _village(args: PackedStringArray) -> DebugCommands.Result:
 	if village == null or _ready_for_jump() != null:
 		return DebugCommands.done(now + "; villages take them when they are entered")
 	var place := str(village.getName())
-	if _organizer().getInformationFor(place) == null:
+	if Game.places.info_for(place) == null:
 		return DebugCommands.done(now + "; %s takes them when it is entered" % place)
-	_organizer().jump_to(place)
+	Game.jump_to(place)
 	return DebugCommands.done(now + "; entering %s again" % place)
 
 
@@ -753,7 +745,7 @@ static func _remakes_on() -> String:
 
 # --- Game ---
 
-## The game pad lost overlay (GameCore.testDraw) without a game pad: its menu
+## The game pad lost overlay (GameCore.drawOverlays) without a game pad: its menu
 ## ("Try to reconnect", "Use keyboard instead") ends it, as with a pad.
 func _padlost(args: PackedStringArray) -> DebugCommands.Result:
 	var input := GameCore.inputManager
@@ -803,7 +795,7 @@ func _status(_args: PackedStringArray) -> DebugCommands.Result:
 		return DebugCommands.done("No game mode")
 	var lines := PackedStringArray([
 		"Mode: %s%s" % [ClassRegistry.getClassName(gm), " (loading)" if gm.isLoading() else ""],
-		"Place: %s" % _organizer().nextPlace])
+		"Place: %s" % Game.next_place])
 	var lab := _labyrinth()
 	if lab != null and lab.currentNode != null:
 		lines.append("Labyrinth: %s, node %d, direction %d" % [lab.getName(), lab.currentNode.getAddress(), lab.dir])
@@ -814,7 +806,7 @@ func _status(_args: PackedStringArray) -> DebugCommands.Result:
 
 
 func _trigger(args: PackedStringArray) -> DebugCommands.Result:
-	var name := Organizer.convert(args[0])
+	var name := Values.convert(args[0])
 	if args.size() > 1:
 		if not args[1].is_valid_int():
 			return DebugCommands.fail("The value is a number: %s" % args[1])

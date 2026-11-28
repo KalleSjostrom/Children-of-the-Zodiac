@@ -66,8 +66,6 @@ const CHEATER := 16
 const SWITCH_BACK := 17
 const EXIT := 18
 const GAME_OVER := 19
-const LANDSCAPE_TEST := 20
-const BATTLE_TEST := 21
 const NEW_MENU := 22
 const BOSS_BATTLE_AREA := 23
 const NO_MODE_IS_SELECTED := -1
@@ -174,10 +172,6 @@ static func soundEnabled() -> bool:
 	return SETTINGS_MAP[SOUND_EFFECTS]
 
 
-static func init() -> void:
-	pass
-
-
 static func loadFont() -> void:
 	Graphics._loadFonts()
 
@@ -226,6 +220,23 @@ static func convertToFloatArray(pos: Array) -> Array:
 	return createNormalFloatPoint(pos[X], pos[Y])
 
 
+## The names of the data files' places, statuses and things (Java's
+## Organizer.convert): lower case, "_" as a space. Java also removed 'NUL'
+## characters; GDScript strings cannot contain them.
+static func convert(s: String) -> String:
+	return s.replace("_", " ").to_lower()
+
+
+## The same in the name's case (Java's Organizer.convertKeepCase).
+static func convertKeepCase(s: String) -> String:
+	return s.replace("_", " ")
+
+
+## A space as "_" (Java's Organizer.convertBack).
+static func convertBack(string: String) -> String:
+	return string.replace(" ", "_")
+
+
 static func getCounterAngle(dir: int) -> int:
 	return absi((dir + 2) % 4)
 
@@ -233,24 +244,18 @@ static func getCounterAngle(dir: int) -> int:
 static func getClassMap() -> Dictionary:
 	var classMap := {}
 	classMap[TITLE] = "title.TitleScreen"
-	classMap[STORY] = "story.Story"
 	classMap[CHEATER] = "organizer.Cheater"
 	classMap[LABYRINTH] = "labyrinth.Labyrinth"
 	classMap[CHURCH] = "store.Church"
 	classMap[LANDSCAPE] = "landscape.Landscape"
-	classMap[STORY_SEQUENSE] = "story.StorySequence"
 	classMap[VILLAGE] = "villages.Village"
 	classMap[WEAPONSTORE] = "store.WeaponStore"
 	classMap[INN] = "store.Inn"
 	classMap[CARDSTORE] = "store.CardStore"
-	classMap[LIBRARY] = "store.Library"
-	classMap[HOUSE] = "store.House"
 	classMap[MENU] = "menu.MainMenu"
 	classMap[VILLAGE_STORY] = "villages.villageStory.VillageStory"
 	classMap[GAME_OVER] = "title.GameOver"
 	classMap[AIR_SHIP] = "landscape.airship.AirLandscape"
-	classMap[LANDSCAPE_TEST] = "villages.Landscape"
-	classMap[BATTLE_TEST] = "battleTest.BattleTest"
 	classMap[BOSS_BATTLE_AREA] = "battle.BossBattleArea"
 	return classMap
 

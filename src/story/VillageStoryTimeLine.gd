@@ -190,7 +190,7 @@ func addParticleSystem():
 		if actors[i].contains("System"):
 			var name: String = actors[i]
 			var sl = SystemLoader.getLoader()
-			var system = sl.buildSystem(Organizer.convert(name))
+			var system = sl.buildSystem(Values.convert(name))
 			var p = positions.get(name)
 			var a := Actor.new(system[0])
 			if p != null:
@@ -349,7 +349,7 @@ func executeCommand(info):
 					members[i].updateDialog(value)
 				i += 1
 			if not found:
-				var gm = Organizer.getOrganizer().getPreviousMode()
+				var gm = Game.previous_mode
 				found = false
 				for s in removedVillagers:
 					if s is Villager:

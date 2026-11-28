@@ -56,7 +56,7 @@ const DEFAULTS := {"recipe": "stones", "set": "painted", "bump": "4",
 	"hole": "0", "ao_depth": "0", "ao_radius": "32", "ao_scale": "4", "ao_floor": "0.2", "ao_strength": "4"}
 
 
-func _init() -> void:
+func _initialize() -> void:
 	var args := DEFAULTS.duplicate()
 	var texture := ""
 	for a in OS.get_cmdline_user_args():

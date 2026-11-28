@@ -181,12 +181,12 @@ func getNrOfInventories():
 static func convert(name):
 	var s: Array = J.split(name, "--")
 	var lab: Array = J.array(2, null)
-	lab[0] = Organizer.convertKeepCase(s[0])
+	lab[0] = Values.convertKeepCase(s[0])
 	lab[1] = Load.prepare(s[1])
 	return lab
 
 static func convertForSave(lab):
-	return Organizer.convertBack(lab[0]) + "--" + Organizer.convertBack(lab[1])
+	return Values.convertBack(lab[0]) + "--" + Values.convertBack(lab[1])
 
 func getNrVisitedNode():
 	var v: int = 0

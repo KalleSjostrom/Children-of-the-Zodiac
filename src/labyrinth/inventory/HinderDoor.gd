@@ -37,7 +37,7 @@ func getDoorIndex():
 ## To be called when the player enters the labyrinth.
 func setHaveBeen(lastNodesName = null):
 	if lastNodesName == null or \
-			Organizer.convert(nextPlace).to_lower() == Organizer.convert(lastNodesName).to_lower():
+			Values.convert(nextPlace).to_lower() == Values.convert(lastNodesName).to_lower():
 		_setHaveBeen()
 
 
@@ -86,7 +86,7 @@ func enter(lab, info = null):
 	# Database.addStatus(dataBaseName, status)
 	var next = lab.getMissionNext()
 	if next != null:
-		Organizer.getOrganizer().updateNextPlaceFor(next, nextPlace)
+		Game.places.update_next_place_for(next, nextPlace)
 		lab.resetMissionNext()
 	else:
 		next = nextPlace

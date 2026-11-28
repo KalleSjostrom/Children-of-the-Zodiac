@@ -23,7 +23,7 @@ var current = BossesDialog.new()
 func _init(p_name = null) -> void:
 	parseFile(p_name)
 	enemy.setInfo(info)
-	enemy.setDbName(Organizer.convert(p_name))
+	enemy.setDbName(Values.convert(p_name))
 
 
 ## Java: protected void parseFile(String filename).
@@ -65,7 +65,7 @@ func executeAttackSpec(command, t):
 				type = J.parseInt(val)
 			attackInfo.setType(type)
 		elif command == "name":
-			attackInfo.setName(Organizer.convertKeepCase(val))
+			attackInfo.setName(Values.convertKeepCase(val))
 		elif command == "power":
 			attackInfo.setPower(J.parseFloat(val))
 		elif command == "anim":
@@ -108,7 +108,7 @@ func executeAttackSpec(command, t):
 						elif command.begins_with("se"):
 							soundEffect = val
 						elif command.begins_with("sm"):
-							startMusic = Organizer.convertKeepCase(val)
+							startMusic = Values.convertKeepCase(val)
 						elif command.begins_with("s"):
 							shake = J.parseBoolean(val)
 						elif command.begins_with("cs"):
@@ -189,7 +189,7 @@ func executeAttackSpec(command, t):
 
 func executeStringCommand(command, t):
 	if command == "name":
-		name = Organizer.convertKeepCase(t.nextToken())
+		name = Values.convertKeepCase(t.nextToken())
 	elif command == "defense":
 		attributes[Creature.DEFENSE] = float(J.parseInt(t.nextToken()))
 	elif command == "trigger":
@@ -199,7 +199,7 @@ func executeStringCommand(command, t):
 		var args: Array = Parser.getArgument(t.nextToken())
 		items[args[0]] = J.parseInt(args[1])
 	elif command == "diesound":
-		diesound = Organizer.convertKeepCase(t.nextToken())
+		diesound = Values.convertKeepCase(t.nextToken())
 	elif command == "startFrame":
 		startFrame = J.parseInt(t.nextToken())
 	elif command == "magicDefense":

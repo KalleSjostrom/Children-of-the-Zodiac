@@ -9,7 +9,7 @@ extends SceneTree
 ## scaled by --scale (default 0.25), with its file name printed below it on
 ## the command line output (the sheet has no text), row by row.
 
-func _init() -> void:
+func _initialize() -> void:
 	var args := OS.get_cmdline_user_args()
 	if args.size() < 2:
 		print("usage: contact_sheet.gd -- <out.png> [--columns=<n>] [--scale=<s>] <image or directory>...")

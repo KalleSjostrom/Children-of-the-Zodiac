@@ -23,7 +23,8 @@ takes the focus).
 
 * **Where it is drawn.** Find every call of the overlay's draw and what each
   mode draws before and after it in the same frame (`draw` of the mode, then
-  `GameCore.testDraw`'s "Paused" and "game pad lost" after it). A node takes
+  `GameCore.drawOverlays`' "Paused" and "game pad lost" after it, the
+  Java's `testDraw`; `Game.draw` calls them in that order). A node takes
   the overlay's slot in that order (section 12 of ARCHITECTURE); what the
   frame draws after it stays over it. A node of the UI layer must not come
   after one of Transition in a frame (the levels only rise: GLBackend warns).
@@ -42,10 +43,10 @@ takes the focus).
   `drawMultiString` at `startText`'s alpha (the current mode's fade value
   unless given). Font: `setFontSize(size[, bold])`, even sizes 20 to 50; the
   bold font stays on until a call sets it back (`ScrollableTexts`, `Deck`).
-* **What reads input in a draw.** `GameCore.testDraw` reads the "game pad
+* **What reads input in a draw.** `GameCore.drawOverlays` reads the "game pad
   lost" menu's buttons between its texts and its menu: a twin must keep that
   order (show the node before, hand it the menu after). Every mode reads the
-  direction buttons and CROSS in its `update`, before `testDraw`, so such an
+  direction buttons and CROSS in its `update`, before `drawOverlays`, so such an
   overlay only sees a press the mode did not take (a labyrinth reads none
   while the player steps), and a cutscene takes START itself (it ends the
   story): plan the cases around it.

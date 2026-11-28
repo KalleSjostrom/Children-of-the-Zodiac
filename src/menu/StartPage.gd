@@ -114,7 +114,7 @@ func executeNode(name):
 	elif name.contains("Slot"):
 		var save: bool = activeNode.getParent().getName() == "Save"
 		if save:
-			var prev = Organizer.getOrganizer().getPreviousMode()
+			var prev = Game.previous_mode
 			var finalName: String = name
 			savingString = "Saving.  "
 			saving = true
@@ -153,7 +153,7 @@ func fillRoot(resetCursor = null):
 	activeNode.insertChild("Options")
 	activeNode.insertChild("Map").setEnabled(
 			Database.getVisitedLabyrinths().size() > 0)
-	var gm = Organizer.getOrganizer().getPreviousMode()
+	var gm = Game.previous_mode
 	var isOnSave := false
 	if gm is Labyrinth:
 		var lab = gm

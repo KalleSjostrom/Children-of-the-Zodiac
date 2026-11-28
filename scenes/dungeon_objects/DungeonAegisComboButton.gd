@@ -22,9 +22,9 @@ func _new_inventory(node, map, status: int) -> Inventory:
 func _buttons(map) -> Array:
 	var out: Array = []
 	for b in buttons:
-		out.append(map.getInventory(Organizer.convert(b)))
+		out.append(map.getInventory(Values.convert(b)))
 	return out
 
 
 func _open_door(map):
-	return map.getInventory(Organizer.convert(open_door)) if open_door != "" else null
+	return map.getInventory(Values.convert(open_door)) if open_door != "" else null

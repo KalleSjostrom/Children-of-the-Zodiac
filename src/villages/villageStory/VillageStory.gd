@@ -12,7 +12,7 @@ func init(name, lab = null, hinders = null):
 	checkPlayer()
 	var vsl := VillageStoryLoader.new()
 	vsl.parseFile(str(info.get("map")) + str(info.get("name")))
-	var gm = Organizer.getOrganizer().getPreviousMode()
+	var gm = Game.previous_mode
 	var fromVillage: bool = gm is Village
 	village = null
 	if not fromVillage:
@@ -38,7 +38,7 @@ func init(name, lab = null, hinders = null):
 			village.init(newInfo)
 			village.setReady()
 			# Delete previous game mode!!
-			Organizer.getOrganizer().overwritePreviousMode(village)
+			Game.previous_mode = village
 			ImageHandler.setGameMode(Values.VILLAGE_STORY)
 			fadeValue = J.parseInt(newInfo.get("fadeValue"))
 	initGameMode(info, Values.DETECT_INIT)
@@ -107,13 +107,13 @@ func draw(g, alpha = null):
 	super.draw(g)
 
 func end(pos, removedVillagers, playersAdded):
-	var gm = Organizer.getOrganizer().getPreviousMode()
+	var gm = Game.previous_mode
 	var v = null
 	if gm is Village:
 		v = gm
 	elif gm is VillageStory:
 		v = gm.village
-		Organizer.getOrganizer().overwritePreviousMode(v)
+		Game.previous_mode = v
 
 	if playersAdded:
 		v.initFromStory(pos, removedVillagers, nextPlace)

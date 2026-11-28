@@ -12,7 +12,7 @@ var dataBaseName_ = ""
 
 func _init(name = null) -> void:
 	super(null, 0, 0, null, 0)
-	dataBaseName_ = Organizer.convert(name)
+	dataBaseName_ = Values.convert(name)
 
 
 func activate(labyrinth):

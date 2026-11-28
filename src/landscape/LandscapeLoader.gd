@@ -128,4 +128,4 @@ static func place_index():
 
 
 static func checkPlace(startNode):
-	return _getPlaceMap().get(Organizer.convert(startNode))
+	return _getPlaceMap().get(Values.convert(startNode))

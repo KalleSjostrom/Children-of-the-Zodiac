@@ -23,9 +23,10 @@ of the legacy files they touch.
 
 * **Framework (hand written, do NOT edit)** — `src/graphics/{Graphics, GLBackend,
   GameTexture, ImageHandler, GraphicHelp, ImageGraphics, JColor, Utils3D,
-  Object2D, TimeHideable}.gd`, `src/organizer/{GameCore, Organizer, GameMode,
-  MenuStarter, SubGameMode, GameModeQueue, GameEventListener, AbstractMapLoader,
-  ResourceLoader}.gd`, `src/input/*.gd`, `src/sound/{OggStreamer, SoundPlayer,
+  Object2D, TimeHideable}.gd`, `src/organizer/{GameCore, GameMode,
+  MenuStarter, SubGameMode, GameEventListener, AbstractMapLoader,
+  ResourceLoader}.gd` (the Organizer and GameModeQueue are the Game autoload
+  since phase 4.3: `main/Game.gd`, ARCHITECTURE section 17), `src/input/*.gd`, `src/sound/{OggStreamer, SoundPlayer,
   SoundValues}.gd`, `src/info/{Values, BattleValues, SoundMap}.gd`,
   `src/story/Fadeable.gd`, `src/battle/Hideable.gd`, `src/util/*.gd`,
   `src/main/*.gd`. Read these files: they document the API you call.
@@ -196,7 +197,7 @@ per-frame logic in `draw` (fades) relies on that.
   `Graphics.GL_QUADS` (all used constants exist).
 * Projection: `GameEventListener.set2DNow(g)` / `set3DNow(g)` switch
   immediately; `GameEventListener.set2D()/set3D()` choose the projection at
-  the start of the next frames (Organizer does this per mode).
+  the start of the next frames (the Game autoload does this per mode).
 * JOGL `Texture` → **`GameTexture`** (it is both): `ImageHandler.getTexture(n)`
   returns a GameTexture; `.getTexture()` returns itself; `.bind(g)`,
   `.getImageTexCoords()` (left/right/top/bottom), `.getWidth()`,

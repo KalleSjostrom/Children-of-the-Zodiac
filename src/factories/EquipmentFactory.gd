@@ -70,7 +70,7 @@ func parse(command, value, stat):
 	elif command == "price":
 		stat[AbstractEquipment.PRICE] = float(J.parseInt(value))
 	elif command == "name":
-		o = Organizer.convertKeepCase(value)
+		o = Values.convertKeepCase(value)
 	elif command == "slots":
 		var v: Array = J.split(value, ":")
 		if not (v.size() == 1 and v[0] == "_"):

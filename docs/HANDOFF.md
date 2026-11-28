@@ -1,4 +1,4 @@
-# Handoff: state of the Godot port (2026-11-22, after steps 1–3, modernization phase 0, phases 1, 2, 3, 4.1, 4.2 and 4.4 done and closed, the particles phases P and P2 and the character sprite sheets; phase 4.4: the pilot (the battle's 2D top layer), its rollout's five parts (the battle's enemy, info panels, deck and hand, the texts among its 3D chunks, the card effects that are not particles) and its closing; phase 4.3's first part, the input wrapper, done and closed)
+# Handoff: state of the Godot port (2026-11-25, after steps 1–3, modernization phase 0, phases 1, 2, 3, 4.1, 4.2 and 4.4 done and closed, the particles phases P and P2 and the character sprite sheets; phase 4.4: the pilot (the battle's 2D top layer), its rollout's five parts (the battle's enemy, info panels, deck and hand, the texts among its 3D chunks, the card effects that are not particles) and its closing; phase 4.3's first part, the input wrapper, done and closed; its second part, the `Game` autoload, done)
 
 Conventions: legacy (ported) code follows `docs/PORTING.md`; new code
 (scenes, resources, tools, bridge) follows `docs/ARCHITECTURE.md`. The
@@ -535,6 +535,48 @@ section 14, "The riddles"; the procedure in `docs/CONVERTING_UI.md` section
 - Prepared (plan 9.3, 9.4): phases 4.3 and 4.4; recommended next: 4.4's
   pilot, the battle's 2D top layer (`docs/phase4_4_prompt.md`).
 
+**Modernization phase 4.3, part 2 (the `Game` autoload): done** (2026-11-25;
+plan 9.3, "How the Organizer worked before the autoload" and "Results of the
+Game autoload"; conventions in `docs/ARCHITECTURE.md` section 17;
+`docs/phase4_3_game_prompt.md`):
+- The autoload `Game` (`main/Game.gd`) has the Organizer's state and rules:
+  `current_mode`, `previous_mode`, `next_place` (AutoPlay's `place=`), the
+  suspended stack, the loading gate, exit after the fade with `finishOff`
+  first, `jump_to`, `open_cheater`, `update` and `draw` (Main calls them),
+  and Main's start flags (`start`). main.bank's places are `PlaceRegistry`'s
+  (`main/PlaceRegistry.gd`): read once at start through the legacy
+  tokenizer, typed places, the prefixes (`land<node>`, `land::<music>::<node>`,
+  `air<node>`), the run-time `startNode` and `nextPlace` as an overlay with
+  today's effects. The 49 `Organizer.getOrganizer()` calls and the field
+  reads go through `Game`.
+- Deleted: `Organizer.gd`, `GameModeQueue.gd`, `BattleTest.gd`, the dead
+  code (`getGameMode`, `continueMusic`, `setNext`, `enterCheat`, the
+  Cheater's Battle and Landscape tests and `doCheat`, …) and the class map's
+  and `ClassRegistry`'s ghost entries; the git history up to dbb27a2c has
+  them. `GameCore` stays (the devices, the pause and pad lost overlays,
+  `exitGame`, `setFullScreen`), no longer a base class. `Organizer.convert`,
+  `convertKeepCase`, `convertBack` are `Values`'.
+- Tools: a `--script` tool that names a game class is a launcher of its
+  `<tool>_job.gd` (the autoload's name is unknown when the tool compiles);
+  the ten of `tools/art`, `tools/import`, `tools/village_remake` are, with
+  their command lines unchanged and identical outputs. `check.sh` compiles
+  `main/` too. Every headless `--script` run starts about 2.4 s slower.
+- Parity (tolerance 0; 446 cases, 11,656 shots; the baseline `g0base` on
+  dbb27a2c equals `i2after`): the dead code (a 37-case smoke set), the
+  registry (`g2reg`, every case) and the autoload (`g3game`, every case, the
+  set kept) are identical to it: every shot, every log, the per-case script,
+  error and leak lines (3, 2,421 and 16 in all), every run exiting with 0.
+- A normal run (no `--seed`, the music on) through the title's New game and
+  Continue, the prolog, a labyrinth, the menu, a village, the Cheater's
+  store, the world map and the console's `goto`, `boss` and `cheater`: the
+  same 19 mode switches as the old code, Escape quits with exit code 0 (in
+  both, a pre-existing exit leak report of 861 objects with the music on).
+  A debug export starts at a floor, a village, the world map and the title
+  with no script or parse error.
+- Prepared (plan 9.3, "Prepared after the Game autoload"): audio next
+  (`docs/phase4_3_audio_prompt.md`, its decisions 9.3's recommended
+  answers); saves after the answers to 9.3's questions.
+
 **Modernization phase 4.3, part 1 (the input wrapper): done and closed**
 (2026-11-22; plan 9.3, "Results of the input wrapper"; conventions in
 `docs/ARCHITECTURE.md` section 16; `docs/phase4_3_prompt.md`):
@@ -947,11 +989,13 @@ decision 5 decided in plan section 13):
    and the enemy's card, and the card effects that are not particles
    (2026-11-20), and phase 4.4 is closed (2026-11-22): every mode is
    through step B and closed. Phase 4.3's first part, the input wrapper, is
-   done and closed (2026-11-22). Next (plan 9.3, "Prepared after the input
-   wrapper"): the `Game` autoload (`docs/phase4_3_game_prompt.md`); audio
-   and saves after the answers to 9.3's questions; step C of the converted
-   modes, the battle's first, once decisions 3, 6 and 8 are made (plan 13);
-   phase 5 after step C. Record goldens before each change.
+   done and closed (2026-11-22), its second part, the `Game` autoload, done
+   (2026-11-25). Next (plan 9.3, "Prepared after the Game autoload"): audio
+   (`docs/phase4_3_audio_prompt.md`, its decisions 9.3's recommended
+   answers, to change before running it); saves after the answers to 9.3's
+   questions; step C of the converted modes, the battle's first, once
+   decisions 3, 6 and 8 are made (plan 13); phase 5 after step C. Record
+   goldens before each change.
 
 1. **Performance:** since P2 the labyrinths with rain or snow run at 60 FPS
    (Forest Path was 35, Ice Cavern--Frozen Field 50; plan 6.12), and since
@@ -974,8 +1018,16 @@ decision 5 decided in plan section 13):
 
 - Godot: `C:\Users\c06ks\Work\Godot\Godot_v4.7-stable_win64_console.exe`.
 - `tools/check.sh [paths]`: import pass + compile (default: `src/`, `scenes/`,
-  `tools/`), prints only errors (locked for concurrent use). Run Godot with
-  `< /dev/null` from bash.
+  `main/`, `tools/`, `proto/`), prints only errors (locked for concurrent use).
+  Run Godot with `< /dev/null` from bash.
+- The `Game` autoload (`main/Game.gd`, since phase 4.3) is instantiated in
+  every run, `--script` tools too: about 2.4 s to start a headless tool. A
+  `--script` tool that names a game class must be a launcher of a
+  `<tool>_job.gd` loaded in `_initialize()` (the autoloads' names are
+  registered after the tool is compiled: "Identifier not found: Game";
+  ARCHITECTURE section 17, "Tools"); the tools of `tools/art`,
+  `tools/import` and `tools/village_remake` are, with unchanged command
+  lines.
 - Run a test: `Godot --path . -- --mute [--load="Slot 1"] [--start=<place>]
   --autoplay=tools/autoplay/<script>.txt --shots=<dir>` (add `--headless` for
   a run without screenshots). AutoPlay prints `mode=<game mode> sub=<battle>

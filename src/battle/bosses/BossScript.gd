@@ -53,7 +53,7 @@ func executeCommand(command: String, tokenizer: StringTokenizer):
 		var onlyOnce: bool = command.contains("Single")
 		var infos = AttackInfo.AttackInfos.new(onlyOnce)
 		while t.hasMoreTokens():
-			var attackName: String = Organizer.convertKeepCase(t.nextToken())
+			var attackName: String = Values.convertKeepCase(t.nextToken())
 			if attackName.begins_with("nop"):
 				infos.add(AttackInfo.NOP)
 			else:

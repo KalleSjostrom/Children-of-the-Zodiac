@@ -103,7 +103,7 @@ func executeCommand(command: String, tokenizer: StringTokenizer):
 		elif cmd == "music":
 			getList(TimeLineEvent.MUSICS).append(argument)
 		elif cmd == "trigger":
-			getList(TimeLineEvent.TRIGGERS).append(Organizer.convert(argument))
+			getList(TimeLineEvent.TRIGGERS).append(Values.convert(argument))
 		elif cmd == "character":
 			Load.loadNewCharacter(argument)
 		elif cmd == "animation":

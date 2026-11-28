@@ -43,7 +43,7 @@ How the game can be saved depends on the level (COTZ-005):
   position as the menu.
 
 The code: `Save.place_for`, `save_game_in`, `autosave` (after a battle,
-`Labyrinth.leaveBattle`), `autosave_at` (`Organizer._initNext`), the
+`Labyrinth.leaveBattle`), `autosave_at` (`Game._autosave_on_entering`, the Organizer's `_initNext` before phase 4.3), the
 position in `Labyrinth.save_position` / `Load.take_labyrinth_position`, the
 slots in `SaveSlots` (`scenes/common/SaveSlots.gd`).
 

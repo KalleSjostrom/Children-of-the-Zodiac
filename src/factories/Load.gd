@@ -51,7 +51,7 @@ static func loadGame(save = null):
 		loadGame(saveSlotName)
 		return
 	reset()
-	Organizer.reset()
+	Database.reset()
 	EnemyFactory.getEnemyFactory()
 	AbstractPage.getImages()
 	Load.new().parseFile(str(save) + ".sav")
@@ -249,22 +249,22 @@ static func take_labyrinth_position(floor: String) -> Array:
 		return []
 	var pos: Array = labyrinthPosition
 	labyrinthPosition = []
-	if Organizer.convert(pos[0]) != Organizer.convert(floor):
+	if Values.convert(pos[0]) != Values.convert(floor):
 		return []
 	return [pos[1], pos[2]]
 
 
 func executeCommand(command: String, tokenizer: StringTokenizer):
 	if command == "start":
-		startl = Organizer.convertKeepCase(tokenizer.nextToken())
+		startl = Values.convertKeepCase(tokenizer.nextToken())
 	elif command == "labpos":
-		var floor: String = Organizer.convertKeepCase(tokenizer.nextToken())
+		var floor: String = Values.convertKeepCase(tokenizer.nextToken())
 		var address: int = J.parseInt(tokenizer.nextToken())
 		labyrinthPosition = [floor, address, J.parseInt(tokenizer.nextToken())]
 	elif command == "visitedNodes":
 		var zone: String = tokenizer.nextToken()
 		Visited.getVisited().getVnodes(zone).append(
-				Organizer.convertKeepCase(tokenizer.nextToken()))
+				Values.convertKeepCase(tokenizer.nextToken()))
 	elif command == "visitedRoads":
 		var zone: String = tokenizer.nextToken()
 		Visited.getVisited().getVroads(zone).append(J.parseInt(tokenizer.nextToken()))
@@ -284,7 +284,7 @@ func executeCommand(command: String, tokenizer: StringTokenizer):
 		if not _isLoaded(currentCharacter.getName()):
 			exCharacter.append(currentCharacter)
 	elif command == "rightHand" or command == "leftHand" or command == "armor":
-		var name: String = Organizer.convertKeepCase(tokenizer.nextToken())
+		var name: String = Values.convertKeepCase(tokenizer.nextToken())
 		var ae = EquipmentFactory.getEquipment(name)
 		currentCharacter.equip(ae, false)
 		var number: int = 1
@@ -292,7 +292,7 @@ func executeCommand(command: String, tokenizer: StringTokenizer):
 			number = J.parseInt(tokenizer.nextToken())
 		setEquipment(ae, number)
 	elif command == "partyweapons" or command == "partyshields" or command == "partyarmors":
-		var name: String = Organizer.convertKeepCase(tokenizer.nextToken())
+		var name: String = Values.convertKeepCase(tokenizer.nextToken())
 		var number: int = 1
 		if tokenizer.hasMoreTokens():
 			number = J.parseInt(tokenizer.nextToken())
@@ -310,7 +310,7 @@ func executeCommand(command: String, tokenizer: StringTokenizer):
 	elif command == "item":
 		var name: String = tokenizer.nextToken()
 		var Nr: int = J.parseInt(tokenizer.nextToken())
-		name = Organizer.convertKeepCase(name)
+		name = Values.convertKeepCase(name)
 		partyItems.addItem(name, Nr)
 	elif command == "info":
 		var gold: int = J.parseInt(tokenizer.nextToken())
@@ -327,14 +327,14 @@ func executeCommand(command: String, tokenizer: StringTokenizer):
 			name += tokenizer.nextToken()
 			next = tokenizer.nextToken()
 		var value: int = J.parseInt(next)
-		name = Organizer.convert(name)
+		name = Values.convert(name)
 		Database.addStatus(name, value)
 	elif command == "storedTrigger":
-		var type: String = Organizer.convertKeepCase(tokenizer.nextToken())
-		var name: String = Organizer.convertKeepCase(tokenizer.nextToken())
+		var type: String = Values.convertKeepCase(tokenizer.nextToken())
+		var name: String = Values.convertKeepCase(tokenizer.nextToken())
 		Database.storeTriggers(type, name)
 	elif command == "counter":
-		var name: String = Organizer.convert(tokenizer.nextToken())
+		var name: String = Values.convert(tokenizer.nextToken())
 		var counter: int = J.parseInt(tokenizer.nextToken())
 		var offset: int = J.parseInt(tokenizer.nextToken())
 		var s = Bestiary.getBestiary().getStats(name)
@@ -380,7 +380,7 @@ func _isLoaded(name: String) -> bool:
 ## Converts a labyrinth name to the "Capitalized Words" form used as key
 ## (e.g. "hall_of_memories" -> "Hall of Memories").
 static func prepare(string):
-	string = Organizer.convert(string)
+	string = Values.convert(string)
 	var sb: String = ""
 	var split: Array = J.split(string, "\\s")
 	for i in range(split.size()):

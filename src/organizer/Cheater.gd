@@ -1,19 +1,15 @@
 class_name Cheater
 extends GameMode
-## Port of organizer.Cheater: the developer/debug mode (Select + Down, Space +
-## Down on the keyboard). It shows a menu of places the player can be
-## teleported to: villages, labyrinth entrances (by mark), story sequences
-## of every chapter, the world map (on foot and from the air), stores and
-## some boss battles. Cross enters a sub menu / goes to the place, circle
-## goes back (from the root it switches back to the previous mode).
-## If no game has been loaded, the "Start" save is loaded first.
-##
-## doCheat(cheat) is called by InputKeyBoardManager when a typed cheat
-## (Shift+0 ... Enter) is confirmed: "trigger <name> <value>" sets a database
-## status, "open" opens all the roads.
+## Port of organizer.Cheater: the developer/debug mode (Java: Select + Down,
+## Space + Down on the keyboard; the debug console's "cheater" now, COTZ-006).
+## It shows a menu of places the player can be teleported to: villages,
+## labyrinth entrances (by mark), story sequences of every chapter, the world
+## map (on foot and from the air), stores and some boss battles. Cross enters
+## a sub menu / goes to the place, circle goes back (from the root it switches
+## back to the previous mode). If no game has been loaded, the "Start" save is
+## loaded first.
 
 var activeNode = null
-var shouldGetInfoFromMain_ = true
 
 
 ## Java: init(HashMap info). The given info is ignored.
@@ -644,7 +640,7 @@ func checkExit():
 	return mode
 
 
-## Called when the organizer switches from the Cheater to the chosen mode.
+## Called when the Game autoload switches from the Cheater to the chosen mode.
 func finishOff():
 	# killOggPlayer()
 	pass
@@ -672,7 +668,7 @@ func update(elapsedTime: float):
 	super.update(elapsedTime)
 
 
-## Gets the next place (tells the organizer which place to load).
+## Gets the next place (tells the Game autoload which place to load).
 func getNextPlace():
 	# GameMode.getNextPlace() is typed String; null means "no place" there too.
 	return "" if nextPlace == null else str(nextPlace)
@@ -685,13 +681,7 @@ func switchToNext():
 	var current: String = activeNode.getName()
 	var n = activeNode.getParent()
 	var parent: String = "" if n == null else n.getName()
-	if next == "Battle Test":
-		mode = Values.BATTLE_TEST
-		nextPlace = ""
-		# Values.DAY = true
-		shouldGetInfoFromMain_ = false
-		Organizer.getOrganizer().setNext(false)
-	elif current == "Villages":
+	if current == "Villages":
 		match next:
 			"Home of Celis":
 				setWestVillage("Home of Celis")
@@ -1384,9 +1374,6 @@ func switchToNext():
 		Inn.setTestMap(getStoreInfo(next, "Inn"))
 		setStore(Values.INN)
 
-	elif next == "Landscape Test":
-		setLandTest("west")
-
 	# No matching case... #
 	else:
 		# Java exited the game; the menu stays open.
@@ -1398,7 +1385,6 @@ func setBossBattleArea(name):
 	mode = Values.BOSS_BATTLE_AREA
 	nextPlace = name
 	exit(Values.BOSS_BATTLE_AREA)
-	Organizer.getOrganizer().setNext(true)
 
 
 func setWestVillage(name):
@@ -1420,65 +1406,51 @@ func setVillage2(name):
 	mode = Values.VILLAGE
 	nextPlace = name
 	exit(Values.VILLAGE)
-	Organizer.getOrganizer().setNext(true)
-
-
-func setLandTest(name):
-	mode = Values.LANDSCAPE_TEST
-	nextPlace = name
-	Organizer.getOrganizer().setNext(true)
 
 
 func setLabyrinth(name):
 	nextPlace = name
 	exit(Values.LABYRINTH)
-	Organizer.getOrganizer().setNext(true)
 
 
 func setStory(name):
 	nextPlace = name
 	exit(Values.STORY_SEQUENSE)
-	Organizer.getOrganizer().setNext(true)
 
 
 func setProlog(name):
 	nextPlace = name
 	exit(Values.STORY_SEQUENSE)
-	Organizer.getOrganizer().setNext(true)
 
 
 func setWestLandscape(name):
 	Database.addStatus("Landscape", Landscape.WEST_CONTINENT)
 	nextPlace = "land" + name
 	exit(Values.LANDSCAPE)
-	Organizer.getOrganizer().setNext(true)
 
 
 func setEastLandscape(name):
 	Database.addStatus("Landscape", Landscape.EAST_CONTINENT)
 	nextPlace = "land" + name
 	exit(Values.LANDSCAPE)
-	Organizer.getOrganizer().setNext(true)
 
 
 func setNorthLandscape(name):
 	Database.addStatus("Landscape", Landscape.NORTH_CONTINENT)
 	nextPlace = "land" + name
 	exit(Values.LANDSCAPE)
-	Organizer.getOrganizer().setNext(true)
 
 
 func setAirLandscape(name):
 	nextPlace = "air" + name
 	exit(Values.AIR_SHIP)
-	Organizer.getOrganizer().setNext(true)
 
 
 ## Loads the village with the given name (main.bank) and returns the
 ## information map of its building whose name contains type.
 func getStoreInfo(next, type):
 	var vl := Village.new()
-	vl.init(Organizer.getOrganizer().getInformationFor(next))
+	vl.init(Game.places.info_for(next))
 	return vl.getTestInfoForType(type)
 
 
@@ -1496,7 +1468,6 @@ func createStoreInfo(next, type):
 
 func setStore(p_mode):
 	exit(p_mode)
-	Organizer.getOrganizer().setNext(true)
 
 
 ## The information for the next place is never created here.
@@ -1504,28 +1475,10 @@ func getInfoForNextPlace():
 	return null
 
 
-## True if the organizer should get the information about the next place
+## True if the Game autoload should get the information about the next place
 ## from the main information source (main.bank), false for the stores
 ## (they use the test map set in switchToNext()).
 func shouldGetInfoFromMain():
 	return (mode != Values.CARDSTORE and mode != Values.WEAPONSTORE
-		and mode != Values.CHURCH and mode != Values.INN) and shouldGetInfoFromMain_
+		and mode != Values.CHURCH and mode != Values.INN)
 
-
-## Executes a typed cheat (InputKeyBoardManager, Shift+0 ... Enter):
-##   "trigger <name> <value>" sets the database status name to value.
-##   "open" opens all the roads on the world map.
-static func doCheat(cheat):
-	var commands: Array = J.split(cheat, " ")
-	if commands != null and commands.size() > 0:
-		if commands[0] == "trigger":
-			if commands.size() < 3:
-				push_error("Cheater.doCheat: usage: trigger <name> <value>")
-				return
-			Database.addStatus(commands[1], J.parseInt(commands[2]))
-		elif cheat == "open":
-			Database.openAllRoads()
-			var gm = Organizer.getOrganizer().getCurrentMode()
-			if gm is Landscape:
-				var l = gm
-				# l.openRoads()

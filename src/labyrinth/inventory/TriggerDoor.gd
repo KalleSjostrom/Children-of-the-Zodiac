@@ -21,7 +21,7 @@ var tutorialName = null
 
 func _init(node = null, dir = null, openRoad = null, nextPlace = null, status = null, tok = null) -> void:
 	super(node, dir, openRoad, nextPlace, status, tok)
-	var triggerfilename: String = Organizer.convertKeepCase(nextPlace)
+	var triggerfilename: String = Values.convertKeepCase(nextPlace)
 	triggerfilename += ".trig"
 	var loader := TriggerLoader.new()
 	loader.parseFile(triggerfilename)
@@ -130,14 +130,14 @@ class TriggerLoader extends AbstractMapLoader:
 			while t.hasMoreTokens():
 				args = Parser.getArgument(t.nextToken())
 				if args[0] == "name":
-					name = Organizer.convertKeepCase(args[1])
+					name = Values.convertKeepCase(args[1])
 			sound = name
 		elif command == "tutorialName":
 			var name = null
 			while t.hasMoreTokens():
 				args = Parser.getArgument(t.nextToken())
 				if args[0] == "name":
-					name = Organizer.convertKeepCase(args[1])
+					name = Values.convertKeepCase(args[1])
 			tutorialName = name
 		elif command == "dialog":
 			parser.addDialog(t, dialogs, null)

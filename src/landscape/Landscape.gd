@@ -189,7 +189,7 @@ func checkGameInput():
 ## Executes the events when the cross button is pressed.
 func crossPressed():
 	var s: String = String(currentNode.getName()).replace(" ", "_") + "node"
-	var status: int = Database.getStatusFor(Organizer.convert(s))
+	var status: int = Database.getStatusFor(Values.convert(s))
 	var p_mode: int = -1
 	var zone: String = currentNode.getName()
 	if status != -2:

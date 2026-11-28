@@ -107,7 +107,7 @@ func update(elapsedTime: float):
 
 		if x < 0 or x > backgroundWidth or y < 0 or y > backgroundHeight:
 			if not checkDoors(holeDoors, player.getDirection()):
-				Organizer.getOrganizer().deleteSuspended()
+				Game.delete_suspended()
 				exit()
 			return
 		checkGameInput()
@@ -131,7 +131,7 @@ func checkDoor(d, direction):
 
 			fromHouse = d.getToPos()
 			if mode == Values.SWITCH_BACK:
-				var gm = Organizer.getOrganizer().getNextSuspendedMode()
+				var gm = Game.next_suspended_mode()
 				if gm == null or gm.getName() != d.getBuildingName():
 					mode = Values.HOUSE
 					if fromHouse != null:
@@ -406,7 +406,7 @@ func executeTalkableVillager(v):
 				nextPlace = filename.replace("exit", "")
 				exit(Values.STORY_SEQUENSE)
 			else:
-				storyInfo = Organizer.getOrganizer().getInformationFor(filename)
+				storyInfo = Game.places.info_for(filename)
 				var mus = storyInfo.get("music")
 				nextPlace = null
 				switchGameMode(Values.VILLAGE_STORY, mus != null and mus != "continue", false)
@@ -809,7 +809,7 @@ func exit(next = null, fadeBattleMusic = null):
 		super.exit(next)
 		return
 	nextPlace = exitName
-	Organizer.getOrganizer().deleteSuspended()
+	Game.delete_suspended()
 	exit(Values.LANDSCAPE)
 
 

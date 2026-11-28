@@ -27,7 +27,7 @@ func _init(node = null, dir = null, openRoad = null, nextPlace = null, status = 
 func setHaveBeen(lastNodesName = null):
 	for np in nextPlaces:
 		if lastNodesName == null or \
-				Organizer.convert(np).to_lower() == Organizer.convert(lastNodesName).to_lower():
+				Values.convert(np).to_lower() == Values.convert(lastNodesName).to_lower():
 			_setHaveBeen()
 
 

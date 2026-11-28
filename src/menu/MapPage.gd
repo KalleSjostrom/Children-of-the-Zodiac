@@ -36,7 +36,7 @@ static func _createMappiece3() -> Array:
 func _init(p_shortcut = false) -> void:
 	shortcut = p_shortcut
 	var name = null
-	var gameMode = Organizer.getOrganizer().getPreviousMode()
+	var gameMode = Game.previous_mode
 	activeNode = getRootNode()
 	if gameMode is Labyrinth:
 		lab = gameMode

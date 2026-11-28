@@ -68,7 +68,7 @@ static func getStatusFor(name):
 	var s = status.get(name)
 	var retStatus: int = -1 if s == null else s
 	if retStatus == -1:
-		var n: String = Organizer.convert(name)
+		var n: String = Values.convert(name)
 		s = status.get(n)
 		retStatus = -1 if s == null else s
 	return retStatus
@@ -124,13 +124,6 @@ static func saveData(writer):
 				String(key).replace(" ", "_") + " " + val.replace(" ", "_"))
 
 
-## Opens all roads in the database.
-static func openAllRoads():
-	for key in status.keys():
-		if String(key).begins_with("road"):
-			status[key] = 1
-
-
 ## Adds the given labyrinth map to the visited labyrinths.
 static func visitLabyrinth(name, map):
 	var found: bool = false
@@ -171,9 +164,3 @@ static func getMap(name):
 
 static func setLastVisitedLabyrinth(lab):
 	lastVisitedLabyrinth = lab
-
-
-static func getStoredKeys():
-	var keys: Array = status.keys()
-	keys.sort()
-	return keys

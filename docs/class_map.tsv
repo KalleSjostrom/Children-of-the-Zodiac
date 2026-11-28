@@ -55,7 +55,6 @@ battleBacks.BattleParticle	BattleParticle	res://src/battleBacks/BattleParticle.g
 battleBacks.BattleSystem	BattleSystem	res://src/battleBacks/BattleSystem.gd
 battleBacks.SnowParticle	BattleBackSnowParticle	res://src/battleBacks/SnowParticle.gd
 battleBacks.SnowSystem	BattleBackSnowSystem	res://src/battleBacks/SnowSystem.gd
-battleTest.BattleTest	BattleTest	res://src/battleTest/BattleTest.gd
 bodies.Bodies	Bodies	res://src/bodies/Bodies.gd
 bodies.Body	Body	res://src/bodies/Body.gd
 bodies.PointBody	PointBody	res://src/bodies/PointBody.gd
@@ -274,17 +273,11 @@ miniGames.RubicsPuzzle19	RubicsPuzzle19	res://src/miniGames/RubicsPuzzle19.gd
 miniGames.Tile	Tile	res://src/miniGames/Tile.gd
 organizer.AbstractMapLoader	AbstractMapLoader	res://src/organizer/AbstractMapLoader.gd
 organizer.Cheater	Cheater	res://src/organizer/Cheater.gd
-organizer.FPSAnimator	FPSAnimator	res://src/organizer/FPSAnimator.gd
-organizer.Game	Game	res://src/organizer/Game.gd
 organizer.GameCore	GameCore	res://src/organizer/GameCore.gd
 organizer.GameEventListener	GameEventListener	res://src/organizer/GameEventListener.gd
 organizer.GameMode	GameMode	res://src/organizer/GameMode.gd
-organizer.GameModeQueue	GameModeQueue	res://src/organizer/GameModeQueue.gd
-organizer.GraphicUI	GraphicUI	res://src/organizer/GraphicUI.gd
 organizer.MenuStarter	MenuStarter	res://src/organizer/MenuStarter.gd
-organizer.Organizer	Organizer	res://src/organizer/Organizer.gd
 organizer.ResourceLoader	GameResourceLoader	res://src/organizer/ResourceLoader.gd
-organizer.Screen	OrganizerScreen	res://src/organizer/Screen.gd
 organizer.SubGameMode	SubGameMode	res://src/organizer/SubGameMode.gd
 particleSystem.EnemySystem	EnemySystem	res://src/particleSystem/EnemySystem.gd
 particleSystem.FlameParticleSystem	FlameParticleSystem	res://src/particleSystem/FlameParticleSystem.gd

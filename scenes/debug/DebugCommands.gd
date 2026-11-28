@@ -7,7 +7,7 @@ extends RefCounted
 ## flip without either.
 ##
 ## The commands go the game's own ways where it has them: places are entered
-## through the Organizer like a door would, statuses through the Database.
+## through the Game autoload like a door would, statuses through the Database.
 ## They are registered in _init, in groups for "help"; see GameCommands for
 ## the game's own.
 

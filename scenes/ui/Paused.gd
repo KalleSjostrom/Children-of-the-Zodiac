@@ -1,6 +1,6 @@
 extends Control
 ## "Paused" over the frame (phase 3 step B, docs/ARCHITECTURE.md section 12),
-## on the Transition layer after the mode's fade, as GameCore.testDraw draws
+## on the Transition layer after the mode's fade, as GameCore.drawOverlays draws
 ## it while the game is paused (START). The dim under it is the Fade node
 ## (Graphics.show_fade at 0.5); GameCore keeps the pause.
 

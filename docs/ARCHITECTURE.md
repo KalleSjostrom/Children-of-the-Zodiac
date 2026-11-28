@@ -24,6 +24,7 @@ style.
 
 ```
 main/Main.tscn            the tree in section 4
+main/Game.gd              the Game autoload, main/PlaceRegistry.gd its place registry (section 17)
 scenes/
   common/                 VillageDoor, VillageSign, VillageLoot, VillageSpawn, ActorView,
                           StoryImage (.tscn + .gd each), alpha_test.gdshader; Difficulty +
@@ -91,16 +92,19 @@ resources/
 src/                      legacy code (shrinks over time)
 tools/import/             scene_preview.gd (windowed; any 2D scene, e.g. a village),
                           dungeon_preview.gd (windowed; a floor scene), particles_to_scenes.gd
-                          (+ .sh; headless `--script`). The village, dungeon and world map
+                          (+ .sh; headless `--script`); each a launcher of its <tool>_job.gd
+                          (section 17, "Tools"). The village, dungeon and world map
                           converters and their data checks are deleted with the .vil and .map
                           files (decision 5, plan 6.9, 7.9, 9.1; the git history has them)
 tools/art/                the character images (section 9, "Character frames and sheets", headless
                           `--script`): pad_character_frames.gd, pack_character_sheets.gd,
-                          rewrite_sprite_frames.gd, character_sets.gd (the sets they work on)
+                          rewrite_sprite_frames.gd (launchers of their _job.gd, section 17),
+                          character_sets.gd (the sets they work on)
 tools/parity/             screenshot comparison (section 7), contact_sheet.gd
 tools/village_remake/     village remakes from new art (section 9, "Village remakes"; headless
                           `--script`): remake_inventory.gd, remake_view.gd, remake_build.gd,
-                          remake_check.gd, remake_lib.gd, remake_draw.gd; obstacle_groups.json
+                          remake_check.gd (launchers of their _job.gd, section 17), remake_lib.gd,
+                          remake_draw.gd; obstacle_groups.json
                           (the obstacle groups of the deleted .vil files)
 ```
 
@@ -182,6 +186,9 @@ Main (Node, src/main/Main.gd)
 └── SubViewport × n (GLBackend)     the legacy 3D chunks
 ```
 
+The root's other child, before Main, is the autoload `Game` (`main/Game.gd`,
+section 17): the modes, the places and the switches; Main calls it every frame.
+
 Everything a legacy `draw(g)` draws lands on `LegacyLayer`, above `World`. A
 `Camera2D` in a scene under `World` moves only the default canvas, so it never
 moves legacy drawing, and the fade (`GameMode.draw`, the Transition layer's
@@ -214,10 +221,13 @@ legacy 2D drawn after it is drawn over it (section 12).
   * When the scene changes, the viewport's canvas transform is reset, so a
     `Camera2D` of the old scene does not leave the canvas scrolled.
 * **Lifetime.** Game modes are `RefCounted` and are never freed explicitly:
-  the Organizer drops them. When the last reference goes,
+  the Game autoload drops them (section 17; the Organizer did until phase
+  4.3). When the last reference goes,
   `GameMode._notification(NOTIFICATION_PREDELETE)` frees `scene_root`. A mode
-  stays referenced as `Organizer.previousGameMode` until the next mode
-  switch, so its scene is freed one switch after the mode was left.
+  stays referenced as `Game.previous_mode` until the next mode
+  switch, so its scene is freed one switch after the mode was left; at exit
+  `Main._exit_tree` frees the scenes not in the tree, `ExitCleanup` reaches
+  the modes through the `Game` node and `Game.release` drops them.
 * **No strong references from a scene to its mode.** The mode holds its
   scene; if the scene (or anything under it, including signal connections
   with bound arguments and lambdas that capture the mode) held the mode, the
@@ -242,9 +252,10 @@ legacy 2D drawn after it is drawn over it (section 12).
   of a SubViewport chunk (`GLBackend.scene_3d`, section 10): it shares the
   depth buffer and the blending with the scene, as it shared one chunk with
   the legacy walls.
-* The Organizer is unchanged in phase 0: the loading gate, exit-after-fade,
+* The Organizer was unchanged in phase 0: the loading gate, exit-after-fade,
   the suspended stack and the previous/current pair work as before. The
-  bridge only adds and removes nodes.
+  bridge only adds and removes nodes. Since phase 4.3 they are the Game
+  autoload's, unchanged (section 17).
 
 ## 5. Data → presentation → logic
 
@@ -334,7 +345,11 @@ particles) `Graphics.place_centered_current_2d`, `Utils3D.show_triangles`, `Part
 `SphereParticle.show_particle` and the twins in `SphereParticleSystem.draw`, `ImageParticleSystem.draw` and
 `SlowParticleSystem.draw`, and the closing's `Character3D._show_red_screen`:
 section 15; phase 4.3's `InputManager.BUTTON_ACTIONS`, `press_actions`,
-`Main.keys_reach_game` and `AutoPlay._send_action`: section 16. Closing phase 4.2 removed the
+`Main.keys_reach_game` and `AutoPlay._send_action`: section 16; and the Game autoload's
+`Game.current_mode`, `previous_mode` (a villager's story sets it), `next_place`,
+`places.info_for`, `places.update_next_place_for`, `next_suspended_mode`, `delete_suspended`,
+`jump_to` and `open_cheater` (the 49 `Organizer.getOrganizer()` calls and the Organizer's
+fields before), with `GameCore.preDraw` and `drawOverlays` (its `testDraw` split): section 17. Closing phase 4.2 removed the
 wrappers that only chose between a legacy drawing and its twin, `AbstractPage.draw_list`,
 `StatusPage.draw_top`, `AbstractStore.draw_dim`, `RiddleGame.draw_dim`, `DeckPage`'s
 `_draw_deck` and `_draw_bar`: their call sites call the twin, plan 9.2; closing phase 4.4
@@ -477,7 +492,7 @@ the bridge it checked (a scene a mode owns under `World` with legacy
 drawing over it, kept while the mode is suspended, freed with the mode) is
 what every village, labyrinth, cutscene and world map case runs through
 now. Run the whole parity set after changing Main, GameMode, GLBackend or
-the Organizer; a scene that is not freed shows as a leak report at exit
+the Game autoload; a scene that is not freed shows as a leak report at exit
 (below). The git history up to aab714c9 has the test.
 
 Freeing the modes needed port fixes: `LandscapeLoader` kept its map loader,
@@ -606,7 +621,7 @@ draws it; the legacy objects stay in charge.
   arithmetic (the legacy `int()` and `J.round` of positions), same state
   changes, and it returns what it would draw.
 * This happens inside `draw`, not in `update`, on purpose: in the frame in
-  which the Organizer leaves a mode, its `update` runs but its `draw` does
+  which the Game autoload leaves a mode, its `update` runs but its `draw` does
   not, and those state changes (smoke particles' lives, the unstable sort's
   history) must not run there either.
 * `Village.SceneGLState` follows the GL state through the world drawing
@@ -1001,7 +1016,7 @@ the walls' depth. Later 3D chunks (after 2D) stay SubViewports.
 **Lifetime.** The scene is the Labyrinth's `scene_root` and is freed with
 it; the Labyrinth is freed since phase 2 (section 8). Each logs it
 (`Labyrinth: freed <floor>`, `DungeonScene: freed <floor>.map`): a floor
-left is freed at the next mode switch (it stays the Organizer's previous
+left is freed at the next mode switch (it stays the Game autoload's previous
 mode until then); Main frees the scene of the floor still current when the
 game quits.
 
@@ -1238,7 +1253,7 @@ EmotionBubble (Control, on UI)      an emotion bubble (Sprite.drawEmotions): the
                                     its corners through the modelview (Graphics.screen_points)
 MissionDisplay (Control, on UI)     the labyrinth's mission line (labyrinth.mission.*)
 └── Line (BaselineLabel MissionLine, y 50; x moves with the slide)
-Paused (Control, on Transition)     "Paused" (GameCore.testDraw); its dim is a Fade node
+Paused (Control, on Transition)     "Paused" (GameCore.drawOverlays); its dim is a Fade node
 └── Title (BaselineLabel PausedTitle, centred at 512, 250)
 PadLost (Control, on Transition)    "Connection to game pad lost"; its dim is a Fade node, its
 │                                   menu a MenuList node after it (since phase 4.2, section 14)
@@ -1290,7 +1305,7 @@ converted draw method runs a twin without the drawing where it drew
 `ScrollableTexts.show_texts` with `ScrollableText.place_text`,
 `Tutorial.show_page` with `Row.place_rows`, `place_words` and
 `Icon.place_icon`; dev only `MapRenderer.show_map`), inside the modes' draw (the
-Organizer's last frame of a mode runs its update but not its draw). A
+last frame of a mode runs its update but not its draw). A
 twin:
 
 * makes the drawing's state changes in the same order: the font sizes; the
@@ -1482,7 +1497,7 @@ for one overlay, and the legacy decides it per load, not per file.
 
 `resources/world_map/place_index.tres` (`WorldMapIndex`) is
 `LandscapeLoader.PlaceMapLoader`'s index: the map file of every world map
-node (`Organizer.convert` of each `node` line's last token, `world0.map`,
+node (`Values.convert`, the Organizer's until phase 4.3, of each `node` line's last token, `world0.map`,
 `world1.map` then `world2.map`). Godot's text format writes its keys
 sorted; the index is only looked up (`checkPlace`).
 
@@ -1575,7 +1590,7 @@ The scenes are the data (the converter is gone): edit
 `Nodes`, the roads with their points and dots in `Roads`; the order of the
 children is the order the legacy objects are built in). A node added or
 renamed goes into `resources/world_map/place_index.tres` too (its
-`Organizer.convert`ed name → its map file; a later map wins a name, as
+`Values.convert`ed name → its map file; a later map wins a name, as
 PlaceMapLoader read world0, world1, then world2). Then: goldens of the cases
 that show the map before the change (`world_*`, `airship_*`, `landscape`,
 `dialog_world_map`, `dungeon_world_map_entry`; the coverage probe of
@@ -1711,7 +1726,7 @@ where each part was drawn:
   `setColor(color)`; `MenuHand.place_hand`: the dim and the bind; the
   menu's variants below), then the frame's next `MenuList` on that layer
   gets the lines with their font sizes and fonts, the hand and the
-  material. `GameCore.testDraw` shows the
+  material. `GameCore.drawOverlays` shows the
   game pad lost menu this way on Transition (before, `PadLost` drew it).
 * Each node takes the colour (`getCurrentColor`, the text colour) and the
   material (`Graphics.canvas_material`) of the GL state where its part was
@@ -2625,3 +2640,110 @@ The repeat of step C's menus is a decision of its own (`GameAction`'s 480
 ms and 90 ms on the game clock, or the OS's echo through
 `is_action_pressed(…, true)`). An `InputEventAction` for an action the
 InputMap lacks logs an error: add the action first.
+
+## 17. The Game autoload and the place registry (phase 4.3)
+
+The game's modes and places are the autoload `Game` (`main/Game.gd`,
+`project.godot`'s `[autoload]`; plan 9.3 has the facts and the results). It
+took over the Java's `Organizer` with its rules unchanged; the music policy
+and the rules inside the modes (`GameMode`: the fade, `done` set in the
+draw, the input behaviours) stay where they are until step C.
+
+**State** (read by the legacy modes, AutoPlay and the console; written only
+by `Game`, except that a villager's story sets `previous_mode`):
+
+| Member | What |
+|---|---|
+| `current_mode: GameMode` | the mode that runs (null before `start`) |
+| `previous_mode: GameMode` | the mode before it, alive until the next switch |
+| `next_place: String` | the place asked for last (AutoPlay's `place=`): a main.bank name or a prefixed one; `""` after a mode that names none (the menu, a store, a villager's story, going back) |
+| `places: PlaceRegistry` | main.bank's places |
+| `next_suspended_mode()`, `suspended_modes()`, `delete_suspended()` | the suspended stack (the last one first): the modes left for the menu, a store, a house or a villager's story |
+
+**Calls.** `start(options, devices)` once from `Main._ready` (the command
+line's `--start`, `--load`, `--start-time`, `--status`, `--start-node`, and
+AutoPlay's input device); `update(elapsed_ms)` (one, three or forty times a
+frame: `Main._update_game`) and `draw(g)` every frame from `Main._process`;
+`jump_to(place)` and `open_cheater()` from the debug console; `release()`
+from `Main._exit_tree`. Nothing in `Game` runs on its own (no `_process`):
+the frame's order is Main's (section 16, plan 9.3).
+
+**The rules** (as the Organizer's):
+
+* *Switching.* When the current mode's `checkExit()` reports an exit mode,
+  `update` calls its `finishOff()`, then reads the exit mode, whether the
+  next place's info comes from main.bank (`shouldGetInfoFromMain`), the next
+  place and the mode's own info for it (`getInfoForNextPlace`: a building's,
+  a villager's story's). `Values.SWITCH_BACK` resumes the suspended stack's
+  top, or swaps the current and the previous mode when it is empty; any
+  other mode makes a new mode (`Values.getClassMap`, `ClassRegistry`), with
+  main.bank's mode when the info comes from main.bank. The left mode becomes
+  `previous_mode`; a suspended one also goes onto the stack.
+* *The loading gate.* A mode is updated and drawn only after it has loaded:
+  `draw` ends the loading (`loadingDone`, ImageHandler's queue being always
+  empty). A mode made in a frame's update (or by the console before it)
+  draws in that frame and updates in the next.
+* *The frame's drawing* (`draw`, the Java's `GameCore.testDraw`): Start's
+  pause (`GameCore.preDraw`), the current mode behind the gate, `checkError`,
+  then "Paused" or the game pad lost overlay (`GameCore.drawOverlays`).
+* *`jump_to`* leaves the current mode without `finishOff` or a fade, keeps
+  the suspended stack and loads the "Start" game when none is loaded.
+  Entering a village, a floor, the world map or the airship from another
+  place autosaves (Easy and Medium; not from the title or the menu).
+
+**The place registry** (`main/PlaceRegistry.gd`): main.bank read once at
+start (`read`, by `start`) through the legacy tokenizer (`AbstractMapLoader`,
+`Parser`: the `var` substitutions, quoted values), into typed places
+(`PlaceRegistry.Place`: `key`, `name`, `mode`, `music`, `map`, `next_place`,
+and `fields`, the line's keys and values, read-only). Decision 5 keeps the
+`.bank` file as the data; nothing is generated from it.
+
+* `key_of(name)`: the name as lookups compare it (`Values.convert`: lower
+  case, `_` as a space).
+* `get_place(name)`: the place of that name, or null (no prefixes).
+* `resolve(name)`: the place a name leads to. `land<node>` leads to the
+  world map whose index has the node (`LandscapeLoader.checkPlace`),
+  `land::<music>::<node>` too, with the world map's music for its next start
+  (`Landscape.setInfo`), `air<node>` (any key beginning with "air") to
+  `airworld`; each sets the world's `startNode` to the node, also when the
+  caller only checks the name.
+* `info_of(place)`, `info_for(name)`: the dictionary a legacy mode gets
+  (`GameMode.init`), new for each call: the place's fields with the run-time
+  changes applied.
+* `update_next_place_for(name, next)`: a cutscene's next place for the rest
+  of the session (a mission's door, an IfDoor's first use).
+
+The run-time changes (`startNode`, `nextPlace`) are an overlay over the
+parsed places, applied by every later lookup of the place, in the order they
+were first written: what the Organizer's writes into main.bank's shared
+dictionaries did (a world map entered by its own name starts at the node the
+last lookup left; loading a game undoes neither). No legacy mode writes into
+the info it gets or reads `startNode` or `nextPlace` after its `init` (plan
+9.3), so a new dictionary per lookup reads as the shared one did.
+
+**GameCore** stays a legacy class, no longer a base class: its statics are
+the input devices (`inputManager`, `gameActions`: the legacy buttons, until
+step C), `paused`, `exitGame` (Escape) and `setFullScreen` (F, Alt+Enter);
+its instance, which `Game` holds, has the pause and the game pad lost
+overlay with its menu (`preDraw`, `drawOverlays`).
+
+**Tools.** Godot registers the autoloads' names after it has compiled the
+script that `--script` runs, and every legacy class leads to the scripts
+that name `Game`: a tool that names a game class (even `Values`) fails to
+compile ("Identifier not found: Game"). Such a tool is a launcher and its
+code: the launcher (`extends SceneTree`, the tool's path, command line and
+header) loads `<tool>_job.gd` in `_initialize()` and calls its
+`run(tree)`; the job is a `RefCounted` that reaches the tree through `tree`
+(`tree.quit()`, `tree.root`, `tree.process_frame`) and gets the launcher's
+`_process` when it needs frames (`dungeon_preview`). The ten tools of
+`tools/art`, `tools/import` and `tools/village_remake` are split so (phase
+4.3); `check_all.gd`, `diff_shots.gd` and `contact_sheet.gd` name no game
+class and work in `_initialize()`. Every `--script` run instantiates the
+autoload, which loads the game's scripts: about 2.4 s more per run (0.25 s
+before).
+
+**For new code.** Read the state from `Game` and switch through it
+(`jump_to`, or a mode's exit); never keep a mode or the registry's
+dictionaries beyond a frame. Step C moves the switch rules out of `GameMode`
+(the fade's `done` set in the draw, the music) into `Game` or the modes'
+scenes; phase 5 makes `Main` a plain scene (plan 10).

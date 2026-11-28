@@ -357,7 +357,7 @@ func checkIfEnemiesAreDead(endForCharacters):
 
 			var switchMusic: bool = true
 			if nextPlace != null:
-				var info = Organizer.getOrganizer().getInformationFor(nextPlace)
+				var info = Game.places.info_for(nextPlace)
 				switchMusic = str(info.get("music")).to_lower() != str(manager.music).to_lower()
 			if switchMusic:
 				manager.switchMusic("No Music", 500)
@@ -367,7 +367,7 @@ func checkIfEnemiesAreDead(endForCharacters):
 			hide()
 			finishRoundForCharacters(true, false)
 		elif nextPlace != null:
-			var info = Organizer.getOrganizer().getInformationFor(nextPlace)
+			var info = Game.places.info_for(nextPlace)
 			if str(info.get("music")).to_lower() == str(manager.music).to_lower():
 				manager.dontFadeBattleMusic()
 			manager.setNextPlace(monster.getNextPlace())

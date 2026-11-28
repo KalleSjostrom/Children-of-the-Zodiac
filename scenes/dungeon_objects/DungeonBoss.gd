@@ -11,4 +11,4 @@ func _new_inventory(node, map, status: int) -> Inventory:
 
 
 func _database_name_for(db_name: String) -> String:
-	return Organizer.convert(image)
+	return Values.convert(image)

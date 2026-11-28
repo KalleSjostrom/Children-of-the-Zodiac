@@ -377,7 +377,7 @@ func _getDialogPackage(tok, dialogs, altPackage):
 		elif key == "whisper":
 			whisper = getValue(argument[1]) == 1
 		elif key == "alts":
-			alts = J.split(Organizer.convertKeepCase(argument[1]), ";")
+			alts = J.split(Values.convertKeepCase(argument[1]), ";")
 			question = true
 		else:
 			error("Create dialog packet got an unrecognizable argument: " + key)

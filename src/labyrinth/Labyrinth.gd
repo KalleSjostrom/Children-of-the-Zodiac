@@ -78,7 +78,7 @@ func init(name, lab = null, hinders = null):
 	mapRenderer = MapRenderer.new(map)
 	stepsToBattle = mapLoader.getStepsToBattle()
 	resetSteps()
-	var gm = Organizer.getOrganizer().getPreviousMode()
+	var gm = Game.previous_mode
 	var lastNameInMain = null
 	if gm is Labyrinth:
 		steps = gm.steps - 2
@@ -332,7 +332,7 @@ func finishOff() -> void:
 		releaseBackReferences()
 
 
-## Also when the debug console jumps away (Organizer.jump_to skips finishOff);
+## Also when the debug console jumps away (Game.jump_to skips finishOff);
 ## not for the Cheater, which can switch back to the floor.
 func exitWithoutFading(p_mode: int) -> void:
 	super.exitWithoutFading(p_mode)

@@ -41,7 +41,7 @@ func getLeftHandFor(storeName):
 
 func executeCommand(command: String, tokenizer: StringTokenizer):
 	if command == "store":
-		var name: String = Organizer.convertKeepCase(tokenizer.nextToken())
+		var name: String = Values.convertKeepCase(tokenizer.nextToken())
 		bank[name] = Store.new()
 		current = name
 	elif command == "rightHand":
@@ -53,7 +53,7 @@ func executeCommand(command: String, tokenizer: StringTokenizer):
 
 
 func get_(tokenizer):
-	var name: String = Organizer.convertKeepCase(tokenizer.nextToken())
+	var name: String = Values.convertKeepCase(tokenizer.nextToken())
 	var ae = EquipmentFactory.getEquipment(name)
 	return ae
 

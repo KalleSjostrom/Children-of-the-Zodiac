@@ -7,7 +7,7 @@ extends InputManager
 ## cross = bottom face button, circle = right, square = left, triangle = top.
 ## Phase 4.3: GamePadController reads them through the InputMap (the left
 ## stick is the directions' axis events there); the lost pad and its overlay
-## (GameCore.testDraw) are as before.
+## (GameCore.drawOverlays) are as before.
 
 const DELAY := 40.0
 

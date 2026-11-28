@@ -91,7 +91,7 @@ func _notification(what: int) -> void:
 			scene_root.free()
 
 
-## Initializes the game mode. Called by the Organizer when it is created.
+## Initializes the game mode. Called by the Game autoload when it is created.
 func init(info) -> void:
 	pass
 
@@ -132,7 +132,7 @@ func changeInput(buttons: Array, detectionMode: int) -> void:
 func _initMusic(p_music, initialVolume: float) -> void:
 	music = p_music
 	if p_music != null and not mute:
-		var gm: GameMode = Organizer.getOrganizer().getPreviousMode()
+		var gm: GameMode = Game.previous_mode
 		if gm != null and gm.oggPlayer != null and gm.music != null \
 				and (String(p_music).contains("continue") or p_music == gm.music):
 			oggPlayer = gm.oggPlayer
@@ -182,14 +182,14 @@ func _fadeOutGameMode() -> bool:
 			if not suspended:
 				var cont := true
 				if mode == Values.SWITCH_BACK:
-					var gm: GameMode = Organizer.getOrganizer().getNextSuspendedMode()
+					var gm: GameMode = Game.next_suspended_mode()
 					if gm != null:
 						var lastMusic = gm.infoMap.get("music")
 						var m = infoMap.get("music")
 						if lastMusic == m:
 							cont = false
 				if cont:
-					var info = Organizer.getOrganizer().getInformationFor(nextPlace)
+					var info = Game.places.info_for(nextPlace)
 					if info == null:
 						info = getInfoForNextPlace()
 					var m = null
@@ -297,7 +297,7 @@ func resumeWith(detectionMode: int, a = null, b = null) -> void:
 
 
 func resumedFromMenu() -> bool:
-	var gm: GameMode = Organizer.getOrganizer().getPreviousMode()
+	var gm: GameMode = Game.previous_mode
 	if gm != null:
 		return gm is MainMenu
 	return false
@@ -379,7 +379,7 @@ func getInfoForNextPlace():
 	return null
 
 
-## Called by the organizer when this mode is about to be shut down.
+## Called by the Game autoload when this mode is about to be shut down.
 func finishOff() -> void:
 	pass
 

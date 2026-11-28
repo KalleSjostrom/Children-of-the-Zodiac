@@ -28,7 +28,7 @@ func draw(g, alpha = null, angle = null, origin = null, lastOrigin = null):
 	if isFinished(status):
 		show_line(g, "Time's up!", int(800 + getXtrans() * 300))
 		if not gameOver:
-			var m = Organizer.getOrganizer().getCurrentMode()
+			var m = Game.current_mode
 			var l: Labyrinth = m as Labyrinth
 			Database.addStatus("pensara prison--floor 1.mapchest25", 1)
 			Database.addStatus("pensara prison--floor 3.mapchest185", 1)

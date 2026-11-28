@@ -497,7 +497,7 @@ func startText(alpha = null, c = null, fontSize: int = -1) -> void:
 		setTextColor(float(c))
 		textStarted = true
 		if alpha <= -1:
-			alpha = Organizer.getOrganizer().getCurrentMode().fadeValue
+			alpha = Game.current_mode.fadeValue
 		_textAlpha = alpha
 
 

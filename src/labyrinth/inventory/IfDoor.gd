@@ -14,7 +14,7 @@ static var ALWAYS_FALSE: int = -2
 func _init(node = null, dir = null, openRoad = null, next = null, status = null, tok = null) -> void:
 	super(node, dir, openRoad, next, status, tok)
 	var temp: Array = J.split(nextPlaces[0], "==")
-	condition = Organizer.convert(temp[0])
+	condition = Values.convert(temp[0])
 	conditionStatus = J.parseInt(temp[1])
 	trueCase = nextPlaces[1]
 	falseCase = nextPlaces[2]
@@ -37,13 +37,13 @@ func activate(labyrinth):
 		else:
 			var s: int = Database.getStatusFor(condition)
 			if s == conditionStatus:
-				var trueStatus: int = Database.getStatusFor(Organizer.convert(trueCase))
+				var trueStatus: int = Database.getStatusFor(Values.convert(trueCase))
 				if trueStatus == -1:
 					next = trueCase
 					status = ALWAYS_FALSE
 					Database.addStatus(dataBaseName, status)
-					Database.addStatus(Organizer.convert(trueCase), 1)
-					Organizer.getOrganizer().updateNextPlaceFor(trueCase, falseCase)
+					Database.addStatus(Values.convert(trueCase), 1)
+					Game.places.update_next_place_for(trueCase, falseCase)
 				else:
 					next = falseCase
 			else:

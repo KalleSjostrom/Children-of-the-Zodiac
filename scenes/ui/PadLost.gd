@@ -1,7 +1,7 @@
 extends Control
 ## "Connection to game pad lost" over the frame (phase 3 step B,
 ## docs/ARCHITECTURE.md section 12), on the Transition layer after the mode's
-## fade, as GameCore.testDraw draws it while a game pad is lost: the title
+## fade, as GameCore.drawOverlays draws it while a game pad is lost: the title
 ## and two lines. The dim under it is the Fade node (Graphics.show_fade at
 ## 0.5); the menu after it ("Try to reconnect", "Use keyboard instead") is a
 ## MenuList node (since phase 4.2); GameCore and its MenuNode keep the input

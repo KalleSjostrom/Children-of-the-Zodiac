@@ -26,7 +26,7 @@ var inputLocked: bool = false
 func init(name, lab = null, hinders = null):
 	initGameMode({}, Values.DETECT_AS_KEY)
 	GameEventListener.set2D()
-	Organizer.getOrganizer().getPreviousMode().setMusicMode(
+	Game.previous_mode.setMusicMode(
 			SoundValues.FADE_OUT, SoundValues.SLOW, SoundValues.HALF)
 	SoundPlayer.playSound(SoundMap.MENU_ENTER_MENU)
 	fadein = false
@@ -36,7 +36,7 @@ func init(name, lab = null, hinders = null):
 
 	thumbNailScreen = getScreenShot()
 	initStartPage(0)
-	var gm = Organizer.getOrganizer().getPreviousMode()
+	var gm = Game.previous_mode
 	if gm is MenuStarter and gm.menuOnMap:
 		# Square (COTZ-012): on to the map (which draws the start page's
 		# thumbnail, set up above).
@@ -55,7 +55,7 @@ static func getMainMenu():
 ## Gets the thumb nail screen shot from the previous mode, or null if that
 ## mode is not a MenuStarter.
 func getScreenShot():
-	var gm = Organizer.getOrganizer().getPreviousMode()
+	var gm = Game.previous_mode
 	if gm != null and gm is MenuStarter:
 		return gm.getThumbnailScreenShot()
 	return null

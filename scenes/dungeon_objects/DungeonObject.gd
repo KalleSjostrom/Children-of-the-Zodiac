@@ -67,7 +67,7 @@ func _ready() -> void:
 ## map's inventory list.
 func create_inventory(map, lab_name: String) -> Inventory:
 	var command_name := kind.get_slice("--", 0)
-	var db_name: String = Organizer.convert(lab_name + command_name + str(cell))
+	var db_name: String = Values.convert(lab_name + command_name + str(cell))
 	var status: int = Database.getStatusFor(db_name)
 	var n = map.getNode(cell)
 	var inv: Inventory = _new_inventory(n, map, status)
@@ -104,7 +104,7 @@ func _set_going(door) -> void:
 static func hinders_for(map, names: PackedStringArray) -> Array:
 	var hinders: Array = []
 	for n in names:
-		var db_name: String = Organizer.convert(n)
+		var db_name: String = Values.convert(n)
 		var inv = map.getInventory(db_name)
 		hinders.append(inv if inv != null else DummyDoor.new(db_name))
 	return hinders

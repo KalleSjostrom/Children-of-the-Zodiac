@@ -12,6 +12,6 @@ extends Resource
 
 const PATH := "res://resources/world_map/place_index.tres"
 
-## The node's name as Organizer.convert makes it (lower case, "_" read as a
+## The node's name as Values.convert makes it (lower case, "_" read as a
 ## space) -> its map file ("world0.map"), in PlaceMapLoader's order.
 @export var maps: Dictionary[String, String] = {}

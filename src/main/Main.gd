@@ -1,11 +1,13 @@
 class_name Main
 extends Node
 ## Entry point of the port (the original's organizer.Game + Screen +
-## FPSAnimator + GameEventListener.display()).
+## FPSAnimator + GameEventListener.display()); the game's modes and places are
+## the Game autoload's (main/Game.gd, the original's Organizer).
 ##
-## Every frame: input -> scheduled tasks/music fades -> Organizer.update(ms)
-## -> draw through the OpenGL emulation (Graphics/GLBackend, on LegacyLayer)
-## -> show the current game mode's scene under World (_sync_world).
+## Every frame: input -> scheduled tasks/music fades -> Game.update(ms)
+## -> Game.draw through the OpenGL emulation (Graphics/GLBackend, on
+## LegacyLayer) -> show the current game mode's scene under World
+## (_sync_world).
 ## The scene tree and the bridge are described in docs/ARCHITECTURE.md.
 ##
 ## Command line options (after "--"):
@@ -73,7 +75,6 @@ static var _legacy: PackedStringArray = []
 @onready var ui_layer: CanvasLayer = $UI
 @onready var transition_layer: CanvasLayer = $Transition
 
-var organizer: Organizer
 var graphics: Graphics
 var backend: GLBackend
 var audio: Node
@@ -141,21 +142,8 @@ func _ready() -> void:
 		autoplay = AutoPlay.new(_args["autoplay"], _args.get("shots", ""))
 		obs.append(autoplay.input)
 
-	organizer = Organizer.new()
-	if _args.has("start"):
-		organizer.nextPlace = String(_args["start"]).replace("_", " ")
-	if _args.has("load"):
-		organizer.loadSlot = String(_args["load"])
-	if _args.has("start-time"):
-		organizer.startTime = String(_args["start-time"])
-	if _args.has("status"):
-		for s in String(_args["status"]).split(",", false):
-			var kv := s.split(":")
-			organizer.startStatuses[kv[0]] = int(kv[1])
-	if _args.has("start-node"):
-		var nd := String(_args["start-node"]).split(":")
-		organizer.startNode = [int(nd[0]), int(nd[1])]
-	organizer.init_(obs)
+	# --start, --load, --start-time, --status and --start-node are the Game's.
+	Game.start(_args, obs)
 	if _args.has("look"):
 		var settings := DungeonLook.parse_settings(String(_args.get("look-settings", "")))
 		var bad := DungeonLook.set_current(StringName(_args["look"]), settings)
@@ -250,12 +238,12 @@ func _process(delta: float) -> void:
 	Scheduler.process(elapsed)
 	OggStreamer.tickAll(elapsed)
 
-	_update_organizer(elapsed)
+	_update_game(elapsed)
 
 	# GameEventListener.display()
 	backend.begin_frame()
 	graphics.beginFrame(GameEventListener.is3D())
-	organizer.testDraw(graphics)
+	Game.draw(graphics)
 	backend.end_frame()
 	_sync_world()
 
@@ -267,31 +255,31 @@ func _process(delta: float) -> void:
 		get_tree().quit()
 
 
-## Organizer.update, CUTSCENE_SPEED times while Circle is held in a cutscene
+## Game.update, CUTSCENE_SPEED times while Circle is held in a cutscene
 ## (VillageStory, COTZ-007). Most cutscene motion moves a fixed step per
 ## update (actors, the camera, zooms), so the update is repeated instead of
 ## given a longer elapsed time; the music, the Scheduler and the fades done
 ## per drawn frame keep their pace. The extra updates stop when the mode
 ## changes (the cutscene ends) or starts loading. A skipped cutscene gets
 ## CUTSCENE_SKIP_SPEED updates and Cross before each of them.
-func _update_organizer(elapsed: float) -> void:
-	var mode: GameMode = organizer.getCurrentMode()
+func _update_game(elapsed: float) -> void:
+	var mode: GameMode = Game.current_mode
 	var skipped: VillageStory = mode as VillageStory if _skipping_cutscene(mode) else null
 	var steps := CUTSCENE_SPEED if _fast_cutscene(mode) else 1
 	if skipped != null:
 		steps = CUTSCENE_SKIP_SPEED
 		skipped.timeLine.crossPressed()
-	organizer.update(elapsed)
+	Game.update(elapsed)
 	for i in range(steps - 1):
-		if organizer.getCurrentMode() != mode or mode.isLoading():
+		if Game.current_mode != mode or mode.isLoading():
 			break
 		if skipped != null:
 			skipped.timeLine.crossPressed()
-		organizer.update(elapsed)
+		Game.update(elapsed)
 
 
 ## Runs the given cutscene to its end: its updates and dialogs as fast as
-## _update_organizer goes (the console's "skip cutscene", COTZ-018).
+## _update_game goes (the console's "skip cutscene", COTZ-018).
 func skip_cutscene(story: VillageStory) -> void:
 	_skip_cutscene_id = story.get_instance_id()
 
@@ -326,7 +314,7 @@ func _fast_cutscene(mode: GameMode) -> bool:
 ## while the mode is not loading; the scene of a mode that is no longer
 ## current is removed from the tree but not freed (GameMode frees it).
 func _sync_world() -> void:
-	var mode: GameMode = organizer.getCurrentMode()
+	var mode: GameMode = Game.current_mode
 	var scene: Node = null
 	if mode != null and not mode.isLoading():
 		scene = mode.shown_scene()
@@ -362,13 +350,14 @@ func _exit_tree() -> void:
 	# The scenes of modes that are not shown (suspended for the menu, or the
 	# previous mode) are not in the tree: free them, and the dungeon
 	# materials, before the renderer shuts down (it reports them otherwise).
-	if organizer != null:
-		var modes: Array = [organizer.currentGameMode, organizer.previousGameMode]
-		modes.append_array(organizer.suspendedGameModes.queue)
-		for m in modes:
-			if m != null and is_instance_valid(m.scene_root) and not m.scene_root.is_inside_tree():
-				m.scene_root.free()
+	var modes: Array = [Game.current_mode, Game.previous_mode]
+	modes.append_array(Game.suspended_modes())
+	for m in modes:
+		if m != null and is_instance_valid(m.scene_root) and not m.scene_root.is_inside_tree():
+			m.scene_root.free()
 	DungeonMaterials.clear_cache()
 	# The script objects that refer to each other, and the textures they keep
-	# (ExitCleanup).
+	# (ExitCleanup; it reaches the modes through the Game node), then the
+	# modes themselves (the Organizer's fields were cleared there).
 	ExitCleanup.release(get_tree().root)
+	Game.release()

@@ -1,15 +1,13 @@
 class_name GameResourceLoader
-extends AbstractMapLoader
+extends RefCounted
 ## Port of organizer.ResourceLoader.
 ##
 ## Loads the resources used in the game. Java paths such as "res/Village/a.png"
 ## or "maps/Main/main.bank" are resolved case-insensitively against
-## res://file_index.txt and mapped to "res://res/Village/a.png".
+## res://file_index.txt and mapped to "res://res/Village/a.png". main.bank's
+## places, which Java parsed here, are PlaceRegistry's (phase 4.3).
 
 static var resLoader: GameResourceLoader
-
-var mainInfo := {}
-var variables := {}
 
 static var _index := {} # lower-case path -> real path (without res://)
 static var _dirs := {} # lower-case directories of the indexed files
@@ -155,48 +153,6 @@ func getBufferedReader(path: String, filename: String = "") -> BufferedReader:
 		push_error("ResourceLoader: file not found: " + full)
 		return null
 	return BufferedReader.new(_readFileText(res))
-
-
-func parseFile(path: String, filename: String = "") -> void:
-	if filename == "":
-		super.parseFile(Values.MainMap, path)
-	else:
-		super.parseFile(path, filename)
-
-
-func executeCommand(command: String, tok: StringTokenizer) -> void:
-	var argument: Array
-	var key: String
-	var value
-	if command == "place":
-		var name = null
-		var info := {}
-		while tok.hasMoreTokens():
-			argument = Parser.getArgument(tok.nextToken())
-			key = argument[0]
-			if String(argument[1]).begins_with("\""):
-				value = Parser.getText(tok, argument[1])[0]
-			else:
-				value = variables.get(argument[1])
-			if key == "name":
-				name = value
-			info[key] = value
-		if name == null:
-			Parser.error(str(lineCount) + " No Name Found!")
-		var n := Organizer.convert(name)
-		mainInfo[n] = info
-	elif command == "var":
-		argument = Parser.getArgument(tok.nextToken())
-		key = argument[0]
-		value = Parser.getText(tok, argument[1])[0]
-		variables[key] = value
-	else:
-		Parser.error(str(lineCount) + " Unknown command " + command)
-
-
-func getMainInfo(filename: String) -> Dictionary:
-	parseFile(filename)
-	return mainInfo
 
 
 ## Gets the image with the given path (java.awt.image.BufferedImage -> Image).

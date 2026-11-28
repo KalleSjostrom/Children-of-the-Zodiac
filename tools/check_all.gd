@@ -1,7 +1,8 @@
 extends SceneTree
-## Compiles every GDScript under res://src, res://scenes, res://tools and
-## res://proto (the look prototypes, docs/LOOK_PROTOTYPES_PLAN.md) (or
-## the folders given after "--") and prints a summary. Run through
+## Compiles every GDScript under res://src, res://scenes, res://main (the
+## Game autoload and the place registry), res://tools and res://proto (the
+## look prototypes, docs/LOOK_PROTOTYPES_PLAN.md) (or the folders given after
+## "--") and prints a summary. Run through
 ## tools/check.sh, which refreshes the global class cache first. This script
 ## skips itself (loading the running script again does not return) and the
 ## folders Godot does not import (a .gdignore in them: tools/parity/out,
@@ -10,12 +11,12 @@ extends SceneTree
 ##   godot --headless --path . --script res://tools/check_all.gd -- src/battle src/cards
 
 
-func _init() -> void:
+func _initialize() -> void:
 	var roots: Array = []
 	for a in OS.get_cmdline_user_args():
 		roots.append("res://" + String(a).trim_prefix("res://").trim_suffix("/"))
 	if roots.is_empty():
-		roots.append_array(["res://src", "res://scenes", "res://tools", "res://proto"])
+		roots.append_array(["res://src", "res://scenes", "res://main", "res://tools", "res://proto"])
 	var files: Array = []
 	for r in roots:
 		if r.ends_with(".gd"):

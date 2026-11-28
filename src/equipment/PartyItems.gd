@@ -69,7 +69,7 @@ func addItem(name, number = null):
 	if number == null and name is Items.Item:
 		items.add(name)
 	else:
-		items.add(Organizer.convertKeepCase(name), number)
+		items.add(Values.convertKeepCase(name), number)
 
 
 func addItems(p_items):

@@ -1,9 +1,13 @@
 class_name GameCore
 extends RefCounted
-## Port of organizer.GameCore: initializes the input managers and runs one
-## step of the game loop per frame (called from Main.gd).
+## Port of organizer.GameCore: the input devices (statics: the legacy buttons
+## the modes read until step C), and the overlays of the frame: Start's pause
+## and the "game pad lost" overlay with its menu. The Java's Organizer
+## extended it; since phase 4.3 the Game autoload holds one and calls preDraw
+## and drawOverlays around the current mode's draw (Game.draw, the Java's
+## testDraw).
 
-## Bridge (phase 3 step B): the UI nodes of testDraw's overlays.
+## Bridge (phase 3 step B): the UI nodes of the overlays.
 const PAUSED_VIEW := "res://scenes/ui/Paused.tscn"
 const PAD_LOST_VIEW := "res://scenes/ui/PadLost.tscn"
 
@@ -12,15 +16,9 @@ static var inputManager := InputManager.InputManagers.new()
 static var gameActions: Array = []
 
 static var paused := false
-static var strings: Array = []
-static var values: Array = []
-static var zeroTime := 0
 
 var activeNode
 var firstTimeIn := true
-var counter := 0
-var counter2 := 0
-var counter3 := 0
 
 
 func init() -> void:
@@ -42,7 +40,7 @@ func init2(obs: Array = []) -> void:
 	# reads no game pad: what a pad holds and whether it stays connected are
 	# not part of a script (a pad that drops out shows the "game pad lost"
 	# overlay, which takes the input and makes every device's directions
-	# press-once until it is answered: testDraw).
+	# press-once until it is answered: drawOverlays).
 	if GamePadController.areThereAnyGamePadControllers() and not J.deterministic:
 		inputManager.addInputManager(InputGamePadManager.new())
 	for o in obs:
@@ -57,18 +55,16 @@ static func setGameAction() -> void:
 	gameActions = inputManager.getGameActions()
 
 
-static func enterCheat() -> void:
-	strings = Database.getStoredKeys()
-	values = []
-	for s in strings:
-		values.append(str(Database.getStatusFor(str(s))))
-	zeroTime = J.currentTimeMillis()
+## Before the frame's drawing (the start of the Java's testDraw): Start
+## pauses or unpauses a mode that can be paused.
+func preDraw(pausable: bool) -> void:
+	if pausable and inputManager.hasStartBeenPressed():
+		paused = not paused
 
 
-func testDraw(g: Graphics) -> void:
-	_preDraw(g)
-	draw(g)
-	g.checkError()
+## After the frame's drawing (the rest of the Java's testDraw): the game pad
+## lost overlay and its menu while the pad is lost, else "Paused" while paused.
+func drawOverlays(g: Graphics) -> void:
 	if inputManager.connectionLost():
 		if firstTimeIn:
 			for i in range(GameMode.UP, GameMode.LEFT + 1):
@@ -99,10 +95,10 @@ func testDraw(g: Graphics) -> void:
 		_show_paused(g)
 
 
-# Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): testDraw's
-# overlays without the drawing. Each makes the drawing's state changes in the
-# same order (fadeOldSchool's colour and bind: Graphics.show_fade, whose Fade
-# node draws the dim; drawSingleCenteredText's font size, startText and
+# Bridge (phase 3 step B, docs/ARCHITECTURE.md section 12): the overlays
+# without the drawing. Each makes the drawing's state changes in the same
+# order (fadeOldSchool's colour and bind: Graphics.show_fade, whose Fade node
+# draws the dim; drawSingleCenteredText's font size, startText and
 # finishText) and hands its node on the Transition layer the text colours,
 # the font and the material of the 2D state.
 
@@ -135,11 +131,6 @@ func _show_pad_lost(g: Graphics) -> void:
 		view.show_texts(colors, g.canvas_material(), Graphics.font_bold())
 
 
-func _preDraw(g: Graphics) -> void:
-	if isPausable() and inputManager.hasStartBeenPressed():
-		paused = not paused
-
-
 static func isPaused() -> bool:
 	return paused
 
@@ -161,16 +152,3 @@ static func setFullScreen() -> void:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-
-
-## Updates the game. elapsedTime is in milliseconds.
-func update(elapsedTime: float) -> void:
-	pass
-
-
-func draw(g: Graphics) -> void:
-	pass
-
-
-func isPausable() -> bool:
-	return false

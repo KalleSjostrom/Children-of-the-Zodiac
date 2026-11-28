@@ -254,7 +254,7 @@ static func createInventory(t, map, labName):
 	var command: String = t.nextToken()
 	var commandName: String = J.split(command, "--")[0]
 	var address: int = J.parseInt(t.nextToken())
-	var dbName: String = Organizer.convert(labName + commandName + str(address))
+	var dbName: String = Values.convert(labName + commandName + str(address))
 	var status: int = Database.getStatusFor(dbName)
 	var n = map.getNode(address)
 	var dir: int = J.parseInt(t.nextToken())
@@ -292,11 +292,11 @@ static func createInventory(t, map, labName):
 		var nr: int = J.parseInt(t.nextToken())
 		var buttons: Array = J.array(nr, null)
 		for i in buttons.size():
-			var name: String = Organizer.convert(t.nextToken())
+			var name: String = Values.convert(t.nextToken())
 			buttons[i] = map.getInventory(name)
 		var openDoor = null
 		if t.hasMoreTokens():
-			var doorToOpen: String = Organizer.convert(t.nextToken())
+			var doorToOpen: String = Values.convert(t.nextToken())
 			openDoor = map.getInventory(doorToOpen)
 		var combo := AegisComboButton.new(
 				n, dir, J.parseInt(token), image, status, buttons, openDoor, imageNr)
@@ -307,11 +307,11 @@ static func createInventory(t, map, labName):
 		var nr: int = J.parseInt(t.nextToken())
 		var buttons: Array = J.array(nr, null)
 		for i in buttons.size():
-			var name: String = Organizer.convert(t.nextToken())
+			var name: String = Values.convert(t.nextToken())
 			buttons[i] = map.getInventory(name)
 		var openDoor = null
 		if t.hasMoreTokens():
-			var doorToOpen: String = Organizer.convert(t.nextToken())
+			var doorToOpen: String = Values.convert(t.nextToken())
 			openDoor = map.getInventory(doorToOpen)
 		var combo := IceComboButton.new(
 				n, dir, J.parseInt(token), image, status,
@@ -395,7 +395,7 @@ static func createInventory(t, map, labName):
 	elif command == "missionChest":
 		inv = MissionChest.new(n, dir, 2, image, status, t)
 	elif command == "boss":
-		dbName = Organizer.convert(image)
+		dbName = Values.convert(image)
 		inv = InventoryBoss.new(n, image)
 	elif command == "save":
 		inv = InventorySave.new(n, dir)
@@ -412,7 +412,7 @@ static func getHinders(t, map):
 	var hinders: Array = J.array(t.countTokens(), null)
 	var i := 0
 	while t.hasMoreTokens():
-		var name: String = Organizer.convert(t.nextToken())
+		var name: String = Values.convert(t.nextToken())
 		hinders[i] = map.getInventory(name)
 		if hinders[i] == null:
 			hinders[i] = DummyDoor.new(name)
